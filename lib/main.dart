@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
@@ -8,8 +9,9 @@ import 'app/modules/splash/splash_binding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
 
-void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   DependencyInjection.init();
   runApp(MyApp());
 }

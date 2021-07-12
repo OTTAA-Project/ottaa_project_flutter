@@ -11,6 +11,6 @@ class SplashController extends GetxController {
 
   _init() async {
     await Future.delayed(Duration(seconds: 3));
-    Get.offNamed(AppRoutes.HOME);
+    Get.offNamed(AppRoutes.LOGIN);
   }
 }

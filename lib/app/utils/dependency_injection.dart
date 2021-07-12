@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/sentences_repository.dart';
 import 'package:ottaa_project_flutter/app/data/service/sentences_service.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
 
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
@@ -12,6 +13,7 @@ class DependencyInjection {
   static void init() {
     // Global
     Get.lazyPut(() => TTSController(), fenix: true);
+    Get.lazyPut(() => AuthController(), fenix: true);
 
     // Repositories
     Get.lazyPut(() => PictsRepository(), fenix: true);

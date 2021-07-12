@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 
@@ -19,19 +20,11 @@ class ConfigurationPage extends StatelessWidget {
                   Expanded(
                     child: Container(),
                   ),
-                  // FittedBox(
-                  //   child: GestureDetector(
-                  //     onTap: () {
-                  //       _.toggleLanguaje();
-                  //     },
-                  //     child: Center(
-                  //         child: Icon(
-                  //       Icons.flag,
-                  //       color: Colors.white,
-                  //       size: horizontalSize / 10,
-                  //     )),
-                  //   ),
-                  // ),
+                  SignInButton(
+                    Buttons.GoogleDark,
+                    text: "Salir de OTTAA",
+                    onPressed: () => _.authController.signOut(),
+                  ),
                   Expanded(
                     child: FittedBox(
                       child: Text(
