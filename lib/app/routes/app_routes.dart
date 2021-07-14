@@ -4,4 +4,5 @@ class AppRoutes {
   static const HOME = "home";
   static const SENTENCES = "sentences";
   static const CONFIGURATION = "configuration";
+  static const ONBOARDING = "onboarding";
 }

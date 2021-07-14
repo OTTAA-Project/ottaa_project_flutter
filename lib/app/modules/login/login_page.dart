@@ -122,6 +122,3 @@ class _HeaderWavePainter extends CustomPainter {
     return true;
   }
 }
-
-
-// _buildLoginContainer(horizontalSize, verticalSize)

@@ -5,6 +5,8 @@ import 'package:ottaa_project_flutter/app/modules/home/home_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_page.dart';
 import 'package:ottaa_project_flutter/app/modules/login/login_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/login/login_page.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_binding.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_page.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_page.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_binding.dart';
@@ -38,6 +40,11 @@ class AppPages {
       name: AppRoutes.LOGIN,
       page: () => LoginPage(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.ONBOARDING,
+      page: () => OnboardingPage(),
+      binding: OnboardingBinding(),
     ),
   ];
 }

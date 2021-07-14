@@ -35,7 +35,7 @@ class AuthController extends GetxController {
     try {
       await future.timeout(Duration(seconds: 10));
       // if ok firebase will return a user else will throw an exception
-      Get.offAllNamed(AppRoutes.HOME);
+      Get.offAllNamed(AppRoutes.ONBOARDING);
       print(_firebaseAuth.currentUser);
     } catch (e) {
       Get.back();
