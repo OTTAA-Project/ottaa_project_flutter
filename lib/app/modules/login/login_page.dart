@@ -1,7 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 
 import 'login_controller.dart';
 
@@ -18,34 +18,38 @@ class LoginPage extends StatelessWidget {
             body: Center(
                 child: Stack(
               children: [
-                HeaderWave(color: Colors.orange),
-                Center(
-                    child: Container(
-                        width: horizontalSize * 0.6,
-                        height: verticalSize * 0.65,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Image(
-                                image:
-                                    AssetImage('assets/imgs/logo_ottaa.webp')),
-                            Column(
-                              children: [
-                                Text("Hola!"),
-                                Text("Por Favor Registrarse para"),
-                                Text("Continuar")
-                              ],
-                            ),
-                            SignInButton(
-                              Buttons.GoogleDark,
-                              text: "Acceder con Google",
-                              onPressed: () => _.authController.signIn(),
-                            ),
-                          ],
-                        ))),
+                FadeInUp(child: HeaderWave(color: Colors.orange)),
+                FadeInUp(
+                  child: Center(
+                      child: Container(
+                          width: horizontalSize * 0.6,
+                          height: verticalSize * 0.65,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Image(
+                                  image: AssetImage(
+                                      'assets/imgs/logo_ottaa.webp')),
+                              Column(
+                                children: [
+                                  Text("Hola!"),
+                                  Text("Por Favor Registrarse para"),
+                                  Text("Continuar")
+                                ],
+                              ),
+                              JelloIn(
+                                child: SignInButton(
+                                  Buttons.GoogleDark,
+                                  text: "Acceder con Google",
+                                  onPressed: () => _.authController.signIn(),
+                                ),
+                              ),
+                            ],
+                          ))),
+                ),
                 Positioned(
                     bottom: verticalSize * 0.045,
                     left: horizontalSize * 0.05,
