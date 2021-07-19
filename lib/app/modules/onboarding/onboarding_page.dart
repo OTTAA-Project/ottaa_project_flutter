@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 
 import 'onboarding_controller.dart';
 
@@ -77,6 +77,13 @@ class OnboardingPage extends StatelessWidget {
                             'Ayudamos a miles de niños con problemas de habla a comunicarse, mejorando su calidad de vida',
                             style:
                                 TextStyle(color: Colors.white, fontSize: 15)),
+                        IconButton(
+                          onPressed: () => Get.toNamed(AppRoutes.TUTORIAL),
+                          iconSize: 150,
+                          icon: SvgPicture.asset(
+                            'assets/Group 732.svg',
+                          ),
+                        ),
                       ],
                     ))
               ],

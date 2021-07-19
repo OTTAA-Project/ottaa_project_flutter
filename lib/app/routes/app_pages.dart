@@ -11,6 +11,8 @@ import 'package:ottaa_project_flutter/app/modules/sentences/sentences_binding.da
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_page.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
+import 'package:ottaa_project_flutter/app/modules/tutorial/tutorial_binding.dart';
+import 'package:ottaa_project_flutter/app/modules/tutorial/tutorial_page.dart';
 
 import 'app_routes.dart';
 
@@ -45,6 +47,11 @@ class AppPages {
       name: AppRoutes.ONBOARDING,
       page: () => OnboardingPage(),
       binding: OnboardingBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.TUTORIAL,
+      page: () => TutorialPage(),
+      binding: TutorialBinding(),
     ),
   ];
 }

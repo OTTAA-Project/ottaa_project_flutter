@@ -5,4 +5,5 @@ class AppRoutes {
   static const SENTENCES = "sentences";
   static const CONFIGURATION = "configuration";
   static const ONBOARDING = "onboarding";
+  static const TUTORIAL = "tutorial";
 }

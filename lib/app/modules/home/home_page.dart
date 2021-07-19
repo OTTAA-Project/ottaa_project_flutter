@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                 //SizedBox(height: 10),
               ],
             ),
-            backgroundColor: Colors.black87,
+            backgroundColor: Colors.black26,
           );
         });
   }
