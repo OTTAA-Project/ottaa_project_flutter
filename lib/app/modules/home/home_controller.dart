@@ -20,6 +20,9 @@ class HomeController extends GetxController {
     this._pictoAnimationController = value;
   }
 
+  String _voiceText = "";
+  String get voiceText => this._voiceText;
+
   List<Pict> _picts = [];
 
   List<Pict> _suggestedPicts = [];
@@ -79,27 +82,37 @@ class HomeController extends GetxController {
     }
   }
 
+  bool hasText() {
+    if (this._voiceText != "") return true;
+    return false;
+  }
+
   Future speak() async {
     if (this._sentencePicts.isNotEmpty) {
-      String voiceText = "";
+      this._voiceText = "";
       this._sentencePicts.forEach((pict) {
         switch (this._ttsController.languaje) {
           case "es-US":
-            voiceText += pict.texto.es;
+            this._voiceText = "${pict.texto.es} ";
             break;
           case "en-US":
-            voiceText += pict.texto.en;
+            this._voiceText += "${pict.texto.en} ";
             break;
 
           default:
-            voiceText += pict.texto.es;
+            this._voiceText += "${pict.texto.es} ";
         }
       });
-
-      await this._ttsController.speak(voiceText);
+      update(["subtitle"]);
+      print(hasText());
+      await this._ttsController.speak(this._voiceText);
       this._suggestedIndex = 0;
       this._sentencePicts.clear();
       this._suggest(0);
+      await Future.delayed(new Duration(seconds: 3), () {
+        this._voiceText = "";
+        update(["subtitle"]);
+      });
     }
   }
 

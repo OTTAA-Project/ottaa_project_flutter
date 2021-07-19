@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
-enum TtsState { playing, stopped, paused, continued }
+enum TTSState { playing, stopped, paused, continued }
 
 class TTSController extends GetxController {
   late FlutterTts _flutterTTS;
@@ -41,12 +41,12 @@ class TTSController extends GetxController {
 
   // bool isCurrentLanguageInstalled = false;
 
-  TtsState _ttsState = TtsState.stopped;
+  TTSState _ttsState = TTSState.stopped;
 
-  get isPlaying => this._ttsState == TtsState.playing;
-  get isStopped => this._ttsState == TtsState.stopped;
-  get isPaused => this._ttsState == TtsState.paused;
-  get isContinued => this._ttsState == TtsState.continued;
+  get isPlaying => this._ttsState == TTSState.playing;
+  get isStopped => this._ttsState == TTSState.stopped;
+  get isPaused => this._ttsState == TTSState.paused;
+  get isContinued => this._ttsState == TTSState.continued;
 
   bool get isIOS => !kIsWeb && Platform.isIOS;
   bool get isAndroid => !kIsWeb && Platform.isAndroid;
@@ -73,34 +73,34 @@ class TTSController extends GetxController {
 
     this._flutterTTS.setStartHandler(() {
       print("Playing");
-      this._ttsState = TtsState.playing;
+      this._ttsState = TTSState.playing;
     });
 
     this._flutterTTS.setCompletionHandler(() {
       print("Complete");
-      this._ttsState = TtsState.stopped;
+      this._ttsState = TTSState.stopped;
     });
 
     this._flutterTTS.setCancelHandler(() {
       print("Cancel");
-      this._ttsState = TtsState.stopped;
+      this._ttsState = TTSState.stopped;
     });
 
     if (isWeb || isIOS) {
       this._flutterTTS.setPauseHandler(() {
         print("Paused");
-        this._ttsState = TtsState.paused;
+        this._ttsState = TTSState.paused;
       });
 
       this._flutterTTS.setContinueHandler(() {
         print("Continued");
-        this._ttsState = TtsState.continued;
+        this._ttsState = TTSState.continued;
       });
     }
 
     this._flutterTTS.setErrorHandler((msg) {
       print("error: $msg");
-      this._ttsState = TtsState.stopped;
+      this._ttsState = TTSState.stopped;
     });
   }
 
