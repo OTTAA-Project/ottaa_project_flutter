@@ -3,9 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:get/route_manager.dart';
+import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
+import 'package:ottaa_project_flutter/app/modules/tutorial/tutorial_binding.dart';
 
 import 'app/modules/splash/splash_binding.dart';
+import 'app/modules/tutorial/tutorial_page.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
 
@@ -35,6 +38,10 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.fadeIn,
       initialBinding: SplashBinding(),
       getPages: AppPages.pages,
+      translations: Translation(), // your translations
+      locale:
+          Locale('es', 'ES'), // translations will be displayed in that locale
+      fallbackLocale: Locale('en', 'US'),
     );
   }
 }

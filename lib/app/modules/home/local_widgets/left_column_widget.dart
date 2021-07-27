@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class LeftColumnWidget extends StatelessWidget {
   const LeftColumnWidget({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class LeftColumnWidget extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: Colors.orange,
+        color: kOTTAOrange,
         borderRadius:
             BorderRadius.only(topRight: Radius.circular(horizontalSize / 40)),
       ),

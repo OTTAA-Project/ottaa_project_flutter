@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'configuration_controller.dart';
 
@@ -37,7 +38,7 @@ class ConfigurationPage extends StatelessWidget {
                     ),
                   ),
                   Switch(
-                      activeColor: Colors.orange,
+                      activeColor: kOTTAOrange,
                       value: _.ttsController.isEnglish,
                       onChanged: (bool value) {
                         _.toggleLanguaje(value);
@@ -54,7 +55,7 @@ class ConfigurationPage extends StatelessWidget {
                     ),
                   ),
                   Slider(
-                    activeColor: Colors.orange,
+                    activeColor: kOTTAOrange,
                     value: _.ttsController.pitch,
                     min: 0.0,
                     max: 1.0,
@@ -76,7 +77,7 @@ class ConfigurationPage extends StatelessWidget {
                     ),
                   ),
                   Slider(
-                    activeColor: Colors.orange,
+                    activeColor: kOTTAOrange,
                     value: _.ttsController.rate,
                     min: 0.0,
                     max: 1.0,
@@ -92,7 +93,7 @@ class ConfigurationPage extends StatelessWidget {
                   Container(
                     height: verticalSize * 0.2,
                     width: horizontalSize,
-                    color: Colors.orange,
+                    color: kOTTAOrange,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [

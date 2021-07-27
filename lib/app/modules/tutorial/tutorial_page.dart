@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'local_widgets/step1.dart';
-import 'local_widgets/step2.dart';
-import 'local_widgets/step3.dart';
-import 'local_widgets/step4.dart';
+import 'local_widgets/step1_tutorial.dart';
+import 'local_widgets/step2_tutorial.dart';
+import 'local_widgets/step3_tutorial.dart';
+import 'local_widgets/step4_tutorial.dart';
 import 'tutorial_controller.dart';
 
 class TutorialPage extends StatelessWidget {
@@ -25,10 +25,10 @@ class TutorialPage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               controller: controller,
               children: <Widget>[
-                step1(controller),
-                step2(controller),
-                step3(controller),
-                step4(controller),
+                step1Tutorial(controller, context),
+                step2Tutorial(controller, context),
+                step3Tutorial(controller, context),
+                step4Tutorial(controller, context),
               ],
             )),
           );

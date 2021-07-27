@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'login_controller.dart';
 
@@ -18,7 +19,7 @@ class LoginPage extends StatelessWidget {
             body: Center(
                 child: Stack(
               children: [
-                FadeInUp(child: HeaderWave(color: Colors.orange)),
+                FadeInUp(child: HeaderWave(color: kOTTAOrange)),
                 FadeInUp(
                   child: Center(
                       child: Container(
@@ -37,7 +38,8 @@ class LoginPage extends StatelessWidget {
                                 children: [
                                   Text("Hola!"),
                                   Text("Por Favor Registrarse para"),
-                                  Text("Continuar")
+                                  Text("Continuar"),
+                                  Text("hello".tr)
                                 ],
                               ),
                               JelloIn(

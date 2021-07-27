@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class ActionsWidget extends StatelessWidget {
   const ActionsWidget({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class ActionsWidget extends StatelessWidget {
       return Container(
         height: verticalSize * 0.2,
         width: horizontalSize * 0.8,
-        color: Colors.orange,
+        color: kOTTAOrange,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,

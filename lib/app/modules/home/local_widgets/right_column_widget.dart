@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class RightColumnWidget extends StatelessWidget {
   const RightColumnWidget({Key? key}) : super(key: key);
@@ -55,7 +56,7 @@ class RightColumnWidget extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: Colors.orange,
+        color: kOTTAOrange,
         borderRadius:
             BorderRadius.only(topLeft: Radius.circular(horizontalSize / 40)),
       ),

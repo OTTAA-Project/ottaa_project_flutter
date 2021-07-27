@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 final Map<int, Color> groupColor = {
   1: Colors.yellow,
-  2: Colors.orange,
+  2: kOTTAOrange,
   3: Colors.green,
   4: Colors.blue,
   5: Colors.purple,

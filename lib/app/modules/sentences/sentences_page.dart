@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'sentences_controller.dart';
 
@@ -97,7 +98,7 @@ class SentencesPage extends StatelessWidget {
                   Container(
                     height: verticalSize * 0.2,
                     width: horizontalSize,
-                    color: Colors.orange,
+                    color: kOTTAOrange,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
