@@ -82,7 +82,7 @@ class HomePage extends StatelessWidget {
                 // if (_.isPlaying())
               ],
             ),
-            backgroundColor: Colors.black26,
+            backgroundColor: Colors.black,
           );
         });
   }

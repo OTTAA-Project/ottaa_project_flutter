@@ -19,7 +19,7 @@ step4Tutorial<widget>(PageController controller, context) {
           child: Container(),
         ),
         Container(
-          height: verticalSize * 0.3,
+          height: verticalSize * 0.45,
           child: FittedBox(
             child: SvgPicture.asset(
               'assets/Group 727.svg',

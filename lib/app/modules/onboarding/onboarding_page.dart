@@ -13,7 +13,7 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final PageController controller = PageController(initialPage: 0);
     return GetBuilder<OnboardingController>(
-        id: "tutorial",
+        id: "onboarding",
         builder: (_) {
           return Scaffold(
             body: SafeArea(

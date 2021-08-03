@@ -7,6 +7,8 @@ import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
 import 'package:ottaa_project_flutter/app/modules/tutorial/tutorial_binding.dart';
 
+import 'app/modules/onboarding/onboarding_binding.dart';
+import 'app/modules/onboarding/onboarding_page.dart';
 import 'app/modules/splash/splash_binding.dart';
 import 'app/modules/tutorial/tutorial_page.dart';
 import 'app/routes/app_pages.dart';

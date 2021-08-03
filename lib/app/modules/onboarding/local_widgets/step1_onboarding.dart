@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import '../onboarding_controller.dart';
@@ -27,17 +29,44 @@ step1Onboarding<widget>(
       ),
       Positioned(
         right: horizontalSize * 0.05,
-        top: verticalSize * 0.12,
+        bottom: verticalSize * 0.10,
+        child: Container(
+          width: horizontalSize * 0.35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              StepButton(
+                text: "Anterior",
+                leading: Icons.chevron_left,
+                onTap: () => _.authController.signOut(),
+                backgroundColor: Colors.grey,
+                fontColor: Colors.white,
+              ),
+              StepButton(
+                text: "Siguiente",
+                trailing: Icons.chevron_right,
+                onTap: () => controller.animateToPage(1,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.easeInOut),
+                backgroundColor: kOTTAOrange,
+                fontColor: Colors.white,
+              ),
+            ],
+          ),
+        ),
+      ),
+      Positioned(
+        right: horizontalSize * 0.05,
+        top: verticalSize * 0.012,
         child: FadeInUp(
           child: Center(
-              child: Container(
-                  width: horizontalSize * 0.4,
-                  height: verticalSize * 0.8,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
+              child: Column(
+            children: [
+              Container(
+                  width: horizontalSize * 0.35,
+                  height: verticalSize * 0.7,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image(image: AssetImage('assets/imgs/logo_ottaa.webp')),
                       Text("Gracias por elegir OTTAA PROJECT"),
@@ -70,45 +99,36 @@ step1Onboarding<widget>(
                         ),
                       ),
                       Text("Fecha de Nacimiento"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () => _.authController.signOut(),
-                            iconSize: 150,
-                            icon: SvgPicture.asset(
-                              'assets/Group 731.svg',
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () => controller.animateToPage(1,
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.easeInOut),
-                            iconSize: 150,
-                            icon: SvgPicture.asset(
-                              'assets/Group 732.svg',
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
-                  ))),
+                  )),
+            ],
+          )),
         ),
       ),
       Positioned(
           top: verticalSize * 0.045,
-          left: horizontalSize * 0.05,
+          left: horizontalSize * 0.025,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Bienvenidos, esto es OTTAA',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40)),
-              Text(
-                  'Ayudamos a miles de niños con problemas de habla a comunicarse, mejorando su calidad de vida',
-                  style: TextStyle(color: Colors.white, fontSize: 15)),
+              Container(
+                width: horizontalSize * 0.45,
+                child: FittedBox(
+                  child: Text('Vamos a conocernos primero!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+              ),
+              Container(
+                width: horizontalSize * 0.45,
+                child: AutoSizeText(
+                  'Vamos a recolectar algunos datos para conocerte mejor',
+                  style: TextStyle(color: Colors.white),
+                  maxLines: 2,
+                ),
+              ),
             ],
           ))
     ],

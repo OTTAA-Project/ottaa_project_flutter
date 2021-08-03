@@ -19,7 +19,7 @@ step1Tutorial<widget>(PageController controller, context) {
           child: Container(),
         ),
         Container(
-          height: verticalSize * 0.3,
+          height: verticalSize * 0.45,
           child: FittedBox(
               child: SvgPicture.asset(
                 'assets/Group 729.svg',
@@ -32,7 +32,7 @@ step1Tutorial<widget>(PageController controller, context) {
           children: [
             Container(
               margin: EdgeInsets.all(20),
-              height: horizontalSize * 0.05,
+              height: horizontalSize * 0.05, // TODO WIDTH
               child: FittedBox(
                 child: Text(
                   "CREA TUS FRASES",
