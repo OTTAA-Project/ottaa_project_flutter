@@ -93,7 +93,7 @@ class HomeController extends GetxController {
       this._sentencePicts.forEach((pict) {
         switch (this._ttsController.languaje) {
           case "es-US":
-            this._voiceText = "${pict.texto.es} ";
+            this._voiceText += "${pict.texto.es} ";
             break;
           case "en-US":
             this._voiceText += "${pict.texto.en} ";

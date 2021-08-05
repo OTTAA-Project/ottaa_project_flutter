@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
-import 'package:ottaa_project_flutter/app/modules/tutorial/tutorial_binding.dart';
 
-import 'app/modules/onboarding/onboarding_binding.dart';
-import 'app/modules/onboarding/onboarding_page.dart';
 import 'app/modules/splash/splash_binding.dart';
-import 'app/modules/tutorial/tutorial_page.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
 
@@ -18,6 +15,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   DependencyInjection.init();
+  if (kIsWeb) {
+    // initialiaze the facebook javascript SDK
+    FacebookAuth.i.webInitialize(
+      appId: "658779868360186", //<-- YOUR APP_ID
+      cookie: true,
+      xfbml: true,
+      version: "v9.0",
+    );
+  }
   runApp(MyApp());
 }
 
