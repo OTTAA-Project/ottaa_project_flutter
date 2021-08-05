@@ -24,7 +24,7 @@ class ConfigurationPage extends StatelessWidget {
                   SignInButton(
                     Buttons.GoogleDark,
                     text: "Salir de OTTAA",
-                    onPressed: () => _.authController.signOut(),
+                    onPressed: () => _.authController.handleSignOut(),
                   ),
                   Expanded(
                     child: FittedBox(

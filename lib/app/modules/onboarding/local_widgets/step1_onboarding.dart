@@ -38,7 +38,7 @@ step1Onboarding<widget>(
               StepButton(
                 text: "Anterior",
                 leading: Icons.chevron_left,
-                onTap: () => _.authController.signOut(),
+                onTap: () => _.authController.handleSignOut(),
                 backgroundColor: Colors.grey,
                 fontColor: Colors.white,
               ),
