@@ -5,8 +5,12 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
+import 'package:ottaa_project_flutter/app/modules/settings/settings_binding.dart';
+import 'package:ottaa_project_flutter/app/modules/settings/settings_page.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
 
+import 'app/modules/home/home_binding.dart';
+import 'app/modules/home/home_page.dart';
 import 'app/modules/splash/splash_binding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
@@ -42,9 +46,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashPage(),
+      home: HomePage(),
       defaultTransition: Transition.fadeIn,
-      initialBinding: SplashBinding(),
+      initialBinding: HomeBinding(),
       getPages: AppPages.pages,
       translations: Translation(), // your translations
       locale:

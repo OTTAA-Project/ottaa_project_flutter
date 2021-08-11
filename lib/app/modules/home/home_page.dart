@@ -59,20 +59,33 @@ class HomePage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SizedBox(width: 15),
-                                  ClipRRect(
-                                    child: Image(
-                                        image:
-                                            AssetImage('assets/Group 671.png')),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 15.0, vertical: 10),
+                                    child: ClipRRect(
+                                      child: Image(
+                                          image: AssetImage(
+                                              'assets/Group 671.png')),
+                                    ),
                                   ),
-                                  SizedBox(width: 15),
-                                  Text(_.voiceText.toUpperCase(),
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 30))
+                                  Expanded(
+                                    child: Text(
+                                        _.ttsController.isSubtitleUppercase
+                                            ? _.voiceText.toUpperCase()
+                                            : _.voiceText,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 30 +
+                                                7.5 *
+                                                    _.ttsController
+                                                        .subtitleSize)),
+                                  ),
+                                  SizedBox(width: 20),
                                 ],
                               ),
                               width: horizontalSize * 0.35,
-                              height: verticalSize * 0.15,
+                              // height: verticalSize * 0.15,
                               decoration: BoxDecoration(
                                   color: Colors.purple,
                                   borderRadius: BorderRadius.circular(100))),

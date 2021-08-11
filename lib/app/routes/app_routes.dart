@@ -3,7 +3,9 @@ class AppRoutes {
   static const LOGIN = "login";
   static const HOME = "home";
   static const SENTENCES = "sentences";
-  static const CONFIGURATION = "configuration";
+  static const SETTINGS = "settings";
+  static const SETTINGS_LANG = "settings_lang";
+  static const SETTINGS_VOICE = "settings_voice";
   static const ONBOARDING = "onboarding";
   static const TUTORIAL = "tutorial";
 }

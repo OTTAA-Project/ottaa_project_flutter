@@ -51,14 +51,14 @@ class LoginPage extends StatelessWidget {
                                       .handleSignIn(SignInType.GOOGLE),
                                 ),
                               ),
-                              JelloIn(
-                                child: SignInButton(
-                                  Buttons.Facebook,
-                                  text: "Acceder con Facebook",
-                                  onPressed: () => _.authController
-                                      .handleSignIn(SignInType.FACEBOOK),
-                                ),
-                              ),
+                              // JelloIn(
+                              //   child: SignInButton(
+                              //     Buttons.Facebook,
+                              //     text: "Acceder con Facebook",
+                              //     onPressed: () => _.authController
+                              //         .handleSignIn(SignInType.FACEBOOK),
+                              //   ),
+                              // ),
                             ],
                           ))),
                 ),
