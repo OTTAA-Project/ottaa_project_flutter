@@ -4,6 +4,8 @@ class AppRoutes {
   static const HOME = "home";
   static const SENTENCES = "sentences";
   static const SETTINGS = "settings";
+  static const SETTINGS_LANG = "settings_lang";
+  static const SETTINGS_VOICE = "settings_voice";
   static const ONBOARDING = "onboarding";
   static const TUTORIAL = "tutorial";
 }

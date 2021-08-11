@@ -8,6 +8,21 @@ class SettingsController extends GetxController {
   final _authController = Get.find<AuthController>();
   AuthController get authController => this._authController;
 
+  toggleIsCustomTTSEnable(bool value) {
+    _ttsController.isCustomTTSEnable = value;
+    update();
+  }
+
+  toggleIsCustomSubtitle(bool value) {
+    _ttsController.isCustomSubtitle = value;
+    update();
+  }
+
+  toggleIsSubtitleUppercase(bool value) {
+    _ttsController.isSubtitleUppercase = value;
+    update();
+  }
+
   toggleLanguaje(bool value) {
     if (value == false) {
       _ttsController.languaje = "es-US";
@@ -26,6 +41,11 @@ class SettingsController extends GetxController {
 
   setRate(value) {
     _ttsController.rate = value;
+    update();
+  }
+
+  setSubtitleSize(value) {
+    _ttsController.subtitleSize = value;
     update();
   }
 }

@@ -7,8 +7,10 @@ import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_binding.
 import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_page.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_page.dart';
+import 'package:ottaa_project_flutter/app/modules/settings/language_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/settings_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/settings_page.dart';
+import 'package:ottaa_project_flutter/app/modules/settings/voice_and_subtitle_page.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
 import 'package:ottaa_project_flutter/app/modules/tutorial/tutorial_binding.dart';
@@ -21,6 +23,16 @@ class AppPages {
     GetPage(
       name: AppRoutes.SETTINGS,
       page: () => SettingsPage(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SETTINGS_LANG,
+      page: () => LanguagePage(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SETTINGS_VOICE,
+      page: () => VoiceAndSubtitlesPage(),
       binding: SettingsBinding(),
     ),
     GetPage(
