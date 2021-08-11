@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
-import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'settings_controller.dart';
 
@@ -11,8 +9,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double verticalSize = MediaQuery.of(context).size.height;
-    double horizontalSize = MediaQuery.of(context).size.width;
     return GetBuilder<SettingsController>(
         builder: (_) => Scaffold(
               appBar: AppBar(
