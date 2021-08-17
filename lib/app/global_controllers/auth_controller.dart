@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/ottaa_loading_widget.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
@@ -55,7 +55,7 @@ class AuthController extends GetxController {
           email: email, password: password, name: name);
   }
 
-  User? get firebaseUser => auth.FirebaseAuth.instance.currentUser;
+  User? get firebaseUser => FirebaseAuth.instance.currentUser;
 
   late AuthService _authService;
 
@@ -110,17 +110,24 @@ class AuthController extends GetxController {
     Get.offAllNamed(AppRoutes.LOGIN);
   }
 
-  _authRequest(
-      Future<auth.UserCredential> future, String loadingMessage) async {
+  _authRequest(Future<UserCredential> future, String loadingMessage) async {
     Get.to(OttaaLoading(textToShow: loadingMessage));
     try {
       await future;
       // if ok firebase will return a user else will throw an exception
-      Get.offAllNamed(AppRoutes.HOME);
-    } on FirebaseAuthException catch (e) {
-      print(e);
+      Get.offAllNamed(AppRoutes.ONBOARDING);
+    } on PlatformException catch (e) {
       print(e.code);
-
+      Get.back();
+      switch (e.code) {
+        case 'popup_closed_by_user':
+          break;
+        default:
+          AppDialogs.showUnknownErrorDialog();
+      }
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      Get.back();
       switch (e.code) {
         case 'sign_in_failed':
           // this error comes due to fingerprint SHA1 and SHA256
@@ -156,6 +163,15 @@ class AuthController extends GetxController {
           break;
         case 'user-not-found':
           AppDialogs.showUserNotFoundDialog();
+          break;
+        default:
+          AppDialogs.showUnknownErrorDialog();
+      }
+    } catch (e) {
+      print(e);
+      Get.back();
+      switch (e.toString()) {
+        case 'Unexpected null value.':
           break;
         default:
           AppDialogs.showUnknownErrorDialog();

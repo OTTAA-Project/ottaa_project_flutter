@@ -127,13 +127,19 @@ class AppDialogs {
                 try {
                   await AppServices.auth.sendPasswordResetEmail(email: email);
                   Get.back(result: ResetPasswordDialogResults.Done);
+                } on FirebaseAuthException catch (e) {
+                  print(e.code);
+                  switch (e.code) {
+                    case 'user-not-found':
+                      Get.back(result: ResetPasswordDialogResults.UserNotFound);
+                      break;
+                    default:
+                      Get.back(
+                          result: ResetPasswordDialogResults.undefinedError);
+                  }
                 } catch (e) {
                   print(e);
-                  // if (e?.code == "user-not-found") {
-                  //   Get.back(result: ResetPasswordDialogResults.UserNotFound);
-                  // } else {
-                  //   Get.back(result: ResetPasswordDialogResults.undefinedError);
-                  // }
+                  Get.back(result: ResetPasswordDialogResults.undefinedError);
                 }
               }),
           TextButton(
