@@ -7,6 +7,8 @@ import 'package:ottaa_project_flutter/app/modules/login/login_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/login/login_page.dart';
 import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_page.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_binding.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_page.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_page.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_binding.dart';
@@ -52,6 +54,11 @@ class AppPages {
       name: AppRoutes.TUTORIAL,
       page: () => TutorialPage(),
       binding: TutorialBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.PICTOGRAMGROUP,
+      page: () => PictogramGroupsPage(),
+      binding: PictogramGroupsBinding(),
     ),
   ];
 }

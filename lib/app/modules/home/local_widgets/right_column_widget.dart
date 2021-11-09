@@ -22,22 +22,24 @@ class RightColumnWidget extends StatelessWidget {
                 Get.toNamed(AppRoutes.CONFIGURATION);
               },
               child: Center(
-                  child: Icon(
-                Icons.settings,
-                color: Colors.white,
-                size: horizontalSize / 10,
-              )),
+                child: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                  size: horizontalSize / 10,
+                ),
+              ),
             ),
           ),
           FittedBox(
             child: GestureDetector(
               onTap: null,
               child: Center(
-                  child: Icon(
-                Icons.share,
-                color: Colors.white,
-                size: horizontalSize / 10,
-              )),
+                child: Icon(
+                  Icons.share,
+                  color: Colors.white,
+                  size: horizontalSize / 10,
+                ),
+              ),
             ),
           ),
           FittedBox(
@@ -46,19 +48,21 @@ class RightColumnWidget extends StatelessWidget {
                 Get.toNamed(AppRoutes.SENTENCES);
               },
               child: Center(
-                  child: Icon(
-                Icons.favorite,
-                color: Colors.white,
-                size: horizontalSize / 10,
-              )),
+                child: Icon(
+                  Icons.favorite,
+                  color: Colors.white,
+                  size: horizontalSize / 10,
+                ),
+              ),
             ),
           )
         ],
       ),
       decoration: BoxDecoration(
         color: kOTTAOrange,
-        borderRadius:
-            BorderRadius.only(topLeft: Radius.circular(horizontalSize / 40)),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(horizontalSize / 40),
+        ),
       ),
     );
   }

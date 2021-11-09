@@ -56,26 +56,30 @@ class HomePage extends StatelessWidget {
                       if (_.hasText())
                         return Center(
                           child: Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(width: 15),
-                                  ClipRRect(
-                                    child: Image(
-                                        image:
-                                            AssetImage('assets/Group 671.png')),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(width: 15),
+                                ClipRRect(
+                                  child: Image(
+                                    image: AssetImage('assets/Group 671.png'),
                                   ),
-                                  SizedBox(width: 15),
-                                  Text(_.voiceText.toUpperCase(),
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 30))
-                                ],
-                              ),
-                              width: horizontalSize * 0.35,
-                              height: verticalSize * 0.15,
-                              decoration: BoxDecoration(
-                                  color: Colors.purple,
-                                  borderRadius: BorderRadius.circular(100))),
+                                ),
+                                SizedBox(width: 15),
+                                Text(
+                                  _.voiceText.toUpperCase(),
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 30),
+                                ),
+                              ],
+                            ),
+                            width: horizontalSize * 0.35,
+                            height: verticalSize * 0.15,
+                            decoration: BoxDecoration(
+                              color: Colors.purple,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
                         );
                       return Container();
                     }),

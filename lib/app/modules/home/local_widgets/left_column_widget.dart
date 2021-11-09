@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class LeftColumnWidget extends StatelessWidget {
@@ -29,7 +31,7 @@ class LeftColumnWidget extends StatelessWidget {
           ),
           FittedBox(
             child: GestureDetector(
-              onTap: null,
+              onTap: () => Get.toNamed(AppRoutes.PICTOGRAMGROUP),
               child: Center(
                   child: Icon(
                 Icons.image,

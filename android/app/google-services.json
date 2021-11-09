@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "873137795353-phsgl5qo4b0s9g1lauejoda7i1a27p5g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ottaaproject.flutter",
+            "certificate_hash": "3c5f9971cb16e3ef11061211f167372cb25f6d51"
+          }
+        },
+        {
           "client_id": "873137795353-7ipbgts5l1r1bhlfjdqugucuvefg1p0r.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -48,11 +48,12 @@ class SentencesPage extends StatelessWidget {
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         final Pict speakPict = Pict(
-                                            id: 0,
-                                            texto: Texto(en: "", es: ""),
-                                            tipo: 6,
-                                            imagen: Imagen(
-                                                picto: "logo_ottaa_dev"));
+                                          id: 0,
+                                          texto: Texto(en: "", es: ""),
+                                          tipo: 6,
+                                          imagen:
+                                              Imagen(picto: "logo_ottaa_dev"),
+                                        );
                                         if (_.sentencesPicts[_.sentencesIndex]
                                                 .length >
                                             index) {

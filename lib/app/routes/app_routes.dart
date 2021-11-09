@@ -6,4 +6,5 @@ class AppRoutes {
   static const CONFIGURATION = "configuration";
   static const ONBOARDING = "onboarding";
   static const TUTORIAL = "tutorial";
+  static const PICTOGRAMGROUP = "pictogram_group";
 }
