@@ -2,8 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/data/repositories/grupos_repository.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 
@@ -12,6 +14,7 @@ class HomeController extends GetxController {
   TTSController get ttsController => this._ttsController;
 
   final _pictsRepository = Get.find<PictsRepository>();
+  final _grupoRepository = Get.find<GrupoRepository>();
 
   late AnimationController _pictoAnimationController;
   AnimationController get pictoAnimationController =>
@@ -24,6 +27,7 @@ class HomeController extends GetxController {
   String get voiceText => this._voiceText;
 
   List<Pict> _picts = [];
+  List<Grupos> grupos =[];
 
   List<Pict> _suggestedPicts = [];
   List<Pict> get suggestedPicts => this._suggestedPicts;
@@ -54,6 +58,7 @@ class HomeController extends GetxController {
 
   Future<void> _loadPicts() async {
     this._picts = await this._pictsRepository.getAll();
+    this.grupos = await this._grupoRepository.getAll();
     _suggest(0);
     update(["suggested"]);
   }

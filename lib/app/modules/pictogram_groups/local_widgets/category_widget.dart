@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'icon_widget.dart';
 
 class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({Key? key, required this.index}) : super(key: key);
-  final int index;
+  const CategoryWidget({Key? key, required this.name,required this.imageName}) : super(key: key);
+  final String name;
+  final String imageName;
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +25,12 @@ class CategoryWidget extends StatelessWidget {
             height: 16,
           ),
           //placeholder for the photos
-          const Placeholder(
-            fallbackHeight: 100,
-            fallbackWidth: 100,
-          ),
+          Image.asset('assets/imgs/$imageName.webp',height: 100,fit: BoxFit.fill,width: double.infinity,),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
             //filler for the text
             child: Text(
-              'Filler Text $index',
+              name,
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
@@ -7,9 +8,11 @@ import 'local_widgets/category_widget.dart';
 
 class PictogramGroupsPage extends StatelessWidget {
   final _pictogramController = Get.find<PictogramGroupsController>();
+  final _homeController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     final height = Get.height;
+    print(_homeController.grupos.length);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOTTAOrange,
@@ -62,9 +65,10 @@ class PictogramGroupsPage extends StatelessWidget {
                       child: GridView.builder(
                         controller: _pictogramController.gridController,
                         padding: const EdgeInsets.symmetric(vertical: 8),
-                        itemCount: 100,
+                        itemCount: _homeController.grupos.length,
                         itemBuilder: (context, index) => CategoryWidget(
-                          index: index,
+                          name: _homeController.grupos[index].texto.en,
+                          imageName: _homeController.grupos[index].imagen.picto,
                         ),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
