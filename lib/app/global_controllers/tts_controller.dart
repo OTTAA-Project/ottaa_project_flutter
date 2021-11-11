@@ -33,7 +33,7 @@ class TTSController extends GetxController {
     this._pitch = value;
   }
 
-  double _rate = 0.4;
+  double _rate = 1.0;
   double get rate => this._rate;
   set rate(value) {
     this._rate = value;

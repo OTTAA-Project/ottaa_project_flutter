@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'login_controller.dart';
@@ -47,8 +48,11 @@ class LoginPage extends StatelessWidget {
                                 child: SignInButton(
                                   Buttons.GoogleDark,
                                   text: "Acceder con Google",
-                                  onPressed: () => _.authController
-                                      .handleSignIn(SignInType.GOOGLE),
+                                  // onPressed: () =>
+                                  //     _.authController.handleSignIn(
+                                  //   SignInType.GOOGLE,
+                                  // ),
+                                  onPressed: () => Get.offAllNamed(AppRoutes.ONBOARDING),
                                 ),
                               ),
                               JelloIn(

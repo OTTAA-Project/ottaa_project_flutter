@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -26,7 +27,7 @@ class AuthService {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    var userCredentials = await _firebaseAuth.signInWithCredential(credential);
+    UserCredential userCredentials = await _firebaseAuth.signInWithCredential(credential);
     if (userCredentials.user != null) {
       print(userCredentials.user);
     }

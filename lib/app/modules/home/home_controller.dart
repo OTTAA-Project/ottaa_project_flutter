@@ -53,19 +53,19 @@ class HomeController extends GetxController {
 
   addPictToSentence(Pict pict) {
     this._sentencePicts.add(pict);
-    _suggest(this._sentencePicts.last.id);
+    suggest(this._sentencePicts.last.id);
   }
 
   Future<void> _loadPicts() async {
     this._picts = await this._pictsRepository.getAll();
     this.grupos = await this._grupoRepository.getAll();
-    _suggest(0);
+    suggest(0);
     update(["suggested"]);
   }
 
   void moreSuggested() {
     if (this._suggestedPicts.length % this._suggestedQuantity != 0)
-      _suggest(
+      suggest(
           this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
     if (this._suggestedPicts.length >
         (this._suggestedIndex + 1) * this._suggestedQuantity) {
@@ -82,7 +82,7 @@ class HomeController extends GetxController {
     if (this._sentencePicts.isNotEmpty) {
       this._sentencePicts.removeLast();
       this._suggestedIndex = 0;
-      _suggest(
+      suggest(
           this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
     }
   }
@@ -113,7 +113,7 @@ class HomeController extends GetxController {
       await this._ttsController.speak(this._voiceText);
       this._suggestedIndex = 0;
       this._sentencePicts.clear();
-      this._suggest(0);
+      this.suggest(0);
       await Future.delayed(new Duration(seconds: 3), () {
         this._voiceText = "";
         update(["subtitle"]);
@@ -121,7 +121,7 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> _suggest(int id) async {
+  Future<void> suggest(int id) async {
     this._suggestedPicts = [];
     this._suggestedIndex = 0;
 

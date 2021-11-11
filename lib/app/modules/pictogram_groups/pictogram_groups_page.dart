@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/category_view_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/picto_search_page.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_pages.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
+import 'local_widgets/category_page_widget.dart';
 import 'local_widgets/category_widget.dart';
 
 class PictogramGroupsPage extends StatelessWidget {
   final _pictogramController = Get.find<PictogramGroupsController>();
   final _homeController = Get.find<HomeController>();
+  final _ttsController = Get.find<TTSController>();
+
   @override
   Widget build(BuildContext context) {
     final height = Get.height;
@@ -28,9 +36,15 @@ class PictogramGroupsPage extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          Icon(
-            Icons.menu,
-            size: 30,
+          GestureDetector(
+            onTap: () {
+              _pictogramController.categoryGridviewOrPageview.value =
+                  !_pictogramController.categoryGridviewOrPageview.value;
+            },
+            child: Icon(
+              Icons.view_carousel,
+              size: 30,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -60,23 +74,17 @@ class PictogramGroupsPage extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 8,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: GridView.builder(
-                        controller: _pictogramController.gridController,
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        itemCount: _homeController.grupos.length,
-                        itemBuilder: (context, index) => CategoryWidget(
-                          name: _homeController.grupos[index].texto.en,
-                          imageName: _homeController.grupos[index].imagen.picto,
-                        ),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                          childAspectRatio: 1,
-                        ),
+                    child: Obx(
+                      () => Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: _pictogramController
+                                    .categoryGridviewOrPageview.value
+                                ? 16
+                                : Get.width * 0.13,
+                            vertical: 16),
+
+                        ///the whole view is extracted to another file
+                        child: CategoryViewWidget(),
                       ),
                     ),
                   ),
@@ -99,10 +107,19 @@ class PictogramGroupsPage extends StatelessWidget {
 
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
-                          Icon(
-                            Icons.search,
-                            size: height * 0.1,
-                            color: Colors.white,
+                          GestureDetector(
+                            onTap: () async {
+                              var result = await showSearch<String>(
+                                context: context,
+                                delegate: CustomDelegate(),
+                              );
+                             print(result);
+                            },
+                            child: Icon(
+                              Icons.search,
+                              size: height * 0.1,
+                              color: Colors.white,
+                            ),
                           ),
                           Container(),
                         ],
@@ -127,7 +144,12 @@ class PictogramGroupsPage extends StatelessWidget {
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
-                    onTap: () => _pictogramController.removeSomeScroll(),
+                    onTap: () =>
+                        _pictogramController.categoryGridviewOrPageview.value
+                            ? _pictogramController.removeSomeScroll(
+                                _pictogramController.categoriesGridController)
+                            : _pictogramController.gotoPreviousPage(
+                                _pictogramController.categoriesPageController),
                     child: Icon(
                       Icons.skip_previous,
                       size: height * 0.1,
@@ -152,7 +174,12 @@ class PictogramGroupsPage extends StatelessWidget {
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
-                    onTap: () => _pictogramController.addSomeScroll(),
+                    onTap: () =>
+                        _pictogramController.categoryGridviewOrPageview.value
+                            ? _pictogramController.addSomeScroll(
+                                _pictogramController.categoriesGridController)
+                            : _pictogramController.gotoNextPage(
+                                _pictogramController.categoriesPageController),
                     child: Icon(
                       Icons.skip_next,
                       size: height * 0.1,
@@ -170,27 +197,11 @@ class PictogramGroupsPage extends StatelessWidget {
               right: Get.width * 0.43,
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.grey[700],
-                    borderRadius: BorderRadius.circular(100)),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 48,
-                      left: 55,
-                      child: Container(
-                        color: Colors.white,
-                        height: 75,
-                        width: 70,
-                      ),
-                    ),
-                    Center(
-                      child: Icon(
-                        Icons.contactless,
-                        size: height * 0.2,
-                        color: kOTTAOrange,
-                      ),
-                    ),
-                  ],
+                  color: Colors.grey[700],
+                  borderRadius: BorderRadius.circular(height * 0.4),
+                ),
+                child: Image.asset(
+                  'assets/icono_ottaa.webp',
                 ),
               ),
             ),
