@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/category_view_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/picto_search_page.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
-import 'package:ottaa_project_flutter/app/routes/app_pages.dart';
-import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-
-import 'local_widgets/category_page_widget.dart';
-import 'local_widgets/category_widget.dart';
 
 class PictogramGroupsPage extends StatelessWidget {
   final _pictogramController = Get.find<PictogramGroupsController>();
   final _homeController = Get.find<HomeController>();
-  final _ttsController = Get.find<TTSController>();
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +107,7 @@ class PictogramGroupsPage extends StatelessWidget {
                                 context: context,
                                 delegate: CustomDelegate(),
                               );
-                             print(result);
+                              print(result);
                             },
                             child: Icon(
                               Icons.search,
@@ -199,7 +192,7 @@ class PictogramGroupsPage extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[700],
-                  borderRadius: BorderRadius.circular(width *0.1),
+                  borderRadius: BorderRadius.circular(width * 0.1),
                 ),
                 child: FittedBox(
                   child: Image.asset(

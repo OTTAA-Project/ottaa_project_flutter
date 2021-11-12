@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
-import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
-import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/category_page_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
-import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-import 'local_widgets/category_widget.dart';
 import 'local_widgets/picto_page_widget.dart';
 
 class SelectPictoPage extends StatelessWidget {
-  final _homeController = Get.find<HomeController>();
-  final _ttsController = Get.find<TTSController>();
   final _pictogramController = Get.find<PictogramGroupsController>();
 
   @override
