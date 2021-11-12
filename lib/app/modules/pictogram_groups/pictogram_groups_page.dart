@@ -19,7 +19,8 @@ class PictogramGroupsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = Get.height;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     print(_homeController.grupos.length);
     return Scaffold(
       appBar: AppBar(
@@ -192,16 +193,21 @@ class PictogramGroupsPage extends StatelessWidget {
 
             /// the play button
             Positioned(
-              bottom: height * 0.05,
-              left: Get.width * 0.43,
-              right: Get.width * 0.43,
+              bottom: height * 0.1,
+              left: width * 0.43,
+              right: width * 0.43,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[700],
-                  borderRadius: BorderRadius.circular(height * 0.4),
+                  borderRadius: BorderRadius.circular(width *0.1),
                 ),
-                child: Image.asset(
-                  'assets/icono_ottaa.webp',
+                child: FittedBox(
+                  child: Image.asset(
+                    'assets/icono_ottaa.webp',
+                    fit: BoxFit.cover,
+                    height: 500,
+                    width: 500,
+                  ),
                 ),
               ),
             ),

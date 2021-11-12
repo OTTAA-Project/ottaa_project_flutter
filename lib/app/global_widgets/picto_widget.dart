@@ -45,47 +45,51 @@ class Picto extends StatelessWidget {
     return GestureDetector(
       onTap: this.onTap,
       child: Container(
-          height: this.height,
-          width: this.width,
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(10)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                //height: 320,
-                margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                padding: EdgeInsets.all(6),
+        height: this.height,
+        width: this.width,
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              //height: 320,
+              margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+              padding: EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                  color: groupColor[pict.tipo],
+                  borderRadius: BorderRadius.circular(10)),
+              child: Container(
+                padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                    color: groupColor[pict.tipo],
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image(
-                        image: AssetImage(
-                            'assets/imgs/${pict.imagen.picto}.webp')),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image(
+                      image:
+                          AssetImage('assets/imgs/${pict.imagen.picto}.webp')),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Center(
+                  child: FittedBox(
+                    // ver si queda o no el fit
+                    child: Text(
+                      texto.toUpperCase(),
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),
-              Expanded(
-                  child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Center(
-                    child: FittedBox(
-                  // ver si queda o no el fit
-                  child: Text(
-                    texto.toUpperCase(),
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                  ),
-                )),
-              )),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

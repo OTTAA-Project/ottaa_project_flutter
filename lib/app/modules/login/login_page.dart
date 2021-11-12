@@ -48,11 +48,11 @@ class LoginPage extends StatelessWidget {
                                 child: SignInButton(
                                   Buttons.GoogleDark,
                                   text: "Acceder con Google",
-                                  // onPressed: () =>
-                                  //     _.authController.handleSignIn(
-                                  //   SignInType.GOOGLE,
-                                  // ),
-                                  onPressed: () => Get.offAllNamed(AppRoutes.ONBOARDING),
+                                  onPressed: () =>
+                                      _.authController.handleSignIn(
+                                    SignInType.GOOGLE,
+                                  ),
+                                  // onPresed: () => Get.offAllNamed(AppRoutes.ONBOARDING),
                                 ),
                               ),
                               JelloIn(

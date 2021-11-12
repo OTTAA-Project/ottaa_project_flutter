@@ -14,6 +14,7 @@ class PictoPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final languaje = _ttsController.languaje;
     return Obx(
       () => _pictogramController.pictoGridviewOrPageview.value
           ? GridView.builder(
@@ -21,17 +22,19 @@ class PictoPageWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               itemCount: _pictogramController.selectedGruposPicts.length,
               itemBuilder: (context, index) => GestureDetector(
-                onTap: ()async{
-                  await onTap(index);
+                onTap: () async {
+                  await onTap(index,languaje);
                 },
                 child: CategoryWidget(
-                  name:
-                      _pictogramController.selectedGruposPicts[index].texto.en,
+                  name: languaje == "en-US"
+                      ? _pictogramController.selectedGruposPicts[index].texto.en
+                      : _pictogramController
+                          .selectedGruposPicts[index].texto.es,
                   imageName: _pictogramController
                       .selectedGruposPicts[index].imagen.picto,
                   border: true,
                   bottom: false,
-                  color : _pictogramController.selectedGruposPicts[index].tipo,
+                  color: _pictogramController.selectedGruposPicts[index].tipo,
                 ),
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -42,40 +45,46 @@ class PictoPageWidget extends StatelessWidget {
               ),
             )
           : PageView.builder(
-            physics: PageScrollPhysics(),
-            controller: _pictogramController.pictoPageController,
-            scrollDirection: Axis.horizontal,
-            itemCount: _pictogramController.selectedGruposPicts.length,
-            itemBuilder: (context, index) => GestureDetector(
-              onTap: ()async{
-                await onTap(index);
-              },
-              child: CategoryPageWidget(
-                name: _pictogramController
-                    .selectedGruposPicts[index].texto.en,
-                imageName: _pictogramController
-                    .selectedGruposPicts[index].imagen.picto,
-                border: true,
-                color: _pictogramController.selectedGruposPicts[index].tipo,
+              physics: PageScrollPhysics(),
+              controller: _pictogramController.pictoPageController,
+              scrollDirection: Axis.horizontal,
+              itemCount: _pictogramController.selectedGruposPicts.length,
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () async {
+                  await onTap(index,languaje);
+                },
+                child: CategoryPageWidget(
+                  name: languaje == "en-US"
+                      ? _pictogramController.selectedGruposPicts[index].texto.en
+                      : _pictogramController
+                          .selectedGruposPicts[index].texto.es,
+                  imageName: _pictogramController
+                      .selectedGruposPicts[index].imagen.picto,
+                  border: true,
+                  color: _pictogramController.selectedGruposPicts[index].tipo,
+                ),
               ),
             ),
-          ),
     );
   }
 
-  Future<void> onTap(int index)async{
+  Future<void> onTap(int index,String languaje) async {
     //saying the name after selecting the category
-    _ttsController.speak(
-        _pictogramController.selectedGruposPicts[index].texto.en);
+    _ttsController.speak(languaje == "en-US"
+        ? _pictogramController.selectedGruposPicts[index].texto.en
+        : _pictogramController.selectedGruposPicts[index].texto.es);
     //add to the sentence
-    if(_pictogramController.selectedPicto == _pictogramController.selectedGruposPicts[index].texto.en){
-      await _homeController.addPictToSentence(
-          _pictogramController.selectedGruposPicts[index]);
+    if (_pictogramController.selectedPicto ==
+        _pictogramController.selectedGruposPicts[index].texto.en) {
+      await _homeController
+          .addPictToSentence(_pictogramController.selectedGruposPicts[index]);
       Get.back();
       Get.back();
     }
+
     ///add it to the variable and punch it in after second hit
-    _pictogramController.selectedPicto = _pictogramController.selectedGruposPicts[index].texto.en;
+    _pictogramController.selectedPicto =
+        _pictogramController.selectedGruposPicts[index].texto.en;
     // Get.toNamed(AppRoutes.SELECTPICTO);
   }
 }

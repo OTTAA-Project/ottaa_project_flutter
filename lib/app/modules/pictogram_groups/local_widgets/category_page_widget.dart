@@ -6,8 +6,22 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'icon_widget.dart';
 
+final Map<int, Color> groupColor = {
+  1: Colors.yellow,
+  2: kOTTAOrange,
+  3: Colors.green,
+  4: Colors.blue,
+  5: Colors.purple,
+  6: Colors.black,
+};
+
 class CategoryPageWidget extends StatelessWidget {
-  const CategoryPageWidget({Key? key, required this.name, required this.imageName,this.border = false,this.color=0})
+  const CategoryPageWidget(
+      {Key? key,
+      required this.name,
+      required this.imageName,
+      this.border = false,
+      this.color = 0})
       : super(key: key);
   final String name;
   final String imageName;
@@ -33,18 +47,20 @@ class CategoryPageWidget extends StatelessWidget {
           //placeholder for the photos
           Container(
             decoration: BoxDecoration(
-                border: border ? Border.all(
-                  color:
-                  color == 1 ? Yellow :color == 2 ? Orange : color == 3 ? YellowGreen : color == 4 ? DodgerBlue :color == 5 ? Magenta : color == 6 ? Black : Black ,
-                  width: 6,
-                ) : Border.all(color: Colors.transparent),
-                borderRadius: BorderRadius.circular(8)
-            ),
-            child: Image.asset(
-              'assets/imgs/$imageName.webp',
-              height: Get.height * 0.5,
-              fit: BoxFit.fill,
-              width: Get.width *0.4,
+                border: border
+                    ? Border.all(
+                        color: groupColor[color]!,
+                        width: 6,
+                      )
+                    : Border.all(color: Colors.transparent),
+                borderRadius: BorderRadius.circular(8)),
+            child: FittedBox(
+              child: Image.asset(
+                'assets/imgs/$imageName.webp',
+                height: Get.height * 0.5,
+                fit: BoxFit.fill,
+                width: Get.width * 0.4,
+              ),
             ),
           ),
           Padding(
@@ -52,18 +68,19 @@ class CategoryPageWidget extends StatelessWidget {
             //filler for the text
             child: Text(
               name,
-              style: const TextStyle(fontWeight: FontWeight.w700,
-              fontSize: 20),
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              IconWidget(icon: Icons.timer_off),
-              IconWidget(icon: Icons.location_off),
-              IconWidget(icon: Icons.face),
-              IconWidget(icon: Icons.wc),
-            ],
+          FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                IconWidget(icon: Icons.timer_off),
+                IconWidget(icon: Icons.location_off),
+                IconWidget(icon: Icons.face),
+                IconWidget(icon: Icons.wc),
+              ],
+            ),
           ),
         ],
       ),

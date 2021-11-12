@@ -17,7 +17,8 @@ class SelectPictoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = Get.height;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOTTAOrange,
@@ -66,7 +67,7 @@ class SelectPictoPage extends StatelessWidget {
           children: [
             Container(
               // height: Get.height * 0.7,
-              padding: EdgeInsets.symmetric(horizontal: Get.width * .15),
+              padding: EdgeInsets.symmetric(horizontal: width * .15),
               child: Column(
                 children: [
                   Expanded(
@@ -77,7 +78,7 @@ class SelectPictoPage extends StatelessWidget {
                             horizontal: _pictogramController
                                     .pictoGridviewOrPageview.value
                                 ? 16
-                                : Get.width * 0.16,
+                                : width * 0.16,
                             vertical: 16),
                         child: PictoPageWidget(),
                       ),
@@ -122,7 +123,7 @@ class SelectPictoPage extends StatelessWidget {
                     topRight: Radius.circular(16),
                   ),
                 ),
-                width: Get.width * 0.15,
+                width: width * 0.15,
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
@@ -152,7 +153,7 @@ class SelectPictoPage extends StatelessWidget {
                     topLeft: Radius.circular(16),
                   ),
                 ),
-                width: Get.width * 0.15,
+                width: width * 0.15,
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
@@ -175,15 +176,20 @@ class SelectPictoPage extends StatelessWidget {
             /// the play button
             Positioned(
               bottom: height * 0.05,
-              left: Get.width * 0.43,
-              right: Get.width * 0.43,
+              left: width * 0.43,
+              right: width * 0.43,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[700],
-                  borderRadius: BorderRadius.circular(height * 0.4),
+                  borderRadius: BorderRadius.circular(width *0.1),
                 ),
-                child: Image.asset(
-                  'assets/icono_ottaa.webp',
+                child: FittedBox(
+                  child: Image.asset(
+                    'assets/icono_ottaa.webp',
+                    fit: BoxFit.cover,
+                    // height: width * 0.2,
+                    // width: width * 0.2,
+                  ),
                 ),
               ),
             ),

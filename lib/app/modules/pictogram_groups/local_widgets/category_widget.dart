@@ -1,10 +1,15 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-
 import 'icon_widget.dart';
+
+final Map<int, Color> groupColor = {
+  1: Colors.yellow,
+  2: kOTTAOrange,
+  3: Colors.green,
+  4: Colors.blue,
+  5: Colors.purple,
+  6: Colors.black,
+};
 
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget({
@@ -14,15 +19,30 @@ class CategoryWidget extends StatelessWidget {
     this.border = false,
     this.bottom = true,
     this.color = 0,
+    this.languaje= '',
   }) : super(key: key);
   final String name;
   final String imageName;
   final bool border;
   final int color;
   final bool bottom;
+  final String languaje;
 
   @override
   Widget build(BuildContext context) {
+    // String text;
+    //
+    // switch (this.languaje) {
+    //   case "es-US":
+    //     text = texto.es;
+    //     break;
+    //   case "en-US":
+    //     text = texto.en;
+    //     break;
+    //
+    //   default:
+    //     text = texto.es;
+    // }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: const BoxDecoration(
@@ -40,31 +60,20 @@ class CategoryWidget extends StatelessWidget {
           ),
           //placeholder for the photos
           Container(
+            height: 100,
+            width: double.infinity,
             decoration: BoxDecoration(
                 border: border
                     ? Border.all(
-                        color: color == 1
-                            ? Yellow
-                            : color == 2
-                                ? Orange
-                                : color == 3
-                                    ? YellowGreen
-                                    : color == 4
-                                        ? DodgerBlue
-                                        : color == 5
-                                            ? Magenta
-                                            : color == 6
-                                                ? Black
-                                                : Black,
+                        color: groupColor[color]!,
                         width: 6,
                       )
                     : Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(8)),
-            child: Image.asset(
-              'assets/imgs/$imageName.webp',
-              height: 100,
-              fit: BoxFit.fill,
-              width: double.infinity,
+            child: FittedBox(
+              child: Image.asset(
+                'assets/imgs/$imageName.webp',
+              ),
             ),
           ),
           Padding(
@@ -77,8 +86,8 @@ class CategoryWidget extends StatelessWidget {
           ),
           bottom
               ? Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Row(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       IconWidget(icon: Icons.timer_off),
@@ -87,7 +96,7 @@ class CategoryWidget extends StatelessWidget {
                       IconWidget(icon: Icons.wc),
                     ],
                   ),
-              )
+                )
               : Container(),
         ],
       ),
