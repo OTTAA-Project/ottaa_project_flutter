@@ -17,18 +17,19 @@ class OnboardingPage extends StatelessWidget {
         builder: (_) {
           return Scaffold(
             body: SafeArea(
-                child: PageView(
-              /// [PageView.scrollDirection] defaults to [Axis.horizontal].
-              /// Use [Axis.vertical] to scroll vertically.
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              controller: controller,
-              children: <Widget>[
-                step1Onboarding(_, controller, context),
-                step2Onboarding(_, controller, context),
-                step3Onboarding(_, controller, context),
-              ],
-            )),
+              child: PageView(
+                /// [PageView.scrollDirection] defaults to [Axis.horizontal].
+                /// Use [Axis.vertical] to scroll vertically.
+                physics: NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                controller: controller,
+                children: <Widget>[
+                  step1Onboarding(_, controller, context),
+                  step2Onboarding(_, controller, context),
+                  step3Onboarding(_, controller, context),
+                ],
+              ),
+            ),
           );
         });
   }

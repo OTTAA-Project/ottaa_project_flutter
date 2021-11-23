@@ -19,7 +19,7 @@ class AuthService {
   }
 
   Future<auth.UserCredential> signInWithGoogle() async {
-    await _googleSignIn.signOut();
+    // await _googleSignIn.signOut();
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
         await googleUser!.authentication;
@@ -30,6 +30,7 @@ class AuthService {
     UserCredential userCredentials = await _firebaseAuth.signInWithCredential(credential);
     if (userCredentials.user != null) {
       print(userCredentials.user);
+      print(userCredentials.user!.email);
     }
     return userCredentials;
   }

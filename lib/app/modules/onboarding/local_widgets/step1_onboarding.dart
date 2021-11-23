@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
@@ -36,14 +37,14 @@ step1Onboarding<widget>(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               StepButton(
-                text: "Anterior",
+                text: "Previous".tr,
                 leading: Icons.chevron_left,
                 onTap: () => _.authController.handleSignOut(),
                 backgroundColor: Colors.grey,
                 fontColor: Colors.white,
               ),
               StepButton(
-                text: "Siguiente",
+                text: "Next".tr,
                 trailing: Icons.chevron_right,
                 onTap: () => controller.animateToPage(1,
                     duration: Duration(milliseconds: 300),
@@ -60,26 +61,26 @@ step1Onboarding<widget>(
         top: verticalSize * 0.012,
         child: FadeInUp(
           child: Center(
-              child: Column(
-            children: [
-              Container(
+            child: Column(
+              children: [
+                Container(
                   width: horizontalSize * 0.35,
                   height: verticalSize * 0.7,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image(image: AssetImage('assets/imgs/logo_ottaa.webp')),
-                      Text("Gracias por elegir OTTAA PROJECT"),
+                      Text("Thank_you_for_choosing_ottaa_project".tr),
                       Form(
                         key: _.formKey,
                         child: Column(
                           children: [
                             TextFormField(
                               controller: _.nameController,
-                              decoration: InputDecoration(hintText: "Nombre"),
+                              decoration: InputDecoration(hintText: "Name".tr),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter some text';
+                                  return 'please_enter_some_text'.tr;
                                 }
                                 return null;
                               },
@@ -87,50 +88,57 @@ step1Onboarding<widget>(
                             TextFormField(
                               controller: _.genderController,
                               keyboardType: TextInputType.number,
-                              decoration: InputDecoration(hintText: "Genero"),
+                              decoration:
+                                  InputDecoration(hintText: "Gender".tr),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter some text';
+                                  return 'please_enter_some_text'.tr;
                                 }
                                 return null;
                               },
-                            )
+                            ),
                           ],
                         ),
                       ),
-                      Text("Fecha de Nacimiento"),
+                      Text("Date_of_birth".tr),
                     ],
-                  )),
-            ],
-          )),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       Positioned(
-          top: verticalSize * 0.045,
-          left: horizontalSize * 0.025,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: horizontalSize * 0.45,
-                child: FittedBox(
-                  child: Text('Vamos a conocernos primero!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      )),
+        top: verticalSize * 0.045,
+        left: horizontalSize * 0.025,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: horizontalSize * 0.45,
+              child: FittedBox(
+                child: Text(
+                  'Lets_get_to_knwo_each_other_first'.tr + '!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Container(
-                width: horizontalSize * 0.45,
-                child: AutoSizeText(
-                  'Vamos a recolectar algunos datos para conocerte mejor',
-                  style: TextStyle(color: Colors.white),
-                  maxLines: 2,
-                ),
+            ),
+            Container(
+              width: horizontalSize * 0.45,
+              child: AutoSizeText(
+                'We_are_going_to_collect_some_data_to_get_to_know_you_better'
+                    .tr,
+                style: TextStyle(color: Colors.white),
+                maxLines: 2,
               ),
-            ],
-          ))
+            ),
+          ],
+        ),
+      ),
     ],
   );
 }

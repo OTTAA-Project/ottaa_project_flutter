@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:get/get.dart';
 
 step4Tutorial<widget>(PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
@@ -35,7 +36,7 @@ step4Tutorial<widget>(PageController controller, context) {
               height: horizontalSize * 0.05,
               child: FittedBox(
                 child: Text(
-                  "JUEGA Y APRENDE",
+                  "Play_and_learn".tr,
                   style: GoogleFonts.montserratAlternates(
                       color: kOTTAOrange, fontWeight: FontWeight.w600),
                 ),
@@ -44,7 +45,7 @@ step4Tutorial<widget>(PageController controller, context) {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.2),
               child: AutoSizeText(
-                "Entra a la selección de juegos para aprender jugando. OTTAA cuenta con juegos didácticos para aprender vocabulario, conceptos y mucho más. Además, pronto habrá más juegos disponibles!.",
+                "${'Step4_long'.tr}!.",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.montserratAlternates(
                     fontSize: 20, color: Colors.black87),
@@ -60,7 +61,7 @@ step4Tutorial<widget>(PageController controller, context) {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             StepButton(
-              text: "Anterior",
+              text: "Previous".tr,
               leading: Icons.chevron_left,
               onTap: () => controller.animateToPage(2,
                   duration: Duration(milliseconds: 300),
@@ -69,7 +70,7 @@ step4Tutorial<widget>(PageController controller, context) {
               fontColor: Colors.grey,
             ),
             StepButton(
-              text: "Listo",
+              text: "Ready".tr,
               trailing: Icons.chevron_right,
               onTap: () => Get.toNamed(AppRoutes.HOME),
               backgroundColor: kOTTAOrange,

@@ -42,7 +42,7 @@ step2Onboarding<widget>(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               StepButton(
-                text: "Anterior",
+                text: "Previous".tr,
                 leading: Icons.chevron_left,
                 onTap: () => controller.animateToPage(0,
                     duration: Duration(milliseconds: 300),
@@ -51,7 +51,7 @@ step2Onboarding<widget>(
                 fontColor: Colors.white,
               ),
               StepButton(
-                text: "Siguiente",
+                text: "Next".tr,
                 trailing: Icons.chevron_right,
                 onTap: () => controller.animateToPage(2,
                     duration: Duration(milliseconds: 300),
@@ -68,9 +68,9 @@ step2Onboarding<widget>(
         top: verticalSize * 0.05,
         child: FadeInUp(
           child: Center(
-              child: Column(
-            children: [
-              Container(
+            child: Column(
+              children: [
+                Container(
                   width: horizontalSize * 0.35,
                   height: verticalSize * 0.7,
                   // decoration: BoxDecoration(
@@ -88,7 +88,7 @@ step2Onboarding<widget>(
                                 horizontal: 100, vertical: 30),
                             child: GFButton(
                               onPressed: () => Get.toNamed(AppRoutes.TUTORIAL),
-                              text: "LAUNCH SHORT TUTORIAL",
+                              text: "Launch_short_tutorial".tr,
                               textColor: Colors.white,
                               disabledTextColor: Colors.grey,
                               color: kOTTAOrange,
@@ -107,7 +107,7 @@ step2Onboarding<widget>(
                               color: kOTTAOrange,
                               disabledColor: kQuantumGrey,
                               onPressed: null,
-                              text: "DO A GUIDED WORKSHOP",
+                              text: "Do_a_guided_workshop".tr,
                               shape: GFButtonShape.pills,
                               size: GFSize.LARGE,
                               blockButton: true,
@@ -118,7 +118,7 @@ step2Onboarding<widget>(
                                 horizontal: 100, vertical: 30),
                             child: GFButton(
                               onPressed: null,
-                              text: "BOOK A DEMO",
+                              text: "Book_a_demo".tr,
                               textColor: Colors.white,
                               disabledTextColor: Colors.grey,
                               color: kOTTAOrange,
@@ -131,38 +131,44 @@ step2Onboarding<widget>(
                         ],
                       ),
                     ],
-                  )),
-            ],
-          )),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       Positioned(
-          top: verticalSize * 0.045,
-          left: horizontalSize * 0.025,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: horizontalSize * 0.45,
-                child: FittedBox(
-                  child: Text(
-                      'OTTAA es una poderosa herramienta de comunicación',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40)),
+        top: verticalSize * 0.045,
+        left: horizontalSize * 0.025,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: horizontalSize * 0.45,
+              child: FittedBox(
+                child: Text(
+                  'Ottaa_is_a_powerful_communication_tool'.tr,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                  ),
                 ),
               ),
-              Container(
-                width: horizontalSize * 0.45,
-                child: AutoSizeText(
-                  'Te ofrecemos diferentes opciones para que aprendas a usarla y sques el mayor provecho',
-                  style: TextStyle(color: Colors.white),
-                  maxLines: 2,
-                ),
+            ),
+            Container(
+              width: horizontalSize * 0.45,
+              child: AutoSizeText(
+                'We_offer_you_different_options_so_that_you_learn_how_to_use_it_and_get_the_most_out_of_it'
+                    .tr,
+                style: TextStyle(color: Colors.white),
+                maxLines: 2,
               ),
-            ],
-          ))
+            ),
+          ],
+        ),
+      ),
     ],
   );
 }

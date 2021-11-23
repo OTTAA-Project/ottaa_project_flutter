@@ -6,7 +6,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
-
+import 'dart:io';
 import 'app/modules/splash/splash_binding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
@@ -46,9 +46,13 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.fadeIn,
       initialBinding: SplashBinding(),
       getPages: AppPages.pages,
-      translations: Translation(), // your translations
-      locale:
-          Locale('es', 'ES'), // translations will be displayed in that locale
+      translations: Translation(),
+      // your translations
+      locale: Locale(
+        Platform.localeName.substring(0, 2),
+        Platform.localeName.substring(3, 5),
+      ),
+      // translations will be displayed in that locale
       fallbackLocale: Locale('en', 'US'),
     );
   }

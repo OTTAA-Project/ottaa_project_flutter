@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'login_controller.dart';
@@ -15,75 +16,87 @@ class LoginPage extends StatelessWidget {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
     return GetBuilder<LoginController>(
-        builder: (_) => Scaffold(
-            backgroundColor: Colors.grey.shade400,
-            body: Center(
-                child: Stack(
-              children: [
-                FadeInUp(child: HeaderWave(color: kOTTAOrange)),
-                FadeInUp(
-                  child: Center(
-                      child: Container(
-                          width: horizontalSize * 0.6,
-                          height: verticalSize * 0.65,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Image(
-                                  image: AssetImage(
-                                      'assets/imgs/logo_ottaa.webp')),
-                              Column(
-                                children: [
-                                  Text("Hola!"),
-                                  Text("Por Favor Registrarse para"),
-                                  Text("Continuar"),
-                                  Text("hello".tr)
-                                ],
-                              ),
-                              JelloIn(
-                                child: SignInButton(
-                                  Buttons.GoogleDark,
-                                  text: "Acceder con Google",
-                                  onPressed: () =>
-                                      _.authController.handleSignIn(
-                                    SignInType.GOOGLE,
-                                  ),
-                                  // onPresed: () => Get.offAllNamed(AppRoutes.ONBOARDING),
-                                ),
-                              ),
-                              JelloIn(
-                                child: SignInButton(
-                                  Buttons.Facebook,
-                                  text: "Acceder con Facebook",
-                                  onPressed: () => _.authController
-                                      .handleSignIn(SignInType.FACEBOOK),
-                                ),
-                              ),
-                            ],
-                          ))),
-                ),
-                Positioned(
-                    bottom: verticalSize * 0.045,
-                    left: horizontalSize * 0.05,
+      builder: (_) => Scaffold(
+        backgroundColor: Colors.grey.shade400,
+        body: Center(
+          child: Stack(
+            children: [
+              FadeInUp(child: HeaderWave(color: kOTTAOrange)),
+              FadeInUp(
+                child: Center(
+                  child: Container(
+                    width: horizontalSize * 0.6,
+                    height: verticalSize * 0.65,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text('Bienvenidos, esto es OTTAA',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22)),
-                        Text(
-                            'Ayudamos a miles de niños con problemas de habla a comunicarse, mejorando su calidad de vida',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 15)),
+                        Image(
+                          image: AssetImage('assets/imgs/logo_ottaa.webp'),
+                        ),
+                        Column(
+                          children: [
+                            Text("${"Hello".tr}!"),
+                            Text("Please_register_for".tr),
+                            Text("Continue".tr),
+                            Text("hello_world".tr)
+                          ],
+                        ),
+                        JelloIn(
+                          child: SignInButton(
+                            Buttons.GoogleDark,
+                            text: "Login_with_google".tr,
+                            // onPressed: () => _.authController.handleSignIn(
+                            //   SignInType.GOOGLE,
+                            // ),
+                            onPressed: () => Get.offAllNamed(AppRoutes.ONBOARDING),
+                          ),
+                        ),
+                        JelloIn(
+                          child: SignInButton(
+                            Buttons.Facebook,
+                            text: "Login_with_facebook".tr,
+                            onPressed: () => _.authController
+                                .handleSignIn(SignInType.FACEBOOK),
+                          ),
+                        ),
                       ],
-                    ))
-              ],
-            ))));
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: verticalSize * 0.045,
+                left: horizontalSize * 0.05,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Welcome_this_is_ottaa'.tr,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                      ),
+                    ),
+                    Text(
+                      'We_help_thousands_of_children_with_speech_problems_to_communicate_improving_their_quality_of_life'
+                          .tr,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -111,14 +124,14 @@ class _HeaderWavePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final lapiz = new Paint();
+    final lapiz = Paint();
 
     // Propiedades
     lapiz.color = this.color; //Color(0xff615AAB);
     lapiz.style = PaintingStyle.fill; // .fill .stroke
     lapiz.strokeWidth = 20;
 
-    final path = new Path();
+    final path = Path();
 
     // Dibujar con el path y el lapiz
     path.moveTo(0, size.height);

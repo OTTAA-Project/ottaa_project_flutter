@@ -38,7 +38,7 @@ class AuthController extends GetxController {
     return true;
   }
 
-  handleSignIn(SignInType type,
+  Future<void> handleSignIn(SignInType type,
       {String? email, String? password, String? name}) async {
     if (type == SignInType.EMAIL_PASSWORD) {
       if (!_validateEmailAndPassword(email!, password!)) return;
