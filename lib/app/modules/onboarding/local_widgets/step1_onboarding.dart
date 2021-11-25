@@ -46,9 +46,31 @@ step1Onboarding<widget>(
               StepButton(
                 text: "Next".tr,
                 trailing: Icons.chevron_right,
-                onTap: () => controller.animateToPage(1,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut),
+                onTap: () {
+                  if (_.name.value == '') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please Add a name'),
+                      ),
+                    );
+                  } else if (_.dateOfBirthInMs.value == 0) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please choose a date of birth'),
+                      ),
+                    );
+                  } else if (_.gender.value == '') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please choose a name'),
+                      ),
+                    );
+                  } else {
+                    controller.animateToPage(1,
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeInOut);
+                  }
+                },
                 backgroundColor: kOTTAOrange,
                 fontColor: Colors.white,
               ),
@@ -100,7 +122,19 @@ step1Onboarding<widget>(
                           ],
                         ),
                       ),
-                      Text("Date_of_birth".tr),
+                      GestureDetector(
+                        onTap: () async {
+                          final initialDate = DateTime.now();
+                          final date = await showDatePicker(
+                            context: context,
+                            firstDate: DateTime(1950),
+                            lastDate: initialDate,
+                            initialDate: initialDate,
+                          );
+                          print(date.toString());
+                        },
+                        child: Text("Date_of_birth".tr),
+                      ),
                     ],
                   ),
                 ),
