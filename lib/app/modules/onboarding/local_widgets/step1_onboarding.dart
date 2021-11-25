@@ -46,7 +46,7 @@ step1Onboarding<widget>(
               StepButton(
                 text: "Next".tr,
                 trailing: Icons.chevron_right,
-                onTap: () {
+                onTap: () async {
                   if (_.name.value == '') {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -62,10 +62,20 @@ step1Onboarding<widget>(
                   } else if (_.gender.value == '') {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Please choose a name'),
+                        content: Text('Please choose a gender'),
                       ),
                     );
                   } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                    await _.uploadInfo();
+                    print('hi');
+                    await _.setPref();
+                    Get.back();
                     controller.animateToPage(1,
                         duration: Duration(milliseconds: 300),
                         curve: Curves.easeInOut);
@@ -99,6 +109,9 @@ step1Onboarding<widget>(
                           children: [
                             TextFormField(
                               controller: _.nameController,
+                              onChanged: (value) {
+                                _.name.value = value;
+                              },
                               decoration: InputDecoration(hintText: "Name".tr),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -107,33 +120,49 @@ step1Onboarding<widget>(
                                 return null;
                               },
                             ),
-                            TextFormField(
-                              controller: _.genderController,
-                              keyboardType: TextInputType.number,
-                              decoration:
-                                  InputDecoration(hintText: "Gender".tr),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'please_enter_some_text'.tr;
-                                }
-                                return null;
+                            GestureDetector(
+                              onTap: () async {
+                                final initialDate = DateTime.now();
+                                final date = await showDatePicker(
+                                  context: context,
+                                  firstDate: DateTime(1950),
+                                  lastDate: initialDate,
+                                  initialDate: initialDate,
+                                );
+                                _.dateOfBirthInMs.value =
+                                    date!.millisecondsSinceEpoch;
+                                print(_.dateOfBirthInMs.value);
+                                final dates = date.toString();
+                                _.birthDateController.text =
+                                    dates.replaceRange(10, 23, '');
                               },
+                              child: TextFormField(
+                                controller: _.birthDateController,
+                                keyboardType: TextInputType.number,
+                                enabled: false,
+                                decoration: InputDecoration(
+                                    hintText: "Date_of_birth".tr),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      AlertDialog(content: _dialogWidget()),
+                                );
+                                print('yes');
+                              },
+                              child: TextFormField(
+                                controller: _.genderController,
+                                keyboardType: TextInputType.number,
+                                decoration:
+                                    InputDecoration(hintText: "Gender".tr),
+                                enabled: false,
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          final initialDate = DateTime.now();
-                          final date = await showDatePicker(
-                            context: context,
-                            firstDate: DateTime(1950),
-                            lastDate: initialDate,
-                            initialDate: initialDate,
-                          );
-                          print(date.toString());
-                        },
-                        child: Text("Date_of_birth".tr),
                       ),
                     ],
                   ),
@@ -173,6 +202,43 @@ step1Onboarding<widget>(
           ],
         ),
       ),
+    ],
+  );
+}
+
+Widget _dialogWidget() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      _textWidget(text: 'Male'.tr),
+      _textWidget(text: 'Female'.tr),
+      _textWidget(text: 'Binary'.tr),
+      _textWidget(text: 'Fluid'.tr),
+      _textWidget(text: 'Other'.tr),
+    ],
+  );
+}
+
+final _controller = Get.find<OnboardingController>();
+
+Widget _textWidget({required String text}) {
+  return Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      GestureDetector(
+        onTap: () {
+          _controller.gender.value = text;
+          _controller.genderController.text = text;
+          Get.back();
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: Text(text),
+        ),
+      ),
+      Divider(),
     ],
   );
 }
