@@ -3,10 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
-import 'dart:io';
+// import 'dart:ui';
 import 'app/modules/splash/splash_binding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print(Get.deviceLocale);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -48,10 +50,16 @@ class MyApp extends StatelessWidget {
       getPages: AppPages.pages,
       translations: Translation(),
       // your translations
-      locale: Locale(
-        Platform.localeName.substring(0, 2),
-        Platform.localeName.substring(3, 5),
-      ),
+      locale: Get.deviceLocale,
+      supportedLocales: [
+        Locale('en', ''),
+        Locale('es', ''),
+      ],
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       // translations will be displayed in that locale
       fallbackLocale: Locale('en', 'US'),
     );

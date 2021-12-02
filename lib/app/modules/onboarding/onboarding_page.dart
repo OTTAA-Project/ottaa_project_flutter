@@ -7,11 +7,11 @@ import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_controll
 import 'local_widgets/step3_onboarding.dart';
 
 class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({Key? key}) : super(key: key);
-
+  OnboardingPage({Key? key}) : super(key: key);
+final _controller = Get.find<OnboardingController>();
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController(initialPage: 0);
+    final PageController controller = PageController(initialPage: _controller.pageNumber.value);
     return GetBuilder<OnboardingController>(
         id: "onboarding",
         builder: (_) {

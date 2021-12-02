@@ -8,7 +8,7 @@ class Translation extends Translations {
           'we_are_preparing_everything': 'We are preparing everything...',
           'Hello': 'Hello',
           'Continue': 'Continue',
-          'Please_register_for': 'Please Register for',
+          'Please_register_to': 'Please Register to',
           'Login_with_google': 'Login with Google',
           'Login_with_facebook': 'Login with Facebook',
           'Welcome_this_is_ottaa': 'Welcome, this is OTTAA',
@@ -30,7 +30,7 @@ class Translation extends Translations {
           'Do_a_guided_workshop': 'DO A GUIDED WORKSHOP',
           'Book_a_demo': 'BOOK A DEMO',
           'Ottaa_is_a_powerful_communication_tool':
-              'OTTAA is a powerful communication tool',
+              'OTTAA is a powerful \ncommunication tool',
           'We_offer_you_different_options_so_that_you_learn_how_to_use_it_and_get_the_most_out_of_it':
               'We offer you different options so that you learn how to use it and get the most out of it.',
           'Choose_your_avatar': 'Choose your Avatar',
@@ -55,6 +55,16 @@ class Translation extends Translations {
           'Binary': 'Binary',
           'Fluid': 'Fluid',
           'Other': 'Other',
+          'hola_nnos_conozcamos_un_poco':
+              'Hello,\nLet\'s get to know each other a little bit.',
+          'vamos_a_pedirte_cierta_informaci_n_para_nmejorar_tu_experiencia_con_ottaa':
+              'We will ask you for certain information\nto improve your experience with OTTAA.',
+          'check_if_the_info_is_correct_nif_not_change_it_as_you_wish_this_will_help_us_to_personalize_the_app_for_you':
+              'Check if the info is correct,\nif not, change it as you wish. This will help us to personalize the app for you.',
+          'te_ofrecemos_varias_opciones_para_naprender_a_utilizarla_y_sacarle_el_maximo_provecho':
+              'We offer you several options to\nlearn how to use it and get the most out of it',
+          'por_ltimo': 'At Last!',
+          'elige_un_personaje_que_nmejor_te_represente': 'Choose a character that best represents you',
           '': '',
         },
         'es_ES': {
@@ -62,7 +72,7 @@ class Translation extends Translations {
           'we_are_preparing_everything': 'Estamos preparando todo...',
           'Hello': 'Hola',
           'Continue': 'Continuar',
-          'Please_register_for': 'Por Favor Registrarse para',
+          'Please_register_to': 'Por favor regístrese en',
           'Login_with_google': 'Acceder con Google',
           'Login_with_facebook': 'Acceder con Facebook',
           'Welcome_this_is_ottaa': 'Bienvenidos, esto es OTTAA',
@@ -83,7 +93,7 @@ class Translation extends Translations {
           'Do_a_guided_workshop': 'HACER UN TALLER GUIADO',
           'Book_a_demo': 'RESERVA UNA DEMO',
           'Ottaa_is_a_powerful_communication_tool':
-              'OTTAA es una poderosa herramienta de comunicación',
+              'OTTAA es una potente\nherramienta de comunicación',
           'We_offer_you_different_options_so_that_you_learn_how_to_use_it_and_get_the_most_out_of_it':
               'Te ofrecemos diferentes opciones para que aprendas a usarla y sques el mayor provecho',
           'Choose_your_avatar': 'Escoge tu Avatar',
@@ -108,6 +118,15 @@ class Translation extends Translations {
           'Binary': 'Binary',
           'Fluid': 'Fluid',
           'Other': 'Other',
+          'hola_nnos_conozcamos_un_poco': 'Hola,\nNos conozcamos un poco',
+          'vamos_a_pedirte_cierta_informaci_n_para_nmejorar_tu_experiencia_con_ottaa':
+              'Vamos a pedirte cierta información para\nmejorar tu experiencia con OTTAA',
+          'check_if_the_info_is_correct_nif_not_change_it_as_you_wish_this_will_help_us_to_personalize_the_app_for_you':
+              'Comprueba si la información es correcta,\nsi no, cámbiala como quieras. Esto nos ayudará a personalizar la aplicación para ti.',
+          'te_ofrecemos_varias_opciones_para_naprender_a_utilizarla_y_sacarle_el_maximo_provecho':
+              'Te ofrecemos varias opciones para\naprender a utilizarla y sacarle el maximo provecho',
+          'por_ltimo': 'Por Ultimo!',
+          'elige_un_personaje_que_nmejor_te_represente': 'Elige un personaje que  mejor te represente',
           '': '',
         },
       };

@@ -20,7 +20,11 @@ step2Onboarding<widget>(
   double horizontalSize = MediaQuery.of(context).size.width;
   return Stack(
     children: [
-      FadeInLeft(child: HeaderWave(color: kOTTAOrange)),
+      FadeInLeft(
+          child: HeaderWave(
+        color: kOTTAOrangeNew,
+        bgColor: kOTTABackgroundNew,
+      )),
       Positioned(
         bottom: 0,
         left: horizontalSize * 0.05,
@@ -43,20 +47,26 @@ step2Onboarding<widget>(
             children: [
               StepButton(
                 text: "Previous".tr,
-                leading: Icons.chevron_left,
-                onTap: () => controller.animateToPage(0,
+                // leading: Icons.chevron_left,
+                onTap: () {
+                  _.pageNumber.value = 0;
+                  controller.animateToPage(_.pageNumber.value,
                     duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut),
-                backgroundColor: Colors.grey,
+                    curve: Curves.easeInOut);
+                },
+                backgroundColor: kQuantumGrey,
                 fontColor: Colors.white,
               ),
               StepButton(
                 text: "Next".tr,
-                trailing: Icons.chevron_right,
-                onTap: () => controller.animateToPage(2,
+                // trailing: Icons.chevron_right,
+                onTap: () {
+                  _.pageNumber.value = 2;
+                  controller.animateToPage(_.pageNumber.value,
                     duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut),
-                backgroundColor: kOTTAOrange,
+                    curve: Curves.easeInOut);
+                },
+                backgroundColor: kOTTAOrangeNew,
                 fontColor: Colors.white,
               ),
             ],
@@ -73,62 +83,51 @@ step2Onboarding<widget>(
                 Container(
                   width: horizontalSize * 0.35,
                   height: verticalSize * 0.7,
-                  // decoration: BoxDecoration(
-                  //     color: Colors.white,
-                  //     borderRadius: BorderRadius.circular(10)),
+                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image(image: AssetImage('assets/imgs/logo_ottaa.webp')),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 100, vertical: 30),
-                            child: GFButton(
-                              onPressed: () => Get.toNamed(AppRoutes.TUTORIAL),
-                              text: "Launch_short_tutorial".tr,
-                              textColor: Colors.white,
-                              disabledTextColor: Colors.grey,
-                              color: kOTTAOrange,
-                              disabledColor: kQuantumGrey,
-                              shape: GFButtonShape.pills,
-                              size: GFSize.LARGE,
-                              blockButton: true,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 100, vertical: 30),
-                            child: GFButton(
-                              textColor: Colors.white,
-                              disabledTextColor: Colors.grey,
-                              color: kOTTAOrange,
-                              disabledColor: kQuantumGrey,
-                              onPressed: null,
-                              text: "Do_a_guided_workshop".tr,
-                              shape: GFButtonShape.pills,
-                              size: GFSize.LARGE,
-                              blockButton: true,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 100, vertical: 30),
-                            child: GFButton(
-                              onPressed: null,
-                              text: "Book_a_demo".tr,
-                              textColor: Colors.white,
-                              disabledTextColor: Colors.grey,
-                              color: kOTTAOrange,
-                              disabledColor: kQuantumGrey,
-                              shape: GFButtonShape.pills,
-                              size: GFSize.LARGE,
-                              blockButton: true,
-                            ),
-                          ),
-                        ],
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
+                        child: Image(image: AssetImage('assets/imgs/logo_ottaa.webp')),
+                      ),
+                      GFButton(
+                        onPressed: () => Get.toNamed(AppRoutes.TUTORIAL),
+                        text: "Launch_short_tutorial".tr,
+                        textColor: Colors.white,
+                        disabledTextColor: Colors.grey,
+                        color: kOTTAOrange,
+                        disabledColor: kQuantumGrey,
+                        shape: GFButtonShape.pills,
+                        size: verticalSize * 0.07,
+                        blockButton: true,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: verticalSize * 0.07),
+                        child: GFButton(
+                          textColor: Colors.white,
+                          disabledTextColor: Colors.grey,
+                          color: kOTTAOrange,
+                          disabledColor: kQuantumGrey,
+                          onPressed: null,
+                          text: "Do_a_guided_workshop".tr,
+                          shape: GFButtonShape.pills,
+                          size: verticalSize * 0.07,
+                          blockButton: true,
+                        ),
+                      ),
+                      GFButton(
+                        onPressed: null,
+                        text: "Book_a_demo".tr,
+                        textColor: Colors.white,
+                        disabledTextColor: Colors.grey,
+                        color: kOTTAOrange,
+                        disabledColor: kQuantumGrey,
+                        shape: GFButtonShape.pills,
+                        size: verticalSize * 0.07,
+                        blockButton: true,
                       ),
                     ],
                   ),
@@ -139,28 +138,26 @@ step2Onboarding<widget>(
         ),
       ),
       Positioned(
-        top: verticalSize * 0.045,
+        top: verticalSize * 0.2,
         left: horizontalSize * 0.025,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: horizontalSize * 0.45,
-              child: FittedBox(
-                child: Text(
-                  'Ottaa_is_a_powerful_communication_tool'.tr,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
-                  ),
+              child: Text(
+                'Ottaa_is_a_powerful_communication_tool'.tr,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
                 ),
               ),
             ),
             Container(
               width: horizontalSize * 0.45,
               child: AutoSizeText(
-                'We_offer_you_different_options_so_that_you_learn_how_to_use_it_and_get_the_most_out_of_it'
+                'te_ofrecemos_varias_opciones_para_naprender_a_utilizarla_y_sacarle_el_maximo_provecho'
                     .tr,
                 style: TextStyle(color: Colors.white),
                 maxLines: 2,

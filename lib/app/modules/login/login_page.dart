@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'login_controller.dart';
@@ -16,11 +17,10 @@ class LoginPage extends StatelessWidget {
     double horizontalSize = MediaQuery.of(context).size.width;
     return GetBuilder<LoginController>(
       builder: (_) => Scaffold(
-        backgroundColor: Colors.grey.shade400,
+        backgroundColor: kOTTABackgroundNew,
         body: Center(
           child: Stack(
             children: [
-              FadeInUp(child: HeaderWave(color: kOTTAOrange)),
               FadeInUp(
                 child: Center(
                   child: Container(
@@ -29,41 +29,51 @@ class LoginPage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Image(
-                          image: AssetImage('assets/imgs/logo_ottaa.webp'),
-                        ),
-                        Column(
-                          children: [
-                            Text("${"Hello".tr}!"),
-                            Text("Please_register_for".tr),
-                            Text("Continue".tr),
-                            Text("hello_world".tr)
-                          ],
-                        ),
-                        JelloIn(
-                          child: SignInButton(
-                            Buttons.GoogleDark,
-                            text: "Login_with_google".tr,
-                            onPressed: () => _.authController.handleSignIn(
-                              SignInType.GOOGLE,
-                            ),
-                            // onPressed: () => Get.offAllNamed(AppRoutes.ONBOARDING),
-                          ),
-                        ),
-                        JelloIn(
-                          child: SignInButton(
-                            Buttons.Facebook,
-                            text: "Login_with_facebook".tr,
-                            onPressed: () => _.authController
-                                .handleSignIn(SignInType.FACEBOOK),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // child: Column(
+                    //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //   children: [
+                    //     Padding(
+                    //       padding: EdgeInsets.symmetric(
+                    //           horizontal: (horizontalSize * 0.6) * 0.2),
+                    //       child: Image.asset(
+                    //         'assets/imgs/logo_ottaa.webp',
+                    //       ),
+                    //     ),
+                    //     Column(
+                    //       children: [
+                    //         Text("${"Hello".tr}!"),
+                    //         Text("Please_register_for".tr),
+                    //         Text("Continue".tr),
+                    //         Text("hello_world".tr)
+                    //       ],
+                    //     ),
+                    //     JelloIn(
+                    //       child: SignInButton(
+                    //         Buttons.GoogleDark,
+                    //         text: "Login_with_google".tr,
+                    //         onPressed: () => _.authController.handleSignIn(
+                    //           SignInType.GOOGLE,
+                    //         ),
+                    //         // onPressed: () => Get.offAllNamed(AppRoutes.ONBOARDING),
+                    //       ),
+                    //     ),
+                    //     JelloIn(
+                    //       child: SignInButton(
+                    //         Buttons.Facebook,
+                    //         text: "Login_with_facebook".tr,
+                    //         onPressed: () => _.authController
+                    //             .handleSignIn(SignInType.FACEBOOK),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                child: FadeInUp(
+                  child: HeaderWave(color: kOTTAOrangeNew),
                 ),
               ),
               Positioned(
@@ -91,6 +101,60 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
               ),
+              FadeInUp(
+                child: Center(
+                  child: Container(
+                    width: horizontalSize * 0.6,
+                    height: verticalSize * 0.65,
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: (horizontalSize * 0.6) * 0.2),
+                          child: Image.asset(
+                            'assets/imgs/logo_ottaa.webp',
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: verticalSize * 0.02,
+                            ),
+                            Text("${"Hello".tr}!"),
+                            Text("Please_register_to".tr),
+                            Text("Continue".tr),
+                          ],
+                        ),
+                        SizedBox(
+                          height: verticalSize * 0.12,
+                        ),
+                        JelloIn(
+                          child: SignInButton(
+                            Buttons.GoogleDark,
+                            text: "Login_with_google".tr,
+                            onPressed: () => _.authController.handleSignIn(
+                              SignInType.GOOGLE,
+                            ),
+                            // onPressed: () => Get.offAllNamed(AppRoutes.ONBOARDING),
+                          ),
+                        ),
+                        JelloIn(
+                          child: SignInButton(
+                            Buttons.Facebook,
+                            text: "Login_with_facebook".tr,
+                            onPressed: () => _.authController
+                                .handleSignIn(SignInType.FACEBOOK),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -107,8 +171,13 @@ class HeaderWave extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: double.infinity,
-      width: double.infinity,
+      height: Get.height,
+      width: Get.width,
+      clipBehavior: Clip.antiAlias,
+      // color: Colors.black,
+      decoration: BoxDecoration(
+        // color: Colors.black
+      ),
       child: CustomPaint(
         painter: _HeaderWavePainter(this.color),
       ),
@@ -134,12 +203,14 @@ class _HeaderWavePainter extends CustomPainter {
 
     // Dibujar con el path y el lapiz
     path.moveTo(0, size.height);
-    path.lineTo(0, size.height * 0.8);
-    path.quadraticBezierTo(size.width * 0.25, size.height * 0.8,
-        size.width * 0.5, size.height * 0.85);
+    path.lineTo(0, size.height * 0.7);
+    path.quadraticBezierTo(size.width * 0.15, size.height * 0.7,
+        size.width * 0.4, size.height * 0.75);
     path.quadraticBezierTo(
-        size.width * 0.75, size.height * 0.9, size.width, size.height * 0.85);
+        size.width * 0.65, size.height * 0.8, size.width , size.height * 0.75);
     path.lineTo(size.width, size.height);
+
+    canvas.drawPath(path, lapiz);
 
     canvas.drawPath(path, lapiz);
   }

@@ -4,6 +4,8 @@ part of './app_theme.dart';
 
 // Primary Palette
 const kOTTAOrange = Color(0xFFFF8138);
+const kOTTAOrangeNew = Color(0xFFFF6900);
+const kOTTABackgroundNew = Color(0xFFF5F5F5);
 const kQuantumGrey = Color(0xFFE0E0E0);
 
 // General Palette

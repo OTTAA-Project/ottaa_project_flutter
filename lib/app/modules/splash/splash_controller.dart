@@ -1,25 +1,31 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 
 class SplashController extends GetxController {
   late bool loggedIn;
+  late bool photo;
 
   @override
   void onInit() async {
+    Get.lazyPut(() => OnboardingController());
     super.onInit();
     await _init();
   }
 
   _init() async {
     await firstTime();
-    await Future.delayed(Duration(seconds: 1));
     // final User? auth = FirebaseAuth.instance.currentUser;
     if (loggedIn == false) {
       Get.offNamed(AppRoutes.LOGIN);
-    } else {
+    } else if (photo) {
       Get.offNamed(AppRoutes.HOME);
+    } else {
+      final _controller = Get.find<OnboardingController>();
+      _controller.pageNumber.value = 2;
+      Get.toNamed(AppRoutes.ONBOARDING);
     }
   }
 
@@ -27,6 +33,12 @@ class SplashController extends GetxController {
     final instance = await SharedPreferences.getInstance();
     loggedIn = instance.getBool('First_time') ?? false;
     print(loggedIn);
+  }
+
+  Future<void> photoCheck() async {
+    final instance = await SharedPreferences.getInstance();
+    photo = instance.getBool('Avatar_photo') ?? false;
+    print(photo);
   }
 
   void checkUser() async {}

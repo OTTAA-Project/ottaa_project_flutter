@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 class HeaderWave extends StatelessWidget {
   final Color color;
-
-  const HeaderWave({required this.color});
+  final Color bgColor;
+  const HeaderWave({required this.color,this.bgColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: bgColor,
       height: double.infinity,
       width: double.infinity,
       child: CustomPaint(
