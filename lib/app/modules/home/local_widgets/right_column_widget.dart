@@ -11,12 +11,12 @@ class RightColumnWidget extends StatelessWidget {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
     return Container(
-      height: verticalSize * 0.75,
+      height: verticalSize * 0.5,
       width: horizontalSize * 0.10,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          FittedBox(
+          /*FittedBox(
             child: GestureDetector(
               onTap: () {
                 Get.toNamed(AppRoutes.CONFIGURATION);
@@ -29,7 +29,7 @@ class RightColumnWidget extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ),*/
           FittedBox(
             child: GestureDetector(
               onTap: null,

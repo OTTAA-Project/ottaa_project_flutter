@@ -84,10 +84,10 @@ Widget step1Onboarding<widget>(
                         duration: Duration(milliseconds: 300),
                         curve: Curves.easeInOut);
                   }
-                  _.pageNumber.value = 1;
-                  controller.animateToPage(_.pageNumber.value,
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.easeInOut);
+                  // _.pageNumber.value = 1;
+                  // controller.animateToPage(_.pageNumber.value,
+                  //     duration: Duration(milliseconds: 300),
+                  //     curve: Curves.easeInOut);
                 },
                 backgroundColor: kOTTAOrangeNew,
                 fontColor: Colors.white,

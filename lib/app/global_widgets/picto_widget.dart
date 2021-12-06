@@ -52,37 +52,37 @@ class Picto extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-              //height: 320,
-              margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-              padding: EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                  color: groupColor[pict.tipo],
-                  borderRadius: BorderRadius.circular(10)),
+            Expanded(
               child: Container(
-                padding: EdgeInsets.all(5),
+                //height: 320,
+                margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                padding: EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: groupColor[pict.tipo],
                     borderRadius: BorderRadius.circular(10)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image(
-                      image:
-                          AssetImage('assets/imgs/${pict.imagen.picto}.webp')),
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image(
+                        image:
+                            AssetImage('assets/imgs/${pict.imagen.picto}.webp')),
+                  ),
                 ),
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Center(
-                  child: FittedBox(
-                    // ver si queda o no el fit
-                    child: Text(
-                      texto.toUpperCase(),
-                      style:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                    ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Center(
+                child: FittedBox(
+                  // ver si queda o no el fit
+                  child: Text(
+                    texto.toUpperCase(),
+                    style:
+                        TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
