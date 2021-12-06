@@ -24,98 +24,105 @@ class SentenceWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: verticalSize * 0.2,
-              child: _.sentencePicts.length >= 1
-                  ? ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _.sentencePicts.length + 1,
-                      itemBuilder: (BuildContext context, int index) {
-                        final Pict speakPict = Pict(
-                            id: 0,
-                            texto: Texto(en: "", es: ""),
-                            tipo: 6,
-                            imagen: Imagen(picto: "logo_ottaa_dev"));
-                        if (_.sentencePicts.length > index) {
-                          final Pict pict = _.sentencePicts[index];
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: verticalSize * 0.04),
+              child: Container(
+                height: verticalSize * 0.2,
+                child: _.sentencePicts.length >= 1
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _.sentencePicts.length + 6,
+                        itemBuilder: (BuildContext context, int index) {
+                          final Pict speakPict = Pict(
+                              id: 0,
+                              texto: Texto(en: "", es: ""),
+                              tipo: 6,
+                              imagen: Imagen(picto: "logo_ottaa_dev"));
+                          if (_.sentencePicts.length > index) {
+                            final Pict pict = _.sentencePicts[index];
+                            return FadeInDown(
+                              from: 30,
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                child: MiniPicto(
+                                  pict: pict,
+                                  onTap: () {
+                                    _.speak();
+                                  },
+                                ),
+                              ),
+                            );
+                          } else if(_.sentencePicts.length == index) {
+                            return Bounce(
+                              from: 6,
+                              infinite: true,
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                child: MiniPicto(
+                                  pict: speakPict,
+                                  onTap: () {
+                                    _.speak();
+                                  },
+                                ),
+                              ),
+                            );
+                          }
                           return FadeInDown(
                             from: 30,
-                            child: Container(
-                              margin: EdgeInsets.all(10),
-                              child: MiniPicto(
-                                pict: pict,
-                                onTap: () {
-                                  _.speak();
-                                },
-                              ),
-                            ),
-                          );
-                        } else if(_.sentencePicts.length == index) {
-                          return Bounce(
-                            from: 6,
-                            infinite: true,
-                            child: Container(
-                              margin: EdgeInsets.all(10),
-                              child: MiniPicto(
-                                pict: speakPict,
-                                onTap: () {
-                                  _.speak();
-                                },
-                              ),
-                            ),
-                          );
-                        }
-                        return FadeInDown(
-                          from: 30,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: kWhite,
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              child: DottedBorder(
-                                dashPattern: [8,8],
-                                child: Container(
-                                  width: Get.width * 0.12,
-                                  color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: kWhite,
+                                ),
+                                padding: const EdgeInsets.all(10),
+                                child: DottedBorder(
+                                  dashPattern: [8,8],
+                                  child: Container(
+                                    width: Get.width * 0.12,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    )
-                  : ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: 20,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => FadeInDown(
-                        from: 30,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: kWhite,
-                            ),
-                            padding: const EdgeInsets.all(10),
-                            child: DottedBorder(
-                              dashPattern: [8,8],
-                              child: Container(
-                                width: Get.width * 0.12,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          );
+                        },
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                        itemCount: 10,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => FadeInDown(
+                          from: 30,
+                          child: emptyWidget(),
                         ),
                       ),
-                    ),
+              ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget emptyWidget(){
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: kWhite,
+        ),
+        padding: const EdgeInsets.all(10),
+        child: DottedBorder(
+          dashPattern: [8,8],
+          child: Container(
+            width: Get.width * 0.12,
+            color: Colors.white,
+          ),
         ),
       ),
     );

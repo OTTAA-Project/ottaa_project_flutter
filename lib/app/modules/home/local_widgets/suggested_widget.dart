@@ -23,7 +23,7 @@ class SuggestedWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: verticalSize * 0.60,
+              height: verticalSize * 0.52,
               width: horizontalSize * 0.78,
               child: ListView.builder(
                 shrinkWrap: true,
