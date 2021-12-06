@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/app/modules/home/local_widgets/actions_wid
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/left_column_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/sentence_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/suggested_widget.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class HomePage extends StatelessWidget {
@@ -70,8 +71,8 @@ class HomePage extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 _.voiceText.toUpperCase(),
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 30),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 30),
                               ),
                             ),
                           ],
@@ -86,6 +87,24 @@ class HomePage extends StatelessWidget {
                     );
                   return Container();
                 },
+              ),
+              Positioned(
+                right: 0,
+                top: verticalSize * 0.25,
+                child: FittedBox(
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.CONFIGURATION);
+                    },
+                    child: Center(
+                      child: Icon(
+                        Icons.settings,
+                        color: Colors.transparent,
+                        size: horizontalSize / 10,
+                      ),
+                    ),
+                  ),
+                ),
               ),
               // if (_.isPlaying())
             ],
