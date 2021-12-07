@@ -72,7 +72,9 @@ step4Tutorial<widget>(PageController controller, context) {
             StepButton(
               text: "Ready".tr,
               trailing: Icons.chevron_right,
-              onTap: () => Get.toNamed(AppRoutes.HOME),
+              onTap: () {
+                Get.close(1);
+              },
               backgroundColor: kOTTAOrange,
               fontColor: Colors.white,
             ),

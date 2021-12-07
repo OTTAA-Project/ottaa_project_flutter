@@ -50,8 +50,8 @@ class Translation extends Translations {
           'Step4_long':
               'Enter the selection of games to learn while playing. OTTAA has educational games to learn vocabulary, concepts and much more. Also, more games will be available soon.',
           'Play_and_learn': 'PLAY AND LEARN',
-          'Male': 'MALE',
-          'Female': 'FEMALE',
+          'Male': 'Male',
+          'Female': 'Female',
           'Binary': 'Binary',
           'Fluid': 'Fluid',
           'Other': 'Other',
@@ -113,8 +113,8 @@ class Translation extends Translations {
           'Step4_long':
               'Entra a la selección de juegos para aprender jugando. OTTAA cuenta con juegos didácticos para aprender vocabulario, conceptos y mucho más. Además, pronto habrá más juegos disponibles',
           'Play_and_learn': 'JUEGA Y APRENDE',
-          'Male': 'MASCULINO',
-          'Female': 'FEMENINO',
+          'Male': 'Masculino',
+          'Female': 'Femenino',
           'Binary': 'Binary',
           'Fluid': 'Fluid',
           'Other': 'Other',

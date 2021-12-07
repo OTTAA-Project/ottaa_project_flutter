@@ -144,9 +144,17 @@ Widget step1Onboarding<widget>(
                                       _.name.value = value;
                                     },
                                     decoration: InputDecoration(
-                                        hintText: "Name".tr,
-                                        contentPadding: const EdgeInsets.all(0),
-                                        isDense: true),
+                                      focusColor: kOTTAOrangeNew,
+                                      fillColor: kOTTAOrangeNew,
+                                      hintText: "Name".tr,
+                                      contentPadding: const EdgeInsets.all(0),
+                                      isDense: true,
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: kOTTAOrangeNew),
+                                      ),
+                                    ),
+                                    cursorColor: kOTTAOrangeNew,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return 'please_enter_some_text'.tr;
@@ -179,6 +187,7 @@ Widget step1Onboarding<widget>(
                                         controller: _.genderController,
                                         keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
+                                          focusColor: kOTTAOrangeNew,
                                           border: InputBorder.none,
                                         ),
                                         enabled: false,
@@ -196,6 +205,17 @@ Widget step1Onboarding<widget>(
                               onTap: () async {
                                 final initialDate = DateTime.now();
                                 final date = await showDatePicker(
+                                  builder: (context, child) {
+                                    return Theme(
+                                      data: Theme.of(context).copyWith(
+                                        colorScheme: ColorScheme.light(
+                                          primary: kOTTAOrangeNew,
+
+                                        ),
+                                      ),
+                                      child: child!,
+                                    );
+                                  },
                                   context: context,
                                   firstDate: DateTime(1950),
                                   lastDate: initialDate,
@@ -270,6 +290,9 @@ Widget step1Onboarding<widget>(
                   ),
                 ),
               ),
+            ),
+            SizedBox(
+              height: verticalSize*0.02,
             ),
             Container(
               width: horizontalSize * 0.45,

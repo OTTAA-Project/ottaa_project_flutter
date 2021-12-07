@@ -142,7 +142,7 @@ class LoginPage extends StatelessWidget {
                                 SignInType.GOOGLE,
                               ),
                               // onPressed: () =>
-                              //     Get.offAllNamed(AppRoutes.HOME),
+                              //     Get.offAllNamed(AppRoutes.ONBOARDING),
                             ),
                           ),
                         ),

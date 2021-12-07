@@ -138,7 +138,7 @@ step2Onboarding<widget>(
         ),
       ),
       Positioned(
-        top: verticalSize * 0.2,
+        top: verticalSize * 0.045,
         left: horizontalSize * 0.025,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,9 +150,12 @@ step2Onboarding<widget>(
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24,
+                  fontSize: 35,
                 ),
               ),
+            ),
+            SizedBox(
+              height: verticalSize * 0.02,
             ),
             Container(
               width: horizontalSize * 0.45,

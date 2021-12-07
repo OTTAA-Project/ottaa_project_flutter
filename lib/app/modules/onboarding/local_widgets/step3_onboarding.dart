@@ -137,7 +137,7 @@ Widget step3Onboarding<widget>(
                             );
                             await _.uploadAvatar(photoNumber: _.imageNumber.value);
                             await _.setPhotoPref();
-                            Get.toNamed(AppRoutes.TUTORIAL);
+                            Get.offAllNamed(AppRoutes.HOME);
                           },
                           backgroundColor: kOTTAOrangeNew,
                           fontColor: Colors.white,
@@ -152,8 +152,8 @@ Widget step3Onboarding<widget>(
         ),
       ),
       Positioned(
-        top: verticalSize * 0.3,
-        left: horizontalSize * 0.02,
+        top: verticalSize * 0.045,
+        left: horizontalSize * 0.025,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -164,6 +164,9 @@ Widget step3Onboarding<widget>(
                 fontWeight: FontWeight.bold,
                 fontSize: 40,
               ),
+            ),
+            SizedBox(
+              height: verticalSize * 0.01,
             ),
             Text(
               '${'elige_un_personaje_que_nmejor_te_represente'.tr}!',

@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 // import 'dart:ui';
 import 'app/modules/splash/splash_binding.dart';
 import 'app/routes/app_pages.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: kOTTAOrangeNew,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: SplashPage(),
