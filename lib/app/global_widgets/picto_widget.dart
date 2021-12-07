@@ -4,7 +4,7 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 final Map<int, Color> groupColor = {
   1: Colors.yellow,
-  2: kOTTAOrange,
+  2: kOTTAOrangeNew,
   3: Colors.green,
   4: Colors.blue,
   5: Colors.purple,
@@ -53,6 +53,7 @@ class Picto extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Expanded(
+              flex: 8,
               child: Container(
                 //height: 320,
                 margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -74,16 +75,13 @@ class Picto extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Center(
-                child: FittedBox(
-                  // ver si queda o no el fit
-                  child: Text(
-                    texto.toUpperCase(),
-                    style:
-                        TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                  ),
+            Expanded(flex: 1,
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  texto.toUpperCase(),
+                  style:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

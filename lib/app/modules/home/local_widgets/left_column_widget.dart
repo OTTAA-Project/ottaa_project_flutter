@@ -43,7 +43,7 @@ class LeftColumnWidget extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: kOTTAOrange,
+        color: kOTTAOrangeNew,
         borderRadius:
             BorderRadius.only(topRight: Radius.circular(horizontalSize / 40)),
       ),

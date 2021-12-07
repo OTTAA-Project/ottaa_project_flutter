@@ -44,7 +44,8 @@ class SentenceWidget extends StatelessWidget {
                             return FadeInDown(
                               from: 30,
                               child: Container(
-                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                                // margin: EdgeInsets.all(10),
                                 child: MiniPicto(
                                   pict: pict,
                                   onTap: () {
@@ -58,7 +59,8 @@ class SentenceWidget extends StatelessWidget {
                               from: 6,
                               infinite: true,
                               child: Container(
-                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                                // margin: EdgeInsets.all(10),
                                 child: MiniPicto(
                                   pict: speakPict,
                                   onTap: () {

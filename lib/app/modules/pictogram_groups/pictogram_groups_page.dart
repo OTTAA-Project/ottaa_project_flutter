@@ -17,7 +17,7 @@ class PictogramGroupsPage extends StatelessWidget {
     print(_homeController.grupos.length);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kOTTAOrange,
+        backgroundColor: kOTTAOrangeNew,
         leading: Container(),
         foregroundColor: Colors.white,
         elevation: 0,
@@ -57,13 +57,12 @@ class PictogramGroupsPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        //todo: change the color
-        color: Colors.grey[700],
+        color: Colors.black,
         child: Stack(
           children: [
             Container(
               // height: Get.height * 0.7,
-              padding: EdgeInsets.symmetric(horizontal: Get.width * .15),
+              padding: EdgeInsets.symmetric(horizontal: Get.width * .10),
               child: Column(
                 children: [
                   Expanded(
@@ -73,7 +72,7 @@ class PictogramGroupsPage extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             horizontal: _pictogramController
                                     .categoryGridviewOrPageview.value
-                                ? 16
+                                ? Get.width *0.02
                                 : Get.width * 0.13,
                             vertical: 16),
 
@@ -85,7 +84,7 @@ class PictogramGroupsPage extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      color: kOTTAOrange,
+                      color: kOTTAOrangeNew,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -129,12 +128,12 @@ class PictogramGroupsPage extends StatelessWidget {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrange,
+                  color: kOTTAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(16),
                   ),
                 ),
-                width: Get.width * 0.15,
+                width: width * 0.10,
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
@@ -159,12 +158,12 @@ class PictogramGroupsPage extends StatelessWidget {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrange,
+                  color: kOTTAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                   ),
                 ),
-                width: Get.width * 0.15,
+                width: width * 0.10,
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
@@ -186,7 +185,7 @@ class PictogramGroupsPage extends StatelessWidget {
 
             /// the play button
             Positioned(
-              bottom: height * 0.1,
+              bottom: height * 0.07,
               left: width * 0.43,
               right: width * 0.43,
               child: Container(
