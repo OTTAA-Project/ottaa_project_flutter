@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
@@ -87,6 +88,8 @@ class AuthService {
   }
 
   Future<List<void>> signOut() async {
+    final sharedPrefClient =await SharedPreferences.getInstance();
+    sharedPrefClient.setBool('First_time', false);
     return Future.wait([
       _firebaseAuth.signOut(),
       _googleSignIn.signOut(),
