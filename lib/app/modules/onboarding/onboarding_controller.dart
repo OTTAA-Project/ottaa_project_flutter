@@ -34,11 +34,17 @@ class OnboardingController extends GetxController {
   Future<void> uploadInfo() async {
     final User? auth = FirebaseAuth.instance.currentUser;
     final ref = databaseRef.child('Usuarios/${auth!.uid}/');
-    await ref.set({
+    await ref.set(<String, Object>{
       'Nombre': name.value,
       'birth_date': dateOfBirthInMs.value,
       'pref_sexo': gender.value,
-    }).then((value) => print('done'));
+    }).then((onValue) {
+      return true;
+    }).catchError((onError) {
+      print(onError.toString());
+      return false;
+    });
+    print('hi');
   }
 
   Future<void> uploadAvatar({required int photoNumber}) async {

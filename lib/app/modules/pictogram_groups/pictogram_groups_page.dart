@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/category_view_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/picto_search_page.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+
+import 'local_widgets/otta_logo_widget.dart';
 
 class PictogramGroupsPage extends StatelessWidget {
   final _pictogramController = Get.find<PictogramGroupsController>();
   final _homeController = Get.find<HomeController>();
+  final _ttsController = Get.find<TTSController>();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +77,7 @@ class PictogramGroupsPage extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             horizontal: _pictogramController
                                     .categoryGridviewOrPageview.value
-                                ? Get.width *0.02
+                                ? Get.width * 0.02
                                 : Get.width * 0.13,
                             vertical: 16),
 
@@ -185,21 +190,38 @@ class PictogramGroupsPage extends StatelessWidget {
 
             /// the play button
             Positioned(
-              bottom: height * 0.07,
+              bottom: height * 0.02,
               left: width * 0.43,
               right: width * 0.43,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[700],
-                  borderRadius: BorderRadius.circular(width * 0.1),
-                ),
-                child: FittedBox(
-                  child: Image.asset(
-                    'assets/icono_ottaa.webp',
-                    fit: BoxFit.cover,
-                    height: 500,
-                    width: 500,
-                  ),
+              child: Obx(
+                () => GestureDetector(
+                  onTap: _pictogramController.categoryGridviewOrPageview.value
+                      ? () {}
+                      : () async {
+                          //saying the name after selecting the category
+                          //saying the name after selecting the category and saving the selected grupo
+                          _pictogramController.selectedGrupos =
+                              _homeController.grupos[_pictogramController
+                                  .categoriesPageController.page!
+                                  .toInt()];
+                          _ttsController.speak(_ttsController.languaje ==
+                                  "en-US"
+                              ? _homeController
+                                  .grupos[_pictogramController
+                                      .categoriesPageController.page!
+                                      .toInt()]
+                                  .texto
+                                  .en
+                              : _homeController
+                                  .grupos[_pictogramController
+                                      .categoriesPageController.page!
+                                      .toInt()]
+                                  .texto
+                                  .es);
+                          await _pictogramController.fetchDesiredPictos();
+                          Get.toNamed(AppRoutes.SELECTPICTO);
+                        },
+                  child: OttaLogoWidget(),
                 ),
               ),
             ),

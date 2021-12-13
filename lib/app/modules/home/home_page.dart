@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/app/modules/home/local_widgets/actions_wid
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/left_column_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/sentence_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/suggested_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
@@ -58,10 +59,13 @@ class HomePage extends StatelessWidget {
                   if (_.hasText())
                     return Center(
                       child: Container(
+                        padding: EdgeInsets.only(top: 10, bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(width: 15),
+                            SizedBox(
+                              width: 13,
+                            ),
                             ClipRRect(
                               child: Image(
                                 image: AssetImage('assets/Group 671.png'),
@@ -72,7 +76,9 @@ class HomePage extends StatelessWidget {
                               child: Text(
                                 _.voiceText.toUpperCase(),
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 30),
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                ),
                               ),
                             ),
                           ],
@@ -87,6 +93,17 @@ class HomePage extends StatelessWidget {
                     );
                   return Container();
                 },
+              ),
+              Positioned(
+                left: horizontalSize * 0.43,
+                right: horizontalSize * 0.43,
+                bottom: verticalSize * 0.02,
+                child: GestureDetector(
+                  onTap: () {
+                    _.speak();
+                  },
+                  child: OttaLogoWidget(),
+                ),
               ),
               Positioned(
                 right: 0,
