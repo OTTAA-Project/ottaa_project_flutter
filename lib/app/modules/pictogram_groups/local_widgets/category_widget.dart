@@ -19,7 +19,7 @@ class CategoryWidget extends StatelessWidget {
     this.border = false,
     this.bottom = true,
     this.color = 0,
-    this.languaje= '',
+    this.languaje = '',
   }) : super(key: key);
   final String name;
   final String imageName;
@@ -59,20 +59,19 @@ class CategoryWidget extends StatelessWidget {
             height: 12,
           ),
           //placeholder for the photos
-          Container(
-            height: 100,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                border: border
-                    ? Border.all(
-                        color: groupColor[color]!,
-                        width: 6,
-                      )
-                    : Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(8)),
-            child: FittedBox(
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  border: border
+                      ? Border.all(
+                          color: groupColor[color]!,
+                          width: 6,
+                        )
+                      : Border.all(color: Colors.white),
+                  borderRadius: BorderRadius.circular(8)),
               child: Image.asset(
                 'assets/imgs/$imageName.webp',
+                fit: BoxFit.fill,
               ),
             ),
           ),
