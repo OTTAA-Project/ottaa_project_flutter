@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +7,7 @@ import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+
 // import 'dart:ui';
 // import 'dart:io';
 import 'app/modules/splash/splash_binding.dart';
@@ -31,15 +31,21 @@ void main() async {
   }
   // print(defaultSystemLocale.toString());
   // print(systemLocales.asMap().toString());
-  runApp(MyApp(locale: Locale(systemLocales[0].languageCode,systemLocales[0].languageCode.toUpperCase()),));
+  runApp(MyApp(
+    locale: Locale(systemLocales[0].languageCode,
+        systemLocales[0].languageCode.toUpperCase()),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final Locale locale;
+
   MyApp({required this.locale});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print('here is the device locale');
     print(Get.deviceLocale);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,

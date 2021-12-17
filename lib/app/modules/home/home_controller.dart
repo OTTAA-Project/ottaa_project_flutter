@@ -11,38 +11,47 @@ import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart
 
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
+
   TTSController get ttsController => this._ttsController;
 
   final _pictsRepository = Get.find<PictsRepository>();
   final _grupoRepository = Get.find<GrupoRepository>();
 
   late AnimationController _pictoAnimationController;
+
   AnimationController get pictoAnimationController =>
       this._pictoAnimationController;
+
   set pictoAnimationController(AnimationController value) {
     this._pictoAnimationController = value;
   }
 
   String _voiceText = "";
+
   String get voiceText => this._voiceText;
 
   List<Pict> _picts = [];
-  List<Grupos> grupos =[];
+  List<Grupos> grupos = [];
 
   List<Pict> _suggestedPicts = [];
+
   List<Pict> get suggestedPicts => this._suggestedPicts;
 
   int _suggestedIndex = 0;
+
   int get suggestedIndex => this._suggestedIndex;
 
   int _suggestedQuantity = 4;
+
   int get suggestedQuantity => this._suggestedQuantity;
+
   // set suggestedQuantity(value) {
   //   this._suggestedQuantity = value;
   //   this._suggestedIndex = 0;
   // }
 
   List<Pict> _sentencePicts = [];
+
   List<Pict> get sentencePicts => this._sentencePicts;
 
   @override
@@ -65,8 +74,7 @@ class HomeController extends GetxController {
 
   void moreSuggested() {
     if (this._suggestedPicts.length % this._suggestedQuantity != 0)
-      suggest(
-          this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
+      suggest(this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
     if (this._suggestedPicts.length >
         (this._suggestedIndex + 1) * this._suggestedQuantity) {
       this._suggestedIndex++;
@@ -82,8 +90,7 @@ class HomeController extends GetxController {
     if (this._sentencePicts.isNotEmpty) {
       this._sentencePicts.removeLast();
       this._suggestedIndex = 0;
-      suggest(
-          this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
+      suggest(this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
     }
   }
 
@@ -97,10 +104,10 @@ class HomeController extends GetxController {
       this._voiceText = "";
       this._sentencePicts.forEach((pict) {
         switch (this._ttsController.languaje) {
-          case "es-US":
+          case "es":
             this._voiceText += "${pict.texto.es} ";
             break;
-          case "en-US":
+          case "en":
             this._voiceText += "${pict.texto.en} ";
             break;
 

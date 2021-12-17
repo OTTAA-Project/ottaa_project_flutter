@@ -9,7 +9,8 @@ enum TTSState { playing, stopped, paused, continued }
 
 class TTSController extends GetxController {
   late FlutterTts _flutterTTS;
-  String _language = "en-US";
+  // String _language = "en-US";
+  String _language = Get.locale!.languageCode;
   String get languaje => this._language;
   set languaje(value) {
     this._language = value;
@@ -56,6 +57,8 @@ class TTSController extends GetxController {
   void onInit() async {
     _initTTS();
     super.onInit();
+    print('The code is here yo');
+    print(Get.locale!.languageCode);
   }
 
   @override

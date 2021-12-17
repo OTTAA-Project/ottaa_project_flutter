@@ -16,8 +16,10 @@ class SentencesController extends GetxController {
   final _sentencesRepository = Get.find<SentencesRepository>();
 
   late AnimationController _sentenceAnimationController;
+
   AnimationController get sentenceAnimationController =>
       this._sentenceAnimationController;
+
   set sentenceAnimationController(AnimationController value) {
     this._sentenceAnimationController = value;
   }
@@ -27,10 +29,13 @@ class SentencesController extends GetxController {
   List<Pict> _sentencePicts = [];
 
   List<List<Pict>> _sentencesPicts = [];
+
   List<List<Pict>> get sentencesPicts => this._sentencesPicts;
 
   int _sentencesIndex = 0;
+
   int get sentencesIndex => this._sentencesIndex;
+
   set sentencesIndex(value) {
     this._sentencesIndex = value;
 
@@ -70,10 +75,10 @@ class SentencesController extends GetxController {
       String voiceText = "";
       this._sentencesPicts[this._sentencesIndex].forEach((pict) {
         switch (this._ttsController.languaje) {
-          case "es-US":
+          case "es":
             voiceText += pict.texto.es;
             break;
-          case "en-US":
+          case "en":
             voiceText += pict.texto.en;
             break;
 
