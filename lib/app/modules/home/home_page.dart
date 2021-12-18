@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
                 child: FittedBox(
                   child: GestureDetector(
                     onTap: () {
-                      Get.toNamed(AppRoutes.CONFIGURATION);
+                      Get.toNamed(AppRoutes.SETTINGS);
                     },
                     child: Center(
                       child: Icon(
