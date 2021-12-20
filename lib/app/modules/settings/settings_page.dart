@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'settings_controller.dart';
 
@@ -49,7 +50,7 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     leading: Icon(
                       Icons.photo_library,
-                      color: Colors.orange,
+                      color: kOTTAOrangeNew,
                     ),
                     onTap: () {},
                     title: Text('Pictograms'),
@@ -58,7 +59,7 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     leading: Icon(
                       Icons.try_sms_star,
-                      color: Colors.orange,
+                      color: kOTTAOrangeNew,
                     ),
                     onTap: () {},
                     title: Text('Prediction'),
@@ -67,7 +68,7 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     leading: Icon(
                       Icons.accessibility,
-                      color: Colors.orange,
+                      color: kOTTAOrangeNew,
                     ),
                     onTap: () {},
                     title: Text('Accesibility'),
@@ -76,7 +77,7 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     leading: Icon(
                       Icons.record_voice_over,
-                      color: Colors.orange,
+                      color: kOTTAOrangeNew,
                     ),
                     onTap: () => Get.toNamed(AppRoutes.SETTINGS_VOICE),
                     title: Text('Voice and subtitles'),
@@ -85,7 +86,7 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     leading: Icon(
                       Icons.language,
-                      color: Colors.orange,
+                      color: kOTTAOrangeNew,
                     ),
                     onTap: () => Get.toNamed(AppRoutes.SETTINGS_LANG),
                     title: Text('Language'),
