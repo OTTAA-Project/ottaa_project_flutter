@@ -14,11 +14,11 @@ class TutorialPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final PageController controller = PageController(initialPage: 0);
     return GetBuilder<TutorialController>(
-        id: "tutorial",
-        builder: (_) {
-          return Scaffold(
-            body: SafeArea(
-                child: PageView(
+      id: "tutorial",
+      builder: (_) {
+        return Scaffold(
+          body: SafeArea(
+            child: PageView(
               /// [PageView.scrollDirection] defaults to [Axis.horizontal].
               /// Use [Axis.vertical] to scroll vertically.
               physics: NeverScrollableScrollPhysics(),
@@ -30,8 +30,10 @@ class TutorialPage extends StatelessWidget {
                 step3Tutorial(controller, context),
                 step4Tutorial(controller, context),
               ],
-            )),
-          );
-        });
+            ),
+          ),
+        );
+      },
+    );
   }
 }

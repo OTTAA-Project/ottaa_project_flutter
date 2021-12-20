@@ -23,7 +23,7 @@ class SuggestedWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: verticalSize * 0.60,
+              height: verticalSize * 0.52,
               width: horizontalSize * 0.78,
               child: ListView.builder(
                 shrinkWrap: true,
@@ -34,7 +34,7 @@ class SuggestedWidget extends StatelessWidget {
                     final Pict pict = _.suggestedPicts[
                         index + _.suggestedIndex * _.suggestedQuantity];
                     return Container(
-                      margin: EdgeInsets.all(horizontalSize / 100),
+                      margin: EdgeInsets.all(horizontalSize / 99),
                       child: Picto(
                         height: verticalSize * 0.10,
                         width: horizontalSize * 0.175,

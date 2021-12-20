@@ -4,8 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:get/get.dart';
 
-step1Tutorial<widget>(PageController controller, context) {
+Widget step1Tutorial<widget>(PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
   double horizontalSize = MediaQuery.of(context).size.width;
   print(verticalSize);
@@ -35,7 +36,7 @@ step1Tutorial<widget>(PageController controller, context) {
               height: horizontalSize * 0.05, // TODO WIDTH
               child: FittedBox(
                 child: Text(
-                  "CREA TUS FRASES",
+                  "Create_your_phrase".tr,
                   style: GoogleFonts.montserratAlternates(
                       color: Colors.white, fontWeight: FontWeight.w600),
                 ),
@@ -44,7 +45,7 @@ step1Tutorial<widget>(PageController controller, context) {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.2),
               child: AutoSizeText(
-                "Toca uno o más de los pictogramas para crear una frase tan larga cómo quieras. Los pictogramas se relacionan automáticamente y siempre tendrás un pictograma más para agregar.",
+                "${'step1_long'.tr}.",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.montserratAlternates(color: Colors.white),
                 maxLines: 4,
@@ -56,7 +57,7 @@ step1Tutorial<widget>(PageController controller, context) {
           child: Container(),
         ),
         StepButton(
-          text: "Siguiente",
+          text: "Next".tr,
           trailing: Icons.chevron_right,
           onTap: () => controller.animateToPage(1,
               duration: Duration(milliseconds: 300), curve: Curves.easeInOut),

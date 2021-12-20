@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
@@ -14,7 +15,7 @@ class SelectPictoPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kOTTAOrange,
+        backgroundColor: kOTTAOrangeNew,
         leading: Container(),
         foregroundColor: Colors.white,
         elevation: 0,
@@ -55,7 +56,7 @@ class SelectPictoPage extends StatelessWidget {
       ),
       body: Container(
         //todo: change the color
-        color: Colors.grey[700],
+        color: Colors.black,
         child: Stack(
           children: [
             Container(
@@ -80,7 +81,7 @@ class SelectPictoPage extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      color: kOTTAOrange,
+                      color: kOTTAOrangeNew,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -111,7 +112,7 @@ class SelectPictoPage extends StatelessWidget {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrange,
+                  color: kOTTAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(16),
                   ),
@@ -141,7 +142,7 @@ class SelectPictoPage extends StatelessWidget {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrange,
+                  color: kOTTAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                   ),
@@ -168,23 +169,10 @@ class SelectPictoPage extends StatelessWidget {
 
             /// the play button
             Positioned(
-              bottom: height * 0.05,
+              bottom: height * 0.02,
               left: width * 0.43,
               right: width * 0.43,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[700],
-                  borderRadius: BorderRadius.circular(width *0.1),
-                ),
-                child: FittedBox(
-                  child: Image.asset(
-                    'assets/icono_ottaa.webp',
-                    fit: BoxFit.cover,
-                    // height: width * 0.2,
-                    // width: width * 0.2,
-                  ),
-                ),
-              ),
+              child: OttaLogoWidget(),
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class ActionsWidget extends StatelessWidget {
@@ -14,7 +15,7 @@ class ActionsWidget extends StatelessWidget {
       return Container(
         height: verticalSize * 0.2,
         width: horizontalSize * 0.8,
-        color: kOTTAOrange,
+        color: kOTTAOrangeNew,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,19 +34,7 @@ class ActionsWidget extends StatelessWidget {
               ),
             ),
             SizedBox(width: 10),
-            FittedBox(
-              child: GestureDetector(
-                onTap: () {
-                  _.speak();
-                },
-                child: Center(
-                    child: Icon(
-                  Icons.surround_sound_rounded,
-                  color: Colors.white,
-                  size: horizontalSize / 10,
-                )),
-              ),
-            ),
+            Container(),
             SizedBox(width: 10),
             FittedBox(
               child: GestureDetector(

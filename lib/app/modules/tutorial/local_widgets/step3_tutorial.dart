@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:get/get.dart';
 
 step3Tutorial<widget>(PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
@@ -33,7 +34,7 @@ step3Tutorial<widget>(PageController controller, context) {
               height: horizontalSize * 0.05,
               child: FittedBox(
                 child: Text(
-                  "ACCEDE A MILES DE PICTOGRAMAS",
+                  "Access_thousands_of_pictograms".tr,
                   style: GoogleFonts.montserratAlternates(
                       color: Colors.white, fontWeight: FontWeight.w600),
                 ),
@@ -42,7 +43,7 @@ step3Tutorial<widget>(PageController controller, context) {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.2),
               child: AutoSizeText(
-                "En OTTAA tenés acceso a miles de pictogramas para que hables de lo que quieras. Encuentra la Galería de Pîctos en la esquina inferior izquierda de la pantalla principal.",
+                "${'Step3_long'.tr}.",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.montserratAlternates(
                     fontSize: 20, color: Colors.white),
@@ -58,7 +59,7 @@ step3Tutorial<widget>(PageController controller, context) {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             StepButton(
-              text: "Anterior",
+              text: "Previous".tr,
               leading: Icons.chevron_left,
               onTap: () => controller.animateToPage(1,
                   duration: Duration(milliseconds: 300),
@@ -67,7 +68,7 @@ step3Tutorial<widget>(PageController controller, context) {
               fontColor: Colors.grey,
             ),
             StepButton(
-              text: "Siguiente",
+              text: "Next".tr,
               trailing: Icons.chevron_right,
               onTap: () => controller.animateToPage(3,
                   duration: Duration(milliseconds: 300),

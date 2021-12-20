@@ -34,27 +34,30 @@ class CustomDelegate extends SearchDelegate<String> {
     else
       listToShow = _pictogramController.picts;
 
-    return GridView.builder(
-      // controller: _pictogramController.pictoGridController,
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      itemCount: listToShow.length,
-      itemBuilder: (context, index) => GestureDetector(
-        onTap: () async {
-          await onTap(listToShow[index]);
-        },
-        child: CategoryWidget(
-          name: listToShow[index].texto.en,
-          imageName: listToShow[index].imagen.picto,
-          border: true,
-          bottom: false,
-          color: listToShow[index].tipo,
+    return Container(
+      color: Colors.black,
+      child: GridView.builder(
+        // controller: _pictogramController.pictoGridController,
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        itemCount: listToShow.length,
+        itemBuilder: (context, index) => GestureDetector(
+          onTap: () async {
+            await onTap(listToShow[index]);
+          },
+          child: CategoryWidget(
+            name: listToShow[index].texto.en,
+            imageName: listToShow[index].imagen.picto,
+            border: true,
+            bottom: false,
+            color: listToShow[index].tipo,
+          ),
         ),
-      ),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 5,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        childAspectRatio: 1,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 5,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          childAspectRatio: 1,
+        ),
       ),
     );
   }

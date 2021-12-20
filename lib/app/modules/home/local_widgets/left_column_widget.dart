@@ -12,7 +12,7 @@ class LeftColumnWidget extends StatelessWidget {
     double horizontalSize = MediaQuery.of(context).size.width;
 
     return Container(
-      height: verticalSize * 0.75,
+      height: verticalSize * 0.5,
       width: horizontalSize * 0.10,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -43,7 +43,7 @@ class LeftColumnWidget extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: kOTTAOrange,
+        color: kOTTAOrangeNew,
         borderRadius:
             BorderRadius.only(topRight: Radius.circular(horizontalSize / 40)),
       ),
