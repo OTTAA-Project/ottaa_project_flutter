@@ -45,6 +45,7 @@ dependencies:
   firebase_database: ^8.0.0
   firebase_storage: ^10.1.0
   dotted_border: ^2.0.0+1
+  path_provider: ^2.0.8
 
 
 dev_dependencies:

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class RightColumnWidget extends StatelessWidget {
   const RightColumnWidget({Key? key}) : super(key: key);
@@ -32,7 +34,12 @@ class RightColumnWidget extends StatelessWidget {
           ),*/
           FittedBox(
             child: GestureDetector(
-              onTap: null,
+              onTap: ()async{
+                final directory = await getApplicationDocumentsDirectory();
+                print(directory.path);
+                final file = File('${directory.path}/counter.json');
+                // file.writeAsString()
+              },
               child: Center(
                 child: Icon(
                   Icons.share,
