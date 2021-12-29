@@ -1,12 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
 class RightColumnWidget extends StatelessWidget {
-  const RightColumnWidget({Key? key}) : super(key: key);
+  RightColumnWidget({Key? key}) : super(key: key);
+  final _controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +38,22 @@ class RightColumnWidget extends StatelessWidget {
           ),*/
           FittedBox(
             child: GestureDetector(
-              onTap: ()async{
+              onTap: () async {
+                //todo: take the algo from here and optimize it
                 final directory = await getApplicationDocumentsDirectory();
                 print(directory.path);
                 final file = File('${directory.path}/counter.json');
-                // file.writeAsString()
+                List<Map<String, dynamic>> gruposInFile = [];
+                _controller.grupos.forEach((element) {
+                  gruposInFile.add(element.toJson());
+                });
+                print(gruposInFile.length);
+                print(_controller.grupos.length);
+                print(gruposInFile.toString());
+                file.writeAsString(gruposInFile.toString());
+                final response = await file.readAsString();
+                final List<Map<String, dynamic>> decoded = jsonDecode(response);
+                print(decoded.length);
               },
               child: Center(
                 child: Icon(

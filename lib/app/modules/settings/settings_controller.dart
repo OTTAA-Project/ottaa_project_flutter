@@ -26,10 +26,10 @@ class SettingsController extends GetxController {
 
   toggleLanguaje(bool value) {
     if (value == false) {
-      _ttsController.languaje = "es-US";
+      _ttsController.languaje = "es";
       _ttsController.isEnglish = value;
     } else {
-      _ttsController.languaje = "en-US";
+      _ttsController.languaje = "en";
       _ttsController.isEnglish = value;
     }
     update();
