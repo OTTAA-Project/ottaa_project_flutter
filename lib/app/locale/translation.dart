@@ -65,6 +65,10 @@ class Translation extends Translations {
               'We offer you several options to\nlearn how to use it and get the most out of it',
           'por_ltimo': 'At Last!',
           'elige_un_personaje_que_nmejor_te_represente': 'Choose a character that best represents you',
+          'edit_pictogram': 'Edit pictogram',
+          'text': 'Text',
+          'frame': 'Frame',
+          'tags': 'Tags',
           '': '',
         },
         'es_ES': {
@@ -127,6 +131,10 @@ class Translation extends Translations {
               'Te ofrecemos varias opciones para\naprender a utilizarla y sacarle el maximo provecho',
           'por_ltimo': 'Por Ultimo!',
           'elige_un_personaje_que_nmejor_te_represente': 'Elige un personaje que  mejor te represente',
+          'edit_pictogram': 'Editar pictograma',
+          'text': 'Texto',
+          'frame': 'Marco',
+          'tags': 'Tage',
           '': '',
         },
       };

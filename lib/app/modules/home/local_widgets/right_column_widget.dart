@@ -1,17 +1,12 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
-import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_page.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
 class RightColumnWidget extends StatelessWidget {
   RightColumnWidget({Key? key}) : super(key: key);
-  final _controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,28 +35,8 @@ class RightColumnWidget extends StatelessWidget {
           FittedBox(
             child: GestureDetector(
               onTap: () async {
-                //todo: take the algo from here and optimize it
-                final directory = await getExternalStorageDirectory();
-                print(directory!.path);
-                final file = File('${directory.path}/counter.json');
-                List<String> gruposInFile = [];
-                _controller.grupos.forEach((element) {
-                  final obj = jsonEncode(element);
-                  gruposInFile.add(obj);
-                });
-                print(gruposInFile.length);
-                print(_controller.grupos.length);
-                // print(gruposInFile.toString());
-                await file.writeAsString(gruposInFile.toString());
-                final response = await file.readAsString();
-                final res = (jsonDecode(response) as List)
-                    .map((e) => Grupos.fromJson(e))
-                    .toList();
-                // final re = jsonDecode(decoded[0]);
-                // print(re);
-                print(res.length);
-                print(res[0].texto.es);
-                print(_controller.grupos[0].texto.es);
+                Get.lazyPut(() => EditPictoController());
+                Get.to(EditPictoPage());
               },
               child: Center(
                 child: Icon(
