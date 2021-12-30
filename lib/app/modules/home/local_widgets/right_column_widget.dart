@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
@@ -40,20 +41,27 @@ class RightColumnWidget extends StatelessWidget {
             child: GestureDetector(
               onTap: () async {
                 //todo: take the algo from here and optimize it
-                final directory = await getApplicationDocumentsDirectory();
-                print(directory.path);
+                final directory = await getExternalStorageDirectory();
+                print(directory!.path);
                 final file = File('${directory.path}/counter.json');
-                List<Map<String, dynamic>> gruposInFile = [];
+                List<String> gruposInFile = [];
                 _controller.grupos.forEach((element) {
-                  gruposInFile.add(element.toJson());
+                  final obj = jsonEncode(element);
+                  gruposInFile.add(obj);
                 });
                 print(gruposInFile.length);
                 print(_controller.grupos.length);
-                print(gruposInFile.toString());
-                file.writeAsString(gruposInFile.toString());
+                // print(gruposInFile.toString());
+                await file.writeAsString(gruposInFile.toString());
                 final response = await file.readAsString();
-                final List<Map<String, dynamic>> decoded = jsonDecode(response);
-                print(decoded.length);
+                final res = (jsonDecode(response) as List)
+                    .map((e) => Grupos.fromJson(e))
+                    .toList();
+                // final re = jsonDecode(decoded[0]);
+                // print(re);
+                print(res.length);
+                print(res[0].texto.es);
+                print(_controller.grupos[0].texto.es);
               },
               child: Center(
                 child: Icon(
