@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_page.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
@@ -36,6 +37,7 @@ class RightColumnWidget extends StatelessWidget {
             child: GestureDetector(
               onTap: () async {
                 Get.lazyPut(() => EditPictoController());
+                Get.lazyPut(() => PictogramGroupsController());
                 Get.to(EditPictoPage());
               },
               child: Center(
