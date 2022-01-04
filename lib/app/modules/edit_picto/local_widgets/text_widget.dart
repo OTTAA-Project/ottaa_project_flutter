@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-class TextWidget extends StatelessWidget {
+class TextWidget extends GetView<EditPictoController> {
   TextWidget({Key? key}) : super(key: key);
   final _ttsController = Get.find<TTSController>();
 
@@ -33,6 +34,7 @@ class TextWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: TextFormField(
+                  controller: controller.nameController,
                   decoration: InputDecoration(
                     focusColor: kOTTAOrangeNew,
                     fillColor: kOTTAOrangeNew,
@@ -50,7 +52,8 @@ class TextWidget extends StatelessWidget {
                 width: width * 0.03,
               ),
               GestureDetector(
-                onTap: () async => await _ttsController.speak('voiceText'),
+                onTap: () async =>
+                    await _ttsController.speak(controller.nameController.text),
                 child: Image.asset(
                   'assets/icono_ottaa.webp',
                   fit: BoxFit.cover,

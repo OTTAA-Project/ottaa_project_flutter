@@ -79,7 +79,7 @@ class Picto extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Text(
-                  texto.toUpperCase(),
+                  texto,
                   style:
                       TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
