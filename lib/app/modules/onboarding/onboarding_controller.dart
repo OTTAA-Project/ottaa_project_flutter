@@ -61,14 +61,7 @@ class OnboardingController extends GetxController {
   //       firebase_storage.FirebaseStorage.instance;
   // }
 
-  Future<void> setFirstTimePref() async {
-    final instance = await SharedPreferences.getInstance();
-    instance.setBool('First_time', true);
-  }
-  Future<void> setPhotoPref() async {
-    final instance = await SharedPreferences.getInstance();
-    instance.setBool('Avatar_photo', true);
-  }
+
 
   _init() async {}
 }

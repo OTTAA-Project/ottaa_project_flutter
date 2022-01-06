@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/edit_picto/local_widgets/choice_dialouge.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 
 import 'category_page_widget.dart';
 import 'category_widget.dart';
@@ -11,6 +13,7 @@ class PictoPageWidget extends StatelessWidget {
   final _pictogramController = Get.find<PictogramGroupsController>();
   final _ttsController = Get.find<TTSController>();
   final _homeController = Get.find<HomeController>();
+  late Offset tapPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,16 @@ class PictoPageWidget extends StatelessWidget {
               itemCount: _pictogramController.selectedGruposPicts.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () async {
-                  await onTap(index,languaje);
+                  await onTap(index, languaje);
+                },
+                onLongPress: () {
+                  _homeController.pictToBeEdited =
+                      _pictogramController.selectedGruposPicts[index];
+                  showDialog(
+                    context: context,
+                    builder: (context) => ChoiceDialogue(),
+                  );
+                  // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: CategoryWidget(
                   name: languaje == "en"
@@ -51,7 +63,12 @@ class PictoPageWidget extends StatelessWidget {
               itemCount: _pictogramController.selectedGruposPicts.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () async {
-                  await onTap(index,languaje);
+                  await onTap(index, languaje);
+                },
+                onLongPress: () {
+                  _homeController.pictToBeEdited =
+                      _pictogramController.selectedGruposPicts[index];
+                  Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: CategoryPageWidget(
                   name: languaje == "en"
@@ -68,7 +85,7 @@ class PictoPageWidget extends StatelessWidget {
     );
   }
 
-  Future<void> onTap(int index,String languaje) async {
+  Future<void> onTap(int index, String languaje) async {
     //saying the name after selecting the category
     _ttsController.speak(languaje == "en"
         ? _pictogramController.selectedGruposPicts[index].texto.en

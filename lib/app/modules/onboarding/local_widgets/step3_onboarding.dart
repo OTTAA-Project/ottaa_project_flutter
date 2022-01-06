@@ -2,13 +2,14 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import '../onboarding_controller.dart';
 import 'header_wave.dart';
-
+final _sharedPrefClient = SharedPrefClient();
 Widget step3Onboarding<widget>(
     OnboardingController _, PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
@@ -139,7 +140,7 @@ Widget step3Onboarding<widget>(
                               );
                               await _.uploadAvatar(
                                   photoNumber: _.imageNumber.value);
-                              await _.setPhotoPref();
+                              await _sharedPrefClient.setPhotoPref();
                               Get.offAllNamed(AppRoutes.HOME);
                             },
                             backgroundColor: kOTTAOrangeNew,

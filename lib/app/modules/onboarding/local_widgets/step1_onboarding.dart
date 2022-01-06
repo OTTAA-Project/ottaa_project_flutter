@@ -3,11 +3,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import '../onboarding_controller.dart';
 import 'header_wave.dart';
+
+final _sharedPrefCient = SharedPrefClient();
 
 Widget step1Onboarding<widget>(
     OnboardingController _, PageController controller, context) {
@@ -257,7 +260,7 @@ Widget step1Onboarding<widget>(
                     );
                     await _.uploadInfo();
                     print('hi');
-                    await _.setFirstTimePref();
+                    await _sharedPrefCient.setFirstTimePref();
                     Get.back();
                     controller.animateToPage(1,
                         duration: Duration(milliseconds: 300),

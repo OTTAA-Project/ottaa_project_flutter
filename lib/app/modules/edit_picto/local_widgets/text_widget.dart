@@ -46,6 +46,14 @@ class TextWidget extends GetView<EditPictoController> {
                     ),
                   ),
                   cursorColor: kOTTAOrangeNew,
+                  onChanged: (value) {
+                    final lang = _ttsController.languaje;
+                    if (lang == 'en') {
+                      controller.pict.value!.texto.en = value;
+                    } else {
+                      controller.pict.value!.texto.es = value;
+                    }
+                  },
                 ),
               ),
               SizedBox(
