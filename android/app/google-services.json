@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "873137795353-1ttsko6h874bjq935auokrhk9plshtka.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ottaaproject.flutter",
+            "certificate_hash": "f16aba7dccaab99ba95c46fb2dfd0d2e51227b89"
+          }
+        },
+        {
           "client_id": "873137795353-20jdkej35qq6g892tnlfliusegkj10j6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -28,6 +36,14 @@
           "android_info": {
             "package_name": "com.ottaaproject.flutter",
             "certificate_hash": "3c5f9971cb16e3ef11061211f167372cb25f6d51"
+          }
+        },
+        {
+          "client_id": "873137795353-qdvuge8q0hnm4m7f4qar3pgcoudg2p2p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ottaaproject.flutter",
+            "certificate_hash": "4bfde4f148f8750aecdf733a9fd56fde405dcea7"
           }
         },
         {
