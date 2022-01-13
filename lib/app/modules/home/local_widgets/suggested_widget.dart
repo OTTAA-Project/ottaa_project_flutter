@@ -36,6 +36,7 @@ class SuggestedWidget extends StatelessWidget {
                     return Container(
                       margin: EdgeInsets.all(horizontalSize / 99),
                       child: Picto(
+                        localImg: pict.localImg,
                         height: verticalSize * 0.10,
                         width: horizontalSize * 0.175,
                         pict: pict,

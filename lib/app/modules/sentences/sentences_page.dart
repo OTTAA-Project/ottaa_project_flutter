@@ -63,6 +63,7 @@ class SentencesPage extends StatelessWidget {
                                           return Container(
                                             margin: EdgeInsets.all(10),
                                             child: MiniPicto(
+                                              localImg: pict.localImg,
                                               pict: pict,
                                               onTap: () {
                                                 _.speak();
@@ -76,6 +77,7 @@ class SentencesPage extends StatelessWidget {
                                             child: Container(
                                               margin: EdgeInsets.all(10),
                                               child: MiniPicto(
+                                                localImg: speakPict.localImg,
                                                 pict: speakPict,
                                                 onTap: () {
                                                   _.speak();

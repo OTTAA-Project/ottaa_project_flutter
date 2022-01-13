@@ -54,7 +54,6 @@ class HomeController extends GetxController {
 
   List<Pict> get sentencePicts => this._sentencePicts;
 
-
   late Pict pictToBeEdited;
 
   @override
@@ -136,10 +135,12 @@ class HomeController extends GetxController {
     this._suggestedIndex = 0;
 
     final Pict addPict = Pict(
-        id: 0,
-        texto: Texto(en: "add", es: "agregar"),
-        tipo: 6,
-        imagen: Imagen(picto: "ic_agregar_nuevo"));
+      id: 0,
+      texto: Texto(en: "add", es: "agregar"),
+      tipo: 6,
+      imagen: Imagen(picto: "ic_agregar_nuevo"),
+      localImg: true,
+    );
 
     final Pict pict = picts.firstWhere((pict) => pict.id == id);
 

@@ -1,11 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 
 class MiniPicto extends StatelessWidget {
   final Pict pict;
   final VoidCallback onTap;
+  final localImg;
 
-  const MiniPicto({required this.pict, required this.onTap});
+  const MiniPicto({
+    required this.pict,
+    required this.onTap,
+    required this.localImg,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +20,20 @@ class MiniPicto extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: Container(
-            color: Colors.white,
-            child: Image(
-                image: AssetImage('assets/imgs/${pict.imagen.picto}.webp'))),
+          color: Colors.white,
+          child: localImg
+              ? Image(
+                  image: AssetImage(
+                    'assets/imgs/${pict.imagen.picto}.webp',
+                  ),
+                )
+              : CachedNetworkImage(
+                  imageUrl: pict.imagen.picto,
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+        ),
       ),
     );
   }

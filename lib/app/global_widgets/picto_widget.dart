@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
@@ -17,6 +18,7 @@ class Picto extends StatelessWidget {
   final double height;
   final double width;
   final languaje;
+  final localImg;
 
   const Picto({
     required this.pict,
@@ -24,6 +26,7 @@ class Picto extends StatelessWidget {
     required this.height,
     required this.width,
     required this.languaje,
+    required this.localImg,
   });
 
   @override
@@ -68,20 +71,25 @@ class Picto extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image(
-                        image:
-                            AssetImage('assets/imgs/${pict.imagen.picto}.webp')),
+                    child: localImg
+                        ? Image.asset('assets/imgs/${pict.imagen.picto}.webp')
+                        : CachedNetworkImage(
+                            imageUrl: pict.imagen.picto,
+                            placeholder: (context, url) => Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
                   ),
                 ),
               ),
             ),
-            Expanded(flex: 1,
+            Expanded(
+              flex: 1,
               child: Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Text(
                   texto,
-                  style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

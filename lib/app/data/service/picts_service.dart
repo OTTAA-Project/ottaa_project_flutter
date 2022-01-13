@@ -6,18 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
-import 'package:get/get.dart';
 
 class PictsService {
   final _sharedPref = SharedPrefClient();
   final _fileController = LocalFileController();
   final databaseRef = FirebaseDatabase.instance.reference();
-  final _ttsController = Get.find<TTSController>();
 
   Future<List<Pict>> getAll() async {
     final fileExists = await _sharedPref.getPictosFile();
-    final language = _ttsController.languaje;
     print('the result is for file');
     print(fileExists);
 
@@ -25,12 +21,14 @@ class PictsService {
     /// check if data exists online or not
     final User? auth = FirebaseAuth.instance.currentUser;
     final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
-    bool result = false;
-    // final res = await ref.get();
-    final a = ref.isBlank;
+    late bool result;
+    final res = await ref.get();
+    final a = res.exists;
+    print(res);
+    print(res.exists);
     print('result is ');
-    print(a);
-    result = !a!;
+    // print(jsonDecode(res.value.toString()));
+    result = a;
     if (result) {
       /// it means file does exists online
       /// now check if you are on phone or web
@@ -48,6 +46,7 @@ class PictsService {
         /// it means the system is mobile
         if (fileExists) {
           ///it means teh file exists
+          print('from file bitches');
           return _fileController.readPictoFromFile();
         } else {
           ///it means teh file does not exists
@@ -60,7 +59,7 @@ class PictsService {
           await _sharedPref.setPictosFile();
           final da =
               (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList();
-          print('from file bitches');
+          print('from online bitches');
           return da;
         }
       }

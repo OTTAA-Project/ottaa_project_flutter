@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
@@ -53,8 +54,9 @@ class CategoryPageWidget extends StatelessWidget {
                     : Border.all(color: Colors.transparent),
                 borderRadius: BorderRadius.circular(8)),
             child: FittedBox(
-              child: Image.asset(
-                'assets/imgs/$imageName.webp',
+              child: CachedNetworkImage(
+                imageUrl: imageName,
+                placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                 height: Get.height * 0.5,
                 fit: BoxFit.fill,
                 width: Get.width * 0.4,
