@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'icon_widget.dart';
@@ -70,12 +71,16 @@ class CategoryWidget extends StatelessWidget {
                         )
                       : Border.all(color: Colors.white),
                   borderRadius: BorderRadius.circular(8)),
-              child: CachedNetworkImage(
-                imageUrl: imageName,
-                placeholder: (context, url) =>
-                    Center(child: CircularProgressIndicator()),
-                fit: BoxFit.fill,
-              ),
+              child: kIsWeb
+                  ? Image.network(
+                      imageName,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: imageName,
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                      fit: BoxFit.fill,
+                    ),
             ),
           ),
           Padding(

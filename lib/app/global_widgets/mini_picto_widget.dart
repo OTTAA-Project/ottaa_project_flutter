@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 
@@ -27,12 +28,16 @@ class MiniPicto extends StatelessWidget {
                     'assets/imgs/${pict.imagen.picto}.webp',
                   ),
                 )
-              : CachedNetworkImage(
-                  imageUrl: pict.imagen.picto,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
+              : kIsWeb
+                  ? Image.network(
+                      pict.imagen.picto,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: pict.imagen.picto,
+                      placeholder: (context, url) => Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
         ),
       ),
     );

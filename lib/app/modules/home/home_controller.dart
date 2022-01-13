@@ -53,6 +53,10 @@ class HomeController extends GetxController {
   List<Pict> _sentencePicts = [];
 
   List<Pict> get sentencePicts => this._sentencePicts;
+  int addId  = 0;
+  int toId = 0;
+  bool fromAdd = false;
+
 
   late Pict pictToBeEdited;
 

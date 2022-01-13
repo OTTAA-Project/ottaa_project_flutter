@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
@@ -73,12 +74,16 @@ class Picto extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: localImg
                         ? Image.asset('assets/imgs/${pict.imagen.picto}.webp')
-                        : CachedNetworkImage(
-                            imageUrl: pict.imagen.picto,
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
+                        : kIsWeb
+                            ? Image.network(
+                                pict.imagen.picto,
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: pict.imagen.picto,
+                                placeholder: (context, url) => Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
                   ),
                 ),
               ),

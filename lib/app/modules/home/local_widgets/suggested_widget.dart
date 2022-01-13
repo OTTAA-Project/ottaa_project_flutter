@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 
 class SuggestedWidget extends StatelessWidget {
-  const SuggestedWidget({Key? key}) : super(key: key);
+  SuggestedWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +43,13 @@ class SuggestedWidget extends StatelessWidget {
                         pict: pict,
                         languaje: _.ttsController.languaje,
                         onTap: () {
-                          pict.texto.es != "agregar"
-                              ? _.addPictToSentence(pict)
-                              : print("AGREGAR");
+                          if (pict.texto.es != "agregar") {
+                            _.addPictToSentence(pict);
+                          } else {
+                            _.toId = _.sentencePicts.last.id;
+                            _.fromAdd = true;
+                            Get.toNamed(AppRoutes.PICTOGRAMGROUP);
+                          }
                         },
                       ),
                     );
