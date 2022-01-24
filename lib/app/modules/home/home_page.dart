@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/home/local_widgets/drawer_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/right_column_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/actions_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/left_column_widget.dart';
@@ -22,6 +23,7 @@ class HomePage extends StatelessWidget {
       id: "home",
       builder: (_) {
         return Scaffold(
+          drawer: DrawerWidget(),
           body: Stack(
             children: [
               Column(
@@ -105,7 +107,7 @@ class HomePage extends StatelessWidget {
                   child: OttaLogoWidget(),
                 ),
               ),
-              Positioned(
+              /*Positioned(
                 right: 0,
                 top: verticalSize * 0.25,
                 child: FittedBox(
@@ -122,7 +124,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ),*/
               // if (_.isPlaying())
             ],
           ),
