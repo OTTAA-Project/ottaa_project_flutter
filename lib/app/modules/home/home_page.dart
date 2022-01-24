@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                             SizedBox(width: 15),
                             Expanded(
                               child: Text(
-                                _.voiceText.toUpperCase(),
+                                _.voiceText  ,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,

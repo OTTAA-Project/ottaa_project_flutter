@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
+import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 
 class PictogramGroupsController extends GetxController {
   late ScrollController categoriesGridController;
@@ -10,6 +11,7 @@ class PictogramGroupsController extends GetxController {
   late PageController categoriesPageController;
   late PageController pictoPageController;
   final _pictsRepository = Get.find<PictsRepository>();
+  final _homeController = Get.find<HomeController>();
   List<Pict> picts = [];
   late Grupos selectedGrupos;
   List<Pict> selectedGruposPicts = [];
@@ -65,6 +67,6 @@ class PictogramGroupsController extends GetxController {
   }
 
   Future<void> loadAssets() async {
-    this.picts = await this._pictsRepository.getAll();
+    this.picts = _homeController.picts;
   }
 }

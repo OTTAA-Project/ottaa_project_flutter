@@ -45,6 +45,9 @@ dependencies:
   firebase_database: ^8.0.0
   firebase_storage: ^10.1.0
   dotted_border: ^2.0.0+1
+  path_provider: ^2.0.8
+  cached_network_image: ^3.2.0
+  firebase_analytics: ^9.0.5
 
 
 dev_dependencies:

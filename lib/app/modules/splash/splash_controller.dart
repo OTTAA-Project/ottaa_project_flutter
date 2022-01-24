@@ -43,6 +43,4 @@ class SplashController extends GetxController {
     photo = instance.getBool('Avatar_photo') ?? false;
     print(photo);
   }
-
-  void checkUser() async {}
 }

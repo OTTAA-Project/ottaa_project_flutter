@@ -26,11 +26,17 @@ class CustomDelegate extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<Pict> listToShow;
+    final language = _ttsController.languaje;
     if (query.isNotEmpty)
-      listToShow = _pictogramController.picts
-          .where(
-              (e) => e.texto.en.contains(query) && e.texto.en.startsWith(query))
-          .toList();
+      listToShow = language == 'en'
+          ? _pictogramController.picts
+              .where((e) =>
+                  e.texto.en.contains(query) && e.texto.en.startsWith(query))
+              .toList()
+          : _pictogramController.picts
+              .where((e) =>
+                  e.texto.es.contains(query) && e.texto.es.startsWith(query))
+              .toList();
     else
       listToShow = _pictogramController.picts;
 
@@ -45,7 +51,9 @@ class CustomDelegate extends SearchDelegate<String> {
             await onTap(listToShow[index]);
           },
           child: CategoryWidget(
-            name: listToShow[index].texto.en,
+            name: language == 'en'
+                ? listToShow[index].texto.en
+                : listToShow[index].texto.es,
             imageName: listToShow[index].imagen.picto,
             border: true,
             bottom: false,

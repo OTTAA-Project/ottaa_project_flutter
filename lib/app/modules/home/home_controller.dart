@@ -30,7 +30,7 @@ class HomeController extends GetxController {
 
   String get voiceText => this._voiceText;
 
-  List<Pict> _picts = [];
+  List<Pict> picts = [];
   List<Grupos> grupos = [];
 
   List<Pict> _suggestedPicts = [];
@@ -53,6 +53,12 @@ class HomeController extends GetxController {
   List<Pict> _sentencePicts = [];
 
   List<Pict> get sentencePicts => this._sentencePicts;
+  int addId  = 0;
+  int toId = 0;
+  bool fromAdd = false;
+
+
+  late Pict pictToBeEdited;
 
   @override
   void onInit() async {
@@ -66,7 +72,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> _loadPicts() async {
-    this._picts = await this._pictsRepository.getAll();
+    this.picts = await this._pictsRepository.getAll();
     this.grupos = await this._grupoRepository.getAll();
     suggest(0);
     update(["suggested"]);
@@ -133,17 +139,19 @@ class HomeController extends GetxController {
     this._suggestedIndex = 0;
 
     final Pict addPict = Pict(
-        id: 0,
-        texto: Texto(en: "add", es: "agregar"),
-        tipo: 6,
-        imagen: Imagen(picto: "ic_agregar_nuevo"));
+      id: 0,
+      texto: Texto(en: "add", es: "agregar"),
+      tipo: 6,
+      imagen: Imagen(picto: "ic_agregar_nuevo"),
+      localImg: true,
+    );
 
-    final Pict pict = _picts.firstWhere((pict) => pict.id == id);
+    final Pict pict = picts.firstWhere((pict) => pict.id == id);
 
     final List<Relacion> recomendedPicts = pict.relacion!.toList();
     recomendedPicts.sort((b, a) => a.frec.compareTo(b.frec));
     recomendedPicts.forEach((recommendedPict) {
-      this._suggestedPicts.add(_picts.firstWhere(
+      this._suggestedPicts.add(picts.firstWhere(
           (suggestedPict) => suggestedPict.id == recommendedPict.id));
     });
     this._suggestedPicts.add(addPict);

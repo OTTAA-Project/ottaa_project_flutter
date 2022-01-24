@@ -61,7 +61,7 @@ class SelectPictoPage extends StatelessWidget {
           children: [
             Container(
               // height: Get.height * 0.7,
-              padding: EdgeInsets.symmetric(horizontal: width * .15),
+              padding: EdgeInsets.symmetric(horizontal: width * .10),
               child: Column(
                 children: [
                   Expanded(
@@ -117,7 +117,7 @@ class SelectPictoPage extends StatelessWidget {
                     topRight: Radius.circular(16),
                   ),
                 ),
-                width: width * 0.15,
+                width: width * 0.10,
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
@@ -147,7 +147,7 @@ class SelectPictoPage extends StatelessWidget {
                     topLeft: Radius.circular(16),
                   ),
                 ),
-                width: width * 0.15,
+                width: width * 0.10,
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(

@@ -4,7 +4,7 @@ import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class RightColumnWidget extends StatelessWidget {
-  const RightColumnWidget({Key? key}) : super(key: key);
+  RightColumnWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class RightColumnWidget extends StatelessWidget {
           ),*/
           FittedBox(
             child: GestureDetector(
-              onTap: null,
+              onTap: () async {},
               child: Center(
                 child: Icon(
                   Icons.share,
