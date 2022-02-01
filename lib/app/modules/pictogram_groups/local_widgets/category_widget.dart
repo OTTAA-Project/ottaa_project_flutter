@@ -22,6 +22,7 @@ class CategoryWidget extends StatelessWidget {
     this.bottom = true,
     this.color = 0,
     this.languaje = '',
+    this.isEditing = false,
   }) : super(key: key);
   final String name;
   final String imageName;
@@ -29,6 +30,7 @@ class CategoryWidget extends StatelessWidget {
   final int color;
   final bool bottom;
   final String languaje;
+  final bool isEditing;
 
   @override
   Widget build(BuildContext context) {
@@ -72,15 +74,19 @@ class CategoryWidget extends StatelessWidget {
                       : Border.all(color: Colors.white),
                   borderRadius: BorderRadius.circular(8)),
               child: kIsWeb
-                  ? Image.network(
-                      imageName,
-                    )
-                  : CachedNetworkImage(
-                      imageUrl: imageName,
-                      placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
-                      fit: BoxFit.fill,
-                    ),
+                  ? isEditing
+                      ? Image.asset(imageName)
+                      : Image.network(
+                          imageName,
+                        )
+                  : isEditing
+                      ? Image.asset(imageName)
+                      : CachedNetworkImage(
+                          imageUrl: imageName,
+                          placeholder: (context, url) =>
+                              Center(child: CircularProgressIndicator()),
+                          fit: BoxFit.fill,
+                        ),
             ),
           ),
           Padding(

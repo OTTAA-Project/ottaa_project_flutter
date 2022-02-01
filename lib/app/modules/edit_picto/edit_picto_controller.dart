@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
@@ -21,6 +22,8 @@ class EditPictoController extends GetxController {
   Rx<Pict?> pict = Rx<Pict?>(null);
   late String lang;
   final databaseRef = FirebaseDatabase.instance.reference();
+  final ImagePicker picker = ImagePicker();
+
 
   Future<void> uploadToFirebase({required String data}) async {
     final language = _ttsController.languaje;
