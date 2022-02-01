@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -23,17 +22,19 @@ class EditPictoController extends GetxController {
   late String lang;
   final databaseRef = FirebaseDatabase.instance.reference();
   final ImagePicker picker = ImagePicker();
-
+  RxBool editingPicture = false.obs;
+  Rx<File?> fileImage = Rx<File?>(null);
 
   Future<void> uploadToFirebase({required String data}) async {
-    final language = _ttsController.languaje;
+    // final language = _ttsController.languaje;
     final User? auth = FirebaseAuth.instance.currentUser;
     final ref = databaseRef.child('Picto/${auth!.uid}/');
     await ref.set({
       'data': data,
     });
   }
-  Future<void> pictsExistsOnFirebase()async{
+
+  Future<void> pictsExistsOnFirebase() async {
     final User? auth = FirebaseAuth.instance.currentUser;
     final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
     await ref.set({

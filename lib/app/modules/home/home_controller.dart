@@ -224,14 +224,16 @@ class HomeController extends GetxController {
   Future<void> launchEmailSubmission() async {
     final Uri params = Uri(
         scheme: 'mailto',
-        // path: 'myOwnEmailAddress@gmail.com',
+        path: 'support@ottaaproject.com',
         queryParameters: {
-          'subject': 'Default Subject',
-          'body': 'Default body'
+          'subject': 'Support',
+          'body':
+              '''Account: ${userEmail.value},\nAccount Type: ${userSubscription.value},\nCurrent OTTAA Installed: ${currentOTTAAInstalled.value}\nCurrent OTTAA Version: ${currentOTTAAVersion.value}\nDevice Name: ${deviceName.value}''',
         });
     String url = params.toString();
-    if (await canLaunch(url)) {
-      await launch(url);
+    final value = url.replaceAll('+', ' ');
+    if (await canLaunch(value)) {
+      await launch(value);
     } else {
       print('Could not launch $url');
     }

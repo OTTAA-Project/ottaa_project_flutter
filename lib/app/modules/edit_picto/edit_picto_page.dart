@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,6 +16,7 @@ import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_gro
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
 
 class EditPictoPage extends GetView<EditPictoController> {
   EditPictoPage({Key? key}) : super(key: key);
@@ -44,6 +46,12 @@ class EditPictoPage extends GetView<EditPictoController> {
                         child: CircularProgressIndicator(),
                       ),
                     );
+
+                    /// upload photo here
+                    if (controller.editingPicture.value) {
+                      await uploadImageToFirebaseStorage(
+                          path: controller.fileImage.value!.path);
+                    }
                     // print(controller.pict.value!.id);
                     int index = 0;
                     while (index < _homeController.picts.length) {
@@ -53,7 +61,7 @@ class EditPictoPage extends GetView<EditPictoController> {
                       }
                       index++;
                     }
-                   /* print('index is');
+                    /* print('index is');
                     print(_homeController.picts[index].id);
                     print(controller.pict.value!.id);
                     print(index);*/
@@ -139,6 +147,8 @@ class EditPictoPage extends GetView<EditPictoController> {
                               border: controller.pictoBorder.value,
                               color: controller.pict.value!.tipo,
                               bottom: false,
+                              isEditing: controller.editingPicture.value,
+                              fileImage: controller.fileImage.value,
                             ),
                           ),
                         ),
@@ -176,6 +186,17 @@ class EditPictoPage extends GetView<EditPictoController> {
         ),
       ),
     );
+  }
+
+  Future<void> uploadImageToFirebaseStorage({required String path}) async {
+    Reference ref = FirebaseStorage.instance
+        .ref()
+        .child('testingUpload/')
+        .child(controller.pict.value!.texto.en);
+    final UploadTask uploadTask = ref.putFile(File(path));
+    final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+    final url = await taskSnapshot.ref.getDownloadURL();
+    controller.pict.value!.imagen.picto = url;
   }
 }
 
@@ -218,35 +239,41 @@ class PictureDialogWidget extends GetView<EditPictoController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ImageWidget(
-                  imageLink: 'assets/icono_ottaa.png',
+                  imageLink: 'assets/camera.png',
                   text: 'Camera',
                   onTap: () async {
                     final XFile? image = await controller.picker
                         .pickImage(source: ImageSource.camera);
                     if (image != null) {
                       print('yes');
-                      ///work on the file and the image address.
-                      // controller.pict.value!.imagen.picto = File;
+                      controller.fileImage.value = File(image.path);
+                      controller.editingPicture.value = true;
+                      Get.back();
                     } else {
+                      Get.back();
                       print('no');
                     }
                   },
                 ),
                 ImageWidget(
-                  imageLink: 'assets/icono_ottaa.png',
+                  imageLink: 'assets/gallery.png',
                   text: 'Gallery',
                   onTap: () async {
-                    final XFile? image = await controller.picker
-                        .pickImage(source: ImageSource.gallery);
+                    final XFile? image = await controller.picker.pickImage(
+                      source: ImageSource.gallery,
+                    );
                     if (image != null) {
-                      print('yes');
+                      controller.fileImage.value = File(image.path);
+                      controller.editingPicture.value = true;
+                      Get.back();
                     } else {
+                      Get.back();
                       print('no');
                     }
                   },
                 ),
                 ImageWidget(
-                  imageLink: 'assets/icono_ottaa.png',
+                  imageLink: 'assets/download_from_arasaac.png',
                   text: 'Download from ARASAAC',
                   onTap: () async {},
                 ),
