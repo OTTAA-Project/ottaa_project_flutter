@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>OTTAA Project</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -41,5 +43,39 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.873137795353-ncjm3kdlieupkddfgklfmd7gindg9pli</string>
+				<string>658779868360186</string>
+			</array>
+			<key>FacebookAppID</key>
+			<string>658779868360186</string>
+			<key>FacebookClientToken</key>
+			<string>46ff5fd01eb079f52398b232f563cf9b</string>
+			<key>FacebookDisplayName</key>
+			<string>OTTAA Project</string>
+			<key>LSApplicationQueriesSchemes</key>
+			<array>
+				<string>fbapi</string>
+				<string>fb-messenger-share-api</string>
+				<string>fbauth2</string>
+				<string>fbshareextension</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>https</string>
+		<string>http</string>
+	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need to access the photos to edit the pictos for the user. So, They can customize their experience</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need to access the Camera to edit the pictos for the user. So, They can customize their experience</string>
 </dict>
 </plist>

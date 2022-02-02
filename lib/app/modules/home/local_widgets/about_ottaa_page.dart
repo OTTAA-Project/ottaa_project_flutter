@@ -104,7 +104,7 @@ class AboutOttaaPage extends GetView<HomeController> {
               bottom: verticalSize * 0.1,
               right: horizontalSize * 0.1,
               child: GestureDetector(
-                onTap: ()async{
+                onTap: () async {
                   await controller.launchEmailSubmission();
                 },
                 child: Container(
@@ -136,6 +136,19 @@ class AboutOttaaPage extends GetView<HomeController> {
                 child: Image.asset(
                   'assets/ic_mancha_gris.PNG',
                   height: verticalSize * 0.5,
+                ),
+              ),
+            ),
+            Positioned(
+              left: horizontalSize * 0.01,
+              top: verticalSize * 0.01,
+              child: GestureDetector(
+                onTap: (){
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
                 ),
               ),
             ),

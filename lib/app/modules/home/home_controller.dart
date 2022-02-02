@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
@@ -12,6 +13,7 @@ import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Platform;
 
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
@@ -74,11 +76,11 @@ class HomeController extends GetxController {
     super.onInit();
     await _loadPicts();
     await getPicNumber();
-    await fetchAccountInfo();
     await fetchInstalledVersion();
-    await fetchDeviceName();
     await fetchAccountType();
     await fetchCurrentVersion();
+    await fetchDeviceName();
+    await fetchAccountInfo();
   }
 
   addPictToSentence(Pict pict) {
@@ -198,8 +200,16 @@ class HomeController extends GetxController {
 
   Future<void> fetchDeviceName() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    deviceName.value = androidInfo.model!;
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      deviceName.value = androidInfo.model!;
+    } else if (Platform.isIOS) {
+      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      deviceName.value = iosDeviceInfo.utsname.machine!;
+    } else if (kIsWeb) {
+      WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
+      deviceName.value = webBrowserInfo.userAgent!;
+    }
   }
 
   Future<void> fetchAccountType() async {
