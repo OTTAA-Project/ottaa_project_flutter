@@ -1,13 +1,17 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:http/http.dart' as http;
 
 class EditPictoController extends GetxController {
   RxBool text = true.obs;
@@ -25,6 +29,8 @@ class EditPictoController extends GetxController {
   RxBool editingPicture = false.obs;
   Rx<File?> fileImage = Rx<File?>(null);
 
+  late String url;
+
   Future<void> uploadToFirebase({required String data}) async {
     // final language = _ttsController.languaje;
     final User? auth = FirebaseAuth.instance.currentUser;
@@ -40,6 +46,27 @@ class EditPictoController extends GetxController {
     await ref.set({
       'value': true,
     });
+  }
+
+  Future<void> fetchPhotoFromArsaac({required String text}) async {
+    url =
+        "http://arasaac.org/api/index.php?callback=json&language=${lang.toUpperCase()}&word=$text&catalog=colorpictos&thumbnailsize=150&TXTlocate=4&KEY=${dotenv.env['API_KEY']!}";
+    var urlF = Uri.parse(url);
+    http.Response response = await http.get(urlF);
+    print(url);
+    try {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        print(data['symbols'][0]['name']);
+        var decodedData = SearchModel.fromJson(data);
+        // print(decodedData);
+        print(decodedData.symbols[0].name);
+      } else {
+        print('else');
+      }
+    } catch (e) {
+      print('failed');
+    }
   }
 
   Future<void> fetchData() async {}

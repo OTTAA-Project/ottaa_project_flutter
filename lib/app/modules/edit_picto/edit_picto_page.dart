@@ -274,7 +274,9 @@ class PictureDialogWidget extends GetView<EditPictoController> {
                 ImageWidget(
                   imageLink: 'assets/download_from_arasaac.png',
                   text: 'Download from ARASAAC',
-                  onTap: () async {},
+                  onTap: () async {
+                    await controller.fetchPhotoFromArsaac(text: 'hello');
+                  },
                 ),
               ],
             ),
