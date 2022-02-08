@@ -40,7 +40,7 @@
 /packages/flutter/coverage/
 version
 analysis_benchmark.json
-
+*.env
 # packages file containing multi-root paths
 .packages.generated
 
@@ -100,6 +100,7 @@ unlinked_spec.ds
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Runner/GoogleService-info.plist
 
 # macOS
 **/macos/Flutter/GeneratedPluginRegistrant.swift

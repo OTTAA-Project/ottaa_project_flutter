@@ -259,9 +259,8 @@ class PictureDialogWidget extends GetView<EditPictoController> {
                   imageLink: 'assets/gallery.png',
                   text: 'Gallery',
                   onTap: () async {
-                    final XFile? image = await controller.picker.pickImage(
-                      source: ImageSource.gallery,
-                    );
+                    final XFile? image = await controller.picker
+                        .pickImage(source: ImageSource.gallery);
                     if (image != null) {
                       controller.fileImage.value = File(image.path);
                       controller.editingPicture.value = true;
