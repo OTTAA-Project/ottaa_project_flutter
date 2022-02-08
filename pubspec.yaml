@@ -33,7 +33,7 @@ dependencies:
   flutter_facebook_auth: ^3.5.0
   flutter_signin_button: ^2.0.0
   flutter_svg: ^0.22.0
-  flutter_tts: ^3.0.0
+  flutter_tts: ^3.3.3
   get: ^4.1.4
   getwidget: ^2.0.3
   google_fonts: ^2.1.0
