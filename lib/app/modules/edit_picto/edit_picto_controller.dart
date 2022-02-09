@@ -28,6 +28,7 @@ class EditPictoController extends GetxController {
   final ImagePicker picker = ImagePicker();
   RxBool editingPicture = false.obs;
   Rx<File?> fileImage = Rx<File?>(null);
+  Rx<String> selectedPhotoUrl = ''.obs;
 
   late String url;
 
@@ -50,7 +51,7 @@ class EditPictoController extends GetxController {
 
   Future<SearchModel?> fetchPhotoFromArsaac({required String text}) async {
     url =
-        "http://arasaac.org/api/index.php?callback=json&language=${lang.toUpperCase()}&word=$text&catalog=colorpictos&thumbnailsize=150&TXTlocate=4&KEY=${dotenv.env['API_KEY']!}";
+        "http://arasaac.org/api/index.php?callback=json&language=${lang.toUpperCase()}&word=${text.replaceAll(' ', '+')}&catalog=colorpictos&thumbnailsize=150&TXTlocate=4&KEY=${dotenv.env['API_KEY']!}";
     var urlF = Uri.parse(url);
     http.Response response = await http.get(urlF);
     // print(url);
