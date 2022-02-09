@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
@@ -17,6 +18,8 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
+
+import 'local_widgets/search_photo_page.dart';
 
 class EditPictoPage extends GetView<EditPictoController> {
   EditPictoPage({Key? key}) : super(key: key);
@@ -275,7 +278,11 @@ class PictureDialogWidget extends GetView<EditPictoController> {
                   imageLink: 'assets/download_from_arasaac.png',
                   text: 'Download from ARASAAC',
                   onTap: () async {
-                    await controller.fetchPhotoFromArsaac(text: 'hello');
+                    var result = await showSearch<SearchModel?>(
+                      context: context,
+                      delegate: SearchPhotoPage(),
+                    );
+                    print(result);
                   },
                 ),
               ],

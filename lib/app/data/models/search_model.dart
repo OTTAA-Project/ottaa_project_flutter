@@ -27,20 +27,20 @@ class SearchModel {
 @JsonSerializable()
 class Symbol {
   Symbol({
-    required this.imagePngurl,
+    required this.imagePNGURL,
     required this.name,
-    required this.wordType,
-    required this.creationDate,
-    required this.modificationDate,
-    required this.thumbnailUrl,
+    required this.wordTYPE,
+    required this.CreationDate,
+    required this.ModificationDate,
+    required this.thumbnailURL,
   });
 
-  String imagePngurl;
+  String imagePNGURL;
   String name;
-  String wordType;
-  DateTime creationDate;
-  DateTime modificationDate;
-  String thumbnailUrl;
+  String wordTYPE;
+  DateTime CreationDate;
+  DateTime ModificationDate;
+  String thumbnailURL;
 
   factory Symbol.fromJson(Map<String, dynamic> json) => _$SymbolFromJson(json);
 

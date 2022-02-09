@@ -48,20 +48,24 @@ class EditPictoController extends GetxController {
     });
   }
 
-  Future<void> fetchPhotoFromArsaac({required String text}) async {
+  Future<SearchModel?> fetchPhotoFromArsaac({required String text}) async {
     url =
         "http://arasaac.org/api/index.php?callback=json&language=${lang.toUpperCase()}&word=$text&catalog=colorpictos&thumbnailsize=150&TXTlocate=4&KEY=${dotenv.env['API_KEY']!}";
     var urlF = Uri.parse(url);
     http.Response response = await http.get(urlF);
-    print(url);
+    // print(url);
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        print(data['symbols'][0]['name']);
-        var decodedData = SearchModel.fromJson(data);
-        // print(decodedData);
-        print(decodedData.symbols[0].name);
+        // print(data['symbols'][0]['name']);
+        SearchModel searchModel =
+            SearchModel.fromJson(jsonDecode(response.body));
+        // print(searchModel.itemCount);
+        // print(searchModel.symbols[0].name);
+        // print(jsonDecode(response.body));
+        return searchModel;
       } else {
+        // return null;
         print('else');
       }
     } catch (e) {
