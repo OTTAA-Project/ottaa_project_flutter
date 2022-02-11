@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'login_controller.dart';
@@ -178,11 +179,9 @@ class HeaderWave extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double horizontalSize = MediaQuery.of(context).size.width;
-    double verticalSize = MediaQuery.of(context).size.height;
     return Container(
-      height: verticalSize,
-      width: horizontalSize,
+      height: Get.height,
+      width: Get.width,
       clipBehavior: Clip.antiAlias,
       // color: Colors.black,
       decoration: BoxDecoration(

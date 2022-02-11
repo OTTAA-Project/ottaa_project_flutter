@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,7 @@ Widget step1Tutorial<widget>(PageController controller, context) {
               child: FittedBox(
                 child: Text(
                   "Create_your_phrase".tr,
-                  style: TextStyle(
+                  style: GoogleFonts.montserratAlternates(
                       color: Colors.white, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -46,7 +47,7 @@ Widget step1Tutorial<widget>(PageController controller, context) {
               child: AutoSizeText(
                 "${'step1_long'.tr}.",
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white),
+                style: GoogleFonts.montserratAlternates(color: Colors.white),
                 maxLines: 4,
               ),
             ),

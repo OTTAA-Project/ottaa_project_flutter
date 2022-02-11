@@ -64,19 +64,13 @@ class PictsService {
         }
       }
     } else {
-      if (fileExists) {
-        ///it means teh file exists
-        print('from file bitches');
-        return _fileController.readPictoFromFile();
-      } else {
-        /// if does not exists just load the basic one from the assets
-        final String pictsString =
-            await rootBundle.loadString('assets/pictos.json');
+      /// if does not exists just load the basic one from the assets
+      final String pictsString =
+          await rootBundle.loadString('assets/pictos.json');
 
-        return (jsonDecode(pictsString) as List)
-            .map((e) => Pict.fromJson(e))
-            .toList();
-      }
+      return (jsonDecode(pictsString) as List)
+          .map((e) => Pict.fromJson(e))
+          .toList();
     }
   }
 }
