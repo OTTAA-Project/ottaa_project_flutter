@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:get/get.dart';
@@ -35,7 +34,7 @@ step2Tutorial<widget>(PageController controller, context) {
               child: FittedBox(
                 child: Text(
                   "Talk_to_the_world".tr,
-                  style: GoogleFonts.montserratAlternates(
+                  style: TextStyle(
                       color: kOTTAOrange, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -45,7 +44,7 @@ step2Tutorial<widget>(PageController controller, context) {
               child: AutoSizeText(
                 "${'step2_long'.tr}.",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.montserratAlternates(
+                style: TextStyle(
                     fontSize: 20, color: Colors.black87),
                 maxLines: 3,
               ),

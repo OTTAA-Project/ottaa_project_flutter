@@ -31,11 +31,13 @@ class CustomDelegate extends SearchDelegate<String> {
       listToShow = language == 'en'
           ? _pictogramController.picts
               .where((e) =>
-                  e.texto.en.contains(query) && e.texto.en.startsWith(query))
+                  e.texto.en.toLowerCase().contains(query.toLowerCase()) &&
+                  e.texto.en.toLowerCase().startsWith(query.toLowerCase()))
               .toList()
           : _pictogramController.picts
               .where((e) =>
-                  e.texto.es.contains(query) && e.texto.es.startsWith(query))
+                  e.texto.es.toLowerCase().contains(query.toLowerCase()) &&
+                  e.texto.es.toLowerCase().startsWith(query.toLowerCase()))
               .toList();
     else
       listToShow = _pictogramController.picts;
