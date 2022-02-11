@@ -23,7 +23,6 @@ class HomePage extends StatelessWidget {
       id: "home",
       builder: (_) {
         return Scaffold(
-          key: _.scaffoldKey,
           drawer: DrawerWidget(),
           body: Stack(
             children: [
@@ -77,7 +76,7 @@ class HomePage extends StatelessWidget {
                             SizedBox(width: 15),
                             Expanded(
                               child: Text(
-                                _.voiceText,
+                                _.voiceText  ,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,

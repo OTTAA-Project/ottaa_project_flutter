@@ -199,7 +199,7 @@ class PictogramGroupsPage extends StatelessWidget {
                       ? () {}
                       : () async {
                           //saying the name after selecting the category
-                          //saying the name after selecting the category and saving the selected group
+                          //saying the name after selecting the category and saving the selected grupo
                           _pictogramController.selectedGrupos =
                               _homeController.grupos[_pictogramController
                                   .categoriesPageController.page!
