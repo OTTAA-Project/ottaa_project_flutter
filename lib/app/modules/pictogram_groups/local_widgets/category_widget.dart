@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'icon_widget.dart';
+import 'dart:io';
 
 final Map<int, Color> groupColor = {
   1: Colors.yellow,
@@ -22,6 +23,8 @@ class CategoryWidget extends StatelessWidget {
     this.bottom = true,
     this.color = 0,
     this.languaje = '',
+    this.isEditing = false,
+    this.fileImage,
   }) : super(key: key);
   final String name;
   final String imageName;
@@ -29,6 +32,8 @@ class CategoryWidget extends StatelessWidget {
   final int color;
   final bool bottom;
   final String languaje;
+  final bool isEditing;
+  final File? fileImage;
 
   @override
   Widget build(BuildContext context) {
@@ -72,15 +77,21 @@ class CategoryWidget extends StatelessWidget {
                       : Border.all(color: Colors.white),
                   borderRadius: BorderRadius.circular(8)),
               child: kIsWeb
-                  ? Image.network(
-                      imageName,
-                    )
-                  : CachedNetworkImage(
-                      imageUrl: imageName,
-                      placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
-                      fit: BoxFit.fill,
-                    ),
+                  ? isEditing
+                      ? Image.file(fileImage!)
+                      : Image.network(
+                          imageName,
+                          loadingBuilder: (context, child, loadingProgress) =>
+                              Center(child: CircularProgressIndicator()),
+                        )
+                  : isEditing
+                      ? Image.file(fileImage!)
+                      : CachedNetworkImage(
+                          imageUrl: imageName,
+                          placeholder: (context, url) =>
+                              Center(child: CircularProgressIndicator()),
+                          fit: BoxFit.fill,
+                        ),
             ),
           ),
           Padding(

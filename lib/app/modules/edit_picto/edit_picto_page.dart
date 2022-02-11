@@ -1,7 +1,9 @@
 import 'dart:convert';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
@@ -15,6 +17,9 @@ import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_gro
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
+
+import 'local_widgets/search_photo_page.dart';
 
 class EditPictoPage extends GetView<EditPictoController> {
   EditPictoPage({Key? key}) : super(key: key);
@@ -44,7 +49,13 @@ class EditPictoPage extends GetView<EditPictoController> {
                         child: CircularProgressIndicator(),
                       ),
                     );
-                    print(controller.pict.value!.id);
+
+                    /// upload photo here
+                    if (controller.editingPicture.value) {
+                      await uploadImageToFirebaseStorage(
+                          path: controller.fileImage.value!.path);
+                    }
+                    // print(controller.pict.value!.id);
                     int index = 0;
                     while (index < _homeController.picts.length) {
                       if (controller.pict.value!.id ==
@@ -53,10 +64,10 @@ class EditPictoPage extends GetView<EditPictoController> {
                       }
                       index++;
                     }
-                    print('index is');
+                    /* print('index is');
                     print(_homeController.picts[index].id);
                     print(controller.pict.value!.id);
-                    print(index);
+                    print(index);*/
                     _homeController.picts[index] = controller.pict.value!;
                     _pictoController.picts[index] = controller.pict.value!;
                     final data = _homeController.picts;
@@ -69,13 +80,13 @@ class EditPictoPage extends GetView<EditPictoController> {
                       final localFile = LocalFileController();
                       await localFile.writePictoToFile(
                           data: fileData.toString());
-                      print('writing to file');
+                      // print('writing to file');
                     }
                     //for the file data
                     final instance = await SharedPreferences.getInstance();
                     await instance.setBool('Pictos_file', true);
                     final res1 = await controller.sharedPref.getPictosFile();
-                    print(res1);
+                    // print(res1);
                     //upload to the firebase
                     await controller.uploadToFirebase(
                         data: fileData.toString());
@@ -123,14 +134,25 @@ class EditPictoPage extends GetView<EditPictoController> {
                       child: Container(
                         padding: EdgeInsets.all(width * 0.01),
                         child: Obx(
-                          () => CategoryWidget(
-                            name: languaje == 'en'
-                                ? controller.pict.value!.texto.en
-                                : controller.pict.value!.texto.es,
-                            imageName: controller.pict.value!.imagen.picto,
-                            border: controller.pictoBorder.value,
-                            color: controller.pict.value!.tipo,
-                            bottom: false,
+                          () => InkWell(
+                            onTap: () {
+                              showDialog(
+                                barrierDismissible: true,
+                                context: context,
+                                builder: (context) => PictureDialogWidget(),
+                              );
+                            },
+                            child: CategoryWidget(
+                              name: languaje == 'en'
+                                  ? controller.pict.value!.texto.en
+                                  : controller.pict.value!.texto.es,
+                              imageName: controller.pict.value!.imagen.picto,
+                              border: controller.pictoBorder.value,
+                              color: controller.pict.value!.tipo,
+                              bottom: false,
+                              isEditing: controller.editingPicture.value,
+                              fileImage: controller.fileImage.value,
+                            ),
                           ),
                         ),
                       ),
@@ -165,6 +187,146 @@ class EditPictoPage extends GetView<EditPictoController> {
             RightColumnWidget(),
           ],
         ),
+      ),
+    );
+  }
+
+  Future<void> uploadImageToFirebaseStorage({required String path}) async {
+    Reference ref = FirebaseStorage.instance
+        .ref()
+        .child('testingUpload/')
+        .child(controller.pict.value!.texto.en);
+    final UploadTask uploadTask = ref.putFile(File(path));
+    final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+    final url = await taskSnapshot.ref.getDownloadURL();
+    controller.pict.value!.imagen.picto = url;
+  }
+}
+
+class PictureDialogWidget extends GetView<EditPictoController> {
+  const PictureDialogWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double horizontalSize = MediaQuery.of(context).size.width;
+    double verticalSize = MediaQuery.of(context).size.height;
+    return AlertDialog(
+      clipBehavior: Clip.antiAlias,
+      contentPadding: const EdgeInsets.all(0),
+      backgroundColor: Colors.transparent,
+      content: Container(
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(verticalSize * 0.03),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(vertical: verticalSize * 0.01),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: kOTTAOrangeNew,
+              ),
+              child: Center(
+                child: Text(
+                  'Choose an option',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ImageWidget(
+                  imageLink: 'assets/camera.png',
+                  text: 'Camera',
+                  onTap: () async {
+                    final XFile? image = await controller.picker
+                        .pickImage(source: ImageSource.camera);
+                    if (image != null) {
+                      print('yes');
+                      controller.fileImage.value = File(image.path);
+                      controller.editingPicture.value = true;
+                      Get.back();
+                    } else {
+                      Get.back();
+                      print('no');
+                    }
+                  },
+                ),
+                ImageWidget(
+                  imageLink: 'assets/gallery.png',
+                  text: 'Gallery',
+                  onTap: () async {
+                    final XFile? image = await controller.picker
+                        .pickImage(source: ImageSource.gallery);
+                    if (image != null) {
+                      controller.fileImage.value = File(image.path);
+                      controller.editingPicture.value = true;
+                      Get.back();
+                    } else {
+                      Get.back();
+                      print('no');
+                    }
+                  },
+                ),
+                ImageWidget(
+                  imageLink: 'assets/download_from_arasaac.png',
+                  text: 'Download from ARASAAC',
+                  onTap: () async {
+                    var result = await showSearch<SearchModel?>(
+                      context: context,
+                      delegate: SearchPhotoPage(),
+                    );
+                    print(result);
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ImageWidget extends StatelessWidget {
+  const ImageWidget({
+    Key? key,
+    required this.imageLink,
+    required this.text,
+    required this.onTap,
+  }) : super(key: key);
+  final String imageLink;
+  final String text;
+  final void Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    double horizontalSize = MediaQuery.of(context).size.width;
+    double verticalSize = MediaQuery.of(context).size.height;
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            imageLink,
+            height: verticalSize * 0.15,
+          ),
+          SizedBox(
+            height: verticalSize * 0.01,
+          ),
+          Text(
+            text,
+          ),
+        ],
       ),
     );
   }
