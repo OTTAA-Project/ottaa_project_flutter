@@ -53,7 +53,10 @@ class EditPictoController extends GetxController {
     url =
         "http://arasaac.org/api/index.php?callback=json&language=${lang.toUpperCase()}&word=${text.replaceAll(' ', '+')}&catalog=colorpictos&thumbnailsize=150&TXTlocate=4&KEY=${dotenv.env['API_KEY']!}";
     var urlF = Uri.parse(url);
-    http.Response response = await http.get(urlF);
+    http.Response response = await http.get(
+      urlF,
+      headers: {"Accept": "application/json"},
+    );
     // print(url);
     try {
       if (response.statusCode == 200) {

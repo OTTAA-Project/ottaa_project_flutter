@@ -17,6 +17,8 @@ class Pict {
     this.horario,
     this.hora,
     this.localImg = false,
+    this.sexo,
+    this.ubicacion,
   });
 
   int id;
@@ -26,11 +28,15 @@ class Pict {
   List<Relacion>? relacion;
   int? agenda;
   int? gps;
-  bool? esSugerencia;
-  List<String>? edad;
-  List<String>? horario;
   List<String>? hora;
-  final localImg;
+  List<String>? edad;
+  List<String>? sexo;
+  bool? esSugerencia;
+  List<String>? horario;
+  List<String>? ubicacion;
+
+  //local used variables
+  bool localImg;
 
   factory Pict.fromJson(Map<String, dynamic> json) => _$PictFromJson(json);
 
@@ -41,10 +47,15 @@ class Pict {
 class Imagen {
   Imagen({
     required this.picto,
+    this.pictoEditado,
+    this.urlFoto,
+    this.pushKey,
   });
 
   String picto;
-
+  String? pictoEditado;
+  String? urlFoto;
+  String? pushKey;
   factory Imagen.fromJson(Map<String, dynamic> json) => _$ImagenFromJson(json);
 
   Map<String, dynamic> toJson() => _$ImagenToJson(this);

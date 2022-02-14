@@ -69,29 +69,25 @@ class CategoryWidget extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  border: border
-                      ? Border.all(
-                          color: groupColor[color]!,
-                          width: 6,
-                        )
-                      : Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8)),
+                border: border
+                    ? Border.all(
+                        color: groupColor[color]!,
+                        width: 6,
+                      )
+                    : Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: kIsWeb
-                  ? isEditing
-                      ? Image.file(fileImage!)
-                      : Image.network(
-                          imageName,
-                          loadingBuilder: (context, child, loadingProgress) =>
-                              Center(child: CircularProgressIndicator()),
-                        )
-                  : isEditing
-                      ? Image.file(fileImage!)
-                      : CachedNetworkImage(
-                          imageUrl: imageName,
-                          placeholder: (context, url) =>
-                              Center(child: CircularProgressIndicator()),
-                          fit: BoxFit.fill,
-                        ),
+                  ? WebImageWidget(
+                      isEditing: isEditing,
+                      imageName: imageName,
+                      fileImage: fileImage,
+                    )
+                  : DeviceImageWidget(
+                      isEditing: isEditing,
+                      imageName: imageName,
+                      fileImage: fileImage,
+                    ),
             ),
           ),
           Padding(
@@ -119,5 +115,65 @@ class CategoryWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class WebImageWidget extends StatelessWidget {
+  WebImageWidget({
+    Key? key,
+    required this.isEditing,
+    required this.imageName,
+    this.fileImage,
+  }) : super(key: key);
+  final bool isEditing;
+  final String imageName;
+  File? fileImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return isEditing
+        ? Image.file(fileImage!)
+        : Image.network(
+            imageName,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  color: kOTTAOrangeNew,
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+          );
+  }
+}
+
+class DeviceImageWidget extends StatelessWidget {
+  DeviceImageWidget({
+    Key? key,
+    required this.isEditing,
+    required this.imageName,
+    this.fileImage,
+  }) : super(key: key);
+  final bool isEditing;
+  final String imageName;
+  File? fileImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return isEditing
+        ? Image.file(fileImage!)
+        : CachedNetworkImage(
+            imageUrl: imageName,
+            placeholder: (context, url) => Center(
+              child: CircularProgressIndicator(
+                color: Colors.black,
+              ),
+            ),
+            fit: BoxFit.fill,
+          );
   }
 }

@@ -52,7 +52,9 @@ class Picto extends StatelessWidget {
         height: this.height,
         width: this.width,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -77,6 +79,23 @@ class Picto extends StatelessWidget {
                         : kIsWeb
                             ? Image.network(
                                 pict.imagen.picto,
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      color: kOTTAOrangeNew,
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                    ),
+                                  );
+                                },
                               )
                             : CachedNetworkImage(
                                 imageUrl: pict.imagen.picto,
