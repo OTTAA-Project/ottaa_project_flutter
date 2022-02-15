@@ -15,7 +15,7 @@ final Map<int, Color> groupColor = {
 };
 
 class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({
+  CategoryWidget({
     Key? key,
     required this.name,
     required this.imageName,
@@ -25,6 +25,7 @@ class CategoryWidget extends StatelessWidget {
     this.languaje = '',
     this.isEditing = false,
     this.fileImage,
+    this.imageWidget,
   }) : super(key: key);
   final String name;
   final String imageName;
@@ -34,6 +35,7 @@ class CategoryWidget extends StatelessWidget {
   final String languaje;
   final bool isEditing;
   final File? fileImage;
+  Image? imageWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,7 @@ class CategoryWidget extends StatelessWidget {
                   ? WebImageWidget(
                       isEditing: isEditing,
                       imageName: imageName,
-                      fileImage: fileImage,
+                      imageWidget: imageWidget,
                     )
                   : DeviceImageWidget(
                       isEditing: isEditing,
@@ -123,16 +125,16 @@ class WebImageWidget extends StatelessWidget {
     Key? key,
     required this.isEditing,
     required this.imageName,
-    this.fileImage,
+    this.imageWidget,
   }) : super(key: key);
   final bool isEditing;
   final String imageName;
-  File? fileImage;
+  Image? imageWidget;
 
   @override
   Widget build(BuildContext context) {
     return isEditing
-        ? Image.file(fileImage!)
+        ? imageWidget!
         : Image.network(
             imageName,
             loadingBuilder: (context, child, loadingProgress) {

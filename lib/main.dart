@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
     // print('hi i am here ${Platform.localeName.split('_').first}');
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'OTTAA Project',
       theme: ThemeData(
         primaryColor: kOTTAOrangeNew,
         visualDensity: VisualDensity.adaptivePlatformDensity,
