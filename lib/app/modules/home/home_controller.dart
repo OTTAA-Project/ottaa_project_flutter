@@ -71,6 +71,10 @@ class HomeController extends GetxController {
   //for opening drawer
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+
+  /// checker for adding the picto from pictogroupPage
+  Pict? pictToAddPict;
+
   @override
   void onInit() async {
     super.onInit();
