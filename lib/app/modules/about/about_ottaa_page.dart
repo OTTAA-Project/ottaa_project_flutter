@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/about/about_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-class AboutOttaaPage extends GetView<HomeController> {
+class AboutOttaaPage extends GetView<AboutController> {
   const AboutOttaaPage({Key? key}) : super(key: key);
 
   @override

@@ -6,7 +6,7 @@ import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-import 'about_ottaa_page.dart';
+import '../../about/about_ottaa_page.dart';
 
 class DrawerWidget extends GetView<HomeController> {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -90,7 +90,7 @@ class DrawerWidget extends GetView<HomeController> {
                     ListTileWidget(
                       icon: Icons.info_outline,
                       title: 'About OTTAA',
-                      onTap: () => Get.to(AboutOttaaPage()),
+                      onTap: () => Get.toNamed(AppRoutes.ABOUTOTTAA),
                     ),
                     ListTileWidget(
                       icon: Icons.view_compact,
