@@ -26,8 +26,9 @@ class LoginPage extends StatelessWidget {
                     width: horizontalSize * 0.6,
                     height: verticalSize * 0.65,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     // child: Column(
                     //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     //   children: [

@@ -60,6 +60,10 @@ class TTSController extends GetxController {
 
   int get subtitleSize => this._subtitleSize;
 
+  set setVolume(value){
+    this._volume = value;
+  }
+
   set subtitleSize(value) {
     this._subtitleSize = value;
   }

@@ -68,6 +68,9 @@ class HomeController extends GetxController {
   RxBool valueToRefresh = false.obs;
   RxBool sentenceBack = false.obs;
 
+  //drawer
+  RxBool muteOrNot = false.obs;
+
   @override
   void onInit() async {
     super.onInit();
