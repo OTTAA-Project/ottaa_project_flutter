@@ -55,7 +55,6 @@ class SelectPictoPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        //todo: change the color
         color: Colors.black,
         child: Stack(
           children: [

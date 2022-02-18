@@ -78,9 +78,52 @@ class HomeController extends GetxController {
     await getPicNumber();
   }
 
-  addPictToSentence(Pict pict) {
-    this._sentencePicts.add(pict);
-    suggest(this._sentencePicts.last.id);
+  addPictToSentence(Pict pict) async {
+    if (this._sentencePicts.isEmpty) {
+      this._sentencePicts.add(pict);
+      suggest(this._sentencePicts.last.id);
+    } else {
+      final addToThisOnePictId = this._sentencePicts.last.id;
+      int addToThisOneIndex = -1;
+      final addToThisOnePict = picts.firstWhere((element) {
+        addToThisOneIndex++;
+        return addToThisOnePictId == element.id;
+      });
+
+      /// if the length of the relacion == 0
+
+      if (this._sentencePicts.last.relacion!.length == 0) {
+        picts[addToThisOneIndex].relacion!.add(
+              Relacion(id: pict.id, frec: 1),
+            );
+      }
+
+      /// if the length of the relacion >1
+
+      if (this._sentencePicts.last.relacion!.length >= 1) {
+        bool alreadyInTheList = false;
+        int relacionID = -1;
+        final val = this._sentencePicts.last.relacion!.firstWhereOrNull((e) {
+          if (e.id == pict.id) {
+            alreadyInTheList = true;
+          }
+          relacionID++;
+          return e.id == pict.id;
+        });
+        ///if  it is in the relacion just increment it
+        if (alreadyInTheList) {
+          picts[addToThisOneIndex].relacion![relacionID].frec =
+              picts[addToThisOneIndex].relacion![relacionID].frec + 1;
+        } else {
+          picts[addToThisOneIndex].relacion!.add(
+                Relacion(id: pict.id, frec: 1),
+              );
+        }
+      }
+
+      this._sentencePicts.add(pict);
+      suggest(this._sentencePicts.last.id);
+    }
   }
 
   Future<void> loadPicts() async {
@@ -110,14 +153,6 @@ class HomeController extends GetxController {
       this._suggestedIndex = 0;
       suggest(this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
     }
-  }
-
-  Future<int> webTry() async {
-    await loadPicts();
-    await getPicNumber();
-    print('refreshed');
-    valueToRefresh.value = true;
-    return 1;
   }
 
   bool hasText() {
@@ -169,7 +204,15 @@ class HomeController extends GetxController {
     final Pict pict = picts.firstWhere((pict) => pict.id == id);
 
     final List<Relacion> recomendedPicts = pict.relacion!.toList();
+    // print('list before sorting : ');
+    // recomendedPicts.forEach((element) {
+    //   print(element.frec);
+    // });
     recomendedPicts.sort((b, a) => a.frec.compareTo(b.frec));
+    // print('after sorting : ');
+    // recomendedPicts.forEach((element) {
+    //   print(element.frec);
+    // });
     recomendedPicts.forEach((recommendedPict) {
       this._suggestedPicts.add(picts.firstWhere(
           (suggestedPict) => suggestedPict.id == recommendedPict.id));

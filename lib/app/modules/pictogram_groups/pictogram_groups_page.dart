@@ -19,7 +19,6 @@ class PictogramGroupsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    print(_homeController.grupos.length);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOTTAOrangeNew,

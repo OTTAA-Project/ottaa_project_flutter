@@ -37,7 +37,8 @@ class LeftColumnWidget extends StatelessWidget {
                 if (_homeController.sentencePicts.isEmpty) {
                   Get.toNamed(AppRoutes.PICTOGRAMGROUP);
                 } else {
-                  if (_homeController.sentencePicts.last.texto.es == "agregar") {
+                  if (_homeController.sentencePicts.last.texto.es ==
+                      "agregar") {
                     Get.toNamed(AppRoutes.PICTOGRAMGROUP);
                   } else {
                     _homeController.toId =
@@ -48,11 +49,12 @@ class LeftColumnWidget extends StatelessWidget {
                 }
               },
               child: Center(
-                  child: Icon(
-                Icons.image,
-                color: Colors.white,
-                size: horizontalSize / 10,
-              )),
+                child: Icon(
+                  Icons.image,
+                  color: Colors.white,
+                  size: horizontalSize / 10,
+                ),
+              ),
             ),
           )
         ],

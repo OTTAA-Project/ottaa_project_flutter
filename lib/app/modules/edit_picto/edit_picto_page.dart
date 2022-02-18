@@ -138,11 +138,13 @@ class PictureDialogWidget extends GetView<EditPictoController> {
   @override
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
+    double horizontalSize = MediaQuery.of(context).size.width;
     return AlertDialog(
       clipBehavior: Clip.antiAlias,
       contentPadding: const EdgeInsets.all(0),
       backgroundColor: Colors.transparent,
       content: Container(
+        width: horizontalSize * 0.4,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -166,31 +168,34 @@ class PictureDialogWidget extends GetView<EditPictoController> {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ImageWidget(
-                  imageLink: 'assets/camera.png',
-                  text: 'Camera',
-                  onTap: controller.cameraFunction,
-                ),
-                ImageWidget(
-                  imageLink: 'assets/gallery.png',
-                  text: 'Gallery',
-                  onTap: controller.galleryFunction,
-                ),
-                ImageWidget(
-                  imageLink: 'assets/download_from_arasaac.png',
-                  text: 'Download from ARASAAC',
-                  onTap: () async {
-                    var result = await showSearch<SearchModel?>(
-                      context: context,
-                      delegate: SearchPhotoPage(),
-                    );
-                    print(result);
-                  },
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ImageWidget(
+                    imageLink: 'assets/camera.png',
+                    text: 'Camera',
+                    onTap: controller.cameraFunction,
+                  ),
+                  ImageWidget(
+                    imageLink: 'assets/gallery.png',
+                    text: 'Gallery',
+                    onTap: controller.galleryFunction,
+                  ),
+                  ImageWidget(
+                    imageLink: 'assets/download_from_arasaac.png',
+                    text: 'Download from ARASAAC',
+                    onTap: () async {
+                      var result = await showSearch<SearchModel?>(
+                        context: context,
+                        delegate: SearchPhotoPage(),
+                      );
+                      print(result);
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
