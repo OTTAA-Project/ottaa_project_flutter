@@ -15,12 +15,9 @@ class PictsService {
   Future<List<Pict>> getAll() async {
     if (kIsWeb) {
       await Future.delayed(
-        Duration(seconds: 1),
+        Duration(seconds: 2),
       );
     }
-    final instance = await SharedPreferences.getInstance();
-    final fileExists = instance.getBool('Pictos_file');
-    debugPrint('the result is for file : $fileExists');
 
     /// updated one for loading the pictos...
     /// check if data exists online or not
@@ -34,18 +31,18 @@ class PictsService {
     } else {
       return await mobileFiles(
         onlineSnapshot: res,
-        fileExists: fileExists != null ? fileExists : false,
       );
     }
   }
 
   Future<List<Pict>> mobileFiles({
     required DataSnapshot onlineSnapshot,
-    required bool fileExists,
   }) async {
     final instance = await SharedPreferences.getInstance();
+    final fileExists = instance.getBool('Pictos_file');
+    debugPrint('the result is for file : $fileExists');
     if (onlineSnapshot.exists && onlineSnapshot.value != null) {
-      if (fileExists) {
+      if (fileExists == true && fileExists != null) {
         debugPrint('from file realtime : mobile');
         return await _fileController.readPictoFromFile();
       } else {
