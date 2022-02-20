@@ -30,18 +30,15 @@ class AboutController extends GetxController{
 
   Future<void> fetchDeviceName() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (kIsWeb) {
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      deviceName.value = androidInfo.model!;
+    } else if (Platform.isIOS) {
+      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      deviceName.value = iosDeviceInfo.utsname.machine!;
+    } else if (kIsWeb) {
       WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
       deviceName.value = webBrowserInfo.userAgent!;
-      print('Browser name is this: 101 ${webBrowserInfo.userAgent!}');
-    }else{
-      if (Platform.isAndroid) {
-        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-        deviceName.value = androidInfo.model!;
-      } else if (Platform.isIOS) {
-        IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-        deviceName.value = iosDeviceInfo.utsname.machine!;
-      }
     }
   }
 
