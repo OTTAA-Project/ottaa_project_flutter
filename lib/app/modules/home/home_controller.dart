@@ -58,6 +58,10 @@ class HomeController extends GetxController {
   late Pict pictToBeEdited;
   RxInt picNumber = 617.obs;
 
+  //predictive algo vars
+
+  List<Pict> predictivePicts = [];
+
   //for opening drawer
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -81,11 +85,11 @@ class HomeController extends GetxController {
   addPictToSentence(Pict pict) async {
     if (this._sentencePicts.isEmpty) {
       this._sentencePicts.add(pict);
-      suggest(this._sentencePicts.last.id);
+      await suggest(this._sentencePicts.last.id);
     } else {
       final addToThisOnePictId = this._sentencePicts.last.id;
       int addToThisOneIndex = -1;
-      final addToThisOnePict = picts.firstWhere((element) {
+      picts.firstWhere((element) {
         addToThisOneIndex++;
         return addToThisOnePictId == element.id;
       });
@@ -103,13 +107,14 @@ class HomeController extends GetxController {
       if (this._sentencePicts.last.relacion!.length >= 1) {
         bool alreadyInTheList = false;
         int relacionID = -1;
-        final val = this._sentencePicts.last.relacion!.firstWhereOrNull((e) {
+        this._sentencePicts.last.relacion!.firstWhereOrNull((e) {
           if (e.id == pict.id) {
             alreadyInTheList = true;
           }
           relacionID++;
           return e.id == pict.id;
         });
+
         ///if  it is in the relacion just increment it
         if (alreadyInTheList) {
           picts[addToThisOneIndex].relacion![relacionID].frec =
@@ -122,14 +127,14 @@ class HomeController extends GetxController {
       }
 
       this._sentencePicts.add(pict);
-      suggest(this._sentencePicts.last.id);
+      await suggest(this._sentencePicts.last.id);
     }
   }
 
   Future<void> loadPicts() async {
     this.picts = await this._pictsRepository.getAll();
     this.grupos = await this._grupoRepository.getAll();
-    suggest(0);
+    await suggest(0);
     update(["suggested"]);
   }
 
@@ -147,11 +152,12 @@ class HomeController extends GetxController {
     update(["suggested"]);
   }
 
-  removePictFromSentence() {
+  removePictFromSentence() async {
     if (this._sentencePicts.isNotEmpty) {
       this._sentencePicts.removeLast();
       this._suggestedIndex = 0;
-      suggest(this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
+      await suggest(
+          this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
     }
   }
 
@@ -181,7 +187,7 @@ class HomeController extends GetxController {
       await this._ttsController.speak(this._voiceText);
       this._suggestedIndex = 0;
       this._sentencePicts.clear();
-      this.suggest(0);
+      await this.suggest(0);
       await Future.delayed(new Duration(seconds: 3), () {
         this._voiceText = "";
         update(["subtitle"]);
@@ -204,19 +210,19 @@ class HomeController extends GetxController {
     final Pict pict = picts.firstWhere((pict) => pict.id == id);
 
     final List<Relacion> recomendedPicts = pict.relacion!.toList();
-    // print('list before sorting : ');
-    // recomendedPicts.forEach((element) {
-    //   print(element.frec);
-    // });
     recomendedPicts.sort((b, a) => a.frec.compareTo(b.frec));
-    // print('after sorting : ');
-    // recomendedPicts.forEach((element) {
-    //   print(element.frec);
+    this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);
+
+    /// *
+    /// predictive algo will replace teh code from here
+
+    // recomendedPicts.forEach((recommendedPict) {
+    //   this._suggestedPicts.add(picts.firstWhere(
+    //       (suggestedPict) => suggestedPict.id == recommendedPict.id));
     // });
-    recomendedPicts.forEach((recommendedPict) {
-      this._suggestedPicts.add(picts.firstWhere(
-          (suggestedPict) => suggestedPict.id == recommendedPict.id));
-    });
+
+    /// to here
+    /// *
     this._suggestedPicts.add(addPict);
     while (this.suggestedPicts.length == 0 ||
         this.suggestedPicts.length % this._suggestedQuantity != 0) {
@@ -232,4 +238,56 @@ class HomeController extends GetxController {
     final res = await ref.get();
     picNumber.value = res.value['urlFoto'];
   }
+
+  Future<List<Pict>> predictiveAlgorithm({required List<Relacion> list}) async {
+    final int pesoFrec = 2,
+        // pesoAgenda = 8,
+        // pesoGps = 12,
+        // pesoEdad = 5,
+        // pesoSexo = 3,
+        pesoHora = 50;
+    final time = DateTime.now().hour;
+    List<Pict> requiredPicts = [];
+    list.forEach((recommendedPict) {
+      print(recommendedPict.frec);
+      requiredPicts.add(
+        picts.firstWhere(
+            (suggestedPict) => suggestedPict.id == recommendedPict.id),
+      );
+    });
+    late String tag;
+    if (time >= 5 && time <= 11) {
+      tag = 'MANANA';
+    } else if (time > 11 && time <= 14) {
+      tag = 'MEDIODIA';
+    } else if (time > 14 && time < 20) {
+      tag = 'TARDE';
+    } else {
+      tag = 'NOCHE';
+    }
+    int i = -1;
+    requiredPicts.forEach((e) {
+      i++;
+      int hora = 0;
+
+      /// '0' should be replaced by the value of HORA
+      if (e.hora == null) {
+        hora = 0;
+      } else {
+        e.hora!.forEach((e) {
+          if (tag == e) {
+            hora = 1;
+          }
+        });
+      }
+      e.score = (list[i].frec * pesoFrec) + (hora * pesoHora);
+      print(e.score);
+    });
+
+    requiredPicts.sort((b, a) => a.score!.compareTo(b.score!));
+
+    return requiredPicts;
+  }
 }
+
+enum Horario { MANANA, MEDIODIA, TARDE, NOCHE, ISEMPTY }
