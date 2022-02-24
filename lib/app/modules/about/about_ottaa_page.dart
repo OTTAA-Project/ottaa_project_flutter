@@ -30,7 +30,7 @@ class AboutOttaaPage extends GetView<AboutController> {
               top: verticalSize * 0.2,
               right: horizontalSize * 0.03,
               child: Text(
-                'Keep your OTTAA up-to-date',
+                'keep_your_ottaa_up_to_date'.tr,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: "Noto Sans",
@@ -64,7 +64,7 @@ class AboutOttaaPage extends GetView<AboutController> {
                     children: [
                       Center(
                         child: Text(
-                          'Account Info',
+                          'account_info'.tr,
                           style: TextStyle(
                               fontFamily: "Noto Sans",
                               color: Colors.white,
@@ -74,23 +74,23 @@ class AboutOttaaPage extends GetView<AboutController> {
                       ),
                       LineWidget(
                         text: controller.userEmail.value,
-                        heading: 'Account',
+                        heading: 'account'.tr,
                       ),
                       LineWidget(
                         text: controller.userSubscription.value,
-                        heading: 'Account  Type',
+                        heading: 'account_type'.tr,
                       ),
                       LineWidget(
                         text: controller.currentOTTAAInstalled.value.toString(),
-                        heading: 'Current OTTAA Installed',
+                        heading: 'current_ottaa_installed'.tr,
                       ),
                       LineWidget(
                         text: controller.currentOTTAAVersion.value.toString(),
-                        heading: 'Current OTTAA Version',
+                        heading: 'current_ottaa_version'.tr,
                       ),
                       LineWidget(
                         text: controller.deviceName.value,
-                        heading: 'Device Name',
+                        heading: 'device_name'.tr,
                       ),
                       SizedBox(
                         height: verticalSize * 0.005,

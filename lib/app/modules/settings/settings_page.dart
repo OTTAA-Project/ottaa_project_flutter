@@ -18,7 +18,7 @@ class SettingsPage extends StatelessWidget {
             onPressed: () => Get.toNamed(AppRoutes.HOME),
           ),
           title: Text(
-            'Settings',
+            'settings'.tr,
             style: TextStyle(
               color: Colors.black,
             ),
@@ -37,7 +37,7 @@ class SettingsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'SETTINGS',
+                  'SETTINGS'.tr,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -53,7 +53,7 @@ class SettingsPage extends StatelessWidget {
                     color: kOTTAOrangeNew,
                   ),
                   onTap: () {},
-                  title: Text('Pictograms'),
+                  title: Text('pictograms'.tr),
                 ),
                 Divider(),
                 ListTile(
@@ -62,7 +62,7 @@ class SettingsPage extends StatelessWidget {
                     color: kOTTAOrangeNew,
                   ),
                   onTap: () {},
-                  title: Text('Prediction'),
+                  title: Text('prediction'.tr),
                 ),
                 Divider(),
                 ListTile(
@@ -71,7 +71,7 @@ class SettingsPage extends StatelessWidget {
                     color: kOTTAOrangeNew,
                   ),
                   onTap: () {},
-                  title: Text('Accesibility'),
+                  title: Text('accessibility'.tr),
                 ),
                 Divider(),
                 ListTile(
@@ -80,7 +80,7 @@ class SettingsPage extends StatelessWidget {
                     color: kOTTAOrangeNew,
                   ),
                   onTap: () => Get.toNamed(AppRoutes.SETTINGS_VOICE),
-                  title: Text('Voice and subtitles'),
+                  title: Text('voice_and_subtitles'.tr),
                 ),
                 Divider(),
                 ListTile(
@@ -89,7 +89,7 @@ class SettingsPage extends StatelessWidget {
                     color: kOTTAOrangeNew,
                   ),
                   onTap: () => Get.toNamed(AppRoutes.SETTINGS_LANG),
-                  title: Text('Language'),
+                  title: Text('language'.tr),
                 ),
                 Divider(),
               ],

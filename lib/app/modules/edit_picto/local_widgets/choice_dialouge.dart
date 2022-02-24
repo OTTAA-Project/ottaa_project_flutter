@@ -17,7 +17,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
               Get.back();
               Get.toNamed(AppRoutes.EDITPICTO);
             },
-            child: Text('Edit'),
+            child: Text('edit'.tr),
           ),
           const SizedBox(
             height: 32,

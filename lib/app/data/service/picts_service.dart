@@ -18,6 +18,11 @@ class PictsService {
         Duration(seconds: 2),
       );
     }
+    if(!kIsWeb){
+      await Future.delayed(
+        Duration(seconds: 1),
+      );
+    }
 
     /// updated one for loading the pictos...
     /// check if data exists online or not

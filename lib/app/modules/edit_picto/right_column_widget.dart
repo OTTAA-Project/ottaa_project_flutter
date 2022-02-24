@@ -50,7 +50,7 @@ class RightColumnWidget extends GetView<EditPictoController> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'TAGs will come in next Release',
+                          'tags_will_come_in_next_release'.tr,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: verticalSize * 0.02,
