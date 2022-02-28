@@ -78,7 +78,9 @@ class Picto extends StatelessWidget {
                         ? Image.asset('assets/imgs/${pict.imagen.picto}.webp')
                         : kIsWeb
                             ? Image.network(
-                                pict.imagen.picto,
+                                pict.imagen.pictoEditado == null
+                                    ? pict.imagen.picto
+                                    : pict.imagen.pictoEditado!,
                                 loadingBuilder:
                                     (context, child, loadingProgress) {
                                   if (loadingProgress == null) return child;

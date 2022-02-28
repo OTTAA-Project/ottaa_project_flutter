@@ -85,14 +85,19 @@ class EditPictoPage extends GetView<EditPictoController> {
                               name: languaje == 'en'
                                   ? controller.pict.value!.texto.en
                                   : controller.pict.value!.texto.es,
-                              imageName: controller.pict.value!.imagen.picto,
+                              imageName: controller
+                                          .pict.value!.imagen.pictoEditado ==
+                                      null
+                                  ? controller.pict.value!.imagen.picto
+                                  : controller.pict.value!.imagen.pictoEditado!,
                               border: controller.pictoBorder.value,
                               color: controller.pict.value!.tipo,
                               bottom: false,
                               isEditing: controller.editingPicture.value,
                               fileImage: controller.fileImage.value,
                               imageWidget: controller.imageWidget.value,
-                              selectedImageUrl: controller.selectedPhotoUrl.value,
+                              selectedImageUrl:
+                                  controller.selectedPhotoUrl.value,
                             ),
                           ),
                         ),

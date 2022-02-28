@@ -30,10 +30,14 @@ class MiniPicto extends StatelessWidget {
                 )
               : kIsWeb
                   ? Image.network(
-                      pict.imagen.picto,
+                      pict.imagen.pictoEditado == null
+                          ? pict.imagen.picto
+                          : pict.imagen.pictoEditado!,
                     )
                   : CachedNetworkImage(
-                      imageUrl: pict.imagen.picto,
+                      imageUrl: pict.imagen.pictoEditado == null
+                          ? pict.imagen.picto
+                          : pict.imagen.pictoEditado!,
                       placeholder: (context, url) => Center(
                         child: CircularProgressIndicator(),
                       ),
