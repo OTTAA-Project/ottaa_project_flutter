@@ -26,6 +26,7 @@ class CategoryWidget extends StatelessWidget {
     this.isEditing = false,
     this.fileImage,
     this.imageWidget,
+    this.selectedImageUrl,
   }) : super(key: key);
   final String name;
   final String imageName;
@@ -36,6 +37,9 @@ class CategoryWidget extends StatelessWidget {
   final bool isEditing;
   final File? fileImage;
   Image? imageWidget;
+
+  // url for arsaac images
+  String? selectedImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -84,11 +88,13 @@ class CategoryWidget extends StatelessWidget {
                       isEditing: isEditing,
                       imageName: imageName,
                       imageWidget: imageWidget,
+                      selectedImageUrl: selectedImageUrl,
                     )
                   : DeviceImageWidget(
                       isEditing: isEditing,
                       imageName: imageName,
                       fileImage: fileImage,
+                      selectedImageUrl: selectedImageUrl,
                     ),
             ),
           ),
@@ -126,17 +132,19 @@ class WebImageWidget extends StatelessWidget {
     required this.isEditing,
     required this.imageName,
     this.imageWidget,
+    this.selectedImageUrl,
   }) : super(key: key);
   final bool isEditing;
   final String imageName;
   Image? imageWidget;
+  String? selectedImageUrl;
 
   @override
   Widget build(BuildContext context) {
     return isEditing
         ? imageWidget!
         : Image.network(
-            imageName,
+            selectedImageUrl == null ? imageName : selectedImageUrl!,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) return child;
               return Center(
@@ -144,7 +152,7 @@ class WebImageWidget extends StatelessWidget {
                   color: kOTTAOrangeNew,
                   value: loadingProgress.expectedTotalBytes != null
                       ? loadingProgress.cumulativeBytesLoaded /
-                      loadingProgress.expectedTotalBytes!
+                          loadingProgress.expectedTotalBytes!
                       : null,
                 ),
               );
@@ -159,15 +167,19 @@ class DeviceImageWidget extends StatelessWidget {
     required this.isEditing,
     required this.imageName,
     this.fileImage,
+    this.selectedImageUrl,
   }) : super(key: key);
   final bool isEditing;
   final String imageName;
   File? fileImage;
+  String? selectedImageUrl;
 
   @override
   Widget build(BuildContext context) {
     return isEditing
-        ? Image.file(fileImage!)
+        ? selectedImageUrl == null
+            ? Image.file(fileImage!)
+            : Image.network(selectedImageUrl!)
         : CachedNetworkImage(
             imageUrl: imageName,
             placeholder: (context, url) => Center(

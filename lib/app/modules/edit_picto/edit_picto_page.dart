@@ -92,6 +92,7 @@ class EditPictoPage extends GetView<EditPictoController> {
                               isEditing: controller.editingPicture.value,
                               fileImage: controller.fileImage.value,
                               imageWidget: controller.imageWidget.value,
+                              selectedImageUrl: controller.selectedPhotoUrl.value,
                             ),
                           ),
                         ),

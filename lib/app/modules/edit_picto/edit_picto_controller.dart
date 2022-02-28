@@ -64,9 +64,11 @@ class EditPictoController extends GetxController {
     });
   }
 
-  Future<SearchModel> fetchPhotoFromArsaac({required String text}) async {
+  Future<List<SearchModel>> fetchPhotoFromArsaac({required String text}) async {
+    final String languageFormat = lang == 'en' ? '639-3' : '639-1';
+    final language = lang == 'en' ? 'eng' : 'es';
     url =
-    "http://arasaac.org/api/index.php?callback=json&language=${lang.toUpperCase()}&word=${text.replaceAll(' ', '+')}&catalog=colorpictos&thumbnailsize=150&TXTlocate=4&KEY=${dotenv.env['API_KEY']!}";
+        'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
     var urlF = Uri.parse(url);
     http.Response response = await http.get(
       urlF,
@@ -76,11 +78,14 @@ class EditPictoController extends GetxController {
     if (response.statusCode == 200) {
       // var data = jsonDecode(response.body);
       // print(data['symbols'][0]['name']);
-      SearchModel searchModel = SearchModel.fromJson(jsonDecode(response.body));
+      final res = (jsonDecode(response.body) as List)
+          .map((e) => SearchModel.fromJson(e))
+          .toList();
+      // SearchModel searchModel = SearchModel.fromJson(jsonDecode(response.body));
       // print(searchModel.itemCount);
       // print(searchModel.symbols[0].name);
       // print(jsonDecode(response.body));
-      return searchModel;
+      return res;
     } else {
       throw 'error';
     }
@@ -107,7 +112,7 @@ class EditPictoController extends GetxController {
   void galleryFunction() async {
     if (kIsWeb) {
       imageTobeUploaded.value =
-      await picker.pickImage(source: ImageSource.gallery);
+          await picker.pickImage(source: ImageSource.gallery);
       if (imageTobeUploaded != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploaded.value!.readAsBytes();
@@ -122,7 +127,7 @@ class EditPictoController extends GetxController {
       }
     } else {
       imageTobeUploaded.value =
-      await picker.pickImage(source: ImageSource.gallery);
+          await picker.pickImage(source: ImageSource.gallery);
       if (imageTobeUploaded != null) {
         fileImage.value = File(imageTobeUploaded.value!.path);
         editingPicture.value = true;
@@ -147,21 +152,29 @@ class EditPictoController extends GetxController {
     if (editingPicture.value) {
       if (kIsWeb) {
         /// method for uploading images for web
-        Reference _reference = FirebaseStorage.instance
-            .ref()
-            .child('testingUpload/${pict.value!.texto.en}');
-        await _reference
-            .putData(
-          await imageTobeUploaded.value!.readAsBytes(),
-          SettableMetadata(contentType: 'image/jpeg'),
-        )
-            .whenComplete(() async {
-          await _reference.getDownloadURL().then((value) {
-            pict.value!.imagen.picto = value;
+        if (selectedPhotoUrl.value == null) {
+          Reference _reference = FirebaseStorage.instance
+              .ref()
+              .child('testingUpload/${pict.value!.texto.en}');
+          await _reference
+              .putData(
+            await imageTobeUploaded.value!.readAsBytes(),
+            SettableMetadata(contentType: 'image/jpeg'),
+          )
+              .whenComplete(() async {
+            await _reference.getDownloadURL().then((value) {
+              pict.value!.imagen.pictoEditado = value;
+            });
           });
-        });
+        } else {
+          pict.value!.imagen.pictoEditado = selectedPhotoUrl.value;
+        }
       } else {
-        await uploadImageToFirebaseStorage(path: fileImage.value!.path);
+        if (selectedPhotoUrl.value == null) {
+          await uploadImageToFirebaseStorage(path: fileImage.value!.path);
+        } else {
+          pict.value!.imagen.pictoEditado = selectedPhotoUrl.value;
+        }
       }
     }
     int index = 0;
@@ -193,8 +206,10 @@ class EditPictoController extends GetxController {
     await uploadToFirebase(data: fileData.toString());
     await pictsExistsOnFirebase();
     // for refreshing the UI of listing
-    _pictoController.pictoGridviewOrPageview.value =!_pictoController.pictoGridviewOrPageview.value;
-    _pictoController.pictoGridviewOrPageview.value =!_pictoController.pictoGridviewOrPageview.value;
+    _pictoController.pictoGridviewOrPageview.value =
+        !_pictoController.pictoGridviewOrPageview.value;
+    _pictoController.pictoGridviewOrPageview.value =
+        !_pictoController.pictoGridviewOrPageview.value;
     Get.back();
     Navigator.of(context).pop(true);
   }
@@ -207,7 +222,7 @@ class EditPictoController extends GetxController {
     final UploadTask uploadTask = ref.putFile(File(path));
     final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
     final url = await taskSnapshot.ref.getDownloadURL();
-    pict.value!.imagen.picto = url;
+    pict.value!.imagen.pictoEditado = url;
   }
 
   @override
@@ -226,6 +241,6 @@ class EditPictoController extends GetxController {
   void onReady() {
     super.onReady();
     nameController.text =
-    lang == 'en' ? pict.value!.texto.en : pict.value!.texto.es;
+        lang == 'en' ? pict.value!.texto.en : pict.value!.texto.es;
   }
 }
