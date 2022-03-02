@@ -44,17 +44,17 @@ class PictogramGroupsPage extends StatelessWidget {
               size: 30,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Icon(
-              Icons.add_circle_outline,
-              size: 30,
-            ),
-          ),
-          Icon(
-            Icons.cloud_download,
-            size: 30,
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 8),
+          //   child: Icon(
+          //     Icons.add_circle_outline,
+          //     size: 30,
+          //   ),
+          // ),
+          // Icon(
+          //   Icons.cloud_download,
+          //   size: 30,
+          // ),
           const SizedBox(
             width: 16,
           ),
@@ -66,7 +66,7 @@ class PictogramGroupsPage extends StatelessWidget {
           children: [
             Container(
               // height: Get.height * 0.7,
-              padding: EdgeInsets.symmetric(horizontal: Get.width * .10),
+              padding: EdgeInsets.symmetric(horizontal: width * .10),
               child: Column(
                 children: [
                   Expanded(
@@ -76,8 +76,8 @@ class PictogramGroupsPage extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             horizontal: _pictogramController
                                     .categoryGridviewOrPageview.value
-                                ? Get.width * 0.02
-                                : Get.width * 0.13,
+                                ? width * 0.02
+                                : width * 0.13,
                             vertical: 16),
 
                         ///the whole view is extracted to another file

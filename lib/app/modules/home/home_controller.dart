@@ -281,7 +281,7 @@ class HomeController extends GetxController {
         });
       }
       e.score = (list[i].frec * pesoFrec) + (hora * pesoHora);
-      print(e.score);
+      // print(e.score);
     });
 
     requiredPicts.sort((b, a) => a.score!.compareTo(b.score!));
