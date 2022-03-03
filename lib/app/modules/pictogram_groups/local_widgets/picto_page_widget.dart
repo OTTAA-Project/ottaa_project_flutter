@@ -51,7 +51,12 @@ class PictoPageWidget extends StatelessWidget {
                       : _pictogramController
                           .selectedGruposPicts[index].texto.es,
                   imageName: _pictogramController
-                      .selectedGruposPicts[index].imagen.picto,
+                              .selectedGruposPicts[index].imagen.pictoEditado ==
+                          null
+                      ? _pictogramController
+                          .selectedGruposPicts[index].imagen.picto
+                      : _pictogramController
+                          .selectedGruposPicts[index].imagen.pictoEditado!,
                   border: true,
                   bottom: false,
                   color: _pictogramController.selectedGruposPicts[index].tipo,

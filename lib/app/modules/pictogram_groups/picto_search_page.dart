@@ -56,7 +56,9 @@ class CustomDelegate extends SearchDelegate<String> {
             name: language == 'en'
                 ? listToShow[index].texto.en
                 : listToShow[index].texto.es,
-            imageName: listToShow[index].imagen.picto,
+            imageName: listToShow[index].imagen.pictoEditado == null
+                ? listToShow[index].imagen.picto
+                : listToShow[index].imagen.pictoEditado!,
             border: true,
             bottom: false,
             color: listToShow[index].tipo,
