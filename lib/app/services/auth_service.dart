@@ -30,7 +30,8 @@ class AuthService {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    UserCredential userCredentials = await _firebaseAuth.signInWithCredential(credential);
+    UserCredential userCredentials =
+        await _firebaseAuth.signInWithCredential(credential);
     if (userCredentials.user != null) {
       print(userCredentials.user);
       print(userCredentials.user!.email);
@@ -90,8 +91,9 @@ class AuthService {
   }
 
   Future<void> signOut() async {
-    final sharedPrefClient =await SharedPreferences.getInstance();
-    sharedPrefClient.setBool('First_time', false);
+    final sharedPrefClient = await SharedPreferences.getInstance();
+    await sharedPrefClient.setBool('First_time', false);
+    await sharedPrefClient.setBool('Pictos_file', false);
     Future.wait([
       _firebaseAuth.signOut(),
       _googleSignIn.signOut(),

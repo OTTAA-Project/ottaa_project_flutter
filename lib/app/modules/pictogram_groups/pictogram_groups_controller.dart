@@ -10,7 +10,6 @@ class PictogramGroupsController extends GetxController {
   late ScrollController pictoGridController;
   late PageController categoriesPageController;
   late PageController pictoPageController;
-  final _pictsRepository = Get.find<PictsRepository>();
   final _homeController = Get.find<HomeController>();
   List<Pict> picts = [];
   late Grupos selectedGrupos;

@@ -103,69 +103,27 @@ class PictoPageWidget extends StatelessWidget {
         _pictogramController.selectedGruposPicts[index].texto.en) {
       await _homeController
           .addPictToSentence(_pictogramController.selectedGruposPicts[index]);
-      _homeController.addId =
-          _pictogramController.selectedGruposPicts[index].id;
-
-      if (_homeController.fromAdd) {
-        // //fetch the value of id to which we will be adding relation
-        // _homeController.toId = _homeController.sentencePicts.last.id;
-        // fetch the picto from which you want to add relation
-        int pictToAddedIndex = -1;
-        final pictToAdded = _homeController.picts.firstWhere((e) {
-          pictToAddedIndex++;
-          return e.id == _homeController.toId;
-        });
-        //find the relacions and check for the null and others
-        final lengthOfRelacion =
-            _homeController.picts[pictToAddedIndex].relacion!.length;
-        print(lengthOfRelacion);
-        final pictFromAdded = _homeController.picts
-            .firstWhere((e) => e.id == _homeController.addId);
-        print(pictFromAdded.texto.en);
-        if (lengthOfRelacion == 0) {
-          _homeController.picts[pictToAddedIndex].relacion!.add(
-            Relacion(id: pictFromAdded.id, frec: 1),
-          );
-        } else {
-          int relacionIndex = -1;
-          final res = _homeController.picts[pictToAddedIndex].relacion!
-              .contains((Relacion e) {
-            relacionIndex++;
-            return e.id == pictFromAdded.id;
-          });
-          print(res);
-          if (res) {
-            _homeController
-                .picts[pictToAddedIndex].relacion![relacionIndex].frec++;
-          } else {
-            _homeController.picts[pictToAddedIndex].relacion!.add(
-              Relacion(id: pictFromAdded.id, frec: 1),
-            );
-          }
-        }
-        print(pictToAdded.texto.en);
-        _homeController.fromAdd = false;
-        final data = _homeController.picts;
-        List<String> fileData = [];
-        data.forEach((element) {
-          final obj = jsonEncode(element);
-          fileData.add(obj);
-        });
-        if (!kIsWeb) {
-          final localFile = LocalFileController();
-          await localFile.writePictoToFile(data: fileData.toString());
-          print('writing to file');
-        }
-        //for the file data
-        final instance = await SharedPreferences.getInstance();
-        await instance.setBool('Pictos_file', true);
-        final res1 = instance.getBool('Pictos_file') ?? false;
-
-        print(res1);
-        //upload to the firebase
-        await uploadToFirebase(data: fileData.toString());
-        await pictsExistsOnFirebase();
+      _homeController.fromAdd = false;
+      final data = _homeController.picts;
+      List<String> fileData = [];
+      data.forEach((element) {
+        final obj = jsonEncode(element);
+        fileData.add(obj);
+      });
+      if (!kIsWeb) {
+        final localFile = LocalFileController();
+        await localFile.writePictoToFile(data: fileData.toString());
+        print('writing to file');
       }
+      //for the file data
+      final instance = await SharedPreferences.getInstance();
+      await instance.setBool('Pictos_file', true);
+      final res1 = instance.getBool('Pictos_file') ?? false;
+
+      print(res1);
+      //upload to the firebase
+      uploadToFirebase(data: fileData.toString());
+      pictsExistsOnFirebase();
       _pictogramController.selectedPicto = '';
       Get.back();
       Get.back();

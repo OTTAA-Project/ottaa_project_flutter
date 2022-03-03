@@ -1,4 +1,6 @@
 import 'package:get/route_manager.dart';
+import 'package:ottaa_project_flutter/app/modules/about/about_binding.dart';
+import 'package:ottaa_project_flutter/app/modules/about/about_ottaa_page.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/language_page.dart';
@@ -84,6 +86,11 @@ class AppPages {
       name: AppRoutes.EDITPICTO,
       page: () => EditPictoPage(),
       binding: EditPictoBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.ABOUTOTTAA,
+      page: () => AboutOttaaPage(),
+      binding: AboutBinding(),
     ),
   ];
 }

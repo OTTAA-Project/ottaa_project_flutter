@@ -7,11 +7,12 @@ class OttaLogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = Get.width;
+    final width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(width * 0.07)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(width * 0.07),
+      ),
       padding: EdgeInsets.all(width * 0.010),
       child: Container(
         padding: EdgeInsets.all(width * 0.02),

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 
 class LeftColumnWidget extends StatelessWidget {
-  const LeftColumnWidget({Key? key}) : super(key: key);
+  LeftColumnWidget({Key? key}) : super(key: key);
+  final _homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +33,28 @@ class LeftColumnWidget extends StatelessWidget {
           ),
           FittedBox(
             child: GestureDetector(
-              onTap: () => Get.toNamed(AppRoutes.PICTOGRAMGROUP),
+              onTap: () {
+                if (_homeController.sentencePicts.isEmpty) {
+                  Get.toNamed(AppRoutes.PICTOGRAMGROUP);
+                } else {
+                  if (_homeController.sentencePicts.last.texto.es ==
+                      "agregar") {
+                    Get.toNamed(AppRoutes.PICTOGRAMGROUP);
+                  } else {
+                    _homeController.toId =
+                        _homeController.sentencePicts.last.id;
+                    _homeController.fromAdd = true;
+                    Get.toNamed(AppRoutes.PICTOGRAMGROUP);
+                  }
+                }
+              },
               child: Center(
-                  child: Icon(
-                Icons.image,
-                color: Colors.white,
-                size: horizontalSize / 10,
-              )),
+                child: Icon(
+                  Icons.image,
+                  color: Colors.white,
+                  size: horizontalSize / 10,
+                ),
+              ),
             ),
           )
         ],
