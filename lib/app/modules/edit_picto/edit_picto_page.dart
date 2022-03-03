@@ -23,21 +23,21 @@ class EditPictoPage extends GetView<EditPictoController> {
       return (await showDialog(
             context: context,
             builder: (context) => new AlertDialog(
-              title: Text('Important'),
-              content: Text('Do you want to save changes'),
+              title: Text('important'.tr),
+              content: Text('do_you_want_to_save_changes'.tr),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(true),
-                  child: Text('No'),
+                  child: Text('no'.tr),
                 ),
                 TextButton(
                   onPressed: () async =>
                       controller.uploadChanges(context: context),
-                  child: Text('Yes'),
+                  child: Text('yes'.tr),
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: Text('Go Back'),
+                  child: Text('go_back'.tr),
                 ),
               ],
             ),
@@ -161,7 +161,7 @@ class PictureDialogWidget extends GetView<EditPictoController> {
               ),
               child: Center(
                 child: Text(
-                  'Choose an option',
+                  'choose_an_option'.tr,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -175,17 +175,17 @@ class PictureDialogWidget extends GetView<EditPictoController> {
                 children: [
                   ImageWidget(
                     imageLink: 'assets/camera.png',
-                    text: 'Camera',
+                    text: 'camera'.tr,
                     onTap: controller.cameraFunction,
                   ),
                   ImageWidget(
                     imageLink: 'assets/gallery.png',
-                    text: 'Gallery',
+                    text: 'gallery'.tr,
                     onTap: controller.galleryFunction,
                   ),
                   ImageWidget(
                     imageLink: 'assets/download_from_arasaac.png',
-                    text: 'Download from ARASAAC',
+                    text: 'download_from_arasaac'.tr,
                     onTap: () async {
                       var result = await showSearch<SearchModel?>(
                         context: context,

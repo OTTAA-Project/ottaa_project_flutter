@@ -18,7 +18,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
           top: height * 0.07,
           left: width * 0.02,
           child: Text(
-            'Fitzgerald key',
+            'fitzgerald_key'.tr,
             style: TextStyle(
               fontWeight: FontWeight.w700,
               color: Colors.grey[600],
@@ -32,7 +32,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
           top: height * 0.28,
           child: ColorWidget(
             color: Colors.green,
-            text: 'Actions',
+            text: 'actions'.tr,
             tipo: 3,
           ),
         ),
@@ -42,7 +42,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
           left: -width * 0.12,
           child: ColorWidget(
             color: Colors.purple,
-            text: 'Interactions',
+            text: 'interactions'.tr,
             tipo: 5,
           ),
         ),
@@ -52,7 +52,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
           right: -width * 0.12,
           child: ColorWidget(
             color: Colors.yellow,
-            text: 'people',
+            text: 'people'.tr,
             tipo: 1,
           ),
         ),
@@ -62,7 +62,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
           left: -width * 0.12,
           child: ColorWidget(
             color: kOTTAOrange,
-            text: 'Nouns',
+            text: 'nouns'.tr,
             tipo: 2,
           ),
         ),
@@ -72,7 +72,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
           right: -width * 0.12,
           child: ColorWidget(
             color: Colors.blue,
-            text: 'Adjectives',
+            text: 'adjectives'.tr,
             tipo: 4,
           ),
         ),
@@ -82,7 +82,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
           top: height * 0.54,
           child: ColorWidget(
             color: Colors.black,
-            text: 'Miscellaneous',
+            text: 'miscellaneous'.tr,
             tipo: 6,
           ),
         ),

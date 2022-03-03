@@ -73,7 +73,7 @@ class DrawerWidget extends GetView<HomeController> {
                             icon: controller.muteOrNot.value
                                 ? Icons.volume_off
                                 : Icons.volume_up,
-                            title: 'Mute',
+                            title: 'mute'.tr,
                             onTap: () async {
                               _ttsController.setVolume =
                                   controller.muteOrNot.value ? 0.8 : 0.0;
@@ -98,17 +98,17 @@ class DrawerWidget extends GetView<HomeController> {
                       children: [
                         ListTileWidget(
                           icon: Icons.info_outline,
-                          title: 'About OTTAA',
+                          title: 'about_ottaa',
                           onTap: () => Get.toNamed(AppRoutes.ABOUTOTTAA),
                         ),
                         ListTileWidget(
                           icon: Icons.settings,
-                          title: 'Configuration',
+                          title: 'configuration'.tr,
                           onTap: () => Get.toNamed(AppRoutes.SETTINGS),
                         ),
                         ListTileWidget(
                           icon: Icons.info_outline,
-                          title: 'Tutorial',
+                          title: 'tutorial'.tr,
                           onTap: () async {
                             Get.toNamed(AppRoutes.TUTORIAL);
                           },
@@ -128,14 +128,14 @@ class DrawerWidget extends GetView<HomeController> {
                       children: [
                         ListTileWidget(
                           icon: Icons.highlight_remove,
-                          title: 'Close Application',
+                          title: 'close_application'.tr,
                           onTap: () async {
                             exit(0);
                           },
                         ),
                         ListTileWidget(
                           icon: Icons.exit_to_app,
-                          title: 'Sign out',
+                          title: 'sign_out'.tr,
                           onTap: () async {
                             await controller.authController.signOut();
                           },

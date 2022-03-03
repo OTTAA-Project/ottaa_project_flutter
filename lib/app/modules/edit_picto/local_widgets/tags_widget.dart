@@ -21,7 +21,7 @@ class TagsWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Choose a TAG',
+                    'choose_a_tag'.tr,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: Colors.grey[600],
@@ -39,7 +39,7 @@ class TagsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'By choosing TAGs you need to predict better when to show certain pictgorams, based on Time,Location, Calender or Weather',
+                  'tags_widget_long_1'.tr,
                   style: TextStyle(),
                 ),
                 SizedBox(

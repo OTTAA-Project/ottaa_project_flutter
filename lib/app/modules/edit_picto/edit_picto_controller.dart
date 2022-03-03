@@ -66,7 +66,7 @@ class EditPictoController extends GetxController {
 
   Future<SearchModel> fetchPhotoFromArsaac({required String text}) async {
     url =
-        "http://arasaac.org/api/index.php?callback=json&language=${lang.toUpperCase()}&word=${text.replaceAll(' ', '+')}&catalog=colorpictos&thumbnailsize=150&TXTlocate=4&KEY=${dotenv.env['API_KEY']!}";
+    "http://arasaac.org/api/index.php?callback=json&language=${lang.toUpperCase()}&word=${text.replaceAll(' ', '+')}&catalog=colorpictos&thumbnailsize=150&TXTlocate=4&KEY=${dotenv.env['API_KEY']!}";
     var urlF = Uri.parse(url);
     http.Response response = await http.get(
       urlF,
@@ -107,7 +107,7 @@ class EditPictoController extends GetxController {
   void galleryFunction() async {
     if (kIsWeb) {
       imageTobeUploaded.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      await picker.pickImage(source: ImageSource.gallery);
       if (imageTobeUploaded != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploaded.value!.readAsBytes();
@@ -122,7 +122,7 @@ class EditPictoController extends GetxController {
       }
     } else {
       imageTobeUploaded.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      await picker.pickImage(source: ImageSource.gallery);
       if (imageTobeUploaded != null) {
         fileImage.value = File(imageTobeUploaded.value!.path);
         editingPicture.value = true;
@@ -226,6 +226,6 @@ class EditPictoController extends GetxController {
   void onReady() {
     super.onReady();
     nameController.text =
-        lang == 'en' ? pict.value!.texto.en : pict.value!.texto.es;
+    lang == 'en' ? pict.value!.texto.en : pict.value!.texto.es;
   }
 }

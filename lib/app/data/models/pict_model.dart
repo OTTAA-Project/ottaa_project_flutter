@@ -19,6 +19,7 @@ class Pict {
     this.localImg = false,
     this.sexo,
     this.ubicacion,
+    this.score,
   });
 
   int id;
@@ -34,6 +35,7 @@ class Pict {
   bool? esSugerencia;
   List<String>? horario;
   List<String>? ubicacion;
+  int? score;
 
   //local used variables
   bool localImg;
@@ -56,6 +58,7 @@ class Imagen {
   String? pictoEditado;
   String? urlFoto;
   String? pushKey;
+
   factory Imagen.fromJson(Map<String, dynamic> json) => _$ImagenFromJson(json);
 
   Map<String, dynamic> toJson() => _$ImagenToJson(this);

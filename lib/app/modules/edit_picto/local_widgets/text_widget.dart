@@ -18,14 +18,14 @@ class TextWidget extends GetView<EditPictoController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Text',
+            'text'.tr,
             style:
                 TextStyle(fontWeight: FontWeight.w600, fontSize: height * 0.03),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: height * 0.03),
             child: Text(
-              'Enter the text to say it loud, can be a single word or a full sentence. Is up to you!',
+              'text_widget_long_1'.tr,
               style: TextStyle(),
             ),
           ),
