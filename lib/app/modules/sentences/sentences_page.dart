@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
+import 'local_widgets/search_sentence.dart';
 import 'sentences_controller.dart';
 
 class SentencesPage extends GetView<SentencesController> {
@@ -70,7 +71,8 @@ class SentencesPage extends GetView<SentencesController> {
                     Expanded(
                       flex: 8,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: horizontalSize * 0.02),
                         child: Center(
                           child: GetBuilder<SentencesController>(
                             id: "sentence",
@@ -174,13 +176,7 @@ class SentencesPage extends GetView<SentencesController> {
                             /// for keeping them in order and the button will be in separate Positioned
                             Container(),
                             GestureDetector(
-                              onTap: () async {
-                                // var result = await showSearch<String>(
-                                //   context: context,
-                                //   delegate: CustomDelegate(),
-                                // );
-                                // print(result);
-                              },
+                              onTap: () => Get.to(SearchSentence()),
                               child: Icon(
                                 Icons.search,
                                 size: verticalSize * 0.1,

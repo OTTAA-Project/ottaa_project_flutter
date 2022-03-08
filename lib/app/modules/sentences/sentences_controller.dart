@@ -14,6 +14,7 @@ class SentencesController extends GetxController {
 
   final _pictsRepository = Get.find<PictsRepository>();
   final _sentencesRepository = Get.find<SentencesRepository>();
+  final searchController = TextEditingController();
 
   late AnimationController _sentenceAnimationController;
 
@@ -24,6 +25,8 @@ class SentencesController extends GetxController {
     this._sentenceAnimationController = value;
   }
 
+  RxBool searchOrIcon = false.obs;
+
   List<Pict> _picts = [];
   List<Sentence> _sentences = [];
   List<Pict> _sentencePicts = [];
@@ -33,6 +36,7 @@ class SentencesController extends GetxController {
   List<List<Pict>> get sentencesPicts => this._sentencesPicts;
 
   int _sentencesIndex = 0;
+  int searchIndex = 0;
 
   int get sentencesIndex => this._sentencesIndex;
 
@@ -47,10 +51,15 @@ class SentencesController extends GetxController {
     update();
   }
 
+  // sentences for searching list
+  List<SearchIndexedSentences> sentencesForSearch = [];
+  List<SearchIndexedSentences> sentencesForList = [];
+
   @override
   void onInit() async {
     super.onInit();
     await _loadPicts();
+    createListForSearching();
   }
 
   Future<void> _loadPicts() async {
@@ -64,30 +73,131 @@ class SentencesController extends GetxController {
             ._sentencePicts
             .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
       });
-      print("object");
       this._sentencesPicts.add(this._sentencePicts);
     });
     update();
   }
 
-  Future speak() async {
+  Future<void> speak() async {
     if (this._sentencesPicts[this._sentencesIndex].isNotEmpty) {
       String voiceText = "";
       this._sentencesPicts[this._sentencesIndex].forEach((pict) {
         switch (this._ttsController.languaje) {
           case "es":
-            voiceText += pict.texto.es;
+            voiceText += ' ' + pict.texto.es;
             break;
           case "en":
-            voiceText += pict.texto.en;
+            voiceText += ' ' + pict.texto.en;
             break;
 
           default:
-            voiceText += pict.texto.es;
+            voiceText += ' ' + pict.texto.en;
         }
       });
 
       await this._ttsController.speak(voiceText);
+      print(sentencesForSearch[this._sentencesIndex].sentence);
+      print(voiceText);
     }
   }
+  Future<void> searchSpeak() async {
+    if (this._sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
+      String voiceText = "";
+      this._sentencesPicts[this._sentencesIndex].forEach((pict) {
+        switch (this._ttsController.languaje) {
+          case "es":
+            voiceText += ' ' + pict.texto.es;
+            break;
+          case "en":
+            voiceText += ' ' + pict.texto.en;
+            break;
+
+          default:
+            voiceText += ' ' + pict.texto.en;
+        }
+      });
+
+      await this._ttsController.speak(voiceText);
+      print(sentencesForSearch[this._sentencesIndex].sentence);
+      print(voiceText);
+    }
+  }
+
+  Future<void> createListForSearching() async {
+    int i = 0;
+    this._sentencesPicts.forEach((e1) {
+      String sentence = '';
+      e1.forEach((e2) {
+        switch (this._ttsController.languaje) {
+          case "es":
+            sentence += ' ' + e2.texto.es;
+            break;
+          case "en":
+            sentence += ' ' + e2.texto.en;
+            break;
+          default:
+            sentence += ' ' + e2.texto.en;
+        }
+      });
+
+      sentencesForSearch.add(
+        SearchIndexedSentences(sentence: sentence, index: i),
+      );
+      i++;
+    });
+    sentencesForSearch.forEach((element) {
+      print(element.sentence);
+    });
+    sentencesForList.addAll(sentencesForSearch);
+  }
+
+  Future<void> onChangedText(String v) async {
+    List<SearchIndexedSentences> listData = [];
+    if (v.length != 0) {
+      sentencesForSearch.forEach((element) {
+        final b = element.sentence
+            .toUpperCase()
+            .contains(v.toString().toUpperCase(), 0);
+        if (b) {
+          listData.add(element);
+        }
+      });
+      sentencesForList = [];
+      sentencesForList.addAll(listData);
+      searchIndex = 0;
+      print(sentencesForList.length);
+      update(['searchBuilder']);
+    } else {
+      sentencesForList.addAll(sentencesForSearch);
+      searchIndex = 0;
+      print(sentencesForList.length);
+      update(['searchBuilder']);
+    }
+  }
+
+  void decrementOne() {
+    if (searchIndex != 0) {
+      searchIndex--;
+    }
+    update(['searchBuilder']);
+    print(searchIndex);
+  }
+
+  void incrementOne() {
+    if (sentencesForList.length - 1 != searchIndex) {
+      searchIndex++;
+    }
+    update(['searchBuilder']);
+    print(searchIndex);
+  }
+}
+
+class SearchIndexedSentences {
+  SearchIndexedSentences({
+    required this.sentence,
+    required this.index,
+  });
+
+  final String sentence;
+  final int index;
 }
