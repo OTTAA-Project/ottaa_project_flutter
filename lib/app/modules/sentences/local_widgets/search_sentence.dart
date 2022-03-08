@@ -39,6 +39,9 @@ class SearchSentence extends GetView<SentencesController> {
                                 ),
                                 border: InputBorder.none,
                               ),
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                               onChanged: (v) {
                                 controller.onChangedText(v);
                               },
