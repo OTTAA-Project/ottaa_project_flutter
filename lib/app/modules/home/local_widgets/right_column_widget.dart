@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
 
 class RightColumnWidget extends StatelessWidget {
   RightColumnWidget({Key? key}) : super(key: key);
@@ -32,7 +33,9 @@ class RightColumnWidget extends StatelessWidget {
           ),*/
           FittedBox(
             child: GestureDetector(
-              onTap: () async {},
+              onTap: () async {
+                CustomAnalyticsEvents.setEventWithParameters("Touch",CustomAnalyticsEvents.createMyMap('Principal', "Share Phrases"));
+              },
               child: Center(
                 child: Icon(
                   Icons.share,
@@ -46,6 +49,7 @@ class RightColumnWidget extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 Get.toNamed(AppRoutes.SENTENCES);
+                CustomAnalyticsEvents.setEventWithParameters("Touch",CustomAnalyticsEvents.createMyMap('Principal', "Favourite Phrases"));
               },
               child: Center(
                 child: Icon(

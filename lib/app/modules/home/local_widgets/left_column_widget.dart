@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
 
 class LeftColumnWidget extends StatelessWidget {
   LeftColumnWidget({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class LeftColumnWidget extends StatelessWidget {
         children: [
           FittedBox(
             child: GestureDetector(
-              onTap: null,
+              onTap: ()=>{CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Principal', 'Games'))},
               child: Center(
                   child: Icon(
                 // Icons.gamepad,
@@ -34,6 +35,7 @@ class LeftColumnWidget extends StatelessWidget {
           FittedBox(
             child: GestureDetector(
               onTap: () {
+                CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Principal', 'Group Galery'));
                 if (_homeController.sentencePicts.isEmpty) {
                   Get.toNamed(AppRoutes.PICTOGRAMGROUP);
                 } else {

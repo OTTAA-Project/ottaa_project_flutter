@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
+import '../../../utils/CustomAnalytics.dart';
 import '../edit_picto_controller.dart';
 
 class ChoiceDialogue extends GetView<EditPictoController> {
@@ -16,6 +17,8 @@ class ChoiceDialogue extends GetView<EditPictoController> {
             onTap: () {
               Get.back();
               Get.toNamed(AppRoutes.EDITPICTO);
+              CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('name', 'Edit '));
+
             },
             child: Text('edit'.tr),
           ),
