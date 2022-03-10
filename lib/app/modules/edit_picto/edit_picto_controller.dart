@@ -5,7 +5,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
@@ -200,7 +199,7 @@ class EditPictoController extends GetxController {
     //for the file data
     final instance = await SharedPreferences.getInstance();
     await instance.setBool('Pictos_file', true);
-    final res1 = await sharedPref.getPictosFile();
+    await sharedPref.getPictosFile();
     // print(res1);
     //upload to the firebase
     await uploadToFirebase(data: fileData.toString());
@@ -240,7 +239,8 @@ class EditPictoController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    nameController.text =
-        lang == 'en' ? pict.value!.texto.en : pict.value!.texto.es;
+    nameController.text = lang == 'en'
+        ? pict.value!.texto.en.toUpperCase()
+        : pict.value!.texto.es.toUpperCase();
   }
 }
