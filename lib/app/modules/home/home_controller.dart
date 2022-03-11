@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:ottaa_project_flutter/app/data/repositories/grupos_repository.da
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
+import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
 
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
@@ -184,7 +186,7 @@ class HomeController extends GetxController {
       });
       update(["subtitle"]);
       print(hasText());
-      await this._ttsController.speak(this._voiceText);
+      await this._ttsController.speakPhrase(this._voiceText);
       this._suggestedIndex = 0;
       this._sentencePicts.clear();
       await this.suggest(0);

@@ -4,6 +4,8 @@ import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
+import '../../../utils/CustomAnalytics.dart';
+
 class ActionsWidget extends StatelessWidget {
   const ActionsWidget({Key? key}) : super(key: key);
 
@@ -23,7 +25,9 @@ class ActionsWidget extends StatelessWidget {
             FittedBox(
               child: GestureDetector(
                 onTap: () {
+                  CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('name', 'More Options'));
                   _.moreSuggested();
+
                 },
                 child: Center(
                     child: Icon(
@@ -40,6 +44,7 @@ class ActionsWidget extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   _.removePictFromSentence();
+                  CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('name', 'Erase'));
                 },
                 child: Center(
                     child: Icon(

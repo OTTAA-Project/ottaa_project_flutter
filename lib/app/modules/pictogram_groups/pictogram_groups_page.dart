@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_gro
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
+import '../../utils/CustomAnalytics.dart';
 import 'local_widgets/otta_logo_widget.dart';
 
 class PictogramGroupsPage extends StatelessWidget {
@@ -27,9 +28,14 @@ class PictogramGroupsPage extends StatelessWidget {
         elevation: 0,
         title: Text('GaleriaGrupos'),
         actions: [
-          Icon(
-            Icons.reorder,
-            size: 30,
+          GestureDetector(
+            onTap: ()=>{
+            CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Group Gallery', 'Change View'))
+          },
+            child:Icon(
+              Icons.reorder,
+              size: 30,
+            )
           ),
           const SizedBox(
             width: 8,
@@ -38,23 +44,37 @@ class PictogramGroupsPage extends StatelessWidget {
             onTap: () {
               _pictogramController.categoryGridviewOrPageview.value =
                   !_pictogramController.categoryGridviewOrPageview.value;
+              CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Group Gallery', 'Change View'));
             },
             child: Icon(
               Icons.view_carousel,
               size: 30,
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 8),
-          //   child: Icon(
-          //     Icons.add_circle_outline,
-          //     size: 30,
-          //   ),
-          // ),
-          // Icon(
-          //   Icons.cloud_download,
-          //   size: 30,
-          // ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child:
+            GestureDetector(
+              onTap: ()=>{
+              CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Group Gallery', 'Add Group'))
+            },
+              child:Icon(
+                Icons.add_circle_outline,
+                size: 30,
+              )
+            ),
+
+          ),
+            GestureDetector(
+                onTap: ()=>{
+                CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Group Gallery', 'Syncronize Pictogram'))
+            },
+                child:Icon(
+                  Icons.cloud_download,
+                  size: 30,
+                )
+          ),
           const SizedBox(
             width: 16,
           ),
@@ -94,7 +114,10 @@ class PictogramGroupsPage extends StatelessWidget {
                         children: [
                           Container(),
                           GestureDetector(
-                            onTap: () => Get.back(),
+                            onTap: () => {
+                            CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Group Gallery', 'Backpress Button')),
+                              Get.back()
+                            },
                             child: Icon(
                               Icons.cancel,
                               size: height * 0.1,
@@ -106,6 +129,8 @@ class PictogramGroupsPage extends StatelessWidget {
                           Container(),
                           GestureDetector(
                             onTap: () async {
+                              CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Group Gallery', 'Search Pictogram'));
+
                               var result = await showSearch<String>(
                                 context: context,
                                 delegate: CustomDelegate(),
@@ -141,12 +166,14 @@ class PictogramGroupsPage extends StatelessWidget {
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
-                    onTap: () =>
+                    onTap: () =>{
                         _pictogramController.categoryGridviewOrPageview.value
                             ? _pictogramController.removeSomeScroll(
                                 _pictogramController.categoriesGridController)
                             : _pictogramController.gotoPreviousPage(
                                 _pictogramController.categoriesPageController),
+                    CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Group Gallery', 'Foward Button'))
+                  },
                     child: Icon(
                       Icons.skip_previous,
                       size: height * 0.1,
@@ -171,12 +198,14 @@ class PictogramGroupsPage extends StatelessWidget {
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
-                    onTap: () =>
+                    onTap: () =>{
                         _pictogramController.categoryGridviewOrPageview.value
                             ? _pictogramController.addSomeScroll(
                                 _pictogramController.categoriesGridController)
                             : _pictogramController.gotoNextPage(
                                 _pictogramController.categoriesPageController),
+                    CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Group Gallery', 'Next Button'))
+                  },
                     child: Icon(
                       Icons.skip_next,
                       size: height * 0.1,
@@ -218,6 +247,7 @@ class PictogramGroupsPage extends StatelessWidget {
                                   .texto
                                   .es);
                           await _pictogramController.fetchDesiredPictos();
+                          CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Group Gallery', 'Pictograms Gallery'));
                           Get.toNamed(AppRoutes.SELECTPICTO);
                         },
                   child: OttaLogoWidget(),

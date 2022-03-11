@@ -10,6 +10,8 @@ import 'package:ottaa_project_flutter/app/modules/home/local_widgets/sentence_wi
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/suggested_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 
+import '../../utils/CustomAnalytics.dart';
+
 class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
   final _homeController = Get.find<HomeController>();
@@ -100,6 +102,8 @@ class HomePage extends GetView<HomeController> {
             child: GestureDetector(
               onTap: () {
                 _homeController.speak();
+                CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Principal', 'Talk'));
+
               },
               child: OttaLogoWidget(),
             ),
