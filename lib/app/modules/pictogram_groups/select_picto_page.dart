@@ -38,17 +38,17 @@ class SelectPictoPage extends StatelessWidget {
               size: 30,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(
-              Icons.add_circle_outline,
-              size: 30,
-            ),
-          ),
-          Icon(
-            Icons.cloud_download,
-            size: 30,
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16),
+          //   child: Icon(
+          //     Icons.add_circle_outline,
+          //     size: 30,
+          //   ),
+          // ),
+          // Icon(
+          //   Icons.cloud_download,
+          //   size: 30,
+          // ),
           const SizedBox(
             width: 16,
           ),

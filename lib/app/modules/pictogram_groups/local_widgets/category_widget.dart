@@ -102,7 +102,7 @@ class CategoryWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 16),
             //filler for the text
             child: Text(
-              name,
+              name.toUpperCase(),
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),
           ),

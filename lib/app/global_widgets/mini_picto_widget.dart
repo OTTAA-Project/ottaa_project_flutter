@@ -6,7 +6,7 @@ import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 class MiniPicto extends StatelessWidget {
   final Pict pict;
   final VoidCallback onTap;
-  final localImg;
+  final bool localImg;
 
   const MiniPicto({
     required this.pict,

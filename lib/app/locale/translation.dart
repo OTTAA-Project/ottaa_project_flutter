@@ -118,6 +118,9 @@ class Translation extends Translations {
           'prediction': 'Prediction',
           'accessibility': 'Accessibility',
           'voice_and_subtitles': 'Voice and subtitles',
+          'all_phrases': 'All Phrases',
+          'search': 'Search',
+          'please_enter_a_valid_search': 'Please enter a valid search',
           '': '',
         },
         'es_ES': {
@@ -218,7 +221,7 @@ class Translation extends Translations {
           'download_from_arasaac': 'Descargar desde ARASAAC',
           'tags_will_come_in_next_release':
               'Los TAG aparecerán en la próxima versión',
-          'mute': 'Mudo',
+          'mute': 'Silenciar',
           'about_ottaa': 'Acerca de OTTAWA',
           'configuration': 'Configuración',
           'tutorial': 'Tutorial',
@@ -234,6 +237,9 @@ class Translation extends Translations {
           'prediction' : 'Predicción',
           'accessibility' : 'Accesibilidad',
           'voice_and_subtitles' : 'Voz y subtítulos',
+          'all_phrases' : 'Todas las frases',
+          'search' : 'Búsqueda',
+          'please_enter_a_valid_search' : 'Por favor ingrese una búsqueda válida',
           '' : '',
         },
       };

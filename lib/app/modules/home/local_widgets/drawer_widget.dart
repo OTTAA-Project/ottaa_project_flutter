@@ -98,7 +98,7 @@ class DrawerWidget extends GetView<HomeController> {
                       children: [
                         ListTileWidget(
                           icon: Icons.info_outline,
-                          title: 'about_ottaa',
+                          title: 'about_ottaa'.tr,
                           onTap: () => Get.toNamed(AppRoutes.ABOUTOTTAA),
                         ),
                         ListTileWidget(
