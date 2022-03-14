@@ -53,6 +53,7 @@ dependencies:
   url_launcher: ^6.0.18
   flutter_dotenv: ^5.0.2
   http: ^0.13.2
+  fluttertoast: ^8.0.9
 #  image_picker_web: ^2.1.0
 
 

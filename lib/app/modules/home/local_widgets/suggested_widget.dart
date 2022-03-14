@@ -48,8 +48,14 @@ class SuggestedWidget extends StatelessWidget {
                           if (pict.texto.es != "agregar") {
                             _.addPictToSentence(pict);
                           } else {
-                            _.toId = _.sentencePicts.last.id;
-                            _.fromAdd = true;
+                            if(_.sentencePicts.length == 0){
+                              _.toId = 0;
+                              _.fromAdd = true;
+                            }
+                            else{
+                              _.toId = _.sentencePicts.last.id;
+                              _.fromAdd = true;
+                            }
                             Get.toNamed(AppRoutes.PICTOGRAMGROUP);
                             CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Principal', 'Group Gallery'));
                           }

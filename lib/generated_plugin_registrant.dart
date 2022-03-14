@@ -13,6 +13,7 @@ import 'package:firebase_database_web/firebase_database_web.dart';
 import 'package:firebase_storage_web/firebase_storage_web.dart';
 import 'package:flutter_facebook_auth_web/flutter_facebook_auth_web.dart';
 import 'package:flutter_tts/flutter_tts_web.dart';
+import 'package:fluttertoast/fluttertoast_web.dart';
 import 'package:google_sign_in_web/google_sign_in_web.dart';
 import 'package:image_picker_for_web/image_picker_for_web.dart';
 import 'package:package_info_plus_web/package_info_plus_web.dart';
@@ -31,6 +32,7 @@ void registerPlugins(Registrar registrar) {
   FirebaseStorageWeb.registerWith(registrar);
   FlutterFacebookAuthPlugin.registerWith(registrar);
   FlutterTtsPlugin.registerWith(registrar);
+  FluttertoastWebPlugin.registerWith(registrar);
   GoogleSignInPlugin.registerWith(registrar);
   ImagePickerPlugin.registerWith(registrar);
   PackageInfoPlugin.registerWith(registrar);

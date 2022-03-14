@@ -1,6 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/drawer_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/right_column_widget.dart';
@@ -15,13 +16,14 @@ import '../../utils/CustomAnalytics.dart';
 class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
   final _homeController = Get.find<HomeController>();
+  final _ttsController = Get.find<TTSController>();
 
   @override
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
     return Scaffold(
-      key: _homeController.scaffoldKey,
+      // key: _homeController.scaffoldKey,
       drawer: DrawerWidget(),
       body: Stack(
         children: [
@@ -75,10 +77,18 @@ class HomePage extends GetView<HomeController> {
                         SizedBox(width: 15),
                         Expanded(
                           child: Text(
-                            _homeController.voiceText,
+                            _ttsController.isCustomSubtitle
+                                ? _ttsController.isSubtitleUppercase
+                                    ? _homeController.voiceText.toUpperCase()
+                                    : _homeController.voiceText
+                                : _homeController.voiceText,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 30,
+                              fontSize: _ttsController.isCustomSubtitle
+                                  ? verticalSize *
+                                      ((_ttsController.subtitleSize / 100) +
+                                          0.01)
+                                  : verticalSize * 0.03,
                             ),
                           ),
                         ),
@@ -101,9 +111,19 @@ class HomePage extends GetView<HomeController> {
             bottom: verticalSize * 0.02,
             child: GestureDetector(
               onTap: () {
+                if (_homeController.sentencePicts.length == 0)
+                  Fluttertoast.showToast(
+                    msg: "choose_a_picto_to_speak".tr,
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.black,
+                    textColor: Colors.white,
+                    fontSize: verticalSize * 0.03,
+                  );
                 _homeController.speak();
-                CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Principal', 'Talk'));
-
+                CustomAnalyticsEvents.setEventWithParameters("Touch",
+                    CustomAnalyticsEvents.createMyMap('Principal', 'Talk'));
               },
               child: OttaLogoWidget(),
             ),
