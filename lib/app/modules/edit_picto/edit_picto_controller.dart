@@ -38,7 +38,7 @@ class EditPictoController extends GetxController {
   final ImagePicker picker = ImagePicker();
   RxBool editingPicture = false.obs;
   Rx<File?> fileImage = Rx<File?>(null);
-  Rx<String> selectedPhotoUrl = ''.obs;
+  Rx<String?> selectedPhotoUrl = null.obs;
   Rx<XFile?> imageTobeUploaded = Rx<XFile?>(null);
 
   late String url;

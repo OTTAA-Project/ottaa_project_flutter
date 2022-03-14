@@ -121,6 +121,8 @@ class Translation extends Translations {
           'all_phrases': 'All Phrases',
           'search': 'Search',
           'please_enter_a_valid_search': 'Please enter a valid search',
+          'choose_a_picto_to_speak': 'Choose a Picto to speak',
+          'we_are_working_on_this_feature': 'We are working on this feature',
           '': '',
         },
         'es_ES': {
@@ -222,13 +224,13 @@ class Translation extends Translations {
           'tags_will_come_in_next_release':
               'Los TAG aparecerán en la próxima versión',
           'mute': 'Silenciar',
-          'about_ottaa': 'Acerca de OTTAWA',
+          'about_ottaa': 'Acerca de OTTAA',
           'configuration': 'Configuración',
           'tutorial': 'Tutorial',
           'close_application': 'Cierra la aplicación',
           'sign_out': 'Desconectar',
           'language': 'Idioma',
-          'ottaa_labs': 'Laboratorios OTTA',
+          'ottaa_labs': 'Laboratorios OTTAa',
           'language_page_long_1':
               'Usa la inteligencia artificial para generar una oración más rica. Necesitas una conexión a Internet estable.',
           'settings': 'Ajustes',
@@ -240,7 +242,8 @@ class Translation extends Translations {
           'all_phrases' : 'Todas las frases',
           'search' : 'Búsqueda',
           'please_enter_a_valid_search' : 'Por favor ingrese una búsqueda válida',
-          '' : '',
+          'choose_a_picto_to_speak' : 'Elige un Picto para hablar',
+          'we_are_working_on_this_feature' : 'Nosotros estamos trabajando en esta característica',
         },
       };
 }

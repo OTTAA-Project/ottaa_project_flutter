@@ -84,6 +84,9 @@ class HomeController extends GetxController {
 
   addPictToSentence(Pict pict) async {
     if (this._sentencePicts.isEmpty) {
+      picts[0].relacion!.add(
+        Relacion(id: pict.id, frec: 1),
+      );
       this._sentencePicts.add(pict);
       await suggest(this._sentencePicts.last.id);
     } else {
@@ -184,11 +187,11 @@ class HomeController extends GetxController {
       });
       update(["subtitle"]);
       print(hasText());
-      await this._ttsController.speak(this._voiceText);
+      await this._ttsController.speakPhrase(this._voiceText);
       this._suggestedIndex = 0;
       this._sentencePicts.clear();
       await this.suggest(0);
-      await Future.delayed(new Duration(seconds: 3), () {
+      await Future.delayed(new Duration(seconds: 1), () {
         this._voiceText = "";
         update(["subtitle"]);
       });

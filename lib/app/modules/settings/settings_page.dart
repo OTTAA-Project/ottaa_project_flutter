@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
@@ -10,6 +11,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
     return GetBuilder<SettingsController>(
       builder: (_) => Scaffold(
         appBar: AppBar(
@@ -52,7 +54,17 @@ class SettingsPage extends StatelessWidget {
                     Icons.photo_library,
                     color: kOTTAOrangeNew,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Fluttertoast.showToast(
+                      msg: "we_are_working_on_this_feature".tr,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.black,
+                      textColor: Colors.white,
+                      fontSize: verticalSize * 0.03,
+                    );
+                  },
                   title: Text('pictograms'.tr),
                 ),
                 Divider(),
@@ -61,7 +73,17 @@ class SettingsPage extends StatelessWidget {
                     Icons.try_sms_star,
                     color: kOTTAOrangeNew,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Fluttertoast.showToast(
+                      msg: "we_are_working_on_this_feature".tr,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.black,
+                      textColor: Colors.white,
+                      fontSize: verticalSize * 0.03,
+                    );
+                  },
                   title: Text('prediction'.tr),
                 ),
                 Divider(),
@@ -70,7 +92,17 @@ class SettingsPage extends StatelessWidget {
                     Icons.accessibility,
                     color: kOTTAOrangeNew,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Fluttertoast.showToast(
+                      msg: "we_are_working_on_this_feature".tr,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.black,
+                      textColor: Colors.white,
+                      fontSize: verticalSize * 0.03,
+                    );
+                  },
                   title: Text('accessibility'.tr),
                 ),
                 Divider(),

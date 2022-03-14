@@ -6,6 +6,8 @@ import 'package:ottaa_project_flutter/app/global_widgets/picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 
+import '../../../utils/CustomAnalytics.dart';
+
 class SuggestedWidget extends StatelessWidget {
   SuggestedWidget({Key? key}) : super(key: key);
 
@@ -46,9 +48,16 @@ class SuggestedWidget extends StatelessWidget {
                           if (pict.texto.es != "agregar") {
                             _.addPictToSentence(pict);
                           } else {
-                            _.toId = _.sentencePicts.last.id;
-                            _.fromAdd = true;
+                            if(_.sentencePicts.length == 0){
+                              _.toId = 0;
+                              _.fromAdd = true;
+                            }
+                            else{
+                              _.toId = _.sentencePicts.last.id;
+                              _.fromAdd = true;
+                            }
                             Get.toNamed(AppRoutes.PICTOGRAMGROUP);
+                            CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Principal', 'Group Gallery'));
                           }
                         },
                       ),
