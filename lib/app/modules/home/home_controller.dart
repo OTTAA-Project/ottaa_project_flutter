@@ -84,9 +84,36 @@ class HomeController extends GetxController {
 
   addPictToSentence(Pict pict) async {
     if (this._sentencePicts.isEmpty) {
-      picts[0].relacion!.add(
-        Relacion(id: pict.id, frec: 1),
-      );
+      if(picts[0].relacion!.isEmpty){
+        picts[0].relacion!.add(
+          Relacion(id: pict.id, frec: 1),
+        );
+      }
+
+      /// if the length of the relacion >1
+
+      if (picts[0].relacion!.length >= 1) {
+        bool alreadyInTheList = false;
+        int relacionID = -1;
+        picts[0].relacion!.firstWhereOrNull((e) {
+          if (e.id == pict.id) {
+            alreadyInTheList = true;
+          }
+          relacionID++;
+          return e.id == pict.id;
+        });
+
+        ///if  it is in the relacion just increment it
+        if (alreadyInTheList) {
+          picts[0].relacion![relacionID].frec =
+              picts[0].relacion![relacionID].frec + 1;
+        } else {
+          picts[0].relacion!.add(
+            Relacion(id: pict.id, frec: 1),
+          );
+        }
+      }
+
       this._sentencePicts.add(pict);
       await suggest(this._sentencePicts.last.id);
     } else {

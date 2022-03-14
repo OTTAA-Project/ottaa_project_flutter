@@ -118,7 +118,13 @@ class EditPictoPage extends GetView<EditPictoController> {
                             () => controller.text.value
                                 ? TextWidget()
                                 : controller.frame.value
-                                    ? FrameColorWidget()
+                                    ? FrameColorWidget(
+                                        onTap: ({int? tipo}) {
+                                          controller.pictoBorder.value = false;
+                                          controller.pict.value!.tipo = tipo!;
+                                          controller.pictoBorder.value = true;
+                                        },
+                                      )
                                     : controller.tags.value
                                         ? TagsWidget()
                                         : Container(),

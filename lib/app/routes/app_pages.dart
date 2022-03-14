@@ -3,6 +3,7 @@ import 'package:ottaa_project_flutter/app/modules/about/about_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/about/about_ottaa_page.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_page.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/add_group_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/language_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/settings_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/settings_page.dart';
@@ -91,6 +92,10 @@ class AppPages {
       name: AppRoutes.ABOUTOTTAA,
       page: () => AboutOttaaPage(),
       binding: AboutBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.ADDGROUP,
+      page: () => AddGroupPage(),
     ),
   ];
 }
