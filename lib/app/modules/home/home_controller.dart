@@ -84,10 +84,10 @@ class HomeController extends GetxController {
 
   addPictToSentence(Pict pict) async {
     if (this._sentencePicts.isEmpty) {
-      if(picts[0].relacion!.isEmpty){
+      if (picts[0].relacion!.isEmpty) {
         picts[0].relacion!.add(
-          Relacion(id: pict.id, frec: 1),
-        );
+              Relacion(id: pict.id, frec: 1),
+            );
       }
 
       /// if the length of the relacion >1
@@ -109,8 +109,8 @@ class HomeController extends GetxController {
               picts[0].relacion![relacionID].frec + 1;
         } else {
           picts[0].relacion!.add(
-            Relacion(id: pict.id, frec: 1),
-          );
+                Relacion(id: pict.id, frec: 1),
+              );
         }
       }
 
@@ -119,6 +119,7 @@ class HomeController extends GetxController {
     } else {
       final addToThisOnePictId = this._sentencePicts.last.id;
       int addToThisOneIndex = -1;
+      print('the size is here ${picts.length}');
       picts.firstWhere((element) {
         addToThisOneIndex++;
         return addToThisOnePictId == element.id;
@@ -126,10 +127,11 @@ class HomeController extends GetxController {
 
       /// if the length of the relacion == 0
 
-      if (this._sentencePicts.last.relacion!.length == 0) {
-        picts[addToThisOneIndex].relacion!.add(
-              Relacion(id: pict.id, frec: 1),
-            );
+      if (this._sentencePicts.last.relacion == null ||
+          this._sentencePicts.last.relacion!.isEmpty) {
+        picts[addToThisOneIndex].relacion = [
+          Relacion(id: pict.id, frec: 1),
+        ];
       }
 
       /// if the length of the relacion >1
@@ -239,9 +241,13 @@ class HomeController extends GetxController {
 
     final Pict pict = picts.firstWhere((pict) => pict.id == id);
 
-    final List<Relacion> recomendedPicts = pict.relacion!.toList();
-    recomendedPicts.sort((b, a) => a.frec.compareTo(b.frec));
-    this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);
+    if (pict.relacion!.length >= 1) {
+      final List<Relacion> recomendedPicts = pict.relacion!.toList();
+      recomendedPicts.sort((b, a) => a.frec.compareTo(b.frec));
+      this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);
+    } else {
+      this._suggestedPicts = [];
+    }
 
     /// *
     /// predictive algo will replace teh code from here

@@ -4,7 +4,6 @@ import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
-
 import 'category_page_widget.dart';
 import 'category_widget.dart';
 
@@ -31,6 +30,15 @@ class CategoryViewWidget extends StatelessWidget {
                       ? _homeController.grupos[index].texto.en
                       : _homeController.grupos[index].texto.es);
                   await _pictogramController.fetchDesiredPictos();
+                  // if (_pictogramController.secondTimeSameGroup ==
+                  //     _pictogramController.selectedGroupIndex) {
+                  // } else {
+                  //   _pictogramController.selectedGrupos.relacion.forEach((e1) {
+                  //     _pictogramController.pictsForGroupAdding
+                  //         .removeWhere((e2) => e1.id == e2.id);
+                  //   });
+                  // }
+                  // print(_pictogramController.selectedGruposPicts.length);
                   Get.toNamed(AppRoutes.SELECTPICTO);
                 },
                 child: CategoryWidget(
@@ -64,6 +72,16 @@ class CategoryViewWidget extends StatelessWidget {
                         ? _homeController.grupos[index].texto.en
                         : _homeController.grupos[index].texto.es);
                     await _pictogramController.fetchDesiredPictos();
+                    // if (_pictogramController.secondTimeSameGroup ==
+                    //     _pictogramController.selectedGroupIndex) {
+                    // } else {
+                    //   _pictogramController.selectedGrupos.relacion
+                    //       .forEach((e1) {
+                    //     _pictogramController.pictsForGroupAdding
+                    //         .removeWhere((e2) => e1.id == e2.id);
+                    //   });
+                    // }
+                    print(_pictogramController.selectedGruposPicts.length);
                     Get.toNamed(AppRoutes.SELECTPICTO);
                   },
                   child: CategoryPageWidget(

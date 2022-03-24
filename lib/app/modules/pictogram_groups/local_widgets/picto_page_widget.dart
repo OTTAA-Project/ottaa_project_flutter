@@ -42,7 +42,6 @@ class PictoPageWidget extends StatelessWidget {
                     context: context,
                     builder: (context) => ChoiceDialogue(),
                   );
-                  // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: CategoryWidget(
                   name: languaje == "en"

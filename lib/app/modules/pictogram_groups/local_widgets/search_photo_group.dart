@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
-import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 
-class SearchPhotoPage extends SearchDelegate<SearchModel?> {
-  final _editController = Get.find<EditPictoController>();
+class SearchPhotoGroup extends SearchDelegate<SearchModel?> {
+  final _editController = Get.find<PictogramGroupsController>();
 
   @override
   List<Widget> buildActions(BuildContext context) => [
-        IconButton(
-          icon: Icon(
-            Icons.clear,
-          ),
-          onPressed: () => query = '',
-        ),
-      ];
+    IconButton(
+      icon: Icon(
+        Icons.clear,
+      ),
+      onPressed: () => query = '',
+    ),
+  ];
 
   @override
   Widget buildLeading(BuildContext context) => IconButton(
-        icon: Icon(Icons.chevron_left),
-        onPressed: () => close(context, null),
-      );
+    icon: Icon(Icons.chevron_left),
+    onPressed: () => close(context, null),
+  );
 
   @override
   Widget buildResults(BuildContext context) {
@@ -51,9 +51,9 @@ class SearchPhotoPage extends SearchDelegate<SearchModel?> {
                   color: Colors.white,
                   child: GestureDetector(
                     onTap: () async {
-                      _editController.selectedPhotoUrl.value =
+                      _editController.selectedPhotoUrlGrupo.value =
                           snapshot.data![index]!.picto.imageUrl;
-                      _editController.editingPicture.value = true;
+                      _editController.isImageProvidedGrupo.value = true;
                       Get.back();
                       Get.back();
                     },

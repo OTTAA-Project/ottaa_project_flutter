@@ -73,11 +73,12 @@ class PictogramGroupsPage extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => {
+            onTap: () {
+              print(_homeController.grupos.last.imagen.picto);
               CustomAnalyticsEvents.setEventWithParameters(
                   "Touch",
                   CustomAnalyticsEvents.createMyMap(
-                      'Group Gallery', 'Syncronize Pictogram'))
+                      'Group Gallery', 'Syncronize Pictogram'));
             },
             child: Icon(
               Icons.cloud_download,

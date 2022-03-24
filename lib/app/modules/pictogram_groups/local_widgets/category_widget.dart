@@ -144,7 +144,7 @@ class WebImageWidget extends StatelessWidget {
     return isEditing
         ? imageWidget!
         : Image.network(
-            selectedImageUrl == null ? imageName : selectedImageUrl!,
+            selectedImageUrl == '' ? imageName : selectedImageUrl!,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) return child;
               return Center(

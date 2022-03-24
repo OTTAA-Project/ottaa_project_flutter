@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
@@ -10,7 +9,6 @@ import 'package:ottaa_project_flutter/app/modules/edit_picto/right_column_widget
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/category_widget.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:get/get.dart';
-
 import 'local_widgets/search_photo_page.dart';
 
 class EditPictoPage extends GetView<EditPictoController> {
@@ -47,7 +45,7 @@ class EditPictoPage extends GetView<EditPictoController> {
 
     final languaje = _ttsController.languaje;
     // final height = Get.height;
-    final width = MediaQuery.of(context).size.width;
+    final horizontalSize = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: _willPop,
       child: Scaffold(
@@ -66,19 +64,29 @@ class EditPictoPage extends GetView<EditPictoController> {
               child: Container(
                 height: Get.height,
                 color: Colors.black,
-                padding: EdgeInsets.all(width * 0.01),
+                padding: EdgeInsets.all(horizontalSize * 0.01),
                 child: Row(
                   children: [
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(width * 0.01),
+                        padding: EdgeInsets.all(horizontalSize * 0.01),
                         child: Obx(
                           () => InkWell(
                             onTap: () {
                               showDialog(
                                 barrierDismissible: true,
                                 context: context,
-                                builder: (context) => PictureDialogWidget(),
+                                builder: (context) => PictureDialogWidget(
+                                  cameraOnTap: controller.cameraFunction,
+                                  galleryOnTap: controller.galleryFunction,
+                                  arsaacOnTap: () async {
+                                    final ans = await showSearch<SearchModel?>(
+                                      context: context,
+                                      delegate: SearchPhotoPage(),
+                                    );
+                                    print(ans?.text);
+                                  },
+                                ),
                               );
                             },
                             child: CategoryWidget(
@@ -104,15 +112,16 @@ class EditPictoPage extends GetView<EditPictoController> {
                       ),
                     ),
                     SizedBox(
-                      width: width * 0.01,
+                      width: horizontalSize * 0.01,
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(width * 0.01),
+                        padding: EdgeInsets.all(horizontalSize * 0.01),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(width * 0.01),
+                            borderRadius:
+                                BorderRadius.circular(horizontalSize * 0.01),
                           ),
                           child: Obx(
                             () => controller.text.value
@@ -145,7 +154,15 @@ class EditPictoPage extends GetView<EditPictoController> {
 }
 
 class PictureDialogWidget extends GetView<EditPictoController> {
-  const PictureDialogWidget({Key? key}) : super(key: key);
+  const PictureDialogWidget({
+    Key? key,
+    required this.cameraOnTap,
+    required this.galleryOnTap,
+    required this.arsaacOnTap,
+  }) : super(key: key);
+  final void Function()? cameraOnTap;
+  final void Function()? galleryOnTap;
+  final void Function()? arsaacOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -188,23 +205,17 @@ class PictureDialogWidget extends GetView<EditPictoController> {
                   ImageWidget(
                     imageLink: 'assets/camera.png',
                     text: 'camera'.tr,
-                    onTap: controller.cameraFunction,
+                    onTap: cameraOnTap,
                   ),
                   ImageWidget(
                     imageLink: 'assets/gallery.png',
                     text: 'gallery'.tr,
-                    onTap: controller.galleryFunction,
+                    onTap: galleryOnTap,
                   ),
                   ImageWidget(
                     imageLink: 'assets/download_from_arasaac.png',
                     text: 'download_from_arasaac'.tr,
-                    onTap: () async {
-                      var result = await showSearch<SearchModel?>(
-                        context: context,
-                        delegate: SearchPhotoPage(),
-                      );
-                      print(result);
-                    },
+                    onTap: arsaacOnTap,
                   ),
                 ],
               ),

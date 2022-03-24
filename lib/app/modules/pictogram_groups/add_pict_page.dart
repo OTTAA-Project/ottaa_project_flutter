@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/add_group_text_widget.dart';
-import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/add_group_widget.dart';
-import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/search_photo_group.dart';
+import 'package:ottaa_project_flutter/app/modules/edit_picto/local_widgets/frame_color_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/app/modules/edit_picto/local_widgets/icon_widget.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_page.dart';
+import 'package:ottaa_project_flutter/app/modules/edit_picto/local_widgets/icon_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/add_group_text_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/add_group_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/search_photo_picto.dart';
 
-class AddGroupPage extends GetView<PictogramGroupsController> {
-  const AddGroupPage({Key? key}) : super(key: key);
+class AddPictoPage extends GetView<PictogramGroupsController> {
+  const AddPictoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
           foregroundColor: Colors.white,
           elevation: 0,
           centerTitle: false,
-          title: Text('Add Group'),
+          title: Text('Add Pict'),
         ),
         body: Container(
           child: Row(
@@ -46,12 +47,12 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
                                 barrierDismissible: true,
                                 context: context,
                                 builder: (context) => PictureDialogWidget(
-                                  cameraOnTap: controller.cameraFunctionGrupo,
-                                  galleryOnTap: controller.galleryFunctionGrupo,
+                                  cameraOnTap: controller.cameraFunctionPicto,
+                                  galleryOnTap: controller.galleryFunctionPicto,
                                   arsaacOnTap: () async {
                                     await showSearch<SearchModel?>(
                                       context: context,
-                                      delegate: SearchPhotoGroup(),
+                                      delegate: SearchPhotoPicto(),
                                     );
                                   },
                                 ),
@@ -59,14 +60,14 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
                             },
                             child: Obx(
                               () => AddGroupWidget(
-                                name: controller.grupoNameController.text,
+                                name: controller.pictoNameController.text,
                                 isImageProvided:
-                                    controller.isImageProvidedGrupo.value,
-                                fileImage: controller.fileImageGrupo.value,
+                                    controller.isImageProvidedPicto.value,
+                                fileImage: controller.fileImagePicto.value,
                                 selectedImageUrl:
-                                    controller.selectedPhotoUrlGrupo.value,
-                                imageWidget: controller.imageWidgetGrupo.value,
-                                color: 6,
+                                    controller.selectedPhotoUrlPicto.value,
+                                imageWidget: controller.imageWidgetPicto.value,
+                                color: controller.tipoValue.value,
                               ),
                             ),
                           ),
@@ -88,10 +89,12 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
                             builder: (controller) {
                               if (controller.textOrBorder) {
                                 return AddGroupTextWidget(
-                                  controllerTxt: controller.grupoNameController,
+                                  controllerTxt: controller.pictoNameController,
                                 );
                               } else {
-                                return Container();
+                                return FrameColorWidget(onTap: ({int? tipo}) {
+                                  controller.updateTipo(tipo: tipo!);
+                                });
                               }
                             },
                           ),
@@ -116,8 +119,15 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
                         text: 'text'.tr,
                       ),
                       IconWidget(
-                        onTap: () => controller.changeToTags(
-                            context: context, verticalSize: verticalSize),
+                        onTap: () => controller.changeToBorderColor(),
+                        iconData: Icons.border_outer,
+                        text: 'frame'.tr,
+                      ),
+                      IconWidget(
+                        onTap: () {
+                          controller.changeToTags(
+                              context: context, verticalSize: verticalSize);
+                        },
                         iconData: Icons.assistant,
                         text: 'tags'.tr,
                       ),
@@ -145,7 +155,7 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
               ),
               TextButton(
                 onPressed: () async =>
-                    controller.uploadChangesGrupos(context: context),
+                    controller.uploadChangesPicto(context: context),
                 child: Text('yes'.tr),
               ),
               TextButton(
