@@ -8,14 +8,17 @@ import 'local_widgets/step3_onboarding.dart';
 
 class OnboardingPage extends StatelessWidget {
   OnboardingPage({Key? key}) : super(key: key);
-final _controller = Get.find<OnboardingController>();
+  final _controller = Get.find<OnboardingController>();
+
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController(initialPage: _controller.pageNumber.value);
+    final PageController controller =
+        PageController(initialPage: _controller.pageNumber.value);
     return GetBuilder<OnboardingController>(
         id: "onboarding",
         builder: (_) {
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             body: SafeArea(
               child: PageView(
                 /// [PageView.scrollDirection] defaults to [Axis.horizontal].

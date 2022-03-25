@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
@@ -18,6 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   DependencyInjection.init();
+  await dotenv.load(fileName: "assets/.env");
   // final String defaultSystemLocale = Platform.localeName;
   final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
   if (kIsWeb) {
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
     // print('hi i am here ${Platform.localeName.split('_').first}');
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'OTTAA Project',
       theme: ThemeData(
         primaryColor: kOTTAOrangeNew,
         visualDensity: VisualDensity.adaptivePlatformDensity,

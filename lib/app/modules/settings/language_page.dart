@@ -11,50 +11,50 @@ class LanguagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
-        builder: (_) => Scaffold(
-              appBar: buildAppBar('Language'),
-              body: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 10,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'LANGUAGE',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Divider(
-                      height: 10,
-                      color: Colors.grey[700],
-                    ),
-                    SwitchListTile(
-                      activeColor: kOTTAOrange,
-                      value: _.ttsController.isEnglish,
-                      onChanged: (bool value) {
-                        _.toggleLanguaje(value);
-                      },
-                      title: Text('Language'),
-                      subtitle: _.ttsController.isEnglish
-                          ? Text('English')
-                          : Text('Spanish'),
-                    ),
-                    Divider(),
-                    SwitchListTile(
-                      value: false,
-                      onChanged: (value) {},
-                      title: Text('OTTA Labs'),
-                      subtitle: Text(
-                          'Use artificial intelligence to generate a richer sentence. You need a stable internet connection.'),
-                    ),
-                    Divider(),
-                  ],
+      builder: (_) => Scaffold(
+        appBar: buildAppBar('Language'),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 30,
+            vertical: 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'LANGUAGE',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
-            ));
+              Divider(
+                height: 10,
+                color: Colors.grey[700],
+              ),
+              SwitchListTile(
+                activeColor: kOTTAOrange,
+                value: _.ttsController.isEnglish,
+                onChanged: (bool value) {
+                  _.toggleLanguaje(value);
+                },
+                title: Text('language'.tr),
+                subtitle: _.ttsController.isEnglish
+                    ? Text('English')
+                    : Text('Spanish'),
+              ),
+              Divider(),
+              SwitchListTile(
+                value: false,
+                onChanged: (value) {},
+                title: Text('ottaa_labs'.tr),
+                subtitle: Text('language_page_long_1'.tr),
+              ),
+              Divider(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

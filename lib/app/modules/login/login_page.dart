@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
-import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'login_controller.dart';
@@ -27,8 +26,9 @@ class LoginPage extends StatelessWidget {
                     width: horizontalSize * 0.6,
                     height: verticalSize * 0.65,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     // child: Column(
                     //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     //   children: [
@@ -179,9 +179,11 @@ class HeaderWave extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double horizontalSize = MediaQuery.of(context).size.width;
+    double verticalSize = MediaQuery.of(context).size.height;
     return Container(
-      height: Get.height,
-      width: Get.width,
+      height: verticalSize,
+      width: horizontalSize,
       clipBehavior: Clip.antiAlias,
       // color: Colors.black,
       decoration: BoxDecoration(

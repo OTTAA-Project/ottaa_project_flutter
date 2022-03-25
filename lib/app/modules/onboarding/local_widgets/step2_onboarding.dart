@@ -51,8 +51,8 @@ step2Onboarding<widget>(
                 onTap: () {
                   _.pageNumber.value = 0;
                   controller.animateToPage(_.pageNumber.value,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut);
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeInOut);
                 },
                 backgroundColor: kQuantumGrey,
                 fontColor: Colors.white,
@@ -63,8 +63,8 @@ step2Onboarding<widget>(
                 onTap: () {
                   _.pageNumber.value = 2;
                   controller.animateToPage(_.pageNumber.value,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut);
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeInOut);
                 },
                 backgroundColor: kOTTAOrangeNew,
                 fontColor: Colors.white,
@@ -83,53 +83,59 @@ step2Onboarding<widget>(
                 Container(
                   width: horizontalSize * 0.35,
                   height: verticalSize * 0.7,
-                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
-                        child: Image(image: AssetImage('assets/imgs/logo_ottaa.webp')),
-                      ),
-                      GFButton(
-                        onPressed: () => Get.toNamed(AppRoutes.TUTORIAL),
-                        text: "Launch_short_tutorial".tr,
-                        textColor: Colors.white,
-                        disabledTextColor: Colors.grey,
-                        color: kOTTAOrange,
-                        disabledColor: kQuantumGrey,
-                        shape: GFButtonShape.pills,
-                        size: verticalSize * 0.07,
-                        blockButton: true,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: verticalSize * 0.07),
-                        child: GFButton(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: verticalSize * 0.05),
+                          child: Image(
+                              image: AssetImage('assets/imgs/logo_ottaa.webp')),
+                        ),
+                        GFButton(
+                          onPressed: () => Get.toNamed(AppRoutes.TUTORIAL),
+                          text: "Launch_short_tutorial".tr,
                           textColor: Colors.white,
                           disabledTextColor: Colors.grey,
                           color: kOTTAOrange,
                           disabledColor: kQuantumGrey,
-                          onPressed: null,
-                          text: "Do_a_guided_workshop".tr,
                           shape: GFButtonShape.pills,
                           size: verticalSize * 0.07,
                           blockButton: true,
                         ),
-                      ),
-                      GFButton(
-                        onPressed: null,
-                        text: "Book_a_demo".tr,
-                        textColor: Colors.white,
-                        disabledTextColor: Colors.grey,
-                        color: kOTTAOrange,
-                        disabledColor: kQuantumGrey,
-                        shape: GFButtonShape.pills,
-                        size: verticalSize * 0.07,
-                        blockButton: true,
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: verticalSize * 0.07),
+                          child: GFButton(
+                            textColor: Colors.white,
+                            disabledTextColor: Colors.grey,
+                            color: kOTTAOrange,
+                            disabledColor: kQuantumGrey,
+                            onPressed: null,
+                            text: "Do_a_guided_workshop".tr,
+                            shape: GFButtonShape.pills,
+                            size: verticalSize * 0.07,
+                            blockButton: true,
+                          ),
+                        ),
+                        GFButton(
+                          onPressed: null,
+                          text: "Book_a_demo".tr,
+                          textColor: Colors.white,
+                          disabledTextColor: Colors.grey,
+                          color: kOTTAOrange,
+                          disabledColor: kQuantumGrey,
+                          shape: GFButtonShape.pills,
+                          size: verticalSize * 0.07,
+                          blockButton: true,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

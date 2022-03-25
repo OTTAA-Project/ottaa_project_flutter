@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io' show Platform;
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter_tts/flutter_tts.dart';
@@ -59,6 +60,10 @@ class TTSController extends GetxController {
   int _subtitleSize = 2;
 
   int get subtitleSize => this._subtitleSize;
+
+  set setVolume(value){
+    this._volume = value;
+  }
 
   set subtitleSize(value) {
     this._subtitleSize = value;
@@ -171,6 +176,7 @@ class TTSController extends GetxController {
       }
       await this._flutterTTS.awaitSpeakCompletion(true);
       await this._flutterTTS.setLanguage(this._language);
+
       // TODO The flutter_tts plugin for web doesn't implement the method 'getVoices'
       // var voice = await this._flutterTTS.getVoices;
       // print(voice.where((element) => element["locale"] == "es-US"));
@@ -180,4 +186,30 @@ class TTSController extends GetxController {
       await this._flutterTTS.speak(voiceText);
     }
   }
+
+  Future speakPhrase(String voiceText) async {
+    if (voiceText.isNotEmpty) {
+      await this._flutterTTS.setVolume(this._volume);
+      // TODO CREATE DEFAULT VALUES
+      if (this.isCustomTTSEnable) {
+        await this._flutterTTS.setSpeechRate(this._rate);
+        await this._flutterTTS.setPitch(this._pitch);
+      } else {
+        await this._flutterTTS.setSpeechRate(0.4);
+        await this._flutterTTS.setPitch(1.0);
+      }
+      await this._flutterTTS.awaitSpeakCompletion(true);
+      await this._flutterTTS.setLanguage(this._language);
+      await FirebaseAnalytics.instance.logEvent(name: "Talk");
+
+      // TODO The flutter_tts plugin for web doesn't implement the method 'getVoices'
+      // var voice = await this._flutterTTS.getVoices;
+      // print(voice.where((element) => element["locale"] == "es-US"));
+      // await this
+      //     ._flutterTTS
+      //     .setVoice({"name": "es-US-language", "locale": "es-US"});
+      await this._flutterTTS.speak(voiceText);
+    }
+  }
+
 }

@@ -4,6 +4,7 @@ import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
+import '../../utils/CustomAnalytics.dart';
 import 'local_widgets/picto_page_widget.dart';
 
 class SelectPictoPage extends StatelessWidget {
@@ -32,36 +33,37 @@ class SelectPictoPage extends StatelessWidget {
             onTap: () {
               _pictogramController.pictoGridviewOrPageview.value =
                   !_pictogramController.pictoGridviewOrPageview.value;
+              CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Pictograms Gallery', 'Change View'));
+
             },
             child: Icon(
               Icons.view_carousel,
               size: 30,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(
-              Icons.add_circle_outline,
-              size: 30,
-            ),
-          ),
-          Icon(
-            Icons.cloud_download,
-            size: 30,
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16),
+          //   child: Icon(
+          //     Icons.add_circle_outline,
+          //     size: 30,
+          //   ),
+          // ),
+          // Icon(
+          //   Icons.cloud_download,
+          //   size: 30,
+          // ),
           const SizedBox(
             width: 16,
           ),
         ],
       ),
       body: Container(
-        //todo: change the color
         color: Colors.black,
         child: Stack(
           children: [
             Container(
               // height: Get.height * 0.7,
-              padding: EdgeInsets.symmetric(horizontal: width * .15),
+              padding: EdgeInsets.symmetric(horizontal: width * .10),
               child: Column(
                 children: [
                   Expanded(
@@ -87,7 +89,11 @@ class SelectPictoPage extends StatelessWidget {
                         children: [
                           Container(),
                           GestureDetector(
-                            onTap: () => Get.back(),
+                            onTap: () =>
+                            {
+                              CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Pictograms Gallery', 'Backpress Button')),
+                              Get.back()
+                            },
                             child: Icon(
                               Icons.cancel,
                               size: height * 0.1,
@@ -117,16 +123,18 @@ class SelectPictoPage extends StatelessWidget {
                     topRight: Radius.circular(16),
                   ),
                 ),
-                width: width * 0.15,
+                width: width * 0.10,
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
-                    onTap: () =>
+                    onTap: () =>{
                         _pictogramController.pictoGridviewOrPageview.value
                             ? _pictogramController.removeSomeScroll(
                                 _pictogramController.pictoGridController)
                             : _pictogramController.gotoPreviousPage(
                                 _pictogramController.pictoPageController),
+                      CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Pictograms Gallery', 'Foward Button'))
+                    },
                     child: Icon(
                       Icons.skip_previous,
                       size: height * 0.1,
@@ -147,16 +155,19 @@ class SelectPictoPage extends StatelessWidget {
                     topLeft: Radius.circular(16),
                   ),
                 ),
-                width: width * 0.15,
+                width: width * 0.10,
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
-                    onTap: () =>
+                    onTap: () =>{
                         _pictogramController.pictoGridviewOrPageview.value
                             ? _pictogramController.addSomeScroll(
                                 _pictogramController.pictoGridController)
                             : _pictogramController.gotoNextPage(
                                 _pictogramController.pictoPageController),
+                      CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Pictograms Gallery', 'Next Button'))
+
+                    },
                     child: Icon(
                       Icons.skip_next,
                       size: height * 0.1,

@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum SignInType { EMAIL_PASSWORD, GOOGLE, FACEBOOK, APPLE }
 
 var firebaseUser = FirebaseAuth.instance.currentUser;
+final databaseRef = FirebaseDatabase.instance.reference();
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
@@ -75,7 +78,17 @@ class AuthController extends GetxController {
     try {
       await future;
       // if ok firebase will return a user else will throw an exception
-      Get.offAllNamed(AppRoutes.ONBOARDING);
+      final User? auth = FirebaseAuth.instance.currentUser;
+      final ref = databaseRef.child('Usuarios/${auth!.uid}/');
+      final res = await ref.get();
+      if (res.exists) {
+        final instance = await SharedPreferences.getInstance();
+        instance.setBool('First_time', true);
+        instance.setBool('Avatar_photo', true);
+        Get.offAllNamed(AppRoutes.HOME);
+      } else {
+        Get.offAllNamed(AppRoutes.ONBOARDING);
+      }
     } catch (e) {
       Get.back();
       // switch (e.code) {

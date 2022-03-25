@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'icon_widget.dart';
+import 'dart:io';
 
 final Map<int, Color> groupColor = {
   1: Colors.yellow,
@@ -12,7 +15,7 @@ final Map<int, Color> groupColor = {
 };
 
 class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({
+  CategoryWidget({
     Key? key,
     required this.name,
     required this.imageName,
@@ -20,6 +23,10 @@ class CategoryWidget extends StatelessWidget {
     this.bottom = true,
     this.color = 0,
     this.languaje = '',
+    this.isEditing = false,
+    this.fileImage,
+    this.imageWidget,
+    this.selectedImageUrl,
   }) : super(key: key);
   final String name;
   final String imageName;
@@ -27,6 +34,12 @@ class CategoryWidget extends StatelessWidget {
   final int color;
   final bool bottom;
   final String languaje;
+  final bool isEditing;
+  final File? fileImage;
+  Image? imageWidget;
+
+  // url for arsaac images
+  String? selectedImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -62,24 +75,34 @@ class CategoryWidget extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  border: border
-                      ? Border.all(
-                          color: groupColor[color]!,
-                          width: 6,
-                        )
-                      : Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8)),
-              child: Image.asset(
-                'assets/imgs/$imageName.webp',
-                fit: BoxFit.fill,
+                border: border
+                    ? Border.all(
+                        color: groupColor[color]!,
+                        width: 6,
+                      )
+                    : Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(8),
               ),
+              child: kIsWeb
+                  ? WebImageWidget(
+                      isEditing: isEditing,
+                      imageName: imageName,
+                      imageWidget: imageWidget,
+                      selectedImageUrl: selectedImageUrl,
+                    )
+                  : DeviceImageWidget(
+                      isEditing: isEditing,
+                      imageName: imageName,
+                      fileImage: fileImage,
+                      selectedImageUrl: selectedImageUrl,
+                    ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
             //filler for the text
             child: Text(
-              name,
+              name.toUpperCase(),
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),
           ),
@@ -100,5 +123,71 @@ class CategoryWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class WebImageWidget extends StatelessWidget {
+  WebImageWidget({
+    Key? key,
+    required this.isEditing,
+    required this.imageName,
+    this.imageWidget,
+    this.selectedImageUrl,
+  }) : super(key: key);
+  final bool isEditing;
+  final String imageName;
+  Image? imageWidget;
+  String? selectedImageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return isEditing
+        ? imageWidget!
+        : Image.network(
+            selectedImageUrl == null ? imageName : selectedImageUrl!,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  color: kOTTAOrangeNew,
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+          );
+  }
+}
+
+class DeviceImageWidget extends StatelessWidget {
+  DeviceImageWidget({
+    Key? key,
+    required this.isEditing,
+    required this.imageName,
+    this.fileImage,
+    this.selectedImageUrl,
+  }) : super(key: key);
+  final bool isEditing;
+  final String imageName;
+  File? fileImage;
+  String? selectedImageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return isEditing
+        ? selectedImageUrl == null
+            ? Image.file(fileImage!)
+            : Image.network(selectedImageUrl!)
+        : CachedNetworkImage(
+            imageUrl: imageName,
+            placeholder: (context, url) => Center(
+              child: CircularProgressIndicator(
+                color: Colors.black,
+              ),
+            ),
+            fit: BoxFit.fill,
+          );
   }
 }

@@ -35,6 +35,7 @@ class SentenceWidget extends StatelessWidget {
                         itemCount: _.sentencePicts.length + 6,
                         itemBuilder: (BuildContext context, int index) {
                           final Pict speakPict = Pict(
+                              localImg: true,
                               id: 0,
                               texto: Texto(en: "", es: ""),
                               tipo: 6,
@@ -44,9 +45,11 @@ class SentenceWidget extends StatelessWidget {
                             return FadeInDown(
                               from: 30,
                               child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Get.width * 0.01),
                                 // margin: EdgeInsets.all(10),
                                 child: MiniPicto(
+                                  localImg: pict.localImg,
                                   pict: pict,
                                   onTap: () {
                                     _.speak();
@@ -54,14 +57,16 @@ class SentenceWidget extends StatelessWidget {
                                 ),
                               ),
                             );
-                          } else if(_.sentencePicts.length == index) {
+                          } else if (_.sentencePicts.length == index) {
                             return Bounce(
                               from: 6,
                               infinite: true,
                               child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Get.width * 0.01),
                                 // margin: EdgeInsets.all(10),
                                 child: MiniPicto(
+                                  localImg: speakPict.localImg,
                                   pict: speakPict,
                                   onTap: () {
                                     _.speak();
@@ -73,7 +78,8 @@ class SentenceWidget extends StatelessWidget {
                           return FadeInDown(
                             from: 30,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Get.width * 0.01),
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -81,7 +87,7 @@ class SentenceWidget extends StatelessWidget {
                                 ),
                                 padding: const EdgeInsets.all(10),
                                 child: DottedBorder(
-                                  dashPattern: [8,8],
+                                  dashPattern: [8, 8],
                                   child: Container(
                                     width: Get.width * 0.12,
                                     color: Colors.white,
@@ -94,7 +100,8 @@ class SentenceWidget extends StatelessWidget {
                       )
                     : ListView.builder(
                         shrinkWrap: true,
-                        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                         itemCount: 10,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => FadeInDown(
@@ -110,7 +117,7 @@ class SentenceWidget extends StatelessWidget {
     );
   }
 
-  Widget emptyWidget(){
+  Widget emptyWidget() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
       child: Container(
@@ -120,7 +127,7 @@ class SentenceWidget extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(10),
         child: DottedBorder(
-          dashPattern: [8,8],
+          dashPattern: [8, 8],
           child: Container(
             width: Get.width * 0.12,
             color: Colors.white,

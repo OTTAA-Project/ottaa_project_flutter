@@ -7,7 +7,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "verbos"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fverbos.webp?alt=media&token=f32aaaf1-44aa-49d3-a0ed-981ba01564d5"
     },
     "relacion": [
       {
@@ -333,7 +333,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "descripcion"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fdescripcion.webp?alt=media&token=4dbde8ba-f144-4a12-90f6-013bf68d912d"
     },
     "relacion": [
       {
@@ -626,7 +626,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "animales"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fanimales.webp?alt=media&token=de80d51b-647a-4860-9233-74b0925e053e"
     },
     "relacion": [
       {
@@ -787,7 +787,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "comidas"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcomidas.webp?alt=media&token=9e4bc673-e0d9-4e75-bb78-ea9b0dd294e2"
     },
     "relacion": [
       {
@@ -1931,7 +1931,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ic_casa"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_casa.webp?alt=media&token=f1d197b6-db37-44e6-b4bc-8ba31b0fa4aa"
     },
     "relacion": [
       {
@@ -2048,7 +2048,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ic_escuela"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_escuela.webp?alt=media&token=05c5460c-c3a5-4404-9389-d6a67e79bb5d"
     },
     "relacion": [
       {
@@ -2157,7 +2157,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ic_colores"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_colores.webp?alt=media&token=04309e00-d682-43f3-9605-bde0b5b4ab9a"
     },
     "relacion": [
       {
@@ -2234,7 +2234,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "conceptos"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fconceptos.webp?alt=media&token=544d07e2-680b-427f-a657-9a1438529627"
     },
     "relacion": [
       {
@@ -2319,7 +2319,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "conjunciones"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fconjunciones.webp?alt=media&token=bd3a504d-d5ca-45cc-a29f-869a6b578174"
     },
     "relacion": [
       {
@@ -2357,7 +2357,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "partes_del_cuerpo"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpartes_del_cuerpo.webp?alt=media&token=b09b6919-2789-46a6-a883-d21c55859e08"
     },
     "relacion": [
       {
@@ -2482,7 +2482,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "instrumentos"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Finstrumentos.webp?alt=media&token=b58a39b2-6c69-4b19-8658-8a6a4fe7ca2a"
     },
     "relacion": [
       {
@@ -2539,7 +2539,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "sociales"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsociales.webp?alt=media&token=4bf39b77-0fdb-4d79-a407-14f5d66281d2"
     },
     "relacion": [
       {
@@ -2608,7 +2608,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "juguetes"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fjuguetes.webp?alt=media&token=046c8f8b-7518-4aac-9c56-6ac6fe4a03ef"
     },
     "relacion": [
       {
@@ -2700,7 +2700,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "lugares"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flugares.webp?alt=media&token=fa4c9b84-7f78-49d3-8fe7-b67335365b94"
     },
     "relacion": [
       {
@@ -2813,7 +2813,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "numeros"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fnumeros.webp?alt=media&token=51f29b27-7998-4db5-bcad-ecc7979beea5"
     },
     "relacion": [
       {
@@ -2870,7 +2870,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ropa"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fropa.webp?alt=media&token=52aa7f5e-5b8e-4cf2-9e2b-451f9e06e042"
     },
     "relacion": [
       {
@@ -2967,7 +2967,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "personas"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpersonas.webp?alt=media&token=a5223e39-5426-4728-beda-8579fbc82adf"
     },
     "relacion": [
       {
@@ -3072,7 +3072,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "preposiciones"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpreposiciones.webp?alt=media&token=73b3d814-e509-4ed4-b4f7-cde7c0b4c2a5"
     },
     "relacion": [
       {
@@ -3149,7 +3149,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "pronombres"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpronombres.webp?alt=media&token=fde2895a-c02f-464c-b487-ec4826cca6bd"
     },
     "relacion": [
       {
@@ -3274,7 +3274,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "sentimientos"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsentimientos.webp?alt=media&token=90954fb0-bf68-48fe-8f12-d9dfc21963da"
     },
     "relacion": [
       {
@@ -3502,7 +3502,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "libro_tiendas"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro_tiendas.webp?alt=media&token=4f4f3669-ad33-4baa-8a6e-bace7f17b45f"
     },
     "relacion": [
       {
@@ -3551,7 +3551,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "tiempos"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftiempos.webp?alt=media&token=a9cba0e5-1635-4d9c-8f1b-9db6243f7e5f"
     },
     "relacion": [
       {
@@ -3592,7 +3592,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "transportes"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftransportes.webp?alt=media&token=94bd980f-eeed-4310-8fe7-09148e19612f"
     },
     "relacion": [
       {
@@ -3629,7 +3629,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "todos"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftodos.webp?alt=media&token=694aae8b-22c8-4274-b9f1-b3bbdd15d061"
     },
     "relacion": [
       {
@@ -12522,7 +12522,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "libro_salud"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro_salud.webp?alt=media&token=c7b4bf4a-38b5-4b09-ac7d-30299ef09d86"
     },
     "relacion": [
       {
@@ -12719,7 +12719,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "libro_ocio_1"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro_ocio_1.webp?alt=media&token=50186510-bf0a-4416-85a8-fc1b17ff6fd5"
     },
     "relacion": [
       {
@@ -12892,7 +12892,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "libro_ocio_2"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro_ocio_2.webp?alt=media&token=fa4aa42c-d12a-4c47-a826-7918e5c23735"
     },
     "relacion": [
       {
@@ -13041,7 +13041,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "restaurante"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Frestaurante.webp?alt=media&token=57ed6d5c-fa5f-41c1-b779-28294311e772"
     },
     "relacion": [
       {
@@ -13318,7 +13318,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "libro_viaje"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro_viaje.webp?alt=media&token=1f869b28-34f4-4d1d-8dc7-2edcb5276f16"
     },
     "relacion": [
       {
@@ -13543,7 +13543,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "higiene_personal"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fhigiene_personal.webp?alt=media&token=d822b484-feb9-4a37-a9f0-ed53e9b3584f"
     },
     "relacion": [
       {
@@ -13628,7 +13628,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "libro_carnicero"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro_carnicero.webp?alt=media&token=b3a49a1a-5b29-40a2-a456-6117822efb08"
     },
     "relacion": [
       {
@@ -13729,7 +13729,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "libro_almacen"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro_almacen.webp?alt=media&token=9f5be80c-f5fc-48dd-be44-ba6ea61a8efc"
     },
     "relacion": [
       {
@@ -13894,7 +13894,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "libro_verduleria"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro_verduleria.webp?alt=media&token=533584e7-215a-4ab7-bc2f-aecf13c9c6c1"
     },
     "relacion": [
       {
@@ -14015,7 +14015,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "clase_musica"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fclase_musica.webp?alt=media&token=a7a2c34a-9c31-44ad-81d0-b1a4c443aa89"
     },
     "relacion": [
       {
@@ -14116,7 +14116,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "clase_plastica"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fclase_plastica.webp?alt=media&token=fb56f0bd-50d1-4a90-b32d-09e85ce95514"
     },
     "relacion": [
       {
@@ -14257,7 +14257,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "libro_clases"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro_clases.webp?alt=media&token=d0f51815-d6ec-4d98-972b-8a5e9fbe06e7"
     },
     "relacion": []
   },
@@ -14269,7 +14269,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ic_futbol"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_futbol.webp?alt=media&token=50db7655-7aff-4f93-9b68-875cc5706c7a"
     },
     "relacion": [
       {
@@ -14374,7 +14374,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "cine"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcine.webp?alt=media&token=4109bb74-ab3d-4cda-99fb-34e7030e8762"
     },
     "relacion": [
       {
@@ -14495,7 +14495,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ic_farmacia"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_farmacia.webp?alt=media&token=0e948284-58e5-4f44-8269-dd5a65ee6558"
     },
     "relacion": [
       {
@@ -14776,7 +14776,7 @@
     },
     "tipo": 0,
     "imagen": {
-      "picto": "natacion"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fnatacion.webp?alt=media&token=f4e987c5-4a65-4499-bf95-ec775a6f17e6"
     },
     "relacion": [
       {
@@ -14804,12 +14804,12 @@
   {
     "id": -1895165,
     "texto": {
-      "es": "desayuno",
-      "en": "breakfast"
+      "en": "breakfast",
+      "es": "desayuno"
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ic_desayuno"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_desayuno.webp?alt=media&token=25948a6f-b4bd-4958-ad10-3ea868660416"
     },
     "relacion": [
       {
@@ -15143,12 +15143,12 @@
   {
     "id": 533264,
     "texto": {
-      "es": "almuerzo",
-      "en": "lunch"
+      "en": "lunch",
+      "es": "almuerzo"
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ic_almuerzo"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_almuerzo.webp?alt=media&token=b7acb5a2-b170-4c2b-a5b6-341d19db3632"
     },
     "relacion": [
       {
@@ -15363,12 +15363,12 @@
   {
     "id": 1377957,
     "texto": {
-      "es": "merienda",
-      "en": "snack"
+      "en": "snack",
+      "es": "merienda"
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ic_merienda"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_merienda.webp?alt=media&token=93022501-e9f5-412a-aee4-1599f3d80543"
     },
     "relacion": [
       {
@@ -15467,12 +15467,12 @@
   {
     "id": 1624279,
     "texto": {
-      "es": "cena",
-      "en": "Dinner"
+      "en": "Dinner",
+      "es": "cena"
     },
     "tipo": 0,
     "imagen": {
-      "picto": "ic_cena"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_cena.webp?alt=media&token=768a1465-9bb2-4f45-895a-29fa7da05086"
     },
     "relacion": [
       {

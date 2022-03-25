@@ -10,4 +10,6 @@ class AppRoutes {
   static const TUTORIAL = "/tutorial";
   static const PICTOGRAMGROUP = "/pictogram_group";
   static const SELECTPICTO = "/select_picto";
+  static const EDITPICTO = "/edit_picto";
+  static const ABOUTOTTAA = "/about_ottaa";
 }
