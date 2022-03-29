@@ -17,7 +17,7 @@ class ActionsWidget extends StatelessWidget {
       return Container(
         height: verticalSize * 0.2,
         width: horizontalSize * 0.8,
-        color: kOTTAOrangeNew,
+        color: kOTTAAOrangeNew,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,

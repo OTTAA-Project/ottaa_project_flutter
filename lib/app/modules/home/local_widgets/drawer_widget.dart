@@ -36,7 +36,7 @@ class DrawerWidget extends GetView<HomeController> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: kOTTAOrangeNew,
+                      color: kOTTAAOrangeNew,
                       borderRadius: BorderRadius.circular(verticalSize * 0.027),
                     ),
                     height: verticalSize * 0.15,

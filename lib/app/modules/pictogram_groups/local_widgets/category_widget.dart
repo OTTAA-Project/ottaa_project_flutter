@@ -7,7 +7,7 @@ import 'dart:io';
 
 final Map<int, Color> groupColor = {
   1: Colors.yellow,
-  2: kOTTAOrange,
+  2: kOTTAAOrange,
   3: Colors.green,
   4: Colors.blue,
   5: Colors.purple,
@@ -149,7 +149,7 @@ class WebImageWidget extends StatelessWidget {
               if (loadingProgress == null) return child;
               return Center(
                 child: CircularProgressIndicator(
-                  color: kOTTAOrangeNew,
+                  color: kOTTAAOrangeNew,
                   value: loadingProgress.expectedTotalBytes != null
                       ? loadingProgress.cumulativeBytesLoaded /
                           loadingProgress.expectedTotalBytes!

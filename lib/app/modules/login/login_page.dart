@@ -16,7 +16,7 @@ class LoginPage extends StatelessWidget {
     double horizontalSize = MediaQuery.of(context).size.width;
     return GetBuilder<LoginController>(
       builder: (_) => Scaffold(
-        backgroundColor: kOTTABackgroundNew,
+        backgroundColor: kOTTAABackgroundNew,
         body: Center(
           child: Stack(
             children: [
@@ -73,7 +73,7 @@ class LoginPage extends StatelessWidget {
               Positioned(
                 bottom: 0,
                 child: FadeInUp(
-                  child: HeaderWave(color: kOTTAOrangeNew),
+                  child: HeaderWave(color: kOTTAAOrangeNew),
                 ),
               ),
               Positioned(

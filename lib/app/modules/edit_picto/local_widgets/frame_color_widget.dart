@@ -61,7 +61,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
           right: 0,
           left: -width * 0.12,
           child: ColorWidget(
-            color: kOTTAOrange,
+            color: kOTTAAOrange,
             text: 'nouns'.tr,
             tipo: 2,
           ),

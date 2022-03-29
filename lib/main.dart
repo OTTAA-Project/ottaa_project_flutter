@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'OTTAA Project',
       theme: ThemeData(
-        primaryColor: kOTTAOrangeNew,
+        primaryColor: kOTTAAOrangeNew,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: SplashPage(),

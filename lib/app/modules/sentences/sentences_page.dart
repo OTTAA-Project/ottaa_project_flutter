@@ -20,7 +20,7 @@ class SentencesPage extends GetView<SentencesController> {
     return GetBuilder<SentencesController>(
       builder: (_) => Scaffold(
         appBar: AppBar(
-          backgroundColor: kOTTAOrangeNew,
+          backgroundColor: kOTTAAOrangeNew,
           leading: Container(),
           foregroundColor: Colors.white,
           elevation: 0,
@@ -159,7 +159,7 @@ class SentencesPage extends GetView<SentencesController> {
                     Expanded(
                       flex: 2,
                       child: Container(
-                        color: kOTTAOrangeNew,
+                        color: kOTTAAOrangeNew,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -196,7 +196,7 @@ class SentencesPage extends GetView<SentencesController> {
                 bottom: 0,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: kOTTAOrangeNew,
+                    color: kOTTAAOrangeNew,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(16),
                     ),
@@ -222,7 +222,7 @@ class SentencesPage extends GetView<SentencesController> {
                 bottom: 0,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: kOTTAOrangeNew,
+                    color: kOTTAAOrangeNew,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
                     ),

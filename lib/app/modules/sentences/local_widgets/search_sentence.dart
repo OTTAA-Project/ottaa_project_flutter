@@ -16,7 +16,7 @@ class SearchSentence extends GetView<SentencesController> {
       builder: (_) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: kOTTAOrangeNew,
+          backgroundColor: kOTTAAOrangeNew,
           leading: Container(),
           foregroundColor: Colors.white,
           elevation: 0,
@@ -181,7 +181,7 @@ class SearchSentence extends GetView<SentencesController> {
                     Expanded(
                       flex: 2,
                       child: Container(
-                        color: kOTTAOrangeNew,
+                        color: kOTTAAOrangeNew,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -211,7 +211,7 @@ class SearchSentence extends GetView<SentencesController> {
                 bottom: 0,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: kOTTAOrangeNew,
+                    color: kOTTAAOrangeNew,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(16),
                     ),
@@ -235,7 +235,7 @@ class SearchSentence extends GetView<SentencesController> {
                 bottom: 0,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: kOTTAOrangeNew,
+                    color: kOTTAAOrangeNew,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
                     ),

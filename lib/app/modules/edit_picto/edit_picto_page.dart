@@ -53,7 +53,7 @@ class EditPictoPage extends GetView<EditPictoController> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: kOTTAOrangeNew,
+          backgroundColor: kOTTAAOrangeNew,
           foregroundColor: Colors.white,
           elevation: 0,
           title: Text('edit_pictogram'.tr),
@@ -163,7 +163,7 @@ class PictureDialogWidget extends GetView<EditPictoController> {
               padding: EdgeInsets.symmetric(vertical: verticalSize * 0.01),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: kOTTAOrangeNew,
+                color: kOTTAAOrangeNew,
               ),
               child: Center(
                 child: Text(

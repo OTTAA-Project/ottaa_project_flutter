@@ -18,8 +18,8 @@ Widget step3Onboarding<widget>(
     children: [
       FadeInLeft(
         child: HeaderWave(
-          color: kOTTAOrangeNew,
-          bgColor: kOTTABackgroundNew,
+          color: kOTTAAOrangeNew,
+          bgColor: kOTTAABackgroundNew,
         ),
       ),
       Positioned(
@@ -70,7 +70,7 @@ Widget step3Onboarding<widget>(
                               padding: EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               decoration: BoxDecoration(
-                                color: kOTTAOrangeNew,
+                                color: kOTTAAOrangeNew,
                                 borderRadius: BorderRadius.circular(100),
                               ),
                               child: Icon(
@@ -143,7 +143,7 @@ Widget step3Onboarding<widget>(
                               await _sharedPrefClient.setPhotoPref();
                               Get.offAllNamed(AppRoutes.HOME);
                             },
-                            backgroundColor: kOTTAOrangeNew,
+                            backgroundColor: kOTTAAOrangeNew,
                             fontColor: Colors.white,
                           ),
                         ),

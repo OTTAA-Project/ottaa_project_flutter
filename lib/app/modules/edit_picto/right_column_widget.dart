@@ -16,7 +16,7 @@ class RightColumnWidget extends GetView<EditPictoController> {
       flex: 1,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: horizontalSize * 0.01),
-        color: kOTTAOrangeNew,
+        color: kOTTAAOrangeNew,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

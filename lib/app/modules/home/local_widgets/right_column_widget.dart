@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
@@ -35,16 +35,26 @@ class RightColumnWidget extends StatelessWidget {
           FittedBox(
             child: GestureDetector(
               onTap: () async {
-                Fluttertoast.showToast(
-                  msg: "we_are_working_on_this_feature".tr,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.black,
-                  textColor: Colors.white,
-                  fontSize: verticalSize * 0.03,
+                // Fluttertoast.showToast(
+                //   msg: "we_are_working_on_this_feature".tr,
+                //   toastLength: Toast.LENGTH_SHORT,
+                //   gravity: ToastGravity.CENTER,
+                //   timeInSecForIosWeb: 1,
+                //   backgroundColor: Colors.black,
+                //   textColor: Colors.white,
+                //   fontSize: verticalSize * 0.03,
+                // );
+                Get.to(
+                  () => BuyPaidVersionPage(
+                    iconAddress: Icons.accessible_forward,
+                    text:
+                        'Use OTTAA Project with screen scanning, connect accessible buttons and much more.',
+                  ),
                 );
-                CustomAnalyticsEvents.setEventWithParameters("Touch",CustomAnalyticsEvents.createMyMap('Principal', "Share Phrases"));
+                CustomAnalyticsEvents.setEventWithParameters(
+                    "Touch",
+                    CustomAnalyticsEvents.createMyMap(
+                        'Principal', "Share Phrases"));
               },
               child: Center(
                 child: Icon(
@@ -59,7 +69,10 @@ class RightColumnWidget extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 Get.toNamed(AppRoutes.SENTENCES);
-                CustomAnalyticsEvents.setEventWithParameters("Touch",CustomAnalyticsEvents.createMyMap('Principal', "Favourite Phrases"));
+                CustomAnalyticsEvents.setEventWithParameters(
+                    "Touch",
+                    CustomAnalyticsEvents.createMyMap(
+                        'Principal', "Favourite Phrases"));
               },
               child: Center(
                 child: Icon(
@@ -73,7 +86,7 @@ class RightColumnWidget extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: kOTTAOrangeNew,
+        color: kOTTAAOrangeNew,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(horizontalSize / 40),
         ),
