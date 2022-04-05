@@ -8,7 +8,7 @@ import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
 
 class RightColumnWidget extends StatelessWidget {
   RightColumnWidget({Key? key}) : super(key: key);
-late String name;
+
   @override
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
@@ -49,7 +49,6 @@ late String name;
                     "Touch",
                     CustomAnalyticsEvents.createMyMap(
                         'Principal', "Share Phrases"));
-                print(name);
               },
               child: Center(
                 child: Icon(
