@@ -318,7 +318,7 @@ class PictogramGroupsController extends GetxController {
 
   Future<void> pictoExistsOnFirebase() async {
     final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('PictoExistsOnFirebase/${auth!.uid}/');
+    final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
     await ref.set({
       'value': true,
     });

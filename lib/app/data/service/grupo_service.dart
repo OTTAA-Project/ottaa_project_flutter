@@ -43,11 +43,25 @@ class GrupoService {
     required DataSnapshot onlineSnapshot,
   }) async {
     final instance = await SharedPreferences.getInstance();
-    final fileExists = instance.getBool('Pictos_file');
+    final fileExists = instance.getBool('Grupos_file');
     debugPrint('the result is for file : $fileExists');
     if (onlineSnapshot.exists && onlineSnapshot.value != null) {
       if (fileExists == true && fileExists != null) {
         debugPrint('from file realtime : mobile');
+        // final pictsString = await rootBundle.loadString('assets/grupos.json');
+        // final grupos = (jsonDecode(pictsString) as List)
+        //     .map((e) => Grupos.fromJson(e))
+        //     .toList();
+        // final data = grupos;
+        // List<String> fileData = [];
+        // data.forEach((element) {
+        //   final obj = jsonEncode(element);
+        //   fileData.add(obj);
+        // });
+        // debugPrint('from file user first time: mobile');
+        // await _fileController.writePictoToFile(data: data.toString());
+        // await instance.setBool('Grupos_file', true);
+        // return grupos;
         return await _fileController.readGruposFromFile();
       } else {
         final ref = databaseRef.child('Grupo/${firebaseRed.currentUser!.uid}/');

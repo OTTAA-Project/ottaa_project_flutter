@@ -68,11 +68,11 @@ class Imagen {
 class Relacion {
   Relacion({
     required this.id,
-    required this.frec,
+    this.frec,
   });
 
   int id;
-  int frec;
+  int? frec;
 
   factory Relacion.fromJson(Map<String, dynamic> json) =>
       _$RelacionFromJson(json);

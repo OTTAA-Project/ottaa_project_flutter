@@ -106,7 +106,7 @@ class HomeController extends GetxController {
         ///if  it is in the relacion just increment it
         if (alreadyInTheList) {
           picts[0].relacion![relacionID].frec =
-              picts[0].relacion![relacionID].frec + 1;
+              picts[0].relacion![relacionID].frec! + 1;
         } else {
           picts[0].relacion!.add(
                 Relacion(id: pict.id, frec: 1),
@@ -150,7 +150,7 @@ class HomeController extends GetxController {
         ///if  it is in the relacion just increment it
         if (alreadyInTheList) {
           picts[addToThisOneIndex].relacion![relacionID].frec =
-              picts[addToThisOneIndex].relacion![relacionID].frec + 1;
+              picts[addToThisOneIndex].relacion![relacionID].frec! + 1;
         } else {
           picts[addToThisOneIndex].relacion!.add(
                 Relacion(id: pict.id, frec: 1),
@@ -243,7 +243,7 @@ class HomeController extends GetxController {
 
     if (pict.relacion!.length >= 1) {
       final List<Relacion> recomendedPicts = pict.relacion!.toList();
-      recomendedPicts.sort((b, a) => a.frec.compareTo(b.frec));
+      recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec!));
       this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);
     } else {
       this._suggestedPicts = [];
@@ -316,7 +316,7 @@ class HomeController extends GetxController {
           }
         });
       }
-      e.score = (list[i].frec * pesoFrec) + (hora * pesoHora);
+      e.score = (list[i].frec! * pesoFrec) + (hora * pesoHora);
       // print(e.score);
     });
 
