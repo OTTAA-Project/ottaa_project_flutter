@@ -123,6 +123,15 @@ class Translation extends Translations {
           'please_enter_a_valid_search': 'Please enter a valid search',
           'choose_a_picto_to_speak': 'Choose a Picto to speak',
           'we_are_working_on_this_feature': 'We are working on this feature',
+          'price_one':
+              'Get access today to all the useful features that OTTAA Premium has to offer for only 990 ARS per month.',
+          'purchase_subscription': 'PURCHASE SUBSCRIPTION',
+          'sentence_1':
+              'Get access to educational games that allow you to evaluate vocabulary in a fun way',
+          'sentence_2':
+              'Use OTTAA Project with screen scanning, connect accessible buttons and much more.',
+          'sentence_3':
+              'With the premium version you can use the GPS to have a better prediction based on the commerce or place where you are',
           '': '',
         },
         'es_ES': {
@@ -235,15 +244,24 @@ class Translation extends Translations {
               'Usa la inteligencia artificial para generar una oración más rica. Necesitas una conexión a Internet estable.',
           'settings': 'Ajustes',
           'SETTINGS': 'AJUSTES',
-          'pictograms' : 'Pictogramas',
-          'prediction' : 'Predicción',
-          'accessibility' : 'Accesibilidad',
-          'voice_and_subtitles' : 'Voz y subtítulos',
-          'all_phrases' : 'Todas las frases',
-          'search' : 'Búsqueda',
-          'please_enter_a_valid_search' : 'Por favor ingrese una búsqueda válida',
-          'choose_a_picto_to_speak' : 'Elige un Picto para hablar',
-          'we_are_working_on_this_feature' : 'Nosotros estamos trabajando en esta característica',
+          'pictograms': 'Pictogramas',
+          'prediction': 'Predicción',
+          'accessibility': 'Accesibilidad',
+          'voice_and_subtitles': 'Voz y subtítulos',
+          'all_phrases': 'Todas las frases',
+          'search': 'Búsqueda',
+          'please_enter_a_valid_search':
+              'Por favor ingrese una búsqueda válida',
+          'choose_a_picto_to_speak': 'Elige un Picto para hablar',
+          'we_are_working_on_this_feature':
+              'Nosotros estamos trabajando en esta característica',
+          'price_one':
+              'Obtenga acceso hoy a todas las funciones útiles que OTTAA Premium tiene para ofrecer por solo 990 ARS al mes.',
+          'purchase_subscription': 'COMPRAR SUSCRIPCIÓN',
+          'sentence_1': 'Accede a juegos educativos que te permiten evaluar vocabulario de una manera divertida',
+          'sentence_2': 'Use OTTAA Project con escaneo de pantalla, conéctese accesible Botones y mucho más.',
+          'sentence_3': 'Con la versión premium puedes usar el GPS para tener una mejor predicción basada en el comercio o lugar donde te encuentres',
+          '': '',
         },
       };
 }

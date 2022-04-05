@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
+import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/local_widgets/choice_dialouge.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
-import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'category_page_widget.dart';
@@ -36,12 +36,16 @@ class PictoPageWidget extends StatelessWidget {
                   await onTap(index, languaje);
                 },
                 onLongPress: () {
-                  _homeController.pictToBeEdited =
-                      _pictogramController.selectedGruposPicts[index];
-                  showDialog(
-                    context: context,
-                    builder: (context) => ChoiceDialogue(),
-                  );
+                  if (_homeController.userSubscription == 1) {
+                    _homeController.pictToBeEdited =
+                        _pictogramController.selectedGruposPicts[index];
+                    showDialog(
+                      context: context,
+                      builder: (context) => ChoiceDialogue(),
+                    );
+                  } else {
+                    Get.to(() => BuyPaidVersionPage());
+                  }
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: CategoryWidget(
@@ -78,9 +82,17 @@ class PictoPageWidget extends StatelessWidget {
                   await onTap(index, languaje);
                 },
                 onLongPress: () {
-                  _homeController.pictToBeEdited =
-                      _pictogramController.selectedGruposPicts[index];
-                  Get.toNamed(AppRoutes.EDITPICTO);
+                  if (_homeController.userSubscription == 1) {
+                    _homeController.pictToBeEdited =
+                        _pictogramController.selectedGruposPicts[index];
+                    showDialog(
+                      context: context,
+                      builder: (context) => ChoiceDialogue(),
+                    );
+                  } else {
+                    Get.to(() => BuyPaidVersionPage());
+                  }
+                  // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: CategoryPageWidget(
                   name: languaje == "en"

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 
 class RightSidePaidVersion extends StatelessWidget {
-  const RightSidePaidVersion({Key? key}) : super(key: key);
+  const RightSidePaidVersion({
+    Key? key,
+    required this.url,
+  }) : super(key: key);
+
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +31,29 @@ class RightSidePaidVersion extends StatelessWidget {
               child: Container(
                 child: Center(
                   child: Text(
-                    'Get access today to all the useful features that OTTAA Premium has to offer for only 990 ARS per month',
+                    'price_one'.tr,
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
             ),
             Expanded(
-              child: Container(
-                color: Colors.lightGreen,
-                child: Center(
-                  child: Text(
-                    'PURCHASE SUBSCRIPTION',
+              child: GestureDetector(
+                onTap: () async {
+                  if (await canLaunch(url)){
+                    await launch(url);
+                  }
+                  else {
+                    print('no');
+                    // can't launch url
+                  }
+                },
+                child: Container(
+                  color: Colors.lightGreen,
+                  child: Center(
+                    child: Text(
+                      'purchase_subscription'.tr,
+                    ),
                   ),
                 ),
               ),
