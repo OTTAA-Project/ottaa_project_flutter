@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,27 +19,36 @@ import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  DependencyInjection.init();
-  await dotenv.load(fileName: "assets/.env");
-  // final String defaultSystemLocale = Platform.localeName;
-  final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
-  if (kIsWeb) {
-    // initialiaze the facebook javascript SDK
-    FacebookAuth.i.webInitialize(
-      appId: "658779868360186", //<-- YOUR APP_ID
-      cookie: true,
-      xfbml: true,
-      version: "v9.0",
+  await runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+    DependencyInjection.init();
+    await dotenv.load(fileName: "assets/.env");
+    // final String defaultSystemLocale = Platform.localeName;
+    final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
+
+    // Pass all uncaught errors from the framework to Crashlytics.
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    if (kIsWeb) {
+      // initialiaze the facebook javascript SDK
+      FacebookAuth.i.webInitialize(
+        appId: "658779868360186", //<-- YOUR APP_ID
+        cookie: true,
+        xfbml: true,
+        version: "v9.0",
+      );
+    }
+    // print(defaultSystemLocale.toString());
+    // print(systemLocales.asMap().toString());
+    runApp(
+      MyApp(
+        locale: Locale(systemLocales[0].languageCode,
+            systemLocales[0].languageCode.toUpperCase()),
+      ),
     );
-  }
-  // print(defaultSystemLocale.toString());
-  // print(systemLocales.asMap().toString());
-  runApp(MyApp(
-    locale: Locale(systemLocales[0].languageCode,
-        systemLocales[0].languageCode.toUpperCase()),
-  ));
+  }, (error, stackTrace) {
+    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -47,8 +59,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print('here is the device locale');
-    print(Get.deviceLocale);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
