@@ -44,34 +44,44 @@ class SearchPhotoPage extends SearchDelegate<SearchModel?> {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
             color: Colors.black,
-            child: GridView.builder(
-              // controller: _pictogramController.pictoGridController,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  color: Colors.white,
-                  child: GestureDetector(
-                    onTap: () async {
-                      _editController.selectedPhotoUrl.value =
-                          snapshot.data![index]!.picto.imageUrl;
-                      _editController.editingPicture.value = true;
-                      Get.back();
-                      Get.back();
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                HeaderWidget(),
+                Expanded(
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    // controller: _pictogramController.pictoGridController,
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        color: Colors.white,
+                        child: GestureDetector(
+                          onTap: () async {
+                            _editController.selectedPhotoUrl.value =
+                                snapshot.data![index]!.picto.imageUrl;
+                            _editController.editingPicture.value = true;
+                            Get.back();
+                            Get.back();
+                          },
+                          child: Image.network(
+                            snapshot.data![index]!.picto.imageUrl,
+                            width: horizontalSize * 0.1,
+                          ),
+                        ),
+                      );
                     },
-                    child: Image.network(
-                      snapshot.data![index]!.picto.imageUrl,
-                      width: horizontalSize * 0.1,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      childAspectRatio: 1,
                     ),
                   ),
-                );
-              },
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 1,
-              ),
+                ),
+              ],
             ),
           );
         } else {
@@ -95,5 +105,59 @@ class SearchPhotoPage extends SearchDelegate<SearchModel?> {
 
   Future<void> onTap(Pict pict) async {
     /// grab the link for the picto from here
+  }
+}
+
+class HeaderWidget extends StatelessWidget {
+  const HeaderWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
+    final horizontalSize = MediaQuery.of(context).size.width;
+    return Container(
+      height: verticalSize * 0.1,
+      width: horizontalSize,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            decoration: BoxDecoration(),
+            padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+            child: Center(
+              child: Text(
+                'Dataset',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: verticalSize * 0.02,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                child: Container(
+                  width: horizontalSize * 0.02,
+                  child: Center(
+                    child: Text(
+                      '$index',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
