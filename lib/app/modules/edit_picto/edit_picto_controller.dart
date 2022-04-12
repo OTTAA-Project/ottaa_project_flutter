@@ -41,6 +41,28 @@ class EditPictoController extends GetxController {
   Rx<String?> selectedPhotoUrl = Rx<String?>(null);
   Rx<XFile?> imageTobeUploaded = Rx<XFile?>(null);
 
+  /// multiple dataset map
+  final Map<int, String> dataSetMap = {
+    17: 'ARASAAC',
+    84: 'Gumeil',
+    14: 'Jellow',
+    13: 'mulberry',
+    82: 'OCHA Humanitarian Icons',
+    83: 'OpenMoji',
+    81: 'Sclera Symbols',
+    66: 'Srbija Simboli',
+    95: 'Typical Bulgarian Symbols',
+    75: 'Adam Urdu Symbols',
+    16: 'Blissymbolics',
+    67: 'Cma Gora',
+    74: 'Hrvatski simboli za PK',
+    86: 'Mulberry Plus',
+    88: 'Otsmin Turkish',
+    15: 'Tawasol',
+    97: 'Typical Bulgarian Symbols SVG',
+    76: 'DoeDY',
+  };
+
   late String url;
 
   /// variables for web
