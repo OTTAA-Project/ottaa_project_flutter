@@ -410,6 +410,7 @@ class PictogramGroupsController extends GetxController {
         child: CircularProgressIndicator(),
       ),
     );
+    final timeSeconds = DateTime.now().millisecondsSinceEpoch;
 
     /// upload photo here
     if (isImageProvidedPicto.value) {
@@ -444,14 +445,27 @@ class PictogramGroupsController extends GetxController {
     // pict.tipo = 6;
     pict.texto.en = pictoNameController.text;
     pict.texto.es = pictoNameController.text;
-    pict.id = _homeController.grupos.length;
+    pict.id = timeSeconds;
     pict.tipo = tipoValue.value;
     pict.relacion = [];
     print(_homeController.picts.length);
     print(_homeController.picts.last);
     _homeController.picts.add(pict);
+    int index = -1;
+    grupos.firstWhere((element) {
+      index++;
+      return element.id == selectedGrupos.id;
+    });
+    grupos[index].relacion.add(
+          GrupoRelacion(
+            id: timeSeconds,
+            frec: 0,
+          ),
+        );
+    selectedGruposPicts.add(pict);
     print(_homeController.picts.length);
     print(_homeController.picts.last.texto.en);
+    print('values are : $index : ${selectedGrupos.id}');
     final data = _homeController.picts;
     List<String> fileData = [];
     data.forEach((element) {
@@ -475,6 +489,11 @@ class PictogramGroupsController extends GetxController {
     // for refreshing the UI of listing
     pictoGridviewOrPageview.value = !pictoGridviewOrPageview.value;
     pictoGridviewOrPageview.value = !pictoGridviewOrPageview.value;
+    selectedList = List.generate(
+        _homeController.picts.length, (index) => false.obs,
+        growable: true);
+    print(selectedGruposPicts.length);
+    secondTimeSameGroup = selectedGroupIndex;
     resetDataForAddPicto();
     Get.back();
     Navigator.of(context).pop(true);

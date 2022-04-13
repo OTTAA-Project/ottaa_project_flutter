@@ -99,9 +99,19 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                           ),
 
                           /// for keeping them in order and the button will be in separate Positioned
+
                           Container(),
                           GestureDetector(
                             onTap: () async {
+                              showDialog<void>(
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                },
+                                context: context,
+                              );
                               List<Pict> toBeAddedonToCurrentList = [];
                               int index = -1;
                               controller.grupos.firstWhere((element) {
@@ -109,7 +119,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                                 return element.id ==
                                     controller.selectedGrupos.id;
                               });
-                              print(index);
+                              print('the group index is $index');
                               int index2 = -1;
                               controller.pictsForGroupAdding.forEach((element) {
                                 index2++;
@@ -119,7 +129,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                                     GrupoRelacion(
                                       id: controller
                                           .pictsForGroupAdding[index2].id,
-                                      frec: 1,
+                                      frec: 0,
                                     ),
                                   );
                                   toBeAddedonToCurrentList.add(
@@ -165,7 +175,8 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                               print(controller.selectedGruposPicts.length);
                               controller.secondTimeSameGroup =
                                   controller.selectedGroupIndex;
-                              Get.back();
+                              Get.close(2);
+
                             },
                             child: Icon(
                               Icons.save,

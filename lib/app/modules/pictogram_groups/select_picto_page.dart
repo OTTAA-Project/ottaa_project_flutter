@@ -61,7 +61,9 @@ class SelectPictoPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Get.to(() => AddPictoToGroupPage());
+              Get.to(
+                () => AddPictoToGroupPage(),
+              );
             },
             child: Icon(
               Icons.add_to_photos,
