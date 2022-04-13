@@ -452,9 +452,15 @@ class PictogramGroupsController extends GetxController {
     print(_homeController.picts.last);
     _homeController.picts.add(pict);
     int index = -1;
+    int indexForAll =-1;
     grupos.firstWhere((element) {
       index++;
       return element.id == selectedGrupos.id;
+    });
+    grupos.firstWhere((element) {
+      indexForAll++;
+      /// 24 is the id of all Grupo
+      return element.id == 24;
     });
     grupos[index].relacion.add(
           GrupoRelacion(
@@ -462,6 +468,12 @@ class PictogramGroupsController extends GetxController {
             frec: 0,
           ),
         );
+    grupos[indexForAll].relacion.add(
+      GrupoRelacion(
+        id: timeSeconds,
+        frec: 0,
+      ),
+    );
     selectedGruposPicts.add(pict);
     print(_homeController.picts.length);
     print(_homeController.picts.last.texto.en);
@@ -486,6 +498,28 @@ class PictogramGroupsController extends GetxController {
     //upload to the firebase
     await uploadToFirebasePicto(data: fileData.toString());
     await pictoExistsOnFirebase();
+
+    final dataGrupo = _homeController.grupos;
+    List<String> fileDataGrupo = [];
+    dataGrupo.forEach((element) {
+      final obj = jsonEncode(element);
+      fileDataGrupo.add(obj);
+    });
+
+    /// saving changes to file
+    if (!kIsWeb) {
+      final localFile = LocalFileController();
+      await localFile.writeGruposToFile(data: fileDataGrupo.toString());
+      // print('writing to file');
+    }
+    //for the file data
+    await instance.setBool('Grupos_file', true);
+    // print(res1);
+    //upload to the firebase
+    await uploadToFirebaseGrupo(data: fileDataGrupo.toString());
+    await gruposExistsOnFirebase();
+
+
     // for refreshing the UI of listing
     pictoGridviewOrPageview.value = !pictoGridviewOrPageview.value;
     pictoGridviewOrPageview.value = !pictoGridviewOrPageview.value;
