@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/add_group_text_widget.dart';
-import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/add_group_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/search_photo_group.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/local_widgets/icon_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_page.dart';
+import 'local_widgets/edit_grupo_widget.dart';
 
-class AddGroupPage extends GetView<PictogramGroupsController> {
-  const AddGroupPage({Key? key}) : super(key: key);
+class EditGrupoPage extends GetView<PictogramGroupsController> {
+  const EditGrupoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
           foregroundColor: Colors.white,
           elevation: 0,
           centerTitle: false,
-          title: Text('Add Group'),
+          title: Text('Edit Grupo'),
         ),
         body: Container(
           child: Row(
@@ -38,34 +38,36 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
                     children: [
                       Expanded(
                         child: Container(
-                          padding: EdgeInsets.all(horizontalSize * 0.01),
+                          // padding: EdgeInsets.all(horizontalSize * 0.01),
                           child: InkWell(
                             onTap: () {
                               showDialog(
                                 barrierDismissible: true,
                                 context: context,
                                 builder: (context) => PictureDialogWidget(
-                                  cameraOnTap: controller.cameraFunctionGrupo,
-                                  galleryOnTap: controller.galleryFunctionGrupo,
+                                  cameraOnTap:
+                                      controller.cameraFunctionGrupoEdit,
+                                  galleryOnTap:
+                                      controller.galleryFunctionGrupoEdit,
                                   arsaacOnTap: () async {
                                     await showSearch<String?>(
                                       context: context,
-                                      delegate: SearchPhotoGroup(),
+                                      delegate: SearchPhotoGroup(edit: true),
                                     );
                                   },
                                 ),
                               );
                             },
                             child: Obx(
-                              () => AddGroupWidget(
-                                name: controller.grupoNameController.text,
-                                isImageProvided:
-                                    controller.isImageProvidedGrupo.value,
-                                fileImage: controller.fileImageGrupo.value,
-                                selectedImageUrl:
-                                    controller.selectedPhotoUrlGrupo.value,
-                                imageWidget: controller.imageWidgetGrupo.value,
-                                color: 6,
+                              () => EditGrupoWidget(
+                                name: controller.grupoEditNameController.text,
+                                mainNativeImageUrl:
+                                    controller.grupoToEdit.imagen.picto,
+                                editingGrupo: controller.editingGrupo.value,
+                                imageWidget:
+                                    controller.imageWidgetGrupoEdit.value,
+                                fileImage: controller.fileImageGrupoEdit.value,
+                                selectedImageUrl: controller.selectedPhotoUrlGrupoEdit.value,
                               ),
                             ),
                           ),
@@ -87,7 +89,8 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
                             builder: (controller) {
                               if (controller.textOrBorder) {
                                 return AddGroupTextWidget(
-                                  controllerTxt: controller.grupoNameController,
+                                  controllerTxt:
+                                      controller.grupoEditNameController,
                                 );
                               } else {
                                 return Container();
@@ -139,12 +142,15 @@ class AddGroupPage extends GetView<PictogramGroupsController> {
             content: Text('do_you_want_to_save_changes'.tr),
             actions: <Widget>[
               TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
+                onPressed: () {
+                  controller.resetDataForEditGrupo();
+                  Navigator.of(context).pop(true);
+                },
                 child: Text('no'.tr),
               ),
               TextButton(
                 onPressed: () async =>
-                    controller.uploadChangesGrupos(context: context),
+                    controller.uploadGrupoEdit(context: context),
                 child: Text('yes'.tr),
               ),
               TextButton(

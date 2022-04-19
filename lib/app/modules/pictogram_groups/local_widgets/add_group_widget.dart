@@ -35,7 +35,11 @@ class AddGroupWidget extends StatelessWidget {
     final horizontalSize = MediaQuery.of(context).size.width;
     final verticalSize = MediaQuery.of(context).size.height;
     return Container(
-      padding: EdgeInsets.all(horizontalSize * 0.01),
+      padding: EdgeInsets.only(
+        left: horizontalSize * 0.01,
+        top: horizontalSize * 0.01,
+        right: horizontalSize * 0.01,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(verticalSize * 0.03),
         color: Colors.white,
@@ -58,7 +62,7 @@ class AddGroupWidget extends StatelessWidget {
                         )
                       : DeviceImage(
                           selectedImageUrl: selectedImageUrl,
-                          fileImage: this.fileImage,
+                          fileImage: fileImage,
                         )
                   : Center(
                       child: Image.asset('assets/imgs/ic_agregar_nuevo.webp'),
@@ -66,7 +70,7 @@ class AddGroupWidget extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Center(
               child: Text(
                 name.toUpperCase(),

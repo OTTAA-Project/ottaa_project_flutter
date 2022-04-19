@@ -35,7 +35,16 @@ class PictogramGroupsController extends GetxController {
   late ScrollController addPictoGridController;
   int selectedGroupIndex = 0;
 
-  //Add Group
+  ///Edit Grupo
+  late Grupos grupoToEdit;
+  final TextEditingController grupoEditNameController = TextEditingController();
+  RxBool editingGrupo = false.obs;
+  RxBool isImageProvidedGrupoEdit = false.obs;
+  Rx<File?> fileImageGrupoEdit = Rx<File?>(null);
+  Rx<String?> selectedPhotoUrlGrupoEdit = ''.obs;
+  Rx<XFile?> imageTobeUploadedGrupoEdit = Rx<XFile?>(null);
+
+  ///Add Group
   bool textOrBorder = true;
   final TextEditingController grupoNameController =
       TextEditingController(text: 'Add Group');
@@ -75,6 +84,7 @@ class PictogramGroupsController extends GetxController {
 
   /// variables for web
   Rx<Image?> imageWidgetGrupo = Rx<Image?>(null);
+  Rx<Image?> imageWidgetGrupoEdit = Rx<Image?>(null);
   Rx<Image?> imageWidgetPicto = Rx<Image?>(null);
 
   /// add picts to grupos
@@ -148,13 +158,31 @@ class PictogramGroupsController extends GetxController {
     imageTobeUploadedGrupo.value = await picker.pickImage(
       source: ImageSource.camera,
       preferredCameraDevice: CameraDevice.front,
-      maxHeight: 600,
-      maxWidth: 600,
+      maxHeight: 700,
+      maxWidth: 700,
     );
     if (imageTobeUploadedGrupo != null) {
       print('yes');
       fileImageGrupo.value = File(imageTobeUploadedGrupo.value!.path);
       isImageProvidedGrupo.value = true;
+      Get.back();
+    } else {
+      Get.back();
+      print('no');
+    }
+  }
+
+  void cameraFunctionGrupoEdit() async {
+    imageTobeUploadedGrupoEdit.value = await picker.pickImage(
+      source: ImageSource.camera,
+      preferredCameraDevice: CameraDevice.front,
+      maxHeight: 700,
+      maxWidth: 700,
+    );
+    if (imageTobeUploadedGrupoEdit != null) {
+      print('yes');
+      fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
+      editingGrupo.value = true;
       Get.back();
     } else {
       Get.back();
@@ -202,6 +230,37 @@ class PictogramGroupsController extends GetxController {
       if (imageTobeUploadedGrupo != null) {
         fileImageGrupo.value = File(imageTobeUploadedGrupo.value!.path);
         isImageProvidedGrupo.value = true;
+        Get.back();
+      } else {
+        Get.back();
+        print('no');
+      }
+    }
+  }
+
+  void galleryFunctionGrupoEdit() async {
+    if (kIsWeb) {
+      imageTobeUploadedGrupoEdit.value =
+          await picker.pickImage(source: ImageSource.gallery);
+      if (imageTobeUploadedGrupoEdit != null) {
+        print('I was here');
+        final imageInBytes =
+            await imageTobeUploadedGrupoEdit.value!.readAsBytes();
+        imageWidgetGrupoEdit.value = Image.memory(
+          imageInBytes,
+        );
+        editingGrupo.value = true;
+        Get.back();
+      } else {
+        Get.back();
+        print('no');
+      }
+    } else {
+      imageTobeUploadedGrupoEdit.value =
+          await picker.pickImage(source: ImageSource.gallery);
+      if (imageTobeUploadedGrupoEdit != null) {
+        fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
+        editingGrupo.value = true;
         Get.back();
       } else {
         Get.back();
@@ -268,7 +327,10 @@ class PictogramGroupsController extends GetxController {
     }
   }
 
-  Future<void> uploadImageToFirebaseStorageGrupo({required String path}) async {
+  Future<void> uploadImageToFirebaseStorageGrupo({
+    required String path,
+    bool edit = false,
+  }) async {
     Reference ref = FirebaseStorage.instance
         .ref()
         .child('groupImages/')
@@ -276,7 +338,11 @@ class PictogramGroupsController extends GetxController {
     final UploadTask uploadTask = ref.putFile(File(path));
     final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
     final url = await taskSnapshot.ref.getDownloadURL();
-    grupo.imagen.picto = url;
+    if (edit) {
+      grupoToEdit.imagen.picto = url;
+    } else {
+      grupo.imagen.picto = url;
+    }
   }
 
   Future<void> uploadImageToFirebaseStoragePicto({required String path}) async {
@@ -322,6 +388,90 @@ class PictogramGroupsController extends GetxController {
     await ref.set({
       'value': true,
     });
+  }
+
+  void uploadGrupoEdit(
+      {required BuildContext context, RxBool? editPicBool}) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    /// upload photo here
+    if (editingGrupo.value) {
+      if (kIsWeb) {
+        /// method for uploading images for web
+        if (selectedPhotoUrlGrupoEdit.value == '') {
+          Reference _reference = FirebaseStorage.instance
+              .ref()
+              .child('testingUpload/${grupoEditNameController.text}');
+          await _reference
+              .putData(
+            await imageTobeUploadedGrupoEdit.value!.readAsBytes(),
+            SettableMetadata(contentType: 'image/jpeg'),
+          )
+              .whenComplete(() async {
+            await _reference.getDownloadURL().then((value) {
+              grupoToEdit.imagen.picto = value;
+            });
+          });
+        } else {
+          grupoToEdit.imagen.picto = selectedPhotoUrlGrupoEdit.value!;
+        }
+      } else {
+        if (selectedPhotoUrlGrupoEdit.value == '') {
+          await uploadImageToFirebaseStorageGrupo(
+            path: fileImageGrupoEdit.value!.path,
+            edit: true,
+          );
+        } else {
+          grupoToEdit.imagen.picto = selectedPhotoUrlGrupoEdit.value!;
+        }
+      }
+    }
+    if (lang.toUpperCase() == 'en'.toUpperCase()) {
+      grupoToEdit.texto.en = grupoEditNameController.text;
+    } else {
+      grupoToEdit.texto.es = grupoEditNameController.text;
+    }
+    int index = -1;
+    _homeController.grupos.firstWhere((element) {
+      index++;
+      print(element.texto.en);
+      return grupoToEdit.id == element.id;
+    });
+    print(grupoToEdit.texto.en);
+    _homeController.grupos[index] = grupoToEdit;
+    grupos[index] = grupoToEdit;
+    final data = _homeController.grupos;
+    List<String> fileData = [];
+    data.forEach((element) {
+      final obj = jsonEncode(element);
+      fileData.add(obj);
+    });
+
+    /// saving changes to file
+    if (!kIsWeb) {
+      final localFile = LocalFileController();
+      await localFile.writeGruposToFile(data: fileData.toString());
+      // print('writing to file');
+    }
+    //for the file data
+    final instance = await SharedPreferences.getInstance();
+    await instance.setBool('Grupos_file', true);
+    // print(res1);
+    //upload to the firebase
+    await uploadToFirebaseGrupo(data: fileData.toString());
+    await gruposExistsOnFirebase();
+    // for refreshing the UI of listing
+    categoryGridviewOrPageview.value = !categoryGridviewOrPageview.value;
+    categoryGridviewOrPageview.value = !categoryGridviewOrPageview.value;
+    resetDataForEditGrupo();
+    Get.back();
+    Navigator.of(context).pop(true);
   }
 
   void uploadChangesGrupos(
@@ -452,13 +602,14 @@ class PictogramGroupsController extends GetxController {
     print(_homeController.picts.last);
     _homeController.picts.add(pict);
     int index = -1;
-    int indexForAll =-1;
+    int indexForAll = -1;
     grupos.firstWhere((element) {
       index++;
       return element.id == selectedGrupos.id;
     });
     grupos.firstWhere((element) {
       indexForAll++;
+
       /// 24 is the id of all Grupo
       return element.id == 24;
     });
@@ -469,11 +620,11 @@ class PictogramGroupsController extends GetxController {
           ),
         );
     grupos[indexForAll].relacion.add(
-      GrupoRelacion(
-        id: timeSeconds,
-        frec: 0,
-      ),
-    );
+          GrupoRelacion(
+            id: timeSeconds,
+            frec: 0,
+          ),
+        );
     selectedGruposPicts.add(pict);
     print(_homeController.picts.length);
     print(_homeController.picts.last.texto.en);
@@ -519,7 +670,6 @@ class PictogramGroupsController extends GetxController {
     await uploadToFirebaseGrupo(data: fileDataGrupo.toString());
     await gruposExistsOnFirebase();
 
-
     // for refreshing the UI of listing
     pictoGridviewOrPageview.value = !pictoGridviewOrPageview.value;
     pictoGridviewOrPageview.value = !pictoGridviewOrPageview.value;
@@ -531,6 +681,15 @@ class PictogramGroupsController extends GetxController {
     resetDataForAddPicto();
     Get.back();
     Navigator.of(context).pop(true);
+  }
+
+  void resetDataForEditGrupo() {
+    grupoEditNameController.text = '';
+    editingGrupo.value = false;
+    isImageProvidedGrupoEdit.value = false;
+    fileImageGrupoEdit.value = null;
+    selectedPhotoUrlGrupoEdit.value = '';
+    imageTobeUploadedGrupoEdit.value = null;
   }
 
   void resetDataForAddGrupos() {
