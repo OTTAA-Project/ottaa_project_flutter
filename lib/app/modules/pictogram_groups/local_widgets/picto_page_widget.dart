@@ -40,7 +40,7 @@ class PictoPageWidget extends StatelessWidget {
                       _pictogramController.selectedGruposPicts[index];
                   showDialog(
                     context: context,
-                    builder: (context) => ChoiceDialogue(),
+                    builder: (context) => ChoiceDialogue(index: index),
                   );
                 },
                 child: CategoryWidget(
