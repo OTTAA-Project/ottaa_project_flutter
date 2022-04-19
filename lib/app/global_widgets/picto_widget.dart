@@ -16,18 +16,20 @@ final Map<int, Color> groupColor = {
 class Picto extends StatelessWidget {
   final Pict pict;
   final VoidCallback onTap;
+  VoidCallback? onLongPress;
   final double height;
   final double width;
   final languaje;
   final localImg;
 
-  const Picto({
+  Picto({
     required this.pict,
     required this.onTap,
     required this.height,
     required this.width,
     required this.languaje,
     required this.localImg,
+    this.onLongPress,
   });
 
   @override
@@ -47,6 +49,7 @@ class Picto extends StatelessWidget {
     }
 
     return GestureDetector(
+      onLongPress: this.onLongPress,
       onTap: this.onTap,
       child: Container(
         height: this.height,

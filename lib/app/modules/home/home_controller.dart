@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
@@ -8,7 +10,14 @@ import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/grupos_repository.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../global_controllers/local_file_controller.dart';
+import '../../routes/app_routes.dart';
+import '../../theme/app_theme.dart';
+import '../../utils/CustomAnalytics.dart';
 
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
@@ -17,6 +26,7 @@ class HomeController extends GetxController {
   final databaseRef = FirebaseDatabase.instance.reference();
   final _pictsRepository = Get.find<PictsRepository>();
   final _grupoRepository = Get.find<GrupoRepository>();
+  final _pictogram = Get.lazyPut(() => PictogramGroupsController());
   final authController = AuthService();
   late AnimationController _pictoAnimationController;
 
@@ -74,6 +84,10 @@ class HomeController extends GetxController {
 
   //drawer
   RxBool muteOrNot = false.obs;
+
+  //editing from homescreen
+  bool editingFromHomeScreen = false;
+  int suggestedMainScreenIndex = -1;
 
   @override
   void onInit() async {
@@ -240,6 +254,7 @@ class HomeController extends GetxController {
     );
 
     final Pict pict = picts.firstWhere((pict) => pict.id == id);
+    print('the id of the pict is ${pict.id}');
 
     if (pict.relacion!.length >= 1) {
       final List<Relacion> recomendedPicts = pict.relacion!.toList();
@@ -324,6 +339,70 @@ class HomeController extends GetxController {
 
     return requiredPicts;
   }
+
+  void deletePicto({
+    required BuildContext context,
+    required int index,
+    required int suggestedIndexMainScreen,
+  }) async {
+    final _pictogramController = Get.find<PictogramGroupsController>();
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: kOTTAOrangeNew,
+            ),
+          );
+        });
+    int indexGrupo = 0;
+    picts[indexGrupo].relacion!.removeWhere((element) => element.id == index);
+    final dataPicts = picts;
+    List<String> fileDataPicts = [];
+    dataPicts.forEach((element) {
+      final obj = jsonEncode(element);
+      fileDataPicts.add(obj);
+    });
+
+    /// saving changes to file
+    if (!kIsWeb) {
+      final localFile = LocalFileController();
+      await localFile.writePictoToFile(
+        data: fileDataPicts.toString(),
+      );
+      // print('writing to file');
+    }
+    //for the file data
+    final instance = await SharedPreferences.getInstance();
+    await instance.setBool('Pictos_file', true);
+    // print(res1);
+    //upload to the firebase
+    await _pictogramController.uploadToFirebasePicto(
+      data: fileDataPicts.toString(),
+    );
+    await _pictogramController.pictoExistsOnFirebase();
+    suggestedPicts.removeAt(suggestedIndexMainScreen);
+    update(['suggested']);
+    Get.back();
+    Get.back();
+  }
+
+  void editPicto({
+    required int suggestedIndexMainScreen,
+  }) {
+    Get.back();
+    editingFromHomeScreen = true;
+    pictToBeEdited = suggestedPicts[suggestedIndexMainScreen];
+    Get.toNamed(AppRoutes.EDITPICTO);
+    CustomAnalyticsEvents.setEventWithParameters(
+        "Touch", CustomAnalyticsEvents.createMyMap('name', 'Edit '));
+  }
+
+  void updateSuggested({required Pict updatedOne,required int suggestedMainScreenIndex}) {
+    suggestedPicts[suggestedMainScreenIndex] = updatedOne;
+    update(['suggested']);
+  }
 }
 
-enum Horario { MANANA, MEDIODIA, TARDE, NOCHE, ISEMPTY }
+// enum Horario { MANANA, MEDIODIA, TARDE, NOCHE, ISEMPTY }

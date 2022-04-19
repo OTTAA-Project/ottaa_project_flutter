@@ -23,6 +23,7 @@ class HomePage extends GetView<HomeController> {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // key: _homeController.scaffoldKey,
       drawer: DrawerWidget(),
       body: Stack(

@@ -48,7 +48,6 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                       ),
                     );
                   });
-              //todo: remove the picto from both groups and upload it
               int indexGrupo = -1;
               _pictogramController.grupos.firstWhere((element) {
                 indexGrupo++;

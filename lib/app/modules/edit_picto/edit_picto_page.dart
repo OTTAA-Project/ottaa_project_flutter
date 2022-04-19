@@ -9,11 +9,13 @@ import 'package:ottaa_project_flutter/app/modules/edit_picto/right_column_widget
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/category_widget.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:get/get.dart';
+import '../home/home_controller.dart';
 import 'local_widgets/search_photo_page.dart';
 
 class EditPictoPage extends GetView<EditPictoController> {
   EditPictoPage({Key? key}) : super(key: key);
   final _ttsController = Get.find<TTSController>();
+  final _homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,10 @@ class EditPictoPage extends GetView<EditPictoController> {
               content: Text('do_you_want_to_save_changes'.tr),
               actions: <Widget>[
                 TextButton(
-                  onPressed: () => Navigator.of(context).pop(true),
+                  onPressed: () {
+                    _homeController.editingFromHomeScreen = false;
+                    Navigator.of(context).pop(true);
+                  },
                   child: Text('no'.tr),
                 ),
                 TextButton(

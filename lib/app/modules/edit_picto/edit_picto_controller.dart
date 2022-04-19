@@ -58,7 +58,8 @@ class EditPictoController extends GetxController {
     });
   }
 
-  Future<List<SearchModel>> fetchPhotoFromGlobalSymbols({required String text}) async {
+  Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
+      {required String text}) async {
     final String languageFormat = lang == 'en' ? '639-3' : '639-1';
     final language = lang == 'en' ? 'eng' : 'es';
     url =
@@ -133,7 +134,8 @@ class EditPictoController extends GetxController {
     }
   }
 
-  void uploadChanges({required BuildContext context,RxBool? editPicBool}) async {
+  void uploadChanges(
+      {required BuildContext context, RxBool? editPicBool}) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -179,13 +181,17 @@ class EditPictoController extends GetxController {
       index++;
     }
     _homeController.picts[index] = pict.value!;
-    _pictoController.picts[index] = pict.value!;
+    if (_homeController.editingFromHomeScreen) {
+    } else {
+      _pictoController.picts[index] = pict.value!;
+    }
     final data = _homeController.picts;
     List<String> fileData = [];
     data.forEach((element) {
       final obj = jsonEncode(element);
       fileData.add(obj);
     });
+
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
@@ -201,10 +207,17 @@ class EditPictoController extends GetxController {
     await uploadToFirebase(data: fileData.toString());
     await pictsExistsOnFirebase();
     // for refreshing the UI of listing
-    _pictoController.pictoGridviewOrPageview.value =
-        !_pictoController.pictoGridviewOrPageview.value;
-    _pictoController.pictoGridviewOrPageview.value =
-        !_pictoController.pictoGridviewOrPageview.value;
+    if (_homeController.editingFromHomeScreen) {
+    } else {
+      _pictoController.pictoGridviewOrPageview.value =
+          !_pictoController.pictoGridviewOrPageview.value;
+      _pictoController.pictoGridviewOrPageview.value =
+          !_pictoController.pictoGridviewOrPageview.value;
+    }
+    _homeController.editingFromHomeScreen = false;
+    _homeController.updateSuggested(
+        suggestedMainScreenIndex: _homeController.suggestedMainScreenIndex,
+        updatedOne: pict.value!);
     Get.back();
     Navigator.of(context).pop(true);
   }
