@@ -26,7 +26,6 @@ class HomeController extends GetxController {
   final databaseRef = FirebaseDatabase.instance.reference();
   final _pictsRepository = Get.find<PictsRepository>();
   final _grupoRepository = Get.find<GrupoRepository>();
-  final _pictogram = Get.lazyPut(() => PictogramGroupsController());
   final authController = AuthService();
   late AnimationController _pictoAnimationController;
 
@@ -94,6 +93,7 @@ class HomeController extends GetxController {
     super.onInit();
     await loadPicts();
     await getPicNumber();
+    final _pictogram = Get.put(PictogramGroupsController());
   }
 
   addPictToSentence(Pict pict) async {
@@ -399,7 +399,8 @@ class HomeController extends GetxController {
         "Touch", CustomAnalyticsEvents.createMyMap('name', 'Edit '));
   }
 
-  void updateSuggested({required Pict updatedOne,required int suggestedMainScreenIndex}) {
+  void updateSuggested(
+      {required Pict updatedOne, required int suggestedMainScreenIndex}) {
     suggestedPicts[suggestedMainScreenIndex] = updatedOne;
     update(['suggested']);
   }

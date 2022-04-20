@@ -208,6 +208,9 @@ class EditPictoController extends GetxController {
     await pictsExistsOnFirebase();
     // for refreshing the UI of listing
     if (_homeController.editingFromHomeScreen) {
+      _homeController.updateSuggested(
+          suggestedMainScreenIndex: _homeController.suggestedMainScreenIndex,
+          updatedOne: pict.value!);
     } else {
       _pictoController.pictoGridviewOrPageview.value =
           !_pictoController.pictoGridviewOrPageview.value;
@@ -215,9 +218,6 @@ class EditPictoController extends GetxController {
           !_pictoController.pictoGridviewOrPageview.value;
     }
     _homeController.editingFromHomeScreen = false;
-    _homeController.updateSuggested(
-        suggestedMainScreenIndex: _homeController.suggestedMainScreenIndex,
-        updatedOne: pict.value!);
     Get.back();
     Navigator.of(context).pop(true);
   }
