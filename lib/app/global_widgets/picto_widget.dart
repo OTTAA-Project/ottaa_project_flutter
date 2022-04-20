@@ -103,7 +103,9 @@ class Picto extends StatelessWidget {
                                 },
                               )
                             : CachedNetworkImage(
-                                imageUrl: pict.imagen.picto,
+                                imageUrl: pict.imagen.pictoEditado == null
+                                    ? pict.imagen.picto
+                                    : pict.imagen.pictoEditado!,
                                 placeholder: (context, url) => Center(
                                   child: CircularProgressIndicator(),
                                 ),
