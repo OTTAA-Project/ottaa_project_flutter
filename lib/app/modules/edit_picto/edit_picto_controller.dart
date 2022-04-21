@@ -42,7 +42,30 @@ class EditPictoController extends GetxController {
   Rx<XFile?> imageTobeUploaded = Rx<XFile?>(null);
 
   /// multiple dataset map
-  final Map<int, String> dataSetMap = {
+  final Map<int, int> dataSetMapId = {
+    0: 0,
+    1: 17,
+    2: 84,
+    3: 14,
+    4: 13,
+    5: 82,
+    6: 83,
+    7: 81,
+    8: 66,
+    9: 95,
+    10: 75,
+    11: 16,
+    12: 67,
+    13: 74,
+    14: 86,
+    15: 88,
+    16: 15,
+    17: 97,
+    18: 76,
+  };
+
+  final Map<int, String> dataSetMapStrings = {
+    0: 'All',
     17: 'ARASAAC',
     84: 'Gumeil',
     14: 'Jellow',
@@ -62,6 +85,9 @@ class EditPictoController extends GetxController {
     97: 'Typical Bulgarian Symbols SVG',
     76: 'DoeDY',
   };
+   RxInt selectedId = 0.obs;
+   RxBool refreshSearchResult = true.obs;
+   bool firstTime = true;
 
   late String url;
 
