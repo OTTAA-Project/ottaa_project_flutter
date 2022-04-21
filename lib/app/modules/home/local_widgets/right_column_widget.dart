@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -44,7 +45,10 @@ class RightColumnWidget extends StatelessWidget {
                   textColor: Colors.white,
                   fontSize: verticalSize * 0.03,
                 );
-                CustomAnalyticsEvents.setEventWithParameters("Touch",CustomAnalyticsEvents.createMyMap('Principal', "Share Phrases"));
+                CustomAnalyticsEvents.setEventWithParameters(
+                    "Touch",
+                    CustomAnalyticsEvents.createMyMap(
+                        'Principal', "Share Phrases"));
               },
               child: Center(
                 child: Icon(
@@ -59,7 +63,10 @@ class RightColumnWidget extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 Get.toNamed(AppRoutes.SENTENCES);
-                CustomAnalyticsEvents.setEventWithParameters("Touch",CustomAnalyticsEvents.createMyMap('Principal', "Favourite Phrases"));
+                CustomAnalyticsEvents.setEventWithParameters(
+                    "Touch",
+                    CustomAnalyticsEvents.createMyMap(
+                        'Principal', "Favourite Phrases"));
               },
               child: Center(
                 child: Icon(
