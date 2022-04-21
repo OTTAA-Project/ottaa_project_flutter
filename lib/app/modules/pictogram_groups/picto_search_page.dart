@@ -21,7 +21,54 @@ class CustomDelegate extends SearchDelegate<String> {
       icon: Icon(Icons.chevron_left), onPressed: () => close(context, ''));
 
   @override
-  Widget buildResults(BuildContext context) => Container();
+  Widget buildResults(BuildContext context) {
+    List<Pict> listToShow;
+    final language = _ttsController.languaje;
+    if (query.isNotEmpty)
+      listToShow = language == 'en'
+          ? _pictogramController.picts
+              .where((e) =>
+                  e.texto.en.toLowerCase().contains(query.toLowerCase()) &&
+                  e.texto.en.toLowerCase().startsWith(query.toLowerCase()))
+              .toList()
+          : _pictogramController.picts
+              .where((e) =>
+                  e.texto.es.toLowerCase().contains(query.toLowerCase()) &&
+                  e.texto.es.toLowerCase().startsWith(query.toLowerCase()))
+              .toList();
+    else
+      listToShow = _pictogramController.picts;
+    return Container(
+      color: Colors.black,
+      child: GridView.builder(
+        // controller: _pictogramController.pictoGridController,
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        itemCount: listToShow.length,
+        itemBuilder: (context, index) => GestureDetector(
+          onTap: () async {
+            await onTap(listToShow[index]);
+          },
+          child: CategoryWidget(
+            name: language == 'en'
+                ? listToShow[index].texto.en
+                : listToShow[index].texto.es,
+            imageName: listToShow[index].imagen.pictoEditado == null
+                ? listToShow[index].imagen.picto
+                : listToShow[index].imagen.pictoEditado!,
+            border: true,
+            bottom: false,
+            color: listToShow[index].tipo,
+          ),
+        ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 5,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          childAspectRatio: 1,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget buildSuggestions(BuildContext context) {

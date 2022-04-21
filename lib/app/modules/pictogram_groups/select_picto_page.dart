@@ -88,19 +88,7 @@ class SelectPictoPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(),
-                          GestureDetector(
-                            onTap: () =>
-                            {
-                              CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Pictograms Gallery', 'Backpress Button')),
-                              Get.back()
-                            },
-                            child: Icon(
-                              Icons.cancel,
-                              size: height * 0.1,
-                              color: Colors.white,
-                            ),
-                          ),
-
+                          Container(),
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
                           Container(),
@@ -112,6 +100,7 @@ class SelectPictoPage extends StatelessWidget {
                 ],
               ),
             ),
+
             //left one
             Positioned(
               left: 0,
@@ -184,6 +173,24 @@ class SelectPictoPage extends StatelessWidget {
               left: width * 0.43,
               right: width * 0.43,
               child: OttaLogoWidget(),
+            ),
+
+            ///close button fix
+            Positioned(
+              left: width * 0.27,
+              bottom: height * 0.04,
+              child: GestureDetector(
+                onTap: () =>
+                {
+                  CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Pictograms Gallery', 'Backpress Button')),
+                  Get.back()
+                },
+                child: Icon(
+                  Icons.cancel,
+                  size: height * 0.1,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         ),

@@ -24,7 +24,7 @@ class SentencesPage extends GetView<SentencesController> {
           leading: Container(),
           foregroundColor: Colors.white,
           elevation: 0,
-          title: Text('Sentences'),
+          title: Text('most_used_sentences'.tr),
           actions: [
             Icon(
               Icons.reorder,
