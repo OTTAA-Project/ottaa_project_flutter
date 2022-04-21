@@ -22,8 +22,8 @@ step2Onboarding<widget>(
     children: [
       FadeInLeft(
           child: HeaderWave(
-        color: kOTTAOrangeNew,
-        bgColor: kOTTABackgroundNew,
+        color: kOTTAAOrangeNew,
+        bgColor: kOTTAABackgroundNew,
       )),
       Positioned(
         bottom: 0,
@@ -66,7 +66,7 @@ step2Onboarding<widget>(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeInOut);
                 },
-                backgroundColor: kOTTAOrangeNew,
+                backgroundColor: kOTTAAOrangeNew,
                 fontColor: Colors.white,
               ),
             ],
@@ -102,7 +102,7 @@ step2Onboarding<widget>(
                           text: "Launch_short_tutorial".tr,
                           textColor: Colors.white,
                           disabledTextColor: Colors.grey,
-                          color: kOTTAOrange,
+                          color: kOTTAAOrange,
                           disabledColor: kQuantumGrey,
                           shape: GFButtonShape.pills,
                           size: verticalSize * 0.07,
@@ -114,7 +114,7 @@ step2Onboarding<widget>(
                           child: GFButton(
                             textColor: Colors.white,
                             disabledTextColor: Colors.grey,
-                            color: kOTTAOrange,
+                            color: kOTTAAOrange,
                             disabledColor: kQuantumGrey,
                             onPressed: null,
                             text: "Do_a_guided_workshop".tr,
@@ -128,7 +128,7 @@ step2Onboarding<widget>(
                           text: "Book_a_demo".tr,
                           textColor: Colors.white,
                           disabledTextColor: Colors.grey,
-                          color: kOTTAOrange,
+                          color: kOTTAAOrange,
                           disabledColor: kQuantumGrey,
                           shape: GFButtonShape.pills,
                           size: verticalSize * 0.07,

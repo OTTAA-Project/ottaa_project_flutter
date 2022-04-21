@@ -75,18 +75,62 @@ class HomeController extends GetxController {
   //drawer
   RxBool muteOrNot = false.obs;
 
+  //paid version screen
+  final String paidUrl =
+      'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-7H209758Y47141226MAMGTWY';
+  late Timer _timer;
+  int currentPage = 0;
+  PageController pageController = PageController(
+    initialPage: 0,
+  );
+  int userSubscription = 0;
+
+  Future<void> fetchAccountType() async {
+    final User? auth = FirebaseAuth.instance.currentUser;
+    final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
+    final res = await ref.get();
+
+    /// this means there is a value
+    if (res.value == 1) {
+      userSubscription = 1;
+    } else {
+      userSubscription = 0;
+    }
+  }
+
+
   @override
   void onInit() async {
     super.onInit();
     await loadPicts();
     await getPicNumber();
+    await fetchAccountType();
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      if (currentPage < 2) {
+        currentPage++;
+      } else {
+        currentPage = 0;
+      }
+
+      pageController.animateToPage(
+        currentPage,
+        duration: Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
   }
 
   addPictToSentence(Pict pict) async {
     if (this._sentencePicts.isEmpty) {
       picts[0].relacion!.add(
-        Relacion(id: pict.id, frec: 1),
-      );
+            Relacion(id: pict.id, frec: 1),
+          );
       this._sentencePicts.add(pict);
       await suggest(this._sentencePicts.last.id);
     } else {

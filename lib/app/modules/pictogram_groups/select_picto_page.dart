@@ -16,7 +16,7 @@ class SelectPictoPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kOTTAOrangeNew,
+        backgroundColor: kOTTAAOrangeNew,
         leading: Container(),
         foregroundColor: Colors.white,
         elevation: 0,
@@ -83,7 +83,7 @@ class SelectPictoPage extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      color: kOTTAOrangeNew,
+                      color: kOTTAAOrangeNew,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -118,7 +118,7 @@ class SelectPictoPage extends StatelessWidget {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrangeNew,
+                  color: kOTTAAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(16),
                   ),
@@ -150,7 +150,7 @@ class SelectPictoPage extends StatelessWidget {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrangeNew,
+                  color: kOTTAAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                   ),

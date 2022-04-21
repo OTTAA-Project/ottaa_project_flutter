@@ -15,7 +15,7 @@ class StepButton extends StatelessWidget {
     required this.text,
     this.leading,
     this.trailing,
-    this.backgroundColor = kOTTAOrange,
+    this.backgroundColor = kOTTAAOrange,
     this.fontColor = Colors.white,
   });
 

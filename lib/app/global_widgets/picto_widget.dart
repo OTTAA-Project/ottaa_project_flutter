@@ -6,7 +6,7 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 final Map<int, Color> groupColor = {
   1: Colors.yellow,
-  2: kOTTAOrangeNew,
+  2: kOTTAAOrangeNew,
   3: Colors.green,
   4: Colors.blue,
   5: Colors.purple,
@@ -86,7 +86,7 @@ class Picto extends StatelessWidget {
                                   if (loadingProgress == null) return child;
                                   return Center(
                                     child: CircularProgressIndicator(
-                                      color: kOTTAOrangeNew,
+                                      color: kOTTAAOrangeNew,
                                       value:
                                           loadingProgress.expectedTotalBytes !=
                                                   null

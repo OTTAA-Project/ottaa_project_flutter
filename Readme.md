@@ -26,6 +26,9 @@ You can be part of this life-changer tech, join us in this social impact open so
 
 ## Resources
 
+
+>* added some custom Icons here from the FlutterIcons website
+
 ### Libraries
    The libraries used are:
 

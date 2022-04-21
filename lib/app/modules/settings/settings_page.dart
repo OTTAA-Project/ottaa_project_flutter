@@ -52,7 +52,7 @@ class SettingsPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(
                     Icons.photo_library,
-                    color: kOTTAOrangeNew,
+                    color: kOTTAAOrangeNew,
                   ),
                   onTap: () {
                     Fluttertoast.showToast(
@@ -71,7 +71,7 @@ class SettingsPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(
                     Icons.try_sms_star,
-                    color: kOTTAOrangeNew,
+                    color: kOTTAAOrangeNew,
                   ),
                   onTap: () {
                     Fluttertoast.showToast(
@@ -90,7 +90,7 @@ class SettingsPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(
                     Icons.accessibility,
-                    color: kOTTAOrangeNew,
+                    color: kOTTAAOrangeNew,
                   ),
                   onTap: () {
                     Fluttertoast.showToast(
@@ -109,7 +109,7 @@ class SettingsPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(
                     Icons.record_voice_over,
-                    color: kOTTAOrangeNew,
+                    color: kOTTAAOrangeNew,
                   ),
                   onTap: () => Get.toNamed(AppRoutes.SETTINGS_VOICE),
                   title: Text('voice_and_subtitles'.tr),
@@ -118,7 +118,7 @@ class SettingsPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(
                     Icons.language,
-                    color: kOTTAOrangeNew,
+                    color: kOTTAAOrangeNew,
                   ),
                   onTap: () => Get.toNamed(AppRoutes.SETTINGS_LANG),
                   title: Text('language'.tr),

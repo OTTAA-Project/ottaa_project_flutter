@@ -36,16 +36,16 @@ class TextWidget extends GetView<EditPictoController> {
                 child: TextFormField(
                   controller: controller.nameController,
                   decoration: InputDecoration(
-                    focusColor: kOTTAOrangeNew,
-                    fillColor: kOTTAOrangeNew,
+                    focusColor: kOTTAAOrangeNew,
+                    fillColor: kOTTAAOrangeNew,
                     hintText: "Name".tr,
                     contentPadding: const EdgeInsets.all(0),
                     isDense: true,
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kOTTAOrangeNew),
+                      borderSide: BorderSide(color: kOTTAAOrangeNew),
                     ),
                   ),
-                  cursorColor: kOTTAOrangeNew,
+                  cursorColor: kOTTAAOrangeNew,
                   onChanged: (value) {
                     final lang = _ttsController.languaje;
                     if (lang == 'en') {

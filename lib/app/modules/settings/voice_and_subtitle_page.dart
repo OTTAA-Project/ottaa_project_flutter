@@ -34,7 +34,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         color: Colors.grey[700],
                       ),
                       SwitchListTile(
-                        activeColor: kOTTAOrange,
+                        activeColor: kOTTAAOrange,
                         value: _.ttsController.isCustomTTSEnable,
                         onChanged: (bool value) {
                           _.toggleIsCustomTTSEnable(value);
@@ -53,7 +53,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                       ),
                       Slider(
                         activeColor: _.ttsController.isCustomTTSEnable
-                            ? kOTTAOrange
+                            ? kOTTAAOrange
                             : kQuantumGrey,
                         inactiveColor: kQuantumGrey,
                         value: _.ttsController.rate,
@@ -75,7 +75,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                       ),
                       Slider(
                         activeColor: _.ttsController.isCustomTTSEnable
-                            ? kOTTAOrange
+                            ? kOTTAAOrange
                             : kQuantumGrey,
                         inactiveColor: kQuantumGrey,
                         value: _.ttsController.pitch,
@@ -100,7 +100,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         color: Colors.grey[700],
                       ),
                       SwitchListTile(
-                        activeColor: kOTTAOrange,
+                        activeColor: kOTTAAOrange,
                         title: Text('Customized subtitle'),
                         subtitle: _.ttsController.isCustomSubtitle
                             ? Text('ON')
@@ -119,7 +119,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                       ),
                       Slider(
                         activeColor: _.ttsController.isCustomSubtitle
-                            ? kOTTAOrange
+                            ? kOTTAAOrange
                             : kQuantumGrey,
                         inactiveColor: kQuantumGrey,
                         value: _.ttsController.subtitleSize.toDouble(),
@@ -135,7 +135,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                       Divider(),
                       SwitchListTile(
                         activeColor: _.ttsController.isCustomSubtitle
-                            ? kOTTAOrange
+                            ? kOTTAAOrange
                             : kQuantumGrey,
                         title: Text('Uppercase'),
                         subtitle: Text('It allows uppercase subtitles.'),

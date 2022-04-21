@@ -11,7 +11,7 @@ Widget step1Tutorial<widget>(PageController controller, context) {
   print(verticalSize);
   print(horizontalSize);
   return Container(
-    color: kOTTAOrange,
+    color: kOTTAAOrange,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -61,7 +61,7 @@ Widget step1Tutorial<widget>(PageController controller, context) {
           onTap: () => controller.animateToPage(1,
               duration: Duration(milliseconds: 300), curve: Curves.easeInOut),
           backgroundColor: Colors.white,
-          fontColor: kOTTAOrange,
+          fontColor: kOTTAAOrange,
         ),
         Expanded(
           child: Container(),
