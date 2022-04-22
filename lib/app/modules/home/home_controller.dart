@@ -105,6 +105,9 @@ class HomeController extends GetxController {
     await loadPicts();
     await getPicNumber();
     await fetchAccountType();
+  }
+
+  void initializePageViewer(){
     _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (currentPage < 2) {
         currentPage++;

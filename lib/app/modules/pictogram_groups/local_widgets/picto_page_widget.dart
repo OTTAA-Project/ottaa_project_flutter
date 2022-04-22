@@ -44,6 +44,7 @@ class PictoPageWidget extends StatelessWidget {
                       builder: (context) => ChoiceDialogue(),
                     );
                   } else {
+                    _homeController.initializePageViewer();
                     Get.to(() => BuyPaidVersionPage());
                   }
                   // Get.toNamed(AppRoutes.EDITPICTO);
@@ -90,6 +91,7 @@ class PictoPageWidget extends StatelessWidget {
                       builder: (context) => ChoiceDialogue(),
                     );
                   } else {
+                    _homeController.initializePageViewer();
                     Get.to(() => BuyPaidVersionPage());
                   }
                   // Get.toNamed(AppRoutes.EDITPICTO);

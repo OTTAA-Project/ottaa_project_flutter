@@ -12,4 +12,5 @@ class AppRoutes {
   static const SELECTPICTO = "/select_picto";
   static const EDITPICTO = "/edit_picto";
   static const ABOUTOTTAA = "/about_ottaa";
+  static const GAMES = "/games";
 }
