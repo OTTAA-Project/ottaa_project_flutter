@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
@@ -8,11 +10,11 @@ class GamesController extends GetxController {
   /// Game Types Data
   List<GameModelData> gameTypes = [
     GameModelData(
-        subtitle:
-            'Answer hte questions by choosing the right pictogram.\nLearn by playing!',
-        completedNumber: 0,
-        totalLevel: 45,
-        title: 'Whats the picto?',
+      subtitle:
+          'Answer hte questions by choosing the right pictogram.\nLearn by playing!',
+      completedNumber: 0,
+      totalLevel: 45,
+      title: 'Whats the picto?',
       imageAsset: 'assets/games_images/whats_picto.png',
     ),
     GameModelData(
@@ -35,6 +37,13 @@ class GamesController extends GetxController {
   int gameSelected = -1;
   int grupoSelectedIndex = -1;
   late String language;
+  RxBool muteOrNot = false.obs;
+  RxBool helpOrNot = false.obs;
+  RxInt correctScore = 0.obs;
+  RxInt incorrectScore = 0.obs;
+  RxInt timeInSeconds = 0.obs;
+  RxInt maximumStreak = 0.obs;
+  late Timer _timer;
 
   final initialGamePageController = PageController(initialPage: 0);
   final grupoPageController = PageController(initialPage: 0);
@@ -50,8 +59,15 @@ class GamesController extends GetxController {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
+  }
+
+  @override
   void onClose() {
     super.onClose();
+    _timer.cancel();
   }
 
   @override
@@ -64,5 +80,12 @@ class GamesController extends GetxController {
     grupos.addAll(_homeController.grupos);
     language = _homeController.language;
     super.onReady();
+  }
+
+  void startGameTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+      timeInSeconds.value = timeInSeconds.value + 1;
+      print(timeInSeconds);
+    });
   }
 }

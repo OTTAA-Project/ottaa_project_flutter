@@ -67,7 +67,7 @@ class GamesPage extends GetView<GamesController> {
                 centerButton: () {
                   controller.gameSelected =
                       controller.initialGamePageController.page!.toInt();
-                  Get.to(GrupoSelectionPage());
+                  Get.to(() => GrupoSelectionPage());
                   // print(controller.initialGamePageController.page);
                 },
                 nextButton: () => controller.goToNextPage(
@@ -80,7 +80,7 @@ class GamesPage extends GetView<GamesController> {
                 onTap: () {
                   controller.gameSelected =
                       controller.initialGamePageController.page!.toInt();
-                  Get.to(GrupoSelectionPage());
+                  Get.to(() => GrupoSelectionPage());
                 },
               ),
             ),
