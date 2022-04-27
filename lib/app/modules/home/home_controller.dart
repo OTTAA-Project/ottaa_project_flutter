@@ -19,6 +19,7 @@ class HomeController extends GetxController {
   final _grupoRepository = Get.find<GrupoRepository>();
   final authController = AuthService();
   late AnimationController _pictoAnimationController;
+  late String language;
 
   AnimationController get pictoAnimationController =>
       this._pictoAnimationController;
@@ -105,6 +106,7 @@ class HomeController extends GetxController {
     await loadPicts();
     await getPicNumber();
     await fetchAccountType();
+    language = _ttsController.languaje;
   }
 
   void initializePageViewer(){
