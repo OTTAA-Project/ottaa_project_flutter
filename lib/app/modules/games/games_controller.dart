@@ -11,7 +11,7 @@ class GamesController extends GetxController {
   List<GameModelData> gameTypes = [
     GameModelData(
       subtitle:
-          'Answer hte questions by choosing the right pictogram.\nLearn by playing!',
+          'Answer the questions by choosing the right pictogram.\nLearn by playing!',
       completedNumber: 0,
       totalLevel: 45,
       title: 'Whats the picto?',
@@ -34,7 +34,7 @@ class GamesController extends GetxController {
   ];
   final _homeController = Get.find<HomeController>();
   List<Grupos> grupos = [];
-  int gameSelected = -1;
+  RxInt gameSelected = 0.obs;
   int grupoSelectedIndex = -1;
   late String language;
   RxBool muteOrNot = false.obs;
@@ -44,6 +44,8 @@ class GamesController extends GetxController {
   RxInt timeInSeconds = 0.obs;
   RxInt maximumStreak = 0.obs;
   late Timer _timer;
+  RxBool imageOrEmoji  = true.obs;
+  RxString selectedAnswer = ''.obs;
 
   final initialGamePageController = PageController(initialPage: 0);
   final grupoPageController = PageController(initialPage: 0);
@@ -61,13 +63,11 @@ class GamesController extends GetxController {
   @override
   void dispose() {
     super.dispose();
-    _timer.cancel();
   }
 
   @override
   void onClose() {
     super.onClose();
-    _timer.cancel();
   }
 
   @override
@@ -85,7 +85,12 @@ class GamesController extends GetxController {
   void startGameTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
       timeInSeconds.value = timeInSeconds.value + 1;
-      print(timeInSeconds);
     });
+  }
+
+  void cancelTimer() {
+    _timer.cancel();
+    timeInSeconds.value = 0;
+    print('time cancel called');
   }
 }

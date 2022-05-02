@@ -65,7 +65,7 @@ class GamesPage extends GetView<GamesController> {
                 horizontalSize: horizontalSize * 0.6,
                 gameSelectionOrGruposSelection: true,
                 centerButton: () {
-                  controller.gameSelected =
+                  controller.gameSelected.value =
                       controller.initialGamePageController.page!.toInt();
                   Get.to(() => GrupoSelectionPage());
                   // print(controller.initialGamePageController.page);
@@ -78,7 +78,7 @@ class GamesPage extends GetView<GamesController> {
                     pageController: controller.initialGamePageController),
                 color: kOTTAAOrangeNew,
                 onTap: () {
-                  controller.gameSelected =
+                  controller.gameSelected.value =
                       controller.initialGamePageController.page!.toInt();
                   Get.to(() => GrupoSelectionPage());
                 },

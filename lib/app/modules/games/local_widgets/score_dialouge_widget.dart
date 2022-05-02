@@ -108,7 +108,7 @@ class ScoreDialougeWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${timeInSeconds / 60} m ${timeInSeconds % 60} s',
+                        '${(timeInSeconds / 60).round()} m ${timeInSeconds % 60} s',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
