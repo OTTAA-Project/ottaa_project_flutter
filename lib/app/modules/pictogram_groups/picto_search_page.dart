@@ -77,14 +77,12 @@ class CustomDelegate extends SearchDelegate<String> {
     if (query.isNotEmpty)
       listToShow = language == 'en'
           ? _pictogramController.picts
-              .where((e) =>
-                  e.texto.en.toLowerCase().contains(query.toLowerCase()) &&
-                  e.texto.en.toLowerCase().startsWith(query.toLowerCase()))
+              .where(
+                  (e) => e.texto.en.toLowerCase().contains(query.toLowerCase()))
               .toList()
           : _pictogramController.picts
-              .where((e) =>
-                  e.texto.es.toLowerCase().contains(query.toLowerCase()) &&
-                  e.texto.es.toLowerCase().startsWith(query.toLowerCase()))
+              .where(
+                  (e) => e.texto.es.toLowerCase().contains(query.toLowerCase()))
               .toList();
     else
       listToShow = _pictogramController.picts;

@@ -45,7 +45,7 @@ class RightColumnWidget extends StatelessWidget {
                   fontSize: verticalSize * 0.03,
                 );
                 CustomAnalyticsEvents.setEventWithParameters("Touch",CustomAnalyticsEvents.createMyMap('Principal', "Share Phrases"));
-                Get.toNamed(AppRoutes.TUTORIAL);
+                // Get.toNamed(AppRoutes.TUTORIAL);
               },
               child: Center(
                 child: Icon(
