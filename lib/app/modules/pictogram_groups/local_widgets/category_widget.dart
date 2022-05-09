@@ -177,7 +177,7 @@ class DeviceImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isEditing
-        ? selectedImageUrl == null
+        ? selectedImageUrl == ''
             ? Image.file(fileImage!)
             : Image.network(selectedImageUrl!)
         : CachedNetworkImage(
