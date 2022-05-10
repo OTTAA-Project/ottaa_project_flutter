@@ -90,6 +90,31 @@ class HomeController extends GetxController {
   bool editingFromHomeScreen = false;
   int suggestedMainScreenIndex = -1;
 
+  //paid version screen
+  final String paidUrl =
+      'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-7H209758Y47141226MAMGTWY';
+  late Timer _timer;
+  int currentPage = 0;
+  PageController pageController = PageController(
+    initialPage: 0,
+  );
+  int userSubscription = 0;
+
+  Future<void> fetchAccountType() async {
+    final User? auth = FirebaseAuth.instance.currentUser;
+    final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
+    final res = await ref.get();
+
+    /// this means there is a value
+    if (res.value == 1) {
+      userSubscription = 1;
+    } else {
+      userSubscription = 0;
+    }
+  }
+
+
+
   @override
   void onInit() async {
     super.onInit();
