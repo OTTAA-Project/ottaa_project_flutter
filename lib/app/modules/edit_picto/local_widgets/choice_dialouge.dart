@@ -44,7 +44,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   builder: (context) {
                     return Center(
                       child: CircularProgressIndicator(
-                        color: kOTTAOrangeNew,
+                        color: kOTTAAOrangeNew,
                       ),
                     );
                   });

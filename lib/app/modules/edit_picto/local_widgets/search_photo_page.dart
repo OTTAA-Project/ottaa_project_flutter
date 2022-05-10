@@ -197,7 +197,7 @@ class HeaderWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: _editController.selectedId.value ==
                                 _editController.dataSetMapId[index]!
-                            ? kOTTAOrangeNew
+                            ? kOTTAAOrangeNew
                             : Colors.grey,
                         borderRadius:
                             BorderRadius.circular(horizontalSize * 0.015),

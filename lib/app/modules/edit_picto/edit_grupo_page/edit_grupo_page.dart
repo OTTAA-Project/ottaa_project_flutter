@@ -20,7 +20,7 @@ class EditGrupoPage extends GetView<PictogramGroupsController> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: kOTTAOrangeNew,
+          backgroundColor: kOTTAAOrangeNew,
           foregroundColor: Colors.white,
           elevation: 0,
           centerTitle: false,
@@ -108,7 +108,7 @@ class EditGrupoPage extends GetView<PictogramGroupsController> {
                 child: Container(
                   padding:
                       EdgeInsets.symmetric(vertical: horizontalSize * 0.01),
-                  color: kOTTAOrangeNew,
+                  color: kOTTAAOrangeNew,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

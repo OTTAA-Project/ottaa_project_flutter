@@ -24,7 +24,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kOTTAOrangeNew,
+        backgroundColor: kOTTAAOrangeNew,
         leading: Container(),
         foregroundColor: Colors.white,
         elevation: 0,
@@ -84,7 +84,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      color: kOTTAOrangeNew,
+                      color: kOTTAAOrangeNew,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -198,7 +198,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrangeNew,
+                  color: kOTTAAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(16),
                   ),
@@ -229,7 +229,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrangeNew,
+                  color: kOTTAAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                   ),

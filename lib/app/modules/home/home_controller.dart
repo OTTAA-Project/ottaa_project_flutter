@@ -354,7 +354,7 @@ class HomeController extends GetxController {
         builder: (context) {
           return Center(
             child: CircularProgressIndicator(
-              color: kOTTAOrangeNew,
+              color: kOTTAAOrangeNew,
             ),
           );
         });
