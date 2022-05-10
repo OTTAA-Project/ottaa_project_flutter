@@ -55,6 +55,7 @@ dependencies:
   http: ^0.13.2
   fluttertoast: ^8.0.9
   firebase_crashlytics: ^2.5.2
+  audioplayers: ^0.20.1
 #  image_picker_web: ^2.1.0
 
 

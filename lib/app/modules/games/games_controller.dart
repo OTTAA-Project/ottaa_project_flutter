@@ -43,9 +43,9 @@ class GamesController extends GetxController {
   RxInt incorrectScore = 0.obs;
   RxInt timeInSeconds = 0.obs;
   RxInt maximumStreak = 0.obs;
-  late Timer _timer;
-  RxBool imageOrEmoji  = true.obs;
-  RxString selectedAnswer = ''.obs;
+  late Timer _gameStartTimer,hintTimer;
+  List<RxBool> imageOrEmoji  = [true.obs,true.obs,true.obs,true.obs];
+  List<RxString> selectedAnswer = [''.obs,''.obs,''.obs,''.obs];
 
   final initialGamePageController = PageController(initialPage: 0);
   final grupoPageController = PageController(initialPage: 0);
@@ -83,13 +83,13 @@ class GamesController extends GetxController {
   }
 
   void startGameTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    _gameStartTimer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
       timeInSeconds.value = timeInSeconds.value + 1;
     });
   }
 
   void cancelTimer() {
-    _timer.cancel();
+    _gameStartTimer.cancel();
     timeInSeconds.value = 0;
     print('time cancel called');
   }

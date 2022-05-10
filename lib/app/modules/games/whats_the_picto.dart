@@ -69,42 +69,50 @@ class WhatsThePicto extends GetView<GamesController> {
         Positioned(
           bottom: verticalSize * 0.02,
           left: horizontalSize * 0.02,
-          child: Row(
-            children: [
-              PictoWidget(
-                verticalSize: verticalSize,
-                horizontalSize: horizontalSize,
-                imageUrl: '',
-                name: '',
-                imageOrResult: false,
-                selectedAnswer: controller.selectedAnswer.value,
-              ),
-              SizedBox(
-                width: horizontalSize * 0.03,
-              ),
-              Obx(
-                () => GestureDetector(
+          child: Obx(
+            () => Row(
+              children: [
+                PictoWidget(
                   onTap: () async {
-                    controller.imageOrEmoji.value =
-                        !controller.imageOrEmoji.value;
+                    controller.imageOrEmoji[0].value =
+                        !controller.imageOrEmoji[0].value;
                     //todo: create a function for adding to score and do some magic
                     await Future.delayed(
-                      Duration(seconds: 1),
+                      Duration(seconds: 2),
                     );
-                    controller.imageOrEmoji.value =
-                        !controller.imageOrEmoji.value;
+                    controller.imageOrEmoji[0].value =
+                        !controller.imageOrEmoji[0].value;
                   },
-                  child: PictoWidget(
-                    verticalSize: verticalSize,
-                    horizontalSize: horizontalSize,
-                    imageUrl: '',
-                    name: '',
-                    imageOrResult: controller.imageOrEmoji.value,
-                    selectedAnswer: controller.selectedAnswer.value,
-                  ),
+                  verticalSize: verticalSize,
+                  horizontalSize: horizontalSize,
+                  imageUrl: '',
+                  name: '',
+                  imageOrResult: controller.imageOrEmoji[0].value,
+                  selectedAnswer: controller.selectedAnswer[0].value,
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: horizontalSize * 0.03,
+                ),
+                PictoWidget(
+                  onTap: () async {
+                    controller.imageOrEmoji[1].value =
+                        !controller.imageOrEmoji[1].value;
+                    //todo: create a function for adding to score and do some magic
+                    await Future.delayed(
+                      Duration(seconds: 2),
+                    );
+                    controller.imageOrEmoji[1].value =
+                        !controller.imageOrEmoji[1].value;
+                  },
+                  verticalSize: verticalSize,
+                  horizontalSize: horizontalSize,
+                  imageUrl: '',
+                  name: 'vvb',
+                  imageOrResult: controller.imageOrEmoji[1].value,
+                  selectedAnswer: controller.selectedAnswer[1].value,
+                ),
+              ],
+            ),
           ),
         ),
       ],
