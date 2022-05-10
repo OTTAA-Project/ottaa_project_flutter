@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
-import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-class TextWidget extends GetView<EditPictoController> {
-  TextWidget({Key? key}) : super(key: key);
-  final _ttsController = Get.find<TTSController>();
+class AddGroupTextWidget extends GetView<PictogramGroupsController> {
+  const AddGroupTextWidget({
+    Key? key,
+    required this.controllerTxt,
+  }) : super(key: key);
+  final TextEditingController controllerTxt;
 
   @override
   Widget build(BuildContext context) {
     final verticalSize = MediaQuery.of(context).size.height;
-    final horizontalSize = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.all(verticalSize * 0.01),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,26 +34,19 @@ class TextWidget extends GetView<EditPictoController> {
             children: [
               Expanded(
                 child: TextFormField(
-                  controller: controller.nameController,
+                  controller: controllerTxt,
                   decoration: InputDecoration(
-                    focusColor: kOTTAAOrangeNew,
-                    fillColor: kOTTAAOrangeNew,
+                    focusColor: kOTTAOrangeNew,
+                    fillColor: kOTTAOrangeNew,
                     hintText: "Name".tr,
                     contentPadding: const EdgeInsets.all(0),
                     isDense: true,
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kOTTAAOrangeNew),
+                      borderSide: BorderSide(color: kOTTAOrangeNew),
                     ),
                   ),
-                  cursorColor: kOTTAAOrangeNew,
-                  onChanged: (value) {
-                    final lang = _ttsController.languaje;
-                    if (lang == 'en') {
-                      controller.pict.value!.texto.en = value;
-                    } else {
-                      controller.pict.value!.texto.es = value;
-                    }
-                  },
+                  cursorColor: kOTTAOrangeNew,
+                  onChanged: (value) {},
                 ),
               ),
               SizedBox(
@@ -61,7 +54,7 @@ class TextWidget extends GetView<EditPictoController> {
               ),
               GestureDetector(
                 onTap: () async =>
-                    await _ttsController.speak(controller.nameController.text),
+                    await controller.ttsController.speak(controllerTxt.text),
                 child: Image.asset(
                   'assets/icono_ottaa.webp',
                   fit: BoxFit.cover,

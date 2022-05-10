@@ -59,28 +59,32 @@ class PictogramGroupsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: GestureDetector(
-                onTap: () => {
-                      CustomAnalyticsEvents.setEventWithParameters(
-                          "Touch",
-                          CustomAnalyticsEvents.createMyMap(
-                              'Group Gallery', 'Add Group'))
-                    },
-                child: Icon(
-                  Icons.add_circle_outline,
-                  size: 30,
-                )),
+              onTap: () {
+                CustomAnalyticsEvents.setEventWithParameters(
+                    "Touch",
+                    CustomAnalyticsEvents.createMyMap(
+                        'Group Gallery', 'Add Group'));
+                Get.toNamed(AppRoutes.ADDGROUP);
+              },
+              child: Icon(
+                Icons.add_circle_outline,
+                size: 30,
+              ),
+            ),
           ),
           GestureDetector(
-              onTap: () => {
-                    CustomAnalyticsEvents.setEventWithParameters(
-                        "Touch",
-                        CustomAnalyticsEvents.createMyMap(
-                            'Group Gallery', 'Syncronize Pictogram'))
-                  },
-              child: Icon(
-                Icons.cloud_download,
-                size: 30,
-              )),
+            onTap: () {
+              print(_homeController.grupos.last.imagen.picto);
+              CustomAnalyticsEvents.setEventWithParameters(
+                  "Touch",
+                  CustomAnalyticsEvents.createMyMap(
+                      'Group Gallery', 'Syncronize Pictogram'));
+            },
+            child: Icon(
+              Icons.cloud_download,
+              size: 30,
+            ),
+          ),
           const SizedBox(
             width: 16,
           ),

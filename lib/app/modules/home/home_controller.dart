@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
@@ -8,7 +10,14 @@ import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/grupos_repository.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../global_controllers/local_file_controller.dart';
+import '../../routes/app_routes.dart';
+import '../../theme/app_theme.dart';
+import '../../utils/CustomAnalytics.dart';
 
 import '../../data/models/search_model.dart';
 
@@ -77,67 +86,53 @@ class HomeController extends GetxController {
   //drawer
   RxBool muteOrNot = false.obs;
 
-  //paid version screen
-  final String paidUrl =
-      'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-7H209758Y47141226MAMGTWY';
-  late Timer _timer;
-  int currentPage = 0;
-  PageController pageController = PageController(
-    initialPage: 0,
-  );
-  int userSubscription = 0;
-
-  Future<void> fetchAccountType() async {
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
-    final res = await ref.get();
-
-    /// this means there is a value
-    if (res.value == 1) {
-      userSubscription = 1;
-    } else {
-      userSubscription = 0;
-    }
-  }
-
+  //editing from homescreen
+  bool editingFromHomeScreen = false;
+  int suggestedMainScreenIndex = -1;
 
   @override
   void onInit() async {
     super.onInit();
     await loadPicts();
     await getPicNumber();
-    await fetchAccountType();
-    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      if (currentPage < 2) {
-        currentPage++;
-      } else {
-        currentPage = 0;
-      }
-
-      pageController.animateToPage(
-        currentPage,
-        duration: Duration(milliseconds: 350),
-        curve: Curves.easeIn,
-      );
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _timer.cancel();
+    final _pictogram = Get.put(PictogramGroupsController());
   }
 
   addPictToSentence(Pict pict) async {
     if (this._sentencePicts.isEmpty) {
-      picts[0].relacion!.add(
+      if (picts[0].relacion!.isEmpty) {
+        picts[0].relacion!.add(
+              Relacion(id: pict.id, frec: 1),
+            );
+      }
+
+      /// if the length of the relacion >1
+
+      if (picts[0].relacion!.length >= 1) {
+        bool alreadyInTheList = false;
+        int relacionID = -1;
+        picts[0].relacion!.firstWhereOrNull((e) {
+          if (e.id == pict.id) {
+            alreadyInTheList = true;
+          }
+          relacionID++;
+          return e.id == pict.id;
+        });
+
+        ///if  it is in the relacion just increment it
+        if (alreadyInTheList) {
+          picts[0].relacion![relacionID].frec =
+              picts[0].relacion![relacionID].frec! + 1;
+        } else {picts[0].relacion!.add(
             Relacion(id: pict.id, frec: 1),
-          );
+          );}
+      }
       this._sentencePicts.add(pict);
       await suggest(this._sentencePicts.last.id);
     } else {
       final addToThisOnePictId = this._sentencePicts.last.id;
       int addToThisOneIndex = -1;
+      print('the size is here ${picts.length}');
       picts.firstWhere((element) {
         addToThisOneIndex++;
         return addToThisOnePictId == element.id;
@@ -145,10 +140,11 @@ class HomeController extends GetxController {
 
       /// if the length of the relacion == 0
 
-      if (this._sentencePicts.last.relacion!.length == 0) {
-        picts[addToThisOneIndex].relacion!.add(
-              Relacion(id: pict.id, frec: 1),
-            );
+      if (this._sentencePicts.last.relacion == null ||
+          this._sentencePicts.last.relacion!.isEmpty) {
+        picts[addToThisOneIndex].relacion = [
+          Relacion(id: pict.id, frec: 1),
+        ];
       }
 
       /// if the length of the relacion >1
@@ -257,10 +253,14 @@ class HomeController extends GetxController {
     );
 
     final Pict pict = picts.firstWhere((pict) => pict.id == id);
+    print('the id of the pict is ${pict.id}');
 
-    final List<Relacion> recomendedPicts = pict.relacion!.toList();
-    recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec! ));
-    this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);
+    if (pict.relacion!.length >= 1) {
+      final List<Relacion> recomendedPicts = pict.relacion!.toList();
+      recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec! ));
+    this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);} else {
+      this._suggestedPicts = [];
+    }
 
     /// *
     /// predictive algo will replace teh code from here
@@ -341,6 +341,71 @@ class HomeController extends GetxController {
   List<SearchModel?> dataMainForImages =[];
   List<SearchModel?> dataMainForImagesReferences=[];
 
+
+  void deletePicto({
+    required BuildContext context,
+    required int index,
+    required int suggestedIndexMainScreen,
+  }) async {
+    final _pictogramController = Get.find<PictogramGroupsController>();
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: kOTTAOrangeNew,
+            ),
+          );
+        });
+    int indexGrupo = 0;
+    picts[indexGrupo].relacion!.removeWhere((element) => element.id == index);
+    final dataPicts = picts;
+    List<String> fileDataPicts = [];
+    dataPicts.forEach((element) {
+      final obj = jsonEncode(element);
+      fileDataPicts.add(obj);
+    });
+
+    /// saving changes to file
+    if (!kIsWeb) {
+      final localFile = LocalFileController();
+      await localFile.writePictoToFile(
+        data: fileDataPicts.toString(),
+      );
+      // print('writing to file');
+    }
+    //for the file data
+    final instance = await SharedPreferences.getInstance();
+    await instance.setBool('Pictos_file', true);
+    // print(res1);
+    //upload to the firebase
+    await _pictogramController.uploadToFirebasePicto(
+      data: fileDataPicts.toString(),
+    );
+    await _pictogramController.pictoExistsOnFirebase();
+    suggestedPicts.removeAt(suggestedIndexMainScreen);
+    update(['suggested']);
+    Get.back();
+    Get.back();
+  }
+
+  void editPicto({
+    required int suggestedIndexMainScreen,
+  }) {
+    Get.back();
+    editingFromHomeScreen = true;
+    pictToBeEdited = suggestedPicts[suggestedIndexMainScreen];
+    Get.toNamed(AppRoutes.EDITPICTO);
+    CustomAnalyticsEvents.setEventWithParameters(
+        "Touch", CustomAnalyticsEvents.createMyMap('name', 'Edit '));
+  }
+
+  void updateSuggested(
+      {required Pict updatedOne, required int suggestedMainScreenIndex}) {
+    suggestedPicts[suggestedMainScreenIndex] = updatedOne;
+    update(['suggested']);
+  }
 }
 
-enum Horario { MANANA, MEDIODIA, TARDE, NOCHE, ISEMPTY }
+// enum Horario { MANANA, MEDIODIA, TARDE, NOCHE, ISEMPTY }

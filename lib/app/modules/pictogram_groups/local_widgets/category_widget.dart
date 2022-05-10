@@ -144,7 +144,7 @@ class WebImageWidget extends StatelessWidget {
     return isEditing
         ? imageWidget!
         : Image.network(
-            selectedImageUrl == null ? imageName : selectedImageUrl!,
+            selectedImageUrl == '' ? imageName : selectedImageUrl!,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) return child;
               return Center(
@@ -177,7 +177,7 @@ class DeviceImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isEditing
-        ? selectedImageUrl == null
+        ? selectedImageUrl == ''
             ? Image.file(fileImage!)
             : Image.network(selectedImageUrl!)
         : CachedNetworkImage(

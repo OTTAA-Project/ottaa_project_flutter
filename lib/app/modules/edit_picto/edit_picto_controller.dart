@@ -17,11 +17,6 @@ import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// import 'package:image_picker_web/image_picker_web.dart';
-// // import 'dart:html' as html;
-// import 'package:mime_type/mime_type.dart';
-// import 'package:path/path.dart' as Path;
-
 class EditPictoController extends GetxController {
   RxBool text = true.obs;
   RxBool frame = false.obs;
@@ -38,7 +33,7 @@ class EditPictoController extends GetxController {
   final ImagePicker picker = ImagePicker();
   RxBool editingPicture = false.obs;
   Rx<File?> fileImage = Rx<File?>(null);
-  Rx<String?> selectedPhotoUrl = Rx<String?>(null);
+  Rx<String?> selectedPhotoUrl = ''.obs;
   Rx<XFile?> imageTobeUploaded = Rx<XFile?>(null);
 
   /// multiple dataset map
@@ -111,7 +106,8 @@ class EditPictoController extends GetxController {
     });
   }
 
-  Future<List<SearchModel>> fetchPhotoFromArsaac({required String text}) async {
+  Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
+      {required String text}) async {
     final String languageFormat = lang == 'en' ? '639-3' : '639-1';
     final language = lang == 'en' ? 'eng' : 'es';
     url =
@@ -186,7 +182,8 @@ class EditPictoController extends GetxController {
     }
   }
 
-  void uploadChanges({required BuildContext context}) async {
+  void uploadChanges(
+      {required BuildContext context, RxBool? editPicBool}) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -199,7 +196,7 @@ class EditPictoController extends GetxController {
     if (editingPicture.value) {
       if (kIsWeb) {
         /// method for uploading images for web
-        if (selectedPhotoUrl.value == null) {
+        if (selectedPhotoUrl.value == '') {
           Reference _reference = FirebaseStorage.instance
               .ref()
               .child('testingUpload/${pict.value!.texto.en}');
@@ -217,7 +214,7 @@ class EditPictoController extends GetxController {
           pict.value!.imagen.pictoEditado = selectedPhotoUrl.value;
         }
       } else {
-        if (selectedPhotoUrl.value == null) {
+        if (selectedPhotoUrl.value == '') {
           await uploadImageToFirebaseStorage(path: fileImage.value!.path);
         } else {
           pict.value!.imagen.pictoEditado = selectedPhotoUrl.value;
@@ -232,13 +229,18 @@ class EditPictoController extends GetxController {
       index++;
     }
     _homeController.picts[index] = pict.value!;
-    _pictoController.picts[index] = pict.value!;
+    if (_homeController.editingFromHomeScreen) {
+    } else {
+      _pictoController.picts[index] = pict.value!;
+    }
     final data = _homeController.picts;
     List<String> fileData = [];
     data.forEach((element) {
       final obj = jsonEncode(element);
       fileData.add(obj);
     });
+
+    /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(data: fileData.toString());
@@ -253,10 +255,17 @@ class EditPictoController extends GetxController {
     await uploadToFirebase(data: fileData.toString());
     await pictsExistsOnFirebase();
     // for refreshing the UI of listing
-    _pictoController.pictoGridviewOrPageview.value =
-        !_pictoController.pictoGridviewOrPageview.value;
-    _pictoController.pictoGridviewOrPageview.value =
-        !_pictoController.pictoGridviewOrPageview.value;
+    if (_homeController.editingFromHomeScreen) {
+      _homeController.updateSuggested(
+          suggestedMainScreenIndex: _homeController.suggestedMainScreenIndex,
+          updatedOne: pict.value!);
+    } else {
+      _pictoController.pictoGridviewOrPageview.value =
+          !_pictoController.pictoGridviewOrPageview.value;
+      _pictoController.pictoGridviewOrPageview.value =
+          !_pictoController.pictoGridviewOrPageview.value;
+    }
+    _homeController.editingFromHomeScreen = false;
     Get.back();
     Navigator.of(context).pop(true);
   }

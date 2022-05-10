@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
@@ -28,10 +27,9 @@ class SearchPhotoPage extends SearchDelegate<SearchModel?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final verticalSize = MediaQuery.of(context).size.height;
     final horizontalSize = MediaQuery.of(context).size.width;
     return FutureBuilder<List<SearchModel?>>(
-      future: _editController.fetchPhotoFromArsaac(text: query),
+      future: _editController.fetchPhotoFromGlobalSymbols(text: query),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           print(snapshot.error);
@@ -124,10 +122,6 @@ class SearchPhotoPage extends SearchDelegate<SearchModel?> {
     return Container(
       color: Colors.black,
     );
-  }
-
-  Future<void> onTap(Pict pict) async {
-    /// grab the link for the picto from here
   }
 }
 
