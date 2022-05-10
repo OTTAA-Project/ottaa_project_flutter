@@ -10,6 +10,8 @@ import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dar
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
 
+import '../../data/models/search_model.dart';
+
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
 
@@ -165,7 +167,7 @@ class HomeController extends GetxController {
         ///if  it is in the relacion just increment it
         if (alreadyInTheList) {
           picts[addToThisOneIndex].relacion![relacionID].frec =
-              picts[addToThisOneIndex].relacion![relacionID].frec + 1;
+              picts[addToThisOneIndex].relacion![relacionID].frec! + 1;
         } else {
           picts[addToThisOneIndex].relacion!.add(
                 Relacion(id: pict.id, frec: 1),
@@ -257,7 +259,7 @@ class HomeController extends GetxController {
     final Pict pict = picts.firstWhere((pict) => pict.id == id);
 
     final List<Relacion> recomendedPicts = pict.relacion!.toList();
-    recomendedPicts.sort((b, a) => a.frec.compareTo(b.frec));
+    recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec! ));
     this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);
 
     /// *
@@ -327,7 +329,7 @@ class HomeController extends GetxController {
           }
         });
       }
-      e.score = (list[i].frec * pesoFrec) + (hora * pesoHora);
+      e.score = (list[i].frec! * pesoFrec) + (hora * pesoHora);
       // print(e.score);
     });
 
@@ -335,6 +337,10 @@ class HomeController extends GetxController {
 
     return requiredPicts;
   }
+
+  List<SearchModel?> dataMainForImages =[];
+  List<SearchModel?> dataMainForImagesReferences=[];
+
 }
 
 enum Horario { MANANA, MEDIODIA, TARDE, NOCHE, ISEMPTY }

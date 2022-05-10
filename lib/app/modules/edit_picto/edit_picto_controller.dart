@@ -38,8 +38,56 @@ class EditPictoController extends GetxController {
   final ImagePicker picker = ImagePicker();
   RxBool editingPicture = false.obs;
   Rx<File?> fileImage = Rx<File?>(null);
-  Rx<String?> selectedPhotoUrl = null.obs;
+  Rx<String?> selectedPhotoUrl = Rx<String?>(null);
   Rx<XFile?> imageTobeUploaded = Rx<XFile?>(null);
+
+  /// multiple dataset map
+  final Map<int, int> dataSetMapId = {
+    0: 0,
+    1: 17,
+    2: 84,
+    3: 14,
+    4: 13,
+    5: 82,
+    6: 83,
+    7: 81,
+    8: 66,
+    9: 95,
+    10: 75,
+    11: 16,
+    12: 67,
+    13: 74,
+    14: 86,
+    15: 88,
+    16: 15,
+    17: 97,
+    18: 76,
+  };
+
+  final Map<int, String> dataSetMapStrings = {
+    0: 'All',
+    17: 'ARASAAC',
+    84: 'Gumeil',
+    14: 'Jellow',
+    13: 'mulberry',
+    82: 'OCHA Humanitarian Icons',
+    83: 'OpenMoji',
+    81: 'Sclera Symbols',
+    66: 'Srbija Simboli',
+    95: 'Typical Bulgarian Symbols',
+    75: 'Adam Urdu Symbols',
+    16: 'Blissymbolics',
+    67: 'Cma Gora',
+    74: 'Hrvatski simboli za PK',
+    86: 'Mulberry Plus',
+    88: 'Otsmin Turkish',
+    15: 'Tawasol',
+    97: 'Typical Bulgarian Symbols SVG',
+    76: 'DoeDY',
+  };
+   RxInt selectedId = 0.obs;
+   RxBool refreshSearchResult = true.obs;
+   bool firstTime = true;
 
   late String url;
 
