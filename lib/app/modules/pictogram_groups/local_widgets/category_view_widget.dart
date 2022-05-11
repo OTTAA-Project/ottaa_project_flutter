@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
+import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_grupo_page/edit_grupo_page.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
@@ -136,15 +137,23 @@ class ChoiceDialogue extends GetView<EditPictoController> {
             onTap: () {
               Get.back();
               // Get.toNamed(AppRoutes.EDITPICTO);
-              _pictogramController.grupoEditNameController.text =
-                  'en'.toUpperCase() == _pictogramController.lang.toUpperCase()
-                      ? _pictogramController.grupoToEdit.texto.en
-                      : _pictogramController.grupoToEdit.texto.es;
-              print(_pictogramController.grupoToEdit.texto.en.toUpperCase());
-              print(_pictogramController.lang.toUpperCase());
-              Get.to(() => EditGrupoPage());
-              CustomAnalyticsEvents.setEventWithParameters(
-                  "Touch", CustomAnalyticsEvents.createMyMap('name', 'Edit '));
+              if (_homeController.userSubscription == 1) {
+                _pictogramController.grupoEditNameController.text =
+                    'en'.toUpperCase() ==
+                            _pictogramController.lang.toUpperCase()
+                        ? _pictogramController.grupoToEdit.texto.en
+                        : _pictogramController.grupoToEdit.texto.es;
+                print(_pictogramController.grupoToEdit.texto.en.toUpperCase());
+                print(_pictogramController.lang.toUpperCase());
+                Get.to(() => EditGrupoPage());
+                CustomAnalyticsEvents.setEventWithParameters("Touch",
+                    CustomAnalyticsEvents.createMyMap('name', 'Edit '));
+                CustomAnalyticsEvents.setEventWithParameters("Touch",
+                    CustomAnalyticsEvents.createMyMap('name', 'Edit '));
+              } else {
+                _homeController.startTimerAndController();
+                Get.to(() => BuyPaidVersionPage());
+              }
             },
             child: Text('edit'.tr),
           ),
@@ -153,39 +162,44 @@ class ChoiceDialogue extends GetView<EditPictoController> {
           ),
           GestureDetector(
             onTap: () async {
-              _pictogramController.grupos.removeWhere((element) =>
-                  _pictogramController.grupoToEdit.id == element.id);
-              _homeController.grupos.removeWhere((element) =>
-                  _pictogramController.grupoToEdit.id == element.id);
-              _pictogramController.categoryGridviewOrPageview.value =
-                  !_pictogramController.categoryGridviewOrPageview.value;
-              _pictogramController.categoryGridviewOrPageview.value =
-                  !_pictogramController.categoryGridviewOrPageview.value;
-              final dataGrupo = _homeController.grupos;
-              List<String> fileDataGrupo = [];
-              dataGrupo.forEach((element) {
-                final obj = jsonEncode(element);
-                fileDataGrupo.add(obj);
-              });
+              if (_homeController.userSubscription == 1) {
+                _pictogramController.grupos.removeWhere((element) =>
+                    _pictogramController.grupoToEdit.id == element.id);
+                _homeController.grupos.removeWhere((element) =>
+                    _pictogramController.grupoToEdit.id == element.id);
+                _pictogramController.categoryGridviewOrPageview.value =
+                    !_pictogramController.categoryGridviewOrPageview.value;
+                _pictogramController.categoryGridviewOrPageview.value =
+                    !_pictogramController.categoryGridviewOrPageview.value;
+                final dataGrupo = _homeController.grupos;
+                List<String> fileDataGrupo = [];
+                dataGrupo.forEach((element) {
+                  final obj = jsonEncode(element);
+                  fileDataGrupo.add(obj);
+                });
 
-              /// saving changes to file
-              if (!kIsWeb) {
-                final localFile = LocalFileController();
-                await localFile.writeGruposToFile(
+                /// saving changes to file
+                if (!kIsWeb) {
+                  final localFile = LocalFileController();
+                  await localFile.writeGruposToFile(
+                    data: fileDataGrupo.toString(),
+                  );
+                  // print('writing to file');
+                }
+                //for the file data
+                final instance = await SharedPreferences.getInstance();
+                await instance.setBool('Grupos_file', true);
+                // print(res1);
+                //upload to the firebase
+                await _pictogramController.uploadToFirebaseGrupo(
                   data: fileDataGrupo.toString(),
                 );
-                // print('writing to file');
+                await _pictogramController.gruposExistsOnFirebase();
+                Get.back();
+              } else {
+                _homeController.startTimerAndController();
+                Get.to(() => BuyPaidVersionPage());
               }
-              //for the file data
-              final instance = await SharedPreferences.getInstance();
-              await instance.setBool('Grupos_file', true);
-              // print(res1);
-              //upload to the firebase
-              await _pictogramController.uploadToFirebaseGrupo(
-                data: fileDataGrupo.toString(),
-              );
-              await _pictogramController.gruposExistsOnFirebase();
-              Get.back();
             },
             child: Text('Delete'),
           ),

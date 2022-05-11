@@ -36,16 +36,12 @@ class PictoPageWidget extends StatelessWidget {
                   await onTap(index, languaje);
                 },
                 onLongPress: () {
-                  if (_homeController.userSubscription == 1) {
-                    _homeController.pictToBeEdited =
-                        _pictogramController.selectedGruposPicts[index];
-                    showDialog(
-                      context: context,
-                      builder: (context) => ChoiceDialogue(),
-                    );
-                  } else {
-                    Get.to(() => BuyPaidVersionPage());
-                  }
+                  _homeController.pictToBeEdited =
+                  _pictogramController.selectedGruposPicts[index];
+                  showDialog(
+                    context: context,
+                    builder: (context) => ChoiceDialogue(),
+                  );
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: CategoryWidget(
@@ -82,16 +78,12 @@ class PictoPageWidget extends StatelessWidget {
                   await onTap(index, languaje);
                 },
                 onLongPress: () {
-                  if (_homeController.userSubscription == 1) {
-                    _homeController.pictToBeEdited =
-                        _pictogramController.selectedGruposPicts[index];
-                    showDialog(
-                      context: context,
-                      builder: (context) => ChoiceDialogue(),
-                    );
-                  } else {
-                    Get.to(() => BuyPaidVersionPage());
-                  }
+                  _homeController.pictToBeEdited =
+                  _pictogramController.selectedGruposPicts[index];
+                  showDialog(
+                    context: context,
+                    builder: (context) => ChoiceDialogue(),
+                  );
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: CategoryPageWidget(

@@ -106,11 +106,11 @@ class HomeController extends GetxController {
     final res = await ref.get();
 
     /// this means there is a value
-    if (res.value == 1) {
-      userSubscription = 1;
-    } else {
-      userSubscription = 0;
-    }
+    // if (res.value == 1) {
+    //   userSubscription = 1;
+    // } else {
+    //   userSubscription = 0;
+    // }
     print('the value of user sub is $userSubscription');
   }
 
@@ -123,6 +123,27 @@ class HomeController extends GetxController {
     await fetchAccountType();
     await getPicNumber();
     final _pictogram = Get.put(PictogramGroupsController());
+  }
+
+  void startTimerAndController(){
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      if (currentPage < 2) {
+        currentPage++;
+      } else {
+        currentPage = 0;
+      }
+
+      pageController.animateToPage(
+        currentPage,
+        duration: Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
+  }
+  Future<bool> disposeTimerAndController() async {
+    _timer.cancel();
+    Get.back();
+    return true;
   }
 
   addPictToSentence(Pict pict) async {

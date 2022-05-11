@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
@@ -108,11 +109,16 @@ class ChoiceDialogue extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              _homeController.suggestedMainScreenIndex =
-                  suggestedIndexMainScreen;
-              _homeController.editPicto(
-                suggestedIndexMainScreen: suggestedIndexMainScreen,
-              );
+              if (_homeController.userSubscription == 1) {
+                _homeController.suggestedMainScreenIndex =
+                    suggestedIndexMainScreen;
+                _homeController.editPicto(
+                  suggestedIndexMainScreen: suggestedIndexMainScreen,
+                );
+              } else {
+                _homeController.startTimerAndController();
+                Get.to(() => BuyPaidVersionPage());
+              }
             },
             child: Text('edit'.tr),
           ),
@@ -120,11 +126,18 @@ class ChoiceDialogue extends StatelessWidget {
             height: 32,
           ),
           GestureDetector(
-            onTap: () => _homeController.deletePicto(
-              index: index!,
-              context: context,
-              suggestedIndexMainScreen: suggestedIndexMainScreen,
-            ),
+            onTap: () {
+              if (_homeController.userSubscription == 1) {
+                _homeController.deletePicto(
+                  index: index!,
+                  context: context,
+                  suggestedIndexMainScreen: suggestedIndexMainScreen,
+                );
+              } else {
+                _homeController.startTimerAndController();
+                Get.to(() => BuyPaidVersionPage());
+              }
+            },
             child: Text('Delete'),
           ),
         ],
