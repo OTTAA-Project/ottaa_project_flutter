@@ -26,7 +26,7 @@ class CategoryWidget extends StatelessWidget {
     this.isEditing = false,
     this.fileImage,
     this.imageWidget,
-    this.selectedImageUrl,
+    this.selectedImageUrl='',
   }) : super(key: key);
   final String name;
   final String imageName;

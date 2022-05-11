@@ -28,7 +28,9 @@ void main() async {
     final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
 
     // Pass all uncaught errors from the framework to Crashlytics.
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    if(!kIsWeb){
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    }
     if (kIsWeb) {
       // initialiaze the facebook javascript SDK
       FacebookAuth.i.webInitialize(
@@ -47,7 +49,9 @@ void main() async {
       ),
     );
   }, (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    if(!kIsWeb){
+      FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    }
   });
 }
 
