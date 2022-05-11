@@ -106,11 +106,11 @@ class HomeController extends GetxController {
     final res = await ref.get();
 
     /// this means there is a value
-    // if (res.value == 1) {
-    //   userSubscription = 1;
-    // } else {
-    //   userSubscription = 0;
-    // }
+    if (res.value == 1) {
+      userSubscription = 1;
+    } else {
+      userSubscription = 0;
+    }
     print('the value of user sub is $userSubscription');
   }
 
