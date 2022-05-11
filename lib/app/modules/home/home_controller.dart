@@ -111,6 +111,7 @@ class HomeController extends GetxController {
     } else {
       userSubscription = 0;
     }
+    print('the value of user sub is $userSubscription');
   }
 
 
@@ -119,6 +120,7 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     await loadPicts();
+    await fetchAccountType();
     await getPicNumber();
     final _pictogram = Get.put(PictogramGroupsController());
   }

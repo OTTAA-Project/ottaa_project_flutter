@@ -56,6 +56,7 @@ class AboutController extends GetxController{
     } else {
       userSubscription.value = 'Free';
     }
+    print('the user type is ${userSubscription.value}');
   }
 
   Future<void> fetchCurrentVersion() async {
