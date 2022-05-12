@@ -103,7 +103,7 @@ class GrupoService {
       return da;
     } else {
       final String pictsString =
-      await rootBundle.loadString('assets/pictos.json');
+      await rootBundle.loadString('assets/grupos.json');
       debugPrint('from json realtime : web');
       return (jsonDecode(pictsString) as List)
           .map((e) => Grupos.fromJson(e))

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
+import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 
 class SearchPhotoPicto extends SearchDelegate<SearchModel?> {
   final _editController = Get.find<PictogramGroupsController>();
+  // final _homeController = Get.find<HomeController>();
 
   @override
   List<Widget> buildActions(BuildContext context) => [
@@ -24,6 +26,7 @@ class SearchPhotoPicto extends SearchDelegate<SearchModel?> {
 
   @override
   Widget buildResults(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
     final horizontalSize = MediaQuery.of(context).size.width;
     return FutureBuilder<List<SearchModel?>>(
       future: _editController.fetchPhotoFromGlobalSymbols(text: query),
@@ -51,6 +54,7 @@ class SearchPhotoPicto extends SearchDelegate<SearchModel?> {
                   color: Colors.white,
                   child: GestureDetector(
                     onTap: () async {
+                      ///main code to be used
                       _editController.selectedPhotoUrlPicto.value =
                           snapshot.data![index]!.picto.imageUrl;
                       _editController.isImageProvidedPicto.value = true;
