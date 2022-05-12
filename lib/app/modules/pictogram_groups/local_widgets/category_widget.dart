@@ -26,7 +26,7 @@ class CategoryWidget extends StatelessWidget {
     this.isEditing = false,
     this.fileImage,
     this.imageWidget,
-    this.selectedImageUrl='',
+    this.selectedImageUrl = '',
   }) : super(key: key);
   final String name;
   final String imageName;
@@ -142,7 +142,23 @@ class WebImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isEditing
-        ? imageWidget!
+        ? imageWidget == null
+            ? Image.network(
+                selectedImageUrl == '' ? imageName : selectedImageUrl!,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: kOTTAAOrangeNew,
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                          : null,
+                    ),
+                  );
+                },
+              )
+            : imageWidget!
         : Image.network(
             selectedImageUrl == '' ? imageName : selectedImageUrl!,
             loadingBuilder: (context, child, loadingProgress) {

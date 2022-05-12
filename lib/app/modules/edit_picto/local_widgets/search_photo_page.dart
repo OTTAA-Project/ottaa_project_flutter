@@ -79,6 +79,8 @@ class SearchPhotoPage extends SearchDelegate<SearchModel?> {
                                             .picto
                                             .imageUrl;
                                     _editController.editingPicture.value = true;
+                                    _editController.imageWidget.value = null;
+                                    print('the url is ${_editController.selectedPhotoUrl.value}');
                                     Get.back();
                                     Get.back();
                                   },

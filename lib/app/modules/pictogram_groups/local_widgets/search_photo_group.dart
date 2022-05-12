@@ -59,10 +59,13 @@ class SearchPhotoGroup extends SearchDelegate<String?> {
                       if(edit){
                         _editController.selectedPhotoUrlGrupoEdit.value = snapshot.data![index]!.picto.imageUrl;
                         _editController.editingGrupo.value = true;
+                        _editController.imageWidgetGrupoEdit.value = null;
                       }else{
                         _editController.selectedPhotoUrlGrupo.value =
                             snapshot.data![index]!.picto.imageUrl;
                         _editController.isImageProvidedGrupo.value = true;
+                        _editController.imageWidgetPicto.value = null;
+                        _editController.imageWidgetGrupo.value = null;
                       }
                       Get.back();
                       Get.back();

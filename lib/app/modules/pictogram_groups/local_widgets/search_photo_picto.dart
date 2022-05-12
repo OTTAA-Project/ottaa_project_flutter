@@ -26,7 +26,7 @@ class SearchPhotoPicto extends SearchDelegate<SearchModel?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final verticalSize = MediaQuery.of(context).size.height;
+    // final verticalSize = MediaQuery.of(context).size.height;
     final horizontalSize = MediaQuery.of(context).size.width;
     return FutureBuilder<List<SearchModel?>>(
       future: _editController.fetchPhotoFromGlobalSymbols(text: query),
