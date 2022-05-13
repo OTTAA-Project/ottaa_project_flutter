@@ -18,7 +18,7 @@ class AboutController extends GetxController{
 
 
   Future<void> fetchAccountInfo() async {
-    final auth = FirebaseAuth.instance.currentUser!.email;
+    final auth = FirebaseAuth.instance.currentUser!.providerData[0].email;
     userEmail.value = auth!;
   }
 
