@@ -50,6 +50,7 @@ class RightColumnWidget extends GetView<HomeController> {
                     "Touch",
                     CustomAnalyticsEvents.createMyMap(
                         'Principal', "Share Phrases"));
+                // Get.toNamed(AppRoutes.TUTORIAL);
               },
               child: Center(
                 child: Icon(

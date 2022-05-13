@@ -124,21 +124,7 @@ class PictogramGroupsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(),
-                          GestureDetector(
-                            onTap: () => {
-                              CustomAnalyticsEvents.setEventWithParameters(
-                                  "Touch",
-                                  CustomAnalyticsEvents.createMyMap(
-                                      'Group Gallery', 'Backpress Button')),
-                              Get.back()
-                            },
-                            child: Icon(
-                              Icons.cancel,
-                              size: height * 0.1,
-                              color: Colors.white,
-                            ),
-                          ),
-
+                         Container(),
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
                           GestureDetector(
@@ -280,6 +266,26 @@ class PictogramGroupsPage extends StatelessWidget {
                 ),
               ),
             ),
+            /// close button
+            Positioned(
+              left: width * 0.27,
+              bottom: height * 0.04,
+              child: GestureDetector(
+                onTap: () => {
+                  CustomAnalyticsEvents.setEventWithParameters(
+                      "Touch",
+                      CustomAnalyticsEvents.createMyMap(
+                          'Group Gallery', 'Backpress Button')),
+                  Get.back()
+                },
+                child: Icon(
+                  Icons.cancel,
+                  size: height * 0.1,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+
           ],
         ),
       ),

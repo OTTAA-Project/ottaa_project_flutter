@@ -211,7 +211,7 @@ class HomeController extends GetxController {
         ///if  it is in the relacion just increment it
         if (alreadyInTheList) {
           picts[addToThisOneIndex].relacion![relacionID].frec =
-              picts[addToThisOneIndex].relacion![relacionID].frec! + 1;
+              (picts[addToThisOneIndex].relacion![relacionID].frec! + 1);
         } else {
           picts[addToThisOneIndex].relacion!.add(
                 Relacion(id: pict.id, frec: 1),

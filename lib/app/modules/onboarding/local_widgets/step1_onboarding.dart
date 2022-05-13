@@ -56,7 +56,8 @@ Widget step1Onboarding<widget>(
                               horizontal: horizontalSize * 0.05,
                               vertical: verticalSize * 0.05),
                           child: Image(
-                              image: AssetImage('assets/imgs/logo_ottaa.webp')),
+                            image: AssetImage('assets/imgs/logo_ottaa.webp'),
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
