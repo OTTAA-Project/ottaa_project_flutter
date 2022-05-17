@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
-import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-class SearchPhotoPage extends SearchDelegate<SearchModel?> {
-  final _editController = Get.find<EditPictoController>();
+class SearchPhotoPicto extends SearchDelegate<SearchModel?> {
+  final _editController = Get.find<PictogramGroupsController>();
   final _homeController = Get.find<HomeController>();
 
   @override
@@ -73,14 +73,14 @@ class SearchPhotoPage extends SearchDelegate<SearchModel?> {
                                 color: Colors.white,
                                 child: GestureDetector(
                                   onTap: () async {
-                                    _editController.selectedPhotoUrl.value =
+                                    _editController
+                                            .selectedPhotoUrlPicto.value =
                                         _homeController
                                             .dataMainForImagesReferences[index]!
                                             .picto
                                             .imageUrl;
-                                    _editController.editingPicture.value = true;
-                                    _editController.imageWidget.value = null;
-                                    print('the url is ${_editController.selectedPhotoUrl.value}');
+                                    _editController.isImageProvidedPicto.value = true;
+                                    // _editController.imageWidget.value = null;
                                     Get.back();
                                     Get.back();
                                   },
@@ -130,7 +130,7 @@ class SearchPhotoPage extends SearchDelegate<SearchModel?> {
 
 class HeaderWidget extends StatelessWidget {
   HeaderWidget({Key? key}) : super(key: key);
-  final _editController = Get.find<EditPictoController>();
+  final _editController = Get.find<PictogramGroupsController>();
   final _homeController = Get.find<HomeController>();
 
   @override

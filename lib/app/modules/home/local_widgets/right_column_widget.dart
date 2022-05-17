@@ -2,11 +2,12 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
 
-class RightColumnWidget extends StatelessWidget {
+class RightColumnWidget extends GetView<HomeController> {
   RightColumnWidget({Key? key}) : super(key: key);
 
   @override
@@ -49,6 +50,7 @@ class RightColumnWidget extends StatelessWidget {
                     "Touch",
                     CustomAnalyticsEvents.createMyMap(
                         'Principal', "Share Phrases"));
+                // Get.toNamed(AppRoutes.TUTORIAL);
               },
               child: Center(
                 child: Icon(

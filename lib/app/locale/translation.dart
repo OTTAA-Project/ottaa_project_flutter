@@ -69,7 +69,7 @@ class Translation extends Translations {
           'edit_pictogram': 'Edit pictogram',
           'text': 'Text',
           'frame': 'Frame',
-          'tags': 'Tags',
+          'tags': 'tags',
           'keep_your_ottaa_up_to_date': 'Keep your OTTAA up-to-date',
           'account_info': 'Account Info',
           'account': 'Account',
@@ -123,6 +123,7 @@ class Translation extends Translations {
           'please_enter_a_valid_search': 'Please enter a valid search',
           'choose_a_picto_to_speak': 'Choose a Picto to speak',
           'we_are_working_on_this_feature': 'We are working on this feature',
+          'most_used_sentences': 'Most used Sentences',
           'price_one':
               'Get access today to all the useful features that OTTAA Premium has to offer for only 990 ARS per month.',
           'purchase_subscription': 'PURCHASE SUBSCRIPTION',
@@ -198,7 +199,7 @@ class Translation extends Translations {
           'edit_pictogram': 'Editar pictograma',
           'text': 'Texto',
           'frame': 'Marco',
-          'tags': 'Tage',
+          'tags': 'Tag',
           'keep_your_ottaa_up_to_date': 'Mantenga su OTTAA actualizada',
           'account_info': 'Informacion de cuenta',
           'account': 'Cuenta',
@@ -254,7 +255,9 @@ class Translation extends Translations {
               'Por favor ingrese una búsqueda válida',
           'choose_a_picto_to_speak': 'Elige un Picto para hablar',
           'we_are_working_on_this_feature':
-              'Nosotros estamos trabajando en esta característica',
+              'Estamos trabajando en esta funcionalidad',
+          'most_used_sentences': 'Oraciones más usadas',
+          '': '',
           'price_one':
               'Obtenga acceso hoy a todas las funciones útiles que OTTAA Premium tiene para ofrecer por solo 990 ARS al mes.',
           'purchase_subscription': 'COMPRAR SUSCRIPCIÓN',

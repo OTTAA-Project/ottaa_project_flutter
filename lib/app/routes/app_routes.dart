@@ -13,4 +13,5 @@ class AppRoutes {
   static const EDITPICTO = "/edit_picto";
   static const ABOUTOTTAA = "/about_ottaa";
   static const GAMES = "/games";
+  static const ADDGROUP = "/add_group_page";
 }

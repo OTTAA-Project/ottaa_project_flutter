@@ -17,7 +17,7 @@ class AboutOttaaPage extends GetView<AboutController> {
             RotatedBox(
               quarterTurns: 4,
               // child: HeaderWave(
-              //   color: kOTTAOrangeNew,
+              //   color: kOTTAAOrangeNew,
               //   height: horizontalSize,
               //   width: verticalSize,
               // ),
