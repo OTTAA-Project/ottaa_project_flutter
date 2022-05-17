@@ -123,11 +123,8 @@ class HomeController extends GetxController {
     await loadPicts();
     await fetchAccountType();
     await getPicNumber();
-    final _pictogram = Get.put(PictogramGroupsController());
-  }
-
-  void startTimerAndController(){
     language = _ttsController.languaje;
+    final _pictogram = Get.put(PictogramGroupsController());
   }
 
   void initializePageViewer(){

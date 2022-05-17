@@ -151,7 +151,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('name', 'Edit '));
               } else {
-                _homeController.startTimerAndController();
+                _homeController.initializePageViewer();
                 Get.to(() => BuyPaidVersionPage());
               }
             },
@@ -197,7 +197,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 await _pictogramController.gruposExistsOnFirebase();
                 Get.back();
               } else {
-                _homeController.startTimerAndController();
+                _homeController.initializePageViewer();
                 Get.to(() => BuyPaidVersionPage());
               }
             },
