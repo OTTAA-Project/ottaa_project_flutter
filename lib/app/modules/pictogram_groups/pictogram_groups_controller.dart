@@ -91,6 +91,55 @@ class PictogramGroupsController extends GetxController {
   late List<RxBool> selectedList;
   int secondTimeSameGroup = -69;
 
+
+  /// variables for global symbols one
+  /// multiple dataset map
+  final Map<int, int> dataSetMapId = {
+    0: 0,
+    1: 17,
+    2: 84,
+    3: 14,
+    4: 13,
+    5: 82,
+    6: 83,
+    7: 81,
+    8: 66,
+    9: 95,
+    10: 75,
+    11: 16,
+    12: 67,
+    13: 74,
+    14: 86,
+    15: 88,
+    16: 15,
+    17: 97,
+    18: 76,
+  };
+
+  final Map<int, String> dataSetMapStrings = {
+    0: 'All',
+    17: 'ARASAAC',
+    84: 'Gumeil',
+    14: 'Jellow',
+    13: 'mulberry',
+    82: 'OCHA Humanitarian Icons',
+    83: 'OpenMoji',
+    81: 'Sclera Symbols',
+    66: 'Srbija Simboli',
+    95: 'Typical Bulgarian Symbols',
+    75: 'Adam Urdu Symbols',
+    16: 'Blissymbolics',
+    67: 'Cma Gora',
+    74: 'Hrvatski simboli za PK',
+    86: 'Mulberry Plus',
+    88: 'Otsmin Turkish',
+    15: 'Tawasol',
+    97: 'Typical Bulgarian Symbols SVG',
+    76: 'DoeDY',
+  };
+  RxInt selectedId = 0.obs;
+  RxBool refreshSearchResult = true.obs;
+
   void addSomeScroll(ScrollController controller) {
     controller.animateTo(controller.offset.toDouble() + 200,
         duration: Duration(milliseconds: 100), curve: Curves.ease);
@@ -250,6 +299,7 @@ class PictogramGroupsController extends GetxController {
           imageInBytes,
         );
         editingGrupo.value = true;
+        selectedPhotoUrlGrupoEdit.value = '';
         Get.back();
       } else {
         Get.back();
@@ -261,6 +311,7 @@ class PictogramGroupsController extends GetxController {
       if (imageTobeUploadedGrupoEdit != null) {
         fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
         editingGrupo.value = true;
+        selectedPhotoUrlGrupoEdit.value= '';
         Get.back();
       } else {
         Get.back();
@@ -280,6 +331,7 @@ class PictogramGroupsController extends GetxController {
           imageInBytes,
         );
         isImageProvidedPicto.value = true;
+        selectedPhotoUrlPicto.value = '';
         Get.back();
       } else {
         Get.back();
@@ -291,6 +343,7 @@ class PictogramGroupsController extends GetxController {
       if (imageTobeUploadedPicto != null) {
         fileImagePicto.value = File(imageTobeUploadedPicto.value!.path);
         isImageProvidedPicto.value = true;
+        selectedPhotoUrlPicto.value = '';
         Get.back();
       } else {
         Get.back();
