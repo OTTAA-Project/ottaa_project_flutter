@@ -44,6 +44,7 @@ class FirebaseDatabaseService {
         assetsFileName: 'assets/pictos.json',
         fileName: 'Pictos_file',
         firebaseName: 'Picto',
+        pictoOrGrupo: true,
         onlineSnapshot: res,
       );
     }
@@ -89,6 +90,7 @@ class FirebaseDatabaseService {
     required String fileName,
     required String assetsFileName,
     required String firebaseName,
+    required bool pictoOrGrupo,
   }) async {
     final instance = await SharedPreferences.getInstance();
     final fileExists = instance.getBool('Pictos_file');
