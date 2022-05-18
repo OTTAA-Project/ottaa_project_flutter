@@ -9,7 +9,7 @@ step3Tutorial<widget>(PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
   double horizontalSize = MediaQuery.of(context).size.width;
   return Container(
-    color: kOTTAOrange,
+    color: kOTTAAOrange,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -73,7 +73,7 @@ step3Tutorial<widget>(PageController controller, context) {
                   duration: Duration(milliseconds: 300),
                   curve: Curves.easeInOut),
               backgroundColor: Colors.white,
-              fontColor: kOTTAOrange,
+              fontColor: kOTTAAOrange,
             ),
           ],
         ),

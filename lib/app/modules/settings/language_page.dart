@@ -33,7 +33,7 @@ class LanguagePage extends StatelessWidget {
                 color: Colors.grey[700],
               ),
               SwitchListTile(
-                activeColor: kOTTAOrange,
+                activeColor: kOTTAAOrange,
                 value: _.ttsController.isEnglish,
                 onChanged: (bool value) {
                   _.toggleLanguaje(value);

@@ -63,7 +63,7 @@ Map<String, dynamic> _$ImagenToJson(Imagen instance) => <String, dynamic>{
 
 Relacion _$RelacionFromJson(Map<String, dynamic> json) => Relacion(
       id: json['id'] as int,
-      frec: json['frec'] as int,
+      frec: json['frec'] as int?,
     );
 
 Map<String, dynamic> _$RelacionToJson(Relacion instance) => <String, dynamic>{

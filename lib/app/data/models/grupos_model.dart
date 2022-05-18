@@ -1,28 +1,32 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'grupos_model.g.dart';
+
 @JsonSerializable()
 class Grupos {
   Grupos({
     required this.id,
     required this.texto,
-    required this.tipo,
+    this.tipo = 0,
     required this.imagen,
     required this.relacion,
     this.frecuencia,
     this.tags,
   });
 
-  final int id;
-  final TextoGrupos texto;
-  final int tipo;
-  final ImagenGrupos imagen;
-  final List<GrupoRelacion> relacion;
-  final int? frecuencia;
-  final List<String>? tags;
+  int id;
+  TextoGrupos texto;
+  int tipo;
+  ImagenGrupos imagen;
+  List<GrupoRelacion> relacion;
+  int? frecuencia;
+  List<String>? tags;
 
   factory Grupos.fromJson(Map<String, dynamic> json) => _$GruposFromJson(json);
+
   Map<String, dynamic> toJson() => _$GruposToJson(this);
 }
+
 @JsonSerializable()
 class ImagenGrupos {
   ImagenGrupos({
@@ -32,13 +36,17 @@ class ImagenGrupos {
     this.pushKey,
   });
 
-  final String picto;
-  final String? pictoEditado;
-  final String? urlFoto;
-  final String? pushKey;
-  factory ImagenGrupos.fromJson(Map<String, dynamic> json) => _$ImagenGruposFromJson(json);
+  String picto;
+  String? pictoEditado;
+  String? urlFoto;
+  String? pushKey;
+
+  factory ImagenGrupos.fromJson(Map<String, dynamic> json) =>
+      _$ImagenGruposFromJson(json);
+
   Map<String, dynamic> toJson() => _$ImagenGruposToJson(this);
 }
+
 @JsonSerializable()
 class GrupoRelacion {
   GrupoRelacion({
@@ -55,18 +63,21 @@ class GrupoRelacion {
     this.horario,
   });
 
-  final int id;
-  final int? frec;
-  final TextoGrupos? texto;
-  final int? tipo;
-  final ImagenGrupos? imagen;
-  final List<RelacionRelacion>? relacion;
-  final int? agenda;
-  final int? gps;
-  final bool? esSugerencia;
-  final List<String>? edad;
-  final List<String>? horario;
-  factory GrupoRelacion.fromJson(Map<String, dynamic> json) => _$GrupoRelacionFromJson(json);
+  int id;
+  int? frec;
+  TextoGrupos? texto;
+  int? tipo;
+  ImagenGrupos? imagen;
+  List<RelacionRelacion>? relacion;
+  int? agenda;
+  int? gps;
+  bool? esSugerencia;
+  List<String>? edad;
+  List<String>? horario;
+
+  factory GrupoRelacion.fromJson(Map<String, dynamic> json) =>
+      _$GrupoRelacionFromJson(json);
+
   Map<String, dynamic> toJson() => _$GrupoRelacionToJson(this);
 }
 
@@ -77,20 +88,27 @@ class RelacionRelacion {
     required this.frec,
   });
 
-  final int id;
-  final int frec;
-  factory RelacionRelacion.fromJson(Map<String, dynamic> json) => _$RelacionRelacionFromJson(json);
+  int id;
+  int frec;
+
+  factory RelacionRelacion.fromJson(Map<String, dynamic> json) =>
+      _$RelacionRelacionFromJson(json);
+
   Map<String, dynamic> toJson() => _$RelacionRelacionToJson(this);
 }
+
 @JsonSerializable()
 class TextoGrupos {
   TextoGrupos({
-    required this.en,
-    required this.es,
+    this.en = '',
+    this.es = '',
   });
 
-  final String en;
-  final String es;
-  factory TextoGrupos.fromJson(Map<String, dynamic> json) => _$TextoGruposFromJson(json);
+  String en;
+  String es;
+
+  factory TextoGrupos.fromJson(Map<String, dynamic> json) =>
+      _$TextoGruposFromJson(json);
+
   Map<String, dynamic> toJson() => _$TextoGruposToJson(this);
 }

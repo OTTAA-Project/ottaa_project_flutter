@@ -17,13 +17,13 @@ class AboutOttaaPage extends GetView<AboutController> {
             RotatedBox(
               quarterTurns: 4,
               // child: HeaderWave(
-              //   color: kOTTAOrangeNew,
+              //   color: kOTTAAOrangeNew,
               //   height: horizontalSize,
               //   width: verticalSize,
               // ),
               child: HeaderWave(
                 color: Colors.white,
-                bgColor: kOTTAOrangeNew,
+                bgColor: kOTTAAOrangeNew,
               ),
             ),
             Positioned(
@@ -49,7 +49,7 @@ class AboutOttaaPage extends GetView<AboutController> {
                 height: verticalSize * 0.4,
                 width: horizontalSize * 0.4,
                 decoration: BoxDecoration(
-                  color: kOTTAOrangeNew,
+                  color: kOTTAAOrangeNew,
                   borderRadius: BorderRadius.circular(verticalSize * 0.03),
                   border: Border.all(
                     color: Colors.white,
@@ -118,7 +118,7 @@ class AboutOttaaPage extends GetView<AboutController> {
                     child: Text(
                       'Contact Support',
                       style: TextStyle(
-                        color: kOTTAOrangeNew,
+                        color: kOTTAAOrangeNew,
                         fontFamily: "Noto Sans",
                         fontSize: verticalSize * 0.02,
                         fontWeight: FontWeight.w500,

@@ -65,7 +65,7 @@ class TagsWidget extends StatelessWidget {
   Widget iconWidget({required IconData icon}) {
     return Icon(
       icon,
-      color: kOTTAOrangeNew,
+      color: kOTTAAOrangeNew,
       size: Get.width * 0.09,
     );
   }

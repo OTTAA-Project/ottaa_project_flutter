@@ -17,7 +17,7 @@ class OttaLogoWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(width * 0.02),
         decoration: BoxDecoration(
-          color: kOTTAOrangeNew,
+          color: kOTTAAOrangeNew,
           borderRadius: BorderRadius.circular(width * 0.2),
         ),
         child: Image.asset(

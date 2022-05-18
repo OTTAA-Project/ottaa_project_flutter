@@ -17,11 +17,6 @@ import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// import 'package:image_picker_web/image_picker_web.dart';
-// // import 'dart:html' as html;
-// import 'package:mime_type/mime_type.dart';
-// import 'package:path/path.dart' as Path;
-
 class EditPictoController extends GetxController {
   RxBool text = true.obs;
   RxBool frame = false.obs;
@@ -38,8 +33,56 @@ class EditPictoController extends GetxController {
   final ImagePicker picker = ImagePicker();
   RxBool editingPicture = false.obs;
   Rx<File?> fileImage = Rx<File?>(null);
-  Rx<String?> selectedPhotoUrl = null.obs;
+  Rx<String?> selectedPhotoUrl = ''.obs;
   Rx<XFile?> imageTobeUploaded = Rx<XFile?>(null);
+
+  /// multiple dataset map
+  final Map<int, int> dataSetMapId = {
+    0: 0,
+    1: 17,
+    2: 84,
+    3: 14,
+    4: 13,
+    5: 82,
+    6: 83,
+    7: 81,
+    8: 66,
+    9: 95,
+    10: 75,
+    11: 16,
+    12: 67,
+    13: 74,
+    14: 86,
+    15: 88,
+    16: 15,
+    17: 97,
+    18: 76,
+  };
+
+  final Map<int, String> dataSetMapStrings = {
+    0: 'All',
+    17: 'ARASAAC',
+    84: 'Gumeil',
+    14: 'Jellow',
+    13: 'mulberry',
+    82: 'OCHA Humanitarian Icons',
+    83: 'OpenMoji',
+    81: 'Sclera Symbols',
+    66: 'Srbija Simboli',
+    95: 'Typical Bulgarian Symbols',
+    75: 'Adam Urdu Symbols',
+    16: 'Blissymbolics',
+    67: 'Cma Gora',
+    74: 'Hrvatski simboli za PK',
+    86: 'Mulberry Plus',
+    88: 'Otsmin Turkish',
+    15: 'Tawasol',
+    97: 'Typical Bulgarian Symbols SVG',
+    76: 'DoeDY',
+  };
+   RxInt selectedId = 0.obs;
+   RxBool refreshSearchResult = true.obs;
+   bool firstTime = true;
 
   late String url;
 
@@ -63,7 +106,8 @@ class EditPictoController extends GetxController {
     });
   }
 
-  Future<List<SearchModel>> fetchPhotoFromArsaac({required String text}) async {
+  Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
+      {required String text}) async {
     final String languageFormat = lang == 'en' ? '639-3' : '639-1';
     final language = lang == 'en' ? 'eng' : 'es';
     url =
@@ -138,7 +182,8 @@ class EditPictoController extends GetxController {
     }
   }
 
-  void uploadChanges({required BuildContext context}) async {
+  void uploadChanges(
+      {required BuildContext context, RxBool? editPicBool}) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -151,7 +196,7 @@ class EditPictoController extends GetxController {
     if (editingPicture.value) {
       if (kIsWeb) {
         /// method for uploading images for web
-        if (selectedPhotoUrl.value == null) {
+        if (selectedPhotoUrl.value == '') {
           Reference _reference = FirebaseStorage.instance
               .ref()
               .child('testingUpload/${pict.value!.texto.en}');
@@ -169,7 +214,7 @@ class EditPictoController extends GetxController {
           pict.value!.imagen.pictoEditado = selectedPhotoUrl.value;
         }
       } else {
-        if (selectedPhotoUrl.value == null) {
+        if (selectedPhotoUrl.value == '') {
           await uploadImageToFirebaseStorage(path: fileImage.value!.path);
         } else {
           pict.value!.imagen.pictoEditado = selectedPhotoUrl.value;
@@ -184,13 +229,18 @@ class EditPictoController extends GetxController {
       index++;
     }
     _homeController.picts[index] = pict.value!;
-    _pictoController.picts[index] = pict.value!;
+    if (_homeController.editingFromHomeScreen) {
+    } else {
+      _pictoController.picts[index] = pict.value!;
+    }
     final data = _homeController.picts;
     List<String> fileData = [];
     data.forEach((element) {
       final obj = jsonEncode(element);
       fileData.add(obj);
     });
+
+    /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(data: fileData.toString());
@@ -205,10 +255,17 @@ class EditPictoController extends GetxController {
     await uploadToFirebase(data: fileData.toString());
     await pictsExistsOnFirebase();
     // for refreshing the UI of listing
-    _pictoController.pictoGridviewOrPageview.value =
-        !_pictoController.pictoGridviewOrPageview.value;
-    _pictoController.pictoGridviewOrPageview.value =
-        !_pictoController.pictoGridviewOrPageview.value;
+    if (_homeController.editingFromHomeScreen) {
+      _homeController.updateSuggested(
+          suggestedMainScreenIndex: _homeController.suggestedMainScreenIndex,
+          updatedOne: pict.value!);
+    } else {
+      _pictoController.pictoGridviewOrPageview.value =
+          !_pictoController.pictoGridviewOrPageview.value;
+      _pictoController.pictoGridviewOrPageview.value =
+          !_pictoController.pictoGridviewOrPageview.value;
+    }
+    _homeController.editingFromHomeScreen = false;
     Get.back();
     Navigator.of(context).pop(true);
   }

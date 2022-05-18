@@ -6,7 +6,7 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 final Map<int, Color> groupColor = {
   1: Colors.yellow,
-  2: kOTTAOrangeNew,
+  2: kOTTAAOrangeNew,
   3: Colors.green,
   4: Colors.blue,
   5: Colors.purple,
@@ -16,18 +16,20 @@ final Map<int, Color> groupColor = {
 class Picto extends StatelessWidget {
   final Pict pict;
   final VoidCallback onTap;
+  VoidCallback? onLongPress;
   final double height;
   final double width;
   final languaje;
   final localImg;
 
-  const Picto({
+  Picto({
     required this.pict,
     required this.onTap,
     required this.height,
     required this.width,
     required this.languaje,
     required this.localImg,
+    this.onLongPress,
   });
 
   @override
@@ -47,6 +49,7 @@ class Picto extends StatelessWidget {
     }
 
     return GestureDetector(
+      onLongPress: this.onLongPress,
       onTap: this.onTap,
       child: Container(
         height: this.height,
@@ -86,7 +89,7 @@ class Picto extends StatelessWidget {
                                   if (loadingProgress == null) return child;
                                   return Center(
                                     child: CircularProgressIndicator(
-                                      color: kOTTAOrangeNew,
+                                      color: kOTTAAOrangeNew,
                                       value:
                                           loadingProgress.expectedTotalBytes !=
                                                   null
@@ -100,7 +103,9 @@ class Picto extends StatelessWidget {
                                 },
                               )
                             : CachedNetworkImage(
-                                imageUrl: pict.imagen.picto,
+                                imageUrl: pict.imagen.pictoEditado == null
+                                    ? pict.imagen.picto
+                                    : pict.imagen.pictoEditado!,
                                 placeholder: (context, url) => Center(
                                   child: CircularProgressIndicator(),
                                 ),

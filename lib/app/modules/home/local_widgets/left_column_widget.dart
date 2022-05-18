@@ -80,7 +80,7 @@ class LeftColumnWidget extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: kOTTAOrangeNew,
+        color: kOTTAAOrangeNew,
         borderRadius:
             BorderRadius.only(topRight: Radius.circular(horizontalSize / 40)),
       ),

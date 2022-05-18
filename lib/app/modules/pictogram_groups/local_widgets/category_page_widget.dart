@@ -8,7 +8,7 @@ import 'icon_widget.dart';
 
 final Map<int, Color> groupColor = {
   1: Colors.yellow,
-  2: kOTTAOrange,
+  2: kOTTAAOrange,
   3: Colors.green,
   4: Colors.blue,
   5: Colors.purple,

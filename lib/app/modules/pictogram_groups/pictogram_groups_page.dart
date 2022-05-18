@@ -22,7 +22,7 @@ class PictogramGroupsPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kOTTAOrangeNew,
+        backgroundColor: kOTTAAOrangeNew,
         leading: Container(),
         foregroundColor: Colors.white,
         elevation: 0,
@@ -59,28 +59,32 @@ class PictogramGroupsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: GestureDetector(
-                onTap: () => {
-                      CustomAnalyticsEvents.setEventWithParameters(
-                          "Touch",
-                          CustomAnalyticsEvents.createMyMap(
-                              'Group Gallery', 'Add Group'))
-                    },
-                child: Icon(
-                  Icons.add_circle_outline,
-                  size: 30,
-                )),
+              onTap: () {
+                CustomAnalyticsEvents.setEventWithParameters(
+                    "Touch",
+                    CustomAnalyticsEvents.createMyMap(
+                        'Group Gallery', 'Add Group'));
+                Get.toNamed(AppRoutes.ADDGROUP);
+              },
+              child: Icon(
+                Icons.add_circle_outline,
+                size: 30,
+              ),
+            ),
           ),
           GestureDetector(
-              onTap: () => {
-                    CustomAnalyticsEvents.setEventWithParameters(
-                        "Touch",
-                        CustomAnalyticsEvents.createMyMap(
-                            'Group Gallery', 'Syncronize Pictogram'))
-                  },
-              child: Icon(
-                Icons.cloud_download,
-                size: 30,
-              )),
+            onTap: () {
+              print(_homeController.grupos.last.imagen.picto);
+              CustomAnalyticsEvents.setEventWithParameters(
+                  "Touch",
+                  CustomAnalyticsEvents.createMyMap(
+                      'Group Gallery', 'Syncronize Pictogram'));
+            },
+            child: Icon(
+              Icons.cloud_download,
+              size: 30,
+            ),
+          ),
           const SizedBox(
             width: 16,
           ),
@@ -115,26 +119,12 @@ class PictogramGroupsPage extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      color: kOTTAOrangeNew,
+                      color: kOTTAAOrangeNew,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(),
-                          GestureDetector(
-                            onTap: () => {
-                              CustomAnalyticsEvents.setEventWithParameters(
-                                  "Touch",
-                                  CustomAnalyticsEvents.createMyMap(
-                                      'Group Gallery', 'Backpress Button')),
-                              Get.back()
-                            },
-                            child: Icon(
-                              Icons.cancel,
-                              size: height * 0.1,
-                              color: Colors.white,
-                            ),
-                          ),
-
+                         Container(),
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
                           GestureDetector(
@@ -170,7 +160,7 @@ class PictogramGroupsPage extends StatelessWidget {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrangeNew,
+                  color: kOTTAAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(16),
                   ),
@@ -205,7 +195,7 @@ class PictogramGroupsPage extends StatelessWidget {
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: kOTTAOrangeNew,
+                  color: kOTTAAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                   ),
@@ -276,6 +266,26 @@ class PictogramGroupsPage extends StatelessWidget {
                 ),
               ),
             ),
+            /// close button
+            Positioned(
+              left: width * 0.27,
+              bottom: height * 0.04,
+              child: GestureDetector(
+                onTap: () => {
+                  CustomAnalyticsEvents.setEventWithParameters(
+                      "Touch",
+                      CustomAnalyticsEvents.createMyMap(
+                          'Group Gallery', 'Backpress Button')),
+                  Get.back()
+                },
+                child: Icon(
+                  Icons.cancel,
+                  size: height * 0.1,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+
           ],
         ),
       ),

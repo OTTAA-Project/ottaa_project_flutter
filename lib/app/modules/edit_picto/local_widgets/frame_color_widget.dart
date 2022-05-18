@@ -5,7 +5,12 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import '../edit_picto_controller.dart';
 
 class FrameColorWidget extends GetView<EditPictoController> {
-  const FrameColorWidget({Key? key}) : super(key: key);
+  const FrameColorWidget({
+    Key? key,
+    required this.onTap,
+  }) : super(key: key);
+
+  final void Function({int? tipo})? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +39,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.green,
             text: 'actions'.tr,
             tipo: 3,
+            onTap: ()=> onTap!(tipo: 3),
           ),
         ),
         Positioned(
@@ -44,6 +50,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.purple,
             text: 'interactions'.tr,
             tipo: 5,
+            onTap: ()=> onTap!(tipo: 5),
           ),
         ),
         Positioned(
@@ -54,6 +61,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.yellow,
             text: 'people'.tr,
             tipo: 1,
+            onTap: ()=> onTap!(tipo: 1),
           ),
         ),
         Positioned(
@@ -61,9 +69,10 @@ class FrameColorWidget extends GetView<EditPictoController> {
           right: 0,
           left: -width * 0.12,
           child: ColorWidget(
-            color: kOTTAOrange,
+            color: kOTTAAOrange,
             text: 'nouns'.tr,
             tipo: 2,
+            onTap: ()=> onTap!(tipo: 2),
           ),
         ),
         Positioned(
@@ -74,6 +83,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.blue,
             text: 'adjectives'.tr,
             tipo: 4,
+            onTap: ()=> onTap!(tipo: 4),
           ),
         ),
         Positioned(
@@ -84,6 +94,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.black,
             text: 'miscellaneous'.tr,
             tipo: 6,
+            onTap: ()=> onTap!(tipo: 6),
           ),
         ),
       ],
@@ -97,21 +108,18 @@ class ColorWidget extends StatelessWidget {
     required this.color,
     required this.text,
     required this.tipo,
+    required this.onTap,
   }) : super(key: key);
   final Color color;
   final String text;
   final int tipo;
-  final controller = Get.find<EditPictoController>();
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: () {
-        controller.pictoBorder.value = false;
-        controller.pict.value!.tipo = tipo;
-        controller.pictoBorder.value = true;
-      },
+      onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

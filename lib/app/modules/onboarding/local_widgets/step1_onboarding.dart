@@ -20,8 +20,8 @@ Widget step1Onboarding<widget>(
     children: [
       FadeInLeft(
           child: HeaderWave(
-        color: kOTTAOrangeNew,
-        bgColor: kOTTABackgroundNew,
+        color: kOTTAAOrangeNew,
+        bgColor: kOTTAABackgroundNew,
       )),
       Positioned(
         bottom: 0,
@@ -56,7 +56,8 @@ Widget step1Onboarding<widget>(
                               horizontal: horizontalSize * 0.05,
                               vertical: verticalSize * 0.05),
                           child: Image(
-                              image: AssetImage('assets/imgs/logo_ottaa.webp')),
+                            image: AssetImage('assets/imgs/logo_ottaa.webp'),
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -84,17 +85,17 @@ Widget step1Onboarding<widget>(
                                         _.name.value = value;
                                       },
                                       decoration: InputDecoration(
-                                        focusColor: kOTTAOrangeNew,
-                                        fillColor: kOTTAOrangeNew,
+                                        focusColor: kOTTAAOrangeNew,
+                                        fillColor: kOTTAAOrangeNew,
                                         hintText: "Name".tr,
                                         contentPadding: const EdgeInsets.all(0),
                                         isDense: true,
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide:
-                                              BorderSide(color: kOTTAOrangeNew),
+                                              BorderSide(color: kOTTAAOrangeNew),
                                         ),
                                       ),
-                                      cursorColor: kOTTAOrangeNew,
+                                      cursorColor: kOTTAAOrangeNew,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
                                           return 'please_enter_some_text'.tr;
@@ -128,7 +129,7 @@ Widget step1Onboarding<widget>(
                                           controller: _.genderController,
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
-                                            focusColor: kOTTAOrangeNew,
+                                            focusColor: kOTTAAOrangeNew,
                                             border: InputBorder.none,
                                           ),
                                           enabled: false,
@@ -150,7 +151,7 @@ Widget step1Onboarding<widget>(
                                       return Theme(
                                         data: Theme.of(context).copyWith(
                                           colorScheme: ColorScheme.light(
-                                            primary: kOTTAOrangeNew,
+                                            primary: kOTTAAOrangeNew,
                                           ),
                                         ),
                                         child: child!,
@@ -194,7 +195,7 @@ Widget step1Onboarding<widget>(
                                     ),
                                     Icon(
                                       Icons.insert_invitation,
-                                      color: kOTTAOrangeNew,
+                                      color: kOTTAAOrangeNew,
                                     ),
                                     const SizedBox(
                                       width: 16,
@@ -271,7 +272,7 @@ Widget step1Onboarding<widget>(
                   //     duration: Duration(milliseconds: 300),
                   //     curve: Curves.easeInOut);
                 },
-                backgroundColor: kOTTAOrangeNew,
+                backgroundColor: kOTTAAOrangeNew,
                 fontColor: Colors.white,
               ),
             ],

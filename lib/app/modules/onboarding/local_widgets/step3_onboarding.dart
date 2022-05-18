@@ -18,8 +18,8 @@ Widget step3Onboarding<widget>(
     children: [
       FadeInLeft(
         child: HeaderWave(
-          color: kOTTAOrangeNew,
-          bgColor: kOTTABackgroundNew,
+          color: kOTTAAOrangeNew,
+          bgColor: kOTTAABackgroundNew,
         ),
       ),
       Positioned(
@@ -70,7 +70,7 @@ Widget step3Onboarding<widget>(
                               padding: EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               decoration: BoxDecoration(
-                                color: kOTTAOrangeNew,
+                                color: kOTTAAOrangeNew,
                                 borderRadius: BorderRadius.circular(100),
                               ),
                               child: Icon(
@@ -107,47 +107,50 @@ Widget step3Onboarding<widget>(
                         ImageWidget(imageNumber: 671),
                       ],
                     ),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: StepButton(
-                            text: "Previous".tr,
-                            // leading: Icons.chevron_left,
-                            onTap: () {
-                              _.pageNumber.value = 1;
-                              controller.animateToPage(_.pageNumber.value,
-                                  duration: Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut);
-                            },
-                            backgroundColor: kQuantumGrey,
-                            fontColor: Colors.white,
+                    Padding(
+                      padding:  EdgeInsets.only(top: verticalSize * 0.02),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: StepButton(
+                              text: "Previous".tr,
+                              // leading: Icons.chevron_left,
+                              onTap: () {
+                                _.pageNumber.value = 1;
+                                controller.animateToPage(_.pageNumber.value,
+                                    duration: Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut);
+                              },
+                              backgroundColor: kQuantumGrey,
+                              fontColor: Colors.white,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: horizontalSize * 0.06,
-                        ),
-                        Expanded(
-                          child: StepButton(
-                            text: "Next".tr,
-                            // trailing: Icons.chevron_right,
-                            onTap: () async {
-                              showDialog(
-                                context: context,
-                                builder: (context) => Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                              await _.uploadAvatar(
-                                  photoNumber: _.imageNumber.value);
-                              await _sharedPrefClient.setPhotoPref();
-                              Get.offAllNamed(AppRoutes.HOME);
-                            },
-                            backgroundColor: kOTTAOrangeNew,
-                            fontColor: Colors.white,
+                          SizedBox(
+                            width: horizontalSize * 0.06,
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: StepButton(
+                              text: "Next".tr,
+                              // trailing: Icons.chevron_right,
+                              onTap: () async {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                                await _.uploadAvatar(
+                                    photoNumber: _.imageNumber.value);
+                                await _sharedPrefClient.setPhotoPref();
+                                Get.offAllNamed(AppRoutes.HOME);
+                              },
+                              backgroundColor: kOTTAAOrangeNew,
+                              fontColor: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

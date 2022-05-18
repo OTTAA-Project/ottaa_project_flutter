@@ -10,20 +10,20 @@ class TextWidget extends GetView<EditPictoController> {
 
   @override
   Widget build(BuildContext context) {
-    final height = Get.height;
-    final width = Get.width;
+    final verticalSize = MediaQuery.of(context).size.height;
+    final horizontalSize = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.all(width * 0.01),
+      padding: EdgeInsets.all(verticalSize * 0.01),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'text'.tr,
-            style:
-                TextStyle(fontWeight: FontWeight.w600, fontSize: height * 0.03),
+            style: TextStyle(
+                fontWeight: FontWeight.w600, fontSize: verticalSize * 0.03),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: height * 0.03),
+            padding: EdgeInsets.symmetric(vertical: verticalSize * 0.03),
             child: Text(
               'text_widget_long_1'.tr,
               style: TextStyle(),
@@ -36,16 +36,16 @@ class TextWidget extends GetView<EditPictoController> {
                 child: TextFormField(
                   controller: controller.nameController,
                   decoration: InputDecoration(
-                    focusColor: kOTTAOrangeNew,
-                    fillColor: kOTTAOrangeNew,
+                    focusColor: kOTTAAOrangeNew,
+                    fillColor: kOTTAAOrangeNew,
                     hintText: "Name".tr,
                     contentPadding: const EdgeInsets.all(0),
                     isDense: true,
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kOTTAOrangeNew),
+                      borderSide: BorderSide(color: kOTTAAOrangeNew),
                     ),
                   ),
-                  cursorColor: kOTTAOrangeNew,
+                  cursorColor: kOTTAAOrangeNew,
                   onChanged: (value) {
                     final lang = _ttsController.languaje;
                     if (lang == 'en') {
@@ -57,7 +57,7 @@ class TextWidget extends GetView<EditPictoController> {
                 ),
               ),
               SizedBox(
-                width: width * 0.03,
+                width: verticalSize * 0.03,
               ),
               GestureDetector(
                 onTap: () async =>
@@ -65,8 +65,8 @@ class TextWidget extends GetView<EditPictoController> {
                 child: Image.asset(
                   'assets/icono_ottaa.webp',
                   fit: BoxFit.cover,
-                  height: width * 0.06,
-                  width: width * 0.06,
+                  height: verticalSize * 0.06,
+                  width: verticalSize * 0.06,
                 ),
               ),
             ],
