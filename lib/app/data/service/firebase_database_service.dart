@@ -38,6 +38,7 @@ class FirebaseDatabaseService {
         snapshot: res,
         firebaseName: 'Picto',
         assetsFileName: 'assets/pictos.json',
+        pictosOrGrupos: true,
       );
     } else {
       return await mobileFiles(
@@ -72,15 +73,17 @@ class FirebaseDatabaseService {
     if (kIsWeb) {
       return await webFiles(
         snapshot: res,
-        assetsFileName: '',
-        firebaseName: '',
+        assetsFileName: 'assets/grupos.json',
+        firebaseName: 'Grupo',
+        pictosOrGrupos: false,
       );
     } else {
       return await mobileFiles(
         onlineSnapshot: res,
-        assetsFileName: '',
-        fileName: '',
-        firebaseName: '',
+        assetsFileName: 'assets/grupos.json',
+        fileName: 'Grupos_file',
+        firebaseName: 'Grupo',
+        pictoOrGrupo: false,
       );
     }
   }
@@ -93,12 +96,16 @@ class FirebaseDatabaseService {
     required bool pictoOrGrupo,
   }) async {
     final instance = await SharedPreferences.getInstance();
-    final fileExists = instance.getBool('Pictos_file');
+    final fileExists = instance.getBool(fileName);
     debugPrint('the result is for file : $fileExists');
     if (onlineSnapshot.exists && onlineSnapshot.value != null) {
       if (fileExists == true && fileExists != null) {
         debugPrint('from file realtime : mobile');
-        return await _fileController.readPictoFromFile();
+        if(pictoOrGrupo){
+          return await _fileController.readPictoFromFile();
+        }else{
+
+        }
       } else {
         final ref = databaseRef.child('Picto/${firebaseRed.currentUser!.uid}/');
         final res = await ref.get();
@@ -134,6 +141,7 @@ class FirebaseDatabaseService {
     required DataSnapshot snapshot,
     required String assetsFileName,
     required String firebaseName,
+    required bool pictosOrGrupos,
   }) async {
     if (snapshot.exists && snapshot.value != null) {
       final ref = databaseRef.child('Picto/${firebaseRed.currentUser!.uid}/');
