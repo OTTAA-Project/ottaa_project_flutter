@@ -33,4 +33,21 @@ class FirebaseDatabaseRepository {
         data: data,
         type: type,
       );
+
+  Future<void> uploadBoolToFirebaseRealtime({
+    required bool data,
+    required String type,
+  }) async =>
+      await _firebaseDatabaseService.uploadBoolToFirebaseRealtime(
+        data: data,
+        type: type,
+      );
+
+  Future<String> uploadImageToStorageForWeb({
+    required String storageName,
+    required dynamic imageInBytes,
+  }) async => await _firebaseDatabaseService.uploadImageToStorageForWeb(
+      imageInBytes: imageInBytes,
+      storageName: storageName,
+    );
 }

@@ -37,6 +37,26 @@ class FirebaseDatabaseService {
     });
   }
 
+  Future<String> uploadImageToStorageForWeb({
+    required String storageName,
+    required dynamic imageInBytes,
+  }) async {
+    late String url;
+    Reference _reference =
+        FirebaseStorage.instance.ref().child('testingUpload/$storageName');
+    await _reference
+        .putData(
+      imageInBytes,
+      SettableMetadata(contentType: 'image/jpeg'),
+    )
+        .whenComplete(() async {
+      await _reference.getDownloadURL().then((value) {
+        url = value;
+      });
+    });
+    return url;
+  }
+
   Future<String> uploadImageToStorage({
     required String path,
     required String storageDirectory,

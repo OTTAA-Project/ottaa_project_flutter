@@ -33,6 +33,22 @@ class DataController extends GetxController {
         type: type,
       );
 
+  Future<void> uploadBoolToFirebaseRealtime({
+    required bool data,
+    required String type,
+  }) async => await _firebaseDatabaseController.uploadBoolToFirebaseRealtime(
+    data: data,
+    type: type,
+  );
+
+  Future<String> uploadImageToStorageForWeb({
+    required String storageName,
+    required dynamic imageInBytes,
+  }) async => await _firebaseDatabaseController.uploadImageToStorageForWeb(
+    imageInBytes: imageInBytes,
+    storageName: storageName,
+  );
+
   @override
   void onInit() async {
     super.onInit();
