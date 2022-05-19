@@ -1,7 +1,8 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
@@ -13,6 +14,40 @@ class FirebaseDatabaseService {
   final _fileController = LocalFileController();
   final databaseRef = FirebaseDatabase.instance.reference();
   final firebaseRed = FirebaseAuth.instance;
+
+  Future<void> uploadDataToFirebaseRealTime({
+    required String data,
+    required String type,
+  }) async {
+    final String? auth = firebaseRed.currentUser!.uid;
+    final ref = databaseRef.child('$type/${auth!}/');
+    await ref.set({
+      'data': data,
+    });
+  }
+
+  Future<void> uploadBoolToFirebaseRealtime({
+    required bool data,
+    required String type,
+  }) async {
+    final String? auth = firebaseRed.currentUser!.uid;
+    final ref = databaseRef.child('$type/${auth!}/');
+    await ref.set({
+      'value': true,
+    });
+  }
+
+  Future<String> uploadImageToStorage({
+    required String path,
+    required String storageDirectory,
+    required String childName,
+  }) async {
+    Reference ref =
+        FirebaseStorage.instance.ref().child(storageDirectory).child(childName);
+    final UploadTask uploadTask = ref.putFile(File(path));
+    final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+    return await taskSnapshot.ref.getDownloadURL();
+  }
 
   Future<List<Pict>> fetchPictos() async {
     if (kIsWeb) {
@@ -101,29 +136,42 @@ class FirebaseDatabaseService {
     if (onlineSnapshot.exists && onlineSnapshot.value != null) {
       if (fileExists == true && fileExists != null) {
         debugPrint('from file realtime : mobile');
-        if(pictoOrGrupo){
+        if (pictoOrGrupo) {
           return await _fileController.readPictoFromFile();
-        }else{
-
+        } else {
+          return await _fileController.readGruposFromFile();
         }
       } else {
-        final ref = databaseRef.child('Picto/${firebaseRed.currentUser!.uid}/');
+        final ref =
+            databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
         final res = await ref.get();
         final data = res.value['data'];
-        final da =
-            (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList();
+        final da = pictoOrGrupo
+            ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList()
+            : (jsonDecode(data) as List)
+                .map((e) => Grupos.fromJson(e))
+                .toList();
         debugPrint('from online realtime : mobile');
-        await _fileController.writePictoToFile(data: data);
-        await instance.setBool('Pictos_file', true);
+        if (pictoOrGrupo) {
+          await _fileController.writePictoToFile(data: data);
+          await instance.setBool(fileName, true);
+        } else {
+          await _fileController.writeGruposToFile(data: data);
+          await instance.setBool(fileName, true);
+        }
         return da;
       }
     } else {
       //todo: make different types of conversion
-      final pictsString = await rootBundle.loadString('assets/pictos.json');
-      final pictos = (jsonDecode(pictsString) as List)
-          .map((e) => Pict.fromJson(e))
-          .toList();
-      final data = pictos;
+      final pictsString = await rootBundle.loadString(assetsFileName);
+      final listData = pictoOrGrupo
+          ? (jsonDecode(pictsString) as List)
+              .map((e) => Pict.fromJson(e))
+              .toList()
+          : (jsonDecode(pictsString) as List)
+              .map((e) => Grupos.fromJson(e))
+              .toList();
+      final data = listData;
       List<String> fileData = [];
       data.forEach((element) {
         final obj = jsonEncode(element);
@@ -131,9 +179,14 @@ class FirebaseDatabaseService {
       });
       debugPrint('from file user first time: mobile');
       //todo: make different functions to write
-      await _fileController.writePictoToFile(data: data.toString());
-      await instance.setBool('Pictos_file', true);
-      return pictos;
+      if (pictoOrGrupo) {
+        await _fileController.writePictoToFile(data: data.toString());
+        await instance.setBool('Pictos_file', true);
+      } else {
+        await _fileController.writeGruposToFile(data: data.toString());
+        await instance.setBool('Pictos_file', true);
+      }
+      return listData;
     }
   }
 
@@ -144,22 +197,25 @@ class FirebaseDatabaseService {
     required bool pictosOrGrupos,
   }) async {
     if (snapshot.exists && snapshot.value != null) {
-      final ref = databaseRef.child('Picto/${firebaseRed.currentUser!.uid}/');
+      final ref =
+          databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
       final res = await ref.get();
       final data = res.value['data'];
       //todo: write different conversions here
-      final da =
-          (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList();
+      final da = pictosOrGrupos
+          ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList()
+          : (jsonDecode(data) as List).map((e) => Grupos.fromJson(e)).toList();
       debugPrint('from online realtime : web');
       return da;
     } else {
       //todo: write different assets here and convert different one's
-      final String pictsString =
-          await rootBundle.loadString('assets/pictos.json');
+      final String listData = await rootBundle.loadString(assetsFileName);
       debugPrint('from json realtime : web');
-      return (jsonDecode(pictsString) as List)
-          .map((e) => Pict.fromJson(e))
-          .toList();
+      return pictosOrGrupos
+          ? (jsonDecode(listData) as List).map((e) => Pict.fromJson(e)).toList()
+          : (jsonDecode(listData) as List)
+              .map((e) => Grupos.fromJson(e))
+              .toList();
     }
   }
 }
