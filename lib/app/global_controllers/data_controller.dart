@@ -23,7 +23,6 @@ class DataController extends GetxController {
         childName: childName,
       );
 
-
   Future<void> uploadDataToFirebaseRealTime({
     required String data,
     required String type,
@@ -36,18 +35,53 @@ class DataController extends GetxController {
   Future<void> uploadBoolToFirebaseRealtime({
     required bool data,
     required String type,
-  }) async => await _firebaseDatabaseController.uploadBoolToFirebaseRealtime(
-    data: data,
-    type: type,
-  );
+  }) async =>
+      await _firebaseDatabaseController.uploadBoolToFirebaseRealtime(
+        data: data,
+        type: type,
+      );
 
   Future<String> uploadImageToStorageForWeb({
     required String storageName,
     required dynamic imageInBytes,
-  }) async => await _firebaseDatabaseController.uploadImageToStorageForWeb(
-    imageInBytes: imageInBytes,
-    storageName: storageName,
-  );
+  }) async =>
+      await _firebaseDatabaseController.uploadImageToStorageForWeb(
+        imageInBytes: imageInBytes,
+        storageName: storageName,
+      );
+
+  Future<void> logFirebaseAnalyticsEvent({required String eventName}) async =>
+      await _firebaseDatabaseController.logFirebaseAnalyticsEvent(
+        eventName: eventName,
+      );
+
+  Future<int> fetchAccountType() async =>
+      await _firebaseDatabaseController.fetchAccountType();
+
+  Future<String> fetchUserEmail() async =>
+      await _firebaseDatabaseController.fetchUserEmail();
+
+  Future<String> fetchCurrentVersion() async =>
+      await _firebaseDatabaseController.fetchCurrentVersion();
+
+  Future<int> getPicNumber() async =>
+      await _firebaseDatabaseController.getPicNumber();
+
+  Future<void> uploadAvatar({required int photoNumber}) async =>
+      await _firebaseDatabaseController.uploadAvatar(
+        photoNumber: photoNumber,
+      );
+
+  Future<void> uploadInfo(
+      {required String name,
+      required String gender,
+      required int dateOfBirthInMs}) async {
+    await _firebaseDatabaseController.uploadInfo(
+      name: name,
+      gender: gender,
+      dateOfBirthInMs: dateOfBirthInMs,
+    );
+  }
 
   @override
   void onInit() async {

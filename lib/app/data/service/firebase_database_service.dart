@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -14,6 +15,64 @@ class FirebaseDatabaseService {
   final _fileController = LocalFileController();
   final databaseRef = FirebaseDatabase.instance.reference();
   final firebaseRed = FirebaseAuth.instance;
+
+
+
+  Future<void> uploadInfo({required String name,required String gender,required int dateOfBirthInMs}) async {
+    final User? auth = firebaseRed.currentUser;
+    final ref = databaseRef.child('Usuarios/${auth!.uid}/');
+    await ref.set(<String, Object>{
+      'Nombre': name,
+      'birth_date': dateOfBirthInMs,
+      'pref_sexo': gender,
+    }).then((onValue) {
+      return true;
+    }).catchError((onError) {
+      print(onError.toString());
+      return false;
+    });
+    print('hi');
+  }
+
+
+
+  Future<void> uploadAvatar({required int photoNumber}) async {
+    final User? auth = firebaseRed.currentUser;
+    final ref = databaseRef.child('Avatar/${auth!.uid}/');
+    await ref.set({
+      'name': 'TestName',
+      'urlFoto': photoNumber,
+    });
+  }
+
+
+  Future<int> getPicNumber() async {
+    final User? auth = firebaseRed.currentUser;
+    final ref = databaseRef.child('Avatar/${auth!.uid}/');
+    final res = await ref.get();
+    return res.value['urlFoto'];
+  }
+
+  Future<String> fetchCurrentVersion()async{
+    final ref = databaseRef.child('version/');
+    final res = await ref.get();
+    return res.value;
+  }
+
+  Future<String> fetchUserEmail()async{
+    final auth = firebaseRed.currentUser!.providerData[0].email;
+    return auth!;
+  }
+
+  Future<int> fetchAccountType()async{
+    final User? auth = firebaseRed.currentUser;
+    final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
+    final res = await ref.get();
+    return res.value;
+  }
+
+  Future<void> logFirebaseAnalyticsEvent({required String eventName}) async =>
+      await FirebaseAnalytics.instance.logEvent(name: "Talk");
 
   Future<void> uploadDataToFirebaseRealTime({
     required String data,
