@@ -34,6 +34,7 @@ class PictogramGroupsController extends GetxController {
   String selectedPicto = '';
   late ScrollController addPictoGridController;
   int selectedGroupIndex = 0;
+  int selectedIndex = 0;
 
   ///Edit Grupo
   late Grupos grupoToEdit;

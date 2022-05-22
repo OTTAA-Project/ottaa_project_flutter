@@ -38,9 +38,10 @@ class PictoPageWidget extends StatelessWidget {
                 onLongPress: () {
                   _homeController.pictToBeEdited =
                   _pictogramController.selectedGruposPicts[index];
+                  print(_homeController.pictToBeEdited.id);
                   showDialog(
                     context: context,
-                    builder: (context) => ChoiceDialogue(),
+                    builder: (context) => ChoiceDialogue(index: index),
                   );
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
@@ -82,7 +83,7 @@ class PictoPageWidget extends StatelessWidget {
                   _pictogramController.selectedGruposPicts[index];
                   showDialog(
                     context: context,
-                    builder: (context) => ChoiceDialogue(),
+                    builder: (context) => ChoiceDialogue(index: index),
                   );
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
