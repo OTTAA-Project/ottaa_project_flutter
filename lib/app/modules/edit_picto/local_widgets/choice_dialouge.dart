@@ -55,15 +55,10 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                         ),
                       );
                     });
-                int indexGrupo = -1;
-                _pictogramController.grupos.firstWhere((element) {
-                  indexGrupo++;
-                  return element.id == _homeController.pictToBeEdited.id;
-                });
-                _pictogramController.grupos[indexGrupo].relacion.removeWhere(
+                _pictogramController.grupos[_pictogramController.selectedIndex].relacion.removeWhere(
                     (element) =>
                         element.id == _homeController.pictToBeEdited.id);
-                _homeController.grupos[indexGrupo].relacion.removeWhere(
+                _homeController.grupos[_pictogramController.selectedIndex].relacion.removeWhere(
                     (element) =>
                         element.id == _homeController.pictToBeEdited.id);
                 final dataGrupo = _homeController.grupos;

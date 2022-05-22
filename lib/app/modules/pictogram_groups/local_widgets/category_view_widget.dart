@@ -43,6 +43,8 @@ class CategoryViewWidget extends StatelessWidget {
                   //saying the name after selecting the category and saving the selected grupo
                   _pictogramController.selectedGrupos =
                       _homeController.grupos[index];
+                  _pictogramController.selectedIndex = index;
+                  print(_pictogramController.selectedIndex);
                   _ttsController.speak(languaje == "en"
                       ? _homeController.grupos[index].texto.en
                       : _homeController.grupos[index].texto.es);
