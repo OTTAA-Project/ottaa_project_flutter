@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -47,7 +46,6 @@ class PictogramGroupsController extends GetxController {
   bool textOrBorder = true;
   final TextEditingController grupoNameController =
       TextEditingController(text: 'Add Group');
-  final databaseRef = FirebaseDatabase.instance.reference();
   final ImagePicker picker = ImagePicker();
   RxBool isImageProvidedGrupo = false.obs;
   Rx<File?> fileImageGrupo = Rx<File?>(null);
