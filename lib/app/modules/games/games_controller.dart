@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -32,9 +33,12 @@ class GamesController extends GetxController {
       imageAsset: 'assets/games_images/memory_game.png',
     ),
   ];
+
   final _homeController = Get.find<HomeController>();
   List<Grupos> grupos = [];
   RxInt gameSelected = 0.obs;
+                                          /// 0 = easy, 1 = medium, 2 = hard///
+  RxInt difficultyLevel = 0.obs;
   int grupoSelectedIndex = -1;
   late String language;
   RxBool muteOrNot = false.obs;
@@ -43,9 +47,9 @@ class GamesController extends GetxController {
   RxInt incorrectScore = 0.obs;
   RxInt timeInSeconds = 0.obs;
   RxInt maximumStreak = 0.obs;
-  late Timer _gameStartTimer,hintTimer;
-  List<RxBool> imageOrEmoji  = [true.obs,true.obs,true.obs,true.obs];
-  List<RxString> selectedAnswer = [''.obs,''.obs,''.obs,''.obs];
+  late Timer _gameStartTimer, hintTimer;
+  List<RxBool> imageOrEmoji = [true.obs, true.obs, true.obs, true.obs];
+  List<RxString> selectedAnswer = [''.obs, ''.obs, ''.obs, ''.obs];
 
   final initialGamePageController = PageController(initialPage: 0);
   final grupoPageController = PageController(initialPage: 0);
@@ -92,5 +96,21 @@ class GamesController extends GetxController {
     _gameStartTimer.cancel();
     timeInSeconds.value = 0;
     print('time cancel called');
+  }
+
+  void createQuestion(){
+    /// check difficulty level
+    /// which is checked by the streak of correct answers
+    if(correctScore.value==0){
+      ///easy difficulty
+    }else if(correctScore.value==1){
+      ///medium difficulty
+    }else{
+      ///hard difficulty
+    }
+  }
+
+  static int random(min, max) {
+    return min + Random().nextInt(max - min);
   }
 }
