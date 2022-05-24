@@ -1,14 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
@@ -25,11 +23,11 @@ class EditPictoController extends GetxController {
   final _homeController = Get.find<HomeController>();
   final _pictoController = Get.find<PictogramGroupsController>();
   final _ttsController = Get.find<TTSController>();
+  final _dataController = Get.find<DataController>();
   final sharedPref = SharedPrefClient();
   TextEditingController nameController = TextEditingController();
   Rx<Pict?> pict = Rx<Pict?>(null);
   late String lang;
-  final databaseRef = FirebaseDatabase.instance.reference();
   final ImagePicker picker = ImagePicker();
   RxBool editingPicture = false.obs;
   Rx<File?> fileImage = Rx<File?>(null);
@@ -80,9 +78,9 @@ class EditPictoController extends GetxController {
     97: 'Typical Bulgarian Symbols SVG',
     76: 'DoeDY',
   };
-   RxInt selectedId = 0.obs;
-   RxBool refreshSearchResult = true.obs;
-   bool firstTime = true;
+  RxInt selectedId = 0.obs;
+  RxBool refreshSearchResult = true.obs;
+  bool firstTime = true;
 
   late String url;
 
@@ -91,19 +89,27 @@ class EditPictoController extends GetxController {
 
   Future<void> uploadToFirebase({required String data}) async {
     // final language = _ttsController.languaje;
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('Picto/${auth!.uid}/');
-    await ref.set({
-      'data': data,
-    });
+    // final User? auth = FirebaseAuth.instance.currentUser;
+    // final ref = databaseRef.child('Picto/${auth!.uid}/');
+    // await ref.set({
+    //   'data': data,
+    // });
+    await _dataController.uploadDataToFirebaseRealTime(
+      data: data,
+      type: 'Picto',
+    );
   }
 
   Future<void> pictsExistsOnFirebase() async {
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
-    await ref.set({
-      'value': true,
-    });
+    // final User? auth = FirebaseAuth.instance.currentUser;
+    // final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
+    // await ref.set({
+    //   'value': true,
+    // });
+    await _dataController.uploadBoolToFirebaseRealtime(
+      data: true,
+      type: 'PictsExistsOnFirebase',
+    );
   }
 
   Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
@@ -197,19 +203,25 @@ class EditPictoController extends GetxController {
       if (kIsWeb) {
         /// method for uploading images for web
         if (selectedPhotoUrl.value == '') {
-          Reference _reference = FirebaseStorage.instance
-              .ref()
-              .child('testingUpload/${pict.value!.texto.en}');
-          await _reference
-              .putData(
-            await imageTobeUploaded.value!.readAsBytes(),
-            SettableMetadata(contentType: 'image/jpeg'),
-          )
-              .whenComplete(() async {
-            await _reference.getDownloadURL().then((value) {
-              pict.value!.imagen.pictoEditado = value;
-            });
-          });
+          final imageInBytes = await imageTobeUploaded.value!.readAsBytes();
+          // Reference _reference = FirebaseStorage.instance
+          //     .ref()
+          //     .child('testingUpload/${pict.value!.texto.en}');
+          // await _reference
+          //     .putData(
+          //   await imageTobeUploaded.value!.readAsBytes(),
+          //   SettableMetadata(contentType: 'image/jpeg'),
+          // )
+          //     .whenComplete(() async {
+          //   await _reference.getDownloadURL().then((value) {
+          //     pict.value!.imagen.pictoEditado = value;
+          //   });
+          // });
+          final value = await _dataController.uploadImageToStorageForWeb(
+            storageName: 'testingUpload',
+            imageInBytes: imageInBytes,
+          );
+          pict.value!.imagen.pictoEditado = value;
         } else {
           pict.value!.imagen.pictoEditado = selectedPhotoUrl.value;
         }
@@ -271,13 +283,17 @@ class EditPictoController extends GetxController {
   }
 
   Future<void> uploadImageToFirebaseStorage({required String path}) async {
-    Reference ref = FirebaseStorage.instance
-        .ref()
-        .child('testingUpload/')
-        .child(pict.value!.texto.en);
-    final UploadTask uploadTask = ref.putFile(File(path));
-    final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
-    final url = await taskSnapshot.ref.getDownloadURL();
+    // Reference ref = FirebaseStorage.instance
+    //     .ref()
+    //     .child('testingUpload/')
+    //     .child(pict.value!.texto.en);
+    // final UploadTask uploadTask = ref.putFile(File(path));
+    // final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+    final url = await _dataController.uploadImageToStorage(
+      path: path,
+      storageDirectory: 'testingUpload',
+      childName: pict.value!.texto.en,
+    );
     pict.value!.imagen.pictoEditado = url;
   }
 

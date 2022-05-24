@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'dart:convert';
@@ -14,7 +12,6 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 
 class PictogramGroupsController extends GetxController {
@@ -24,6 +21,7 @@ class PictogramGroupsController extends GetxController {
   late PageController pictoPageController;
   final _homeController = Get.find<HomeController>();
   final ttsController = Get.find<TTSController>();
+  final _dataController = Get.find<DataController>();
   List<Pict> picts = [];
   List<Grupos> grupos = [];
   late List<Pict> pictsForGroupAdding;
@@ -48,7 +46,6 @@ class PictogramGroupsController extends GetxController {
   bool textOrBorder = true;
   final TextEditingController grupoNameController =
       TextEditingController(text: 'Add Group');
-  final databaseRef = FirebaseDatabase.instance.reference();
   final ImagePicker picker = ImagePicker();
   RxBool isImageProvidedGrupo = false.obs;
   Rx<File?> fileImageGrupo = Rx<File?>(null);
@@ -90,7 +87,6 @@ class PictogramGroupsController extends GetxController {
   /// add picts to grupos
   late List<RxBool> selectedList;
   int secondTimeSameGroup = -69;
-
 
   /// variables for global symbols one
   /// multiple dataset map
@@ -311,7 +307,7 @@ class PictogramGroupsController extends GetxController {
       if (imageTobeUploadedGrupoEdit != null) {
         fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
         editingGrupo.value = true;
-        selectedPhotoUrlGrupoEdit.value= '';
+        selectedPhotoUrlGrupoEdit.value = '';
         Get.back();
       } else {
         Get.back();
@@ -384,13 +380,17 @@ class PictogramGroupsController extends GetxController {
     required String path,
     bool edit = false,
   }) async {
-    Reference ref = FirebaseStorage.instance
-        .ref()
-        .child('groupImages/')
-        .child(grupoNameController.text);
-    final UploadTask uploadTask = ref.putFile(File(path));
-    final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
-    final url = await taskSnapshot.ref.getDownloadURL();
+    // Reference ref = FirebaseStorage.instance
+    //     .ref()
+    //     .child('groupImages/')
+    //     .child(grupoNameController.text);
+    // final UploadTask uploadTask = ref.putFile(File(path));
+    // final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+    // final url = await taskSnapshot.ref.getDownloadURL();
+    final url = await _dataController.uploadImageToStorage(
+        path: path,
+        storageDirectory: 'groupImages/',
+        childName: grupoNameController.text);
     if (edit) {
       grupoToEdit.imagen.picto = url;
     } else {
@@ -399,48 +399,65 @@ class PictogramGroupsController extends GetxController {
   }
 
   Future<void> uploadImageToFirebaseStoragePicto({required String path}) async {
-    Reference ref = FirebaseStorage.instance
-        .ref()
-        .child('pictoImages/')
-        .child(pictoNameController.text);
-    final UploadTask uploadTask = ref.putFile(File(path));
-    final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
-    final url = await taskSnapshot.ref.getDownloadURL();
+    // Reference ref = FirebaseStorage.instance
+    //     .ref()
+    //     .child('pictoImages/')
+    //     .child(pictoNameController.text);
+    // final UploadTask uploadTask = ref.putFile(File(path));
+    // final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+    // final url = await taskSnapshot.ref.getDownloadURL();
+    final url = await _dataController.uploadImageToStorage(
+      path: path,
+      storageDirectory: 'pictoImages/',
+      childName: pictoNameController.text,
+    );
     pict.imagen.picto = url;
   }
 
   Future<void> uploadToFirebaseGrupo({required String data}) async {
     // final language = _ttsController.languaje;
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('Grupo/${auth!.uid}/');
-    await ref.set({
-      'data': data,
-    });
+    // final User? auth = FirebaseAuth.instance.currentUser;
+    // final ref = databaseRef.child('Grupo/${auth!.uid}/');
+    // await ref.set({
+    //   'data': data,
+    // });
+    await _dataController.uploadDataToFirebaseRealTime(
+      data: data,
+      type: 'Grupo',
+    );
   }
 
   Future<void> uploadToFirebasePicto({required String data}) async {
     // final language = _ttsController.languaje;
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('Picto/${auth!.uid}/');
-    await ref.set({
-      'data': data,
-    });
+    // final User? auth = FirebaseAuth.instance.currentUser;
+    // final ref = databaseRef.child('Picto/${auth!.uid}/');
+    // await ref.set({
+    //   'data': data,
+    // });
+    await _dataController.uploadDataToFirebaseRealTime(
+      data: data,
+      type: 'Picto',
+    );
   }
 
   Future<void> gruposExistsOnFirebase() async {
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('GruposExistsOnFirebase/${auth!.uid}/');
-    await ref.set({
-      'value': true,
-    });
+    // final User? auth = FirebaseAuth.instance.currentUser;
+    // final ref = databaseRef.child('GruposExistsOnFirebase/${auth!.uid}/');
+    // await ref.set({
+    //   'value': true,
+    // });
+    await _dataController.uploadBoolToFirebaseRealtime(
+        data: true, type: 'GruposExistsOnFirebase');
   }
 
   Future<void> pictoExistsOnFirebase() async {
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
-    await ref.set({
-      'value': true,
-    });
+    // final User? auth = FirebaseAuth.instance.currentUser;
+    // final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
+    // await ref.set({
+    //   'value': true,
+    // });
+    await _dataController.uploadBoolToFirebaseRealtime(
+        data: true, type: 'PictsExistsOnFirebase');
   }
 
   void uploadGrupoEdit(
@@ -458,19 +475,26 @@ class PictogramGroupsController extends GetxController {
       if (kIsWeb) {
         /// method for uploading images for web
         if (selectedPhotoUrlGrupoEdit.value == '') {
-          Reference _reference = FirebaseStorage.instance
-              .ref()
-              .child('testingUpload/${grupoEditNameController.text}');
-          await _reference
-              .putData(
-            await imageTobeUploadedGrupoEdit.value!.readAsBytes(),
-            SettableMetadata(contentType: 'image/jpeg'),
-          )
-              .whenComplete(() async {
-            await _reference.getDownloadURL().then((value) {
-              grupoToEdit.imagen.picto = value;
-            });
-          });
+          final imageInBytes =
+              await imageTobeUploadedGrupoEdit.value!.readAsBytes();
+          // Reference _reference = FirebaseStorage.instance
+          //     .ref()
+          //     .child('testingUpload/${grupoEditNameController.text}');
+          // await _reference
+          //     .putData(
+          //   await imageTobeUploadedGrupoEdit.value!.readAsBytes(),
+          //   SettableMetadata(contentType: 'image/jpeg'),
+          // )
+          //     .whenComplete(() async {
+          //   await _reference.getDownloadURL().then((value) {
+          //     grupoToEdit.imagen.picto = value;
+          //   });
+          // });
+          final value = await _dataController.uploadImageToStorageForWeb(
+            storageName: grupoEditNameController.text,
+            imageInBytes: imageInBytes,
+          );
+          grupoToEdit.imagen.picto = value;
         } else {
           grupoToEdit.imagen.picto = selectedPhotoUrlGrupoEdit.value!;
         }
@@ -542,19 +566,26 @@ class PictogramGroupsController extends GetxController {
       if (kIsWeb) {
         /// method for uploading images for web
         if (selectedPhotoUrlGrupo.value == '') {
-          Reference _reference = FirebaseStorage.instance
-              .ref()
-              .child('testingUpload/${grupoNameController.text}');
-          await _reference
-              .putData(
-            await imageTobeUploadedGrupo.value!.readAsBytes(),
-            SettableMetadata(contentType: 'image/jpeg'),
-          )
-              .whenComplete(() async {
-            await _reference.getDownloadURL().then((value) {
-              grupo.imagen.picto = value;
-            });
-          });
+          final imageInBytes =
+              await imageTobeUploadedGrupo.value!.readAsBytes();
+          // Reference _reference = FirebaseStorage.instance
+          //     .ref()
+          //     .child('testingUpload/${grupoNameController.text}');
+          // await _reference
+          //     .putData(
+          //   await imageTobeUploadedGrupo.value!.readAsBytes(),
+          //   SettableMetadata(contentType: 'image/jpeg'),
+          // )
+          //     .whenComplete(() async {
+          //   await _reference.getDownloadURL().then((value) {
+          //     grupo.imagen.picto = value;
+          //   });
+          // });
+          final value = await _dataController.uploadImageToStorageForWeb(
+            storageName: grupoNameController.text,
+            imageInBytes: imageInBytes,
+          );
+          grupo.imagen.picto = value;
         } else {
           grupo.imagen.picto = selectedPhotoUrlGrupo.value!;
         }
@@ -620,19 +651,26 @@ class PictogramGroupsController extends GetxController {
       if (kIsWeb) {
         /// method for uploading images for web
         if (selectedPhotoUrlPicto.value == '') {
-          Reference _reference = FirebaseStorage.instance
-              .ref()
-              .child('testingUpload/${pictoNameController.text}');
-          await _reference
-              .putData(
-            await imageTobeUploadedPicto.value!.readAsBytes(),
-            SettableMetadata(contentType: 'image/jpeg'),
-          )
-              .whenComplete(() async {
-            await _reference.getDownloadURL().then((value) {
-              pict.imagen.picto = value;
-            });
-          });
+          final imageInBytes =
+              await imageTobeUploadedPicto.value!.readAsBytes();
+          // Reference _reference = FirebaseStorage.instance
+          //     .ref()
+          //     .child('testingUpload/${pictoNameController.text}');
+          // await _reference
+          //     .putData(
+          //   await imageTobeUploadedPicto.value!.readAsBytes(),
+          //   SettableMetadata(contentType: 'image/jpeg'),
+          // )
+          //     .whenComplete(() async {
+          //   await _reference.getDownloadURL().then((value) {
+          //     pict.imagen.picto = value;
+          //   });
+          // });
+          final value = await _dataController.uploadImageToStorageForWeb(
+            storageName: pictoNameController.text,
+            imageInBytes: imageInBytes,
+          );
+          pict.imagen.picto = value;
         } else {
           pict.imagen.picto = selectedPhotoUrlPicto.value!;
         }
