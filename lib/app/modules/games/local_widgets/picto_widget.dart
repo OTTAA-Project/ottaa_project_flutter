@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PictoWidget extends StatelessWidget {
@@ -44,15 +46,24 @@ class PictoWidget extends StatelessWidget {
                   width: 4,
                 ),
               ),
-              //todo: replace it with the imageWidget
               child: Stack(
                 children: [
                   Center(
-                    child: Image.asset('assets/icono_ottaa.webp'),
+                    child: kIsWeb
+                        ? Image.network(imageUrl)
+                        : CachedNetworkImage(
+                            imageUrl: imageUrl,
+                            placeholder: (context, url) => Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.black,
+                              ),
+                            ),
+                            fit: BoxFit.fill,
+                          ),
                   ),
                   Center(
                     child: AnimatedOpacity(
-                      duration: Duration(seconds: 2),
+                      duration: Duration(milliseconds: 1000),
                       opacity: imageOrResult ? 0 : 1,
                       child: selectedAnswer.toUpperCase() == name.toUpperCase()
                           ? Icon(

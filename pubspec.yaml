@@ -66,7 +66,6 @@ dev_dependencies:
 dependency_overrides:
   get: '4.6.1'
   url_launcher_web: 2.0.9
-  get: '4.6.0'
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.

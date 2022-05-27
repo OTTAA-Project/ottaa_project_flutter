@@ -17,6 +17,10 @@ class GamesPlayingPage extends GetView<GamesController> {
     return WillPopScope(
       onWillPop: () async {
         controller.cancelTimer();
+        await controller.pauseMusic();
+        controller.currentStreak.value = 0;
+        controller.correctScore.value = 0;
+        controller.incorrectScore.value = 0;
         Get.back();
         return true;
       },
@@ -27,8 +31,12 @@ class GamesPlayingPage extends GetView<GamesController> {
           foregroundColor: Colors.white,
           elevation: 0,
           leading: GestureDetector(
-            onTap: () {
+            onTap: () async {
               controller.cancelTimer();
+              await controller.pauseMusic();
+              controller.currentStreak.value = 0;
+              controller.correctScore.value = 0;
+              controller.incorrectScore.value = 0;
               Get.back();
             },
             child: Icon(
@@ -81,8 +89,21 @@ class GamesPlayingPage extends GetView<GamesController> {
             ),
             Obx(
               () => GestureDetector(
-                onTap: () {
+                onTap: () async {
                   controller.muteOrNot.value = !controller.muteOrNot.value;
+                  if (controller.muteOrNot.value) {
+                    await controller.backgroundMusicPlayer.pause();
+                    // controller.difficultyLevel.value = 1;
+                    // controller.changeViewForListview.value = !controller.changeViewForListview.value;
+                    // await Future.delayed(Duration(seconds: 1));
+                    // controller.changeViewForListview.value = !controller.changeViewForListview.value;
+                  } else {
+                    await controller.backgroundMusicPlayer.play();
+                    controller.difficultyLevel.value = 0;
+                    // controller.changeViewForListview.value = !controller.changeViewForListview.value;
+                    // await Future.delayed(Duration(seconds: 1));
+                    // controller.changeViewForListview.value = !controller.changeViewForListview.value;
+                  }
                 },
                 child: Icon(
                   controller.muteOrNot.value

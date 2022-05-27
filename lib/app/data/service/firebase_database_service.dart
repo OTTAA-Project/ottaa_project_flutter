@@ -214,7 +214,7 @@ class FirebaseDatabaseService {
     debugPrint('the result is for file : $fileExists');
     if (onlineSnapshot.exists && onlineSnapshot.value != null) {
       if (fileExists == true && fileExists != null) {
-        debugPrint('from file realtime : mobile');
+        debugPrint('from file on the device : mobile');
         if (pictoOrGrupo) {
           return await _fileController.readPictoFromFile();
         } else {
@@ -230,7 +230,7 @@ class FirebaseDatabaseService {
             : (jsonDecode(data) as List)
                 .map((e) => Grupos.fromJson(e))
                 .toList();
-        debugPrint('from online realtime : mobile');
+        debugPrint('from online firebase : mobile');
         if (pictoOrGrupo) {
           await _fileController.writePictoToFile(data: data);
           await instance.setBool(fileName, true);

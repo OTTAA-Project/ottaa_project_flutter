@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/games/games_controller.dart';
@@ -30,9 +31,14 @@ class WhatsThePicto extends GetView<GamesController> {
         Positioned(
           left: horizontalSize * 0.4,
           top: verticalSize * 0.06,
-          child: Image.asset(
-            'assets/icono_ottaa.webp',
-            height: verticalSize * 0.2,
+          child: GestureDetector(
+            onTap: () {
+              controller.speakName();
+            },
+            child: Image.asset(
+              'assets/icono_ottaa.webp',
+              height: verticalSize * 0.2,
+            ),
           ),
         ),
         //todo: update the photo init and change it back to the
@@ -57,101 +63,66 @@ class WhatsThePicto extends GetView<GamesController> {
                 ),
               ),
               child: Center(
-                child: Icon(
-                  Icons.help_outline,
-                  color: kOTTAAOrangeNew,
-                  size: verticalSize * 0.19,
+                child: Stack(
+                  children: [
+                    Icon(
+                      Icons.help_outline,
+                      color: kOTTAAOrangeNew,
+                      size: verticalSize * 0.19,
+                    ),
+                    Obx(
+                      () => AnimatedOpacity(
+                        duration: Duration(seconds: 1),
+                        opacity: controller.showImage.value ? 1 : 0,
+                        child: CachedNetworkImage(
+                          imageUrl: controller.selectedImage.value,
+                          placeholder: (context, url) => Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.black,
+                            ),
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
         ),
-        // Positioned(
-        //   bottom: verticalSize * 0.02,
-        //   left: horizontalSize * 0.02,
-        //   child: Obx(
-        //     () => Row(
-        //       children: [
-        //         PictoWidget(
-        //           onTap: () async {
-        //             controller.imageOrEmoji[0].value =
-        //                 !controller.imageOrEmoji[0].value;
-        //             //todo: create a function for adding to score and do some magic
-        //             await Future.delayed(
-        //               Duration(seconds: 2),
-        //             );
-        //             controller.imageOrEmoji[0].value =
-        //                 !controller.imageOrEmoji[0].value;
-        //           },
-        //           verticalSize: verticalSize,
-        //           horizontalSize: horizontalSize,
-        //           imageUrl: '',
-        //           name: '',
-        //           imageOrResult: controller.imageOrEmoji[0].value,
-        //           selectedAnswer: controller.selectedAnswer[0].value,
-        //         ),
-        //         SizedBox(
-        //           width: horizontalSize * 0.03,
-        //         ),
-        //         PictoWidget(
-        //           onTap: () async {
-        //             controller.imageOrEmoji[1].value =
-        //                 !controller.imageOrEmoji[1].value;
-        //             //todo: create a function for adding to score and do some magic
-        //             await Future.delayed(
-        //               Duration(seconds: 2),
-        //             );
-        //             controller.imageOrEmoji[1].value =
-        //                 !controller.imageOrEmoji[1].value;
-        //             // print(random(0, controller.grupos[controller.grupoSelectedIndex].relacion.length));
-        //           },
-        //           verticalSize: verticalSize,
-        //           horizontalSize: horizontalSize,
-        //           imageUrl: '',
-        //           name: 'vvb',
-        //           imageOrResult: controller.imageOrEmoji[1].value,
-        //           selectedAnswer: controller.selectedAnswer[1].value,
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
         Positioned(
           bottom: verticalSize * 0.02,
           left: horizontalSize * 0.02,
-          child: Obx(
-            () => Container(
-              height: 400,
-              width: horizontalSize * 0.98,
-              child: ListView.builder(
-                itemCount: controller.difficultyLevel.value + 2,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(right: horizontalSize * 0.03),
-                    child: Obx(
-                      () => PictoWidget(
-                        onTap: () async {
-                          controller.imageOrEmoji[index].value =
-                              !controller.imageOrEmoji[index].value;
-                          //todo: create a function for adding to score and do some magic
-                          await Future.delayed(
-                            Duration(seconds: 2),
-                          );
-                          controller.imageOrEmoji[index].value =
-                              !controller.imageOrEmoji[index].value;
-                        },
-                        verticalSize: verticalSize,
-                        horizontalSize: horizontalSize,
-                        imageUrl: '',
-                        name: index == 0 ? '' : 'vbb',
-                        imageOrResult: controller.imageOrEmoji[index].value,
-                        selectedAnswer: controller.selectedAnswer[index].value,
-                      ),
-                    ),
-                  );
-                },
-              ),
+          child: Container(
+            height: 400,
+            width: horizontalSize * 0.98,
+            child: Obx(
+              () => controller.changeViewForListview.value
+                  ? ListView.builder(
+                      itemCount: controller.difficultyLevel.value + 2,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding:
+                              EdgeInsets.only(right: horizontalSize * 0.03),
+                          child: Obx(
+                            () => PictoWidget(
+                              onTap: () async => await controller
+                                  .pictoFunctionWhatsThePicto(index: index),
+                              verticalSize: verticalSize,
+                              horizontalSize: horizontalSize,
+                              imageUrl: controller.questions[index].imageUrl,
+                              name: controller.questions[index].text,
+                              imageOrResult:
+                                  controller.imageOrEmoji[index].value,
+                              selectedAnswer: controller.selectedAnswer.value,
+                            ),
+                          ),
+                        );
+                      },
+                    )
+                  : Container(),
             ),
           ),
         ),

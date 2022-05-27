@@ -37,21 +37,9 @@ class GrupoSelectionPage extends GetView<GamesController> {
             },
             pageControllerGame: controller.initialGamePageController,
             pageControllerGrupo: controller.grupoPageController,
-            centerButton: () {
-              controller.grupoSelectedIndex =
-                  controller.grupoPageController.page!.toInt();
-              //todo: do some work here for games before going to the actual playing
-              controller.startGameTimer();
-              Get.to(() => GamesPlayingPage());
-            },
+            centerButton: controller.selectingGrupoFunction,
             color: kOTTAAOrangeNew,
-            onTap: () {
-              controller.grupoSelectedIndex =
-                  controller.grupoPageController.page!.toInt();
-              //todo: do some work here for games before going to the actual playing
-              controller.startGameTimer();
-              Get.to(() => GamesPlayingPage());
-            },
+            onTap: controller.selectingGrupoFunction,
             grupos: controller.grupos,
             language: controller.language,
           ),
