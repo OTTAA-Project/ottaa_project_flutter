@@ -68,6 +68,7 @@ class FirebaseDatabaseService {
     final User? auth = firebaseRed.currentUser;
     final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
     final res = await ref.get();
+    if(res.value == null) return 0;
     return res.value;
   }
 

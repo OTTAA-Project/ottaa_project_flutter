@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/games/games_controller.dart';
-import 'package:ottaa_project_flutter/app/modules/games/local_widgets/picto_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/games/local_widgets/picto_whats_the_picto_widget.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class WhatsThePicto extends GetView<GamesController> {
@@ -107,7 +107,7 @@ class WhatsThePicto extends GetView<GamesController> {
                           padding:
                               EdgeInsets.only(right: horizontalSize * 0.03),
                           child: Obx(
-                            () => PictoWidget(
+                            () => PictoWhatsThePictoWidget(
                               onTap: () async => await controller
                                   .pictoFunctionWhatsThePicto(index: index),
                               verticalSize: verticalSize,

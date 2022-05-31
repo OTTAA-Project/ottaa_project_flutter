@@ -38,6 +38,12 @@ class GamesController extends GetxController {
       imageAsset: 'assets/games_images/memory_game.png',
     ),
   ];
+  final Map<int, RxDouble> leftRatios = {
+    0: 0.05.obs,
+    1: 0.28.obs,
+    2: 0.51.obs,
+    3: 0.74.obs,
+  };
   RxList<GameQuestionModel> questions = <GameQuestionModel>[].obs;
   final AudioPlayer backgroundMusicPlayer = AudioPlayer();
   final AudioPlayer clicksPlayer = AudioPlayer();
@@ -50,7 +56,7 @@ class GamesController extends GetxController {
   RxBool changeViewForListview = true.obs;
 
   /// 0 = easy, 1 = medium, 2 = hard///
-  RxInt difficultyLevel = 2.obs;
+  RxInt difficultyLevel = 0.obs;
   int grupoSelectedIndex = -1;
   late String language;
   RxBool muteOrNot = false.obs;
@@ -65,6 +71,7 @@ class GamesController extends GetxController {
   RxString selectedAnswer = ''.obs;
   RxString selectedImage = ''.obs;
   RxBool showImage = false.obs;
+  List<RxBool> topOrBottom = [true.obs, true.obs, true.obs, true.obs];
 
   final initialGamePageController = PageController(initialPage: 0);
   final grupoPageController = PageController(initialPage: 0);
@@ -308,7 +315,9 @@ class GamesController extends GetxController {
       selectedAnswer.value = questions[correctAnswer].text;
       selectedImage.value = questions[correctAnswer].imageUrl;
       await clicksPlayer.pause();
-      await _ttsController.speak('What\'s the picto ${selectedAnswer.value}');
+      if (gameSelected.value == 0) {
+        await _ttsController.speak('What\'s the picto ${selectedAnswer.value}');
+      }
     }
   }
 
@@ -351,4 +360,10 @@ class GamesController extends GetxController {
   void speakName() {
     _ttsController.speak('What\'s the picto ${selectedAnswer.string}');
   }
+
+  Future<void> topWidgetFunction() async {
+    topOrBottom[0].value = !topOrBottom[0].value;
+  }
+
+  Future<void> bottomWidgetFunction() async {}
 }
