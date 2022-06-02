@@ -69,12 +69,13 @@ class GamesController extends GetxController {
   late Timer _gameStartTimer, hintTimer;
   List<RxBool> imageOrEmoji = [true.obs, true.obs, true.obs, true.obs];
   RxString selectedAnswer = ''.obs;
+  RxString selectedAnswerBottom = ''.obs;
+  List<RxString> bottomWidgetNames = [''.obs, ''.obs, ''.obs, ''.obs];
   RxString selectedImage = ''.obs;
   RxBool showImage = false.obs;
   List<RxBool> topOrBottom = [true.obs, true.obs, true.obs, true.obs];
   List<RxInt> randomPositionsForBottomWidgets = [8.obs, 8.obs, 8.obs, 8.obs];
   List<bool> selectedOrNot = [false, false, false, false];
-  List<String> selectedAnswersMatchPictos = ['', '', '', ''];
   int totalCorrectMatchPicto = 0;
   final initialGamePageController = PageController(initialPage: 0);
   final grupoPageController = PageController(initialPage: 0);
@@ -187,7 +188,6 @@ class GamesController extends GetxController {
       topOrBottom = [true.obs, true.obs, true.obs, true.obs];
       randomPositionsForBottomWidgets = [8.obs, 8.obs, 8.obs, 8.obs];
       selectedOrNot = [false, false, false, false];
-      selectedAnswersMatchPictos = ['', '', '', ''];
       totalCorrectMatchPicto = 0;
       selectedAnswer.value = '';
     }
@@ -195,7 +195,7 @@ class GamesController extends GetxController {
       ///easy difficulty
       int picto1 = random(0, currentGrupoPicts.length);
       int picto2 = random(0, currentGrupoPicts.length);
-      while(picto1 == picto2){
+      while (picto1 == picto2) {
         picto1 = random(0, currentGrupoPicts.length);
       }
       print('the values are here');
@@ -232,17 +232,17 @@ class GamesController extends GetxController {
         speakNameWhatsThePicto();
       }
       if (gameSelected.value == 1) {
-        generateRandomPositioningForMatchPictos();
+        await generateRandomPositioningForMatchPictos();
       }
     } else if (difficultyLevel.value == 1) {
       ///medium difficulty
       int picto1 = random(0, currentGrupoPicts.length);
       int picto2 = random(0, currentGrupoPicts.length);
       int picto3 = random(0, currentGrupoPicts.length);
-      while(picto1 == picto2){
+      while (picto1 == picto2) {
         picto1 = random(0, currentGrupoPicts.length);
       }
-      while(picto3 == picto1 || picto3 == picto2){
+      while (picto3 == picto1 || picto3 == picto2) {
         picto3 = random(0, currentGrupoPicts.length);
       }
       questions.clear();
@@ -287,7 +287,7 @@ class GamesController extends GetxController {
         speakNameWhatsThePicto();
       }
       if (gameSelected.value == 1) {
-        generateRandomPositioningForMatchPictos();
+        await generateRandomPositioningForMatchPictos();
       }
     } else {
       ///hard difficulty
@@ -295,13 +295,13 @@ class GamesController extends GetxController {
       int picto2 = random(0, currentGrupoPicts.length);
       int picto3 = random(0, currentGrupoPicts.length);
       int picto4 = random(0, currentGrupoPicts.length);
-      while(picto1 == picto2){
+      while (picto1 == picto2) {
         picto1 = random(0, currentGrupoPicts.length);
       }
-      while(picto3 == picto1 || picto3 == picto2){
+      while (picto3 == picto1 || picto3 == picto2) {
         picto3 = random(0, currentGrupoPicts.length);
       }
-      while(picto4 == picto1 || picto4 == picto2 || picto4 == picto3){
+      while (picto4 == picto1 || picto4 == picto2 || picto4 == picto3) {
         picto4 = random(0, currentGrupoPicts.length);
       }
       questions.clear();
@@ -357,7 +357,7 @@ class GamesController extends GetxController {
         speakNameWhatsThePicto();
       }
       if (gameSelected.value == 1) {
-        generateRandomPositioningForMatchPictos();
+        await generateRandomPositioningForMatchPictos();
       }
     }
   }
@@ -404,13 +404,14 @@ class GamesController extends GetxController {
   }
 
   Future<void> topWidgetFunction({required int index}) async {
+    selectedAnswer.value = questions[index].text;
     print('the values of the current stack is');
     selectedOrNot.forEach((element) {
       print('the value is : $element');
     });
     if (selectedOrNot[index]) {
       /// it is selected for checking user clicked on the below question
-      if (selectedAnswer.value == questions[index].text) {
+      if (selectedAnswer.value == selectedAnswerBottom.value) {
         totalCorrectMatchPicto++;
         playClickSounds(assetName: 'yay');
         topOrBottom[index].value = !topOrBottom[index].value;
@@ -428,21 +429,23 @@ class GamesController extends GetxController {
     }
   }
 
-  Future<void> bottomWidgetFunction({required int index}) async {
+  Future<void> bottomWidgetFunction(
+      {required int index, required String text}) async {
+    selectedAnswerBottom.value = text;
     if (selectedOrNot[index]) {
       /// it is selected for checking user clicked on the below question
-      if (selectedAnswer.value == questions[index].text) {
+      if (selectedAnswer.value == selectedAnswerBottom.value) {
         totalCorrectMatchPicto++;
         topOrBottom[index].value = !topOrBottom[index].value;
-        playClickSounds(assetName: 'yay');
+        await playClickSounds(assetName: 'yay');
       } else {
         selectedOrNot[index] = false;
-        playClickSounds(assetName: 'ohoh');
+        await playClickSounds(assetName: 'ohoh');
       }
     } else {
       /// it is not selected for checking
       selectedOrNot[index] = true;
-      selectedAnswer.value = questions[index].text;
+      selectedAnswerBottom.value = questions[index].text;
     }
     await Future.delayed(Duration(seconds: 1));
     if (totalCorrectMatchPicto == difficultyLevel.value + 2) {
@@ -450,7 +453,7 @@ class GamesController extends GetxController {
     }
   }
 
-  void generateRandomPositioningForMatchPictos() {
+  Future<void> generateRandomPositioningForMatchPictos() async {
     randomPositionsForBottomWidgets = [99.obs, 99.obs, 99.obs, 99.obs];
     if (difficultyLevel.value == 0) {
       int position1 = Random().nextInt(4000) % 2;
@@ -479,29 +482,30 @@ class GamesController extends GetxController {
       print('position 2 is this one $position2');
       print('position 3 is this one $position3');
     } else if (difficultyLevel.value == 2) {
+      int position0 = Random().nextInt(4000) % 4;
       int position1 = Random().nextInt(4000) % 4;
       int position2 = Random().nextInt(4000) % 4;
       int position3 = Random().nextInt(4000) % 4;
-      int position4 = Random().nextInt(4000) % 4;
-      while (position2 == position1) {
+      while (position1 == position0) {
+        position1 = Random().nextInt(4000) % 4;
+      }
+      while (position2 == position0 || position2 == position1) {
         position2 = Random().nextInt(4000) % 4;
       }
-      while (position3 == position1 || position3 == position2) {
+      while (position3 == position0 ||
+          position3 == position1 ||
+          position3 == position2) {
         position3 = Random().nextInt(4000) % 4;
       }
-      while (position4 == position1 ||
-          position4 == position2 ||
-          position4 == position3) {
-        position4 = Random().nextInt(4000) % 4;
-      }
-      randomPositionsForBottomWidgets[0].value = position1;
-      randomPositionsForBottomWidgets[1].value = position2;
-      randomPositionsForBottomWidgets[2].value = position3;
-      randomPositionsForBottomWidgets[3].value = position4;
-      print('position 1 is this one $position1');
-      print('position 2 is this one $position2');
-      print('position 3 is this one $position3');
-      print('position 4 is this one $position4');
+      randomPositionsForBottomWidgets[0].value = position0;
+      bottomWidgetNames[position0].value = questions[0].text;
+      randomPositionsForBottomWidgets[1].value = position1;
+      bottomWidgetNames[position1].value = questions[1].text;
+      randomPositionsForBottomWidgets[2].value = position2;
+      bottomWidgetNames[position2].value = questions[2].text;
+      randomPositionsForBottomWidgets[3].value = position3;
+      bottomWidgetNames[position3].value = questions[3].text;
+      await Future.delayed(Duration(milliseconds: 300));
     }
   }
 }

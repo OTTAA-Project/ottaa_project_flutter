@@ -73,15 +73,17 @@ class MatchPicto extends GetView<GamesController> {
             left: horizontalSize * 0.05,
             bottom: verticalSize * 0.05,
             foundOrNot: controller
-
                 .topOrBottom[
                     controller.randomPositionsForBottomWidgets[0].value]
                 .value,
             onTap: () async => controller.bottomWidgetFunction(
-                index: controller.randomPositionsForBottomWidgets[0].value),
-            name: controller
-                .questions[controller.randomPositionsForBottomWidgets[0].value]
-                .text,
+              index: controller.randomPositionsForBottomWidgets[0].value,
+              text: controller.bottomWidgetNames[0].value,
+            ),
+            // name: controller
+            //     .questions[controller.randomPositionsForBottomWidgets[0].value]
+            //     .text,
+            name: controller.bottomWidgetNames[0].value,
           ),
           PictoMatchPictoBottomWidget(
             horizontalSize: horizontalSize,
@@ -93,10 +95,13 @@ class MatchPicto extends GetView<GamesController> {
                     controller.randomPositionsForBottomWidgets[1].value]
                 .value,
             onTap: () async => controller.bottomWidgetFunction(
-                index: controller.randomPositionsForBottomWidgets[1].value),
-            name: controller
-                .questions[controller.randomPositionsForBottomWidgets[1].value]
-                .text,
+              index: controller.randomPositionsForBottomWidgets[1].value,
+              text: controller.bottomWidgetNames[1].value,
+            ),
+            // name: controller
+            //     .questions[controller.randomPositionsForBottomWidgets[1].value]
+            //     .text,
+            name: controller.bottomWidgetNames[1].value,
           ),
           controller.difficultyLevel.value >= 1
               ? PictoMatchPictoBottomWidget(
@@ -109,11 +114,14 @@ class MatchPicto extends GetView<GamesController> {
                           controller.randomPositionsForBottomWidgets[2].value]
                       .value,
                   onTap: () async => controller.bottomWidgetFunction(
-                      index: controller.randomPositionsForBottomWidgets[2].value),
-                  name: controller
-                      .questions[
-                          controller.randomPositionsForBottomWidgets[2].value]
-                      .text,
+                    index: controller.randomPositionsForBottomWidgets[2].value,
+                    text: controller.bottomWidgetNames[2].value,
+                  ),
+                  // name: controller
+                  //     .questions[
+                  //         controller.randomPositionsForBottomWidgets[2].value]
+                  //     .text,
+                  name: controller.bottomWidgetNames[2].value,
                 )
               : Container(),
 
@@ -128,11 +136,14 @@ class MatchPicto extends GetView<GamesController> {
                           controller.randomPositionsForBottomWidgets[3].value]
                       .value,
                   onTap: () async => controller.bottomWidgetFunction(
-                      index: controller.randomPositionsForBottomWidgets[3].value),
-                  name: controller
-                      .questions[
-                          controller.randomPositionsForBottomWidgets[3].value]
-                      .text,
+                    index: controller.randomPositionsForBottomWidgets[3].value,
+                    text: controller.bottomWidgetNames[3].value,
+                  ),
+                  // name: controller
+                  //     .questions[
+                  //         controller.randomPositionsForBottomWidgets[3].value]
+                  //     .text,
+                  name: controller.bottomWidgetNames[3].value,
                 )
               : Container(),
 

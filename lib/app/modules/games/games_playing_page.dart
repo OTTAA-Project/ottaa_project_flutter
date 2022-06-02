@@ -44,8 +44,14 @@ class GamesPlayingPage extends GetView<GamesController> {
               color: Colors.white,
             ),
           ),
-          title: Text(
-              '${controller.gameTypes[controller.gameSelected.value].title}'),
+          title: GestureDetector(
+            onTap: (){
+              print(controller.bottomWidgetNames[1].value);
+              print(controller.randomPositionsForBottomWidgets[1].value);
+            },
+            child: Text(
+                '${controller.gameTypes[controller.gameSelected.value].title}'),
+          ),
           actions: [
             GestureDetector(
               onTap: () {
