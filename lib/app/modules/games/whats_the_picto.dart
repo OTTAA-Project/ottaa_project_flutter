@@ -33,7 +33,7 @@ class WhatsThePicto extends GetView<GamesController> {
           top: verticalSize * 0.06,
           child: GestureDetector(
             onTap: () {
-              controller.speakName();
+              controller.speakNameWhatsThePicto();
             },
             child: Image.asset(
               'assets/icono_ottaa.webp',

@@ -10,9 +10,10 @@ class PictoMatchPictoBottomWidget extends StatelessWidget {
     required this.foundOrNot,
     required this.bottom,
     required this.left,
+    required this.name,
   }) : super(key: key);
   final double verticalSize, horizontalSize, left, bottom;
-
+  final String name;
   final void Function()? onTap;
   final bool foundOrNot;
 
@@ -34,18 +35,40 @@ class PictoMatchPictoBottomWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(verticalSize * 0.02),
               // color: topOrBottom ? Colors.transparent : Colors.white,
             ),
-            child: Container(
-              margin: EdgeInsets.all(verticalSize * 0.02),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(verticalSize * 0.03),
-                border:
-                    Border.all(color: Colors.black, width: verticalSize * 0.01),
-              ),
-              child: Icon(
-                Icons.help_outline,
-                color: kOTTAAOrangeNew,
-                size: verticalSize * 0.19,
-              ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(
+                      verticalSize * 0.01,
+                      verticalSize * 0.01,
+                      verticalSize * 0.01,
+                      0,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(verticalSize * 0.03),
+                      border: Border.all(
+                          color: Colors.black, width: verticalSize * 0.01),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.help_outline,
+                        color: kOTTAAOrangeNew,
+                        size: verticalSize * 0.19,
+                      ),
+                    ),
+                  ),
+                ),
+                Text(
+                  name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: verticalSize * 0.042,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

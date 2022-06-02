@@ -32,8 +32,8 @@ class PictoMatchPictoWidget extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(verticalSize * 0.02),
           splashColor: kOTTAAOrangeNew,
-          // onTap: topOrBottom ? onTap : null,
-          onTap: onTap,
+          onTap: topOrBottom ? onTap : null,
+          // onTap: onTap,
           child: Container(
             height: verticalSize * 0.28,
             width: horizontalSize * 0.2,
@@ -48,7 +48,16 @@ class PictoMatchPictoWidget extends StatelessWidget {
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    margin: EdgeInsets.all(verticalSize * 0.02),
+                    margin: EdgeInsets.fromLTRB(
+                      verticalSize * 0.01,
+                      verticalSize * 0.01,
+                      verticalSize * 0.01,
+                      0,
+                    ),
+                    padding: EdgeInsets.all(
+                      verticalSize * 0.01,
+                    ),
+                    clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(verticalSize * 0.03),
                       border: Border.all(
@@ -70,15 +79,16 @@ class PictoMatchPictoWidget extends StatelessWidget {
                 Text(
                   name,
                   style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: verticalSize * 0.042),
+                    fontWeight: FontWeight.w600,
+                    fontSize: verticalSize * 0.042,
+                  ),
                 ),
               ],
             ),
           ),
         ),
       ),
-      duration: Duration(seconds: 2),
+      duration: Duration(seconds: 1),
     );
   }
 }
