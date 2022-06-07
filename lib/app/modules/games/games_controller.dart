@@ -56,7 +56,7 @@ class GamesController extends GetxController {
   RxBool changeViewForListview = true.obs;
 
   /// 0 = easy, 1 = medium, 2 = hard///
-  RxInt difficultyLevel = 2.obs;
+  RxInt difficultyLevel = 0.obs;
   int grupoSelectedIndex = -1;
   late String language;
   RxBool muteOrNot = false.obs;
@@ -77,6 +77,31 @@ class GamesController extends GetxController {
   List<RxInt> randomPositionsForBottomWidgets = [8.obs, 8.obs, 8.obs, 8.obs];
   List<bool> selectedOrNot = [false, false, false, false];
   int totalCorrectMatchPicto = 0;
+  List<RxInt> positions = [
+    0.obs,
+    0.obs,
+    0.obs,
+    0.obs,
+    0.obs,
+    0.obs,
+    0.obs,
+    0.obs,
+  ];
+  List<RxBool> showOrHideMemoryGame = [
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+  ];
+  RxString first = ''.obs;
+  RxString second = ''.obs;
+  RxInt firstIndex = 99.obs;
+  RxInt secondIndex = 99.obs;
+  int totalCorrectMemoryGame = 0;
   final initialGamePageController = PageController(initialPage: 0);
   final grupoPageController = PageController(initialPage: 0);
 
@@ -198,6 +223,23 @@ class GamesController extends GetxController {
       while (picto1 == picto2) {
         picto1 = random(0, currentGrupoPicts.length);
       }
+      if (gameSelected.value == 2) {
+        totalCorrectMemoryGame = 0;
+        first.value = '';
+        second.value = '';
+        firstIndex.value = 99;
+        secondIndex.value = 99;
+        showOrHideMemoryGame = [
+          false.obs,
+          false.obs,
+          false.obs,
+          false.obs,
+          false.obs,
+          false.obs,
+          false.obs,
+          false.obs,
+        ];
+      }
       print('the values are here');
       print(picto1);
       print(picto2);
@@ -233,6 +275,9 @@ class GamesController extends GetxController {
       }
       if (gameSelected.value == 1) {
         await generateRandomPositioningForMatchPictos();
+      }
+      if (gameSelected.value == 2) {
+        await generateRandomPositionsForMemoryGame();
       }
     } else if (difficultyLevel.value == 1) {
       ///medium difficulty
@@ -288,6 +333,9 @@ class GamesController extends GetxController {
       }
       if (gameSelected.value == 1) {
         await generateRandomPositioningForMatchPictos();
+      }
+      if (gameSelected.value == 2) {
+        await generateRandomPositionsForMemoryGame();
       }
     } else {
       ///hard difficulty
@@ -359,6 +407,9 @@ class GamesController extends GetxController {
       if (gameSelected.value == 1) {
         await generateRandomPositioningForMatchPictos();
       }
+      if (gameSelected.value == 2) {
+        await generateRandomPositionsForMemoryGame();
+      }
     }
   }
 
@@ -413,11 +464,12 @@ class GamesController extends GetxController {
       /// it is selected for checking user clicked on the below question
       if (selectedAnswer.value == selectedAnswerBottom.value) {
         totalCorrectMatchPicto++;
-        playClickSounds(assetName: 'yay');
         topOrBottom[index].value = !topOrBottom[index].value;
+        await playClickSounds(assetName: 'yay');
+        await Future.delayed(Duration(seconds: 1));
       } else {
         selectedOrNot[index] = false;
-        playClickSounds(assetName: 'ohoh');
+        await playClickSounds(assetName: 'ohoh');
       }
     } else {
       /// it is not selected for checking
@@ -456,31 +508,35 @@ class GamesController extends GetxController {
   Future<void> generateRandomPositioningForMatchPictos() async {
     randomPositionsForBottomWidgets = [99.obs, 99.obs, 99.obs, 99.obs];
     if (difficultyLevel.value == 0) {
+      int position0 = Random().nextInt(4000) % 2;
       int position1 = Random().nextInt(4000) % 2;
-      int position2 = Random().nextInt(4000) % 2;
-      while (position2 == position1) {
-        position2 = Random().nextInt(4000) % 2;
+      while (position1 == position0) {
+        position1 = Random().nextInt(4000) % 2;
       }
-      randomPositionsForBottomWidgets[0].value = position1;
-      randomPositionsForBottomWidgets[1].value = position2;
-      print('position 1 is this one $position1');
-      print('position 2 is this one $position2');
+      randomPositionsForBottomWidgets[0].value = position0;
+      bottomWidgetNames[position0].value = questions[0].text;
+      randomPositionsForBottomWidgets[1].value = position1;
+      bottomWidgetNames[position1].value = questions[1].text;
+      print('position 1 is this one $position0');
+      print('position 2 is this one $position1');
     } else if (difficultyLevel.value == 1) {
+      int position0 = Random().nextInt(4000) % 3;
       int position1 = Random().nextInt(4000) % 3;
       int position2 = Random().nextInt(4000) % 3;
-      int position3 = Random().nextInt(4000) % 3;
-      while (position2 == position1) {
+      while (position1 == position0) {
+        position1 = Random().nextInt(4000) % 3;
+      }
+      while (position2 == position0 || position2 == position1) {
         position2 = Random().nextInt(4000) % 3;
       }
-      while (position3 == position1 || position3 == position2) {
-        position3 = Random().nextInt(4000) % 3;
-      }
-      randomPositionsForBottomWidgets[0].value = position1;
-      randomPositionsForBottomWidgets[1].value = position2;
-      randomPositionsForBottomWidgets[2].value = position3;
-      print('position 1 is this one $position1');
-      print('position 2 is this one $position2');
-      print('position 3 is this one $position3');
+      randomPositionsForBottomWidgets[0].value = position0;
+      bottomWidgetNames[position0].value = questions[0].text;
+      randomPositionsForBottomWidgets[1].value = position1;
+      bottomWidgetNames[position1].value = questions[1].text;
+      randomPositionsForBottomWidgets[2].value = position2;
+      print('position 1 is this one $position0');
+      print('position 2 is this one $position1');
+      print('position 3 is this one $position2');
     } else if (difficultyLevel.value == 2) {
       int position0 = Random().nextInt(4000) % 4;
       int position1 = Random().nextInt(4000) % 4;
@@ -506,6 +562,129 @@ class GamesController extends GetxController {
       randomPositionsForBottomWidgets[3].value = position3;
       bottomWidgetNames[position3].value = questions[3].text;
       await Future.delayed(Duration(milliseconds: 300));
+    }
+  }
+
+  Future<void> generateRandomPositionsForMemoryGame() async {
+    /// shuffle the positions for having randomising
+    positions = [0.obs, 0.obs, 0.obs, 0.obs, 0.obs, 0.obs, 0.obs, 0.obs];
+    if (difficultyLevel.value == 0) {
+      int position0 = Random().nextInt(4000) % 2;
+      int position1 = Random().nextInt(4000) % 2;
+      int position2 = Random().nextInt(4000) % 2;
+      int position3 = Random().nextInt(4000) % 2;
+      while (position1 == position3) {
+        position1 = Random().nextInt(4000) % 2;
+      }
+      while (position2 == position0) {
+        position2 = Random().nextInt(4000) % 2;
+      }
+      print(position0);
+      print(position1);
+      print(position2);
+      print(position3);
+      positions[0].value = position0;
+      positions[1].value = position1;
+      positions[2].value = position2;
+      positions[3].value = position3;
+    }
+    if (difficultyLevel.value == 1) {
+      int position0 = Random().nextInt(4000) % 3;
+      int position1 = Random().nextInt(4000) % 3;
+      int position2 = Random().nextInt(4000) % 3;
+      while (position1 == position0) {
+        position1 = Random().nextInt(4000) % 3;
+      }
+      while (position2 == position0 || position2 == position1) {
+        position2 = Random().nextInt(4000) % 3;
+      }
+      int position3 = Random().nextInt(4000) % 3;
+      int position4 = Random().nextInt(4000) % 3;
+      int position5 = Random().nextInt(4000) % 3;
+      while (position4 == position3) {
+        position4 = Random().nextInt(4000) % 3;
+      }
+      while (position5 == position3 || position5 == position4) {
+        position5 = Random().nextInt(4000) % 3;
+      }
+      positions[0].value = position0;
+      positions[1].value = position1;
+      positions[2].value = position2;
+      positions[3].value = position3;
+      positions[4].value = position4;
+      positions[5].value = position5;
+    }
+    if (difficultyLevel.value == 2) {
+      int position0 = Random().nextInt(4000) % 4;
+      int position1 = Random().nextInt(4000) % 4;
+      int position2 = Random().nextInt(4000) % 4;
+      int position3 = Random().nextInt(4000) % 4;
+      while (position1 == position0) {
+        position1 = Random().nextInt(4000) % 4;
+      }
+      while (position2 == position0 || position2 == position1) {
+        position2 = Random().nextInt(4000) % 4;
+      }
+      while (position3 == position0 ||
+          position3 == position1 ||
+          position3 == position2) {
+        position3 = Random().nextInt(4000) % 4;
+      }
+      positions[0].value = position0;
+      positions[1].value = position1;
+      positions[2].value = position2;
+      positions[3].value = position3;
+      int position4 = Random().nextInt(4000) % 4;
+      int position5 = Random().nextInt(4000) % 4;
+      int position6 = Random().nextInt(4000) % 4;
+      int position7 = Random().nextInt(4000) % 4;
+      while (position5 == position4) {
+        position5 = Random().nextInt(4000) % 4;
+      }
+      while (position6 == position4 || position6 == position5) {
+        position6 = Random().nextInt(4000) % 4;
+      }
+      while (position7 == position4 ||
+          position7 == position5 ||
+          position7 == position6) {
+        position7 = Random().nextInt(4000) % 4;
+      }
+      positions[4].value = position4;
+      positions[5].value = position5;
+      positions[6].value = position6;
+      positions[7].value = position7;
+    }
+  }
+
+  Future<void> memoryGameOnTap(
+      {required int index, required String text}) async {
+    print('index is floowing $index');
+    showOrHideMemoryGame[index].value = !showOrHideMemoryGame[index].value;
+    if (first.value == '') {
+      first.value = text;
+      firstIndex.value = index;
+    } else {
+      if (index == firstIndex.value) return;
+      second.value = text;
+      secondIndex.value = index;
+      if (first.value == second.value) {
+        // showOrHideMemoryGame[secondIndex.value].value = !showOrHideMemoryGame[secondIndex.value].value;
+        totalCorrectMemoryGame++;
+        first.value = '';
+        second.value = '';
+      } else {
+        showOrHideMemoryGame[firstIndex.value].value =
+            !showOrHideMemoryGame[firstIndex.value].value;
+        showOrHideMemoryGame[secondIndex.value].value =
+            !showOrHideMemoryGame[secondIndex.value].value;
+        first.value = '';
+        second.value = '';
+      }
+    }
+    print('first is ${first.value}');
+    print('second is ${second.value}');
+    if (totalCorrectMemoryGame == difficultyLevel.value + 2) {
+      await createQuestion();
     }
   }
 }
