@@ -19,12 +19,14 @@ class ScoreDialougeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Colors.transparent,
       contentPadding: const EdgeInsets.all(0),
       content: Container(
         height: verticalSize * 0.4,
         width: horizontalSize * 0.4,
         decoration: BoxDecoration(
           color: Colors.blueGrey[600],
+          borderRadius: BorderRadius.circular(verticalSize * 0.03),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -50,7 +52,7 @@ class ScoreDialougeWidget extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.emoji_emotions_outlined,
-                    size: verticalSize * 0.07,
+                    size: verticalSize * 0.12,
                     color: Colors.white,
                   ),
                   Column(
