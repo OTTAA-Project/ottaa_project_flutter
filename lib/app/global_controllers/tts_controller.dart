@@ -177,6 +177,7 @@ class TTSController extends GetxController {
       await this._flutterTTS.awaitSpeakCompletion(true);
       await this._flutterTTS.setLanguage(this._language);
 
+
       // TODO The flutter_tts plugin for web doesn't implement the method 'getVoices'
       // var voice = await this._flutterTTS.getVoices;
       // print(voice.where((element) => element["locale"] == "es-US"));

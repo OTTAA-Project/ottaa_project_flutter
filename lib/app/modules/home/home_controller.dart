@@ -9,17 +9,15 @@ import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/grupos_repository.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../global_controllers/local_file_controller.dart';
-import '../../routes/app_routes.dart';
-import '../../theme/app_theme.dart';
-import '../../utils/CustomAnalytics.dart';
-
-import '../../data/models/search_model.dart';
+import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
