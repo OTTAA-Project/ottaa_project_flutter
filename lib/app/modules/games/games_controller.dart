@@ -47,7 +47,7 @@ class GamesController extends GetxController {
   RxList<GameQuestionModel> questions = <GameQuestionModel>[].obs;
   final AudioPlayer backgroundMusicPlayer = AudioPlayer();
   final AudioPlayer clicksPlayer = AudioPlayer();
-  final _homeController = Get.find<HomeController>();
+  final homeController = Get.find<HomeController>();
   final _ttsController = Get.find<TTSController>();
   List<Grupos> grupos = [];
   List<Pict> pictos = [];
@@ -58,7 +58,7 @@ class GamesController extends GetxController {
   /// 0 = easy, 1 = medium, 2 = hard///
   RxInt difficultyLevel = 0.obs;
   int grupoSelectedIndex = -1;
-  late String language;
+  // late String language;
   RxBool muteOrNot = false.obs;
   RxBool helpOrNot = false.obs;
   RxInt correctScore = 0.obs;
@@ -141,9 +141,8 @@ class GamesController extends GetxController {
 
   @override
   void onReady() {
-    grupos.addAll(_homeController.grupos);
-    pictos.addAll(_homeController.picts);
-    language = _homeController.language;
+    grupos.addAll(homeController.grupos);
+    pictos.addAll(homeController.picts);
     super.onReady();
   }
 
@@ -250,7 +249,7 @@ class GamesController extends GetxController {
           imageUrl: currentGrupoPicts[picto1].imagen.pictoEditado == null
               ? currentGrupoPicts[picto1].imagen.picto
               : currentGrupoPicts[picto1].imagen.pictoEditado!,
-          text: language.toLowerCase() == 'en'.toLowerCase()
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
               ? currentGrupoPicts[picto1].texto.en
               : currentGrupoPicts[picto1].texto.es,
         ),
@@ -261,7 +260,7 @@ class GamesController extends GetxController {
           imageUrl: currentGrupoPicts[picto2].imagen.pictoEditado == null
               ? currentGrupoPicts[picto2].imagen.picto
               : currentGrupoPicts[picto2].imagen.pictoEditado!,
-          text: language.toLowerCase() == 'en'.toLowerCase()
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
               ? currentGrupoPicts[picto2].texto.en
               : currentGrupoPicts[picto2].texto.es,
         ),
@@ -297,7 +296,7 @@ class GamesController extends GetxController {
           imageUrl: currentGrupoPicts[picto1].imagen.pictoEditado == null
               ? currentGrupoPicts[picto1].imagen.picto
               : currentGrupoPicts[picto1].imagen.pictoEditado!,
-          text: language.toLowerCase() == 'en'.toLowerCase()
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
               ? currentGrupoPicts[picto1].texto.en
               : currentGrupoPicts[picto1].texto.es,
         ),
@@ -308,7 +307,7 @@ class GamesController extends GetxController {
           imageUrl: currentGrupoPicts[picto2].imagen.pictoEditado == null
               ? currentGrupoPicts[picto2].imagen.picto
               : currentGrupoPicts[picto2].imagen.pictoEditado!,
-          text: language.toLowerCase() == 'en'.toLowerCase()
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
               ? currentGrupoPicts[picto2].texto.en
               : currentGrupoPicts[picto2].texto.es,
         ),
@@ -319,7 +318,7 @@ class GamesController extends GetxController {
           imageUrl: currentGrupoPicts[picto3].imagen.pictoEditado == null
               ? currentGrupoPicts[picto3].imagen.picto
               : currentGrupoPicts[picto3].imagen.pictoEditado!,
-          text: language.toLowerCase() == 'en'.toLowerCase()
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
               ? currentGrupoPicts[picto3].texto.en
               : currentGrupoPicts[picto3].texto.es,
         ),
@@ -359,7 +358,7 @@ class GamesController extends GetxController {
           imageUrl: currentGrupoPicts[picto1].imagen.pictoEditado == null
               ? currentGrupoPicts[picto1].imagen.picto
               : currentGrupoPicts[picto1].imagen.pictoEditado!,
-          text: language.toLowerCase() == 'en'.toLowerCase()
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
               ? currentGrupoPicts[picto1].texto.en
               : currentGrupoPicts[picto1].texto.es,
         ),
@@ -370,7 +369,7 @@ class GamesController extends GetxController {
           imageUrl: currentGrupoPicts[picto2].imagen.pictoEditado == null
               ? currentGrupoPicts[picto2].imagen.picto
               : currentGrupoPicts[picto2].imagen.pictoEditado!,
-          text: language.toLowerCase() == 'en'.toLowerCase()
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
               ? currentGrupoPicts[picto2].texto.en
               : currentGrupoPicts[picto2].texto.es,
         ),
@@ -381,7 +380,7 @@ class GamesController extends GetxController {
           imageUrl: currentGrupoPicts[picto3].imagen.pictoEditado == null
               ? currentGrupoPicts[picto3].imagen.picto
               : currentGrupoPicts[picto3].imagen.pictoEditado!,
-          text: language.toLowerCase() == 'en'.toLowerCase()
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
               ? currentGrupoPicts[picto3].texto.en
               : currentGrupoPicts[picto3].texto.es,
         ),
@@ -392,7 +391,7 @@ class GamesController extends GetxController {
           imageUrl: currentGrupoPicts[picto4].imagen.pictoEditado == null
               ? currentGrupoPicts[picto4].imagen.picto
               : currentGrupoPicts[picto4].imagen.pictoEditado!,
-          text: language.toLowerCase() == 'en'.toLowerCase()
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
               ? currentGrupoPicts[picto4].texto.en
               : currentGrupoPicts[picto4].texto.es,
         ),

@@ -41,7 +41,7 @@ class GrupoSelectionPage extends GetView<GamesController> {
             color: kOTTAAOrangeNew,
             onTap: controller.selectingGrupoFunction,
             grupos: controller.grupos,
-            language: controller.language,
+            language: controller.homeController.language,
           ),
           Positioned(
             bottom: verticalSize * 0.01,
