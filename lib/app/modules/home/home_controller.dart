@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
@@ -16,6 +18,8 @@ import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 
@@ -37,6 +41,7 @@ class HomeController extends GetxController {
   }
 
   String _voiceText = "";
+  String textToShare = '';
 
   String get voiceText => this._voiceText;
   List<Pict> picts = [];
@@ -97,6 +102,11 @@ class HomeController extends GetxController {
     initialPage: 0,
   );
   int userSubscription = 0;
+  String audioFilePath = '';
+  late Uint8List imageFile;
+
+  //Create an instance of ScreenshotController
+  ScreenshotController screenshotController = ScreenshotController();
 
   Future<void> fetchAccountType() async {
     final User? auth = FirebaseAuth.instance.currentUser;
@@ -112,8 +122,6 @@ class HomeController extends GetxController {
     print('the value of user sub is $userSubscription');
   }
 
-
-
   @override
   void onInit() async {
     super.onInit();
@@ -123,7 +131,7 @@ class HomeController extends GetxController {
     final _pictogram = Get.put(PictogramGroupsController());
   }
 
-  void startTimerAndController(){
+  void startTimerAndController() {
     _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (currentPage < 2) {
         currentPage++;
@@ -138,6 +146,7 @@ class HomeController extends GetxController {
       );
     });
   }
+
   Future<bool> disposeTimerAndController() async {
     _timer.cancel();
     Get.back();
@@ -169,9 +178,11 @@ class HomeController extends GetxController {
         if (alreadyInTheList) {
           picts[0].relacion![relacionID].frec =
               picts[0].relacion![relacionID].frec! + 1;
-        } else {picts[0].relacion!.add(
-            Relacion(id: pict.id, frec: 1),
-          );}
+        } else {
+          picts[0].relacion!.add(
+                Relacion(id: pict.id, frec: 1),
+              );
+        }
       }
       this._sentencePicts.add(pict);
       await suggest(this._sentencePicts.last.id);
@@ -220,6 +231,7 @@ class HomeController extends GetxController {
       this._sentencePicts.add(pict);
       await suggest(this._sentencePicts.last.id);
     }
+    update(['screenshot']);
   }
 
   Future<void> loadPicts() async {
@@ -250,6 +262,7 @@ class HomeController extends GetxController {
       await suggest(
           this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
     }
+    update(['screenshot']);
   }
 
   bool hasText() {
@@ -303,8 +316,9 @@ class HomeController extends GetxController {
 
     if (pict.relacion!.length >= 1) {
       final List<Relacion> recomendedPicts = pict.relacion!.toList();
-      recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec! ));
-    this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);} else {
+      recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec!));
+      this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);
+    } else {
       this._suggestedPicts = [];
     }
 
@@ -384,9 +398,8 @@ class HomeController extends GetxController {
     return requiredPicts;
   }
 
-  List<SearchModel?> dataMainForImages =[];
-  List<SearchModel?> dataMainForImagesReferences=[];
-
+  List<SearchModel?> dataMainForImages = [];
+  List<SearchModel?> dataMainForImagesReferences = [];
 
   void deletePicto({
     required BuildContext context,
@@ -451,6 +464,79 @@ class HomeController extends GetxController {
       {required Pict updatedOne, required int suggestedMainScreenIndex}) {
     suggestedPicts[suggestedMainScreenIndex] = updatedOne;
     update(['suggested']);
+  }
+
+  final FlutterTts _flutterTts = FlutterTts();
+  late var fileName;
+
+  /// converting text to speech
+  Future createAudioScript({
+    required String name,
+    required String script,
+  }) async {
+    await _flutterTts.setLanguage(_ttsController.languaje);
+    await _flutterTts.setSpeechRate(1.0);
+    await _flutterTts.setVolume(1.0);
+    await _flutterTts.setPitch(1.0);
+    if (_ttsController.languaje == 'en') {
+      await _flutterTts.setVoice(
+        {"name": "en-us-x-tpf-local", "locale": "en-US"},
+      );
+    }
+    if (GetPlatform.isIOS) _flutterTts.setSharedInstance(true);
+    // await _flutterTts.speak(script);
+    fileName = GetPlatform.isAndroid ? '$name.wav' : '$name.caf';
+    print('FileName: $fileName');
+
+    await _flutterTts.synthesizeToFile(script, fileName).then((value) async {
+      if (value == 1) {
+        print('Value $value');
+        print('generated');
+      }
+    });
+    final externalDirectory = await getExternalStorageDirectory();
+    audioFilePath = '${externalDirectory!.path}/$fileName';
+    print(audioFilePath);
+    // saveToFirebase(path, fileName, firebasPath: '$firebasepath/$name')
+    //     .then((value) => {log('Received Audio Link: $value')});
+  }
+
+// /// saving converted audio file to firebase
+// Future<String> saveToFirebase(String path, String name,
+//     {required String firebasPath}) async {
+//   final firebaseStorage = FirebaseStorage.instance;
+//   SettableMetadata metadata = SettableMetadata(
+//     contentType: 'audio/mpeg',
+//     customMetadata: <String, String>{
+//       'userid': _app.userid.value,
+//       'name': _app.name.value,
+//       'filename': name,
+//     },
+//   );
+//   var snapshot = await firebaseStorage
+//       .ref()
+//       .child(firebasPath)
+//       .putFile(File(path), metadata);
+//   var downloadUrl = await snapshot.ref.getDownloadURL();
+//   print(downloadUrl + " saved url");
+//   return downloadUrl;
+// }
+
+  Future<void> generateStringToShare() async {
+    this.textToShare = "";
+    this._sentencePicts.forEach((pict) {
+      switch (this._ttsController.languaje) {
+        case "es":
+          this.textToShare += "${pict.texto.es} ";
+          break;
+        case "en":
+          this.textToShare += "${pict.texto.en} ";
+          break;
+
+        default:
+          this.textToShare += "${pict.texto.es} ";
+      }
+    });
   }
 }
 
