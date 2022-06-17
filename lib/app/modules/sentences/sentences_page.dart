@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
-import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'local_widgets/search_sentence.dart';

@@ -12,6 +12,7 @@ import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/grupos_repository.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
@@ -25,9 +26,8 @@ import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
-
+  final _dataController = Get.find<DataController>();
   TTSController get ttsController => this._ttsController;
-  final databaseRef = FirebaseDatabase.instance.reference();
   final _pictsRepository = Get.find<PictsRepository>();
   final _grupoRepository = Get.find<GrupoRepository>();
   final authController = AuthService();
@@ -109,12 +109,12 @@ class HomeController extends GetxController {
   ScreenshotController screenshotController = ScreenshotController();
 
   Future<void> fetchAccountType() async {
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
-    final res = await ref.get();
-
+    // final User? auth = FirebaseAuth.instance.currentUser;
+    // final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
+    // final res = await ref.get();
+    final res = await _dataController.fetchAccountType();
     /// this means there is a value
-    if (res.value == 1) {
+    if (res == 1) {
       userSubscription = 1;
     } else {
       userSubscription = 0;
@@ -342,10 +342,10 @@ class HomeController extends GetxController {
   }
 
   Future<void> getPicNumber() async {
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('Avatar/${auth!.uid}/');
-    final res = await ref.get();
-    picNumber.value = res.value['urlFoto'];
+    // final User? auth = FirebaseAuth.instance.currentUser;
+    // final ref = databaseRef.child('Avatar/${auth!.uid}/');
+    final res = await _dataController.getPicNumber();
+    picNumber.value = res;
   }
 
   Future<List<Pict>> predictiveAlgorithm({required List<Relacion> list}) async {
