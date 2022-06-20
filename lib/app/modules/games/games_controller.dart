@@ -572,10 +572,10 @@ class GamesController extends GetxController {
       int position1 = Random().nextInt(4000) % 2;
       int position2 = Random().nextInt(4000) % 2;
       int position3 = Random().nextInt(4000) % 2;
-      while (position1 == position3) {
+      while (position1 == position0) {
         position1 = Random().nextInt(4000) % 2;
       }
-      while (position2 == position0) {
+      while (position2 == position3) {
         position2 = Random().nextInt(4000) % 2;
       }
       print(position0);
@@ -584,8 +584,8 @@ class GamesController extends GetxController {
       print(position3);
       positions[0].value = position0;
       positions[1].value = position1;
-      positions[2].value = position2;
-      positions[3].value = position3;
+      positions[4].value = position2;
+      positions[5].value = position3;
     }
     if (difficultyLevel.value == 1) {
       int position0 = Random().nextInt(4000) % 3;
@@ -609,9 +609,9 @@ class GamesController extends GetxController {
       positions[0].value = position0;
       positions[1].value = position1;
       positions[2].value = position2;
-      positions[3].value = position3;
-      positions[4].value = position4;
-      positions[5].value = position5;
+      positions[4].value = position3;
+      positions[5].value = position4;
+      positions[6].value = position5;
     }
     if (difficultyLevel.value == 2) {
       int position0 = Random().nextInt(4000) % 4;
@@ -669,6 +669,14 @@ class GamesController extends GetxController {
       if (first.value == second.value) {
         // showOrHideMemoryGame[secondIndex.value].value = !showOrHideMemoryGame[secondIndex.value].value;
         totalCorrectMemoryGame++;
+        correctScore.value++;
+        if(currentStreak.value >= 0){
+          if(maximumStreak.value == currentStreak.value){
+            maximumStreak.value++;
+          }
+          currentStreak.value++;
+          await playClickSounds(assetName: 'yay');
+        }
         first.value = '';
         second.value = '';
       } else {
@@ -678,6 +686,9 @@ class GamesController extends GetxController {
             !showOrHideMemoryGame[secondIndex.value].value;
         first.value = '';
         second.value = '';
+        incorrectScore.value++;
+        currentStreak.value--;
+        await playClickSounds(assetName: 'ohoh');
       }
     }
     print('first is ${first.value}');
