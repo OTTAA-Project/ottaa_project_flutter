@@ -14,7 +14,6 @@ import 'package:ottaa_project_flutter/app/modules/home/local_widgets/suggested_w
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:screenshot/screenshot.dart';
-
 import '../../utils/CustomAnalytics.dart';
 
 class HomePage extends GetView<HomeController> {

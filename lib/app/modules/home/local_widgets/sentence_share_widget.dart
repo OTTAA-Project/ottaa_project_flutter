@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
@@ -5,6 +6,7 @@ import 'package:ottaa_project_flutter/app/modules/home/local_widgets/share_icon_
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SentenceShareWidget extends GetView<HomeController> {
   const SentenceShareWidget({Key? key}) : super(key: key);
@@ -43,12 +45,16 @@ class SentenceShareWidget extends GetView<HomeController> {
             iconData: Icons.volume_up_sharp,
             text: 'Audio',
             onTap: () async {
-              controller.generateStringToShare();
-              controller.createAudioScript(
-                name: 'Audio Message',
-                script: controller.textToShare,
-              );
-              Share.shareFiles([controller.audioFilePath], text: 'Audio File');
+              if (kIsWeb) {
+              } else {
+                controller.generateStringToShare();
+                controller.createAudioScript(
+                  name: 'Audio Message',
+                  script: controller.textToShare,
+                );
+                Share.shareFiles([controller.audioFilePath],
+                    text: 'Audio File');
+              }
             },
           ),
           ShareIconWidget(
@@ -57,17 +63,30 @@ class SentenceShareWidget extends GetView<HomeController> {
             iconData: Icons.image,
             text: 'Image',
             onTap: () async {
-              final externalDirectory = await getExternalStorageDirectory();
-              String fileName = 'image_to_share.png';
-              String path = externalDirectory!.path;
-              final audioFilePath = '${externalDirectory.path}/$fileName';
-
-              controller.screenshotController.captureAndSave(
-                path, //set path where screenshot will be saved
-                fileName: fileName,
-                pixelRatio: 3,
-              );
-              Share.shareFiles([audioFilePath], text: 'Image File');
+              if (kIsWeb) {
+                /// here is method for having image and uploading it to the firebase for sharing
+                final image = await controller.screenshotController
+                    .capture(pixelRatio: 3);
+                final value =
+                    await controller.dataController.uploadImageToStorageForWeb(
+                  storageName: 'testingUpload',
+                  imageInBytes: image!,
+                );
+                final Uri _url = Uri.parse('https://wa.me/?text=$value');
+                print(value);
+                await launchUrl(_url);
+              } else {
+                final externalDirectory = await getExternalStorageDirectory();
+                String fileName = 'image_to_share.png';
+                String path = externalDirectory!.path;
+                final audioFilePath = '${externalDirectory.path}/$fileName';
+                controller.screenshotController.captureAndSave(
+                  path, //set path where screenshot will be saved
+                  fileName: fileName,
+                  pixelRatio: 3,
+                );
+                Share.shareFiles([audioFilePath], text: 'Image File');
+              }
             },
           ),
           ShareIconWidget(
@@ -77,7 +96,13 @@ class SentenceShareWidget extends GetView<HomeController> {
             text: 'Texto',
             onTap: () async {
               controller.generateStringToShare();
-              Share.share(controller.textToShare);
+              if (kIsWeb) {
+                final Uri _url =
+                    Uri.parse('https://wa.me/?text=${controller.textToShare}');
+                await launchUrl(_url);
+              } else {
+                Share.share(controller.textToShare);
+              }
             },
           ),
         ],

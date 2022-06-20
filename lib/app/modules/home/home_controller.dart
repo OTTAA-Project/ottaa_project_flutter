@@ -26,13 +26,12 @@ import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
-  final _dataController = Get.find<DataController>();
+  final dataController = Get.find<DataController>();
   TTSController get ttsController => this._ttsController;
   final _pictsRepository = Get.find<PictsRepository>();
   final _grupoRepository = Get.find<GrupoRepository>();
   final authController = AuthService();
   late AnimationController _pictoAnimationController;
-
   AnimationController get pictoAnimationController =>
       this._pictoAnimationController;
 
@@ -112,7 +111,7 @@ class HomeController extends GetxController {
     // final User? auth = FirebaseAuth.instance.currentUser;
     // final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
     // final res = await ref.get();
-    final res = await _dataController.fetchAccountType();
+    final res = await dataController.fetchAccountType();
     /// this means there is a value
     if (res == 1) {
       userSubscription = 1;
@@ -344,7 +343,7 @@ class HomeController extends GetxController {
   Future<void> getPicNumber() async {
     // final User? auth = FirebaseAuth.instance.currentUser;
     // final ref = databaseRef.child('Avatar/${auth!.uid}/');
-    final res = await _dataController.getPicNumber();
+    final res = await dataController.getPicNumber();
     picNumber.value = res;
   }
 
