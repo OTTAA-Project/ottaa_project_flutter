@@ -58,6 +58,7 @@ class GamesController extends GetxController {
   /// 0 = easy, 1 = medium, 2 = hard///
   RxInt difficultyLevel = 0.obs;
   int grupoSelectedIndex = -1;
+
   // late String language;
   RxBool muteOrNot = false.obs;
   RxBool helpOrNot = false.obs;
@@ -465,9 +466,18 @@ class GamesController extends GetxController {
         totalCorrectMatchPicto++;
         topOrBottom[index].value = !topOrBottom[index].value;
         await playClickSounds(assetName: 'yay');
+        correctScore.value++;
+        if (currentStreak.value >= 0) {
+          if (maximumStreak.value == currentStreak.value) {
+            maximumStreak.value++;
+          }
+          currentStreak.value++;
+        }
         await Future.delayed(Duration(seconds: 1));
       } else {
         selectedOrNot[index] = false;
+        incorrectScore.value++;
+        currentStreak.value--;
         await playClickSounds(assetName: 'ohoh');
       }
     } else {
@@ -488,10 +498,19 @@ class GamesController extends GetxController {
       if (selectedAnswer.value == selectedAnswerBottom.value) {
         totalCorrectMatchPicto++;
         topOrBottom[index].value = !topOrBottom[index].value;
+        correctScore.value++;
+        if (currentStreak.value >= 0) {
+          if (maximumStreak.value == currentStreak.value) {
+            maximumStreak.value++;
+          }
+          currentStreak.value++;
+        }
         await playClickSounds(assetName: 'yay');
       } else {
         selectedOrNot[index] = false;
         await playClickSounds(assetName: 'ohoh');
+        incorrectScore.value++;
+        currentStreak.value--;
       }
     } else {
       /// it is not selected for checking
@@ -670,8 +689,8 @@ class GamesController extends GetxController {
         // showOrHideMemoryGame[secondIndex.value].value = !showOrHideMemoryGame[secondIndex.value].value;
         totalCorrectMemoryGame++;
         correctScore.value++;
-        if(currentStreak.value >= 0){
-          if(maximumStreak.value == currentStreak.value){
+        if (currentStreak.value >= 0) {
+          if (maximumStreak.value == currentStreak.value) {
             maximumStreak.value++;
           }
           currentStreak.value++;
