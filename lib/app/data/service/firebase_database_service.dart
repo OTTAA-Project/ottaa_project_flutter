@@ -16,9 +16,10 @@ class FirebaseDatabaseService {
   final databaseRef = FirebaseDatabase.instance.reference();
   final firebaseRed = FirebaseAuth.instance;
 
-
-
-  Future<void> uploadInfo({required String name,required String gender,required int dateOfBirthInMs}) async {
+  Future<void> uploadInfo(
+      {required String name,
+      required String gender,
+      required int dateOfBirthInMs}) async {
     final User? auth = firebaseRed.currentUser;
     final ref = databaseRef.child('Usuarios/${auth!.uid}/');
     await ref.set(<String, Object>{
@@ -34,8 +35,6 @@ class FirebaseDatabaseService {
     print('hi');
   }
 
-
-
   Future<void> uploadAvatar({required int photoNumber}) async {
     final User? auth = firebaseRed.currentUser;
     final ref = databaseRef.child('Avatar/${auth!.uid}/');
@@ -45,7 +44,6 @@ class FirebaseDatabaseService {
     });
   }
 
-
   Future<int> getPicNumber() async {
     final User? auth = firebaseRed.currentUser;
     final ref = databaseRef.child('Avatar/${auth!.uid}/');
@@ -53,22 +51,22 @@ class FirebaseDatabaseService {
     return res.value['urlFoto'];
   }
 
-  Future<String> fetchCurrentVersion()async{
+  Future<String> fetchCurrentVersion() async {
     final ref = databaseRef.child('version/');
     final res = await ref.get();
     return res.value;
   }
 
-  Future<String> fetchUserEmail()async{
+  Future<String> fetchUserEmail() async {
     final auth = firebaseRed.currentUser!.providerData[0].email;
     return auth!;
   }
 
-  Future<int> fetchAccountType()async{
+  Future<int> fetchAccountType() async {
     final User? auth = firebaseRed.currentUser;
     final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
     final res = await ref.get();
-    if(res.value == null) return 0;
+    if (res.value == null) return 0;
     return res.value;
   }
 
@@ -297,5 +295,31 @@ class FirebaseDatabaseService {
               .map((e) => Grupos.fromJson(e))
               .toList();
     }
+  }
+
+  Future<Map<String, dynamic>> fetchGameData(
+      {required int gameNumber, required int grupoNumber}) async {
+    final ref = databaseRef
+        .child('${firebaseRed.currentUser!.uid}/$gameNumber/$grupoNumber');
+    final res = await ref.get();
+    final bol = res.exists;
+    if (bol) {
+      final data = res.value['data'];
+      return data;
+    } else {
+      return {'': ''};
+    }
+  }
+
+  Future<void> uploadGameData({
+    required int gameNumber,
+    required int grupoNumber,
+    required Map<dynamic, dynamic> data,
+  }) async {
+    final ref = databaseRef
+        .child('${firebaseRed.currentUser!.uid}/$gameNumber/$grupoNumber');
+    await ref.set({
+      data,
+    });
   }
 }

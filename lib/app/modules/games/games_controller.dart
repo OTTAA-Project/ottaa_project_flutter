@@ -62,6 +62,8 @@ class GamesController extends GetxController {
   RxInt difficultyLevel = 0.obs;
   int grupoSelectedIndex = -1;
 
+  late GameData gameData;
+
   // late String language;
   RxBool muteOrNot = false.obs;
   RxBool helpOrNot = false.obs;
