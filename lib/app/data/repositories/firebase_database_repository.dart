@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
@@ -44,7 +46,7 @@ class FirebaseDatabaseRepository {
 
   Future<String> uploadImageToStorageForWeb({
     required String storageName,
-    required dynamic imageInBytes,
+    required Uint8List imageInBytes,
   }) async =>
       await _firebaseDatabaseService.uploadImageToStorageForWeb(
         imageInBytes: imageInBytes,

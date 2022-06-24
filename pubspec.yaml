@@ -54,6 +54,8 @@ dependencies:
   http: ^0.13.2
   fluttertoast: ^8.0.9
   firebase_crashlytics: ^2.5.2
+  share_plus: ^4.0.7
+  screenshot: ^1.2.3
 #  image_picker_web: ^2.1.0
 
 
@@ -64,7 +66,7 @@ dev_dependencies:
 
 dependency_overrides:
   url_launcher_web: 2.0.9
-  get: '4.6.0'
+  get: 4.6.1
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.

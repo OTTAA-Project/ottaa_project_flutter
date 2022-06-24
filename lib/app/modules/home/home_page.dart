@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -10,7 +12,8 @@ import 'package:ottaa_project_flutter/app/modules/home/local_widgets/left_column
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/sentence_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/suggested_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
-
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:screenshot/screenshot.dart';
 import '../../utils/CustomAnalytics.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -28,6 +31,88 @@ class HomePage extends GetView<HomeController> {
       drawer: DrawerWidget(),
       body: Stack(
         children: [
+          /// ScreenSHot Widget is here
+          Screenshot(
+            controller: controller.screenshotController,
+            child: Container(
+              height: verticalSize * 0.25,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.blueGrey,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: GetBuilder<HomeController>(
+                      id: 'screenshot',
+                      builder: (controller) => ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.sentencePicts.length,
+                        itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.only(left: verticalSize * 0.01),
+                          child: kIsWeb
+                              ? Image.network(
+                            controller.sentencePicts[index].imagen
+                                .pictoEditado ==
+                                null
+                                ? controller
+                                .sentencePicts[index].imagen.picto
+                                : controller.sentencePicts[index].imagen
+                                .pictoEditado!,
+                            loadingBuilder:
+                                (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  color: kOTTAAOrangeNew,
+                                  value:
+                                  loadingProgress.expectedTotalBytes !=
+                                      null
+                                      ? loadingProgress
+                                      .cumulativeBytesLoaded /
+                                      loadingProgress
+                                          .expectedTotalBytes!
+                                      : null,
+                                ),
+                              );
+                            },
+                          )
+                              : CachedNetworkImage(
+                            imageUrl: controller.sentencePicts[index].imagen
+                                .pictoEditado ==
+                                null
+                                ? controller
+                                .sentencePicts[index].imagen.picto
+                                : controller.sentencePicts[index].imagen
+                                .pictoEditado!,
+                            placeholder: (context, url) => Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            height: verticalSize * 0.04,
+                            width: verticalSize * 0.15,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: verticalSize * 0.03),
+                    child: Image.asset(
+                      'assets/otta_drawer_logo.png',
+                      height: verticalSize * 0.05,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          /// just a little hack to keep it hidden
+          Container(
+            height: verticalSize * 0.25,
+            color: Colors.black,
+          ),
           Column(
             //MAIN COLUMN
             mainAxisAlignment: MainAxisAlignment.spaceAround,

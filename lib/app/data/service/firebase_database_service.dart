@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -98,11 +99,11 @@ class FirebaseDatabaseService {
 
   Future<String> uploadImageToStorageForWeb({
     required String storageName,
-    required dynamic imageInBytes,
+    required Uint8List imageInBytes,
   }) async {
     late String url;
     Reference _reference =
-        FirebaseStorage.instance.ref().child('testingUpload/$storageName');
+        FirebaseStorage.instance.ref().child('$storageName/');
     await _reference
         .putData(
       imageInBytes,
