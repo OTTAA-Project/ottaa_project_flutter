@@ -116,7 +116,7 @@ class ChoiceDialogue extends StatelessWidget {
                   suggestedIndexMainScreen: suggestedIndexMainScreen,
                 );
               } else {
-                _homeController.startTimerAndController();
+                _homeController.initializePageViewer();
                 Get.to(() => BuyPaidVersionPage());
               }
             },
@@ -134,7 +134,7 @@ class ChoiceDialogue extends StatelessWidget {
                   suggestedIndexMainScreen: suggestedIndexMainScreen,
                 );
               } else {
-                _homeController.startTimerAndController();
+                _homeController.initializePageViewer();
                 Get.to(() => BuyPaidVersionPage());
               }
             },

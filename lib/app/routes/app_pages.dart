@@ -3,6 +3,7 @@ import 'package:ottaa_project_flutter/app/modules/about/about_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/about/about_ottaa_page.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_page.dart';
+import 'package:ottaa_project_flutter/app/modules/games/games_page.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/add_group_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/language_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/settings_binding.dart';
@@ -23,7 +24,7 @@ import 'package:ottaa_project_flutter/app/modules/splash/splash_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
 import 'package:ottaa_project_flutter/app/modules/tutorial/tutorial_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/tutorial/tutorial_page.dart';
-
+import 'package:ottaa_project_flutter/app/modules/games/games_bindings.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -92,6 +93,11 @@ class AppPages {
       name: AppRoutes.ABOUTOTTAA,
       page: () => AboutOttaaPage(),
       binding: AboutBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.GAMES,
+      page: () => GamesPage(),
+      binding: GamesBinding(),
     ),
     GetPage(
       name: AppRoutes.ADDGROUP,
