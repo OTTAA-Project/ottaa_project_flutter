@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:ottaa_project_flutter/app/data/models/game_data_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/game_question_model.dart';
@@ -54,6 +55,8 @@ class GamesController extends GetxController {
   List<Pict> currentGrupoPicts = [];
   RxInt gameSelected = 0.obs;
   RxBool changeViewForListview = true.obs;
+  int tries = 0;
+  int startTimeInEpoch = 0;
 
   /// 0 = easy, 1 = medium, 2 = hard///
   RxInt difficultyLevel = 0.obs;
@@ -148,6 +151,7 @@ class GamesController extends GetxController {
   }
 
   void startGameTimer() {
+    startTimeInEpoch = DateTime.now().millisecondsSinceEpoch;
     _gameStartTimer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
       timeInSeconds.value = timeInSeconds.value + 1;
     });
@@ -478,6 +482,7 @@ class GamesController extends GetxController {
         selectedOrNot[index] = false;
         incorrectScore.value++;
         currentStreak.value--;
+        tries++;
         await playClickSounds(assetName: 'ohoh');
       }
     } else {
@@ -507,6 +512,7 @@ class GamesController extends GetxController {
         }
         await playClickSounds(assetName: 'yay');
       } else {
+        tries++;
         selectedOrNot[index] = false;
         await playClickSounds(assetName: 'ohoh');
         incorrectScore.value++;
@@ -699,6 +705,7 @@ class GamesController extends GetxController {
         first.value = '';
         second.value = '';
       } else {
+        tries++;
         showOrHideMemoryGame[firstIndex.value].value =
             !showOrHideMemoryGame[firstIndex.value].value;
         showOrHideMemoryGame[secondIndex.value].value =
@@ -715,5 +722,31 @@ class GamesController extends GetxController {
     if (totalCorrectMemoryGame == difficultyLevel.value + 2) {
       await createQuestion();
     }
+  }
+
+  Future<void> uploadScore() async {
+    final endTimeInEpoch = DateTime.now().millisecondsSinceEpoch;
+    double score = (correctScore.value + incorrectScore.value) / 2;
+    /// check if the level is played or not
+    
+    GameData game = GameData(
+      game: gameSelected.value,
+      levelId: grupoSelectedIndex,
+      bestStreak: maximumStreak.value,
+      score: Score(
+        hit: correctScore.value,
+        mistakes: incorrectScore.value,
+        score: score,
+        tries: tries,
+      ),
+      timeUse: timeInSeconds.value,
+      reloj: [
+        RelojElement(
+          endTime: endTimeInEpoch,
+          startTime: startTimeInEpoch,
+          useTime: timeInSeconds.value,
+        ),
+      ],
+    );
   }
 }

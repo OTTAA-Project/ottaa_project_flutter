@@ -18,9 +18,11 @@ class GamesPlayingPage extends GetView<GamesController> {
       onWillPop: () async {
         controller.cancelTimer();
         await controller.pauseMusic();
+        await controller.uploadScore();
         controller.currentStreak.value = 0;
         controller.correctScore.value = 0;
         controller.incorrectScore.value = 0;
+        controller.tries = 0;
         Get.back();
         return true;
       },
@@ -32,11 +34,13 @@ class GamesPlayingPage extends GetView<GamesController> {
           elevation: 0,
           leading: GestureDetector(
             onTap: () async {
+              await controller.uploadScore();
               controller.cancelTimer();
               await controller.pauseMusic();
               controller.currentStreak.value = 0;
               controller.correctScore.value = 0;
               controller.incorrectScore.value = 0;
+              controller.tries = 0;
               Get.back();
             },
             child: Icon(
