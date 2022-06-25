@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,16 +66,112 @@ class SentenceShareWidget extends GetView<HomeController> {
             onTap: () async {
               if (kIsWeb) {
                 /// here is method for having image and uploading it to the firebase for sharing
-                final image = await controller.screenshotController
-                    .capture(pixelRatio: 3);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                );
+                print('started');
+                final image =
+                    await controller.screenshotController.captureFromWidget(
+                  Container(
+                    height: verticalSize * 0.25,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.blueGrey,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: GetBuilder<HomeController>(
+                            id: 'screenshot',
+                            builder: (controller) => ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.sentencePicts.length,
+                              itemBuilder: (context, index) => Padding(
+                                padding:
+                                    EdgeInsets.only(left: verticalSize * 0.01),
+                                child: kIsWeb
+                                    ? Image.network(
+                                        controller.sentencePicts[index].imagen
+                                                    .pictoEditado ==
+                                                null
+                                            ? controller.sentencePicts[index]
+                                                .imagen.picto
+                                            : controller.sentencePicts[index]
+                                                .imagen.pictoEditado!,
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress == null)
+                                            return child;
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              color: kOTTAAOrangeNew,
+                                              value: loadingProgress
+                                                          .expectedTotalBytes !=
+                                                      null
+                                                  ? loadingProgress
+                                                          .cumulativeBytesLoaded /
+                                                      loadingProgress
+                                                          .expectedTotalBytes!
+                                                  : null,
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : CachedNetworkImage(
+                                        imageUrl: controller
+                                                    .sentencePicts[index]
+                                                    .imagen
+                                                    .pictoEditado ==
+                                                null
+                                            ? controller.sentencePicts[index]
+                                                .imagen.picto
+                                            : controller.sentencePicts[index]
+                                                .imagen.pictoEditado!,
+                                        placeholder: (context, url) => Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                        height: verticalSize * 0.04,
+                                        width: verticalSize * 0.15,
+                                      ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: verticalSize * 0.03),
+                          child: Image.asset(
+                            'assets/otta_drawer_logo.png',
+                            height: verticalSize * 0.05,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  delay: Duration(seconds: 1),
+                  context: context,
+                );
+                // final image = await controller.screenshotController.capture(
+                //   pixelRatio: 1,
+                //   delay: const Duration(milliseconds: 200),
+                // );
+                print('image taken');
                 final value =
                     await controller.dataController.uploadImageToStorageForWeb(
                   storageName: 'testingUpload',
-                  imageInBytes: image!,
+                  imageInBytes: image,
                 );
+                print('image uploaded');
                 final Uri _url = Uri.parse('https://wa.me/?text=$value');
                 print(value);
                 await launchUrl(_url);
+                Get.back();
               } else {
                 final externalDirectory = await getExternalStorageDirectory();
                 String fileName = 'image_to_share.png';
