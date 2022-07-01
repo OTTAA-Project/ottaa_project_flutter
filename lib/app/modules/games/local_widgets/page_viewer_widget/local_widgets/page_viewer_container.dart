@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PageViewerContainer extends StatelessWidget {
   const PageViewerContainer({
@@ -78,7 +79,7 @@ class PageViewerContainer extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Play',
+                        'play'.tr,
                         style: TextStyle(
                           fontSize: verticalSize * 0.025,
                           color: color,

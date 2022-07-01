@@ -35,7 +35,7 @@ class PictoMatchPictoWidget extends StatelessWidget {
           onTap: topOrBottom ? onTap : null,
           // onTap: onTap,
           child: Container(
-            height: verticalSize * 0.28,
+            height: verticalSize * 0.4,
             width: horizontalSize * 0.2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(verticalSize * 0.02),

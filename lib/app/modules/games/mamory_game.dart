@@ -18,7 +18,7 @@ class MemoryGame extends GetView<GamesController> {
             left: horizontalSize * 0.05,
             top: verticalSize * 0.03,
             child: Container(
-              height: verticalSize * 0.25,
+              height: verticalSize * 0.4,
               width: horizontalSize * 0.2,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -30,7 +30,7 @@ class MemoryGame extends GetView<GamesController> {
             left: horizontalSize * 0.28,
             top: verticalSize * 0.03,
             child: Container(
-              height: verticalSize * 0.25,
+              height: verticalSize * 0.4,
               width: horizontalSize * 0.2,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -43,7 +43,7 @@ class MemoryGame extends GetView<GamesController> {
             top: verticalSize * 0.03,
             child: controller.difficultyLevel.value >= 1
                 ? Container(
-                    height: verticalSize * 0.25,
+                    height: verticalSize * 0.4,
                     width: horizontalSize * 0.2,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -57,7 +57,7 @@ class MemoryGame extends GetView<GamesController> {
             top: verticalSize * 0.03,
             child: controller.difficultyLevel.value >= 2
                 ? Container(
-                    height: verticalSize * 0.25,
+                    height: verticalSize * 0.4,
                     width: horizontalSize * 0.2,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -68,6 +68,7 @@ class MemoryGame extends GetView<GamesController> {
           ),
           PictoMemoryGameWidget(
             onTap: () async => controller.memoryGameOnTap(
+              context: context,
               index: 0,
               text: controller.questions[controller.positions[0].value].text,
             ),
@@ -83,6 +84,7 @@ class MemoryGame extends GetView<GamesController> {
           ),
           PictoMemoryGameWidget(
             onTap: () async => controller.memoryGameOnTap(
+              context: context,
               index: 1,
               text: controller.questions[controller.positions[1].value].text,
             ),
@@ -99,6 +101,7 @@ class MemoryGame extends GetView<GamesController> {
           controller.difficultyLevel.value >= 1
               ? PictoMemoryGameWidget(
                   onTap: () async => controller.memoryGameOnTap(
+                    context: context,
                     index: 2,
                     text: controller
                         .questions[controller.positions[2].value].text,
@@ -118,6 +121,7 @@ class MemoryGame extends GetView<GamesController> {
           controller.difficultyLevel.value >= 2
               ? PictoMemoryGameWidget(
                   onTap: () async => controller.memoryGameOnTap(
+                    context: context,
                     index: 3,
                     text: controller
                         .questions[controller.positions[3].value].text,
@@ -140,7 +144,7 @@ class MemoryGame extends GetView<GamesController> {
             left: horizontalSize * 0.05,
             bottom: verticalSize * 0.03,
             child: Container(
-              height: verticalSize * 0.25,
+              height: verticalSize * 0.4,
               width: horizontalSize * 0.2,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -152,7 +156,7 @@ class MemoryGame extends GetView<GamesController> {
             left: horizontalSize * 0.28,
             bottom: verticalSize * 0.03,
             child: Container(
-              height: verticalSize * 0.25,
+              height: verticalSize * 0.4,
               width: horizontalSize * 0.2,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -165,7 +169,7 @@ class MemoryGame extends GetView<GamesController> {
                   left: horizontalSize * 0.51,
                   bottom: verticalSize * 0.03,
                   child: Container(
-                    height: verticalSize * 0.25,
+                    height: verticalSize * 0.4,
                     width: horizontalSize * 0.2,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -179,7 +183,7 @@ class MemoryGame extends GetView<GamesController> {
                   left: horizontalSize * 0.74,
                   bottom: verticalSize * 0.03,
                   child: Container(
-                    height: verticalSize * 0.25,
+                    height: verticalSize * 0.4,
                     width: horizontalSize * 0.2,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -191,6 +195,7 @@ class MemoryGame extends GetView<GamesController> {
           PictoMemoryGameWidget(
             onTap: () async => controller.memoryGameOnTap(
               index: 4,
+              context: context,
               text: controller.questions[controller.positions[4].value].text,
             ),
             name: controller.questions[controller.positions[4].value].text,
@@ -205,6 +210,7 @@ class MemoryGame extends GetView<GamesController> {
           ),
           PictoMemoryGameWidget(
             onTap: () async => controller.memoryGameOnTap(
+              context: context,
               index: 5,
               text: controller.questions[controller.positions[5].value].text,
             ),
@@ -222,6 +228,7 @@ class MemoryGame extends GetView<GamesController> {
               ? PictoMemoryGameWidget(
                   onTap: () async => controller.memoryGameOnTap(
                     index: 6,
+                    context: context,
                     text: controller
                         .questions[controller.positions[6].value].text,
                   ),
@@ -240,6 +247,7 @@ class MemoryGame extends GetView<GamesController> {
           controller.difficultyLevel.value >= 2
               ? PictoMemoryGameWidget(
                   onTap: () async => controller.memoryGameOnTap(
+                    context: context,
                     index: 7,
                     text: controller
                         .questions[controller.positions[7].value].text,

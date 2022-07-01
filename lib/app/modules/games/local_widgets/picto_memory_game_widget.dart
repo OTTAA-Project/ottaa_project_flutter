@@ -34,7 +34,7 @@ class PictoMemoryGameWidget extends StatelessWidget {
           splashColor: kOTTAAOrangeNew,
           onTap: showOrHide ? null : onTap,
           child: Container(
-            height: verticalSize * 0.25,
+            height: verticalSize * 0.4,
             width: horizontalSize * 0.2,
             decoration: BoxDecoration(
               // color: Colors.white,

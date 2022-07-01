@@ -133,6 +133,13 @@ class Translation extends Translations {
               'Use OTTAA Project with screen scanning, connect accessible buttons and much more.',
           'sentence_3':
               'With the premium version you can use the GPS to have a better prediction based on the commerce or place where you are',
+          'whats_the_picto': 'Whats the picto?',
+          'game1': 'Answer the questions by choosing the right pictogram.\nLearn by playing!',
+          'match_picto': 'Match Picto',
+          'game2': 'Attach the pictogram correctly',
+          'memory_game': 'Memory Game',
+          'game3': 'Test your memory',
+          'play': 'Tocar',
           '': '',
         },
         'es_ES': {
@@ -257,14 +264,20 @@ class Translation extends Translations {
           'we_are_working_on_this_feature':
               'Estamos trabajando en esta funcionalidad',
           'most_used_sentences': 'Oraciones más usadas',
-          '': '',
           'price_one':
               'Obtenga acceso hoy a todas las funciones útiles que OTTAA Premium tiene para ofrecer por solo 990 ARS al mes.',
           'purchase_subscription': 'COMPRAR SUSCRIPCIÓN',
           'sentence_1': 'Accede a juegos educativos que te permiten evaluar vocabulario de una manera divertida',
           'sentence_2': 'Use OTTAA Project con escaneo de pantalla, conéctese accesible Botones y mucho más.',
           'sentence_3': 'Con la versión premium puedes usar el GPS para tener una mejor predicción basada en el comercio o lugar donde te encuentres',
-          '': '',
+          'whats_the_picto': '¿Cual es el Picto ?',
+          'game1': 'Responde a las preguntas eligiendo el pictograma adecuado. ¡Aprende jugando!',
+          'match_picto':'Igualar pictogramas',
+          'game2':'Adjunta el pictograma correctamente',
+          'memory_game':'Juego de memoria',
+          'game3':'Prueba tu memoria',
+          'play':'Tocar',
+          '':'',
         },
       };
 }

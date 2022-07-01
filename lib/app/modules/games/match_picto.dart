@@ -19,7 +19,7 @@ class MatchPicto extends GetView<GamesController> {
             left: horizontalSize * 0.05,
             bottom: verticalSize * 0.05,
             child: Container(
-              height: verticalSize * 0.28,
+              height: verticalSize * 0.4,
               width: horizontalSize * 0.2,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -31,7 +31,7 @@ class MatchPicto extends GetView<GamesController> {
             left: horizontalSize * 0.28,
             bottom: verticalSize * 0.05,
             child: Container(
-              height: verticalSize * 0.28,
+              height: verticalSize * 0.4,
               width: horizontalSize * 0.2,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -44,7 +44,7 @@ class MatchPicto extends GetView<GamesController> {
             bottom: verticalSize * 0.05,
             child: controller.difficultyLevel.value >= 1
                 ? Container(
-                    height: verticalSize * 0.28,
+                    height: verticalSize * 0.4,
                     width: horizontalSize * 0.2,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -58,7 +58,7 @@ class MatchPicto extends GetView<GamesController> {
             bottom: verticalSize * 0.05,
             child: controller.difficultyLevel.value >= 2
                 ? Container(
-                    height: verticalSize * 0.28,
+                    height: verticalSize * 0.4,
                     width: horizontalSize * 0.2,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -79,6 +79,7 @@ class MatchPicto extends GetView<GamesController> {
             onTap: () async => controller.bottomWidgetFunction(
               index: controller.randomPositionsForBottomWidgets[0].value,
               text: controller.bottomWidgetNames[0].value,
+              context: context,
             ),
             // name: controller
             //     .questions[controller.randomPositionsForBottomWidgets[0].value]
@@ -97,6 +98,7 @@ class MatchPicto extends GetView<GamesController> {
             onTap: () async => controller.bottomWidgetFunction(
               index: controller.randomPositionsForBottomWidgets[1].value,
               text: controller.bottomWidgetNames[1].value,
+              context: context,
             ),
             // name: controller
             //     .questions[controller.randomPositionsForBottomWidgets[1].value]
@@ -116,6 +118,7 @@ class MatchPicto extends GetView<GamesController> {
                   onTap: () async => controller.bottomWidgetFunction(
                     index: controller.randomPositionsForBottomWidgets[2].value,
                     text: controller.bottomWidgetNames[2].value,
+                    context: context,
                   ),
                   // name: controller
                   //     .questions[
@@ -138,6 +141,7 @@ class MatchPicto extends GetView<GamesController> {
                   onTap: () async => controller.bottomWidgetFunction(
                     index: controller.randomPositionsForBottomWidgets[3].value,
                     text: controller.bottomWidgetNames[3].value,
+                    context: context,
                   ),
                   // name: controller
                   //     .questions[
@@ -153,7 +157,7 @@ class MatchPicto extends GetView<GamesController> {
             top: verticalSize * 0.02,
             child: Obx(
               () => Container(
-                height: verticalSize * 0.28,
+                height: verticalSize * 0.4,
                 width: horizontalSize * 0.2,
                 decoration: BoxDecoration(
                   color: controller.topOrBottom[0].value
@@ -169,7 +173,7 @@ class MatchPicto extends GetView<GamesController> {
             top: verticalSize * 0.02,
             child: Obx(
               () => Container(
-                height: verticalSize * 0.28,
+                height: verticalSize * 0.4,
                 width: horizontalSize * 0.2,
                 decoration: BoxDecoration(
                   color: controller.topOrBottom[1].value
@@ -186,7 +190,7 @@ class MatchPicto extends GetView<GamesController> {
             child: Obx(
               () => controller.difficultyLevel.value >= 1
                   ? Container(
-                      height: verticalSize * 0.28,
+                      height: verticalSize * 0.4,
                       width: horizontalSize * 0.2,
                       decoration: BoxDecoration(
                         color: controller.topOrBottom[2].value
@@ -205,7 +209,7 @@ class MatchPicto extends GetView<GamesController> {
             child: Obx(
               () => controller.difficultyLevel.value >= 2
                   ? Container(
-                      height: verticalSize * 0.28,
+                      height: verticalSize * 0.4,
                       width: horizontalSize * 0.2,
                       decoration: BoxDecoration(
                         color: controller.topOrBottom[3].value
@@ -228,9 +232,12 @@ class MatchPicto extends GetView<GamesController> {
                         controller.randomPositionsForBottomWidgets[0].value]!,
             top: controller.topOrBottom[0].value
                 ? verticalSize * 0.02
-                : verticalSize * 0.57,
+                : verticalSize * 0.46,
             topOrBottom: controller.topOrBottom[0].value,
-            onTap: () async => controller.topWidgetFunction(index: 0),
+            onTap: () async => controller.topWidgetFunction(
+              index: 0,
+              context: context,
+            ),
             name: controller.questions[0].text,
             imageUrl: controller.questions[0].imageUrl,
           ),
@@ -244,10 +251,13 @@ class MatchPicto extends GetView<GamesController> {
                         controller.randomPositionsForBottomWidgets[1].value]!,
             top: controller.topOrBottom[1].value
                 ? verticalSize * 0.02
-                : verticalSize * 0.57,
+                : verticalSize * 0.46,
             // bottom: controller.topOrBottom[1].value ? 0 : verticalSize * 0.02,
             topOrBottom: controller.topOrBottom[1].value,
-            onTap: () async => controller.topWidgetFunction(index: 1),
+            onTap: () async => controller.topWidgetFunction(
+              index: 1,
+              context: context,
+            ),
             name: controller.questions[1].text,
             imageUrl: controller.questions[1].imageUrl,
           ),
@@ -262,10 +272,13 @@ class MatchPicto extends GetView<GamesController> {
                               .randomPositionsForBottomWidgets[2].value]!,
                   top: controller.topOrBottom[2].value
                       ? verticalSize * 0.02
-                      : verticalSize * 0.57,
+                      : verticalSize * 0.46,
                   // bottom: controller.topOrBottom[2].value ? 0 : verticalSize * 0.02,
                   topOrBottom: controller.topOrBottom[2].value,
-                  onTap: () async => controller.topWidgetFunction(index: 2),
+                  onTap: () async => controller.topWidgetFunction(
+                    index: 2,
+                    context: context,
+                  ),
                   name: controller.questions[2].text,
                   imageUrl: controller.questions[2].imageUrl,
                 )
@@ -281,10 +294,13 @@ class MatchPicto extends GetView<GamesController> {
                               .randomPositionsForBottomWidgets[3].value]!,
                   top: controller.topOrBottom[3].value
                       ? verticalSize * 0.02
-                      : verticalSize * 0.57,
+                      : verticalSize * 0.46,
                   // bottom: controller.topOrBottom[3].value ? 0 : verticalSize * 0.02,
                   topOrBottom: controller.topOrBottom[3].value,
-                  onTap: () async => controller.topWidgetFunction(index: 3),
+                  onTap: () async => controller.topWidgetFunction(
+                    index: 3,
+                    context: context,
+                  ),
                   name: controller.questions[3].text,
                   imageUrl: controller.questions[3].imageUrl,
                 )

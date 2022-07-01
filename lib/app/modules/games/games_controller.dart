@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:ottaa_project_flutter/app/data/models/game_data_model.dart';
@@ -16,25 +16,24 @@ class GamesController extends GetxController {
   /// Game Types Data
   List<GameModelData> gameTypes = [
     GameModelData(
-      subtitle:
-          'Answer the questions by choosing the right pictogram.\nLearn by playing!',
+      subtitle: 'game1'.tr,
       completedNumber: 0,
       totalLevel: 45,
-      title: 'Whats the picto?',
+      title: 'whats_the_picto'.tr,
       imageAsset: 'assets/games_images/whats_picto.png',
     ),
     GameModelData(
-      title: 'Match pictos',
+      title: 'match_picto'.tr,
       totalLevel: 45,
       completedNumber: 0,
-      subtitle: 'Attach the pictogram correctly',
+      subtitle: 'game2'.tr,
       imageAsset: 'assets/games_images/match_picto.png',
     ),
     GameModelData(
-      title: 'Memory game',
+      title: 'memory_game'.tr,
       completedNumber: 0,
       totalLevel: 45,
-      subtitle: 'Test your memory',
+      subtitle: 'mage3'.tr,
       imageAsset: 'assets/games_images/memory_game.png',
     ),
   ];
@@ -61,6 +60,9 @@ class GamesController extends GetxController {
   /// 0 = easy, 1 = medium, 2 = hard///
   RxInt difficultyLevel = 0.obs;
   int grupoSelectedIndex = -1;
+
+  // hack for match picto
+  int sameOrNotIndex = -1;
 
   late GameData gameData;
 
@@ -460,73 +462,107 @@ class GamesController extends GetxController {
     await _ttsController.speak('What\'s the picto ${selectedAnswer.string}');
   }
 
-  Future<void> topWidgetFunction({required int index}) async {
+  Future<void> topWidgetFunction({
+    required int index,
+    required BuildContext context,
+  }) async {
     selectedAnswer.value = questions[index].text;
     print('the values of the current stack is');
     selectedOrNot.forEach((element) {
       print('the value is : $element');
     });
-    if (selectedOrNot[index]) {
-      /// it is selected for checking user clicked on the below question
-      if (selectedAnswer.value == selectedAnswerBottom.value) {
-        totalCorrectMatchPicto++;
-        topOrBottom[index].value = !topOrBottom[index].value;
-        await playClickSounds(assetName: 'yay');
-        correctScore.value++;
-        if (currentStreak.value >= 0) {
-          if (maximumStreak.value == currentStreak.value) {
-            maximumStreak.value++;
-          }
-          currentStreak.value++;
-        }
-        await Future.delayed(Duration(seconds: 1));
-      } else {
-        selectedOrNot[index] = false;
-        incorrectScore.value++;
-        currentStreak.value--;
-        tries++;
-        await playClickSounds(assetName: 'ohoh');
-      }
+    if (sameOrNotIndex == index) {
+      _ttsController.speak(questions[index].text);
     } else {
-      /// it is not selected for checking
-      selectedOrNot[index] = true;
-      selectedAnswer.value = questions[index].text;
+      if (selectedOrNot[index]) {
+        sameOrNotIndex = index;
+        /// it is selected for checking user clicked on the below question
+        if (selectedAnswer.value == selectedAnswerBottom.value) {
+          await playClickSounds(assetName: 'yay');
+          showTheDialog(context);
+          totalCorrectMatchPicto++;
+          topOrBottom[index].value = !topOrBottom[index].value;
+          await Future.delayed(Duration(seconds: 1));
+          Get.back();
+          correctScore.value++;
+          if (currentStreak.value >= 0) {
+            if (maximumStreak.value == currentStreak.value) {
+              maximumStreak.value++;
+            }
+            currentStreak.value++;
+          }
+        } else {
+          showTheDialog(context);
+          await playClickSounds(assetName: 'ohoh');
+          await Future.delayed(Duration(seconds: 1));
+          Get.back();
+          selectedOrNot[index] = false;
+          selectedAnswerBottom.value = '';
+          selectedAnswer.value = '';
+          incorrectScore.value++;
+          currentStreak.value--;
+          tries++;
+        }
+      } else {
+        /// it is not selected for checking
+        selectedOrNot[index] = true;
+        selectedAnswer.value = questions[index].text;
+      }
     }
     if (totalCorrectMatchPicto == difficultyLevel.value + 2) {
+      await Future.delayed(Duration(seconds: 3));
+      sameOrNotIndex = -1;
       createQuestion();
     }
   }
 
-  Future<void> bottomWidgetFunction(
-      {required int index, required String text}) async {
+  Future<void> bottomWidgetFunction({
+    required int index,
+    required String text,
+    required BuildContext context,
+  }) async {
     selectedAnswerBottom.value = text;
-    if (selectedOrNot[index]) {
-      /// it is selected for checking user clicked on the below question
-      if (selectedAnswer.value == selectedAnswerBottom.value) {
-        totalCorrectMatchPicto++;
-        topOrBottom[index].value = !topOrBottom[index].value;
-        correctScore.value++;
-        if (currentStreak.value >= 0) {
-          if (maximumStreak.value == currentStreak.value) {
-            maximumStreak.value++;
-          }
-          currentStreak.value++;
-        }
-        await playClickSounds(assetName: 'yay');
-      } else {
-        tries++;
-        selectedOrNot[index] = false;
-        await playClickSounds(assetName: 'ohoh');
-        incorrectScore.value++;
-        currentStreak.value--;
-      }
+    if (sameOrNotIndex == index) {
+      _ttsController.speak(text);
     } else {
-      /// it is not selected for checking
-      selectedOrNot[index] = true;
-      selectedAnswerBottom.value = questions[index].text;
+      sameOrNotIndex = index;
+      if (selectedOrNot[index]) {
+        /// it is selected for checking user clicked on the below question
+        if (selectedAnswer.value == selectedAnswerBottom.value) {
+          showTheDialog(context);
+          await playClickSounds(assetName: 'yay');
+          await Future.delayed(Duration(seconds: 1));
+          Get.back();
+          totalCorrectMatchPicto++;
+          topOrBottom[index].value = !topOrBottom[index].value;
+          correctScore.value++;
+          if (currentStreak.value >= 0) {
+            if (maximumStreak.value == currentStreak.value) {
+              maximumStreak.value++;
+            }
+            currentStreak.value++;
+          }
+        } else {
+          showTheDialog(context);
+          await playClickSounds(assetName: 'ohoh');
+          await Future.delayed(Duration(seconds: 1));
+          Get.back();
+          tries++;
+          selectedOrNot[index] = false;
+          selectedAnswerBottom.value = '';
+          selectedAnswer.value = '';
+          incorrectScore.value++;
+          currentStreak.value--;
+        }
+      } else {
+        /// it is not selected for checking
+        selectedOrNot[index] = true;
+        selectedAnswerBottom.value = questions[index].text;
+      }
     }
-    await Future.delayed(Duration(seconds: 1));
     if (totalCorrectMatchPicto == difficultyLevel.value + 2) {
+      await Future.delayed(Duration(seconds: 3));
+      sameOrNotIndex = -1;
       await createQuestion();
     }
   }
@@ -683,7 +719,9 @@ class GamesController extends GetxController {
   }
 
   Future<void> memoryGameOnTap(
-      {required int index, required String text}) async {
+      {required int index,
+      required String text,
+      required BuildContext context}) async {
     print('index is floowing $index');
     showOrHideMemoryGame[index].value = !showOrHideMemoryGame[index].value;
     if (first.value == '') {
@@ -694,34 +732,44 @@ class GamesController extends GetxController {
       second.value = text;
       secondIndex.value = index;
       if (first.value == second.value) {
+        showTheDialog(context);
+        first.value = '';
+        second.value = '';
+        await playClickSounds(assetName: 'yay');
+        await Future.delayed(Duration(seconds: 1));
+        Get.back();
         // showOrHideMemoryGame[secondIndex.value].value = !showOrHideMemoryGame[secondIndex.value].value;
         totalCorrectMemoryGame++;
         correctScore.value++;
+
         if (currentStreak.value >= 0) {
           if (maximumStreak.value == currentStreak.value) {
             maximumStreak.value++;
           }
           currentStreak.value++;
-          await playClickSounds(assetName: 'yay');
         }
-        first.value = '';
-        second.value = '';
       } else {
-        tries++;
-        showOrHideMemoryGame[firstIndex.value].value =
-            !showOrHideMemoryGame[firstIndex.value].value;
-        showOrHideMemoryGame[secondIndex.value].value =
-            !showOrHideMemoryGame[secondIndex.value].value;
+        showTheDialog(context);
         first.value = '';
         second.value = '';
         incorrectScore.value++;
         currentStreak.value--;
         await playClickSounds(assetName: 'ohoh');
+        await Future.delayed(Duration(seconds: 1));
+        Get.back();
+        tries++;
+        showOrHideMemoryGame[firstIndex.value].value =
+            !showOrHideMemoryGame[firstIndex.value].value;
+        showOrHideMemoryGame[secondIndex.value].value =
+            !showOrHideMemoryGame[secondIndex.value].value;
       }
     }
     print('first is ${first.value}');
     print('second is ${second.value}');
     if (totalCorrectMemoryGame == difficultyLevel.value + 2) {
+      first.value = '';
+      second.value = '';
+      await Future.delayed(Duration(seconds: 3));
       await createQuestion();
     }
   }
@@ -729,8 +777,9 @@ class GamesController extends GetxController {
   Future<void> uploadScore() async {
     final endTimeInEpoch = DateTime.now().millisecondsSinceEpoch;
     double score = (correctScore.value + incorrectScore.value) / 2;
+
     /// check if the level is played or not
-    
+
     GameData game = GameData(
       game: gameSelected.value,
       levelId: grupoSelectedIndex,
@@ -750,5 +799,15 @@ class GamesController extends GetxController {
         ),
       ],
     );
+  }
+
+  void showTheDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => Container(
+              color: Colors.white,
+            ),
+        barrierColor: Colors.transparent,
+        barrierDismissible: false);
   }
 }
