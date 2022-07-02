@@ -104,7 +104,7 @@ class Translation extends Translations {
           'tags_will_come_in_next_release': 'TAGs will come in next Release',
           'mute': 'Mute',
           'about_ottaa': 'About OTTAA',
-          'configuration': 'Configuration',
+          'configuration': 'Settings',
           'tutorial': 'Tutorial',
           'close_application': 'Close Application',
           'sign_out': 'Sign out',
@@ -133,14 +133,16 @@ class Translation extends Translations {
               'Use OTTAA Project with screen scanning, connect accessible buttons and much more.',
           'sentence_3':
               'With the premium version you can use the GPS to have a better prediction based on the commerce or place where you are',
-          'whats_the_picto': 'Whats the picto?',
+          'whats_the_picto': 'What\'s the picto?',
           'game1': 'Answer the questions by choosing the right pictogram.\nLearn by playing!',
           'match_picto': 'Match Picto',
           'game2': 'Attach the pictogram correctly',
           'memory_game': 'Memory Game',
           'game3': 'Test your memory',
-          'play': 'Tocar',
+          'play': 'PLAY',
+          'select_a_category_to_play': 'Select a category to play',
           '': '',
+
         },
         'es_ES': {
           'hello_world': 'Hola Mundo',
@@ -276,7 +278,8 @@ class Translation extends Translations {
           'game2':'Adjunta el pictograma correctamente',
           'memory_game':'Juego de memoria',
           'game3':'Prueba tu memoria',
-          'play':'Tocar',
+          'play':'JUGAR',
+          'select_a_category_to_play':'Seleccione una categoría para jugar',
           '':'',
         },
       };

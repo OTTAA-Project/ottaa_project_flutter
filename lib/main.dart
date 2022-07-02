@@ -20,9 +20,11 @@ void main() async {
     DependencyInjection.init();
     // final String defaultSystemLocale = Platform.localeName;
     final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
-
+    print('these are the locales Asim asked for');
+    print(systemLocales.toList());
+    print('above it');
     // Pass all uncaught errors from the framework to Crashlytics.
-    if(!kIsWeb){
+    if (!kIsWeb) {
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     }
     if (kIsWeb) {
@@ -43,7 +45,7 @@ void main() async {
       ),
     );
   }, (error, stackTrace) {
-    if(!kIsWeb){
+    if (!kIsWeb) {
       FirebaseCrashlytics.instance.recordError(error, stackTrace);
     }
   });
@@ -77,7 +79,7 @@ class MyApp extends StatelessWidget {
       // your translations
       locale: locale,
       // translations will be displayed in that locale
-      fallbackLocale: Locale('en', 'US'),
+      fallbackLocale: Locale('es', 'AR'),
     );
   }
 }

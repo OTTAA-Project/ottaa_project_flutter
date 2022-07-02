@@ -19,7 +19,7 @@ class GrupoSelectionPage extends GetView<GamesController> {
         leading: Container(),
         foregroundColor: Colors.white,
         elevation: 0,
-        title: Text('Select a category to play'),
+        title: Text('select_a_category_to_play'.tr),
       ),
       body: Stack(
         children: [

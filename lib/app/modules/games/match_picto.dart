@@ -71,7 +71,7 @@ class MatchPicto extends GetView<GamesController> {
             horizontalSize: horizontalSize,
             verticalSize: verticalSize,
             left: horizontalSize * 0.05,
-            bottom: verticalSize * 0.05,
+            top: verticalSize * 0.46,
             foundOrNot: controller
                 .topOrBottom[
                     controller.randomPositionsForBottomWidgets[0].value]
@@ -90,7 +90,7 @@ class MatchPicto extends GetView<GamesController> {
             horizontalSize: horizontalSize,
             verticalSize: verticalSize,
             left: horizontalSize * 0.28,
-            bottom: verticalSize * 0.05,
+            top: verticalSize * 0.46,
             foundOrNot: controller
                 .topOrBottom[
                     controller.randomPositionsForBottomWidgets[1].value]
@@ -110,7 +110,7 @@ class MatchPicto extends GetView<GamesController> {
                   horizontalSize: horizontalSize,
                   verticalSize: verticalSize,
                   left: horizontalSize * 0.51,
-                  bottom: verticalSize * 0.05,
+                  top: verticalSize * 0.46,
                   foundOrNot: controller
                       .topOrBottom[
                           controller.randomPositionsForBottomWidgets[2].value]
@@ -133,7 +133,7 @@ class MatchPicto extends GetView<GamesController> {
                   horizontalSize: horizontalSize,
                   verticalSize: verticalSize,
                   left: horizontalSize * 0.74,
-                  bottom: verticalSize * 0.05,
+                  top: verticalSize * 0.46,
                   foundOrNot: controller
                       .topOrBottom[
                           controller.randomPositionsForBottomWidgets[3].value]

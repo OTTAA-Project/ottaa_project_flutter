@@ -8,11 +8,11 @@ class PictoMatchPictoBottomWidget extends StatelessWidget {
     required this.horizontalSize,
     required this.onTap,
     required this.foundOrNot,
-    required this.bottom,
+    required this.top,
     required this.left,
     required this.name,
   }) : super(key: key);
-  final double verticalSize, horizontalSize, left, bottom;
+  final double verticalSize, horizontalSize, left, top;
   final String name;
   final void Function()? onTap;
   final bool foundOrNot;
@@ -20,7 +20,7 @@ class PictoMatchPictoBottomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: bottom,
+      top: top,
       left: left,
       child: Material(
         type: MaterialType.transparency,

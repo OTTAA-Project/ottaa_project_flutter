@@ -33,7 +33,7 @@ class GamesController extends GetxController {
       title: 'memory_game'.tr,
       completedNumber: 0,
       totalLevel: 45,
-      subtitle: 'mage3'.tr,
+      subtitle: 'game3'.tr,
       imageAsset: 'assets/games_images/memory_game.png',
     ),
   ];
@@ -145,6 +145,7 @@ class GamesController extends GetxController {
     // backgroundMusicPlayer.setAudioSource();
     await backgroundMusicPlayer.setAsset('assets/audios/funckygroove.mp3');
     await backgroundMusicPlayer.setLoopMode(LoopMode.one);
+    backgroundMusicPlayer.setVolume(0.5);
   }
 
   @override
@@ -476,6 +477,7 @@ class GamesController extends GetxController {
     } else {
       if (selectedOrNot[index]) {
         sameOrNotIndex = index;
+
         /// it is selected for checking user clicked on the below question
         if (selectedAnswer.value == selectedAnswerBottom.value) {
           await playClickSounds(assetName: 'yay');
@@ -522,6 +524,10 @@ class GamesController extends GetxController {
     required BuildContext context,
   }) async {
     selectedAnswerBottom.value = text;
+    print('the values of the current stack is');
+    selectedOrNot.forEach((element) {
+      print('the value is : $element');
+    });
     if (sameOrNotIndex == index) {
       _ttsController.speak(text);
     } else {

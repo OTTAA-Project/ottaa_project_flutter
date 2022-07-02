@@ -21,7 +21,7 @@ class WhatsThePicto extends GetView<GamesController> {
           left: horizontalSize * 0.1,
           top: verticalSize * 0.13,
           child: Text(
-            'Whats the Picto?',
+            'whats_the_picto'.tr,
             style: TextStyle(
               color: Colors.white,
               fontSize: verticalSize * 0.04,
