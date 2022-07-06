@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -27,6 +25,7 @@ import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
   final dataController = Get.find<DataController>();
+
   TTSController get ttsController => this._ttsController;
   final _pictsRepository = Get.find<PictsRepository>();
   final _grupoRepository = Get.find<GrupoRepository>();
@@ -98,6 +97,7 @@ class HomeController extends GetxController {
   final String paidUrl =
       'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-7H209758Y47141226MAMGTWY';
   late Timer _timer;
+  late Timer _timerDialouge;
   int currentPage = 0;
   PageController pageController = PageController(
     initialPage: 0,
@@ -114,6 +114,7 @@ class HomeController extends GetxController {
     // final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
     // final res = await ref.get();
     final res = await dataController.fetchAccountType();
+
     /// this means there is a value
     if (res == 1) {
       userSubscription = 1;
@@ -539,6 +540,11 @@ class HomeController extends GetxController {
           this.textToShare += "${pict.texto.es} ";
       }
     });
+  }
+
+  Future<void> startTimerForDialogeExit() async {
+    await Future.delayed(Duration(seconds: 2));
+    Get.back();
   }
 }
 

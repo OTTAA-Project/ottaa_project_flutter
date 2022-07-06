@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 class EmptyTextDialogWidget extends StatelessWidget {
   const EmptyTextDialogWidget({Key? key}) : super(key: key);
 
@@ -27,7 +27,7 @@ class EmptyTextDialogWidget extends StatelessWidget {
                   width: verticalSize * 0.03,
                 ),
                 Text(
-                  'please, create a phrase and select the share button',
+                  'share_text'.tr,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: verticalSize * 0.03,

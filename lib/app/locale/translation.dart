@@ -141,6 +141,8 @@ class Translation extends Translations {
           'game3': 'Test your memory',
           'play': 'PLAY',
           'select_a_category_to_play': 'Select a category to play',
+          'image': 'Image',
+          'share_text': 'please, create a phrase and select the share button',
           '': '',
 
         },
@@ -280,6 +282,8 @@ class Translation extends Translations {
           'game3':'Prueba tu memoria',
           'play':'JUGAR',
           'select_a_category_to_play':'Seleccione una categoría para jugar',
+          'image':'Imagen',
+          'share_text':'por favor, crea una frase y selecciona el botón de compartir',
           '':'',
         },
       };

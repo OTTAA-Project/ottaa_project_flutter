@@ -46,7 +46,7 @@ class RightColumnWidget extends GetView<HomeController> {
                 controller.sentencePicts.length == 0
                     ? showDialog(
                         context: context,
-                        barrierDismissible: true,
+                        barrierDismissible: false,
                         barrierColor: Colors.transparent,
                         builder: (context) {
                           return EmptyTextDialogWidget();
@@ -58,6 +58,9 @@ class RightColumnWidget extends GetView<HomeController> {
                           return SentenceShareWidget();
                         },
                       );
+                if(controller.sentencePicts.length == 0){
+                  await controller.startTimerForDialogeExit();
+                }
               },
               child: Center(
                 child: Icon(

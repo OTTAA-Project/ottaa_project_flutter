@@ -62,7 +62,7 @@ class SentenceShareWidget extends GetView<HomeController> {
             color: kOTTAAOrangeNew,
             verticalSize: verticalSize,
             iconData: Icons.image,
-            text: 'Image',
+            text: 'image'.tr,
             onTap: () async {
               if (kIsWeb) {
                 /// here is method for having image and uploading it to the firebase for sharing
@@ -190,7 +190,7 @@ class SentenceShareWidget extends GetView<HomeController> {
             color: kOTTAAOrangeNew,
             verticalSize: verticalSize,
             iconData: Icons.text_format,
-            text: 'Texto',
+            text: 'text'.tr,
             onTap: () async {
               controller.generateStringToShare();
               if (kIsWeb) {
