@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum TTSState { playing, stopped, paused, continued }
 
@@ -18,7 +19,7 @@ class TTSController extends GetxController {
     this._language = value;
   }
 
-  bool _isEnglish = true;
+  late bool _isEnglish;
 
   bool get isEnglish => this._isEnglish;
 
@@ -106,6 +107,8 @@ class TTSController extends GetxController {
   @override
   void onInit() async {
     _initTTS();
+    final instance = await SharedPreferences.getInstance();
+    _isEnglish = instance.getBool('Language_KEY') ?? false;
     super.onInit();
   }
 

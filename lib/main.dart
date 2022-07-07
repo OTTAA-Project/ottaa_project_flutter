@@ -9,6 +9,7 @@ import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'app/modules/splash/splash_binding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
@@ -38,10 +39,12 @@ void main() async {
     }
     // print(defaultSystemLocale.toString());
     // print(systemLocales.asMap().toString());
+    final instance = await SharedPreferences.getInstance();
+    final bool = instance.getBool('Language_KEY') ?? false;
     runApp(
       MyApp(
-        locale: Locale(systemLocales[0].languageCode,
-            systemLocales[0].languageCode.toUpperCase()),
+        locale: bool ? Locale(systemLocales[0].languageCode,
+            systemLocales[0].languageCode.toUpperCase()) : Locale('es', 'AR'),
       ),
     );
   }, (error, stackTrace) {
