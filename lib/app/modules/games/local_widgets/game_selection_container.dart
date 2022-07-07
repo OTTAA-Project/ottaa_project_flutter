@@ -25,15 +25,18 @@ class GameSelectionContainer extends StatelessWidget {
       controller: pageControllerGame,
       itemCount: 3,
       itemBuilder: (context, index) {
-        return PageViewerContainer(
-          color: color,
-          subtitle: gameTypes[index].subtitle,
-          title: gameTypes[index].title,
-          verticalSize: verticalSize,
-          horizontalSize: horizontalSize,
-          completedLevel: gameTypes[index].completedNumber,
-          totalLevel: gameTypes[index].totalLevel,
-          imageAsset: gameTypes[index].imageAsset,
+        return Padding(
+          padding: EdgeInsets.all(horizontalSize *0.02),
+          child: PageViewerContainer(
+            color: color,
+            subtitle: gameTypes[index].subtitle,
+            title: gameTypes[index].title,
+            verticalSize: verticalSize,
+            horizontalSize: horizontalSize,
+            completedLevel: gameTypes[index].completedNumber,
+            totalLevel: gameTypes[index].totalLevel,
+            imageAsset: gameTypes[index].imageAsset,
+          ),
         );
       },
     );

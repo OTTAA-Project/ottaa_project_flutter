@@ -97,7 +97,6 @@ class HomeController extends GetxController {
   final String paidUrl =
       'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-7H209758Y47141226MAMGTWY';
   late Timer _timer;
-  late Timer _timerDialouge;
   int currentPage = 0;
   PageController pageController = PageController(
     initialPage: 0,
@@ -542,7 +541,7 @@ class HomeController extends GetxController {
     });
   }
 
-  Future<void> startTimerForDialogeExit() async {
+  Future<void> startTimerForDialogueExit() async {
     await Future.delayed(Duration(seconds: 2));
     Get.back();
   }

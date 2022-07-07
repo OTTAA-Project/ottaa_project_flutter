@@ -59,7 +59,7 @@ class RightColumnWidget extends GetView<HomeController> {
                         },
                       );
                 if(controller.sentencePicts.length == 0){
-                  await controller.startTimerForDialogeExit();
+                  await controller.startTimerForDialogueExit();
                 }
               },
               child: Center(

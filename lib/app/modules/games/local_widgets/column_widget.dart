@@ -37,7 +37,7 @@ class ColumnWidget extends StatelessWidget {
           child: Icon(
             icon,
             color: Colors.white,
-            size: verticalSize * 0.1,
+            size: horizontalSize * 0.12,
           ),
         ),
       ),
