@@ -153,6 +153,8 @@ class Translation extends Translations {
           'size': 'Size',
           'upperCase': 'UpperCase',
           'it_allows_uppercase_subtitles': 'It allows uppercase subtitles.',
+          'login_screen':
+              'Hello, welcome to OTTAA Project, the first predictive communication platform for people with speech impairments, please login with your account and fill in some data to benefit from our prediction.',
         },
         'es_ES': {
           'hello_world': 'Hola Mundo',
@@ -306,6 +308,8 @@ class Translation extends Translations {
           'size': 'Tamaño',
           'upperCase': 'Mayúsculas',
           'it_allows_uppercase_subtitles': 'Permite subtítulos en mayúsculas',
+          'login_screen':
+              'Hola, bienvenido a OTTAA Project, la primera plataforma de comunicación predictiva para personas con problemas del habla, inicie sesión con su cuenta y complete algunos datos para beneficiarse de nuestra predicción.',
           '': '',
         },
       };
