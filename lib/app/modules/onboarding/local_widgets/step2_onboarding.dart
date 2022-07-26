@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -87,7 +84,7 @@ step2Onboarding<widget>(
                       EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(verticalSize * 0.03)),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [

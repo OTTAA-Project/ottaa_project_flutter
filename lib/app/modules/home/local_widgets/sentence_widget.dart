@@ -14,7 +14,7 @@ class SentenceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
-
+    double horizontalSize = MediaQuery.of(context).size.width;
     return GetBuilder<HomeController>(
       id: "sentence",
       builder: (_) => SingleChildScrollView(
@@ -46,7 +46,7 @@ class SentenceWidget extends StatelessWidget {
                               from: 30,
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: Get.width * 0.01),
+                                    horizontal: horizontalSize * 0.01),
                                 // margin: EdgeInsets.all(10),
                                 child: MiniPicto(
                                   localImg: pict.localImg,
@@ -63,7 +63,7 @@ class SentenceWidget extends StatelessWidget {
                               infinite: true,
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: Get.width * 0.01),
+                                    horizontal: horizontalSize * 0.01),
                                 // margin: EdgeInsets.all(10),
                                 child: MiniPicto(
                                   localImg: speakPict.localImg,
@@ -79,7 +79,7 @@ class SentenceWidget extends StatelessWidget {
                             from: 30,
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: Get.width * 0.01),
+                                  horizontal: horizontalSize * 0.01),
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -88,9 +88,12 @@ class SentenceWidget extends StatelessWidget {
                                 padding: const EdgeInsets.all(10),
                                 child: DottedBorder(
                                   dashPattern: [8, 8],
-                                  child: Container(
-                                    width: Get.width * 0.12,
-                                    color: Colors.white,
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
+                                      width: horizontalSize * 0.1,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -101,12 +104,12 @@ class SentenceWidget extends StatelessWidget {
                     : ListView.builder(
                         shrinkWrap: true,
                         padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                            EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
                         itemCount: 10,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => FadeInDown(
                           from: 30,
-                          child: emptyWidget(),
+                          child: emptyWidget(horizontalSize: horizontalSize),
                         ),
                       ),
               ),
@@ -117,9 +120,9 @@ class SentenceWidget extends StatelessWidget {
     );
   }
 
-  Widget emptyWidget() {
+  Widget emptyWidget({required double horizontalSize}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+      padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -129,7 +132,7 @@ class SentenceWidget extends StatelessWidget {
         child: DottedBorder(
           dashPattern: [8, 8],
           child: Container(
-            width: Get.width * 0.12,
+            width: horizontalSize * 0.1,
             color: Colors.white,
           ),
         ),

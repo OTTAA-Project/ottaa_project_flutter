@@ -73,7 +73,7 @@ class PictogramGroupsController extends GetxController {
 
   //Add Pict
   final TextEditingController pictoNameController =
-      TextEditingController(text: 'Add Picto');
+      TextEditingController();
   RxBool isImageProvidedPicto = false.obs;
   Rx<File?> fileImagePicto = Rx<File?>(null);
   Rx<String?> selectedPhotoUrlPicto = ''.obs;

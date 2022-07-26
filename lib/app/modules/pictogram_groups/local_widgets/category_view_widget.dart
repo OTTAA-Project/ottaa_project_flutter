@@ -79,44 +79,41 @@ class CategoryViewWidget extends StatelessWidget {
               controller: _pictogramController.categoriesPageController,
               scrollDirection: Axis.horizontal,
               itemCount: _homeController.grupos.length,
-              itemBuilder: (context, index) => AspectRatio(
-                aspectRatio: 9 / 16,
-                child: GestureDetector(
-                  onLongPress: () async {
-                    _pictogramController.grupoToEdit =
-                        _homeController.grupos[index];
-                    showDialog(
-                      context: context,
-                      builder: (context) => ChoiceDialogue(),
-                    );
-                  },
-                  onTap: () async {
-                    //saying the name after selecting the category
-                    //saying the name after selecting the category and saving the selected grupo
-                    _pictogramController.selectedGrupos =
-                        _homeController.grupos[index];
-                    _ttsController.speak(languaje == "en"
-                        ? _homeController.grupos[index].texto.en
-                        : _homeController.grupos[index].texto.es);
-                    await _pictogramController.fetchDesiredPictos();
-                    // if (_pictogramController.secondTimeSameGroup ==
-                    //     _pictogramController.selectedGroupIndex) {
-                    // } else {
-                    //   _pictogramController.selectedGrupos.relacion
-                    //       .forEach((e1) {
-                    //     _pictogramController.pictsForGroupAdding
-                    //         .removeWhere((e2) => e1.id == e2.id);
-                    //   });
-                    // }
-                    print(_pictogramController.selectedGruposPicts.length);
-                    Get.toNamed(AppRoutes.SELECTPICTO);
-                  },
-                  child: CategoryPageWidget(
-                    name: languaje == 'en'
-                        ? _homeController.grupos[index].texto.en
-                        : _homeController.grupos[index].texto.es,
-                    imageName: _homeController.grupos[index].imagen.picto,
-                  ),
+              itemBuilder: (context, index) => GestureDetector(
+                onLongPress: () async {
+                  _pictogramController.grupoToEdit =
+                      _homeController.grupos[index];
+                  showDialog(
+                    context: context,
+                    builder: (context) => ChoiceDialogue(),
+                  );
+                },
+                onTap: () async {
+                  //saying the name after selecting the category
+                  //saying the name after selecting the category and saving the selected grupo
+                  _pictogramController.selectedGrupos =
+                      _homeController.grupos[index];
+                  _ttsController.speak(languaje == "en"
+                      ? _homeController.grupos[index].texto.en
+                      : _homeController.grupos[index].texto.es);
+                  await _pictogramController.fetchDesiredPictos();
+                  // if (_pictogramController.secondTimeSameGroup ==
+                  //     _pictogramController.selectedGroupIndex) {
+                  // } else {
+                  //   _pictogramController.selectedGrupos.relacion
+                  //       .forEach((e1) {
+                  //     _pictogramController.pictsForGroupAdding
+                  //         .removeWhere((e2) => e1.id == e2.id);
+                  //   });
+                  // }
+                  print(_pictogramController.selectedGruposPicts.length);
+                  Get.toNamed(AppRoutes.SELECTPICTO);
+                },
+                child: CategoryPageWidget(
+                  name: languaje == 'en'
+                      ? _homeController.grupos[index].texto.en
+                      : _homeController.grupos[index].texto.es,
+                  imageName: _homeController.grupos[index].imagen.picto,
                 ),
               ),
             ),

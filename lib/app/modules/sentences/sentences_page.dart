@@ -14,17 +14,24 @@ class SentencesPage extends GetView<SentencesController> {
 
   @override
   Widget build(BuildContext context) {
-    double verticalSize = MediaQuery.of(context).size.height;
-    double horizontalSize = MediaQuery.of(context).size.width;
+    double verticalSize = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double horizontalSize = MediaQuery
+        .of(context)
+        .size
+        .width;
     return GetBuilder<SentencesController>(
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: kOTTAAOrangeNew,
-          leading: Container(),
-          foregroundColor: Colors.white,
-          elevation: 0,
-          title: Text('most_used_sentences'.tr),
-          actions: [
+      builder: (_) =>
+          Scaffold(
+            appBar: AppBar(
+              backgroundColor: kOTTAAOrangeNew,
+              leading: Container(),
+              foregroundColor: Colors.white,
+              elevation: 0,
+              title: Text('most_used_sentences'.tr),
+              /*actions: [
             Icon(
               Icons.reorder,
               size: 30,
@@ -57,207 +64,220 @@ class SentencesPage extends GetView<SentencesController> {
             const SizedBox(
               width: 16,
             ),
-          ],
-        ),
-        body: Container(
-          color: Colors.black,
-          child: Stack(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: horizontalSize * .10),
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 8,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: horizontalSize * 0.02),
-                        child: Center(
-                          child: GetBuilder<SentencesController>(
-                            id: "sentence",
-                            builder: (_) => FadeInDown(
-                              controller: (controller) =>
-                                  _.sentenceAnimationController = controller,
-                              from: 30,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    _.sentencesPicts.isNotEmpty
-                                        ? Container(
-                                            height: verticalSize / 3,
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: _
-                                                      .sentencesPicts[
-                                                          _.sentencesIndex]
-                                                      .length +
-                                                  1,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                final Pict speakPict = Pict(
-                                                  localImg: true,
-                                                  id: 0,
-                                                  texto: Texto(en: "", es: ""),
-                                                  tipo: 6,
-                                                  imagen: Imagen(
-                                                      picto: "logo_ottaa_dev"),
-                                                );
-                                                if (_
-                                                        .sentencesPicts[
-                                                            _.sentencesIndex]
-                                                        .length >
-                                                    index) {
-                                                  final Pict pict = _
-                                                          .sentencesPicts[
-                                                      _.sentencesIndex][index];
-                                                  return Container(
-                                                    margin: EdgeInsets.all(10),
-                                                    child: MiniPicto(
-                                                      localImg: pict.localImg,
-                                                      pict: pict,
-                                                      onTap: () {
-                                                        _.speak();
-                                                      },
-                                                    ),
+          ],*/
+            ),
+            body: Container(
+              color: Colors.black,
+              child: Stack(
+                children: [
+                  Center(
+                    child: CircularProgressIndicator(
+                      color: kOTTAAOrangeNew,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: horizontalSize * .10),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          flex: 8,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: horizontalSize * 0.02),
+                            child: Center(
+                              child: GetBuilder<SentencesController>(
+                                id: "sentence",
+                                builder: (_) =>
+                                    FadeInDown(
+                                      controller: (controller) =>
+                                      _.sentenceAnimationController =
+                                          controller,
+                                      from: 30,
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .center,
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .center,
+                                          children: [
+                                            _.sentencesPicts.isNotEmpty
+                                                ? Container(
+                                              height: verticalSize / 3,
+                                              child: ListView.builder(
+                                                shrinkWrap: true,
+                                                scrollDirection: Axis
+                                                    .horizontal,
+                                                itemCount: _
+                                                    .sentencesPicts[
+                                                _.sentencesIndex]
+                                                    .length +
+                                                    1,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                    int index) {
+                                                  final Pict speakPict = Pict(
+                                                    localImg: true,
+                                                    id: 0,
+                                                    texto: Texto(
+                                                        en: "", es: ""),
+                                                    tipo: 6,
+                                                    imagen: Imagen(
+                                                        picto: "logo_ottaa_dev"),
                                                   );
-                                                } else {
-                                                  return Bounce(
-                                                    from: 6,
-                                                    infinite: true,
-                                                    child: Container(
-                                                      margin:
-                                                          EdgeInsets.all(10),
+                                                  if (_
+                                                      .sentencesPicts[
+                                                  _.sentencesIndex]
+                                                      .length >
+                                                      index) {
+                                                    final Pict pict = _
+                                                        .sentencesPicts[
+                                                    _.sentencesIndex][index];
+                                                    return Container(
+                                                      margin: EdgeInsets.all(
+                                                          10),
                                                       child: MiniPicto(
-                                                        localImg:
-                                                            speakPict.localImg,
-                                                        pict: speakPict,
+                                                        localImg: pict.localImg,
+                                                        pict: pict,
                                                         onTap: () {
                                                           _.speak();
                                                         },
                                                       ),
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          )
-                                        : Container()
-                                  ],
-                                ),
+                                                    );
+                                                  } else {
+                                                    return Bounce(
+                                                      from: 6,
+                                                      infinite: true,
+                                                      child: Container(
+                                                        margin:
+                                                        EdgeInsets.all(10),
+                                                        child: MiniPicto(
+                                                          localImg:
+                                                          speakPict.localImg,
+                                                          pict: speakPict,
+                                                          onTap: () {
+                                                            _.speak();
+                                                          },
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                              ),
+                                            )
+                                                : Container()
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: kOTTAAOrangeNew,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(),
-                            GestureDetector(
-                              onTap: () => Get.back(),
-                              child: Icon(
-                                Icons.cancel,
-                                size: verticalSize * 0.1,
-                                color: Colors.white,
-                              ),
-                            ),
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            color: kOTTAAOrangeNew,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(),
+                                GestureDetector(
+                                  onTap: () => Get.back(),
+                                  child: Icon(
+                                    Icons.cancel,
+                                    size: verticalSize * 0.1,
+                                    color: Colors.white,
+                                  ),
+                                ),
 
-                            /// for keeping them in order and the button will be in separate Positioned
-                            Container(),
-                            GestureDetector(
-                              onTap: () => Get.to(SearchSentence()),
-                              child: Icon(
-                                Icons.search,
-                                size: verticalSize * 0.1,
-                                color: Colors.white,
-                              ),
+                                /// for keeping them in order and the button will be in separate Positioned
+                                Container(),
+                                GestureDetector(
+                                  onTap: () => Get.to(SearchSentence()),
+                                  child: Icon(
+                                    Icons.search,
+                                    size: verticalSize * 0.1,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Container(),
+                              ],
                             ),
-                            Container(),
-                          ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    bottom: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: kOTTAAOrangeNew,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(16),
+                        ),
+                      ),
+                      width: horizontalSize * 0.10,
+                      height: verticalSize * 0.5,
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.sentencesIndex--;
+                          },
+                          child: Icon(
+                            Icons.skip_previous,
+                            size: verticalSize * 0.1,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Positioned(
-                left: 0,
-                bottom: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: kOTTAAOrangeNew,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(16),
-                    ),
                   ),
-                  width: horizontalSize * 0.10,
-                  height: verticalSize * 0.5,
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        controller.sentencesIndex--;
-                      },
-                      child: Icon(
-                        Icons.skip_previous,
-                        size: verticalSize * 0.1,
-                        color: Colors.white,
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: kOTTAAOrangeNew,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                        ),
+                      ),
+                      width: horizontalSize * 0.10,
+                      height: verticalSize * 0.5,
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.sentencesIndex++;
+                          },
+                          child: Icon(
+                            Icons.skip_next,
+                            size: verticalSize * 0.1,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: kOTTAAOrangeNew,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                    ),
-                  ),
-                  width: horizontalSize * 0.10,
-                  height: verticalSize * 0.5,
-                  child: Center(
+                  Positioned(
+                    bottom: verticalSize * 0.02,
+                    left: horizontalSize * 0.43,
+                    right: horizontalSize * 0.43,
                     child: GestureDetector(
-                      onTap: () {
-                        controller.sentencesIndex++;
+                      onTap: () async {
+                        await controller.speak();
                       },
-                      child: Icon(
-                        Icons.skip_next,
-                        size: verticalSize * 0.1,
-                        color: Colors.white,
-                      ),
+                      child: OttaLogoWidget(),
                     ),
                   ),
-                ),
+                ],
               ),
-              Positioned(
-                bottom: verticalSize * 0.02,
-                left: horizontalSize * 0.43,
-                right: horizontalSize * 0.43,
-                child: GestureDetector(
-                  onTap: () async {
-                    await controller.speak();
-                  },
-                  child: OttaLogoWidget(),
-                ),
-              ),
-            ],
+            ),
+            backgroundColor: Colors.black,
           ),
-        ),
-        backgroundColor: Colors.black,
-      ),
     );
   }
 }

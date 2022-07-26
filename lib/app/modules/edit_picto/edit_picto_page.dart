@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
@@ -207,11 +208,11 @@ class PictureDialogWidget extends GetView<EditPictoController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ImageWidget(
+                  kIsWeb ?  ImageWidget(
                     imageLink: 'assets/camera.png',
                     text: 'camera'.tr,
                     onTap: cameraOnTap,
-                  ),
+                  ) : Container(),
                   ImageWidget(
                     imageLink: 'assets/gallery.png',
                     text: 'gallery'.tr,

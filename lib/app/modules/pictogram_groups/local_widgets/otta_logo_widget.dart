@@ -10,10 +10,11 @@ class OttaLogoWidget extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black,
+        // color: Colors.black,
         borderRadius: BorderRadius.circular(width * 0.07),
+        border: Border.all(color: Colors.black,width: width * 0.008)
       ),
-      padding: EdgeInsets.all(width * 0.010),
+      // padding: EdgeInsets.all(width * 0.010),
       child: Container(
         padding: EdgeInsets.all(width * 0.02),
         decoration: BoxDecoration(

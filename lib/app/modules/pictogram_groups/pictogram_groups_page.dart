@@ -28,20 +28,20 @@ class PictogramGroupsPage extends StatelessWidget {
         elevation: 0,
         title: Text('GaleriaGrupos'),
         actions: [
-          GestureDetector(
-              onTap: () => {
-                    CustomAnalyticsEvents.setEventWithParameters(
-                        "Touch",
-                        CustomAnalyticsEvents.createMyMap(
-                            'Group Gallery', 'Change View'))
-                  },
-              child: Icon(
-                Icons.reorder,
-                size: 30,
-              )),
-          const SizedBox(
-            width: 8,
-          ),
+          // GestureDetector(
+          //     onTap: () => {
+          //           CustomAnalyticsEvents.setEventWithParameters(
+          //               "Touch",
+          //               CustomAnalyticsEvents.createMyMap(
+          //                   'Group Gallery', 'Change View'))
+          //         },
+          //     child: Icon(
+          //       Icons.reorder,
+          //       size: 30,
+          //     )),
+          // const SizedBox(
+          //   width: 8,
+          // ),
           GestureDetector(
             onTap: () {
               _pictogramController.categoryGridviewOrPageview.value =
@@ -72,19 +72,19 @@ class PictogramGroupsPage extends StatelessWidget {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              print(_homeController.grupos.last.imagen.picto);
-              CustomAnalyticsEvents.setEventWithParameters(
-                  "Touch",
-                  CustomAnalyticsEvents.createMyMap(
-                      'Group Gallery', 'Syncronize Pictogram'));
-            },
-            child: Icon(
-              Icons.cloud_download,
-              size: 30,
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: () {
+          //     print(_homeController.grupos.last.imagen.picto);
+          //     CustomAnalyticsEvents.setEventWithParameters(
+          //         "Touch",
+          //         CustomAnalyticsEvents.createMyMap(
+          //             'Group Gallery', 'Syncronize Pictogram'));
+          //   },
+          //   child: Icon(
+          //     Icons.cloud_download,
+          //     size: 30,
+          //   ),
+          // ),
           const SizedBox(
             width: 16,
           ),

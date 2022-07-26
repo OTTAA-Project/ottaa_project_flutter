@@ -23,14 +23,31 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    double verticalSize = MediaQuery.of(context).size.height;
-    double horizontalSize = MediaQuery.of(context).size.width;
+    double verticalSize = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double horizontalSize = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // key: _homeController.scaffoldKey,
       drawer: DrawerWidget(),
       body: Stack(
         children: [
+          Obx(
+                () =>
+            controller.showOrNot.value
+                ? Center(
+              child: CircularProgressIndicator(
+                color: kOTTAAOrangeNew,
+              ),
+            )
+                : Container(),
+          ),
+
           /// ScreenSHot Widget is here
           Screenshot(
             controller: controller.screenshotController,
@@ -47,54 +64,58 @@ class HomePage extends GetView<HomeController> {
                   Expanded(
                     child: GetBuilder<HomeController>(
                       id: 'screenshot',
-                      builder: (controller) => ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.sentencePicts.length,
-                        itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.only(left: verticalSize * 0.01),
-                          child: kIsWeb
-                              ? Image.network(
-                            controller.sentencePicts[index].imagen
-                                .pictoEditado ==
-                                null
-                                ? controller
-                                .sentencePicts[index].imagen.picto
-                                : controller.sentencePicts[index].imagen
-                                .pictoEditado!,
-                            loadingBuilder:
-                                (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  color: kOTTAAOrangeNew,
-                                  value:
-                                  loadingProgress.expectedTotalBytes !=
-                                      null
-                                      ? loadingProgress
-                                      .cumulativeBytesLoaded /
-                                      loadingProgress
-                                          .expectedTotalBytes!
-                                      : null,
+                      builder: (controller) =>
+                          ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: controller.sentencePicts.length,
+                            itemBuilder: (context, index) =>
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: verticalSize * 0.01),
+                                  child: kIsWeb
+                                      ? Image.network(
+                                    controller.sentencePicts[index].imagen
+                                        .pictoEditado ==
+                                        null
+                                        ? controller
+                                        .sentencePicts[index].imagen.picto
+                                        : controller.sentencePicts[index].imagen
+                                        .pictoEditado!,
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Center(
+                                        child: CircularProgressIndicator(
+                                          color: kOTTAAOrangeNew,
+                                          value: loadingProgress
+                                              .expectedTotalBytes !=
+                                              null
+                                              ? loadingProgress
+                                              .cumulativeBytesLoaded /
+                                              loadingProgress
+                                                  .expectedTotalBytes!
+                                              : null,
+                                        ),
+                                      );
+                                    },
+                                  )
+                                      : CachedNetworkImage(
+                                    imageUrl: controller.sentencePicts[index]
+                                        .imagen.pictoEditado ==
+                                        null
+                                        ? controller
+                                        .sentencePicts[index].imagen.picto
+                                        : controller.sentencePicts[index].imagen
+                                        .pictoEditado!,
+                                    placeholder: (context, url) =>
+                                        Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                    height: verticalSize * 0.04,
+                                    width: verticalSize * 0.15,
+                                  ),
                                 ),
-                              );
-                            },
-                          )
-                              : CachedNetworkImage(
-                            imageUrl: controller.sentencePicts[index].imagen
-                                .pictoEditado ==
-                                null
-                                ? controller
-                                .sentencePicts[index].imagen.picto
-                                : controller.sentencePicts[index].imagen
-                                .pictoEditado!,
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            height: verticalSize * 0.04,
-                            width: verticalSize * 0.15,
                           ),
-                        ),
-                      ),
                     ),
                   ),
                   Padding(
@@ -108,6 +129,7 @@ class HomePage extends GetView<HomeController> {
               ),
             ),
           ),
+
           /// just a little hack to keep it hidden
           Container(
             height: verticalSize * 0.25,
@@ -122,7 +144,7 @@ class HomePage extends GetView<HomeController> {
               Row(
                 // BODY ROW
                 crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // LEFT COLUMN
                   LeftColumnWidget(),
@@ -141,6 +163,19 @@ class HomePage extends GetView<HomeController> {
               )
               //SizedBox(height: 10),
             ],
+          ),
+          Positioned(
+            left: horizontalSize * 0.0999,
+            bottom: verticalSize * 0.182,
+            child: Container(
+              height: 20,
+              width: horizontalSize * 0.8005,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(4),
+                    bottomRight: Radius.circular(4),),
+              ),
+            ),
           ),
           GetBuilder<HomeController>(
             id: "subtitle",
@@ -165,15 +200,15 @@ class HomePage extends GetView<HomeController> {
                           child: Text(
                             _ttsController.isCustomSubtitle
                                 ? _ttsController.isSubtitleUppercase
-                                    ? _homeController.voiceText.toUpperCase()
-                                    : _homeController.voiceText
+                                ? _homeController.voiceText.toUpperCase()
+                                : _homeController.voiceText
                                 : _homeController.voiceText,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: _ttsController.isCustomSubtitle
                                   ? verticalSize *
-                                      ((_ttsController.subtitleSize / 100) +
-                                          0.01)
+                                  ((_ttsController.subtitleSize / 100) +
+                                      0.01)
                                   : verticalSize * 0.03,
                             ),
                           ),

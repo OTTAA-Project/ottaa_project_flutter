@@ -34,7 +34,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
         Positioned(
           left: 0,
           right: 0,
-          top: height * 0.28,
+          top: height * 0.3,
           child: ColorWidget(
             color: Colors.green,
             text: 'actions'.tr,
@@ -43,9 +43,9 @@ class FrameColorWidget extends GetView<EditPictoController> {
           ),
         ),
         Positioned(
-          top: height * 0.34,
+          top: height * 0.45,
           right: 0,
-          left: -width * 0.12,
+          left: -width * 0.2,
           child: ColorWidget(
             color: Colors.purple,
             text: 'interactions'.tr,
@@ -54,9 +54,9 @@ class FrameColorWidget extends GetView<EditPictoController> {
           ),
         ),
         Positioned(
-          top: height * 0.34,
+          top: height * 0.45,
           left: 0,
-          right: -width * 0.12,
+          right: -width * 0.2,
           child: ColorWidget(
             color: Colors.yellow,
             text: 'people'.tr,
@@ -65,9 +65,9 @@ class FrameColorWidget extends GetView<EditPictoController> {
           ),
         ),
         Positioned(
-          top: height * 0.45,
+          top: height * 0.6,
           right: 0,
-          left: -width * 0.12,
+          left: -width * 0.2,
           child: ColorWidget(
             color: kOTTAAOrange,
             text: 'nouns'.tr,
@@ -76,9 +76,9 @@ class FrameColorWidget extends GetView<EditPictoController> {
           ),
         ),
         Positioned(
-          top: height * 0.45,
+          top: height * 0.6,
           left: 0,
-          right: -width * 0.12,
+          right: -width * 0.2,
           child: ColorWidget(
             color: Colors.blue,
             text: 'adjectives'.tr,
@@ -89,7 +89,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
         Positioned(
           left: 0,
           right: 0,
-          top: height * 0.54,
+          top: height * 0.7,
           child: ColorWidget(
             color: Colors.black,
             text: 'miscellaneous'.tr,
@@ -124,8 +124,8 @@ class ColorWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            height: width * 0.05,
-            width: width * 0.05,
+            height: width * 0.04,
+            width: width * 0.04,
             decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.circular(width * 0.03),

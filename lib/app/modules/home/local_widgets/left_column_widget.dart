@@ -40,7 +40,7 @@ class LeftColumnWidget extends StatelessWidget {
               child: Center(
                   child: Icon(
                 // Icons.gamepad,
-                Icons.gamepad,
+                Icons.videogame_asset,
                 color: Colors.white,
                 size: horizontalSize / 10,
               )),
@@ -83,7 +83,7 @@ class LeftColumnWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: kOTTAAOrangeNew,
         borderRadius:
-            BorderRadius.only(topRight: Radius.circular(horizontalSize / 40)),
+            BorderRadius.only(topRight: Radius.circular(16)),
       ),
     );
   }

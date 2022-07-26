@@ -15,7 +15,7 @@ class ActionsWidget extends StatelessWidget {
     double horizontalSize = MediaQuery.of(context).size.width;
     return GetBuilder<HomeController>(builder: (_) {
       return Container(
-        height: verticalSize * 0.2,
+        height: verticalSize * 0.178,
         width: horizontalSize * 0.8,
         color: kOTTAAOrangeNew,
         child: Row(
@@ -42,6 +42,9 @@ class ActionsWidget extends StatelessWidget {
             SizedBox(width: 10),
             FittedBox(
               child: GestureDetector(
+                onLongPress: (){
+                  _.removeWholeSentence();
+                },
                 onTap: () {
                   _.removePictFromSentence();
                   CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('name', 'Erase'));

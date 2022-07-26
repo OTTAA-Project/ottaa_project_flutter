@@ -43,7 +43,10 @@ Widget step1Onboarding<widget>(
             child: Column(
               children: [
                 Container(
-                  color: Colors.white,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(verticalSize * 0.02),
+                  ),
                   width: horizontalSize * 0.35,
                   height: verticalSize * 0.73,
                   padding:
@@ -51,13 +54,8 @@ Widget step1Onboarding<widget>(
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: horizontalSize * 0.05,
-                              vertical: verticalSize * 0.05),
-                          child: Image(
-                            image: AssetImage('assets/imgs/logo_ottaa.webp'),
-                          ),
+                        Image(
+                          image: AssetImage('assets/imgs/logo_ottaa.webp'),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -108,7 +106,7 @@ Widget step1Onboarding<widget>(
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    vertical: verticalSize * 0.1),
+                                    vertical: verticalSize * 0.05),
                                 child: GestureDetector(
                                   onTap: () {
                                     showDialog(
@@ -259,9 +257,9 @@ Widget step1Onboarding<widget>(
                         child: CircularProgressIndicator(),
                       ),
                     );
-                    await _.uploadInfo();
-                    print('hi');
-                    await _sharedPrefCient.setFirstTimePref();
+                    // await _.uploadInfo();
+                    // print('hi');
+                    // await _sharedPrefCient.setFirstTimePref();
                     Get.back();
                     controller.animateToPage(1,
                         duration: Duration(milliseconds: 300),

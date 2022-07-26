@@ -25,6 +25,7 @@ import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
   final dataController = Get.find<DataController>();
+  RxBool showOrNot = true.obs;
 
   TTSController get ttsController => this._ttsController;
   final _pictsRepository = Get.find<PictsRepository>();
@@ -130,6 +131,7 @@ class HomeController extends GetxController {
     await fetchAccountType();
     await getPicNumber();
     language = _ttsController.languaje;
+    showOrNot.value = false;
     final _pictogram = Get.put(PictogramGroupsController());
   }
 
@@ -260,6 +262,16 @@ class HomeController extends GetxController {
   removePictFromSentence() async {
     if (this._sentencePicts.isNotEmpty) {
       this._sentencePicts.removeLast();
+      this._suggestedIndex = 0;
+      await suggest(
+          this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
+    }
+    update(['screenshot']);
+  }
+
+  removeWholeSentence() async {
+    if (this._sentencePicts.isNotEmpty) {
+      this._sentencePicts.clear();
       this._suggestedIndex = 0;
       await suggest(
           this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);

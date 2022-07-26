@@ -94,7 +94,7 @@ class RightColumnWidget extends GetView<HomeController> {
       decoration: BoxDecoration(
         color: kOTTAAOrangeNew,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(horizontalSize / 40),
+          topLeft: Radius.circular(16),
         ),
       ),
     );
