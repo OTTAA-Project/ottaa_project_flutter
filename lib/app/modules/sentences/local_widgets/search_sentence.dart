@@ -22,7 +22,7 @@ class SearchSentence extends GetView<SentencesController> {
           elevation: 0,
           title: Text('all_phrases'.tr),
           actions: [
-            Obx(
+           /* Obx(
               () => controller.searchOrIcon.value
                   ? Container(
                       padding: EdgeInsets.only(right: horizontalSize * 0.04),
@@ -70,7 +70,43 @@ class SearchSentence extends GetView<SentencesController> {
                         ),
                       ),
                     ),
-            ),
+            ),*/
+            Container(
+              padding: EdgeInsets.only(right: horizontalSize * 0.04),
+              width: horizontalSize * 0.3,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      autofocus: true,
+                      controller: controller.searchController,
+                      decoration: InputDecoration(
+                        hintText: '${'search'.tr}...',
+                        hintStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      onChanged: (v) {
+                        controller.onChangedText(v);
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: horizontalSize * 0.02,
+                  ),
+                  GestureDetector(
+                    onTap: () => controller.searchOrIcon.value = false,
+                    child: Icon(
+                      Icons.clear,
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
         body: Container(

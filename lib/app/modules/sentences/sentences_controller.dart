@@ -97,13 +97,13 @@ class SentencesController extends GetxController {
 
       await this._ttsController.speak(voiceText);
       print(sentencesForSearch[this._sentencesIndex].sentence);
-      print(voiceText);
+      print(this._sentencesIndex);
     }
   }
   Future<void> searchSpeak() async {
     if (this._sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
       String voiceText = "";
-      this._sentencesPicts[this._sentencesIndex].forEach((pict) {
+      this._sentencesPicts[searchIndex].forEach((pict) {
         switch (this._ttsController.languaje) {
           case "es":
             voiceText += ' ' + pict.texto.es;
@@ -118,8 +118,9 @@ class SentencesController extends GetxController {
       });
 
       await this._ttsController.speak(voiceText);
-      print(sentencesForSearch[this._sentencesIndex].sentence);
-      print(voiceText);
+      print(sentencesForList[searchIndex].sentence);
+      print('search index is $searchIndex');
+      print('the index from controller is ${sentencesForList[searchIndex].index}');
     }
   }
 
@@ -162,7 +163,7 @@ class SentencesController extends GetxController {
           listData.add(element);
         }
       });
-      sentencesForList = [];
+      sentencesForList.clear();
       sentencesForList.addAll(listData);
       searchIndex = 0;
       print(sentencesForList.length);
