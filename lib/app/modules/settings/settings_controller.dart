@@ -26,16 +26,16 @@ class SettingsController extends GetxController {
     update();
   }
 
-  toggleLanguaje(bool value) async {
-    if (value == false) {
+  toggleLanguaje(String value) async {
+    if (value.toLowerCase() == 'Spanish'.toLowerCase()) {
       _ttsController.languaje = "es";
-      _ttsController.isEnglish = value;
+      _ttsController.isEnglish = false;
     } else {
       _ttsController.languaje = "en";
-      _ttsController.isEnglish = value;
+      _ttsController.isEnglish = true;
     }
     final instance = await SharedPreferences.getInstance();
-    instance.setBool('Language_KEY', value);
+    instance.setBool('Language_KEY', _ttsController.isEnglish);
     update();
   }
 

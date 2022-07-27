@@ -103,7 +103,7 @@ class SentencesController extends GetxController {
   Future<void> searchSpeak() async {
     if (this._sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
       String voiceText = "";
-      this._sentencesPicts[searchIndex].forEach((pict) {
+      this._sentencesPicts[sentencesForList[searchIndex].index].forEach((pict) {
         switch (this._ttsController.languaje) {
           case "es":
             voiceText += ' ' + pict.texto.es;

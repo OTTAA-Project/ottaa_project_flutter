@@ -26,6 +26,9 @@ class AuthService {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
         await googleUser!.authentication;
+    final name  = googleUser.displayName!;
+    print('name from the google auth');
+    print(name);
     final auth.OAuthCredential credential = auth.GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
@@ -36,22 +39,26 @@ class AuthService {
       print(userCredentials.user);
       print(userCredentials.user!.email);
     }
+    print('name from the firebae auth');
+    print(userCredentials.user!.displayName);
     return userCredentials;
   }
 
   Future<auth.UserCredential> signInWithFacebook() async {
     // Trigger the sign-in flow
-    final LoginResult result = await FacebookAuth.instance.login();
+    final LoginResult result = await FacebookAuth.instance.login(permissions: ["user_birthday", "user_gender",'public_profile']);
 
     // Create a credential from the access token
     auth.OAuthCredential facebookAuthCredential =
         auth.FacebookAuthProvider.credential(result.accessToken!.token);
-
+print(result.accessToken!.token);
     // Once signed in, return the UserCredential
     var userCredentials = await auth.FirebaseAuth.instance
         .signInWithCredential(facebookAuthCredential);
     if (userCredentials.user != null) {
       print(userCredentials.user);
+      print(userCredentials.user!.displayName);
+      print(userCredentials.user!.providerData.toString());
     }
     return userCredentials;
   }

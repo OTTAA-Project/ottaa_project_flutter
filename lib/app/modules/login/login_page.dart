@@ -138,17 +138,23 @@ class LoginPage extends StatelessWidget {
                           height: verticalSize * 0.12,
                         ),
                         JelloIn(
-                          child: Container(
-                            height: verticalSize * 0.04,
-                            child: SignInButton(
-                              Buttons.GoogleDark,
-                              text: "Login_with_google".tr,
-                              onPressed: () => _.authController.handleSignIn(
-                                SignInType.GOOGLE,
-                              ),
-                              // onPressed: () => Get.offAllNamed(AppRoutes.HOME),
-                            ),
+                          child: LoginButton(
+                            onTap: () => _.authController
+                                .handleSignIn(SignInType.GOOGLE),
+                            text: "Login_with_google".tr,
+                            googleOrFacebook: true,
+                            verticalSize: verticalSize,
+                            horizontalSize: horizontalSize,
                           ),
+                          // Container(
+                          //   height: verticalSize * 0.04,
+                          //   child: SignInButton(
+                          //     Buttons.GoogleDark,
+                          //     text: "Login_with_google".tr,
+                          //     onPressed: () => _.authController.handleSignIn(
+                          //       SignInType.GOOGLE,
+                          //     ),
+                          // onPressed: () => Get.offAllNamed(AppRoutes.HOME),
                         ),
                         SizedBox(
                           height: verticalSize * 0.02,

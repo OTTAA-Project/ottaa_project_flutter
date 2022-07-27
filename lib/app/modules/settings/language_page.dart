@@ -32,16 +32,37 @@ class LanguagePage extends StatelessWidget {
                 height: 10,
                 color: Colors.grey[700],
               ),
-              SwitchListTile(
-                activeColor: kOTTAAOrange,
-                value: _.ttsController.isEnglish,
-                onChanged: (bool value) {
-                  _.toggleLanguaje(value);
+              // SwitchListTile(
+              //   activeColor: kOTTAAOrange,
+              //   value: _.ttsController.isEnglish,
+              //   onChanged: (bool value) {
+              //     _.toggleLanguaje(value);
+              //   },
+              //   title: Text('language'.tr),
+              //   subtitle: _.ttsController.isEnglish
+              //       ? Text('English')
+              //       : Text('Spanish'),
+              // ),
+              DropdownButton<String>(
+                isExpanded: true,
+                // value: _.isEnglish.value ? 'English' : 'Spanish',
+                value: _.ttsController.isEnglish ? 'English' : 'Spanish',
+                iconSize: 20,
+                elevation: 16,
+                underline: Container(),
+                onChanged: (newValue) {
+                  _.toggleLanguaje(newValue!);
                 },
-                title: Text('language'.tr),
-                subtitle: _.ttsController.isEnglish
-                    ? Text('English')
-                    : Text('Spanish'),
+                items: [
+                  DropdownMenuItem(
+                    child: Text('English'),
+                    value: 'English',
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Spanish'),
+                    value: 'Spanish',
+                  ),
+                ],
               ),
               Divider(),
               SwitchListTile(
