@@ -208,46 +208,49 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.004),
-        decoration: BoxDecoration(
-          color: googleOrFacebook ? Color(0xFF4285F4) : Color(0xFF1877f2),
-        ),
-        height: verticalSize * 0.039,
-        width: horizontalSize * 0.173,
-        child: Row(
-          children: [
-            googleOrFacebook
-                ? Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: verticalSize * 0.005),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
+      child: Card(
+        elevation: 3,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.004),
+          decoration: BoxDecoration(
+            color: googleOrFacebook ? Color(0xFF4285F4) : Color(0xFF1877f2),
+          ),
+          height: verticalSize * 0.039,
+          width: horizontalSize * 0.173,
+          child: Row(
+            children: [
+              googleOrFacebook
+                  ? Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: verticalSize * 0.005),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        child: Image.asset(
+                          'assets/google_icon.ico',
+                          height: verticalSize * 0.03,
+                          width: horizontalSize * 0.02,
+                        ),
                       ),
-                      child: Image.asset(
-                        'assets/google_icon.ico',
-                        height: verticalSize * 0.03,
-                        width: horizontalSize * 0.02,
-                      ),
+                    )
+                  : Icon(
+                      Icons.facebook,
+                      color: Colors.white,
                     ),
-                  )
-                : Icon(
-                    Icons.facebook,
-                    color: Colors.white,
-                  ),
-            SizedBox(
-              width: horizontalSize * 0.01,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                color: Colors.white,
+              SizedBox(
+                width: horizontalSize * 0.01,
               ),
-            ),
-          ],
+              Text(
+                text,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

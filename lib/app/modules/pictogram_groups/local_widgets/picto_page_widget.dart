@@ -21,6 +21,7 @@ class PictoPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final languaje = _ttsController.languaje;
+    final horizontalSize = MediaQuery.of(context).size.width;
     return Obx(
       () => _pictogramController.pictoGridviewOrPageview.value
           ? GridView.builder(
@@ -83,15 +84,18 @@ class PictoPageWidget extends StatelessWidget {
                   );
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
-                child: CategoryPageWidget(
-                  name: languaje == "en"
-                      ? _pictogramController.selectedGruposPicts[index].texto.en
-                      : _pictogramController
-                          .selectedGruposPicts[index].texto.es,
-                  imageName: _pictogramController
-                      .selectedGruposPicts[index].imagen.picto,
-                  border: true,
-                  color: _pictogramController.selectedGruposPicts[index].tipo,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.05),
+                  child: CategoryPageWidget(
+                    name: languaje == "en"
+                        ? _pictogramController.selectedGruposPicts[index].texto.en
+                        : _pictogramController
+                            .selectedGruposPicts[index].texto.es,
+                    imageName: _pictogramController
+                        .selectedGruposPicts[index].imagen.picto,
+                    border: true,
+                    color: _pictogramController.selectedGruposPicts[index].tipo,
+                  ),
                 ),
               ),
             ),

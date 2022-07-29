@@ -14,27 +14,25 @@ class FrameColorWidget extends GetView<EditPictoController> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+    final horizontalSIze = MediaQuery.of(context).size.width;
+    final verticalSize = MediaQuery.of(context).size.height;
     return Stack(
       fit: StackFit.expand,
       children: [
         Positioned(
-          top: height * 0.07,
-          left: width * 0.02,
+          top: verticalSize * 0.02,
+          left: horizontalSIze * 0.01,
           child: Text(
             'fitzgerald_key'.tr,
             style: TextStyle(
-              fontWeight: FontWeight.w700,
-              color: Colors.grey[600],
-              fontSize: width * 0.02,
+                fontWeight: FontWeight.w600, fontSize: verticalSize * 0.03
             ),
           ),
         ),
         Positioned(
           left: 0,
           right: 0,
-          top: height * 0.3,
+          top: verticalSize * 0.2,
           child: ColorWidget(
             color: Colors.green,
             text: 'actions'.tr,
@@ -43,9 +41,9 @@ class FrameColorWidget extends GetView<EditPictoController> {
           ),
         ),
         Positioned(
-          top: height * 0.45,
+          top: verticalSize * 0.35,
           right: 0,
-          left: -width * 0.2,
+          left: -horizontalSIze * 0.2,
           child: ColorWidget(
             color: Colors.purple,
             text: 'interactions'.tr,
@@ -54,9 +52,9 @@ class FrameColorWidget extends GetView<EditPictoController> {
           ),
         ),
         Positioned(
-          top: height * 0.45,
+          top: verticalSize * 0.35,
           left: 0,
-          right: -width * 0.2,
+          right: -horizontalSIze * 0.2,
           child: ColorWidget(
             color: Colors.yellow,
             text: 'people'.tr,
@@ -65,9 +63,9 @@ class FrameColorWidget extends GetView<EditPictoController> {
           ),
         ),
         Positioned(
-          top: height * 0.6,
+          top: verticalSize * 0.5,
           right: 0,
-          left: -width * 0.2,
+          left: -horizontalSIze * 0.2,
           child: ColorWidget(
             color: kOTTAAOrange,
             text: 'nouns'.tr,
@@ -76,9 +74,9 @@ class FrameColorWidget extends GetView<EditPictoController> {
           ),
         ),
         Positioned(
-          top: height * 0.6,
+          top: verticalSize * 0.5,
           left: 0,
-          right: -width * 0.2,
+          right: -horizontalSIze * 0.2,
           child: ColorWidget(
             color: Colors.blue,
             text: 'adjectives'.tr,
@@ -89,7 +87,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
         Positioned(
           left: 0,
           right: 0,
-          top: height * 0.7,
+          top: verticalSize * 0.6,
           child: ColorWidget(
             color: Colors.black,
             text: 'miscellaneous'.tr,

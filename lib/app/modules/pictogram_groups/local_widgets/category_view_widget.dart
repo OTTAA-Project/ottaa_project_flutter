@@ -23,6 +23,7 @@ class CategoryViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final horizontalSize = MediaQuery.of(context).size.height;
     final languaje = _ttsController.languaje;
     return Obx(
       () => _pictogramController.categoryGridviewOrPageview.value
@@ -109,11 +110,14 @@ class CategoryViewWidget extends StatelessWidget {
                   print(_pictogramController.selectedGruposPicts.length);
                   Get.toNamed(AppRoutes.SELECTPICTO);
                 },
-                child: CategoryPageWidget(
-                  name: languaje == 'en'
-                      ? _homeController.grupos[index].texto.en
-                      : _homeController.grupos[index].texto.es,
-                  imageName: _homeController.grupos[index].imagen.picto,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.1),
+                  child: CategoryPageWidget(
+                    name: languaje == 'en'
+                        ? _homeController.grupos[index].texto.en
+                        : _homeController.grupos[index].texto.es,
+                    imageName: _homeController.grupos[index].imagen.picto,
+                  ),
                 ),
               ),
             ),
