@@ -19,9 +19,9 @@ You can be part of this life-changer tech, join us in this social impact open so
 - run `flutter pub run build_runner build` to generate the model class code.
 - run `flutter run` to run the project.
 - run `flutter packages pub run build_runner build --delete-conflicting-outputs` if there are some errors for models building.
-
-
-## Web Page
+- run `flutter build web --release --web-renderer html` for building the project.
+- run `flutter deploy` for deploying it on the master.
+- run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
  * [Web Page](https://ottaaproject.com)
 
 ## Resources

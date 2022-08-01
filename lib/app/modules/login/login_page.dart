@@ -117,6 +117,8 @@ class LoginPage extends StatelessWidget {
                               horizontal: (horizontalSize * 0.6) * 0.2),
                           child: Image.asset(
                             'assets/imgs/logo_ottaa.webp',
+                            height: verticalSize * 0.15,
+                            width: horizontalSize * 0.3,
                           ),
                         ),
                         Column(
@@ -138,45 +140,47 @@ class LoginPage extends StatelessWidget {
                           height: verticalSize * 0.12,
                         ),
                         JelloIn(
-                          child: LoginButton(
-                            onTap: () => _.authController
-                                .handleSignIn(SignInType.GOOGLE),
-                            text: "Login_with_google".tr,
-                            googleOrFacebook: true,
-                            verticalSize: verticalSize,
-                            horizontalSize: horizontalSize,
+                          // child: LoginButton(
+                          //   onTap: () => _.authController
+                          //       .handleSignIn(SignInType.GOOGLE),
+                          //   text: "Login_with_google".tr,
+                          //   googleOrFacebook: true,
+                          //   verticalSize: verticalSize,
+                          //   horizontalSize: horizontalSize,
+                          // ),
+                          child: Container(
+                            height: verticalSize * 0.04,
+                            child: SignInButton(
+                              Buttons.GoogleDark,
+                              text: "Login_with_google".tr,
+                              onPressed: () => _.authController.handleSignIn(
+                                SignInType.GOOGLE,
+                              ),
+                              // onPressed: () => Get.offAllNamed(AppRoutes.HOME),
+                            ),
                           ),
-                          // Container(
-                          //   height: verticalSize * 0.04,
-                          //   child: SignInButton(
-                          //     Buttons.GoogleDark,
-                          //     text: "Login_with_google".tr,
-                          //     onPressed: () => _.authController.handleSignIn(
-                          //       SignInType.GOOGLE,
-                          //     ),
-                          // onPressed: () => Get.offAllNamed(AppRoutes.HOME),
                         ),
                         SizedBox(
                           height: verticalSize * 0.02,
                         ),
                         JelloIn(
-                          // child: Container(
-                          //   height: verticalSize * 0.04,
-                          //   child: SignInButton(
-                          //     Buttons.Facebook,
-                          //     text: "Login_with_facebook".tr,
-                          //     onPressed: () => _.authController
-                          //         .handleSignIn(SignInType.FACEBOOK),
-                          //   ),
-                          // ),
-                          child: LoginButton(
-                            onTap: () => _.authController
-                                .handleSignIn(SignInType.FACEBOOK),
-                            text: "Login_with_facebook".tr,
-                            googleOrFacebook: false,
-                            verticalSize: verticalSize,
-                            horizontalSize: horizontalSize,
+                          child: Container(
+                            height: verticalSize * 0.04,
+                            child: SignInButton(
+                              Buttons.Facebook,
+                              text: "Login_with_facebook".tr,
+                              onPressed: () => _.authController
+                                  .handleSignIn(SignInType.FACEBOOK),
+                            ),
                           ),
+                          // child: LoginButton(
+                          //   onTap: () => _.authController
+                          //       .handleSignIn(SignInType.FACEBOOK),
+                          //   text: "Login_with_facebook".tr,
+                          //   googleOrFacebook: false,
+                          //   verticalSize: verticalSize,
+                          //   horizontalSize: horizontalSize,
+                          // ),
                         ),
                       ],
                     ),

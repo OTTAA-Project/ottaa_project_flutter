@@ -15,7 +15,6 @@ class ActionsWidget extends StatelessWidget {
     double horizontalSize = MediaQuery.of(context).size.width;
     return GetBuilder<HomeController>(builder: (_) {
       return Container(
-        height: verticalSize * 0.178,
         width: horizontalSize * 0.8,
         color: kOTTAAOrangeNew,
         child: Row(
@@ -25,9 +24,11 @@ class ActionsWidget extends StatelessWidget {
             FittedBox(
               child: GestureDetector(
                 onTap: () {
-                  CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('name', 'More Options'));
+                  CustomAnalyticsEvents.setEventWithParameters(
+                      "Touch",
+                      CustomAnalyticsEvents.createMyMap(
+                          'name', 'More Options'));
                   _.moreSuggested();
-
                 },
                 child: Center(
                     child: Icon(
@@ -42,12 +43,13 @@ class ActionsWidget extends StatelessWidget {
             SizedBox(width: 10),
             FittedBox(
               child: GestureDetector(
-                onLongPress: (){
+                onLongPress: () {
                   _.removeWholeSentence();
                 },
                 onTap: () {
                   _.removePictFromSentence();
-                  CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('name', 'Erase'));
+                  CustomAnalyticsEvents.setEventWithParameters("Touch",
+                      CustomAnalyticsEvents.createMyMap('name', 'Erase'));
                 },
                 child: Center(
                     child: Icon(

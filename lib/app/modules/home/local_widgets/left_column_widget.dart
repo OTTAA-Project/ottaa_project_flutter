@@ -14,7 +14,6 @@ class LeftColumnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
-
     return Container(
       height: verticalSize * 0.5,
       width: horizontalSize * 0.10,
