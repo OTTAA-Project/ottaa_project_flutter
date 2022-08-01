@@ -29,7 +29,7 @@ class CategoryViewWidget extends StatelessWidget {
       () => _pictogramController.categoryGridviewOrPageview.value
           ? GridView.builder(
               controller: _pictogramController.categoriesGridController,
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              // padding: const EdgeInsets.symmetric(vertical: 8),
               itemCount: _homeController.grupos.length,
               itemBuilder: (context, index) => GestureDetector(
                 onLongPress: () async {
