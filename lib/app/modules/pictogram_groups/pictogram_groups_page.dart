@@ -101,20 +101,9 @@ class PictogramGroupsPage extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 8,
-                    child: Obx(
-                      () => Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: _pictogramController
-                                  .categoryGridviewOrPageview.value
-                              ? horizontalSize * 0.02
-                              : horizontalSize * 0.13,
-                          vertical: 16,
+                    child: Container(
+                        // color: Colors.pink,
                         ),
-
-                        ///the whole view is extracted to another file
-                        child: CategoryViewWidget(),
-                      ),
-                    ),
                   ),
                   Expanded(
                     flex: 2,
@@ -124,7 +113,8 @@ class PictogramGroupsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(),
-                         Container(),
+                          Container(),
+
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
                           GestureDetector(
@@ -154,7 +144,8 @@ class PictogramGroupsPage extends StatelessWidget {
                 ],
               ),
             ),
-            //left one
+
+            ///left one
             Positioned(
               left: 0,
               bottom: 0,
@@ -189,7 +180,8 @@ class PictogramGroupsPage extends StatelessWidget {
                 ),
               ),
             ),
-            //right one
+
+            ///right one
             Positioned(
               right: 0,
               bottom: 0,
@@ -220,6 +212,35 @@ class PictogramGroupsPage extends StatelessWidget {
                       size: verticalSize * 0.1,
                       color: Colors.white,
                     ),
+                  ),
+                ),
+              ),
+            ),
+
+            /// main data widget
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: verticalSize * 0.17,
+              child: Obx(
+                () => Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                  child: Container(
+                    height: verticalSize * 0.7,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal:
+                          _pictogramController.categoryGridviewOrPageview.value
+                              ? horizontalSize * 0.02
+                              : horizontalSize * 0.13,
+                      vertical: 16,
+                    ),
+                    // width: horizontalSize * 0.8,
+                    child: CategoryViewWidget(),
                   ),
                 ),
               ),
@@ -266,6 +287,7 @@ class PictogramGroupsPage extends StatelessWidget {
                 ),
               ),
             ),
+
             /// close button
             Positioned(
               left: horizontalSize * 0.27,
@@ -285,7 +307,6 @@ class PictogramGroupsPage extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),

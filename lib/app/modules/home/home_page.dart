@@ -144,7 +144,6 @@ class HomePage extends GetView<HomeController> {
                 child: Column(
                   children: [
                     SentenceWidget(),
-                    SuggestedWidget(),
                   ],
                 ),
               ),
@@ -155,17 +154,17 @@ class HomePage extends GetView<HomeController> {
             ],
           ),
           Positioned(
-            left: horizontalSize * 0.0999,
-            bottom: verticalSize * 0.182,
-            child: Container(
-              height: 20,
-              width: horizontalSize * 0.8005,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(4),
-                  bottomRight: Radius.circular(4),
+            left: 0,
+            right: 0,
+            bottom: verticalSize * 0.17,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(15),
                 ),
+                child: SuggestedWidget(),
               ),
             ),
           ),
