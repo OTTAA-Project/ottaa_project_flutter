@@ -14,8 +14,8 @@ class SelectPictoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final verticalSize = MediaQuery.of(context).size.height;
+    final horizontalSize = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOTTAAOrangeNew,
@@ -81,21 +81,13 @@ class SelectPictoPage extends StatelessWidget {
           children: [
             Container(
               // height: Get.height * 0.7,
-              padding: EdgeInsets.symmetric(horizontal: width * .10),
+              padding: EdgeInsets.symmetric(horizontal: horizontalSize * .10),
               child: Column(
                 children: [
                   Expanded(
                     flex: 8,
-                    child: Obx(
-                      () => Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: _pictogramController
-                                    .pictoGridviewOrPageview.value
-                                ? 16
-                                : width * 0.16,
-                            vertical: 16),
-                        child: PictoPageWidget(),
-                      ),
+                    child: Container(
+                      // color: Colors.pink,
                     ),
                   ),
                   Expanded(
@@ -107,6 +99,7 @@ class SelectPictoPage extends StatelessWidget {
                         children: [
                           Container(),
                           Container(),
+
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
                           Container(),
@@ -119,7 +112,7 @@ class SelectPictoPage extends StatelessWidget {
               ),
             ),
 
-            //left one
+            ///left one
             Positioned(
               left: 0,
               bottom: 0,
@@ -130,8 +123,8 @@ class SelectPictoPage extends StatelessWidget {
                     topRight: Radius.circular(16),
                   ),
                 ),
-                width: width * 0.10,
-                height: height * 0.5,
+                width: horizontalSize * 0.10,
+                height: verticalSize * 0.5,
                 child: Center(
                   child: GestureDetector(
                     onTap: () => {
@@ -147,14 +140,15 @@ class SelectPictoPage extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.skip_previous,
-                      size: height * 0.1,
+                      size: verticalSize * 0.1,
                       color: Colors.white,
                     ),
                   ),
                 ),
               ),
             ),
-            //right one
+
+            ///right one
             Positioned(
               right: 0,
               bottom: 0,
@@ -165,8 +159,8 @@ class SelectPictoPage extends StatelessWidget {
                     topLeft: Radius.circular(16),
                   ),
                 ),
-                width: width * 0.10,
-                height: height * 0.5,
+                width: horizontalSize * 0.10,
+                height: verticalSize * 0.5,
                 child: Center(
                   child: GestureDetector(
                     onTap: () => {
@@ -182,8 +176,37 @@ class SelectPictoPage extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.skip_next,
-                      size: height * 0.1,
+                      size: verticalSize * 0.1,
                       color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            /// mainView
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: verticalSize * 0.17,
+              child: Obx(
+                () => Padding(
+                  padding:
+                  EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                  child: Container(
+                    height: verticalSize * 0.7,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal:
+                              _pictogramController.pictoGridviewOrPageview.value
+                                  ? 16
+                                  : horizontalSize * 0.16,
+                          vertical: 16),
+                      child: PictoPageWidget(),
                     ),
                   ),
                 ),
@@ -192,25 +215,27 @@ class SelectPictoPage extends StatelessWidget {
 
             /// the play button
             Positioned(
-              bottom: height * 0.02,
-              left: width * 0.43,
-              right: width * 0.43,
+              bottom: verticalSize * 0.02,
+              left: horizontalSize * 0.43,
+              right: horizontalSize * 0.43,
               child: OttaLogoWidget(),
             ),
 
             ///close button fix
             Positioned(
-              left: width * 0.27,
-              bottom: height * 0.04,
+              left: horizontalSize * 0.27,
+              bottom: verticalSize * 0.04,
               child: GestureDetector(
-                onTap: () =>
-                {
-                  CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Pictograms Gallery', 'Backpress Button')),
+                onTap: () => {
+                  CustomAnalyticsEvents.setEventWithParameters(
+                      "Touch",
+                      CustomAnalyticsEvents.createMyMap(
+                          'Pictograms Gallery', 'Backpress Button')),
                   Get.back()
                 },
                 child: Icon(
                   Icons.cancel,
-                  size: height * 0.1,
+                  size: verticalSize * 0.1,
                   color: Colors.white,
                 ),
               ),
