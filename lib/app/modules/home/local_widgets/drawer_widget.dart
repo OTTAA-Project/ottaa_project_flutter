@@ -102,6 +102,11 @@ class DrawerWidget extends GetView<HomeController> {
                           onTap: () => Get.toNamed(AppRoutes.ABOUTOTTAA),
                         ),
                         ListTileWidget(
+                          icon: Icons.info_outline,
+                          title: 'report'.tr,
+                          onTap: () => Get.toNamed(AppRoutes.REPORTPAGE),
+                        ),
+                        ListTileWidget(
                           icon: Icons.settings,
                           title: 'configuration'.tr,
                           onTap: () => Get.toNamed(AppRoutes.SETTINGS),
