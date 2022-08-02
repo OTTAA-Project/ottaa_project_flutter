@@ -323,4 +323,18 @@ class FirebaseDatabaseService {
       data,
     });
   }
+
+  Future<void> saveUserPhotoUrl({required String photoUrl}) async {
+    final User? auth = firebaseRed.currentUser;
+    final ref = databaseRef.child('PhotoUrl/${auth!.uid}/');
+    await ref.set({
+      'PhotoUrl': photoUrl,
+    });
+  }
+  Future<String> fetchUserPhotoUrl()async{
+    final User? auth = firebaseRed.currentUser;
+    final ref = databaseRef.child('PhotoUrl/${auth!.uid}/');
+    final res = await ref.get();
+    return res.value['PhotoUrl'];
+  }
 }

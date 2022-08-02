@@ -85,6 +85,11 @@ class DataController extends GetxController {
     );
   }
 
+  Future<void> saveUserPhotoUrl({required String photoUrl}) async =>
+      await _firebaseDatabaseController.saveUserPhotoUrl(photoUrl: photoUrl);
+  Future<String> fetchUserPhotoUrl() async =>
+      await _firebaseDatabaseController.fetchUserPhotoUrl();
+
   @override
   void onInit() async {
     super.onInit();

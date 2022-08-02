@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import 'package:get/get.dart';
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final DataController dataController = Get.find<DataController>();
 
   Stream<auth.User?> onAuthChanged() {
     return _firebaseAuth.authStateChanges();
@@ -34,7 +36,11 @@ class AuthService {
         await _firebaseAuth.signInWithCredential(credential);
     if (userCredentials.user != null) {
       print(userCredentials.user);
-      print(userCredentials.user!.email);
+      // print(userCredentials.user!.photoURL);
+      String url = userCredentials.user!.photoURL!;
+      url.replaceFirst('s96-c', 's400-c');
+      await dataController.saveUserPhotoUrl(photoUrl: url);
+      // print(userCredentials.user!.email);
     }
     return userCredentials;
   }
@@ -52,6 +58,9 @@ class AuthService {
         .signInWithCredential(facebookAuthCredential);
     if (userCredentials.user != null) {
       print(userCredentials.user);
+      String url = userCredentials.user!.photoURL!;
+      url = url + '?type=large';
+      await dataController.saveUserPhotoUrl(photoUrl: url);
     }
     return userCredentials;
   }

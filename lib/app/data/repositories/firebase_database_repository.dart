@@ -83,4 +83,10 @@ class FirebaseDatabaseRepository {
       dateOfBirthInMs: dateOfBirthInMs,
     );
   }
+
+  Future<void> saveUserPhotoUrl({required String photoUrl}) async =>
+      await _firebaseDatabaseService.saveUserPhotoUrl(photoUrl: photoUrl);
+
+  Future<String> fetchUserPhotoUrl() async =>
+      await _firebaseDatabaseService.fetchUserPhotoUrl();
 }

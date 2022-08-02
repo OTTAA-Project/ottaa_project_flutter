@@ -4,6 +4,7 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          'ottaa_score' : 'OTTAA Score',
           'hello_world': 'Hello World',
           'we_are_preparing_everything': 'We are preparing everything...',
           'Hello': 'Hello',
@@ -310,6 +311,7 @@ class Translation extends Translations {
           'it_allows_uppercase_subtitles': 'Permite subtítulos en mayúsculas',
           'login_screen':
               'Hola, bienvenido a OTTAA Project, la primera plataforma de comunicación predictiva para personas con problemas del habla, inicie sesión con su cuenta y complete algunos datos para beneficiarse de nuestra predicción.',
+          'ottaa_score': 'OTTAA Rencor',
           '': '',
         },
       };
