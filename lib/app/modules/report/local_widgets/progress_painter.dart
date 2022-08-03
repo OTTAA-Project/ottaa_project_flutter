@@ -5,14 +5,18 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class ProgressPainter extends CustomPainter {
   final double value;
+  final Color color;
+
   double deg2rad(double deg) => deg * pi / 180;
+
   ProgressPainter({
     required this.value,
+    required this.color,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = kOTTAAOrangeNew;
+    Paint paint = Paint()..color = color;
 
     final rect = Rect.fromCenter(
         center: Offset(size.height / 2, size.width / 2),

@@ -21,7 +21,7 @@ class OTTAAScoreWidget extends StatelessWidget {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(10),
-        height: verticalSize * 0.3,
+        height: verticalSize * 0.35,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -57,14 +57,31 @@ class OTTAAScoreWidget extends StatelessWidget {
                           color: kOTTAAOrangeNew.withOpacity(.5),
                         ),
                         child: CustomPaint(
-                          painter: ProgressPainter(value: 40),
+                          painter: ProgressPainter(
+                            value: progressIndicatorScore,
+                            color: kOTTAAOrangeNew,
+                          ),
                           child: Container(
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(),
                             height: 160,
                             width: 160,
                             child: photoUrl == ''
-                                ? Container()
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        verticalSize * 0.2,
+                                      ),
+                                      color: Colors.grey[350],
+                                    ),
+                                    height: 200,
+                                    width: 200,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        color: kOTTAAOrangeNew,
+                                      ),
+                                    ),
+                                  )
                                 : Container(
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(
@@ -106,11 +123,9 @@ class OTTAAScoreWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'OTTAA Score es una medida del uso en general de la aplicación, usando datos como uso en los últimos días y promedio de pictos por frase',
+                    'score_text_1',
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: verticalSize * 0.018
-                    ),
+                        color: Colors.black, fontSize: verticalSize * 0.018),
                     textAlign: TextAlign.center,
                   ),
                 ],

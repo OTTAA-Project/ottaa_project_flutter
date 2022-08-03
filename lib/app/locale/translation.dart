@@ -4,7 +4,10 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
-          'ottaa_score' : 'OTTAA Score',
+          'score_text_1':
+              'OTTAA Score is a measure of the overall use of the application, using data as usage in the last days and average picts per sentence.',
+          'most_used_groups': 'Most used Groups',
+          'ottaa_score': 'OTTAA Score',
           'hello_world': 'Hello World',
           'we_are_preparing_everything': 'We are preparing everything...',
           'Hello': 'Hello',
@@ -312,6 +315,9 @@ class Translation extends Translations {
           'login_screen':
               'Hola, bienvenido a OTTAA Project, la primera plataforma de comunicación predictiva para personas con problemas del habla, inicie sesión con su cuenta y complete algunos datos para beneficiarse de nuestra predicción.',
           'ottaa_score': 'OTTAA Rencor',
+          'most_used_groups': 'Grupos más usados',
+          'score_text_1':
+              'OTTAA Score es una medida del uso en general de la aplicación, usando datos como uso en los últimos días y promedio de pictos por frase',
           '': '',
         },
       };

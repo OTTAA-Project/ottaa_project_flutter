@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/report/local_widgets/ottaa_score_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/report/local_widgets/vocabulary_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/report/report_controller.dart';
 
 class ReportPage extends GetView<ReportController> {
@@ -34,16 +35,16 @@ class ReportPage extends GetView<ReportController> {
                     SizedBox(
                       width: horizontalSize * 0.02,
                     ),
-                    Expanded(
-                      child: Container(
-                        height: verticalSize * 0.3,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(
-                            verticalSize * 0.02,
-                          ),
-                        ),
+                    Obx(
+                      () => VocabularyWidget(
+                        firstValueProgress: controller.firstValueProgress.value,
+                        secondValueProgress:
+                            controller.secondValueProgress.value,
+                        thirdValueProgress: controller.thirdValueProgress.value,
+                        heading: 'most_used_grupos'.tr,
+                        firstValueText: controller.firstValueText.value,
+                        secondValueText: controller.secondValueText.value,
+                        thirdValueText: controller.thirdValueText.value,
                       ),
                     ),
                   ],
