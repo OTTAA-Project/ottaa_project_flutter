@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ottaa_project_flutter/app/modules/report/local_widgets/most_used_phrases_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/report/local_widgets/points_with_text.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
@@ -46,10 +47,8 @@ class BottomWidget extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.brown,
-              ),
+            child: MostUsedPhrasesWidget(
+              heading: 'Test Header',
             ),
           ),
         ],
