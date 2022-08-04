@@ -187,12 +187,12 @@ class VocabularyWidget extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(vertical: verticalSize * 0.01),
                     child: RowWidget(
-                      color: Colors.brown,
+                      color: Colors.pink,
                       text: secondValueText,
                     ),
                   ),
                   RowWidget(
-                    color: Colors.brown,
+                    color: Colors.blue,
                     text: thirdValueText,
                   ),
                 ],

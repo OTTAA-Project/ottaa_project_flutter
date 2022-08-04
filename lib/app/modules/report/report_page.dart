@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/modules/report/local_widgets/bottom_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/report/local_widgets/chart_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/report/local_widgets/ottaa_score_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/report/local_widgets/vocabulary_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/report/report_controller.dart';
@@ -30,6 +32,7 @@ class ReportPage extends GetView<ReportController> {
                         horizontalSize: horizontalSize,
                         headingText: 'ottaa_score'.tr,
                         photoUrl: controller.photoUrl.value,
+                        scoreText: 'score_text_1'.tr,
                       ),
                     ),
                     SizedBox(
@@ -41,7 +44,7 @@ class ReportPage extends GetView<ReportController> {
                         secondValueProgress:
                             controller.secondValueProgress.value,
                         thirdValueProgress: controller.thirdValueProgress.value,
-                        heading: 'most_used_grupos'.tr,
+                        heading: 'most_used_groups'.tr,
                         firstValueText: controller.firstValueText.value,
                         secondValueText: controller.secondValueText.value,
                         thirdValueText: controller.thirdValueText.value,
@@ -49,6 +52,13 @@ class ReportPage extends GetView<ReportController> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: verticalSize * 0.03,
+                  ),
+                  child: ChartWidget(),
+                ),
+                BottomWidget(),
               ],
             ),
           ),

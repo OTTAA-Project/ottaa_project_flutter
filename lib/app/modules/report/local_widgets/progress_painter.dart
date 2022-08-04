@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class ProgressPainter extends CustomPainter {
   final double value;
