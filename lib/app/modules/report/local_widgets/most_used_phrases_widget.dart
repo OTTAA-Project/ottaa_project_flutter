@@ -55,7 +55,7 @@ class MostUsedPhrasesWidget extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return Container(
-                                padding: EdgeInsets.only(left:10),
+                                padding: EdgeInsets.only(left: 10),
                                 height: 150,
                                 width: 110,
                                 child: Image.network(
