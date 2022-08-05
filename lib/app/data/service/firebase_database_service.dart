@@ -337,4 +337,12 @@ class FirebaseDatabaseService {
     final res = await ref.get();
     return res.value['PhotoUrl'];
   }
+
+  Future<void> uploadFrases({required String data})async{
+    final String? auth = firebaseRed.currentUser!.uid;
+    final ref = databaseRef.child('frases/${auth!}/');
+    await ref.set({
+      'data': data,
+    });
+  }
 }

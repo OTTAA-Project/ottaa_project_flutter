@@ -89,4 +89,7 @@ class FirebaseDatabaseRepository {
 
   Future<String> fetchUserPhotoUrl() async =>
       await _firebaseDatabaseService.fetchUserPhotoUrl();
+
+  Future<void> uploadFrases({required String data}) async =>
+      await _firebaseDatabaseService.uploadFrases(data: data);
 }

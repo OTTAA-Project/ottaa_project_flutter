@@ -48,14 +48,14 @@ class PictosComponente {
   PictosComponente({
     required this.id,
     required this.esSugerencia,
-    required this.hora,
+    this.hora,
     required this.edad,
     required this.sexo,
   });
 
   int id;
   bool esSugerencia;
-  List<String> hora;
+  List<String?>? hora;
   List<String> edad;
   List<String> sexo;
 
