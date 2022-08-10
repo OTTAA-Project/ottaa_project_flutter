@@ -4,7 +4,17 @@ import 'package:ottaa_project_flutter/app/modules/report/local_widgets/points_wi
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class BottomWidget extends StatelessWidget {
-  const BottomWidget({Key? key}) : super(key: key);
+  const BottomWidget({
+    Key? key,
+    required this.sevenDaysString,
+    required this.averageSentenceString,
+    required this.averageSentenceValue,
+    required this.sevenDaysValue,
+  }) : super(key: key);
+
+  final String sevenDaysString, averageSentenceString;
+  final double averageSentenceValue;
+  final int sevenDaysValue;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +33,8 @@ class BottomWidget extends StatelessWidget {
                   child: PointsWithText(
                     boxColor: kOTTAAOrangeNew,
                     textColor: Colors.white,
-                    description: 'Test Description ',
-                    score: '20.90',
+                    description: sevenDaysString,
+                    score: sevenDaysValue.toString(),
                   ),
                 ),
                 SizedBox(
@@ -35,8 +45,8 @@ class BottomWidget extends StatelessWidget {
                   child: PointsWithText(
                     boxColor: Colors.white,
                     textColor: kOTTAAOrangeNew,
-                    description: 'Test Description ',
-                    score: '20.90',
+                    description: averageSentenceString,
+                    score: averageSentenceValue.toString(),
                   ),
                 ),
               ],

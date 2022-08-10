@@ -39,6 +39,7 @@ class PointsWithText extends StatelessWidget {
               fontWeight: FontWeight.w400,
               fontSize: verticalSize * 0.02,
             ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

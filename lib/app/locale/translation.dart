@@ -4,6 +4,9 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          'pictogram_by_sentence_on_average':
+              'Pictograms by sentences on average',
+          'phrases_last_seven_days': 'Phrases created in the last 7 days',
           'score_text_1':
               'OTTAA Score is a measure of the overall use of the application, using data as usage in the last days and average picts per sentence.',
           'most_used_groups': 'Most used Groups',
@@ -318,6 +321,9 @@ class Translation extends Translations {
           'most_used_groups': 'Grupos más usados',
           'score_text_1':
               'OTTAA Score es una medida del uso en general de la aplicación, usando datos como uso en los últimos días y promedio de pictos por frase',
+          'phrases_last_seven_days': 'Frases creadas en los últimos 7 días',
+          'pictogram_by_sentence_on_average':
+              'Pictogramas por frases en promedio',
           '': '',
         },
       };

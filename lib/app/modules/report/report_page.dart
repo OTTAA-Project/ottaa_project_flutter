@@ -58,7 +58,19 @@ class ReportPage extends GetView<ReportController> {
                   ),
                   child: ChartWidget(),
                 ),
-                BottomWidget(),
+                Obx(
+                  () => BottomWidget(
+                    averageSentenceString:
+                        'pictogram_by_sentence_on_average'.tr,
+                    averageSentenceValue: double.parse(controller
+                        .averagePictoFrase.value
+                        .toString()
+                        .substring(0, 4)
+                        .toString()),
+                    sevenDaysString: 'phrases_last_seven_days'.tr,
+                    sevenDaysValue: controller.frases7Days.value,
+                  ),
+                ),
               ],
             ),
           ),
