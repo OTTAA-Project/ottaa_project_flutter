@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/report/report_controller.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class MostUsedPhrasesWidget extends StatelessWidget {
   MostUsedPhrasesWidget({
@@ -37,8 +38,9 @@ class MostUsedPhrasesWidget extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
               child: PageView.builder(
+                controller: controller.pageController,
                 itemCount: 4,
-                itemBuilder: (context, index) {
+                itemBuilder: (context, indexMain) {
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.blueGrey,
@@ -49,21 +51,31 @@ class MostUsedPhrasesWidget extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: controller.randomPictos.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                padding: EdgeInsets.only(left: 10),
-                                height: 150,
-                                width: 110,
-                                child: Image.network(
-                                    controller.randomPictos[index]),
-                              );
-                            },
-                          ),
-                        ),
+                        controller.loadingMostUsedSentences.value
+                            ? Expanded(
+                                child: ListView.builder(
+                                  itemCount: controller
+                                      .mostUsedSentences[indexMain].length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, indexSecond) {
+                                    return Container(
+                                      padding: EdgeInsets.only(left: 10),
+                                      height: 150,
+                                      width: 110,
+                                      child: Image.network(controller
+                                              .mostUsedSentences[indexMain]
+                                          [indexSecond]),
+                                    );
+                                  },
+                                ),
+                              )
+                            : Expanded(
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    color: kOTTAAOrangeNew,
+                                  ),
+                                ),
+                              ),
                         Align(
                           child: Padding(
                             padding:

@@ -62,7 +62,8 @@ class ReportPage extends GetView<ReportController> {
                   () => BottomWidget(
                     averageSentenceString:
                         'pictogram_by_sentence_on_average'.tr,
-                    averageSentenceValue: double.parse(controller
+                    averageSentenceValue: controller
+                        .averagePictoFrase.value == 0.00 ? 0.00 : double.parse(controller
                         .averagePictoFrase.value
                         .toString()
                         .substring(0, 4)
