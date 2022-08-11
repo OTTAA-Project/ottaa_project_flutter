@@ -11,9 +11,14 @@ class VocabularyWidget extends StatelessWidget {
     required this.firstValueText,
     required this.secondValueText,
     required this.thirdValueText,
+    required this.fourthValueProgress,
+    required this.fourthValueText,
   }) : super(key: key);
-  final double firstValueProgress, secondValueProgress, thirdValueProgress;
-  final String firstValueText, secondValueText, thirdValueText;
+  final double firstValueProgress,
+      secondValueProgress,
+      thirdValueProgress,
+      fourthValueProgress;
+  final String firstValueText, secondValueText, thirdValueText, fourthValueText;
   final String heading;
 
   @override
@@ -45,80 +50,74 @@ class VocabularyWidget extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
-                    height: verticalSize * 0.03,
-                  ),
                   Center(
                     child: Stack(
                       children: [
-                        /// first value
+                        ///first one
                         Container(
-                          height: 200,
-                          width: 200,
+                          height: 250,
+                          width: 250,
                           decoration: BoxDecoration(
-                            color: Colors.brown.withOpacity(0.3),
+                            color: Colors.amberAccent.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(200),
                           ),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: firstValueProgress,
-                              color: Colors.brown,
+                              color: Colors.amberAccent,
                             ),
                             child: Container(
-                              height: 200,
-                              width: 200,
+                              height: 250,
+                              width: 250,
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 20),
+                          padding: const EdgeInsets.only(left: 15, top: 15),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
                               color: Colors.white,
                             ),
                             child: Container(
-                              height: 160,
-                              width: 160,
+                              height: 220,
+                              width: 220,
                             ),
                           ),
                         ),
 
                         /// second value
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 30,
-                            top: 30,
-                          ),
+                          padding: const EdgeInsets.only(top: 25, left: 25),
                           child: Container(
+                            height: 200,
+                            width: 200,
                             decoration: BoxDecoration(
-                              color: Colors.pink.withOpacity(0.3),
+                              color: Colors.brown.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(200),
                             ),
-                            height: 140,
-                            width: 140,
                             child: CustomPaint(
                               painter: ProgressPainter(
                                 value: secondValueProgress,
-                                color: Colors.pink,
+                                color: Colors.brown,
                               ),
                               child: Container(
-                                height: 140,
-                                width: 140,
+                                height: 200,
+                                width: 200,
                               ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 45, top: 45),
+                          padding: const EdgeInsets.only(left: 40, top: 40),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
                               color: Colors.white,
                             ),
                             child: Container(
-                              height: 110,
-                              width: 110,
+                              height: 170,
+                              width: 170,
                             ),
                           ),
                         ),
@@ -126,30 +125,69 @@ class VocabularyWidget extends StatelessWidget {
                         /// third value
                         Padding(
                           padding: const EdgeInsets.only(
-                            left: 55,
-                            top: 55,
+                            left: 50,
+                            top: 50,
                           ),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.blue.withOpacity(0.3),
+                              color: Colors.pink.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(200),
                             ),
-                            height: 90,
-                            width: 90,
+                            height: 150,
+                            width: 150,
                             child: CustomPaint(
                               painter: ProgressPainter(
                                 value: thirdValueProgress,
-                                color: Colors.blue,
+                                color: Colors.pink,
                               ),
                               child: Container(
-                                height: 90,
-                                width: 90,
+                                height: 150,
+                                width: 150,
                               ),
                             ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 65, top: 65),
+                          child: CustomPaint(
+                            painter: ProgressPainter(
+                              value: 100,
+                              color: Colors.white,
+                            ),
+                            child: Container(
+                              height: 120,
+                              width: 120,
+                            ),
+                          ),
+                        ),
+
+                        /// fourth value
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 75,
+                            top: 75,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blue.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(200),
+                            ),
+                            height: 100,
+                            width: 100,
+                            child: CustomPaint(
+                              painter: ProgressPainter(
+                                value: fourthValueProgress,
+                                color: Colors.blue,
+                              ),
+                              child: Container(
+                                height: 100,
+                                width: 100,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 90, top: 90),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
@@ -174,26 +212,34 @@ class VocabularyWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.symmetric(vertical: verticalSize*0.02),
+                    padding:
+                        EdgeInsets.symmetric(vertical: verticalSize * 0.02),
                     child: Text(
                       heading,
                     ),
                   ),
                   RowWidget(
-                    color: Colors.brown,
+                    color: Colors.amberAccent,
                     text: firstValueText,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: verticalSize * 0.01),
+                    child: RowWidget(
+                      color: Colors.brown,
+                      text: secondValueText,
+                    ),
                   ),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: verticalSize * 0.01),
                     child: RowWidget(
                       color: Colors.pink,
-                      text: secondValueText,
+                      text: thirdValueText,
                     ),
                   ),
                   RowWidget(
                     color: Colors.blue,
-                    text: thirdValueText,
+                    text: fourthValueText,
                   ),
                 ],
               ),

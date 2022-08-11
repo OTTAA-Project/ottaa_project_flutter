@@ -23,9 +23,11 @@ class ReportController extends GetxController {
   RxDouble firstValueProgress = 0.00.obs;
   RxDouble secondValueProgress = 0.00.obs;
   RxDouble thirdValueProgress = 0.00.obs;
+  RxDouble fourthValueProgress = 0.00.obs;
   RxString firstValueText = 'first'.obs;
   RxString secondValueText = 'second'.obs;
   RxString thirdValueText = 'third'.obs;
+  RxString fourthValueText = 'fourth'.obs;
   List<List<String>> mostUsedSentences = [];
   late PictoStatisticsModel pictoStatisticsModel;
   late FrasesStatisticsModel frasesStatisticsModel;
@@ -34,6 +36,7 @@ class ReportController extends GetxController {
   RxDouble averagePictoFrase = 0.00.obs;
   RxBool loadingMostUsedSentences = false.obs;
   RxInt frases7Days = 0.obs;
+  late double scoreForProfile;
 
   @override
   void onClose() {
@@ -145,5 +148,30 @@ class ReportController extends GetxController {
         curve: Curves.easeIn,
       );
     });
+  }
+
+  void calculateScoreForProfile() {
+
+    ///last7DaysUsage = number of days the user used the app in the last 7 days.
+    /// sentences7days = sentences created in the last 7 days.
+    /// averagePictoFrase = average pictograms per sentence.
+    /// usedGroups = number of different used groups.
+
+    // int a = 500,
+    //     b = 3,
+    //     c = 500,
+    //     d = 44,
+    //     level = 0,
+    //     last7DaysUsage = 0,
+    //     usedGroups = 0;
+    //
+    // double score = 0;
+    //
+    // score = last7DaysUsage * a +
+    //     frases7days * b +
+    //     averagePictoFrase.value * c +
+    //     usedGroups * d;
+    //
+    // return (int)(score / 1000);
   }
 }

@@ -48,6 +48,9 @@ class ReportPage extends GetView<ReportController> {
                         firstValueText: controller.firstValueText.value,
                         secondValueText: controller.secondValueText.value,
                         thirdValueText: controller.thirdValueText.value,
+                        fourthValueProgress:
+                            controller.fourthValueProgress.value,
+                        fourthValueText: controller.fourthValueText.value,
                       ),
                     ),
                   ],
@@ -62,12 +65,13 @@ class ReportPage extends GetView<ReportController> {
                   () => BottomWidget(
                     averageSentenceString:
                         'pictogram_by_sentence_on_average'.tr,
-                    averageSentenceValue: controller
-                        .averagePictoFrase.value == 0.00 ? 0.00 : double.parse(controller
-                        .averagePictoFrase.value
-                        .toString()
-                        .substring(0, 4)
-                        .toString()),
+                    averageSentenceValue:
+                        controller.averagePictoFrase.value == 0.00
+                            ? 0.00
+                            : double.parse(controller.averagePictoFrase.value
+                                .toString()
+                                .substring(0, 4)
+                                .toString()),
                     sevenDaysString: 'phrases_last_seven_days'.tr,
                     sevenDaysValue: controller.frases7Days.value,
                   ),
