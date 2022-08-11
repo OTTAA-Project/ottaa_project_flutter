@@ -102,7 +102,6 @@ class ReportController extends GetxController {
   Future<void> makeMostUsedSentencesList() async {
     /// creating a list to add all of the ids
     List<List<int>> pictosIds = [];
-    int i = 0;
     pictoStatisticsModel.mostUsedSentences.forEach((element) {
       List<int> res = [];
       element.pictoComponentes.forEach((element) {
@@ -110,11 +109,9 @@ class ReportController extends GetxController {
         print(element.id);
       });
       pictosIds.add(res);
-      i++;
     });
 
     /// getting the strings for the selected ids from the data
-    i = 0;
     List<List<String>> selectedPictosUrl = [];
     pictosIds.forEach((element) {
       List<String> res = [];
@@ -129,7 +126,6 @@ class ReportController extends GetxController {
         });
       });
       selectedPictosUrl.add(res);
-      i++;
     });
     mostUsedSentences = selectedPictosUrl;
     loadingMostUsedSentences.value = true;
