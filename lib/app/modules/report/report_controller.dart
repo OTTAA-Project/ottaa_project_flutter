@@ -67,10 +67,11 @@ class ReportController extends GetxController {
   }
 
   Future<void> fetchPictoStatisticsData() async {
+    final uid = _dataController.fetchCurrentUserUID();
     final uri = Uri.parse(
       'https://us-central1-ottaaproject-flutter.cloudfunctions.net/onReqFunc',
     );
-    final body = {'UserID': 'KikJcMSzLcbEc5J5ya0ZFNrSwwv1'};
+    final body = {'UserID': uid};
     final res = await http.post(
       uri,
       body: jsonEncode(body),
@@ -82,9 +83,10 @@ class ReportController extends GetxController {
   }
 
   Future<void> fetchMostUsedSentences() async {
+    final uid = _dataController.fetchCurrentUserUID();
     final uri = Uri.parse(
         'https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
-    final body = {'UserID': 'KikJcMSzLcbEc5J5ya0ZFNrSwwv1'};
+    final body = {'UserID': uid};
     final res = await http.post(
       uri,
       body: jsonEncode(body),
@@ -151,7 +153,6 @@ class ReportController extends GetxController {
   }
 
   void calculateScoreForProfile() {
-
     ///last7DaysUsage = number of days the user used the app in the last 7 days.
     /// sentences7days = sentences created in the last 7 days.
     /// averagePictoFrase = average pictograms per sentence.

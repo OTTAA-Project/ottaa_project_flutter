@@ -345,4 +345,9 @@ class FirebaseDatabaseService {
       'data': data,
     });
   }
+
+  String fetchCurrentUserUID(){
+    final User? auth = firebaseRed.currentUser;
+    return auth!.uid;
+  }
 }

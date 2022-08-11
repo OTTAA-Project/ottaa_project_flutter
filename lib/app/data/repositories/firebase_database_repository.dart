@@ -92,4 +92,7 @@ class FirebaseDatabaseRepository {
 
   Future<void> uploadFrases({required String data}) async =>
       await _firebaseDatabaseService.uploadFrases(data: data);
+
+  String fetchCurrentUserUID() =>
+      _firebaseDatabaseService.fetchCurrentUserUID();
 }

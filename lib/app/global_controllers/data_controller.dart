@@ -92,6 +92,9 @@ class DataController extends GetxController {
   Future<void> uploadFrases({required String data}) async =>
       await _firebaseDatabaseController.uploadFrases(data: data);
 
+  String fetchCurrentUserUID() =>
+      _firebaseDatabaseController.fetchCurrentUserUID();
+
   @override
   void onInit() async {
     super.onInit();
