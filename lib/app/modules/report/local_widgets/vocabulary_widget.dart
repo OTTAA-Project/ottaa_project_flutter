@@ -13,13 +13,18 @@ class VocabularyWidget extends StatelessWidget {
     required this.thirdValueText,
     required this.fourthValueProgress,
     required this.fourthValueText,
+    required this.vocabularyHeading,
   }) : super(key: key);
   final double firstValueProgress,
       secondValueProgress,
       thirdValueProgress,
       fourthValueProgress;
-  final String firstValueText, secondValueText, thirdValueText, fourthValueText;
-  final String heading;
+  final String firstValueText,
+      secondValueText,
+      thirdValueText,
+      fourthValueText,
+      heading,
+      vocabularyHeading;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +49,7 @@ class VocabularyWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Vocabulary',
+                    vocabularyHeading,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Colors.black,

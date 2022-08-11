@@ -10,9 +10,10 @@ class BottomWidget extends StatelessWidget {
     required this.averageSentenceString,
     required this.averageSentenceValue,
     required this.sevenDaysValue,
+    required this.mostUsedHeading,
   }) : super(key: key);
 
-  final String sevenDaysString, averageSentenceString;
+  final String sevenDaysString, averageSentenceString, mostUsedHeading;
   final double averageSentenceValue;
   final int sevenDaysValue;
 
@@ -58,7 +59,7 @@ class BottomWidget extends StatelessWidget {
           Expanded(
             flex: 1,
             child: MostUsedPhrasesWidget(
-              heading: 'Test Header',
+              heading: mostUsedHeading,
             ),
           ),
         ],

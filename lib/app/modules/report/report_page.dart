@@ -51,6 +51,7 @@ class ReportPage extends GetView<ReportController> {
                         fourthValueProgress:
                             controller.fourthValueProgress.value,
                         fourthValueText: controller.fourthValueText.value,
+                        vocabularyHeading: 'vocabulary'.tr,
                       ),
                     ),
                   ],
@@ -74,6 +75,7 @@ class ReportPage extends GetView<ReportController> {
                                 .toString()),
                     sevenDaysString: 'phrases_last_seven_days'.tr,
                     sevenDaysValue: controller.frases7Days.value,
+                    mostUsedHeading: 'most_used_phrases'.tr,
                   ),
                 ),
               ],

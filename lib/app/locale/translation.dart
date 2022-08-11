@@ -4,6 +4,8 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          'vocabulary': 'Vocabulary',
+          'most_used_phrases': 'MOST USED PHRASES',
           'pictogram_by_sentence_on_average':
               'Pictograms by sentences on average',
           'phrases_last_seven_days': 'Phrases created in the last 7 days',
@@ -324,6 +326,8 @@ class Translation extends Translations {
           'phrases_last_seven_days': 'Frases creadas en los últimos 7 días',
           'pictogram_by_sentence_on_average':
               'Pictogramas por frases en promedio',
+          'most_used_phrases': 'FRASES MAS USADAS',
+          'vocabulary': 'Vocabulario',
           '': '',
         },
       };
