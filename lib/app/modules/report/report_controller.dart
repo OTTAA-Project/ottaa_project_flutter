@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -40,7 +39,9 @@ class ReportController extends GetxController {
 
   @override
   void onClose() {
-    _timer.cancel();
+    if(_timer.isActive){
+      _timer.cancel();
+    }
     super.onClose();
   }
 
@@ -52,14 +53,6 @@ class ReportController extends GetxController {
   @override
   void onInit() async {
     _pictos = _homeController.picts;
-    randomPictos = [];
-    for (int i = 0; i <= 4; i++) {
-      randomPictos.add(_pictos[
-              Random(DateTime.now().millisecondsSinceEpoch + i).nextInt(200)]
-          .imagen
-          .picto);
-      print(randomPictos[i]);
-    }
     photoUrl.value = await _dataController.fetchUserPhotoUrl();
     await fetchPictoStatisticsData();
     await fetchMostUsedSentences();
@@ -153,22 +146,26 @@ class ReportController extends GetxController {
     /// sentences7days = sentences created in the last 7 days.
     /// averagePictoFrase = average pictograms per sentence.
     /// usedGroups = number of different used groups.
+    int usedGrupos = 0;
+    pictoStatisticsModel.pictoUsagePerGroup.forEach((element) {
+  if(element.percentage> 0.0){
+    usedGrupos++;
+  }
+});
+    int a = 500,
+        b = 3,
+        c = 500,
+        d = 44,
+        level = 0,
+        last7DaysUsage = 0;
 
-    // int a = 500,
-    //     b = 3,
-    //     c = 500,
-    //     d = 44,
-    //     level = 0,
-    //     last7DaysUsage = 0,
-    //     usedGroups = 0;
-    //
-    // double score = 0;
+    double score = 0;
     //
     // score = last7DaysUsage * a +
     //     frases7days * b +
     //     averagePictoFrase.value * c +
     //     usedGroups * d;
-    //
+
     // return (int)(score / 1000);
   }
 }
