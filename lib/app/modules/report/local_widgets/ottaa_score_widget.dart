@@ -13,9 +13,10 @@ class OTTAAScoreWidget extends StatelessWidget {
     required this.photoUrl,
     required this.progressIndicatorScore,
     required this.scoreText,
+    required this.level,
   }) : super(key: key);
   final double verticalSize, horizontalSize, progressIndicatorScore;
-  final String headingText, photoUrl,scoreText;
+  final String headingText, photoUrl, scoreText, level;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +116,7 @@ class OTTAAScoreWidget extends StatelessWidget {
                       vertical: verticalSize * 0.02,
                     ),
                     child: Text(
-                      'level Holder',
+                      'level $level',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: verticalSize * 0.04,

@@ -36,10 +36,11 @@ class ReportController extends GetxController {
   RxBool loadingMostUsedSentences = false.obs;
   RxInt frases7Days = 0.obs;
   late double scoreForProfile;
+  RxDouble scoreProfile = 0.00.obs;
 
   @override
   void onClose() {
-    if(_timer.isActive){
+    if (_timer.isActive) {
       _timer.cancel();
     }
     super.onClose();
@@ -56,6 +57,7 @@ class ReportController extends GetxController {
     photoUrl.value = await _dataController.fetchUserPhotoUrl();
     await fetchPictoStatisticsData();
     await fetchMostUsedSentences();
+    calculateScoreForProfile();
     super.onInit();
   }
 
@@ -147,25 +149,30 @@ class ReportController extends GetxController {
     /// averagePictoFrase = average pictograms per sentence.
     /// usedGroups = number of different used groups.
     int usedGrupos = 0;
+    frasesStatisticsModel.frecLast7Days.forEach((key, value) {
+      print('here is the values from the map');
+      print('$key : $value');
+    });
     pictoStatisticsModel.pictoUsagePerGroup.forEach((element) {
-  if(element.percentage> 0.0){
-    usedGrupos++;
-  }
-});
-    int a = 500,
-        b = 3,
-        c = 500,
-        d = 44,
-        level = 0,
-        last7DaysUsage = 0;
+      if (element.percentage > 0.0) {
+        usedGrupos++;
+      }
+    });
+    int a = 500, b = 3, c = 500, d = 44, last7DaysUsage = 0;
+    frasesStatisticsModel.frecLast7Days.forEach((key, value) {
 
+      last7DaysUsage = last7DaysUsage + value;
+    });
     double score = 0;
-    //
-    // score = last7DaysUsage * a +
-    //     frases7days * b +
-    //     averagePictoFrase.value * c +
-    //     usedGroups * d;
-
+    score = (last7DaysUsage * a) +
+        (frasesStatisticsModel.frases7Days * b) +
+        (averagePictoFrase.value * c) +
+        (usedGrupos * d);
+    scoreProfile.value = score;
+    String val = score.toString();
+    val = val.substring(1);
+    scorePercentageScore.value = double.parse(val)/10;
+    print(score);
     // return (int)(score / 1000);
   }
 }

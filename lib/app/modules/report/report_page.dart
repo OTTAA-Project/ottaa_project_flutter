@@ -33,6 +33,8 @@ class ReportPage extends GetView<ReportController> {
                         headingText: 'ottaa_score'.tr,
                         photoUrl: controller.photoUrl.value,
                         scoreText: 'score_text_1'.tr,
+                        level: ((controller.scoreProfile / 1000).toInt())
+                            .toString(),
                       ),
                     ),
                     SizedBox(
