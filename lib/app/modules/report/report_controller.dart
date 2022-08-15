@@ -160,7 +160,6 @@ class ReportController extends GetxController {
     });
     int a = 500, b = 3, c = 500, d = 44, last7DaysUsage = 0;
     frasesStatisticsModel.frecLast7Days.forEach((key, value) {
-
       last7DaysUsage = last7DaysUsage + value;
     });
     double score = 0;
@@ -171,8 +170,40 @@ class ReportController extends GetxController {
     scoreProfile.value = score;
     String val = score.toString();
     val = val.substring(1);
-    scorePercentageScore.value = double.parse(val)/10;
+    scorePercentageScore.value = double.parse(val) / 10;
     print(score);
     // return (int)(score / 1000);
+    vocabularyFunction();
+  }
+
+  void vocabularyFunction() {
+    List<double> values = [];
+    pictoStatisticsModel.pictoUsagePerGroup.forEach((element) {
+      values.add(element.percentage);
+    });
+    values.sort((a, b) => b.compareTo(a));
+    final language = _homeController.language;
+    firstValueProgress.value = values[0];
+    secondValueProgress.value = values[1];
+    thirdValueProgress.value = values[2];
+    fourthValueProgress.value = values[3];
+    pictoStatisticsModel.pictoUsagePerGroup.forEach((element) {
+      if (element.percentage == firstValueProgress.value) {
+        firstValueText.value =
+            language == 'en' ? element.name.en : element.name.es;
+      }
+      if (element.percentage == secondValueProgress.value) {
+        secondValueText.value =
+            language == 'en' ? element.name.en : element.name.es;
+      }
+      if (element.percentage == thirdValueProgress.value) {
+        thirdValueText.value =
+            language == 'en' ? element.name.en : element.name.es;
+      }
+      if (element.percentage == fourthValueProgress.value) {
+        fourthValueText.value =
+            language == 'en' ? element.name.en : element.name.es;
+      }
+    });
   }
 }
