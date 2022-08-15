@@ -32,7 +32,7 @@ class SentenceWidget extends StatelessWidget {
                     ? ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: _.sentencePicts.length + 6,
+                        itemCount: _.sentencePicts.length + 8,
                         itemBuilder: (BuildContext context, int index) {
                           final Pict speakPict = Pict(
                               localImg: true,
