@@ -40,23 +40,28 @@ class SentenceShareWidget extends GetView<HomeController> {
       ),
       content: Row(
         children: [
-          ShareIconWidget(
-            color: kOTTAAOrangeNew,
-            verticalSize: verticalSize,
-            iconData: Icons.volume_up_sharp,
-            text: 'Audio',
-            onTap: () async {
-              if (kIsWeb) {
-              } else {
-                controller.generateStringToShare();
-                controller.createAudioScript(
-                  name: 'Audio Message',
-                  script: controller.textToShare,
-                );
-                Share.shareFiles([controller.audioFilePath],
-                    text: 'Audio File');
-              }
-            },
+          !kIsWeb
+              ? ShareIconWidget(
+                  color: kOTTAAOrangeNew,
+                  verticalSize: verticalSize,
+                  iconData: Icons.volume_up_sharp,
+                  text: 'Audio',
+                  onTap: () async {
+                    if (kIsWeb) {
+                    } else {
+                      controller.generateStringToShare();
+                      controller.createAudioScript(
+                        name: 'Audio Message',
+                        script: controller.textToShare,
+                      );
+                      Share.shareFiles([controller.audioFilePath],
+                          text: 'Audio File');
+                    }
+                  },
+                )
+              : Container(
+            height: 0,
+            width: 0,
           ),
           ShareIconWidget(
             color: kOTTAAOrangeNew,
@@ -154,7 +159,7 @@ class SentenceShareWidget extends GetView<HomeController> {
                       ],
                     ),
                   ),
-                  delay: Duration(seconds: 1),
+                  delay: Duration(seconds: 2),
                   context: context,
                 );
                 // final image = await controller.screenshotController.capture(
