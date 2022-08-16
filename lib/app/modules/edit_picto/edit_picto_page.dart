@@ -208,7 +208,7 @@ class PictureDialogWidget extends GetView<EditPictoController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  kIsWeb ?  ImageWidget(
+                  !kIsWeb ?  ImageWidget(
                     imageLink: 'assets/camera.png',
                     text: 'camera'.tr,
                     onTap: cameraOnTap,

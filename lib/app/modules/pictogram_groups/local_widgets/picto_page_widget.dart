@@ -85,10 +85,12 @@ class PictoPageWidget extends StatelessWidget {
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.05),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.07),
                   child: CategoryPageWidget(
                     name: languaje == "en"
-                        ? _pictogramController.selectedGruposPicts[index].texto.en
+                        ? _pictogramController
+                            .selectedGruposPicts[index].texto.en
                         : _pictogramController
                             .selectedGruposPicts[index].texto.es,
                     imageName: _pictogramController

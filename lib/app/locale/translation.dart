@@ -4,6 +4,7 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          'galeria_grupos':'Gallery Groups',
           'add_pict' : 'Add Pict',
           'add_group' : 'Add Group',
           'hello_world': 'Hello World',
@@ -314,6 +315,7 @@ class Translation extends Translations {
               'Hola, bienvenido a OTTAA Project, la primera plataforma de comunicación predictiva para personas con problemas del habla, inicie sesión con su cuenta y complete algunos datos para beneficiarse de nuestra predicción.',
           'add_group': 'Añadir grupo',
           'add_pict': 'Agregar imagen',
+          'galeria_grupos': 'Galeria Grupos',
           '': '',
         },
       };

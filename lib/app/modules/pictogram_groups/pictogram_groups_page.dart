@@ -26,7 +26,7 @@ class PictogramGroupsPage extends StatelessWidget {
         leading: Container(),
         foregroundColor: Colors.white,
         elevation: 0,
-        title: Text('GaleriaGrupos'),
+        title: Text('galeria_grupos'.tr),
         actions: [
           // GestureDetector(
           //     onTap: () => {

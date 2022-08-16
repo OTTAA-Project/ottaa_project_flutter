@@ -15,7 +15,7 @@ class SentencesController extends GetxController {
   final _pictsRepository = Get.find<PictsRepository>();
   final _sentencesRepository = Get.find<SentencesRepository>();
   final searchController = TextEditingController();
-
+  RxBool showCircular = true.obs;
   late AnimationController _sentenceAnimationController;
 
   AnimationController get sentenceAnimationController =>
@@ -60,6 +60,7 @@ class SentencesController extends GetxController {
     super.onInit();
     await _loadPicts();
     createListForSearching();
+    showCircular.value = false;
   }
 
   Future<void> _loadPicts() async {
@@ -100,6 +101,7 @@ class SentencesController extends GetxController {
       print(this._sentencesIndex);
     }
   }
+
   Future<void> searchSpeak() async {
     if (this._sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
       String voiceText = "";
@@ -120,7 +122,8 @@ class SentencesController extends GetxController {
       await this._ttsController.speak(voiceText);
       print(sentencesForList[searchIndex].sentence);
       print('search index is $searchIndex');
-      print('the index from controller is ${sentencesForList[searchIndex].index}');
+      print(
+          'the index from controller is ${sentencesForList[searchIndex].index}');
     }
   }
 

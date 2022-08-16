@@ -127,7 +127,7 @@ class DrawerWidget extends GetView<HomeController> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        kIsWeb
+                        !kIsWeb
                             ? ListTileWidget(
                                 icon: Icons.highlight_remove,
                                 title: 'close_application'.tr,
