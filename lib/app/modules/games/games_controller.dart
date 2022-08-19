@@ -809,6 +809,7 @@ class GamesController extends GetxController {
       second.value = '';
       await Future.delayed(Duration(seconds: 3));
       await createQuestion();
+      update(['MemoryGame']);
     }
   }
 
