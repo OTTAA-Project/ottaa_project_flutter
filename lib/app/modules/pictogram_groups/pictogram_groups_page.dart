@@ -227,20 +227,26 @@ class PictogramGroupsPage extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
                   child: Container(
-                    height: verticalSize * 0.7,
+                    height: verticalSize * 0.72,
                     decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal:
+                    padding: EdgeInsets.only(
+                      left:
                           _pictogramController.categoryGridviewOrPageview.value
                               ? horizontalSize * 0.02
                               : horizontalSize * 0.13,
-                      vertical: 16,
+                      right: _pictogramController.categoryGridviewOrPageview.value
+                          ? horizontalSize * 0.02
+                          : horizontalSize * 0.13,
+                      bottom: 16,
                     ),
                     // width: horizontalSize * 0.8,
-                    child: CategoryViewWidget(),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom:16.0),
+                      child: CategoryViewWidget(),
+                    ),
                   ),
                 ),
               ),
@@ -248,7 +254,7 @@ class PictogramGroupsPage extends StatelessWidget {
 
             /// the play button
             Positioned(
-              bottom: verticalSize * 0.02,
+              bottom: verticalSize * 0.015,
               left: horizontalSize * 0.43,
               right: horizontalSize * 0.43,
               child: Obx(

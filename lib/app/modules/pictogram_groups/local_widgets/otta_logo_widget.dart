@@ -16,6 +16,8 @@ class OttaLogoWidget extends StatelessWidget {
       ),
       // padding: EdgeInsets.all(width * 0.010),
       child: Container(
+        // height: width * 0.15,
+        width: width * 0.15,
         padding: EdgeInsets.all(width * 0.02),
         decoration: BoxDecoration(
           color: kOTTAAOrangeNew,
