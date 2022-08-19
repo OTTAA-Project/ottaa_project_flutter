@@ -27,6 +27,7 @@ class MiniPicto extends StatelessWidget {
                   image: AssetImage(
                     'assets/imgs/${pict.imagen.picto}.webp',
                   ),
+                  fit: BoxFit.fitHeight,
                 )
               : kIsWeb
                   ? Image.network(
@@ -41,6 +42,7 @@ class MiniPicto extends StatelessWidget {
                       placeholder: (context, url) => Center(
                         child: CircularProgressIndicator(),
                       ),
+                      fit: BoxFit.fitHeight,
                     ),
         ),
       ),

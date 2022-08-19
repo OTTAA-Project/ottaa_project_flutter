@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
@@ -178,7 +179,7 @@ class PictureDialogWidget extends GetView<EditPictoController> {
       contentPadding: const EdgeInsets.all(0),
       backgroundColor: Colors.transparent,
       content: Container(
-        width: horizontalSize * 0.4,
+        // width: horizontalSize * 0.4,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -207,20 +208,32 @@ class PictureDialogWidget extends GetView<EditPictoController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ImageWidget(
-                    imageLink: 'assets/camera.png',
-                    text: 'camera'.tr,
-                    onTap: cameraOnTap,
+                  !kIsWeb
+                      ? ImageWidget(
+                          imageLink: 'assets/camera.png',
+                          text: 'camera'.tr,
+                          onTap: cameraOnTap,
+                        )
+                      : Container(
+                          height: 0,
+                          width: 0,
+                        ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                    child: ImageWidget(
+                      imageLink: 'assets/gallery.png',
+                      text: 'gallery'.tr,
+                      onTap: galleryOnTap,
+                    ),
                   ),
-                  ImageWidget(
-                    imageLink: 'assets/gallery.png',
-                    text: 'gallery'.tr,
-                    onTap: galleryOnTap,
-                  ),
-                  ImageWidget(
-                    imageLink: 'assets/download_from_arasaac.png',
-                    text: 'download_from_arasaac'.tr,
-                    onTap: arsaacOnTap,
+                  Padding(
+                    padding:  EdgeInsets.only(right: horizontalSize * 0.01),
+                    child: ImageWidget(
+                      imageLink: 'assets/download_from_arasaac.png',
+                      text: 'download_from_arasaac'.tr,
+                      onTap: arsaacOnTap,
+                    ),
                   ),
                 ],
               ),

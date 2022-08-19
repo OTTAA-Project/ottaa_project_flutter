@@ -15,7 +15,7 @@ class SentencesController extends GetxController {
   final _pictsRepository = Get.find<PictsRepository>();
   final _sentencesRepository = Get.find<SentencesRepository>();
   final searchController = TextEditingController();
-
+  RxBool showCircular = true.obs;
   late AnimationController _sentenceAnimationController;
 
   AnimationController get sentenceAnimationController =>
@@ -60,6 +60,7 @@ class SentencesController extends GetxController {
     super.onInit();
     await _loadPicts();
     createListForSearching();
+    showCircular.value = false;
   }
 
   Future<void> _loadPicts() async {
@@ -97,13 +98,14 @@ class SentencesController extends GetxController {
 
       await this._ttsController.speak(voiceText);
       print(sentencesForSearch[this._sentencesIndex].sentence);
-      print(voiceText);
+      print(this._sentencesIndex);
     }
   }
+
   Future<void> searchSpeak() async {
     if (this._sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
       String voiceText = "";
-      this._sentencesPicts[this._sentencesIndex].forEach((pict) {
+      this._sentencesPicts[sentencesForList[searchIndex].index].forEach((pict) {
         switch (this._ttsController.languaje) {
           case "es":
             voiceText += ' ' + pict.texto.es;
@@ -118,8 +120,10 @@ class SentencesController extends GetxController {
       });
 
       await this._ttsController.speak(voiceText);
-      print(sentencesForSearch[this._sentencesIndex].sentence);
-      print(voiceText);
+      print(sentencesForList[searchIndex].sentence);
+      print('search index is $searchIndex');
+      print(
+          'the index from controller is ${sentencesForList[searchIndex].index}');
     }
   }
 
@@ -162,7 +166,7 @@ class SentencesController extends GetxController {
           listData.add(element);
         }
       });
-      sentencesForList = [];
+      sentencesForList.clear();
       sentencesForList.addAll(listData);
       searchIndex = 0;
       print(sentencesForList.length);

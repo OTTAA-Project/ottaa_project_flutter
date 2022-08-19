@@ -54,23 +54,21 @@ class CategoryPageWidget extends StatelessWidget {
                       )
                     : Border.all(color: Colors.transparent),
                 borderRadius: BorderRadius.circular(8)),
-            child: FittedBox(
-              child: kIsWeb
-                  ? Image.network(
-                      imageName,
-                      height: Get.height * 0.5,
-                      fit: BoxFit.fill,
-                      width: Get.width * 0.4,
-                    )
-                  : CachedNetworkImage(
-                      imageUrl: imageName,
-                      placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
-                      height: Get.height * 0.5,
-                      fit: BoxFit.fill,
-                      width: Get.width * 0.4,
-                    ),
-            ),
+            child: kIsWeb
+                ? Image.network(
+                    imageName,
+                    height: Get.height * 0.5,
+                    fit: BoxFit.fitHeight,
+                    width: Get.width * 0.4,
+                  )
+                : CachedNetworkImage(
+                    imageUrl: imageName,
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                    height: Get.height * 0.5,
+                    fit: BoxFit.fitHeight,
+                    width: Get.width * 0.4,
+                  ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -80,16 +78,14 @@ class CategoryPageWidget extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
           ),
-          FittedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                IconWidget(icon: Icons.timer_off),
-                IconWidget(icon: Icons.location_off),
-                IconWidget(icon: Icons.face),
-                IconWidget(icon: Icons.wc),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              IconWidget(icon: Icons.timer_off),
+              IconWidget(icon: Icons.location_off),
+              IconWidget(icon: Icons.face),
+              IconWidget(icon: Icons.wc),
+            ],
           ),
         ],
       ),

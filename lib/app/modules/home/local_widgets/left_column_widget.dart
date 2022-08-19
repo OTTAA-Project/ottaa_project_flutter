@@ -14,7 +14,6 @@ class LeftColumnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
-
     return Container(
       height: verticalSize * 0.5,
       width: horizontalSize * 0.10,
@@ -24,7 +23,7 @@ class LeftColumnWidget extends StatelessWidget {
           FittedBox(
             child: GestureDetector(
               onTap: () {
-                Fluttertoast.showToast(
+                /*Fluttertoast.showToast(
                   msg: "we_are_working_on_this_feature".tr,
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.CENTER,
@@ -32,14 +31,15 @@ class LeftColumnWidget extends StatelessWidget {
                   backgroundColor: Colors.black,
                   textColor: Colors.white,
                   fontSize: verticalSize * 0.03,
-                );
+                );*/
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('Principal', 'Games'));
+                Get.toNamed(AppRoutes.GAMES);
               },
               child: Center(
                   child: Icon(
                 // Icons.gamepad,
-                Icons.gamepad,
+                Icons.videogame_asset,
                 color: Colors.white,
                 size: horizontalSize / 10,
               )),
@@ -57,7 +57,7 @@ class LeftColumnWidget extends StatelessWidget {
                 } else {
                   if (_homeController.sentencePicts.last.texto.es ==
                       "agregar") {
-                    _homeController.toId =0;
+                    _homeController.toId = 0;
                     _homeController.fromAdd = true;
                     Get.toNamed(AppRoutes.PICTOGRAMGROUP);
                   } else {
@@ -82,7 +82,7 @@ class LeftColumnWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: kOTTAAOrangeNew,
         borderRadius:
-            BorderRadius.only(topRight: Radius.circular(horizontalSize / 40)),
+            BorderRadius.only(topRight: Radius.circular(16)),
       ),
     );
   }

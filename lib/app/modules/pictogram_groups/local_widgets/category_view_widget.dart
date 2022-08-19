@@ -23,12 +23,13 @@ class CategoryViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final horizontalSize = MediaQuery.of(context).size.height;
     final languaje = _ttsController.languaje;
     return Obx(
       () => _pictogramController.categoryGridviewOrPageview.value
           ? GridView.builder(
               controller: _pictogramController.categoriesGridController,
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              // padding: const EdgeInsets.symmetric(vertical: 8),
               itemCount: _homeController.grupos.length,
               itemBuilder: (context, index) => GestureDetector(
                 onLongPress: () async {
@@ -79,38 +80,38 @@ class CategoryViewWidget extends StatelessWidget {
               controller: _pictogramController.categoriesPageController,
               scrollDirection: Axis.horizontal,
               itemCount: _homeController.grupos.length,
-              itemBuilder: (context, index) => AspectRatio(
-                aspectRatio: 9 / 16,
-                child: GestureDetector(
-                  onLongPress: () async {
-                    _pictogramController.grupoToEdit =
-                        _homeController.grupos[index];
-                    showDialog(
-                      context: context,
-                      builder: (context) => ChoiceDialogue(),
-                    );
-                  },
-                  onTap: () async {
-                    //saying the name after selecting the category
-                    //saying the name after selecting the category and saving the selected grupo
-                    _pictogramController.selectedGrupos =
-                        _homeController.grupos[index];
-                    _ttsController.speak(languaje == "en"
-                        ? _homeController.grupos[index].texto.en
-                        : _homeController.grupos[index].texto.es);
-                    await _pictogramController.fetchDesiredPictos();
-                    // if (_pictogramController.secondTimeSameGroup ==
-                    //     _pictogramController.selectedGroupIndex) {
-                    // } else {
-                    //   _pictogramController.selectedGrupos.relacion
-                    //       .forEach((e1) {
-                    //     _pictogramController.pictsForGroupAdding
-                    //         .removeWhere((e2) => e1.id == e2.id);
-                    //   });
-                    // }
-                    print(_pictogramController.selectedGruposPicts.length);
-                    Get.toNamed(AppRoutes.SELECTPICTO);
-                  },
+              itemBuilder: (context, index) => GestureDetector(
+                onLongPress: () async {
+                  _pictogramController.grupoToEdit =
+                      _homeController.grupos[index];
+                  showDialog(
+                    context: context,
+                    builder: (context) => ChoiceDialogue(),
+                  );
+                },
+                onTap: () async {
+                  //saying the name after selecting the category
+                  //saying the name after selecting the category and saving the selected grupo
+                  _pictogramController.selectedGrupos =
+                      _homeController.grupos[index];
+                  _ttsController.speak(languaje == "en"
+                      ? _homeController.grupos[index].texto.en
+                      : _homeController.grupos[index].texto.es);
+                  await _pictogramController.fetchDesiredPictos();
+                  // if (_pictogramController.secondTimeSameGroup ==
+                  //     _pictogramController.selectedGroupIndex) {
+                  // } else {
+                  //   _pictogramController.selectedGrupos.relacion
+                  //       .forEach((e1) {
+                  //     _pictogramController.pictsForGroupAdding
+                  //         .removeWhere((e2) => e1.id == e2.id);
+                  //   });
+                  // }
+                  print(_pictogramController.selectedGruposPicts.length);
+                  Get.toNamed(AppRoutes.SELECTPICTO);
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.15),
                   child: CategoryPageWidget(
                     name: languaje == 'en'
                         ? _homeController.grupos[index].texto.en
@@ -153,7 +154,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('name', 'Edit '));
               } else {
-                _homeController.startTimerAndController();
+                _homeController.initializePageViewer();
                 Get.to(() => BuyPaidVersionPage());
               }
             },
@@ -199,7 +200,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 await _pictogramController.gruposExistsOnFirebase();
                 Get.back();
               } else {
-                _homeController.startTimerAndController();
+                _homeController.initializePageViewer();
                 Get.to(() => BuyPaidVersionPage());
               }
             },

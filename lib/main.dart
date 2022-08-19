@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,9 +9,7 @@ import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-
-// import 'dart:ui';
-// import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'app/modules/splash/splash_binding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
@@ -24,9 +21,11 @@ void main() async {
     DependencyInjection.init();
     // final String defaultSystemLocale = Platform.localeName;
     final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
-
+    print('these are the locales Asim asked for');
+    print(systemLocales.toList());
+    print('above it');
     // Pass all uncaught errors from the framework to Crashlytics.
-    if(!kIsWeb){
+    if (!kIsWeb) {
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     }
     if (kIsWeb) {
@@ -40,14 +39,16 @@ void main() async {
     }
     // print(defaultSystemLocale.toString());
     // print(systemLocales.asMap().toString());
+    final instance = await SharedPreferences.getInstance();
+    final bool = instance.getBool('Language_KEY') ?? false;
     runApp(
       MyApp(
-        locale: Locale(systemLocales[0].languageCode,
-            systemLocales[0].languageCode.toUpperCase()),
+        locale: bool ? Locale(systemLocales[0].languageCode,
+            systemLocales[0].languageCode.toUpperCase()) : Locale('es', 'AR'),
       ),
     );
   }, (error, stackTrace) {
-    if(!kIsWeb){
+    if (!kIsWeb) {
       FirebaseCrashlytics.instance.recordError(error, stackTrace);
     }
   });
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
     // print('hi i am here ${Platform.localeName.split('_').first}');
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'OTTAA Project',
+      title: 'OTTAA PROJECT',
       theme: ThemeData(
         primaryColor: kOTTAAOrangeNew,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
       // your translations
       locale: locale,
       // translations will be displayed in that locale
-      fallbackLocale: Locale('en', 'US'),
+      fallbackLocale: Locale('es', 'AR'),
     );
   }
 }

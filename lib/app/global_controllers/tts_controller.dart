@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'dart:io' show Platform;
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum TTSState { playing, stopped, paused, continued }
 
 class TTSController extends GetxController {
   late FlutterTts _flutterTTS;
   String _language = Get.locale!.languageCode;
+  final _dataController = Get.find<DataController>();
 
   String get languaje => this._language;
 
@@ -18,7 +19,7 @@ class TTSController extends GetxController {
     this._language = value;
   }
 
-  bool _isEnglish = true;
+  late bool _isEnglish;
 
   bool get isEnglish => this._isEnglish;
 
@@ -61,7 +62,7 @@ class TTSController extends GetxController {
 
   int get subtitleSize => this._subtitleSize;
 
-  set setVolume(value){
+  set setVolume(value) {
     this._volume = value;
   }
 
@@ -106,6 +107,8 @@ class TTSController extends GetxController {
   @override
   void onInit() async {
     _initTTS();
+    final instance = await SharedPreferences.getInstance();
+    _isEnglish = instance.getBool('Language_KEY') ?? false;
     super.onInit();
   }
 
@@ -177,6 +180,7 @@ class TTSController extends GetxController {
       await this._flutterTTS.awaitSpeakCompletion(true);
       await this._flutterTTS.setLanguage(this._language);
 
+
       // TODO The flutter_tts plugin for web doesn't implement the method 'getVoices'
       // var voice = await this._flutterTTS.getVoices;
       // print(voice.where((element) => element["locale"] == "es-US"));
@@ -200,8 +204,8 @@ class TTSController extends GetxController {
       }
       await this._flutterTTS.awaitSpeakCompletion(true);
       await this._flutterTTS.setLanguage(this._language);
-      await FirebaseAnalytics.instance.logEvent(name: "Talk");
-
+      // await FirebaseAnalytics.instance.logEvent(name: "Talk");
+      _dataController.logFirebaseAnalyticsEvent(eventName: 'Talk');
       // TODO The flutter_tts plugin for web doesn't implement the method 'getVoices'
       // var voice = await this._flutterTTS.getVoices;
       // print(voice.where((element) => element["locale"] == "es-US"));
@@ -211,5 +215,4 @@ class TTSController extends GetxController {
       await this._flutterTTS.speak(voiceText);
     }
   }
-
 }

@@ -115,12 +115,18 @@ class Picto extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 1,
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text(
-                  texto.toUpperCase(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              flex: 2,
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    texto.toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
             ),
