@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
-import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'local_widgets/search_sentence.dart';
@@ -25,7 +24,7 @@ class SentencesPage extends GetView<SentencesController> {
           foregroundColor: Colors.white,
           elevation: 0,
           title: Text('most_used_sentences'.tr),
-          actions: [
+          /*actions: [
             Icon(
               Icons.reorder,
               size: 30,
@@ -58,103 +57,18 @@ class SentencesPage extends GetView<SentencesController> {
             const SizedBox(
               width: 16,
             ),
-          ],
+          ],*/
         ),
         body: Container(
           color: Colors.black,
           child: Stack(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: horizontalSize * .10),
                 child: Column(
                   children: [
                     Expanded(
                       flex: 8,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: horizontalSize * 0.02),
-                        child: Center(
-                          child: GetBuilder<SentencesController>(
-                            id: "sentence",
-                            builder: (_) => FadeInDown(
-                              controller: (controller) =>
-                                  _.sentenceAnimationController = controller,
-                              from: 30,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    _.sentencesPicts.isNotEmpty
-                                        ? Container(
-                                            height: verticalSize / 3,
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: _
-                                                      .sentencesPicts[
-                                                          _.sentencesIndex]
-                                                      .length +
-                                                  1,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                final Pict speakPict = Pict(
-                                                  localImg: true,
-                                                  id: 0,
-                                                  texto: Texto(en: "", es: ""),
-                                                  tipo: 6,
-                                                  imagen: Imagen(
-                                                      picto: "logo_ottaa_dev"),
-                                                );
-                                                if (_
-                                                        .sentencesPicts[
-                                                            _.sentencesIndex]
-                                                        .length >
-                                                    index) {
-                                                  final Pict pict = _
-                                                          .sentencesPicts[
-                                                      _.sentencesIndex][index];
-                                                  return Container(
-                                                    margin: EdgeInsets.all(10),
-                                                    child: MiniPicto(
-                                                      localImg: pict.localImg,
-                                                      pict: pict,
-                                                      onTap: () {
-                                                        _.speak();
-                                                      },
-                                                    ),
-                                                  );
-                                                } else {
-                                                  return Bounce(
-                                                    from: 6,
-                                                    infinite: true,
-                                                    child: Container(
-                                                      margin:
-                                                          EdgeInsets.all(10),
-                                                      child: MiniPicto(
-                                                        localImg:
-                                                            speakPict.localImg,
-                                                        pict: speakPict,
-                                                        onTap: () {
-                                                          _.speak();
-                                                        },
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          )
-                                        : Container()
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      child: Container(),
                     ),
                     Expanded(
                       flex: 2,
@@ -191,6 +105,109 @@ class SentencesPage extends GetView<SentencesController> {
                   ],
                 ),
               ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: verticalSize * 0.17,
+                child: Container(
+                  height: verticalSize * 0.8,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                    child: Center(
+                      child: GetBuilder<SentencesController>(
+                        id: "sentence",
+                        builder: (_) => FadeInDown(
+                          controller: (controller) =>
+                              _.sentenceAnimationController = controller,
+                          from: 30,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _.sentencesPicts.isNotEmpty
+                                    ? Container(
+                                        height: verticalSize / 3,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount:
+                                              _.sentencesPicts[_.sentencesIndex]
+                                                      .length +
+                                                  1,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            final Pict speakPict = Pict(
+                                              localImg: true,
+                                              id: 0,
+                                              texto: Texto(en: "", es: ""),
+                                              tipo: 6,
+                                              imagen: Imagen(
+                                                  picto: "logo_ottaa_dev"),
+                                            );
+                                            if (_
+                                                    .sentencesPicts[
+                                                        _.sentencesIndex]
+                                                    .length >
+                                                index) {
+                                              final Pict pict =
+                                                  _.sentencesPicts[
+                                                      _.sentencesIndex][index];
+                                              return Container(
+                                                margin: EdgeInsets.all(10),
+                                                child: MiniPicto(
+                                                  localImg: pict.localImg,
+                                                  pict: pict,
+                                                  onTap: () {
+                                                    _.speak();
+                                                  },
+                                                ),
+                                              );
+                                            } else {
+                                              return Bounce(
+                                                from: 6,
+                                                infinite: true,
+                                                child: Container(
+                                                  margin: EdgeInsets.all(10),
+                                                  child: MiniPicto(
+                                                    localImg:
+                                                        speakPict.localImg,
+                                                    pict: speakPict,
+                                                    onTap: () {
+                                                      _.speak();
+                                                    },
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                        ),
+                                      )
+                                    : Container()
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              controller.showCircular.value
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: kOTTAAOrangeNew,
+                      ),
+                    )
+                  : Container(),
               Positioned(
                 left: 0,
                 bottom: 0,

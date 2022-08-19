@@ -1,8 +1,8 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/home/local_widgets/empty_text_dialog_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/home/local_widgets/sentence_share_widget.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
@@ -37,20 +37,30 @@ class RightColumnWidget extends GetView<HomeController> {
           FittedBox(
             child: GestureDetector(
               onTap: () async {
-                Fluttertoast.showToast(
-                  msg: "we_are_working_on_this_feature".tr,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.black,
-                  textColor: Colors.white,
-                  fontSize: verticalSize * 0.03,
-                );
+                // controller.ttsController
                 CustomAnalyticsEvents.setEventWithParameters(
-                    "Touch",
-                    CustomAnalyticsEvents.createMyMap(
-                        'Principal', "Share Phrases"));
-                // Get.toNamed(AppRoutes.TUTORIAL);
+                  "Touch",
+                  CustomAnalyticsEvents.createMyMap(
+                      'Principal', "Share Phrases"),
+                );
+                controller.sentencePicts.length == 0
+                    ? showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        barrierColor: Colors.transparent,
+                        builder: (context) {
+                          return EmptyTextDialogWidget();
+                        },
+                      )
+                    : showDialog(
+                        context: context,
+                        builder: (context) {
+                          return SentenceShareWidget();
+                        },
+                      );
+                if(controller.sentencePicts.length == 0){
+                  await controller.startTimerForDialogueExit();
+                }
               },
               child: Center(
                 child: Icon(
@@ -84,7 +94,7 @@ class RightColumnWidget extends GetView<HomeController> {
       decoration: BoxDecoration(
         color: kOTTAAOrangeNew,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(horizontalSize / 40),
+          topLeft: Radius.circular(16),
         ),
       ),
     );

@@ -4,6 +4,9 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          'galeria_grupos':'Gallery Groups',
+          'add_pict' : 'Add Pict',
+          'add_group' : 'Add Group',
           'hello_world': 'Hello World',
           'we_are_preparing_everything': 'We are preparing everything...',
           'Hello': 'Hello',
@@ -104,7 +107,7 @@ class Translation extends Translations {
           'tags_will_come_in_next_release': 'TAGs will come in next Release',
           'mute': 'Mute',
           'about_ottaa': 'About OTTAA',
-          'configuration': 'Configuration',
+          'configuration': 'Settings',
           'tutorial': 'Tutorial',
           'close_application': 'Close Application',
           'sign_out': 'Sign out',
@@ -133,7 +136,28 @@ class Translation extends Translations {
               'Use OTTAA Project with screen scanning, connect accessible buttons and much more.',
           'sentence_3':
               'With the premium version you can use the GPS to have a better prediction based on the commerce or place where you are',
-          '': '',
+          'whats_the_picto': 'What\'s the picto?',
+          'game1':
+              'Answer the questions by choosing the right pictogram.\nLearn by playing!',
+          'match_picto': 'Match Picto',
+          'game2': 'Attach the pictogram correctly',
+          'memory_game': 'Memory Game',
+          'game3': 'Test your memory',
+          'play': 'PLAY',
+          'select_a_category_to_play': 'Select a category to play',
+          'image': 'Image',
+          'share_text': 'please, create a phrase and select the share button',
+          'text_to_speche_engine': 'TEXT-TO-SPEECH-ENGINE',
+          'enable_custom_tts': 'Enable custom TTS',
+          'speech_rate': 'Speech Rate',
+          'speech_pitch': 'Speech Pitch',
+          'SUBTITLE': 'SUBTITLE',
+          'customized_subtitle': 'Customized subtitle',
+          'size': 'Size',
+          'upperCase': 'UpperCase',
+          'it_allows_uppercase_subtitles': 'It allows uppercase subtitles.',
+          'login_screen':
+              'Hello, welcome to OTTAA Project, the first predictive communication platform for people with speech impairments, please login with your account and fill in some data to benefit from our prediction.',
         },
         'es_ES': {
           'hello_world': 'Hola Mundo',
@@ -257,13 +281,41 @@ class Translation extends Translations {
           'we_are_working_on_this_feature':
               'Estamos trabajando en esta funcionalidad',
           'most_used_sentences': 'Oraciones más usadas',
-          '': '',
           'price_one':
               'Obtenga acceso hoy a todas las funciones útiles que OTTAA Premium tiene para ofrecer por solo 990 ARS al mes.',
           'purchase_subscription': 'COMPRAR SUSCRIPCIÓN',
-          'sentence_1': 'Accede a juegos educativos que te permiten evaluar vocabulario de una manera divertida',
-          'sentence_2': 'Use OTTAA Project con escaneo de pantalla, conéctese accesible Botones y mucho más.',
-          'sentence_3': 'Con la versión premium puedes usar el GPS para tener una mejor predicción basada en el comercio o lugar donde te encuentres',
+          'sentence_1':
+              'Accede a juegos educativos que te permiten evaluar vocabulario de una manera divertida',
+          'sentence_2':
+              'Use OTTAA Project con escaneo de pantalla, conéctese accesible Botones y mucho más.',
+          'sentence_3':
+              'Con la versión premium puedes usar el GPS para tener una mejor predicción basada en el comercio o lugar donde te encuentres',
+          'whats_the_picto': '¿Cual es el Picto ?',
+          'game1':
+              'Responde a las preguntas eligiendo el pictograma adecuado. ¡Aprende jugando!',
+          'match_picto': 'Igualar pictogramas',
+          'game2': 'Adjunta el pictograma correctamente',
+          'memory_game': 'Juego de memoria',
+          'game3': 'Prueba tu memoria',
+          'play': 'JUGAR',
+          'select_a_category_to_play': 'Seleccione una categoría para jugar',
+          'image': 'Imagen',
+          'share_text':
+              'por favor, crea una frase y selecciona el botón de compartir',
+          'text_to_speche_engine': 'MOTOR DE TEXTO A VOZ',
+          'enable_custom_tts': 'Habilitar TTS personalizado',
+          'speech_rate': 'Nivel de conversación',
+          'speech_pitch': 'Tono de voz',
+          'SUBTITLE': 'SUBTITULAR',
+          'customized_subtitle': 'subtítulo personalizado',
+          'size': 'Tamaño',
+          'upperCase': 'Mayúsculas',
+          'it_allows_uppercase_subtitles': 'Permite subtítulos en mayúsculas',
+          'login_screen':
+              'Hola, bienvenido a OTTAA Project, la primera plataforma de comunicación predictiva para personas con problemas del habla, inicie sesión con su cuenta y complete algunos datos para beneficiarse de nuestra predicción.',
+          'add_group': 'Añadir grupo',
+          'add_pict': 'Agregar imagen',
+          'galeria_grupos': 'Galeria Grupos',
           '': '',
         },
       };

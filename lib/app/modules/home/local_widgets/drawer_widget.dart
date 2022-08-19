@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
@@ -126,13 +127,15 @@ class DrawerWidget extends GetView<HomeController> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        ListTileWidget(
-                          icon: Icons.highlight_remove,
-                          title: 'close_application'.tr,
-                          onTap: () async {
-                            exit(0);
-                          },
-                        ),
+                        !kIsWeb
+                            ? ListTileWidget(
+                                icon: Icons.highlight_remove,
+                                title: 'close_application'.tr,
+                                onTap: () async {
+                                  exit(0);
+                                },
+                              )
+                            : Container(),
                         ListTileWidget(
                           icon: Icons.exit_to_app,
                           title: 'sign_out'.tr,

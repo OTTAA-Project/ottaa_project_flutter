@@ -6,9 +6,10 @@ class IconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
     return Icon(
       icon,
-      size: 30,
+      size: verticalSize * 0.05,
       color: Colors.grey[200],
     );
   }

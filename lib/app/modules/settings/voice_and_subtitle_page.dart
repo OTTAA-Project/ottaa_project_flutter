@@ -12,7 +12,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
         builder: (_) => Scaffold(
-              appBar: buildAppBar('Voice and subtitles'),
+              appBar: buildAppBar('voice_and_subtitles'.tr),
               body: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 30,
@@ -23,7 +23,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'TEXT-TO-SPEECH-ENGINE',
+                        'text_to_speche_engine'.tr,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -39,7 +39,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         onChanged: (bool value) {
                           _.toggleIsCustomTTSEnable(value);
                         },
-                        title: Text('Enable custom TTS'),
+                        title: Text('enable_custom_tts'.tr),
                         subtitle: _.ttsController.isCustomTTSEnable
                             ? Text('ON')
                             : Text('OFF'),
@@ -47,7 +47,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                       Divider(),
                       ListTile(
                         onTap: () {},
-                        title: Text('Speech Rate'),
+                        title: Text('speech_rate'.tr),
                         subtitle: Text(_.ttsController.rate.toString()),
                         enabled: false,
                       ),
@@ -69,7 +69,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                       Divider(),
                       ListTile(
                         onTap: () {},
-                        title: Text('Speech Pitch'),
+                        title: Text('speech_pitch'.tr),
                         subtitle: Text(_.ttsController.pitch.toString()),
                         enabled: false,
                       ),
@@ -89,7 +89,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         },
                       ),
                       Text(
-                        'SUBTITLE',
+                        'SUBTITLE'.tr,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -101,7 +101,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                       ),
                       SwitchListTile(
                         activeColor: kOTTAAOrange,
-                        title: Text('Customized subtitle'),
+                        title: Text('customized_subtitle'.tr),
                         subtitle: _.ttsController.isCustomSubtitle
                             ? Text('ON')
                             : Text('OFF'),
@@ -113,7 +113,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                       Divider(),
                       ListTile(
                         onTap: () {},
-                        title: Text('Size'),
+                        title: Text('size'.tr),
                         subtitle: Text(_.ttsController.subtitleSize.toString()),
                         enabled: false,
                       ),
@@ -137,8 +137,8 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         activeColor: _.ttsController.isCustomSubtitle
                             ? kOTTAAOrange
                             : kQuantumGrey,
-                        title: Text('Uppercase'),
-                        subtitle: Text('It allows uppercase subtitles.'),
+                        title: Text('upperCase'.tr),
+                        subtitle: Text('it_allows_uppercase_subtitles'.tr),
                         onChanged: (bool value) {
                           if (_.ttsController.isCustomSubtitle)
                             _.toggleIsSubtitleUppercase(value);

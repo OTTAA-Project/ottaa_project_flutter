@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -10,7 +12,8 @@ import 'package:ottaa_project_flutter/app/modules/home/local_widgets/left_column
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/sentence_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/suggested_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
-
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:screenshot/screenshot.dart';
 import '../../utils/CustomAnalytics.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -28,34 +31,130 @@ class HomePage extends GetView<HomeController> {
       drawer: DrawerWidget(),
       body: Stack(
         children: [
+          /// ScreenSHot Widget is here
+          Screenshot(
+            controller: controller.screenshotController,
+            child: Container(
+              height: verticalSize * 0.25,
+              // width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.blueGrey,
+              ),
+              child: Container(
+                color: Colors.blueGrey,
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    GetBuilder<HomeController>(
+                      id: 'screenshot',
+                      builder: (controller) => Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: controller.sentencePicts
+                            .map(
+                              (e) => Padding(
+                            padding:
+                            EdgeInsets.only(right: 8),
+                            child: kIsWeb
+                                ? Image.network(
+                              e.imagen.pictoEditado == null
+                                  ? e.imagen.picto
+                                  : e.imagen.pictoEditado!,
+                              width: verticalSize * 0.14,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null)
+                                  return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: kOTTAAOrangeNew,
+                                    value: loadingProgress
+                                        .expectedTotalBytes !=
+                                        null
+                                        ? loadingProgress
+                                        .cumulativeBytesLoaded /
+                                        loadingProgress
+                                            .expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              },
+                            )
+                                : CachedNetworkImage(
+                              imageUrl: e.imagen.pictoEditado == null
+                                  ? e.imagen.picto
+                                  : e.imagen.pictoEditado!,
+                              placeholder: (context, url) => Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              // height: verticalSize * 0.04,
+                              width: verticalSize * 0.14,
+                            ),
+                          ),
+                        )
+                            .toList(),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 16),
+                      child: Image.asset(
+                        'assets/otta_drawer_logo.png',
+                        height: verticalSize * 0.05,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          /// just a little hack to keep it hidden
+          Container(
+            height: verticalSize * 0.25,
+            color: Colors.black,
+          ),
+          Positioned(
+            left: 0,
+            bottom: 0,
+            child: LeftColumnWidget(),
+          ),
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: RightColumnWidget(),
+          ),
           Column(
             //MAIN COLUMN
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              // TOP ROW
-              SentenceWidget(),
-              Row(
-                // BODY ROW
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // LEFT COLUMN
-                  LeftColumnWidget(),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // BODY
-                      SuggestedWidget(),
-                      ActionsWidget(),
-                    ],
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                  ),
-                  // RIGHT COLUMN
-                  RightColumnWidget(),
-                ],
-              )
-              //SizedBox(height: 10),
+              Expanded(
+                flex: 8,
+                child: Column(
+                  children: [
+                    SentenceWidget(),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: ActionsWidget(),
+              ),
             ],
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: verticalSize * 0.17,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: SuggestedWidget(),
+              ),
+            ),
           ),
           GetBuilder<HomeController>(
             id: "subtitle",
@@ -148,6 +247,16 @@ class HomePage extends GetView<HomeController> {
                 ),
               ),*/
           // if (_homeController.isPlaying())
+          /// circular Indicator
+          Obx(
+            () => controller.showOrNot.value
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: kOTTAAOrangeNew,
+                    ),
+                  )
+                : Container(),
+          ),
         ],
       ),
       backgroundColor: Colors.black,
