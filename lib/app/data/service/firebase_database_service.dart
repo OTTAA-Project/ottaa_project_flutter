@@ -52,7 +52,7 @@ class FirebaseDatabaseService {
     return res.value['urlFoto'];
   }
 
-  Future<String> fetchCurrentVersion() async {
+  Future<double> fetchCurrentVersion() async {
     final ref = databaseRef.child('version/');
     final res = await ref.get();
     return res.value;

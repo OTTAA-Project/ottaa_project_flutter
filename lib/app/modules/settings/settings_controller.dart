@@ -8,12 +8,20 @@ class SettingsController extends GetxController {
 
   TTSController get ttsController => this._ttsController;
   final _authController = Get.find<AuthController>();
+  RxString language = ''.obs;
 
   AuthController get authController => this._authController;
 
   toggleIsCustomTTSEnable(bool value) {
     _ttsController.isCustomTTSEnable = value;
     update();
+  }
+
+  @override
+  void onInit() async {
+    language.value = _ttsController.languaje;
+    print(language.value);
+    super.onInit();
   }
 
   toggleIsCustomSubtitle(bool value) {
@@ -27,15 +35,9 @@ class SettingsController extends GetxController {
   }
 
   toggleLanguaje(String value) async {
-    if (value.toLowerCase() == 'Spanish'.toLowerCase()) {
-      _ttsController.languaje = "es";
-      _ttsController.isEnglish = false;
-    } else {
-      _ttsController.languaje = "en";
-      _ttsController.isEnglish = true;
-    }
+    _ttsController.languaje = value;
     final instance = await SharedPreferences.getInstance();
-    instance.setBool('Language_KEY', _ttsController.isEnglish);
+    instance.setString('Language_KEY', language.value);
     update();
   }
 

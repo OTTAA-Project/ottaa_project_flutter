@@ -318,5 +318,6 @@ class Translation extends Translations {
           'galeria_grupos': 'Galeria Grupos',
           '': '',
         },
+    'fr_fr': {},
       };
 }

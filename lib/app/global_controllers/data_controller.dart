@@ -63,7 +63,7 @@ class DataController extends GetxController {
   Future<String> fetchUserEmail() async =>
       await _firebaseDatabaseController.fetchUserEmail();
 
-  Future<String> fetchCurrentVersion() async =>
+  Future<double> fetchCurrentVersion() async =>
       await _firebaseDatabaseController.fetchCurrentVersion();
 
   Future<int> getPicNumber() async =>

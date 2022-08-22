@@ -64,7 +64,7 @@ class FirebaseDatabaseRepository {
   Future<String> fetchUserEmail() async =>
       await _firebaseDatabaseService.fetchUserEmail();
 
-  Future<String> fetchCurrentVersion() async =>
+  Future<double> fetchCurrentVersion() async =>
       await _firebaseDatabaseService.fetchCurrentVersion();
 
   Future<int> getPicNumber() async =>
