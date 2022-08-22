@@ -43,7 +43,7 @@ class PictoPageWidget extends StatelessWidget {
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: CategoryWidget(
-                  name: languaje == "en"
+                  name: languaje == "en-US"
                       ? _pictogramController.selectedGruposPicts[index].texto.en
                       : _pictogramController
                           .selectedGruposPicts[index].texto.es,
@@ -88,7 +88,7 @@ class PictoPageWidget extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: horizontalSize * 0.07),
                   child: CategoryPageWidget(
-                    name: languaje == "en"
+                    name: languaje == "en-US"
                         ? _pictogramController
                             .selectedGruposPicts[index].texto.en
                         : _pictogramController
@@ -106,7 +106,7 @@ class PictoPageWidget extends StatelessWidget {
 
   Future<void> onTap(int index, String languaje) async {
     //saying the name after selecting the category
-    _ttsController.speak(languaje == "en"
+    _ttsController.speak(languaje == "en-US"
         ? _pictogramController.selectedGruposPicts[index].texto.en
         : _pictogramController.selectedGruposPicts[index].texto.es);
     //add to the sentence

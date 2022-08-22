@@ -289,10 +289,10 @@ class HomeController extends GetxController {
       this._voiceText = "";
       this._sentencePicts.forEach((pict) {
         switch (this._ttsController.languaje) {
-          case "es":
+          case "es-AR":
             this._voiceText += "${pict.texto.es} ";
             break;
-          case "en":
+          case "en-US":
             this._voiceText += "${pict.texto.en} ";
             break;
 
@@ -492,7 +492,7 @@ class HomeController extends GetxController {
     await _flutterTts.setSpeechRate(1.0);
     await _flutterTts.setVolume(1.0);
     await _flutterTts.setPitch(1.0);
-    if (_ttsController.languaje == 'en') {
+    if (_ttsController.languaje == 'en-US') {
       await _flutterTts.setVoice(
         {"name": "en-us-x-tpf-local", "locale": "en-US"},
       );
@@ -540,10 +540,10 @@ class HomeController extends GetxController {
     this.textToShare = "";
     this._sentencePicts.forEach((pict) {
       switch (this._ttsController.languaje) {
-        case "es":
+        case "es-AR":
           this.textToShare += "${pict.texto.es} ";
           break;
-        case "en":
+        case "en-US":
           this.textToShare += "${pict.texto.en} ";
           break;
 

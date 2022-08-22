@@ -46,7 +46,7 @@ class CategoryViewWidget extends StatelessWidget {
                       _homeController.grupos[index];
                   _pictogramController.selectedIndex = index;
                   print(_pictogramController.selectedIndex);
-                  _ttsController.speak(languaje == "en"
+                  _ttsController.speak(languaje == "en-US"
                       ? _homeController.grupos[index].texto.en
                       : _homeController.grupos[index].texto.es);
                   await _pictogramController.fetchDesiredPictos();
@@ -62,7 +62,7 @@ class CategoryViewWidget extends StatelessWidget {
                   Get.toNamed(AppRoutes.SELECTPICTO);
                 },
                 child: CategoryWidget(
-                  name: languaje == 'en'
+                  name: languaje == 'en-US'
                       ? _homeController.grupos[index].texto.en
                       : _homeController.grupos[index].texto.es,
                   imageName: _homeController.grupos[index].imagen.picto,
@@ -113,7 +113,7 @@ class CategoryViewWidget extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.15),
                   child: CategoryPageWidget(
-                    name: languaje == 'en'
+                    name: languaje == 'en-US'
                         ? _homeController.grupos[index].texto.en
                         : _homeController.grupos[index].texto.es,
                     imageName: _homeController.grupos[index].imagen.picto,

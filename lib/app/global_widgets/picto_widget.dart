@@ -37,13 +37,12 @@ class Picto extends StatelessWidget {
     String texto;
 
     switch (this.languaje) {
-      case "es":
+      case "es-AR":
         texto = pict.texto.es;
         break;
-      case "en":
+      case "en-US":
         texto = pict.texto.en;
         break;
-
       default:
         texto = pict.texto.es;
     }

@@ -19,7 +19,8 @@ class SettingsController extends GetxController {
 
   @override
   void onInit() async {
-    language.value = _ttsController.languaje;
+    final instance = await SharedPreferences.getInstance();
+    language.value = instance.getString('Language_KEY')?? 'Spanish';
     print(language.value);
     super.onInit();
   }

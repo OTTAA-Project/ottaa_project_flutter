@@ -25,14 +25,14 @@ class CustomDelegate extends SearchDelegate<String> {
     List<Pict> listToShow;
     final language = _ttsController.languaje;
     if (query.isNotEmpty)
-      listToShow = language == 'en'
+      listToShow = language == 'en-US'
           ? _pictogramController.picts
-              .where((e) =>
-                  e.texto.en.toLowerCase().contains(query.toLowerCase()))
+              .where(
+                  (e) => e.texto.en.toLowerCase().contains(query.toLowerCase()))
               .toList()
           : _pictogramController.picts
-              .where((e) =>
-                  e.texto.es.toLowerCase().contains(query.toLowerCase()))
+              .where(
+                  (e) => e.texto.es.toLowerCase().contains(query.toLowerCase()))
               .toList();
     else
       listToShow = _pictogramController.picts;
@@ -47,7 +47,7 @@ class CustomDelegate extends SearchDelegate<String> {
             await onTap(listToShow[index]);
           },
           child: CategoryWidget(
-            name: language == 'en'
+            name: language == 'en-US'
                 ? listToShow[index].texto.en
                 : listToShow[index].texto.es,
             imageName: listToShow[index].imagen.pictoEditado == null
@@ -73,7 +73,7 @@ class CustomDelegate extends SearchDelegate<String> {
     List<Pict> listToShow;
     final language = _ttsController.languaje;
     if (query.isNotEmpty)
-      listToShow = language == 'en'
+      listToShow = language == 'en-US'
           ? _pictogramController.picts
               .where(
                   (e) => e.texto.en.toLowerCase().contains(query.toLowerCase()))
@@ -96,7 +96,7 @@ class CustomDelegate extends SearchDelegate<String> {
             await onTap(listToShow[index]);
           },
           child: CategoryWidget(
-            name: language == 'en'
+            name: language == 'en-US'
                 ? listToShow[index].texto.en
                 : listToShow[index].texto.es,
             imageName: listToShow[index].imagen.pictoEditado == null

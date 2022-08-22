@@ -96,7 +96,7 @@ class EditPictoPage extends GetView<EditPictoController> {
                               );
                             },
                             child: CategoryWidget(
-                              name: languaje == 'en'
+                              name: languaje == 'en-US'
                                   ? controller.pict.value!.texto.en
                                   : controller.pict.value!.texto.es,
                               imageName: controller

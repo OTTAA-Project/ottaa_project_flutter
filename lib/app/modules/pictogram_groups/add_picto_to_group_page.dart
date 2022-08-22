@@ -55,7 +55,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                           child: Obx(
                             () => AddPictoToGroupWidget(
                               color: controller.pictsForGroupAdding[index].tipo,
-                              name: controller.ttsController.languaje == 'en'
+                              name: controller.ttsController.languaje == 'en-US'
                                   ? controller
                                       .pictsForGroupAdding[index].texto.en
                                   : controller
