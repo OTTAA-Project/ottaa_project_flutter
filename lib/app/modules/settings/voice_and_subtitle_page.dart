@@ -6,7 +6,7 @@ import 'local_widgets/build_app_bar.dart';
 import 'settings_controller.dart';
 
 class VoiceAndSubtitlesPage extends StatelessWidget {
-  VoiceAndSubtitlesPage({Key? key}) : super(key: key);
+  const VoiceAndSubtitlesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                     children: [
                       Text(
                         'text_to_speche_engine'.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -40,11 +40,9 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                           _.toggleIsCustomTTSEnable(value);
                         },
                         title: Text('enable_custom_tts'.tr),
-                        subtitle: _.ttsController.isCustomTTSEnable
-                            ? Text('ON')
-                            : Text('OFF'),
+                        subtitle: _.ttsController.isCustomTTSEnable ? const Text('ON') : const Text('OFF'),
                       ),
-                      Divider(),
+                      const Divider(),
                       ListTile(
                         onTap: () {},
                         title: Text('speech_rate'.tr),
@@ -52,9 +50,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         enabled: false,
                       ),
                       Slider(
-                        activeColor: _.ttsController.isCustomTTSEnable
-                            ? kOTTAAOrange
-                            : kQuantumGrey,
+                        activeColor: _.ttsController.isCustomTTSEnable ? kOTTAAOrange : kQuantumGrey,
                         inactiveColor: kQuantumGrey,
                         value: _.ttsController.rate,
                         min: 0.0,
@@ -62,11 +58,12 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         divisions: 10,
                         label: _.ttsController.rate.toString(),
                         onChanged: (double value) {
-                          if (_.ttsController.isCustomTTSEnable)
+                          if (_.ttsController.isCustomTTSEnable) {
                             _.setRate(value);
+                          }
                         },
                       ),
-                      Divider(),
+                      const Divider(),
                       ListTile(
                         onTap: () {},
                         title: Text('speech_pitch'.tr),
@@ -74,9 +71,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         enabled: false,
                       ),
                       Slider(
-                        activeColor: _.ttsController.isCustomTTSEnable
-                            ? kOTTAAOrange
-                            : kQuantumGrey,
+                        activeColor: _.ttsController.isCustomTTSEnable ? kOTTAAOrange : kQuantumGrey,
                         inactiveColor: kQuantumGrey,
                         value: _.ttsController.pitch,
                         min: 0.0,
@@ -84,13 +79,14 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         divisions: 10,
                         label: _.ttsController.pitch.toString(),
                         onChanged: (double value) {
-                          if (_.ttsController.isCustomTTSEnable)
+                          if (_.ttsController.isCustomTTSEnable) {
                             _.setPitch(value);
+                          }
                         },
                       ),
                       Text(
                         'SUBTITLE'.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -102,15 +98,13 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                       SwitchListTile(
                         activeColor: kOTTAAOrange,
                         title: Text('customized_subtitle'.tr),
-                        subtitle: _.ttsController.isCustomSubtitle
-                            ? Text('ON')
-                            : Text('OFF'),
+                        subtitle: _.ttsController.isCustomSubtitle ? const Text('ON') : const Text('OFF'),
                         onChanged: (bool value) {
                           _.toggleIsCustomSubtitle(value);
                         },
                         value: _.ttsController.isCustomSubtitle,
                       ),
-                      Divider(),
+                      const Divider(),
                       ListTile(
                         onTap: () {},
                         title: Text('size'.tr),
@@ -118,9 +112,7 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         enabled: false,
                       ),
                       Slider(
-                        activeColor: _.ttsController.isCustomSubtitle
-                            ? kOTTAAOrange
-                            : kQuantumGrey,
+                        activeColor: _.ttsController.isCustomSubtitle ? kOTTAAOrange : kQuantumGrey,
                         inactiveColor: kQuantumGrey,
                         value: _.ttsController.subtitleSize.toDouble(),
                         min: 1.0,
@@ -128,20 +120,20 @@ class VoiceAndSubtitlesPage extends StatelessWidget {
                         divisions: 3,
                         label: _.ttsController.subtitleSize.toString(),
                         onChanged: (double value) {
-                          if (_.ttsController.isCustomSubtitle)
+                          if (_.ttsController.isCustomSubtitle) {
                             _.setSubtitleSize(value.toInt());
+                          }
                         },
                       ),
-                      Divider(),
+                      const Divider(),
                       SwitchListTile(
-                        activeColor: _.ttsController.isCustomSubtitle
-                            ? kOTTAAOrange
-                            : kQuantumGrey,
+                        activeColor: _.ttsController.isCustomSubtitle ? kOTTAAOrange : kQuantumGrey,
                         title: Text('upperCase'.tr),
                         subtitle: Text('it_allows_uppercase_subtitles'.tr),
                         onChanged: (bool value) {
-                          if (_.ttsController.isCustomSubtitle)
+                          if (_.ttsController.isCustomSubtitle) {
                             _.toggleIsSubtitleUppercase(value);
+                          }
                         },
                         value: _.ttsController.isSubtitleUppercase,
                       ),

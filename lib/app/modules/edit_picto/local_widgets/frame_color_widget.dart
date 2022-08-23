@@ -24,9 +24,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
           left: horizontalSIze * 0.01,
           child: Text(
             'fitzgerald_key'.tr,
-            style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: verticalSize * 0.03
-            ),
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: verticalSize * 0.03),
           ),
         ),
         Positioned(
@@ -37,7 +35,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.green,
             text: 'actions'.tr,
             tipo: 3,
-            onTap: ()=> onTap!(tipo: 3),
+            onTap: () => onTap!(tipo: 3),
           ),
         ),
         Positioned(
@@ -48,7 +46,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.purple,
             text: 'interactions'.tr,
             tipo: 5,
-            onTap: ()=> onTap!(tipo: 5),
+            onTap: () => onTap!(tipo: 5),
           ),
         ),
         Positioned(
@@ -59,7 +57,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.yellow,
             text: 'people'.tr,
             tipo: 1,
-            onTap: ()=> onTap!(tipo: 1),
+            onTap: () => onTap!(tipo: 1),
           ),
         ),
         Positioned(
@@ -70,7 +68,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: kOTTAAOrange,
             text: 'nouns'.tr,
             tipo: 2,
-            onTap: ()=> onTap!(tipo: 2),
+            onTap: () => onTap!(tipo: 2),
           ),
         ),
         Positioned(
@@ -81,7 +79,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.blue,
             text: 'adjectives'.tr,
             tipo: 4,
-            onTap: ()=> onTap!(tipo: 4),
+            onTap: () => onTap!(tipo: 4),
           ),
         ),
         Positioned(
@@ -92,7 +90,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
             color: Colors.black,
             text: 'miscellaneous'.tr,
             tipo: 6,
-            onTap: ()=> onTap!(tipo: 6),
+            onTap: () => onTap!(tipo: 6),
           ),
         ),
       ],
@@ -101,7 +99,7 @@ class FrameColorWidget extends GetView<EditPictoController> {
 }
 
 class ColorWidget extends StatelessWidget {
-  ColorWidget({
+  const ColorWidget({
     Key? key,
     required this.color,
     required this.text,

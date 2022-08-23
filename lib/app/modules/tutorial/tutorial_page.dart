@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/modules/tutorial/local_widgets/tutorials_widgets.dart';
+import 'package:ottaa_project_flutter/app/modules/tutorial/tutorial_controller.dart';
 
-import 'local_widgets/step1_tutorial.dart';
-import 'local_widgets/step2_tutorial.dart';
-import 'local_widgets/step3_tutorial.dart';
-import 'local_widgets/step4_tutorial.dart';
-import 'tutorial_controller.dart';
 
 class TutorialPage extends StatelessWidget {
   const TutorialPage({Key? key}) : super(key: key);
@@ -21,7 +18,7 @@ class TutorialPage extends StatelessWidget {
             child: PageView(
               /// [PageView.scrollDirection] defaults to [Axis.horizontal].
               /// Use [Axis.vertical] to scroll vertically.
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.horizontal,
               controller: controller,
               children: <Widget>[

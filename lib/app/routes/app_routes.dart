@@ -1,17 +1,17 @@
 class AppRoutes {
-  static const SPLASH = "/splash";
-  static const LOGIN = "/login";
-  static const HOME = "/home";
-  static const SENTENCES = "/sentences";
-  static const SETTINGS = "/settings";
-  static const SETTINGS_LANG = "/settings_lang";
-  static const SETTINGS_VOICE = "/settings_voice";
-  static const ONBOARDING = "/onboarding";
-  static const TUTORIAL = "/tutorial";
-  static const PICTOGRAMGROUP = "/pictogram_group";
-  static const SELECTPICTO = "/select_picto";
-  static const EDITPICTO = "/edit_picto";
-  static const ABOUTOTTAA = "/about_ottaa";
-  static const GAMES = "/games";
-  static const ADDGROUP = "/add_group_page";
+  static const kSlash = "/splash";
+  static const kLogin = "/login";
+  static const kHome = "/home";
+  static const kSentences = "/sentences";
+  static const kSettings = "/settings";
+  static const kSettingsLang = "/settings_lang";
+  static const kSettingsVoice = "/settings_voice";
+  static const kOnBoarding = "/onboarding";
+  static const kTutorial = "/tutorial";
+  static const kPictogramGroup = "/pictogram_group";
+  static const kSelectPictogram = "/select_picto";
+  static const kEditPictogram = "/edit_picto";
+  static const kAboutOTTA = "/about_ottaa";
+  static const kGames = "/games";
+  static const kAddGroup = "/add_group_page";
 }

@@ -5,7 +5,7 @@ import 'dart:io';
 import '../../../../theme/app_theme.dart';
 
 class EditGrupoWidget extends StatelessWidget {
-  EditGrupoWidget({
+  const EditGrupoWidget({
     Key? key,
     required this.name,
     required this.mainNativeImageUrl,
@@ -16,9 +16,9 @@ class EditGrupoWidget extends StatelessWidget {
   }) : super(key: key);
   final String name;
   final String mainNativeImageUrl;
-  String? selectedImageUrl;
-  File? fileImage;
-  Image? imageWidget;
+  final String? selectedImageUrl;
+  final File? fileImage;
+  final Image? imageWidget;
   final bool editingGrupo;
 
   @override
@@ -64,8 +64,7 @@ class EditGrupoWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 name.toUpperCase(),
-                style: TextStyle(
-                    fontSize: verticalSize * 0.03, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: verticalSize * 0.03, fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -76,14 +75,14 @@ class EditGrupoWidget extends StatelessWidget {
 }
 
 class WebImage extends StatelessWidget {
-  WebImage({
+  const WebImage({
     Key? key,
     required this.mainNativeImageUrl,
     this.selectedImageUrl,
     this.imageWidget,
   }) : super(key: key);
-  String? selectedImageUrl;
-  Image? imageWidget;
+  final String? selectedImageUrl;
+  final Image? imageWidget;
   final String mainNativeImageUrl;
 
   @override
@@ -98,10 +97,7 @@ class WebImage extends StatelessWidget {
                   return Center(
                     child: CircularProgressIndicator(
                       color: kOTTAAOrangeNew,
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
+                      value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
                     ),
                   );
                 },
@@ -113,10 +109,7 @@ class WebImage extends StatelessWidget {
                   return Center(
                     child: CircularProgressIndicator(
                       color: kOTTAAOrangeNew,
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
+                      value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
                     ),
                   );
                 },
@@ -125,17 +118,17 @@ class WebImage extends StatelessWidget {
 }
 
 class DeviceImage extends StatelessWidget {
-  DeviceImage({
+  const DeviceImage({
     Key? key,
     required this.mainNativeImageUrl,
     this.selectedImageUrl,
     this.fileImage,
     required this.editingGrupo,
   }) : super(key: key);
-  String? selectedImageUrl;
-  File? fileImage;
-  String mainNativeImageUrl;
-  bool editingGrupo;
+  final String? selectedImageUrl;
+  final File? fileImage;
+  final String mainNativeImageUrl;
+  final bool editingGrupo;
 
   @override
   Widget build(BuildContext context) {

@@ -28,8 +28,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
         leading: Container(),
         foregroundColor: Colors.white,
         elevation: 0,
-        title: Text('OTTAA PROJECT'),
-        actions: [],
+        title: const Text('OTTAA PROJECT'),
       ),
       body: Container(
         color: Colors.black,
@@ -49,31 +48,19 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            controller.selectedList[index].value =
-                                !controller.selectedList[index].value;
+                            controller.selectedList[index].value = !controller.selectedList[index].value;
                           },
                           child: Obx(
                             () => AddPictoToGroupWidget(
                               color: controller.pictsForGroupAdding[index].tipo,
-                              name: controller.ttsController.languaje == 'en'
-                                  ? controller
-                                      .pictsForGroupAdding[index].texto.en
-                                  : controller
-                                      .pictsForGroupAdding[index].texto.es,
-                              image: controller.pictsForGroupAdding[index]
-                                          .imagen.pictoEditado !=
-                                      null
-                                  ? controller.pictsForGroupAdding[index].imagen
-                                      .pictoEditado!
-                                  : controller
-                                      .pictsForGroupAdding[index].imagen.picto,
+                              name: controller.ttsController.languaje == 'en' ? controller.pictsForGroupAdding[index].texto.en : controller.pictsForGroupAdding[index].texto.es,
+                              image: controller.pictsForGroupAdding[index].imagen.pictoEditado != null ? controller.pictsForGroupAdding[index].imagen.pictoEditado! : controller.pictsForGroupAdding[index].imagen.picto,
                               isSelected: controller.selectedList[index].value,
                             ),
                           ),
                         );
                       },
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20,
@@ -105,78 +92,62 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                             onTap: () async {
                               showDialog<void>(
                                 barrierDismissible: false,
-                                builder: (BuildContext context) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
+                                builder: (BuildContext context) => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
                                 context: context,
                               );
+
                               List<Pict> toBeAddedonToCurrentList = [];
                               int index = -1;
                               controller.grupos.firstWhere((element) {
                                 index++;
-                                return element.id ==
-                                    controller.selectedGrupos.id;
+                                return element.id == controller.selectedGrupos.id;
                               });
                               print('the group index is $index');
                               int index2 = -1;
-                              controller.pictsForGroupAdding.forEach((element) {
+                              // ignore: unused_local_variable
+                              for (var group in controller.pictsForGroupAdding) {
                                 index2++;
-                                if (controller.selectedList[index2].value ==
-                                    true) {
+                                if (controller.selectedList[index2].value == true) {
                                   _homeController.grupos[index].relacion.add(
                                     GrupoRelacion(
-                                      id: controller
-                                          .pictsForGroupAdding[index2].id,
+                                      id: controller.pictsForGroupAdding[index2].id,
                                       frec: 0,
                                     ),
                                   );
-                                  toBeAddedonToCurrentList.add(
-                                      controller.pictsForGroupAdding[index2]);
-                                  print(controller
-                                      .pictsForGroupAdding[index2].texto.en);
+                                  toBeAddedonToCurrentList.add(controller.pictsForGroupAdding[index2]);
+                                  print(controller.pictsForGroupAdding[index2].texto.en);
                                 }
-                              });
-                              final data = _homeController.grupos;
+                              }
+                              final groupsData = _homeController.grupos;
                               List<String> fileData = [];
-                              data.forEach((element) {
-                                final obj = jsonEncode(element);
+                              for (var groupData in groupsData) {
+                                final obj = jsonEncode(groupData);
                                 fileData.add(obj);
-                              });
+                              }
 
                               /// saving changes to file
                               if (!kIsWeb) {
                                 final localFile = LocalFileController();
-                                await localFile.writeGruposToFile(
-                                    data: fileData.toString());
+                                await localFile.writeGruposToFile(data: fileData.toString());
                                 // print('writing to file');
                               }
                               //for the file data
-                              final instance =
-                                  await SharedPreferences.getInstance();
+                              final instance = await SharedPreferences.getInstance();
                               await instance.setBool('Grupos_file', true);
                               // print(res1);
                               //upload to the firebase
-                              await controller.uploadToFirebaseGrupo(
-                                  data: fileData.toString());
+                              await controller.uploadToFirebaseGrupo(data: fileData.toString());
                               await controller.gruposExistsOnFirebase();
                               //change the view and add values to the current list
-                              controller.selectedGruposPicts
-                                  .addAll(toBeAddedonToCurrentList);
-                              controller.pictoGridviewOrPageview.value =
-                                  !controller.pictoGridviewOrPageview.value;
-                              controller.pictoGridviewOrPageview.value =
-                                  !controller.pictoGridviewOrPageview.value;
-                              controller.selectedList = List.generate(
-                                  _homeController.picts.length,
-                                  (index) => false.obs,
-                                  growable: true);
+                              controller.selectedGruposPicts.addAll(toBeAddedonToCurrentList);
+                              controller.pictoGridviewOrPageview.value = !controller.pictoGridviewOrPageview.value;
+                              controller.pictoGridviewOrPageview.value = !controller.pictoGridviewOrPageview.value;
+                              controller.selectedList = List.generate(_homeController.picts.length, (index) => false.obs, growable: true);
                               print(controller.selectedGruposPicts.length);
-                              controller.secondTimeSameGroup =
-                                  controller.selectedGroupIndex;
+                              controller.secondTimeSameGroup = controller.selectedGroupIndex;
                               Get.close(2);
-
                             },
                             child: Icon(
                               Icons.save,
@@ -184,7 +155,6 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                               color: Colors.white,
                             ),
                           ),
-                          Container(),
                         ],
                       ),
                     ),
@@ -197,7 +167,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
               left: 0,
               bottom: 0,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: kOTTAAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(16),
@@ -207,13 +177,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                 height: height * 0.5,
                 child: Center(
                   child: GestureDetector(
-                    onTap: () => {
-                      controller.pictoGridviewOrPageview.value
-                          ? controller
-                              .removeSomeScroll(controller.pictoGridController)
-                          : controller
-                              .gotoPreviousPage(controller.pictoPageController)
-                    },
+                    onTap: () => {controller.pictoGridviewOrPageview.value ? controller.removeSomeScroll(controller.pictoGridController) : controller.gotoPreviousPage(controller.pictoPageController)},
                     child: Icon(
                       Icons.skip_previous,
                       size: height * 0.1,
@@ -228,7 +192,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
               right: 0,
               bottom: 0,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: kOTTAAOrangeNew,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
@@ -239,11 +203,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                 child: Center(
                   child: GestureDetector(
                     onTap: () => {
-                      controller.pictoGridviewOrPageview.value
-                          ? controller
-                              .addSomeScroll(controller.pictoGridController)
-                          : controller
-                              .gotoNextPage(controller.pictoPageController),
+                      controller.pictoGridviewOrPageview.value ? controller.addSomeScroll(controller.pictoGridController) : controller.gotoNextPage(controller.pictoPageController),
                     },
                     child: Icon(
                       Icons.skip_next,
@@ -260,7 +220,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
               bottom: height * 0.02,
               left: width * 0.43,
               right: width * 0.43,
-              child: OttaLogoWidget(),
+              child: const OttaLogoWidget(),
             ),
           ],
         ),

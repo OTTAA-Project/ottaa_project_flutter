@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/global_widgets/otta_icons.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/ottaa_project_custom_icons_icons.dart';
 
 final List<PageViewerDataModel> data = [
   PageViewerDataModel(
@@ -11,7 +11,7 @@ final List<PageViewerDataModel> data = [
   ),
   PageViewerDataModel(
     text: 'sentence_3',
-    icon: Ottaa_project_custom_icons.map_marked,
+    icon: OttaIcons.map_marked,
   ),
   PageViewerDataModel(
     text: 'sentence_2',
@@ -27,7 +27,6 @@ class LeftSidePaidVersion extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     final verticalSize = MediaQuery.of(context).size.height;
-    final horizontalSize = MediaQuery.of(context).size.width;
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -60,7 +59,6 @@ class PageViewerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final verticalSize = MediaQuery.of(context).size.height;
-    final horizontalSize = MediaQuery.of(context).size.width;
     return Column(
       children: [
         Expanded(

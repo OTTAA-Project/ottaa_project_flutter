@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class RightSidePaidVersion extends StatelessWidget {
   const RightSidePaidVersion({
@@ -28,22 +28,19 @@ class RightSidePaidVersion extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                child: Center(
-                  child: Text(
-                    'price_one'.tr,
-                    textAlign: TextAlign.center,
-                  ),
+              child: Center(
+                child: Text(
+                  'price_one'.tr,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
             Expanded(
               child: GestureDetector(
                 onTap: () async {
-                  if (await canLaunch(url)){
-                    await launch(url);
-                  }
-                  else {
+                  if (await canLaunchUrlString(url)) {
+                    await launchUrlString(url);
+                  } else {
                     print('no');
                     // can't launch url
                   }
@@ -63,7 +60,7 @@ class RightSidePaidVersion extends StatelessWidget {
             ),
             Expanded(
               child: GestureDetector(
-                onTap: () => Get.offAllNamed(AppRoutes.LOGIN),
+                onTap: () => Get.offAllNamed(AppRoutes.kLogin),
                 child: Container(
                   color: Colors.black12,
                   child: Center(

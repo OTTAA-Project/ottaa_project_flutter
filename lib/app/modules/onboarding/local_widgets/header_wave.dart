@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class HeaderWave extends StatelessWidget {
   final Color color;
   final Color bgColor;
-  const HeaderWave({required this.color,this.bgColor = Colors.white});
+
+  const HeaderWave({Key? key, required this.color, this.bgColor = Colors.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class HeaderWave extends StatelessWidget {
       height: double.infinity,
       width: double.infinity,
       child: CustomPaint(
-        painter: _HeaderWavePainter(this.color),
+        painter: _HeaderWavePainter(color),
       ),
     );
   }
@@ -25,14 +26,14 @@ class _HeaderWavePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final lapiz = new Paint();
+    final lapiz = Paint();
 
     // Propiedades
-    lapiz.color = this.color; //Color(0xff615AAB);
+    lapiz.color = color; //Color(0xff615AAB);
     lapiz.style = PaintingStyle.fill; // .fill .stroke
     lapiz.strokeWidth = 20;
 
-    final path = new Path();
+    final path = Path();
 
     // Dibujar con el path y el lapiz
     // path.moveTo(0, size.height);
@@ -45,10 +46,8 @@ class _HeaderWavePainter extends CustomPainter {
 
     path.moveTo(0, 0);
     path.lineTo(size.width * 0.5, 0);
-    path.quadraticBezierTo(size.width * 0.5, size.height * 0.3,
-        size.width * 0.45, size.height * 0.5);
-    path.quadraticBezierTo(
-        size.width * 0.4, size.height * 0.75, size.width * 0.45, size.height);
+    path.quadraticBezierTo(size.width * 0.5, size.height * 0.3, size.width * 0.45, size.height * 0.5);
+    path.quadraticBezierTo(size.width * 0.4, size.height * 0.75, size.width * 0.45, size.height);
     path.lineTo(0, size.height);
     canvas.drawPath(path, lapiz);
   }

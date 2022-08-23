@@ -19,24 +19,24 @@ class SplashController extends GetxController {
     // final User? auth = FirebaseAuth.instance.currentUser;
     if (loggedIn == false) {
       await Future.delayed(
-        Duration(seconds: 1),
+        const Duration(seconds: 1),
       );
-      Get.offNamed(AppRoutes.LOGIN);
+      Get.offNamed(AppRoutes.kLogin);
     } else if (photo) {
       await Future.delayed(
-        Duration(seconds: 1),
+        const Duration(seconds: 1),
       );
-      Get.offNamed(AppRoutes.HOME);
+      Get.offNamed(AppRoutes.kHome);
     } else {
       Get.lazyPut(
         () => OnboardingController(),
       );
       Future.delayed(
-        Duration(seconds: 1),
+        const Duration(seconds: 1),
       );
-      final _controller = Get.find<OnboardingController>();
-      _controller.pageNumber.value = 2;
-      Get.toNamed(AppRoutes.ONBOARDING);
+      final controller = Get.find<OnboardingController>();
+      controller.pageNumber.value = 2;
+      Get.toNamed(AppRoutes.kOnBoarding);
     }
   }
 

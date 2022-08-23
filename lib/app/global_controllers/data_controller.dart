@@ -8,11 +8,9 @@ import 'package:ottaa_project_flutter/app/data/repositories/firebase_database_re
 class DataController extends GetxController {
   final _firebaseDatabaseController = Get.find<FirebaseDatabaseRepository>();
 
-  Future<List<Pict>> fetchPictos() async =>
-      await _firebaseDatabaseController.fetchPictos();
+  Future<List<Pict>> fetchPictos() async => await _firebaseDatabaseController.fetchPictos();
 
-  Future<List<Grupos>> fetchGrupos() async =>
-      await _firebaseDatabaseController.fetchGrupos();
+  Future<List<Grupos>> fetchGrupos() async => await _firebaseDatabaseController.fetchGrupos();
 
   Future<String> uploadImageToStorage({
     required String path,
@@ -52,41 +50,27 @@ class DataController extends GetxController {
         storageName: storageName,
       );
 
-  Future<void> logFirebaseAnalyticsEvent({required String eventName}) async =>
-      await _firebaseDatabaseController.logFirebaseAnalyticsEvent(
+  Future<void> logFirebaseAnalyticsEvent({required String eventName}) async => await _firebaseDatabaseController.logFirebaseAnalyticsEvent(
         eventName: eventName,
       );
 
-  Future<int> fetchAccountType() async =>
-      await _firebaseDatabaseController.fetchAccountType();
+  Future<int> fetchAccountType() async => await _firebaseDatabaseController.fetchAccountType();
 
-  Future<String> fetchUserEmail() async =>
-      await _firebaseDatabaseController.fetchUserEmail();
+  Future<String> fetchUserEmail() async => await _firebaseDatabaseController.fetchUserEmail();
 
-  Future<String> fetchCurrentVersion() async =>
-      await _firebaseDatabaseController.fetchCurrentVersion();
+  Future<String> fetchCurrentVersion() async => await _firebaseDatabaseController.fetchCurrentVersion();
 
-  Future<int> getPicNumber() async =>
-      await _firebaseDatabaseController.getPicNumber();
+  Future<int> getPicNumber() async => await _firebaseDatabaseController.getPicNumber();
 
-  Future<void> uploadAvatar({required int photoNumber}) async =>
-      await _firebaseDatabaseController.uploadAvatar(
+  Future<void> uploadAvatar({required int photoNumber}) async => await _firebaseDatabaseController.uploadAvatar(
         photoNumber: photoNumber,
       );
 
-  Future<void> uploadInfo(
-      {required String name,
-      required String gender,
-      required int dateOfBirthInMs}) async {
+  Future<void> uploadInfo({required String name, required String gender, required int dateOfBirthInMs}) async {
     await _firebaseDatabaseController.uploadInfo(
       name: name,
       gender: gender,
       dateOfBirthInMs: dateOfBirthInMs,
     );
-  }
-
-  @override
-  void onInit() async {
-    super.onInit();
   }
 }

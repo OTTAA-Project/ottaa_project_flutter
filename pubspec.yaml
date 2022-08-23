@@ -64,6 +64,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^2.0.1
 
 dependency_overrides:
   get: '4.6.1'
@@ -84,7 +85,6 @@ flutter:
     - assets/profiles/
     - assets/games_images/
     - assets/audios/
-    - assets/.env
   fonts:
     - family: OTTAAProjectCustomIcon
       fonts:

@@ -24,6 +24,6 @@ class SharedPrefClient {
 
   Future<void> setPictosFile() async {
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool('Pictos_file',true);
+    await instance.setBool('Pictos_file', true);
   }
 }

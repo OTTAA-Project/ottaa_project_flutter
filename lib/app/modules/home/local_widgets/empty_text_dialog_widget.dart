@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 class EmptyTextDialogWidget extends StatelessWidget {
   const EmptyTextDialogWidget({Key? key}) : super(key: key);
 

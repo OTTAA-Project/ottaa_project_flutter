@@ -2,27 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-
-import 'icon_widget.dart';
-
-final Map<int, Color> groupColor = {
-  1: Colors.yellow,
-  2: kOTTAAOrange,
-  3: Colors.green,
-  4: Colors.blue,
-  5: Colors.purple,
-  6: Colors.black,
-};
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/icon_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/theme/group_colors.dart';
 
 class CategoryPageWidget extends StatelessWidget {
-  const CategoryPageWidget(
-      {Key? key,
-      required this.name,
-      required this.imageName,
-      this.border = false,
-      this.color = 0})
-      : super(key: key);
+  const CategoryPageWidget({Key? key, required this.name, required this.imageName, this.border = false, this.color = 0}) : super(key: key);
   final String name;
   final String imageName;
   final bool border;
@@ -49,7 +33,7 @@ class CategoryPageWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 border: border
                     ? Border.all(
-                        color: groupColor[color]!,
+                        color: kGroupColor[color]!,
                         width: 6,
                       )
                     : Border.all(color: Colors.transparent),
@@ -63,8 +47,9 @@ class CategoryPageWidget extends StatelessWidget {
                   )
                 : CachedNetworkImage(
                     imageUrl: imageName,
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                     height: Get.height * 0.5,
                     fit: BoxFit.fitHeight,
                     width: Get.width * 0.4,

@@ -8,6 +8,8 @@ import 'package:ottaa_project_flutter/app/modules/sentences/sentences_controller
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class SearchSentence extends GetView<SentencesController> {
+  const SearchSentence({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
@@ -22,7 +24,7 @@ class SearchSentence extends GetView<SentencesController> {
           elevation: 0,
           title: Text('all_phrases'.tr),
           actions: [
-           /* Obx(
+            /* Obx(
               () => controller.searchOrIcon.value
                   ? Container(
                       padding: EdgeInsets.only(right: horizontalSize * 0.04),
@@ -82,12 +84,12 @@ class SearchSentence extends GetView<SentencesController> {
                       controller: controller.searchController,
                       decoration: InputDecoration(
                         hintText: '${'search'.tr}...',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           color: Colors.white,
                         ),
                         border: InputBorder.none,
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                       onChanged: (v) {
@@ -100,7 +102,7 @@ class SearchSentence extends GetView<SentencesController> {
                   ),
                   GestureDetector(
                     onTap: () => controller.searchOrIcon.value = false,
-                    child: Icon(
+                    child: const Icon(
                       Icons.clear,
                     ),
                   ),
@@ -120,8 +122,7 @@ class SearchSentence extends GetView<SentencesController> {
                     Expanded(
                       flex: 8,
                       child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: horizontalSize * 0.02),
+                        padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                         child: Center(
                           child: GetBuilder<SentencesController>(
                             id: "searchBuilder",
@@ -131,82 +132,62 @@ class SearchSentence extends GetView<SentencesController> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  _.sentencesForList.isNotEmpty
-                                      ? Container(
-                                          height: verticalSize / 3,
-                                          child: ListView.builder(
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: _
-                                                    .sentencesPicts[_
-                                                        .sentencesForList[
-                                                            _.searchIndex]
-                                                        .index]
-                                                    .length +
-                                                1,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              final Pict speakPict = Pict(
-                                                localImg: true,
-                                                id: 0,
-                                                texto: Texto(en: "", es: ""),
-                                                tipo: 6,
-                                                imagen: Imagen(
-                                                    picto: "logo_ottaa_dev"),
-                                              );
-                                              if (_
-                                                      .sentencesPicts[_
-                                                          .sentencesForList[
-                                                              _.searchIndex]
-                                                          .index]
-                                                      .length >
-                                                  index) {
-                                                final Pict pict =
-                                                    _.sentencesPicts[_
-                                                        .sentencesForList[
-                                                            _.searchIndex]
-                                                        .index][index];
-                                                return Container(
-                                                  margin: EdgeInsets.all(10),
-                                                  child: MiniPicto(
-                                                    localImg: pict.localImg,
-                                                    pict: pict,
-                                                    onTap: () {
-                                                      _.searchSpeak();
-                                                    },
-                                                  ),
-                                                );
-                                              } else {
-                                                return Bounce(
-                                                  from: 6,
-                                                  infinite: true,
-                                                  child: Container(
-                                                    margin: EdgeInsets.all(10),
-                                                    child: MiniPicto(
-                                                      localImg:
-                                                          speakPict.localImg,
-                                                      pict: speakPict,
-                                                      onTap: () {
-                                                        _.searchSpeak();
-                                                      },
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
-                                        )
-                                      : Container(
-                                          child: Center(
-                                            child: Text(
-                                              'please_enter_a_valid_search'.tr,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 23,
+                                  if (_.sentencesForList.isNotEmpty)
+                                    SizedBox(
+                                      height: verticalSize / 3,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: _.sentencesPicts[_.sentencesForList[_.searchIndex].index].length + 1,
+                                        itemBuilder: (BuildContext context, int index) {
+                                          final Pict speakPict = Pict(
+                                            localImg: true,
+                                            id: 0,
+                                            texto: Texto(en: "", es: ""),
+                                            tipo: 6,
+                                            imagen: Imagen(picto: "logo_ottaa_dev"),
+                                          );
+                                          if (_.sentencesPicts[_.sentencesForList[_.searchIndex].index].length > index) {
+                                            final Pict pict = _.sentencesPicts[_.sentencesForList[_.searchIndex].index][index];
+                                            return Container(
+                                              margin: const EdgeInsets.all(10),
+                                              child: MiniPicto(
+                                                localImg: pict.localImg,
+                                                pict: pict,
+                                                onTap: () {
+                                                  _.searchSpeak();
+                                                },
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          } else {
+                                            return Bounce(
+                                              from: 6,
+                                              infinite: true,
+                                              child: Container(
+                                                margin: const EdgeInsets.all(10),
+                                                child: MiniPicto(
+                                                  localImg: speakPict.localImg,
+                                                  pict: speakPict,
+                                                  onTap: () {
+                                                    _.searchSpeak();
+                                                  },
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    )
+                                  else
+                                    Center(
+                                      child: Text(
+                                        'please_enter_a_valid_search'.tr,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 23,
                                         ),
+                                      ),
+                                    ),
                                 ],
                               ),
                             ),
@@ -246,7 +227,7 @@ class SearchSentence extends GetView<SentencesController> {
                 left: 0,
                 bottom: 0,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: kOTTAAOrangeNew,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(16),
@@ -270,7 +251,7 @@ class SearchSentence extends GetView<SentencesController> {
                 right: 0,
                 bottom: 0,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: kOTTAAOrangeNew,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
@@ -298,7 +279,7 @@ class SearchSentence extends GetView<SentencesController> {
                   onTap: () async {
                     await controller.searchSpeak();
                   },
-                  child: OttaLogoWidget(),
+                  child: const OttaLogoWidget(),
                 ),
               ),
             ],

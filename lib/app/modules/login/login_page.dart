@@ -73,7 +73,7 @@ class LoginPage extends StatelessWidget {
               Positioned(
                 bottom: 0,
                 child: FadeInUp(
-                  child: HeaderWave(color: kOTTAAOrangeNew),
+                  child: const HeaderWave(color: kOTTAAOrangeNew),
                 ),
               ),
               Positioned(
@@ -84,16 +84,15 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text(
                       'Welcome_this_is_ottaa'.tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 22,
                       ),
                     ),
                     Text(
-                      'We_help_thousands_of_children_with_speech_problems_to_communicate_improving_their_quality_of_life'
-                          .tr,
-                      style: TextStyle(
+                      'We_help_thousands_of_children_with_speech_problems_to_communicate_improving_their_quality_of_life'.tr,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                       ),
@@ -106,15 +105,12 @@ class LoginPage extends StatelessWidget {
                   child: Container(
                     width: horizontalSize * 0.6,
                     height: verticalSize * 0.65,
-                    decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(10)),
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: (horizontalSize * 0.6) * 0.2),
+                          padding: EdgeInsets.symmetric(horizontal: (horizontalSize * 0.6) * 0.2),
                           child: Image.asset(
                             'assets/imgs/logo_ottaa.webp',
                             height: verticalSize * 0.15,
@@ -127,10 +123,9 @@ class LoginPage extends StatelessWidget {
                               height: verticalSize * 0.02,
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalSize * 0.05),
+                              padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.05),
                               child: Text(
-                                "${"login_screen".tr}",
+                                "login_screen".tr,
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -148,13 +143,13 @@ class LoginPage extends StatelessWidget {
                           //   verticalSize: verticalSize,
                           //   horizontalSize: horizontalSize,
                           // ),
-                          child: Container(
+                          child: SizedBox(
                             height: verticalSize * 0.04,
                             child: SignInButton(
                               Buttons.GoogleDark,
                               text: "Login_with_google".tr,
                               onPressed: () => _.authController.handleSignIn(
-                                SignInType.GOOGLE,
+                                SignInType.google,
                               ),
                               // onPressed: () => Get.offAllNamed(AppRoutes.HOME),
                             ),
@@ -164,13 +159,12 @@ class LoginPage extends StatelessWidget {
                           height: verticalSize * 0.02,
                         ),
                         JelloIn(
-                          child: Container(
+                          child: SizedBox(
                             height: verticalSize * 0.04,
                             child: SignInButton(
                               Buttons.Facebook,
                               text: "Login_with_facebook".tr,
-                              onPressed: () => _.authController
-                                  .handleSignIn(SignInType.FACEBOOK),
+                              onPressed: () => _.authController.handleSignIn(SignInType.facebook),
                             ),
                           ),
                           // child: LoginButton(
@@ -219,7 +213,7 @@ class LoginButton extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.004),
           decoration: BoxDecoration(
-            color: googleOrFacebook ? Color(0xFF4285F4) : Color(0xFF1877f2),
+            color: googleOrFacebook ? const Color(0xFF4285F4) : const Color(0xFF1877f2),
           ),
           height: verticalSize * 0.039,
           width: horizontalSize * 0.173,
@@ -227,10 +221,9 @@ class LoginButton extends StatelessWidget {
             children: [
               googleOrFacebook
                   ? Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: verticalSize * 0.005),
+                      padding: EdgeInsets.symmetric(vertical: verticalSize * 0.005),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Image.asset(
@@ -240,7 +233,7 @@ class LoginButton extends StatelessWidget {
                         ),
                       ),
                     )
-                  : Icon(
+                  : const Icon(
                       Icons.facebook,
                       color: Colors.white,
                     ),
@@ -249,7 +242,7 @@ class LoginButton extends StatelessWidget {
               ),
               Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
@@ -264,7 +257,7 @@ class LoginButton extends StatelessWidget {
 class HeaderWave extends StatelessWidget {
   final Color color;
 
-  const HeaderWave({required this.color});
+  const HeaderWave({Key? key, required this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -275,11 +268,11 @@ class HeaderWave extends StatelessWidget {
       width: horizontalSize,
       clipBehavior: Clip.antiAlias,
       // color: Colors.black,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           // color: Colors.black
           ),
       child: CustomPaint(
-        painter: _HeaderWavePainter(this.color),
+        painter: _HeaderWavePainter(color),
       ),
     );
   }
@@ -295,7 +288,7 @@ class _HeaderWavePainter extends CustomPainter {
     final lapiz = Paint();
 
     // Propiedades
-    lapiz.color = this.color; //Color(0xff615AAB);
+    lapiz.color = color; //Color(0xff615AAB);
     lapiz.style = PaintingStyle.fill; // .fill .stroke
     lapiz.strokeWidth = 20;
 
@@ -304,10 +297,8 @@ class _HeaderWavePainter extends CustomPainter {
     // Dibujar con el path y el lapiz
     path.moveTo(0, size.height);
     path.lineTo(0, size.height * 0.7);
-    path.quadraticBezierTo(size.width * 0.15, size.height * 0.7,
-        size.width * 0.4, size.height * 0.75);
-    path.quadraticBezierTo(
-        size.width * 0.65, size.height * 0.8, size.width, size.height * 0.75);
+    path.quadraticBezierTo(size.width * 0.15, size.height * 0.7, size.width * 0.4, size.height * 0.75);
+    path.quadraticBezierTo(size.width * 0.65, size.height * 0.8, size.width, size.height * 0.75);
     path.lineTo(size.width, size.height);
 
     canvas.drawPath(path, lapiz);

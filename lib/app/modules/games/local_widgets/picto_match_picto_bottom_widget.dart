@@ -49,8 +49,7 @@ class PictoMatchPictoBottomWidget extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(verticalSize * 0.03),
-                      border: Border.all(
-                          color: Colors.black, width: verticalSize * 0.01),
+                      border: Border.all(color: Colors.black, width: verticalSize * 0.01),
                     ),
                     child: Center(
                       child: Icon(

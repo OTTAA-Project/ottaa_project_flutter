@@ -3,26 +3,22 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/local_widgets/header_wave.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-import '../onboarding_controller.dart';
-import 'header_wave.dart';
-
-final _sharedPrefCient = SharedPrefClient();
-
-Widget step1Onboarding<widget>(
-    OnboardingController _, PageController controller, context) {
+Widget step1Onboarding<widget>(OnboardingController _, PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
   double horizontalSize = MediaQuery.of(context).size.width;
   return Stack(
     children: [
       FadeInLeft(
-          child: HeaderWave(
-        color: kOTTAAOrangeNew,
-        bgColor: kOTTAABackgroundNew,
-      )),
+        child: const HeaderWave(
+          color: kOTTAAOrangeNew,
+          bgColor: kOTTAABackgroundNew,
+        ),
+      ),
       Positioned(
         bottom: 0,
         left: horizontalSize * 0.05,
@@ -30,8 +26,7 @@ Widget step1Onboarding<widget>(
           child: SvgPicture.asset(
             'assets/3 people.svg',
             width: horizontalSize * 0.4,
-            placeholderBuilder: (BuildContext context) =>
-                Container(child: const CircularProgressIndicator()),
+            placeholderBuilder: (BuildContext context) => const CircularProgressIndicator(),
           ),
         ),
       ),
@@ -49,20 +44,17 @@ Widget step1Onboarding<widget>(
                   ),
                   width: horizontalSize * 0.35,
                   height: verticalSize * 0.73,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Image(
+                        const Image(
                           image: AssetImage('assets/imgs/logo_ottaa.webp'),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: verticalSize * 0.05),
+                          padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
                           child: Text(
-                            "check_if_the_info_is_correct_nif_not_change_it_as_you_wish_this_will_help_us_to_personalize_the_app_for_you"
-                                .tr,
+                            "check_if_the_info_is_correct_nif_not_change_it_as_you_wish_this_will_help_us_to_personalize_the_app_for_you".tr,
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -88,9 +80,8 @@ Widget step1Onboarding<widget>(
                                         hintText: "Name".tr,
                                         contentPadding: const EdgeInsets.all(0),
                                         isDense: true,
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: kOTTAAOrangeNew),
+                                        focusedBorder: const UnderlineInputBorder(
+                                          borderSide: BorderSide(color: kOTTAAOrangeNew),
                                         ),
                                       ),
                                       cursorColor: kOTTAAOrangeNew,
@@ -105,28 +96,25 @@ Widget step1Onboarding<widget>(
                                 ],
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: verticalSize * 0.05),
+                                padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
                                 child: GestureDetector(
                                   onTap: () {
                                     showDialog(
                                       context: context,
-                                      builder: (context) =>
-                                          AlertDialog(content: _dialogWidget()),
+                                      builder: (context) => AlertDialog(content: _dialogWidget()),
                                     );
                                   },
                                   child: Row(
                                     children: [
                                       Text(
                                         '${"Gender".tr}: ',
-                                        style:
-                                            TextStyle(color: Colors.grey[400]),
+                                        style: TextStyle(color: Colors.grey[400]),
                                       ),
                                       Expanded(
                                         child: TextFormField(
                                           controller: _.genderController,
                                           keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             focusColor: kOTTAAOrangeNew,
                                             border: InputBorder.none,
                                           ),
@@ -148,7 +136,7 @@ Widget step1Onboarding<widget>(
                                     builder: (context, child) {
                                       return Theme(
                                         data: Theme.of(context).copyWith(
-                                          colorScheme: ColorScheme.light(
+                                          colorScheme: const ColorScheme.light(
                                             primary: kOTTAAOrangeNew,
                                           ),
                                         ),
@@ -160,11 +148,9 @@ Widget step1Onboarding<widget>(
                                     lastDate: initialDate,
                                     initialDate: initialDate,
                                   );
-                                  _.dateOfBirthInMs.value =
-                                      date!.millisecondsSinceEpoch;
+                                  _.dateOfBirthInMs.value = date!.millisecondsSinceEpoch;
                                   print(_.dateOfBirthInMs.value);
-                                  _.birthDateController.text =
-                                      '${date.day}/${date.month}/${date.year}';
+                                  _.birthDateController.text = '${date.day}/${date.month}/${date.year}';
                                   // dates.replaceRange(10, 23, '');
                                 },
                                 child: Row(
@@ -181,17 +167,13 @@ Widget step1Onboarding<widget>(
                                         controller: _.birthDateController,
                                         keyboardType: TextInputType.number,
                                         enabled: false,
-                                        decoration: InputDecoration(
-                                            isDense: true,
-                                            contentPadding:
-                                                const EdgeInsets.all(0),
-                                            hintText: "Date_of_birth".tr),
+                                        decoration: InputDecoration(isDense: true, contentPadding: const EdgeInsets.all(0), hintText: "Date_of_birth".tr),
                                       ),
                                     ),
                                     const SizedBox(
                                       width: 16,
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.insert_invitation,
                                       color: kOTTAAOrangeNew,
                                     ),
@@ -216,7 +198,7 @@ Widget step1Onboarding<widget>(
       Positioned(
         right: horizontalSize * 0.05,
         bottom: verticalSize * 0.10,
-        child: Container(
+        child: SizedBox(
           width: horizontalSize * 0.35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -234,26 +216,26 @@ Widget step1Onboarding<widget>(
                 onTap: () async {
                   if (_.name.value == '') {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Please Add a name'),
                       ),
                     );
                   } else if (_.dateOfBirthInMs.value == 0) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Please choose a date of birth'),
                       ),
                     );
                   } else if (_.gender.value == '') {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Please choose a gender'),
                       ),
                     );
                   } else {
                     showDialog(
                       context: context,
-                      builder: (context) => Center(
+                      builder: (context) => const Center(
                         child: CircularProgressIndicator(),
                       ),
                     );
@@ -261,9 +243,7 @@ Widget step1Onboarding<widget>(
                     // print('hi');
                     // await _sharedPrefCient.setFirstTimePref();
                     Get.back();
-                    controller.animateToPage(1,
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.easeInOut);
+                    controller.animateToPage(1, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
                   }
                   // _.pageNumber.value = 1;
                   // controller.animateToPage(_.pageNumber.value,
@@ -283,12 +263,12 @@ Widget step1Onboarding<widget>(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: horizontalSize * 0.45,
               child: FittedBox(
                 child: Text(
                   'hola_nnos_conozcamos_un_poco'.tr,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -298,12 +278,11 @@ Widget step1Onboarding<widget>(
             SizedBox(
               height: verticalSize * 0.02,
             ),
-            Container(
+            SizedBox(
               width: horizontalSize * 0.45,
               child: AutoSizeText(
-                'vamos_a_pedirte_cierta_informaci_n_para_nmejorar_tu_experiencia_con_ottaa'
-                    .tr,
-                style: TextStyle(color: Colors.white),
+                'vamos_a_pedirte_cierta_informaci_n_para_nmejorar_tu_experiencia_con_ottaa'.tr,
+                style: const TextStyle(color: Colors.white),
                 maxLines: 2,
               ),
             ),
@@ -348,7 +327,9 @@ Widget _textWidget({required String text}) {
           child: Text(text),
         ),
       ),
-      Divider(),
+      const Divider(),
     ],
   );
 }
+
+//TODO: WHY???

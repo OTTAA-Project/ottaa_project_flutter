@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
-import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-import 'package:get/get.dart';
 
 step4Tutorial<widget>(PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
@@ -18,26 +16,26 @@ step4Tutorial<widget>(PageController controller, context) {
         Expanded(
           child: Container(),
         ),
-        Container(
+        SizedBox(
           height: verticalSize * 0.45,
           child: FittedBox(
             child: SvgPicture.asset(
               'assets/Group 727.svg',
-              placeholderBuilder: (BuildContext context) =>
-                  Container(child: const CircularProgressIndicator()),
+              placeholderBuilder: (BuildContext context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ),
         ),
         Column(
           children: [
             Container(
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               height: horizontalSize * 0.05,
               child: FittedBox(
                 child: Text(
                   "Play_and_learn".tr,
-                  style: TextStyle(
-                      color: kOTTAAOrange, fontWeight: FontWeight.w600),
+                  style: const TextStyle(color: kOTTAAOrange, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -46,8 +44,7 @@ step4Tutorial<widget>(PageController controller, context) {
               child: AutoSizeText(
                 "${'Step4_long'.tr}!.",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20, color: Colors.black87),
+                style: const TextStyle(fontSize: 20, color: Colors.black87),
                 maxLines: 3,
               ),
             ),
@@ -62,9 +59,7 @@ step4Tutorial<widget>(PageController controller, context) {
             StepButton(
               text: "Previous".tr,
               leading: Icons.chevron_left,
-              onTap: () => controller.animateToPage(2,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.easeInOut),
+              onTap: () => controller.animateToPage(2, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
               backgroundColor: Colors.white,
               fontColor: Colors.grey,
             ),

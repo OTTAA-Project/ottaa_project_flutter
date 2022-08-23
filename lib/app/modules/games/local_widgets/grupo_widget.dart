@@ -42,10 +42,10 @@ class GrupoWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(title,style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: verticalSize * 0.023
-                    ),),
+                    Text(
+                      title,
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: verticalSize * 0.023),
+                    ),
                     Container(
                       height: 5,
                       width: 20,

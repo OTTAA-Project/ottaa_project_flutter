@@ -1,8 +1,10 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class Ottaa_project_custom_icons {
-  Ottaa_project_custom_icons._();
+class OttaIcons {
+  OttaIcons._();
 
   static const _kFontFam = 'OTTAAProjectCustomIcon';
   static const String? _kFontPkg = null;

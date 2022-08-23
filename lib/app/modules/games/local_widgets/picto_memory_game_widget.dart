@@ -64,7 +64,7 @@ class PictoMemoryGameWidget extends StatelessWidget {
                             ? Image.network(imageUrl)
                             : CachedNetworkImage(
                                 imageUrl: imageUrl,
-                                placeholder: (context, url) => Center(
+                                placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.black,
                                   ),

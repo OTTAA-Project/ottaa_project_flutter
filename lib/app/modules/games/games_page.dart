@@ -16,7 +16,7 @@ class GamesPage extends GetView<GamesController> {
     return Scaffold(
       body: Stack(
         children: [
-          RotatedBox(
+          const RotatedBox(
             quarterTurns: 4,
             child: HeaderWave(
               color: kOTTAAOrangeNew,
@@ -56,7 +56,7 @@ class GamesPage extends GetView<GamesController> {
           Positioned(
             bottom: 0,
             right: 0,
-            child: Container(
+            child: SizedBox(
               height: verticalSize,
               width: horizontalSize * 0.6,
               child: PageViewerWidget(
@@ -65,22 +65,18 @@ class GamesPage extends GetView<GamesController> {
                 horizontalSize: horizontalSize * 0.6,
                 gameSelectionOrGruposSelection: true,
                 centerButton: () {
-                  controller.gameSelected.value =
-                      controller.initialGamePageController.page!.toInt();
-                  Get.to(() => GrupoSelectionPage());
+                  controller.gameSelected.value = controller.initialGamePageController.page!.toInt();
+                  Get.to(() => const GrupoSelectionPage());
                   // print(controller.initialGamePageController.page);
                 },
-                nextButton: () => controller.goToNextPage(
-                    pageController: controller.initialGamePageController),
+                nextButton: () => controller.goToNextPage(pageController: controller.initialGamePageController),
                 pageControllerGame: controller.initialGamePageController,
                 pageControllerGrupo: controller.initialGamePageController,
-                previousButton: () => controller.goToPreviousPage(
-                    pageController: controller.initialGamePageController),
+                previousButton: () => controller.goToPreviousPage(pageController: controller.initialGamePageController),
                 color: kOTTAAOrangeNew,
                 onTap: () {
-                  controller.gameSelected.value =
-                      controller.initialGamePageController.page!.toInt();
-                  Get.to(() => GrupoSelectionPage());
+                  controller.gameSelected.value = controller.initialGamePageController.page!.toInt();
+                  Get.to(() => const GrupoSelectionPage());
                 },
               ),
             ),

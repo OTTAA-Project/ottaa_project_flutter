@@ -16,26 +16,24 @@ step2Tutorial<widget>(PageController controller, context) {
         Expanded(
           child: Container(),
         ),
-        Container(
+        SizedBox(
           height: verticalSize * 0.45,
           child: FittedBox(
             child: SvgPicture.asset(
               'assets/Group 728.svg',
-              placeholderBuilder: (BuildContext context) =>
-                  Container(child: const CircularProgressIndicator()),
+              placeholderBuilder: (BuildContext context) => const Center(child: CircularProgressIndicator()),
             ),
           ),
         ),
         Column(
           children: [
             Container(
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               height: horizontalSize * 0.05,
               child: FittedBox(
                 child: Text(
                   "Talk_to_the_world".tr,
-                  style: TextStyle(
-                      color: kOTTAAOrange, fontWeight: FontWeight.w600),
+                  style: const TextStyle(color: kOTTAAOrange, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -44,8 +42,7 @@ step2Tutorial<widget>(PageController controller, context) {
               child: AutoSizeText(
                 "${'step2_long'.tr}.",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20, color: Colors.black87),
+                style: const TextStyle(fontSize: 20, color: Colors.black87),
                 maxLines: 3,
               ),
             ),
@@ -60,18 +57,14 @@ step2Tutorial<widget>(PageController controller, context) {
             StepButton(
               text: "Previous".tr,
               leading: Icons.chevron_left,
-              onTap: () => controller.animateToPage(0,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.easeInOut),
+              onTap: () => controller.animateToPage(0, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
               backgroundColor: Colors.white,
               fontColor: Colors.grey,
             ),
             StepButton(
               text: "Next".tr,
               trailing: Icons.chevron_right,
-              onTap: () => controller.animateToPage(2,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.easeInOut),
+              onTap: () => controller.animateToPage(2, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
               backgroundColor: kOTTAAOrange,
               fontColor: Colors.white,
             ),

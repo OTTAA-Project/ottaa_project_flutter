@@ -14,7 +14,7 @@ class AboutOttaaPage extends GetView<AboutController> {
       body: SafeArea(
         child: Stack(
           children: [
-            RotatedBox(
+            const RotatedBox(
               quarterTurns: 4,
               // child: HeaderWave(
               //   color: kOTTAAOrangeNew,
@@ -43,9 +43,7 @@ class AboutOttaaPage extends GetView<AboutController> {
               top: verticalSize * 0.3,
               right: horizontalSize * 0.1,
               child: Container(
-                padding: EdgeInsets.symmetric(
-                    vertical: verticalSize * 0.01,
-                    horizontal: horizontalSize * 0.02),
+                padding: EdgeInsets.symmetric(vertical: verticalSize * 0.01, horizontal: horizontalSize * 0.02),
                 height: verticalSize * 0.4,
                 width: horizontalSize * 0.4,
                 decoration: BoxDecoration(
@@ -65,11 +63,7 @@ class AboutOttaaPage extends GetView<AboutController> {
                       Center(
                         child: Text(
                           'account_info'.tr,
-                          style: TextStyle(
-                              fontFamily: "Noto Sans",
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: verticalSize * 0.03),
+                          style: TextStyle(fontFamily: "Noto Sans", color: Colors.white, fontWeight: FontWeight.w700, fontSize: verticalSize * 0.03),
                         ),
                       ),
                       LineWidget(
@@ -143,10 +137,10 @@ class AboutOttaaPage extends GetView<AboutController> {
               left: horizontalSize * 0.01,
               top: verticalSize * 0.01,
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   Get.back();
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back,
                   color: Colors.black,
                 ),
@@ -190,10 +184,7 @@ class LineWidget extends StatelessWidget {
         ),
         Text(
           text,
-          style: TextStyle(
-              fontFamily: "Noto Sans",
-              color: Colors.white,
-              fontSize: verticalSize * 0.021),
+          style: TextStyle(fontFamily: "Noto Sans", color: Colors.white, fontSize: verticalSize * 0.021),
         ),
       ],
     );
@@ -204,7 +195,7 @@ class HeaderWave extends StatelessWidget {
   final Color color;
   final Color bgColor;
 
-  const HeaderWave({required this.color, this.bgColor = Colors.white});
+  const HeaderWave({Key? key, required this.color, this.bgColor = Colors.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +204,7 @@ class HeaderWave extends StatelessWidget {
       height: double.infinity,
       width: double.infinity,
       child: CustomPaint(
-        painter: _HeaderWavePainter(this.color),
+        painter: _HeaderWavePainter(color),
       ),
     );
   }
@@ -226,14 +217,14 @@ class _HeaderWavePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final lapiz = new Paint();
+    final lapiz = Paint();
 
     // Propiedades
-    lapiz.color = this.color; //Color(0xff615AAB);
+    lapiz.color = color; //Color(0xff615AAB);
     lapiz.style = PaintingStyle.fill; // .fill .stroke
     lapiz.strokeWidth = 20;
 
-    final path = new Path();
+    final path = Path();
 
     // Dibujar con el path y el lapiz
     // path.moveTo(0, size.height);
@@ -246,10 +237,8 @@ class _HeaderWavePainter extends CustomPainter {
 
     path.moveTo(0, 0);
     path.lineTo(size.width * 0.4, 0);
-    path.quadraticBezierTo(size.width * 0.4, size.height * 0.3,
-        size.width * 0.35, size.height * 0.5);
-    path.quadraticBezierTo(
-        size.width * 0.3, size.height * 0.75, size.width * 0.35, size.height);
+    path.quadraticBezierTo(size.width * 0.4, size.height * 0.3, size.width * 0.35, size.height * 0.5);
+    path.quadraticBezierTo(size.width * 0.3, size.height * 0.75, size.width * 0.35, size.height);
     path.lineTo(0, size.height);
     canvas.drawPath(path, lapiz);
   }

@@ -15,21 +15,19 @@ class TagsWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'choose_a_tag'.tr,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey[600],
-                      fontSize: width * 0.02,
-                    ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'choose_a_tag'.tr,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey[600],
+                    fontSize: width * 0.02,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -40,7 +38,7 @@ class TagsWidget extends StatelessWidget {
               children: [
                 Text(
                   'tags_widget_long_1'.tr,
-                  style: TextStyle(),
+                  style: const TextStyle(),
                 ),
                 SizedBox(
                   height: height * 0.02,

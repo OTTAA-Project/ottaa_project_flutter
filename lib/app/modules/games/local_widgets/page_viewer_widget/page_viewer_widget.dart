@@ -8,7 +8,7 @@ import 'package:ottaa_project_flutter/app/modules/games/local_widgets/grupo_sele
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class PageViewerWidget extends StatelessWidget {
-  PageViewerWidget({
+  const PageViewerWidget({
     Key? key,
     required this.verticalSize,
     required this.horizontalSize,
@@ -30,9 +30,9 @@ class PageViewerWidget extends StatelessWidget {
   final void Function()? previousButton, nextButton, centerButton, onTap;
   final PageController pageControllerGame, pageControllerGrupo;
   final Color color;
-  List<GameModelData>? gameTypes;
-  List<Grupos>? grupos;
-  String? language;
+  final List<GameModelData>? gameTypes;
+  final List<Grupos>? grupos;
+  final String? language;
 
   @override
   Widget build(BuildContext context) {
@@ -97,10 +97,8 @@ class PageViewerWidget extends StatelessWidget {
             left: horizontalSize * 0.168,
             right: horizontalSize * 0.168,
             bottom: verticalSize * 0.25,
-            child: Container(
-              height: gameSelectionOrGruposSelection
-                  ? verticalSize * 0.5
-                  : verticalSize * 0.6,
+            child: SizedBox(
+              height: gameSelectionOrGruposSelection ? verticalSize * 0.5 : verticalSize * 0.6,
               width: horizontalSize * 0.6,
               child: gameSelectionOrGruposSelection
                   ? GameSelectionContainer(

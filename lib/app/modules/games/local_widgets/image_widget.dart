@@ -11,8 +11,6 @@ class ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return kIsWeb
-        ? Image.network(imageUrl)
-        : CachedNetworkImage(imageUrl: imageUrl);
+    return kIsWeb ? Image.network(imageUrl) : CachedNetworkImage(imageUrl: imageUrl);
   }
 }

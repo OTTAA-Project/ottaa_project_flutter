@@ -3,8 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'dart:io' show Platform;
+
+import 'package:url_launcher/url_launcher_string.dart';
 
 class AboutController extends GetxController {
   RxString userEmail = ''.obs;
@@ -66,18 +67,14 @@ class AboutController extends GetxController {
   }
 
   Future<void> launchEmailSubmission() async {
-    final Uri params = Uri(
-        scheme: 'mailto',
-        path: 'support@ottaaproject.com',
-        queryParameters: {
-          'subject': 'Support',
-          'body':
-              '''Account: ${userEmail.value},\nAccount Type: ${userSubscription.value},\nCurrent OTTAA Installed: ${currentOTTAAInstalled.value}\nCurrent OTTAA Version: ${currentOTTAAVersion.value}\nDevice Name: ${deviceName.value}''',
-        });
+    final Uri params = Uri(scheme: 'mailto', path: 'support@ottaaproject.com', queryParameters: {
+      'subject': 'Support',
+      'body': '''Account: ${userEmail.value},\nAccount Type: ${userSubscription.value},\nCurrent OTTAA Installed: ${currentOTTAAInstalled.value}\nCurrent OTTAA Version: ${currentOTTAAVersion.value}\nDevice Name: ${deviceName.value}''',
+    });
     String url = params.toString();
     final value = url.replaceAll('+', ' ');
-    if (await canLaunch(value)) {
-      await launch(value);
+    if (await canLaunchUrlString(value)) {
+      await launchUrlString(value);
     } else {
       print('Could not launch $url');
     }

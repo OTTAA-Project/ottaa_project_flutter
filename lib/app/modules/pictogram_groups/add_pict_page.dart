@@ -28,115 +28,105 @@ class AddPictoPage extends GetView<PictogramGroupsController> {
           centerTitle: false,
           title: Text('add_pict'.tr),
         ),
-        body: Container(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 8,
-                child: Container(
-                  padding: EdgeInsets.all(verticalSize * 0.03),
-                  color: Colors.black,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          // padding: EdgeInsets.all(horizontalSize * 0.01),
-                          child: InkWell(
-                            onTap: () {
-                              showDialog(
-                                barrierDismissible: true,
-                                context: context,
-                                builder: (context) => PictureDialogWidget(
-                                  cameraOnTap: controller.cameraFunctionPicto,
-                                  galleryOnTap: controller.galleryFunctionPicto,
-                                  arsaacOnTap: () async {
-                                    await showSearch<SearchModel?>(
-                                      context: context,
-                                      delegate: SearchPhotoPicto(),
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                            child: Obx(
-                              () => AddGroupWidget(
-                                name: controller.pictoNameController.text,
-                                isImageProvided:
-                                    controller.isImageProvidedPicto.value,
-                                fileImage: controller.fileImagePicto.value,
-                                selectedImageUrl:
-                                    controller.selectedPhotoUrlPicto.value,
-                                imageWidget: controller.imageWidgetPicto.value,
-                                color: controller.tipoValue.value,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: horizontalSize * 0.01,
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.all(horizontalSize * 0.02),
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(verticalSize * 0.03),
-                            color: Colors.white,
-                          ),
-                          child: GetBuilder<PictogramGroupsController>(
-                            id: 'second',
-                            builder: (controller) {
-                              if (controller.textOrBorder) {
-                                return AddGroupTextWidget(
-                                  controllerTxt: controller.pictoNameController,
-                                );
-                              } else {
-                                return FrameColorWidget(onTap: ({int? tipo}) {
-                                  controller.updateTipo(tipo: tipo!);
-                                });
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: horizontalSize * 0.01),
-                  color: kOTTAAOrangeNew,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconWidget(
-                        onTap: () => controller.changeToText(),
-                        iconData: Icons.edit,
-                        text: 'text'.tr,
-                      ),
-                      IconWidget(
-                        onTap: () => controller.changeToBorderColor(),
-                        iconData: Icons.border_outer,
-                        text: 'frame'.tr,
-                      ),
-                      IconWidget(
+        body: Row(
+          children: [
+            Expanded(
+              flex: 8,
+              child: Container(
+                padding: EdgeInsets.all(verticalSize * 0.03),
+                color: Colors.black,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: InkWell(
                         onTap: () {
-                          controller.changeToTags(
-                              context: context, verticalSize: verticalSize);
+                          showDialog(
+                            barrierDismissible: true,
+                            context: context,
+                            builder: (context) => PictureDialogWidget(
+                              cameraOnTap: controller.cameraFunctionPicto,
+                              galleryOnTap: controller.galleryFunctionPicto,
+                              arsaacOnTap: () async {
+                                await showSearch<SearchModel?>(
+                                  context: context,
+                                  delegate: SearchPhotoPicto(),
+                                );
+                              },
+                            ),
+                          );
                         },
-                        iconData: Icons.assistant,
-                        text: 'tags'.tr,
+                        child: Obx(
+                          () => AddGroupWidget(
+                            name: controller.pictoNameController.text,
+                            isImageProvided: controller.isImageProvidedPicto.value,
+                            fileImage: controller.fileImagePicto.value,
+                            selectedImageUrl: controller.selectedPhotoUrlPicto.value,
+                            imageWidget: controller.imageWidgetPicto.value,
+                            color: controller.tipoValue.value,
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      width: horizontalSize * 0.01,
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(horizontalSize * 0.02),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(verticalSize * 0.03),
+                          color: Colors.white,
+                        ),
+                        child: GetBuilder<PictogramGroupsController>(
+                          id: 'second',
+                          builder: (controller) {
+                            if (controller.textOrBorder) {
+                              return AddGroupTextWidget(
+                                controllerTxt: controller.pictoNameController,
+                              );
+                            } else {
+                              return FrameColorWidget(onTap: ({int? tipo}) {
+                                controller.updateTipo(tipo: tipo!);
+                              });
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: horizontalSize * 0.01),
+                color: kOTTAAOrangeNew,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconWidget(
+                      onTap: () => controller.changeToText(),
+                      iconData: Icons.edit,
+                      text: 'text'.tr,
+                    ),
+                    IconWidget(
+                      onTap: () => controller.changeToBorderColor(),
+                      iconData: Icons.border_outer,
+                      text: 'frame'.tr,
+                    ),
+                    IconWidget(
+                      onTap: () {
+                        controller.changeToTags(context: context, verticalSize: verticalSize);
+                      },
+                      iconData: Icons.assistant,
+                      text: 'tags'.tr,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -145,7 +135,7 @@ class AddPictoPage extends GetView<PictogramGroupsController> {
   Future<bool> _willPop({required BuildContext context}) async {
     return (await showDialog(
           context: context,
-          builder: (context) => new AlertDialog(
+          builder: (context) => AlertDialog(
             title: Text('important'.tr),
             content: Text('do_you_want_to_save_changes'.tr),
             actions: <Widget>[
@@ -154,8 +144,7 @@ class AddPictoPage extends GetView<PictogramGroupsController> {
                 child: Text('no'.tr),
               ),
               TextButton(
-                onPressed: () async =>
-                    controller.uploadChangesPicto(context: context),
+                onPressed: () async => controller.uploadChangesPicto(context: context),
                 child: Text('yes'.tr),
               ),
               TextButton(

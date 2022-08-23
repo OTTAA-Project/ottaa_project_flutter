@@ -1,0 +1,39 @@
+Falta documentación
+
+GetX - //Enumerar lo que no usan vs lo que tienen
+
+Sin .env // No pasan un .env.template
+
+FacebookAuth.i.webInitialize(
+  appId: "658779868360186", //<-- YOUR APP_ID
+  cookie: true,
+  xfbml: true,
+  version: "v9.0",
+); -- Leak de appId?
+
+COMAS // IDENTACIÓN
+
+Actualizar versión de SDK -- Mejores perfomances
+
+53 warns
+927 lint errors
+
+Uso de const -- Muy poco uso de consts y sin el super
+
+Nice theme -- Buen uso del theme data
+
+void () => return null; -- Return null en una función void
+
+
+import '../../../foo/bar' importación desde el path en vez de package
+
+constants.dart -- por alguna razón estaba la api de timbd
+
+archivos barril - importaciones de más de 5 widgets distintos
+
+Principios SOLID - responsabilidad única
+Principios DRY - Dont repeat yourself
+
+Nombres pronunciables y expresivos https://dart.dev/guides/language/effective-dart/style
+
+Propagación de contexto en funciones https://blog.codemagic.io/how-to-improve-the-performance-of-your-flutter-app./

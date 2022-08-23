@@ -27,6 +27,7 @@ class PictoMatchPictoWidget extends StatelessWidget {
       top: top,
       // bottom: bottom,
       left: left,
+      duration: const Duration(seconds: 1),
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
@@ -60,14 +61,13 @@ class PictoMatchPictoWidget extends StatelessWidget {
                     clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(verticalSize * 0.03),
-                      border: Border.all(
-                          color: Colors.black, width: verticalSize * 0.01),
+                      border: Border.all(color: Colors.black, width: verticalSize * 0.01),
                     ),
                     child: kIsWeb
                         ? Image.network(imageUrl)
                         : CachedNetworkImage(
                             imageUrl: imageUrl,
-                            placeholder: (context, url) => Center(
+                            placeholder: (context, url) => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.black,
                               ),
@@ -88,7 +88,6 @@ class PictoMatchPictoWidget extends StatelessWidget {
           ),
         ),
       ),
-      duration: Duration(seconds: 1),
     );
   }
 }

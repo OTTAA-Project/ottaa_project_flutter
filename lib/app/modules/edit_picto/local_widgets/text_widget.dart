@@ -11,7 +11,6 @@ class TextWidget extends GetView<EditPictoController> {
   @override
   Widget build(BuildContext context) {
     final verticalSize = MediaQuery.of(context).size.height;
-    final horizontalSize = MediaQuery.of(context).size.width;
     return Container(
       padding: EdgeInsets.all(verticalSize * 0.01),
       child: Column(
@@ -19,14 +18,12 @@ class TextWidget extends GetView<EditPictoController> {
         children: [
           Text(
             'text'.tr,
-            style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: verticalSize * 0.03),
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: verticalSize * 0.03),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: verticalSize * 0.03),
             child: Text(
               'text_widget_long_1'.tr,
-              style: TextStyle(),
             ),
           ),
           Row(
@@ -41,7 +38,7 @@ class TextWidget extends GetView<EditPictoController> {
                     hintText: "Name".tr,
                     contentPadding: const EdgeInsets.all(0),
                     isDense: true,
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: kOTTAAOrangeNew),
                     ),
                   ),
@@ -60,8 +57,7 @@ class TextWidget extends GetView<EditPictoController> {
                 width: verticalSize * 0.03,
               ),
               GestureDetector(
-                onTap: () async =>
-                    await _ttsController.speak(controller.nameController.text),
+                onTap: () async => await _ttsController.speak(controller.nameController.text),
                 child: Image.asset(
                   'assets/icono_ottaa.webp',
                   fit: BoxFit.cover,

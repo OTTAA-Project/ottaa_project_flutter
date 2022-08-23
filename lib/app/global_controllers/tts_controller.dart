@@ -13,42 +13,42 @@ class TTSController extends GetxController {
   String _language = Get.locale!.languageCode;
   final _dataController = Get.find<DataController>();
 
-  String get languaje => this._language;
+  String get languaje => _language;
 
   set languaje(value) {
-    this._language = value;
+    _language = value;
   }
 
   late bool _isEnglish;
 
-  bool get isEnglish => this._isEnglish;
+  bool get isEnglish => _isEnglish;
 
   set isEnglish(value) {
-    this._isEnglish = value;
+    _isEnglish = value;
   }
 
   bool _isCustomTTSEnable = false;
 
-  bool get isCustomTTSEnable => this._isCustomTTSEnable;
+  bool get isCustomTTSEnable => _isCustomTTSEnable;
 
   set isCustomTTSEnable(value) {
-    this._isCustomTTSEnable = value;
+    _isCustomTTSEnable = value;
   }
 
   bool _isCustomSubtitle = false;
 
-  bool get isCustomSubtitle => this._isCustomSubtitle;
+  bool get isCustomSubtitle => _isCustomSubtitle;
 
   set isCustomSubtitle(value) {
-    this._isCustomSubtitle = value;
+    _isCustomSubtitle = value;
   }
 
   bool _isSubtitleUppercase = false;
 
-  bool get isSubtitleUppercase => this._isSubtitleUppercase;
+  bool get isSubtitleUppercase => _isSubtitleUppercase;
 
   set isSubtitleUppercase(value) {
-    this._isSubtitleUppercase = value;
+    _isSubtitleUppercase = value;
   }
 
   // ignore: unused_field
@@ -56,47 +56,47 @@ class TTSController extends GetxController {
 
   double _volume = 0.8;
 
-  double get volume => this._volume;
+  double get volume => _volume;
 
   int _subtitleSize = 2;
 
-  int get subtitleSize => this._subtitleSize;
+  int get subtitleSize => _subtitleSize;
 
   set setVolume(value) {
-    this._volume = value;
+    _volume = value;
   }
 
   set subtitleSize(value) {
-    this._subtitleSize = value;
+    _subtitleSize = value;
   }
 
   double _pitch = 1.0;
 
-  double get pitch => this._pitch;
+  double get pitch => _pitch;
 
   set pitch(value) {
-    this._pitch = value;
+    _pitch = value;
   }
 
   double _rate = 0.4;
 
-  double get rate => this._rate;
+  double get rate => _rate;
 
   set rate(value) {
-    this._rate = value;
+    _rate = value;
   }
 
   // bool isCurrentLanguageInstalled = false;
 
   TTSState _ttsState = TTSState.stopped;
 
-  get isPlaying => this._ttsState == TTSState.playing;
+  get isPlaying => _ttsState == TTSState.playing;
 
-  get isStopped => this._ttsState == TTSState.stopped;
+  get isStopped => _ttsState == TTSState.stopped;
 
-  get isPaused => this._ttsState == TTSState.paused;
+  get isPaused => _ttsState == TTSState.paused;
 
-  get isContinued => this._ttsState == TTSState.continued;
+  get isContinued => _ttsState == TTSState.continued;
 
   bool get isIOS => !kIsWeb && Platform.isIOS;
 
@@ -114,47 +114,47 @@ class TTSController extends GetxController {
 
   @override
   void onClose() {
-    this._flutterTTS.stop();
+    _flutterTTS.stop();
     super.onClose();
   }
 
   _initTTS() {
-    this._flutterTTS = FlutterTts();
+    _flutterTTS = FlutterTts();
 
     if (isAndroid) {
       _getDefaultEngine();
     }
 
-    this._flutterTTS.setStartHandler(() {
+    _flutterTTS.setStartHandler(() {
       print("Playing");
-      this._ttsState = TTSState.playing;
+      _ttsState = TTSState.playing;
     });
 
-    this._flutterTTS.setCompletionHandler(() {
+    _flutterTTS.setCompletionHandler(() {
       print("Complete");
-      this._ttsState = TTSState.stopped;
+      _ttsState = TTSState.stopped;
     });
 
-    this._flutterTTS.setCancelHandler(() {
+    _flutterTTS.setCancelHandler(() {
       print("Cancel");
-      this._ttsState = TTSState.stopped;
+      _ttsState = TTSState.stopped;
     });
 
     if (isWeb || isIOS) {
-      this._flutterTTS.setPauseHandler(() {
+      _flutterTTS.setPauseHandler(() {
         print("Paused");
-        this._ttsState = TTSState.paused;
+        _ttsState = TTSState.paused;
       });
 
-      this._flutterTTS.setContinueHandler(() {
+      _flutterTTS.setContinueHandler(() {
         print("Continued");
-        this._ttsState = TTSState.continued;
+        _ttsState = TTSState.continued;
       });
     }
 
-    this._flutterTTS.setErrorHandler((msg) {
+    _flutterTTS.setErrorHandler((msg) {
       print("error: $msg");
-      this._ttsState = TTSState.stopped;
+      _ttsState = TTSState.stopped;
     });
   }
 
@@ -163,23 +163,22 @@ class TTSController extends GetxController {
   // Future<dynamic> _getEngines() => flutterTts.getEngines;
 
   Future _getDefaultEngine() async {
-    this._engine = await this._flutterTTS.getDefaultEngine;
+    _engine = await _flutterTTS.getDefaultEngine;
   }
 
   Future speak(String voiceText) async {
     if (voiceText.isNotEmpty) {
-      await this._flutterTTS.setVolume(this._volume);
+      await _flutterTTS.setVolume(_volume);
       // TODO CREATE DEFAULT VALUES
-      if (this.isCustomTTSEnable) {
-        await this._flutterTTS.setSpeechRate(this._rate);
-        await this._flutterTTS.setPitch(this._pitch);
+      if (isCustomTTSEnable) {
+        await _flutterTTS.setSpeechRate(_rate);
+        await _flutterTTS.setPitch(_pitch);
       } else {
-        await this._flutterTTS.setSpeechRate(0.4);
-        await this._flutterTTS.setPitch(1.0);
+        await _flutterTTS.setSpeechRate(0.4);
+        await _flutterTTS.setPitch(1.0);
       }
-      await this._flutterTTS.awaitSpeakCompletion(true);
-      await this._flutterTTS.setLanguage(this._language);
-
+      await _flutterTTS.awaitSpeakCompletion(true);
+      await _flutterTTS.setLanguage(_language);
 
       // TODO The flutter_tts plugin for web doesn't implement the method 'getVoices'
       // var voice = await this._flutterTTS.getVoices;
@@ -187,23 +186,23 @@ class TTSController extends GetxController {
       // await this
       //     ._flutterTTS
       //     .setVoice({"name": "es-US-language", "locale": "es-US"});
-      await this._flutterTTS.speak(voiceText);
+      await _flutterTTS.speak(voiceText);
     }
   }
 
   Future speakPhrase(String voiceText) async {
     if (voiceText.isNotEmpty) {
-      await this._flutterTTS.setVolume(this._volume);
+      await _flutterTTS.setVolume(_volume);
       // TODO CREATE DEFAULT VALUES
-      if (this.isCustomTTSEnable) {
-        await this._flutterTTS.setSpeechRate(this._rate);
-        await this._flutterTTS.setPitch(this._pitch);
+      if (isCustomTTSEnable) {
+        await _flutterTTS.setSpeechRate(_rate);
+        await _flutterTTS.setPitch(_pitch);
       } else {
-        await this._flutterTTS.setSpeechRate(0.4);
-        await this._flutterTTS.setPitch(1.0);
+        await _flutterTTS.setSpeechRate(0.4);
+        await _flutterTTS.setPitch(1.0);
       }
-      await this._flutterTTS.awaitSpeakCompletion(true);
-      await this._flutterTTS.setLanguage(this._language);
+      await _flutterTTS.awaitSpeakCompletion(true);
+      await _flutterTTS.setLanguage(_language);
       // await FirebaseAnalytics.instance.logEvent(name: "Talk");
       _dataController.logFirebaseAnalyticsEvent(eventName: 'Talk');
       // TODO The flutter_tts plugin for web doesn't implement the method 'getVoices'
@@ -212,7 +211,7 @@ class TTSController extends GetxController {
       // await this
       //     ._flutterTTS
       //     .setVoice({"name": "es-US-language", "locale": "es-US"});
-      await this._flutterTTS.speak(voiceText);
+      await _flutterTTS.speak(voiceText);
     }
   }
 }

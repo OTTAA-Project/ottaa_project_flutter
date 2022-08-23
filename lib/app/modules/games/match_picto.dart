@@ -72,10 +72,7 @@ class MatchPicto extends GetView<GamesController> {
             verticalSize: verticalSize,
             left: horizontalSize * 0.05,
             top: verticalSize * 0.46,
-            foundOrNot: controller
-                .topOrBottom[
-                    controller.randomPositionsForBottomWidgets[0].value]
-                .value,
+            foundOrNot: controller.topOrBottom[controller.randomPositionsForBottomWidgets[0].value].value,
             onTap: () async {
               controller.bottomWidgetFunction(
                 index: controller.randomPositionsForBottomWidgets[0].value,
@@ -90,10 +87,7 @@ class MatchPicto extends GetView<GamesController> {
             verticalSize: verticalSize,
             left: horizontalSize * 0.28,
             top: verticalSize * 0.46,
-            foundOrNot: controller
-                .topOrBottom[
-                    controller.randomPositionsForBottomWidgets[1].value]
-                .value,
+            foundOrNot: controller.topOrBottom[controller.randomPositionsForBottomWidgets[1].value].value,
             onTap: () async => controller.bottomWidgetFunction(
               index: controller.randomPositionsForBottomWidgets[1].value,
               text: controller.bottomWidgetNames[1].value,
@@ -107,10 +101,7 @@ class MatchPicto extends GetView<GamesController> {
                   verticalSize: verticalSize,
                   left: horizontalSize * 0.51,
                   top: verticalSize * 0.46,
-                  foundOrNot: controller
-                      .topOrBottom[
-                          controller.randomPositionsForBottomWidgets[2].value]
-                      .value,
+                  foundOrNot: controller.topOrBottom[controller.randomPositionsForBottomWidgets[2].value].value,
                   onTap: () async => controller.bottomWidgetFunction(
                     index: controller.randomPositionsForBottomWidgets[2].value,
                     text: controller.bottomWidgetNames[2].value,
@@ -126,14 +117,10 @@ class MatchPicto extends GetView<GamesController> {
                   verticalSize: verticalSize,
                   left: horizontalSize * 0.74,
                   top: verticalSize * 0.46,
-                  foundOrNot: controller
-                      .topOrBottom[
-                          controller.randomPositionsForBottomWidgets[3].value]
-                      .value,
+                  foundOrNot: controller.topOrBottom[controller.randomPositionsForBottomWidgets[3].value].value,
                   onTap: () async {
                     controller.bottomWidgetFunction(
-                      index:
-                          controller.randomPositionsForBottomWidgets[3].value,
+                      index: controller.randomPositionsForBottomWidgets[3].value,
                       text: controller.bottomWidgetNames[3].value,
                       context: context,
                     );
@@ -152,9 +139,7 @@ class MatchPicto extends GetView<GamesController> {
                 height: verticalSize * 0.4,
                 width: horizontalSize * 0.2,
                 decoration: BoxDecoration(
-                  color: controller.topOrBottom[0].value
-                      ? Colors.white
-                      : Colors.black,
+                  color: controller.topOrBottom[0].value ? Colors.white : Colors.black,
                   borderRadius: BorderRadius.circular(verticalSize * 0.02),
                 ),
               ),
@@ -168,9 +153,7 @@ class MatchPicto extends GetView<GamesController> {
                 height: verticalSize * 0.4,
                 width: horizontalSize * 0.2,
                 decoration: BoxDecoration(
-                  color: controller.topOrBottom[1].value
-                      ? Colors.white
-                      : Colors.black,
+                  color: controller.topOrBottom[1].value ? Colors.white : Colors.black,
                   borderRadius: BorderRadius.circular(verticalSize * 0.02),
                 ),
               ),
@@ -185,11 +168,8 @@ class MatchPicto extends GetView<GamesController> {
                       height: verticalSize * 0.4,
                       width: horizontalSize * 0.2,
                       decoration: BoxDecoration(
-                        color: controller.topOrBottom[2].value
-                            ? Colors.white
-                            : Colors.black,
-                        borderRadius:
-                            BorderRadius.circular(verticalSize * 0.02),
+                        color: controller.topOrBottom[2].value ? Colors.white : Colors.black,
+                        borderRadius: BorderRadius.circular(verticalSize * 0.02),
                       ),
                     )
                   : Container(),
@@ -204,11 +184,8 @@ class MatchPicto extends GetView<GamesController> {
                       height: verticalSize * 0.4,
                       width: horizontalSize * 0.2,
                       decoration: BoxDecoration(
-                        color: controller.topOrBottom[3].value
-                            ? Colors.white
-                            : Colors.black,
-                        borderRadius:
-                            BorderRadius.circular(verticalSize * 0.02),
+                        color: controller.topOrBottom[3].value ? Colors.white : Colors.black,
+                        borderRadius: BorderRadius.circular(verticalSize * 0.02),
                       ),
                     )
                   : Container(),
@@ -217,14 +194,8 @@ class MatchPicto extends GetView<GamesController> {
           PictoMatchPictoWidget(
             horizontalSize: horizontalSize,
             verticalSize: verticalSize,
-            left: controller.topOrBottom[0].value
-                ? horizontalSize * 0.05
-                : horizontalSize *
-                    controller.leftRatios[
-                        controller.randomPositionsForBottomWidgets[0].value]!,
-            top: controller.topOrBottom[0].value
-                ? verticalSize * 0.02
-                : verticalSize * 0.46,
+            left: controller.topOrBottom[0].value ? horizontalSize * 0.05 : horizontalSize * controller.leftRatios[controller.randomPositionsForBottomWidgets[0].value]!,
+            top: controller.topOrBottom[0].value ? verticalSize * 0.02 : verticalSize * 0.46,
             topOrBottom: controller.topOrBottom[0].value,
             onTap: () async => controller.topWidgetFunction(
               text: controller.questions[0].text,
@@ -237,14 +208,8 @@ class MatchPicto extends GetView<GamesController> {
           PictoMatchPictoWidget(
             horizontalSize: horizontalSize,
             verticalSize: verticalSize,
-            left: controller.topOrBottom[1].value
-                ? horizontalSize * 0.28
-                : horizontalSize *
-                    controller.leftRatios[
-                        controller.randomPositionsForBottomWidgets[1].value]!,
-            top: controller.topOrBottom[1].value
-                ? verticalSize * 0.02
-                : verticalSize * 0.46,
+            left: controller.topOrBottom[1].value ? horizontalSize * 0.28 : horizontalSize * controller.leftRatios[controller.randomPositionsForBottomWidgets[1].value]!,
+            top: controller.topOrBottom[1].value ? verticalSize * 0.02 : verticalSize * 0.46,
             // bottom: controller.topOrBottom[1].value ? 0 : verticalSize * 0.02,
             topOrBottom: controller.topOrBottom[1].value,
             onTap: () async => controller.topWidgetFunction(
@@ -259,14 +224,8 @@ class MatchPicto extends GetView<GamesController> {
               ? PictoMatchPictoWidget(
                   horizontalSize: horizontalSize,
                   verticalSize: verticalSize,
-                  left: controller.topOrBottom[2].value
-                      ? horizontalSize * 0.51
-                      : horizontalSize *
-                          controller.leftRatios[controller
-                              .randomPositionsForBottomWidgets[2].value]!,
-                  top: controller.topOrBottom[2].value
-                      ? verticalSize * 0.02
-                      : verticalSize * 0.46,
+                  left: controller.topOrBottom[2].value ? horizontalSize * 0.51 : horizontalSize * controller.leftRatios[controller.randomPositionsForBottomWidgets[2].value]!,
+                  top: controller.topOrBottom[2].value ? verticalSize * 0.02 : verticalSize * 0.46,
                   // bottom: controller.topOrBottom[2].value ? 0 : verticalSize * 0.02,
                   topOrBottom: controller.topOrBottom[2].value,
                   onTap: () async => controller.topWidgetFunction(
@@ -282,14 +241,8 @@ class MatchPicto extends GetView<GamesController> {
               ? PictoMatchPictoWidget(
                   horizontalSize: horizontalSize,
                   verticalSize: verticalSize,
-                  left: controller.topOrBottom[3].value
-                      ? horizontalSize * 0.74
-                      : horizontalSize *
-                          controller.leftRatios[controller
-                              .randomPositionsForBottomWidgets[3].value]!,
-                  top: controller.topOrBottom[3].value
-                      ? verticalSize * 0.02
-                      : verticalSize * 0.46,
+                  left: controller.topOrBottom[3].value ? horizontalSize * 0.74 : horizontalSize * controller.leftRatios[controller.randomPositionsForBottomWidgets[3].value]!,
+                  top: controller.topOrBottom[3].value ? verticalSize * 0.02 : verticalSize * 0.46,
                   // bottom: controller.topOrBottom[3].value ? 0 : verticalSize * 0.02,
                   topOrBottom: controller.topOrBottom[3].value,
                   onTap: () async => controller.topWidgetFunction(

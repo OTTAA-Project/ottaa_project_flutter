@@ -19,7 +19,7 @@ class SentenceShareWidget extends GetView<HomeController> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(verticalSize * 0.04),
       ),
-      titlePadding: EdgeInsets.all(0),
+      titlePadding: const EdgeInsets.all(0),
       title: Container(
         height: verticalSize * 0.06,
         decoration: BoxDecoration(
@@ -29,7 +29,7 @@ class SentenceShareWidget extends GetView<HomeController> {
             topRight: Radius.circular(verticalSize * 0.04),
           ),
         ),
-        child: Center(
+        child: const Center(
           child: Text(
             'Share',
             style: TextStyle(
@@ -54,12 +54,11 @@ class SentenceShareWidget extends GetView<HomeController> {
                         name: 'Audio Message',
                         script: controller.textToShare,
                       );
-                      Share.shareFiles([controller.audioFilePath],
-                          text: 'Audio File');
+                      Share.shareFiles([controller.audioFilePath], text: 'Audio File');
                     }
                   },
                 )
-              : Container(
+              : const SizedBox(
                   height: 0,
                   width: 0,
                 ),
@@ -74,18 +73,17 @@ class SentenceShareWidget extends GetView<HomeController> {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   },
                 );
                 print('started');
-                final image =
-                    await controller.screenshotController.captureFromWidget(
+                final image = await controller.screenshotController.captureFromWidget(
                   Container(
                     height: verticalSize * 0.25,
                     // width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.blueGrey,
                     ),
                     child: Container(
@@ -102,42 +100,27 @@ class SentenceShareWidget extends GetView<HomeController> {
                               children: controller.sentencePicts
                                   .map(
                                     (e) => Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: kIsWeb
                                           ? Image.network(
-                                              e.imagen.pictoEditado == null
-                                                  ? e.imagen.picto
-                                                  : e.imagen.pictoEditado!,
+                                              e.imagen.pictoEditado == null ? e.imagen.picto : e.imagen.pictoEditado!,
                                               width: verticalSize * 0.14,
-                                              loadingBuilder: (context, child,
-                                                  loadingProgress) {
-                                                if (loadingProgress == null)
+                                              loadingBuilder: (context, child, loadingProgress) {
+                                                if (loadingProgress == null) {
                                                   return child;
+                                                }
                                                 return Center(
-                                                  child:
-                                                      CircularProgressIndicator(
+                                                  child: CircularProgressIndicator(
                                                     color: kOTTAAOrangeNew,
-                                                    value: loadingProgress
-                                                                .expectedTotalBytes !=
-                                                            null
-                                                        ? loadingProgress
-                                                                .cumulativeBytesLoaded /
-                                                            loadingProgress
-                                                                .expectedTotalBytes!
-                                                        : null,
+                                                    value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
                                                   ),
                                                 );
                                               },
                                             )
                                           : CachedNetworkImage(
-                                              imageUrl:
-                                                  e.imagen.pictoEditado == null
-                                                      ? e.imagen.picto
-                                                      : e.imagen.pictoEditado!,
-                                              placeholder: (context, url) =>
-                                                  Center(
-                                                child:
-                                                    CircularProgressIndicator(),
+                                              imageUrl: e.imagen.pictoEditado == null ? e.imagen.picto : e.imagen.pictoEditado!,
+                                              placeholder: (context, url) => const Center(
+                                                child: CircularProgressIndicator(),
                                               ),
                                               // height: verticalSize * 0.04,
                                               width: verticalSize * 0.14,
@@ -148,7 +131,7 @@ class SentenceShareWidget extends GetView<HomeController> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 16),
+                            padding: const EdgeInsets.only(top: 16),
                             child: Image.asset(
                               'assets/otta_drawer_logo.png',
                               height: verticalSize * 0.05,
@@ -158,7 +141,7 @@ class SentenceShareWidget extends GetView<HomeController> {
                       ),
                     ),
                   ),
-                  delay: Duration(seconds: 2),
+                  delay: const Duration(seconds: 2),
                   context: context,
                 );
                 // final image = await controller.screenshotController.capture(
@@ -166,15 +149,14 @@ class SentenceShareWidget extends GetView<HomeController> {
                 //   delay: const Duration(milliseconds: 200),
                 // );
                 print('image taken');
-                final value =
-                    await controller.dataController.uploadImageToStorageForWeb(
+                final value = await controller.dataController.uploadImageToStorageForWeb(
                   storageName: 'testingUpload',
                   imageInBytes: image,
                 );
                 print('image uploaded');
-                final Uri _url = Uri.parse('https://wa.me/?text=$value');
+                final Uri url = Uri.parse('https://wa.me/?text=$value');
                 print(value);
-                await launchUrl(_url);
+                await launchUrl(url);
                 Get.back();
               } else {
                 final externalDirectory = await getExternalStorageDirectory();
@@ -198,9 +180,8 @@ class SentenceShareWidget extends GetView<HomeController> {
             onTap: () async {
               controller.generateStringToShare();
               if (kIsWeb) {
-                final Uri _url =
-                    Uri.parse('https://wa.me/?text=${controller.textToShare}');
-                await launchUrl(_url);
+                final Uri url = Uri.parse('https://wa.me/?text=${controller.textToShare}');
+                await launchUrl(url);
               } else {
                 Share.share(controller.textToShare);
               }

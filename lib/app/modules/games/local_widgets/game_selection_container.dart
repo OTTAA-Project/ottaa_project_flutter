@@ -26,7 +26,7 @@ class GameSelectionContainer extends StatelessWidget {
       itemCount: 3,
       itemBuilder: (context, index) {
         return Padding(
-          padding: EdgeInsets.all(horizontalSize *0.02),
+          padding: EdgeInsets.all(horizontalSize * 0.02),
           child: PageViewerContainer(
             color: color,
             subtitle: gameTypes[index].subtitle,

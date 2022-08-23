@@ -1,19 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/theme/group_colors.dart';
 import 'dart:io';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-final Map<int, Color> groupColor = {
-  1: Colors.yellow,
-  2: kOTTAAOrangeNew,
-  3: Colors.green,
-  4: Colors.blue,
-  5: Colors.purple,
-  6: Colors.black,
-};
-
 class AddGroupWidget extends StatelessWidget {
-  AddGroupWidget({
+  const AddGroupWidget({
     Key? key,
     required this.name,
     required this.isImageProvided,
@@ -25,9 +17,9 @@ class AddGroupWidget extends StatelessWidget {
 
   final String name;
   final bool isImageProvided;
-  String? selectedImageUrl;
-  File? fileImage;
-  Image? imageWidget;
+  final String? selectedImageUrl;
+  final File? fileImage;
+  final Image? imageWidget;
   final int color;
 
   @override
@@ -52,7 +44,7 @@ class AddGroupWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 // color: Colors.pink,
                 borderRadius: BorderRadius.circular(verticalSize * 0.02),
-                border: Border.all(color: groupColor[color]!, width: 4),
+                border: Border.all(color: kGroupColor[color]!, width: 4),
               ),
               child: isImageProvided
                   ? kIsWeb
@@ -86,13 +78,13 @@ class AddGroupWidget extends StatelessWidget {
 }
 
 class WebImage extends StatelessWidget {
-  WebImage({
+  const WebImage({
     Key? key,
     this.selectedImageUrl,
     this.imageWidget,
   }) : super(key: key);
-  String? selectedImageUrl;
-  Image? imageWidget;
+  final String? selectedImageUrl;
+  final Image? imageWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -117,13 +109,13 @@ class WebImage extends StatelessWidget {
 }
 
 class DeviceImage extends StatelessWidget {
-  DeviceImage({
+  const DeviceImage({
     Key? key,
     this.selectedImageUrl,
     this.fileImage,
   }) : super(key: key);
-  String? selectedImageUrl;
-  File? fileImage;
+  final String? selectedImageUrl;
+  final File? fileImage;
 
   @override
   Widget build(BuildContext context) {

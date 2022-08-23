@@ -42,7 +42,7 @@ class BuyPaidVersionPage extends GetView<HomeController> {
           child: Row(
             children: [
               /// here is the left side of the widget for the paid version screen
-              LeftSidePaidVersion(
+              const LeftSidePaidVersion(
                   // iconAddress: Ottaa_project_custom_icons.map_marked,
                   // iconAddress: Icons.videogame_asset,
                   // iconAddress: Icons.accessible_forward,

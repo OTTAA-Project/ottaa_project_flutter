@@ -13,59 +13,55 @@ class AddGroupTextWidget extends GetView<PictogramGroupsController> {
   @override
   Widget build(BuildContext context) {
     final verticalSize = MediaQuery.of(context).size.height;
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'text'.tr,
-            style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: verticalSize * 0.03),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'text'.tr,
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: verticalSize * 0.03),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: verticalSize * 0.03),
+          child: Text(
+            'text_widget_long_1'.tr,
+            style: const TextStyle(),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: verticalSize * 0.03),
-            child: Text(
-              'text_widget_long_1'.tr,
-              style: TextStyle(),
-            ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: TextFormField(
-                  controller: controllerTxt,
-                  decoration: InputDecoration(
-                    focusColor: kOTTAAOrangeNew,
-                    fillColor: kOTTAAOrangeNew,
-                    hintText: "Name".tr,
-                    contentPadding: const EdgeInsets.all(0),
-                    isDense: true,
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kOTTAAOrangeNew),
-                    ),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: controllerTxt,
+                decoration: InputDecoration(
+                  focusColor: kOTTAAOrangeNew,
+                  fillColor: kOTTAAOrangeNew,
+                  hintText: "Name".tr,
+                  contentPadding: const EdgeInsets.all(0),
+                  isDense: true,
+                  focusedBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(color: kOTTAAOrangeNew),
                   ),
-                  cursorColor: kOTTAAOrangeNew,
-                  onChanged: (value) {},
                 ),
+                cursorColor: kOTTAAOrangeNew,
+                onChanged: (value) {},
               ),
-              SizedBox(
-                width: verticalSize * 0.03,
+            ),
+            SizedBox(
+              width: verticalSize * 0.03,
+            ),
+            GestureDetector(
+              onTap: () async => await controller.ttsController.speak(controllerTxt.text),
+              child: Image.asset(
+                'assets/icono_ottaa.webp',
+                fit: BoxFit.cover,
+                height: verticalSize * 0.06,
+                width: verticalSize * 0.06,
               ),
-              GestureDetector(
-                onTap: () async =>
-                    await controller.ttsController.speak(controllerTxt.text),
-                child: Image.asset(
-                  'assets/icono_ottaa.webp',
-                  fit: BoxFit.cover,
-                  height: verticalSize * 0.06,
-                  width: verticalSize * 0.06,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

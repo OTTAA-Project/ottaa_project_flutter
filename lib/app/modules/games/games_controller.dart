@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -115,24 +117,17 @@ class GamesController extends GetxController {
   final grupoPageController = PageController(initialPage: 0);
 
   void goToNextPage({required PageController pageController}) {
-    pageController.nextPage(
-        duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
   void goToPreviousPage({required PageController pageController}) {
-    pageController.previousPage(
-        duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
   @override
   void dispose() async {
     super.dispose();
     await backgroundMusicPlayer.dispose();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 
   @override
@@ -158,7 +153,7 @@ class GamesController extends GetxController {
 
   void startGameTimer() {
     startTimeInEpoch = DateTime.now().millisecondsSinceEpoch;
-    _gameStartTimer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    _gameStartTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       timeInSeconds.value = timeInSeconds.value + 1;
     });
   }
@@ -170,8 +165,7 @@ class GamesController extends GetxController {
   }
 
   Future<void> pictoFunctionWhatsThePicto({required int index}) async {
-    final bool correctOrNot =
-        questions[index].text.toLowerCase() == selectedAnswer.toLowerCase();
+    final bool correctOrNot = questions[index].text.toLowerCase() == selectedAnswer.toLowerCase();
     imageOrEmoji[index].value = !imageOrEmoji[index].value;
     if (correctOrNot) {
       showImage.value = !showImage.value;
@@ -180,12 +174,12 @@ class GamesController extends GetxController {
       await playClickSounds(assetName: 'ohoh');
     }
     await Future.delayed(
-      Duration(milliseconds: 1000),
+      const Duration(milliseconds: 1000),
     );
     imageOrEmoji[index].value = !imageOrEmoji[index].value;
     if (correctOrNot) {
       showImage.value = !showImage.value;
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
 
       /// change the question and increment to the correct one and streak if it is there
       await createQuestion();
@@ -257,23 +251,15 @@ class GamesController extends GetxController {
       questions.add(
         GameQuestionModel(
           id: picto1,
-          imageUrl: currentGrupoPicts[picto1].imagen.pictoEditado == null
-              ? currentGrupoPicts[picto1].imagen.picto
-              : currentGrupoPicts[picto1].imagen.pictoEditado!,
-          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
-              ? currentGrupoPicts[picto1].texto.en
-              : currentGrupoPicts[picto1].texto.es,
+          imageUrl: currentGrupoPicts[picto1].imagen.pictoEditado == null ? currentGrupoPicts[picto1].imagen.picto : currentGrupoPicts[picto1].imagen.pictoEditado!,
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase() ? currentGrupoPicts[picto1].texto.en : currentGrupoPicts[picto1].texto.es,
         ),
       );
       questions.add(
         GameQuestionModel(
           id: picto2,
-          imageUrl: currentGrupoPicts[picto2].imagen.pictoEditado == null
-              ? currentGrupoPicts[picto2].imagen.picto
-              : currentGrupoPicts[picto2].imagen.pictoEditado!,
-          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
-              ? currentGrupoPicts[picto2].texto.en
-              : currentGrupoPicts[picto2].texto.es,
+          imageUrl: currentGrupoPicts[picto2].imagen.pictoEditado == null ? currentGrupoPicts[picto2].imagen.picto : currentGrupoPicts[picto2].imagen.pictoEditado!,
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase() ? currentGrupoPicts[picto2].texto.en : currentGrupoPicts[picto2].texto.es,
         ),
       );
       await clicksPlayer.pause();
@@ -304,34 +290,22 @@ class GamesController extends GetxController {
       questions.add(
         GameQuestionModel(
           id: picto1,
-          imageUrl: currentGrupoPicts[picto1].imagen.pictoEditado == null
-              ? currentGrupoPicts[picto1].imagen.picto
-              : currentGrupoPicts[picto1].imagen.pictoEditado!,
-          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
-              ? currentGrupoPicts[picto1].texto.en
-              : currentGrupoPicts[picto1].texto.es,
+          imageUrl: currentGrupoPicts[picto1].imagen.pictoEditado == null ? currentGrupoPicts[picto1].imagen.picto : currentGrupoPicts[picto1].imagen.pictoEditado!,
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase() ? currentGrupoPicts[picto1].texto.en : currentGrupoPicts[picto1].texto.es,
         ),
       );
       questions.add(
         GameQuestionModel(
           id: picto2,
-          imageUrl: currentGrupoPicts[picto2].imagen.pictoEditado == null
-              ? currentGrupoPicts[picto2].imagen.picto
-              : currentGrupoPicts[picto2].imagen.pictoEditado!,
-          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
-              ? currentGrupoPicts[picto2].texto.en
-              : currentGrupoPicts[picto2].texto.es,
+          imageUrl: currentGrupoPicts[picto2].imagen.pictoEditado == null ? currentGrupoPicts[picto2].imagen.picto : currentGrupoPicts[picto2].imagen.pictoEditado!,
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase() ? currentGrupoPicts[picto2].texto.en : currentGrupoPicts[picto2].texto.es,
         ),
       );
       questions.add(
         GameQuestionModel(
           id: picto2,
-          imageUrl: currentGrupoPicts[picto3].imagen.pictoEditado == null
-              ? currentGrupoPicts[picto3].imagen.picto
-              : currentGrupoPicts[picto3].imagen.pictoEditado!,
-          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
-              ? currentGrupoPicts[picto3].texto.en
-              : currentGrupoPicts[picto3].texto.es,
+          imageUrl: currentGrupoPicts[picto3].imagen.pictoEditado == null ? currentGrupoPicts[picto3].imagen.picto : currentGrupoPicts[picto3].imagen.pictoEditado!,
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase() ? currentGrupoPicts[picto3].texto.en : currentGrupoPicts[picto3].texto.es,
         ),
       );
       await clicksPlayer.pause();
@@ -366,45 +340,29 @@ class GamesController extends GetxController {
       questions.add(
         GameQuestionModel(
           id: picto1,
-          imageUrl: currentGrupoPicts[picto1].imagen.pictoEditado == null
-              ? currentGrupoPicts[picto1].imagen.picto
-              : currentGrupoPicts[picto1].imagen.pictoEditado!,
-          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
-              ? currentGrupoPicts[picto1].texto.en
-              : currentGrupoPicts[picto1].texto.es,
+          imageUrl: currentGrupoPicts[picto1].imagen.pictoEditado == null ? currentGrupoPicts[picto1].imagen.picto : currentGrupoPicts[picto1].imagen.pictoEditado!,
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase() ? currentGrupoPicts[picto1].texto.en : currentGrupoPicts[picto1].texto.es,
         ),
       );
       questions.add(
         GameQuestionModel(
           id: picto2,
-          imageUrl: currentGrupoPicts[picto2].imagen.pictoEditado == null
-              ? currentGrupoPicts[picto2].imagen.picto
-              : currentGrupoPicts[picto2].imagen.pictoEditado!,
-          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
-              ? currentGrupoPicts[picto2].texto.en
-              : currentGrupoPicts[picto2].texto.es,
+          imageUrl: currentGrupoPicts[picto2].imagen.pictoEditado == null ? currentGrupoPicts[picto2].imagen.picto : currentGrupoPicts[picto2].imagen.pictoEditado!,
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase() ? currentGrupoPicts[picto2].texto.en : currentGrupoPicts[picto2].texto.es,
         ),
       );
       questions.add(
         GameQuestionModel(
           id: picto3,
-          imageUrl: currentGrupoPicts[picto3].imagen.pictoEditado == null
-              ? currentGrupoPicts[picto3].imagen.picto
-              : currentGrupoPicts[picto3].imagen.pictoEditado!,
-          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
-              ? currentGrupoPicts[picto3].texto.en
-              : currentGrupoPicts[picto3].texto.es,
+          imageUrl: currentGrupoPicts[picto3].imagen.pictoEditado == null ? currentGrupoPicts[picto3].imagen.picto : currentGrupoPicts[picto3].imagen.pictoEditado!,
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase() ? currentGrupoPicts[picto3].texto.en : currentGrupoPicts[picto3].texto.es,
         ),
       );
       questions.add(
         GameQuestionModel(
           id: picto4,
-          imageUrl: currentGrupoPicts[picto4].imagen.pictoEditado == null
-              ? currentGrupoPicts[picto4].imagen.picto
-              : currentGrupoPicts[picto4].imagen.pictoEditado!,
-          text: homeController.language.toLowerCase() == 'en'.toLowerCase()
-              ? currentGrupoPicts[picto4].texto.en
-              : currentGrupoPicts[picto4].texto.es,
+          imageUrl: currentGrupoPicts[picto4].imagen.pictoEditado == null ? currentGrupoPicts[picto4].imagen.picto : currentGrupoPicts[picto4].imagen.pictoEditado!,
+          text: homeController.language.toLowerCase() == 'en'.toLowerCase() ? currentGrupoPicts[picto4].texto.en : currentGrupoPicts[picto4].texto.es,
         ),
       );
       await clicksPlayer.pause();
@@ -426,11 +384,11 @@ class GamesController extends GetxController {
   void fetchPictosForCurrentGrupo() async {
     currentGrupoPicts = [];
     for (int i = 0; i < grupos[grupoSelectedIndex].relacion.length; i++) {
-      pictos.forEach((element) {
+      for (var element in pictos) {
         if (element.id == grupos[grupoSelectedIndex].relacion[i].id) {
           currentGrupoPicts.add(element);
         }
-      });
+      }
     }
   }
 
@@ -453,7 +411,7 @@ class GamesController extends GetxController {
     // await controller.initializeBackgroundMusic();
     fetchPictosForCurrentGrupo();
     await createQuestion();
-    Get.to(() => GamesPlayingPage());
+    Get.to(() => const GamesPlayingPage());
   }
 
   Future<void> pauseMusic() async {
@@ -461,8 +419,7 @@ class GamesController extends GetxController {
   }
 
   void speakNameWhatsThePicto() async {
-    await _ttsController
-        .speak('${'whats_the_picto'.tr} ${selectedAnswer.string}');
+    await _ttsController.speak('${'whats_the_picto'.tr} ${selectedAnswer.string}');
     print('${'whats_the_picto'.tr} ${selectedAnswer.string}');
   }
 
@@ -483,7 +440,7 @@ class GamesController extends GetxController {
         totalCorrectMatchPicto++;
         topOrBottom[index].value = !topOrBottom[index].value;
         print('the index is $index and the value is $selectedAnswer');
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
         Get.back();
         correctScore.value++;
         if (currentStreak.value >= 0) {
@@ -495,7 +452,7 @@ class GamesController extends GetxController {
       } else {
         showTheDialog(context);
         await playClickSounds(assetName: 'ohoh');
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
         Get.back();
         selectedOrNot[index] = false;
         selectedAnswerBottom.value = '';
@@ -510,9 +467,9 @@ class GamesController extends GetxController {
       selectedAnswer.value = text;
     }
     print('the values of the current stack is');
-    selectedOrNot.forEach((element) {
+    for (var element in selectedOrNot) {
       print('the value is : $element');
-    });
+    }
     int i = 0;
     while (i < selectedOrNot.length) {
       if (i == index) {
@@ -522,12 +479,11 @@ class GamesController extends GetxController {
       i++;
     }
     if (totalCorrectMatchPicto == difficultyLevel.value + 2) {
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       sameOrNotIndex = -1;
       createQuestion();
     }
-    print(
-        'the index is $index and the value is $selectedAnswer : $selectedAnswerBottom');
+    print('the index is $index and the value is $selectedAnswer : $selectedAnswerBottom');
   }
 
   Future<void> bottomWidgetFunction({
@@ -539,12 +495,11 @@ class GamesController extends GetxController {
     _ttsController.speak(text);
     if (selectedOrNot[index]) {
       /// it is selected for checking user clicked on the below question
-      if (selectedAnswer.value.toLowerCase() ==
-          selectedAnswerBottom.value.toLowerCase()) {
+      if (selectedAnswer.value.toLowerCase() == selectedAnswerBottom.value.toLowerCase()) {
         showTheDialog(context);
         await playClickSounds(assetName: 'yay');
         print('the index is $index and the value is $selectedAnswer');
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
         Get.back();
         totalCorrectMatchPicto++;
         topOrBottom[index].value = !topOrBottom[index].value;
@@ -558,7 +513,7 @@ class GamesController extends GetxController {
       } else {
         showTheDialog(context);
         await playClickSounds(assetName: 'ohoh');
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
         Get.back();
         tries++;
         selectedOrNot[index] = false;
@@ -573,11 +528,11 @@ class GamesController extends GetxController {
       selectedAnswerBottom.value = questions[index].text;
     }
     print('the values of the current stack is');
-    selectedOrNot.forEach((element) {
+    for (var element in selectedOrNot) {
       print('the value is : $element');
-    });
+    }
     if (totalCorrectMatchPicto == difficultyLevel.value + 2) {
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       sameOrNotIndex = -1;
       await createQuestion();
     }
@@ -590,11 +545,10 @@ class GamesController extends GetxController {
       i++;
     }
     print(';;;;;');
-    selectedOrNot.forEach((element) {
+    for (var element in selectedOrNot) {
       print('the value is : $element');
-    });
-    print(
-        'the index is $index and the value is $selectedAnswer : $selectedAnswerBottom');
+    }
+    print('the index is $index and the value is $selectedAnswer : $selectedAnswerBottom');
   }
 
   Future<void> generateRandomPositioningForMatchPictos() async {
@@ -640,9 +594,7 @@ class GamesController extends GetxController {
       while (position2 == position0 || position2 == position1) {
         position2 = Random().nextInt(4000) % 4;
       }
-      while (position3 == position0 ||
-          position3 == position1 ||
-          position3 == position2) {
+      while (position3 == position0 || position3 == position1 || position3 == position2) {
         position3 = Random().nextInt(4000) % 4;
       }
       randomPositionsForBottomWidgets[0].value = position0;
@@ -653,15 +605,11 @@ class GamesController extends GetxController {
       bottomWidgetNames[position2].value = questions[2].text;
       randomPositionsForBottomWidgets[3].value = position3;
       bottomWidgetNames[position3].value = questions[3].text;
-      print(
-          'position 0 has this one ${randomPositionsForBottomWidgets[0].value}');
-      print(
-          'position 1 has this one ${randomPositionsForBottomWidgets[1].value}');
-      print(
-          'position 2 has this one ${randomPositionsForBottomWidgets[2].value}');
-      print(
-          'position 3 has this one ${randomPositionsForBottomWidgets[3].value}');
-      await Future.delayed(Duration(milliseconds: 300));
+      print('position 0 has this one ${randomPositionsForBottomWidgets[0].value}');
+      print('position 1 has this one ${randomPositionsForBottomWidgets[1].value}');
+      print('position 2 has this one ${randomPositionsForBottomWidgets[2].value}');
+      print('position 3 has this one ${randomPositionsForBottomWidgets[3].value}');
+      await Future.delayed(const Duration(milliseconds: 300));
     }
   }
 
@@ -725,9 +673,7 @@ class GamesController extends GetxController {
       while (position2 == position0 || position2 == position1) {
         position2 = Random().nextInt(4000) % 4;
       }
-      while (position3 == position0 ||
-          position3 == position1 ||
-          position3 == position2) {
+      while (position3 == position0 || position3 == position1 || position3 == position2) {
         position3 = Random().nextInt(4000) % 4;
       }
       positions[0].value = position0;
@@ -744,9 +690,7 @@ class GamesController extends GetxController {
       while (position6 == position4 || position6 == position5) {
         position6 = Random().nextInt(4000) % 4;
       }
-      while (position7 == position4 ||
-          position7 == position5 ||
-          position7 == position6) {
+      while (position7 == position4 || position7 == position5 || position7 == position6) {
         position7 = Random().nextInt(4000) % 4;
       }
       positions[4].value = position4;
@@ -756,10 +700,7 @@ class GamesController extends GetxController {
     }
   }
 
-  Future<void> memoryGameOnTap(
-      {required int index,
-      required String text,
-      required BuildContext context}) async {
+  Future<void> memoryGameOnTap({required int index, required String text, required BuildContext context}) async {
     print('index is floowing $index');
     showOrHideMemoryGame[index].value = !showOrHideMemoryGame[index].value;
     if (first.value == '') {
@@ -774,7 +715,7 @@ class GamesController extends GetxController {
         first.value = '';
         second.value = '';
         await playClickSounds(assetName: 'yay');
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(const Duration(seconds: 1));
         Get.back();
         // showOrHideMemoryGame[secondIndex.value].value = !showOrHideMemoryGame[secondIndex.value].value;
         totalCorrectMemoryGame++;
@@ -793,13 +734,11 @@ class GamesController extends GetxController {
         incorrectScore.value++;
         currentStreak.value--;
         await playClickSounds(assetName: 'ohoh');
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(const Duration(seconds: 1));
         Get.back();
         tries++;
-        showOrHideMemoryGame[firstIndex.value].value =
-            !showOrHideMemoryGame[firstIndex.value].value;
-        showOrHideMemoryGame[secondIndex.value].value =
-            !showOrHideMemoryGame[secondIndex.value].value;
+        showOrHideMemoryGame[firstIndex.value].value = !showOrHideMemoryGame[firstIndex.value].value;
+        showOrHideMemoryGame[secondIndex.value].value = !showOrHideMemoryGame[secondIndex.value].value;
       }
     }
     print('first is ${first.value}');
@@ -807,46 +746,46 @@ class GamesController extends GetxController {
     if (totalCorrectMemoryGame == difficultyLevel.value + 2) {
       first.value = '';
       second.value = '';
-      await Future.delayed(Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 3));
       await createQuestion();
       update(['MemoryGame']);
     }
   }
 
   Future<void> uploadScore() async {
-    final endTimeInEpoch = DateTime.now().millisecondsSinceEpoch;
-    double score = (correctScore.value + incorrectScore.value) / 2;
+    // final endTimeInEpoch = DateTime.now().millisecondsSinceEpoch;
+    // double score = (correctScore.value + incorrectScore.value) / 2;
 
     /// check if the level is played or not
 
-    GameData game = GameData(
-      game: gameSelected.value,
-      levelId: grupoSelectedIndex,
-      bestStreak: maximumStreak.value,
-      score: Score(
-        hit: correctScore.value,
-        mistakes: incorrectScore.value,
-        score: score,
-        tries: tries,
-      ),
-      timeUse: timeInSeconds.value,
-      reloj: [
-        RelojElement(
-          endTime: endTimeInEpoch,
-          startTime: startTimeInEpoch,
-          useTime: timeInSeconds.value,
-        ),
-      ],
-    );
+    // GameData game = GameData(
+    //   game: gameSelected.value,
+    //   levelId: grupoSelectedIndex,
+    //   bestStreak: maximumStreak.value,
+    //   score: Score(
+    //     hit: correctScore.value,
+    //     mistakes: incorrectScore.value,
+    //     score: score,
+    //     tries: tries,
+    //   ),
+    //   timeUse: timeInSeconds.value,
+    //   reloj: [
+    //     RelojElement(
+    //       endTime: endTimeInEpoch,
+    //       startTime: startTimeInEpoch,
+    //       useTime: timeInSeconds.value,
+    //     ),
+    //   ],
+    // );
+    //TODO: ??
   }
 
   void showTheDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (context) => Container(
-              color: Colors.transparent,
-            ),
-        barrierColor: Colors.transparent,
-        barrierDismissible: false);
+      context: context,
+      builder: (context) => Container(color: Colors.transparent),
+      barrierColor: Colors.transparent,
+      barrierDismissible: false,
+    );
   }
 }

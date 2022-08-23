@@ -13,29 +13,25 @@ class CustomDelegate extends SearchDelegate<String> {
   final _homeController = Get.find<HomeController>();
 
   @override
-  List<Widget> buildActions(BuildContext context) =>
-      [IconButton(icon: Icon(Icons.clear), onPressed: () => query = '')];
+  List<Widget> buildActions(BuildContext context) => [
+        IconButton(icon: const Icon(Icons.clear), onPressed: () => query = ''),
+      ];
 
   @override
   Widget buildLeading(BuildContext context) => IconButton(
-      icon: Icon(Icons.chevron_left), onPressed: () => close(context, ''));
+        icon: const Icon(Icons.chevron_left),
+        onPressed: () => close(context, ''),
+      );
 
   @override
   Widget buildResults(BuildContext context) {
     List<Pict> listToShow;
     final language = _ttsController.languaje;
-    if (query.isNotEmpty)
-      listToShow = language == 'en'
-          ? _pictogramController.picts
-              .where((e) =>
-                  e.texto.en.toLowerCase().contains(query.toLowerCase()))
-              .toList()
-          : _pictogramController.picts
-              .where((e) =>
-                  e.texto.es.toLowerCase().contains(query.toLowerCase()))
-              .toList();
-    else
+    if (query.isNotEmpty) {
+      listToShow = language == 'en' ? _pictogramController.picts.where((e) => e.texto.en.toLowerCase().contains(query.toLowerCase())).toList() : _pictogramController.picts.where((e) => e.texto.es.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
       listToShow = _pictogramController.picts;
+    }
     return Container(
       color: Colors.black,
       child: GridView.builder(
@@ -47,12 +43,8 @@ class CustomDelegate extends SearchDelegate<String> {
             await onTap(listToShow[index]);
           },
           child: CategoryWidget(
-            name: language == 'en'
-                ? listToShow[index].texto.en
-                : listToShow[index].texto.es,
-            imageName: listToShow[index].imagen.pictoEditado == null
-                ? listToShow[index].imagen.picto
-                : listToShow[index].imagen.pictoEditado!,
+            name: language == 'en' ? listToShow[index].texto.en : listToShow[index].texto.es,
+            imageName: listToShow[index].imagen.pictoEditado == null ? listToShow[index].imagen.picto : listToShow[index].imagen.pictoEditado!,
             border: true,
             bottom: false,
             color: listToShow[index].tipo,
@@ -72,18 +64,11 @@ class CustomDelegate extends SearchDelegate<String> {
   Widget buildSuggestions(BuildContext context) {
     List<Pict> listToShow;
     final language = _ttsController.languaje;
-    if (query.isNotEmpty)
-      listToShow = language == 'en'
-          ? _pictogramController.picts
-              .where(
-                  (e) => e.texto.en.toLowerCase().contains(query.toLowerCase()))
-              .toList()
-          : _pictogramController.picts
-              .where(
-                  (e) => e.texto.es.toLowerCase().contains(query.toLowerCase()))
-              .toList();
-    else
+    if (query.isNotEmpty) {
+      listToShow = language == 'en' ? _pictogramController.picts.where((e) => e.texto.en.toLowerCase().contains(query.toLowerCase())).toList() : _pictogramController.picts.where((e) => e.texto.es.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
       listToShow = _pictogramController.picts;
+    }
 
     return Container(
       color: Colors.black,
@@ -96,12 +81,8 @@ class CustomDelegate extends SearchDelegate<String> {
             await onTap(listToShow[index]);
           },
           child: CategoryWidget(
-            name: language == 'en'
-                ? listToShow[index].texto.en
-                : listToShow[index].texto.es,
-            imageName: listToShow[index].imagen.pictoEditado == null
-                ? listToShow[index].imagen.picto
-                : listToShow[index].imagen.pictoEditado!,
+            name: language == 'en' ? listToShow[index].texto.en : listToShow[index].texto.es,
+            imageName: listToShow[index].imagen.pictoEditado == null ? listToShow[index].imagen.picto : listToShow[index].imagen.pictoEditado!,
             border: true,
             bottom: false,
             color: listToShow[index].tipo,

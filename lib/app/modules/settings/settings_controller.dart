@@ -6,10 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsController extends GetxController {
   final _ttsController = Get.find<TTSController>();
 
-  TTSController get ttsController => this._ttsController;
+  TTSController get ttsController => _ttsController;
   final _authController = Get.find<AuthController>();
 
-  AuthController get authController => this._authController;
+  AuthController get authController => _authController;
 
   toggleIsCustomTTSEnable(bool value) {
     _ttsController.isCustomTTSEnable = value;

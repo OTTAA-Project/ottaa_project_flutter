@@ -20,7 +20,7 @@ void main() async {
     await Firebase.initializeApp();
     DependencyInjection.init();
     // final String defaultSystemLocale = Platform.localeName;
-    final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
+    final List<Locale> systemLocales = WidgetsBinding.instance.window.locales;
     print('these are the locales Asim asked for');
     print(systemLocales.toList());
     print('above it');
@@ -43,8 +43,7 @@ void main() async {
     final bool = instance.getBool('Language_KEY') ?? false;
     runApp(
       MyApp(
-        locale: bool ? Locale(systemLocales[0].languageCode,
-            systemLocales[0].languageCode.toUpperCase()) : Locale('es', 'AR'),
+        locale: bool ? Locale(systemLocales[0].languageCode, systemLocales[0].languageCode.toUpperCase()) : const Locale('es', 'AR'),
       ),
     );
   }, (error, stackTrace) {
@@ -57,7 +56,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final Locale locale;
 
-  MyApp({required this.locale});
+  const MyApp({Key? key, required this.locale}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -74,7 +73,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kOTTAAOrangeNew,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashPage(),
+      home: const SplashPage(),
       defaultTransition: Transition.fadeIn,
       initialBinding: SplashBinding(),
       getPages: AppPages.pages,
@@ -82,7 +81,7 @@ class MyApp extends StatelessWidget {
       // your translations
       locale: locale,
       // translations will be displayed in that locale
-      fallbackLocale: Locale('es', 'AR'),
+      fallbackLocale: const Locale('es', 'AR'),
     );
   }
 }

@@ -2,27 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/theme/group_colors.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-
-final Map<int, Color> groupColor = {
-  1: Colors.yellow,
-  2: kOTTAAOrangeNew,
-  3: Colors.green,
-  4: Colors.blue,
-  5: Colors.purple,
-  6: Colors.black,
-};
 
 class Picto extends StatelessWidget {
   final Pict pict;
   final VoidCallback onTap;
-  VoidCallback? onLongPress;
+  final VoidCallback? onLongPress;
   final double height;
   final double width;
-  final languaje;
-  final localImg;
+  final String languaje;
+  final bool localImg;
 
-  Picto({
+  const Picto({
+    Key? key,
     required this.pict,
     required this.onTap,
     required this.height,
@@ -30,13 +23,13 @@ class Picto extends StatelessWidget {
     required this.languaje,
     required this.localImg,
     this.onLongPress,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String texto;
 
-    switch (this.languaje) {
+    switch (languaje) {
       case "es":
         texto = pict.texto.es;
         break;
@@ -49,11 +42,11 @@ class Picto extends StatelessWidget {
     }
 
     return GestureDetector(
-      onLongPress: this.onLongPress,
-      onTap: this.onTap,
+      onLongPress: onLongPress,
+      onTap: onTap,
       child: Container(
-        height: this.height,
-        width: this.width,
+        height: height,
+        width: width,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -65,48 +58,32 @@ class Picto extends StatelessWidget {
               flex: 8,
               child: Container(
                 //height: 320,
-                margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                padding: EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                    color: groupColor[pict.tipo],
-                    borderRadius: BorderRadius.circular(10)),
+                margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(color: kGroupColor[pict.tipo], borderRadius: BorderRadius.circular(10)),
                 child: Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: localImg
                         ? Image.asset('assets/imgs/${pict.imagen.picto}.webp')
                         : kIsWeb
                             ? Image.network(
-                                pict.imagen.pictoEditado == null
-                                    ? pict.imagen.picto
-                                    : pict.imagen.pictoEditado!,
-                                loadingBuilder:
-                                    (context, child, loadingProgress) {
+                                pict.imagen.pictoEditado == null ? pict.imagen.picto : pict.imagen.pictoEditado!,
+                                loadingBuilder: (context, child, loadingProgress) {
                                   if (loadingProgress == null) return child;
                                   return Center(
                                     child: CircularProgressIndicator(
                                       color: kOTTAAOrangeNew,
-                                      value:
-                                          loadingProgress.expectedTotalBytes !=
-                                                  null
-                                              ? loadingProgress
-                                                      .cumulativeBytesLoaded /
-                                                  loadingProgress
-                                                      .expectedTotalBytes!
-                                              : null,
+                                      value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
                                     ),
                                   );
                                 },
                               )
                             : CachedNetworkImage(
-                                imageUrl: pict.imagen.pictoEditado == null
-                                    ? pict.imagen.picto
-                                    : pict.imagen.pictoEditado!,
-                                placeholder: (context, url) => Center(
+                                imageUrl: pict.imagen.pictoEditado == null ? pict.imagen.picto : pict.imagen.pictoEditado!,
+                                placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator(),
                                 ),
                               ),
@@ -118,10 +95,10 @@ class Picto extends StatelessWidget {
               flex: 2,
               child: Center(
                 child: Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Text(
                     texto.toUpperCase(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,

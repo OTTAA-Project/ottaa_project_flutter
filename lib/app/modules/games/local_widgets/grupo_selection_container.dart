@@ -3,7 +3,7 @@ import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/modules/games/local_widgets/grupo_widget.dart';
 
 class GrupoSelectionContainer extends StatelessWidget {
-  GrupoSelectionContainer({
+  const GrupoSelectionContainer({
     Key? key,
     required this.pageControllerGrupo,
     required this.verticalSize,
@@ -17,7 +17,7 @@ class GrupoSelectionContainer extends StatelessWidget {
   final double verticalSize;
   final double horizontalSize;
   final List<Grupos> grupos;
-  String? language;
+  final String? language;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +29,8 @@ class GrupoSelectionContainer extends StatelessWidget {
           horizontalSize: horizontalSize,
           verticalSize: verticalSize,
           color: color,
-          title: 'en' == language
-              ? grupos[index].texto.en.toUpperCase()
-              : grupos[index].texto.es.toUpperCase(),
-          imageUrl: grupos[index].imagen.pictoEditado != null
-              ? grupos[index].imagen.pictoEditado!
-              : grupos[index].imagen.picto,
+          title: 'en' == language ? grupos[index].texto.en.toUpperCase() : grupos[index].texto.es.toUpperCase(),
+          imageUrl: grupos[index].imagen.pictoEditado != null ? grupos[index].imagen.pictoEditado! : grupos[index].imagen.picto,
         );
       },
     );

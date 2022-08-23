@@ -23,7 +23,7 @@ class EditPictoPage extends GetView<EditPictoController> {
     Future<bool> _willPop() async {
       return (await showDialog(
             context: context,
-            builder: (context) => new AlertDialog(
+            builder: (context) => AlertDialog(
               title: Text('important'.tr),
               content: Text('do_you_want_to_save_changes'.tr),
               actions: <Widget>[
@@ -35,8 +35,7 @@ class EditPictoPage extends GetView<EditPictoController> {
                   child: Text('no'.tr),
                 ),
                 TextButton(
-                  onPressed: () async =>
-                      controller.uploadChanges(context: context),
+                  onPressed: () async => controller.uploadChanges(context: context),
                   child: Text('yes'.tr),
                 ),
                 TextButton(
@@ -96,22 +95,15 @@ class EditPictoPage extends GetView<EditPictoController> {
                               );
                             },
                             child: CategoryWidget(
-                              name: languaje == 'en'
-                                  ? controller.pict.value!.texto.en
-                                  : controller.pict.value!.texto.es,
-                              imageName: controller
-                                          .pict.value!.imagen.pictoEditado ==
-                                      null
-                                  ? controller.pict.value!.imagen.picto
-                                  : controller.pict.value!.imagen.pictoEditado!,
+                              name: languaje == 'en' ? controller.pict.value!.texto.en : controller.pict.value!.texto.es,
+                              imageName: controller.pict.value!.imagen.pictoEditado == null ? controller.pict.value!.imagen.picto : controller.pict.value!.imagen.pictoEditado!,
                               border: controller.pictoBorder.value,
                               color: controller.pict.value!.tipo,
                               bottom: false,
                               isEditing: controller.editingPicture.value,
                               fileImage: controller.fileImage.value,
                               imageWidget: controller.imageWidget.value,
-                              selectedImageUrl:
-                                  controller.selectedPhotoUrl.value,
+                              selectedImageUrl: controller.selectedPhotoUrl.value,
                             ),
                           ),
                         ),
@@ -126,8 +118,7 @@ class EditPictoPage extends GetView<EditPictoController> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(horizontalSize * 0.01),
+                            borderRadius: BorderRadius.circular(horizontalSize * 0.01),
                           ),
                           child: Obx(
                             () => controller.text.value
@@ -141,7 +132,7 @@ class EditPictoPage extends GetView<EditPictoController> {
                                         },
                                       )
                                     : controller.tags.value
-                                        ? TagsWidget()
+                                        ? const TagsWidget()
                                         : Container(),
                           ),
                         ),
@@ -151,7 +142,7 @@ class EditPictoPage extends GetView<EditPictoController> {
                 ),
               ),
             ),
-            RightColumnWidget(),
+            const RightColumnWidget(),
           ],
         ),
       ),
@@ -191,13 +182,13 @@ class PictureDialogWidget extends GetView<EditPictoController> {
             Container(
               padding: EdgeInsets.symmetric(vertical: verticalSize * 0.01),
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: kOTTAAOrangeNew,
               ),
               child: Center(
                 child: Text(
                   'choose_an_option'.tr,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),
@@ -208,19 +199,14 @@ class PictureDialogWidget extends GetView<EditPictoController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  !kIsWeb
-                      ? ImageWidget(
-                          imageLink: 'assets/camera.png',
-                          text: 'camera'.tr,
-                          onTap: cameraOnTap,
-                        )
-                      : Container(
-                          height: 0,
-                          width: 0,
-                        ),
+                  if (!kIsWeb)
+                    ImageWidget(
+                      imageLink: 'assets/camera.png',
+                      text: 'camera'.tr,
+                      onTap: cameraOnTap,
+                    ),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                    padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
                     child: ImageWidget(
                       imageLink: 'assets/gallery.png',
                       text: 'gallery'.tr,
@@ -228,7 +214,7 @@ class PictureDialogWidget extends GetView<EditPictoController> {
                     ),
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(right: horizontalSize * 0.01),
+                    padding: EdgeInsets.only(right: horizontalSize * 0.01),
                     child: ImageWidget(
                       imageLink: 'assets/download_from_arasaac.png',
                       text: 'download_from_arasaac'.tr,

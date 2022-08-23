@@ -4,7 +4,7 @@ AppBar buildAppBar(String title) {
   return AppBar(
     title: Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.black,
       ),
     ),

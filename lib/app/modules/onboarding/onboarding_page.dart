@@ -23,7 +23,7 @@ class OnboardingPage extends StatelessWidget {
               child: PageView(
                 /// [PageView.scrollDirection] defaults to [Axis.horizontal].
                 /// Use [Axis.vertical] to scroll vertically.
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 controller: controller,
                 children: <Widget>[

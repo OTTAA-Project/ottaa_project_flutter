@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/games/games_controller.dart';
-import 'package:ottaa_project_flutter/app/modules/games/games_playing_page.dart';
 import 'package:ottaa_project_flutter/app/modules/games/local_widgets/page_viewer_widget/page_viewer_widget.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
@@ -28,12 +27,10 @@ class GrupoSelectionPage extends GetView<GamesController> {
             horizontalSize: horizontalSize,
             gameSelectionOrGruposSelection: false,
             nextButton: () {
-              controller.goToNextPage(
-                  pageController: controller.grupoPageController);
+              controller.goToNextPage(pageController: controller.grupoPageController);
             },
             previousButton: () {
-              controller.goToPreviousPage(
-                  pageController: controller.grupoPageController);
+              controller.goToPreviousPage(pageController: controller.grupoPageController);
             },
             pageControllerGame: controller.initialGamePageController,
             pageControllerGrupo: controller.grupoPageController,

@@ -48,47 +48,45 @@ class PageViewerContainer extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: verticalSize * 0.025,
-                    ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: verticalSize * 0.025,
                   ),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontSize: verticalSize * 0.02,
-                    ),
-                    textAlign: TextAlign.center,
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: verticalSize * 0.02,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Level $completedLevel/$totalLevel',
-                        style: TextStyle(
-                          fontSize: verticalSize * 0.025,
-                          color: color,
-                        ),
+                  textAlign: TextAlign.center,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'Level $completedLevel/$totalLevel',
+                      style: TextStyle(
+                        fontSize: verticalSize * 0.025,
+                        color: color,
                       ),
-                      Text(
-                        'play'.tr,
-                        style: TextStyle(
-                          fontSize: verticalSize * 0.025,
-                          color: color,
-                        ),
+                    ),
+                    Text(
+                      'play'.tr,
+                      style: TextStyle(
+                        fontSize: verticalSize * 0.025,
+                        color: color,
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

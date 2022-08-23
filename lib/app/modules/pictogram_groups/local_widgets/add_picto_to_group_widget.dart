@@ -1,17 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import '../../../theme/app_theme.dart';
-
-final Map<int, Color> groupColor = {
-  1: Colors.yellow,
-  2: kOTTAAOrangeNew,
-  3: Colors.green,
-  4: Colors.blue,
-  5: Colors.purple,
-  6: Colors.black,
-};
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/theme/group_colors.dart';
 
 class AddPictoToGroupWidget extends StatelessWidget {
   const AddPictoToGroupWidget({
@@ -34,10 +24,12 @@ class AddPictoToGroupWidget extends StatelessWidget {
       padding: EdgeInsets.all(horizontalSize * 0.01),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(verticalSize * 0.03),
-        border: isSelected ? Border.all(
-          color: Colors.blue,
-          width: 4,
-        ) : Border.all(),
+        border: isSelected
+            ? Border.all(
+                color: Colors.blue,
+                width: 4,
+              )
+            : Border.all(),
         color: Colors.white,
       ),
       child: Column(
@@ -48,7 +40,7 @@ class AddPictoToGroupWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 // color: Colors.pink,
                 borderRadius: BorderRadius.circular(verticalSize * 0.02),
-                border: Border.all(color: groupColor[color]!, width: 4),
+                border: Border.all(color: kGroupColor[color]!, width: 4),
               ),
               child: kIsWeb
                   ? Image.network(image)
@@ -62,8 +54,7 @@ class AddPictoToGroupWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 name.toUpperCase(),
-                style: TextStyle(
-                    fontSize: verticalSize * 0.02, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: verticalSize * 0.02, fontWeight: FontWeight.w600),
               ),
             ),
           ),

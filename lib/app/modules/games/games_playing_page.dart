@@ -43,13 +43,12 @@ class GamesPlayingPage extends GetView<GamesController> {
               controller.tries = 0;
               Get.back();
             },
-            child: Icon(
+            child: const Icon(
               Icons.keyboard_backspace,
               color: Colors.white,
             ),
           ),
-          title: Text(
-              '${controller.gameTypes[controller.gameSelected.value].title}'),
+          title: Text(controller.gameTypes[controller.gameSelected.value].title),
           actions: [
             GestureDetector(
               onTap: () {
@@ -79,12 +78,9 @@ class GamesPlayingPage extends GetView<GamesController> {
                   controller.helpOrNot.value = !controller.helpOrNot.value;
                 },
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.025),
+                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.025),
                   child: Icon(
-                    controller.helpOrNot.value
-                        ? Icons.speaker_notes_off_outlined
-                        : Icons.help_center_rounded,
+                    controller.helpOrNot.value ? Icons.speaker_notes_off_outlined : Icons.help_center_rounded,
                     color: Colors.white,
                     size: verticalSize * 0.04,
                   ),
@@ -110,9 +106,7 @@ class GamesPlayingPage extends GetView<GamesController> {
                   }
                 },
                 child: Icon(
-                  controller.muteOrNot.value
-                      ? Icons.volume_mute
-                      : Icons.volume_up,
+                  controller.muteOrNot.value ? Icons.volume_mute : Icons.volume_up,
                   color: Colors.white,
                   size: verticalSize * 0.04,
                 ),
@@ -125,10 +119,10 @@ class GamesPlayingPage extends GetView<GamesController> {
         ),
         body: Obx(
           () => controller.gameSelected.value == 0
-              ? WhatsThePicto()
+              ? const WhatsThePicto()
               : controller.gameSelected.value == 1
-                  ? MatchPicto()
-                  : MemoryGame(),
+                  ? const MatchPicto()
+                  : const MemoryGame(),
         ),
       ),
     );

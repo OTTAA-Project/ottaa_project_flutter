@@ -17,10 +17,7 @@ class FirebaseDatabaseService {
   final databaseRef = FirebaseDatabase.instance.reference();
   final firebaseRed = FirebaseAuth.instance;
 
-  Future<void> uploadInfo(
-      {required String name,
-      required String gender,
-      required int dateOfBirthInMs}) async {
+  Future<void> uploadInfo({required String name, required String gender, required int dateOfBirthInMs}) async {
     final User? auth = firebaseRed.currentUser;
     final ref = databaseRef.child('Usuarios/${auth!.uid}/');
     await ref.set(<String, Object>{
@@ -71,15 +68,14 @@ class FirebaseDatabaseService {
     return res.value;
   }
 
-  Future<void> logFirebaseAnalyticsEvent({required String eventName}) async =>
-      await FirebaseAnalytics.instance.logEvent(name: "Talk");
+  Future<void> logFirebaseAnalyticsEvent({required String eventName}) async => await FirebaseAnalytics.instance.logEvent(name: "Talk");
 
   Future<void> uploadDataToFirebaseRealTime({
     required String data,
     required String type,
   }) async {
-    final String? auth = firebaseRed.currentUser!.uid;
-    final ref = databaseRef.child('$type/${auth!}/');
+    final String auth = firebaseRed.currentUser!.uid;
+    final ref = databaseRef.child('$type/$auth/');
     await ref.set({
       'data': data,
     });
@@ -89,8 +85,8 @@ class FirebaseDatabaseService {
     required bool data,
     required String type,
   }) async {
-    final String? auth = firebaseRed.currentUser!.uid;
-    final ref = databaseRef.child('$type/${auth!}/');
+    final String auth = firebaseRed.currentUser!.uid;
+    final ref = databaseRef.child('$type/$auth/');
     await ref.set({
       'value': true,
     });
@@ -101,15 +97,14 @@ class FirebaseDatabaseService {
     required Uint8List imageInBytes,
   }) async {
     late String url;
-    Reference _reference =
-        FirebaseStorage.instance.ref().child('$storageName/');
-    await _reference
+    Reference reference = FirebaseStorage.instance.ref().child('$storageName/');
+    await reference
         .putData(
       imageInBytes,
       SettableMetadata(contentType: 'image/jpeg'),
     )
         .whenComplete(() async {
-      await _reference.getDownloadURL().then((value) {
+      await reference.getDownloadURL().then((value) {
         url = value;
       });
     });
@@ -121,8 +116,7 @@ class FirebaseDatabaseService {
     required String storageDirectory,
     required String childName,
   }) async {
-    Reference ref =
-        FirebaseStorage.instance.ref().child(storageDirectory).child(childName);
+    Reference ref = FirebaseStorage.instance.ref().child(storageDirectory).child(childName);
     final UploadTask uploadTask = ref.putFile(File(path));
     final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
     return await taskSnapshot.ref.getDownloadURL();
@@ -131,12 +125,12 @@ class FirebaseDatabaseService {
   Future<List<Pict>> fetchPictos() async {
     if (kIsWeb) {
       await Future.delayed(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
       );
     }
     if (!kIsWeb) {
       await Future.delayed(
-        Duration(seconds: 1),
+        const Duration(seconds: 1),
       );
     }
 
@@ -168,12 +162,12 @@ class FirebaseDatabaseService {
   Future<List<Grupos>> fetchGrupos() async {
     if (kIsWeb) {
       await Future.delayed(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
       );
     }
     if (!kIsWeb) {
       await Future.delayed(
-        Duration(seconds: 1),
+        const Duration(seconds: 1),
       );
     }
 
@@ -221,15 +215,10 @@ class FirebaseDatabaseService {
           return await _fileController.readGruposFromFile();
         }
       } else {
-        final ref =
-            databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
+        final ref = databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
         final res = await ref.get();
         final data = res.value['data'];
-        final da = pictoOrGrupo
-            ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList()
-            : (jsonDecode(data) as List)
-                .map((e) => Grupos.fromJson(e))
-                .toList();
+        final da = pictoOrGrupo ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList() : (jsonDecode(data) as List).map((e) => Grupos.fromJson(e)).toList();
         debugPrint('from online firebase : mobile');
         if (pictoOrGrupo) {
           await _fileController.writePictoToFile(data: data);
@@ -243,19 +232,13 @@ class FirebaseDatabaseService {
     } else {
       //todo: make different types of conversion
       final pictsString = await rootBundle.loadString(assetsFileName);
-      final listData = pictoOrGrupo
-          ? (jsonDecode(pictsString) as List)
-              .map((e) => Pict.fromJson(e))
-              .toList()
-          : (jsonDecode(pictsString) as List)
-              .map((e) => Grupos.fromJson(e))
-              .toList();
+      final listData = pictoOrGrupo ? (jsonDecode(pictsString) as List).map((e) => Pict.fromJson(e)).toList() : (jsonDecode(pictsString) as List).map((e) => Grupos.fromJson(e)).toList();
       final data = listData;
       List<String> fileData = [];
-      data.forEach((element) {
+      for (var element in data) {
         final obj = jsonEncode(element);
         fileData.add(obj);
-      });
+      }
       debugPrint('from file user first time: mobile');
       //todo: make different functions to write
       if (pictoOrGrupo) {
@@ -276,32 +259,23 @@ class FirebaseDatabaseService {
     required bool pictosOrGrupos,
   }) async {
     if (snapshot.exists && snapshot.value != null) {
-      final ref =
-          databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
+      final ref = databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
       final res = await ref.get();
       final data = res.value['data'];
       //todo: write different conversions here
-      final da = pictosOrGrupos
-          ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList()
-          : (jsonDecode(data) as List).map((e) => Grupos.fromJson(e)).toList();
+      final da = pictosOrGrupos ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList() : (jsonDecode(data) as List).map((e) => Grupos.fromJson(e)).toList();
       debugPrint('from online realtime : web');
       return da;
     } else {
       //todo: write different assets here and convert different one's
       final String listData = await rootBundle.loadString(assetsFileName);
       debugPrint('from json realtime : web');
-      return pictosOrGrupos
-          ? (jsonDecode(listData) as List).map((e) => Pict.fromJson(e)).toList()
-          : (jsonDecode(listData) as List)
-              .map((e) => Grupos.fromJson(e))
-              .toList();
+      return pictosOrGrupos ? (jsonDecode(listData) as List).map((e) => Pict.fromJson(e)).toList() : (jsonDecode(listData) as List).map((e) => Grupos.fromJson(e)).toList();
     }
   }
 
-  Future<Map<String, dynamic>> fetchGameData(
-      {required int gameNumber, required int grupoNumber}) async {
-    final ref = databaseRef
-        .child('${firebaseRed.currentUser!.uid}/$gameNumber/$grupoNumber');
+  Future<Map<String, dynamic>> fetchGameData({required int gameNumber, required int grupoNumber}) async {
+    final ref = databaseRef.child('${firebaseRed.currentUser!.uid}/$gameNumber/$grupoNumber');
     final res = await ref.get();
     final bol = res.exists;
     if (bol) {
@@ -317,8 +291,7 @@ class FirebaseDatabaseService {
     required int grupoNumber,
     required Map<dynamic, dynamic> data,
   }) async {
-    final ref = databaseRef
-        .child('${firebaseRed.currentUser!.uid}/$gameNumber/$grupoNumber');
+    final ref = databaseRef.child('${firebaseRed.currentUser!.uid}/$gameNumber/$grupoNumber');
     await ref.set({
       data,
     });

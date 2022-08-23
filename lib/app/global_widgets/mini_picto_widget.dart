@@ -9,15 +9,16 @@ class MiniPicto extends StatelessWidget {
   final bool localImg;
 
   const MiniPicto({
+    Key? key,
     required this.pict,
     required this.onTap,
     required this.localImg,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: this.onTap,
+      onTap: onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: Container(
@@ -31,15 +32,11 @@ class MiniPicto extends StatelessWidget {
                 )
               : kIsWeb
                   ? Image.network(
-                      pict.imagen.pictoEditado == null
-                          ? pict.imagen.picto
-                          : pict.imagen.pictoEditado!,
+                      pict.imagen.pictoEditado == null ? pict.imagen.picto : pict.imagen.pictoEditado!,
                     )
                   : CachedNetworkImage(
-                      imageUrl: pict.imagen.pictoEditado == null
-                          ? pict.imagen.picto
-                          : pict.imagen.pictoEditado!,
-                      placeholder: (context, url) => Center(
+                      imageUrl: pict.imagen.pictoEditado == null ? pict.imagen.picto : pict.imagen.pictoEditado!,
+                      placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(),
                       ),
                       fit: BoxFit.fitHeight,

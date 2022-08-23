@@ -32,8 +32,7 @@ class CenterButtonWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(verticalSize * 0.15),
-            border:
-                Border.all(color: Colors.white, width: verticalSize * 0.014),
+            border: Border.all(color: Colors.white, width: verticalSize * 0.014),
           ),
           child: Icon(
             Icons.play_arrow,

@@ -10,12 +10,12 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
-import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
+import 'package:ottaa_project_flutter/app/utils/custom_analytics.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
 
 class ChoiceDialogue extends GetView<EditPictoController> {
   ChoiceDialogue({Key? key, this.index}) : super(key: key);
-  int? index;
+  final int? index;
   final _pictogramController = Get.find<PictogramGroupsController>();
   final _homeController = Get.find<HomeController>();
 
@@ -29,12 +29,11 @@ class ChoiceDialogue extends GetView<EditPictoController> {
             onTap: () {
               Get.back();
               if (_homeController.userSubscription == 1) {
-                Get.toNamed(AppRoutes.EDITPICTO);
-                CustomAnalyticsEvents.setEventWithParameters("Touch",
-                    CustomAnalyticsEvents.createMyMap('name', 'Edit '));
+                Get.toNamed(AppRoutes.kEditPictogram);
+                CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('name', 'Edit '));
               } else {
                 _homeController.initializePageViewer();
-                Get.to(() => BuyPaidVersionPage());
+                Get.to(() => const BuyPaidVersionPage());
               }
             },
             child: Text('edit'.tr),
@@ -49,24 +48,20 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                     barrierDismissible: false,
                     context: context,
                     builder: (context) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: kOTTAAOrangeNew,
                         ),
                       );
                     });
-                _pictogramController.grupos[_pictogramController.selectedIndex].relacion.removeWhere(
-                    (element) =>
-                        element.id == _homeController.pictToBeEdited.id);
-                _homeController.grupos[_pictogramController.selectedIndex].relacion.removeWhere(
-                    (element) =>
-                        element.id == _homeController.pictToBeEdited.id);
+                _pictogramController.grupos[_pictogramController.selectedIndex].relacion.removeWhere((element) => element.id == _homeController.pictToBeEdited.id);
+                _homeController.grupos[_pictogramController.selectedIndex].relacion.removeWhere((element) => element.id == _homeController.pictToBeEdited.id);
                 final dataGrupo = _homeController.grupos;
                 List<String> fileDataGrupo = [];
-                dataGrupo.forEach((element) {
+                for (var element in dataGrupo) {
                   final obj = jsonEncode(element);
                   fileDataGrupo.add(obj);
-                });
+                }
 
                 /// saving changes to file
                 if (!kIsWeb) {
@@ -86,21 +81,19 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 );
                 await _pictogramController.gruposExistsOnFirebase();
                 _pictogramController.selectedGruposPicts.removeAt(index!);
-                _pictogramController.pictoGridviewOrPageview.value =
-                    !_pictogramController.pictoGridviewOrPageview.value;
+                _pictogramController.pictoGridviewOrPageview.value = !_pictogramController.pictoGridviewOrPageview.value;
                 Future.delayed(
-                  Duration(milliseconds: 300),
+                  const Duration(milliseconds: 300),
                 );
-                _pictogramController.pictoGridviewOrPageview.value =
-                    !_pictogramController.pictoGridviewOrPageview.value;
+                _pictogramController.pictoGridviewOrPageview.value = !_pictogramController.pictoGridviewOrPageview.value;
                 Get.back();
                 Get.back();
               } else {
                 _homeController.initializePageViewer();
-                Get.to(() => BuyPaidVersionPage());
+                Get.to(() => const BuyPaidVersionPage());
               }
             },
-            child: Text('Delete'),
+            child: const Text('Delete'),
           ),
         ],
       ),

@@ -5,10 +5,10 @@ import 'package:ottaa_project_flutter/app/modules/home/local_widgets/empty_text_
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/sentence_share_widget.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
+import 'package:ottaa_project_flutter/app/utils/custom_analytics.dart';
 
 class RightColumnWidget extends GetView<HomeController> {
-  RightColumnWidget({Key? key}) : super(key: key);
+  const RightColumnWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +17,12 @@ class RightColumnWidget extends GetView<HomeController> {
     return Container(
       height: verticalSize * 0.5,
       width: horizontalSize * 0.10,
+      decoration: const BoxDecoration(
+        color: kOTTAAOrangeNew,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+        ),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -40,25 +46,24 @@ class RightColumnWidget extends GetView<HomeController> {
                 // controller.ttsController
                 CustomAnalyticsEvents.setEventWithParameters(
                   "Touch",
-                  CustomAnalyticsEvents.createMyMap(
-                      'Principal', "Share Phrases"),
+                  CustomAnalyticsEvents.createMyMap('Principal', "Share Phrases"),
                 );
-                controller.sentencePicts.length == 0
+                controller.sentencePicts.isEmpty
                     ? showDialog(
                         context: context,
                         barrierDismissible: false,
                         barrierColor: Colors.transparent,
                         builder: (context) {
-                          return EmptyTextDialogWidget();
+                          return const EmptyTextDialogWidget();
                         },
                       )
                     : showDialog(
                         context: context,
                         builder: (context) {
-                          return SentenceShareWidget();
+                          return const SentenceShareWidget();
                         },
                       );
-                if(controller.sentencePicts.length == 0){
+                if (controller.sentencePicts.isEmpty) {
                   await controller.startTimerForDialogueExit();
                 }
               },
@@ -74,11 +79,8 @@ class RightColumnWidget extends GetView<HomeController> {
           FittedBox(
             child: GestureDetector(
               onTap: () {
-                Get.toNamed(AppRoutes.SENTENCES);
-                CustomAnalyticsEvents.setEventWithParameters(
-                    "Touch",
-                    CustomAnalyticsEvents.createMyMap(
-                        'Principal', "Favourite Phrases"));
+                Get.toNamed(AppRoutes.kSentences);
+                CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Principal', "Favourite Phrases"));
               },
               child: Center(
                 child: Icon(
@@ -90,12 +92,6 @@ class RightColumnWidget extends GetView<HomeController> {
             ),
           )
         ],
-      ),
-      decoration: BoxDecoration(
-        color: kOTTAAOrangeNew,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16),
-        ),
       ),
     );
   }

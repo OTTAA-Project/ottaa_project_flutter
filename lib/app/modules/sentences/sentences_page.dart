@@ -1,30 +1,38 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
-import 'package:ottaa_project_flutter/app/global_widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/sentences/local_widgets/speak_pict_widget.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'local_widgets/search_sentence.dart';
 import 'sentences_controller.dart';
 
 class SentencesPage extends GetView<SentencesController> {
-  SentencesPage({Key? key}) : super(key: key);
+  const SentencesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
+
+    final verticalBound = verticalSize * 0.02;
+    final horizontalBound = horizontalSize * 0.43;
+
+    final directionButtonWidth = horizontalSize * 0.10;
+    final directionButtonHeight = verticalSize * 0.5;
+
+    final iconSize = verticalSize * 0.1;
     return GetBuilder<SentencesController>(
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: kOTTAAOrangeNew,
-          leading: Container(),
-          foregroundColor: Colors.white,
-          elevation: 0,
-          title: Text('most_used_sentences'.tr),
-          /*actions: [
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: kOTTAAOrangeNew,
+            leading: Container(),
+            foregroundColor: Colors.white,
+            elevation: 0,
+            title: Text('most_used_sentences'.tr),
+            /*actions: [
             Icon(
               Icons.reorder,
               size: 30,
@@ -58,13 +66,12 @@ class SentencesPage extends GetView<SentencesController> {
               width: 16,
             ),
           ],*/
-        ),
-        body: Container(
-          color: Colors.black,
-          child: Stack(
-            children: [
-              Container(
-                child: Column(
+          ),
+          body: Container(
+            color: Colors.black,
+            child: Stack(
+              children: [
+                Column(
                   children: [
                     Expanded(
                       flex: 8,
@@ -82,7 +89,7 @@ class SentencesPage extends GetView<SentencesController> {
                               onTap: () => Get.back(),
                               child: Icon(
                                 Icons.cancel,
-                                size: verticalSize * 0.1,
+                                size: iconSize,
                                 color: Colors.white,
                               ),
                             ),
@@ -90,10 +97,10 @@ class SentencesPage extends GetView<SentencesController> {
                             /// for keeping them in order and the button will be in separate Positioned
                             Container(),
                             GestureDetector(
-                              onTap: () => Get.to(SearchSentence()),
+                              onTap: () => Get.to(const SearchSentence()),
                               child: Icon(
                                 Icons.search,
-                                size: verticalSize * 0.1,
+                                size: iconSize,
                                 color: Colors.white,
                               ),
                             ),
@@ -104,95 +111,46 @@ class SentencesPage extends GetView<SentencesController> {
                     ),
                   ],
                 ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: verticalSize * 0.17,
-                child: Container(
-                  height: verticalSize * 0.8,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: verticalSize * 0.17,
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
-                    child: Center(
-                      child: GetBuilder<SentencesController>(
-                        id: "sentence",
-                        builder: (_) => FadeInDown(
-                          controller: (controller) =>
-                              _.sentenceAnimationController = controller,
-                          from: 30,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                _.sentencesPicts.isNotEmpty
-                                    ? Container(
-                                        height: verticalSize / 3,
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount:
-                                              _.sentencesPicts[_.sentencesIndex]
-                                                      .length +
-                                                  1,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            final Pict speakPict = Pict(
-                                              localImg: true,
-                                              id: 0,
-                                              texto: Texto(en: "", es: ""),
-                                              tipo: 6,
-                                              imagen: Imagen(
-                                                  picto: "logo_ottaa_dev"),
-                                            );
-                                            if (_
-                                                    .sentencesPicts[
-                                                        _.sentencesIndex]
-                                                    .length >
-                                                index) {
-                                              final Pict pict =
-                                                  _.sentencesPicts[
-                                                      _.sentencesIndex][index];
-                                              return Container(
-                                                margin: EdgeInsets.all(10),
-                                                child: MiniPicto(
-                                                  localImg: pict.localImg,
-                                                  pict: pict,
-                                                  onTap: () {
-                                                    _.speak();
-                                                  },
-                                                ),
-                                              );
-                                            } else {
-                                              return Bounce(
-                                                from: 6,
-                                                infinite: true,
-                                                child: Container(
-                                                  margin: EdgeInsets.all(10),
-                                                  child: MiniPicto(
-                                                    localImg:
-                                                        speakPict.localImg,
-                                                    pict: speakPict,
-                                                    onTap: () {
-                                                      _.speak();
-                                                    },
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                          },
+                    height: verticalSize * 0.8,
+                    padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                      child: Center(
+                        child: GetBuilder<SentencesController>(
+                          id: "sentence",
+                          builder: (sentencesController) => FadeInDown(
+                            controller: (controller) => sentencesController.sentenceAnimationController = controller,
+                            from: 30,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  if (sentencesController.sentencesPicts.isNotEmpty)
+                                    SizedBox(
+                                      height: verticalSize / 3,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: sentencesController.sentencesPicts[sentencesController.sentencesIndex].length + 1,
+                                        itemBuilder: (BuildContext context, int index) => SpeakPicWidget(
+                                          pict: sentencesController.sentencesPicts[sentencesController.sentencesIndex].length > index ? sentencesController.sentencesPicts[sentencesController.sentencesIndex][index] : null,
+                                          speak: sentencesController.speak,
                                         ),
-                                      )
-                                    : Container()
-                              ],
+                                      ),
+                                    )
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -200,82 +158,81 @@ class SentencesPage extends GetView<SentencesController> {
                     ),
                   ),
                 ),
-              ),
-              controller.showCircular.value
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: kOTTAAOrangeNew,
-                      ),
-                    )
-                  : Container(),
-              Positioned(
-                left: 0,
-                bottom: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: kOTTAAOrangeNew,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(16),
+                if (controller.showCircular.value)
+                  const Center(
+                    child: CircularProgressIndicator(
+                      color: kOTTAAOrangeNew,
                     ),
                   ),
-                  width: horizontalSize * 0.10,
-                  height: verticalSize * 0.5,
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        controller.sentencesIndex--;
-                      },
-                      child: Icon(
-                        Icons.skip_previous,
-                        size: verticalSize * 0.1,
-                        color: Colors.white,
+                Positioned(
+                  left: 0,
+                  bottom: 0,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: kOTTAAOrangeNew,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(16),
                       ),
                     ),
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: kOTTAAOrangeNew,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                    ),
-                  ),
-                  width: horizontalSize * 0.10,
-                  height: verticalSize * 0.5,
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        controller.sentencesIndex++;
-                      },
-                      child: Icon(
-                        Icons.skip_next,
-                        size: verticalSize * 0.1,
-                        color: Colors.white,
+                    width: directionButtonWidth,
+                    height: directionButtonHeight,
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.sentencesIndex--;
+                        },
+                        child: Icon(
+                          Icons.skip_previous,
+                          size: iconSize,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: verticalSize * 0.02,
-                left: horizontalSize * 0.43,
-                right: horizontalSize * 0.43,
-                child: GestureDetector(
-                  onTap: () async {
-                    await controller.speak();
-                  },
-                  child: OttaLogoWidget(),
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: kOTTAAOrangeNew,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                      ),
+                    ),
+                    width: directionButtonWidth,
+                    height: directionButtonHeight,
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.sentencesIndex++;
+                        },
+                        child: Icon(
+                          Icons.skip_next,
+                          size: iconSize,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                Positioned(
+                  bottom: verticalBound,
+                  left: horizontalBound,
+                  right: horizontalBound,
+                  child: GestureDetector(
+                    onTap: () async {
+                      await controller.speak();
+                    },
+                    child: const OttaLogoWidget(),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        backgroundColor: Colors.black,
-      ),
+          backgroundColor: Colors.black,
+        );
+      },
     );
   }
 }

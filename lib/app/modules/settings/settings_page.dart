@@ -7,7 +7,7 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'settings_controller.dart';
 
 class SettingsPage extends StatelessWidget {
-  SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +16,12 @@ class SettingsPage extends StatelessWidget {
       builder: (_) => Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Get.toNamed(AppRoutes.HOME),
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Get.toNamed(AppRoutes.kHome),
           ),
           title: Text(
             'settings'.tr,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
             ),
           ),
@@ -40,7 +40,7 @@ class SettingsPage extends StatelessWidget {
               children: [
                 Text(
                   'SETTINGS'.tr,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -50,7 +50,7 @@ class SettingsPage extends StatelessWidget {
                   color: Colors.grey[700],
                 ),
                 ListTile(
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.photo_library,
                     color: kOTTAAOrangeNew,
                   ),
@@ -67,9 +67,9 @@ class SettingsPage extends StatelessWidget {
                   },
                   title: Text('pictograms'.tr),
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.try_sms_star,
                     color: kOTTAAOrangeNew,
                   ),
@@ -86,9 +86,9 @@ class SettingsPage extends StatelessWidget {
                   },
                   title: Text('prediction'.tr),
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.accessibility,
                     color: kOTTAAOrangeNew,
                   ),
@@ -105,25 +105,25 @@ class SettingsPage extends StatelessWidget {
                   },
                   title: Text('accessibility'.tr),
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.record_voice_over,
                     color: kOTTAAOrangeNew,
                   ),
-                  onTap: () => Get.toNamed(AppRoutes.SETTINGS_VOICE),
+                  onTap: () => Get.toNamed(AppRoutes.kSettingsVoice),
                   title: Text('voice_and_subtitles'.tr),
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.language,
                     color: kOTTAAOrangeNew,
                   ),
-                  onTap: () => Get.toNamed(AppRoutes.SETTINGS_LANG),
+                  onTap: () => Get.toNamed(AppRoutes.kSettingsLang),
                   title: Text('language'.tr),
                 ),
-                Divider(),
+                const Divider(),
               ],
             ),
           ),

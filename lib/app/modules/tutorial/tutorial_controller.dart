@@ -3,7 +3,7 @@ import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dar
 
 class TutorialController extends GetxController {
   final _authController = Get.find<AuthController>();
-  AuthController get authController => this._authController;
+  AuthController get authController => _authController;
 
   @override
   void onInit() async {

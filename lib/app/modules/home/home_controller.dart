@@ -16,7 +16,7 @@ import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_gro
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
+import 'package:ottaa_project_flutter/app/utils/custom_analytics.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,45 +27,38 @@ class HomeController extends GetxController {
   final dataController = Get.find<DataController>();
   RxBool showOrNot = true.obs;
 
-  TTSController get ttsController => this._ttsController;
+  TTSController get ttsController => _ttsController;
   final _pictsRepository = Get.find<PictsRepository>();
   final _grupoRepository = Get.find<GrupoRepository>();
   final authController = AuthService();
-  late AnimationController _pictoAnimationController;
+  late AnimationController pictoAnimationController;
   late String language;
-
-  AnimationController get pictoAnimationController =>
-      this._pictoAnimationController;
-
-  set pictoAnimationController(AnimationController value) {
-    this._pictoAnimationController = value;
-  }
 
   String _voiceText = "";
   String textToShare = '';
 
-  String get voiceText => this._voiceText;
+  String get voiceText => _voiceText;
   List<Pict> picts = [];
   List<Grupos> grupos = [];
   List<Pict> _suggestedPicts = [];
 
-  List<Pict> get suggestedPicts => this._suggestedPicts;
+  List<Pict> get suggestedPicts => _suggestedPicts;
   int _suggestedIndex = 0;
 
-  int get suggestedIndex => this._suggestedIndex;
+  int get suggestedIndex => _suggestedIndex;
 
-  int _suggestedQuantity = 4;
+  final int _suggestedQuantity = 4;
 
-  int get suggestedQuantity => this._suggestedQuantity;
+  int get suggestedQuantity => _suggestedQuantity;
 
   // set suggestedQuantity(value) {
-  //   this._suggestedQuantity = value;
-  //   this._suggestedIndex = 0;
+  //   _suggestedQuantity = value;
+  //   _suggestedIndex = 0;
   // }
 
-  List<Pict> _sentencePicts = [];
+  final List<Pict> _sentencePicts = [];
 
-  List<Pict> get sentencePicts => this._sentencePicts;
+  List<Pict> get sentencePicts => _sentencePicts;
   int addId = 0;
   int toId = 0;
   bool fromAdd = false;
@@ -95,8 +88,7 @@ class HomeController extends GetxController {
   int suggestedMainScreenIndex = -1;
 
   //paid version screen
-  final String paidUrl =
-      'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-7H209758Y47141226MAMGTWY';
+  final String paidUrl = 'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-7H209758Y47141226MAMGTWY';
   late Timer _timer;
   int currentPage = 0;
   PageController pageController = PageController(
@@ -132,11 +124,11 @@ class HomeController extends GetxController {
     await getPicNumber();
     language = _ttsController.languaje;
     showOrNot.value = false;
-    final _pictogram = Get.put(PictogramGroupsController());
+    Get.put(PictogramGroupsController());
   }
 
   void initializePageViewer() {
-    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
       if (currentPage < 2) {
         currentPage++;
       } else {
@@ -145,7 +137,7 @@ class HomeController extends GetxController {
 
       pageController.animateToPage(
         currentPage,
-        duration: Duration(milliseconds: 350),
+        duration: const Duration(milliseconds: 350),
         curve: Curves.easeIn,
       );
     });
@@ -158,7 +150,7 @@ class HomeController extends GetxController {
   }
 
   addPictToSentence(Pict pict) async {
-    if (this._sentencePicts.isEmpty) {
+    if (_sentencePicts.isEmpty) {
       if (picts[0].relacion!.isEmpty) {
         picts[0].relacion!.add(
               Relacion(id: pict.id, frec: 1),
@@ -167,7 +159,7 @@ class HomeController extends GetxController {
 
       /// if the length of the relacion >1
 
-      if (picts[0].relacion!.length >= 1) {
+      if (picts[0].relacion!.isNotEmpty) {
         bool alreadyInTheList = false;
         int relacionID = -1;
         picts[0].relacion!.firstWhereOrNull((e) {
@@ -180,18 +172,17 @@ class HomeController extends GetxController {
 
         ///if  it is in the relacion just increment it
         if (alreadyInTheList) {
-          picts[0].relacion![relacionID].frec =
-              picts[0].relacion![relacionID].frec! + 1;
+          picts[0].relacion![relacionID].frec = picts[0].relacion![relacionID].frec! + 1;
         } else {
           picts[0].relacion!.add(
                 Relacion(id: pict.id, frec: 1),
               );
         }
       }
-      this._sentencePicts.add(pict);
-      await suggest(this._sentencePicts.last.id);
+      _sentencePicts.add(pict);
+      await suggest(_sentencePicts.last.id);
     } else {
-      final addToThisOnePictId = this._sentencePicts.last.id;
+      final addToThisOnePictId = _sentencePicts.last.id;
       int addToThisOneIndex = -1;
       print('the size is here ${picts.length}');
       picts.firstWhere((element) {
@@ -201,8 +192,7 @@ class HomeController extends GetxController {
 
       /// if the length of the relacion == 0
 
-      if (this._sentencePicts.last.relacion == null ||
-          this._sentencePicts.last.relacion!.isEmpty) {
+      if (_sentencePicts.last.relacion == null || _sentencePicts.last.relacion!.isEmpty) {
         picts[addToThisOneIndex].relacion = [
           Relacion(id: pict.id, frec: 1),
         ];
@@ -210,10 +200,10 @@ class HomeController extends GetxController {
 
       /// if the length of the relacion >1
 
-      if (this._sentencePicts.last.relacion!.length >= 1) {
+      if (_sentencePicts.last.relacion!.isNotEmpty) {
         bool alreadyInTheList = false;
         int relacionID = -1;
-        this._sentencePicts.last.relacion!.firstWhereOrNull((e) {
+        _sentencePicts.last.relacion!.firstWhereOrNull((e) {
           if (e.id == pict.id) {
             alreadyInTheList = true;
           }
@@ -223,8 +213,7 @@ class HomeController extends GetxController {
 
         ///if  it is in the relacion just increment it
         if (alreadyInTheList) {
-          picts[addToThisOneIndex].relacion![relacionID].frec =
-              (picts[addToThisOneIndex].relacion![relacionID].frec! + 1);
+          picts[addToThisOneIndex].relacion![relacionID].frec = (picts[addToThisOneIndex].relacion![relacionID].frec! + 1);
         } else {
           picts[addToThisOneIndex].relacion!.add(
                 Relacion(id: pict.id, frec: 1),
@@ -232,90 +221,89 @@ class HomeController extends GetxController {
         }
       }
 
-      this._sentencePicts.add(pict);
-      await suggest(this._sentencePicts.last.id);
+      _sentencePicts.add(pict);
+      await suggest(_sentencePicts.last.id);
     }
     update(['screenshot']);
   }
 
   Future<void> loadPicts() async {
-    this.picts = await this._pictsRepository.getAll();
-    this.grupos = await this._grupoRepository.getAll();
+    picts = await _pictsRepository.getAll();
+    grupos = await _grupoRepository.getAll();
     await suggest(0);
     update(["suggested"]);
   }
 
   void moreSuggested() {
-    if (this._suggestedPicts.length % this._suggestedQuantity != 0)
-      suggest(this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
-    if (this._suggestedPicts.length >
-        (this._suggestedIndex + 1) * this._suggestedQuantity) {
-      this._suggestedIndex++;
-    } else {
-      this._suggestedIndex = 0;
+    if (_suggestedPicts.length % _suggestedQuantity != 0) {
+      suggest(_sentencePicts.isNotEmpty ? _sentencePicts.last.id : 0);
     }
-    if (this._suggestedPicts.length != this.suggestedQuantity)
-      this._pictoAnimationController.forward(from: 0.0);
+    if (_suggestedPicts.length > (_suggestedIndex + 1) * _suggestedQuantity) {
+      _suggestedIndex++;
+    } else {
+      _suggestedIndex = 0;
+    }
+    if (_suggestedPicts.length != suggestedQuantity) {
+      pictoAnimationController.forward(from: 0.0);
+    }
     update(["suggested"]);
   }
 
   removePictFromSentence() async {
-    if (this._sentencePicts.isNotEmpty) {
-      this._sentencePicts.removeLast();
-      this._suggestedIndex = 0;
-      await suggest(
-          this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
+    if (_sentencePicts.isNotEmpty) {
+      _sentencePicts.removeLast();
+      _suggestedIndex = 0;
+      await suggest(_sentencePicts.isNotEmpty ? _sentencePicts.last.id : 0);
     }
     update(['screenshot']);
   }
 
   removeWholeSentence() async {
-    if (this._sentencePicts.isNotEmpty) {
-      this._sentencePicts.clear();
-      this._suggestedIndex = 0;
-      await suggest(
-          this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
+    if (_sentencePicts.isNotEmpty) {
+      _sentencePicts.clear();
+      _suggestedIndex = 0;
+      await suggest(_sentencePicts.isNotEmpty ? _sentencePicts.last.id : 0);
     }
     update(['screenshot']);
   }
 
   bool hasText() {
-    if (this._voiceText != "") return true;
+    if (_voiceText != "") return true;
     return false;
   }
 
   Future speak() async {
-    if (this._sentencePicts.isNotEmpty) {
-      this._voiceText = "";
-      this._sentencePicts.forEach((pict) {
-        switch (this._ttsController.languaje) {
+    if (_sentencePicts.isNotEmpty) {
+      _voiceText = "";
+      for (var pict in _sentencePicts) {
+        switch (_ttsController.languaje) {
           case "es":
-            this._voiceText += "${pict.texto.es} ";
+            _voiceText += "${pict.texto.es} ";
             break;
           case "en":
-            this._voiceText += "${pict.texto.en} ";
+            _voiceText += "${pict.texto.en} ";
             break;
 
           default:
-            this._voiceText += "${pict.texto.es} ";
+            _voiceText += "${pict.texto.es} ";
         }
-      });
+      }
       update(["subtitle"]);
       print(hasText());
-      await this._ttsController.speakPhrase(this._voiceText);
-      this._suggestedIndex = 0;
-      this._sentencePicts.clear();
-      await this.suggest(0);
-      await Future.delayed(new Duration(seconds: 1), () {
-        this._voiceText = "";
+      await _ttsController.speakPhrase(_voiceText);
+      _suggestedIndex = 0;
+      _sentencePicts.clear();
+      await suggest(0);
+      await Future.delayed(const Duration(seconds: 1), () {
+        _voiceText = "";
         update(["subtitle"]);
       });
     }
   }
 
   Future<void> suggest(int id) async {
-    this._suggestedPicts = [];
-    this._suggestedIndex = 0;
+    _suggestedPicts = [];
+    _suggestedIndex = 0;
 
     final Pict addPict = Pict(
       id: 0,
@@ -328,30 +316,29 @@ class HomeController extends GetxController {
     final Pict pict = picts.firstWhere((pict) => pict.id == id);
     print('the id of the pict is ${pict.id}');
 
-    if (pict.relacion!.length >= 1) {
+    if (pict.relacion!.isNotEmpty) {
       final List<Relacion> recomendedPicts = pict.relacion!.toList();
       recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec!));
-      this._suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);
+      _suggestedPicts = await predictiveAlgorithm(list: recomendedPicts);
     } else {
-      this._suggestedPicts = [];
+      _suggestedPicts = [];
     }
 
     /// *
     /// predictive algo will replace teh code from here
 
     // recomendedPicts.forEach((recommendedPict) {
-    //   this._suggestedPicts.add(picts.firstWhere(
+    //   _suggestedPicts.add(picts.firstWhere(
     //       (suggestedPict) => suggestedPict.id == recommendedPict.id));
     // });
 
     /// to here
     /// *
-    this._suggestedPicts.add(addPict);
-    while (this.suggestedPicts.length == 0 ||
-        this.suggestedPicts.length % this._suggestedQuantity != 0) {
-      this._suggestedPicts.add(addPict);
+    _suggestedPicts.add(addPict);
+    while (suggestedPicts.isEmpty || suggestedPicts.length % _suggestedQuantity != 0) {
+      _suggestedPicts.add(addPict);
     }
-    this._pictoAnimationController.forward(from: 0.0);
+    pictoAnimationController.forward(from: 0.0);
     update(["suggested", "sentence"]);
   }
 
@@ -363,7 +350,7 @@ class HomeController extends GetxController {
   }
 
   Future<List<Pict>> predictiveAlgorithm({required List<Relacion> list}) async {
-    final int pesoFrec = 2,
+    const int pesoFrec = 2,
         // pesoAgenda = 8,
         // pesoGps = 12,
         // pesoEdad = 5,
@@ -371,13 +358,12 @@ class HomeController extends GetxController {
         pesoHora = 50;
     final time = DateTime.now().hour;
     List<Pict> requiredPicts = [];
-    list.forEach((recommendedPict) {
+    for (var recommendedPict in list) {
       print(recommendedPict.frec);
       requiredPicts.add(
-        picts.firstWhere(
-            (suggestedPict) => suggestedPict.id == recommendedPict.id),
+        picts.firstWhere((suggestedPict) => suggestedPict.id == recommendedPict.id),
       );
-    });
+    }
     late String tag;
     if (time >= 5 && time <= 11) {
       tag = 'MANANA';
@@ -389,7 +375,7 @@ class HomeController extends GetxController {
       tag = 'NOCHE';
     }
     int i = -1;
-    requiredPicts.forEach((e) {
+    for (var e in requiredPicts) {
       i++;
       int hora = 0;
 
@@ -397,15 +383,15 @@ class HomeController extends GetxController {
       if (e.hora == null) {
         hora = 0;
       } else {
-        e.hora!.forEach((e) {
+        for (var e in e.hora!) {
           if (tag == e) {
             hora = 1;
           }
-        });
+        }
       }
       e.score = (list[i].frec! * pesoFrec) + (hora * pesoHora);
       // print(e.score);
-    });
+    }
 
     requiredPicts.sort((b, a) => a.score!.compareTo(b.score!));
 
@@ -420,12 +406,12 @@ class HomeController extends GetxController {
     required int index,
     required int suggestedIndexMainScreen,
   }) async {
-    final _pictogramController = Get.find<PictogramGroupsController>();
+    final pictogramController = Get.find<PictogramGroupsController>();
     showDialog(
         barrierDismissible: false,
         context: context,
         builder: (context) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: kOTTAAOrangeNew,
             ),
@@ -435,10 +421,10 @@ class HomeController extends GetxController {
     picts[indexGrupo].relacion!.removeWhere((element) => element.id == index);
     final dataPicts = picts;
     List<String> fileDataPicts = [];
-    dataPicts.forEach((element) {
+    for (var element in dataPicts) {
       final obj = jsonEncode(element);
       fileDataPicts.add(obj);
-    });
+    }
 
     /// saving changes to file
     if (!kIsWeb) {
@@ -453,10 +439,10 @@ class HomeController extends GetxController {
     await instance.setBool('Pictos_file', true);
     // print(res1);
     //upload to the firebase
-    await _pictogramController.uploadToFirebasePicto(
+    await pictogramController.uploadToFirebasePicto(
       data: fileDataPicts.toString(),
     );
-    await _pictogramController.pictoExistsOnFirebase();
+    await pictogramController.pictoExistsOnFirebase();
     suggestedPicts.removeAt(suggestedIndexMainScreen);
     update(['suggested']);
     Get.back();
@@ -469,19 +455,17 @@ class HomeController extends GetxController {
     Get.back();
     editingFromHomeScreen = true;
     pictToBeEdited = suggestedPicts[suggestedIndexMainScreen];
-    Get.toNamed(AppRoutes.EDITPICTO);
-    CustomAnalyticsEvents.setEventWithParameters(
-        "Touch", CustomAnalyticsEvents.createMyMap('name', 'Edit '));
+    Get.toNamed(AppRoutes.kEditPictogram);
+    CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('name', 'Edit '));
   }
 
-  void updateSuggested(
-      {required Pict updatedOne, required int suggestedMainScreenIndex}) {
+  void updateSuggested({required Pict updatedOne, required int suggestedMainScreenIndex}) {
     suggestedPicts[suggestedMainScreenIndex] = updatedOne;
     update(['suggested']);
   }
 
   final FlutterTts _flutterTts = FlutterTts();
-  late var fileName;
+  late String fileName;
 
   /// converting text to speech
   Future createAudioScript({
@@ -537,24 +521,24 @@ class HomeController extends GetxController {
 // }
 
   Future<void> generateStringToShare() async {
-    this.textToShare = "";
-    this._sentencePicts.forEach((pict) {
-      switch (this._ttsController.languaje) {
+    textToShare = "";
+    for (var pict in _sentencePicts) {
+      switch (_ttsController.languaje) {
         case "es":
-          this.textToShare += "${pict.texto.es} ";
+          textToShare += "${pict.texto.es} ";
           break;
         case "en":
-          this.textToShare += "${pict.texto.en} ";
+          textToShare += "${pict.texto.en} ";
           break;
 
         default:
-          this.textToShare += "${pict.texto.es} ";
+          textToShare += "${pict.texto.es} ";
       }
-    });
+    }
   }
 
   Future<void> startTimerForDialogueExit() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     Get.back();
   }
 }

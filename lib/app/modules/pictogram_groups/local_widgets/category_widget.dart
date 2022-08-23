@@ -1,21 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/platform/mobile_web_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/platform/web_image_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/theme/group_colors.dart';
 import 'icon_widget.dart';
 import 'dart:io';
 
-final Map<int, Color> groupColor = {
-  1: Colors.yellow,
-  2: kOTTAAOrange,
-  3: Colors.green,
-  4: Colors.blue,
-  5: Colors.purple,
-  6: Colors.black,
-};
-
 class CategoryWidget extends StatelessWidget {
-  CategoryWidget({
+  const CategoryWidget({
     Key? key,
     required this.name,
     required this.imageName,
@@ -36,10 +28,10 @@ class CategoryWidget extends StatelessWidget {
   final String languaje;
   final bool isEditing;
   final File? fileImage;
-  Image? imageWidget;
+  final Image? imageWidget;
 
   // url for arsaac images
-  String? selectedImageUrl;
+  final String? selectedImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +69,7 @@ class CategoryWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 border: border
                     ? Border.all(
-                        color: groupColor[color]!,
+                        color: kGroupColor[color]!,
                         width: 6,
                       )
                     : Border.all(color: Colors.white),
@@ -90,7 +82,7 @@ class CategoryWidget extends StatelessWidget {
                       imageWidget: imageWidget,
                       selectedImageUrl: selectedImageUrl,
                     )
-                  : DeviceImageWidget(
+                  : MobileImageWidget(
                       isEditing: isEditing,
                       imageName: imageName,
                       fileImage: fileImage,
@@ -106,104 +98,21 @@ class CategoryWidget extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),
           ),
-          bottom
-              ? Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      IconWidget(icon: Icons.timer_off),
-                      IconWidget(icon: Icons.location_off),
-                      IconWidget(icon: Icons.face),
-                      IconWidget(icon: Icons.wc),
-                    ],
-                  ),
-                )
-              : Container(),
+          if (bottom)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  IconWidget(icon: Icons.timer_off),
+                  IconWidget(icon: Icons.location_off),
+                  IconWidget(icon: Icons.face),
+                  IconWidget(icon: Icons.wc),
+                ],
+              ),
+            )
         ],
       ),
     );
-  }
-}
-
-class WebImageWidget extends StatelessWidget {
-  WebImageWidget({
-    Key? key,
-    required this.isEditing,
-    required this.imageName,
-    this.imageWidget,
-    this.selectedImageUrl,
-  }) : super(key: key);
-  final bool isEditing;
-  final String imageName;
-  Image? imageWidget;
-  String? selectedImageUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return isEditing
-        ? imageWidget == null
-            ? Image.network(
-                selectedImageUrl == '' ? imageName : selectedImageUrl!,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: kOTTAAOrangeNew,
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
-                    ),
-                  );
-                },
-              )
-            : imageWidget!
-        : Image.network(
-            selectedImageUrl == '' ? imageName : selectedImageUrl!,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              return Center(
-                child: CircularProgressIndicator(
-                  color: kOTTAAOrangeNew,
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          loadingProgress.expectedTotalBytes!
-                      : null,
-                ),
-              );
-            },
-          );
-  }
-}
-
-class DeviceImageWidget extends StatelessWidget {
-  DeviceImageWidget({
-    Key? key,
-    required this.isEditing,
-    required this.imageName,
-    this.fileImage,
-    this.selectedImageUrl,
-  }) : super(key: key);
-  final bool isEditing;
-  final String imageName;
-  File? fileImage;
-  String? selectedImageUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return isEditing
-        ? selectedImageUrl == ''
-            ? Image.file(fileImage!)
-            : Image.network(selectedImageUrl!)
-        : CachedNetworkImage(
-            imageUrl: imageName,
-            placeholder: (context, url) => Center(
-              child: CircularProgressIndicator(
-                color: Colors.black,
-              ),
-            ),
-            fit: BoxFit.fill,
-          );
   }
 }

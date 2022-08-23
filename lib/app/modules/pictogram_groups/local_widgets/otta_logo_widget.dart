@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class OttaLogoWidget extends StatelessWidget {

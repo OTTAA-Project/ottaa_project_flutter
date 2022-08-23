@@ -17,7 +17,7 @@ class SettingSection extends StatelessWidget {
         children: [
           Text(
             items['title'],
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
@@ -34,11 +34,9 @@ class SettingSection extends StatelessWidget {
                         value: true, // always true by default
                         onChanged: (value) {},
                         title: Text(item['title']),
-                        subtitle: item['subtitle'].toString().isEmpty
-                            ? null
-                            : Text(item['subtitle']),
+                        subtitle: item['subtitle'].toString().isEmpty ? null : Text(item['subtitle']),
                       ),
-                      Divider(),
+                      const Divider(),
                     ],
                   )
                 : Column(
@@ -46,12 +44,10 @@ class SettingSection extends StatelessWidget {
                       ListTile(
                         enabled: item['isEnabled'],
                         onTap: () {},
-                        title: Text('Language'),
-                        subtitle: item['subtitle'].toString().isEmpty
-                            ? null
-                            : Text(item['subtitle']),
+                        title: const Text('Language'),
+                        subtitle: item['subtitle'].toString().isEmpty ? null : Text(item['subtitle']),
                       ),
-                      Divider(),
+                      const Divider(),
                     ],
                   ),
         ],

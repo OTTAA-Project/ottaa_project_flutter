@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -45,8 +47,7 @@ class PictogramGroupsController extends GetxController {
 
   ///Add Group
   bool textOrBorder = true;
-  final TextEditingController grupoNameController =
-      TextEditingController();
+  final TextEditingController grupoNameController = TextEditingController();
   final ImagePicker picker = ImagePicker();
   RxBool isImageProvidedGrupo = false.obs;
   Rx<File?> fileImageGrupo = Rx<File?>(null);
@@ -72,8 +73,7 @@ class PictogramGroupsController extends GetxController {
   );
 
   //Add Pict
-  final TextEditingController pictoNameController =
-      TextEditingController();
+  final TextEditingController pictoNameController = TextEditingController();
   RxBool isImageProvidedPicto = false.obs;
   Rx<File?> fileImagePicto = Rx<File?>(null);
   Rx<String?> selectedPhotoUrlPicto = ''.obs;
@@ -138,33 +138,29 @@ class PictogramGroupsController extends GetxController {
   RxBool refreshSearchResult = true.obs;
 
   void addSomeScroll(ScrollController controller) {
-    controller.animateTo(controller.offset.toDouble() + 200,
-        duration: Duration(milliseconds: 100), curve: Curves.ease);
+    controller.animateTo(controller.offset.toDouble() + 200, duration: const Duration(milliseconds: 100), curve: Curves.ease);
   }
 
   void removeSomeScroll(ScrollController controller) {
-    controller.animateTo(controller.offset.toDouble() - 200,
-        duration: Duration(milliseconds: 100), curve: Curves.ease);
+    controller.animateTo(controller.offset.toDouble() - 200, duration: const Duration(milliseconds: 100), curve: Curves.ease);
   }
 
   void gotoNextPage(PageController pageController) {
-    pageController.nextPage(
-        duration: Duration(milliseconds: 100), curve: Curves.easeIn);
+    pageController.nextPage(duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
   }
 
   void gotoPreviousPage(PageController pageController) {
-    pageController.previousPage(
-        duration: Duration(milliseconds: 100), curve: Curves.easeOut);
+    pageController.previousPage(duration: const Duration(milliseconds: 100), curve: Curves.easeOut);
   }
 
   Future<void> fetchDesiredPictos() async {
     selectedGruposPicts = [];
     for (int i = 0; i < selectedGrupos.relacion.length; i++) {
-      picts.forEach((element) {
-        if (element.id == selectedGrupos.relacion[i].id) {
-          selectedGruposPicts.add(element);
+      for (var pictogram in picts) {
+        if (pictogram.id == selectedGrupos.relacion[i].id) {
+          selectedGruposPicts.add(pictogram);
         }
-      });
+      }
     }
   }
 
@@ -178,8 +174,7 @@ class PictogramGroupsController extends GetxController {
     update(['second']);
   }
 
-  void changeToTags(
-      {required BuildContext context, required double verticalSize}) {
+  void changeToTags({required BuildContext context, required double verticalSize}) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -207,6 +202,8 @@ class PictogramGroupsController extends GetxController {
       maxHeight: 700,
       maxWidth: 700,
     );
+    // isNull is deprecated and cannot be used, use "==" operator
+    // ignore: unnecessary_null_comparison
     if (imageTobeUploadedGrupo != null) {
       print('yes');
       fileImageGrupo.value = File(imageTobeUploadedGrupo.value!.path);
@@ -225,6 +222,8 @@ class PictogramGroupsController extends GetxController {
       maxHeight: 700,
       maxWidth: 700,
     );
+    // isNull is deprecated and cannot be used, use "==" operator
+    // ignore: unnecessary_null_comparison
     if (imageTobeUploadedGrupoEdit != null) {
       print('yes');
       fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
@@ -243,6 +242,9 @@ class PictogramGroupsController extends GetxController {
       maxHeight: 600,
       maxWidth: 600,
     );
+
+    // isNull is deprecated and cannot be used, use "==" operator
+    // ignore: unnecessary_null_comparison
     if (imageTobeUploadedPicto != null) {
       print('yes');
       fileImagePicto.value = File(imageTobeUploadedPicto.value!.path);
@@ -256,8 +258,9 @@ class PictogramGroupsController extends GetxController {
 
   void galleryFunctionGrupo() async {
     if (kIsWeb) {
-      imageTobeUploadedGrupo.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      imageTobeUploadedGrupo.value = await picker.pickImage(source: ImageSource.gallery);
+      // isNull is deprecated and cannot be used, use "==" operator
+      // ignore: unnecessary_null_comparison
       if (imageTobeUploadedGrupo != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploadedGrupo.value!.readAsBytes();
@@ -271,8 +274,9 @@ class PictogramGroupsController extends GetxController {
         print('no');
       }
     } else {
-      imageTobeUploadedGrupo.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      imageTobeUploadedGrupo.value = await picker.pickImage(source: ImageSource.gallery);
+      // isNull is deprecated and cannot be used, use "==" operator
+      // ignore: unnecessary_null_comparison
       if (imageTobeUploadedGrupo != null) {
         fileImageGrupo.value = File(imageTobeUploadedGrupo.value!.path);
         isImageProvidedGrupo.value = true;
@@ -286,12 +290,13 @@ class PictogramGroupsController extends GetxController {
 
   void galleryFunctionGrupoEdit() async {
     if (kIsWeb) {
-      imageTobeUploadedGrupoEdit.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      imageTobeUploadedGrupoEdit.value = await picker.pickImage(source: ImageSource.gallery);
+
+      // isNull is deprecated and cannot be used, use "==" operator
+      // ignore: unnecessary_null_comparison
       if (imageTobeUploadedGrupoEdit != null) {
         print('I was here');
-        final imageInBytes =
-            await imageTobeUploadedGrupoEdit.value!.readAsBytes();
+        final imageInBytes = await imageTobeUploadedGrupoEdit.value!.readAsBytes();
         imageWidgetGrupoEdit.value = Image.memory(
           imageInBytes,
         );
@@ -303,8 +308,10 @@ class PictogramGroupsController extends GetxController {
         print('no');
       }
     } else {
-      imageTobeUploadedGrupoEdit.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      imageTobeUploadedGrupoEdit.value = await picker.pickImage(source: ImageSource.gallery);
+
+      // isNull is deprecated and cannot be used, use "==" operator
+      // ignore: unnecessary_null_comparison
       if (imageTobeUploadedGrupoEdit != null) {
         fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
         editingGrupo.value = true;
@@ -319,8 +326,10 @@ class PictogramGroupsController extends GetxController {
 
   void galleryFunctionPicto() async {
     if (kIsWeb) {
-      imageTobeUploadedPicto.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      imageTobeUploadedPicto.value = await picker.pickImage(source: ImageSource.gallery);
+
+      // isNull is deprecated and cannot be used, use "==" operator
+      // ignore: unnecessary_null_comparison
       if (imageTobeUploadedPicto != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploadedPicto.value!.readAsBytes();
@@ -335,8 +344,10 @@ class PictogramGroupsController extends GetxController {
         print('no');
       }
     } else {
-      imageTobeUploadedPicto.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      imageTobeUploadedPicto.value = await picker.pickImage(source: ImageSource.gallery);
+
+      // isNull is deprecated and cannot be used, use "==" operator
+      // ignore: unnecessary_null_comparison
       if (imageTobeUploadedPicto != null) {
         fileImagePicto.value = File(imageTobeUploadedPicto.value!.path);
         isImageProvidedPicto.value = true;
@@ -349,12 +360,10 @@ class PictogramGroupsController extends GetxController {
     }
   }
 
-  Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
-      {required String text}) async {
+  Future<List<SearchModel>> fetchPhotoFromGlobalSymbols({required String text}) async {
     final String languageFormat = lang == 'en' ? '639-3' : '639-1';
     final language = lang == 'en' ? 'eng' : 'es';
-    url =
-        'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
+    url = 'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
     var urlF = Uri.parse(url);
     http.Response response = await http.get(
       urlF,
@@ -364,9 +373,7 @@ class PictogramGroupsController extends GetxController {
     if (response.statusCode == 200) {
       // var data = jsonDecode(response.body);
       // print(data['symbols'][0]['name']);
-      final res = (jsonDecode(response.body) as List)
-          .map((e) => SearchModel.fromJson(e))
-          .toList();
+      final res = (jsonDecode(response.body) as List).map((e) => SearchModel.fromJson(e)).toList();
       // SearchModel searchModel = SearchModel.fromJson(jsonDecode(response.body));
       // print(searchModel.itemCount);
       // print(searchModel.symbols[0].name);
@@ -388,10 +395,7 @@ class PictogramGroupsController extends GetxController {
     // final UploadTask uploadTask = ref.putFile(File(path));
     // final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
     // final url = await taskSnapshot.ref.getDownloadURL();
-    final url = await _dataController.uploadImageToStorage(
-        path: path,
-        storageDirectory: 'groupImages/',
-        childName: grupoNameController.text);
+    final url = await _dataController.uploadImageToStorage(path: path, storageDirectory: 'groupImages/', childName: grupoNameController.text);
     if (edit) {
       grupoToEdit.imagen.picto = url;
     } else {
@@ -447,8 +451,7 @@ class PictogramGroupsController extends GetxController {
     // await ref.set({
     //   'value': true,
     // });
-    await _dataController.uploadBoolToFirebaseRealtime(
-        data: true, type: 'GruposExistsOnFirebase');
+    await _dataController.uploadBoolToFirebaseRealtime(data: true, type: 'GruposExistsOnFirebase');
   }
 
   Future<void> pictoExistsOnFirebase() async {
@@ -457,16 +460,14 @@ class PictogramGroupsController extends GetxController {
     // await ref.set({
     //   'value': true,
     // });
-    await _dataController.uploadBoolToFirebaseRealtime(
-        data: true, type: 'PictsExistsOnFirebase');
+    await _dataController.uploadBoolToFirebaseRealtime(data: true, type: 'PictsExistsOnFirebase');
   }
 
-  void uploadGrupoEdit(
-      {required BuildContext context, RxBool? editPicBool}) async {
+  void uploadGrupoEdit({required BuildContext context, RxBool? editPicBool}) async {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(
+      builder: (context) => const Center(
         child: CircularProgressIndicator(),
       ),
     );
@@ -476,8 +477,7 @@ class PictogramGroupsController extends GetxController {
       if (kIsWeb) {
         /// method for uploading images for web
         if (selectedPhotoUrlGrupoEdit.value == '') {
-          final imageInBytes =
-              await imageTobeUploadedGrupoEdit.value!.readAsBytes();
+          final imageInBytes = await imageTobeUploadedGrupoEdit.value!.readAsBytes();
           // Reference _reference = FirebaseStorage.instance
           //     .ref()
           //     .child('testingUpload/${grupoEditNameController.text}');
@@ -526,10 +526,10 @@ class PictogramGroupsController extends GetxController {
     grupos[index] = grupoToEdit;
     final data = _homeController.grupos;
     List<String> fileData = [];
-    data.forEach((element) {
+    for (var element in data) {
       final obj = jsonEncode(element);
       fileData.add(obj);
-    });
+    }
 
     /// saving changes to file
     if (!kIsWeb) {
@@ -552,12 +552,11 @@ class PictogramGroupsController extends GetxController {
     Navigator.of(context).pop(true);
   }
 
-  void uploadChangesGrupos(
-      {required BuildContext context, RxBool? editPicBool}) async {
+  void uploadChangesGrupos({required BuildContext context, RxBool? editPicBool}) async {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(
+      builder: (context) => const Center(
         child: CircularProgressIndicator(),
       ),
     );
@@ -567,8 +566,7 @@ class PictogramGroupsController extends GetxController {
       if (kIsWeb) {
         /// method for uploading images for web
         if (selectedPhotoUrlGrupo.value == '') {
-          final imageInBytes =
-              await imageTobeUploadedGrupo.value!.readAsBytes();
+          final imageInBytes = await imageTobeUploadedGrupo.value!.readAsBytes();
           // Reference _reference = FirebaseStorage.instance
           //     .ref()
           //     .child('testingUpload/${grupoNameController.text}');
@@ -592,8 +590,7 @@ class PictogramGroupsController extends GetxController {
         }
       } else {
         if (selectedPhotoUrlGrupo.value == '') {
-          await uploadImageToFirebaseStorageGrupo(
-              path: fileImageGrupo.value!.path);
+          await uploadImageToFirebaseStorageGrupo(path: fileImageGrupo.value!.path);
         } else {
           grupo.imagen.picto = selectedPhotoUrlGrupo.value!;
         }
@@ -610,10 +607,10 @@ class PictogramGroupsController extends GetxController {
     print(_homeController.grupos.last);
     final data = _homeController.grupos;
     List<String> fileData = [];
-    data.forEach((element) {
+    for (var element in data) {
       final obj = jsonEncode(element);
       fileData.add(obj);
-    });
+    }
 
     /// saving changes to file
     if (!kIsWeb) {
@@ -636,12 +633,11 @@ class PictogramGroupsController extends GetxController {
     Navigator.of(context).pop(true);
   }
 
-  void uploadChangesPicto(
-      {required BuildContext context, RxBool? editPicBool}) async {
+  void uploadChangesPicto({required BuildContext context, RxBool? editPicBool}) async {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(
+      builder: (context) => const Center(
         child: CircularProgressIndicator(),
       ),
     );
@@ -652,8 +648,7 @@ class PictogramGroupsController extends GetxController {
       if (kIsWeb) {
         /// method for uploading images for web
         if (selectedPhotoUrlPicto.value == '') {
-          final imageInBytes =
-              await imageTobeUploadedPicto.value!.readAsBytes();
+          final imageInBytes = await imageTobeUploadedPicto.value!.readAsBytes();
           // Reference _reference = FirebaseStorage.instance
           //     .ref()
           //     .child('testingUpload/${pictoNameController.text}');
@@ -677,8 +672,7 @@ class PictogramGroupsController extends GetxController {
         }
       } else {
         if (selectedPhotoUrlPicto.value == '') {
-          await uploadImageToFirebaseStoragePicto(
-              path: fileImagePicto.value!.path);
+          await uploadImageToFirebaseStoragePicto(path: fileImagePicto.value!.path);
         } else {
           pict.imagen.picto = selectedPhotoUrlPicto.value!;
         }
@@ -723,10 +717,10 @@ class PictogramGroupsController extends GetxController {
     print('values are : $index : ${selectedGrupos.id}');
     final data = _homeController.picts;
     List<String> fileData = [];
-    data.forEach((element) {
+    for (var element in data) {
       final obj = jsonEncode(element);
       fileData.add(obj);
-    });
+    }
 
     /// saving changes to file
     if (!kIsWeb) {
@@ -744,10 +738,10 @@ class PictogramGroupsController extends GetxController {
 
     final dataGrupo = _homeController.grupos;
     List<String> fileDataGrupo = [];
-    dataGrupo.forEach((element) {
+    for (var element in dataGrupo) {
       final obj = jsonEncode(element);
       fileDataGrupo.add(obj);
-    });
+    }
 
     /// saving changes to file
     if (!kIsWeb) {
@@ -765,9 +759,7 @@ class PictogramGroupsController extends GetxController {
     // for refreshing the UI of listing
     pictoGridviewOrPageview.value = !pictoGridviewOrPageview.value;
     pictoGridviewOrPageview.value = !pictoGridviewOrPageview.value;
-    selectedList = List.generate(
-        _homeController.picts.length, (index) => false.obs,
-        growable: true);
+    selectedList = List.generate(_homeController.picts.length, (index) => false.obs, growable: true);
     print(selectedGruposPicts.length);
     secondTimeSameGroup = selectedGroupIndex;
     resetDataForAddPicto();
@@ -847,14 +839,12 @@ class PictogramGroupsController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    selectedList = List.generate(
-        _homeController.picts.length, (index) => false.obs,
-        growable: true);
+    selectedList = List.generate(_homeController.picts.length, (index) => false.obs, growable: true);
     pictsForGroupAdding = _homeController.picts;
   }
 
   Future<void> loadAssets() async {
-    this.picts = _homeController.picts;
-    this.grupos = _homeController.grupos;
+    picts = _homeController.picts;
+    grupos = _homeController.grupos;
   }
 }

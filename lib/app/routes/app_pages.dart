@@ -30,78 +30,78 @@ import 'app_routes.dart';
 class AppPages {
   static final List<GetPage> pages = [
     GetPage(
-      name: AppRoutes.SETTINGS,
-      page: () => SettingsPage(),
+      name: AppRoutes.kSettings,
+      page: () => const SettingsPage(),
       binding: SettingsBinding(),
     ),
     GetPage(
-      name: AppRoutes.SETTINGS_LANG,
-      page: () => LanguagePage(),
+      name: AppRoutes.kSettingsLang,
+      page: () => const LanguagePage(),
       binding: SettingsBinding(),
     ),
     GetPage(
-      name: AppRoutes.SETTINGS_VOICE,
-      page: () => VoiceAndSubtitlesPage(),
+      name: AppRoutes.kSettingsVoice,
+      page: () => const VoiceAndSubtitlesPage(),
       binding: SettingsBinding(),
     ),
     GetPage(
-      name: AppRoutes.HOME,
+      name: AppRoutes.kHome,
       page: () => HomePage(),
       binding: HomeBinding(),
     ),
     GetPage(
-      name: AppRoutes.SENTENCES,
-      page: () => SentencesPage(),
+      name: AppRoutes.kSentences,
+      page: () => const SentencesPage(),
       binding: SentencesBinding(),
     ),
     GetPage(
-      name: AppRoutes.SPLASH,
-      page: () => SplashPage(),
+      name: AppRoutes.kSlash,
+      page: () => const SplashPage(),
       binding: SplashBinding(),
     ),
     GetPage(
-      name: AppRoutes.LOGIN,
-      page: () => LoginPage(),
+      name: AppRoutes.kLogin,
+      page: () => const LoginPage(),
       binding: LoginBinding(),
     ),
     GetPage(
-      name: AppRoutes.ONBOARDING,
+      name: AppRoutes.kOnBoarding,
       page: () => OnboardingPage(),
       binding: OnboardingBinding(),
     ),
     GetPage(
-      name: AppRoutes.TUTORIAL,
-      page: () => TutorialPage(),
+      name: AppRoutes.kTutorial,
+      page: () => const TutorialPage(),
       binding: TutorialBinding(),
     ),
     GetPage(
-      name: AppRoutes.PICTOGRAMGROUP,
+      name: AppRoutes.kPictogramGroup,
       page: () => PictogramGroupsPage(),
       binding: PictogramGroupsBinding(),
     ),
     GetPage(
-      name: AppRoutes.SELECTPICTO,
+      name: AppRoutes.kSelectPictogram,
       page: () => SelectPictoPage(),
       binding: PictogramGroupsBinding(),
     ),
     GetPage(
-      name: AppRoutes.EDITPICTO,
+      name: AppRoutes.kEditPictogram,
       page: () => EditPictoPage(),
       binding: EditPictoBinding(),
     ),
     GetPage(
-      name: AppRoutes.ABOUTOTTAA,
-      page: () => AboutOttaaPage(),
+      name: AppRoutes.kAboutOTTA,
+      page: () => const AboutOttaaPage(),
       binding: AboutBinding(),
     ),
     GetPage(
-      name: AppRoutes.GAMES,
-      page: () => GamesPage(),
+      name: AppRoutes.kGames,
+      page: () => const GamesPage(),
       binding: GamesBinding(),
     ),
     GetPage(
-      name: AppRoutes.ADDGROUP,
-      page: () => AddGroupPage(),
-    ),
+      name: AppRoutes.kAddGroup,
+      page: () => const AddGroupPage(),
+    )
   ];
 }

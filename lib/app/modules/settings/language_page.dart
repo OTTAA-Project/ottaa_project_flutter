@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'local_widgets/build_app_bar.dart';
 import 'settings_controller.dart';
 
 class LanguagePage extends StatelessWidget {
-  LanguagePage({Key? key}) : super(key: key);
+  const LanguagePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class LanguagePage extends StatelessWidget {
             children: [
               Text(
                 'language'.tr,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -53,25 +52,25 @@ class LanguagePage extends StatelessWidget {
                 onChanged: (newValue) {
                   _.toggleLanguaje(newValue!);
                 },
-                items: [
+                items: const [
                   DropdownMenuItem(
-                    child: Text('English'),
                     value: 'English',
+                    child: Text('English'),
                   ),
                   DropdownMenuItem(
-                    child: Text('Spanish'),
                     value: 'Spanish',
+                    child: Text('Spanish'),
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               SwitchListTile(
                 value: false,
                 onChanged: (value) {},
                 title: Text('ottaa_labs'.tr),
                 subtitle: Text('language_page_long_1'.tr),
               ),
-              Divider(),
+              const Divider(),
             ],
           ),
         ),

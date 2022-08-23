@@ -26,27 +26,21 @@ class SentenceWidget extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(vertical: verticalSize * 0.04),
-              child: Container(
+              child: SizedBox(
                 height: verticalSize * 0.2,
-                child: _.sentencePicts.length >= 1
+                child: _.sentencePicts.isNotEmpty
                     ? ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         itemCount: _.sentencePicts.length + 8,
                         itemBuilder: (BuildContext context, int index) {
-                          final Pict speakPict = Pict(
-                              localImg: true,
-                              id: 0,
-                              texto: Texto(en: "", es: ""),
-                              tipo: 6,
-                              imagen: Imagen(picto: "logo_ottaa_dev"));
+                          final Pict speakPict = Pict(localImg: true, id: 0, texto: Texto(en: "", es: ""), tipo: 6, imagen: Imagen(picto: "logo_ottaa_dev"));
                           if (_.sentencePicts.length > index) {
                             final Pict pict = _.sentencePicts[index];
                             return FadeInDown(
                               from: 30,
                               child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: horizontalSize * 0.01),
+                                padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
                                 // margin: EdgeInsets.all(10),
                                 child: MiniPicto(
                                   localImg: pict.localImg,
@@ -62,8 +56,7 @@ class SentenceWidget extends StatelessWidget {
                               from: 6,
                               infinite: true,
                               child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: horizontalSize * 0.01),
+                                padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
                                 // margin: EdgeInsets.all(10),
                                 child: MiniPicto(
                                   localImg: speakPict.localImg,
@@ -78,8 +71,7 @@ class SentenceWidget extends StatelessWidget {
                           return FadeInDown(
                             from: 30,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalSize * 0.01),
+                              padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -87,7 +79,7 @@ class SentenceWidget extends StatelessWidget {
                                 ),
                                 padding: const EdgeInsets.all(10),
                                 child: DottedBorder(
-                                  dashPattern: [8, 8],
+                                  dashPattern: const [8, 8],
                                   child: AspectRatio(
                                     aspectRatio: 1,
                                     child: Container(
@@ -103,8 +95,7 @@ class SentenceWidget extends StatelessWidget {
                       )
                     : ListView.builder(
                         shrinkWrap: true,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                        padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
                         itemCount: 10,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => FadeInDown(
@@ -130,7 +121,7 @@ class SentenceWidget extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(10),
         child: DottedBorder(
-          dashPattern: [8, 8],
+          dashPattern: const [8, 8],
           child: Container(
             width: horizontalSize * 0.1,
             color: Colors.white,

@@ -53,7 +53,7 @@ class PictoWhatsThePictoWidget extends StatelessWidget {
                         ? Image.network(imageUrl)
                         : CachedNetworkImage(
                             imageUrl: imageUrl,
-                            placeholder: (context, url) => Center(
+                            placeholder: (context, url) => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.black,
                               ),
@@ -63,7 +63,7 @@ class PictoWhatsThePictoWidget extends StatelessWidget {
                   ),
                   Center(
                     child: AnimatedOpacity(
-                      duration: Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 1000),
                       opacity: imageOrResult ? 0 : 1,
                       child: selectedAnswer.toUpperCase() == name.toUpperCase()
                           ? Icon(

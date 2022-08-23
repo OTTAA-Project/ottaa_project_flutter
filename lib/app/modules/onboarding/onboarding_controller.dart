@@ -9,17 +9,16 @@ class OnboardingController extends GetxController {
   RxInt imageNumber = 671.obs;
   RxInt pageNumber = 0.obs;
 
-  AuthController get authController => this._authController;
+  AuthController get authController => _authController;
   RxString name = ''.obs;
   RxInt dateOfBirthInMs = 0.obs;
-  RxString gender = '${'Male'.tr}'.obs;
+  RxString gender = 'Male'.tr.obs;
 
   // final firebaseAuth = FirebaseAuth.instance
 
   final formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
-  TextEditingController genderController =
-      TextEditingController(text: '${'Male'.tr}');
+  TextEditingController genderController = TextEditingController(text: 'Male'.tr);
   TextEditingController birthDateController = TextEditingController();
 
   @override

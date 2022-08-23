@@ -19,7 +19,7 @@ class DrawerWidget extends GetView<HomeController> {
     return SafeArea(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: verticalSize * 0.02),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.transparent,
         ),
         child: Container(
@@ -31,8 +31,7 @@ class DrawerWidget extends GetView<HomeController> {
           ),
           child: SingleChildScrollView(
             child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
               child: Column(
                 children: [
                   Container(
@@ -64,22 +63,17 @@ class DrawerWidget extends GetView<HomeController> {
                     height: verticalSize * 0.01,
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                    padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Obx(
                           () => ListTileWidget(
-                            icon: controller.muteOrNot.value
-                                ? Icons.volume_off
-                                : Icons.volume_up,
+                            icon: controller.muteOrNot.value ? Icons.volume_off : Icons.volume_up,
                             title: 'mute'.tr,
                             onTap: () async {
-                              _ttsController.setVolume =
-                                  controller.muteOrNot.value ? 0.8 : 0.0;
-                              controller.muteOrNot.value =
-                                  !controller.muteOrNot.value;
+                              _ttsController.setVolume = controller.muteOrNot.value ? 0.8 : 0.0;
+                              controller.muteOrNot.value = !controller.muteOrNot.value;
                               print(_ttsController.volume);
                             },
                           ),
@@ -87,43 +81,41 @@ class DrawerWidget extends GetView<HomeController> {
                       ],
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     color: Colors.grey,
                     // thickness: 0.0,
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                    padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTileWidget(
                           icon: Icons.info_outline,
                           title: 'about_ottaa'.tr,
-                          onTap: () => Get.toNamed(AppRoutes.ABOUTOTTAA),
+                          onTap: () => Get.toNamed(AppRoutes.kAboutOTTA),
                         ),
                         ListTileWidget(
                           icon: Icons.settings,
                           title: 'configuration'.tr,
-                          onTap: () => Get.toNamed(AppRoutes.SETTINGS),
+                          onTap: () => Get.toNamed(AppRoutes.kSettings),
                         ),
                         ListTileWidget(
                           icon: Icons.info_outline,
                           title: 'tutorial'.tr,
                           onTap: () async {
-                            Get.toNamed(AppRoutes.TUTORIAL);
+                            Get.toNamed(AppRoutes.kTutorial);
                           },
                         ),
                       ],
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     color: Colors.grey,
                     // thickness: 0.0,
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                    padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -157,7 +149,7 @@ class DrawerWidget extends GetView<HomeController> {
 }
 
 class ListTileWidget extends StatelessWidget {
-  ListTileWidget({
+  const ListTileWidget({
     Key? key,
     required this.icon,
     required this.title,

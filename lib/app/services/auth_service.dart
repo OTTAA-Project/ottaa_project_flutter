@@ -15,26 +15,22 @@ class AuthService {
     return _firebaseAuth.authStateChanges();
   }
 
-  Future<auth.UserCredential> signInWithEmailAndPassword(
-      String email, String password) async {
-    return await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
+  Future<auth.UserCredential> signInWithEmailAndPassword(String email, String password) async {
+    return await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
   }
 
   Future<auth.UserCredential> signInWithGoogle() async {
     await _googleSignIn.signOut();
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
-    final name  = googleUser.displayName!;
+    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+    final name = googleUser.displayName!;
     print('name from the google auth');
     print(name);
     final auth.OAuthCredential credential = auth.GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    UserCredential userCredentials =
-        await _firebaseAuth.signInWithCredential(credential);
+    UserCredential userCredentials = await _firebaseAuth.signInWithCredential(credential);
     if (userCredentials.user != null) {
       print(userCredentials.user);
       print(userCredentials.user!.email);
@@ -46,15 +42,13 @@ class AuthService {
 
   Future<auth.UserCredential> signInWithFacebook() async {
     // Trigger the sign-in flow
-    final LoginResult result = await FacebookAuth.instance.login(permissions: ["user_birthday", "user_gender",'public_profile']);
+    final LoginResult result = await FacebookAuth.instance.login(permissions: ["user_birthday", "user_gender", 'public_profile']);
 
     // Create a credential from the access token
-    auth.OAuthCredential facebookAuthCredential =
-        auth.FacebookAuthProvider.credential(result.accessToken!.token);
-print(result.accessToken!.token);
+    auth.OAuthCredential facebookAuthCredential = auth.FacebookAuthProvider.credential(result.accessToken!.token);
+    print(result.accessToken!.token);
     // Once signed in, return the UserCredential
-    var userCredentials = await auth.FirebaseAuth.instance
-        .signInWithCredential(facebookAuthCredential);
+    var userCredentials = await auth.FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
     if (userCredentials.user != null) {
       print(userCredentials.user);
       print(userCredentials.user!.displayName);
@@ -105,7 +99,7 @@ print(result.accessToken!.token);
       _firebaseAuth.signOut(),
       _googleSignIn.signOut(),
     ]);
-    Get.offAllNamed(AppRoutes.LOGIN);
+    Get.offAllNamed(AppRoutes.kLogin);
   }
 
   Future<void> sendEmailVerification() async {
@@ -128,9 +122,8 @@ print(result.accessToken!.token);
     user!.updatePassword(password).then((_) {
       print("Succesfull changed password");
     }).catchError((error) {
-      print("Password can't be changed" + error.toString());
+      print("Password can't be changed: ${error.toString()}");
     });
-    return null;
   }
 
   Future<void> deleteUser() async {
@@ -138,13 +131,11 @@ print(result.accessToken!.token);
     user!.delete().then((_) {
       print("Succesfull user deleted");
     }).catchError((error) {
-      print("user can't be delete" + error.toString());
+      print("user can't be delete ${error.toString()}");
     });
-    return null;
   }
 
   Future<void> sendPasswordResetMail(String email) async {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
-    return null;
   }
 }

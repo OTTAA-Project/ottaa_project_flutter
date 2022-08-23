@@ -11,37 +11,32 @@ class StepButton extends StatelessWidget {
   final Color? fontColor;
 
   const StepButton({
+    Key? key,
     required this.onTap,
     required this.text,
     this.leading,
     this.trailing,
     this.backgroundColor = kOTTAAOrange,
     this.fontColor = Colors.white,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: this.onTap,
+      onTap: onTap,
       child: Container(
         width: 150,
         height: 40,
+        decoration: BoxDecoration(color: backgroundColor, borderRadius: BorderRadius.circular(30)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (this.leading != null)
-              Icon(this.leading!, color: this.fontColor),
-            AutoSizeText(this.text,
-                style: TextStyle(
-                    color: this.fontColor, fontWeight: FontWeight.bold)),
-            if (this.trailing != null)
-              Icon(this.trailing!, color: this.fontColor),
+            if (leading != null) Icon(leading!, color: fontColor),
+            AutoSizeText(text, style: TextStyle(color: fontColor, fontWeight: FontWeight.bold)),
+            if (trailing != null) Icon(trailing!, color: fontColor),
           ],
         ),
-        decoration: BoxDecoration(
-            color: this.backgroundColor,
-            borderRadius: BorderRadius.circular(30)),
       ),
     );
   }

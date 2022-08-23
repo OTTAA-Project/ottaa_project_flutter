@@ -4,20 +4,19 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/local_widgets/header_wave.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-import '../onboarding_controller.dart';
-import 'header_wave.dart';
 final _sharedPrefClient = SharedPrefClient();
-Widget step3Onboarding<widget>(
-    OnboardingController _, PageController controller, context) {
+Widget step3Onboarding<widget>(OnboardingController _, PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
   double horizontalSize = MediaQuery.of(context).size.width;
   return Stack(
     children: [
       FadeInLeft(
-        child: HeaderWave(
+        child: const HeaderWave(
           color: kOTTAAOrangeNew,
           bgColor: kOTTAABackgroundNew,
         ),
@@ -29,8 +28,7 @@ Widget step3Onboarding<widget>(
           child: SvgPicture.asset(
             'assets/Group 706.svg',
             width: horizontalSize * 0.3,
-            placeholderBuilder: (BuildContext context) =>
-                Container(child: const CircularProgressIndicator()),
+            placeholderBuilder: (BuildContext context) => const CircularProgressIndicator(),
           ),
         ),
       ),
@@ -39,7 +37,7 @@ Widget step3Onboarding<widget>(
         top: verticalSize * 0.03,
         child: FadeInUp(
           child: Center(
-            child: Container(
+            child: SizedBox(
               width: horizontalSize * 0.45,
               height: verticalSize,
               // decoration: BoxDecoration(
@@ -48,7 +46,7 @@ Widget step3Onboarding<widget>(
                 child: Column(
                   children: [
                     Text("Choose_your_avatar".tr),
-                    Container(
+                    SizedBox(
                       height: verticalSize * 0.2,
                       width: horizontalSize * 0.16,
                       // color: Colors.black,
@@ -67,13 +65,12 @@ Widget step3Onboarding<widget>(
                             bottom: 0,
                             child: Container(
                               clipBehavior: Clip.antiAlias,
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
+                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                               decoration: BoxDecoration(
                                 color: kOTTAAOrangeNew,
                                 borderRadius: BorderRadius.circular(100),
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.edit,
                                 color: Colors.white,
                               ),
@@ -85,9 +82,8 @@ Widget step3Onboarding<widget>(
                     GridView.count(
                       crossAxisCount: 5,
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      padding:
-                          EdgeInsets.symmetric(vertical: verticalSize * 0.05),
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
                       mainAxisSpacing: verticalSize * 0.02,
                       children: [
                         ImageWidget(imageNumber: 615),
@@ -108,7 +104,7 @@ Widget step3Onboarding<widget>(
                       ],
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(top: verticalSize * 0.02),
+                      padding: EdgeInsets.only(top: verticalSize * 0.02),
                       child: Row(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -118,9 +114,7 @@ Widget step3Onboarding<widget>(
                               // leading: Icons.chevron_left,
                               onTap: () {
                                 _.pageNumber.value = 1;
-                                controller.animateToPage(_.pageNumber.value,
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut);
+                                controller.animateToPage(_.pageNumber.value, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
                               },
                               backgroundColor: kQuantumGrey,
                               fontColor: Colors.white,
@@ -136,14 +130,13 @@ Widget step3Onboarding<widget>(
                               onTap: () async {
                                 showDialog(
                                   context: context,
-                                  builder: (context) => Center(
+                                  builder: (context) => const Center(
                                     child: CircularProgressIndicator(),
                                   ),
                                 );
-                                await _.uploadAvatar(
-                                    photoNumber: _.imageNumber.value);
+                                await _.uploadAvatar(photoNumber: _.imageNumber.value);
                                 await _sharedPrefClient.setPhotoPref();
-                                Get.offAllNamed(AppRoutes.HOME);
+                                Get.offAllNamed(AppRoutes.kHome);
                               },
                               backgroundColor: kOTTAAOrangeNew,
                               fontColor: Colors.white,
@@ -166,8 +159,8 @@ Widget step3Onboarding<widget>(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${'por_ltimo'.tr}',
-              style: TextStyle(
+              'por_ltimo'.tr,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 40,
@@ -178,7 +171,7 @@ Widget step3Onboarding<widget>(
             ),
             Text(
               '${'elige_un_personaje_que_nmejor_te_represente'.tr}!',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 15,
               ),

@@ -6,10 +6,10 @@ import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_p
 import 'package:ottaa_project_flutter/app/global_widgets/picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
-import '../../../utils/CustomAnalytics.dart';
+import '../../../utils/custom_analytics.dart';
 
 class SuggestedWidget extends StatelessWidget {
-  SuggestedWidget({Key? key}) : super(key: key);
+  const SuggestedWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +19,13 @@ class SuggestedWidget extends StatelessWidget {
       id: "suggested",
       builder: (_) => Bounce(
         from: 5,
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         controller: (controller) => _.pictoAnimationController = controller,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               height: verticalSize * 0.52,
               width: horizontalSize * 0.78,
               child: ListView.builder(
@@ -34,8 +34,7 @@ class SuggestedWidget extends StatelessWidget {
                 itemCount: _.suggestedQuantity,
                 itemBuilder: (BuildContext context, int index) {
                   if (_.suggestedPicts.isNotEmpty) {
-                    final Pict pict = _.suggestedPicts[
-                        index + _.suggestedIndex * _.suggestedQuantity];
+                    final Pict pict = _.suggestedPicts[index + _.suggestedIndex * _.suggestedQuantity];
                     return Container(
                       margin: EdgeInsets.all(horizontalSize / 99),
                       child: Picto(
@@ -53,9 +52,7 @@ class SuggestedWidget extends StatelessWidget {
                                     return Center(
                                       child: ChoiceDialogue(
                                         index: pict.id,
-                                        suggestedIndexMainScreen: index +
-                                            _.suggestedIndex *
-                                                _.suggestedQuantity,
+                                        suggestedIndexMainScreen: index + _.suggestedIndex * _.suggestedQuantity,
                                       ),
                                     );
                                   },
@@ -65,18 +62,15 @@ class SuggestedWidget extends StatelessWidget {
                           if (pict.texto.es != "agregar") {
                             _.addPictToSentence(pict);
                           } else {
-                            if (_.sentencePicts.length == 0) {
+                            if (_.sentencePicts.isEmpty) {
                               _.toId = 0;
                               _.fromAdd = true;
                             } else {
                               _.toId = _.sentencePicts.last.id;
                               _.fromAdd = true;
                             }
-                            Get.toNamed(AppRoutes.PICTOGRAMGROUP);
-                            CustomAnalyticsEvents.setEventWithParameters(
-                                "Touch",
-                                CustomAnalyticsEvents.createMyMap(
-                                    'Principal', 'Group Gallery'));
+                            Get.toNamed(AppRoutes.kPictogramGroup);
+                            CustomAnalyticsEvents.setEventWithParameters("Touch", CustomAnalyticsEvents.createMyMap('Principal', 'Group Gallery'));
                           }
                         },
                       ),
@@ -95,9 +89,8 @@ class SuggestedWidget extends StatelessWidget {
 }
 
 class ChoiceDialogue extends StatelessWidget {
-  ChoiceDialogue({Key? key, this.index, required this.suggestedIndexMainScreen})
-      : super(key: key);
-  int? index;
+  ChoiceDialogue({Key? key, this.index, required this.suggestedIndexMainScreen}) : super(key: key);
+  final int? index;
   final _homeController = Get.find<HomeController>();
   final int suggestedIndexMainScreen;
 
@@ -110,14 +103,13 @@ class ChoiceDialogue extends StatelessWidget {
           GestureDetector(
             onTap: () {
               if (_homeController.userSubscription == 1) {
-                _homeController.suggestedMainScreenIndex =
-                    suggestedIndexMainScreen;
+                _homeController.suggestedMainScreenIndex = suggestedIndexMainScreen;
                 _homeController.editPicto(
                   suggestedIndexMainScreen: suggestedIndexMainScreen,
                 );
               } else {
                 _homeController.initializePageViewer();
-                Get.to(() => BuyPaidVersionPage());
+                Get.to(() => const BuyPaidVersionPage());
               }
             },
             child: Text('edit'.tr),
@@ -135,10 +127,10 @@ class ChoiceDialogue extends StatelessWidget {
                 );
               } else {
                 _homeController.initializePageViewer();
-                Get.to(() => BuyPaidVersionPage());
+                Get.to(() => const BuyPaidVersionPage());
               }
             },
-            child: Text('Delete'),
+            child: const Text('Delete'),
           ),
         ],
       ),

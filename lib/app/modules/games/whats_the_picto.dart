@@ -72,11 +72,11 @@ class WhatsThePicto extends GetView<GamesController> {
                     ),
                     Obx(
                       () => AnimatedOpacity(
-                        duration: Duration(seconds: 1),
+                        duration: const Duration(seconds: 1),
                         opacity: controller.showImage.value ? 1 : 0,
                         child: CachedNetworkImage(
                           imageUrl: controller.selectedImage.value,
-                          placeholder: (context, url) => Center(
+                          placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.black,
                             ),
@@ -94,7 +94,7 @@ class WhatsThePicto extends GetView<GamesController> {
         Positioned(
           bottom: verticalSize * 0.02,
           left: horizontalSize * 0.02,
-          child: Container(
+          child: SizedBox(
             height: 400,
             width: horizontalSize * 0.98,
             child: Obx(
@@ -104,18 +104,15 @@ class WhatsThePicto extends GetView<GamesController> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding:
-                              EdgeInsets.only(right: horizontalSize * 0.03),
+                          padding: EdgeInsets.only(right: horizontalSize * 0.03),
                           child: Obx(
                             () => PictoWhatsThePictoWidget(
-                              onTap: () async => await controller
-                                  .pictoFunctionWhatsThePicto(index: index),
+                              onTap: () async => await controller.pictoFunctionWhatsThePicto(index: index),
                               verticalSize: verticalSize,
                               horizontalSize: horizontalSize,
                               imageUrl: controller.questions[index].imageUrl,
                               name: controller.questions[index].text,
-                              imageOrResult:
-                                  controller.imageOrEmoji[index].value,
+                              imageOrResult: controller.imageOrEmoji[index].value,
                               selectedAnswer: controller.selectedAnswer.value,
                             ),
                           ),

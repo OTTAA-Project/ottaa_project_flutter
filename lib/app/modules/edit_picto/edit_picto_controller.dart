@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison, use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -112,12 +114,10 @@ class EditPictoController extends GetxController {
     );
   }
 
-  Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
-      {required String text}) async {
+  Future<List<SearchModel>> fetchPhotoFromGlobalSymbols({required String text}) async {
     final String languageFormat = lang == 'en' ? '639-3' : '639-1';
     final language = lang == 'en' ? 'eng' : 'es';
-    url =
-        'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
+    url = 'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
     var urlF = Uri.parse(url);
     http.Response response = await http.get(
       urlF,
@@ -127,9 +127,7 @@ class EditPictoController extends GetxController {
     if (response.statusCode == 200) {
       // var data = jsonDecode(response.body);
       // print(data['symbols'][0]['name']);
-      final res = (jsonDecode(response.body) as List)
-          .map((e) => SearchModel.fromJson(e))
-          .toList();
+      final res = (jsonDecode(response.body) as List).map((e) => SearchModel.fromJson(e)).toList();
       // SearchModel searchModel = SearchModel.fromJson(jsonDecode(response.body));
       // print(searchModel.itemCount);
       // print(searchModel.symbols[0].name);
@@ -160,8 +158,7 @@ class EditPictoController extends GetxController {
 
   void galleryFunction() async {
     if (kIsWeb) {
-      imageTobeUploaded.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      imageTobeUploaded.value = await picker.pickImage(source: ImageSource.gallery);
       if (imageTobeUploaded != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploaded.value!.readAsBytes();
@@ -175,8 +172,7 @@ class EditPictoController extends GetxController {
         print('no');
       }
     } else {
-      imageTobeUploaded.value =
-          await picker.pickImage(source: ImageSource.gallery);
+      imageTobeUploaded.value = await picker.pickImage(source: ImageSource.gallery);
       if (imageTobeUploaded != null) {
         fileImage.value = File(imageTobeUploaded.value!.path);
         editingPicture.value = true;
@@ -188,12 +184,11 @@ class EditPictoController extends GetxController {
     }
   }
 
-  void uploadChanges(
-      {required BuildContext context, RxBool? editPicBool}) async {
+  void uploadChanges({required BuildContext context, RxBool? editPicBool}) async {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(
+      builder: (context) => const Center(
         child: CircularProgressIndicator(),
       ),
     );
@@ -247,10 +242,10 @@ class EditPictoController extends GetxController {
     }
     final data = _homeController.picts;
     List<String> fileData = [];
-    data.forEach((element) {
+    for (var element in data) {
       final obj = jsonEncode(element);
       fileData.add(obj);
-    });
+    }
 
     /// saving changes to file
     if (!kIsWeb) {
@@ -268,14 +263,10 @@ class EditPictoController extends GetxController {
     await pictsExistsOnFirebase();
     // for refreshing the UI of listing
     if (_homeController.editingFromHomeScreen) {
-      _homeController.updateSuggested(
-          suggestedMainScreenIndex: _homeController.suggestedMainScreenIndex,
-          updatedOne: pict.value!);
+      _homeController.updateSuggested(suggestedMainScreenIndex: _homeController.suggestedMainScreenIndex, updatedOne: pict.value!);
     } else {
-      _pictoController.pictoGridviewOrPageview.value =
-          !_pictoController.pictoGridviewOrPageview.value;
-      _pictoController.pictoGridviewOrPageview.value =
-          !_pictoController.pictoGridviewOrPageview.value;
+      _pictoController.pictoGridviewOrPageview.value = !_pictoController.pictoGridviewOrPageview.value;
+      _pictoController.pictoGridviewOrPageview.value = !_pictoController.pictoGridviewOrPageview.value;
     }
     _homeController.editingFromHomeScreen = false;
     Get.back();
@@ -298,11 +289,6 @@ class EditPictoController extends GetxController {
   }
 
   @override
-  void onClose() {
-    super.onClose();
-  }
-
-  @override
   void onInit() {
     super.onInit();
     pict.value = _homeController.pictToBeEdited;
@@ -312,8 +298,6 @@ class EditPictoController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    nameController.text = lang == 'en'
-        ? pict.value!.texto.en.toUpperCase()
-        : pict.value!.texto.es.toUpperCase();
+    nameController.text = lang == 'en' ? pict.value!.texto.en.toUpperCase() : pict.value!.texto.es.toUpperCase();
   }
 }
