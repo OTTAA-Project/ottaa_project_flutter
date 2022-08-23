@@ -36,7 +36,7 @@ step2Onboarding<widget>(
       ),
       Positioned(
         right: horizontalSize * 0.05,
-        bottom: verticalSize * 0.10,
+        bottom: verticalSize * 0.05,
         child: Container(
           width: horizontalSize * 0.35,
           child: Row(
@@ -153,7 +153,7 @@ step2Onboarding<widget>(
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 35,
+                  fontSize: verticalSize * 0.05,
                 ),
               ),
             ),

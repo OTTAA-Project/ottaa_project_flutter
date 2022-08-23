@@ -215,7 +215,7 @@ Widget step1Onboarding<widget>(
       ),
       Positioned(
         right: horizontalSize * 0.05,
-        bottom: verticalSize * 0.10,
+        bottom: verticalSize * 0.05,
         child: Container(
           width: horizontalSize * 0.35,
           child: Row(

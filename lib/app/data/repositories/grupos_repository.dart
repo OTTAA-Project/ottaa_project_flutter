@@ -8,4 +8,12 @@ class GrupoRepository {
   Future<List<Grupos>> getAll() async {
     return _gruposService.getAll();
   }
+
+  Future<List<Grupos>> getFrench() async {
+    return _gruposService.getFrench();
+  }
+
+  Future<List<Grupos>> getPortuguese() async {
+    return _gruposService.getPortuguese();
+  }
 }

@@ -108,7 +108,7 @@ Widget step3Onboarding<widget>(
                       ],
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(top: verticalSize * 0.02),
+                      padding:  EdgeInsets.only(top: verticalSize * 0.02,bottom: verticalSize * 0.1),
                       child: Row(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

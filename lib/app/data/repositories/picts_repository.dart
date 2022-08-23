@@ -8,4 +8,11 @@ class PictsRepository {
   Future<List<Pict>> getAll() async {
     return _pictsService.getAll();
   }
+  Future<List<Pict>> getFrench() async {
+    return _pictsService.getFrench();
+  }
+
+  Future<List<Pict>> getPortuguese() async {
+    return _pictsService.getPortuguese();
+  }
 }
