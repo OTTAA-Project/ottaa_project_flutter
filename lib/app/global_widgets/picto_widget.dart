@@ -35,13 +35,19 @@ class Picto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String texto;
-
+    print(languaje);
     switch (this.languaje) {
       case "es-AR":
         texto = pict.texto.es;
         break;
       case "en-US":
         texto = pict.texto.en;
+        break;
+      case "fr-FR":
+        texto = pict.texto.fr;
+        break;
+      case "pt-br":
+        texto = pict.texto.pt;
         break;
       default:
         texto = pict.texto.es;

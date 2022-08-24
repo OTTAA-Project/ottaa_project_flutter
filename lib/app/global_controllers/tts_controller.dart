@@ -206,6 +206,7 @@ class TTSController extends GetxController {
       // await this
       //     ._flutterTTS
       //     .setVoice({"name": "es-US-language", "locale": "es-US"});
+      print(voiceText);
       await this._flutterTTS.speak(voiceText);
     }
   }

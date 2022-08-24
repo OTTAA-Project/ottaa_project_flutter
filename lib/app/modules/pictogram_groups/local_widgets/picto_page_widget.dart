@@ -43,10 +43,7 @@ class PictoPageWidget extends StatelessWidget {
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: CategoryWidget(
-                  name: languaje == "en-US"
-                      ? _pictogramController.selectedGruposPicts[index].texto.en
-                      : _pictogramController
-                          .selectedGruposPicts[index].texto.es,
+                  name: _pictogramController.selectedGruposPicts[index].texto,
                   imageName: _pictogramController
                               .selectedGruposPicts[index].imagen.pictoEditado ==
                           null
@@ -57,6 +54,7 @@ class PictoPageWidget extends StatelessWidget {
                   border: true,
                   bottom: false,
                   color: _pictogramController.selectedGruposPicts[index].tipo,
+                  languaje: _pictogramController.lang,
                 ),
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -88,11 +86,8 @@ class PictoPageWidget extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: horizontalSize * 0.07),
                   child: CategoryPageWidget(
-                    name: languaje == "en-US"
-                        ? _pictogramController
-                            .selectedGruposPicts[index].texto.en
-                        : _pictogramController
-                            .selectedGruposPicts[index].texto.es,
+                    name: _pictogramController.selectedGruposPicts[index].texto,
+                    language: _homeController.language,
                     imageName: _pictogramController
                         .selectedGruposPicts[index].imagen.picto,
                     border: true,
@@ -106,9 +101,30 @@ class PictoPageWidget extends StatelessWidget {
 
   Future<void> onTap(int index, String languaje) async {
     //saying the name after selecting the category
-    _ttsController.speak(languaje == "en-US"
-        ? _pictogramController.selectedGruposPicts[index].texto.en
-        : _pictogramController.selectedGruposPicts[index].texto.es);
+    switch (_homeController.language) {
+      case "es-AR":
+        _ttsController
+            .speak(_pictogramController.selectedGruposPicts[index].texto.es);
+        break;
+      case "en-US":
+        _ttsController
+            .speak(_pictogramController.selectedGruposPicts[index].texto.en);
+        break;
+      case "fr-FR":
+        _ttsController
+            .speak(_pictogramController.selectedGruposPicts[index].texto.fr);
+        break;
+      case "pt-br":
+        _ttsController
+            .speak(_pictogramController.selectedGruposPicts[index].texto.pt);
+        break;
+      default:
+        _ttsController
+            .speak(_pictogramController.selectedGruposPicts[index].texto.es);
+    }
+    // _ttsController.speak(languaje == "en-US"
+    //     ? _pictogramController.selectedGruposPicts[index].texto.en
+    //     : _pictogramController.selectedGruposPicts[index].texto.es);
     //add to the sentence
     if (_pictogramController.selectedPicto ==
         _pictogramController.selectedGruposPicts[index].texto.en) {

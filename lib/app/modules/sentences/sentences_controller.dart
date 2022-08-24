@@ -84,15 +84,23 @@ class SentencesController extends GetxController {
       String voiceText = "";
       this._sentencesPicts[this._sentencesIndex].forEach((pict) {
         switch (this._ttsController.languaje) {
-          case "es":
+          // case "es-AR":
+          //   voiceText += ' ' + pict.texto.es;
+          //   break;
+          case "es-AR":
             voiceText += ' ' + pict.texto.es;
             break;
-          case "en":
+          case "en-US":
             voiceText += ' ' + pict.texto.en;
             break;
-
+          case "fr-FR":
+            voiceText += ' ' + pict.texto.fr;
+            break;
+          case "pt-br":
+            voiceText += ' ' + pict.texto.pt;
+            break;
           default:
-            voiceText += ' ' + pict.texto.en;
+            voiceText += ' ' + pict.texto.es;
         }
       });
 
@@ -107,15 +115,23 @@ class SentencesController extends GetxController {
       String voiceText = "";
       this._sentencesPicts[sentencesForList[searchIndex].index].forEach((pict) {
         switch (this._ttsController.languaje) {
-          case "es":
+          // case "es-AR":
+          //   voiceText += ' ' + pict.texto.es;
+          //   break;
+          case "es-AR":
             voiceText += ' ' + pict.texto.es;
             break;
-          case "en":
+          case "en-US":
             voiceText += ' ' + pict.texto.en;
             break;
-
+          case "fr-FR":
+            voiceText += ' ' + pict.texto.fr;
+            break;
+          case "pt-br":
+            voiceText += ' ' + pict.texto.pt;
+            break;
           default:
-            voiceText += ' ' + pict.texto.en;
+            voiceText += ' ' + pict.texto.es;
         }
       });
 
@@ -133,14 +149,23 @@ class SentencesController extends GetxController {
       String sentence = '';
       e1.forEach((e2) {
         switch (this._ttsController.languaje) {
-          case "es":
+          // case "es":
+          //   sentence += ' ' + e2.texto.es;
+          //   break;
+          case "es-AR":
             sentence += ' ' + e2.texto.es;
             break;
-          case "en":
+          case "en-US":
             sentence += ' ' + e2.texto.en;
             break;
+          case "fr-FR":
+            sentence += ' ' + e2.texto.fr;
+            break;
+          case "pt-br":
+            sentence += ' ' + e2.texto.pt;
+            break;
           default:
-            sentence += ' ' + e2.texto.en;
+            sentence += ' ' + e2.texto.es;
         }
       });
 

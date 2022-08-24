@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
@@ -46,9 +47,30 @@ class CategoryViewWidget extends StatelessWidget {
                       _homeController.grupos[index];
                   _pictogramController.selectedIndex = index;
                   print(_pictogramController.selectedIndex);
-                  _ttsController.speak(languaje == "en-US"
-                      ? _homeController.grupos[index].texto.en
-                      : _homeController.grupos[index].texto.es);
+                  switch (_homeController.language) {
+                    case "es-AR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.es);
+                      break;
+                    case "en-US":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.en);
+                      break;
+                    case "fr-FR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.fr);
+                      break;
+                    case "pt-br":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.pt);
+                      break;
+                    default:
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.es);
+                  }
+                  // _ttsController.speak(languaje == "en-US"
+                  //     ? _homeController.grupos[index].texto.en
+                  //     : _homeController.grupos[index].texto.es);
                   await _pictogramController.fetchDesiredPictos();
                   // if (_pictogramController.secondTimeSameGroup ==
                   //     _pictogramController.selectedGroupIndex) {
@@ -62,10 +84,10 @@ class CategoryViewWidget extends StatelessWidget {
                   Get.toNamed(AppRoutes.SELECTPICTO);
                 },
                 child: CategoryWidget(
-                  name: languaje == 'en-US'
-                      ? _homeController.grupos[index].texto.en
-                      : _homeController.grupos[index].texto.es,
+                  names: _homeController.grupos[index].texto,
                   imageName: _homeController.grupos[index].imagen.picto,
+                  name: Texto(),
+                  languaje: _homeController.language,
                 ),
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -111,11 +133,12 @@ class CategoryViewWidget extends StatelessWidget {
                   Get.toNamed(AppRoutes.SELECTPICTO);
                 },
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.15),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.15),
                   child: CategoryPageWidget(
-                    name: languaje == 'en-US'
-                        ? _homeController.grupos[index].texto.en
-                        : _homeController.grupos[index].texto.es,
+                    names: _homeController.grupos[index].texto,
+                    name: Texto(),
+                    language: _homeController.language,
                     imageName: _homeController.grupos[index].imagen.picto,
                   ),
                 ),

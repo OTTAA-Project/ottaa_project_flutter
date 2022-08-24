@@ -45,8 +45,7 @@ class PictogramGroupsController extends GetxController {
 
   ///Add Group
   bool textOrBorder = true;
-  final TextEditingController grupoNameController =
-      TextEditingController();
+  final TextEditingController grupoNameController = TextEditingController();
   final ImagePicker picker = ImagePicker();
   RxBool isImageProvidedGrupo = false.obs;
   Rx<File?> fileImageGrupo = Rx<File?>(null);
@@ -64,16 +63,12 @@ class PictogramGroupsController extends GetxController {
   Pict pict = Pict(
     imagen: Imagen(picto: ''),
     id: 0,
-    texto: Texto(
-      en: '',
-      es: '',
-    ),
+    texto: Texto(),
     tipo: 6,
   );
 
   //Add Pict
-  final TextEditingController pictoNameController =
-      TextEditingController();
+  final TextEditingController pictoNameController = TextEditingController();
   RxBool isImageProvidedPicto = false.obs;
   Rx<File?> fileImagePicto = Rx<File?>(null);
   Rx<String?> selectedPhotoUrlPicto = ''.obs;

@@ -47,9 +47,7 @@ class CustomDelegate extends SearchDelegate<String> {
             await onTap(listToShow[index]);
           },
           child: CategoryWidget(
-            name: language == 'en-US'
-                ? listToShow[index].texto.en
-                : listToShow[index].texto.es,
+            name: listToShow[index].texto,
             imageName: listToShow[index].imagen.pictoEditado == null
                 ? listToShow[index].imagen.picto
                 : listToShow[index].imagen.pictoEditado!,
@@ -96,9 +94,7 @@ class CustomDelegate extends SearchDelegate<String> {
             await onTap(listToShow[index]);
           },
           child: CategoryWidget(
-            name: language == 'en-US'
-                ? listToShow[index].texto.en
-                : listToShow[index].texto.es,
+            name: listToShow[index].texto,
             imageName: listToShow[index].imagen.pictoEditado == null
                 ? listToShow[index].imagen.picto
                 : listToShow[index].imagen.pictoEditado!,

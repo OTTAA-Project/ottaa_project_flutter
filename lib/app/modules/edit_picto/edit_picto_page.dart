@@ -96,9 +96,7 @@ class EditPictoPage extends GetView<EditPictoController> {
                               );
                             },
                             child: CategoryWidget(
-                              name: languaje == 'en-US'
-                                  ? controller.pict.value!.texto.en
-                                  : controller.pict.value!.texto.es,
+                              name: controller.pict.value!.texto,
                               imageName: controller
                                           .pict.value!.imagen.pictoEditado ==
                                       null
@@ -112,6 +110,7 @@ class EditPictoPage extends GetView<EditPictoController> {
                               imageWidget: controller.imageWidget.value,
                               selectedImageUrl:
                                   controller.selectedPhotoUrl.value,
+                              languaje: controller.lang,
                             ),
                           ),
                         ),
@@ -228,7 +227,7 @@ class PictureDialogWidget extends GetView<EditPictoController> {
                     ),
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(right: horizontalSize * 0.01),
+                    padding: EdgeInsets.only(right: horizontalSize * 0.01),
                     child: ImageWidget(
                       imageLink: 'assets/download_from_arasaac.png',
                       text: 'download_from_arasaac'.tr,

@@ -114,8 +114,8 @@ class EditPictoController extends GetxController {
 
   Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
       {required String text}) async {
-    final String languageFormat = lang == 'en' ? '639-3' : '639-1';
-    final language = lang == 'en' ? 'eng' : 'es';
+    final String languageFormat = lang == 'en-US' ? '639-3' : '639-1';
+    final language = lang == 'en-US' ? 'eng' : 'es';
     url =
         'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
     var urlF = Uri.parse(url);
@@ -312,8 +312,25 @@ class EditPictoController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    nameController.text = lang == 'en'
+    nameController.text = lang == 'en-US'
         ? pict.value!.texto.en.toUpperCase()
         : pict.value!.texto.es.toUpperCase();
+
+    switch (lang) {
+      case "es-AR":
+        nameController.text = pict.value!.texto.es;
+        break;
+      case "en-US":
+        nameController.text = pict.value!.texto.en;
+        break;
+      case "fr-FR":
+        nameController.text = pict.value!.texto.fr;
+        break;
+      case "pt-br":
+        nameController.text = pict.value!.texto.pt;
+        break;
+      default:
+        nameController.text =pict.value!.texto.es;
+    }
   }
 }
