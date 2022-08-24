@@ -96,7 +96,7 @@ class SentencesController extends GetxController {
           case "fr-FR":
             voiceText += ' ' + pict.texto.fr;
             break;
-          case "pt-br":
+          case "pt-BR":
             voiceText += ' ' + pict.texto.pt;
             break;
           default:
@@ -127,7 +127,7 @@ class SentencesController extends GetxController {
           case "fr-FR":
             voiceText += ' ' + pict.texto.fr;
             break;
-          case "pt-br":
+          case "pt-BR":
             voiceText += ' ' + pict.texto.pt;
             break;
           default:
@@ -161,7 +161,7 @@ class SentencesController extends GetxController {
           case "fr-FR":
             sentence += ' ' + e2.texto.fr;
             break;
-          case "pt-br":
+          case "pt-BR":
             sentence += ' ' + e2.texto.pt;
             break;
           default:

@@ -5,6 +5,6 @@ class Constants {
     'English': 'en-US',
     'Spanish': 'es-AR',
     'French': 'fr-FR',
-    'Portuguese': 'pt-br',
+    'Portuguese': 'pt-BR',
   };
 }

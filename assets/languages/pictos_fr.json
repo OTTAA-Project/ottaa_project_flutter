@@ -266,20 +266,6 @@
     "gps": 0
   },
   {
-    "id": 16,
-    "texto": {
-      "en": "tie",
-      "fr": "attacher"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "ic_empatar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 17,
     "texto": {
       "en": "turn on",
@@ -415,34 +401,6 @@
     "gps": 0
   },
   {
-    "id": 24,
-    "texto": {
-      "en": "expel",
-      "fr": "expulser"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "ic_expulsar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 25,
-    "texto": {
-      "en": "fry",
-      "fr": "frire"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "freir"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 26,
     "texto": {
       "en": "win",
@@ -451,20 +409,6 @@
     "tipo": 3,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_ganar.webp?alt=media&token=07cd9657-3510-44de-9bdd-16544b5bf73f"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 27,
-    "texto": {
-      "en": "stew",
-      "fr": "Ragoût"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "guisar"
     },
     "relacion": [],
     "agenda": 0,
@@ -571,7 +515,7 @@
     },
     "tipo": 3,
     "imagen": {
-      "picto": "ic_jugar"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_jugar.webp?alt=media&token=aba130c0-3439-4bcb-97b2-80adaaa645b5"
     },
     "relacion": [
       {
@@ -605,34 +549,6 @@
     "gps": 0
   },
   {
-    "id": 36,
-    "texto": {
-      "en": "pay with cash",
-      "fr": "payer avec de l&#39;argent"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "pagar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 37,
-    "texto": {
-      "en": "pay with card",
-      "fr": "payer avec carte"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "pagar_con_tarjeta"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 38,
     "texto": {
       "en": "take a walk",
@@ -640,7 +556,7 @@
     },
     "tipo": 3,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpasear.webp?alt=media&token=1de7c440-8578-45bf-8d39-dd1b6d8a40d9"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_pasear.webp?alt=media&token=8ce622f4-a514-462a-bdb1-792e0c85863b"
     },
     "relacion": [],
     "agenda": 0,
@@ -661,20 +577,6 @@
     "gps": 0
   },
   {
-    "id": 40,
-    "texto": {
-      "en": "think",
-      "fr": "pense"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "ic_pensar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 41,
     "texto": {
       "en": "lose",
@@ -689,20 +591,6 @@
     "gps": 0
   },
   {
-    "id": 42,
-    "texto": {
-      "en": "pee",
-      "fr": "pipi"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "ic_hacerpis"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 43,
     "texto": {
       "en": "paint",
@@ -710,7 +598,7 @@
     },
     "tipo": 3,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpintar.webp?alt=media&token=02634a91-0bef-46f5-b8a7-561d1fca2b33"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_pintar.webp?alt=media&token=5dd94837-f3fb-4f86-a82d-03cc7dff54bf"
     },
     "relacion": [],
     "agenda": 0,
@@ -772,62 +660,6 @@
     "gps": 0
   },
   {
-    "id": 45,
-    "texto": {
-      "en": "answer",
-      "fr": "répondre"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "ic_responder"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 46,
-    "texto": {
-      "en": "flash a card",
-      "fr": "flasher une carte"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "ic_sacar_tarjeta"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 47,
-    "texto": {
-      "en": "take turn",
-      "fr": "prendre son tour"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "coger_turno"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 48,
-    "texto": {
-      "en": "turn volume up",
-      "fr": "augmente le volume"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "ic_volumen_mas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 49,
     "texto": {
       "en": "have",
@@ -851,20 +683,6 @@
     "gps": 0
   },
   {
-    "id": 50,
-    "texto": {
-      "en": "play the guitar",
-      "fr": "jouer de la guitare"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "ic_tocar_instrumento"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 51,
     "texto": {
       "en": "drink",
@@ -872,7 +690,7 @@
     },
     "tipo": 3,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbebida.webp?alt=media&token=70276811-03c6-4072-89e2-c07fea37652f"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbeber.webp?alt=media&token=95642655-8bd4-47d7-8222-0244e7491598"
     },
     "relacion": [],
     "agenda": 0,
@@ -921,34 +739,6 @@
     "gps": 0
   },
   {
-    "id": 55,
-    "texto": {
-      "en": "duck",
-      "fr": "canard"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpato.webp?alt=media&token=d828454d-109a-4321-8348-a029423823a0"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 56,
-    "texto": {
-      "en": "add",
-      "fr": "ajouter"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "agregar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 57,
     "texto": {
       "en": "love",
@@ -963,48 +753,6 @@
     "gps": 0
   },
   {
-    "id": 58,
-    "texto": {
-      "en": "knead",
-      "fr": "pétrir"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "amasar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 59,
-    "texto": {
-      "en": "learn to swim",
-      "fr": "apprendre à nager"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "aprender_a_nadar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 60,
-    "texto": {
-      "en": "aprove",
-      "fr": "aprove"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "aprobar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 61,
     "texto": {
       "en": "get down",
@@ -1013,34 +761,6 @@
     "tipo": 3,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbajar.webp?alt=media&token=2247bc63-785c-4290-87ee-93ca136dbed3"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 62,
-    "texto": {
-      "en": "low the bed",
-      "fr": "bas le lit"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "bajar_la_cama"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 63,
-    "texto": {
-      "en": "low the temperature",
-      "fr": "abaisser la température"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "bajar_la_temperatura"
     },
     "relacion": [],
     "agenda": 0,
@@ -1082,21 +802,7 @@
     },
     "tipo": 3,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fotonio.webp?alt=media&token=1d1a0c5b-e4c7-4976-879b-357f3c84ee62"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 67,
-    "texto": {
-      "en": "change place",
-      "fr": "changer de place"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "cambiar_de_lugar"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcaer.webp?alt=media&token=5bdb209f-082b-442d-82bb-429359e504d1"
     },
     "relacion": [],
     "agenda": 0,
@@ -1159,62 +865,6 @@
     "gps": 0
   },
   {
-    "id": 72,
-    "texto": {
-      "en": "cut bread",
-      "fr": "couper du pain"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "cortar_el_pan"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 73,
-    "texto": {
-      "en": "peep",
-      "fr": "piaulement"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "curiosear"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 74,
-    "texto": {
-      "en": "decide",
-      "fr": "décider"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "decidir"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 75,
-    "texto": {
-      "en": "move",
-      "fr": "bouge toi"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "desplazarse"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 76,
     "texto": {
       "en": "get in",
@@ -1229,20 +879,6 @@
     "gps": 0
   },
   {
-    "id": 77,
-    "texto": {
-      "en": "miss",
-      "fr": "manquer"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "faltar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 78,
     "texto": {
       "en": "make love",
@@ -1250,7 +886,7 @@
     },
     "tipo": 3,
     "imagen": {
-      "picto": "hacer_el_amor"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fhacer_el_amor.webp?alt=media&token=f7e8141e-8325-4564-bcc4-7c75e59152a9"
     },
     "relacion": [],
     "agenda": 0,
@@ -1265,20 +901,6 @@
     "tipo": 3,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fhusmear.webp?alt=media&token=e1bdad48-76a9-4de9-9246-a0d9e60c8c2d"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 80,
-    "texto": {
-      "en": "include",
-      "fr": "comprendre"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "incluir"
     },
     "relacion": [],
     "agenda": 0,
@@ -1307,34 +929,6 @@
     "tipo": 3,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fjugar_con_la_tablet.webp?alt=media&token=9e30d1b6-ab88-463f-a30f-c1d4b199dcdc"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 83,
-    "texto": {
-      "en": "dive",
-      "fr": "se plonger"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "lanzarse_al_agua"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 84,
-    "texto": {
-      "en": "wash face",
-      "fr": "Se laver le visage"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "lavar_la_cara"
     },
     "relacion": [],
     "agenda": 0,
@@ -1376,7 +970,7 @@
     },
     "tipo": 3,
     "imagen": {
-      "picto": "pasear"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpasear.webp?alt=media&token=1de7c440-8578-45bf-8d39-dd1b6d8a40d9"
     },
     "relacion": [],
     "agenda": 0,
@@ -1397,20 +991,6 @@
     "gps": 0
   },
   {
-    "id": 89,
-    "texto": {
-      "en": "percieve",
-      "fr": "percevoir"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "percibir"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 90,
     "texto": {
       "en": "paint",
@@ -1418,21 +998,7 @@
     },
     "tipo": 3,
     "imagen": {
-      "picto": "pintar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 91,
-    "texto": {
-      "en": "plant",
-      "fr": "plante"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "plantar"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpintar.webp?alt=media&token=02634a91-0bef-46f5-b8a7-561d1fca2b33"
     },
     "relacion": [],
     "agenda": 0,
@@ -1495,20 +1061,6 @@
     "gps": 0
   },
   {
-    "id": 96,
-    "texto": {
-      "en": "breath under water",
-      "fr": "souffle sous l&#39;eau"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "respirar_bajo_el_agua"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 97,
     "texto": {
       "en": "take out",
@@ -1531,20 +1083,6 @@
     "tipo": 3,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsalir.webp?alt=media&token=8b81f386-fd97-42bb-8ef8-87814b1148c9"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 99,
-    "texto": {
-      "en": "get out of the pool",
-      "fr": "Sors de la piscine"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "salir_del_agua"
     },
     "relacion": [],
     "agenda": 0,
@@ -1579,20 +1117,6 @@
     "gps": 0
   },
   {
-    "id": 102,
-    "texto": {
-      "en": "seat on the edge",
-      "fr": "siège sur le bord"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "sentar_en_el_borde"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 103,
     "texto": {
       "en": "blow your nose",
@@ -1615,34 +1139,6 @@
     "tipo": 3,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsubir.webp?alt=media&token=0d1f10bf-924a-4ac0-bbb5-e2269d8fa39c"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 105,
-    "texto": {
-      "en": "turn up the heat",
-      "fr": "augmenter la chaleur"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "subir_la_temperatura"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 106,
-    "texto": {
-      "en": "suspend",
-      "fr": "suspendre"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "suspender"
     },
     "relacion": [],
     "agenda": 0,
@@ -1677,48 +1173,6 @@
     "gps": 0
   },
   {
-    "id": 109,
-    "texto": {
-      "en": "travel by plane",
-      "fr": "Voyage en avion"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "viajar_en_avion"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 110,
-    "texto": {
-      "en": "travel by boat",
-      "fr": "Voyage en bateau"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "viajar_en_barco"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 111,
-    "texto": {
-      "en": "travel by train",
-      "fr": "Voyage en train"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "viajar_en_tren"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 112,
     "texto": {
       "en": "clean",
@@ -1747,34 +1201,6 @@
     "gps": 0
   },
   {
-    "id": 114,
-    "texto": {
-      "en": "desinfect",
-      "fr": "désinfecter"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "desinfectar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 115,
-    "texto": {
-      "en": "ask for a taxi",
-      "fr": "demander un taxi"
-    },
-    "tipo": 3,
-    "imagen": {
-      "picto": "pedir_un_taxi"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 116,
     "texto": {
       "en": "travel",
@@ -1782,7 +1208,7 @@
     },
     "tipo": 3,
     "imagen": {
-      "picto": "viajar"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fviajar.webp?alt=media&token=ccfef1e5-8011-4c79-8b69-f2b136b1b0b9"
     },
     "relacion": [],
     "agenda": 0,
@@ -1846,20 +1272,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_aburrido.webp?alt=media&token=e307839a-58fe-4c57-8f59-9ede484d2c53"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 120,
-    "texto": {
-      "en": "unfriendly",
-      "fr": "hostile"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "antipatico"
     },
     "relacion": [],
     "agenda": 0,
@@ -1944,34 +1356,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Farreglado.webp?alt=media&token=f71281ba-0a11-4f1e-9eee-fe0fbe34d2ae"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 127,
-    "texto": {
-      "en": "rough",
-      "fr": "rugueux"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "aspero"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 128,
-    "texto": {
-      "en": "terrified",
-      "fr": "terrifié"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "aterrorizados"
     },
     "relacion": [],
     "agenda": 0,
@@ -2069,7 +1453,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flindo.webp?alt=media&token=b708bf7e-50e2-4d1c-89d6-ebbb7ec92e81"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbuena.webp?alt=media&token=622125ee-a972-4419-8aac-3fc01c70f437"
     },
     "relacion": [],
     "agenda": 0,
@@ -2083,7 +1467,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "bueno"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbueno.webp?alt=media&token=ce7bc25a-b814-43f3-a0e4-f89925cc3a40"
     },
     "relacion": [],
     "agenda": 0,
@@ -2125,7 +1509,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcaliente_cosa.webp?alt=media&token=85612726-a786-41f7-aa5e-169ec0f86b6d"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcaliente.webp?alt=media&token=1a683cf4-d621-4bf1-9fa5-419c3a699a94"
     },
     "relacion": [],
     "agenda": 0,
@@ -2139,7 +1523,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "caliente_cosa"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcaliente_cosa.webp?alt=media&token=85612726-a786-41f7-aa5e-169ec0f86b6d"
     },
     "relacion": [],
     "agenda": 0,
@@ -2160,34 +1544,6 @@
     "gps": 0
   },
   {
-    "id": 142,
-    "texto": {
-      "en": "bold",
-      "fr": "audacieux"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "calvo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 143,
-    "texto": {
-      "en": "hoary",
-      "fr": "chenu"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "canosos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 144,
     "texto": {
       "en": "expensive",
@@ -2195,35 +1551,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "caro"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 145,
-    "texto": {
-      "en": "brown",
-      "fr": "marron"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "castano"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 146,
-    "texto": {
-      "en": "blind",
-      "fr": "aveugle"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "ciego"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcaro.webp?alt=media&token=bf0e37f5-b5e2-4f91-824f-e9644af0dc4f"
     },
     "relacion": [],
     "agenda": 0,
@@ -2244,20 +1572,6 @@
     "gps": 0
   },
   {
-    "id": 148,
-    "texto": {
-      "en": "lame",
-      "fr": "boiteux"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "cojo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 149,
     "texto": {
       "en": "comfortable",
@@ -2266,48 +1580,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcomodo.webp?alt=media&token=8d46e93a-b3aa-46e8-8726-80b097f612b1"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 150,
-    "texto": {
-      "en": "complicated",
-      "fr": "compliqué"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "complicado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 151,
-    "texto": {
-      "en": "confused",
-      "fr": "confus"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "confundidos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 152,
-    "texto": {
-      "en": "short",
-      "fr": "court"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "corto"
     },
     "relacion": [],
     "agenda": 0,
@@ -2328,34 +1600,6 @@
     "gps": 0
   },
   {
-    "id": 154,
-    "texto": {
-      "en": "curious",
-      "fr": "curieuse"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "curiosos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 155,
-    "texto": {
-      "en": "nasty",
-      "fr": "méchant"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "desagradable"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 156,
     "texto": {
       "en": "unkwown",
@@ -2370,20 +1614,6 @@
     "gps": 0
   },
   {
-    "id": 157,
-    "texto": {
-      "en": "messy",
-      "fr": "désordonné"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "desordenado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 158,
     "texto": {
       "en": "tousled",
@@ -2391,7 +1621,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fdespeinado.webp?alt=media&token=8c85ff0d-8102-40e3-a09d-9fc4a0ebf2f1"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fdespeinada.webp?alt=media&token=dd507db6-7f92-40cb-982d-47e4fa9381c3"
     },
     "relacion": [],
     "agenda": 0,
@@ -2405,21 +1635,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "despeinado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 160,
-    "texto": {
-      "en": "distracted",
-      "fr": "distraits"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "distraido"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fdespeinado.webp?alt=media&token=8c85ff0d-8102-40e3-a09d-9fc4a0ebf2f1"
     },
     "relacion": [],
     "agenda": 0,
@@ -2454,20 +1670,6 @@
     "gps": 0
   },
   {
-    "id": 163,
-    "texto": {
-      "en": "selfish",
-      "fr": "égoïste"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "egoista"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 164,
     "texto": {
       "en": "in love",
@@ -2475,7 +1677,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fenamorados.webp?alt=media&token=10dcfa22-c4a8-4c38-b71a-886cd0d56f3b"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fenamorado.webp?alt=media&token=4c7e4801-3d0d-4a28-8faf-747e2087b6af"
     },
     "relacion": [],
     "agenda": 0,
@@ -2496,20 +1698,6 @@
     "gps": 0
   },
   {
-    "id": 166,
-    "texto": {
-      "en": "balanced",
-      "fr": "équilibré"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "equilibrado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 167,
     "texto": {
       "en": "angry",
@@ -2524,48 +1712,6 @@
     "gps": 0
   },
   {
-    "id": 168,
-    "texto": {
-      "en": "big",
-      "fr": "gros"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "ic_grande"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 169,
-    "texto": {
-      "en": "weird",
-      "fr": "bizarre"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "extrano"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 170,
-    "texto": {
-      "en": "famous",
-      "fr": "célèbre"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "famosa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 171,
     "texto": {
       "en": "happy",
@@ -2573,7 +1719,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_feliz.webp?alt=media&token=9ec37b34-ac24-4da9-b90d-e4f23f727358"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ffeliz.webp?alt=media&token=6e0556fc-0825-4e02-a428-758ac7a42686"
     },
     "relacion": [],
     "agenda": 0,
@@ -2594,62 +1740,6 @@
     "gps": 0
   },
   {
-    "id": 173,
-    "texto": {
-      "en": "end",
-      "fr": "fin"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "finalizacion"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 174,
-    "texto": {
-      "en": "thin",
-      "fr": "mince"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "flacos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 175,
-    "texto": {
-      "en": "flexible",
-      "fr": "flexible"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "flexible"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 176,
-    "texto": {
-      "en": "floppy",
-      "fr": "souple"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "flojo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 177,
     "texto": {
       "en": "cold",
@@ -2657,7 +1747,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fzid_resfriado.webp?alt=media&token=88ccba98-7926-49f5-b376-aac36faecd74"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ffrio_cosa.webp?alt=media&token=d1f315da-7d2b-4894-9123-83e69a3bf671"
     },
     "relacion": [],
     "agenda": 0,
@@ -2671,7 +1761,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ffrio_bebida.webp?alt=media&token=aab2a538-aeff-41f7-bbac-97c164d2a5a6"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ffrio.webp?alt=media&token=9b56d164-cb41-47b9-9281-de7bc09aafc4"
     },
     "relacion": [],
     "agenda": 0,
@@ -2685,21 +1775,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "frio_bebida"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 180,
-    "texto": {
-      "en": "strong",
-      "fr": "fort"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "fuerte"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ffrio_bebida.webp?alt=media&token=aab2a538-aeff-41f7-bbac-97c164d2a5a6"
     },
     "relacion": [],
     "agenda": 0,
@@ -2713,175 +1789,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "ic_feliz"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 182,
-    "texto": {
-      "en": "gluttonous",
-      "fr": "glouton"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "glotona"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 183,
-    "texto": {
-      "en": "gourmand",
-      "fr": "gourmand"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "goloso"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 184,
-    "texto": {
-      "en": "free",
-      "fr": "gratuit"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "gratuito"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 185,
-    "texto": {
-      "en": "cute",
-      "fr": "mignonne"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "guapa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 186,
-    "texto": {
-      "en": "cute",
-      "fr": "mignonne"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "guapo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 187,
-    "texto": {
-      "en": "illegal",
-      "fr": "illégal"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "ilegal"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 188,
-    "texto": {
-      "en": "incomprehensible",
-      "fr": "incompréhensible"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "incomprensible"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 189,
-    "texto": {
-      "en": "autonomous",
-      "fr": "autonome"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "independiente"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 190,
-    "texto": {
-      "en": "miserable",
-      "fr": "misérable"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "infeliz"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 191,
-    "texto": {
-      "en": "unfaithful",
-      "fr": "infidèle"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "infiel"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 192,
-    "texto": {
-      "en": "start",
-      "fr": "début"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "inicial"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 193,
-    "texto": {
-      "en": "comprehensible",
-      "fr": "compréhensible"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "inteligible"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_feliz.webp?alt=media&token=9ec37b34-ac24-4da9-b90d-e4f23f727358"
     },
     "relacion": [],
     "agenda": 0,
@@ -2896,62 +1804,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Firritado.webp?alt=media&token=67d39162-7ffc-40cf-869d-4ce59cc9d1e8"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 195,
-    "texto": {
-      "en": "young",
-      "fr": "Jeune"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "joven"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 196,
-    "texto": {
-      "en": "long",
-      "fr": "longue"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "largo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 197,
-    "texto": {
-      "en": "slow",
-      "fr": "lent"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "lento"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 198,
-    "texto": {
-      "en": "light",
-      "fr": "lumière"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "ligero"
     },
     "relacion": [],
     "agenda": 0,
@@ -2979,35 +1831,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "lindo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 201,
-    "texto": {
-      "en": "smooth",
-      "fr": "lisse"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "liso"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 202,
-    "texto": {
-      "en": "full",
-      "fr": "plein"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "lleno"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flindo.webp?alt=media&token=b708bf7e-50e2-4d1c-89d6-ebbb7ec92e81"
     },
     "relacion": [],
     "agenda": 0,
@@ -3021,7 +1845,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_estoy_mal.webp?alt=media&token=cbd50a8b-74cc-48ac-b1c3-c3accf49bc62"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fmalo.webp?alt=media&token=0c04538d-6ffb-4edf-8097-7e4b69d8d87c"
     },
     "relacion": [],
     "agenda": 0,
@@ -3049,21 +1873,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "ic_estoy_mal"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 206,
-    "texto": {
-      "en": "medium",
-      "fr": "moyen"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "mediano"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_estoy_mal.webp?alt=media&token=cbd50a8b-74cc-48ac-b1c3-c3accf49bc62"
     },
     "relacion": [],
     "agenda": 0,
@@ -3098,20 +1908,6 @@
     "gps": 0
   },
   {
-    "id": 209,
-    "texto": {
-      "en": "hairy",
-      "fr": "poilu"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "melenudo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 210,
     "texto": {
       "en": "equals",
@@ -3120,20 +1916,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fmismo.webp?alt=media&token=afcd67dc-37f1-4ee6-8651-4776cdccb259"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 211,
-    "texto": {
-      "en": "wet",
-      "fr": "humide"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "mojado"
     },
     "relacion": [],
     "agenda": 0,
@@ -3168,48 +1950,6 @@
     "gps": 0
   },
   {
-    "id": 214,
-    "texto": {
-      "en": "dead",
-      "fr": "mort"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "muerto"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 215,
-    "texto": {
-      "en": "global",
-      "fr": "global"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "mundial"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 216,
-    "texto": {
-      "en": "negative",
-      "fr": "négatif"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "negativo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 217,
     "texto": {
       "en": "nervous",
@@ -3231,7 +1971,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fningunos.webp?alt=media&token=0a10497d-0497-462a-bb53-ed6f227bb7b6"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fa.webp?alt=media&token=3e8a5652-be09-49bc-9bfa-3511eebfd9e8"
     },
     "relacion": [],
     "agenda": 0,
@@ -3252,188 +1992,6 @@
     "gps": 0
   },
   {
-    "id": 220,
-    "texto": {
-      "en": "new",
-      "fr": "Nouveau"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "nuevo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 221,
-    "texto": {
-      "en": "opaque",
-      "fr": "opaque"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "opacos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 222,
-    "texto": {
-      "en": "neat",
-      "fr": "soigné"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "ordenado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 223,
-    "texto": {
-      "en": "obscure",
-      "fr": "obscur"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "oscuro"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 224,
-    "texto": {
-      "en": "muddy",
-      "fr": "boueux"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "pantanoso"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 225,
-    "texto": {
-      "en": "sticky",
-      "fr": "gluant"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "pegajosa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 226,
-    "texto": {
-      "en": "combed",
-      "fr": "peigné"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "peinada"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 227,
-    "texto": {
-      "en": "combed",
-      "fr": "peigné"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "peinado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 228,
-    "texto": {
-      "en": "small",
-      "fr": "petit"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "ic_pequenio"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 229,
-    "texto": {
-      "en": "heavy",
-      "fr": "lourd"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "pesado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 230,
-    "texto": {
-      "en": "hot",
-      "fr": "chaud"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "picante"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 231,
-    "texto": {
-      "en": "ironed",
-      "fr": "repassé"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "planchado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 232,
-    "texto": {
-      "en": "poor",
-      "fr": "pauvre"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "pobre"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 233,
     "texto": {
       "en": "few",
@@ -3441,7 +1999,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpocos.webp?alt=media&token=3db8f233-9a11-47b3-9894-9cde18678671"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpoco.webp?alt=media&token=1d232fd6-f131-48b3-9457-7d8310e9c88e"
     },
     "relacion": [],
     "agenda": 0,
@@ -3455,35 +2013,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "pocos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 235,
-    "texto": {
-      "en": "positive",
-      "fr": "positif"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "positivo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 236,
-    "texto": {
-      "en": "posterior",
-      "fr": "postérieur"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "posterior"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpocos.webp?alt=media&token=3db8f233-9a11-47b3-9894-9cde18678671"
     },
     "relacion": [],
     "agenda": 0,
@@ -3518,48 +2048,6 @@
     "gps": 0
   },
   {
-    "id": 239,
-    "texto": {
-      "en": "troubled",
-      "fr": "troublé"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "ic_problemas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 240,
-    "texto": {
-      "en": "fast",
-      "fr": "vite"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "rapido"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 241,
-    "texto": {
-      "en": "weird",
-      "fr": "bizarre"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "raro"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 242,
     "texto": {
       "en": "wealthy",
@@ -3568,20 +2056,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Frica.webp?alt=media&token=1b58ab93-2b20-44fb-999d-ee76b1d32e66"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 243,
-    "texto": {
-      "en": "wealthy",
-      "fr": "riches"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "rico"
     },
     "relacion": [],
     "agenda": 0,
@@ -3616,34 +2090,6 @@
     "gps": 0
   },
   {
-    "id": 246,
-    "texto": {
-      "en": "broken",
-      "fr": "cassé"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "roto"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 247,
-    "texto": {
-      "en": "wrinkled",
-      "fr": "ridé"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "rugoso"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 248,
     "texto": {
       "en": "salty",
@@ -3652,62 +2098,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsalado.webp?alt=media&token=64004dbf-110a-4faf-8ab0-ea27d30dcd54"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 249,
-    "texto": {
-      "en": "wild",
-      "fr": "sauvage"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "salvaje"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 250,
-    "texto": {
-      "en": "healthy",
-      "fr": "en bonne santé"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "sana"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 251,
-    "texto": {
-      "en": "healthy",
-      "fr": "en bonne santé"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "sano"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 252,
-    "texto": {
-      "en": "dry",
-      "fr": "sec"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "seco"
     },
     "relacion": [],
     "agenda": 0,
@@ -3728,34 +2118,6 @@
     "gps": 0
   },
   {
-    "id": 254,
-    "texto": {
-      "en": "seated",
-      "fr": "assise"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "sentado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 255,
-    "texto": {
-      "en": "friendly",
-      "fr": "amical"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "simpatico"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 256,
     "texto": {
       "en": "sunny",
@@ -3764,90 +2126,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsoleado.webp?alt=media&token=cd13634a-16d4-4ca1-80d7-6937f0c63e50"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 257,
-    "texto": {
-      "en": "lonely",
-      "fr": "solitaire"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "solitario"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 258,
-    "texto": {
-      "en": "single",
-      "fr": "unique"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "soltera"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 259,
-    "texto": {
-      "en": "single",
-      "fr": "unique"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "soltero"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 260,
-    "texto": {
-      "en": "deaf",
-      "fr": "sourd"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "sorda"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 261,
-    "texto": {
-      "en": "deaf and dumb",
-      "fr": "sourd et muet"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "sordomudo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 262,
-    "texto": {
-      "en": "sleepy",
-      "fr": "somnolent"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "ic_suenio"
     },
     "relacion": [],
     "agenda": 0,
@@ -3868,48 +2146,6 @@
     "gps": 0
   },
   {
-    "id": 264,
-    "texto": {
-      "en": "fearful",
-      "fr": "craintif"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "temeroso"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 265,
-    "texto": {
-      "en": "fearful",
-      "fr": "craintif"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "temerosa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 266,
-    "texto": {
-      "en": "mild",
-      "fr": "doux"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "templada"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 267,
     "texto": {
       "en": "all",
@@ -3917,7 +2153,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftodas.webp?alt=media&token=dcdb7025-41d9-4230-8871-51612bf8bfec"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftodos.webp?alt=media&token=694aae8b-22c8-4274-b9f1-b3bbdd15d061"
     },
     "relacion": [],
     "agenda": 0,
@@ -3931,49 +2167,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "todas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 269,
-    "texto": {
-      "en": "toxic",
-      "fr": "toxique"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "toxico"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 270,
-    "texto": {
-      "en": "transgender",
-      "fr": "transgenres"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "transexual"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 271,
-    "texto": {
-      "en": "transparent",
-      "fr": "transparent"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "transparente"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftodas.webp?alt=media&token=dcdb7025-41d9-4230-8871-51612bf8bfec"
     },
     "relacion": [],
     "agenda": 0,
@@ -3994,20 +2188,6 @@
     "gps": 0
   },
   {
-    "id": 273,
-    "texto": {
-      "en": "last",
-      "fr": "dernier"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "ultimo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 274,
     "texto": {
       "en": "crazy",
@@ -4016,76 +2196,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_loco.webp?alt=media&token=ad86fdf3-5b8c-4af1-aed0-81052e3a6c96"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 275,
-    "texto": {
-      "en": "empty",
-      "fr": "vide"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "vacio"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 276,
-    "texto": {
-      "en": "lazy",
-      "fr": "paresseux"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "vago"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 277,
-    "texto": {
-      "en": "some",
-      "fr": "certains"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "varios"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 278,
-    "texto": {
-      "en": "quick",
-      "fr": "rapide"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "veloz"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 279,
-    "texto": {
-      "en": "true",
-      "fr": "vrai"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "verdadera"
     },
     "relacion": [],
     "agenda": 0,
@@ -4148,34 +2258,6 @@
     "gps": 0
   },
   {
-    "id": 284,
-    "texto": {
-      "en": "hawk",
-      "fr": "faucon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "aguila"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 285,
-    "texto": {
-      "en": "antelope",
-      "fr": "antilope"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "antilope"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 286,
     "texto": {
       "en": "animals",
@@ -4184,20 +2266,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fanimales.webp?alt=media&token=a9f8b76e-61ab-4c70-aef4-ec4e6549da60"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 287,
-    "texto": {
-      "en": "squirrel",
-      "fr": "écureuil"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ardilla"
     },
     "relacion": [],
     "agenda": 0,
@@ -4218,20 +2286,6 @@
     "gps": 0
   },
   {
-    "id": 289,
-    "texto": {
-      "en": "bacterium",
-      "fr": "bactérie"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "bacteria"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 290,
     "texto": {
       "en": "whale",
@@ -4240,34 +2294,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fballena.webp?alt=media&token=89bbc0a0-5fb0-4102-b5b4-16f1e3f429f6"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 291,
-    "texto": {
-      "en": "owl",
-      "fr": "hibou"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "buho"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 292,
-    "texto": {
-      "en": "seahorse",
-      "fr": "hippocampe"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "caballito_de_mar"
     },
     "relacion": [],
     "agenda": 0,
@@ -4302,20 +2328,6 @@
     "gps": 0
   },
   {
-    "id": 295,
-    "texto": {
-      "en": "chamaleon",
-      "fr": "chamaleon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "camaleon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 296,
     "texto": {
       "en": "camel",
@@ -4337,7 +2349,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpajaro.webp?alt=media&token=be98ebb6-6c77-46e4-93aa-5f999363d793"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcanario.webp?alt=media&token=a5c74e04-d7d8-44a2-8ef6-3b418cb088f5"
     },
     "relacion": [],
     "agenda": 0,
@@ -4372,20 +2384,6 @@
     "gps": 0
   },
   {
-    "id": 300,
-    "texto": {
-      "en": "zebra",
-      "fr": "zèbre"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cebra"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 301,
     "texto": {
       "en": "pig",
@@ -4400,118 +2398,6 @@
     "gps": 0
   },
   {
-    "id": 302,
-    "texto": {
-      "en": "chimpanzee",
-      "fr": "chimpanzé"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "chimpance"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 303,
-    "texto": {
-      "en": "centipede",
-      "fr": "mille pattes"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cienpies"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 304,
-    "texto": {
-      "en": "swan",
-      "fr": "cygne"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cisne"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 305,
-    "texto": {
-      "en": "parrot",
-      "fr": "perroquet"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cotorra"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 306,
-    "texto": {
-      "en": "coyote",
-      "fr": "coyote"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "coyote"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 307,
-    "texto": {
-      "en": "dinasour",
-      "fr": "dinasour"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "dinosaurio"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 308,
-    "texto": {
-      "en": "hedgehog",
-      "fr": "hérisson"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "erizo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 309,
-    "texto": {
-      "en": "starfish",
-      "fr": "étoile de mer"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "estrella_de_mar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 310,
     "texto": {
       "en": "cock",
@@ -4520,34 +2406,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fgallo.webp?alt=media&token=f7eeb656-0122-4522-a795-630b90749f8a"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 311,
-    "texto": {
-      "en": "megrim",
-      "fr": "megrim"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pez_gallo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 312,
-    "texto": {
-      "en": "claw",
-      "fr": "griffe"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "garra"
     },
     "relacion": [],
     "agenda": 0,
@@ -4582,76 +2440,6 @@
     "gps": 0
   },
   {
-    "id": 315,
-    "texto": {
-      "en": "worm",
-      "fr": "ver"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "gusano"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 316,
-    "texto": {
-      "en": "hippo",
-      "fr": "hippopotame"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "hipopotamo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 317,
-    "texto": {
-      "en": "lizard",
-      "fr": "lézard"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "iguana"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 318,
-    "texto": {
-      "en": "wild pig",
-      "fr": "cochon sauvage"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "jabali"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 319,
-    "texto": {
-      "en": "goldfinch",
-      "fr": "chardonneret"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "jilguero"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 320,
     "texto": {
       "en": "giraffe",
@@ -4660,34 +2448,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fjirafa.webp?alt=media&token=5e9950fc-00dc-4d7a-90b3-cee9f55a2dc0"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 321,
-    "texto": {
-      "en": "koala",
-      "fr": "koala"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "koala"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 322,
-    "texto": {
-      "en": "lizard",
-      "fr": "lézard"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "lagarto"
     },
     "relacion": [],
     "agenda": 0,
@@ -4708,48 +2468,6 @@
     "gps": 0
   },
   {
-    "id": 324,
-    "texto": {
-      "en": "lion",
-      "fr": "Lion"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "leona"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 325,
-    "texto": {
-      "en": "rabbit",
-      "fr": "lapin"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fconejo.webp?alt=media&token=b5eac151-aecb-458f-b8c4-eb911037dab7"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 326,
-    "texto": {
-      "en": "stingray",
-      "fr": "Stingray"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "manta_raya"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 327,
     "texto": {
       "en": "butterfly",
@@ -4758,48 +2476,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fmariposa.webp?alt=media&token=eb75c2c3-871e-42ed-a893-0142c9eb6c05"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 328,
-    "texto": {
-      "en": "fly",
-      "fr": "mouche"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "mosca"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 329,
-    "texto": {
-      "en": "otter",
-      "fr": "loutre"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "nutria"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 330,
-    "texto": {
-      "en": "platypus",
-      "fr": "ornithorynque"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ornitorrinco"
     },
     "relacion": [],
     "agenda": 0,
@@ -4841,7 +2517,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "pajaro"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpajaro.webp?alt=media&token=be98ebb6-6c77-46e4-93aa-5f999363d793"
     },
     "relacion": [],
     "agenda": 0,
@@ -4876,20 +2552,6 @@
     "gps": 0
   },
   {
-    "id": 336,
-    "texto": {
-      "en": "panda",
-      "fr": "Panda"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "panda"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 337,
     "texto": {
       "en": "duck",
@@ -4897,35 +2559,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "pato"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 338,
-    "texto": {
-      "en": "turkey",
-      "fr": "dinde"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pavo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 339,
-    "texto": {
-      "en": "peacock",
-      "fr": "paon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pavo_real"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpato.webp?alt=media&token=d828454d-109a-4321-8348-a029423823a0"
     },
     "relacion": [],
     "agenda": 0,
@@ -4939,21 +2573,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fzid_pescado.webp?alt=media&token=c61c5906-1c00-425f-af6f-63c50b9a005a"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 341,
-    "texto": {
-      "en": "pelican",
-      "fr": "pélican"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pelicano"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpeces.webp?alt=media&token=c9e8c8d9-ac35-4b91-a3c2-0ab94c1c5a13"
     },
     "relacion": [],
     "agenda": 0,
@@ -4974,76 +2594,6 @@
     "gps": 0
   },
   {
-    "id": 343,
-    "texto": {
-      "en": "clownfish",
-      "fr": "poisson clown"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pez_payaso"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 344,
-    "texto": {
-      "en": "penguin",
-      "fr": "manchot"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pinguino"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 345,
-    "texto": {
-      "en": "piranha",
-      "fr": "piranha"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pirania"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 346,
-    "texto": {
-      "en": "moth",
-      "fr": "papillon de nuit"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "polilla"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 347,
-    "texto": {
-      "en": "pony",
-      "fr": "poney"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "poni"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 348,
     "texto": {
       "en": "frog",
@@ -5058,76 +2608,6 @@
     "gps": 0
   },
   {
-    "id": 349,
-    "texto": {
-      "en": "reptile",
-      "fr": "reptile"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "reptiles"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 350,
-    "texto": {
-      "en": "rhino",
-      "fr": "rhinocéros"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "rinoceronte"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 351,
-    "texto": {
-      "en": "salmon",
-      "fr": "Saumon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "salmon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 352,
-    "texto": {
-      "en": "grasshopper",
-      "fr": "sauterelle"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "saltamontes"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 353,
-    "texto": {
-      "en": "veal",
-      "fr": "veau"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fternera.webp?alt=media&token=6a044f56-c3c8-456b-b59b-788a90d61d62"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 354,
     "texto": {
       "en": "tiger",
@@ -5136,20 +2616,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftigre.webp?alt=media&token=8eb90cc1-2275-4d7d-b109-e051c165fd0f"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 355,
-    "texto": {
-      "en": "bull",
-      "fr": "taureau"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "toro"
     },
     "relacion": [],
     "agenda": 0,
@@ -5184,20 +2650,6 @@
     "gps": 0
   },
   {
-    "id": 358,
-    "texto": {
-      "en": "heifer",
-      "fr": "génisse"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "vaquilla"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 359,
     "texto": {
       "en": "snake",
@@ -5212,34 +2664,6 @@
     "gps": 0
   },
   {
-    "id": 360,
-    "texto": {
-      "en": "whiting",
-      "fr": "merlan"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pescadilla"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 361,
-    "texto": {
-      "en": "sardine",
-      "fr": "sardine"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "sardina"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 362,
     "texto": {
       "en": "cock",
@@ -5247,7 +2671,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "gallo"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fgallo.webp?alt=media&token=f7eeb656-0122-4522-a795-630b90749f8a"
     },
     "relacion": [],
     "agenda": 0,
@@ -5268,146 +2692,6 @@
     "gps": 0
   },
   {
-    "id": 364,
-    "texto": {
-      "en": "chick",
-      "fr": "poussin"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pollo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 365,
-    "texto": {
-      "en": "lobster",
-      "fr": "Homard"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "zid_marisco"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 366,
-    "texto": {
-      "en": "turkey",
-      "fr": "dinde"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pavo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 367,
-    "texto": {
-      "en": "duck",
-      "fr": "canard"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pato"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 368,
-    "texto": {
-      "en": "swordfish",
-      "fr": "espadon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pez_espada"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 369,
-    "texto": {
-      "en": "octopus",
-      "fr": "poulpe"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pulpo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 370,
-    "texto": {
-      "en": "squid",
-      "fr": "calamar"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "calamar"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 371,
-    "texto": {
-      "en": "prawns",
-      "fr": "crevettes"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "gambas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 372,
-    "texto": {
-      "en": "mussel",
-      "fr": "moule"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "mejillon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 373,
-    "texto": {
-      "en": "clam",
-      "fr": "palourde"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "almeja"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 374,
     "texto": {
       "en": "veal",
@@ -5415,7 +2699,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "ternera"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fternera.webp?alt=media&token=6a044f56-c3c8-456b-b59b-788a90d61d62"
     },
     "relacion": [],
     "agenda": 0,
@@ -5429,7 +2713,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "cerdo"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcerdo.webp?alt=media&token=741f2ba1-fe2a-43b2-be72-3a7f30f861d8"
     },
     "relacion": [],
     "agenda": 0,
@@ -5443,7 +2727,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "conejo"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fconejo.webp?alt=media&token=b5eac151-aecb-458f-b8c4-eb911037dab7"
     },
     "relacion": [],
     "agenda": 0,
@@ -5518,7 +2802,7 @@
     },
     "tipo": 5,
     "imagen": {
-      "picto": "ic_buenos_dias"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_buenos_dias.webp?alt=media&token=0d7fe795-3024-45fb-8ba5-bd361d2c61ee"
     },
     "relacion": [],
     "agenda": 0,
@@ -5703,20 +2987,6 @@
     "gps": 0
   },
   {
-    "id": 392,
-    "texto": {
-      "en": "artichoke",
-      "fr": "artichaut"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "alcachofa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 393,
     "texto": {
       "en": "almond",
@@ -5745,20 +3015,6 @@
     "gps": 0
   },
   {
-    "id": 395,
-    "texto": {
-      "en": "cranberry",
-      "fr": "canneberge"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "arandanos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 396,
     "texto": {
       "en": "sugar",
@@ -5773,20 +3029,6 @@
     "gps": 0
   },
   {
-    "id": 397,
-    "texto": {
-      "en": "eggplant",
-      "fr": "aubergine"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "berenjena"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 398,
     "texto": {
       "en": "sandwich",
@@ -5794,7 +3036,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsandwich.webp?alt=media&token=7fc5f532-18d1-4b03-a06f-8008fb0c8434"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbocadillo.webp?alt=media&token=48edafdd-3303-40a7-94fa-6800e3c94e0c"
     },
     "relacion": [],
     "agenda": 0,
@@ -5885,20 +3127,6 @@
     "gps": 0
   },
   {
-    "id": 405,
-    "texto": {
-      "en": "mushrooms",
-      "fr": "champignons"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "champinones"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 406,
     "texto": {
       "en": "lollipop",
@@ -5906,7 +3134,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "chupetin"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fchupetin.webp?alt=media&token=b3f95f54-d2b4-4827-ab7a-a44ebc6d5f3e"
     },
     "relacion": [],
     "agenda": 0,
@@ -5935,48 +3163,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fdamasco.webp?alt=media&token=0abf4e01-36e5-441f-8e1b-a60e6dd56809"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 409,
-    "texto": {
-      "en": "asparagus",
-      "fr": "asperges"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "esparragos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 410,
-    "texto": {
-      "en": "spinach",
-      "fr": "épinard"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "espinacas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 411,
-    "texto": {
-      "en": "stew",
-      "fr": "Ragoût"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "estofado"
     },
     "relacion": [],
     "agenda": 0,
@@ -6039,20 +3225,6 @@
     "gps": 0
   },
   {
-    "id": 416,
-    "texto": {
-      "en": "prawns",
-      "fr": "crevettes"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "gambas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 417,
     "texto": {
       "en": "jelly",
@@ -6061,34 +3233,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fgelatina.webp?alt=media&token=90951f93-c68c-44f5-8855-bab89935ea72"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 418,
-    "texto": {
-      "en": "fig",
-      "fr": "figue"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "higos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 419,
-    "texto": {
-      "en": "vegetables",
-      "fr": "des légumes"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fzid_verduras.webp?alt=media&token=e74f9d18-10ee-47f4-947c-1ab02b13f5df"
     },
     "relacion": [],
     "agenda": 0,
@@ -6117,34 +3261,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fhuevo_frito.webp?alt=media&token=481b1c1d-6856-4c97-b41d-90500a683e99"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 422,
-    "texto": {
-      "en": "beans",
-      "fr": "des haricots"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "judia_verde"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 423,
-    "texto": {
-      "en": "kiwi",
-      "fr": "kiwi"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "kiwi"
     },
     "relacion": [],
     "agenda": 0,
@@ -6186,7 +3302,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "leche_con_cacao"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fleche_con_cacao.webp?alt=media&token=83b77847-9dd6-416c-9100-8fee10be0174"
     },
     "relacion": [],
     "agenda": 0,
@@ -6215,20 +3331,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flechuga.webp?alt=media&token=5c996973-d151-4065-b7ca-cdfcc56e4d4f"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 429,
-    "texto": {
-      "en": "fruit salad",
-      "fr": "salade de fruit"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "macedonia"
     },
     "relacion": [],
     "agenda": 0,
@@ -6277,34 +3379,6 @@
     "gps": 0
   },
   {
-    "id": 433,
-    "texto": {
-      "en": "cantaloupe",
-      "fr": "cantaloup"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "melon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 434,
-    "texto": {
-      "en": "blackberrie",
-      "fr": "blackberrie"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "moras"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 435,
     "texto": {
       "en": "orange",
@@ -6313,34 +3387,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fnaranja.webp?alt=media&token=17f79963-266e-4032-b9fb-ddbba417e802"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 436,
-    "texto": {
-      "en": "olives",
-      "fr": "Olives"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "olivas_verdes"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 437,
-    "texto": {
-      "en": "paella",
-      "fr": "Paëlla"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "paella"
     },
     "relacion": [],
     "agenda": 0,
@@ -6375,104 +3421,6 @@
     "gps": 0
   },
   {
-    "id": 440,
-    "texto": {
-      "en": "dinner roll",
-      "fr": "petit pain"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "panecillo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 441,
-    "texto": {
-      "en": "papaya",
-      "fr": "Papaye"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "papaya"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 442,
-    "texto": {
-      "en": "potatoes",
-      "fr": "patates"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "patatas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 443,
-    "texto": {
-      "en": "cucumber",
-      "fr": "concombre"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pepino"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 444,
-    "texto": {
-      "en": "sunflower seeds",
-      "fr": "graines de tournesol"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pipa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 445,
-    "texto": {
-      "en": "pumpkin seed",
-      "fr": "graine de citrouille"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pipas_de_calabaza"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 446,
-    "texto": {
-      "en": "pistachio",
-      "fr": "pistache"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pistacho"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 447,
     "texto": {
       "en": "grapefruit",
@@ -6481,20 +3429,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpomelo.webp?alt=media&token=4b112d85-10dd-4d9f-b9af-4e0c221fa896"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 448,
-    "texto": {
-      "en": "leek",
-      "fr": "poireau"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "puerro"
     },
     "relacion": [],
     "agenda": 0,
@@ -6515,118 +3449,6 @@
     "gps": 0
   },
   {
-    "id": 450,
-    "texto": {
-      "en": "cheese",
-      "fr": "fromage"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fqueso.webp?alt=media&token=f36923ae-193d-4e9f-bbd3-60557ac52629"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 451,
-    "texto": {
-      "en": "blue cheese",
-      "fr": "fromage bleu"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "queso_azul"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 452,
-    "texto": {
-      "en": "sliced cheese",
-      "fr": "fromage en tranches"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "queso_en_lonchas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 453,
-    "texto": {
-      "en": "mozzarella",
-      "fr": "mozzarella"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "queso_mozzarella"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 454,
-    "texto": {
-      "en": "grated cheese",
-      "fr": "fromage râpé"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "queso_rallado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 455,
-    "texto": {
-      "en": "squid rings",
-      "fr": "anneaux de calmars"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "rabas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 456,
-    "texto": {
-      "en": "beet",
-      "fr": "betterave"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "remolacha"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 457,
-    "texto": {
-      "en": "watermelon",
-      "fr": "pastèque"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "sandia"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 458,
     "texto": {
       "en": "sandwich",
@@ -6634,49 +3456,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "sandwich"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 459,
-    "texto": {
-      "en": "grits",
-      "fr": "gruau"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "semola"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 460,
-    "texto": {
-      "en": "mushrooms",
-      "fr": "champignons"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "setas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 461,
-    "texto": {
-      "en": "tapas",
-      "fr": "tapas"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tapa"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsandwich.webp?alt=media&token=7fc5f532-18d1-4b03-a06f-8008fb0c8434"
     },
     "relacion": [],
     "agenda": 0,
@@ -6711,20 +3491,6 @@
     "gps": 0
   },
   {
-    "id": 464,
-    "texto": {
-      "en": "tortilla",
-      "fr": "tortilla"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "torta_de_maiz"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 465,
     "texto": {
       "en": "toast",
@@ -6733,34 +3499,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftostada.webp?alt=media&token=a07b7217-cf65-42ae-a72f-327b8ba13f66"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 466,
-    "texto": {
-      "en": "cheese slice",
-      "fr": "tranche de fromage"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "trozo_de_queso"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 467,
-    "texto": {
-      "en": "pineapple juice",
-      "fr": "jus d&#39;ananas"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "zumo_de_anana"
     },
     "relacion": [],
     "agenda": 0,
@@ -6789,20 +3527,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fmelocoton.webp?alt=media&token=b00db9ca-225c-4867-8c54-ed3754e15c04"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 470,
-    "texto": {
-      "en": "tomato juice",
-      "fr": "jus de tomate"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "zumo_de_tomate"
     },
     "relacion": [],
     "agenda": 0,
@@ -6886,7 +3610,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "zid_pescado"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fzid_pescado.webp?alt=media&token=c61c5906-1c00-425f-af6f-63c50b9a005a"
     },
     "relacion": [],
     "agenda": 0,
@@ -6914,21 +3638,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "zid_verduras"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 479,
-    "texto": {
-      "en": "legume",
-      "fr": "légumineuse"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "legumbres"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fzid_verduras.webp?alt=media&token=e74f9d18-10ee-47f4-947c-1ab02b13f5df"
     },
     "relacion": [],
     "agenda": 0,
@@ -7047,20 +3757,6 @@
     "gps": 0
   },
   {
-    "id": 488,
-    "texto": {
-      "en": "vinegar",
-      "fr": "le vinaigre"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "vinagre"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 489,
     "texto": {
       "en": "salt",
@@ -7089,20 +3785,6 @@
     "gps": 0
   },
   {
-    "id": 491,
-    "texto": {
-      "en": "mustard",
-      "fr": "moutarde"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "mostaza"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 492,
     "texto": {
       "en": "ketchup",
@@ -7117,20 +3799,6 @@
     "gps": 0
   },
   {
-    "id": 493,
-    "texto": {
-      "en": "snack",
-      "fr": "casse-croûte"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_snack"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 494,
     "texto": {
       "en": "candy",
@@ -7138,7 +3806,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "ic_dulces"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_dulces.webp?alt=media&token=3ee8a703-20b4-454c-8254-1c0c1b66873d"
     },
     "relacion": [],
     "agenda": 0,
@@ -7299,20 +3967,6 @@
     "gps": 0
   },
   {
-    "id": 506,
-    "texto": {
-      "en": "chicken breast",
-      "fr": "poitrine de poulet"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pechuga_de_pollo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 507,
     "texto": {
       "en": "egg",
@@ -7327,34 +3981,6 @@
     "gps": 0
   },
   {
-    "id": 508,
-    "texto": {
-      "en": "fish shop",
-      "fr": "poissonnerie"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pescaderia"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 509,
-    "texto": {
-      "en": "fishmonger",
-      "fr": "poissonnier"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pescadero"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 510,
     "texto": {
       "en": "fish",
@@ -7362,21 +3988,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "zid_pescado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 511,
-    "texto": {
-      "en": "barbecue",
-      "fr": "barbecue"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "barbacoa"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fzid_pescado.webp?alt=media&token=c61c5906-1c00-425f-af6f-63c50b9a005a"
     },
     "relacion": [],
     "agenda": 0,
@@ -7391,34 +4003,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ffilete.webp?alt=media&token=03537ace-c649-4720-86ef-949b7dc58542"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 513,
-    "texto": {
-      "en": "chop",
-      "fr": "hacher"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "chuleta"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 514,
-    "texto": {
-      "en": "rib",
-      "fr": "nervure"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "costilla"
     },
     "relacion": [],
     "agenda": 0,
@@ -7467,48 +4051,6 @@
     "gps": 0
   },
   {
-    "id": 518,
-    "texto": {
-      "en": "sausage",
-      "fr": "saucisse"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsalchichas.webp?alt=media&token=aee011c3-8381-4e88-b47d-45677eebf67e"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 519,
-    "texto": {
-      "en": "salami",
-      "fr": "salami"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "salchichon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 520,
-    "texto": {
-      "en": "mortadella",
-      "fr": "mortadelle"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "mortadela"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 521,
     "texto": {
       "en": "cheese",
@@ -7516,35 +4058,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "queso"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 522,
-    "texto": {
-      "en": "longaniza",
-      "fr": "longaniza"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "longaniza"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 523,
-    "texto": {
-      "en": "bacon",
-      "fr": "Bacon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "beicon"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fqueso.webp?alt=media&token=f36923ae-193d-4e9f-bbd3-60557ac52629"
     },
     "relacion": [],
     "agenda": 0,
@@ -7558,7 +4072,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "salchichas"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsalchichas.webp?alt=media&token=aee011c3-8381-4e88-b47d-45677eebf67e"
     },
     "relacion": [],
     "agenda": 0,
@@ -7586,7 +4100,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fantes.webp?alt=media&token=3dd6363e-4ce8-439b-ade7-79d2988c5d3d"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fante.webp?alt=media&token=9a02d561-8472-473c-b508-0b090b8f2669"
     },
     "relacion": [],
     "agenda": 0,
@@ -7789,48 +4303,6 @@
     "gps": 0
   },
   {
-    "id": 541,
-    "texto": {
-      "en": "above",
-      "fr": "au dessus"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "sobre"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 542,
-    "texto": {
-      "en": "behind",
-      "fr": "derrière"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "tras"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 543,
-    "texto": {
-      "en": "magician",
-      "fr": "magicien"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "mago"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 544,
     "texto": {
       "en": "hero",
@@ -7839,104 +4311,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fspiderman.webp?alt=media&token=118e61bb-843e-427b-86b9-9dcb559cd496"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 545,
-    "texto": {
-      "en": "adventoruos",
-      "fr": "adventoruos"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "aventurero"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 546,
-    "texto": {
-      "en": "vampire",
-      "fr": "vampire"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "vampiro"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 547,
-    "texto": {
-      "en": "witch",
-      "fr": "sorcière"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "bruja"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 548,
-    "texto": {
-      "en": "elf",
-      "fr": "elfe"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "duende"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 549,
-    "texto": {
-      "en": "ET",
-      "fr": "ET"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "extraterrestre"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 550,
-    "texto": {
-      "en": "monster",
-      "fr": "monstre"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "monstruo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 551,
-    "texto": {
-      "en": "dinosaur",
-      "fr": "dinosaure"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "dinosaurio"
     },
     "relacion": [],
     "agenda": 0,
@@ -7985,34 +4359,6 @@
     "gps": 0
   },
   {
-    "id": 555,
-    "texto": {
-      "en": "puppet show",
-      "fr": "spectacle de marionnettes"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "teatro_de_marionetas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 556,
-    "texto": {
-      "en": "adventure",
-      "fr": "aventure"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_aventura"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 557,
     "texto": {
       "en": "in love",
@@ -8020,35 +4366,7 @@
     },
     "tipo": 4,
     "imagen": {
-      "picto": "enamorados"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 558,
-    "texto": {
-      "en": "thriller",
-      "fr": "thriller"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "miedo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 559,
-    "texto": {
-      "en": "laughter",
-      "fr": "rire"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "gracioso"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fenamorados.webp?alt=media&token=10dcfa22-c4a8-4c38-b71a-886cd0d56f3b"
     },
     "relacion": [],
     "agenda": 0,
@@ -8062,7 +4380,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_canal_dibujos_animados.webp?alt=media&token=64a8bf60-3076-41a1-80fa-035278796067"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_dibujos_animados.webp?alt=media&token=7849908a-4329-4361-ac52-f583f345b9d7"
     },
     "relacion": [],
     "agenda": 0,
@@ -8077,20 +4395,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_entrada.webp?alt=media&token=3c3f1754-1512-4658-923b-3486a794d797"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 562,
-    "texto": {
-      "en": "ticket office",
-      "fr": "guichet"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "taquilla"
     },
     "relacion": [],
     "agenda": 0,
@@ -8118,7 +4422,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "bebida"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbebida.webp?alt=media&token=70276811-03c6-4072-89e2-c07fea37652f"
     },
     "relacion": [],
     "agenda": 0,
@@ -8133,20 +4437,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_palomitas.webp?alt=media&token=f85af19c-2583-4c1a-83d0-bf55b275a45c"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 566,
-    "texto": {
-      "en": "public",
-      "fr": "Publique"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "publico"
     },
     "relacion": [],
     "agenda": 0,
@@ -8181,48 +4471,6 @@
     "gps": 0
   },
   {
-    "id": 569,
-    "texto": {
-      "en": "",
-      "fr": ""
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_dvd"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 570,
-    "texto": {
-      "en": "documentary",
-      "fr": "documentaire"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_canal_documental"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 571,
-    "texto": {
-      "en": "sports",
-      "fr": "des sports"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_canal_deportes"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 572,
     "texto": {
       "en": "news",
@@ -8251,20 +4499,6 @@
     "gps": 0
   },
   {
-    "id": 574,
-    "texto": {
-      "en": "game show",
-      "fr": "jeu télévisé"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "concurso"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 575,
     "texto": {
       "en": "cooking channel",
@@ -8279,62 +4513,6 @@
     "gps": 0
   },
   {
-    "id": 576,
-    "texto": {
-      "en": "DIY channel",
-      "fr": "Chaîne DIY"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "programa_de_bricolaje"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 577,
-    "texto": {
-      "en": "wheather channel",
-      "fr": "canal de wheather"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_canal_clima"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 578,
-    "texto": {
-      "en": "ads",
-      "fr": "les publicités"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "anuncios"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 579,
-    "texto": {
-      "en": "funny movie",
-      "fr": "film amusant"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_comica"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 580,
     "texto": {
       "en": "cartoons",
@@ -8342,35 +4520,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "ic_canal_dibujos_animados"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 581,
-    "texto": {
-      "en": "Romantic",
-      "fr": "Romantique"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_romantica"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 582,
-    "texto": {
-      "en": "action movie",
-      "fr": "film d&#39;action"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_aventura"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_canal_dibujos_animados.webp?alt=media&token=64a8bf60-3076-41a1-80fa-035278796067"
     },
     "relacion": [],
     "agenda": 0,
@@ -8385,48 +4535,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_canal_deportes.webp?alt=media&token=83ff30a5-1672-4d60-bc80-8851a3608c9b"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 584,
-    "texto": {
-      "en": "documentary channel",
-      "fr": "chaîne documentaire"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_canal_documental"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 585,
-    "texto": {
-      "en": "grilled fish",
-      "fr": "poisson grillé"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pescado_a_la_parrilla"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 586,
-    "texto": {
-      "en": "oven",
-      "fr": "four"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fhorno.webp?alt=media&token=6134b9d8-da69-4b8c-932d-082424a641d1"
     },
     "relacion": [],
     "agenda": 0,
@@ -8489,48 +4597,6 @@
     "gps": 0
   },
   {
-    "id": 591,
-    "texto": {
-      "en": "cooked",
-      "fr": "cuit"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cocido"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 592,
-    "texto": {
-      "en": "rummer",
-      "fr": "grand verre à pied"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "copa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 593,
-    "texto": {
-      "en": "cutlery",
-      "fr": "coutellerie"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cubiertos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 594,
     "texto": {
       "en": "breakfast",
@@ -8553,20 +4619,6 @@
     "tipo": 6,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fdonde.webp?alt=media&token=9e13c203-dc99-4345-aba7-8e2ce243627b"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 596,
-    "texto": {
-      "en": "fried",
-      "fr": "frit"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "frito"
     },
     "relacion": [],
     "agenda": 0,
@@ -8629,20 +4681,6 @@
     "gps": 0
   },
   {
-    "id": 601,
-    "texto": {
-      "en": "main coure",
-      "fr": "coure principale"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "primer_plato"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 602,
     "texto": {
       "en": "What time is it?",
@@ -8651,20 +4689,6 @@
     "tipo": 5,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fque_hora_es.webp?alt=media&token=44e9f414-a3da-4401-82c8-bb12fc1c7102"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 603,
-    "texto": {
-      "en": "second course",
-      "fr": "deuxième cours"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "segundo_plato"
     },
     "relacion": [],
     "agenda": 0,
@@ -8783,34 +4807,6 @@
     "gps": 0
   },
   {
-    "id": 612,
-    "texto": {
-      "en": "bus stop",
-      "fr": "arrêt de bus"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "parada"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 613,
-    "texto": {
-      "en": "taxi stop",
-      "fr": "arrêt de taxi"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "parada_taxi"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 614,
     "texto": {
       "en": "grandpa",
@@ -8844,20 +4840,6 @@
     "gps": 0
   },
   {
-    "id": 616,
-    "texto": {
-      "en": "referee",
-      "fr": "arbitre"
-    },
-    "tipo": 1,
-    "imagen": {
-      "picto": "ic_arbitro"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 617,
     "texto": {
       "en": "butcher",
@@ -8865,21 +4847,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "carnicero"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 618,
-    "texto": {
-      "en": "waiter",
-      "fr": "serveur"
-    },
-    "tipo": 1,
-    "imagen": {
-      "picto": "camarero"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcarnicero.webp?alt=media&token=8922d169-5277-40f3-a3e4-07925112592f"
     },
     "relacion": [],
     "agenda": 0,
@@ -8970,20 +4938,6 @@
     "gps": 0
   },
   {
-    "id": 625,
-    "texto": {
-      "en": "Indian",
-      "fr": "Indien"
-    },
-    "tipo": 1,
-    "imagen": {
-      "picto": "indio"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 626,
     "texto": {
       "en": "teacher",
@@ -8991,7 +4945,7 @@
     },
     "tipo": 1,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fmaestro.webp?alt=media&token=00e6a3c7-c0da-4de3-9ac0-82642de9f4e9"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_maestra.webp?alt=media&token=4ee47174-ea96-46df-9f02-c35642dfaf31"
     },
     "relacion": [],
     "agenda": 0,
@@ -9005,7 +4959,7 @@
     },
     "tipo": 1,
     "imagen": {
-      "picto": "maestro"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fmaestro.webp?alt=media&token=00e6a3c7-c0da-4de3-9ac0-82642de9f4e9"
     },
     "relacion": [],
     "agenda": 0,
@@ -9101,20 +5055,6 @@
     "gps": 0
   },
   {
-    "id": 634,
-    "texto": {
-      "en": "pirate",
-      "fr": "pirate"
-    },
-    "tipo": 1,
-    "imagen": {
-      "picto": "pirata"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 635,
     "texto": {
       "en": "princess",
@@ -9123,34 +5063,6 @@
     "tipo": 1,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fprincesa.webp?alt=media&token=73c9d26b-a83c-4f75-9c1d-ae8661899d86"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 636,
-    "texto": {
-      "en": "prince",
-      "fr": "prince"
-    },
-    "tipo": 1,
-    "imagen": {
-      "picto": "principe"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 637,
-    "texto": {
-      "en": "poulterer",
-      "fr": "poulterer"
-    },
-    "tipo": 1,
-    "imagen": {
-      "picto": "pollero"
     },
     "relacion": [],
     "agenda": 0,
@@ -9193,20 +5105,6 @@
     "tipo": 1,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftaxista.webp?alt=media&token=b4ac3631-1c95-47ed-a3f2-2dde435b3448"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 641,
-    "texto": {
-      "en": "Cowboy",
-      "fr": "Cow-boy"
-    },
-    "tipo": 1,
-    "imagen": {
-      "picto": "vaquero"
     },
     "relacion": [],
     "agenda": 0,
@@ -9272,20 +5170,6 @@
     "gps": 0
   },
   {
-    "id": 645,
-    "texto": {
-      "en": "customs",
-      "fr": "douane"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "aduana"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 646,
     "texto": {
       "en": "airport",
@@ -9294,20 +5178,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Faeropuerto.webp?alt=media&token=2f7b5699-6a42-43ec-bcdb-e4bb6283fe4f"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 647,
-    "texto": {
-      "en": "travel agency",
-      "fr": "agence de voyage"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "agencia_de_viajes"
     },
     "relacion": [],
     "agenda": 0,
@@ -9335,7 +5205,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "bar"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbar.webp?alt=media&token=ee953361-583a-4181-8fe7-735b7814e951"
     },
     "relacion": [],
     "agenda": 0,
@@ -9370,20 +5240,6 @@
     "gps": 0
   },
   {
-    "id": 652,
-    "texto": {
-      "en": "butchery",
-      "fr": "boucherie"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "carniceria"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 653,
     "texto": {
       "en": "house",
@@ -9392,34 +5248,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_casa.webp?alt=media&token=f1d197b6-db37-44e6-b4bc-8ba31b0fa4aa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 654,
-    "texto": {
-      "en": "computer store",
-      "fr": "magasin d&#39;informatique"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_informatica"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 655,
-    "texto": {
-      "en": "Chocolate shop",
-      "fr": "Magasin de chocolat"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "chocolateria"
     },
     "relacion": [],
     "agenda": 0,
@@ -9448,34 +5276,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_comedor.webp?alt=media&token=eb71846a-eef3-4c0d-aabd-026e7b716e00"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 658,
-    "texto": {
-      "en": "mattres shop",
-      "fr": "magasin de mattres"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_congelados"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 659,
-    "texto": {
-      "en": "Bike dealership",
-      "fr": "Concessionnaire de vélos"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_motos"
     },
     "relacion": [],
     "agenda": 0,
@@ -9524,48 +5324,6 @@
     "gps": 0
   },
   {
-    "id": 663,
-    "texto": {
-      "en": "parking lot",
-      "fr": "terrain de stationnement"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "parking"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 664,
-    "texto": {
-      "en": "",
-      "fr": ""
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "charcuteria"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 665,
-    "texto": {
-      "en": "fountain",
-      "fr": "Fontaine"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "fuente"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 666,
     "texto": {
       "en": "Burger shop",
@@ -9574,20 +5332,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fhamburgueseria.webp?alt=media&token=54beeb1d-8901-472f-ac33-aa906e18627a"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 667,
-    "texto": {
-      "en": "hydrotherapy",
-      "fr": "hydrothérapie"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "hidroterapia"
     },
     "relacion": [],
     "agenda": 0,
@@ -9608,48 +5352,6 @@
     "gps": 0
   },
   {
-    "id": 669,
-    "texto": {
-      "en": "hotel",
-      "fr": "un hôtel"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "hotel"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 670,
-    "texto": {
-      "en": "accesible hotel",
-      "fr": "hôtel accessible"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "hotel_accesible"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 671,
-    "texto": {
-      "en": "orchard",
-      "fr": "verger"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "huerta"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 672,
     "texto": {
       "en": "garden",
@@ -9664,34 +5366,6 @@
     "gps": 0
   },
   {
-    "id": 673,
-    "texto": {
-      "en": "toy shop",
-      "fr": "Magasin de jouets"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "jugueteria"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 674,
-    "texto": {
-      "en": "bag shop",
-      "fr": "magasin de sac"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_bolsos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 675,
     "texto": {
       "en": "market",
@@ -9700,34 +5374,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fmercado.webp?alt=media&token=bd72176b-1f7d-453b-9f33-dbc5ad38ae7e"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 676,
-    "texto": {
-      "en": "construction site",
-      "fr": "chantier de construction"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "obra"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 677,
-    "texto": {
-      "en": "orthopedics shop",
-      "fr": "magasin d&#39;orthopédie"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ortopedia"
     },
     "relacion": [],
     "agenda": 0,
@@ -9776,20 +5422,6 @@
     "gps": 0
   },
   {
-    "id": 681,
-    "texto": {
-      "en": "crosswalk",
-      "fr": "passage clouté"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "paso_de_cebra"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 682,
     "texto": {
       "en": "square",
@@ -9804,34 +5436,6 @@
     "gps": 0
   },
   {
-    "id": 683,
-    "texto": {
-      "en": "bridge",
-      "fr": "pont"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "puente"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 684,
-    "texto": {
-      "en": "dairy shop",
-      "fr": "magasin laitier"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "queseria"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 685,
     "texto": {
       "en": "Restaurant",
@@ -9840,20 +5444,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Frestaurante.webp?alt=media&token=57ed6d5c-fa5f-41c1-b779-28294311e772"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 686,
-    "texto": {
-      "en": "road",
-      "fr": "route"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "carretera"
     },
     "relacion": [],
     "agenda": 0,
@@ -9888,132 +5478,6 @@
     "gps": 0
   },
   {
-    "id": 689,
-    "texto": {
-      "en": "terrace",
-      "fr": "terrasse"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "terraza"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 690,
-    "texto": {
-      "en": "frozen shop",
-      "fr": "magasin congelé"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_congelados"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 691,
-    "texto": {
-      "en": "art and deco",
-      "fr": "art et déco"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_decoracion"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 692,
-    "texto": {
-      "en": "sports shop",
-      "fr": "magasin de sport"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_deportes"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 693,
-    "texto": {
-      "en": "home appliances shop",
-      "fr": "magasin d&#39;électroménager"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_electrodomesticos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 694,
-    "texto": {
-      "en": "photo store",
-      "fr": "magasin de photo"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_fotografia"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 695,
-    "texto": {
-      "en": "Music store",
-      "fr": "Magasin de musique"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_musica"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 696,
-    "texto": {
-      "en": "phone shop",
-      "fr": "magasin de téléphone"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_telefonia"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 697,
-    "texto": {
-      "en": "pet shop",
-      "fr": "animalerie"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_animales"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 698,
     "texto": {
       "en": "greengrocery",
@@ -10028,20 +5492,6 @@
     "gps": 0
   },
   {
-    "id": 699,
-    "texto": {
-      "en": "wine shop",
-      "fr": "cave à vins"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tienda_de_bebidas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 700,
     "texto": {
       "en": "Blockbuster",
@@ -10050,20 +5500,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fvideoclub.webp?alt=media&token=c1b47059-a6c9-4fb2-ac5f-38cfaf94a82d"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 701,
-    "texto": {
-      "en": "Zoo",
-      "fr": "zoo"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "zoo"
     },
     "relacion": [],
     "agenda": 0,
@@ -10112,20 +5548,6 @@
     "gps": 0
   },
   {
-    "id": 705,
-    "texto": {
-      "en": "culture",
-      "fr": "Culture"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "cultura"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 706,
     "texto": {
       "en": "fulfillment",
@@ -10162,48 +5584,6 @@
     "tipo": 6,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fhigiene_personal.webp?alt=media&token=d822b484-feb9-4a37-a9f0-ed53e9b3584f"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 709,
-    "texto": {
-      "en": "integration",
-      "fr": "l&#39;intégration"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "integracion"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 710,
-    "texto": {
-      "en": "justice",
-      "fr": "Justice"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "justicia"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 711,
-    "texto": {
-      "en": "abuse",
-      "fr": "abuser de"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "maltrato"
     },
     "relacion": [],
     "agenda": 0,
@@ -10252,48 +5632,6 @@
     "gps": 0
   },
   {
-    "id": 715,
-    "texto": {
-      "en": "poverty",
-      "fr": "la pauvreté"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "pobreza"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 716,
-    "texto": {
-      "en": "prohibition",
-      "fr": "interdiction"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "prohibicion"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 717,
-    "texto": {
-      "en": "protection",
-      "fr": "protection"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "proteccion"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 718,
     "texto": {
       "en": "rehab",
@@ -10302,34 +5640,6 @@
     "tipo": 6,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Frehabilitacion.webp?alt=media&token=da4746ed-7fe5-48b5-afde-a59d382c5024"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 719,
-    "texto": {
-      "en": "secret",
-      "fr": "secret"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "secreto"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 720,
-    "texto": {
-      "en": "selection",
-      "fr": "sélection"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "seleccion"
     },
     "relacion": [],
     "agenda": 0,
@@ -10364,34 +5674,6 @@
     "gps": 0
   },
   {
-    "id": 723,
-    "texto": {
-      "en": "society",
-      "fr": "société"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "sociedad"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 724,
-    "texto": {
-      "en": "solidarity",
-      "fr": "solidarité"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "solidaridad"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 725,
     "texto": {
       "en": "surprise",
@@ -10400,34 +5682,6 @@
     "tipo": 6,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsorpresa.webp?alt=media&token=27ad6998-250d-4aa3-8e2b-8f0c55525c2d"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 726,
-    "texto": {
-      "en": "tourism",
-      "fr": "tourisme"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "turismo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 727,
-    "texto": {
-      "en": "turn",
-      "fr": "tour"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "turno"
     },
     "relacion": [],
     "agenda": 0,
@@ -10532,20 +5786,6 @@
     "gps": 0
   },
   {
-    "id": 735,
-    "texto": {
-      "en": "beige",
-      "fr": "beige"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "beige"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 736,
     "texto": {
       "en": "White",
@@ -10610,20 +5850,6 @@
     "tipo": 4,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flila.webp?alt=media&token=3b380965-52f2-4529-846f-45cf1c4fdf9c"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 741,
-    "texto": {
-      "en": "Light pink",
-      "fr": "Rose clair"
-    },
-    "tipo": 4,
-    "imagen": {
-      "picto": "malva"
     },
     "relacion": [],
     "agenda": 0,
@@ -10819,7 +6045,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fordenador.webp?alt=media&token=9452b67d-5e5c-456a-bb33-1398701f7f00"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_computadora.webp?alt=media&token=a8231494-9cd4-4214-957c-0f0cac0bf51a"
     },
     "relacion": [],
     "agenda": 0,
@@ -10868,20 +6094,6 @@
     "gps": 0
   },
   {
-    "id": 759,
-    "texto": {
-      "en": "newspaper",
-      "fr": "journal"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_diario"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 760,
     "texto": {
       "en": "eraser",
@@ -10924,48 +6136,6 @@
     "gps": 0
   },
   {
-    "id": 763,
-    "texto": {
-      "en": "glasses",
-      "fr": "des lunettes"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_lentes"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 764,
-    "texto": {
-      "en": "keys",
-      "fr": "clés"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_llaves"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 765,
-    "texto": {
-      "en": "clay",
-      "fr": "argile"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_masa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 766,
     "texto": {
       "en": "paper",
@@ -10987,7 +6157,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpelota.webp?alt=media&token=ae1475c3-af87-493d-8843-3ad0720b6fb8"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_pelotas.webp?alt=media&token=2b17cead-37bc-40c1-9933-8320836adeb0"
     },
     "relacion": [],
     "agenda": 0,
@@ -11092,20 +6262,6 @@
     "gps": 0
   },
   {
-    "id": 775,
-    "texto": {
-      "en": "scissors",
-      "fr": "les ciseaux"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_tijeras"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 776,
     "texto": {
       "en": "armpit",
@@ -11142,20 +6298,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbrazo.webp?alt=media&token=7e37e062-4e54-4226-80a1-ad131b7ea8a3"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 779,
-    "texto": {
-      "en": "eyebrow",
-      "fr": "sourcil"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ceja"
     },
     "relacion": [],
     "agenda": 0,
@@ -11386,20 +6528,6 @@
     "gps": 0
   },
   {
-    "id": 796,
-    "texto": {
-      "en": "body parts",
-      "fr": "parties du corps"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "partes_del_cuerpo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 797,
     "texto": {
       "en": "chest",
@@ -11408,20 +6536,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpecho.webp?alt=media&token=55d7a439-26c1-48b6-82ae-8d749d0142d7"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 798,
-    "texto": {
-      "en": "eyelash",
-      "fr": "cil"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pestana"
     },
     "relacion": [],
     "agenda": 0,
@@ -11450,20 +6564,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpulmones.webp?alt=media&token=9fd10e4a-561e-4140-892b-164b87c3859e"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 801,
-    "texto": {
-      "en": "kidney",
-      "fr": "un rein"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "riniones"
     },
     "relacion": [],
     "agenda": 0,
@@ -11512,20 +6612,6 @@
     "gps": 0
   },
   {
-    "id": 805,
-    "texto": {
-      "en": "heel",
-      "fr": "talon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "talon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 806,
     "texto": {
       "en": "boobs",
@@ -11554,20 +6640,6 @@
     "gps": 0
   },
   {
-    "id": 808,
-    "texto": {
-      "en": "trunk",
-      "fr": "tronc"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tronco"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 809,
     "texto": {
       "en": "nail",
@@ -11589,7 +6661,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "antes"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fantes.webp?alt=media&token=3dd6363e-4ce8-439b-ade7-79d2988c5d3d"
     },
     "relacion": [],
     "agenda": 0,
@@ -11624,34 +6696,6 @@
     "gps": 0
   },
   {
-    "id": 813,
-    "texto": {
-      "en": "seasons",
-      "fr": "saisons"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "estaciones_del_ano"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 814,
-    "texto": {
-      "en": "winter",
-      "fr": "hiver"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "invierno"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 815,
     "texto": {
       "en": "tomorrow",
@@ -11673,7 +6717,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "otonio"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fotonio.webp?alt=media&token=1d1a0c5b-e4c7-4976-879b-357f3c84ee62"
     },
     "relacion": [],
     "agenda": 0,
@@ -11862,20 +6906,6 @@
     "gps": 0
   },
   {
-    "id": 830,
-    "texto": {
-      "en": "bruise",
-      "fr": "bleu"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "zid_moreton"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 831,
     "texto": {
       "en": "cold",
@@ -11883,35 +6913,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "zid_resfriado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 832,
-    "texto": {
-      "en": "red card",
-      "fr": "carte rouge"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_tarjeta_roja"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 833,
-    "texto": {
-      "en": "yellow card",
-      "fr": "carte jaune"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_tarjeta_amarilla"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fzid_resfriado.webp?alt=media&token=88ccba98-7926-49f5-b376-aac36faecd74"
     },
     "relacion": [],
     "agenda": 0,
@@ -12100,48 +7102,6 @@
     "gps": 0
   },
   {
-    "id": 847,
-    "texto": {
-      "en": "accordion",
-      "fr": "accordéon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "acordeon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 848,
-    "texto": {
-      "en": "harmonica",
-      "fr": "harmonica"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "armonica"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 849,
-    "texto": {
-      "en": "drums",
-      "fr": "tambours"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "baterias"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 850,
     "texto": {
       "en": "minim",
@@ -12170,20 +7130,6 @@
     "gps": 0
   },
   {
-    "id": 852,
-    "texto": {
-      "en": "castanets",
-      "fr": "castagnettes"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "castanuela"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 853,
     "texto": {
       "en": "chore",
@@ -12192,20 +7138,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcoro.webp?alt=media&token=bb964d61-b045-4569-a9fa-43df344f7444"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 854,
-    "texto": {
-      "en": "flute",
-      "fr": "flûte"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "flauta"
     },
     "relacion": [],
     "agenda": 0,
@@ -12226,20 +7158,6 @@
     "gps": 0
   },
   {
-    "id": 856,
-    "texto": {
-      "en": "electric guitar",
-      "fr": "guitare électrique"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "guitarra_electrica"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 857,
     "texto": {
       "en": "musical instruments",
@@ -12248,34 +7166,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Finstrumentos.webp?alt=media&token=b58a39b2-6c69-4b19-8658-8a6a4fe7ca2a"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 858,
-    "texto": {
-      "en": "maracas",
-      "fr": "maracas"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_maracas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 859,
-    "texto": {
-      "en": "rattle",
-      "fr": "hochet"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "matraca"
     },
     "relacion": [],
     "agenda": 0,
@@ -12296,62 +7186,6 @@
     "gps": 0
   },
   {
-    "id": 861,
-    "texto": {
-      "en": "crotchet",
-      "fr": "noire"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "negra"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 862,
-    "texto": {
-      "en": "tambourine",
-      "fr": "tambourin"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pandereta"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 863,
-    "texto": {
-      "en": "stave",
-      "fr": "portée"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pentagrama"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 864,
-    "texto": {
-      "en": "percussion",
-      "fr": "percussion"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "percusion"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 865,
     "texto": {
       "en": "piano",
@@ -12360,62 +7194,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpiano.webp?alt=media&token=e07c1a80-4bb9-455d-b249-75f1731bb974"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 866,
-    "texto": {
-      "en": "cymbal",
-      "fr": "cymbale"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "platillos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 867,
-    "texto": {
-      "en": "semibreve",
-      "fr": "semibreve"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "redonda"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 868,
-    "texto": {
-      "en": "sax",
-      "fr": "saxo"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "saxofon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 869,
-    "texto": {
-      "en": "semiquaver",
-      "fr": "double croche"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "semicorchea"
     },
     "relacion": [],
     "agenda": 0,
@@ -12450,34 +7228,6 @@
     "gps": 0
   },
   {
-    "id": 872,
-    "texto": {
-      "en": "trombone",
-      "fr": "trombone"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "trombon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 873,
-    "texto": {
-      "en": "horn",
-      "fr": "klaxon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "trompa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 874,
     "texto": {
       "en": "trumpet",
@@ -12486,20 +7236,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftrompeta.webp?alt=media&token=e670470a-5b54-4e66-a80e-bf6a11e10863"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 875,
-    "texto": {
-      "en": "bass horn",
-      "fr": "cor basse"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tuba"
     },
     "relacion": [],
     "agenda": 0,
@@ -12520,20 +7256,6 @@
     "gps": 0
   },
   {
-    "id": 877,
-    "texto": {
-      "en": "xylophone",
-      "fr": "xylophone"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "xilofono"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 878,
     "texto": {
       "en": "aspirine",
@@ -12542,34 +7264,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_aspirina.jpg?alt=media&token=1104fe22-4f42-4bba-a75d-bb25af56333e"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 879,
-    "texto": {
-      "en": "capsule",
-      "fr": "capsule"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "capsula"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 880,
-    "texto": {
-      "en": "band aid",
-      "fr": "pansement"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tirita"
     },
     "relacion": [],
     "agenda": 0,
@@ -12598,20 +7292,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fic_digestivo.webp?alt=media&token=0a2a998d-5647-4676-b38d-4ec2b5e89d0e"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 883,
-    "texto": {
-      "en": "Pharmacy",
-      "fr": "Pharmacie"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "ic_farmacia"
     },
     "relacion": [],
     "agenda": 0,
@@ -12668,20 +7348,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fvenda.webp?alt=media&token=e72b4a6f-825c-47bd-bd4b-5aae4ebd0ed1"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 888,
-    "texto": {
-      "en": "both",
-      "fr": "tous les deux"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "ambos"
     },
     "relacion": [],
     "agenda": 0,
@@ -12821,7 +7487,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fy.webp?alt=media&token=a6efd48e-4961-43ff-9827-b72b6b8403d8"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fe.webp?alt=media&token=4b5833d7-9d6a-40f1-a90a-ef23d13ece1b"
     },
     "relacion": [],
     "agenda": 0,
@@ -12870,20 +7536,6 @@
     "gps": 0
   },
   {
-    "id": 902,
-    "texto": {
-      "en": "while",
-      "fr": "tandis que"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "mientras"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 903,
     "texto": {
       "en": "no one",
@@ -12919,7 +7571,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "ningunos"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fningunos.webp?alt=media&token=0a10497d-0497-462a-bb53-ed6f227bb7b6"
     },
     "relacion": [],
     "agenda": 0,
@@ -12933,7 +7585,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "ningunos"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fningunos.webp?alt=media&token=0a10497d-0497-462a-bb53-ed6f227bb7b6"
     },
     "relacion": [],
     "agenda": 0,
@@ -12948,34 +7600,6 @@
     "tipo": 6,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fno_gustar.webp?alt=media&token=e2b175cd-9167-4be8-9b9a-4cffafb7403b"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 908,
-    "texto": {
-      "en": "our",
-      "fr": "notre"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "nuestra"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 909,
-    "texto": {
-      "en": "ours",
-      "fr": "les notres"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "nuestra"
     },
     "relacion": [],
     "agenda": 0,
@@ -13003,7 +7627,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fquienes.webp?alt=media&token=52dd1ebb-74ef-4b1a-9cff-0180ed85ea3d"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fquien_es.webp?alt=media&token=c30b2009-2039-4ffb-a85c-12ddf5e68908"
     },
     "relacion": [],
     "agenda": 0,
@@ -13045,7 +7669,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "quien"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fquien.webp?alt=media&token=94d5cbe4-5aab-4898-b2b3-d335741935ab"
     },
     "relacion": [],
     "agenda": 0,
@@ -13059,35 +7683,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "quienes"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 916,
-    "texto": {
-      "en": "nevertheless",
-      "fr": "Néanmoins"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "sin_embargo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 917,
-    "texto": {
-      "en": "theirs",
-      "fr": "les leurs"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsuyos.webp?alt=media&token=1265f18e-c7f5-4f94-852a-76c1f9841d25"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fquienes.webp?alt=media&token=52dd1ebb-74ef-4b1a-9cff-0180ed85ea3d"
     },
     "relacion": [],
     "agenda": 0,
@@ -13101,7 +7697,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "suyos"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsuyos.webp?alt=media&token=1265f18e-c7f5-4f94-852a-76c1f9841d25"
     },
     "relacion": [],
     "agenda": 0,
@@ -13115,7 +7711,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftuya.webp?alt=media&token=f0b677b3-7fbe-4d02-8e31-ecae0ba9b0da"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftuya.webp?alt=media&token=e38d6e6e-0e88-4374-8d9c-8dc5725de50e"
     },
     "relacion": [],
     "agenda": 0,
@@ -13129,35 +7725,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "tuya"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 921,
-    "texto": {
-      "en": "your",
-      "fr": "votre"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "vuestra"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 922,
-    "texto": {
-      "en": "your",
-      "fr": "votre"
-    },
-    "tipo": 6,
-    "imagen": {
-      "picto": "vuestra"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Ftuya.webp?alt=media&token=f0b677b3-7fbe-4d02-8e31-ecae0ba9b0da"
     },
     "relacion": [],
     "agenda": 0,
@@ -13171,7 +7739,7 @@
     },
     "tipo": 6,
     "imagen": {
-      "picto": "y"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fy.webp?alt=media&token=a6efd48e-4961-43ff-9827-b72b6b8403d8"
     },
     "relacion": [],
     "agenda": 0,
@@ -13192,48 +7760,6 @@
     "gps": 0
   },
   {
-    "id": 925,
-    "texto": {
-      "en": "toms",
-      "fr": "toms"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "alpargatas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 926,
-    "texto": {
-      "en": "bib",
-      "fr": "bavoir"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "baberos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 927,
-    "texto": {
-      "en": "gown",
-      "fr": "robe"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "batas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 928,
     "texto": {
       "en": "bikini",
@@ -13242,20 +7768,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbikinis.webp?alt=media&token=f901e863-6e71-4b05-8275-859616e7f2fe"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 929,
-    "texto": {
-      "en": "blouse",
-      "fr": "chemisier"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "blusas"
     },
     "relacion": [],
     "agenda": 0,
@@ -13290,34 +7802,6 @@
     "gps": 0
   },
   {
-    "id": 932,
-    "texto": {
-      "en": "football boots",
-      "fr": "chaussures de football"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "botas_de_futbol"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 933,
-    "texto": {
-      "en": "mountain boots",
-      "fr": "bottes de montagne"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "botas_de_montania"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 934,
     "texto": {
       "en": "button",
@@ -13332,20 +7816,6 @@
     "gps": 0
   },
   {
-    "id": 935,
-    "texto": {
-      "en": "bracelet",
-      "fr": "bracelet"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "brazalete"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 936,
     "texto": {
       "en": "scarf",
@@ -13354,20 +7824,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fbufandas.webp?alt=media&token=2a6e67eb-235e-4668-9b7f-2c656f174ffc"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 937,
-    "texto": {
-      "en": "wedge",
-      "fr": "coin"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "calza"
     },
     "relacion": [],
     "agenda": 0,
@@ -13430,132 +7886,6 @@
     "gps": 0
   },
   {
-    "id": 942,
-    "texto": {
-      "en": "jacket",
-      "fr": "veste"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "camperon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 943,
-    "texto": {
-      "en": "hoodie",
-      "fr": "sweat à capuche"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "capuchas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 944,
-    "texto": {
-      "en": "purse",
-      "fr": "bourse"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cartera"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 945,
-    "texto": {
-      "en": "vest",
-      "fr": "gilet"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "chalecos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 946,
-    "texto": {
-      "en": "flipflop",
-      "fr": "tongues"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "chancla"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 947,
-    "texto": {
-      "en": "lace",
-      "fr": "dentelle"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cordon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 948,
-    "texto": {
-      "en": "luggage",
-      "fr": "bagage"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "equipaje"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 949,
-    "texto": {
-      "en": "corset",
-      "fr": "corset"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "faja"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 950,
-    "texto": {
-      "en": "trench coat",
-      "fr": "trench-coat"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "gabardina"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 951,
     "texto": {
       "en": "hat",
@@ -13564,34 +7894,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fgorro.webp?alt=media&token=7d67441b-5c98-4de4-b963-9dbcaed92805"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 952,
-    "texto": {
-      "en": "glove",
-      "fr": "gant"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "guante"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 953,
-    "texto": {
-      "en": "raincoat",
-      "fr": "imperméable"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "impermeables"
     },
     "relacion": [],
     "agenda": 0,
@@ -13612,20 +7914,6 @@
     "gps": 0
   },
   {
-    "id": 955,
-    "texto": {
-      "en": "socket",
-      "fr": "prise"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "calcetin"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 956,
     "texto": {
       "en": "overall",
@@ -13634,48 +7922,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fmono.webp?alt=media&token=7a7422c4-a218-41c5-ae87-1f27be86fca5"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 957,
-    "texto": {
-      "en": "tank top",
-      "fr": "débardeur"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "musculosa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 958,
-    "texto": {
-      "en": "girl un underwear",
-      "fr": "fille un sous-vêtement"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "nina_en_ropa_interior"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 959,
-    "texto": {
-      "en": "boy in underwear",
-      "fr": "garçon en sous-vêtements"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "nino_en_ropa_interior"
     },
     "relacion": [],
     "agenda": 0,
@@ -13696,20 +7942,6 @@
     "gps": 0
   },
   {
-    "id": 961,
-    "texto": {
-      "en": "slipper",
-      "fr": "pantoufle"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pantuflas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 962,
     "texto": {
       "en": "shorts",
@@ -13718,76 +7950,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpantalones_cortos.webp?alt=media&token=48ca7ec7-555a-40c9-b325-34eddf840149"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 963,
-    "texto": {
-      "en": "poncho",
-      "fr": "poncho"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "poncho"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 964,
-    "texto": {
-      "en": "polo shirt",
-      "fr": "chemise polo"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "polo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 965,
-    "texto": {
-      "en": "overall",
-      "fr": "global"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "peto"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 966,
-    "texto": {
-      "en": "jacket",
-      "fr": "veste"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "saco"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 967,
-    "texto": {
-      "en": "sandal",
-      "fr": "sandale"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "sandalia"
     },
     "relacion": [],
     "agenda": 0,
@@ -13816,20 +7978,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fsweater.webp?alt=media&token=9998eaa9-ac10-4469-a5a4-b4f1a4f7ae11"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 970,
-    "texto": {
-      "en": "high heel",
-      "fr": "talon haut"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tacon"
     },
     "relacion": [],
     "agenda": 0,
@@ -13934,34 +8082,6 @@
     "gps": 0
   },
   {
-    "id": 978,
-    "texto": {
-      "en": "blocks",
-      "fr": "blocs"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "bloques"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 979,
-    "texto": {
-      "en": "horse",
-      "fr": "cheval"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "caballito_mecedor"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 980,
     "texto": {
       "en": "truck",
@@ -14004,48 +8124,6 @@
     "gps": 0
   },
   {
-    "id": 983,
-    "texto": {
-      "en": "rubick",
-      "fr": "rubick"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cubo_de_rubik"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 984,
-    "texto": {
-      "en": "draught",
-      "fr": "Brouillon"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "damas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 985,
-    "texto": {
-      "en": "dart",
-      "fr": "dard"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "dardos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 986,
     "texto": {
       "en": "story",
@@ -14053,7 +8131,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "cuento"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcuento.webp?alt=media&token=2f3fa4f7-9f55-424e-a587-8974d1728f84"
     },
     "relacion": [],
     "agenda": 0,
@@ -14074,20 +8152,6 @@
     "gps": 0
   },
   {
-    "id": 988,
-    "texto": {
-      "en": "board games",
-      "fr": "jeux de plateau"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "juego_de_mesa"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 989,
     "texto": {
       "en": "toys",
@@ -14102,90 +8166,6 @@
     "gps": 0
   },
   {
-    "id": 990,
-    "texto": {
-      "en": "storybook",
-      "fr": "livre de contes"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cuentos"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 991,
-    "texto": {
-      "en": "lego",
-      "fr": "lego"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "lego"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 992,
-    "texto": {
-      "en": "doll",
-      "fr": "poupée"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "muneco"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 993,
-    "texto": {
-      "en": "shovel and bucket",
-      "fr": "pelle et seau"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "cubo_y_pala"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 994,
-    "texto": {
-      "en": "playmobil",
-      "fr": "playmobil"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "muneco_articulado"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 995,
-    "texto": {
-      "en": "skate",
-      "fr": "patin"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "patineta"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 996,
     "texto": {
       "en": "ball",
@@ -14193,64 +8173,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "pelota"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 997,
-    "texto": {
-      "en": "scooter",
-      "fr": "scooter"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "monopatin"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 998,
-    "texto": {
-      "en": "rugby ball",
-      "fr": "ballon de rugby"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "balon_de_rugby"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 999,
-    "texto": {
-      "en": "basketball",
-      "fr": "basketball"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pelota_de_baloncesto"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1000,
-    "texto": {
-      "en": "baseball",
-      "da": "baseball",
-      "fr": "base-ball"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pelota_de_beisbol"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fpelota.webp?alt=media&token=ae1475c3-af87-493d-8843-3ad0720b6fb8"
     },
     "relacion": [],
     "agenda": 0,
@@ -14271,48 +8194,6 @@
     "gps": 0
   },
   {
-    "id": 1002,
-    "texto": {
-      "en": "battery",
-      "da": "batteri"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pilas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1003,
-    "texto": {
-      "en": "ball pit",
-      "da": "boldkasse"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "piscina_de_pelotas"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1004,
-    "texto": {
-      "en": "water gun",
-      "da": "vandpistol"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "pistola_de_agua"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 1005,
     "texto": {
       "en": "jigsaw",
@@ -14321,90 +8202,6 @@
     "tipo": 2,
     "imagen": {
       "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Frompecabezas.webp?alt=media&token=a1901342-85d3-4e93-9b0d-2ef3b599d05b"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1006,
-    "texto": {
-      "en": "rope",
-      "da": "reb"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "soga"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1007,
-    "texto": {
-      "en": "toy train",
-      "da": "legetøjstog"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tren_de_juguete"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1008,
-    "texto": {
-      "en": "tic tac toe",
-      "da": "Trip Trap Træsko"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "tres_en_raya"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1009,
-    "texto": {
-      "en": "tricycle",
-      "da": "trehjulet cykel"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "triciclo"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1010,
-    "texto": {
-      "en": "twister",
-      "da": "twister"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "twister"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1011,
-    "texto": {
-      "en": "yo-yo",
-      "da": "yo-yo"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "yoyo"
     },
     "relacion": [],
     "agenda": 0,
@@ -14453,20 +8250,6 @@
     "gps": 0
   },
   {
-    "id": 1015,
-    "texto": {
-      "en": "mattress",
-      "da": "madras"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "colchon"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 1016,
     "texto": {
       "en": "computer",
@@ -14474,7 +8257,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "ordenador"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fordenador.webp?alt=media&token=9452b67d-5e5c-456a-bb33-1398701f7f00"
     },
     "relacion": [],
     "agenda": 0,
@@ -14488,21 +8271,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "libro"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1018,
-    "texto": {
-      "en": "Swimming",
-      "da": "svømning"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "natacion"
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Flibro.webp?alt=media&token=ce9ae11b-a7e1-48ae-bc73-36358db5e1ec"
     },
     "relacion": [],
     "agenda": 0,
@@ -14537,34 +8306,6 @@
     "gps": 0
   },
   {
-    "id": 1021,
-    "texto": {
-      "en": "hand towel",
-      "da": "håndklæde"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "toalla_de_mano"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
-    "id": 1022,
-    "texto": {
-      "en": "sheet",
-      "da": "ark"
-    },
-    "tipo": 2,
-    "imagen": {
-      "picto": "sabana"
-    },
-    "relacion": [],
-    "agenda": 0,
-    "gps": 0
-  },
-  {
     "id": 1023,
     "texto": {
       "en": "",
@@ -14572,7 +8313,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "/storage/emulated/0/Android/data/com.stonefacesoft.ottaa/Files/MI_03082016_181141.png",
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fcocina.webp?alt=media&token=0f13280e-6377-482b-80f8-88b87659718c",
       "pictoEditado": "/storage/emulated/0/Android/data/com.stonefacesoft.ottaa/Files/MI_03082016_181141.png"
     },
     "relacion": [],
@@ -14587,7 +8328,7 @@
     },
     "tipo": 2,
     "imagen": {
-      "picto": "/storage/emulated/0/Android/data/com.stonefacesoft.ottaa/Files/MI_03082016_181219.jpg",
+      "picto": "https://firebasestorage.googleapis.com/v0/b/ottaaproject-flutter.appspot.com/o/Archivos%20Paises%2Ficonos%2Fnevera.webp?alt=media&token=26ab2e17-fa2b-49cc-875d-1eb22929b367",
       "pictoEditado": "/storage/emulated/0/Android/data/com.stonefacesoft.ottaa/Files/MI_03082016_181219.jpg"
     },
     "relacion": [],

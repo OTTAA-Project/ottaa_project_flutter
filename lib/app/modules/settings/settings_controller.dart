@@ -4,12 +4,14 @@ import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dar
 import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsController extends GetxController {
   final _ttsController = Get.find<TTSController>();
   final _homeController = Get.find<HomeController>();
+  final _pictogramController = Get.find<PictogramGroupsController>();
   final _pictsRepository = Get.find<PictsRepository>();
   final _grupoRepository = Get.find<GrupoRepository>();
 
@@ -57,9 +59,11 @@ class SettingsController extends GetxController {
       _homeController.picts = await _pictsRepository.getAll();
       _homeController.grupos = await _grupoRepository.getAll();
     }
+    _homeController.language = _ttsController.languaje;
     await _homeController.suggest(0);
     instance.setString('Language_KEY', language.value);
     print(language.value);
+    await _pictogramController.loadAssets();
     update();
   }
 

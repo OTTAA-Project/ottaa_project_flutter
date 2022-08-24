@@ -310,7 +310,7 @@ class HomeController extends GetxController {
           case "en-US":
             this._voiceText += "${pict.texto.en} ";
             break;
-          case "pt-br":
+          case "pt-BR":
             this._voiceText += "${pict.texto.pt} ";
             break;
           case "fr-FR":
@@ -568,7 +568,7 @@ class HomeController extends GetxController {
         case "fr-FR":
           this.textToShare += "${pict.texto.fr} ";
           break;
-        case "pt-br":
+        case "pt-BR":
           this.textToShare += "${pict.texto.pt} ";
           break;
         default:

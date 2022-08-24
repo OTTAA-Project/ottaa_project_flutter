@@ -292,7 +292,7 @@ class EditPictoController extends GetxController {
     final url = await _dataController.uploadImageToStorage(
       path: path,
       storageDirectory: 'testingUpload',
-      childName: pict.value!.texto.en,
+      childName: nameController.text,
     );
     pict.value!.imagen.pictoEditado = url;
   }
@@ -312,9 +312,9 @@ class EditPictoController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    nameController.text = lang == 'en-US'
-        ? pict.value!.texto.en.toUpperCase()
-        : pict.value!.texto.es.toUpperCase();
+    // nameController.text = lang == 'en-US'
+    //     ? pict.value!.texto.en.toUpperCase()
+    //     : pict.value!.texto.es.toUpperCase();
 
     switch (lang) {
       case "es-AR":
@@ -326,7 +326,7 @@ class EditPictoController extends GetxController {
       case "fr-FR":
         nameController.text = pict.value!.texto.fr;
         break;
-      case "pt-br":
+      case "pt-BR":
         nameController.text = pict.value!.texto.pt;
         break;
       default:

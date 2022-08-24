@@ -54,7 +54,7 @@ class PictoPageWidget extends StatelessWidget {
                   border: true,
                   bottom: false,
                   color: _pictogramController.selectedGruposPicts[index].tipo,
-                  languaje: _pictogramController.lang,
+                  languaje: _homeController.language,
                 ),
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -114,7 +114,7 @@ class PictoPageWidget extends StatelessWidget {
         _ttsController
             .speak(_pictogramController.selectedGruposPicts[index].texto.fr);
         break;
-      case "pt-br":
+      case "pt-BR":
         _ttsController
             .speak(_pictogramController.selectedGruposPicts[index].texto.pt);
         break;

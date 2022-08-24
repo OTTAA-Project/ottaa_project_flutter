@@ -46,7 +46,7 @@ class Picto extends StatelessWidget {
       case "fr-FR":
         texto = pict.texto.fr;
         break;
-      case "pt-br":
+      case "pt-BR":
         texto = pict.texto.pt;
         break;
       default:

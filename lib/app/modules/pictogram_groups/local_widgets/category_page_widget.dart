@@ -48,7 +48,7 @@ class CategoryPageWidget extends StatelessWidget {
         case "fr-FR":
           text = name.fr;
           break;
-        case "pt-br":
+        case "pt-BR":
           text = name.pt;
           break;
         default:
@@ -65,7 +65,7 @@ class CategoryPageWidget extends StatelessWidget {
         case "fr-FR":
           text = names!.fr;
           break;
-        case "pt-br":
+        case "pt-BR":
           text = names!.pt;
           break;
         default:

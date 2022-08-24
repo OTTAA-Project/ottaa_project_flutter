@@ -60,7 +60,7 @@ class CategoryViewWidget extends StatelessWidget {
                       _ttsController
                           .speak(_homeController.grupos[index].texto.fr);
                       break;
-                    case "pt-br":
+                    case "pt-BR":
                       _ttsController
                           .speak(_homeController.grupos[index].texto.pt);
                       break;
@@ -114,11 +114,33 @@ class CategoryViewWidget extends StatelessWidget {
                 onTap: () async {
                   //saying the name after selecting the category
                   //saying the name after selecting the category and saving the selected grupo
-                  _pictogramController.selectedGrupos =
-                      _homeController.grupos[index];
-                  _ttsController.speak(languaje == "en"
-                      ? _homeController.grupos[index].texto.en
-                      : _homeController.grupos[index].texto.es);
+                  // _pictogramController.selectedGrupos =
+                  //     _homeController.grupos[index];
+                  // _ttsController.speak(languaje == "en"
+                  //     ? _homeController.grupos[index].texto.en
+                  //     : _homeController.grupos[index].texto.es);
+                  switch (_homeController.language) {
+                    case "es-AR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.es);
+                      break;
+                    case "en-US":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.en);
+                      break;
+                    case "fr-FR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.fr);
+                      break;
+                    case "pt-BR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.pt);
+                      break;
+                    default:
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.es);
+                  }
+
                   await _pictogramController.fetchDesiredPictos();
                   // if (_pictogramController.secondTimeSameGroup ==
                   //     _pictogramController.selectedGroupIndex) {
@@ -164,13 +186,34 @@ class ChoiceDialogue extends GetView<EditPictoController> {
               Get.back();
               // Get.toNamed(AppRoutes.EDITPICTO);
               if (_homeController.userSubscription == 1) {
-                _pictogramController.grupoEditNameController.text =
-                    'en'.toUpperCase() ==
-                            _pictogramController.lang.toUpperCase()
-                        ? _pictogramController.grupoToEdit.texto.en
-                        : _pictogramController.grupoToEdit.texto.es;
-                print(_pictogramController.grupoToEdit.texto.en.toUpperCase());
-                print(_pictogramController.lang.toUpperCase());
+                // _pictogramController.grupoEditNameController.text =
+                //     'en'.toUpperCase() ==
+                //         _homeController.language.toUpperCase()
+                //         ? _pictogramController.grupoToEdit.texto.en
+                //         : _pictogramController.grupoToEdit.texto.es;
+                switch (_homeController.language) {
+                  case "es-AR":
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.es;
+                    break;
+                  case "en-US":
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.en;
+                    break;
+                  case "fr-FR":
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.fr;
+                    break;
+                  case "pt-BR":
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.pt;
+                    break;
+                  default:
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.es;
+                }
+                // print(_pictogramController.grupoToEdit.texto.en.toUpperCase());
+                // print(_pictogramController.lang.toUpperCase());
                 Get.to(() => EditGrupoPage());
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('name', 'Edit '));

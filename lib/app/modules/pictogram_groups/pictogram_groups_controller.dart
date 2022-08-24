@@ -51,7 +51,6 @@ class PictogramGroupsController extends GetxController {
   Rx<File?> fileImageGrupo = Rx<File?>(null);
   Rx<String?> selectedPhotoUrlGrupo = ''.obs;
   Rx<XFile?> imageTobeUploadedGrupo = Rx<XFile?>(null);
-  late String lang;
   late String url;
   Grupos grupo = Grupos(
     id: 0,
@@ -346,8 +345,8 @@ class PictogramGroupsController extends GetxController {
 
   Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
       {required String text}) async {
-    final String languageFormat = lang == 'en' ? '639-3' : '639-1';
-    final language = lang == 'en' ? 'eng' : 'es';
+    final String languageFormat = _homeController.language == 'en' ? '639-3' : '639-1';
+    final language = _homeController.language == 'en' ? 'eng' : 'es';
     url =
         'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
     var urlF = Uri.parse(url);
@@ -505,7 +504,7 @@ class PictogramGroupsController extends GetxController {
         }
       }
     }
-    if (lang.toUpperCase() == 'en'.toUpperCase()) {
+    if (_homeController.language.toUpperCase() == 'en-US'.toUpperCase()) {
       grupoToEdit.texto.en = grupoEditNameController.text;
     } else {
       grupoToEdit.texto.es = grupoEditNameController.text;
@@ -513,10 +512,10 @@ class PictogramGroupsController extends GetxController {
     int index = -1;
     _homeController.grupos.firstWhere((element) {
       index++;
-      print(element.texto.en);
+      // print(element.texto.en);
       return grupoToEdit.id == element.id;
     });
-    print(grupoToEdit.texto.en);
+    // print(grupoToEdit.texto.en);
     _homeController.grupos[index] = grupoToEdit;
     grupos[index] = grupoToEdit;
     final data = _homeController.grupos;
@@ -827,7 +826,7 @@ class PictogramGroupsController extends GetxController {
     pictoPageController = PageController();
     addPictoGridController = PageController();
     await loadAssets();
-    lang = ttsController.languaje;
+    // lang = ttsController.languaje;
   }
 
   @override
