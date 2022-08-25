@@ -59,6 +59,8 @@ class SettingsController extends GetxController {
       _homeController.picts = await _pictsRepository.getAll();
       _homeController.grupos = await _grupoRepository.getAll();
     }*/
+    _homeController.picts.clear();
+    _homeController.grupos.clear();
     _homeController.picts = await _pictsRepository.getAll();
     _homeController.grupos = await _grupoRepository.getAll();
     _homeController.language = _ttsController.languaje;
