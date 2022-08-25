@@ -17,7 +17,6 @@ import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
-import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -30,7 +30,7 @@ class LocalFileController {
 
   Future<File> get _gruposPortugueseFile async {
     final path = await _directoryPath;
-    return File('$path/grupos_fr_file.json');
+    return File('$path/grupos_pt_file.json');
   }
 
   Future<File> get _pictoFile async {

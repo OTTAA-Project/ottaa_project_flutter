@@ -13,6 +13,7 @@ import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EditPictoController extends GetxController {
@@ -94,10 +95,43 @@ class EditPictoController extends GetxController {
     // await ref.set({
     //   'data': data,
     // });
-    await _dataController.uploadDataToFirebaseRealTime(
-      data: data,
-      type: 'Picto',
-    );
+    switch (_ttsController.languaje) {
+      case "es-AR":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Picto',
+        );
+        break;
+      case "en-US":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Picto',
+        );
+        break;
+      case "fr-FR":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: Constants.FRENCH_PICTO_FIREBASE_NAME,
+        );
+        break;
+      case "pt-BR":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: Constants.PORTUGUESE_PICTO_FIREBASE_NAME,
+        );
+        break;
+      default:
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Picto',
+        );
+        break;
+    }
+
+    // await _dataController.uploadDataToFirebaseRealTime(
+    //   data: data,
+    //   type: 'Picto',
+    // );
   }
 
   Future<void> pictsExistsOnFirebase() async {
@@ -106,10 +140,42 @@ class EditPictoController extends GetxController {
     // await ref.set({
     //   'value': true,
     // });
-    await _dataController.uploadBoolToFirebaseRealtime(
-      data: true,
-      type: 'PictsExistsOnFirebase',
-    );
+    // await _dataController.uploadBoolToFirebaseRealtime(
+    //   data: true,
+    //   type: 'PictsExistsOnFirebase',
+    // );
+    switch (_ttsController.languaje) {
+      case "es-AR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase',
+        );
+        break;
+      case "en-US":
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase',
+        );
+        break;
+      case "fr-FR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase${Constants.FRENCH_LANGUAGE_NAME}',
+        );
+        break;
+      case "pt-BR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase${Constants.PORTUGUESE_LANGUAGE_NAME}',
+        );
+        break;
+      default:
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase',
+        );
+        break;
+    }
   }
 
   Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
@@ -263,7 +329,24 @@ class EditPictoController extends GetxController {
     }
     //for the file data
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool('Pictos_file', true);
+    switch (_ttsController.languaje) {
+      case "es-AR":
+        await instance.setBool('Pictos_file', true);
+        break;
+      case "en-US":
+        await instance.setBool('Pictos_file', true);
+        break;
+      case "fr-FR":
+        await instance.setBool(Constants.FRENCH_PICTO_FILE_NAME, true);
+        break;
+      case "pt-BR":
+        await instance.setBool(Constants.PORTUGUESE_PICTO_FILE_NAME, true);
+        break;
+      default:
+        await instance.setBool('Pictos_file', true);
+        break;
+    }
+    // await instance.setBool('Pictos_file', true);
     await sharedPref.getPictosFile();
     // print(res1);
     //upload to the firebase

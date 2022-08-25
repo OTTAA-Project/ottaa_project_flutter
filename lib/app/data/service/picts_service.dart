@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 
 class PictsService {
   final _dataController = Get.find<DataController>();
@@ -11,19 +12,19 @@ class PictsService {
 
   Future<List<Pict>> getPortuguese() async {
     return _dataController.fetchOtherPictos(
-      languageName: 'portuguesePicto',
+      languageName: Constants.PORTUGUESE_LANGUAGE_NAME,
       assetName: 'assets/languages/pictos_pt.json',
-      firebaseName: 'portuguesePicto',
-      fileName: 'picto_pt_file',
+      firebaseName: Constants.PORTUGUESE_PICTO_FIREBASE_NAME,
+      fileName: Constants.PORTUGUESE_PICTO_FILE_NAME,
     );
   }
 
   Future<List<Pict>> getFrench() async {
     return _dataController.fetchOtherPictos(
-      languageName: 'frenchPicto',
+      languageName: Constants.FRENCH_LANGUAGE_NAME,
       assetName: 'assets/languages/pictos_fr.json',
-      firebaseName: 'frenchPicto',
-      fileName: 'picto_fr_file',
+      firebaseName: Constants.FRENCH_PICTO_FIREBASE_NAME,
+      fileName: Constants.FRENCH_PICTO_FILE_NAME,
     );
   }
 }
