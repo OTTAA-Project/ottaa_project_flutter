@@ -145,10 +145,10 @@ class SentencesController extends GetxController {
 
   Future<void> createListForSearching() async {
     int i = 0;
-    this._sentencesPicts.forEach((e1) {
+    _sentencesPicts.forEach((e1) {
       String sentence = '';
       e1.forEach((e2) {
-        switch (this._ttsController.languaje) {
+        switch (_ttsController.languaje) {
           // case "es":
           //   sentence += ' ' + e2.texto.es;
           //   break;
