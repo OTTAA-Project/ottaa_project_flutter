@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseDatabaseService {
@@ -271,7 +272,8 @@ class FirebaseDatabaseService {
     /// check if data exists online or not
     final User? auth = firebaseRed.currentUser;
     debugPrint('the value from stream is ${auth!.displayName}');
-    final ref = databaseRef.child('GruposExistsOnFirebase$languageName/${auth.uid}/');
+    final ref =
+        databaseRef.child('GruposExistsOnFirebase$languageName/${auth.uid}/');
     final res = await ref.get();
 
     if (kIsWeb) {
@@ -339,14 +341,18 @@ class FirebaseDatabaseService {
   }) async {
     final instance = await SharedPreferences.getInstance();
     final fileExists = instance.getBool(fileName);
+    final String key = instance.getString('Language_KEY') ?? 'Spanish';
+    final String languageCode = Constants.LANGUAGE_CODES[key]!;
     debugPrint('the result is for file : $fileExists');
     if (onlineSnapshot.exists && onlineSnapshot.value != null) {
       if (fileExists == true && fileExists != null) {
         debugPrint('from file on the device : mobile');
         if (pictoOrGrupo) {
-          return await _fileController.readPictoFromFile();
+          return await _fileController.readPictoFromFile(
+              language: languageCode);
         } else {
-          return await _fileController.readGruposFromFile();
+          return await _fileController.readGruposFromFile(
+              language: languageCode);
         }
       } else {
         final ref =
@@ -360,10 +366,12 @@ class FirebaseDatabaseService {
                 .toList();
         debugPrint('from online firebase : mobile');
         if (pictoOrGrupo) {
-          await _fileController.writePictoToFile(data: data);
+          await _fileController.writePictoToFile(
+              data: data, language: languageCode);
           await instance.setBool(fileName, true);
         } else {
-          await _fileController.writeGruposToFile(data: data);
+          await _fileController.writeGruposToFile(
+              data: data, language: languageCode);
           await instance.setBool(fileName, true);
         }
         return da;
@@ -384,13 +392,17 @@ class FirebaseDatabaseService {
         fileData.add(obj);
       });
       debugPrint('from file user first time: mobile');
-      //todo: make different functions to write
+
       if (pictoOrGrupo) {
-        await _fileController.writePictoToFile(data: data.toString());
-        await instance.setBool(firebaseName, true);
+        await _fileController.writePictoToFile(
+            data: data.toString(), language: languageCode);
+        await instance.setBool(fileName, true);
       } else {
-        await _fileController.writeGruposToFile(data: data.toString());
-        await instance.setBool(firebaseName, true);
+        await _fileController.writeGruposToFile(
+          data: data.toString(),
+          language: languageCode,
+        );
+        await instance.setBool(fileName, true);
       }
       return listData;
     }
@@ -405,14 +417,20 @@ class FirebaseDatabaseService {
   }) async {
     final instance = await SharedPreferences.getInstance();
     final fileExists = instance.getBool(fileName);
+    final String key = instance.getString('Language_KEY') ?? 'Spanish';
+    final String languageCode = Constants.LANGUAGE_CODES[key]!;
     debugPrint('the result is for file : $fileExists');
     if (onlineSnapshot.exists && onlineSnapshot.value != null) {
       if (fileExists == true && fileExists != null) {
         debugPrint('from file on the device : mobile');
         if (pictoOrGrupo) {
-          return await _fileController.readPictoFromFile();
+          return await _fileController.readPictoFromFile(
+            language: languageCode,
+          );
         } else {
-          return await _fileController.readGruposFromFile();
+          return await _fileController.readGruposFromFile(
+            language: languageCode,
+          );
         }
       } else {
         final ref =
@@ -426,10 +444,16 @@ class FirebaseDatabaseService {
                 .toList();
         debugPrint('from online firebase : mobile');
         if (pictoOrGrupo) {
-          await _fileController.writePictoToFile(data: data);
+          await _fileController.writePictoToFile(
+            data: data,
+            language: languageCode,
+          );
           await instance.setBool(fileName, true);
         } else {
-          await _fileController.writeGruposToFile(data: data);
+          await _fileController.writeGruposToFile(
+            data: data,
+            language: languageCode,
+          );
           await instance.setBool(fileName, true);
         }
         return da;
@@ -452,10 +476,16 @@ class FirebaseDatabaseService {
       debugPrint('from file user first time: mobile');
       //todo: make different functions to write
       if (pictoOrGrupo) {
-        await _fileController.writePictoToFile(data: data.toString());
+        await _fileController.writePictoToFile(
+          data: data.toString(),
+          language: languageCode,
+        );
         await instance.setBool(fileName, true);
       } else {
-        await _fileController.writeGruposToFile(data: data.toString());
+        await _fileController.writeGruposToFile(
+          data: data.toString(),
+          language: languageCode,
+        );
         await instance.setBool(fileName, true);
       }
       return listData;

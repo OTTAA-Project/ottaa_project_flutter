@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "ottaaproject-flutter",
-    "keyboard": "keyboard-98820"
+    "keyboard": "keyboard-98820",
+    "ottaa": "ottaaproject-flutter"
   },
   "targets": {}
 }

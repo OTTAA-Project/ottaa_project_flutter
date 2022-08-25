@@ -255,7 +255,10 @@ class EditPictoController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writePictoToFile(data: fileData.toString());
+      await localFile.writePictoToFile(
+        data: fileData.toString(),
+        language: _ttsController.languaje,
+      );
       // print('writing to file');
     }
     //for the file data
@@ -330,7 +333,7 @@ class EditPictoController extends GetxController {
         nameController.text = pict.value!.texto.pt;
         break;
       default:
-        nameController.text =pict.value!.texto.es;
+        nameController.text = pict.value!.texto.es;
     }
   }
 }

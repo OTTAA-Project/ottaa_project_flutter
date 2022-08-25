@@ -149,7 +149,9 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                               if (!kIsWeb) {
                                 final localFile = LocalFileController();
                                 await localFile.writeGruposToFile(
-                                    data: fileData.toString());
+                                  data: fileData.toString(),
+                                  language: _homeController.language,
+                                );
                                 // print('writing to file');
                               }
                               //for the file data
@@ -176,7 +178,6 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                               controller.secondTimeSameGroup =
                                   controller.selectedGroupIndex;
                               Get.close(2);
-
                             },
                             child: Icon(
                               Icons.save,

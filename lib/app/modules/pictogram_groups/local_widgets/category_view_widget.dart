@@ -252,6 +252,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   final localFile = LocalFileController();
                   await localFile.writeGruposToFile(
                     data: fileDataGrupo.toString(),
+                    language: _homeController.language,
                   );
                   // print('writing to file');
                 }

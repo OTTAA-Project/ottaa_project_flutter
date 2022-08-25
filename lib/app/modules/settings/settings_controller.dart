@@ -47,7 +47,7 @@ class SettingsController extends GetxController {
   toggleLanguaje(String value) async {
     _ttsController.languaje = Constants.LANGUAGE_CODES[value];
     final instance = await SharedPreferences.getInstance();
-    if (language.value == 'French') {
+    /*if (language.value == 'French') {
       _homeController.picts = await _pictsRepository.getFrench();
       _homeController.grupos = await _grupoRepository.getFrench();
     }
@@ -58,7 +58,9 @@ class SettingsController extends GetxController {
     if (language.value == 'Spanish' || language.value == 'English') {
       _homeController.picts = await _pictsRepository.getAll();
       _homeController.grupos = await _grupoRepository.getAll();
-    }
+    }*/
+    _homeController.picts = await _pictsRepository.getAll();
+    _homeController.grupos = await _grupoRepository.getAll();
     _homeController.language = _ttsController.languaje;
     await _homeController.suggest(0);
     instance.setString('Language_KEY', language.value);

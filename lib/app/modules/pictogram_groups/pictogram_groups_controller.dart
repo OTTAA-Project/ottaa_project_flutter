@@ -201,7 +201,7 @@ class PictogramGroupsController extends GetxController {
       maxHeight: 700,
       maxWidth: 700,
     );
-    if (imageTobeUploadedGrupo != null) {
+    if (imageTobeUploadedGrupo.value != null) {
       print('yes');
       fileImageGrupo.value = File(imageTobeUploadedGrupo.value!.path);
       isImageProvidedGrupo.value = true;
@@ -219,7 +219,7 @@ class PictogramGroupsController extends GetxController {
       maxHeight: 700,
       maxWidth: 700,
     );
-    if (imageTobeUploadedGrupoEdit != null) {
+    if (imageTobeUploadedGrupoEdit.value != null) {
       print('yes');
       fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
       editingGrupo.value = true;
@@ -237,7 +237,7 @@ class PictogramGroupsController extends GetxController {
       maxHeight: 600,
       maxWidth: 600,
     );
-    if (imageTobeUploadedPicto != null) {
+    if (imageTobeUploadedPicto.value != null) {
       print('yes');
       fileImagePicto.value = File(imageTobeUploadedPicto.value!.path);
       isImageProvidedPicto.value = true;
@@ -252,7 +252,7 @@ class PictogramGroupsController extends GetxController {
     if (kIsWeb) {
       imageTobeUploadedGrupo.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedGrupo != null) {
+      if (imageTobeUploadedGrupo.value != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploadedGrupo.value!.readAsBytes();
         imageWidgetGrupo.value = Image.memory(
@@ -267,7 +267,7 @@ class PictogramGroupsController extends GetxController {
     } else {
       imageTobeUploadedGrupo.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedGrupo != null) {
+      if (imageTobeUploadedGrupo.value != null) {
         fileImageGrupo.value = File(imageTobeUploadedGrupo.value!.path);
         isImageProvidedGrupo.value = true;
         Get.back();
@@ -282,7 +282,7 @@ class PictogramGroupsController extends GetxController {
     if (kIsWeb) {
       imageTobeUploadedGrupoEdit.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedGrupoEdit != null) {
+      if (imageTobeUploadedGrupoEdit.value != null) {
         print('I was here');
         final imageInBytes =
             await imageTobeUploadedGrupoEdit.value!.readAsBytes();
@@ -299,7 +299,7 @@ class PictogramGroupsController extends GetxController {
     } else {
       imageTobeUploadedGrupoEdit.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedGrupoEdit != null) {
+      if (imageTobeUploadedGrupoEdit.value != null) {
         fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
         editingGrupo.value = true;
         selectedPhotoUrlGrupoEdit.value = '';
@@ -315,7 +315,7 @@ class PictogramGroupsController extends GetxController {
     if (kIsWeb) {
       imageTobeUploadedPicto.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedPicto != null) {
+      if (imageTobeUploadedPicto.value != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploadedPicto.value!.readAsBytes();
         imageWidgetPicto.value = Image.memory(
@@ -331,7 +331,7 @@ class PictogramGroupsController extends GetxController {
     } else {
       imageTobeUploadedPicto.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedPicto != null) {
+      if (imageTobeUploadedPicto.value != null) {
         fileImagePicto.value = File(imageTobeUploadedPicto.value!.path);
         isImageProvidedPicto.value = true;
         selectedPhotoUrlPicto.value = '';
@@ -345,7 +345,8 @@ class PictogramGroupsController extends GetxController {
 
   Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
       {required String text}) async {
-    final String languageFormat = _homeController.language == 'en' ? '639-3' : '639-1';
+    final String languageFormat =
+        _homeController.language == 'en' ? '639-3' : '639-1';
     final language = _homeController.language == 'en' ? 'eng' : 'es';
     url =
         'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
@@ -504,10 +505,26 @@ class PictogramGroupsController extends GetxController {
         }
       }
     }
-    if (_homeController.language.toUpperCase() == 'en-US'.toUpperCase()) {
-      grupoToEdit.texto.en = grupoEditNameController.text;
-    } else {
-      grupoToEdit.texto.es = grupoEditNameController.text;
+    // if (_homeController.language.toUpperCase() == 'en-US'.toUpperCase()) {
+    //   grupoToEdit.texto.en = grupoEditNameController.text;
+    // } else {
+    //   grupoToEdit.texto.es = grupoEditNameController.text;
+    // }
+    switch (_homeController.language) {
+      case "es-AR":
+        grupoToEdit.texto.es = grupoEditNameController.text;
+        break;
+      case "en-US":
+        grupoToEdit.texto.en = grupoEditNameController.text;
+        break;
+      case "fr-FR":
+        grupoToEdit.texto.fr = grupoEditNameController.text;
+        break;
+      case "pt-BR":
+        grupoToEdit.texto.pt = grupoEditNameController.text;
+        break;
+      default:
+        grupoToEdit.texto.es = grupoEditNameController.text;
     }
     int index = -1;
     _homeController.grupos.firstWhere((element) {
@@ -528,7 +545,10 @@ class PictogramGroupsController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writeGruposToFile(data: fileData.toString());
+      await localFile.writeGruposToFile(
+        data: fileData.toString(),
+        language: _homeController.language,
+      );
       // print('writing to file');
     }
     //for the file data
@@ -612,7 +632,10 @@ class PictogramGroupsController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writeGruposToFile(data: fileData.toString());
+      await localFile.writeGruposToFile(
+        data: fileData.toString(),
+        language: _homeController.language,
+      );
       // print('writing to file');
     }
     //for the file data
@@ -725,7 +748,10 @@ class PictogramGroupsController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writePictoToFile(data: fileData.toString());
+      await localFile.writePictoToFile(
+        data: fileData.toString(),
+        language: _homeController.language,
+      );
       // print('writing to file');
     }
     //for the file data
@@ -746,7 +772,10 @@ class PictogramGroupsController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writeGruposToFile(data: fileDataGrupo.toString());
+      await localFile.writeGruposToFile(
+        data: fileDataGrupo.toString(),
+        language: _homeController.language,
+      );
       // print('writing to file');
     }
     //for the file data

@@ -55,11 +55,13 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                         ),
                       );
                     });
-                _pictogramController.grupos[_pictogramController.selectedIndex].relacion.removeWhere(
-                    (element) =>
+                _pictogramController
+                    .grupos[_pictogramController.selectedIndex].relacion
+                    .removeWhere((element) =>
                         element.id == _homeController.pictToBeEdited.id);
-                _homeController.grupos[_pictogramController.selectedIndex].relacion.removeWhere(
-                    (element) =>
+                _homeController
+                    .grupos[_pictogramController.selectedIndex].relacion
+                    .removeWhere((element) =>
                         element.id == _homeController.pictToBeEdited.id);
                 final dataGrupo = _homeController.grupos;
                 List<String> fileDataGrupo = [];
@@ -73,6 +75,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   final localFile = LocalFileController();
                   await localFile.writeGruposToFile(
                     data: fileDataGrupo.toString(),
+                    language: _homeController.language,
                   );
                   // print('writing to file');
                 }

@@ -139,7 +139,10 @@ class PictoPageWidget extends StatelessWidget {
       });
       if (!kIsWeb) {
         final localFile = LocalFileController();
-        await localFile.writePictoToFile(data: fileData.toString());
+        await localFile.writePictoToFile(
+          data: fileData.toString(),
+          language: _ttsController.languaje,
+        );
         print('writing to file');
       }
       //for the file data

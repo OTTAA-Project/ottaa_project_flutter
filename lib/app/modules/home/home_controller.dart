@@ -243,7 +243,7 @@ class HomeController extends GetxController {
     await Future.delayed(
       Duration(milliseconds: 500),
     );
-    if (_ttsController.languaje == Constants.LANGUAGE_CODES['French']) {
+    /* if (_ttsController.languaje == Constants.LANGUAGE_CODES['French']) {
       this.picts = await this._pictsRepository.getFrench();
       this.grupos = await this._grupoRepository.getFrench();
     }
@@ -255,7 +255,9 @@ class HomeController extends GetxController {
         _ttsController.languaje == Constants.LANGUAGE_CODES['English']) {
       this.picts = await this._pictsRepository.getAll();
       this.grupos = await this._grupoRepository.getAll();
-    }
+    }*/
+    this.picts = await this._pictsRepository.getAll();
+    this.grupos = await this._grupoRepository.getAll();
     await suggest(0);
     update(["suggested"]);
   }
@@ -464,6 +466,7 @@ class HomeController extends GetxController {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(
         data: fileDataPicts.toString(),
+        language: language,
       );
       // print('writing to file');
     }

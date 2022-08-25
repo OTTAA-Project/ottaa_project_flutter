@@ -14,7 +14,7 @@ class PictsService {
       languageName: 'portuguesePicto',
       assetName: 'assets/languages/pictos_pt.json',
       firebaseName: 'portuguesePicto',
-      fileName: 'pictos_pt_file',
+      fileName: 'picto_pt_file',
     );
   }
 
