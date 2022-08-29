@@ -239,6 +239,22 @@ class HomeController extends GetxController {
   }
 
   Future<void> loadPicts() async {
+    await Future.delayed(
+      Duration(milliseconds: 500),
+    );
+    /* if (_ttsController.languaje == Constants.LANGUAGE_CODES['French']) {
+      this.picts = await this._pictsRepository.getFrench();
+      this.grupos = await this._grupoRepository.getFrench();
+    }
+    if (_ttsController.languaje == Constants.LANGUAGE_CODES['Portuguese']) {
+      this.picts = await this._pictsRepository.getPortuguese();
+      this.grupos = await this._grupoRepository.getPortuguese();
+    }
+    if (_ttsController.languaje == Constants.LANGUAGE_CODES['Spanish'] ||
+        _ttsController.languaje == Constants.LANGUAGE_CODES['English']) {
+      this.picts = await this._pictsRepository.getAll();
+      this.grupos = await this._grupoRepository.getAll();
+    }*/
     this.picts = await this._pictsRepository.getAll();
     this.grupos = await this._grupoRepository.getAll();
     await suggest(0);
@@ -289,27 +305,31 @@ class HomeController extends GetxController {
       this._voiceText = "";
       this._sentencePicts.forEach((pict) {
         switch (this._ttsController.languaje) {
-          case "es":
+          case "es-AR":
             this._voiceText += "${pict.texto.es} ";
             break;
-          case "en":
+          case "en-US":
             this._voiceText += "${pict.texto.en} ";
             break;
-
+          case "pt-BR":
+            this._voiceText += "${pict.texto.pt} ";
+            break;
+          case "fr-FR":
+            this._voiceText += "${pict.texto.fr} ";
+            break;
           default:
             this._voiceText += "${pict.texto.es} ";
         }
       });
       update(["subtitle"]);
-      print(hasText());
+      // print(hasText());
       await this._ttsController.speakPhrase(this._voiceText);
       this._suggestedIndex = 0;
       this._sentencePicts.clear();
       await this.suggest(0);
-      await Future.delayed(new Duration(seconds: 1), () {
-        this._voiceText = "";
-        update(["subtitle"]);
-      });
+      await Future.delayed(Duration(seconds: 1));
+      this._voiceText = "";
+      update(["subtitle"]);
     }
   }
 
@@ -445,6 +465,7 @@ class HomeController extends GetxController {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(
         data: fileDataPicts.toString(),
+        language: language,
       );
       // print('writing to file');
     }
@@ -492,7 +513,7 @@ class HomeController extends GetxController {
     await _flutterTts.setSpeechRate(1.0);
     await _flutterTts.setVolume(1.0);
     await _flutterTts.setPitch(1.0);
-    if (_ttsController.languaje == 'en') {
+    if (_ttsController.languaje == 'en-US') {
       await _flutterTts.setVoice(
         {"name": "en-us-x-tpf-local", "locale": "en-US"},
       );
@@ -540,13 +561,18 @@ class HomeController extends GetxController {
     this.textToShare = "";
     this._sentencePicts.forEach((pict) {
       switch (this._ttsController.languaje) {
-        case "es":
+        case "es-AR":
           this.textToShare += "${pict.texto.es} ";
           break;
-        case "en":
+        case "en-US":
           this.textToShare += "${pict.texto.en} ";
           break;
-
+        case "fr-FR":
+          this.textToShare += "${pict.texto.fr} ";
+          break;
+        case "pt-BR":
+          this.textToShare += "${pict.texto.pt} ";
+          break;
         default:
           this.textToShare += "${pict.texto.es} ";
       }

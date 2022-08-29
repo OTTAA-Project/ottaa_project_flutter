@@ -64,7 +64,7 @@ class FirebaseDatabaseRepository {
   Future<String> fetchUserEmail() async =>
       await _firebaseDatabaseService.fetchUserEmail();
 
-  Future<String> fetchCurrentVersion() async =>
+  Future<double> fetchCurrentVersion() async =>
       await _firebaseDatabaseService.fetchCurrentVersion();
 
   Future<int> getPicNumber() async =>
@@ -83,4 +83,30 @@ class FirebaseDatabaseRepository {
       dateOfBirthInMs: dateOfBirthInMs,
     );
   }
+
+  Future<List<Pict>> fetchOtherPictos({
+    required String languageName,
+    required String assetName,
+    required String firebaseName,
+    required String fileName,
+  }) async =>
+      await _firebaseDatabaseService.fetchOtherPictos(
+        languageName: languageName,
+        assetName: assetName,
+        firebaseName: firebaseName,
+        fileName: fileName,
+      );
+
+  Future<List<Grupos>> fetchOtherGrupos({
+    required String languageName,
+    required String assetName,
+    required String firebaseName,
+    required String fileName,
+  }) async =>
+      _firebaseDatabaseService.fetchOtherGrupos(
+        languageName: languageName,
+        assetName: assetName,
+        firebaseName: firebaseName,
+        fileName: fileName,
+      );
 }

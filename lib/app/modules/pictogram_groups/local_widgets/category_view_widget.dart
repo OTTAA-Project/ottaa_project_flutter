@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
@@ -46,9 +47,30 @@ class CategoryViewWidget extends StatelessWidget {
                       _homeController.grupos[index];
                   _pictogramController.selectedIndex = index;
                   print(_pictogramController.selectedIndex);
-                  _ttsController.speak(languaje == "en"
-                      ? _homeController.grupos[index].texto.en
-                      : _homeController.grupos[index].texto.es);
+                  switch (_homeController.language) {
+                    case "es-AR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.es);
+                      break;
+                    case "en-US":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.en);
+                      break;
+                    case "fr-FR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.fr);
+                      break;
+                    case "pt-BR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.pt);
+                      break;
+                    default:
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.es);
+                  }
+                  // _ttsController.speak(languaje == "en-US"
+                  //     ? _homeController.grupos[index].texto.en
+                  //     : _homeController.grupos[index].texto.es);
                   await _pictogramController.fetchDesiredPictos();
                   // if (_pictogramController.secondTimeSameGroup ==
                   //     _pictogramController.selectedGroupIndex) {
@@ -62,10 +84,10 @@ class CategoryViewWidget extends StatelessWidget {
                   Get.toNamed(AppRoutes.SELECTPICTO);
                 },
                 child: CategoryWidget(
-                  name: languaje == 'en'
-                      ? _homeController.grupos[index].texto.en
-                      : _homeController.grupos[index].texto.es,
+                  names: _homeController.grupos[index].texto,
                   imageName: _homeController.grupos[index].imagen.picto,
+                  name: Texto(),
+                  languaje: _homeController.language,
                 ),
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -92,11 +114,33 @@ class CategoryViewWidget extends StatelessWidget {
                 onTap: () async {
                   //saying the name after selecting the category
                   //saying the name after selecting the category and saving the selected grupo
-                  _pictogramController.selectedGrupos =
-                      _homeController.grupos[index];
-                  _ttsController.speak(languaje == "en"
-                      ? _homeController.grupos[index].texto.en
-                      : _homeController.grupos[index].texto.es);
+                  // _pictogramController.selectedGrupos =
+                  //     _homeController.grupos[index];
+                  // _ttsController.speak(languaje == "en"
+                  //     ? _homeController.grupos[index].texto.en
+                  //     : _homeController.grupos[index].texto.es);
+                  switch (_homeController.language) {
+                    case "es-AR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.es);
+                      break;
+                    case "en-US":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.en);
+                      break;
+                    case "fr-FR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.fr);
+                      break;
+                    case "pt-BR":
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.pt);
+                      break;
+                    default:
+                      _ttsController
+                          .speak(_homeController.grupos[index].texto.es);
+                  }
+
                   await _pictogramController.fetchDesiredPictos();
                   // if (_pictogramController.secondTimeSameGroup ==
                   //     _pictogramController.selectedGroupIndex) {
@@ -111,11 +155,12 @@ class CategoryViewWidget extends StatelessWidget {
                   Get.toNamed(AppRoutes.SELECTPICTO);
                 },
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.15),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.15),
                   child: CategoryPageWidget(
-                    name: languaje == 'en'
-                        ? _homeController.grupos[index].texto.en
-                        : _homeController.grupos[index].texto.es,
+                    names: _homeController.grupos[index].texto,
+                    name: Texto(),
+                    language: _homeController.language,
                     imageName: _homeController.grupos[index].imagen.picto,
                   ),
                 ),
@@ -141,13 +186,34 @@ class ChoiceDialogue extends GetView<EditPictoController> {
               Get.back();
               // Get.toNamed(AppRoutes.EDITPICTO);
               if (_homeController.userSubscription == 1) {
-                _pictogramController.grupoEditNameController.text =
-                    'en'.toUpperCase() ==
-                            _pictogramController.lang.toUpperCase()
-                        ? _pictogramController.grupoToEdit.texto.en
-                        : _pictogramController.grupoToEdit.texto.es;
-                print(_pictogramController.grupoToEdit.texto.en.toUpperCase());
-                print(_pictogramController.lang.toUpperCase());
+                // _pictogramController.grupoEditNameController.text =
+                //     'en'.toUpperCase() ==
+                //         _homeController.language.toUpperCase()
+                //         ? _pictogramController.grupoToEdit.texto.en
+                //         : _pictogramController.grupoToEdit.texto.es;
+                switch (_homeController.language) {
+                  case "es-AR":
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.es;
+                    break;
+                  case "en-US":
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.en;
+                    break;
+                  case "fr-FR":
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.fr;
+                    break;
+                  case "pt-BR":
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.pt;
+                    break;
+                  default:
+                    _pictogramController.grupoEditNameController.text =
+                        _pictogramController.grupoToEdit.texto.es;
+                }
+                // print(_pictogramController.grupoToEdit.texto.en.toUpperCase());
+                // print(_pictogramController.lang.toUpperCase());
                 Get.to(() => EditGrupoPage());
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('name', 'Edit '));
@@ -186,6 +252,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   final localFile = LocalFileController();
                   await localFile.writeGruposToFile(
                     data: fileDataGrupo.toString(),
+                    language: _homeController.language,
                   );
                   // print('writing to file');
                 }

@@ -35,11 +35,12 @@ class SentenceWidget extends StatelessWidget {
                         itemCount: _.sentencePicts.length + 8,
                         itemBuilder: (BuildContext context, int index) {
                           final Pict speakPict = Pict(
-                              localImg: true,
-                              id: 0,
-                              texto: Texto(en: "", es: ""),
-                              tipo: 6,
-                              imagen: Imagen(picto: "logo_ottaa_dev"));
+                            localImg: true,
+                            id: 0,
+                            texto: Texto(),
+                            tipo: 6,
+                            imagen: Imagen(picto: "logo_ottaa_dev"),
+                          );
                           if (_.sentencePicts.length > index) {
                             final Pict pict = _.sentencePicts[index];
                             return FadeInDown(
@@ -103,8 +104,8 @@ class SentenceWidget extends StatelessWidget {
                       )
                     : ListView.builder(
                         shrinkWrap: true,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: horizontalSize * 0.01),
                         itemCount: 10,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => FadeInDown(

@@ -84,7 +84,7 @@ flutter:
     - assets/profiles/
     - assets/games_images/
     - assets/audios/
-    - assets/.env
+    - assets/languages/
   fonts:
     - family: OTTAAProjectCustomIcon
       fonts:
