@@ -3,7 +3,7 @@
 # Welcome to the OTTAA Project #
 
 
-The OTTAA Project is an augmentative and alternative communication (AAC) mobile application intended for users with speech impairments. It is a fast and effective tool that significantly improves the users' quality of life and facilitates their social and labor reintegration.
+The OTTAA Project is an augmentative and alternative communication (AAC) mobile application intended for users with speech impairments. It is a fast and effective tool that significantly improves users' quality of life and facilitates their social and labor reintegration.
 
 We have already improved the lives of more than 40000 people in 11 countries, helping individuals with cerebral palsy, aphasia, autism, Down syndrome and mild ALS.
 
