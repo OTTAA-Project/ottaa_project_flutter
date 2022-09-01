@@ -1,28 +1,17 @@
 ![image](https://ottaaproject.com/img/ottaa-project.svg)
 
-# Welcome to OTTAA Project wiki #
+# Welcome to the OTTAA Project #
 
 
+The OTTAA Project is an augmentative and alternative communication (AAC) mobile application intended for users with speech impairments. It is a fast and effective tool that significantly improves the users' quality of life and facilitates their social and labor reintegration.
 
-OTTAA Project is an Alternative Augmentative Communication System, intended for people with speech impairments. It is a mobile, fast and effective tool that significantly improves the quality of life and facilitates social and labor integration.
+We have already improved the lives of more than 40000 people in 11 countries, helping individuals with cerebral palsy, aphasia, autism, Down syndrome and mild ALS.
 
-We had already improved more than 40000 people lifestyle in 11 countries, our App helps people with Cerebral Palsy, Aphasia, Autism, Down Syndrome & mild ALS.
-You can be part of this life-changer tech, join us in this social impact open source project.
+You can be a part of this open source project and help build life changing technology, join us!
 
 
 [![](http://img.youtube.com/vi/zAL7yWxc-gU/0.jpg)](http://www.youtube.com/watch?v=zAL7yWxc-gU "Video")
 
-# Project Info #
- *[creating models]
-
-- run `flutter pub get` to get the dependencies.
-- run `flutter pub run build_runner build` to generate the model class code.
-- run `flutter run` to run the project.
-- run `flutter packages pub run build_runner build --delete-conflicting-outputs` if there are some errors for models building.
-- run `flutter build web --release --web-renderer html` for building the project.
-- run `flutter deploy` for deploying it on the master.
-- run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
- * [Web Page](https://ottaaproject.com)
 
 ## Resources
 
@@ -220,6 +209,17 @@ You can be part of this life-changer tech, join us in this social impact open so
 
 ### How to contribute
 We would love your help. Before you start working however, please read and follow this guide.
+
+#### Creating models
+
+- run `flutter pub get` to get the dependencies.
+- run `flutter pub run build_runner build` to generate the model class code.
+- run `flutter run` to run the project.
+- run `flutter packages pub run build_runner build --delete-conflicting-outputs` if there are some errors for models building.
+- run `flutter build web --release --web-renderer html` for building the project.
+- run `flutter deploy` for deploying it on the master.
+- run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
+ * [Web Page](https://ottaaproject.com)
 
 #### Reporting Issues
 
