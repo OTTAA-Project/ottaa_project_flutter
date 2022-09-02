@@ -6,7 +6,7 @@ The [OTTAA Project](https://www.ottaaproject.com/) is an augmentative and altern
 
 You can be a part of this open source project and help build life changing technology, join us!
 
-<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/ARG_VENTURE_OTTAA%20(1%20of%201)-36.jpg" alt="ottaa_img" width="200"/>
+<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/ARG_VENTURE_OTTAA%20(1%20of%201)-36.jpg" alt="ottaa_img" width="400"/>
 
 ## How does it work?
 
