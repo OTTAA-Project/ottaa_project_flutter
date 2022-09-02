@@ -1,7 +1,14 @@
-## Contributing
+## Contributing to the OTTAA Project
 
-### How to contribute
-We would love your help. Before you start working however, please read and follow this guide.
+We would love your help. We have compiled this useful guide to making contributions, please read it carefully before you start working
+
+### Ways of contributing
+
+- As a developer 
+- As a translator 
+- As a manual tester
+- As an automation tester 
+
 
 #### Creating models
 
@@ -14,7 +21,9 @@ We would love your help. Before you start working however, please read and follo
 - run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
  * [Web Page](https://ottaaproject.com)
 
-#### Reporting Issues
+#### As a developer
+
+##### Report an issue
 
 Provide a lot of information about the bug. Mention the version of OTTAA Project and explain how the problem can be reproduced.
 
