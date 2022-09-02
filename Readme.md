@@ -5,8 +5,9 @@
 The [OTTAA Project](https://www.ottaaproject.com/) is an augmentative and alternative communication (AAC) mobile application intended for users with speech and language impairments. It is a fast and effective tool that significantly improves users' quality of life and facilitates their social and labor reintegration. We have already positively impacted the lives of more than 40000 people in 11 countries, helping individuals with cerebral palsy, aphasia, autism, Down syndrome and mild ALS.
 
 You can be a part of this open source project and help build life changing technology, join us!
-
+<p align="center">
 <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/ARG_VENTURE_OTTAA%20(1%20of%201)-36.jpg" alt="ottaa_img" width="400"/>
+</p>
 
 ## How does it work?
 
