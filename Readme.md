@@ -46,7 +46,7 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
  Official Android developer tools
 
   ![Android Studio](https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Android_Studio_icon.svg/64px-Android_Studio_icon.svg.png)
-    [Android Studio](https://developer.android.com/studio)
+   [Android Studio](https://developer.android.com/studio)
 
  Repository
 
@@ -65,7 +65,7 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 
 
 ### API Reference
- * Find the API reference information [here](https://ottaaproject.com/javadoc)
+ * Find the API reference information [here](https://ottaaproject.com/javadoc).
 
 ## Contributing
 
