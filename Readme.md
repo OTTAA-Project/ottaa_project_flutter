@@ -43,6 +43,7 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 ### Tools
 
 >* Official Android developer tools
+
 <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/android_studio" alt="android_dev" width="40" height="40"/> [Android Studio](https://developer.android.com/studio)
 
 >* Repository
