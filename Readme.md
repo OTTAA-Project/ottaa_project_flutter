@@ -22,7 +22,6 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 >* added some custom Icons here from the FlutterIcons website
 
 ### Libraries
-   The libraries used are:
 
   >* [Volley](https://github.com/google/volley) - Network requests
 
@@ -40,26 +39,20 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 
   >* [Android Support Library](https://developer.android.com) - Android (Google) support library
 
-### Tools Needed
 
+### Tools
 
-#### Official Android developer tools
-<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/android_studio" alt="ottaa_img" width="40" height="40"/> [Android Studio](https://developer.android.com/studio)
+>* Official Android developer tools
+<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/android_studio" alt="android_dev" width="40" height="40"/> [Android Studio](https://developer.android.com/studio)
 
- Repository
+>* Repository
+<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/bit_bucket.png" alt="bit_bucket" width="40" height="40"/> [Bitbucket](https://bitbucket.org)
 
-   ![Bitbucket](public/images/tools_libraries/bit_bucket.png)
-  [Bitbucket](https://bitbucket.org)
+>* Pictograms
+<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/araasac.png" alt="araasac" width="40" height="40"/> [Araasac](http://arasaac.org/)
 
- Pictograms
-
-   ![Arasaac](https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/araasac.png)
-  [Araasac](http://arasaac.org/)
-
- Testing Platform
-
-   ![Testproject](https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/test_project.png)
-    [Testproject](http://testproject.io)
+>* Testing Platform
+<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/test_project.png" alt="test_platform" width="40" height="40"/> [Testproject](http://testproject.io)
 
 
 ### API Reference
