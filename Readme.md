@@ -24,21 +24,21 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 ### Libraries
    The libraries used are:
 
-  >* [volley](https://github.com/google/volley) - Network Requests
+  >* [Volley](https://github.com/google/volley) - Network requests
 
-  >* [Android-RateThisApp](https://github.com/kobakei/Android-RateThisApp) - App Rating
+  >* [Android-RateThisApp](https://github.com/kobakei/Android-RateThisApp) - App rating
 
-  >* [lottie-android](https://github.com/airbnb/lottie-android) - Dynamic animations
+  >* [Lottie for Android](https://github.com/airbnb/lottie-android) - Dynamic animations
 
-  >* [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) - Graphic Reports
+  >* [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) - Graphic reports
 
-  >* [Glide](https://github.com/bumptech/glide) - Loading Images
+  >* [Glide](https://github.com/bumptech/glide) - Image loading
 
-  >* [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API/blob/master/LICENSE) Java 7 lamba implementation
+  >* [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API) Stream API for Java 7
 
-  >* [SimpleNlg](https://github.com/simplenlg/simplenlg) - Natural Language Processing
+  >* [SimpleNLG](https://github.com/simplenlg/simplenlg) - Natural language processing
 
-  >* [Android Support Library](https://developer.android.com) - Google's Support Library
+  >* [Android Support Library](https://developer.android.com) - Android (Google) support library
 
 ### Tools Needed
 
