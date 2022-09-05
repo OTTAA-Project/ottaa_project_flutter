@@ -54,7 +54,7 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 
 <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/araasac.png" alt="araasac" width="40" height="40"/> [Araasac](http://arasaac.org/)
 
-> Testing Platform
+* Testing Platform
 
 <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/test_project.png" alt="test_platform" width="40" height="40"/> [Testproject](http://testproject.io)
 
