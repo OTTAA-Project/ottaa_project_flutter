@@ -19,38 +19,38 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 
 ## Resources
 
->* added some custom Icons here from the FlutterIcons website
+* added some custom Icons here from the FlutterIcons website
 
 ### Libraries
 
-  >* [Volley](https://github.com/google/volley) - Network requests
+  * [Volley](https://github.com/google/volley) - Network requests
 
-  >* [Android-RateThisApp](https://github.com/kobakei/Android-RateThisApp) - App rating
+  * [Android-RateThisApp](https://github.com/kobakei/Android-RateThisApp) - App rating
 
-  >* [Lottie for Android](https://github.com/airbnb/lottie-android) - Dynamic animations
+  * [Lottie for Android](https://github.com/airbnb/lottie-android) - Dynamic animations
 
-  >* [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) - Graphic reports
+  * [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) - Graphic reports
 
-  >* [Glide](https://github.com/bumptech/glide) - Image loading
+  * [Glide](https://github.com/bumptech/glide) - Image loading
 
-  >* [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API) Stream API for Java 7
+  * [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API) Stream API for Java 7
 
-  >* [SimpleNLG](https://github.com/simplenlg/simplenlg) - Natural language processing
+  * [SimpleNLG](https://github.com/simplenlg/simplenlg) - Natural language processing
 
-  >* [Android Support Library](https://developer.android.com) - Android (Google) support library
+  * [Android Support Library](https://developer.android.com) - Android (Google) support library
 
 
 ### Tools
 
->* Official Android developer tools
+* Official Android developer tools
 
 <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/android_studio" alt="android_dev" width="40" height="40"/> [Android Studio](https://developer.android.com/studio)
 
->* Repository
+* Repository
 
 <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/bit_bucket.png" alt="bit_bucket" width="40" height="40"/> [Bitbucket](https://bitbucket.org)
 
->* Pictograms
+* Pictograms
 
 <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/araasac.png" alt="araasac" width="40" height="40"/> [Araasac](http://arasaac.org/)
 
