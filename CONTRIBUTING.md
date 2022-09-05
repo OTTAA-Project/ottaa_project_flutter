@@ -1,8 +1,8 @@
-## Contributing to the OTTAA Project
+# Contributing to the OTTAA Project
 
 We would love your help. We have compiled this useful guide to making contributions, please read it carefully before you start working
 
-### Ways of contributing
+## Ways of contributing
 
 - As a developer 
 - As a translator 
@@ -21,11 +21,11 @@ We would love your help. We have compiled this useful guide to making contributi
 - run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
  * [Web Page](https://ottaaproject.com)
 
-#### As a developer
+### As a developer
 
-##### Report an issue
+#### Report an issue
 
-Provide a lot of information about the bug. Mention the version of OTTAA Project and explain how the problem can be reproduced.
+Provide as muc information as possible about the bug. Mention the version of OTTAA Project and explain how the problem can be reproduced.
 
 ### Code Contributions
 
