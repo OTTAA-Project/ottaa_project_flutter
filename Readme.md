@@ -14,7 +14,7 @@ You can be a part of this open source project and help build life changing techn
 Watch this video for a quick and clear exaplanation of how OTTAA works. 
 
 <p align="center">
-<a href="https://www.youtube.com/watch?v=nQZRzBOWD-c"><img src="https://img.youtube.com/vi/nQZRzBOWD-c/0.jpg" alt="OTTAA The first intelligent communication platform for speech impaired people" width="480" height="360"></a>
+<a href="https://www.youtube.com/watch?v=nQZRzBOWD-c"><img src="https://img.youtube.com/vi/nQZRzBOWD-c/0.jpg" alt="OTTAA The first intelligent communication platform for speech impaired people" width="480" height="360"> target="_blank">New Tab</a>
 </p>
 
 ## Resources
