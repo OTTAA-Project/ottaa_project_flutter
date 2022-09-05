@@ -50,7 +50,7 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 
  Repository
 
-   ![Bitbucket](https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/bit_bucket.png)
+   ![Bitbucket](public/images/tools_libraries/bit_bucket.png)
   [Bitbucket](https://bitbucket.org)
 
  Pictograms
