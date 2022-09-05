@@ -45,22 +45,22 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 
  Official Android developer tools
 
-  ![Android Studio](https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Android_Studio_icon.svg/64px-Android_Studio_icon.svg.png)
+  ![Android Studio](public/images/tools_libraries/android_studio)
    [Android Studio](https://developer.android.com/studio)
 
  Repository
 
-   ![Bitbucket](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Bitbucket-blue-logomark-only.svg/64px-Bitbucket-blue-logomark-only.svg.png)
+   ![Bitbucket](https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/bit_bucket.png)
   [Bitbucket](https://bitbucket.org)
 
  Pictograms
 
-   ![Arasaac](https://avatars2.githubusercontent.com/u/10613455?s=200&v=4)
+   ![Arasaac](https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/araasac.png)
   [Araasac](http://arasaac.org/)
 
  Testing Platform
 
-   ![Testproject](https://blog.testproject.io/wp-content/themes/testprojectblog/img/t-plogo.png)
+   ![Testproject](https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/test_project.png)
     [Testproject](http://testproject.io)
 
 
