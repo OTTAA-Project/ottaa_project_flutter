@@ -76,10 +76,10 @@ Support this project by becoming a sponsor. [Become a sponsor](https://www.ottaa
 Thank you to our current sponsors!
 
 <p float="left">
-  <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/UNICEF_logo_2016.png" width="100" /> 
-  <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/EXPO_2020_Dubai_logo.png" width="50" height="50" />
-  <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/katapult_accelerator.png" width="50" height="50" />
- <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/startup_chile.jpg" width="50" height="50" />
+  <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/UNICEF_logo_2016.png" width="200" /> 
+  <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/EXPO_2020_Dubai_logo.png" width="200" />
+  <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/katapult_accelerator.png" width="200" />
+ <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/startup_chile.jpg" width="200" />
 </p>
 
 
