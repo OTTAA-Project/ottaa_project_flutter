@@ -14,7 +14,7 @@ You can be a part of this open source project and help build life changing techn
 The OTTA app facilitates human communication via pictograms suggesting each user the most appropriate pictograms based on preference, need and environment. Watch this video for a more comprehensive walk through. 
 
 <p align="center">
-<a href="https://www.youtube.com/watch?v=nQZRzBOWD-c"><img src="https://img.youtube.com/vi/nQZRzBOWD-c.jpg" alt="OTTAA The first intelligent communication platform for speech impaired people" width="480" height="360"></a>
+<a href="https://www.youtube.com/watch?v=nQZRzBOWD-c"><img src="https://img.youtube.com/vi/nQZRzBOWD-c/0.jpg" alt="OTTAA The first intelligent communication platform for speech impaired people" width="480" height="360"></a>
 </p>
 
 ## Resources
