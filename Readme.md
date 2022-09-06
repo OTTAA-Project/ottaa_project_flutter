@@ -71,8 +71,8 @@ Contributors help the OTTAA Project grow. If you would like to become a contribu
 
 
 <p float="left">
- <a href="https://globalsymbols.com/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/global_symbols.png" width="150"></a>
- 
+ <a href="https://globalsymbols.com/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/global_symbols.png" width="150" hspace="20"></a>
+
  <a href="http://arasaac.org/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/ARASAAC_titulo.png" width="150"></a>
 </p>
 
