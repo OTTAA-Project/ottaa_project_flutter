@@ -69,11 +69,20 @@ Contributors help the OTTAA Project grow. If you would like to become a contribu
 
 ## Acknowledgements
 
-<p float="left">
- <a href="https://arasaac.org/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/araasac.png" alt="araasac" width="70" height="70" [Araasac](http://arasaac.org/) ></a> 
- 
- <a href="https://globalsymbols.com/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/global_symbols.svg" width="100"></a>
-</p>
+<ul class="image-list-small">
+    <li>
+      <a href="#" style="background-image: url('https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/araasac.png');"></a>
+      <div class="details">
+        <h3><a href="#">In the subway</a></h3>
+      </div>
+    </li>
+    <li>
+      <a href="#" style="background-image: url('https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/global_symbols.svg');"></a>
+      <div class="details">
+        <h3><a href="#">Industrial</a></h3>
+      </div>
+    </li>
+</ul>
 
 
 ## Sponsors
