@@ -77,9 +77,10 @@ Thank you to our current sponsors!
 
 <p float="left">
  <a href="https://www.unicef.org/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/UNICEF_logo_2016.png" width="200"></a>
-  <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/EXPO_2020_Dubai_logo.png" width="200" />
-  <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/katapult_accelerator.png" width="200" />
- <img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/startup_chile.jpg" width="200" />
+ <a href="https://startupchile.org/en/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/startup_chile.jpg" width="200"></a>
+ <a href="https://www.expo2020dubai.com/en"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/EXPO_2020_Dubai_logo.png" width="200" width="200"></a>
+ <a href="https://katapult.vc/startups/accelerators/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/katapult_accelerator.png" width="200"></a>
+
 </p>
 
 
