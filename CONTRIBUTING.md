@@ -47,8 +47,8 @@ In order to create a pull request is necessary
 
 
 
-### Documentation
-#### Comments
+#### Documentation
+##### Comments
 * Comment documenting the source code are required.
 
 * Comment a class explaining the purpose of that and how to implements if that required.
@@ -56,12 +56,12 @@ In order to create a pull request is necessary
 * Comment should be formatted as proper English sentences.
 * use Javadoc documentation.
 
-### Code
+#### Code
 
-#### Duplication
+##### Duplication
 * Don't copy-paste source code. Reuse it.
 
-#### Import Libraries
+##### Import Libraries
 
 * Sort by category.
 
@@ -83,7 +83,7 @@ dependencies {
    implementation 'library'
 }
 ```
-#### Indentation
+##### Indentation
 
 
  Switch case
@@ -177,6 +177,10 @@ index
 ├── PrimeraUltimaConexion
 └── Usuarios
 ```
+
+#### Analytics Implementation
+
+[Here](https://github.com/VicColombo/ottaa_project_flutter/blob/master/AnalyticsImplementation.md) is the list of events that should be tracked.
 
 ## Code of Conduct
 
