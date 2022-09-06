@@ -69,6 +69,12 @@ Contributors help the OTTAA Project grow. If you would like to become a contribu
 
 ## Acknowledgements
 
+<p float="left">
+ <a href="https://arasaac.org/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/logo-arasaac-texto.svg" width="200"></a>
+ <a href="https://globalsymbols.com/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/global_symbols.svg" width="200"></a>
+</p>
+
+
 ## Sponsors
 
 Thank you to our current sponsors!
