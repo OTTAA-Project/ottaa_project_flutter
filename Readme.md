@@ -71,7 +71,7 @@ Contributors help the OTTAA Project grow. If you would like to become a contribu
 
 ## Sponsors
 
-Support this project by becoming a sponsor. [Become a sponsor](https://www.ottaaproject.com/support-ottaa-project.php)
+Support this project by [becoming a sponsor](https://www.ottaaproject.com/support-ottaa-project.php).
 
 Thank you to our current sponsors!
 
