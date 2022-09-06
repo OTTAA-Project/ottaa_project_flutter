@@ -52,7 +52,7 @@ The OTTA app facilitates human communication via pictograms suggesting each user
 
 * Pictograms
 
-<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/ARASAAC_titulo.png" alt="araasac" width="40" height="40"/> [Arasaac](http://arasaac.org/)
+<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/ARASAAC_titulo.png" alt="araasac" width="50" height="50"/> [Arasaac](http://arasaac.org/)
 
 * Testing Platform
 
