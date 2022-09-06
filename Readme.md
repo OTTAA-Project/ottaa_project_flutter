@@ -11,7 +11,7 @@ You can be a part of this open source project and help build life changing techn
 
 ## How does it work?
 
-Watch this video for a quick and clear exaplanation of how OTTAA works. 
+The OTTA app facilitates human communication via pictograms suggesting each user the most appropriate pictograms based on preference, need and environment. Watch this video for a more comprehensive walk through. 
 
 <p align="center">
 <a href="https://www.youtube.com/watch?v=nQZRzBOWD-c"><img src="https://img.youtube.com/vi/nQZRzBOWD-c/0.jpg" alt="OTTAA The first intelligent communication platform for speech impaired people" width="480" height="360"></a>
@@ -64,14 +64,12 @@ Watch this video for a quick and clear exaplanation of how OTTAA works.
 
 ## Contributing
 
-Contributors help the OTTAA Project grow. If you would like to become a contributor, please read [Contribute](CONTRIBUTING.md)
+Contributors help the OTTAA Project grow. If you would like to become a contributor, please read [Contribute](CONTRIBUTING.md).
 
 
 ## Acknowledgements
 
 ## Sponsors
-
-Support this project by [becoming a sponsor](https://www.ottaaproject.com/support-ottaa-project.php).
 
 Thank you to our current sponsors!
 
@@ -83,6 +81,7 @@ Thank you to our current sponsors!
 
 </p>
 
+Support this project by [becoming a sponsor](https://www.ottaaproject.com/support-ottaa-project.php).
 
 ## Legal & Licenses
 
