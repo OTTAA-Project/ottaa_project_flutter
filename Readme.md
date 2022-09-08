@@ -91,9 +91,9 @@ Support this project by [becoming a sponsor](https://www.ottaaproject.com/suppor
 
 ## :memo: Legal & Licenses
 
-Code - GPLv3
-ARASAAC Symbols - CC BY-NC-SA 4.0
-Global Symbols CIC - CC BY-NC-SA 4.0
+* Code - GPLv3
+* ARASAAC Symbols - CC BY-NC-SA 4.0
+* Global Symbols CIC - CC BY-NC-SA 4.0
 
 OTTAA Project™ 2016 - 2022
 
