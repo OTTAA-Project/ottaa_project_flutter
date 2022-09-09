@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/data/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -545,5 +546,30 @@ class FirebaseDatabaseService {
     await ref.set({
       data,
     });
+  }
+
+  Future<void> uploadFrases({
+    required String language,
+    required String data,
+    required String type,
+  }) async {
+    final ref =
+        databaseRef.child('frases/${firebaseRed.currentUser!.uid}/$language/$type');
+    await ref.set({'data': data});
+  }
+
+  Future<List<Sentence>> fetchFrases({
+    required String language,
+    required String type,
+  }) async {
+    final ref = databaseRef
+        .child('frases/${firebaseRed.currentUser!.uid}/$language/$type');
+    final res = await ref.get();
+    final data = res.value['data'];
+    //todo: write different conversions here
+    final da =
+        (jsonDecode(data) as List).map((e) => Sentence.fromJson(e)).toList();
+
+    return da;
   }
 }

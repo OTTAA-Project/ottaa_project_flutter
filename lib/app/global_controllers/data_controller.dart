@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/data/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/firebase_database_repository.dart';
 
 class DataController extends GetxController {
@@ -84,6 +85,7 @@ class DataController extends GetxController {
       dateOfBirthInMs: dateOfBirthInMs,
     );
   }
+
   Future<List<Pict>> fetchOtherPictos({
     required String languageName,
     required String assetName,
@@ -103,11 +105,31 @@ class DataController extends GetxController {
     required String firebaseName,
     required String fileName,
   }) async =>
-      _firebaseDatabaseController.fetchOtherGrupos(
+      await _firebaseDatabaseController.fetchOtherGrupos(
         languageName: languageName,
         assetName: assetName,
         firebaseName: firebaseName,
         fileName: fileName,
+      );
+
+  Future<void> uploadFrases({
+    required String language,
+    required String data,
+    required String type,
+  }) async =>
+      await _firebaseDatabaseController.uploadFrases(
+        language: language,
+        data: data,
+        type: type,
+      );
+
+  Future<List<Sentence>> fetchFrases({
+    required String language,
+    required String type,
+  }) async =>
+      await _firebaseDatabaseController.fetchFrases(
+        language: language,
+        type: type,
       );
 
   @override

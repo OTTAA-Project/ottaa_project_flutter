@@ -324,6 +324,8 @@ class HomeController extends GetxController {
       update(["subtitle"]);
       // print(hasText());
       await this._ttsController.speakPhrase(this._voiceText);
+      //todo: add a function here to keep the used sentences and upload them to firebase
+      uploadFrases();
       this._suggestedIndex = 0;
       this._sentencePicts.clear();
       await this.suggest(0);
@@ -331,6 +333,9 @@ class HomeController extends GetxController {
       this._voiceText = "";
       update(["subtitle"]);
     }
+  }
+  Future<void> uploadFrases()async{
+
   }
 
   Future<void> suggest(int id) async {

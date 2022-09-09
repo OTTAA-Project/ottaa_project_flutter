@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import 'local_widgets/search_sentence.dart';
@@ -20,44 +21,19 @@ class SentencesPage extends GetView<SentencesController> {
       builder: (_) => Scaffold(
         appBar: AppBar(
           backgroundColor: kOTTAAOrangeNew,
-          leading: Container(),
+          automaticallyImplyLeading: false,
           foregroundColor: Colors.white,
           elevation: 0,
           title: Text('most_used_sentences'.tr),
-          /*actions: [
-            Icon(
-              Icons.reorder,
-              size: 30,
-            ),
-            const SizedBox(
-              width: 8,
-            ),
+          actions: [
             GestureDetector(
-              onTap: () {
-                // _pictogramController.categoryGridviewOrPageview.value =
-                //     !_pictogramController
-                //         .categoryGridviewOrPageview.value;
-              },
-              child: Icon(
-                Icons.view_carousel,
-                size: 30,
-              ),
+              onTap: () => Get.toNamed(AppRoutes.FAVOURITESCREENPAGE),
+              child: Icon(Icons.star),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 8),
-            //   child: Icon(
-            //     Icons.add_circle_outline,
-            //     size: 30,
-            //   ),
-            // ),
-            // Icon(
-            //   Icons.cloud_download,
-            //   size: 30,
-            // ),
             const SizedBox(
               width: 16,
             ),
-          ],*/
+          ],
         ),
         body: Container(
           color: Colors.black,
