@@ -27,4 +27,6 @@ class Constants {
   static const FRENCH_FRASES_FAVOURITE_FILE_NAME = 'frases_es_favourite_file';
   static const PORTUGUESE_FRASES_FAVOURITE_FILE_NAME =
       'frases_es_favourite_file';
+  static const MOST_USED_SENTENCES = 'most_used_sentences';
+  static const FAVOURITE_SENTENCES = 'favourite_sentences';
 }

@@ -117,16 +117,22 @@ class FirebaseDatabaseRepository {
     required String type,
   }) async =>
       await _firebaseDatabaseService.uploadFrases(
-        language: language,
-        data: data,
-        type: type
-      );
+          language: language, data: data, type: type);
 
   Future<List<Sentence>> fetchFrases({
     required String language,
     required String type,
   }) async =>
       await _firebaseDatabaseService.fetchFrases(
+        language: language,
+        type: type,
+      );
+
+  Future<List<Sentence>> fetchFavouriteFrases({
+    required String language,
+    required String type,
+  }) async =>
+      await _firebaseDatabaseService.fetchFavouriteFrases(
         language: language,
         type: type,
       );

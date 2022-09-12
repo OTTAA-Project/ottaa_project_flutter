@@ -19,9 +19,9 @@ class Sentence {
   });
 
   final String frase;
-  final int frecuencia;
+  int frecuencia;
   final Complejidad complejidad;
-  final List<int> fecha;
+  List<int> fecha;
   final String locale;
   final int id;
 

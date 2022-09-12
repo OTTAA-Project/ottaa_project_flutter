@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/app/data/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/sentences_repository.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 
 class SentencesController extends GetxController {
   final _ttsController = Get.find<TTSController>();
@@ -30,6 +31,7 @@ class SentencesController extends GetxController {
   List<Pict> _picts = [];
   List<Sentence> _sentences = [];
   List<Pict> _sentencePicts = [];
+  List<Sentence> favouriteSentences = [];
 
   List<List<Pict>> _sentencesPicts = [];
 
@@ -58,25 +60,108 @@ class SentencesController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    await _loadPicts();
+    await loadSentences(type: Constants.MOST_USED_SENTENCES);
     createListForSearching();
     showCircular.value = false;
   }
 
-  Future<void> _loadPicts() async {
+  Future<void> loadSentences({required String type}) async {
     this._picts = await this._pictsRepository.getAll();
-    this._sentences = await this._sentencesRepository.getAll();
+    final language = _ttsController.languaje;
+    switch (language) {
+      case "es-AR":
+        this._sentences = await this._sentencesRepository.getAll(
+              language: language,
+              type: type,
+            );
+        break;
+      case "en-US":
+        this._sentences = await this._sentencesRepository.getAll(
+              language: language,
+              type: type,
+            );
+        break;
+      case "fr-FR":
+        this._sentences = await this._sentencesRepository.getAll(
+              language: language,
+              type: type,
+            );
+        break;
+      case "pt-BR":
+        this._sentences = await this._sentencesRepository.getAll(
+              language: language,
+              type: type,
+            );
+        break;
+      default:
+        this._sentences = await this._sentencesRepository.getAll(
+              language: language,
+              type: Constants.SPANISH_FRASES_MOST_USED_FILE_NAME,
+            );
+    }
 
-    this._sentences.forEach((sentence) {
-      this._sentencePicts = [];
-      sentence.complejidad.pictosComponentes.forEach((pictoComponente) {
-        this
-            ._sentencePicts
-            .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+    ///sorting
+    Comparator<Sentence> sortById =
+        (a, b) => a.frecuencia.compareTo(b.frecuencia);
+    _sentences.sort(sortById);
+    _sentences = _sentences.reversed.toList();
+    if (_sentences.length >= 10) {
+      for (int i = 0; i <= 9; i++) {
+        this._sentencePicts = [];
+        _sentences[i].complejidad.pictosComponentes.forEach((pictoComponente) {
+          this
+              ._sentencePicts
+              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+        });
+        this._sentencesPicts.add(this._sentencePicts);
+      }
+    } else {
+      this._sentences.forEach((sentence) {
+        this._sentencePicts = [];
+        sentence.complejidad.pictosComponentes.forEach((pictoComponente) {
+          this
+              ._sentencePicts
+              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+        });
+        this._sentencesPicts.add(this._sentencePicts);
       });
-      this._sentencesPicts.add(this._sentencePicts);
-    });
+    }
     update();
+  }
+
+  Future<void> fetchFavourites() async {
+    final language = _ttsController.languaje;
+    switch (language) {
+      case "es-AR":
+        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
+              language: language,
+              type: Constants.MOST_USED_SENTENCES,
+            );
+        break;
+      case "en-US":
+        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
+              language: language,
+              type: Constants.SPANISH_FRASES_FAVOURITE_FILE_NAME,
+            );
+        break;
+      case "fr-FR":
+        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
+              language: language,
+              type: Constants.FRENCH_FRASES_FAVOURITE_FILE_NAME,
+            );
+        break;
+      case "pt-BR":
+        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
+              language: language,
+              type: Constants.PORTUGUESE_FRASES_FAVOURITE_FILE_NAME,
+            );
+        break;
+      default:
+        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
+              language: language,
+              type: Constants.SPANISH_FRASES_FAVOURITE_FILE_NAME,
+            );
+    }
   }
 
   Future<void> speak() async {

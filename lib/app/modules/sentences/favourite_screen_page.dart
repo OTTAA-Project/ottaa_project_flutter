@@ -98,9 +98,7 @@ class FavouriteScreenPage extends GetView<SentencesController> {
                     child: Center(
                       child: GetBuilder<SentencesController>(
                         id: "favourite_sentences",
-                        builder: (_) => Container(
-
-                        ),
+                        builder: (_) => Container(),
                       ),
                     ),
                   ),

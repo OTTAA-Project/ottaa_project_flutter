@@ -132,6 +132,15 @@ class DataController extends GetxController {
         type: type,
       );
 
+  Future<List<Sentence>> fetchFavouriteFrases({
+    required String language,
+    required String type,
+  }) async =>
+      _firebaseDatabaseController.fetchFavouriteFrases(
+        language: language,
+        type: type,
+      );
+
   @override
   void onInit() async {
     super.onInit();
