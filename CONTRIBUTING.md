@@ -11,22 +11,14 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ## As a developer
 
-### What you need to know
+### Get started: setting up your IDE
 
-In order to contribute as a developer, you will need to have a basic understanding of -pending-.
+- Run `flutter pub get` to get the dependencies.
+- Run `flutter pub run build_runner build` to generate the model class code.
+- Run `flutter run` to run the project.
+- If you encounter any errors for model building, run `flutter packages pub run build_runner build --delete-conflicting-outputs`.
 
-#### Creating models
-
-- run `flutter pub get` to get the dependencies.
-- run `flutter pub run build_runner build` to generate the model class code.
-- run `flutter run` to run the project.
-- run `flutter packages pub run build_runner build --delete-conflicting-outputs` if there are some errors for models building.
-- run `flutter build web --release --web-renderer html` for building the project.
-- run `flutter deploy` for deploying it on the master.
-- run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
- * [Web Page](https://ottaaproject.com)
-
-#### Report an issue
+### Reporting an issue
 
 Provide as muc information as possible about the bug. Mention the version of OTTAA Project and explain how the problem can be reproduced.
 
