@@ -19,8 +19,6 @@ The OTTA app facilitates human communication via pictograms suggesting each user
 
 ## Resources
 
-* added some custom Icons here from the FlutterIcons website
-
 ### Libraries
 
   * [Volley](https://github.com/google/volley) - Network requests
@@ -94,8 +92,7 @@ Support this project by [becoming a sponsor](https://www.ottaaproject.com/suppor
 * Code - GPLv3
 * ARASAAC Symbols - CC BY-NC-SA 4.0
 * Global Symbols CIC - CC BY-NC-SA 4.0
-
-OTTAA Project™ 2016 - 2022
+* OTTAA Project™ 2016 - 2022
 
 OTTAA's brand assets, texts, logos, icons, designs, names of other OTTAA software, and any other brand features and elements, whether registered or unregistered (“Brand Assets”)—are proprietary assets owned exclusively by OTTAA and its group of companies.
 
