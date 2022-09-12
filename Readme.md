@@ -42,19 +42,19 @@ The OTTA app facilitates human communication via pictograms suggesting each user
 
 * Official Android developer tools
 
-<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/android_studio" alt="android_dev" width="40" height="40"/> [Android Studio](https://developer.android.com/studio)
+<img src="/public/images/tools_libraries/android_studio" alt="android_dev" width="40" height="40"/> [Android Studio](https://developer.android.com/studio)
 
 * Repository
 
-<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/bit_bucket.png" alt="bit_bucket" width="40" height="40"/> [Bitbucket](https://bitbucket.org)
+<img src="/public/images/tools_libraries/bit_bucket.png" alt="bit_bucket" width="40" height="40"/> [Bitbucket](https://bitbucket.org)
 
 * Pictograms
 
-<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/ARASAAC_titulo.png" alt="araasac" width="50" height="50"/> [Arasaac](http://arasaac.org/)
+<img src="/public/images/tools_libraries/ARASAAC_titulo.png" alt="araasac" width="50" height="50"/> [Arasaac](http://arasaac.org/)
 
 * Testing Platform
 
-<img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/test_project.png" alt="test_platform" width="40" height="40"/> [Testproject](http://testproject.io)
+<img src="/public/images/tools_libraries/test_project.png" alt="test_platform" width="40" height="40"/> [Testproject](http://testproject.io)
 
 
 ### API Reference
@@ -69,8 +69,8 @@ Contributors help the OTTAA Project grow. If you would like to become a contribu
 
 
 <p float="left">
- <a href="https://globalsymbols.com/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/global_symbols.png" width="150" hspace="20"></a>
- <a href="http://arasaac.org/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/tools_libraries/ARASAAC_titulo.png" width="150"></a>
+ <a href="https://globalsymbols.com/"><img src="/public/images/global_symbols.png" width="150" hspace="20"></a>
+ <a href="http://arasaac.org/"><img src="/public/images/tools_libraries/ARASAAC_titulo.png" width="150"></a>
 </p>
 
 ## Sponsors
@@ -78,10 +78,10 @@ Contributors help the OTTAA Project grow. If you would like to become a contribu
 Thank you to our current sponsors!
 
 <p float="left">
- <a href="https://www.unicef.org/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/UNICEF_logo_2016.png" width="200"></a>
- <a href="https://startupchile.org/en/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/startup_chile.jpg" width="200"></a>
- <a href="https://www.expo2020dubai.com/en"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/EXPO_2020_Dubai_logo.png" width="200" width="200"></a>
- <a href="https://katapult.vc/startups/accelerators/"><img src="https://github.com/VicColombo/ottaa_project_flutter/blob/master/public/images/sponsors/katapult_accelerator.png" width="200"></a>
+ <a href="https://www.unicef.org/"><img src="/public/images/sponsors/UNICEF_logo_2016.png" width="200"></a>
+ <a href="https://startupchile.org/en/"><img src="/public/images/sponsors/startup_chile.jpg" width="200"></a>
+ <a href="https://www.expo2020dubai.com/en"><img src="/public/images/sponsors/EXPO_2020_Dubai_logo.png" width="200" width="200"></a>
+ <a href="https://katapult.vc/startups/accelerators/"><img src="/public/images/sponsors/katapult_accelerator.png" width="200"></a>
 
 </p>
 
