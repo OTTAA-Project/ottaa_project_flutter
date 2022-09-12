@@ -1,6 +1,6 @@
 # Contributing to the OTTAA Project
 
-We would love your help. We have compiled this useful guide to making contributions, please read it carefully before you start working
+We would love your help in the OTTAA Project. We have compiled this useful guide to all the ways of making contributions, reading it carefully before you start is important to maintain consistency in the project quality and ensure a respectful and positive environment in our community.
 
 ## Ways of contributing
 
@@ -9,6 +9,11 @@ We would love your help. We have compiled this useful guide to making contributi
 - As a manual tester
 - As an automation tester 
 
+## As a developer
+
+### What you need to know
+
+In order to contribute as a developer, you will need to have a basic understanding of -pending-.
 
 #### Creating models
 
@@ -21,17 +26,13 @@ We would love your help. We have compiled this useful guide to making contributi
 - run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
  * [Web Page](https://ottaaproject.com)
 
-### As a developer
-
 #### Report an issue
 
 Provide as muc information as possible about the bug. Mention the version of OTTAA Project and explain how the problem can be reproduced.
 
 ### Code Contributions
 
-
-
-#### Create a pull request
+#### Submitting a pull request
 In order to create a pull request is necessary
 
 * Avoid file conflicts with the source code
@@ -181,6 +182,21 @@ index
 ### Analytics Implementation
 
 [Here](https://github.com/VicColombo/ottaa_project_flutter/blob/master/AnalyticsImplementation.md) is the list of events that should be tracked.
+
+## As a translator
+
+-pending-
+
+## As a manual tester
+
+-pending-
+
+## As an automation tester 
+
+If you are proficient with automation testing, we will be happy if you can help us!. 
+We have developed a little automation framework based on [Webdriver.io](https://webdriver.io/), that runs using the cloud service provided by [Browserstack](https://www.browserstack.com/). Here you can find the repository to start collaborating: 
+https://github.com/cboard-org/cboard-webdriverio
+
 
 ## Code of Conduct
 
