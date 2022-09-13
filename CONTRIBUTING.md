@@ -4,19 +4,6 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ## Table of contents
 
-1. [Ways of contributing](#Ways-of-contributing)
-2. [As a developer](#As-a-developer)
-  * [Setting up your IDE](#Setting-up-your-IDE)
-  * [Reporting an issue](#Reporting-an-issue)
-  * [Submitting a pull request](#Submitting-a-pull-request)
-  * [Code conventions](#Code-conventions)
-  * [Analytics implementation](#Analytics-implementation)
-4. [As a translator](#As-a-translator)
-5. [As a manual tester](#As-a-manual-tester)
-6. [As an automation tester](#As-an-automation-tester)
-7. [Code of conduct](#Code-of-conduct)
-
-
 <div id="toc_container">
 <p class="toc_title">Contents</p>
 <ol class="toc_list">
@@ -211,36 +198,37 @@ We will be implementing a continuous integration workflow that will be running m
 
 ### OTTAA Project Open Source Code of Conduct
 
-In order to work in the  OTTAA Project in a collaborative way and help our community grow we ask you to comply with the following code of conduct..
+The following core principles guide work and collaboration in the OTTAA Project:
 
-** Diversity makes us  grow : **  We truly believe that every user’s or developer’s age, gender, nationality, race or sexual orientation provide content based on a plurality of experiences and knowledge that contribute to the construction of a complete tool which reflects the real needs of potential users of the OTTAA Project.
+** Diversity makes us  grow : **  We truly believe diversity of experiences and knowledge contribute to building a better and more complete tool which more accurately reflects the real needs of potential users of the OTTAA Project. With that in minds we respect and welcome all differences of our users or developers age, gender, nationality, race or sexual orientation to name a few.
 
-** Debate enriches us : ** As we consider that everyone can  contribute significantly to improving the software we seek to establish mutual respect among the members of the community, reaching a consensus among the developers and solving the problem in the best way possible.
+** Debate enriches us : ** As we consider that everyone can contribute significantly to improving the software we seek to establish respect among the members of the community in order to better reach a consensus among the developers and resolve issues in the best possible way.
 
-It is necessary to comply with the following  guidelines in our conduct code:
 
-* **Refraining from discriminating .**
-* **Avoiding posting pornographic content.**
-* **Refraining from publishing the user’s details or relevant  information.**
-* **Refraining from making  heavy jokes.**
-* **Avoiding insults**
-* **Refraining from judging others on there religions or race**
+With those in mind, we ask everyone to comply with the following guidelines in our code of conduct in any and every interaction among the OTTAA community:
+
+* **Refrain from discriminating against others.**
+* **Respect privacy: refrain from publishing the user’s details or relevant information.**
+* **Refrain from making funny coments or jokes if you think they might be offensive to others.**
+* **Avoid insults or harsh language.**
+* **Refrain from judging others based on their religion, sexual orientation, nationality or ethnic procedence.**
+* **Avoid posting pornographic content.**
 
 ### Reporting breaches to the code of conduct
 
-In the case of any violation of our code of conduct, it should be reported as follows:
-Share your contact details
+Any violations of our code of conduct should be reported. Please follow these steps:
 
-* **Send a screenshot of the situation**
-* **Explain the situation in as much detail as possible**
-* **Send the email to the following address : support@ottaaproject.com**
+* **Send the email to the following address : support@ottaaproject.com.**
+* **Include a screenshot of the situation in which de code was violated.**
+* **Explain the situation in as much detail as possible.**
+* If possible, share your contact details
 
-After the  revision of the report, the team assigned to analyze the case will carry out the following actions:
+After the  revising the ciolation report the team assigned to analyze the case will carry out the following actions:
 
-* **Notify the user of the breach**
-* **devise a way for the user to amend that attitude.**
+* **Notify the user of the breach.**
+* **Devise a way for the user to amend their error.**
 
-the user can be expelled from the community in the following situation :
+The user can be expelled from the community in the following situation :
 
-* **Repeated conduct**
+* **Repeated inadequate conduct**
 * **Posting of pornographic content**
