@@ -6,16 +6,21 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 1. [Ways of contributing](#Ways-of-contributing)
 2. [As a developer](#As-a-developer)
-  1. [Setting up your IDE](#Setting-up-your-IDE)
-  2. [Reporting an issue](#Reporting-an-issue)
-  3. [Submitting a pull request](#Submitting-a-pull-request)
-  4. [Code conventions](#Code-conventions)
-  5. [Analytics implementation](#Analytics-implementation)
+  * [Setting up your IDE](#Setting-up-your-IDE)
+  * [Reporting an issue](#Reporting-an-issue)
+  * [Submitting a pull request](#Submitting-a-pull-request)
+  * [Code conventions](#Code-conventions)
+  * [Analytics implementation](#Analytics-implementation)
 4. [As a translator](#As-a-translator)
 5. [As a manual tester](#As-a-manual-tester)
 6. [As an automation tester](#As-an-automation-tester)
 7. [Code of conduct](#Code-of-conduct)
 
+
+
+1. Item1
+  1.1. SubItemA
+  1.2. SubItemB
 
 ## Ways of contributing
 
