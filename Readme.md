@@ -17,6 +17,17 @@ The OTTA app facilitates human communication via pictograms for those who are sp
 <a href="https://www.youtube.com/watch?v=nQZRzBOWD-c"><img src="https://img.youtube.com/vi/nQZRzBOWD-c/0.jpg" alt="OTTAA The first intelligent communication platform for speech impaired people" width="480" height="360"></a>
 </p>
 
+## Getting started: setting up your IDE for the first time
+
+* Run `flutter pub get` to get the dependencies.
+* Run `flutter pub run build_runner build` to generate the model class code.
+* Run `flutter run` to run the project.
+
+\* If this is not your first time setting up and you encounter any errors for model building:
+
+* Run `flutter packages pub run build_runner build --delete-conflicting-outputs`.
+
+
 ## Resources
 
 ### Libraries
