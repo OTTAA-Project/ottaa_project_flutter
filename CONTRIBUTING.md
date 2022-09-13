@@ -19,16 +19,17 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 <div id="toc_container">
 <p class="toc_title">Contents</p>
-<ul class="toc_list">
-  <li><a href="#First_Point_Header">1 First Point Header</a>
-  <ul>
-    <li><a href="#First_Sub_Point_1">1.1 First Sub Point 1</a></li>
-    <li><a href="#First_Sub_Point_2">1.2 First Sub Point 2</a></li>
-  </ul>
+<ol class="toc_list">
+  <li><a href="#Ways_of_contributing">1. Ways of contributing</a>
+  <li><a href="#As_a_developer">2. As a developer</a></li>
+  <ol>
+    <li><a href="#Setting_up_your_IDE">2.1 Setting up your IDE</a></li>
+    <li><a href="#First_Sub_Point_2">2.2 First Sub Point 2</a></li>
+  </ol>
 </li>
 <li><a href="#Second_Point_Header">2 Second Point Header</a></li>
 <li><a href="#Third_Point_Header">3 Third Point Header</a></li>
-</ul>
+</ol>
 </div>
 
 ## Ways of contributing
