@@ -17,10 +17,16 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 7. [Code of conduct](#Code-of-conduct)
 
 
-
-1. Item1
-  1.1. SubItemA
-  1.2. SubItemB
+<ol> 
+  <li>[One](#Ways-of-contributing)</li> 
+  <li>Two
+    <ol> 
+      <li>Inner One</li> 
+      <li>inner Two</li> 
+    </ol>
+  </li>
+  <li>Three</li> 
+</ol> 
 
 ## Ways of contributing
 
