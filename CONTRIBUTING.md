@@ -42,7 +42,7 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ### Reporting an issue
 
-Any bug or hotfix that results from manual testing should be reported via an [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues) in our GitHub repository **using the [template]**(https://github.com/OTTAA-Project/ottaa_project_flutter/issues/new?assignees=&labels=&template=bug_report.md&title=) for bug reporting and **providing as much information as possible** about the bug, including: used **version of OTTAA** and/or **version of web navigator** and clear instructions on how to **reproduce** the bug.
+Any bug or hotfix that results from manual testing should be reported via an [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues) in our GitHub repository using the **[template](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/new?assignees=&labels=&template=bug_report.md&title=)** for bug reporting and **providing as much information as possible** about the bug, including: used **version of OTTAA** and/or **version of web navigator** and clear instructions on how to **reproduce** the bug.
 
 
 ### Submitting a pull request
