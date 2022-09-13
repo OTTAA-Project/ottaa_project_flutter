@@ -42,7 +42,7 @@ Please bear the following in mind when creating a PR:
 
 ### General style guidelines for writing and documenting code
 
-##### On commenting:
+#### On commenting:
 
 * Comments should always be **full English sentences**.
 
@@ -50,7 +50,7 @@ Please bear the following in mind when creating a PR:
 
 * **Comment all your classes** explaining their purpose and how to implement them if required.
 
-##### On code duplication:
+#### On code duplication:
 
 * **Don't copy-paste** source code. Reuse it in a  way that makes sense, re writing the neccessary parts.
 
