@@ -20,15 +20,20 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 <div id="toc_container">
 <p class="toc_title">Contents</p>
 <ol class="toc_list">
-  <li><a href="#Ways_of_contributing">Ways of contributing</a>
-  <li><a href="#As_a_developer">As a developer</a></li>
+  <li><a href="#Ways-of-contributing">Ways of contributing</a>
+  <li><a href="#As-a-developer">As a developer</a></li>
   <ol>
-    <li><a href="#Setting_up_your_IDE">Setting up your IDE</a></li>
+    <li><a href="#Setting-up-your-IDE">Setting up your IDE</a></li>
     <li><a href="#Reporting-an-issue">Reporting an issue</a></li>
+    <li><a href="#Submitting-a-pull-request">Submitting a pull request</a></li>
+    <li><a href="#Code-conventions">Code conventions</a></li>
+    <li><a href="#Analytics-implementation">Analytics implementation</a></li>
   </ol>
 </li>
-<li><a href="#Second_Point_Header">2 Second Point Header</a></li>
-<li><a href="#Third_Point_Header">3 Third Point Header</a></li>
+<li><a href="#As-a-translator">As a Translator</a></li>
+<li><a href="#As-a-manual-tester">As a manual tester</a></li>
+<li><a href="#As-an-automation-tester">As an automation tester</a></li>
+<li><a href="#Code-of-conduct">Code of conduct</a></li>
 </ol>
 </div>
 
