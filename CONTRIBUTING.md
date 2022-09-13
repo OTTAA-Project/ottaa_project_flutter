@@ -6,7 +6,7 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 1. [Ways of contributing](#Ways-of-contributing)
 2. [As a developer](#As-a-developer)
-  2.1 [Get started: setting up your IDE](#Get-started:-setting-up-your-IDE)
+  2.1 [Setting up your IDE](#Setting-up-your-IDE)
   2.2 [Reporting an issue](#Reporting-an-issue)
   2.3 [Submitting a pull request](#Submitting-a-pull-request)
   2.4 [Code conventions](#Code-conventions)
@@ -25,7 +25,7 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ## As a developer
 
-### Get started: setting up your IDE
+### Setting up your IDE
 
 - Run `flutter pub get` to get the dependencies.
 - Run `flutter pub run build_runner build` to generate the model class code.
