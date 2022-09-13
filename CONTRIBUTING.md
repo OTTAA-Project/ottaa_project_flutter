@@ -17,16 +17,19 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 7. [Code of conduct](#Code-of-conduct)
 
 
-<ol> 
-  <li>[One](#Ways-of-contributing)</li> 
-  <li>Two
-    <ol> 
-      <li>Inner One</li> 
-      <li>inner Two</li> 
-    </ol>
-  </li>
-  <li>Three</li> 
-</ol> 
+<div id="toc_container">
+<p class="toc_title">Contents</p>
+<ul class="toc_list">
+  <li><a href="#First_Point_Header">1 First Point Header</a>
+  <ul>
+    <li><a href="#First_Sub_Point_1">1.1 First Sub Point 1</a></li>
+    <li><a href="#First_Sub_Point_2">1.2 First Sub Point 2</a></li>
+  </ul>
+</li>
+<li><a href="#Second_Point_Header">2 Second Point Header</a></li>
+<li><a href="#Third_Point_Header">3 Third Point Header</a></li>
+</ul>
+</div>
 
 ## Ways of contributing
 
