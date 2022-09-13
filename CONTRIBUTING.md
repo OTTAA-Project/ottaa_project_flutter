@@ -1,6 +1,6 @@
 # Contributing to the OTTAA Project
 
-We would love your help in the OTTAA Project. We have compiled this useful guide to all the ways of making contributions, reading it carefully before you start is important to maintain consistency in the project quality and ensure a respectful and positive environment in our community.
+We would love your help in the OTTAA Project. We have compiled this useful guide to all the ways you can collaborate. Reading it carefully before you start is important to maintain consistency in the project quality and ensure a respectful and positive environment in our community.
 
 ## Ways of contributing
 
@@ -41,6 +41,7 @@ In order to create a pull request is necessary
 
 
 #### Documentation
+
 ##### Comments
 * Comment documenting the source code are required.
 
@@ -177,18 +178,23 @@ index
 
 ## As a translator
 
--pending-
+We currently support Spanish, English, Portuguese and French, but we are open to adding new languages as users' needs arise. Everyone is welcome to contribute with suggestions, changes or error corrections via email at **support@ottaaproject.com**, use subject "Contribution".
+
+Our focus right now is growing in Latin America, with this in mind we would love some help with **pictogram localization**, that is to say, to have pictograms translated **based each country/region-specific culture and Spanish variety**. For example, we know that 🚗 is commonly *carro* in México but *auto* or *coche* in Argentina. 
+
+Chile, Argentina, Colombia, and the Caribbean are our current priorities, but of course we welcome help with any of our supported languages and regions.
+
 
 ## As a manual tester
 
--pending-
+We have test cases for manual testing [here](https://docs.google.com/document/d/1khElUEbtREVsTzwxKmLYfdDYJxCnz0zcNaIraRYaMGs/edit) and we mainly need help testing the overall functionality of the new Flutter version.
+
+Any bug or hotfix that results from manual testing should be reported via an [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues) in our GitHub repository using the [template](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/new?assignees=&labels=&template=bug_report.md&title=) for bug reporting.
+
 
 ## As an automation tester 
 
-If you are proficient with automation testing, we will be happy if you can help us!. 
-We have developed a little automation framework based on [Webdriver.io](https://webdriver.io/), that runs using the cloud service provided by [Browserstack](https://www.browserstack.com/). Here you can find the repository to start collaborating: 
-https://github.com/cboard-org/cboard-webdriverio
-
+We will be implementing a continuous integration workflow that will be running multiple automated testing. In the meantime, any experience with CI/CD and automated testing in Dart is very much welcome. Feel free to contact us at **support@ottaaproject.com**.
 
 ## Code of Conduct
 
