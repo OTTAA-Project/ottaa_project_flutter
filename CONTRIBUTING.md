@@ -5,6 +5,15 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 ## Table of contents
 
 1. [Ways of contributing](#Ways-of-contributing)
+2. [As a developer](#As-a-developer)
+2.1 [Get started: setting up your IDE](#Get-started:-setting-up-your-IDE)
+2.2 [Reporting an issue](#Reporting-an-issue)
+2.3 [Submitting a pull request](#Submitting-a-pull-request)
+2.4 [Code conventions](#Code-conventions)
+2.5 [Analytics implementation](#Analytics-implementation)
+4. [](#)
+5. [](#)
+6. [](#)
 
 7. [Code of conduct](#Code-of-conduct)
 
@@ -46,7 +55,7 @@ Please bear the following in mind when creating a PR:
 |Bugfix|  Bug-fix about a version|
 
 
-### General style guidelines for writing and documenting code
+### Code conventions
 
 #### On commenting
 
