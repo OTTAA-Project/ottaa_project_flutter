@@ -20,11 +20,11 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 <div id="toc_container">
 <p class="toc_title">Contents</p>
 <ol class="toc_list">
-  <li><a href="#Ways_of_contributing">1 Ways of contributing</a>
-  <li><a href="#As_a_developer">2 As a developer</a></li>
+  <li><a href="#Ways_of_contributing">Ways of contributing</a>
+  <li><a href="#As_a_developer">As a developer</a></li>
   <ol>
-    <li><a href="#Setting_up_your_IDE">2.1 Setting up your IDE</a></li>
-    <li><a href="#First_Sub_Point_2">2.2 First Sub Point 2</a></li>
+    <li><a href="#Setting_up_your_IDE">Setting up your IDE</a></li>
+    <li><a href="#Reporting-an-issue">Reporting an issue</a></li>
   </ol>
 </li>
 <li><a href="#Second_Point_Header">2 Second Point Header</a></li>
