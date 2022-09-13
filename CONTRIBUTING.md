@@ -20,16 +20,17 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ### Reporting an issue
 
-Provide as muc information as possible about the bug. Mention the version of OTTAA Project and explain how the problem can be reproduced.
+Any bug or hotfix that results from manual testing should be reported via an [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues) in our GitHub repository **using the [template]**(https://github.com/OTTAA-Project/ottaa_project_flutter/issues/new?assignees=&labels=&template=bug_report.md&title=) for bug reporting and **providing as much information as possible** about the bug, including: used **version of OTTAA** and/or **version of web navigator** and clear instructions on how to **reproduce** the bug.
 
-### Code Contributions
 
-#### Submitting a pull request
-In order to create a pull request is necessary
+### Submitting a pull request
 
-* Avoid file conflicts with the source code
-* Should make a description about the characteristics to apply
-* Should apply the pull request in the corresponding branch
+Please bear the following in mind when creating a PR:
+
+* Avoid file conflicts with the source code.
+* Make a detailed description about the features it applies to.
+* Make the PR in the corresponding branch.
+* Avoid your PR containing unrelated commits, keep it focused on its scope. 
 
 |Branch|Description|
 |---|---|
@@ -39,23 +40,22 @@ In order to create a pull request is necessary
 |Bugfix|  Bug-fix about a version|
 
 
+### General style guidelines for writing and documenting code
 
-#### Documentation
+##### On commenting:
 
-##### Comments
-* Comment documenting the source code are required.
+* Comments should always be **full English sentences**.
 
-* Comment a class explaining the purpose of that and how to implements if that required.
+* As a default, **always document the source code** via clear comments.
 
-* Comment should be formatted as proper English sentences.
-* use Javadoc documentation.
+* **Comment all your classes** explaining their purpose and how to implement them if required.
 
-#### Code
+##### On code duplication:
 
-##### Duplication
-* Don't copy-paste source code. Reuse it.
+* **Don't copy-paste** source code. Reuse it in a  way that makes sense, re writing the neccessary parts.
 
-##### Import Libraries
+
+On importing libraries: 
 
 * Sort by category.
 
@@ -70,12 +70,10 @@ In order to create a pull request is necessary
 * Sort by alphabetical order.
 
 * Use Grandle level app
+
  Example :
 ```
-#!xml
-dependencies {
-   implementation 'library'
-}
+
 ```
 ##### Indentation
 
