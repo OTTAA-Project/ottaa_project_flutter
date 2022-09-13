@@ -4,9 +4,9 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ## Table of contents
 
-1. [Ways of contributing](#Ways of contributing)
+1. [Ways of contributing](#Ways-of-contributing)
 
-7. [Code of conduct](#code-of-conduct)
+7. [Code of conduct](#Code-of-conduct)
 
 ## Ways of contributing
 
