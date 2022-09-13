@@ -16,6 +16,7 @@ class Sentence {
     required this.fecha,
     required this.locale,
     required this.id,
+    this.favouriteOrNot = false,
   });
 
   final String frase;
@@ -24,7 +25,7 @@ class Sentence {
   List<int> fecha;
   final String locale;
   final int id;
-
+  bool favouriteOrNot;
   factory Sentence.fromJson(Map<String, dynamic> json) => Sentence(
         frase: json["frase"],
         frecuencia: json["frecuencia"],
@@ -32,6 +33,7 @@ class Sentence {
         fecha: List<int>.from(json["fecha"].map((x) => x)),
         locale: json["locale"],
         id: json["id"],
+    favouriteOrNot: json['favouriteOrNot']
       );
 
   Map<String, dynamic> toJson() => {

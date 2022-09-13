@@ -31,6 +31,7 @@ class SentencesController extends GetxController {
   List<Pict> _picts = [];
   List<Sentence> _sentences = [];
   List<Pict> _sentencePicts = [];
+  List<List<Pict>> favouritePicts = [];
   List<Sentence> favouriteSentences = [];
 
   List<List<Pict>> _sentencesPicts = [];
@@ -60,43 +61,43 @@ class SentencesController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    await loadSentences(type: Constants.MOST_USED_SENTENCES);
+    await _loadPicts();
     createListForSearching();
     showCircular.value = false;
   }
 
-  Future<void> loadSentences({required String type}) async {
+  Future<void> _loadPicts() async {
     this._picts = await this._pictsRepository.getAll();
     final language = _ttsController.languaje;
     switch (language) {
       case "es-AR":
         this._sentences = await this._sentencesRepository.getAll(
               language: language,
-              type: type,
+              type: Constants.MOST_USED_SENTENCES,
             );
         break;
       case "en-US":
         this._sentences = await this._sentencesRepository.getAll(
               language: language,
-              type: type,
+              type: Constants.MOST_USED_SENTENCES,
             );
         break;
       case "fr-FR":
         this._sentences = await this._sentencesRepository.getAll(
               language: language,
-              type: type,
+              type: Constants.MOST_USED_SENTENCES,
             );
         break;
       case "pt-BR":
         this._sentences = await this._sentencesRepository.getAll(
               language: language,
-              type: type,
+              type: Constants.MOST_USED_SENTENCES,
             );
         break;
       default:
         this._sentences = await this._sentencesRepository.getAll(
               language: language,
-              type: Constants.SPANISH_FRASES_MOST_USED_FILE_NAME,
+              type: Constants.MOST_USED_SENTENCES,
             );
     }
 
@@ -133,34 +134,61 @@ class SentencesController extends GetxController {
     final language = _ttsController.languaje;
     switch (language) {
       case "es-AR":
-        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
-              language: language,
-              type: Constants.MOST_USED_SENTENCES,
-            );
+        this.favouriteSentences =
+            await this._sentencesRepository.fetchFavouriteFrases(
+                  language: language,
+                  type: Constants.FAVOURITE_SENTENCES,
+                );
         break;
       case "en-US":
-        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
-              language: language,
-              type: Constants.SPANISH_FRASES_FAVOURITE_FILE_NAME,
-            );
+        this.favouriteSentences =
+            await this._sentencesRepository.fetchFavouriteFrases(
+                  language: language,
+                  type: Constants.FAVOURITE_SENTENCES,
+                );
         break;
       case "fr-FR":
-        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
-              language: language,
-              type: Constants.FRENCH_FRASES_FAVOURITE_FILE_NAME,
-            );
+        this.favouriteSentences =
+            await this._sentencesRepository.fetchFavouriteFrases(
+                  language: language,
+                  type: Constants.FAVOURITE_SENTENCES,
+                );
         break;
       case "pt-BR":
-        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
-              language: language,
-              type: Constants.PORTUGUESE_FRASES_FAVOURITE_FILE_NAME,
-            );
+        this.favouriteSentences =
+            await this._sentencesRepository.fetchFavouriteFrases(
+                  language: language,
+                  type: Constants.FAVOURITE_SENTENCES,
+                );
         break;
       default:
-        this._sentences = await this._sentencesRepository.fetchFavouriteFrases(
-              language: language,
-              type: Constants.SPANISH_FRASES_FAVOURITE_FILE_NAME,
-            );
+        this.favouriteSentences =
+            await this._sentencesRepository.fetchFavouriteFrases(
+                  language: language,
+                  type: Constants.FAVOURITE_SENTENCES,
+                );
+    }
+
+    if (favouriteSentences.length >= 10) {
+      for (int i = 0; i <= 9; i++) {
+        this._sentencePicts = [];
+        favouriteSentences[i].complejidad.pictosComponentes.forEach((pictoComponente) {
+          this
+              ._sentencePicts
+              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+        });
+        this.favouritePicts.add(this._sentencePicts);
+      }
+    } else {
+      this.favouriteSentences.forEach((sentence) {
+        this._sentencePicts = [];
+        sentence.complejidad.pictosComponentes.forEach((pictoComponente) {
+          this
+              ._sentencePicts
+              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+        });
+        this.favouritePicts.add(this._sentencePicts);
+      });
     }
   }
 

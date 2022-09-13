@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_controller.dart';
+import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class FavouriteScreenPage extends GetView<SentencesController> {
@@ -21,9 +22,9 @@ class FavouriteScreenPage extends GetView<SentencesController> {
           title: Text('favourites_sentences'.tr),
           actions: [
             GestureDetector(
-              onTap: () {
-                Get.toNamed('page');
-              },
+              onTap: () => Get.toNamed(
+                AppRoutes.ADDORREMOVEFAVOURITEPAGE,
+              ),
               child: Icon(
                 Icons.favorite,
               ),
@@ -65,7 +66,9 @@ class FavouriteScreenPage extends GetView<SentencesController> {
                             Container(),
                             GestureDetector(
                               //todo: add the callback and also change the icon on the click and view
-                              // onTap: () => Get.to(SearchSentence()),
+                              onTap: () => Get.toNamed(
+                                AppRoutes.ADDORREMOVEFAVOURITEPAGE,
+                              ),
                               child: Icon(
                                 Icons.edit,
                                 size: verticalSize * 0.1,
@@ -86,6 +89,7 @@ class FavouriteScreenPage extends GetView<SentencesController> {
                 bottom: verticalSize * 0.17,
                 child: Container(
                   height: verticalSize * 0.8,
+                  width: horizontalSize * 0.8,
                   padding:
                       EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
                   child: Container(
@@ -98,7 +102,24 @@ class FavouriteScreenPage extends GetView<SentencesController> {
                     child: Center(
                       child: GetBuilder<SentencesController>(
                         id: "favourite_sentences",
-                        builder: (_) => Container(),
+                        builder: (_) => Container(
+                          child: Center(
+                            child: Container(
+                              height: verticalSize * 0.5,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                // itemCount: controller.favouriteSentences.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    height: 300,
+                                    width: 200,
+                                    color: Colors.pink,
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),

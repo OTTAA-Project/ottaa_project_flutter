@@ -15,4 +15,5 @@ class AppRoutes {
   static const GAMES = "/games";
   static const ADDGROUP = "/add_group_page";
   static const FAVOURITESCREENPAGE = "/favourite_screen_page";
+  static const ADDORREMOVEFAVOURITEPAGE = "/add_or_remove_favourite_page";
 }

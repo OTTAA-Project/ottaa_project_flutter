@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_binding.
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_page.dart';
 import 'package:ottaa_project_flutter/app/modules/games/games_page.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/add_group_page.dart';
+import 'package:ottaa_project_flutter/app/modules/sentences/add_or_remove%20_favourite_page.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/favourite_screen_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/language_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/settings_binding.dart';
@@ -103,6 +104,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.FAVOURITESCREENPAGE,
       page: () => FavouriteScreenPage(),
+      binding: SentencesBinding(),
+    ), GetPage(
+      name: AppRoutes.ADDORREMOVEFAVOURITEPAGE,
+      page: () => AddOrRemoveFavouritePage(),
       binding: SentencesBinding(),
     ),
     GetPage(

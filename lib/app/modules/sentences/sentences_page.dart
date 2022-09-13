@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/app/global_widgets/mini_picto_widget.dart'
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 
 import 'local_widgets/search_sentence.dart';
 import 'sentences_controller.dart';
@@ -27,7 +28,10 @@ class SentencesPage extends GetView<SentencesController> {
           title: Text('most_used_sentences'.tr),
           actions: [
             GestureDetector(
-              onTap: () => Get.toNamed(AppRoutes.FAVOURITESCREENPAGE),
+              onTap: () async {
+                await _.fetchFavourites();
+                Get.toNamed(AppRoutes.FAVOURITESCREENPAGE);
+              },
               child: Icon(Icons.star),
             ),
             const SizedBox(
