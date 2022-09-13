@@ -2,6 +2,12 @@
 
 We would love your help in the OTTAA Project. We have compiled this useful guide to all the ways you can collaborate. Reading it carefully before you start is important to maintain consistency in the project quality and ensure a respectful and positive environment in our community.
 
+## Table of contents
+
+1. [Ways of contributing](#Ways of contributing)
+
+7. [Code of conduct](#code-of-conduct)
+
 ## Ways of contributing
 
 - As a developer 
@@ -42,20 +48,20 @@ Please bear the following in mind when creating a PR:
 
 ### General style guidelines for writing and documenting code
 
-#### On commenting:
+#### On commenting
 
-* Comments should always be **full English sentences**.
+* Comments should always be full English sentences.
 
-* As a default, **always document the source code** via clear comments.
+* As a default, always document the source code via clear comments.
 
-* **Comment all your classes** explaining their purpose and how to implement them if required.
+* Comment all your classes explaining their purpose and how to implement them if required.
 
-#### On code duplication:
+#### On code duplication
 
-* **Don't copy-paste** source code. Reuse it in a  way that makes sense, re writing the neccessary parts.
+* Don't copy-paste source code. Reuse it in a  way that makes sense, re writing the neccessary parts.
 
 
-On importing libraries: 
+#### On importing libraries 
 
 * Sort by category.
 
@@ -75,81 +81,59 @@ On importing libraries:
 ```
 
 ```
-##### Indentation
+#### On indentation
 
 
  Switch case
 ```
-#!java
-Align by  such as these cases :
 
-Switch(value){
-    case 0:
-       // Todo action here
-    break;
-    Default:
-       // Todo default action here
-    break;
-}
 ```
 If / else or else if
 ```
-#!java
-
-if(value.toString().equals("Hello")){
-  //To do action here
-}else if{
-  // To do action here
-} else{
-  // Todo
-}
 
 ```
-**Remember: **
 
-* The attributes of the class must be protected or private
+#### On classes
 
-* The Method of the class must be public, private or protected
+* The attributes of the class must be protected or private.
 
-* The class must be public or private
+* The Method of the class can be public, private or protected.
 
-### Naming ###
-** Name:** That must be transparent and representative about the action to show us.
+* The class can be public or private.
 
-**Class:** should be nouns in UpperCamelCase, with the first letter of every word capitalized.
-example :
+* Class name must be transparent and representative of its purpose.
+
+* Class names should be nouns in UpperCamelCase, with the first letter of every word capitalized.
+
+Example :
 
 ```
-#!java
-public class Json(){
 
-}
 ```
-**variable:** 	Local variables, instance variables, and class variables are also written in lowerCamelCase.
+#### On variables
+
+* Local variables, instance variables, and class variables should be written in lowerCamelCase: with the exception of the first world, the first letter of every word should be capitalized.
 
 example :
 
 ```
-#!java
 
-String name =" Carl";
-String fileName="json.txt";
 ```
 
-**Constant:** Constants should be written in uppercase characters separated by underscores.
+#### On constants
+
+* Constants should be written in UPPERCASE with words separated by underscores.
 
 example :
 
 
 ```
-#!java
 
-public static final String CONSTANT_NAME=" fileName.txt";
 ```
 
 #### Firebase index:
 
-This is the Three in firebase :
+This is the firebase tree index:
 
 ```
 #!code
