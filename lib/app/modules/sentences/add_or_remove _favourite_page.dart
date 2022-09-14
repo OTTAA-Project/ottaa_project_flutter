@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/global_widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
@@ -20,9 +22,7 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
           title: Text('favourites_sentences'.tr),
           actions: [
             GestureDetector(
-              // onTap: () => Get.toNamed(
-              //   AppRoutes.ADDORREMOVEFAVOURITEPAGE,
-              // ),
+              onTap: () => Get.back(),
               child: Icon(
                 Icons.favorite,
               ),
@@ -63,10 +63,21 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                             /// for keeping them in order and the button will be in separate Positioned
                             Container(),
                             GestureDetector(
-                              //todo: add the callback and also change the icon on the click and view
-                              // onTap: () => Get.toNamed(
-                              //   AppRoutes.ADDORREMOVEFAVOURITEPAGE,
-                              // ),
+                              onTap: () async {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: kOTTAAOrangeNew,
+                                      ),
+                                    );
+                                  },
+                                );
+                                await controller.saveFavourite();
+                                Get.back();
+                                Get.back();
+                              },
                               child: Icon(
                                 Icons.save,
                                 size: verticalSize * 0.1,
@@ -84,41 +95,99 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: verticalSize * 0.17,
+                bottom: verticalSize * 0.3,
                 child: Container(
-                  height: verticalSize * 0.8,
+                  height: verticalSize * 0.5,
                   width: horizontalSize * 0.8,
                   padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
-                    child: Center(
-                      child: GetBuilder<SentencesController>(
-                        id: "favourite_sentences",
-                        builder: (_) => Container(
-                          child: Center(
-                            child: Container(
-                              height: verticalSize * 0.5,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                // itemCount: controller.favouriteSentences.length,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    height: 300,
-                                    width: 200,
-                                    color: Colors.pink,
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.12),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _.favouriteOrNotPicts.isNotEmpty
+                            ? Container(
+                                height: verticalSize / 2.5,
+                                width: horizontalSize * 0.78,
+                                color: controller
+                                        .sentences[controller
+                                            .selectedIndexFavSelection]
+                                        .favouriteOrNot
+                                    ? Colors.blue
+                                    : Colors.transparent,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: verticalSize * 0.05),
+                                child: Center(
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: _
+                                            .favouriteOrNotPicts[
+                                                _.selectedIndexFavSelection]
+                                            .length +
+                                        1,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      final Pict speakPict = Pict(
+                                        localImg: true,
+                                        id: 0,
+                                        texto: Texto(),
+                                        tipo: 6,
+                                        imagen: Imagen(picto: "logo_ottaa_dev"),
+                                      );
+                                      if (_
+                                              .favouriteOrNotPicts[
+                                                  _.selectedIndexFavSelection]
+                                              .length >
+                                          index) {
+                                        final Pict pict = _.favouriteOrNotPicts[
+                                            _.selectedIndexFavSelection][index];
+                                        return Container(
+                                          margin: EdgeInsets.all(10),
+                                          child: MiniPicto(
+                                            localImg: pict.localImg,
+                                            pict: pict,
+                                            onTap: () {
+                                              controller
+                                                      .sentences[_
+                                                          .selectedIndexFavSelection]
+                                                      .favouriteOrNot =
+                                                  !controller
+                                                      .sentences[_
+                                                          .selectedIndexFavSelection]
+                                                      .favouriteOrNot;
+                                              _.speakFavOrNot();
+                                            },
+                                          ),
+                                        );
+                                      } else {
+                                        return Container(
+                                          margin: EdgeInsets.all(10),
+                                          child: MiniPicto(
+                                            localImg: speakPict.localImg,
+                                            pict: speakPict,
+                                            onTap: () {
+                                              controller
+                                                      .sentences[_
+                                                          .selectedIndexFavSelection]
+                                                      .favouriteOrNot =
+                                                  !controller
+                                                      .sentences[_
+                                                          .selectedIndexFavSelection]
+                                                      .favouriteOrNot;
+                                              _.speakFavOrNot();
+                                            },
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ),
+                              )
+                            : Container()
+                      ],
                     ),
                   ),
                 ),
@@ -148,7 +217,7 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                     child: GestureDetector(
                       onTap: () {
                         //todo: add the required code
-                        controller.sentencesIndex--;
+                        controller.selectedIndexFavSelection--;
                       },
                       child: Icon(
                         Icons.skip_previous,
@@ -174,8 +243,7 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
-                        //todo: add the required code
-                        controller.sentencesIndex++;
+                        controller.selectedIndexFavSelection++;
                       },
                       child: Icon(
                         Icons.skip_next,
@@ -192,8 +260,7 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                 right: horizontalSize * 0.43,
                 child: GestureDetector(
                   onTap: () async {
-                    //todo: add the required code
-                    await controller.speak();
+                    await controller.speakFavOrNot();
                   },
                   child: OttaLogoWidget(),
                 ),

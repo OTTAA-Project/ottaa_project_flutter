@@ -4,7 +4,7 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
-          'favourites_sentences': 'favourites_sentences',
+          'favourites_sentences': 'Favourite Sentences',
           'galeria_grupos': 'Gallery Groups',
           'add_pict': 'Add Pict',
           'add_group': 'Add Group',

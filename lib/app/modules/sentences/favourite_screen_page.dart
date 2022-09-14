@@ -108,12 +108,18 @@ class FavouriteScreenPage extends GetView<SentencesController> {
                               height: verticalSize * 0.5,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                // itemCount: controller.favouriteSentences.length,
+                                itemCount: controller.favouriteSentences.length,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     height: 300,
                                     width: 200,
                                     color: Colors.pink,
+                                    child: Text(
+                                      '$index',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
                                   );
                                 },
                               ),
