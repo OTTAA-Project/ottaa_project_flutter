@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
@@ -55,11 +56,13 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                         ),
                       );
                     });
-                _pictogramController.grupos[_pictogramController.selectedIndex].relacion.removeWhere(
-                    (element) =>
+                _pictogramController
+                    .grupos[_pictogramController.selectedIndex].relacion
+                    .removeWhere((element) =>
                         element.id == _homeController.pictToBeEdited.id);
-                _homeController.grupos[_pictogramController.selectedIndex].relacion.removeWhere(
-                    (element) =>
+                _homeController
+                    .grupos[_pictogramController.selectedIndex].relacion
+                    .removeWhere((element) =>
                         element.id == _homeController.pictToBeEdited.id);
                 final dataGrupo = _homeController.grupos;
                 List<String> fileDataGrupo = [];
@@ -73,12 +76,32 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   final localFile = LocalFileController();
                   await localFile.writeGruposToFile(
                     data: fileDataGrupo.toString(),
+                    language: _homeController.language,
                   );
                   // print('writing to file');
                 }
                 //for the file data
                 final instance = await SharedPreferences.getInstance();
-                await instance.setBool('Grupos_file', true);
+                switch (_homeController.language) {
+                  case "es-AR":
+                    await instance.setBool('Grupos_file', true);
+                    break;
+                  case "en-US":
+                    await instance.setBool('Grupos_file', true);
+                    break;
+                  case "fr-FR":
+                    await instance.setBool(
+                        Constants.FRENCH_GRUPO_FILE_NAME, true);
+                    break;
+                  case "pt-BR":
+                    await instance.setBool(
+                        Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
+                    break;
+                  default:
+                    await instance.setBool('Grupos_file', true);
+                }
+
+                // await instance.setBool('Grupos_file', true);
                 // print(res1);
                 //upload to the firebase
                 await _pictogramController.uploadToFirebaseGrupo(

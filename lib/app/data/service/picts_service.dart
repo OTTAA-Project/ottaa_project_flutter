@@ -1,9 +1,7 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 
 class PictsService {
   final _dataController = Get.find<DataController>();
@@ -12,19 +10,21 @@ class PictsService {
     return _dataController.fetchPictos();
   }
 
-  Future<List<Pict>> getFrench() async {
-    final pictsString =
-        await rootBundle.loadString('assets/languages/pictos_fr.json');
-    final pictos =
-        (jsonDecode(pictsString) as List).map((e) => Pict.fromJson(e)).toList();
-    return pictos;
+  Future<List<Pict>> getPortuguese() async {
+    return _dataController.fetchOtherPictos(
+      languageName: Constants.PORTUGUESE_LANGUAGE_NAME,
+      assetName: 'assets/languages/pictos_pt.json',
+      firebaseName: Constants.PORTUGUESE_PICTO_FIREBASE_NAME,
+      fileName: Constants.PORTUGUESE_PICTO_FILE_NAME,
+    );
   }
 
-  Future<List<Pict>> getPortuguese() async {
-    final pictsString =
-        await rootBundle.loadString('assets/languages/pictos_pt.json');
-    final pictos =
-        (jsonDecode(pictsString) as List).map((e) => Pict.fromJson(e)).toList();
-    return pictos;
+  Future<List<Pict>> getFrench() async {
+    return _dataController.fetchOtherPictos(
+      languageName: Constants.FRENCH_LANGUAGE_NAME,
+      assetName: 'assets/languages/pictos_fr.json',
+      firebaseName: Constants.FRENCH_PICTO_FIREBASE_NAME,
+      fileName: Constants.FRENCH_PICTO_FILE_NAME,
+    );
   }
 }

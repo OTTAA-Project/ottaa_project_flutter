@@ -63,7 +63,7 @@ class DataController extends GetxController {
   Future<String> fetchUserEmail() async =>
       await _firebaseDatabaseController.fetchUserEmail();
 
-  Future<String> fetchCurrentVersion() async =>
+  Future<double> fetchCurrentVersion() async =>
       await _firebaseDatabaseController.fetchCurrentVersion();
 
   Future<int> getPicNumber() async =>
@@ -84,6 +84,31 @@ class DataController extends GetxController {
       dateOfBirthInMs: dateOfBirthInMs,
     );
   }
+  Future<List<Pict>> fetchOtherPictos({
+    required String languageName,
+    required String assetName,
+    required String firebaseName,
+    required String fileName,
+  }) async =>
+      await _firebaseDatabaseController.fetchOtherPictos(
+        languageName: languageName,
+        assetName: assetName,
+        firebaseName: firebaseName,
+        fileName: fileName,
+      );
+
+  Future<List<Grupos>> fetchOtherGrupos({
+    required String languageName,
+    required String assetName,
+    required String firebaseName,
+    required String fileName,
+  }) async =>
+      _firebaseDatabaseController.fetchOtherGrupos(
+        languageName: languageName,
+        assetName: assetName,
+        firebaseName: firebaseName,
+        fileName: fileName,
+      );
 
   @override
   void onInit() async {

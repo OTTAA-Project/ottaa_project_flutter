@@ -58,7 +58,7 @@ class RightColumnWidget extends GetView<HomeController> {
                           return SentenceShareWidget();
                         },
                       );
-                if(controller.sentencePicts.length == 0){
+                if (controller.sentencePicts.length == 0) {
                   await controller.startTimerForDialogueExit();
                 }
               },

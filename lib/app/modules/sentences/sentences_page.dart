@@ -148,7 +148,7 @@ class SentencesPage extends GetView<SentencesController> {
                                             final Pict speakPict = Pict(
                                               localImg: true,
                                               id: 0,
-                                              texto: Texto(en: "", es: ""),
+                                              texto: Texto(),
                                               tipo: 6,
                                               imagen: Imagen(
                                                   picto: "logo_ottaa_dev"),
