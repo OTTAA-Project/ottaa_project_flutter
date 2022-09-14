@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/global_widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
@@ -103,26 +105,79 @@ class FavouriteScreenPage extends GetView<SentencesController> {
                       child: GetBuilder<SentencesController>(
                         id: "favourite_sentences",
                         builder: (_) => Container(
-                          child: Center(
-                            child: Container(
-                              height: verticalSize * 0.5,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: controller.favouriteSentences.length,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    height: 300,
-                                    width: 200,
-                                    color: Colors.pink,
-                                    child: Text(
-                                      '$index',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
+                          height: verticalSize * 0.8,
+                          width: horizontalSize * 0.8,
+                          // padding: EdgeInsets.symmetricmmetric(
+                          //     horizontal: horizontalSize * 0.12),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _.favouriteSentences.isNotEmpty
+                                    ? Container(
+                                        height: verticalSize / 3,
+                                        width: horizontalSize * 0.78,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: verticalSize * 0.05),
+                                        child: Center(
+                                          child: ListView.builder(
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: _
+                                                    .favouritePicts[_
+                                                        .selectedIndexFav]
+                                                    .length +
+                                                1,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              final Pict speakPict = Pict(
+                                                localImg: true,
+                                                id: 0,
+                                                texto: Texto(),
+                                                tipo: 6,
+                                                imagen: Imagen(
+                                                    picto: "logo_ottaa_dev"),
+                                              );
+                                              if (_
+                                                      .favouritePicts[_
+                                                          .selectedIndexFav]
+                                                      .length >
+                                                  index) {
+                                                final Pict pict = _
+                                                            .favouritePicts[
+                                                        _.selectedIndexFav]
+                                                    [index];
+                                                return Container(
+                                                  margin: EdgeInsets.all(10),
+                                                  child: MiniPicto(
+                                                    localImg: pict.localImg,
+                                                    pict: pict,
+                                                    onTap: () {
+                                                      _.speakFavOrNot();
+                                                    },
+                                                  ),
+                                                );
+                                              } else {
+                                                return Container(
+                                                  margin: EdgeInsets.all(10),
+                                                  child: MiniPicto(
+                                                    localImg:
+                                                        speakPict.localImg,
+                                                    pict: speakPict,
+                                                    onTap: () {
+                                                      _.speakFavOrNot();
+                                                    },
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    : Container()
+                              ],
                             ),
                           ),
                         ),
@@ -156,7 +211,7 @@ class FavouriteScreenPage extends GetView<SentencesController> {
                     child: GestureDetector(
                       onTap: () {
                         //todo: add the required code
-                        controller.sentencesIndex--;
+                        controller.selectedIndexFav--;
                       },
                       child: Icon(
                         Icons.skip_previous,
@@ -183,7 +238,7 @@ class FavouriteScreenPage extends GetView<SentencesController> {
                     child: GestureDetector(
                       onTap: () {
                         //todo: add the required code
-                        controller.sentencesIndex++;
+                        controller.selectedIndexFav++;
                       },
                       child: Icon(
                         Icons.skip_next,

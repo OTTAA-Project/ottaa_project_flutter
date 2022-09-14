@@ -42,6 +42,7 @@ class SentencesController extends GetxController {
   ScrollController favouriteSelectionController = ScrollController();
   List<List<Pict>> _sentencesPicts = [];
   int _selectedIndexFavSelection = 0;
+  int _selectedIndexFav = 0;
 
   List<List<Pict>> get sentencesPicts => this._sentencesPicts;
 
@@ -72,6 +73,18 @@ class SentencesController extends GetxController {
   }
 
   int get selectedIndexFavSelection => this._selectedIndexFavSelection;
+
+  set selectedIndexFav(value) {
+    this._selectedIndexFav = value;
+
+    if (this._selectedIndexFav == this.favouriteOrNotPicts.length)
+      this._selectedIndexFav = 0;
+    if (this._selectedIndexFav == -1)
+      this._selectedIndexFav = this.favouriteOrNotPicts.length - 1;
+    update();
+  }
+
+  int get selectedIndexFav => this._selectedIndexFav;
 
   // sentences for searching list
   List<SearchIndexedSentences> sentencesForSearch = [];
@@ -105,6 +118,8 @@ class SentencesController extends GetxController {
     );
     await fetchFavourites();
     update(["favourite_sentences"]);
+    this._selectedIndexFav = 0;
+    this._selectedIndexFavSelection = 0;
   }
 
   Future<void> _loadPicts() async {
