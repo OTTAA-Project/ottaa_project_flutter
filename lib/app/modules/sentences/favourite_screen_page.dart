@@ -1,18 +1,14 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets/otta_logo_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/sentences/sentences_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/app/utils/constants.dart';
 
-import 'local_widgets/search_sentence.dart';
-import 'sentences_controller.dart';
-
-class SentencesPage extends GetView<SentencesController> {
-  SentencesPage({Key? key}) : super(key: key);
+class FavouriteScreenPage extends GetView<SentencesController> {
+  const FavouriteScreenPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +21,15 @@ class SentencesPage extends GetView<SentencesController> {
           automaticallyImplyLeading: false,
           foregroundColor: Colors.white,
           elevation: 0,
-          title: Text('most_used_sentences'.tr),
+          title: Text('favourites_sentences'.tr),
           actions: [
             GestureDetector(
-              onTap: () async {
-                await _.fetchFavourites();
-                Get.toNamed(AppRoutes.FAVOURITESCREENPAGE);
-              },
-              child: Icon(Icons.star),
+              onTap: () => Get.toNamed(
+                AppRoutes.ADDORREMOVEFAVOURITEPAGE,
+              ),
+              child: Icon(
+                Icons.favorite,
+              ),
             ),
             const SizedBox(
               width: 16,
@@ -70,9 +67,12 @@ class SentencesPage extends GetView<SentencesController> {
                             /// for keeping them in order and the button will be in separate Positioned
                             Container(),
                             GestureDetector(
-                              onTap: () => Get.to(SearchSentence()),
+                              //todo: add the callback and also change the icon on the click and view
+                              onTap: () => Get.toNamed(
+                                AppRoutes.ADDORREMOVEFAVOURITEPAGE,
+                              ),
                               child: Icon(
-                                Icons.search,
+                                Icons.edit,
                                 size: verticalSize * 0.1,
                                 color: Colors.white,
                               ),
@@ -91,6 +91,7 @@ class SentencesPage extends GetView<SentencesController> {
                 bottom: verticalSize * 0.17,
                 child: Container(
                   height: verticalSize * 0.8,
+                  width: horizontalSize * 0.8,
                   padding:
                       EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
                   child: Container(
@@ -102,73 +103,77 @@ class SentencesPage extends GetView<SentencesController> {
                         EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                     child: Center(
                       child: GetBuilder<SentencesController>(
-                        id: "sentence",
-                        builder: (_) => FadeInDown(
-                          controller: (controller) =>
-                              _.sentenceAnimationController = controller,
-                          from: 30,
+                        id: "favourite_sentences",
+                        builder: (_) => Container(
+                          height: verticalSize * 0.8,
+                          width: horizontalSize * 0.8,
+                          // padding: EdgeInsets.symmetricmmetric(
+                          //     horizontal: horizontalSize * 0.12),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                _.sentencesPicts.isNotEmpty
+                                _.favouriteSentences.isNotEmpty
                                     ? Container(
                                         height: verticalSize / 3,
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount:
-                                              _.sentencesPicts[_.sentencesIndex]
-                                                      .length +
-                                                  1,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            final Pict speakPict = Pict(
-                                              localImg: true,
-                                              id: 0,
-                                              texto: Texto(),
-                                              tipo: 6,
-                                              imagen: Imagen(
-                                                  picto: "logo_ottaa_dev"),
-                                            );
-                                            if (_
-                                                    .sentencesPicts[
-                                                        _.sentencesIndex]
-                                                    .length >
-                                                index) {
-                                              final Pict pict =
-                                                  _.sentencesPicts[
-                                                      _.sentencesIndex][index];
-                                              return Container(
-                                                margin: EdgeInsets.all(10),
-                                                child: MiniPicto(
-                                                  localImg: pict.localImg,
-                                                  pict: pict,
-                                                  onTap: () {
-                                                    _.speak();
-                                                  },
-                                                ),
+                                        width: horizontalSize * 0.78,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: verticalSize * 0.05),
+                                        child: Center(
+                                          child: ListView.builder(
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: _
+                                                    .favouritePicts[_
+                                                        .selectedIndexFav]
+                                                    .length +
+                                                1,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              final Pict speakPict = Pict(
+                                                localImg: true,
+                                                id: 0,
+                                                texto: Texto(),
+                                                tipo: 6,
+                                                imagen: Imagen(
+                                                    picto: "logo_ottaa_dev"),
                                               );
-                                            } else {
-                                              return Bounce(
-                                                from: 6,
-                                                infinite: true,
-                                                child: Container(
+                                              if (_
+                                                      .favouritePicts[_
+                                                          .selectedIndexFav]
+                                                      .length >
+                                                  index) {
+                                                final Pict pict = _
+                                                            .favouritePicts[
+                                                        _.selectedIndexFav]
+                                                    [index];
+                                                return Container(
+                                                  margin: EdgeInsets.all(10),
+                                                  child: MiniPicto(
+                                                    localImg: pict.localImg,
+                                                    pict: pict,
+                                                    onTap: () {
+                                                      _.speakFavOrNot();
+                                                    },
+                                                  ),
+                                                );
+                                              } else {
+                                                return Container(
                                                   margin: EdgeInsets.all(10),
                                                   child: MiniPicto(
                                                     localImg:
                                                         speakPict.localImg,
                                                     pict: speakPict,
                                                     onTap: () {
-                                                      _.speak();
+                                                      _.speakFavOrNot();
                                                     },
                                                   ),
-                                                ),
-                                              );
-                                            }
-                                          },
+                                                );
+                                              }
+                                            },
+                                          ),
                                         ),
                                       )
                                     : Container()
@@ -181,6 +186,8 @@ class SentencesPage extends GetView<SentencesController> {
                   ),
                 ),
               ),
+
+              ///circularProgressIndicator
               controller.showCircular.value
                   ? Center(
                       child: CircularProgressIndicator(
@@ -203,7 +210,8 @@ class SentencesPage extends GetView<SentencesController> {
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
-                        controller.sentencesIndex--;
+                        //todo: add the required code
+                        controller.selectedIndexFav--;
                       },
                       child: Icon(
                         Icons.skip_previous,
@@ -229,7 +237,8 @@ class SentencesPage extends GetView<SentencesController> {
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
-                        controller.sentencesIndex++;
+                        //todo: add the required code
+                        controller.selectedIndexFav++;
                       },
                       child: Icon(
                         Icons.skip_next,
@@ -246,6 +255,7 @@ class SentencesPage extends GetView<SentencesController> {
                 right: horizontalSize * 0.43,
                 child: GestureDetector(
                   onTap: () async {
+                    //todo: add the required code
                     await controller.speak();
                   },
                   child: OttaLogoWidget(),
@@ -259,84 +269,3 @@ class SentencesPage extends GetView<SentencesController> {
     );
   }
 }
-/*
-class Widhdhd extends StatelessWidget {
-  const Widhdhd({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Expanded(
-          child: Container(),
-        ),
-        Expanded(
-          child: Container(),
-        ),
-        Container(
-          height: verticalSize * 0.2,
-          width: horizontalSize,
-          color: kOTTAOrange,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              FittedBox(
-                child: GestureDetector(
-                  onTap: () {
-                    _.sentencesIndex--;
-                  },
-                  child: Center(
-                      child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                    size: horizontalSize / 10,
-                  )),
-                ),
-              ),
-              FittedBox(
-                child: GestureDetector(
-                  onTap: () {
-                    _.speak();
-                  },
-                  child: Center(
-                      child: Icon(
-                    Icons.surround_sound_rounded,
-                    color: Colors.white,
-                    size: horizontalSize / 10,
-                  )),
-                ),
-              ),
-              FittedBox(
-                child: GestureDetector(
-                  onTap: () {
-                    Get.offNamed(AppRoutes.HOME);
-                  },
-                  child: Center(
-                      child: Icon(
-                    Icons.home,
-                    color: Colors.white,
-                    size: horizontalSize / 10,
-                  )),
-                ),
-              ),
-              FittedBox(
-                child: GestureDetector(
-                  onTap: () {
-                    _.sentencesIndex++;
-                  },
-                  child: Center(
-                      child: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: horizontalSize / 10,
-                  )),
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-}*/
