@@ -174,6 +174,7 @@ class ListTileWidget extends StatelessWidget {
       ),
       title: Text(
         title,
+        style: TextStyle(fontSize: verticalSize * 0.03),
       ),
     );
   }

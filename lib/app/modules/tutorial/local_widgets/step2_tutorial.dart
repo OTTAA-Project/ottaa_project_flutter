@@ -35,7 +35,7 @@ step2Tutorial<widget>(PageController controller, context) {
                 child: Text(
                   "Talk_to_the_world".tr,
                   style: TextStyle(
-                      color: kOTTAAOrange, fontWeight: FontWeight.w600),
+                      color: kOTTAAOrangeNew, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -72,7 +72,7 @@ step2Tutorial<widget>(PageController controller, context) {
               onTap: () => controller.animateToPage(2,
                   duration: Duration(milliseconds: 300),
                   curve: Curves.easeInOut),
-              backgroundColor: kOTTAAOrange,
+              backgroundColor: kOTTAAOrangeNew,
               fontColor: Colors.white,
             ),
           ],
