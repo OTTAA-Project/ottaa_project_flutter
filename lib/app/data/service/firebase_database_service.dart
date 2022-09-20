@@ -77,9 +77,10 @@ class FirebaseDatabaseService {
   Future<void> uploadDataToFirebaseRealTime({
     required String data,
     required String type,
+    required String languageCode,
   }) async {
     final String? auth = firebaseRed.currentUser!.uid;
-    final ref = databaseRef.child('$type/${auth!}/');
+    final ref = databaseRef.child('$type/${auth!}/$languageCode');
     await ref.set({
       'data': data,
     });
@@ -198,6 +199,7 @@ class FirebaseDatabaseService {
         fileName: 'Grupos_file',
         firebaseName: 'Grupo',
         pictoOrGrupo: false,
+
       );
     }
   }
@@ -208,6 +210,7 @@ class FirebaseDatabaseService {
     required String assetsFileName,
     required String firebaseName,
     required bool pictoOrGrupo,
+    required String languageCode,
   }) async {
     final instance = await SharedPreferences.getInstance();
     final fileExists = instance.getBool(fileName);
@@ -222,7 +225,7 @@ class FirebaseDatabaseService {
         }
       } else {
         final ref =
-            databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
+            databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
         final res = await ref.get();
         final data = res.value['data'];
         final da = pictoOrGrupo
@@ -274,10 +277,11 @@ class FirebaseDatabaseService {
     required String assetsFileName,
     required String firebaseName,
     required bool pictosOrGrupos,
+    required String languageCode,
   }) async {
     if (snapshot.exists && snapshot.value != null) {
       final ref =
-          databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
+          databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
       final res = await ref.get();
       final data = res.value['data'];
       //todo: write different conversions here
