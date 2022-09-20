@@ -156,6 +156,7 @@ class FirebaseDatabaseService {
         firebaseName: 'Picto',
         assetsFileName: 'assets/pictos.json',
         pictosOrGrupos: true,
+        languageCode: ,
       );
     } else {
       return await mobileFiles(
@@ -164,6 +165,7 @@ class FirebaseDatabaseService {
         firebaseName: 'Picto',
         pictoOrGrupo: true,
         onlineSnapshot: res,
+        languageCode: ,
       );
     }
   }
@@ -193,6 +195,7 @@ class FirebaseDatabaseService {
         assetsFileName: 'assets/grupos.json',
         firebaseName: 'Grupo',
         pictosOrGrupos: false,
+        languageCode: ,
       );
     } else {
       return await mobileFiles(
@@ -200,7 +203,7 @@ class FirebaseDatabaseService {
         assetsFileName: 'assets/grupos.json',
         fileName: 'Grupos_file',
         firebaseName: 'Grupo',
-        pictoOrGrupo: false,
+        pictoOrGrupo: false,languageCode: ,
 
       );
     }
@@ -566,13 +569,6 @@ class FirebaseDatabaseService {
     return res.value['PhotoUrl'];
   }
 
-  Future<void> uploadFrases({required String data})async{
-    final String? auth = firebaseRed.currentUser!.uid;
-    final ref = databaseRef.child('frases/${auth!}/');
-    await ref.set({
-      'data': data,
-    });
-  }
 
   String fetchCurrentUserUID(){
     final User? auth = firebaseRed.currentUser;
