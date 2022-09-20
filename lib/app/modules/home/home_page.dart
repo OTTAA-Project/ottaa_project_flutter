@@ -36,75 +36,75 @@ class HomePage extends GetView<HomeController> {
             controller: controller.screenshotController,
             child: Container(
               height: verticalSize * 0.25,
-              width: double.infinity,
+              // width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.blueGrey,
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: GetBuilder<HomeController>(
+              child: Container(
+                color: Colors.blueGrey,
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    GetBuilder<HomeController>(
                       id: 'screenshot',
-                      builder: (controller) => ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.sentencePicts.length,
-                        itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.only(left: verticalSize * 0.01),
-                          child: kIsWeb
-                              ? Image.network(
-                            controller.sentencePicts[index].imagen
-                                .pictoEditado ==
-                                null
-                                ? controller
-                                .sentencePicts[index].imagen.picto
-                                : controller.sentencePicts[index].imagen
-                                .pictoEditado!,
-                            loadingBuilder:
-                                (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  color: kOTTAAOrangeNew,
-                                  value:
-                                  loadingProgress.expectedTotalBytes !=
-                                      null
-                                      ? loadingProgress
-                                      .cumulativeBytesLoaded /
-                                      loadingProgress
-                                          .expectedTotalBytes!
-                                      : null,
-                                ),
-                              );
-                            },
-                          )
-                              : CachedNetworkImage(
-                            imageUrl: controller.sentencePicts[index].imagen
-                                .pictoEditado ==
-                                null
-                                ? controller
-                                .sentencePicts[index].imagen.picto
-                                : controller.sentencePicts[index].imagen
-                                .pictoEditado!,
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(),
+                      builder: (controller) => Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: controller.sentencePicts
+                            .map(
+                              (e) => Padding(
+                            padding:
+                            EdgeInsets.only(right: 8),
+                            child: kIsWeb
+                                ? Image.network(
+                              e.imagen.pictoEditado == null
+                                  ? e.imagen.picto
+                                  : e.imagen.pictoEditado!,
+                              width: verticalSize * 0.14,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null)
+                                  return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: kOTTAAOrangeNew,
+                                    value: loadingProgress
+                                        .expectedTotalBytes !=
+                                        null
+                                        ? loadingProgress
+                                        .cumulativeBytesLoaded /
+                                        loadingProgress
+                                            .expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              },
+                            )
+                                : CachedNetworkImage(
+                              imageUrl: e.imagen.pictoEditado == null
+                                  ? e.imagen.picto
+                                  : e.imagen.pictoEditado!,
+                              placeholder: (context, url) => Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              // height: verticalSize * 0.04,
+                              width: verticalSize * 0.14,
                             ),
-                            height: verticalSize * 0.04,
-                            width: verticalSize * 0.15,
                           ),
-                        ),
+                        )
+                            .toList(),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: verticalSize * 0.03),
-                    child: Image.asset(
-                      'assets/otta_drawer_logo.png',
-                      height: verticalSize * 0.05,
+                    Padding(
+                      padding: EdgeInsets.only(top: 16),
+                      child: Image.asset(
+                        'assets/otta_drawer_logo.png',
+                        height: verticalSize * 0.05,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -113,34 +113,48 @@ class HomePage extends GetView<HomeController> {
             height: verticalSize * 0.25,
             color: Colors.black,
           ),
+          Positioned(
+            left: 0,
+            bottom: 0,
+            child: LeftColumnWidget(),
+          ),
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: RightColumnWidget(),
+          ),
           Column(
             //MAIN COLUMN
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              // TOP ROW
-              SentenceWidget(),
-              Row(
-                // BODY ROW
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // LEFT COLUMN
-                  LeftColumnWidget(),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // BODY
-                      SuggestedWidget(),
-                      ActionsWidget(),
-                    ],
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                  ),
-                  // RIGHT COLUMN
-                  RightColumnWidget(),
-                ],
-              )
-              //SizedBox(height: 10),
+              Expanded(
+                flex: 8,
+                child: Column(
+                  children: [
+                    SentenceWidget(),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: ActionsWidget(),
+              ),
             ],
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: verticalSize * 0.17,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: SuggestedWidget(),
+              ),
+            ),
           ),
           GetBuilder<HomeController>(
             id: "subtitle",
@@ -233,6 +247,16 @@ class HomePage extends GetView<HomeController> {
                 ),
               ),*/
           // if (_homeController.isPlaying())
+          /// circular Indicator
+          Obx(
+            () => controller.showOrNot.value
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: kOTTAAOrangeNew,
+                    ),
+                  )
+                : Container(),
+          ),
         ],
       ),
       backgroundColor: Colors.black,

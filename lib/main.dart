@@ -9,9 +9,11 @@ import 'package:get/route_manager.dart';
 import 'package:ottaa_project_flutter/app/locale/translation.dart';
 import 'package:ottaa_project_flutter/app/modules/splash/splash_page.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app/modules/splash/splash_binding.dart';
 import 'app/routes/app_pages.dart';
+import 'package:build_daemon/constants.dart';
 import 'app/utils/dependency_injection.dart';
 
 void main() async {
@@ -40,11 +42,14 @@ void main() async {
     // print(defaultSystemLocale.toString());
     // print(systemLocales.asMap().toString());
     final instance = await SharedPreferences.getInstance();
-    final bool = instance.getBool('Language_KEY') ?? false;
+    final String key = instance.getString('Language_KEY') ?? 'Spanish';
+    final String languageCode = Constants.LANGUAGE_CODES[key]!;
+    final values = languageCode.split('-');
     runApp(
       MyApp(
-        locale: bool ? Locale(systemLocales[0].languageCode,
-            systemLocales[0].languageCode.toUpperCase()) : Locale('es', 'AR'),
+        locale: key != 'spanish'
+            ? Locale(values[0], values[1])
+            : Locale('es', 'AR'),
       ),
     );
   }, (error, stackTrace) {
@@ -69,7 +74,7 @@ class MyApp extends StatelessWidget {
     // print('hi i am here ${Platform.localeName.split('_').first}');
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'OTTAA Project',
+      title: 'OTTAA PROJECT',
       theme: ThemeData(
         primaryColor: kOTTAAOrangeNew,
         visualDensity: VisualDensity.adaptivePlatformDensity,

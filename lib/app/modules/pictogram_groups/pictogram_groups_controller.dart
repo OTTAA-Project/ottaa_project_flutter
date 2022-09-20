@@ -11,6 +11,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 
@@ -45,14 +46,12 @@ class PictogramGroupsController extends GetxController {
 
   ///Add Group
   bool textOrBorder = true;
-  final TextEditingController grupoNameController =
-      TextEditingController(text: 'Add Group');
+  final TextEditingController grupoNameController = TextEditingController();
   final ImagePicker picker = ImagePicker();
   RxBool isImageProvidedGrupo = false.obs;
   Rx<File?> fileImageGrupo = Rx<File?>(null);
   Rx<String?> selectedPhotoUrlGrupo = ''.obs;
   Rx<XFile?> imageTobeUploadedGrupo = Rx<XFile?>(null);
-  late String lang;
   late String url;
   Grupos grupo = Grupos(
     id: 0,
@@ -64,16 +63,12 @@ class PictogramGroupsController extends GetxController {
   Pict pict = Pict(
     imagen: Imagen(picto: ''),
     id: 0,
-    texto: Texto(
-      en: '',
-      es: '',
-    ),
+    texto: Texto(),
     tipo: 6,
   );
 
   //Add Pict
-  final TextEditingController pictoNameController =
-      TextEditingController(text: 'Add Picto');
+  final TextEditingController pictoNameController = TextEditingController();
   RxBool isImageProvidedPicto = false.obs;
   Rx<File?> fileImagePicto = Rx<File?>(null);
   Rx<String?> selectedPhotoUrlPicto = ''.obs;
@@ -207,7 +202,7 @@ class PictogramGroupsController extends GetxController {
       maxHeight: 700,
       maxWidth: 700,
     );
-    if (imageTobeUploadedGrupo != null) {
+    if (imageTobeUploadedGrupo.value != null) {
       print('yes');
       fileImageGrupo.value = File(imageTobeUploadedGrupo.value!.path);
       isImageProvidedGrupo.value = true;
@@ -225,7 +220,7 @@ class PictogramGroupsController extends GetxController {
       maxHeight: 700,
       maxWidth: 700,
     );
-    if (imageTobeUploadedGrupoEdit != null) {
+    if (imageTobeUploadedGrupoEdit.value != null) {
       print('yes');
       fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
       editingGrupo.value = true;
@@ -243,7 +238,7 @@ class PictogramGroupsController extends GetxController {
       maxHeight: 600,
       maxWidth: 600,
     );
-    if (imageTobeUploadedPicto != null) {
+    if (imageTobeUploadedPicto.value != null) {
       print('yes');
       fileImagePicto.value = File(imageTobeUploadedPicto.value!.path);
       isImageProvidedPicto.value = true;
@@ -258,7 +253,7 @@ class PictogramGroupsController extends GetxController {
     if (kIsWeb) {
       imageTobeUploadedGrupo.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedGrupo != null) {
+      if (imageTobeUploadedGrupo.value != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploadedGrupo.value!.readAsBytes();
         imageWidgetGrupo.value = Image.memory(
@@ -273,7 +268,7 @@ class PictogramGroupsController extends GetxController {
     } else {
       imageTobeUploadedGrupo.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedGrupo != null) {
+      if (imageTobeUploadedGrupo.value != null) {
         fileImageGrupo.value = File(imageTobeUploadedGrupo.value!.path);
         isImageProvidedGrupo.value = true;
         Get.back();
@@ -288,7 +283,7 @@ class PictogramGroupsController extends GetxController {
     if (kIsWeb) {
       imageTobeUploadedGrupoEdit.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedGrupoEdit != null) {
+      if (imageTobeUploadedGrupoEdit.value != null) {
         print('I was here');
         final imageInBytes =
             await imageTobeUploadedGrupoEdit.value!.readAsBytes();
@@ -305,7 +300,7 @@ class PictogramGroupsController extends GetxController {
     } else {
       imageTobeUploadedGrupoEdit.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedGrupoEdit != null) {
+      if (imageTobeUploadedGrupoEdit.value != null) {
         fileImageGrupoEdit.value = File(imageTobeUploadedGrupoEdit.value!.path);
         editingGrupo.value = true;
         selectedPhotoUrlGrupoEdit.value = '';
@@ -321,7 +316,7 @@ class PictogramGroupsController extends GetxController {
     if (kIsWeb) {
       imageTobeUploadedPicto.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedPicto != null) {
+      if (imageTobeUploadedPicto.value != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploadedPicto.value!.readAsBytes();
         imageWidgetPicto.value = Image.memory(
@@ -337,7 +332,7 @@ class PictogramGroupsController extends GetxController {
     } else {
       imageTobeUploadedPicto.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploadedPicto != null) {
+      if (imageTobeUploadedPicto.value != null) {
         fileImagePicto.value = File(imageTobeUploadedPicto.value!.path);
         isImageProvidedPicto.value = true;
         selectedPhotoUrlPicto.value = '';
@@ -351,8 +346,9 @@ class PictogramGroupsController extends GetxController {
 
   Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
       {required String text}) async {
-    final String languageFormat = lang == 'en' ? '639-3' : '639-1';
-    final language = lang == 'en' ? 'eng' : 'es';
+    final String languageFormat =
+        _homeController.language == 'en' ? '639-3' : '639-1';
+    final language = _homeController.language == 'en' ? 'eng' : 'es';
     url =
         'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
     var urlF = Uri.parse(url);
@@ -422,10 +418,42 @@ class PictogramGroupsController extends GetxController {
     // await ref.set({
     //   'data': data,
     // });
-    await _dataController.uploadDataToFirebaseRealTime(
-      data: data,
-      type: 'Grupo',
-    );
+    // await _dataController.uploadDataToFirebaseRealTime(
+    //   data: data,
+    //   type: 'Grupo',
+    // );
+
+    switch (_homeController.language) {
+      case "es-AR":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Grupo',
+        );
+        break;
+      case "en-US":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Grupo',
+        );
+        break;
+      case "fr-FR":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: Constants.FRENCH_GRUPO_FIREBASE_NAME,
+        );
+        break;
+      case "pt-BR":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: Constants.PORTUGUESE_GRUPO_FIREBASE_NAME,
+        );
+        break;
+      default:
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Grupo',
+        );
+    }
   }
 
   Future<void> uploadToFirebasePicto({required String data}) async {
@@ -447,8 +475,33 @@ class PictogramGroupsController extends GetxController {
     // await ref.set({
     //   'value': true,
     // });
-    await _dataController.uploadBoolToFirebaseRealtime(
-        data: true, type: 'GruposExistsOnFirebase');
+
+    switch (_homeController.language) {
+      case "es-AR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true, type: 'GruposExistsOnFirebase');
+        break;
+      case "en-US":
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true, type: 'GruposExistsOnFirebase');
+        break;
+      case "fr-FR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true,
+            type: 'GruposExistsOnFirebase${Constants.FRENCH_LANGUAGE_NAME}');
+        break;
+      case "pt-BR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true,
+            type:
+                'GruposExistsOnFirebase${Constants.PORTUGUESE_LANGUAGE_NAME}');
+        break;
+      default:
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true, type: 'GruposExistsOnFirebase');
+    }
+    // await _dataController.uploadBoolToFirebaseRealtime(
+    //     data: true, type: 'GruposExistsOnFirebase');
   }
 
   Future<void> pictoExistsOnFirebase() async {
@@ -457,8 +510,31 @@ class PictogramGroupsController extends GetxController {
     // await ref.set({
     //   'value': true,
     // });
-    await _dataController.uploadBoolToFirebaseRealtime(
-        data: true, type: 'PictsExistsOnFirebase');
+    switch (_homeController.language) {
+      case "es-AR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true, type: 'PictsExistsOnFirebase');
+        break;
+      case "en-US":
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true, type: 'PictsExistsOnFirebase');
+        break;
+      case "fr-FR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true,
+            type: 'PictsExistsOnFirebase${Constants.FRENCH_LANGUAGE_NAME}');
+        break;
+      case "pt-BR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true,
+            type: 'PictsExistsOnFirebase${Constants.PORTUGUESE_LANGUAGE_NAME}');
+        break;
+      default:
+        await _dataController.uploadBoolToFirebaseRealtime(
+            data: true, type: 'PictsExistsOnFirebase');
+    }
+    // await _dataController.uploadBoolToFirebaseRealtime(
+    //     data: true, type: 'PictsExistsOnFirebase');
   }
 
   void uploadGrupoEdit(
@@ -510,18 +586,34 @@ class PictogramGroupsController extends GetxController {
         }
       }
     }
-    if (lang.toUpperCase() == 'en'.toUpperCase()) {
-      grupoToEdit.texto.en = grupoEditNameController.text;
-    } else {
-      grupoToEdit.texto.es = grupoEditNameController.text;
+    // if (_homeController.language.toUpperCase() == 'en-US'.toUpperCase()) {
+    //   grupoToEdit.texto.en = grupoEditNameController.text;
+    // } else {
+    //   grupoToEdit.texto.es = grupoEditNameController.text;
+    // }
+    switch (_homeController.language) {
+      case "es-AR":
+        grupoToEdit.texto.es = grupoEditNameController.text;
+        break;
+      case "en-US":
+        grupoToEdit.texto.en = grupoEditNameController.text;
+        break;
+      case "fr-FR":
+        grupoToEdit.texto.fr = grupoEditNameController.text;
+        break;
+      case "pt-BR":
+        grupoToEdit.texto.pt = grupoEditNameController.text;
+        break;
+      default:
+        grupoToEdit.texto.es = grupoEditNameController.text;
     }
     int index = -1;
     _homeController.grupos.firstWhere((element) {
       index++;
-      print(element.texto.en);
+      // print(element.texto.en);
       return grupoToEdit.id == element.id;
     });
-    print(grupoToEdit.texto.en);
+    // print(grupoToEdit.texto.en);
     _homeController.grupos[index] = grupoToEdit;
     grupos[index] = grupoToEdit;
     final data = _homeController.grupos;
@@ -534,12 +626,31 @@ class PictogramGroupsController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writeGruposToFile(data: fileData.toString());
+      await localFile.writeGruposToFile(
+        data: fileData.toString(),
+        language: _homeController.language,
+      );
       // print('writing to file');
     }
     //for the file data
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool('Grupos_file', true);
+    switch (_homeController.language) {
+      case "es-AR":
+        await instance.setBool('Grupos_file', true);
+        break;
+      case "en-US":
+        await instance.setBool('Grupos_file', true);
+        break;
+      case "fr-FR":
+        await instance.setBool(Constants.FRENCH_GRUPO_FILE_NAME, true);
+        break;
+      case "pt-BR":
+        await instance.setBool(Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
+        break;
+      default:
+        await instance.setBool('Grupos_file', true);
+    }
+    // await instance.setBool('Grupos_file', true);
     // print(res1);
     //upload to the firebase
     await uploadToFirebaseGrupo(data: fileData.toString());
@@ -618,12 +729,31 @@ class PictogramGroupsController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writeGruposToFile(data: fileData.toString());
+      await localFile.writeGruposToFile(
+        data: fileData.toString(),
+        language: _homeController.language,
+      );
       // print('writing to file');
     }
     //for the file data
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool('Grupos_file', true);
+    switch (_homeController.language) {
+      case "es-AR":
+        await instance.setBool('Grupos_file', true);
+        break;
+      case "en-US":
+        await instance.setBool('Grupos_file', true);
+        break;
+      case "fr-FR":
+        await instance.setBool(Constants.FRENCH_GRUPO_FILE_NAME, true);
+        break;
+      case "pt-BR":
+        await instance.setBool(Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
+        break;
+      default:
+        await instance.setBool('Grupos_file', true);
+    }
+    // await instance.setBool('Grupos_file', true);
     // print(res1);
     //upload to the firebase
     await uploadToFirebaseGrupo(data: fileData.toString());
@@ -685,8 +815,24 @@ class PictogramGroupsController extends GetxController {
       }
     }
     // pict.tipo = 6;
-    pict.texto.en = pictoNameController.text;
-    pict.texto.es = pictoNameController.text;
+    switch (_homeController.language) {
+      case "es-AR":
+        pict.texto.es = pictoNameController.text;
+        break;
+      case "en-US":
+        pict.texto.en = pictoNameController.text;
+        break;
+      case "fr-FR":
+        pict.texto.fr = pictoNameController.text;
+        break;
+      case "pt-BR":
+        pict.texto.pt = pictoNameController.text;
+        break;
+      default:
+        pict.texto.es = pictoNameController.text;
+    }
+    // pict.texto.en = pictoNameController.text;
+    // pict.texto.es = pictoNameController.text;
     pict.id = timeSeconds;
     pict.tipo = tipoValue.value;
     pict.relacion = [];
@@ -731,12 +877,32 @@ class PictogramGroupsController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writePictoToFile(data: fileData.toString());
+      await localFile.writePictoToFile(
+        data: fileData.toString(),
+        language: _homeController.language,
+      );
       // print('writing to file');
     }
     //for the file data
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool('Pictos_file', true);
+    switch (_homeController.language) {
+      case "es-AR":
+        await instance.setBool('Pictos_file', true);
+        break;
+      case "en-US":
+        await instance.setBool('Pictos_file', true);
+        break;
+      case "fr-FR":
+        await instance.setBool(Constants.FRENCH_PICTO_FILE_NAME, true);
+        break;
+      case "pt-BR":
+        await instance.setBool(Constants.PORTUGUESE_PICTO_FILE_NAME, true);
+        break;
+      default:
+        await instance.setBool('Pictos_file', true);
+        break;
+    }
+    // await instance.setBool('Pictos_file', true);
     // print(res1);
     //upload to the firebase
     await uploadToFirebasePicto(data: fileData.toString());
@@ -752,11 +918,30 @@ class PictogramGroupsController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writeGruposToFile(data: fileDataGrupo.toString());
+      await localFile.writeGruposToFile(
+        data: fileDataGrupo.toString(),
+        language: _homeController.language,
+      );
       // print('writing to file');
     }
     //for the file data
-    await instance.setBool('Grupos_file', true);
+    switch (_homeController.language) {
+      case "es-AR":
+        await instance.setBool('Grupos_file', true);
+        break;
+      case "en-US":
+        await instance.setBool('Grupos_file', true);
+        break;
+      case "fr-FR":
+        await instance.setBool(Constants.FRENCH_GRUPO_FILE_NAME, true);
+        break;
+      case "pt-BR":
+        await instance.setBool(Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
+        break;
+      default:
+        await instance.setBool('Grupos_file', true);
+    }
+    // await instance.setBool('Grupos_file', true);
     // print(res1);
     //upload to the firebase
     await uploadToFirebaseGrupo(data: fileDataGrupo.toString());
@@ -832,7 +1017,7 @@ class PictogramGroupsController extends GetxController {
     pictoPageController = PageController();
     addPictoGridController = PageController();
     await loadAssets();
-    lang = ttsController.languaje;
+    // lang = ttsController.languaje;
   }
 
   @override

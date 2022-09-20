@@ -102,10 +102,14 @@ class TextoGrupos {
   TextoGrupos({
     this.en = '',
     this.es = '',
+    this.fr = '',
+    this.pt = '',
   });
 
   String en;
   String es;
+  String fr;
+  String pt;
 
   factory TextoGrupos.fromJson(Map<String, dynamic> json) =>
       _$TextoGruposFromJson(json);

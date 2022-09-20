@@ -26,7 +26,7 @@ class AddPictoPage extends GetView<PictogramGroupsController> {
           foregroundColor: Colors.white,
           elevation: 0,
           centerTitle: false,
-          title: Text('Add Pict'),
+          title: Text('add_pict'.tr),
         ),
         body: Container(
           child: Row(
@@ -40,7 +40,7 @@ class AddPictoPage extends GetView<PictogramGroupsController> {
                     children: [
                       Expanded(
                         child: Container(
-                          padding: EdgeInsets.all(horizontalSize * 0.01),
+                          // padding: EdgeInsets.all(horizontalSize * 0.01),
                           child: InkWell(
                             onTap: () {
                               showDialog(

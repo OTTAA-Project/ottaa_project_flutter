@@ -463,6 +463,7 @@ class GamesController extends GetxController {
   void speakNameWhatsThePicto() async {
     await _ttsController
         .speak('${'whats_the_picto'.tr} ${selectedAnswer.string}');
+    print('${'whats_the_picto'.tr} ${selectedAnswer.string}');
   }
 
   Future<void> topWidgetFunction({
@@ -808,6 +809,7 @@ class GamesController extends GetxController {
       second.value = '';
       await Future.delayed(Duration(seconds: 3));
       await createQuestion();
+      update(['MemoryGame']);
     }
   }
 

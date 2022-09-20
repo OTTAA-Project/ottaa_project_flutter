@@ -14,7 +14,6 @@ class LeftColumnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
-
     return Container(
       height: verticalSize * 0.5,
       width: horizontalSize * 0.10,
@@ -40,7 +39,7 @@ class LeftColumnWidget extends StatelessWidget {
               child: Center(
                   child: Icon(
                 // Icons.gamepad,
-                Icons.gamepad,
+                Icons.videogame_asset,
                 color: Colors.white,
                 size: horizontalSize / 10,
               )),
@@ -83,7 +82,7 @@ class LeftColumnWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: kOTTAAOrangeNew,
         borderRadius:
-            BorderRadius.only(topRight: Radius.circular(horizontalSize / 40)),
+            BorderRadius.only(topRight: Radius.circular(16)),
       ),
     );
   }

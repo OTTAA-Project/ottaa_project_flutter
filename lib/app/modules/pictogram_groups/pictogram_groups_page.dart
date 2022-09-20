@@ -18,275 +18,310 @@ class PictogramGroupsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    double verticalSize = MediaQuery.of(context).size.height;
+    double horizontalSize = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kOTTAAOrangeNew,
-        leading: Container(),
-        foregroundColor: Colors.white,
-        elevation: 0,
-        title: Text('GaleriaGrupos'),
-        actions: [
-          GestureDetector(
-              onTap: () => {
-                    CustomAnalyticsEvents.setEventWithParameters(
-                        "Touch",
-                        CustomAnalyticsEvents.createMyMap(
-                            'Group Gallery', 'Change View'))
-                  },
-              child: Icon(
-                Icons.reorder,
-                size: 30,
-              )),
-          const SizedBox(
-            width: 8,
-          ),
-          GestureDetector(
-            onTap: () {
-              _pictogramController.categoryGridviewOrPageview.value =
-                  !_pictogramController.categoryGridviewOrPageview.value;
-              CustomAnalyticsEvents.setEventWithParameters(
-                  "Touch",
-                  CustomAnalyticsEvents.createMyMap(
-                      'Group Gallery', 'Change View'));
-            },
-            child: Icon(
-              Icons.view_carousel,
-              size: 30,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: GestureDetector(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(verticalSize * 0.1),
+        child: AppBar(
+          centerTitle: false,
+          backgroundColor: kOTTAAOrangeNew,
+          leading: Container(),
+          titleSpacing: 0,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          title: Text('galeria_grupos'.tr),
+          actions: [
+            // GestureDetector(
+            //     onTap: () => {
+            //           CustomAnalyticsEvents.setEventWithParameters(
+            //               "Touch",
+            //               CustomAnalyticsEvents.createMyMap(
+            //                   'Group Gallery', 'Change View'))
+            //         },
+            //     child: Icon(
+            //       Icons.reorder,
+            //       size: 30,
+            //     )),
+            // const SizedBox(
+            //   width: 8,
+            // ),
+            GestureDetector(
               onTap: () {
+                _pictogramController.categoryGridviewOrPageview.value =
+                    !_pictogramController.categoryGridviewOrPageview.value;
                 CustomAnalyticsEvents.setEventWithParameters(
                     "Touch",
                     CustomAnalyticsEvents.createMyMap(
-                        'Group Gallery', 'Add Group'));
-                Get.toNamed(AppRoutes.ADDGROUP);
+                        'Group Gallery', 'Change View'));
               },
               child: Icon(
-                Icons.add_circle_outline,
+                Icons.view_carousel,
                 size: 30,
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              print(_homeController.grupos.last.imagen.picto);
-              CustomAnalyticsEvents.setEventWithParameters(
-                  "Touch",
-                  CustomAnalyticsEvents.createMyMap(
-                      'Group Gallery', 'Syncronize Pictogram'));
-            },
-            child: Icon(
-              Icons.cloud_download,
-              size: 30,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: GestureDetector(
+                onTap: () {
+                  CustomAnalyticsEvents.setEventWithParameters(
+                      "Touch",
+                      CustomAnalyticsEvents.createMyMap(
+                          'Group Gallery', 'Add Group'));
+                  Get.toNamed(AppRoutes.ADDGROUP);
+                },
+                child: Icon(
+                  Icons.add_circle_outline,
+                  size: 30,
+                ),
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-        ],
+            // GestureDetector(
+            //   onTap: () {
+            //     print(_homeController.grupos.last.imagen.picto);
+            //     CustomAnalyticsEvents.setEventWithParameters(
+            //         "Touch",
+            //         CustomAnalyticsEvents.createMyMap(
+            //             'Group Gallery', 'Syncronize Pictogram'));
+            //   },
+            //   child: Icon(
+            //     Icons.cloud_download,
+            //     size: 30,
+            //   ),
+            // ),
+            const SizedBox(
+              width: 16,
+            ),
+          ],
+        ),
       ),
       body: Container(
         color: Colors.black,
-        child: Stack(
-          children: [
-            Container(
-              // height: Get.height * 0.7,
-              padding: EdgeInsets.symmetric(horizontal: width * .10),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 8,
-                    child: Obx(
-                      () => Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: _pictogramController
-                                  .categoryGridviewOrPageview.value
-                              ? width * 0.02
-                              : width * 0.13,
-                          vertical: 16,
-                        ),
+        child: SafeArea(
+          child: Stack(
+            children: [
+              Container(
+                // height: Get.height * 0.7,
+                padding: EdgeInsets.symmetric(horizontal: horizontalSize * .09),
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 7,
+                      child: Container(
+                          // color: Colors.pink,
+                          ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        color: kOTTAAOrangeNew,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(),
+                            Container(),
 
-                        ///the whole view is extracted to another file
+                            /// for keeping them in order and the button will be in separate Positioned
+                            Container(),
+                            GestureDetector(
+                              onTap: () async {
+                                CustomAnalyticsEvents.setEventWithParameters(
+                                    "Touch",
+                                    CustomAnalyticsEvents.createMyMap(
+                                        'Group Gallery', 'Search Pictogram'));
+
+                                var result = await showSearch<String>(
+                                  context: context,
+                                  delegate: CustomDelegate(),
+                                );
+                                print(result);
+                              },
+                              child: Icon(
+                                Icons.search,
+                                size: verticalSize * 0.1,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Container(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              ///left one
+              Positioned(
+                left: 0,
+                bottom: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: kOTTAAOrangeNew,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(16),
+                    ),
+                  ),
+                  width: horizontalSize * 0.10,
+                  height: verticalSize * 0.5,
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () => {
+                        _pictogramController.categoryGridviewOrPageview.value
+                            ? _pictogramController.removeSomeScroll(
+                                _pictogramController.categoriesGridController)
+                            : _pictogramController.gotoPreviousPage(
+                                _pictogramController.categoriesPageController),
+                        CustomAnalyticsEvents.setEventWithParameters(
+                            "Touch",
+                            CustomAnalyticsEvents.createMyMap(
+                                'Group Gallery', 'Foward Button'))
+                      },
+                      child: Icon(
+                        Icons.skip_previous,
+                        size: verticalSize * 0.1,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              ///right one
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: kOTTAAOrangeNew,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                    ),
+                  ),
+                  width: horizontalSize * 0.10,
+                  height: verticalSize * 0.5,
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () => {
+                        _pictogramController.categoryGridviewOrPageview.value
+                            ? _pictogramController.addSomeScroll(
+                                _pictogramController.categoriesGridController)
+                            : _pictogramController.gotoNextPage(
+                                _pictogramController.categoriesPageController),
+                        CustomAnalyticsEvents.setEventWithParameters(
+                            "Touch",
+                            CustomAnalyticsEvents.createMyMap(
+                                'Group Gallery', 'Next Button'))
+                      },
+                      child: Icon(
+                        Icons.skip_next,
+                        size: verticalSize * 0.1,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              /// main data widget
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: verticalSize * 0.17,
+                child: Obx(
+                  () => Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                    child: Container(
+                      height: verticalSize * 0.72,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      padding: EdgeInsets.only(
+                        left:
+                            _pictogramController.categoryGridviewOrPageview.value
+                                ? horizontalSize * 0.02
+                                : horizontalSize * 0.13,
+                        right:
+                            _pictogramController.categoryGridviewOrPageview.value
+                                ? horizontalSize * 0.02
+                                : horizontalSize * 0.13,
+                        bottom: 16,
+                      ),
+                      // width: horizontalSize * 0.8,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
                         child: CategoryViewWidget(),
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      color: kOTTAAOrangeNew,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(),
-                         Container(),
-                          /// for keeping them in order and the button will be in separate Positioned
-                          Container(),
-                          GestureDetector(
-                            onTap: () async {
-                              CustomAnalyticsEvents.setEventWithParameters(
-                                  "Touch",
-                                  CustomAnalyticsEvents.createMyMap(
-                                      'Group Gallery', 'Search Pictogram'));
+                ),
+              ),
 
-                              var result = await showSearch<String>(
-                                context: context,
-                                delegate: CustomDelegate(),
-                              );
-                              print(result);
-                            },
-                            child: Icon(
-                              Icons.search,
-                              size: height * 0.1,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Container(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            //left one
-            Positioned(
-              left: 0,
-              bottom: 0,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: kOTTAAOrangeNew,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(16),
-                  ),
-                ),
-                width: width * 0.10,
-                height: height * 0.5,
-                child: Center(
-                  child: GestureDetector(
-                    onTap: () => {
-                      _pictogramController.categoryGridviewOrPageview.value
-                          ? _pictogramController.removeSomeScroll(
-                              _pictogramController.categoriesGridController)
-                          : _pictogramController.gotoPreviousPage(
-                              _pictogramController.categoriesPageController),
-                      CustomAnalyticsEvents.setEventWithParameters(
-                          "Touch",
-                          CustomAnalyticsEvents.createMyMap(
-                              'Group Gallery', 'Foward Button'))
-                    },
-                    child: Icon(
-                      Icons.skip_previous,
-                      size: height * 0.1,
-                      color: Colors.white,
-                    ),
+              /// the play button
+              Positioned(
+                bottom: verticalSize * 0.015,
+                left: horizontalSize * 0.43,
+                right: horizontalSize * 0.43,
+                child: Obx(
+                  () => GestureDetector(
+                    onTap: _pictogramController.categoryGridviewOrPageview.value
+                        ? () {}
+                        : () async {
+                            //saying the name after selecting the category
+                            //saying the name after selecting the category and saving the selected group
+                            _pictogramController.selectedGrupos =
+                                _homeController.grupos[_pictogramController
+                                    .categoriesPageController.page!
+                                    .toInt()];
+                            _ttsController.speak(_ttsController.languaje ==
+                                    "en-US"
+                                ? _homeController
+                                    .grupos[_pictogramController
+                                        .categoriesPageController.page!
+                                        .toInt()]
+                                    .texto
+                                    .en
+                                : _homeController
+                                    .grupos[_pictogramController
+                                        .categoriesPageController.page!
+                                        .toInt()]
+                                    .texto
+                                    .es);
+                            await _pictogramController.fetchDesiredPictos();
+                            CustomAnalyticsEvents.setEventWithParameters(
+                                "Touch",
+                                CustomAnalyticsEvents.createMyMap(
+                                    'Group Gallery', 'Pictograms Gallery'));
+                            Get.toNamed(AppRoutes.SELECTPICTO);
+                          },
+                    child: OttaLogoWidget(),
                   ),
                 ),
               ),
-            ),
-            //right one
-            Positioned(
-              right: 0,
-              bottom: 0,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: kOTTAAOrangeNew,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                  ),
-                ),
-                width: width * 0.10,
-                height: height * 0.5,
-                child: Center(
-                  child: GestureDetector(
-                    onTap: () => {
-                      _pictogramController.categoryGridviewOrPageview.value
-                          ? _pictogramController.addSomeScroll(
-                              _pictogramController.categoriesGridController)
-                          : _pictogramController.gotoNextPage(
-                              _pictogramController.categoriesPageController),
-                      CustomAnalyticsEvents.setEventWithParameters(
-                          "Touch",
-                          CustomAnalyticsEvents.createMyMap(
-                              'Group Gallery', 'Next Button'))
-                    },
-                    child: Icon(
-                      Icons.skip_next,
-                      size: height * 0.1,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
 
-            /// the play button
-            Positioned(
-              bottom: height * 0.02,
-              left: width * 0.43,
-              right: width * 0.43,
-              child: Obx(
-                () => GestureDetector(
-                  onTap: _pictogramController.categoryGridviewOrPageview.value
-                      ? () {}
-                      : () async {
-                          //saying the name after selecting the category
-                          //saying the name after selecting the category and saving the selected group
-                          _pictogramController.selectedGrupos =
-                              _homeController.grupos[_pictogramController
-                                  .categoriesPageController.page!
-                                  .toInt()];
-                          _ttsController.speak(_ttsController.languaje ==
-                                  "en-US"
-                              ? _homeController
-                                  .grupos[_pictogramController
-                                      .categoriesPageController.page!
-                                      .toInt()]
-                                  .texto
-                                  .en
-                              : _homeController
-                                  .grupos[_pictogramController
-                                      .categoriesPageController.page!
-                                      .toInt()]
-                                  .texto
-                                  .es);
-                          await _pictogramController.fetchDesiredPictos();
-                          CustomAnalyticsEvents.setEventWithParameters(
-                              "Touch",
-                              CustomAnalyticsEvents.createMyMap(
-                                  'Group Gallery', 'Pictograms Gallery'));
-                          Get.toNamed(AppRoutes.SELECTPICTO);
-                        },
-                  child: OttaLogoWidget(),
+              /// close button
+              Positioned(
+                left: horizontalSize * 0.27,
+                bottom: verticalSize * 0.04,
+                child: GestureDetector(
+                  onTap: () => {
+                    CustomAnalyticsEvents.setEventWithParameters(
+                        "Touch",
+                        CustomAnalyticsEvents.createMyMap(
+                            'Group Gallery', 'Backpress Button')),
+                    Get.back()
+                  },
+                  child: Icon(
+                    Icons.cancel,
+                    size: verticalSize * 0.1,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            /// close button
-            Positioned(
-              left: width * 0.27,
-              bottom: height * 0.04,
-              child: GestureDetector(
-                onTap: () => {
-                  CustomAnalyticsEvents.setEventWithParameters(
-                      "Touch",
-                      CustomAnalyticsEvents.createMyMap(
-                          'Group Gallery', 'Backpress Button')),
-                  Get.back()
-                },
-                child: Icon(
-                  Icons.cancel,
-                  size: height * 0.1,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-
-          ],
+            ],
+          ),
         ),
       ),
     );

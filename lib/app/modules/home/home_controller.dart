@@ -7,6 +7,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/data/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/grupos_repository.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
@@ -17,6 +18,7 @@ import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/services/auth_service.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,6 +27,7 @@ import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 class HomeController extends GetxController {
   final _ttsController = Get.find<TTSController>();
   final dataController = Get.find<DataController>();
+  RxBool showOrNot = true.obs;
 
   TTSController get ttsController => this._ttsController;
   final _pictsRepository = Get.find<PictsRepository>();
@@ -108,6 +111,175 @@ class HomeController extends GetxController {
   //Create an instance of ScreenshotController
   ScreenshotController screenshotController = ScreenshotController();
 
+  List<Sentence> mostUsedSentences = [];
+  int indexForMostUsed = 0;
+
+  Future<void> fetchMostUsedSentences() async {
+    switch (this._ttsController.languaje) {
+      case "es-AR":
+        mostUsedSentences = await dataController.fetchFrases(
+          language: language,
+          type: Constants.MOST_USED_SENTENCES,
+        );
+        break;
+      case "en-US":
+        mostUsedSentences = await dataController.fetchFrases(
+          language: language,
+          type: Constants.MOST_USED_SENTENCES,
+        );
+        break;
+      case "pt-BR":
+        mostUsedSentences = await dataController.fetchFrases(
+          language: language,
+          type: Constants.MOST_USED_SENTENCES,
+        );
+        break;
+      case "fr-FR":
+        mostUsedSentences = await dataController.fetchFrases(
+          language: language,
+          type: Constants.MOST_USED_SENTENCES,
+        );
+        break;
+      default:
+        mostUsedSentences = await dataController.fetchFrases(
+          language: language,
+          type: Constants.MOST_USED_SENTENCES,
+        );
+    }
+  }
+
+  Future<void> uploadFrases({
+    required String phrase,
+  }) async {
+    switch (this._ttsController.languaje) {
+      case "es-AR":
+        await addSentenceToList(
+          phrase: phrase,
+        );
+        break;
+      case "en-US":
+        await addSentenceToList(
+          phrase: phrase,
+        );
+        break;
+      case "pt-BR":
+        await addSentenceToList(
+          phrase: phrase,
+        );
+        break;
+      case "fr-FR":
+        await addSentenceToList(
+          phrase: phrase,
+        );
+        break;
+      default:
+        await addSentenceToList(
+          phrase: phrase,
+        );
+    }
+    List<String> dataUpload = [];
+    mostUsedSentences.forEach((element) {
+      final obj = jsonEncode(element);
+      dataUpload.add(obj);
+    });
+    mostUsedSentences.forEach((element) {
+      print(
+          'Sentence: ${element.frase},Here is the frequency: ${element.frecuencia}');
+    });
+    await dataController.uploadFrases(
+      language: language,
+      data: dataUpload.toString(),
+      type: Constants.MOST_USED_SENTENCES,
+    );
+  }
+
+  Future<void> addSentenceToList({
+    required String phrase,
+  }) async {
+    if (mostUsedSentences.isEmpty) {
+      List<PictosComponente> pictosComponente = [];
+      _sentencePicts.forEach((element) {
+        pictosComponente.add(
+          PictosComponente(
+              id: element.id,
+              //todo: chat with hector aout this
+              esSugerencia: element.esSugerencia != null ? true : false,
+              hora: element.hora,
+              edad: element.edad),
+        );
+      });
+      final timeWhenUsed = DateTime.now().millisecondsSinceEpoch;
+      mostUsedSentences.add(
+        Sentence(
+          fecha: [timeWhenUsed],
+          complejidad: Complejidad(
+            pictosComponentes: pictosComponente,
+            valor: 0,
+          ),
+          frase: phrase,
+          id: mostUsedSentences.length,
+          frecuencia: 1,
+          locale: '',
+        ),
+      );
+    } else {
+      ///check if the mostUsedSentences has the sentence already or not
+      final res = checkIfSentenceExist(
+        phrase: phrase,
+      );
+      if (res) {
+        /// increment the new sentence to the list
+        mostUsedSentences[indexForMostUsed].frecuencia++;
+        mostUsedSentences[indexForMostUsed]
+            .fecha
+            .add(DateTime.now().millisecondsSinceEpoch);
+      } else {
+        /// add the new sentence to the list
+        List<PictosComponente> pictosComponente = [];
+        _sentencePicts.forEach((element) {
+          pictosComponente.add(
+            PictosComponente(
+                id: element.id,
+                //todo: chat with hector aout this
+                esSugerencia: element.esSugerencia != null ? true : false,
+                hora: element.hora,
+                edad: element.edad),
+          );
+        });
+        final timeWhenUsed = DateTime.now().millisecondsSinceEpoch;
+        mostUsedSentences.add(
+          Sentence(
+            fecha: [timeWhenUsed],
+            complejidad: Complejidad(
+              pictosComponentes: pictosComponente,
+              valor: 0,
+            ),
+            frase: phrase,
+            id: mostUsedSentences.length,
+            frecuencia: 1,
+            locale: ttsController.languaje,
+          ),
+        );
+      }
+    }
+  }
+
+  bool checkIfSentenceExist({required String phrase}) {
+    indexForMostUsed = -1;
+    bool boolean = false;
+    mostUsedSentences.forEach((sentence) {
+      if (sentence.frase.trim().toLowerCase() == phrase.trim().toLowerCase()) {
+        boolean = true;
+      }
+      indexForMostUsed++;
+    });
+    if (boolean) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<void> fetchAccountType() async {
     // final User? auth = FirebaseAuth.instance.currentUser;
     // final ref = databaseRef.child('Pago/${auth!.uid}/Pago');
@@ -130,7 +302,9 @@ class HomeController extends GetxController {
     await fetchAccountType();
     await getPicNumber();
     language = _ttsController.languaje;
+    showOrNot.value = false;
     final _pictogram = Get.put(PictogramGroupsController());
+    await fetchMostUsedSentences();
   }
 
   void initializePageViewer() {
@@ -237,6 +411,22 @@ class HomeController extends GetxController {
   }
 
   Future<void> loadPicts() async {
+    await Future.delayed(
+      Duration(milliseconds: 500),
+    );
+    /* if (_ttsController.languaje == Constants.LANGUAGE_CODES['French']) {
+      this.picts = await this._pictsRepository.getFrench();
+      this.grupos = await this._grupoRepository.getFrench();
+    }
+    if (_ttsController.languaje == Constants.LANGUAGE_CODES['Portuguese']) {
+      this.picts = await this._pictsRepository.getPortuguese();
+      this.grupos = await this._grupoRepository.getPortuguese();
+    }
+    if (_ttsController.languaje == Constants.LANGUAGE_CODES['Spanish'] ||
+        _ttsController.languaje == Constants.LANGUAGE_CODES['English']) {
+      this.picts = await this._pictsRepository.getAll();
+      this.grupos = await this._grupoRepository.getAll();
+    }*/
     this.picts = await this._pictsRepository.getAll();
     this.grupos = await this._grupoRepository.getAll();
     await suggest(0);
@@ -267,6 +457,16 @@ class HomeController extends GetxController {
     update(['screenshot']);
   }
 
+  removeWholeSentence() async {
+    if (this._sentencePicts.isNotEmpty) {
+      this._sentencePicts.clear();
+      this._suggestedIndex = 0;
+      await suggest(
+          this._sentencePicts.isNotEmpty ? this._sentencePicts.last.id : 0);
+    }
+    update(['screenshot']);
+  }
+
   bool hasText() {
     if (this._voiceText != "") return true;
     return false;
@@ -277,27 +477,33 @@ class HomeController extends GetxController {
       this._voiceText = "";
       this._sentencePicts.forEach((pict) {
         switch (this._ttsController.languaje) {
-          case "es":
+          case "es-AR":
             this._voiceText += "${pict.texto.es} ";
             break;
-          case "en":
+          case "en-US":
             this._voiceText += "${pict.texto.en} ";
             break;
-
+          case "pt-BR":
+            this._voiceText += "${pict.texto.pt} ";
+            break;
+          case "fr-FR":
+            this._voiceText += "${pict.texto.fr} ";
+            break;
           default:
             this._voiceText += "${pict.texto.es} ";
         }
       });
       update(["subtitle"]);
-      print(hasText());
-      await this._ttsController.speakPhrase(this._voiceText);
+      // print(hasText());
+      await _ttsController.speakPhrase(_voiceText);
+      //todo: add a function here to keep the used sentences and upload them to firebase
+      await uploadFrases(phrase: _voiceText);
       this._suggestedIndex = 0;
       this._sentencePicts.clear();
       await this.suggest(0);
-      await Future.delayed(new Duration(seconds: 1), () {
-        this._voiceText = "";
-        update(["subtitle"]);
-      });
+      await Future.delayed(Duration(seconds: 1));
+      this._voiceText = "";
+      update(["subtitle"]);
     }
   }
 
@@ -433,6 +639,7 @@ class HomeController extends GetxController {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(
         data: fileDataPicts.toString(),
+        language: language,
       );
       // print('writing to file');
     }
@@ -480,7 +687,7 @@ class HomeController extends GetxController {
     await _flutterTts.setSpeechRate(1.0);
     await _flutterTts.setVolume(1.0);
     await _flutterTts.setPitch(1.0);
-    if (_ttsController.languaje == 'en') {
+    if (_ttsController.languaje == 'en-US') {
       await _flutterTts.setVoice(
         {"name": "en-us-x-tpf-local", "locale": "en-US"},
       );
@@ -528,13 +735,18 @@ class HomeController extends GetxController {
     this.textToShare = "";
     this._sentencePicts.forEach((pict) {
       switch (this._ttsController.languaje) {
-        case "es":
+        case "es-AR":
           this.textToShare += "${pict.texto.es} ";
           break;
-        case "en":
+        case "en-US":
           this.textToShare += "${pict.texto.en} ";
           break;
-
+        case "fr-FR":
+          this.textToShare += "${pict.texto.fr} ";
+          break;
+        case "pt-BR":
+          this.textToShare += "${pict.texto.pt} ";
+          break;
         default:
           this.textToShare += "${pict.texto.es} ";
       }

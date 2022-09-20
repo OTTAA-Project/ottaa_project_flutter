@@ -58,7 +58,7 @@ class RightColumnWidget extends GetView<HomeController> {
                           return SentenceShareWidget();
                         },
                       );
-                if(controller.sentencePicts.length == 0){
+                if (controller.sentencePicts.length == 0) {
                   await controller.startTimerForDialogueExit();
                 }
               },
@@ -94,7 +94,7 @@ class RightColumnWidget extends GetView<HomeController> {
       decoration: BoxDecoration(
         color: kOTTAAOrangeNew,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(horizontalSize / 40),
+          topLeft: Radius.circular(16),
         ),
       ),
     );
