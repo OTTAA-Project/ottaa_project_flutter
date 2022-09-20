@@ -1,10 +1,11 @@
-import 'package:charts_flutter/flutter.dart' as charts;
-
-class DeveloperSeries {
+class ChartModel {
   final int year;
-  final int developers;
-  final charts.Color barColor;
+  final int count;
+  // final Color barColor;
 
-  DeveloperSeries(
-      {required this.year, required this.developers, required this.barColor,});
+  ChartModel({
+    required this.year,
+    required this.count,
+    // required this.barColor,
+  });
 }

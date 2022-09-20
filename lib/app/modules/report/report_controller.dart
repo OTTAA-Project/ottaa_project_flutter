@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/app/data/models/frases_statistics_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/picto_statistics_model.dart';
+import 'package:ottaa_project_flutter/app/data/models/report_chart_data_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 
@@ -35,6 +37,7 @@ class ReportController extends GetxController {
   RxDouble averagePictoFrase = 0.00.obs;
   RxBool loadingMostUsedSentences = false.obs;
   RxInt frases7Days = 0.obs;
+  List<ChartModel> chartModel = [];
   late double scoreForProfile;
   RxDouble scoreProfile = 0.00.obs;
 
@@ -151,8 +154,18 @@ class ReportController extends GetxController {
     int usedGrupos = 0;
     frasesStatisticsModel.frecLast7Days.forEach((key, value) {
       print('here is the values from the map');
+      final date = DateTime.fromMillisecondsSinceEpoch(
+        int.parse(key),
+      );
+      final month = DateFormat.MMMM().format(date);
+      print('${date.day} $month ${date.year}');
+      chartModel.add(
+        ChartModel(year: int.parse(key), count: value),
+      );
       print('$key : $value');
     });
+    print(chartModel.length);
+    print(chartModel.last.year);
     pictoStatisticsModel.pictoUsagePerGroup.forEach((element) {
       if (element.percentage > 0.0) {
         usedGrupos++;
@@ -174,6 +187,7 @@ class ReportController extends GetxController {
     print(score);
     // return (int)(score / 1000);
     vocabularyFunction();
+    update(['charts']);
   }
 
   void vocabularyFunction() {
