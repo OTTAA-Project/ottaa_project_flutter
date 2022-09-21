@@ -2,82 +2,107 @@
 
 # Welcome to OTTAA Project wiki #
 
+OTTAA Project is an Alternative Augmentative Communication System, intended for people with speech
+impairments. It is a mobile, fast and effective tool that significantly improves the quality of life
+and facilitates social and labor integration.
 
-
-OTTAA Project is an Alternative Augmentative Communication System, intended for people with speech impairments. It is a mobile, fast and effective tool that significantly improves the quality of life and facilitates social and labor integration.
-
-We had already improved more than 40000 people lifestyle in 11 countries, our App helps people with Cerebral Palsy, Aphasia, Autism, Down Syndrome & mild ALS.
-You can be part of this life-changer tech, join us in this social impact open source project.
-
+We had already improved more than 40000 people lifestyle in 11 countries, our App helps people with
+Cerebral Palsy, Aphasia, Autism, Down Syndrome & mild ALS. You can be part of this life-changer
+tech, join us in this social impact open source project.
 
 [![](http://img.youtube.com/vi/zAL7yWxc-gU/0.jpg)](http://www.youtube.com/watch?v=zAL7yWxc-gU "Video")
 
 # Project Info #
- *[creating models]
+
+*[creating models]
 
 - run `flutter pub get` to get the dependencies.
 - run `flutter pub run build_runner build` to generate the model class code.
 - run `flutter run` to run the project.
-- run `flutter packages pub run build_runner build --delete-conflicting-outputs` if there are some errors for models building.
+- run `flutter packages pub run build_runner build --delete-conflicting-outputs` if there are some
+  errors for models building.
 - run `flutter build web --release --web-renderer canvaskit` for building the project.
 - run `flutter deploy` for deploying it on the master.
 - run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
- * [Web Page](https://ottaaproject.com)
+
+* [Web Page](https://ottaaproject.com)
 
 ## Resources
 
-
->* added some custom Icons here from the FlutterIcons website
+> * added some custom Icons here from the FlutterIcons website
 
 ### Libraries
-   The libraries used are:
 
-  >* [volley](https://github.com/google/volley) - Network Requests
+The libraries used are:
 
-  >* [Android-RateThisApp](https://github.com/kobakei/Android-RateThisApp) - App Rating
+> * [animate_do](https://pub.dev/packages/animate_do) - Animations
 
-  >* [lottie-android](https://github.com/airbnb/lottie-android) - Dynamic animations
+> * [auto_size_text](https://pub.dev/packages/auto_size_text) - For some resizing of the text according to the changes of the layout
 
-  >* [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) - Graphic Reports
+> * [firebase_auth](https://pub.dev/packages/firebase_auth) - For authentication using the firebase
 
-  >* [Glide](https://github.com/bumptech/glide) - Loading Images
+> * [firebase_core](https://pub.dev/packages/firebase_core) - For running the firebase services
 
-  >* [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API/blob/master/LICENSE) Java 7 lamba implementation
+> * [flutter_facebook_auth](https://pub.dev/packages/flutter_facebook_auth) - For facebook auth
 
-  >* [SimpleNlg](https://github.com/simplenlg/simplenlg) - Natural Language Processing
+> * [flutter_signin_button](https://pub.dev/packages/flutter_signin_button) For some fancy SignIn buttons
 
-  >* [Android Support Library](https://developer.android.com) - Google's Support Library
+> * [flutter_tts](https://pub.dev/packages/flutter_tts) - For audio and text communication
+
+> * [get](https://pub.dev/packages/get) - State management tool for flutter apps
+> * [google_sign_in](https://pub.dev/packages/google_sign_in) - For google auth
+> * [json_serializable](https://pub.dev/packages/json_serializable) - For parsing the json responses
+> * [getwidget](https://pub.dev/packages/getwidget) - for pre-built-in widgets
+> * [json_annotation](https://pub.dev/packages/json_annotation) - Classes and helper functions that support JSON code generation via the json_serializable package.
+> * [build_runner](https://pub.dev/packages/build_runner) - A build system for Dart code generation and modular compilation
+> * [shared_preferences](https://pub.dev/packages/shared_preferences) - Flutter plugin for reading and writing simple key-value pairs. Wraps NSUserDefaults on iOS and SharedPreferences on Android.
+> * [firebase_database](https://pub.dev/packages/firebase_database) - For accessing firebase database
+> * [firebase_storage](https://pub.dev/packages/firebase_storage) - for accessing teh storage on the firebase
+> * [dotted_border](https://pub.dev/packages/dotted_border) - A flutter package to let users easily add a dashed border around any widget.
+> * [path_provider](https://pub.dev/packages/path_provider) - for getting commonly used locations on host platform file systems, such as the temp and app data directories.
+> * [cached_network_image](https://pub.dev/packages/cached_network_image) - for loading the images from the network and loading them offline after getting them once
+> * [firebase_analytics](https://pub.dev/packages/firebase_analytics) - for getting the analytics from the app
+> * [image_picker](https://pub.dev/packages/image_picker) - for picking the image from device storage
+> * [package_info_plus](https://pub.dev/packages/package_info_plus) - For getting the package info of the app
+> * [device_info_plus](https://pub.dev/packages/device_info_plus) - for getting the device info
+> * [url_launcher](https://pub.dev/packages/url_launcher) - for launching urls from app
+> * [http](https://pub.dev/packages/http) - for receiving and sending data API's
+> * [fluttertoast](https://pub.dev/packages/fluttertoast) - for showing toast messages
+> * [firebase_crashlytics](https://pub.dev/packages/firebase_crashlytics) - for firebase crashlytics reports
+> * [share_plus](https://pub.dev/packages/share_plus) - for sharing content via the platform share UI,
+> * [screenshot](https://pub.dev/packages/screenshot) - For taking screenshots of the widget
+> * [just_audio](https://pub.dev/packages/just_audio) - for playing audio files
 
 ### Tools Needed
 
+Official Android developer tools
 
- Official Android developer tools
+![Android Studio](https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Android_Studio_icon.svg/64px-Android_Studio_icon.svg.png)
+[Android Studio](https://developer.android.com/studio)
 
-  ![Android Studio](https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Android_Studio_icon.svg/64px-Android_Studio_icon.svg.png)
-    [Android Studio](https://developer.android.com/studio)
+Repository
 
- Repository
+![Bitbucket](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Bitbucket-blue-logomark-only.svg/64px-Bitbucket-blue-logomark-only.svg.png)
+[Bitbucket](https://bitbucket.org)
 
-   ![Bitbucket](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Bitbucket-blue-logomark-only.svg/64px-Bitbucket-blue-logomark-only.svg.png)
-  [Bitbucket](https://bitbucket.org)
+Pictograms
 
- Pictograms
+![Arasaac](https://avatars2.githubusercontent.com/u/10613455?s=200&v=4)
+[Araasac](http://arasaac.org/)
 
-   ![Arasaac](https://avatars2.githubusercontent.com/u/10613455?s=200&v=4)
-  [Araasac](http://arasaac.org/)
+Testing Platform
 
- Testing Platform
-
-   ![Testproject](https://blog.testproject.io/wp-content/themes/testprojectblog/img/t-plogo.png)
-    [Testproject](http://testproject.io)
-
+![Testproject](https://blog.testproject.io/wp-content/themes/testprojectblog/img/t-plogo.png)
+[Testproject](http://testproject.io)
 
 ## Documentation
- * [Documentation](https://ottaaproject.com/javadoc)
+
+* [Documentation](https://ottaaproject.com/javadoc)
 
 ## Analytics Implementation
 
 ### Kind of events
+
 * **Talk**  *-Interaction Event*
 * **Erase** *- Event-related with Erase action*
 * **Delete** *- Event-related with Delete a pictogram or group*
@@ -102,6 +127,7 @@ You can be part of this life-changer tech, join us in this social impact open so
 | Principal | Hablar en Modo Experimental | Phrase With NLG    |
 
 #### Accessibility
+
 | Screen         | Action                                  | Name of Event                |
 |----------------|-----------------------------------------|-------------------------------|
 | Principal      | Hablar Con Dispositivo de accesibilidad | Talk with accesibility device |
@@ -124,7 +150,6 @@ You can be part of this life-changer tech, join us in this social impact open so
 | Editar Grupos | Editar Pictograma        | Edit Pictogram                           |
 | Editar Grupos | Agregar Grupo Nuevo      | Add Group                                |
 | Editar Grupos | Editar Grupo             | Edit Group                               |
-
 
 #### Settings
 
@@ -150,6 +175,7 @@ You can be part of this life-changer tech, join us in this social impact open so
 | Idioma           | OTTAA Labs                  | Experimental Mode     |
 
 #### Touch
+
 | Screen           | Action                               | Name of Event             |
 |------------------|--------------------------------------|----------------------------|
 | Principal        | Frases Mas Usadas                    | More Used Phrases          |
@@ -214,22 +240,24 @@ You can be part of this life-changer tech, join us in this social impact open so
 | VincularFrases | ir a la frase siguiente | Favorite Phrases DownButton |
 | VincularFrases | volver a la pantall principal sin guardar las frases favoritas | Favorite Phrases BackButton |
 | VincularFrases | volver a la pantall principal guardando las frases favoritas | SaveFavoritePhrases |
+
 # Information
 
 ## Contributing
 
 ### How to contribute
+
 We would love your help. Before you start working however, please read and follow this guide.
 
 #### Reporting Issues
 
-Provide a lot of information about the bug. Mention the version of OTTAA Project and explain how the problem can be reproduced.
+Provide a lot of information about the bug. Mention the version of OTTAA Project and explain how the
+problem can be reproduced.
 
 ### Code Contributions
 
-
-
 #### Create a pull request
+
 In order to create a pull request is necessary
 
 * Avoid file conflicts with the source code
@@ -243,10 +271,10 @@ In order to create a pull request is necessary
 |Hotfix|  Hot-fix about a version|
 |Bugfix|  Bug-fix about a version|
 
-
-
 ### Documentation
+
 #### Comments
+
 * Comment documenting the source code are required.
 
 * Comment a class explaining the purpose of that and how to implements if that required.
@@ -257,6 +285,7 @@ In order to create a pull request is necessary
 ### Code
 
 #### Duplication
+
 * Don't copy-paste source code. Reuse it.
 
 #### Import Libraries
@@ -273,18 +302,19 @@ In order to create a pull request is necessary
 
 * Sort by alphabetical order.
 
-* Use Grandle level app
- Example :
+* Use Grandle level app Example :
+
 ```
 #!xml
 dependencies {
    implementation 'library'
 }
 ```
+
 #### Indentation
 
+Switch case
 
- Switch case
 ```
 #!java
 Align by  such as these cases :
@@ -298,7 +328,9 @@ Switch(value){
     break;
 }
 ```
+
 If / else or else if
+
 ```
 #!java
 
@@ -311,6 +343,7 @@ if(value.toString().equals("Hello")){
 }
 
 ```
+
 **Remember: **
 
 * The attributes of the class must be protected or private
@@ -320,6 +353,7 @@ if(value.toString().equals("Hello")){
 * The class must be public or private
 
 ### Naming ###
+
 ** Name:** That must be transparent and representative about the action to show us.
 
 **Class:** should be nouns in UpperCamelCase, with the first letter of every word capitalized.
@@ -331,7 +365,9 @@ public class Json(){
 
 }
 ```
-**variable:** 	Local variables, instance variables, and class variables are also written in lowerCamelCase.
+
+**variable:**    Local variables, instance variables, and class variables are also written in
+lowerCamelCase.
 
 example :
 
@@ -345,7 +381,6 @@ String fileName="json.txt";
 **Constant:** Constants should be written in uppercase characters separated by underscores.
 
 example :
-
 
 ```
 #!java
@@ -380,18 +415,24 @@ index
 
 ### OTTAA Project Open Source Code of Conduct
 
-In order to work in the  OTTAA Project in a collaborative way and help our community grow we ask you to comply with the following code of conduct..
+In order to work in the OTTAA Project in a collaborative way and help our community grow we ask you
+to comply with the following code of conduct..
 
-** Diversity makes us  grow : **  We truly believe that every user’s or developer’s age, gender, nationality, race or sexual orientation provide content based on a plurality of experiences and knowledge that contribute to the construction of a complete tool which reflects the real needs of potential users of the OTTAA Project.
+** Diversity makes us grow : **  We truly believe that every user’s or developer’s age, gender,
+nationality, race or sexual orientation provide content based on a plurality of experiences and
+knowledge that contribute to the construction of a complete tool which reflects the real needs of
+potential users of the OTTAA Project.
 
-** Debate enriches us : ** As we consider that everyone can  contribute significantly to improving the software we seek to establish mutual respect among the members of the community, reaching a consensus among the developers and solving the problem in the best way possible.
+** Debate enriches us : ** As we consider that everyone can contribute significantly to improving
+the software we seek to establish mutual respect among the members of the community, reaching a
+consensus among the developers and solving the problem in the best way possible.
 
-It is necessary to comply with the following  guidelines in our conduct code:
+It is necessary to comply with the following guidelines in our conduct code:
 
 * **Refraining from discriminating .**
 * **Avoiding posting pornographic content.**
-* **Refraining from publishing the user’s details or relevant  information.**
-* **Refraining from making  heavy jokes.**
+* **Refraining from publishing the user’s details or relevant information.**
+* **Refraining from making heavy jokes.**
 * **Avoiding insults**
 * **Refraining from judging others on there religions or race**
 
@@ -404,7 +445,8 @@ Share your contact details
 * **Explain the situation in as much detail as possible**
 * **Send the email to the following address : support@ottaaproject.com**
 
-After the  revision of the report, the team assigned to analyze the case will carry out the following actions:
+After the revision of the report, the team assigned to analyze the case will carry out the following
+actions:
 
 * **Notify the user of the breach**
 * **devise a way for the user to amend that attitude.**
