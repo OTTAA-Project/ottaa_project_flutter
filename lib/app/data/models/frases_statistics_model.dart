@@ -14,7 +14,7 @@ class FrasesStatisticsModel {
   int totalFrases;
   @JsonKey(nullable: true, defaultValue: 000, name: 'frases7days')
   int frases7Days;
-  @JsonKey(name: 'averagePictoFrase')
+  @JsonKey(name: 'averagePictoFrase',defaultValue: 0.00,nullable: true)
   double averagePictoFrase;
   @JsonKey(name: 'frecLast7days')
   Map<String, int> frecLast7Days;

@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
@@ -94,7 +92,6 @@ class SentencesController extends GetxController {
   void onInit() async {
     super.onInit();
     await _loadPicts();
-    await uploadFrases();
     fetchFavOrNot();
     createListForSearching();
     showCircular.value = false;
@@ -112,7 +109,7 @@ class SentencesController extends GetxController {
       final obj = jsonEncode(element);
       dataUpload.add(obj);
     });
-    await _dataController.uploadFrases(
+    await dataController.uploadFrases(
       language: _ttsController.languaje,
       data: dataUpload.toString(),
       type: Constants.FAVOURITE_SENTENCES,
@@ -443,18 +440,6 @@ class SentencesController extends GetxController {
     print(searchIndex);
   }
 
-  Future<void> uploadFrases() async {
-    final dataFrases = this._sentences;
-    List<String> fileDataFrases = [];
-    dataFrases.forEach((element) {
-      final obj = jsonEncode(element);
-      fileDataFrases.add(obj);
-    });
-
-    await dataController.uploadFrases(
-      data: fileDataFrases.toString(),
-    );
-  }
 }
 
 class SearchIndexedSentences {

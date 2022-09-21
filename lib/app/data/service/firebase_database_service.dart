@@ -132,6 +132,9 @@ class FirebaseDatabaseService {
   }
 
   Future<List<Pict>> fetchPictos() async {
+    final instance = await SharedPreferences.getInstance();
+    final String key = instance.getString('Language_KEY') ?? 'Spanish';
+    final String languageCode = Constants.LANGUAGE_CODES[key]!;
     if (kIsWeb) {
       await Future.delayed(
         Duration(seconds: 2),
@@ -156,7 +159,7 @@ class FirebaseDatabaseService {
         firebaseName: 'Picto',
         assetsFileName: 'assets/pictos.json',
         pictosOrGrupos: true,
-        languageCode: ,
+        languageCode: languageCode,
       );
     } else {
       return await mobileFiles(
@@ -165,12 +168,15 @@ class FirebaseDatabaseService {
         firebaseName: 'Picto',
         pictoOrGrupo: true,
         onlineSnapshot: res,
-        languageCode: ,
+        languageCode: languageCode,
       );
     }
   }
 
   Future<List<Grupos>> fetchGrupos() async {
+    final instance = await SharedPreferences.getInstance();
+    final String key = instance.getString('Language_KEY') ?? 'Spanish';
+    final String languageCode = Constants.LANGUAGE_CODES[key]!;
     if (kIsWeb) {
       await Future.delayed(
         Duration(seconds: 2),
@@ -195,7 +201,7 @@ class FirebaseDatabaseService {
         assetsFileName: 'assets/grupos.json',
         firebaseName: 'Grupo',
         pictosOrGrupos: false,
-        languageCode: ,
+        languageCode: languageCode,
       );
     } else {
       return await mobileFiles(
@@ -203,8 +209,8 @@ class FirebaseDatabaseService {
         assetsFileName: 'assets/grupos.json',
         fileName: 'Grupos_file',
         firebaseName: 'Grupo',
-        pictoOrGrupo: false,languageCode: ,
-
+        pictoOrGrupo: false,
+        languageCode: languageCode,
       );
     }
   }
@@ -440,8 +446,8 @@ class FirebaseDatabaseService {
           );
         }
       } else {
-        final ref =
-            databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
+        final ref = databaseRef.child(
+            '$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
         final res = await ref.get();
         final data = res.value['data'];
         final da = pictoOrGrupo
@@ -507,8 +513,8 @@ class FirebaseDatabaseService {
     required String languageCode,
   }) async {
     if (snapshot.exists && snapshot.value != null) {
-      final ref =
-          databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
+      final ref = databaseRef
+          .child('$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
       final res = await ref.get();
       final data = res.value['data'];
       //todo: write different conversions here
@@ -562,15 +568,15 @@ class FirebaseDatabaseService {
       'PhotoUrl': photoUrl,
     });
   }
-  Future<String> fetchUserPhotoUrl()async{
+
+  Future<String> fetchUserPhotoUrl() async {
     final User? auth = firebaseRed.currentUser;
     final ref = databaseRef.child('PhotoUrl/${auth!.uid}/');
     final res = await ref.get();
     return res.value['PhotoUrl'];
   }
 
-
-  String fetchCurrentUserUID(){
+  String fetchCurrentUserUID() {
     final User? auth = firebaseRed.currentUser;
     return auth!.uid;
   }

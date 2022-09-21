@@ -174,6 +174,7 @@ class PictoPageWidget extends StatelessWidget {
     await _dataController.uploadDataToFirebaseRealTime(
       data: data,
       type: 'Picto',
+      languageCode: _ttsController.languaje,
     );
   }
 

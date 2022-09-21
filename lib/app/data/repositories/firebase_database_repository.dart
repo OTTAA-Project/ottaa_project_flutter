@@ -30,10 +30,12 @@ class FirebaseDatabaseRepository {
   Future<void> uploadDataToFirebaseRealTime({
     required String data,
     required String type,
+    required String languageCode,
   }) async =>
       await _firebaseDatabaseService.uploadDataToFirebaseRealTime(
         data: data,
         type: type,
+        languageCode: languageCode,
       );
 
   Future<void> uploadBoolToFirebaseRealtime({
@@ -90,9 +92,6 @@ class FirebaseDatabaseRepository {
 
   Future<String> fetchUserPhotoUrl() async =>
       await _firebaseDatabaseService.fetchUserPhotoUrl();
-
-  Future<void> uploadFrases({required String data}) async =>
-      await _firebaseDatabaseService.uploadFrases(data: data);
 
   String fetchCurrentUserUID() =>
       _firebaseDatabaseService.fetchCurrentUserUID();

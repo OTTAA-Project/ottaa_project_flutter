@@ -95,33 +95,41 @@ class EditPictoController extends GetxController {
     // await ref.set({
     //   'data': data,
     // });
+    final instance = await SharedPreferences.getInstance();
+    final String key = instance.getString('Language_KEY') ?? 'Spanish';
+    final String languageCode = Constants.LANGUAGE_CODES[key]!;
     switch (_ttsController.languaje) {
       case "es-AR":
         await _dataController.uploadDataToFirebaseRealTime(
           data: data,
           type: 'Picto',
+          languageCode: languageCode,
         );
         break;
       case "en-US":
         await _dataController.uploadDataToFirebaseRealTime(
           data: data,
           type: 'Picto',
+          languageCode: languageCode,
         );
         break;
       case "fr-FR":
         await _dataController.uploadDataToFirebaseRealTime(
           data: data,
           type: Constants.FRENCH_PICTO_FIREBASE_NAME,
+          languageCode: languageCode,
         );
         break;
       case "pt-BR":
         await _dataController.uploadDataToFirebaseRealTime(
           data: data,
           type: Constants.PORTUGUESE_PICTO_FIREBASE_NAME,
+          languageCode: languageCode,
         );
         break;
       default:
         await _dataController.uploadDataToFirebaseRealTime(
+          languageCode: languageCode,
           data: data,
           type: 'Picto',
         );

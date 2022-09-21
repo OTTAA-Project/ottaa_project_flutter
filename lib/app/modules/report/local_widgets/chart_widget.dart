@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/app/data/models/report_chart_data_model.dart';
 import 'package:ottaa_project_flutter/app/modules/report/report_controller.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart' as ch;
 
@@ -26,8 +27,11 @@ class ChartWidget extends StatelessWidget {
                 ),
               ),
               child: SfCartesianChart(
-                series: <ChartSeries>[
-                  LineSeries<ChartModel, int>(
+                series: <SplineSeries>[
+                  SplineSeries<ChartModel, int>(
+                    color: kOTTAAOrangeNew,
+                    splineType: ch.SplineType.natural,
+                    width: 6,
                     dataSource: controller.chartModel,
                     xValueMapper: (ChartModel developerSeries, _) {
                       // return '12';
