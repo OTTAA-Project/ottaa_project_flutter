@@ -17,4 +17,16 @@ class Constants {
   static const PORTUGUESE_PICTO_FIREBASE_NAME = 'portuguesePicto';
   static const FRENCH_GRUPO_FIREBASE_NAME = 'frenchGrupo';
   static const PORTUGUESE_GRUPO_FIREBASE_NAME = 'portugueseGrupo';
+  static const PORTUGUESE_FRASES_MOST_USED_FILE_NAME =
+      'frases_pt_most_used_file';
+  static const FRENCH_FRASES_MOST_USED_FILE_NAME = 'frases_fr_most_used_file';
+  static const ENGLISH_FRASES_MOST_USED_FILE_NAME = 'frases_en_most_used_file';
+  static const SPANISH_FRASES_MOST_USED_FILE_NAME = 'frases_es_favourite_file';
+  static const SPANISH_FRASES_FAVOURITE_FILE_NAME = 'frases_es_favourite_file';
+  static const ENGLISH_FRASES_FAVOURITE_FILE_NAME = 'frases_es_favourite_file';
+  static const FRENCH_FRASES_FAVOURITE_FILE_NAME = 'frases_es_favourite_file';
+  static const PORTUGUESE_FRASES_FAVOURITE_FILE_NAME =
+      'frases_es_favourite_file';
+  static const MOST_USED_SENTENCES = 'most_used_sentences';
+  static const FAVOURITE_SENTENCES = 'favourite_sentences';
 }
