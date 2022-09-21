@@ -162,7 +162,7 @@ class PictogramGroupsPage extends StatelessWidget {
                       topRight: Radius.circular(16),
                     ),
                   ),
-                  width: horizontalSize * 0.10,
+                  width: horizontalSize * 0.102,
                   height: verticalSize * 0.5,
                   child: Center(
                     child: GestureDetector(
@@ -198,7 +198,7 @@ class PictogramGroupsPage extends StatelessWidget {
                       topLeft: Radius.circular(16),
                     ),
                   ),
-                  width: horizontalSize * 0.10,
+                  width: horizontalSize * 0.102,
                   height: verticalSize * 0.5,
                   child: Center(
                     child: GestureDetector(
@@ -233,7 +233,7 @@ class PictogramGroupsPage extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
                     child: Container(
-                      height: verticalSize * 0.72,
+                      height: verticalSize * 0.65,
                       decoration: BoxDecoration(
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(15),
@@ -251,7 +251,7 @@ class PictogramGroupsPage extends StatelessWidget {
                       ),
                       // width: horizontalSize * 0.8,
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: 0.0),
                         child: CategoryViewWidget(),
                       ),
                     ),
