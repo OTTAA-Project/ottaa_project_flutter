@@ -69,7 +69,10 @@ class ReportController extends GetxController {
     final uri = Uri.parse(
       'https://us-central1-ottaaproject-flutter.cloudfunctions.net/onReqFunc',
     );
-    final body = {'UserID': uid};
+    final body = {
+      'UserID': uid,
+      'Language': _homeController.language,
+    };
     final res = await http.post(
       uri,
       body: jsonEncode(body),
@@ -84,7 +87,10 @@ class ReportController extends GetxController {
     final uid = _dataController.fetchCurrentUserUID();
     final uri = Uri.parse(
         'https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
-    final body = {'UserID': uid};
+    final body = {
+      'UserID': uid,
+      'Language': _homeController.language,
+     };
     final res = await http.post(
       uri,
       body: jsonEncode(body),

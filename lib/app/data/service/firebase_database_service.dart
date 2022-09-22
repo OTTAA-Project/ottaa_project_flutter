@@ -587,7 +587,7 @@ class FirebaseDatabaseService {
     required String type,
   }) async {
     final ref = databaseRef
-        .child('frases/${firebaseRed.currentUser!.uid}/$language/$type');
+        .child('Frases/${firebaseRed.currentUser!.uid}/$language/$type');
     await ref.set({'data': data});
   }
 
@@ -596,7 +596,7 @@ class FirebaseDatabaseService {
     required String type,
   }) async {
     final ref = databaseRef
-        .child('frases/${firebaseRed.currentUser!.uid}/$language/$type');
+        .child('Frases/${firebaseRed.currentUser!.uid}/$language/$type');
     final res = await ref.get();
     if (res.exists && res.value != null) {
       final data = res.value['data'];
@@ -619,7 +619,7 @@ class FirebaseDatabaseService {
     required String type,
   }) async {
     final ref = databaseRef
-        .child('frases/${firebaseRed.currentUser!.uid}/$language/$type');
+        .child('Frases/${firebaseRed.currentUser!.uid}/$language/$type');
     final res = await ref.get();
     if (res.exists && res.value != null) {
       final data = res.value['data'];
