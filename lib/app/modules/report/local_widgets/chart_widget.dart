@@ -35,10 +35,10 @@ class ChartWidget extends StatelessWidget {
                     dataSource: controller.chartModel,
                     xValueMapper: (ChartModel developerSeries, _) {
                       // return '12';
-                      // final date = DateTime.fromMillisecondsSinceEpoch(
-                      //     developerSeries.year);
+                      final date = DateTime.fromMillisecondsSinceEpoch(
+                          developerSeries.year);
                       // print(_);
-                      return developerSeries.year.toInt();
+                      return date.day;
                     },
                     yValueMapper: (ChartModel developerSeries, _) =>
                         developerSeries.count,
@@ -46,7 +46,7 @@ class ChartWidget extends StatelessWidget {
                 ],
                 primaryXAxis: ch.NumericAxis(
                   labelFormat:
-                      '{value} ${DateFormat.MMMM().format(DateTime.now())} ${DateTime.now().year}',
+                      '{value} ${DateFormat.MMMM().format(DateTime.now()).toString().substring(0,3)} ${DateTime.now().year}',
                   edgeLabelPlacement: EdgeLabelPlacement.shift,
                 ),
               ),

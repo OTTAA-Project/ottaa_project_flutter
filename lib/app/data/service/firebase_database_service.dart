@@ -156,7 +156,7 @@ class FirebaseDatabaseService {
     if (kIsWeb) {
       return await webFiles(
         snapshot: res,
-        firebaseName: 'Picto',
+        firebaseName: 'Pictos',
         assetsFileName: 'assets/pictos.json',
         pictosOrGrupos: true,
         languageCode: languageCode,
@@ -165,7 +165,7 @@ class FirebaseDatabaseService {
       return await mobileFiles(
         assetsFileName: 'assets/pictos.json',
         fileName: 'Pictos_file',
-        firebaseName: 'Picto',
+        firebaseName: 'Pictos',
         pictoOrGrupo: true,
         onlineSnapshot: res,
         languageCode: languageCode,
@@ -199,7 +199,7 @@ class FirebaseDatabaseService {
       return await webFiles(
         snapshot: res,
         assetsFileName: 'assets/grupos.json',
-        firebaseName: 'Grupo',
+        firebaseName: 'Grupos',
         pictosOrGrupos: false,
         languageCode: languageCode,
       );
@@ -208,7 +208,7 @@ class FirebaseDatabaseService {
         onlineSnapshot: res,
         assetsFileName: 'assets/grupos.json',
         fileName: 'Grupos_file',
-        firebaseName: 'Grupo',
+        firebaseName: 'Grupos',
         pictoOrGrupo: false,
         languageCode: languageCode,
       );
