@@ -30,125 +30,129 @@ class DrawerWidget extends GetView<HomeController> {
             borderRadius: BorderRadius.circular(verticalSize * 0.03),
           ),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: kOTTAAOrangeNew,
-                    borderRadius: BorderRadius.circular(verticalSize * 0.027),
-                  ),
-                  height: verticalSize * 0.15,
-                  width: double.infinity,
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Obx(
-                          () => Image.asset(
-                            'assets/profiles/Group ${controller.picNumber.value}@2x.png',
+            child: ConstrainedBox(
+              constraints:
+                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: kOTTAAOrangeNew,
+                      borderRadius: BorderRadius.circular(verticalSize * 0.027),
+                    ),
+                    height: verticalSize * 0.15,
+                    width: double.infinity,
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Obx(
+                            () => Image.asset(
+                              'assets/profiles/Group ${controller.picNumber.value}@2x.png',
+                              height: verticalSize * 0.05,
+                            ),
+                          ),
+                          Image.asset(
+                            'assets/otta_drawer_logo.png',
                             height: verticalSize * 0.05,
                           ),
-                        ),
-                        Image.asset(
-                          'assets/otta_drawer_logo.png',
-                          height: verticalSize * 0.05,
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: verticalSize * 0.01,
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Obx(
+                          () => ListTileWidget(
+                            icon: controller.muteOrNot.value
+                                ? Icons.volume_off
+                                : Icons.volume_up,
+                            title: 'mute'.tr,
+                            onTap: () async {
+                              _ttsController.setVolume =
+                                  controller.muteOrNot.value ? 0.8 : 0.0;
+                              controller.muteOrNot.value =
+                                  !controller.muteOrNot.value;
+                              print(_ttsController.volume);
+                            },
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: verticalSize * 0.01,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Obx(
-                        () => ListTileWidget(
-                          icon: controller.muteOrNot.value
-                              ? Icons.volume_off
-                              : Icons.volume_up,
-                          title: 'mute'.tr,
+                  Divider(
+                    color: Colors.grey,
+                    // thickness: 0.0,
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTileWidget(
+                          icon: Icons.info_outline,
+                          title: 'about_ottaa'.tr,
+                          onTap: () => Get.toNamed(AppRoutes.ABOUTOTTAA),
+                        ),
+                        ListTileWidget(
+                          icon: Icons.info_outline,
+                          title: 'report'.tr,
+                          onTap: () => Get.toNamed(AppRoutes.REPORTPAGE),
+                        ),
+                        ListTileWidget(
+                          icon: Icons.settings,
+                          title: 'configuration'.tr,
+                          onTap: () => Get.toNamed(AppRoutes.SETTINGS),
+                        ),
+                        ListTileWidget(
+                          icon: Icons.info_outline,
+                          title: 'tutorial'.tr,
                           onTap: () async {
-                            _ttsController.setVolume =
-                                controller.muteOrNot.value ? 0.8 : 0.0;
-                            controller.muteOrNot.value =
-                                !controller.muteOrNot.value;
-                            print(_ttsController.volume);
+                            Get.toNamed(AppRoutes.TUTORIAL);
                           },
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Divider(
-                  color: Colors.grey,
-                  // thickness: 0.0,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTileWidget(
-                        icon: Icons.info_outline,
-                        title: 'about_ottaa'.tr,
-                        onTap: () => Get.toNamed(AppRoutes.ABOUTOTTAA),
-                      ),
-                      ListTileWidget(
-                        icon: Icons.info_outline,
-                        title: 'report'.tr,
-                        onTap: () => Get.toNamed(AppRoutes.REPORTPAGE),
-                      ),
-                      ListTileWidget(
-                        icon: Icons.settings,
-                        title: 'configuration'.tr,
-                        onTap: () => Get.toNamed(AppRoutes.SETTINGS),
-                      ),
-                      ListTileWidget(
-                        icon: Icons.info_outline,
-                        title: 'tutorial'.tr,
-                        onTap: () async {
-                          Get.toNamed(AppRoutes.TUTORIAL);
-                        },
-                      ),
-                    ],
+                  Divider(
+                    color: Colors.grey,
+                    // thickness: 0.0,
                   ),
-                ),
-                Divider(
-                  color: Colors.grey,
-                  // thickness: 0.0,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      !kIsWeb
-                          ? ListTileWidget(
-                              icon: Icons.highlight_remove,
-                              title: 'close_application'.tr,
-                              onTap: () async {
-                                exit(0);
-                              },
-                            )
-                          : Container(),
-                      ListTileWidget(
-                        icon: Icons.exit_to_app,
-                        title: 'sign_out'.tr,
-                        onTap: () async {
-                          await controller.authController.signOut();
-                        },
-                      ),
-                    ],
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        !kIsWeb
+                            ? ListTileWidget(
+                                icon: Icons.highlight_remove,
+                                title: 'close_application'.tr,
+                                onTap: () async {
+                                  exit(0);
+                                },
+                              )
+                            : Container(),
+                        ListTileWidget(
+                          icon: Icons.exit_to_app,
+                          title: 'sign_out'.tr,
+                          onTap: () async {
+                            await controller.authController.signOut();
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
