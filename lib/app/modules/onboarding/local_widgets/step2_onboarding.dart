@@ -18,10 +18,11 @@ step2Onboarding<widget>(
   return Stack(
     children: [
       FadeInLeft(
-          child: HeaderWave(
-        color: kOTTAAOrangeNew,
-        bgColor: kOTTAABackgroundNew,
-      )),
+        child: HeaderWave(
+          color: kOTTAAOrangeNew,
+          bgColor: kOTTAABackgroundNew,
+        ),
+      ),
       Positioned(
         bottom: 0,
         left: horizontalSize * 0.05,
@@ -83,17 +84,13 @@ step2Onboarding<widget>(
                   padding:
                       EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(verticalSize * 0.03)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(verticalSize * 0.03),
+                  ),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: verticalSize * 0.05),
-                          child: Image(
-                              image: AssetImage('assets/imgs/logo_ottaa.webp')),
-                        ),
+                        Image(image: AssetImage('assets/imgs/logo_ottaa.webp')),
                         GFButton(
                           onPressed: () => Get.toNamed(AppRoutes.TUTORIAL),
                           text: "Launch_short_tutorial".tr,

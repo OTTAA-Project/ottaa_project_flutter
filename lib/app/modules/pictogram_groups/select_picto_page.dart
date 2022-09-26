@@ -17,67 +17,64 @@ class SelectPictoPage extends StatelessWidget {
     final verticalSize = MediaQuery.of(context).size.height;
     final horizontalSize = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(verticalSize * 0.1),
-        child: AppBar(
-          titleSpacing: 0,
-          backgroundColor: kOTTAAOrangeNew,
-          leading: Container(),
-          foregroundColor: Colors.white,
-          elevation: 0,
-          title: Text('galeria_grupos'.tr),
-          actions: [
-            Icon(
-              Icons.reorder,
+      appBar: AppBar(
+        titleSpacing: 0,
+        backgroundColor: kOTTAAOrangeNew,
+        leading: Container(),
+        foregroundColor: Colors.white,
+        elevation: 0,
+        title: Text('galeria_grupos'.tr),
+        actions: [
+          Icon(
+            Icons.reorder,
+            size: 30,
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          GestureDetector(
+            onTap: () {
+              _pictogramController.pictoGridviewOrPageview.value =
+                  !_pictogramController.pictoGridviewOrPageview.value;
+              CustomAnalyticsEvents.setEventWithParameters(
+                  "Touch",
+                  CustomAnalyticsEvents.createMyMap(
+                      'Pictograms Gallery', 'Change View'));
+            },
+            child: Icon(
+              Icons.view_carousel,
               size: 30,
             ),
-            const SizedBox(
-              width: 16,
-            ),
-            GestureDetector(
-              onTap: () {
-                _pictogramController.pictoGridviewOrPageview.value =
-                    !_pictogramController.pictoGridviewOrPageview.value;
-                CustomAnalyticsEvents.setEventWithParameters(
-                    "Touch",
-                    CustomAnalyticsEvents.createMyMap(
-                        'Pictograms Gallery', 'Change View'));
-              },
-              child: Icon(
-                Icons.view_carousel,
-                size: 30,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GestureDetector(
-                onTap: () {
-                  Get.to(
-                    () => AddPictoPage(),
-                  );
-                },
-                child: Icon(
-                  Icons.add_circle_outline,
-                  size: 30,
-                ),
-              ),
-            ),
-            GestureDetector(
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: GestureDetector(
               onTap: () {
                 Get.to(
-                  () => AddPictoToGroupPage(),
+                  () => AddPictoPage(),
                 );
               },
               child: Icon(
-                Icons.add_to_photos,
+                Icons.add_circle_outline,
                 size: 30,
               ),
             ),
-            const SizedBox(
-              width: 16,
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(
+                () => AddPictoToGroupPage(),
+              );
+            },
+            child: Icon(
+              Icons.add_to_photos,
+              size: 30,
             ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+        ],
       ),
       body: Container(
         color: Colors.black,
@@ -192,11 +189,11 @@ class SelectPictoPage extends StatelessWidget {
             Positioned(
               left: 0,
               right: 0,
-              bottom: verticalSize * 0.17,
+              bottom: verticalSize * 0.16,
               child: Obx(
                 () => Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.097),
                   child: Container(
                     height: verticalSize * 0.7,
                     decoration: BoxDecoration(
@@ -204,12 +201,15 @@ class SelectPictoPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal:
-                              _pictogramController.pictoGridviewOrPageview.value
-                                  ? 16
-                                  : horizontalSize * 0.16,
-                          vertical: 16),
+                      padding: EdgeInsets.only(
+                        left: _pictogramController.pictoGridviewOrPageview.value
+                            ? 16
+                            : horizontalSize * 0.16,
+                        right:
+                            _pictogramController.pictoGridviewOrPageview.value
+                                ? 16
+                                : horizontalSize * 0.16,
+                      ),
                       child: PictoPageWidget(),
                     ),
                   ),

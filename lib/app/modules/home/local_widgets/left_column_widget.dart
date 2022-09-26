@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/modules/home/local_widgets/empty_text_dialog_widget.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
@@ -22,26 +22,28 @@ class LeftColumnWidget extends StatelessWidget {
         children: [
           FittedBox(
             child: GestureDetector(
-              onTap: () {
-                /*Fluttertoast.showToast(
-                  msg: "we_are_working_on_this_feature".tr,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.black,
-                  textColor: Colors.white,
-                  fontSize: verticalSize * 0.03,
-                );*/
+              onTap: () async{
+                // showDialog(
+                //   context: context,
+                //   barrierDismissible: false,
+                //   barrierColor: Colors.transparent,
+                //   builder: (context) {
+                //     return EmptyTextDialogWidget(
+                //       text: "we_are_working_on_this_feature".tr,
+                //     );
+                //   },
+                // );
+                // await _homeController.startTimerForDialogueExit();
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('Principal', 'Games'));
-                Get.toNamed(AppRoutes.GAMES);
+                Get.toNamed(AppRoutes.ONBOARDING);
               },
               child: Center(
                   child: Icon(
                 // Icons.gamepad,
                 Icons.videogame_asset,
                 color: Colors.white,
-                size: horizontalSize / 10,
+                size: horizontalSize / 12,
               )),
             ),
           ),
@@ -81,8 +83,7 @@ class LeftColumnWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: kOTTAAOrangeNew,
-        borderRadius:
-            BorderRadius.only(topRight: Radius.circular(16)),
+        borderRadius: BorderRadius.only(topRight: Radius.circular(16)),
       ),
     );
   }

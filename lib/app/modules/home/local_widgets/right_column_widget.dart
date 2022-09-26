@@ -49,7 +49,9 @@ class RightColumnWidget extends GetView<HomeController> {
                         barrierDismissible: false,
                         barrierColor: Colors.transparent,
                         builder: (context) {
-                          return EmptyTextDialogWidget();
+                          return EmptyTextDialogWidget(
+                            text: 'share_text'.tr,
+                          );
                         },
                       )
                     : showDialog(
