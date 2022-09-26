@@ -428,34 +428,34 @@ class PictogramGroupsController extends GetxController {
         await _dataController.uploadDataToFirebaseRealTime(
           data: data,
           languageCode: ttsController.languaje,
-          type: 'Grupo',
+          type: 'Grupos',
         );
         break;
       case "en-US":
         await _dataController.uploadDataToFirebaseRealTime(
           data: data,
           languageCode: ttsController.languaje,
-          type: 'Grupo',
+          type: 'Grupos',
         );
         break;
       case "fr-FR":
         await _dataController.uploadDataToFirebaseRealTime(
           data: data,
-          type: Constants.FRENCH_GRUPO_FIREBASE_NAME,
+          type: 'Grupos',
           languageCode: ttsController.languaje,
         );
         break;
       case "pt-BR":
         await _dataController.uploadDataToFirebaseRealTime(
           data: data,
-          type: Constants.PORTUGUESE_GRUPO_FIREBASE_NAME,
+          type: 'Grupos',
           languageCode: ttsController.languaje,
         );
         break;
       default:
         await _dataController.uploadDataToFirebaseRealTime(
           data: data,
-          type: 'Grupo',
+          type: 'Grupos',
           languageCode: ttsController.languaje,
         );
     }
@@ -470,7 +470,7 @@ class PictogramGroupsController extends GetxController {
     // });
     await _dataController.uploadDataToFirebaseRealTime(
       data: data,
-      type: 'Picto',
+      type: 'Pictos',
       languageCode: ttsController.languaje,
     );
   }

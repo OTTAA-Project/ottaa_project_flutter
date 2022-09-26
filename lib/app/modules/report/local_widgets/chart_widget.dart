@@ -26,30 +26,39 @@ class ChartWidget extends StatelessWidget {
                   verticalSize * 0.02,
                 ),
               ),
-              child: SfCartesianChart(
-                series: <SplineSeries>[
-                  SplineSeries<ChartModel, int>(
-                    color: kOTTAAOrangeNew,
-                    splineType: ch.SplineType.natural,
-                    width: 6,
-                    dataSource: controller.chartModel,
-                    xValueMapper: (ChartModel developerSeries, _) {
-                      // return '12';
-                      final date = DateTime.fromMillisecondsSinceEpoch(
-                          developerSeries.year);
-                      // print(_);
-                      return date.day;
-                    },
-                    yValueMapper: (ChartModel developerSeries, _) =>
-                        developerSeries.count,
-                  ),
-                ],
-                primaryXAxis: ch.NumericAxis(
-                  labelFormat:
-                      '{value} ${DateFormat.MMMM().format(DateTime.now()).toString().substring(0,3)} ${DateTime.now().year}',
-                  edgeLabelPlacement: EdgeLabelPlacement.shift,
-                ),
-              ),
+              child: controller.chartShow.value
+                  ? SfCartesianChart(
+                      series: <SplineSeries>[
+                        SplineSeries<ChartModel, int>(
+                          color: kOTTAAOrangeNew,
+                          splineType: ch.SplineType.natural,
+                          width: 6,
+                          dataSource: controller.chartModel,
+                          xValueMapper: (ChartModel developerSeries, _) {
+                            // return '12';
+                            final date = DateTime.fromMillisecondsSinceEpoch(
+                                developerSeries.year);
+                            // print(_);
+                            return date.day;
+                          },
+                          yValueMapper: (ChartModel developerSeries, _) =>
+                              developerSeries.count,
+                        ),
+                      ],
+                      primaryXAxis: ch.NumericAxis(
+                        labelFormat:
+                            '{value} ${DateFormat.MMMM().format(DateTime.now()).toString().substring(0, 3)} ${DateTime.now().year}',
+                        edgeLabelPlacement: EdgeLabelPlacement.shift,
+                        // decimalPlaces: 0,
+                        // desiredIntervals: 6,
+                        interval: 1,
+                      ),
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(
+                        color: kOTTAAOrangeNew,
+                      ),
+                    ),
             ));
   }
 }

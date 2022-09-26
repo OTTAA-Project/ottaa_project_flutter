@@ -31,7 +31,7 @@ class MostUsedPhrasesWidget extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: Colors.black,
-              fontSize: verticalSize * 0.022,
+              // fontSize: verticalSize * 0.022,
             ),
           ),
           Expanded(

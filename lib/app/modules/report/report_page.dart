@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/app/modules/report/local_widgets/chart_wid
 import 'package:ottaa_project_flutter/app/modules/report/local_widgets/ottaa_score_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/report/local_widgets/vocabulary_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/report/report_controller.dart';
+import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class ReportPage extends GetView<ReportController> {
   const ReportPage({Key? key}) : super(key: key);
@@ -15,6 +16,11 @@ class ReportPage extends GetView<ReportController> {
     final verticalSize = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.grey[300],
+      appBar: AppBar(
+        backwardsCompatibility: false,
+        backgroundColor: kOTTAAOrangeNew,
+        title: Text('report'.tr),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,

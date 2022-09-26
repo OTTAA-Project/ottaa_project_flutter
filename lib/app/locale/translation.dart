@@ -323,14 +323,14 @@ class Translation extends Translations {
           'it_allows_uppercase_subtitles': 'Permite subtítulos en mayúsculas',
           'login_screen':
               'Hola, bienvenido a OTTAA Project, la primera plataforma de comunicación predictiva para personas con problemas del habla, inicie sesión con su cuenta y complete algunos datos para beneficiarse de nuestra predicción.',
-          'ottaa_score': 'OTTAA Rencor',
+          'ottaa_score': 'OTTAA Score',
           'most_used_groups': 'Grupos más usados',
           'score_text_1':
               'OTTAA Score es una medida del uso en general de la aplicación, usando datos como uso en los últimos días y promedio de pictos por frase',
           'phrases_last_seven_days': 'Frases creadas en los últimos 7 días',
           'pictogram_by_sentence_on_average':
               'Pictogramas por frases en promedio',
-          'most_used_phrases': 'FRASES MAS USADAS',
+          'most_used_phrases': 'Frases Mas Usadas',
           'vocabulary': 'Vocabulario',
           'add_group': 'Añadir grupo',
           'add_pict': 'Agregar imagen',

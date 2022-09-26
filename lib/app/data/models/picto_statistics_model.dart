@@ -83,10 +83,14 @@ class Name {
   Name({
     required this.en,
     required this.es,
+    required this.fr,
+    required this.pt,
   });
 
   String en;
   String es;
+  String fr;
+  String pt;
   factory Name.fromJson(Map<String, dynamic> json) =>
       _$NameFromJson(json);
 

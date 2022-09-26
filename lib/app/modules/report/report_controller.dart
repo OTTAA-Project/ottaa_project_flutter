@@ -20,6 +20,7 @@ class ReportController extends GetxController {
   late Timer _timer;
   int currentPage = 0;
   RxString photoUrl = ''.obs;
+  RxBool chartShow = false.obs;
   RxDouble scorePercentageScore = 0.00.obs;
   RxDouble firstValueProgress = 0.00.obs;
   RxDouble secondValueProgress = 0.00.obs;
@@ -90,7 +91,7 @@ class ReportController extends GetxController {
     final body = {
       'UserID': uid,
       'Language': _homeController.language,
-     };
+    };
     final res = await http.post(
       uri,
       body: jsonEncode(body),
@@ -192,12 +193,15 @@ class ReportController extends GetxController {
     scorePercentageScore.value = double.parse(val) / 10;
     print(score);
     // return (int)(score / 1000);
-    vocabularyFunction();
+    chartShow.value = true;
     update(['charts']);
+    vocabularyFunction();
   }
 
   void vocabularyFunction() {
     List<double> values = [];
+    print('printing values here');
+    print(pictoStatisticsModel.pictoUsagePerGroup.toString());
     pictoStatisticsModel.pictoUsagePerGroup.forEach((element) {
       values.add(element.percentage);
     });
@@ -207,22 +211,79 @@ class ReportController extends GetxController {
     secondValueProgress.value = values[1];
     thirdValueProgress.value = values[2];
     fourthValueProgress.value = values[3];
+
     pictoStatisticsModel.pictoUsagePerGroup.forEach((element) {
       if (element.percentage == firstValueProgress.value) {
-        firstValueText.value =
-            language == 'en' ? element.name.en : element.name.es;
+        switch (language) {
+          case "es-AR":
+            firstValueText.value = element.name.es;
+            break;
+          case "en-US":
+            firstValueText.value = element.name.en;
+            break;
+          case "fr-FR":
+            firstValueText.value = element.name.fr;
+            break;
+          case "pt-BR":
+            firstValueText.value = element.name.pt;
+            break;
+          default:
+            firstValueText.value = element.name.es;
+        }
       }
       if (element.percentage == secondValueProgress.value) {
-        secondValueText.value =
-            language == 'en' ? element.name.en : element.name.es;
+        switch (language) {
+          case "es-AR":
+            secondValueText.value = element.name.es;
+            break;
+          case "en-US":
+            secondValueText.value = element.name.en;
+            break;
+          case "fr-FR":
+            secondValueText.value = element.name.fr;
+            break;
+          case "pt-BR":
+            secondValueText.value = element.name.pt;
+            break;
+          default:
+            secondValueText.value = element.name.es;
+        }
       }
       if (element.percentage == thirdValueProgress.value) {
-        thirdValueText.value =
-            language == 'en' ? element.name.en : element.name.es;
+        switch (language) {
+          case "es-AR":
+            thirdValueText.value = element.name.es;
+            break;
+          case "en-US":
+            thirdValueText.value = element.name.en;
+            break;
+          case "fr-FR":
+            thirdValueText.value = element.name.fr;
+            break;
+          case "pt-BR":
+            thirdValueText.value = element.name.pt;
+            break;
+          default:
+            thirdValueText.value = element.name.es;
+        }
       }
       if (element.percentage == fourthValueProgress.value) {
-        fourthValueText.value =
-            language == 'en' ? element.name.en : element.name.es;
+        switch (language) {
+          case "es-AR":
+            fourthValueText.value = element.name.es;
+            break;
+          case "en-US":
+            fourthValueText.value = element.name.en;
+            break;
+          case "fr-FR":
+            fourthValueText.value = element.name.fr;
+            break;
+          case "pt-BR":
+            fourthValueText.value = element.name.pt;
+            break;
+          default:
+            fourthValueText.value = element.name.es;
+        }
       }
     });
   }
