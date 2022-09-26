@@ -36,7 +36,7 @@ class LeftColumnWidget extends StatelessWidget {
                 // await _homeController.startTimerForDialogueExit();
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('Principal', 'Games'));
-                Get.toNamed(AppRoutes.ONBOARDING);
+                Get.toNamed(AppRoutes.GAMES);
               },
               child: Center(
                   child: Icon(
