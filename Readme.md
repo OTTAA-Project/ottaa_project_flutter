@@ -32,6 +32,8 @@ The OTTA app facilitates human communication via pictograms for those who are sp
 
 ### Libraries
 
+The complete list of libraries we use can be found [here](libraries.md)
+
   * [Volley](https://github.com/google/volley) - Network requests
 
   * [Android-RateThisApp](https://github.com/kobakei/Android-RateThisApp) - App rating
