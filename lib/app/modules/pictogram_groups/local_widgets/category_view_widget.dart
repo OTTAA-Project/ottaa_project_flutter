@@ -24,13 +24,14 @@ class CategoryViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final horizontalSize = MediaQuery.of(context).size.height;
+    final horizontalSize = MediaQuery.of(context).size.width;
+    final verticalSize = MediaQuery.of(context).size.height;
     final languaje = _ttsController.languaje;
     return Obx(
       () => _pictogramController.categoryGridviewOrPageview.value
           ? GridView.builder(
               controller: _pictogramController.categoriesGridController,
-              // padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
               itemCount: _homeController.grupos.length,
               itemBuilder: (context, index) => GestureDetector(
                 onLongPress: () async {
@@ -92,8 +93,8 @@ class CategoryViewWidget extends StatelessWidget {
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
                 childAspectRatio: 0.8,
               ),
             )

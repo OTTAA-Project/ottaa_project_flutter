@@ -47,6 +47,7 @@ class CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
     String text;
     if (names == null) {
       switch (this.languaje) {
@@ -139,11 +140,13 @@ class CategoryWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(vertical: verticalSize * 0.01),
             //filler for the text
             child: Text(
               text.toUpperCase(),
-              style: const TextStyle(fontWeight: FontWeight.w700),
+              style: TextStyle(fontWeight: FontWeight.w700,
+              fontSize: 18,
+              ),
             ),
           ),
           bottom

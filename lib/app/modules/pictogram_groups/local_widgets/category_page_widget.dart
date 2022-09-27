@@ -36,6 +36,8 @@ class CategoryPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
+    final horizontalSize = MediaQuery.of(context).size.width;
     String text;
     if (names == null) {
       switch (this.language) {
@@ -99,21 +101,21 @@ class CategoryPageWidget extends StatelessWidget {
             child: kIsWeb
                 ? Image.network(
                     imageName,
-                    height: Get.height * 0.5,
+                    height: verticalSize * 0.4,
                     fit: BoxFit.fitHeight,
-                    width: Get.width * 0.4,
+                    width: horizontalSize * 0.4,
                   )
                 : CachedNetworkImage(
                     imageUrl: imageName,
                     placeholder: (context, url) =>
                         Center(child: CircularProgressIndicator()),
-                    height: Get.height * 0.5,
+                    height: verticalSize * 0.4,
                     fit: BoxFit.fitHeight,
-                    width: Get.width * 0.4,
+                    width: horizontalSize * 0.4,
                   ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(vertical: verticalSize * 0.02),
             //filler for the text
             child: Text(
               text,

@@ -29,10 +29,7 @@ class DrawerWidget extends GetView<HomeController> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(verticalSize * 0.03),
           ),
-          child: ConstrainedBox(
-            constraints:
-                BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-            child: Column(
+          child:  Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
@@ -181,6 +178,7 @@ class ListTileWidget extends StatelessWidget {
       ),
       title: Text(
         title,
+        style: TextStyle(fontSize: verticalSize * 0.03),
       ),
     );
   }

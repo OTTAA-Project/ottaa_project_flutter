@@ -22,11 +22,12 @@ class PictoPageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final languaje = _ttsController.languaje;
     final horizontalSize = MediaQuery.of(context).size.width;
+    final verticalSize = MediaQuery.of(context).size.height;
     return Obx(
       () => _pictogramController.pictoGridviewOrPageview.value
           ? GridView.builder(
               controller: _pictogramController.pictoGridController,
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
               itemCount: _pictogramController.selectedGruposPicts.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () async {
@@ -59,9 +60,9 @@ class PictoPageWidget extends StatelessWidget {
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 0.90,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+                childAspectRatio: 0.8,
               ),
             )
           : PageView.builder(

@@ -43,7 +43,7 @@ class PageViewerContainer extends StatelessWidget {
               ),
               child: Image.asset(
                 imageAsset,
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fill,
               ),
             ),
           ),
@@ -72,7 +72,7 @@ class PageViewerContainer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        'Level $completedLevel/$totalLevel',
+                        '${'level'.tr} $completedLevel/$totalLevel',
                         style: TextStyle(
                           fontSize: verticalSize * 0.025,
                           color: color,

@@ -144,7 +144,7 @@ class HomePage extends GetView<HomeController> {
           Positioned(
             left: 0,
             right: 0,
-            bottom: verticalSize * 0.17,
+            bottom: verticalSize * 0.16,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
               child: Container(
