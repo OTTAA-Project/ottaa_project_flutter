@@ -4,7 +4,7 @@
 
 **Diversity helps us  grow**  
 
-We truly believe the diversity of experiences and knowledge contributes to building a better and more complete tool which more accurately reflects the real needs of potential users of the OTTAA Project. With that in mind we respect and welcome all differences in our users' and developers' age, gender, nationality, race or sexual orientation.
+We truly believe that diversity of experiences, backgrounds and knowledge contributes to building a better and more complete tool which more accurately reflects the real needs of potential users of the OTTAA Project. With that in mind we respect and welcome all differences in our users' and developers' age, gender, nationality, race or sexual orientation.
 
 **Debate enriches us** 
 
