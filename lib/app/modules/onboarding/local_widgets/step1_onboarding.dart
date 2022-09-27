@@ -257,9 +257,9 @@ Widget step1Onboarding<widget>(
                         child: CircularProgressIndicator(),
                       ),
                     );
-                    // await _.uploadInfo();
-                    // print('hi');
-                    // await _sharedPrefCient.setFirstTimePref();
+                    await _.uploadInfo();
+                    print('hi');
+                    await _sharedPrefCient.setFirstTimePref();
                     Get.back();
                     controller.animateToPage(1,
                         duration: Duration(milliseconds: 300),
