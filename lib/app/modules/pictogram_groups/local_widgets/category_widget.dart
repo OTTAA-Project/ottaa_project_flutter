@@ -145,7 +145,7 @@ class CategoryWidget extends StatelessWidget {
             child: Text(
               text.toUpperCase(),
               style: TextStyle(fontWeight: FontWeight.w700,
-              fontSize: verticalSize * 0.035,
+              fontSize: 18,
               ),
             ),
           ),

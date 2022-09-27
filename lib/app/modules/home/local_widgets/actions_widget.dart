@@ -21,7 +21,7 @@ class ActionsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: verticalSize * 0.015),
+              padding: EdgeInsets.only(top: verticalSize * 0.04),
               child: GestureDetector(
                 onTap: () {
                   CustomAnalyticsEvents.setEventWithParameters(
@@ -43,7 +43,7 @@ class ActionsWidget extends StatelessWidget {
             Container(),
             SizedBox(width: 10),
             Padding(
-              padding: EdgeInsets.only(top: verticalSize * 0.025),
+              padding: EdgeInsets.only(top: verticalSize * 0.045),
               child: GestureDetector(
                 onLongPress: () {
                   _.removeWholeSentence();
