@@ -43,7 +43,7 @@ class PageViewerContainer extends StatelessWidget {
               ),
               child: Image.asset(
                 imageAsset,
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fill,
               ),
             ),
           ),
