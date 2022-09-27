@@ -4,6 +4,7 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          'level': 'Level',
           'favourites_sentences': 'Favourite Sentences',
           'galeria_grupos': 'Gallery Groups',
           'add_pict': 'Add Pict',
@@ -200,7 +201,7 @@ class Translation extends Translations {
           'step2_long':
               'Una vez creada la frase, toca el logo de OTTAA par hablar en voz alta o usando el ícono de compartir, podrás enviar tu frase a través de las redes sociales más usadas',
           'Access_thousands_of_pictograms': 'ACCEDE A MILES DE PICTOGRAMAS',
-          'step3_long':
+          'Step3_long':
               'En OTTAA tenés acceso a miles de pictogramas para que hables de lo que quieras. Encuentra la Galería de Pîctos en la esquina inferior izquierda de la pantalla principal',
           'Ready': 'Listo',
           'Step4_long':
@@ -635,7 +636,8 @@ class Translation extends Translations {
               "Oferecemos diferentes opções para que você aprenda a usá-lo e aproveite ao máximo.",
           "Welcome_this_is_ottaa": "Bem-vindo,\nisto é OTTAA",
           "whats_the_picto": "Qual é o picto",
-          "favourites_sentences": "Oraciones favoritas"
+          "favourites_sentences": "Oraciones favoritas",
+          'level': 'Nivel',
         },
       };
 }

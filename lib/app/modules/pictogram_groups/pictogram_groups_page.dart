@@ -21,79 +21,76 @@ class PictogramGroupsPage extends StatelessWidget {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(verticalSize * 0.1),
-        child: AppBar(
-          centerTitle: false,
-          backgroundColor: kOTTAAOrangeNew,
-          leading: Container(),
-          titleSpacing: 0,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          title: Text('galeria_grupos'.tr),
-          actions: [
-            // GestureDetector(
-            //     onTap: () => {
-            //           CustomAnalyticsEvents.setEventWithParameters(
-            //               "Touch",
-            //               CustomAnalyticsEvents.createMyMap(
-            //                   'Group Gallery', 'Change View'))
-            //         },
-            //     child: Icon(
-            //       Icons.reorder,
-            //       size: 30,
-            //     )),
-            // const SizedBox(
-            //   width: 8,
-            // ),
-            GestureDetector(
+      appBar: AppBar(
+        centerTitle: false,
+        backgroundColor: kOTTAAOrangeNew,
+        leading: Container(),
+        titleSpacing: 0,
+        foregroundColor: Colors.white,
+        elevation: 0,
+        title: Text('galeria_grupos'.tr),
+        actions: [
+          // GestureDetector(
+          //     onTap: () => {
+          //           CustomAnalyticsEvents.setEventWithParameters(
+          //               "Touch",
+          //               CustomAnalyticsEvents.createMyMap(
+          //                   'Group Gallery', 'Change View'))
+          //         },
+          //     child: Icon(
+          //       Icons.reorder,
+          //       size: 30,
+          //     )),
+          // const SizedBox(
+          //   width: 8,
+          // ),
+          GestureDetector(
+            onTap: () {
+              _pictogramController.categoryGridviewOrPageview.value =
+                  !_pictogramController.categoryGridviewOrPageview.value;
+              CustomAnalyticsEvents.setEventWithParameters(
+                  "Touch",
+                  CustomAnalyticsEvents.createMyMap(
+                      'Group Gallery', 'Change View'));
+            },
+            child: Icon(
+              Icons.view_carousel,
+              size: 30,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: GestureDetector(
               onTap: () {
-                _pictogramController.categoryGridviewOrPageview.value =
-                    !_pictogramController.categoryGridviewOrPageview.value;
                 CustomAnalyticsEvents.setEventWithParameters(
                     "Touch",
                     CustomAnalyticsEvents.createMyMap(
-                        'Group Gallery', 'Change View'));
+                        'Group Gallery', 'Add Group'));
+                Get.toNamed(AppRoutes.ADDGROUP);
               },
               child: Icon(
-                Icons.view_carousel,
+                Icons.add_circle_outline,
                 size: 30,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: GestureDetector(
-                onTap: () {
-                  CustomAnalyticsEvents.setEventWithParameters(
-                      "Touch",
-                      CustomAnalyticsEvents.createMyMap(
-                          'Group Gallery', 'Add Group'));
-                  Get.toNamed(AppRoutes.ADDGROUP);
-                },
-                child: Icon(
-                  Icons.add_circle_outline,
-                  size: 30,
-                ),
-              ),
-            ),
-            // GestureDetector(
-            //   onTap: () {
-            //     print(_homeController.grupos.last.imagen.picto);
-            //     CustomAnalyticsEvents.setEventWithParameters(
-            //         "Touch",
-            //         CustomAnalyticsEvents.createMyMap(
-            //             'Group Gallery', 'Syncronize Pictogram'));
-            //   },
-            //   child: Icon(
-            //     Icons.cloud_download,
-            //     size: 30,
-            //   ),
-            // ),
-            const SizedBox(
-              width: 16,
-            ),
-          ],
-        ),
+          ),
+          // GestureDetector(
+          //   onTap: () {
+          //     print(_homeController.grupos.last.imagen.picto);
+          //     CustomAnalyticsEvents.setEventWithParameters(
+          //         "Touch",
+          //         CustomAnalyticsEvents.createMyMap(
+          //             'Group Gallery', 'Syncronize Pictogram'));
+          //   },
+          //   child: Icon(
+          //     Icons.cloud_download,
+          //     size: 30,
+          //   ),
+          // ),
+          const SizedBox(
+            width: 16,
+          ),
+        ],
       ),
       body: Container(
         color: Colors.black,
@@ -162,7 +159,7 @@ class PictogramGroupsPage extends StatelessWidget {
                       topRight: Radius.circular(16),
                     ),
                   ),
-                  width: horizontalSize * 0.10,
+                  width: horizontalSize * 0.102,
                   height: verticalSize * 0.5,
                   child: Center(
                     child: GestureDetector(
@@ -198,7 +195,7 @@ class PictogramGroupsPage extends StatelessWidget {
                       topLeft: Radius.circular(16),
                     ),
                   ),
-                  width: horizontalSize * 0.10,
+                  width: horizontalSize * 0.102,
                   height: verticalSize * 0.5,
                   child: Center(
                     child: GestureDetector(
@@ -227,13 +224,13 @@ class PictogramGroupsPage extends StatelessWidget {
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: verticalSize * 0.17,
+                bottom: verticalSize * 0.16,
                 child: Obx(
                   () => Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
                     child: Container(
-                      height: verticalSize * 0.72,
+                      height: verticalSize * 0.65,
                       decoration: BoxDecoration(
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(15),
@@ -247,11 +244,10 @@ class PictogramGroupsPage extends StatelessWidget {
                             _pictogramController.categoryGridviewOrPageview.value
                                 ? horizontalSize * 0.02
                                 : horizontalSize * 0.13,
-                        bottom: 16,
                       ),
                       // width: horizontalSize * 0.8,
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: 0.0),
                         child: CategoryViewWidget(),
                       ),
                     ),

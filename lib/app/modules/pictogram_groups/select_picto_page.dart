@@ -18,6 +18,7 @@ class SelectPictoPage extends StatelessWidget {
     final horizontalSize = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         backgroundColor: kOTTAAOrangeNew,
         leading: Container(),
         foregroundColor: Colors.white,
@@ -85,10 +86,10 @@ class SelectPictoPage extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    flex: 8,
+                    flex: 7,
                     child: Container(
-                      // color: Colors.pink,
-                    ),
+                        // color: Colors.pink,
+                        ),
                   ),
                   Expanded(
                     flex: 2,
@@ -123,7 +124,7 @@ class SelectPictoPage extends StatelessWidget {
                     topRight: Radius.circular(16),
                   ),
                 ),
-                width: horizontalSize * 0.10,
+                width: horizontalSize * 0.102,
                 height: verticalSize * 0.5,
                 child: Center(
                   child: GestureDetector(
@@ -159,7 +160,7 @@ class SelectPictoPage extends StatelessWidget {
                     topLeft: Radius.circular(16),
                   ),
                 ),
-                width: horizontalSize * 0.10,
+                width: horizontalSize * 0.102,
                 height: verticalSize * 0.5,
                 child: Center(
                   child: GestureDetector(
@@ -188,11 +189,11 @@ class SelectPictoPage extends StatelessWidget {
             Positioned(
               left: 0,
               right: 0,
-              bottom: verticalSize * 0.17,
+              bottom: verticalSize * 0.16,
               child: Obx(
                 () => Padding(
                   padding:
-                  EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.097),
                   child: Container(
                     height: verticalSize * 0.7,
                     decoration: BoxDecoration(
@@ -200,12 +201,15 @@ class SelectPictoPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal:
-                              _pictogramController.pictoGridviewOrPageview.value
-                                  ? 16
-                                  : horizontalSize * 0.16,
-                          vertical: 16),
+                      padding: EdgeInsets.only(
+                        left: _pictogramController.pictoGridviewOrPageview.value
+                            ? 16
+                            : horizontalSize * 0.16,
+                        right:
+                            _pictogramController.pictoGridviewOrPageview.value
+                                ? 16
+                                : horizontalSize * 0.16,
+                      ),
                       child: PictoPageWidget(),
                     ),
                   ),
