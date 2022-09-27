@@ -194,8 +194,8 @@ Any bug or hotfix that results from manual testing should be reported via an [is
 
 We will be implementing a continuous integration workflow that will be running multiple automated testing. In the meantime, any experience with CI/CD and automated testing in Dart is very much welcome. Feel free to contact us at **support@ottaaproject.com**.
 
-## On our code of Conduct
+## On our code of conduct
 
-Please read through our [code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+Please read through our [code of conduct](CODE_OF_CONDUCT.md) before contributing.
 
 
