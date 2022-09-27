@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/app/data/repositories/picts_repository.dart';
@@ -16,7 +14,7 @@ class SentencesController extends GetxController {
   final _ttsController = Get.find<TTSController>();
   final _pictsRepository = Get.find<PictsRepository>();
   final _sentencesRepository = Get.find<SentencesRepository>();
-  final _dataController = Get.find<DataController>();
+  final dataController = Get.find<DataController>();
   final searchController = TextEditingController();
   RxBool showCircular = true.obs;
   late AnimationController _sentenceAnimationController;
@@ -111,7 +109,7 @@ class SentencesController extends GetxController {
       final obj = jsonEncode(element);
       dataUpload.add(obj);
     });
-    await _dataController.uploadFrases(
+    await dataController.uploadFrases(
       language: _ttsController.languaje,
       data: dataUpload.toString(),
       type: Constants.FAVOURITE_SENTENCES,
@@ -441,6 +439,7 @@ class SentencesController extends GetxController {
     update(['searchBuilder']);
     print(searchIndex);
   }
+
 }
 
 class SearchIndexedSentences {

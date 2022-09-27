@@ -29,10 +29,12 @@ class DataController extends GetxController {
   Future<void> uploadDataToFirebaseRealTime({
     required String data,
     required String type,
+    required String languageCode,
   }) async =>
       await _firebaseDatabaseController.uploadDataToFirebaseRealTime(
         data: data,
         type: type,
+        languageCode: languageCode,
       );
 
   Future<void> uploadBoolToFirebaseRealtime({
@@ -85,6 +87,15 @@ class DataController extends GetxController {
       dateOfBirthInMs: dateOfBirthInMs,
     );
   }
+
+  Future<void> saveUserPhotoUrl({required String photoUrl}) async =>
+      await _firebaseDatabaseController.saveUserPhotoUrl(photoUrl: photoUrl);
+
+  Future<String> fetchUserPhotoUrl() async =>
+      await _firebaseDatabaseController.fetchUserPhotoUrl();
+
+  String fetchCurrentUserUID() =>
+      _firebaseDatabaseController.fetchCurrentUserUID();
 
   Future<List<Pict>> fetchOtherPictos({
     required String languageName,

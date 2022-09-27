@@ -7,6 +7,8 @@ import 'package:ottaa_project_flutter/app/modules/games/games_page.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/add_group_page.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/add_or_remove%20_favourite_page.dart';
 import 'package:ottaa_project_flutter/app/modules/sentences/favourite_screen_page.dart';
+import 'package:ottaa_project_flutter/app/modules/report/report_binding.dart';
+import 'package:ottaa_project_flutter/app/modules/report/report_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/language_page.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/settings_binding.dart';
 import 'package:ottaa_project_flutter/app/modules/settings/settings_page.dart';
@@ -113,6 +115,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.ADDGROUP,
       page: () => AddGroupPage(),
+    ),
+    GetPage(
+      name: AppRoutes.REPORTPAGE,
+      page: () => ReportPage(),
+      binding: ReportBinding(),
     ),
   ];
 }

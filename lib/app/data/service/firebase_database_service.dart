@@ -79,9 +79,10 @@ class FirebaseDatabaseService {
   Future<void> uploadDataToFirebaseRealTime({
     required String data,
     required String type,
+    required String languageCode,
   }) async {
     final String? id = firebaseRed.currentUser!.uid;
-    final ref = databaseRef.child('$type/${id!}/');
+    final ref = databaseRef.child('$type/${id!}/$languageCode');
     await ref.set({
       'data': data,
     });
@@ -131,6 +132,9 @@ class FirebaseDatabaseService {
   }
 
   Future<List<Pict>> fetchPictos() async {
+    final instance = await SharedPreferences.getInstance();
+    final String key = instance.getString('Language_KEY') ?? 'Spanish';
+    final String languageCode = Constants.LANGUAGE_CODES[key]!;
     if (kIsWeb) {
       await Future.delayed(
         Duration(seconds: 2),
@@ -152,22 +156,27 @@ class FirebaseDatabaseService {
     if (kIsWeb) {
       return await webFiles(
         snapshot: res,
-        firebaseName: 'Picto',
+        firebaseName: 'Pictos',
         assetsFileName: 'assets/pictos.json',
         pictosOrGrupos: true,
+        languageCode: languageCode,
       );
     } else {
       return await mobileFiles(
         assetsFileName: 'assets/pictos.json',
         fileName: 'Pictos_file',
-        firebaseName: 'Picto',
+        firebaseName: 'Pictos',
         pictoOrGrupo: true,
         onlineSnapshot: res,
+        languageCode: languageCode,
       );
     }
   }
 
   Future<List<Grupos>> fetchGrupos() async {
+    final instance = await SharedPreferences.getInstance();
+    final String key = instance.getString('Language_KEY') ?? 'Spanish';
+    final String languageCode = Constants.LANGUAGE_CODES[key]!;
     if (kIsWeb) {
       await Future.delayed(
         Duration(seconds: 2),
@@ -190,16 +199,18 @@ class FirebaseDatabaseService {
       return await webFiles(
         snapshot: res,
         assetsFileName: 'assets/grupos.json',
-        firebaseName: 'Grupo',
+        firebaseName: 'Grupos',
         pictosOrGrupos: false,
+        languageCode: languageCode,
       );
     } else {
       return await mobileFiles(
         onlineSnapshot: res,
         assetsFileName: 'assets/grupos.json',
         fileName: 'Grupos_file',
-        firebaseName: 'Grupo',
+        firebaseName: 'Grupos',
         pictoOrGrupo: false,
+        languageCode: languageCode,
       );
     }
   }
@@ -415,6 +426,7 @@ class FirebaseDatabaseService {
     required String assetsFileName,
     required String firebaseName,
     required bool pictoOrGrupo,
+    required String languageCode,
   }) async {
     final instance = await SharedPreferences.getInstance();
     final fileExists = instance.getBool(fileName);
@@ -434,8 +446,8 @@ class FirebaseDatabaseService {
           );
         }
       } else {
-        final ref =
-            databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
+        final ref = databaseRef.child(
+            '$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
         final res = await ref.get();
         final data = res.value['data'];
         final da = pictoOrGrupo
@@ -498,10 +510,11 @@ class FirebaseDatabaseService {
     required String assetsFileName,
     required String firebaseName,
     required bool pictosOrGrupos,
+    required String languageCode,
   }) async {
     if (snapshot.exists && snapshot.value != null) {
-      final ref =
-          databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
+      final ref = databaseRef
+          .child('$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
       final res = await ref.get();
       final data = res.value['data'];
       //todo: write different conversions here
@@ -548,13 +561,33 @@ class FirebaseDatabaseService {
     });
   }
 
+  Future<void> saveUserPhotoUrl({required String photoUrl}) async {
+    final User? auth = firebaseRed.currentUser;
+    final ref = databaseRef.child('PhotoUrl/${auth!.uid}/');
+    await ref.set({
+      'PhotoUrl': photoUrl,
+    });
+  }
+
+  Future<String> fetchUserPhotoUrl() async {
+    final User? auth = firebaseRed.currentUser;
+    final ref = databaseRef.child('PhotoUrl/${auth!.uid}/');
+    final res = await ref.get();
+    return res.value['PhotoUrl'];
+  }
+
+  String fetchCurrentUserUID() {
+    final User? auth = firebaseRed.currentUser;
+    return auth!.uid;
+  }
+
   Future<void> uploadFrases({
     required String language,
     required String data,
     required String type,
   }) async {
     final ref = databaseRef
-        .child('frases/${firebaseRed.currentUser!.uid}/$language/$type');
+        .child('Frases/${firebaseRed.currentUser!.uid}/$language/$type');
     await ref.set({'data': data});
   }
 
@@ -563,7 +596,7 @@ class FirebaseDatabaseService {
     required String type,
   }) async {
     final ref = databaseRef
-        .child('frases/${firebaseRed.currentUser!.uid}/$language/$type');
+        .child('Frases/${firebaseRed.currentUser!.uid}/$language/$type');
     final res = await ref.get();
     if (res.exists && res.value != null) {
       final data = res.value['data'];
@@ -586,7 +619,7 @@ class FirebaseDatabaseService {
     required String type,
   }) async {
     final ref = databaseRef
-        .child('frases/${firebaseRed.currentUser!.uid}/$language/$type');
+        .child('Frases/${firebaseRed.currentUser!.uid}/$language/$type');
     final res = await ref.get();
     if (res.exists && res.value != null) {
       final data = res.value['data'];

@@ -174,7 +174,8 @@ class PictoPageWidget extends StatelessWidget {
     // });
     await _dataController.uploadDataToFirebaseRealTime(
       data: data,
-      type: 'Picto',
+      type: 'Pictos',
+      languageCode: _ttsController.languaje,
     );
   }
 
