@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-class OttaLogoWidget extends StatelessWidget {
-  const OttaLogoWidget({Key? key}) : super(key: key);
+class OttaaLogoWidget extends StatelessWidget {
+  const OttaaLogoWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,18 +16,19 @@ class OttaLogoWidget extends StatelessWidget {
       ),
       // padding: EdgeInsets.all(width * 0.010),
       child: Container(
-        // height: width * 0.15,
-        width: width * 0.15,
+        // height: width * 0.1,
+        // width: width * 0.1,
         padding: EdgeInsets.all(width * 0.02),
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: kOTTAAOrangeNew,
-          borderRadius: BorderRadius.circular(width * 0.2),
+          borderRadius: BorderRadius.circular(width * 0.4),
         ),
         child: Image.asset(
           'assets/icono_ottaa.png',
-          fit: BoxFit.cover,
-          // height: width * 0.2,
-          // width: width * 0.2,
+          fit: BoxFit.fill,
+          // height: width * 0.08,
+          // width: width * 0.04,
         ),
       ),
     );

@@ -261,7 +261,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
               bottom: height * 0.02,
               left: width * 0.43,
               right: width * 0.43,
-              child: OttaLogoWidget(),
+              child: OttaaLogoWidget(),
             ),
           ],
         ),

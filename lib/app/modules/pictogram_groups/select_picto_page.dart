@@ -17,64 +17,69 @@ class SelectPictoPage extends StatelessWidget {
     final verticalSize = MediaQuery.of(context).size.height;
     final horizontalSize = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 0,
-        backgroundColor: kOTTAAOrangeNew,
-        leading: Container(),
-        foregroundColor: Colors.white,
-        elevation: 0,
-        title: Text('galeria_grupos'.tr),
-        actions: [
-          Icon(
-            Icons.reorder,
-            size: 30,
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          GestureDetector(
-            onTap: () {
-              _pictogramController.pictoGridviewOrPageview.value =
-                  !_pictogramController.pictoGridviewOrPageview.value;
-              CustomAnalyticsEvents.setEventWithParameters(
-                  "Touch",
-                  CustomAnalyticsEvents.createMyMap(
-                      'Pictograms Gallery', 'Change View'));
-            },
-            child: Icon(
-              Icons.view_carousel,
-              size: 30,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(verticalSize * 0.07),
+        child: AppBar(
+          titleSpacing: 0,
+          backgroundColor: kOTTAAOrangeNew,
+          leading: Container(),
+          foregroundColor: Colors.white,
+          elevation: 0,
+          title: Text('galeria_grupos'.tr,style: TextStyle(
+            fontSize: verticalSize * 0.03,
+          ),),
+          actions: [
+            Icon(
+              Icons.reorder,
+              size: verticalSize * 0.06,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: GestureDetector(
+            const SizedBox(
+              width: 16,
+            ),
+            GestureDetector(
+              onTap: () {
+                _pictogramController.pictoGridviewOrPageview.value =
+                    !_pictogramController.pictoGridviewOrPageview.value;
+                CustomAnalyticsEvents.setEventWithParameters(
+                    "Touch",
+                    CustomAnalyticsEvents.createMyMap(
+                        'Pictograms Gallery', 'Change View'));
+              },
+              child: Icon(
+                Icons.view_carousel,
+                size: verticalSize * 0.06,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(
+                    () => AddPictoPage(),
+                  );
+                },
+                child: Icon(
+                  Icons.add_circle_outline,
+                  size: verticalSize * 0.06,
+                ),
+              ),
+            ),
+            GestureDetector(
               onTap: () {
                 Get.to(
-                  () => AddPictoPage(),
+                  () => AddPictoToGroupPage(),
                 );
               },
               child: Icon(
-                Icons.add_circle_outline,
-                size: 30,
+                Icons.add_to_photos,
+                size: verticalSize * 0.06,
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.to(
-                () => AddPictoToGroupPage(),
-              );
-            },
-            child: Icon(
-              Icons.add_to_photos,
-              size: 30,
+            const SizedBox(
+              width: 16,
             ),
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-        ],
+          ],
+        ),
       ),
       body: Container(
         color: Colors.black,
@@ -222,7 +227,7 @@ class SelectPictoPage extends StatelessWidget {
               bottom: verticalSize * 0.02,
               left: horizontalSize * 0.43,
               right: horizontalSize * 0.43,
-              child: OttaLogoWidget(),
+              child: OttaaLogoWidget(),
             ),
 
             ///close button fix

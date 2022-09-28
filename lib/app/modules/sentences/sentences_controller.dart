@@ -75,10 +75,10 @@ class SentencesController extends GetxController {
   set selectedIndexFav(value) {
     this._selectedIndexFav = value;
 
-    if (this._selectedIndexFav == this.favouriteOrNotPicts.length)
+    if (this._selectedIndexFav == this.favouritePicts.length)
       this._selectedIndexFav = 0;
     if (this._selectedIndexFav == -1)
-      this._selectedIndexFav = this.favouriteOrNotPicts.length - 1;
+      this._selectedIndexFav = this.favouritePicts.length - 1;
     update();
   }
 

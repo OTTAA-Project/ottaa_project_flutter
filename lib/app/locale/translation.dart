@@ -5,6 +5,7 @@ class Translation extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en_US': {
           'level': 'Level',
+          'report': 'Report',
           'vocabulary': 'Vocabulary',
           'most_used_phrases': 'MOST USED PHRASES',
           'pictogram_by_sentence_on_average':
@@ -14,7 +15,7 @@ class Translation extends Translations {
               'OTTAA Score is a measure of the overall use of the application, using data as usage in the last days and average picts per sentence.',
           'most_used_groups': 'Most used Groups',
           'ottaa_score': 'OTTAA Score',
-          'favourites_sentences': 'Favourite Sentences',
+          'favourites_sente': 'Favourite Sentences',
           'galeria_grupos': 'Gallery Groups',
           'add_pict': 'Add Pict',
           'add_group': 'Add Group',
@@ -192,7 +193,7 @@ class Translation extends Translations {
           'Lets_get_to_knwo_each_other_first': 'Vamos a conocernos primero',
           'We_are_going_to_collect_some_data_to_get_to_know_you_better':
               'Vamos a recolectar algunos datos para conocerte mejor',
-          'Launch_short_tutorial': 'TUTORIAL CORTO DE LANZAMIENTO',
+          'Launch_short_tutorial': 'Tutorial Corto',
           'Do_a_guided_workshop': 'HACER UN TALLER GUIADO',
           'Book_a_demo': 'RESERVA UNA DEMO',
           'Ottaa_is_a_powerful_communication_tool':
@@ -302,6 +303,7 @@ class Translation extends Translations {
           'sentence_3':
               'Con la versión premium puedes usar el GPS para tener una mejor predicción basada en el comercio o lugar donde te encuentres',
           'whats_the_picto': '¿Cual es el Picto ?',
+          'report': 'Reporte',
           'game1':
               'Responde a las preguntas eligiendo el pictograma adecuado. ¡Aprende jugando!',
           'match_picto': 'Igualar pictogramas',
@@ -654,7 +656,7 @@ class Translation extends Translations {
               "Oferecemos diferentes opções para que você aprenda a usá-lo e aproveite ao máximo.",
           "Welcome_this_is_ottaa": "Bem-vindo,\nisto é OTTAA",
           "whats_the_picto": "Qual é o picto",
-          "favourites_sentences": "Oraciones favoritas",
+          "favourites_sente": "Oraciones favoritas",
           'level': 'Nivel',
         },
       };

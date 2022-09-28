@@ -22,7 +22,7 @@ class MostUsedPhrasesWidget extends StatelessWidget {
           verticalSize * 0.01,
         ),
       ),
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(verticalSize * 0.01),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -59,9 +59,9 @@ class MostUsedPhrasesWidget extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, indexSecond) {
                                     return Container(
-                                      padding: EdgeInsets.only(left: 10),
-                                      height: 150,
-                                      width: 110,
+                                      padding: EdgeInsets.only(left: verticalSize * 0.01),
+                                      height: verticalSize * 0.15,
+                                      width: verticalSize * 0.15,
                                       child: Image.network(controller
                                               .mostUsedSentences[indexMain]
                                           [indexSecond]),

@@ -21,7 +21,7 @@ class FavouriteScreenPage extends GetView<SentencesController> {
           automaticallyImplyLeading: false,
           foregroundColor: Colors.white,
           elevation: 0,
-          title: Text('favourites_sentences'.tr),
+          title: Text("favourites_sente".tr),
           actions: [
             GestureDetector(
               onTap: () => Get.toNamed(
@@ -258,7 +258,7 @@ class FavouriteScreenPage extends GetView<SentencesController> {
                     //todo: add the required code
                     await controller.speak();
                   },
-                  child: OttaLogoWidget(),
+                  child: OttaaLogoWidget(),
                 ),
               ),
             ],

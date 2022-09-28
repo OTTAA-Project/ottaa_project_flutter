@@ -27,7 +27,7 @@ class PictoPageWidget extends StatelessWidget {
       () => _pictogramController.pictoGridviewOrPageview.value
           ? GridView.builder(
               controller: _pictogramController.pictoGridController,
-              padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
+              // padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
               itemCount: _pictogramController.selectedGruposPicts.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () async {
@@ -84,8 +84,10 @@ class PictoPageWidget extends StatelessWidget {
                   // Get.toNamed(AppRoutes.EDITPICTO);
                 },
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.07),
+                  padding: EdgeInsets.only(
+                      left: horizontalSize * 0.07,
+                      right: horizontalSize * 0.07,
+                      bottom: horizontalSize * 0.05),
                   child: CategoryPageWidget(
                     name: _pictogramController.selectedGruposPicts[index].texto,
                     language: _homeController.language,

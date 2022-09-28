@@ -30,10 +30,11 @@ class VocabularyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final verticalSize = MediaQuery.of(context).size.height;
     final horizontalSize = MediaQuery.of(context).size.width;
+    print('the vertical size is ${verticalSize.toString()}');
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(10),
-        height: verticalSize * 0.35,
+        height: verticalSize * 0.4,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -59,44 +60,53 @@ class VocabularyWidget extends StatelessWidget {
                     child: Stack(
                       children: [
                         ///first one
-                        Container(
-                          height: 250,
-                          width: 250,
-                          decoration: BoxDecoration(
-                            color: Colors.amberAccent.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(200),
-                          ),
-                          child: CustomPaint(
-                            painter: ProgressPainter(
-                              value: firstValueProgress,
-                              color: Colors.amberAccent,
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: verticalSize * 0.005,
+                              top: verticalSize * 0.005),
+                          child: Container(
+                            height: verticalSize * 0.29,
+                            width: verticalSize * 0.29,
+                            decoration: BoxDecoration(
+                              color: Colors.amberAccent.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(200),
                             ),
-                            child: Container(
-                              height: 250,
-                              width: 250,
+                            child: CustomPaint(
+                              painter: ProgressPainter(
+                                value: firstValueProgress,
+                                color: Colors.amberAccent,
+                              ),
+                              child: Container(
+                                height: verticalSize * 0.29,
+                                width: verticalSize * 0.29,
+                              ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 15),
+                          padding: EdgeInsets.only(
+                              left: verticalSize * 0.025,
+                              top: verticalSize * 0.025),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
                               color: Colors.white,
                             ),
                             child: Container(
-                              height: 220,
-                              width: 220,
+                              height: verticalSize * 0.25,
+                              width: verticalSize * 0.25,
                             ),
                           ),
                         ),
 
                         /// second value
                         Padding(
-                          padding: const EdgeInsets.only(top: 25, left: 25),
+                          padding: EdgeInsets.only(
+                              top: verticalSize * 0.04,
+                              left: verticalSize * 0.04),
                           child: Container(
-                            height: 200,
-                            width: 200,
+                            height: verticalSize * 0.22,
+                            width: verticalSize * 0.22,
                             decoration: BoxDecoration(
                               color: Colors.brown.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(200),
@@ -107,100 +117,106 @@ class VocabularyWidget extends StatelessWidget {
                                 color: Colors.brown,
                               ),
                               child: Container(
-                                height: 200,
-                                width: 200,
+                                height: verticalSize * 0.22,
+                                width: verticalSize * 0.22,
                               ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 40, top: 40),
+                          padding: EdgeInsets.only(
+                              left: verticalSize * 0.06,
+                              top: verticalSize * 0.06),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
                               color: Colors.white,
                             ),
                             child: Container(
-                              height: 170,
-                              width: 170,
+                              height: verticalSize * 0.18,
+                              width: verticalSize * 0.18,
                             ),
                           ),
                         ),
 
                         /// third value
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 50,
-                            top: 50,
+                          padding: EdgeInsets.only(
+                            left: verticalSize * 0.075,
+                            top: verticalSize * 0.075,
                           ),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.pink.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(200),
                             ),
-                            height: 150,
-                            width: 150,
+                            height: verticalSize * 0.15,
+                            width: verticalSize * 0.15,
                             child: CustomPaint(
                               painter: ProgressPainter(
                                 value: thirdValueProgress,
                                 color: Colors.pink,
                               ),
                               child: Container(
-                                height: 150,
-                                width: 150,
+                                height: verticalSize * 0.15,
+                                width: verticalSize * 0.15,
                               ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 65, top: 65),
+                          padding: EdgeInsets.only(
+                              left: verticalSize * 0.095,
+                              top: verticalSize * 0.095),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
                               color: Colors.white,
                             ),
                             child: Container(
-                              height: 120,
-                              width: 120,
+                              height: verticalSize * 0.11,
+                              width: verticalSize * 0.11,
                             ),
                           ),
                         ),
 
                         /// fourth value
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 75,
-                            top: 75,
+                          padding: EdgeInsets.only(
+                            left: verticalSize * 0.108,
+                            top: verticalSize * 0.108,
                           ),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.blue.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(200),
                             ),
-                            height: 100,
-                            width: 100,
+                            height: verticalSize * 0.085,
+                            width: verticalSize * 0.085,
                             child: CustomPaint(
                               painter: ProgressPainter(
                                 value: fourthValueProgress,
                                 color: Colors.blue,
                               ),
                               child: Container(
-                                height: 100,
-                                width: 100,
+                                height: verticalSize * 0.085,
+                                width: verticalSize * 0.085,
                               ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 90, top: 90),
+                          padding: EdgeInsets.only(
+                              left: verticalSize * 0.122,
+                              top: verticalSize * 0.122),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
                               color: Colors.white,
                             ),
                             child: Container(
-                              height: 70,
-                              width: 70,
+                              height: verticalSize * 0.055,
+                              width: verticalSize * 0.055,
                             ),
                           ),
                         ),
@@ -268,6 +284,7 @@ class RowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -277,7 +294,7 @@ class RowWidget extends StatelessWidget {
         ),
         Text(
           text,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: verticalSize * 0.02),
         ),
       ],
     );
@@ -293,18 +310,20 @@ class SmallCircularWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
+    final horizontalSize = MediaQuery.of(context).size.width;
     return CustomPaint(
       painter: ProgressPainter(color: color, value: 100),
       child: Container(
-        height: 30,
-        width: 30,
+        height: verticalSize * 0.05,
+        width: verticalSize * 0.05,
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(verticalSize * 0.01),
           child: CustomPaint(
             painter: ProgressPainter(value: 100, color: Colors.white),
             child: Container(
-              height: 15,
-              width: 15,
+              height: verticalSize * 0.03,
+              width: verticalSize * 0.03,
             ),
           ),
         ),

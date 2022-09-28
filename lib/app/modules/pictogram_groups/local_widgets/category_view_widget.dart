@@ -31,7 +31,7 @@ class CategoryViewWidget extends StatelessWidget {
       () => _pictogramController.categoryGridviewOrPageview.value
           ? GridView.builder(
               controller: _pictogramController.categoriesGridController,
-              padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
+              // padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
               itemCount: _homeController.grupos.length,
               itemBuilder: (context, index) => GestureDetector(
                 onLongPress: () async {
@@ -157,7 +157,7 @@ class CategoryViewWidget extends StatelessWidget {
                 },
                 child: Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.15),
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.1,vertical: verticalSize * 0.05),
                   child: CategoryPageWidget(
                     names: _homeController.grupos[index].texto,
                     name: Texto(),
