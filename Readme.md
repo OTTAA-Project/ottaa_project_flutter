@@ -40,7 +40,7 @@ The OTTAA Project was developed and runs mainly on:
 * [Firebase](https://firebase.google.com/) 
 
 
-The complete list of libraries used and their functions can be found [here](libraries.md)
+The complete list of libraries used and their functions can be found [here](libraries.md).
 
 
 ### Tools
