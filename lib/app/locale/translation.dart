@@ -15,7 +15,7 @@ class Translation extends Translations {
               'OTTAA Score is a measure of the overall use of the application, using data as usage in the last days and average picts per sentence.',
           'most_used_groups': 'Most used Groups',
           'ottaa_score': 'OTTAA Score',
-          'favourites_sente': 'Favourite Sentences',
+          'favourite_sentence': 'Favourite Sentences',
           'galeria_grupos': 'Gallery Groups',
           'add_pict': 'Add Pict',
           'add_group': 'Add Group',
@@ -656,7 +656,7 @@ class Translation extends Translations {
               "Oferecemos diferentes opções para que você aprenda a usá-lo e aproveite ao máximo.",
           "Welcome_this_is_ottaa": "Bem-vindo,\nisto é OTTAA",
           "whats_the_picto": "Qual é o picto",
-          "favourites_sente": "Oraciones favoritas",
+          'favourite_sentence': 'Oraciones favoritas',
           'level': 'Nivel',
         },
       };

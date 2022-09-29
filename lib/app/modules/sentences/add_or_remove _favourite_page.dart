@@ -7,7 +7,8 @@ import 'package:ottaa_project_flutter/app/modules/sentences/sentences_controller
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 class AddOrRemoveFavouritePage extends StatelessWidget {
-  const AddOrRemoveFavouritePage({Key? key}) : super(key: key);
+  AddOrRemoveFavouritePage({Key? key}) : super(key: key);
+  final controller = Get.find<SentencesController>();
 
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
@@ -18,7 +19,9 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
         automaticallyImplyLeading: false,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: Text("favourites_sente".tr),
+        title: Text(controller.ttsController.languaje == 'es-AR'
+            ? 'Oraciones favoritas'
+            : 'Favourite Sentences'),
         actions: [
           GestureDetector(
             onTap: () => Get.back(),

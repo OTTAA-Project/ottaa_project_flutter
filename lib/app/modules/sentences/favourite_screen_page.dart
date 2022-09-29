@@ -21,7 +21,7 @@ class FavouriteScreenPage extends GetView<SentencesController> {
           automaticallyImplyLeading: false,
           foregroundColor: Colors.white,
           elevation: 0,
-          title: Text("favourites_sente".tr),
+          title: Text(controller.ttsController.languaje == 'es-AR' ? 'Oraciones favoritas' : 'Favourite Sentences'),
           actions: [
             GestureDetector(
               onTap: () => Get.toNamed(

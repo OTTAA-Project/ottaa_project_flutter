@@ -10,27 +10,35 @@ class OttaaLogoWidget extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
-        // color: Colors.black,
-        borderRadius: BorderRadius.circular(width * 0.07),
-        border: Border.all(color: Colors.black,width: width * 0.008)
-      ),
+          // color: Colors.black,
+          borderRadius: BorderRadius.circular(width * 0.07),
+          border: Border.all(color: Colors.black, width: width * 0.008)),
       // padding: EdgeInsets.all(width * 0.010),
       child: Container(
-        // height: width * 0.1,
-        // width: width * 0.1,
+        // height: width * 0.15,
+        width: width * 0.15,
         padding: EdgeInsets.all(width * 0.02),
-        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: kOTTAAOrangeNew,
-          borderRadius: BorderRadius.circular(width * 0.4),
+          borderRadius: BorderRadius.circular(width * 0.2),
         ),
         child: Image.asset(
           'assets/icono_ottaa.png',
-          fit: BoxFit.fill,
-          // height: width * 0.08,
-          // width: width * 0.04,
+          fit: BoxFit.cover,
+          // height: width * 0.2,
+          // width: width * 0.2,
         ),
       ),
     );
+  }
+}
+
+class MyClip extends CustomClipper<Rect> {
+  Rect getClip(Size size) {
+    return Rect.fromLTWH(100, 100, 100, 100);
+  }
+
+  bool shouldReclip(oldClipper) {
+    return false;
   }
 }
