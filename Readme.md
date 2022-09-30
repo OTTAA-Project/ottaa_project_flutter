@@ -9,7 +9,7 @@ You can be a part of this open source project and help build life changing techn
 <img src="/public/images/ottaa_project/ARG_VENTURE_OTTAA%20(1%20of%201)-36.jpg" alt="ottaa_img" width="400"/>
 </p>
 
-Here is our [Project's Roadmap](https://github.com/orgs/OTTAA-Project/projects/4/views/1) where you can learn about what features we are currently working on, what stage they are in, and when we expect to deliver them to you. 
+In our [Project's Roadmap](https://github.com/orgs/OTTAA-Project/projects/4/views/1) where you can learn about what features we are currently working on, what stage they are in, and when we expect to deliver them to you. 
 
 ## How does it work?
 
