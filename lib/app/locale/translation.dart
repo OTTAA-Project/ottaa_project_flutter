@@ -193,7 +193,7 @@ class Translation extends Translations {
           'Lets_get_to_knwo_each_other_first': 'Vamos a conocernos primero',
           'We_are_going_to_collect_some_data_to_get_to_know_you_better':
               'Vamos a recolectar algunos datos para conocerte mejor',
-          'Launch_short_tutorial': 'Tutorial Corto',
+          'Launch_short_tutorial': 'TUTORIAL CORTO',
           'Do_a_guided_workshop': 'HACER UN TALLER GUIADO',
           'Book_a_demo': 'RESERVA UNA DEMO',
           'Ottaa_is_a_powerful_communication_tool':
