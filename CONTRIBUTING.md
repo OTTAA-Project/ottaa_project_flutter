@@ -172,7 +172,7 @@ index
 
 ### Analytics implementation
 
-[Here](https://github.com/VicColombo/ottaa_project_flutter/blob/master/AnalyticsImplementation.md) is the list of events that should be tracked.
+[Here](/analytics_implementation.md) is the list of events that should be tracked.
 
 ## As a translator
 
