@@ -64,17 +64,45 @@ Please bear the following in mind when creating a PR:
 
 ### Code conventions
 
-#### On commenting
-
-* Comments should always be full English sentences.
+#### On documentation
 
 * As a default, always document the source code via clear comments.
 
 * Comment all your classes explaining their purpose and how to implement them if required.
 
+##### General automated documentation
+
+You can find the general code documentation [here]()(add link to automatic doc when ready). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it, please read our [quick guide to Dartdoc](/dartdoc_automatic_documentation.md) if you want to get started.
+
+##### Comments not included in the Dartdoc generated documentation
+
+* Format comments as full English sentences.
+
+* Do not use /* block comments \*/ for documentation:
+
+```
+[x]
+
+void greet(String name) {
+  /* Assume we have a valid name. */
+  print('Hi, $name!');
+}
+``` 
+* Do instead:
+
+```
+[✓]
+
+void greet(String name) {
+  // Assume we have a valid name.
+  print('Hi, $name!');
+}
+```
+
+
 #### On code duplication
 
-* Don't copy-paste source code. Reuse it in a  way that makes sense, re writing the neccessary parts.
+* Do not copy-paste source code. Reuse it in a  way that makes sense, re writing the neccessary parts.
 
 
 #### On importing libraries 
