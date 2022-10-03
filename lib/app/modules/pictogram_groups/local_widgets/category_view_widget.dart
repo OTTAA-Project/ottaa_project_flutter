@@ -156,8 +156,10 @@ class CategoryViewWidget extends StatelessWidget {
                   Get.toNamed(AppRoutes.SELECTPICTO);
                 },
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.1,vertical: verticalSize * 0.05),
+                  padding: EdgeInsets.only(
+                      left: horizontalSize * 0.07,
+                      right: horizontalSize * 0.07,
+                      bottom: verticalSize * 0.09),
                   child: CategoryPageWidget(
                     names: _homeController.grupos[index].texto,
                     name: Texto(),

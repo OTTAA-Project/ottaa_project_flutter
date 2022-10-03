@@ -208,11 +208,11 @@ class SelectPictoPage extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.only(
                         left: _pictogramController.pictoGridviewOrPageview.value
-                            ? 16
+                            ? horizontalSize * 0.02
                             : horizontalSize * 0.16,
                         right:
                             _pictogramController.pictoGridviewOrPageview.value
-                                ? 16
+                                ? horizontalSize * 0.02
                                 : horizontalSize * 0.16,
                       ),
                       child: PictoPageWidget(),

@@ -247,11 +247,11 @@ class PictogramGroupsPage extends StatelessWidget {
                         left: _pictogramController
                                 .categoryGridviewOrPageview.value
                             ? horizontalSize * 0.02
-                            : horizontalSize * 0.13,
+                            : horizontalSize * 0.16,
                         right: _pictogramController
                                 .categoryGridviewOrPageview.value
                             ? horizontalSize * 0.02
-                            : horizontalSize * 0.13,
+                            : horizontalSize * 0.16,
                       ),
                       // width: horizontalSize * 0.8,
                       child: Padding(

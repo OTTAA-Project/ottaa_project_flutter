@@ -87,7 +87,7 @@ class PictoPageWidget extends StatelessWidget {
                   padding: EdgeInsets.only(
                       left: horizontalSize * 0.07,
                       right: horizontalSize * 0.07,
-                      bottom: horizontalSize * 0.05),
+                      bottom: horizontalSize * 0.05,),
                   child: CategoryPageWidget(
                     name: _pictogramController.selectedGruposPicts[index].texto,
                     language: _homeController.language,
