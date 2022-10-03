@@ -1,7 +1,14 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
+import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingController extends GetxController {
   final _authController = Get.find<AuthController>();
@@ -59,4 +66,58 @@ class OnboardingController extends GetxController {
   // }
 
   _init() async {}
+
+  Future<void> uploadPictos({required bool maleOrFemale}) async {
+    late dynamic fileData;
+    if (maleOrFemale) {
+      ///male pictos
+      final String pictsString = await rootBundle
+          .loadString('assets/gender_based/pictos/pictos_es_male.json');
+
+      final data = (jsonDecode(pictsString) as List)
+          .map((e) => Pict.fromJson(e))
+          .toList();
+      fileData = [];
+      data.forEach((element) {
+        final obj = jsonEncode(element);
+        fileData.add(obj);
+      });
+      _dataController.uploadDataToFirebaseRealTime(
+        data: fileData.toString(),
+        type: 'Pictos',
+        languageCode: "es-AR",
+      );
+    } else {
+      /// female pictos
+      final String pictsString = await rootBundle
+          .loadString('assets/gender_based/pictos/pictos_es_female.json');
+
+      final data = (jsonDecode(pictsString) as List)
+          .map((e) => Pict.fromJson(e))
+          .toList();
+      fileData = [];
+      data.forEach((element) {
+        final obj = jsonEncode(element);
+        fileData.add(obj);
+      });
+      _dataController.uploadDataToFirebaseRealTime(
+        data: fileData.toString(),
+        type: 'Pictos',
+        languageCode: "es-AR",
+      );
+    }
+
+    /// saving changes to file
+    if (!kIsWeb) {
+      final localFile = LocalFileController();
+      await localFile.writePictoToFile(
+        data: fileData.toString(),
+        language: 'es-AR',
+      );
+      // print('writing to file');
+      //for the file data
+      final instance = await SharedPreferences.getInstance();
+      await instance.setBool('Pictos_file', true);
+    }
+  }
 }
