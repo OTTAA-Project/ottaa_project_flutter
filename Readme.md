@@ -64,8 +64,8 @@ The complete list of libraries used and their functions can be found [here](libr
 <img src="/public/images/tools_libraries/test_project.png" alt="test_platform" width="40" height="40"/> [Testproject](http://testproject.io)
 
 
-### API Reference
- * Find the API reference information [here](https://ottaaproject.com/javadoc).
+### Automatic code documentation
+ * We are using [Dartdoc](https://pub.dev/packages/dartdoc) for our general [automatic code documentation]()(add link when completed). For some help getting started with dartdoc, check out [this guide]()(add link when completed) we put together.  
 
 ## Contributing
 
