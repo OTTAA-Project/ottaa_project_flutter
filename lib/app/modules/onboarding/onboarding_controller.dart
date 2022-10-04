@@ -67,7 +67,7 @@ class OnboardingController extends GetxController {
 
   _init() async {}
 
-  Future<void> uploadPictos({required bool maleOrFemale}) async {
+  Future<void> uploadDataForSelectedGender({required bool maleOrFemale}) async {
     late dynamic fileData;
     if (maleOrFemale) {
       ///male pictos

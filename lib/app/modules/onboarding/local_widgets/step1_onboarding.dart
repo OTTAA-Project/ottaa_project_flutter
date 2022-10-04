@@ -264,11 +264,11 @@ Widget step1Onboarding<widget>(
                     if (male.toString().toLowerCase() ==
                         _.gender.value.toString().toLowerCase()) {
                       //todo : add here for male
-                      await _.uploadPictos(maleOrFemale: true);
+                      await _.uploadDataForSelectedGender(maleOrFemale: true);
                     } else if (female.toString().toLowerCase() ==
                         _.gender.value.toString().toLowerCase()) {
                       //todo : add here for female
-                      await _.uploadPictos(maleOrFemale: false);
+                      await _.uploadDataForSelectedGender(maleOrFemale: false);
                     } else if (binary.toString().toLowerCase() ==
                         _.gender.value.toString().toLowerCase()) {
                       //todo : add here for binary
