@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
@@ -68,46 +69,43 @@ class OnboardingController extends GetxController {
   _init() async {}
 
   Future<void> uploadDataForSelectedGender({required bool maleOrFemale}) async {
-    late dynamic fileData;
     if (maleOrFemale) {
       ///male pictos
-      final String pictsString = await rootBundle
-          .loadString('assets/gender_based/pictos/pictos_es_male.json');
-
-      final data = (jsonDecode(pictsString) as List)
-          .map((e) => Pict.fromJson(e))
-          .toList();
-      fileData = [];
-      data.forEach((element) {
-        final obj = jsonEncode(element);
-        fileData.add(obj);
-      });
-      _dataController.uploadDataToFirebaseRealTime(
-        data: fileData.toString(),
-        type: 'Pictos',
-        languageCode: "es-AR",
+      await uploadPictos(
+        assetRoute: 'assets/gender_based/pictos/pictos_es_male.json',
+      );
+      await uploadGrupos(
+        assetRoute: 'assets/gender_based/grupos/grupos_es_male.json',
       );
     } else {
       /// female pictos
-      final String pictsString = await rootBundle
-          .loadString('assets/gender_based/pictos/pictos_es_female.json');
-
-      final data = (jsonDecode(pictsString) as List)
-          .map((e) => Pict.fromJson(e))
-          .toList();
-      fileData = [];
-      data.forEach((element) {
-        final obj = jsonEncode(element);
-        fileData.add(obj);
-      });
-      _dataController.uploadDataToFirebaseRealTime(
-        data: fileData.toString(),
-        type: 'Pictos',
-        languageCode: "es-AR",
+      await uploadPictos(
+        assetRoute: 'assets/gender_based/pictos/pictos_es_female.json',
+      );
+      await uploadGrupos(
+        assetRoute: 'assets/gender_based/grupos/grupos_es_male.json',
       );
     }
+  }
 
-    /// saving changes to file
+  Future<void> uploadPictos({
+    required String assetRoute,
+    // required String type,
+  }) async {
+    final String pictsString = await rootBundle.loadString(assetRoute);
+
+    final data =
+        (jsonDecode(pictsString) as List).map((e) => Pict.fromJson(e)).toList();
+    final dynamic fileData = [];
+    data.forEach((element) {
+      final obj = jsonEncode(element);
+      fileData.add(obj);
+    });
+    _dataController.uploadDataToFirebaseRealTime(
+      data: fileData.toString(),
+      type: 'Pictos',
+      languageCode: "es-AR",
+    );
     if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(
@@ -118,6 +116,38 @@ class OnboardingController extends GetxController {
       //for the file data
       final instance = await SharedPreferences.getInstance();
       await instance.setBool('Pictos_file', true);
+    }
+  }
+
+  Future<void> uploadGrupos({
+    required String assetRoute,
+    // required String type,
+  }) async {
+    final String gruposString = await rootBundle.loadString(assetRoute);
+
+    final data = (jsonDecode(gruposString) as List)
+        .map((e) => Grupos.fromJson(e))
+        .toList();
+    final dynamic fileData = [];
+    data.forEach((element) {
+      final obj = jsonEncode(element);
+      fileData.add(obj);
+    });
+    _dataController.uploadDataToFirebaseRealTime(
+      data: fileData.toString(),
+      type: 'Grupos',
+      languageCode: "es-AR",
+    );
+    if (!kIsWeb) {
+      final localFile = LocalFileController();
+      await localFile.writeGruposToFile(
+        data: fileData.toString(),
+        language: 'es-AR',
+      );
+      // print('writing to file');
+      //for the file data
+      final instance = await SharedPreferences.getInstance();
+      await instance.setBool('Grupos_file', true);
     }
   }
 }
