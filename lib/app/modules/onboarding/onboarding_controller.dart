@@ -71,6 +71,7 @@ class OnboardingController extends GetxController {
   Future<void> uploadDataForSelectedGender({required bool maleOrFemale}) async {
     if (maleOrFemale) {
       ///male pictos
+      print('came to male');
       await uploadPictos(
         assetRoute: 'assets/gender_based/pictos/pictos_es_male.json',
       );
@@ -79,11 +80,12 @@ class OnboardingController extends GetxController {
       );
     } else {
       /// female pictos
+      print('came to female');
       await uploadPictos(
         assetRoute: 'assets/gender_based/pictos/pictos_es_female.json',
       );
       await uploadGrupos(
-        assetRoute: 'assets/gender_based/grupos/grupos_es_male.json',
+        assetRoute: 'assets/gender_based/grupos/grupos_es_female.json',
       );
     }
   }
@@ -92,7 +94,7 @@ class OnboardingController extends GetxController {
     required String assetRoute,
     // required String type,
   }) async {
-    final String pictsString = await rootBundle.loadString(assetRoute);
+    final dynamic pictsString = await rootBundle.loadString(assetRoute);
 
     final data =
         (jsonDecode(pictsString) as List).map((e) => Pict.fromJson(e)).toList();
@@ -123,7 +125,7 @@ class OnboardingController extends GetxController {
     required String assetRoute,
     // required String type,
   }) async {
-    final String gruposString = await rootBundle.loadString(assetRoute);
+    final dynamic gruposString = await rootBundle.loadString(assetRoute);
 
     final data = (jsonDecode(gruposString) as List)
         .map((e) => Grupos.fromJson(e))
