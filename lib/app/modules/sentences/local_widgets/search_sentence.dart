@@ -298,7 +298,7 @@ class SearchSentence extends GetView<SentencesController> {
                   onTap: () async {
                     await controller.searchSpeak();
                   },
-                  child: OttaLogoWidget(),
+                  child: OttaaLogoWidget(),
                 ),
               ),
             ],

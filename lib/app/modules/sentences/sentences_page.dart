@@ -248,7 +248,7 @@ class SentencesPage extends GetView<SentencesController> {
                   onTap: () async {
                     await controller.speak();
                   },
-                  child: OttaLogoWidget(),
+                  child: OttaaLogoWidget(),
                 ),
               ),
             ],

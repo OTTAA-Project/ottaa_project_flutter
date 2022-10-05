@@ -35,7 +35,7 @@ class HomePage extends GetView<HomeController> {
           Screenshot(
             controller: controller.screenshotController,
             child: Container(
-              height: verticalSize * 0.25,
+              height: verticalSize * 0.26,
               // width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.blueGrey,
@@ -97,10 +97,10 @@ class HomePage extends GetView<HomeController> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 16),
+                      padding: EdgeInsets.only(top: 14),
                       child: Image.asset(
                         'assets/otta_drawer_logo.png',
-                        height: verticalSize * 0.05,
+                        height: verticalSize * 0.038,
                       ),
                     ),
                   ],
@@ -110,7 +110,7 @@ class HomePage extends GetView<HomeController> {
           ),
           /// just a little hack to keep it hidden
           Container(
-            height: verticalSize * 0.25,
+            height: verticalSize * 0.26,
             color: Colors.black,
           ),
           Positioned(
@@ -225,7 +225,7 @@ class HomePage extends GetView<HomeController> {
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('Principal', 'Talk'));
               },
-              child: OttaLogoWidget(),
+              child: OttaaLogoWidget(),
             ),
           ),
           /*Positioned(

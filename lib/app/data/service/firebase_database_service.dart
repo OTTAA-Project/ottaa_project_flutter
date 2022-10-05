@@ -605,12 +605,8 @@ class FirebaseDatabaseService {
 
       return da;
     } else {
-      final String sentencesString =
-          await rootBundle.loadString('assets/frases.json');
-
-      return (jsonDecode(sentencesString) as List)
-          .map((e) => Sentence.fromJson(e))
-          .toList();
+      /// if there are no frases we will be returning the empty string
+      return [];
     }
   }
 
