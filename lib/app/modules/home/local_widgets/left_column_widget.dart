@@ -23,20 +23,20 @@ class LeftColumnWidget extends StatelessWidget {
           FittedBox(
             child: GestureDetector(
               onTap: () async{
-                // showDialog(
-                //   context: context,
-                //   barrierDismissible: false,
-                //   barrierColor: Colors.transparent,
-                //   builder: (context) {
-                //     return EmptyTextDialogWidget(
-                //       text: "we_are_working_on_this_feature".tr,
-                //     );
-                //   },
-                // );
-                // await _homeController.startTimerForDialogueExit();
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  barrierColor: Colors.transparent,
+                  builder: (context) {
+                    return EmptyTextDialogWidget(
+                      text: "we_are_working_on_this_feature".tr,
+                    );
+                  },
+                );
+                await _homeController.startTimerForDialogueExit();
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('Principal', 'Games'));
-                Get.toNamed(AppRoutes.GAMES);
+                // Get.toNamed(AppRoutes.GAMES);
               },
               child: Center(
                   child: Icon(
