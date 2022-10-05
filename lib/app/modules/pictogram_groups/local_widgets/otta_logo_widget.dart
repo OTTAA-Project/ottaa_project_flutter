@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-class OttaLogoWidget extends StatelessWidget {
-  const OttaLogoWidget({Key? key}) : super(key: key);
+class OttaaLogoWidget extends StatelessWidget {
+  const OttaaLogoWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
-        // color: Colors.black,
-        borderRadius: BorderRadius.circular(width * 0.07),
-        border: Border.all(color: Colors.black,width: width * 0.008)
-      ),
+          // color: Colors.black,
+          borderRadius: BorderRadius.circular(width * 0.07),
+          border: Border.all(color: Colors.black, width: width * 0.008)),
       // padding: EdgeInsets.all(width * 0.010),
       child: Container(
         // height: width * 0.15,
@@ -31,5 +30,15 @@ class OttaLogoWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class MyClip extends CustomClipper<Rect> {
+  Rect getClip(Size size) {
+    return Rect.fromLTWH(100, 100, 100, 100);
+  }
+
+  bool shouldReclip(oldClipper) {
+    return false;
   }
 }

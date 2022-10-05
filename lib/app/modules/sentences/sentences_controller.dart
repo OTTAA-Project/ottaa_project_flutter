@@ -11,7 +11,7 @@ import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart
 import 'package:ottaa_project_flutter/app/utils/constants.dart';
 
 class SentencesController extends GetxController {
-  final _ttsController = Get.find<TTSController>();
+  final ttsController = Get.find<TTSController>();
   final _pictsRepository = Get.find<PictsRepository>();
   final _sentencesRepository = Get.find<SentencesRepository>();
   final dataController = Get.find<DataController>();
@@ -75,10 +75,10 @@ class SentencesController extends GetxController {
   set selectedIndexFav(value) {
     this._selectedIndexFav = value;
 
-    if (this._selectedIndexFav == this.favouriteOrNotPicts.length)
+    if (this._selectedIndexFav == this.favouritePicts.length)
       this._selectedIndexFav = 0;
     if (this._selectedIndexFav == -1)
-      this._selectedIndexFav = this.favouriteOrNotPicts.length - 1;
+      this._selectedIndexFav = this.favouritePicts.length - 1;
     update();
   }
 
@@ -110,7 +110,7 @@ class SentencesController extends GetxController {
       dataUpload.add(obj);
     });
     await dataController.uploadFrases(
-      language: _ttsController.languaje,
+      language: ttsController.languaje,
       data: dataUpload.toString(),
       type: Constants.FAVOURITE_SENTENCES,
     );
@@ -122,7 +122,7 @@ class SentencesController extends GetxController {
 
   Future<void> _loadPicts() async {
     this._picts = await this._pictsRepository.getAll();
-    final language = _ttsController.languaje;
+    final language = ttsController.languaje;
     switch (language) {
       case "es-AR":
         this.sentences = await this._sentencesRepository.getAll(
@@ -202,7 +202,7 @@ class SentencesController extends GetxController {
   }
 
   Future<void> fetchFavourites() async {
-    final language = _ttsController.languaje;
+    final language = ttsController.languaje;
     switch (language) {
       case "es-AR":
         this.favouriteSentences =
@@ -270,7 +270,7 @@ class SentencesController extends GetxController {
     if (this._sentencesPicts[this._sentencesIndex].isNotEmpty) {
       String voiceText = "";
       this._sentencesPicts[this._sentencesIndex].forEach((pict) {
-        switch (this._ttsController.languaje) {
+        switch (this.ttsController.languaje) {
           // case "es-AR":
           //   voiceText += ' ' + pict.texto.es;
           //   break;
@@ -291,7 +291,7 @@ class SentencesController extends GetxController {
         }
       });
 
-      await this._ttsController.speak(voiceText);
+      await this.ttsController.speak(voiceText);
       print(sentencesForSearch[this._sentencesIndex].sentence);
       print(this._sentencesIndex);
     }
@@ -301,7 +301,7 @@ class SentencesController extends GetxController {
     if (this.favouriteOrNotPicts[this._selectedIndexFavSelection].isNotEmpty) {
       String voiceText = "";
       this.favouriteOrNotPicts[this._selectedIndexFavSelection].forEach((pict) {
-        switch (this._ttsController.languaje) {
+        switch (this.ttsController.languaje) {
           // case "es-AR":
           //   voiceText += ' ' + pict.texto.es;
           //   break;
@@ -322,7 +322,7 @@ class SentencesController extends GetxController {
         }
       });
 
-      await this._ttsController.speak(voiceText);
+      await this.ttsController.speak(voiceText);
       print(voiceText);
       update();
       // print(favouriteOrNotPicts[this._selectedIndexFavSelection]);
@@ -334,7 +334,7 @@ class SentencesController extends GetxController {
     if (this._sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
       String voiceText = "";
       this._sentencesPicts[sentencesForList[searchIndex].index].forEach((pict) {
-        switch (this._ttsController.languaje) {
+        switch (this.ttsController.languaje) {
           // case "es-AR":
           //   voiceText += ' ' + pict.texto.es;
           //   break;
@@ -355,7 +355,7 @@ class SentencesController extends GetxController {
         }
       });
 
-      await this._ttsController.speak(voiceText);
+      await this.ttsController.speak(voiceText);
       print(sentencesForList[searchIndex].sentence);
       print('search index is $searchIndex');
       print(
@@ -368,7 +368,7 @@ class SentencesController extends GetxController {
     _sentencesPicts.forEach((e1) {
       String sentence = '';
       e1.forEach((e2) {
-        switch (_ttsController.languaje) {
+        switch (ttsController.languaje) {
           // case "es":
           //   sentence += ' ' + e2.texto.es;
           //   break;

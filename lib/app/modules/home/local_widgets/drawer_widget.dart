@@ -169,15 +169,39 @@ class ListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
-    return ListTile(
+    // return ListTile(
+    //   minLeadingWidth: 0,
+    //   onTap: onTap,
+    //   leading: Icon(
+    //     icon,
+    //     size: verticalSize * 0.04,
+    //   ),
+    //   horizontalTitleGap: 0,
+    //   title: Text(
+    //     title,
+    //     style: TextStyle(fontSize: verticalSize * 0.026),
+    //   ),
+    // );
+    return GestureDetector(
       onTap: onTap,
-      leading: Icon(
-        icon,
-        size: verticalSize * 0.04,
-      ),
-      title: Text(
-        title,
-        style: TextStyle(fontSize: verticalSize * 0.03),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: verticalSize * 0.02),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: verticalSize * 0.04,
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontSize: verticalSize * 0.026),
+            ),
+          ],
+        ),
       ),
     );
   }

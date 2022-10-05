@@ -89,30 +89,32 @@ class CategoryPageWidget extends StatelessWidget {
             height: 12,
           ),
           //placeholder for the photos
-          Container(
-            decoration: BoxDecoration(
-                border: border
-                    ? Border.all(
-                        color: groupColor[color]!,
-                        width: 6,
-                      )
-                    : Border.all(color: Colors.transparent),
-                borderRadius: BorderRadius.circular(8)),
-            child: kIsWeb
-                ? Image.network(
-                    imageName,
-                    height: verticalSize * 0.4,
-                    fit: BoxFit.fitHeight,
-                    width: horizontalSize * 0.4,
-                  )
-                : CachedNetworkImage(
-                    imageUrl: imageName,
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                    height: verticalSize * 0.4,
-                    fit: BoxFit.fitHeight,
-                    width: horizontalSize * 0.4,
-                  ),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  border: border
+                      ? Border.all(
+                          color: groupColor[color]!,
+                          width: 6,
+                        )
+                      : Border.all(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(8)),
+              child: kIsWeb
+                  ? Image.network(
+                      imageName,
+                      height: verticalSize * 0.4,
+                      fit: BoxFit.fitHeight,
+                      width: horizontalSize * 0.4,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: imageName,
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                      height: verticalSize * 0.4,
+                      fit: BoxFit.fill,
+                      width: horizontalSize * 0.4,
+                    ),
+            ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: verticalSize * 0.02),

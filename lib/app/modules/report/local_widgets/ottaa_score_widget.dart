@@ -23,7 +23,7 @@ class OTTAAScoreWidget extends StatelessWidget {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(10),
-        height: verticalSize * 0.35,
+        height: verticalSize * 0.4,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -64,10 +64,10 @@ class OTTAAScoreWidget extends StatelessWidget {
                             color: kOTTAAOrangeNew,
                           ),
                           child: Container(
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(verticalSize * 0.025),
                             decoration: BoxDecoration(),
-                            height: 160,
-                            width: 160,
+                            height: verticalSize * 0.25,
+                            width: verticalSize * 0.25,
                             child: photoUrl == ''
                                 ? Container(
                                     decoration: BoxDecoration(
@@ -76,8 +76,8 @@ class OTTAAScoreWidget extends StatelessWidget {
                                       ),
                                       color: Colors.grey[350],
                                     ),
-                                    height: 200,
-                                    width: 200,
+                                    height: verticalSize * 0.25,
+                                    width: verticalSize * 0.25,
                                     child: Center(
                                       child: CircularProgressIndicator(
                                         color: kOTTAAOrangeNew,

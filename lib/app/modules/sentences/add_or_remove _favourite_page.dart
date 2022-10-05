@@ -6,33 +6,36 @@ import 'package:ottaa_project_flutter/app/modules/pictogram_groups/local_widgets
 import 'package:ottaa_project_flutter/app/modules/sentences/sentences_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
-class AddOrRemoveFavouritePage extends GetView<SentencesController> {
-  const AddOrRemoveFavouritePage({Key? key}) : super(key: key);
+class AddOrRemoveFavouritePage extends StatelessWidget {
+  AddOrRemoveFavouritePage({Key? key}) : super(key: key);
+  final controller = Get.find<SentencesController>();
 
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
-    return GetBuilder<SentencesController>(
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: kOTTAAOrangeNew,
-          automaticallyImplyLeading: false,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          title: Text('favourites_sentences'.tr),
-          actions: [
-            GestureDetector(
-              onTap: () => Get.back(),
-              child: Icon(
-                Icons.favorite,
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kOTTAAOrangeNew,
+        automaticallyImplyLeading: false,
+        foregroundColor: Colors.white,
+        elevation: 0,
+        title: Text(controller.ttsController.languaje == 'es-AR'
+            ? 'Oraciones favoritas'
+            : 'Favourite Sentences'),
+        actions: [
+          GestureDetector(
+            onTap: () => Get.back(),
+            child: Icon(
+              Icons.favorite,
             ),
-            const SizedBox(
-              width: 16,
-            ),
-          ],
-        ),
-        body: Container(
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+        ],
+      ),
+      body: GetBuilder<SentencesController>(
+        builder: (_) => Container(
           color: Colors.black,
           child: Stack(
             children: [
@@ -74,7 +77,7 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                                     );
                                   },
                                 );
-                                await controller.saveFavourite();
+                                await _.saveFavourite();
                                 Get.back();
                                 Get.back();
                               },
@@ -111,9 +114,7 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                             ? Container(
                                 height: verticalSize / 2.5,
                                 width: horizontalSize * 0.78,
-                                color: controller
-                                        .sentences[controller
-                                            .selectedIndexFavSelection]
+                                color: _.sentences[_.selectedIndexFavSelection]
                                         .favouriteOrNot
                                     ? Colors.blue
                                     : Colors.transparent,
@@ -150,11 +151,11 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                                             localImg: pict.localImg,
                                             pict: pict,
                                             onTap: () {
-                                              controller
+                                              _
                                                       .sentences[_
                                                           .selectedIndexFavSelection]
                                                       .favouriteOrNot =
-                                                  !controller
+                                                  !_
                                                       .sentences[_
                                                           .selectedIndexFavSelection]
                                                       .favouriteOrNot;
@@ -169,11 +170,11 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                                             localImg: speakPict.localImg,
                                             pict: speakPict,
                                             onTap: () {
-                                              controller
+                                              _
                                                       .sentences[_
                                                           .selectedIndexFavSelection]
                                                       .favouriteOrNot =
-                                                  !controller
+                                                  !_
                                                       .sentences[_
                                                           .selectedIndexFavSelection]
                                                       .favouriteOrNot;
@@ -194,7 +195,7 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
               ),
 
               ///circularProgressIndicator
-              controller.showCircular.value
+              _.showCircular.value
                   ? Center(
                       child: CircularProgressIndicator(
                         color: kOTTAAOrangeNew,
@@ -217,7 +218,7 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                     child: GestureDetector(
                       onTap: () {
                         //todo: add the required code
-                        controller.selectedIndexFavSelection--;
+                        _.selectedIndexFavSelection--;
                       },
                       child: Icon(
                         Icons.skip_previous,
@@ -243,7 +244,7 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
-                        controller.selectedIndexFavSelection++;
+                        _.selectedIndexFavSelection++;
                       },
                       child: Icon(
                         Icons.skip_next,
@@ -260,16 +261,16 @@ class AddOrRemoveFavouritePage extends GetView<SentencesController> {
                 right: horizontalSize * 0.43,
                 child: GestureDetector(
                   onTap: () async {
-                    await controller.speakFavOrNot();
+                    await _.speakFavOrNot();
                   },
-                  child: OttaLogoWidget(),
+                  child: OttaaLogoWidget(),
                 ),
               ),
             ],
           ),
         ),
-        backgroundColor: Colors.black,
       ),
+      backgroundColor: Colors.black,
     );
   }
 }
