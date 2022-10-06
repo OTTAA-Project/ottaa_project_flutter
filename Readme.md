@@ -64,9 +64,9 @@ The complete list of libraries used and their functions can be found [here](libr
 <img src="/public/images/tools_libraries/test_project.png" alt="test_platform" width="40" height="40"/> [Testproject](http://testproject.io)
 
 
-### Code documentation
+### API reference
 
- * We are using [Dartdoc](https://pub.dev/packages/dartdoc) for our general (automatic) [code documentation]()(add link when completed). For some help getting started with dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.  
+ * We are using [Dartdoc](https://pub.dev/packages/dartdoc) to automate the [API reference documentation] ()(add link when completed). For some help getting started with dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.  
 
 ## Contributing
 
