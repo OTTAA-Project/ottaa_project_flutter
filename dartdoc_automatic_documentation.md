@@ -39,7 +39,5 @@ Then make sure your package analyzes without errors running:
 ```flutter analyze```
 
 
-## Style
-
 
 For more information, the [Effective Dart: Documentation guide](https://dart.dev/guides/language/effective-dart/documentation) covers formatting, linking, markup, and general best practices when authoring doc comments with dartdoc.
