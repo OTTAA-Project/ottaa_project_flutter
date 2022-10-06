@@ -74,7 +74,7 @@ Consistent code writing, commenting and documenting style is key to collaboratio
 * Always document all source code via clear comments. 
 
 
-##### General coments
+#### General coments
 
 * Format comments as full English sentences.
 
@@ -104,7 +104,7 @@ void greet(String name) {
 * The special syntax ```///``` is reserved for comments that will go in the API reference, as it is the special syntax Dartdoc looks for when generating the documentation files.
 
 
-##### API reference
+#### API reference
 
 We use [Dartdoc](https://pub.dev/packages/dartdoc) to build the [API reference]()(add link to automatic doc when ready). Please read our [Dartdoc API reference for Flutter](/dartdoc_automatic_documentation.md) to get started.
 
