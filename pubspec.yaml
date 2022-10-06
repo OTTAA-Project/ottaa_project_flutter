@@ -57,6 +57,9 @@ dependencies:
   share_plus: ^4.0.7
   screenshot: ^1.2.3
   just_audio: ^0.9.21
+  intl: ^0.17.0
+
+
 #  image_picker_web: ^2.1.0
 
 
@@ -68,6 +71,7 @@ dev_dependencies:
 dependency_overrides:
   get: '4.6.1'
   url_launcher_web: 2.0.9
+  syncfusion_flutter_charts: 19.3.45
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
@@ -84,7 +88,10 @@ flutter:
     - assets/profiles/
     - assets/games_images/
     - assets/audios/
-    - assets/.env
+    - assets/languages/
+    - assets/gender_based/
+    - assets/gender_based/pictos/
+    - assets/gender_based/grupos/
   fonts:
     - family: OTTAAProjectCustomIcon
       fonts:

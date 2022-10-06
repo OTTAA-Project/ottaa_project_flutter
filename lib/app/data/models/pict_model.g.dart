@@ -72,11 +72,15 @@ Map<String, dynamic> _$RelacionToJson(Relacion instance) => <String, dynamic>{
     };
 
 Texto _$TextoFromJson(Map<String, dynamic> json) => Texto(
-      en: json['en'] as String,
-      es: json['es'] as String,
+      en: json['en'] as String? ?? '',
+      es: json['es'] as String? ?? '',
+      pt: json['pt'] as String? ?? '',
+      fr: json['fr'] as String? ?? '',
     );
 
 Map<String, dynamic> _$TextoToJson(Texto instance) => <String, dynamic>{
       'en': instance.en,
       'es': instance.es,
+      'fr': instance.fr,
+      'pt': instance.pt,
     };

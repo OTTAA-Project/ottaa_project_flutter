@@ -37,7 +37,7 @@ step4Tutorial<widget>(PageController controller, context) {
                 child: Text(
                   "Play_and_learn".tr,
                   style: TextStyle(
-                      color: kOTTAAOrange, fontWeight: FontWeight.w600),
+                      color: kOTTAAOrangeNew, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -74,7 +74,7 @@ step4Tutorial<widget>(PageController controller, context) {
               onTap: () {
                 Get.close(1);
               },
-              backgroundColor: kOTTAAOrange,
+              backgroundColor: kOTTAAOrangeNew,
               fontColor: Colors.white,
             ),
           ],

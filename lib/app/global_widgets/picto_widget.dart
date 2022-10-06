@@ -35,15 +35,20 @@ class Picto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String texto;
-
+    print(languaje);
     switch (this.languaje) {
-      case "es":
+      case "es-AR":
         texto = pict.texto.es;
         break;
-      case "en":
+      case "en-US":
         texto = pict.texto.en;
         break;
-
+      case "fr-FR":
+        texto = pict.texto.fr;
+        break;
+      case "pt-BR":
+        texto = pict.texto.pt;
+        break;
       default:
         texto = pict.texto.es;
     }
@@ -122,7 +127,7 @@ class Picto extends StatelessWidget {
                   child: Text(
                     texto.toUpperCase(),
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
