@@ -66,13 +66,15 @@ Please bear the following in mind when creating a PR:
 
 #### On documentation
 
-* As a default, always document the source code via clear comments.
-
-* Comment all your classes explaining their purpose and how to implement them if required.
+As a default, always document the source code via clear comments. Comment all your classes explaining their purpose and how to implement them if required.
 
 ##### General automated documentation
 
-You can find the general code documentation [here]()(add link to automatic doc when ready). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it, please read our [quick guide to Dartdoc](/dartdoc_automatic_documentation.md) if you want to get started.
+You can find the API reference documentation [here]()(add link to automatic doc when ready). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it, please read our [quick guide to Dartdoc](/dartdoc_automatic_documentation.md) to get started.
+
+
+*** what should be included in API reference, what not**
+
 
 ##### Comments not included in the Dartdoc generated documentation
 
