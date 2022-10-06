@@ -64,23 +64,21 @@ Please bear the following in mind when creating a PR:
 
 ### Code conventions
 
-#### On documentation
+Consistent code writing, commenting and documenting style is key to collaboration. Make sure that you read the complete *Code conventions* section carefully and that your code complies with our guidelines.
 
-As a default, always document the source code via clear comments. Comment all your classes explaining their purpose and how to implement them if required.
+#### On commenting and documenting code
 
-##### General automated documentation
-
-You can find the API reference documentation [here]()(add link to automatic doc when ready). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it, please read our [quick guide to Dartdoc](/dartdoc_automatic_documentation.md) to get started.
+* Always comment all your classes explaining their purpose and how to implement them if required. [WILL THESE ALWAYS GO IN THE API REFERENCE?]
 
 
-*** what should be included in API reference, what not**
+* Always document all source code via clear comments. 
 
 
-##### Comments not included in the Dartdoc generated documentation
+##### General coments
 
 * Format comments as full English sentences.
 
-* Do not use /* block comments \*/ for documentation:
+* Do **not** use /* block comments \*/ for documentation:
 
 ```
 [x]
@@ -90,7 +88,7 @@ void greet(String name) {
   print('Hi, $name!');
 }
 ``` 
-* Do instead:
+* **Do** instead:
 
 ```
 [✓]
@@ -100,6 +98,18 @@ void greet(String name) {
   print('Hi, $name!');
 }
 ```
+
+* You *can* use a block comment (/* ... \*/) to temporarily comment out a section of code, but all other comments should use //.
+
+* The special syntax ```///``` is reserved for comments that will go in the API reference, as it is the special syntax Dartdoc looks for when generating the documentation files.
+
+
+##### API reference
+
+We use [Dartdoc](https://pub.dev/packages/dartdoc) to build the [API reference]()(add link to automatic doc when ready). Please read our [Dartdoc API reference for Flutter](/dartdoc_automatic_documentation.md) to get started.
+
+
+*** what should be included in API reference & what not?**
 
 
 #### On code duplication
@@ -156,6 +166,7 @@ Example :
 ```
 
 ```
+
 #### On variables
 
 * Local variables, instance variables, and class variables should be written in lowerCamelCase: with the exception of the first world, the first letter of every word should be capitalized.
