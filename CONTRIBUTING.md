@@ -33,6 +33,10 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ## As a developer
 
+### Required knowledge (placeholder)
+
+main languages / libraries / tools that make up OTTAA and you need to know to contribute 
+
 ### Setting up your IDE
 
 - Run `flutter pub get` to get the dependencies.
