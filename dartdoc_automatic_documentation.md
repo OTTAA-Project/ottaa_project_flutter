@@ -1,4 +1,4 @@
-# Dartdoc API reference for Flutter
+# Dartdoc (building the API reference)
 
 
 
@@ -39,5 +39,35 @@ Then make sure your package analyzes without errors running:
 ```flutter analyze```
 
 
+## Style tips we follow
+
+We intend for our API reference documentation to be straight forward, concise and user friendly. Make sure your Dartdoc comments are correctly formatted by following these tips. For a more comprehensive explanation and examples of each tip, please read [this section](https://dart.dev/guides/language/effective-dart/documentation#:~:text=use%20//.-,Doc%20comments,-Doc%20comments%20are) of the offcial Dartdoc guide.
+
+### General writing tips
+
+* Be brief, use as many words as neccesary to explain your code clearly, but not more.
+* Avoid abbreviations and acronyms unless they are obvious.
+* Prefer using “this” instead of “the” to refer to a member’s instance.
+
+
+### Style for comments
+
+1. Start doc comments with a single-sentence summary.
+2. Separate the first sentence of a doc comment into its own paragraph.
+3. Avoid redundancy with the surrounding context by mentioning things the reader already knows.
+4. Prefer starting function or method comments with third-person verbs.
+5. Prefer starting a non-boolean variable or property comment with a noun phrase.
+6. Prefer starting a boolean variable or property comment with “Whether” followed by a noun or gerund phrase.
+7. Do not write documentation for both the getter and setter of a property.
+8. Prefer starting library or type comments with noun phrases.
+9. Consider including code samples in doc comments.
+10. Use square brackets in doc comments to refer to in-scope identifiers.
+11. Use prose to explain parameters, return values, and exceptions.
+12. Put doc comments before metadata annotations.
+13. Use Markup, but do not abuse it.
+14. Avoid using HTML as it is not supported by Dartdoc.
+
+
 
 For more information, the [Effective Dart: Documentation guide](https://dart.dev/guides/language/effective-dart/documentation) covers formatting, linking, markup, and general best practices when authoring doc comments with dartdoc.
+ 
