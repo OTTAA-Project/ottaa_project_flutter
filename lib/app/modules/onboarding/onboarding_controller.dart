@@ -103,7 +103,7 @@ class OnboardingController extends GetxController {
       final obj = jsonEncode(element);
       fileData.add(obj);
     });
-    _dataController.uploadDataToFirebaseRealTime(
+    await _dataController.uploadDataToFirebaseRealTime(
       data: fileData.toString(),
       type: 'Pictos',
       languageCode: "es-AR",
@@ -119,6 +119,10 @@ class OnboardingController extends GetxController {
       final instance = await SharedPreferences.getInstance();
       await instance.setBool('Pictos_file', true);
     }
+    await _dataController.uploadBoolToFirebaseRealtime(
+      data: true,
+      type: 'PictsExistsOnFirebase',
+    );
   }
 
   Future<void> uploadGrupos({
@@ -135,7 +139,7 @@ class OnboardingController extends GetxController {
       final obj = jsonEncode(element);
       fileData.add(obj);
     });
-    _dataController.uploadDataToFirebaseRealTime(
+    await _dataController.uploadDataToFirebaseRealTime(
       data: fileData.toString(),
       type: 'Grupos',
       languageCode: "es-AR",
@@ -146,10 +150,15 @@ class OnboardingController extends GetxController {
         data: fileData.toString(),
         language: 'es-AR',
       );
+
       // print('writing to file');
       //for the file data
       final instance = await SharedPreferences.getInstance();
       await instance.setBool('Grupos_file', true);
     }
+    await _dataController.uploadBoolToFirebaseRealtime(
+      data: true,
+      type: 'GruposExistsOnFirebase',
+    );
   }
 }
