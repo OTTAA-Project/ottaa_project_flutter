@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
+import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'icon_widget.dart';
 import 'dart:io';
@@ -27,8 +29,10 @@ class CategoryWidget extends StatelessWidget {
     this.fileImage,
     this.imageWidget,
     this.selectedImageUrl = '',
+    this.names,
   }) : super(key: key);
-  final String name;
+  final Texto name;
+  TextoGrupos? names;
   final String imageName;
   final bool border;
   final int color;
@@ -43,6 +47,43 @@ class CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
+    String text;
+    if (names == null) {
+      switch (this.languaje) {
+        case "es-AR":
+          text = name.es;
+          break;
+        case "en-US":
+          text = name.en;
+          break;
+        case "fr-FR":
+          text = name.fr;
+          break;
+        case "pt-BR":
+          text = name.pt;
+          break;
+        default:
+          text = name.es;
+      }
+    } else {
+      switch (this.languaje) {
+        case "es-AR":
+          text = names!.es;
+          break;
+        case "en-US":
+          text = names!.en;
+          break;
+        case "fr-FR":
+          text = names!.fr;
+          break;
+        case "pt-BR":
+          text = names!.pt;
+          break;
+        default:
+          text = names!.es;
+      }
+    }
     // String text;
     //
     // switch (this.languaje) {
@@ -99,11 +140,13 @@ class CategoryWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(vertical: verticalSize * 0.01),
             //filler for the text
             child: Text(
-              name.toUpperCase(),
-              style: const TextStyle(fontWeight: FontWeight.w700),
+              text.toUpperCase(),
+              style: TextStyle(fontWeight: FontWeight.w700,
+              fontSize: 18,
+              ),
             ),
           ),
           bottom

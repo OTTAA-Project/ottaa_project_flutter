@@ -26,8 +26,9 @@ class SuggestedWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: verticalSize * 0.52,
+              height: verticalSize * 0.58,
               width: horizontalSize * 0.78,
+              padding: EdgeInsets.only(bottom: verticalSize * 0.03),
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,

@@ -23,6 +23,14 @@ The OTTA app facilitates human communication via pictograms for those who are sp
 * Run `flutter pub run build_runner build` to generate the model class code.
 * Run `flutter run` to run the project.
 
+- run `flutter pub get` to get the dependencies.
+- run `flutter pub run build_runner build` to generate the model class code.
+- run `flutter run` to run the project.
+- run `flutter packages pub run build_runner build --delete-conflicting-outputs` if there are some errors for models building.
+- run `flutter build web --release --web-renderer canvaskit` for building the project.
+- run `flutter deploy` for deploying it on the master.
+- run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
+ * [Web Page](https://ottaaproject.com)
 \* If this is not your first time setting up and you encounter any errors for model building:
 
 * Run `flutter packages pub run build_runner build --delete-conflicting-outputs`.

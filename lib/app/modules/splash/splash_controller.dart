@@ -43,7 +43,7 @@ class SplashController extends GetxController {
   Future<void> firstTime() async {
     final instance = await SharedPreferences.getInstance();
     loggedIn = instance.getBool('First_time') ?? false;
-    print(loggedIn);
+    print('the user is logged In or not $loggedIn');
   }
 
   Future<void> photoCheck() async {
