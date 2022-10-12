@@ -26,10 +26,10 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ## Ways of contributing
 
-- As a developer 
-- As a translator 
-- As a manual tester
-- As an automation tester 
+- as a developer; 
+- as a translator; 
+- as a manual tester;
+- as an automation tester 
 
 ## As a developer
 
