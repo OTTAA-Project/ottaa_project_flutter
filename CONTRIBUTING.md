@@ -26,6 +26,8 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ## Ways of contributing
 
+You may contribute to OTTAA
+
 - as a developer; 
 - as a translator; 
 - as a manual tester;
