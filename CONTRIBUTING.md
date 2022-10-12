@@ -31,7 +31,7 @@ You may contribute to OTTAA
 - as a developer; 
 - as a translator; 
 - as a manual tester;
-- as an automation tester 
+- as an automation tester. 
 
 ## As a developer
 
