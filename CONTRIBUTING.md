@@ -139,21 +139,26 @@ We use [Dartdoc](https://pub.dev/packages/dartdoc) to build the [API reference](
 
 * Use Grandle level app
 
- Example :
-```
+Example :
 
-```
+```add code example here```
+
+
 #### On indentation
 
 
  Switch case
-```
+ 
+Example :
 
-```
+```add code example here```
+
+
 If / else or else if
-```
 
-```
+Example :
+
+```add code example here```
 
 #### On classes
 
@@ -169,30 +174,23 @@ If / else or else if
 
 Example :
 
-```
-
-```
+```add code example here```
 
 #### On variables
 
 * Local variables, instance variables, and class variables should be written in lowerCamelCase: with the exception of the first world, the first letter of every word should be capitalized.
 
-example :
+Example :
 
-```
-
-```
+```add code example here```
 
 #### On constants
 
 * Constants should be written in UPPERCASE with words separated by underscores.
 
-example :
+Example:
 
-
-```
-
-```
+```add code example here```
 
 #### Firebase index:
 
