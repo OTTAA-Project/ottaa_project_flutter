@@ -70,7 +70,7 @@ Please bear the following in mind when creating a PR:
 
 ### Code conventions
 
-Consistent code writing, commenting and documenting style is key to collaboration. Make sure that you read the complete *Code conventions* section carefully and that your code complies with our guidelines.
+Consistent code writing, commenting and documenting style is key to collaboration. Make sure that you read the complete *Code conventions* section carefully and that your code complies with our guidelines. We are using this [Effective Dart: Style](https://dart.dev/guides/language/effective-dart/style) as our main style guide for Dart. 
 
 #### On commenting and documenting code
 
