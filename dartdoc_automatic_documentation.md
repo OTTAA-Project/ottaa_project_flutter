@@ -7,11 +7,27 @@
 Dartdoc is an automatic documentation generation tool for Dart language. The ```dart doc``` command generates HTML documentation from Dart source code by looking for and parsing comments on your code that have a special syntax. You can also add descriptions to the generated documentation by using documentation comments, which can contain Markdown formatting.
 
 
-## How to install and run dartdoc
+## How to install and run dartdoc as a library
 
-First run:
+First, install the package by running:
 
 ```dart pub global activate dartdoc```
+
+
+Second, run from the root directory of a package:
+
+```pub global activate dartdoc ``` or ```flutter pub get```
+
+
+Third, make sure your package analyzes without errors by running:
+
+```flutter analyze```
+
+
+Finally, to start documenting just run:
+
+```dartdoc```
+
 
 ## How to write dartdoc doc comments
 
@@ -32,19 +48,6 @@ This will not:
 // The number of characters in this chunk when unsplit.
 int get length => ...
 ```
-
-
-## How to generate documentation
-
-To generate documentation for Flutter using dartdoc, first run these two commands from the root directory of a package:
-
-```pub global activate dartdoc ``` or ```flutter pub get```
-```dartdoc```
-
-Then make sure your package analyzes without errors running:
-
-```flutter analyze```
-
 
 ## Style tips we follow
 
