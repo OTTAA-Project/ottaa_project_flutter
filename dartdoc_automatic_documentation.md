@@ -29,6 +29,8 @@ Finally, to start documenting just run:
 ```dartdoc```
 
 
+You can find the complete guide to Dartdoc [here](https://pub.dev/packages/dartdoc).
+
 ## How to write dartdoc doc comments
 
 The regular comment syntax for Dart code is ```//```. However, using ```///``` for your comments instead enables Dartdoc to find those comments and generate documentation for them.
