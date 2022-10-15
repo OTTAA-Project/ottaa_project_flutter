@@ -7,7 +7,7 @@
 Dartdoc is an automatic documentation generation tool for Dart language. The ```dart doc``` command generates HTML documentation from Dart source code by looking for and parsing comments on your code that have a special syntax. You can also add descriptions to the generated documentation by using documentation comments, which can contain Markdown formatting.
 
 
-## How to install and run dartdoc as a library
+## How to install and run Dartdoc as a library
 
 First, install the package by running:
 
@@ -31,11 +31,11 @@ Finally, to start documenting just run:
 
 You can find the complete guide to Dartdoc [here](https://pub.dev/packages/dartdoc).
 
-## How to write dartdoc doc comments
+## How to write Dartdoc doc comments
 
 The regular comment syntax for Dart code is ```//```. However, using ```///``` for your comments instead enables Dartdoc to find those comments and generate documentation for them.
 
-This will be picked up by dartdoc:
+This will be picked up by Dartdoc:
 
 ```[✓]
 
@@ -81,5 +81,5 @@ We intend for our API reference documentation to be straight forward, concise an
 
 
 
-For more information, the [Effective Dart: Documentation guide](https://dart.dev/guides/language/effective-dart/documentation) covers formatting, linking, markup, and general best practices when authoring doc comments with dartdoc.
+For more information, the [Effective Dart: Documentation guide](https://dart.dev/guides/language/effective-dart/documentation) covers formatting, linking, markup, and general best practices when authoring doc comments with Dartdoc.
  
