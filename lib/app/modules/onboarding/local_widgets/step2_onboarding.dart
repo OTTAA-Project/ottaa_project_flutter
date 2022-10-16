@@ -2,7 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:getwidget/getwidget.dart';
+
+// import 'package:getwidget/getwidget.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
@@ -90,42 +91,45 @@ step2Onboarding<widget>(
                     child: Column(
                       children: [
                         Image(image: AssetImage('assets/imgs/logo_ottaa.webp')),
-                        GFButton(
-                          onPressed: () => Get.toNamed(AppRoutes.TUTORIAL),
+                        StepButton(
+                          width: false,
+                          onTap: () => Get.toNamed(AppRoutes.TUTORIAL),
                           text: "Launch_short_tutorial".tr,
-                          textColor: Colors.white,
-                          disabledTextColor: Colors.grey,
-                          color: kOTTAAOrange,
-                          disabledColor: kQuantumGrey,
-                          shape: GFButtonShape.pills,
-                          size: verticalSize * 0.07,
-                          blockButton: true,
+                          fontColor: Colors.white,
+                          // disabledTextColor: Colors.grey,
+                          backgroundColor: kOTTAAOrange,
+                          // disabledColor: kQuantumGrey,
+                          // shape: GFButtonShape.pills,
+                          // size: verticalSize * 0.07,
+                          // blockButton: true,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: verticalSize * 0.07),
-                          child: GFButton(
-                            textColor: Colors.white,
-                            disabledTextColor: Colors.grey,
-                            color: kOTTAAOrange,
-                            disabledColor: kQuantumGrey,
-                            onPressed: null,
+                          child: StepButton(
+                            width: false,
+                            fontColor: Colors.white,
+                            backgroundColor: Colors.grey,
+                            // color: kOTTAAOrange,
+                            // disabledColor: kQuantumGrey,
+                            onTap: () {},
                             text: "Do_a_guided_workshop".tr,
-                            shape: GFButtonShape.pills,
-                            size: verticalSize * 0.07,
-                            blockButton: true,
+                            // shape: GFButtonShape.pills,
+                            // size: verticalSize * 0.07,
+                            // blockButton: true,
                           ),
                         ),
-                        GFButton(
-                          onPressed: null,
+                        StepButton(
+                          width: false,
+                          onTap: () {},
                           text: "Book_a_demo".tr,
-                          textColor: Colors.white,
-                          disabledTextColor: Colors.grey,
-                          color: kOTTAAOrange,
-                          disabledColor: kQuantumGrey,
-                          shape: GFButtonShape.pills,
-                          size: verticalSize * 0.07,
-                          blockButton: true,
+                          fontColor: Colors.white,
+                          backgroundColor: Colors.grey,
+                          // color: kOTTAAOrange,
+                          // disabledColor: kQuantumGrey,
+                          // shape: GFButtonShape.pills,
+                          // size: verticalSize * 0.07,
+                          // blockButton: true,
                         ),
                       ],
                     ),

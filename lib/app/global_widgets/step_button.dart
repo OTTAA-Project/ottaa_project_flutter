@@ -8,6 +8,7 @@ class StepButton extends StatelessWidget {
   final IconData? trailing;
   final Color? backgroundColor;
   final Color? fontColor;
+  final bool? width;
 
   const StepButton({
     required this.onTap,
@@ -16,6 +17,7 @@ class StepButton extends StatelessWidget {
     this.trailing,
     this.backgroundColor = kOTTAAOrange,
     this.fontColor = Colors.white,
+    this.width = true,
   });
 
   @override
@@ -25,7 +27,7 @@ class StepButton extends StatelessWidget {
     return GestureDetector(
       onTap: this.onTap,
       child: Container(
-        width: horizontalSize * 0.17,
+        width: width! ? horizontalSize * 0.17 : double.maxFinite,
         height: 40,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

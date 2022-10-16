@@ -4,10 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-
-import '../onboarding_controller.dart';
-import 'header_wave.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/local_widgets/header_wave.dart';
 
 final _sharedPrefCient = SharedPrefClient();
 
@@ -249,46 +248,46 @@ Widget step1Onboarding<widget>(
                       ),
                     );
                   } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) => Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                    final male = 'Male'.tr;
-                    final female = 'Female'.tr;
-                    final binary = 'Binary'.tr;
-                    final fluid = 'Fluid'.tr;
-                    final other = 'Other'.tr;
-                    if (male.toString().toLowerCase() ==
-                        _.gender.value.toString().toLowerCase()) {
-                      //todo : add here for male
-                      await _.uploadDataForSelectedGender(maleOrFemale: true);
-                    } else if (female.toString().toLowerCase() ==
-                        _.gender.value.toString().toLowerCase()) {
-                      //todo : add here for female
-                      await _.uploadDataForSelectedGender(maleOrFemale: false);
-                    } else if (binary.toString().toLowerCase() ==
-                        _.gender.value.toString().toLowerCase()) {
-                      //todo : add here for binary
-                    } else if (fluid.toString().toLowerCase() ==
-                        _.gender.value.toString().toLowerCase()) {
-                      //todo : add here for fluid
-                    } else if (other.toString().toLowerCase() ==
-                        _.gender.value.toString().toLowerCase()) {
-                      //todo : add here for other
-                    }
-                    await _.uploadInfo();
-                    await _sharedPrefCient.setFirstTimePref();
-                    Get.back();
-                    controller.animateToPage(1,
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.easeInOut);
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (context) => Center(
+                  //       child: CircularProgressIndicator(),
+                  //     ),
+                  //   );
+                  //   final male = 'Male'.tr;
+                  //   final female = 'Female'.tr;
+                  //   final binary = 'Binary'.tr;
+                  //   final fluid = 'Fluid'.tr;
+                  //   final other = 'Other'.tr;
+                  //   if (male.toString().toLowerCase() ==
+                  //       _.gender.value.toString().toLowerCase()) {
+                  //     //todo : add here for male
+                  //     await _.uploadDataForSelectedGender(maleOrFemale: true);
+                  //   } else if (female.toString().toLowerCase() ==
+                  //       _.gender.value.toString().toLowerCase()) {
+                  //     //todo : add here for female
+                  //     await _.uploadDataForSelectedGender(maleOrFemale: false);
+                  //   } else if (binary.toString().toLowerCase() ==
+                  //       _.gender.value.toString().toLowerCase()) {
+                  //     //todo : add here for binary
+                  //   } else if (fluid.toString().toLowerCase() ==
+                  //       _.gender.value.toString().toLowerCase()) {
+                  //     //todo : add here for fluid
+                  //   } else if (other.toString().toLowerCase() ==
+                  //       _.gender.value.toString().toLowerCase()) {
+                  //     //todo : add here for other
+                  //   }
+                  //   await _.uploadInfo();
+                  //   await _sharedPrefCient.setFirstTimePref();
+                  //   Get.back();
+                  //   controller.animateToPage(1,
+                  //       duration: Duration(milliseconds: 300),
+                  //       curve: Curves.easeInOut);
                   }
-                  // _.pageNumber.value = 1;
-                  // controller.animateToPage(_.pageNumber.value,
-                  //     duration: Duration(milliseconds: 300),
-                  //     curve: Curves.easeInOut);
+                  _.pageNumber.value = 1;
+                  controller.animateToPage(_.pageNumber.value,
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeInOut);
                 },
                 backgroundColor: kOTTAAOrangeNew,
                 fontColor: Colors.white,
@@ -323,7 +322,9 @@ Widget step1Onboarding<widget>(
               child: Text(
                 'vamos_a_pedirte_cierta_informaci_n_para_nmejorar_tu_experiencia_con_ottaa'
                     .tr,
-                style: TextStyle(color: Colors.white,),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
                 maxLines: 2,
               ),
             ),
