@@ -248,46 +248,46 @@ Widget step1Onboarding<widget>(
                       ),
                     );
                   } else {
-                  //   showDialog(
-                  //     context: context,
-                  //     builder: (context) => Center(
-                  //       child: CircularProgressIndicator(),
-                  //     ),
-                  //   );
-                  //   final male = 'Male'.tr;
-                  //   final female = 'Female'.tr;
-                  //   final binary = 'Binary'.tr;
-                  //   final fluid = 'Fluid'.tr;
-                  //   final other = 'Other'.tr;
-                  //   if (male.toString().toLowerCase() ==
-                  //       _.gender.value.toString().toLowerCase()) {
-                  //     //todo : add here for male
-                  //     await _.uploadDataForSelectedGender(maleOrFemale: true);
-                  //   } else if (female.toString().toLowerCase() ==
-                  //       _.gender.value.toString().toLowerCase()) {
-                  //     //todo : add here for female
-                  //     await _.uploadDataForSelectedGender(maleOrFemale: false);
-                  //   } else if (binary.toString().toLowerCase() ==
-                  //       _.gender.value.toString().toLowerCase()) {
-                  //     //todo : add here for binary
-                  //   } else if (fluid.toString().toLowerCase() ==
-                  //       _.gender.value.toString().toLowerCase()) {
-                  //     //todo : add here for fluid
-                  //   } else if (other.toString().toLowerCase() ==
-                  //       _.gender.value.toString().toLowerCase()) {
-                  //     //todo : add here for other
-                  //   }
-                  //   await _.uploadInfo();
-                  //   await _sharedPrefCient.setFirstTimePref();
-                  //   Get.back();
-                  //   controller.animateToPage(1,
-                  //       duration: Duration(milliseconds: 300),
-                  //       curve: Curves.easeInOut);
+                    showDialog(
+                      context: context,
+                      builder: (context) => Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                    final male = 'Male'.tr;
+                    final female = 'Female'.tr;
+                    final binary = 'Binary'.tr;
+                    final fluid = 'Fluid'.tr;
+                    final other = 'Other'.tr;
+                    if (male.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for male
+                      await _.uploadDataForSelectedGender(maleOrFemale: true);
+                    } else if (female.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for female
+                      await _.uploadDataForSelectedGender(maleOrFemale: false);
+                    } else if (binary.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for binary
+                    } else if (fluid.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for fluid
+                    } else if (other.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for other
+                    }
+                    await _.uploadInfo();
+                    await _sharedPrefCient.setFirstTimePref();
+                    Get.back();
+                    controller.animateToPage(1,
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeInOut);
                   }
-                  _.pageNumber.value = 1;
-                  controller.animateToPage(_.pageNumber.value,
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.easeInOut);
+                  // _.pageNumber.value = 1;
+                  // controller.animateToPage(_.pageNumber.value,
+                  //     duration: Duration(milliseconds: 300),
+                  //     curve: Curves.easeInOut);
                 },
                 backgroundColor: kOTTAAOrangeNew,
                 fontColor: Colors.white,
