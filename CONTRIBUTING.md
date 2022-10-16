@@ -37,9 +37,9 @@ You may contribute to OTTAA
 
 ### Required knowledge (placeholder)
 
-main languages / libraries / tools that make up OTTAA and you need to know to contribute 
+In order to contribute as a developer, you will need to have a basic understanding of [this/these coding languge/s] and [this/these tool/s (could be a framework, library, platform)]. We also strongly recommend you be familiar with [these language/technology that might not be as important as the other two mentioned but is still important] .
 
-### Setting up your IDE
+#### Setting up your IDE
 
 - Run `flutter pub get` to get the dependencies.
 - Run `flutter pub run build_runner build` to generate the model class code.
@@ -60,12 +60,59 @@ Please bear the following in mind when creating a PR:
 * Make the PR in the corresponding branch.
 * Avoid your PR containing unrelated commits, keep it focused on its scope. 
 
-|Branch|Description|
-|---|---|
-|Version| Main |
-|Feature| Add new features |
-|Hotfix|  Hot-fix about a version|
-|Bugfix|  Bug-fix about a version|
+
+#### Commits
+
+We use the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for our commit messages. Under this convention the commit message should be structured like this:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Bear in mind:
+
+1) Type *fix:*: patches a bug in your codebase.
+2) Type *feat:*: introduces a new feature to the codebase (this correlates with MINOR in Semantic Versioning).
+3) Types other than *fix:*: and *feat:*: are allowed, for example *build:*, *chore:*, *ci:*, *docs:*, *style:*, *refactor:*, *perf:*, *test:*.
+4) Footer BREAKING CHANGE or *!* after type/scope: introduces a breaking API change (correlating with MAJOR in Semantic Versioning). 
+5) A BREAKING CHANGE can be part of commits of any type.
+6) Footers other than *BREAKING CHANGE* may be provided and follow a convention similar to [git trailer format](https://git-scm.com/docs/git-interpret-trailers).
+
+##### Examples
+
+Commit message with description and BREAKING CHANGE footer:
+
+*feat: allow provided config object to extend other configs*
+*BREAKING CHANGE: `extends` key in config file is now used for extending other config files*
+
+
+Commit message with scope and ! to draw attention to breaking change
+
+*feat(api)!: send an email to the customer when a product is shipped
+
+Commit message with both ! and BREAKING CHANGE footer
+
+*chore!: drop support for Node 6
+*BREAKING CHANGE: use JavaScript features not available in Node 6.
+
+
+#### Branch naming 
+
+To name and describe our branches we use the type of change it will contain and a short description. We follow the Git [branching models](https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows) for this-
+
+Examples:
+
+|Instance|Branch|Description, Instructions, Notes|
+|---|---|---|
+|Stable|	main	|Accepts merges from Working and Hotfixes|
+|Development|	dev|Accepts merges from Features/Issues, Fixes and Hotfixes|
+|Features/Issues|	feat/*	|Always branch off HEAD of Working|
+|Fixes|	fix/*	|Always branch off HEAD of Working|
+|Hotfix|	hotfix/*	|Always branch off Stable
 
 
 ### Code conventions
