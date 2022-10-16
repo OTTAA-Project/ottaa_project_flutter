@@ -74,15 +74,15 @@ Consistent code writing, commenting and documenting style is key to collaboratio
 
 #### On commenting and documenting code
 
-* Always comment all your classes explaining their purpose and how to implement them if required. [WILL THESE ALWAYS GO IN THE API REFERENCE?]
+To get familiarized with the code, check the [API reference]()(add link to automatic doc when ready). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it and will ask you to use it as well when commenting your code. If you require assistante with Dartdoc please check [Using Dartdoc](#using-dartdoc) below.
 
+* Classes, variables, constants and relationship between classes should always be documented.
 
-* Always document all source code via clear comments. 
+* Your comments should be full English sentences.
 
+* Use [Dartdoc](https://pub.dev/packages/dartdoc) to generate automatic standarized documentation for your code. 
 
-#### General coments
-
-* Format comments as full English sentences.
+* Use ```///``` to comment your code as it is the special syntax Dartdoc looks for when generating the documentation files.
 
 * Do **not** use /* block comments \*/ for documentation:
 
@@ -105,17 +105,12 @@ void greet(String name) {
 }
 ```
 
-* You *can* use a block comment (/* ... \*/) to temporarily comment out a section of code, but all other comments should use //.
-
-* The special syntax ```///``` is reserved for comments that will go in the API reference, as it is the special syntax Dartdoc looks for when generating the documentation files.
+* You *can* use a block comment (/* ... \*/) to temporarily comment out a section of code, but all other comments should use ///.
 
 
-#### API reference
+#### Using Dartdoc
 
-We use [Dartdoc](https://pub.dev/packages/dartdoc) to build the [API reference]()(add link to automatic doc when ready). Please read our [Dartdoc API reference for Flutter](/dartdoc_automatic_documentation.md) to get started.
-
-
-*** what should be included in API reference & what not?**
+If this is your first time using it or you have any doubts about installation, execution, or formatting, please read our [Dartdoc API reference for Flutter](/dartdoc_automatic_documentation.md) to get started.
 
 
 #### On code duplication
