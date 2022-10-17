@@ -121,13 +121,13 @@ Consistent code writing, commenting and documenting style is key to collaboratio
 
 #### On commenting and documenting code
 
-To get familiarized with the code, check the [API reference]()(add link to automatic doc when ready). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it and will ask you to use it as well when commenting your code. If you require assistante with Dartdoc please check [Using Dartdoc](#using-dartdoc) below.
+To get familiarized with the code, check the [API reference]()(add link to automatic doc when ready). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it and will ask you to use it as well when commenting your code. If you require assistance with Dartdoc please check [Using Dartdoc](#using-dartdoc) below.
 
 * Classes, variables, constants and relationship between classes should always be documented.
 
 * Your comments should be full English sentences.
 
-* Use [Dartdoc](https://pub.dev/packages/dartdoc) to generate automatic standarized documentation for your code. 
+* Use [Dartdoc](https://pub.dev/packages/dartdoc) to generate automatic standardized documentation for your code. 
 
 * Use ```///``` to comment your code as it is the special syntax Dartdoc looks for when generating the documentation files.
 
@@ -162,7 +162,7 @@ If this is your first time using it or you have any doubts about installation, e
 
 #### On code duplication
 
-* Do not copy-paste source code. Reuse it in a  way that makes sense, re writing the neccessary parts.
+* Do not copy-paste source code. Reuse it in a  way that makes sense, rewriting the necessary parts.
 
 
 #### On importing libraries 
@@ -208,9 +208,9 @@ Example :
 
 * The Method of the class can be public, private or protected.
 
-* The class can be public or private.
+* Classes can be public or private.
 
-* Class name must be transparent and representative of its purpose.
+* Class names must be transparent and representative of its purpose.
 
 * Class names should be nouns in UpperCamelCase, with the first letter of every word capitalized.
 
@@ -263,9 +263,9 @@ index
 
 ## As a translator
 
-We currently support Spanish, English, Portuguese and French, but we are open to adding new languages as users' needs arise. Everyone is welcome to contribute with suggestions, changes or error corrections via email at **support@ottaaproject.com**, use subject "Contribution".
+We currently support Spanish, English, Portuguese and French, but we are open to adding new languages as users' needs arise. Everyone is welcome to contribute with suggestions, changes or error corrections via email at **support@ottaaproject.com**, use the subject "Contribution".
 
-Our focus right now is growing in Latin America, with this in mind we would love some help with **pictogram localization**, that is to say, to have pictograms translated **based each country/region-specific culture and Spanish variety**. For example, we know that a car 🚗 is commonly *carro* in México but *auto* or *coche* in Argentina. 
+Our focus right now is growing in Latin America, with this in mind we would love some help with **pictogram localization**, that is to say, to have pictograms translated **based on each country/region-specific culture and Spanish variety**. For example, we know that a car 🚗 is commonly *carro* in México but *auto* or *coche* in Argentina. 
 
 Chile, Argentina, Colombia, and the Caribbean are our current priorities, but of course we welcome help with any of our supported languages and regions.
 
