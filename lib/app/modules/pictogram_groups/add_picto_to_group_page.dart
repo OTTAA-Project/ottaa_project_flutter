@@ -55,7 +55,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                           child: Obx(
                             () => AddPictoToGroupWidget(
                               color: controller.pictsForGroupAdding[index].tipo,
-                              name: controller.ttsController.languaje == 'en'
+                              name: controller.ttsController.languaje == 'en-US'
                                   ? controller
                                       .pictsForGroupAdding[index].texto.en
                                   : controller
@@ -149,7 +149,9 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                               if (!kIsWeb) {
                                 final localFile = LocalFileController();
                                 await localFile.writeGruposToFile(
-                                    data: fileData.toString());
+                                  data: fileData.toString(),
+                                  language: _homeController.language,
+                                );
                                 // print('writing to file');
                               }
                               //for the file data
@@ -176,7 +178,6 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                               controller.secondTimeSameGroup =
                                   controller.selectedGroupIndex;
                               Get.close(2);
-
                             },
                             child: Icon(
                               Icons.save,
@@ -260,7 +261,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
               bottom: height * 0.02,
               left: width * 0.43,
               right: width * 0.43,
-              child: OttaLogoWidget(),
+              child: OttaaLogoWidget(),
             ),
           ],
         ),

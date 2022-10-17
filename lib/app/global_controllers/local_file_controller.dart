@@ -22,34 +22,127 @@ class LocalFileController {
     final path = await _directoryPath;
     return File('$path/gruposFile.json');
   }
+
+  Future<File> get _gruposFrenchFile async {
+    final path = await _directoryPath;
+    return File('$path/grupos_fr_file.json');
+  }
+
+  Future<File> get _gruposPortugueseFile async {
+    final path = await _directoryPath;
+    return File('$path/grupos_pt_file.json');
+  }
+
   Future<File> get _pictoFile async {
     final path = await _directoryPath;
     return File('$path/pictoFile.json');
   }
 
-  Future<void> writeGruposToFile({required String data}) async {
-    final file = await _gruposFile;
+  Future<File> get _pictoFrenchFile async {
+    final path = await _directoryPath;
+    return File('$path/pictos_fr_file.json');
+  }
+
+  Future<File> get _pictoPortugueseFile async {
+    final path = await _directoryPath;
+    return File('$path/pictos_pt_file.json');
+  }
+
+  Future<void> writeGruposToFile({
+    required String data,
+    required String language,
+  }) async {
+    // final file = await _gruposFile;
+    late File file;
+    switch (language) {
+      case "es-AR":
+        file = await _gruposFile;
+        break;
+      case "en-US":
+        file = await _gruposFile;
+        break;
+      case "fr-FR":
+        file = await _gruposFrenchFile;
+        break;
+      case "pt-BR":
+        file = await _gruposPortugueseFile;
+        break;
+      default:
+        file = await _gruposFile;
+    }
     await file.writeAsString(data);
   }
 
-  Future<List<Grupos>> readGruposFromFile() async {
-    final file = await _gruposFile;
+  Future<List<Grupos>> readGruposFromFile({
+    required String language,
+  }) async {
+    // final File file = await _gruposFile;
+    late File file;
+    switch (language) {
+      case "es-AR":
+        file = await _gruposFile;
+        break;
+      case "en-US":
+        file = await _gruposFile;
+        break;
+      case "fr-FR":
+        file = await _gruposFrenchFile;
+        break;
+      case "pt-BR":
+        file = await _gruposPortugueseFile;
+        break;
+      default:
+        file = await _gruposFile;
+    }
     final response = await file.readAsString();
     return (jsonDecode(response) as List)
         .map((e) => Grupos.fromJson(e))
         .toList();
   }
 
-  Future<void> writePictoToFile({required String data}) async {
-    final file = await _pictoFile;
+  Future<void> writePictoToFile(
+      {required String data, required String language}) async {
+    // final file = await _pictoFile;
+    late File file;
+    switch (language) {
+      case "es-AR":
+        file = await _pictoFile;
+        break;
+      case "en-US":
+        file = await _pictoFile;
+        break;
+      case "fr-FR":
+        file = await _pictoFrenchFile;
+        break;
+      case "pt-BR":
+        file = await _pictoPortugueseFile;
+        break;
+      default:
+        file = await _pictoFile;
+    }
     await file.writeAsString(data);
   }
 
-  Future<List<Pict>> readPictoFromFile() async {
-    final file = await _pictoFile;
+  Future<List<Pict>> readPictoFromFile({required String language}) async {
+    // final file = await _pictoFile;
+    late File file;
+    switch (language) {
+      case "es-AR":
+        file = await _pictoFile;
+        break;
+      case "en-US":
+        file = await _pictoFile;
+        break;
+      case "fr-FR":
+        file = await _pictoFrenchFile;
+        break;
+      case "pt-BR":
+        file = await _pictoPortugueseFile;
+        break;
+      default:
+        file = await _pictoFile;
+    }
     final response = await file.readAsString();
-    return (jsonDecode(response) as List)
-        .map((e) => Pict.fromJson(e))
-        .toList();
+    return (jsonDecode(response) as List).map((e) => Pict.fromJson(e)).toList();
   }
 }

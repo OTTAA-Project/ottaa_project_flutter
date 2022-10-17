@@ -83,12 +83,16 @@ class Relacion {
 @JsonSerializable()
 class Texto {
   Texto({
-    required this.en,
-    required this.es,
+    this.en = '',
+    this.es = '',
+    this.pt = '',
+    this.fr = '',
   });
 
   String en;
   String es;
+  String fr;
+  String pt;
 
   factory Texto.fromJson(Map<String, dynamic> json) => _$TextoFromJson(json);
 
