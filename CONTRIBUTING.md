@@ -102,7 +102,7 @@ Commit message with both ! and BREAKING CHANGE footer
 
 #### Branch naming 
 
-To name and describe our branches we use the type of change it will contain and a short description. We follow the Git [branching models](https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows) for this-
+To name and describe our branches we use the type of change it will contain and a short description, following Git [branching models](https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows).
 
 Examples:
 
