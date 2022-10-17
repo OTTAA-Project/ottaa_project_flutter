@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/modules/settings/local_widgets/dialouge_widget.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
@@ -54,16 +54,17 @@ class SettingsPage extends StatelessWidget {
                     Icons.photo_library,
                     color: kOTTAAOrangeNew,
                   ),
-                  onTap: () {
-                    Fluttertoast.showToast(
-                      msg: "we_are_working_on_this_feature".tr,
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.black,
-                      textColor: Colors.white,
-                      fontSize: verticalSize * 0.03,
-                    );
+                  onTap: () async {
+                    await showDialouge(context: context);
+                    // Fluttertoast.showToast(
+                    //   msg: "we_are_working_on_this_feature".tr,
+                    //   toastLength: Toast.LENGTH_SHORT,
+                    //   gravity: ToastGravity.CENTER,
+                    //   timeInSecForIosWeb: 1,
+                    //   backgroundColor: Colors.black,
+                    //   textColor: Colors.white,
+                    //   fontSize: verticalSize * 0.03,
+                    // );
                   },
                   title: Text('pictograms'.tr),
                 ),
@@ -73,16 +74,17 @@ class SettingsPage extends StatelessWidget {
                     Icons.try_sms_star,
                     color: kOTTAAOrangeNew,
                   ),
-                  onTap: () {
-                    Fluttertoast.showToast(
-                      msg: "we_are_working_on_this_feature".tr,
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.black,
-                      textColor: Colors.white,
-                      fontSize: verticalSize * 0.03,
-                    );
+                  onTap: () async {
+                    await showDialouge(context: context);
+                    // Fluttertoast.showToast(
+                    //   msg: "we_are_working_on_this_feature".tr,
+                    //   toastLength: Toast.LENGTH_SHORT,
+                    //   gravity: ToastGravity.CENTER,
+                    //   timeInSecForIosWeb: 1,
+                    //   backgroundColor: Colors.black,
+                    //   textColor: Colors.white,
+                    //   fontSize: verticalSize * 0.03,
+                    // );
                   },
                   title: Text('prediction'.tr),
                 ),
@@ -92,16 +94,17 @@ class SettingsPage extends StatelessWidget {
                     Icons.accessibility,
                     color: kOTTAAOrangeNew,
                   ),
-                  onTap: () {
-                    Fluttertoast.showToast(
-                      msg: "we_are_working_on_this_feature".tr,
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.black,
-                      textColor: Colors.white,
-                      fontSize: verticalSize * 0.03,
-                    );
+                  onTap: () async {
+                    await showDialouge(context: context);
+                    // Fluttertoast.showToast(
+                    //   msg: "we_are_working_on_this_feature".tr,
+                    //   toastLength: Toast.LENGTH_SHORT,
+                    //   gravity: ToastGravity.CENTER,
+                    //   timeInSecForIosWeb: 1,
+                    //   backgroundColor: Colors.black,
+                    //   textColor: Colors.white,
+                    //   fontSize: verticalSize * 0.03,
+                    // );
                   },
                   title: Text('accessibility'.tr),
                 ),
@@ -130,5 +133,22 @@ class SettingsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> showDialouge({required BuildContext context}) async {
+    showDialog(
+      context: context,
+      barrierColor: Colors.transparent,
+      builder: (context) => Material(
+        color: Colors.transparent,
+        child: Center(
+          child: DialougeWidget(),
+        ),
+      ),
+    );
+    await Future.delayed(
+      Duration(milliseconds: 800),
+    );
+    Get.back();
   }
 }
