@@ -236,8 +236,7 @@ Example:
 
 #### Firebase index:
 
-This is the firebase tree index:
-
+[FIREBASE TREE INDEX NEEDS UPDATING]
 ```
 #!code
 
