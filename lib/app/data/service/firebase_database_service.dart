@@ -332,8 +332,7 @@ class FirebaseDatabaseService {
       final ref =
           databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
       final res = await ref.get();
-      //todo: remove changes
-      final data = "res.value?['data']";
+      final data = res.children.first.value as String;
 
       final da = pictosOrGrupos
           ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList()
@@ -377,8 +376,7 @@ class FirebaseDatabaseService {
         final ref =
             databaseRef.child('$firebaseName/${firebaseRed.currentUser!.uid}/');
         final res = await ref.get();
-        //todo: remove changes
-        final data = "res.value['data']";
+        final data = res.children.first.value as String;
         final da = pictoOrGrupo
             ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList()
             : (jsonDecode(data) as List)
@@ -457,9 +455,8 @@ class FirebaseDatabaseService {
         final ref = databaseRef.child(
             '$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
         final res = await ref.get();
-        //todo: remove changes
-        // final data = res.value['data'];
-        final data = res.value! as String;
+
+        final data = res.children.first.value as String;
         final da = pictoOrGrupo
             ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList()
             : (jsonDecode(data) as List)
@@ -526,9 +523,7 @@ class FirebaseDatabaseService {
       final ref = databaseRef
           .child('$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
       final res = await ref.get();
-      //todo: remove changes
-      // final data = res.value['data'];
-      final data = res.value! as String;
+      final data = res.children.first.value as String;
       //todo: write different conversions here
       final da = pictosOrGrupos
           ? (jsonDecode(data) as List).map((e) => Pict.fromJson(e)).toList()
@@ -555,8 +550,7 @@ class FirebaseDatabaseService {
     final bol = res.exists;
     if (bol) {
       //todo: remove changes
-      final data = "res.value['data']";
-      // return data;
+      final data = res.children.first.value as String;
       return {};
     } else {
       return {'': ''};
@@ -587,9 +581,7 @@ class FirebaseDatabaseService {
     final User? auth = firebaseRed.currentUser;
     final ref = databaseRef.child('PhotoUrl/${auth!.uid}/');
     final res = await ref.get();
-    //todo: remove changes
-    // return res.value['PhotoUrl'];
-    return res.value! as String;
+    return res.children.first.value as String;
   }
 
   String fetchCurrentUserUID() {
@@ -615,9 +607,7 @@ class FirebaseDatabaseService {
         .child('Frases/${firebaseRed.currentUser!.uid}/$language/$type');
     final res = await ref.get();
     if (res.exists && res.value != null) {
-      //todo: remove changes
-      // final data = res.value['data'];
-      final data = res.value! as String;
+      final data = res.children.first.value as String;
       final da =
           (jsonDecode(data) as List).map((e) => Sentence.fromJson(e)).toList();
 
@@ -636,9 +626,7 @@ class FirebaseDatabaseService {
         .child('Frases/${firebaseRed.currentUser!.uid}/$language/$type');
     final res = await ref.get();
     if (res.exists && res.value != null) {
-      //todo: remove changes
-      // final data = res.value['data'];
-      final data = res.value! as String;
+      final data = res.children.first.value as String;
       final da =
           (jsonDecode(data) as List).map((e) => Sentence.fromJson(e)).toList();
 
