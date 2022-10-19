@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/drawer_widget.dart';
+import 'package:ottaa_project_flutter/app/modules/home/local_widgets/empty_text_dialog_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/right_column_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/actions_widget.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/left_column_widget.dart';
@@ -54,45 +55,44 @@ class HomePage extends GetView<HomeController> {
                         children: controller.sentencePicts
                             .map(
                               (e) => Padding(
-                            padding:
-                            EdgeInsets.only(right: 8),
-                            child: kIsWeb
-                                ? Image.network(
-                              e.imagen.pictoEditado == null
-                                  ? e.imagen.picto
-                                  : e.imagen.pictoEditado!,
-                              width: verticalSize * 0.14,
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null)
-                                  return child;
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    color: kOTTAAOrangeNew,
-                                    value: loadingProgress
-                                        .expectedTotalBytes !=
-                                        null
-                                        ? loadingProgress
-                                        .cumulativeBytesLoaded /
-                                        loadingProgress
-                                            .expectedTotalBytes!
-                                        : null,
-                                  ),
-                                );
-                              },
-                            )
-                                : CachedNetworkImage(
-                              imageUrl: e.imagen.pictoEditado == null
-                                  ? e.imagen.picto
-                                  : e.imagen.pictoEditado!,
-                              placeholder: (context, url) => Center(
-                                child: CircularProgressIndicator(),
+                                padding: EdgeInsets.only(right: 8),
+                                child: kIsWeb
+                                    ? Image.network(
+                                        e.imagen.pictoEditado == null
+                                            ? e.imagen.picto
+                                            : e.imagen.pictoEditado!,
+                                        width: verticalSize * 0.14,
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress == null)
+                                            return child;
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              color: kOTTAAOrangeNew,
+                                              value: loadingProgress
+                                                          .expectedTotalBytes !=
+                                                      null
+                                                  ? loadingProgress
+                                                          .cumulativeBytesLoaded /
+                                                      loadingProgress
+                                                          .expectedTotalBytes!
+                                                  : null,
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : CachedNetworkImage(
+                                        imageUrl: e.imagen.pictoEditado == null
+                                            ? e.imagen.picto
+                                            : e.imagen.pictoEditado!,
+                                        placeholder: (context, url) => Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                        // height: verticalSize * 0.04,
+                                        width: verticalSize * 0.14,
+                                      ),
                               ),
-                              // height: verticalSize * 0.04,
-                              width: verticalSize * 0.14,
-                            ),
-                          ),
-                        )
+                            )
                             .toList(),
                       ),
                     ),
@@ -108,6 +108,7 @@ class HomePage extends GetView<HomeController> {
               ),
             ),
           ),
+
           /// just a little hack to keep it hidden
           Container(
             height: verticalSize * 0.26,
@@ -210,17 +211,20 @@ class HomePage extends GetView<HomeController> {
             right: horizontalSize * 0.43,
             bottom: verticalSize * 0.02,
             child: GestureDetector(
-              onTap: () {
-                if (_homeController.sentencePicts.length == 0)
-                  Fluttertoast.showToast(
-                    msg: "choose_a_picto_to_speak".tr,
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.black,
-                    textColor: Colors.white,
-                    fontSize: verticalSize * 0.03,
+              onTap: () async {
+                if (_homeController.sentencePicts.length == 0) {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    barrierColor: Colors.transparent,
+                    builder: (context) {
+                      return EmptyTextDialogWidget(
+                        text: 'share_text'.tr,
+                      );
+                    },
                   );
+                  await controller.startTimerForDialogueExit();
+                }
                 _homeController.speak();
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('Principal', 'Talk'));

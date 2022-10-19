@@ -1,14 +1,12 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/onboarding_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
-
-import '../onboarding_controller.dart';
-import 'header_wave.dart';
+import 'package:ottaa_project_flutter/app/modules/onboarding/local_widgets/header_wave.dart';
 
 final _sharedPrefCient = SharedPrefClient();
 
@@ -321,10 +319,12 @@ Widget step1Onboarding<widget>(
             ),
             Container(
               width: horizontalSize * 0.45,
-              child: AutoSizeText(
+              child: Text(
                 'vamos_a_pedirte_cierta_informaci_n_para_nmejorar_tu_experiencia_con_ottaa'
                     .tr,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
                 maxLines: 2,
               ),
             ),

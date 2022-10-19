@@ -79,7 +79,7 @@ class ReportPage extends GetView<ReportController> {
                             ? 0.00
                             : double.parse(controller.averagePictoFrase.value
                                 .toString()
-                                .substring(0, 4)
+                                .substring(0, 3)
                                 .toString()),
                     sevenDaysString: 'phrases_last_seven_days'.tr,
                     sevenDaysValue: controller.frases7Days.value,
