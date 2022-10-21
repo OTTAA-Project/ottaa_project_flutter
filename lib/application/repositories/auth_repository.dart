@@ -1,7 +1,6 @@
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -13,7 +12,7 @@ import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 
 final databaseRef = FirebaseDatabase.instance.ref();
 
-class AuthRepositoryImpl with ChangeNotifier implements AuthRepository<User> {
+class AuthRepositoryImpl extends AuthRepository<User> {
   final LoadingNotifier loadingNotifier;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -24,25 +23,34 @@ class AuthRepositoryImpl with ChangeNotifier implements AuthRepository<User> {
 
   @override
   FutureOr<Either<String, User>> getCurrentUser() {
-    // TODO: implement getCurrentUser
-    throw UnimplementedError();
+    User? user = _firebaseAuth.currentUser;
+
+    if (user != null) {
+      return Right(user);
+    } else {
+      return const Left("user_not_logged"); //TODO: Translate
+    }
   }
 
   @override
   FutureOr<bool> isLoggedIn() {
-    // TODO: implement isLoggedIn
-    throw UnimplementedError();
+    return _firebaseAuth.currentUser != null;
   }
 
   @override
-  FutureOr<void> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+  FutureOr<void> logout() async {
+    await _firebaseAuth.signOut();
+    await _googleSignIn.signOut();
+    await _facebookAuth.logOut();
+
+    notifyListeners();
   }
 
   @override
   FutureOr<Either<String, User>> signIn(SignInType type) async {
     Either<String, User> result;
+
+    loadingNotifier.showLoading();
 
     switch (type) {
       case SignInType.google:
@@ -57,14 +65,17 @@ class AuthRepositoryImpl with ChangeNotifier implements AuthRepository<User> {
         return const Left("error_no_implement_auth_method"); //TODO: Implement translate method.
     }
 
-    final User? auth = FirebaseAuth.instance.currentUser;
-    final ref = databaseRef.child('Usuarios/${auth!.uid}/');
-    final res = await ref.get();
-    if (res.exists) {
-      // final instance = await SharedPreferences.getInstance();
-      // instance.setBool('First_time', true);
-      // instance.setBool('Avatar_photo', true);
+    if (result.isRight) {
+      final User auth = result.right;
 
+      final ref = databaseRef.child('Usuarios/${auth.uid}/');
+      final res = await ref.get();
+      if (res.exists) {
+        // final instance = await SharedPreferences.getInstance();
+        // instance.setBool('First_time', true);
+        // instance.setBool('Avatar_photo', true);
+
+      }
     }
 
     return result;

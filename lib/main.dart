@@ -23,5 +23,7 @@ void main() async {
 
   await setupServices();
 
-  runApp(const Injector(application: Application()));
+  runApp(const Injector(
+    application: Application(),
+  ));
 }

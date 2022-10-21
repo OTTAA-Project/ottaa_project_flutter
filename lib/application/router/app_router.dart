@@ -18,29 +18,8 @@ class AppRouter {
         builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
-        path: AppRoutes.home,
-      ),
-      GoRoute(
         path: AppRoutes.login,
         builder: (context, state) => const LoginScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.onboarding,
-      ),
-      GoRoute(
-        path: AppRoutes.sentences,
-      ),
-      GoRoute(
-        path: AppRoutes.settings,
-      ),
-      GoRoute(
-        path: AppRoutes.settingslang,
-      ),
-      GoRoute(
-        path: AppRoutes.settingsvoice,
-      ),
-      GoRoute(
-        path: AppRoutes.tutorial,
       ),
     ],
     initialLocation: FirebaseAuth.instance.currentUser == null ? '/login' : '/splash', //Replace with db check

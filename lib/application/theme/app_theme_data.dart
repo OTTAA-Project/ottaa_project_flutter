@@ -660,6 +660,6 @@ class AppThemeData {
   };
 
   ThemeData? buildTheme() {
-    return ThemeDecoder.decodeThemeData(_json);
+    return ThemeDecoder.decodeThemeData(_json, validate: true);
   }
 }

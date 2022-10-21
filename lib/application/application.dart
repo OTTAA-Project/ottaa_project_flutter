@@ -7,11 +7,7 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO!: localization, etc.
     return MaterialApp.router(
-      routeInformationProvider: AppRouter().router.routeInformationProvider,
-      routeInformationParser: AppRouter().router.routeInformationParser,
-      routerDelegate: AppRouter().router.routerDelegate,
       routerConfig: AppRouter().router,
       theme: AppTheme.instance.defaultThemeData(),
     );
