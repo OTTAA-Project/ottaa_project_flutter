@@ -16,7 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseDatabaseService {
   final _fileController = LocalFileController();
-  final databaseRef = FirebaseDatabase.instance.reference();
+  final databaseRef = FirebaseDatabase.instance.ref();
   final firebaseRed = FirebaseAuth.instance;
 
   Future<void> uploadInfo(

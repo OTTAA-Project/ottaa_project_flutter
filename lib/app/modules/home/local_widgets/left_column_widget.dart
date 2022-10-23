@@ -1,5 +1,9 @@
+import 'dart:convert';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/modules/home/local_widgets/empty_text_dialog_widget.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
@@ -22,21 +26,60 @@ class LeftColumnWidget extends StatelessWidget {
         children: [
           FittedBox(
             child: GestureDetector(
-              onTap: () async{
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  barrierColor: Colors.transparent,
-                  builder: (context) {
-                    return EmptyTextDialogWidget(
-                      text: "we_are_working_on_this_feature".tr,
-                    );
-                  },
-                );
-                await _homeController.startTimerForDialogueExit();
-                CustomAnalyticsEvents.setEventWithParameters("Touch",
-                    CustomAnalyticsEvents.createMyMap('Principal', 'Games'));
+              onTap: () async {
+                // showDialog(
+                //   context: context,
+                //   barrierDismissible: false,
+                //   barrierColor: Colors.transparent,
+                //   builder: (context) {
+                //     return EmptyTextDialogWidget(
+                //       text: "we_are_working_on_this_feature".tr,
+                //     );
+                //   },
+                // );
+                // await _homeController.startTimerForDialogueExit();
+                // CustomAnalyticsEvents.setEventWithParameters("Touch",
+                //     CustomAnalyticsEvents.createMyMap('Principal', 'Games'));
                 // Get.toNamed(AppRoutes.GAMES);
+                final ref = FirebaseDatabase.instance.ref();
+                final re = ref.child('test/grupos');
+                dynamic jsonData = List.empty(growable: true);
+                // todo: for saving pictos
+                // _homeController.picts.forEach((Pict e) {
+                //   final relactions = e.relacion?.map((e) => e.toJson()).toList();
+                //   jsonData.add(
+                //     {
+                //     'id': e.id,
+                //     'texto' : e.texto.toJson(),
+                //     'tipo': e.tipo,
+                //     'imagen': e.imagen.toJson(),
+                //     'relacion': relactions,
+                //     'agenda': e.agenda,
+                //     'gps': e.gps,
+                //     'hora' : e.hora,
+                //     'edad':e.edad,
+                //     'sexo': e.sexo,
+                //     'esSugerencia': e.esSugerencia,
+                //     'horario':e.horario,
+                //     'ubicacion' : e.ubicacion,
+                //     'score' : e.score,
+                //     }
+                //   );
+                // });
+                _homeController.grupos.forEach((e) {
+                  final relactions = e.relacion.map((e) => e.toJson()).toList();
+                  jsonData.add({
+                  'id': e.id,
+                  'texto': e.texto.toJson(),
+                  'tipo': e.tipo,
+                  'imagen': e.imagen.toJson(),
+                  'relacion' : relactions,
+                  'frecuencia':e.frecuencia,
+                  'tags': e.tags,
+                  });
+                });
+                re.set(jsonData);
+
               },
               child: Center(
                   child: Icon(
@@ -87,4 +130,14 @@ class LeftColumnWidget extends StatelessWidget {
       ),
     );
   }
+
+  // static toOrderItemList(var map) {
+  //   Map values = map as Map;
+  //   List<Pict> cartItem = [];
+  //   values.forEach((key, data) {
+  //     final Pict connect = Pict.fromJson(data);
+  //     cartItem.add(connect);
+  //   });
+  //   return cartItem;
+  // }
 }
