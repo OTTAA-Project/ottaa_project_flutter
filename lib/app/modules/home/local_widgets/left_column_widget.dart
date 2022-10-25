@@ -42,7 +42,7 @@ class LeftColumnWidget extends StatelessWidget {
                 //     CustomAnalyticsEvents.createMyMap('Principal', 'Games'));
                 // Get.toNamed(AppRoutes.GAMES);
                 final ref = FirebaseDatabase.instance.ref();
-                final re = ref.child('test/grupos');
+                final re = ref.child('test/');
                 dynamic jsonData = List.empty(growable: true);
                 // todo: for saving pictos
                 // _homeController.picts.forEach((Pict e) {
@@ -66,20 +66,46 @@ class LeftColumnWidget extends StatelessWidget {
                 //     }
                 //   );
                 // });
-                _homeController.grupos.forEach((e) {
-                  final relactions = e.relacion.map((e) => e.toJson()).toList();
-                  jsonData.add({
-                  'id': e.id,
-                  'texto': e.texto.toJson(),
-                  'tipo': e.tipo,
-                  'imagen': e.imagen.toJson(),
-                  'relacion' : relactions,
-                  'frecuencia':e.frecuencia,
-                  'tags': e.tags,
-                  });
+                // _homeController.grupos.forEach((e) {
+                //   final relactions = e.relacion.map((e) => e.toJson()).toList();
+                //   jsonData.add({
+                //   'id': e.id,
+                //   'texto': e.texto.toJson(),
+                //   'tipo': e.tipo,
+                //   'imagen': e.imagen.toJson(),
+                //   'relacion' : relactions,
+                //   'frecuencia':e.frecuencia,
+                //   'tags': e.tags,
+                //   });
+                // });
+                // re.set(jsonData);
+                final data = await re.once();
+                final encode = jsonEncode(data.snapshot.value);
+                final da = (jsonDecode(encode) as List)
+                    .map((e) => Pict.fromJson(e))
+                    .toList();
+                da[0].texto.en = 'tasks';
+                da[0].texto.es = 'tasks';
+                final relactions =
+                    da[0].relacion?.map((e) => e.toJson()).toList();
+                final ree = ref.child('test/0/');
+                ree.update({
+                  'id': da[0].id,
+                  'texto': da[0].texto.toJson(),
+                  'tipo': da[0].tipo,
+                  'imagen': da[0].imagen.toJson(),
+                  'relacion': relactions,
+                  'agenda': da[0].agenda,
+                  'gps': da[0].gps,
+                  'hora': da[0].hora,
+                  'edad': da[0].edad,
+                  'sexo': da[0].sexo,
+                  'esSugerencia': da[0].esSugerencia,
+                  'horario': da[0].horario,
+                  'ubicacion': da[0].ubicacion,
+                  'score': da[0].score,
                 });
-                re.set(jsonData);
-
+                print('done');
               },
               child: Center(
                   child: Icon(
@@ -131,13 +157,13 @@ class LeftColumnWidget extends StatelessWidget {
     );
   }
 
-  // static toOrderItemList(var map) {
-  //   Map values = map as Map;
-  //   List<Pict> cartItem = [];
-  //   values.forEach((key, data) {
-  //     final Pict connect = Pict.fromJson(data);
-  //     cartItem.add(connect);
-  //   });
-  //   return cartItem;
-  // }
+// static toOrderItemList(var map) {
+//   Map values = map as Map;
+//   List<Pict> cartItem = [];
+//   values.forEach((key, data) {
+//     final Pict connect = Pict.fromJson(data);
+//     cartItem.add(connect);
+//   });
+//   return cartItem;
+// }
 }
