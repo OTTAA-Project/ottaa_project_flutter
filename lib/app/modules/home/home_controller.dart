@@ -624,7 +624,8 @@ class HomeController extends GetxController {
     }
     //for the file data
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool('Pictos_file', true);
+    await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
     // print(res1);
     //upload to the firebase
     await dataController.uploadPictosToFirebaseRealTime(

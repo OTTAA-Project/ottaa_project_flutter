@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart
 import 'package:ottaa_project_flutter/app/modules/edit_picto/local_widgets/choice_dialouge.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'category_page_widget.dart';
 import 'category_widget.dart';
@@ -85,9 +86,10 @@ class PictoPageWidget extends StatelessWidget {
                 },
                 child: Padding(
                   padding: EdgeInsets.only(
-                      left: horizontalSize * 0.07,
-                      right: horizontalSize * 0.07,
-                      bottom: horizontalSize * 0.05,),
+                    left: horizontalSize * 0.07,
+                    right: horizontalSize * 0.07,
+                    bottom: horizontalSize * 0.05,
+                  ),
                   child: CategoryPageWidget(
                     name: _pictogramController.selectedGruposPicts[index].texto,
                     language: _homeController.language,
@@ -150,8 +152,13 @@ class PictoPageWidget extends StatelessWidget {
       }
       //for the file data
       final instance = await SharedPreferences.getInstance();
-      await instance.setBool('Pictos_file', true);
-      final res1 = instance.getBool('Pictos_file') ?? false;
+      await instance.setBool(
+          Constants
+              .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
+          true);
+      final res1 = instance.getBool(Constants.LANGUAGE_CODES[
+              instance.getString('Language_KEY') ?? 'Spanish']!) ??
+          false;
 
       print(res1);
       //upload to the firebase

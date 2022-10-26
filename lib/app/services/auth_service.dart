@@ -5,6 +5,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
@@ -107,7 +108,8 @@ print(result.accessToken!.token);
   Future<void> signOut() async {
     final sharedPrefClient = await SharedPreferences.getInstance();
     await sharedPrefClient.setBool('First_time', false);
-    await sharedPrefClient.setBool('Pictos_file', false);
+    final instance = await SharedPreferences.getInstance();
+    await sharedPrefClient.setBool(Constants.LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, false);
     Future.wait([
       _firebaseAuth.signOut(),
       _googleSignIn.signOut(),

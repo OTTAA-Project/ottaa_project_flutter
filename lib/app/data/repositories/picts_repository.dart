@@ -8,28 +8,6 @@ class PictsRepository {
   PictsService _pictsService = Get.find<PictsService>();
 
   Future<List<Pict>> getAll() async {
-    // return _pictsService.getAll();
-    final instance = await SharedPreferences.getInstance();
-    final String language = Constants
-        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!;
-    switch (language) {
-      case "es-AR":
-        return _pictsService.getAll();
-      case "en-US":
-        return _pictsService.getAll();
-      case "fr-FR":
-        return _pictsService.getFrench();
-      case "pt-BR":
-        return _pictsService.getPortuguese();
-      default:
-        return _pictsService.getAll();
-    }
-  }
-  Future<List<Pict>> getFrench() async {
-    return _pictsService.getFrench();
-  }
-
-  Future<List<Pict>> getPortuguese() async {
-    return _pictsService.getPortuguese();
+    return await _pictsService.getAll();
   }
 }

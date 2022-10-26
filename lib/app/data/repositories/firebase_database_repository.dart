@@ -143,32 +143,6 @@ class FirebaseDatabaseRepository {
   String fetchCurrentUserUID() =>
       _firebaseDatabaseService.fetchCurrentUserUID();
 
-  Future<List<Pict>> fetchOtherPictos({
-    required String languageName,
-    required String assetName,
-    required String firebaseName,
-    required String fileName,
-  }) async =>
-      await _firebaseDatabaseService.fetchOtherPictos(
-        languageName: languageName,
-        assetName: assetName,
-        firebaseName: firebaseName,
-        fileName: fileName,
-      );
-
-  Future<List<Grupos>> fetchOtherGrupos({
-    required String languageName,
-    required String assetName,
-    required String firebaseName,
-    required String fileName,
-  }) async =>
-      await _firebaseDatabaseService.fetchOtherGrupos(
-        languageName: languageName,
-        assetName: assetName,
-        firebaseName: firebaseName,
-        fileName: fileName,
-      );
-
   Future<void> uploadFrases({
     required String language,
     required List<Sentence> data,

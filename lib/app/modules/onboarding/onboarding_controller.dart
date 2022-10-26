@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dar
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingController extends GetxController {
@@ -117,7 +118,10 @@ class OnboardingController extends GetxController {
       // print('writing to file');
       //for the file data
       final instance = await SharedPreferences.getInstance();
-      await instance.setBool('Pictos_file', true);
+      await instance.setBool(
+          Constants
+              .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
+          true);
     }
     // await _dataController.uploadBoolToFirebaseRealtime(
     //   data: true,
@@ -154,7 +158,9 @@ class OnboardingController extends GetxController {
       // print('writing to file');
       //for the file data
       final instance = await SharedPreferences.getInstance();
-      await instance.setBool('Grupos_file', true);
+      await instance.setBool(
+          "${Constants.LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo",
+          true);
     }
   }
 }

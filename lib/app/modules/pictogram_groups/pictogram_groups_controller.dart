@@ -642,10 +642,12 @@ class PictogramGroupsController extends GetxController {
     final instance = await SharedPreferences.getInstance();
     switch (_homeController.language) {
       case "es-AR":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "en-US":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "fr-FR":
         await instance.setBool(Constants.FRENCH_GRUPO_FILE_NAME, true);
@@ -654,7 +656,8 @@ class PictogramGroupsController extends GetxController {
         await instance.setBool(Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
         break;
       default:
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
     }
     // await instance.setBool('Grupos_file', true);
     // print(res1);
@@ -752,10 +755,12 @@ class PictogramGroupsController extends GetxController {
     final instance = await SharedPreferences.getInstance();
     switch (_homeController.language) {
       case "es-AR":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "en-US":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "fr-FR":
         await instance.setBool(Constants.FRENCH_GRUPO_FILE_NAME, true);
@@ -764,7 +769,8 @@ class PictogramGroupsController extends GetxController {
         await instance.setBool(Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
         break;
       default:
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
     }
     // await instance.setBool('Grupos_file', true);
     // print(res1);
@@ -907,10 +913,12 @@ class PictogramGroupsController extends GetxController {
     final instance = await SharedPreferences.getInstance();
     switch (_homeController.language) {
       case "es-AR":
-        await instance.setBool('Pictos_file', true);
+        await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
       case "en-US":
-        await instance.setBool('Pictos_file', true);
+        await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
       case "fr-FR":
         await instance.setBool(Constants.FRENCH_PICTO_FILE_NAME, true);
@@ -919,10 +927,12 @@ class PictogramGroupsController extends GetxController {
         await instance.setBool(Constants.PORTUGUESE_PICTO_FILE_NAME, true);
         break;
       default:
-        await instance.setBool('Pictos_file', true);
+        await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
     }
-    // await instance.setBool('Pictos_file', true);
+    // await instance.setBool(Constants
+    //     .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
     // print(res1);
     //upload to the firebase
     await _dataController.uploadEditingPictoToFirebaseRealTime(
@@ -952,10 +962,12 @@ class PictogramGroupsController extends GetxController {
     //for the file data
     switch (_homeController.language) {
       case "es-AR":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "en-US":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "fr-FR":
         await instance.setBool(Constants.FRENCH_GRUPO_FILE_NAME, true);
@@ -964,7 +976,8 @@ class PictogramGroupsController extends GetxController {
         await instance.setBool(Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
         break;
       default:
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
     }
     // await instance.setBool('Grupos_file', true);
     // print(res1);

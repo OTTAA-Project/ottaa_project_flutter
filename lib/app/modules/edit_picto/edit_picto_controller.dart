@@ -303,10 +303,12 @@ class EditPictoController extends GetxController {
     final instance = await SharedPreferences.getInstance();
     switch (_ttsController.languaje) {
       case "es-AR":
-        await instance.setBool('Pictos_file', true);
+        await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
       case "en-US":
-        await instance.setBool('Pictos_file', true);
+        await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
       case "fr-FR":
         await instance.setBool(Constants.FRENCH_PICTO_FILE_NAME, true);
@@ -315,10 +317,12 @@ class EditPictoController extends GetxController {
         await instance.setBool(Constants.PORTUGUESE_PICTO_FILE_NAME, true);
         break;
       default:
-        await instance.setBool('Pictos_file', true);
+        await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
     }
-    // await instance.setBool('Pictos_file', true);
+    // await instance.setBool(Constants
+    //     .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
     await sharedPref.getPictosFile();
     // print(res1);
     //upload to the firebase

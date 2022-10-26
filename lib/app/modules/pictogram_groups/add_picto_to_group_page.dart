@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
@@ -157,7 +158,9 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                               //for the file data
                               final instance =
                                   await SharedPreferences.getInstance();
-                              await instance.setBool('Grupos_file', true);
+                              await instance.setBool(
+                                  "${Constants.LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo",
+                                  true);
                               // print(res1);
                               //upload to the firebase
                               await controller.uploadToFirebaseGrupo(

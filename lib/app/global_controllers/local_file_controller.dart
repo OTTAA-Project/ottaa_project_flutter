@@ -18,34 +18,44 @@ class LocalFileController {
     return directory.path;
   }
 
-  Future<File> get _gruposFile async {
+  Future<File> get _gruposEnglishFile async {
     final path = await _directoryPath;
-    return File('$path/gruposFile.json');
+    return File('$path/en-US_grupo.json');
+  }
+
+  Future<File> get _gruposEspanolFile async {
+    final path = await _directoryPath;
+    return File('$path/es-AR_grupo.json');
   }
 
   Future<File> get _gruposFrenchFile async {
     final path = await _directoryPath;
-    return File('$path/grupos_fr_file.json');
+    return File('$path/fr-FR_grupo.json');
   }
 
   Future<File> get _gruposPortugueseFile async {
     final path = await _directoryPath;
-    return File('$path/grupos_pt_file.json');
+    return File('$path/pt-BR_grupo.json');
   }
 
-  Future<File> get _pictoFile async {
+  Future<File> get _pictoEnglishFile async {
     final path = await _directoryPath;
-    return File('$path/pictoFile.json');
+    return File('$path/en-US.json');
+  }
+
+  Future<File> get _pictoEspanolFile async {
+    final path = await _directoryPath;
+    return File('$path/es-AR.json');
   }
 
   Future<File> get _pictoFrenchFile async {
     final path = await _directoryPath;
-    return File('$path/pictos_fr_file.json');
+    return File('$path/fr-FR.json');
   }
 
   Future<File> get _pictoPortugueseFile async {
     final path = await _directoryPath;
-    return File('$path/pictos_pt_file.json');
+    return File('$path/pt-BR.json');
   }
 
   Future<void> writeGruposToFile({
@@ -56,10 +66,10 @@ class LocalFileController {
     late File file;
     switch (language) {
       case "es-AR":
-        file = await _gruposFile;
+        file = await _gruposEspanolFile;
         break;
       case "en-US":
-        file = await _gruposFile;
+        file = await _gruposEnglishFile;
         break;
       case "fr-FR":
         file = await _gruposFrenchFile;
@@ -68,7 +78,7 @@ class LocalFileController {
         file = await _gruposPortugueseFile;
         break;
       default:
-        file = await _gruposFile;
+        file = await _gruposEspanolFile;
     }
     await file.writeAsString(data);
   }
@@ -80,10 +90,10 @@ class LocalFileController {
     late File file;
     switch (language) {
       case "es-AR":
-        file = await _gruposFile;
+        file = await _gruposEspanolFile;
         break;
       case "en-US":
-        file = await _gruposFile;
+        file = await _gruposEnglishFile;
         break;
       case "fr-FR":
         file = await _gruposFrenchFile;
@@ -92,7 +102,7 @@ class LocalFileController {
         file = await _gruposPortugueseFile;
         break;
       default:
-        file = await _gruposFile;
+        file = await _gruposEspanolFile;
     }
     final response = await file.readAsString();
     return (jsonDecode(response) as List)
@@ -106,10 +116,10 @@ class LocalFileController {
     late File file;
     switch (language) {
       case "es-AR":
-        file = await _pictoFile;
+        file = await _pictoEspanolFile;
         break;
       case "en-US":
-        file = await _pictoFile;
+        file = await _pictoEnglishFile;
         break;
       case "fr-FR":
         file = await _pictoFrenchFile;
@@ -118,7 +128,7 @@ class LocalFileController {
         file = await _pictoPortugueseFile;
         break;
       default:
-        file = await _pictoFile;
+        file = await _pictoEspanolFile;
     }
     await file.writeAsString(data);
   }
@@ -128,10 +138,10 @@ class LocalFileController {
     late File file;
     switch (language) {
       case "es-AR":
-        file = await _pictoFile;
+        file = await _pictoEspanolFile;
         break;
       case "en-US":
-        file = await _pictoFile;
+        file = await _pictoEnglishFile;
         break;
       case "fr-FR":
         file = await _pictoFrenchFile;
@@ -140,7 +150,7 @@ class LocalFileController {
         file = await _pictoPortugueseFile;
         break;
       default:
-        file = await _pictoFile;
+        file = await _pictoEspanolFile;
     }
     final response = await file.readAsString();
     return (jsonDecode(response) as List).map((e) => Pict.fromJson(e)).toList();

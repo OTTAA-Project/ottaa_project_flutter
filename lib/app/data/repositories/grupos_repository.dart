@@ -8,20 +8,6 @@ class GrupoRepository {
   GrupoService _gruposService = Get.find<GrupoService>();
 
   Future<List<Grupos>> getAll() async {
-    final instance = await SharedPreferences.getInstance();
-    final String language = Constants
-        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!;
-    switch (language) {
-      case "es-AR":
-        return _gruposService.getAll();
-      case "en-US":
-        return _gruposService.getAll();
-      case "fr-FR":
-        return _gruposService.getFrench();
-      case "pt-BR":
-        return _gruposService.getPortuguese();
-      default:
-        return _gruposService.getAll();
-    }
+    return await _gruposService.getAll();
   }
 }

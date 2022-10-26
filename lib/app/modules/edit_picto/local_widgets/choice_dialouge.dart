@@ -84,7 +84,9 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 final instance = await SharedPreferences.getInstance();
                 switch (_homeController.language) {
                   case "es-AR":
-                    await instance.setBool('Grupos_file', true);
+                    await instance.setBool(
+                        "${Constants.LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo",
+                        true);
                     break;
                   case "en-US":
                     await instance.setBool('Grupos_file', true);

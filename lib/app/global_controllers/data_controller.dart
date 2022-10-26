@@ -145,32 +145,6 @@ class DataController extends GetxController {
   String fetchCurrentUserUID() =>
       _firebaseDatabaseController.fetchCurrentUserUID();
 
-  Future<List<Pict>> fetchOtherPictos({
-    required String languageName,
-    required String assetName,
-    required String firebaseName,
-    required String fileName,
-  }) async =>
-      await _firebaseDatabaseController.fetchOtherPictos(
-        languageName: languageName,
-        assetName: assetName,
-        firebaseName: firebaseName,
-        fileName: fileName,
-      );
-
-  Future<List<Grupos>> fetchOtherGrupos({
-    required String languageName,
-    required String assetName,
-    required String firebaseName,
-    required String fileName,
-  }) async =>
-      await _firebaseDatabaseController.fetchOtherGrupos(
-        languageName: languageName,
-        assetName: assetName,
-        firebaseName: firebaseName,
-        fileName: fileName,
-      );
-
   Future<void> uploadFrases({
     required String language,
     required List<Sentence> data,
