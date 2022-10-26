@@ -104,14 +104,9 @@ class SentencesController extends GetxController {
         toBeSaved.add(element);
       }
     });
-    List<String> dataUpload = [];
-    toBeSaved.forEach((element) {
-      final obj = jsonEncode(element);
-      dataUpload.add(obj);
-    });
     await dataController.uploadFrases(
       language: ttsController.languaje,
-      data: dataUpload.toString(),
+      data: toBeSaved,
       type: Constants.FAVOURITE_SENTENCES,
     );
     await fetchFavourites();

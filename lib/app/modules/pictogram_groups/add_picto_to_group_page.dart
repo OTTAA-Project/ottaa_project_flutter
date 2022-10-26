@@ -161,8 +161,9 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                               // print(res1);
                               //upload to the firebase
                               await controller.uploadToFirebaseGrupo(
-                                  data: fileData.toString());
-                              await controller.gruposExistsOnFirebase();
+                                data: data,
+                              );
+                              // await controller.gruposExistsOnFirebase();
                               //change the view and add values to the current list
                               controller.selectedGruposPicts
                                   .addAll(toBeAddedonToCurrentList);

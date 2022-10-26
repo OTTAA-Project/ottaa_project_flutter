@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
@@ -77,11 +78,24 @@ class AuthController extends GetxController {
     // Get.to(VulleticLoading(textToShow: loadingMessage));
     try {
       await future;
-      // if ok firebase will return a user else will throw an exception
       final User? auth = FirebaseAuth.instance.currentUser;
-      final ref = databaseRef.child('Usuarios/${auth!.uid}/');
-      final res = await ref.get();
-      if (res.exists) {
+      final email = auth!.providerData[0].email;
+      // if ok firebase will return a user else will throw an exception
+      await runToGetDataFromOtherPlatform(
+        email: email!,
+        uid: auth.uid,
+      );
+      //todo: add the request here
+      final refNew = databaseRef.child('Usuarios/${auth.uid}/');
+      final resNew = await refNew.get();
+      final refOld = databaseRef.child('Usuarios/${auth.uid}/');
+      final resOld = await refOld.get();
+      if (resNew.exists) {
+        final instance = await SharedPreferences.getInstance();
+        instance.setBool('First_time', true);
+        instance.setBool('Avatar_photo', true);
+        Get.offAllNamed(AppRoutes.HOME);
+      } else if (resOld.exists) {
         final instance = await SharedPreferences.getInstance();
         instance.setBool('First_time', true);
         instance.setBool('Avatar_photo', true);
@@ -92,5 +106,18 @@ class AuthController extends GetxController {
     } catch (e) {
       Get.back();
     }
+  }
+
+  Future<void> runToGetDataFromOtherPlatform({
+    required String email,
+    required String uid,
+  }) async {
+    final uri = Uri.parse(
+      'https://us-central1-ottaaproject-flutter.cloudfunctions.net/getOldUserDataHttp?email=$email&uid=$uid',
+    );
+    final res = await http.get(
+      uri,
+    );
+    print(res.body);
   }
 }

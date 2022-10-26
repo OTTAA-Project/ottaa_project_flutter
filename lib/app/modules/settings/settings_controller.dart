@@ -59,13 +59,13 @@ class SettingsController extends GetxController {
       _homeController.picts = await _pictsRepository.getAll();
       _homeController.grupos = await _grupoRepository.getAll();
     }*/
+    instance.setString('Language_KEY', language.value);
+    _homeController.language = _ttsController.languaje;
     _homeController.picts.clear();
     _homeController.grupos.clear();
     _homeController.picts = await _pictsRepository.getAll();
     _homeController.grupos = await _grupoRepository.getAll();
-    _homeController.language = _ttsController.languaje;
     await _homeController.suggest(0);
-    instance.setString('Language_KEY', language.value);
     print(language.value);
     await _pictogramController.loadAssets();
     update();

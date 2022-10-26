@@ -105,9 +105,9 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 // print(res1);
                 //upload to the firebase
                 await _pictogramController.uploadToFirebaseGrupo(
-                  data: fileDataGrupo.toString(),
+                  data: dataGrupo,
                 );
-                await _pictogramController.gruposExistsOnFirebase();
+                // await _pictogramController.gruposExistsOnFirebase();
                 _pictogramController.selectedGruposPicts.removeAt(index!);
                 _pictogramController.pictoGridviewOrPageview.value =
                     !_pictogramController.pictoGridviewOrPageview.value;

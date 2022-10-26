@@ -220,8 +220,6 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 Get.to(() => EditGrupoPage());
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('name', 'Edit '));
-                CustomAnalyticsEvents.setEventWithParameters("Touch",
-                    CustomAnalyticsEvents.createMyMap('name', 'Edit '));
               } else {
                 _homeController.initializePageViewer();
                 Get.to(() => BuyPaidVersionPage());
@@ -265,9 +263,9 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 // print(res1);
                 //upload to the firebase
                 await _pictogramController.uploadToFirebaseGrupo(
-                  data: fileDataGrupo.toString(),
+                  data: dataGrupo,
                 );
-                await _pictogramController.gruposExistsOnFirebase();
+                // await _pictogramController.gruposExistsOnFirebase();
                 Get.back();
               } else {
                 _homeController.initializePageViewer();

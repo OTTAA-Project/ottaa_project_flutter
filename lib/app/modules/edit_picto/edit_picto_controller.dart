@@ -88,7 +88,10 @@ class EditPictoController extends GetxController {
   /// variables for web
   Rx<Image?> imageWidget = Rx<Image?>(null);
 
-  Future<void> uploadToFirebase({required String data}) async {
+  Future<void> uploadToFirebase({
+    required Pict data,
+    required int index,
+  }) async {
     // final language = _ttsController.languaje;
     // final User? auth = FirebaseAuth.instance.currentUser;
     // final ref = databaseRef.child('Picto/${auth!.uid}/');
@@ -100,38 +103,43 @@ class EditPictoController extends GetxController {
     final String languageCode = Constants.LANGUAGE_CODES[key]!;
     switch (_ttsController.languaje) {
       case "es-AR":
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadEditingPictoToFirebaseRealTime(
           data: data,
           type: 'Pictos',
           languageCode: languageCode,
+          index: index,
         );
         break;
       case "en-US":
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadEditingPictoToFirebaseRealTime(
           data: data,
           type: 'Pictos',
           languageCode: languageCode,
+          index: index,
         );
         break;
       case "fr-FR":
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadEditingPictoToFirebaseRealTime(
           data: data,
           type: 'Pictos',
           languageCode: languageCode,
+          index: index,
         );
         break;
       case "pt-BR":
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadEditingPictoToFirebaseRealTime(
           data: data,
           type: 'Pictos',
           languageCode: languageCode,
+          index: index,
         );
         break;
       default:
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadEditingPictoToFirebaseRealTime(
           languageCode: languageCode,
           data: data,
           type: 'Pictos',
+          index: index,
         );
         break;
     }
@@ -140,50 +148,6 @@ class EditPictoController extends GetxController {
     //   data: data,
     //   type: 'Picto',
     // );
-  }
-
-  Future<void> pictsExistsOnFirebase() async {
-    // final User? auth = FirebaseAuth.instance.currentUser;
-    // final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
-    // await ref.set({
-    //   'value': true,
-    // });
-    // await _dataController.uploadBoolToFirebaseRealtime(
-    //   data: true,
-    //   type: 'PictsExistsOnFirebase',
-    // );
-    switch (_ttsController.languaje) {
-      case "es-AR":
-        await _dataController.uploadBoolToFirebaseRealtime(
-          data: true,
-          type: 'PictsExistsOnFirebase',
-        );
-        break;
-      case "en-US":
-        await _dataController.uploadBoolToFirebaseRealtime(
-          data: true,
-          type: 'PictsExistsOnFirebase',
-        );
-        break;
-      case "fr-FR":
-        await _dataController.uploadBoolToFirebaseRealtime(
-          data: true,
-          type: 'PictsExistsOnFirebase${Constants.FRENCH_LANGUAGE_NAME}',
-        );
-        break;
-      case "pt-BR":
-        await _dataController.uploadBoolToFirebaseRealtime(
-          data: true,
-          type: 'PictsExistsOnFirebase${Constants.PORTUGUESE_LANGUAGE_NAME}',
-        );
-        break;
-      default:
-        await _dataController.uploadBoolToFirebaseRealtime(
-          data: true,
-          type: 'PictsExistsOnFirebase',
-        );
-        break;
-    }
   }
 
   Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
@@ -358,8 +322,10 @@ class EditPictoController extends GetxController {
     await sharedPref.getPictosFile();
     // print(res1);
     //upload to the firebase
-    await uploadToFirebase(data: fileData.toString());
-    await pictsExistsOnFirebase();
+    await uploadToFirebase(
+      data: pict.value!,
+      index: index,
+    );
     // for refreshing the UI of listing
     if (_homeController.editingFromHomeScreen) {
       _homeController.updateSuggested(
@@ -385,7 +351,7 @@ class EditPictoController extends GetxController {
     // final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
     final url = await _dataController.uploadImageToStorage(
       path: path,
-      storageDirectory: 'testingUpload',
+      storageDirectory: 'PictosImages',
       childName: nameController.text,
     );
     pict.value!.imagen.pictoEditado = url;

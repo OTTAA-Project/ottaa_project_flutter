@@ -96,8 +96,11 @@ class SuggestedWidget extends StatelessWidget {
 }
 
 class ChoiceDialogue extends StatelessWidget {
-  ChoiceDialogue({Key? key, this.index, required this.suggestedIndexMainScreen})
-      : super(key: key);
+  ChoiceDialogue({
+    Key? key,
+    this.index,
+    required this.suggestedIndexMainScreen,
+  }) : super(key: key);
   int? index;
   final _homeController = Get.find<HomeController>();
   final int suggestedIndexMainScreen;

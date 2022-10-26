@@ -177,18 +177,13 @@ class HomeController extends GetxController {
           phrase: phrase,
         );
     }
-    List<String> dataUpload = [];
-    mostUsedSentences.forEach((element) {
-      final obj = jsonEncode(element);
-      dataUpload.add(obj);
-    });
     mostUsedSentences.forEach((element) {
       print(
           'Sentence: ${element.frase},Here is the frequency: ${element.frecuencia}');
     });
     await dataController.uploadFrases(
       language: language,
-      data: dataUpload.toString(),
+      data: mostUsedSentences,
       type: Constants.MOST_USED_SENTENCES,
     );
   }
@@ -411,22 +406,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> loadPicts() async {
-    await Future.delayed(
-      Duration(milliseconds: 500),
-    );
-    /* if (_ttsController.languaje == Constants.LANGUAGE_CODES['French']) {
-      this.picts = await this._pictsRepository.getFrench();
-      this.grupos = await this._grupoRepository.getFrench();
-    }
-    if (_ttsController.languaje == Constants.LANGUAGE_CODES['Portuguese']) {
-      this.picts = await this._pictsRepository.getPortuguese();
-      this.grupos = await this._grupoRepository.getPortuguese();
-    }
-    if (_ttsController.languaje == Constants.LANGUAGE_CODES['Spanish'] ||
-        _ttsController.languaje == Constants.LANGUAGE_CODES['English']) {
-      this.picts = await this._pictsRepository.getAll();
-      this.grupos = await this._grupoRepository.getAll();
-    }*/
     this.picts = await this._pictsRepository.getAll();
     this.grupos = await this._grupoRepository.getAll();
     await suggest(0);
@@ -648,10 +627,12 @@ class HomeController extends GetxController {
     await instance.setBool('Pictos_file', true);
     // print(res1);
     //upload to the firebase
-    await _pictogramController.uploadToFirebasePicto(
-      data: fileDataPicts.toString(),
+    await dataController.uploadPictosToFirebaseRealTime(
+      data: picts,
+      languageCode: language,
+      type: 'Pictos',
     );
-    await _pictogramController.pictoExistsOnFirebase();
+    // await _pictogramController.pictoExistsOnFirebase();
     suggestedPicts.removeAt(suggestedIndexMainScreen);
     update(['suggested']);
     Get.back();
