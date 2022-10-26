@@ -13,10 +13,10 @@ class Constants {
   static const PORTUGUESE_GRUPO_FILE_NAME = 'grupos_pt_file';
   static const FRENCH_LANGUAGE_NAME = 'French';
   static const PORTUGUESE_LANGUAGE_NAME = 'Portuguese';
-  static const FRENCH_PICTO_FIREBASE_NAME = 'frenchPicto';
-  static const PORTUGUESE_PICTO_FIREBASE_NAME = 'portuguesePicto';
-  static const FRENCH_GRUPO_FIREBASE_NAME = 'frenchGrupo';
-  static const PORTUGUESE_GRUPO_FIREBASE_NAME = 'portugueseGrupo';
+  static const FRENCH_PICTO_FIREBASE_NAME = 'fr-FR';
+  static const PORTUGUESE_PICTO_FIREBASE_NAME = 'pt-BR';
+  static const FRENCH_GRUPO_FIREBASE_NAME = 'fr-FR';
+  static const PORTUGUESE_GRUPO_FIREBASE_NAME = 'pt-BR';
   static const PORTUGUESE_FRASES_MOST_USED_FILE_NAME =
       'frases_pt_most_used_file';
   static const FRENCH_FRASES_MOST_USED_FILE_NAME = 'frases_fr_most_used_file';

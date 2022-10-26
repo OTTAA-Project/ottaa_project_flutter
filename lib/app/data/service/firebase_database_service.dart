@@ -565,7 +565,7 @@ class FirebaseDatabaseService {
     }
 
     final refNew = databaseRef
-        .child('$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
+        .child('${firebaseRed.currentUser!.uid}/$firebaseName/$languageCode');
     final resNew = await refNew.get();
     final refOld = databaseRef
         .child('$firebaseName/${firebaseRed.currentUser!.uid}/$languageCode');
