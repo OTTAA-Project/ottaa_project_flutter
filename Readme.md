@@ -6,7 +6,7 @@ The [OTTAA Project](https://www.ottaaproject.com/) is an augmentative and altern
 
 You can be a part of this open source project and help build life changing technology, join us!
 
-![OTTAA gif demo](public/images/usar_ottaa.gif)
+![OTTAA gif demo](public/images/ottaa_project/usar_ottaa.gif)
 
 
 
