@@ -18,7 +18,7 @@ class DrawerWidget extends GetView<HomeController> {
     double verticalSize = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: verticalSize * 0.02),
+        // padding: EdgeInsets.symmetric(vertical: verticalSize * 0.02),
         decoration: BoxDecoration(
           color: Colors.transparent,
         ),
@@ -29,126 +29,125 @@ class DrawerWidget extends GetView<HomeController> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(verticalSize * 0.03),
           ),
-          child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: kOTTAAOrangeNew,
-                      borderRadius: BorderRadius.circular(verticalSize * 0.027),
-                    ),
-                    height: verticalSize * 0.15,
-                    width: double.infinity,
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Obx(
-                            () => Image.asset(
-                              'assets/profiles/Group ${controller.picNumber.value}@2x.png',
-                              height: verticalSize * 0.05,
-                            ),
-                          ),
-                          Image.asset(
-                            'assets/otta_drawer_logo.png',
-                            height: verticalSize * 0.05,
-                          ),
-                        ],
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: kOTTAAOrangeNew,
+                  borderRadius: BorderRadius.circular(verticalSize * 0.027),
+                ),
+                height: verticalSize * 0.15,
+                width: double.infinity,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Obx(
+                        () => Image.asset(
+                          'assets/profiles/Group ${controller.picNumber.value}@2x.png',
+                          height: verticalSize * 0.05,
+                        ),
+                      ),
+                      Image.asset(
+                        'assets/otta_drawer_logo.png',
+                        height: verticalSize * 0.05,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: verticalSize * 0.01,
+              ),
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Obx(
+                      () => ListTileWidget(
+                        icon: controller.muteOrNot.value
+                            ? Icons.volume_off
+                            : Icons.volume_up,
+                        title: 'mute'.tr,
+                        onTap: () async {
+                          _ttsController.setVolume =
+                              controller.muteOrNot.value ? 0.8 : 0.0;
+                          controller.muteOrNot.value =
+                              !controller.muteOrNot.value;
+                          print(_ttsController.volume);
+                        },
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: verticalSize * 0.01,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Obx(
-                          () => ListTileWidget(
-                            icon: controller.muteOrNot.value
-                                ? Icons.volume_off
-                                : Icons.volume_up,
-                            title: 'mute'.tr,
-                            onTap: () async {
-                              _ttsController.setVolume =
-                                  controller.muteOrNot.value ? 0.8 : 0.0;
-                              controller.muteOrNot.value =
-                                  !controller.muteOrNot.value;
-                              print(_ttsController.volume);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    color: Colors.grey,
-                    // thickness: 0.0,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTileWidget(
-                          icon: Icons.info_outline,
-                          title: 'about_ottaa'.tr,
-                          onTap: () => Get.toNamed(AppRoutes.ABOUTOTTAA),
-                        ),
-                        ListTileWidget(
-                          icon: Icons.settings,
-                          title: 'configuration'.tr,
-                          onTap: () => Get.toNamed(AppRoutes.SETTINGS),
-                        ),
-                        ListTileWidget(
-                          icon: Icons.info_outline,
-                          title: 'tutorial'.tr,
-                          onTap: () async {
-                            Get.toNamed(AppRoutes.TUTORIAL);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    color: Colors.grey,
-                    // thickness: 0.0,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        !kIsWeb
-                            ? ListTileWidget(
-                                icon: Icons.highlight_remove,
-                                title: 'close_application'.tr,
-                                onTap: () async {
-                                  exit(0);
-                                },
-                              )
-                            : Container(),
-                        ListTileWidget(
-                          icon: Icons.exit_to_app,
-                          title: 'sign_out'.tr,
-                          onTap: () async {
-                            await controller.authController.signOut();
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              Divider(
+                color: Colors.grey,
+                // thickness: 0.0,
+              ),
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTileWidget(
+                      icon: Icons.info_outline,
+                      title: 'about_ottaa'.tr,
+                      onTap: () => Get.toNamed(AppRoutes.ABOUTOTTAA),
+                    ),
+                    ListTileWidget(
+                      icon: Icons.info_outline,
+                      title: 'report'.tr,
+                      onTap: () => Get.toNamed(AppRoutes.REPORTPAGE),
+                    ),
+                    ListTileWidget(
+                      icon: Icons.settings,
+                      title: 'configuration'.tr,
+                      onTap: () => Get.toNamed(AppRoutes.SETTINGS),
+                    ),
+                    ListTileWidget(
+                      icon: Icons.info_outline,
+                      title: 'tutorial'.tr,
+                      onTap: () async {
+                        Get.toNamed(AppRoutes.TUTORIAL);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Divider(
+                color: Colors.grey,
+                // thickness: 0.0,
+              ),
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: horizontalSize * 0.01),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    !kIsWeb
+                        ? ListTileWidget(
+                            icon: Icons.highlight_remove,
+                            title: 'close_application'.tr,
+                            onTap: () async {
+                              exit(0);
+                            },
+                          )
+                        : Container(),
+                    ListTileWidget(
+                      icon: Icons.exit_to_app,
+                      title: 'sign_out'.tr,
+                      onTap: () async {
+                        await controller.authController.signOut();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -170,14 +169,39 @@ class ListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
-    return ListTile(
+    // return ListTile(
+    //   minLeadingWidth: 0,
+    //   onTap: onTap,
+    //   leading: Icon(
+    //     icon,
+    //     size: verticalSize * 0.04,
+    //   ),
+    //   horizontalTitleGap: 0,
+    //   title: Text(
+    //     title,
+    //     style: TextStyle(fontSize: verticalSize * 0.026),
+    //   ),
+    // );
+    return GestureDetector(
       onTap: onTap,
-      leading: Icon(
-        icon,
-        size: verticalSize * 0.035,
-      ),
-      title: Text(
-        title,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: verticalSize * 0.02),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: verticalSize * 0.04,
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontSize: verticalSize * 0.026),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -5,9 +5,12 @@
 The [OTTAA Project](https://www.ottaaproject.com/) is an augmentative and alternative communication (AAC) mobile application intended for users with speech and language impairments. It is a fast and effective tool that significantly improves users' quality of life and facilitates their social and labor reintegration. We have already positively impacted the lives of more than 40000 people in 11 countries, helping individuals with cerebral palsy, aphasia, autism, Down syndrome and mild ALS.
 
 You can be a part of this open source project and help build life changing technology, join us!
+
 <p align="center">
-<img src="/public/images/ottaa_project/ARG_VENTURE_OTTAA%20(1%20of%201)-36.jpg" alt="ottaa_img" width="400"/>
+<img src="/public/images/ottaa_project/usar_ottaa.gif" alt="ottaa_img" width="500"/>
 </p>
+
+Read our [Project's Roadmap](https://github.com/orgs/OTTAA-Project/projects/4/views/1) to learn about what features we are currently working on, what stage they are in, and when we expect to deliver them to you. 
 
 ## How does it work?
 
@@ -23,32 +26,24 @@ The OTTA app facilitates human communication via pictograms for those who are sp
 * Run `flutter pub run build_runner build` to generate the model class code.
 * Run `flutter run` to run the project.
 
-\* If this is not your first time setting up and you encounter any errors for model building:
+\* In case you encounter any errors for model building:
 
 * Run `flutter packages pub run build_runner build --delete-conflicting-outputs`.
 
 
 ## Resources
 
-### Libraries
+### Libraries & tools
 
-The complete list of libraries we use can be found [here](libraries.md).
 
-  * [Volley](https://github.com/google/volley) - Network requests
+The OTTAA Project was developed and runs mainly on:
 
-  * [Android-RateThisApp](https://github.com/kobakei/Android-RateThisApp) - App rating
+* [Flutter](https://flutter.dev/) 
 
-  * [Lottie for Android](https://github.com/airbnb/lottie-android) - Dynamic animations
+* [Firebase](https://firebase.google.com/) 
 
-  * [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) - Graphic reports
 
-  * [Glide](https://github.com/bumptech/glide) - Image loading
-
-  * [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API) Stream API for Java 7
-
-  * [SimpleNLG](https://github.com/simplenlg/simplenlg) - Natural language processing
-
-  * [Android Support Library](https://developer.android.com) - Android (Google) support library
+The complete list of libraries used and their functions can be found [here](libraries.md).
 
 
 ### Tools
@@ -70,8 +65,9 @@ The complete list of libraries we use can be found [here](libraries.md).
 <img src="/public/images/tools_libraries/test_project.png" alt="test_platform" width="40" height="40"/> [Testproject](http://testproject.io)
 
 
-### API Reference
- * Find the API reference information [here](https://ottaaproject.com/javadoc).
+### API reference
+
+ * We are using [Dartdoc](https://pub.dev/packages/dartdoc) to automate the [API reference documentation] ()(add link when completed). For some help getting started with dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.  
 
 ## Contributing
 

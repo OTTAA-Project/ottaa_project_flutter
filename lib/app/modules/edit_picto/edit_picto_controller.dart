@@ -13,6 +13,7 @@ import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EditPictoController extends GetxController {
@@ -94,10 +95,51 @@ class EditPictoController extends GetxController {
     // await ref.set({
     //   'data': data,
     // });
-    await _dataController.uploadDataToFirebaseRealTime(
-      data: data,
-      type: 'Picto',
-    );
+    final instance = await SharedPreferences.getInstance();
+    final String key = instance.getString('Language_KEY') ?? 'Spanish';
+    final String languageCode = Constants.LANGUAGE_CODES[key]!;
+    switch (_ttsController.languaje) {
+      case "es-AR":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Pictos',
+          languageCode: languageCode,
+        );
+        break;
+      case "en-US":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Pictos',
+          languageCode: languageCode,
+        );
+        break;
+      case "fr-FR":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Pictos',
+          languageCode: languageCode,
+        );
+        break;
+      case "pt-BR":
+        await _dataController.uploadDataToFirebaseRealTime(
+          data: data,
+          type: 'Pictos',
+          languageCode: languageCode,
+        );
+        break;
+      default:
+        await _dataController.uploadDataToFirebaseRealTime(
+          languageCode: languageCode,
+          data: data,
+          type: 'Pictos',
+        );
+        break;
+    }
+
+    // await _dataController.uploadDataToFirebaseRealTime(
+    //   data: data,
+    //   type: 'Picto',
+    // );
   }
 
   Future<void> pictsExistsOnFirebase() async {
@@ -106,16 +148,48 @@ class EditPictoController extends GetxController {
     // await ref.set({
     //   'value': true,
     // });
-    await _dataController.uploadBoolToFirebaseRealtime(
-      data: true,
-      type: 'PictsExistsOnFirebase',
-    );
+    // await _dataController.uploadBoolToFirebaseRealtime(
+    //   data: true,
+    //   type: 'PictsExistsOnFirebase',
+    // );
+    switch (_ttsController.languaje) {
+      case "es-AR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase',
+        );
+        break;
+      case "en-US":
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase',
+        );
+        break;
+      case "fr-FR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase${Constants.FRENCH_LANGUAGE_NAME}',
+        );
+        break;
+      case "pt-BR":
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase${Constants.PORTUGUESE_LANGUAGE_NAME}',
+        );
+        break;
+      default:
+        await _dataController.uploadBoolToFirebaseRealtime(
+          data: true,
+          type: 'PictsExistsOnFirebase',
+        );
+        break;
+    }
   }
 
   Future<List<SearchModel>> fetchPhotoFromGlobalSymbols(
       {required String text}) async {
-    final String languageFormat = lang == 'en' ? '639-3' : '639-1';
-    final language = lang == 'en' ? 'eng' : 'es';
+    final String languageFormat = lang == 'en-US' ? '639-3' : '639-1';
+    final language = lang == 'en-US' ? 'eng' : 'es';
     url =
         'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
     var urlF = Uri.parse(url);
@@ -255,12 +329,32 @@ class EditPictoController extends GetxController {
     /// saving changes to file
     if (!kIsWeb) {
       final localFile = LocalFileController();
-      await localFile.writePictoToFile(data: fileData.toString());
+      await localFile.writePictoToFile(
+        data: fileData.toString(),
+        language: _ttsController.languaje,
+      );
       // print('writing to file');
     }
     //for the file data
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool('Pictos_file', true);
+    switch (_ttsController.languaje) {
+      case "es-AR":
+        await instance.setBool('Pictos_file', true);
+        break;
+      case "en-US":
+        await instance.setBool('Pictos_file', true);
+        break;
+      case "fr-FR":
+        await instance.setBool(Constants.FRENCH_PICTO_FILE_NAME, true);
+        break;
+      case "pt-BR":
+        await instance.setBool(Constants.PORTUGUESE_PICTO_FILE_NAME, true);
+        break;
+      default:
+        await instance.setBool('Pictos_file', true);
+        break;
+    }
+    // await instance.setBool('Pictos_file', true);
     await sharedPref.getPictosFile();
     // print(res1);
     //upload to the firebase
@@ -292,7 +386,7 @@ class EditPictoController extends GetxController {
     final url = await _dataController.uploadImageToStorage(
       path: path,
       storageDirectory: 'testingUpload',
-      childName: pict.value!.texto.en,
+      childName: nameController.text,
     );
     pict.value!.imagen.pictoEditado = url;
   }
@@ -312,8 +406,25 @@ class EditPictoController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    nameController.text = lang == 'en'
-        ? pict.value!.texto.en.toUpperCase()
-        : pict.value!.texto.es.toUpperCase();
+    // nameController.text = lang == 'en-US'
+    //     ? pict.value!.texto.en.toUpperCase()
+    //     : pict.value!.texto.es.toUpperCase();
+
+    switch (lang) {
+      case "es-AR":
+        nameController.text = pict.value!.texto.es;
+        break;
+      case "en-US":
+        nameController.text = pict.value!.texto.en;
+        break;
+      case "fr-FR":
+        nameController.text = pict.value!.texto.fr;
+        break;
+      case "pt-BR":
+        nameController.text = pict.value!.texto.pt;
+        break;
+      default:
+        nameController.text = pict.value!.texto.es;
+    }
   }
 }

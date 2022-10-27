@@ -9,7 +9,7 @@ step3Tutorial<widget>(PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
   double horizontalSize = MediaQuery.of(context).size.width;
   return Container(
-    color: kOTTAAOrange,
+    color: kOTTAAOrangeNew,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -42,7 +42,7 @@ step3Tutorial<widget>(PageController controller, context) {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.2),
               child: AutoSizeText(
-                "${'Step3_long'.tr}.",
+                'Step3_long'.tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20, color: Colors.white),
@@ -73,7 +73,7 @@ step3Tutorial<widget>(PageController controller, context) {
                   duration: Duration(milliseconds: 300),
                   curve: Curves.easeInOut),
               backgroundColor: Colors.white,
-              fontColor: kOTTAAOrange,
+              fontColor: kOTTAAOrangeNew,
             ),
           ],
         ),

@@ -91,39 +91,6 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       Get.back();
-      // switch (e.code) {
-      //   // case 'sign_in_failed':
-      //   //   this error comes due to fingerprint SHA1 and SHA256
-      //   //   AppDialogs.showInformationDialog("Error en el Login",
-      //   //       "La aplicación no se pudo loguear (sign-in-failed)");
-      //   //   break;
-      //   // case 'account-exists-with-different-credential':
-      //   //   AppDialogs.showInformationDialog("Ya exite la cuenta",
-      //   //       "El mail de la cuenta está asociado a otro método de login");
-      //   //   break;
-      //   // case "too-many-requests":
-      //   //   AppDialogs.showInformationDialog("Límite de intentos alcanzado",
-      //   //       "Espere unos minutos y vuelva a intentar acceder nuevamente");
-      //   //   break;
-      //   // case "email-already-exists":
-      //   //   AppDialogs.showEmailAlreadyExistsDialog();
-      //   //   break;
-      //   // case 'weak-password':
-      //   //   AppDialogs.showWeakPasswordDialog();
-      //   //   break;
-      //   // case 'invalid-email':
-      //   //   AppDialogs.showInvalidEmailDialog();
-      //   //   break;
-      //   // case 'invalid-password':
-      //   //   AppDialogs.showInvalidPasswordDialog();
-      //   //   break;
-      //   // case 'user-not-found':
-      //   //   AppDialogs.showUserNotFoundDialog();
-      //   // break;
-      //   default:
-      //     // AppDialogs.showUnknownErrorDialog();
-      //     print(e);
-      // }
     }
   }
 }

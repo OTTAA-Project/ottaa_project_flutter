@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
+import 'package:ottaa_project_flutter/app/data/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/app/data/service/firebase_database_service.dart';
 
 class FirebaseDatabaseRepository {
@@ -29,10 +30,12 @@ class FirebaseDatabaseRepository {
   Future<void> uploadDataToFirebaseRealTime({
     required String data,
     required String type,
+    required String languageCode,
   }) async =>
       await _firebaseDatabaseService.uploadDataToFirebaseRealTime(
         data: data,
         type: type,
+        languageCode: languageCode,
       );
 
   Future<void> uploadBoolToFirebaseRealtime({
@@ -64,7 +67,7 @@ class FirebaseDatabaseRepository {
   Future<String> fetchUserEmail() async =>
       await _firebaseDatabaseService.fetchUserEmail();
 
-  Future<String> fetchCurrentVersion() async =>
+  Future<double> fetchCurrentVersion() async =>
       await _firebaseDatabaseService.fetchCurrentVersion();
 
   Future<int> getPicNumber() async =>
@@ -83,4 +86,65 @@ class FirebaseDatabaseRepository {
       dateOfBirthInMs: dateOfBirthInMs,
     );
   }
+
+  Future<void> saveUserPhotoUrl({required String photoUrl}) async =>
+      await _firebaseDatabaseService.saveUserPhotoUrl(photoUrl: photoUrl);
+
+  Future<String> fetchUserPhotoUrl() async =>
+      await _firebaseDatabaseService.fetchUserPhotoUrl();
+
+  String fetchCurrentUserUID() =>
+      _firebaseDatabaseService.fetchCurrentUserUID();
+
+  Future<List<Pict>> fetchOtherPictos({
+    required String languageName,
+    required String assetName,
+    required String firebaseName,
+    required String fileName,
+  }) async =>
+      await _firebaseDatabaseService.fetchOtherPictos(
+        languageName: languageName,
+        assetName: assetName,
+        firebaseName: firebaseName,
+        fileName: fileName,
+      );
+
+  Future<List<Grupos>> fetchOtherGrupos({
+    required String languageName,
+    required String assetName,
+    required String firebaseName,
+    required String fileName,
+  }) async =>
+      await _firebaseDatabaseService.fetchOtherGrupos(
+        languageName: languageName,
+        assetName: assetName,
+        firebaseName: firebaseName,
+        fileName: fileName,
+      );
+
+  Future<void> uploadFrases({
+    required String language,
+    required String data,
+    required String type,
+  }) async =>
+      await _firebaseDatabaseService.uploadFrases(
+          language: language, data: data, type: type);
+
+  Future<List<Sentence>> fetchFrases({
+    required String language,
+    required String type,
+  }) async =>
+      await _firebaseDatabaseService.fetchFrases(
+        language: language,
+        type: type,
+      );
+
+  Future<List<Sentence>> fetchFavouriteFrases({
+    required String language,
+    required String type,
+  }) async =>
+      await _firebaseDatabaseService.fetchFavouriteFrases(
+        language: language,
+        type: type,
+      );
 }

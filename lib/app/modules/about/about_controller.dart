@@ -61,8 +61,8 @@ class AboutController extends GetxController {
   Future<void> fetchCurrentVersion() async {
     // final ref = databaseRef.child('version/');
     // final res = await ref.get();
-    final res = await _dataController.fetchCurrentVersion();
-    currentOTTAAVersion.value = res;
+    final double res = await _dataController.fetchCurrentVersion();
+    currentOTTAAVersion.value = res.toString();
   }
 
   Future<void> launchEmailSubmission() async {

@@ -26,14 +26,20 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
 
 ## Ways of contributing
 
-- As a developer 
-- As a translator 
-- As a manual tester
-- As an automation tester 
+You may contribute to OTTAA
+
+- as a developer; 
+- as a translator; 
+- as a manual tester;
+- as an automation tester. 
 
 ## As a developer
 
-### Setting up your IDE
+### Required knowledge (placeholder)
+
+In order to contribute as a developer, you will need to have a basic understanding of [this/these coding languge/s] and [this/these tool/s (could be a framework, library, platform)]. We also strongly recommend you be familiar with [these language/technology that might not be as important as the other two mentioned but is still important] .
+
+#### Setting up your IDE
 
 - Run `flutter pub get` to get the dependencies.
 - Run `flutter pub run build_runner build` to generate the model class code.
@@ -54,27 +60,109 @@ Please bear the following in mind when creating a PR:
 * Make the PR in the corresponding branch.
 * Avoid your PR containing unrelated commits, keep it focused on its scope. 
 
-|Branch|Description|
-|---|---|
-|Version| Main |
-|Feature| Add new features |
-|Hotfix|  Hot-fix about a version|
-|Bugfix|  Bug-fix about a version|
+
+#### Commits
+
+We use the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for our commit messages. Under this convention the commit message should be structured like this:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Bear in mind:
+
+1) Type *fix:*: patches a bug in your codebase.
+2) Type *feat:*: introduces a new feature to the codebase (this correlates with MINOR in Semantic Versioning).
+3) Types other than *fix:*: and *feat:*: are allowed, for example *build:*, *chore:*, *ci:*, *docs:*, *style:*, *refactor:*, *perf:*, *test:*.
+4) Footer BREAKING CHANGE or *!* after type/scope: introduces a breaking API change (correlating with MAJOR in Semantic Versioning). 
+5) A BREAKING CHANGE can be part of commits of any type.
+6) Footers other than *BREAKING CHANGE* may be provided and follow a convention similar to [git trailer format](https://git-scm.com/docs/git-interpret-trailers).
+
+##### Examples
+
+Commit message with description and BREAKING CHANGE footer:
+
+*feat: allow provided config object to extend other configs*
+*BREAKING CHANGE: `extends` key in config file is now used for extending other config files*
+
+
+Commit message with scope and ! to draw attention to breaking change
+
+*feat(api)!: send an email to the customer when a product is shipped
+
+Commit message with both ! and BREAKING CHANGE footer
+
+*chore!: drop support for Node 6
+*BREAKING CHANGE: use JavaScript features not available in Node 6.
+
+
+#### Branch naming 
+
+To name and describe our branches we use the type of change it will contain and a short description, following Git [branching models](https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows).
+
+Examples:
+
+|Instance|Branch|Description, Instructions, Notes|
+|---|---|---|
+|Stable|	main	|Accepts merges from Working and Hotfixes|
+|Development|	dev|Accepts merges from Features/Issues, Fixes and Hotfixes|
+|Features/Issues|	feat/*	|Always branch off HEAD of Working|
+|Fixes|	fix/*	|Always branch off HEAD of Working|
+|Hotfix|	hotfix/*	|Always branch off Stable
 
 
 ### Code conventions
 
-#### On commenting
+Consistent code writing, commenting and documenting style is key to collaboration. Make sure that you read the complete *Code conventions* section carefully and that your code complies with our guidelines. We are using [Effective Dart: Style](https://dart.dev/guides/language/effective-dart/style) as our main style guide for Dart. 
 
-* Comments should always be full English sentences.
+#### On commenting and documenting code
 
-* As a default, always document the source code via clear comments.
+To get familiarized with the code, check the [API reference]()(add link to automatic doc when ready). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it and will ask you to use it as well when commenting your code. If you require assistance with Dartdoc please check [Using Dartdoc](#using-dartdoc) below.
 
-* Comment all your classes explaining their purpose and how to implement them if required.
+* Classes, variables, constants and relationship between classes should always be documented.
+
+* Your comments should be full English sentences.
+
+* Use [Dartdoc](https://pub.dev/packages/dartdoc) to generate automatic standardized documentation for your code. 
+
+* Use ```///``` to comment your code as it is the special syntax Dartdoc looks for when generating the documentation files.
+
+* Do **not** use /* block comments \*/ for documentation:
+
+```
+[x]
+
+void greet(String name) {
+  /* Assume we have a valid name. */
+  print('Hi, $name!');
+}
+``` 
+* **Do** instead:
+
+```
+[✓]
+
+void greet(String name) {
+  // Assume we have a valid name.
+  print('Hi, $name!');
+}
+```
+
+* You *can* use a block comment (/* ... \*/) to temporarily comment out a section of code, but all other comments should use ///.
+
+
+#### Using Dartdoc
+
+If this is your first time using it or you have any doubts about installation, execution, or formatting, please read our [Dartdoc API reference for Flutter](/dartdoc_automatic_documentation.md) to get started.
+
 
 #### On code duplication
 
-* Don't copy-paste source code. Reuse it in a  way that makes sense, re writing the neccessary parts.
+* Do not copy-paste source code. Reuse it in a  way that makes sense, rewriting the necessary parts.
 
 
 #### On importing libraries 
@@ -93,21 +181,26 @@ Please bear the following in mind when creating a PR:
 
 * Use Grandle level app
 
- Example :
-```
+Example :
 
-```
+```add code example here```
+
+
 #### On indentation
 
 
  Switch case
-```
+ 
+Example :
 
-```
+```add code example here```
+
+
 If / else or else if
-```
 
-```
+Example :
+
+```add code example here```
 
 #### On classes
 
@@ -115,42 +208,35 @@ If / else or else if
 
 * The Method of the class can be public, private or protected.
 
-* The class can be public or private.
+* Classes can be public or private.
 
-* Class name must be transparent and representative of its purpose.
+* Class names must be transparent and representative of its purpose.
 
 * Class names should be nouns in UpperCamelCase, with the first letter of every word capitalized.
 
 Example :
 
-```
+```add code example here```
 
-```
 #### On variables
 
 * Local variables, instance variables, and class variables should be written in lowerCamelCase: with the exception of the first world, the first letter of every word should be capitalized.
 
-example :
+Example :
 
-```
-
-```
+```add code example here```
 
 #### On constants
 
 * Constants should be written in UPPERCASE with words separated by underscores.
 
-example :
+Example:
 
-
-```
-
-```
+```add code example here```
 
 #### Firebase index:
 
-This is the firebase tree index:
-
+[FIREBASE TREE INDEX NEEDS UPDATING]
 ```
 #!code
 
@@ -172,13 +258,13 @@ index
 
 ### Analytics implementation
 
-[Here](https://github.com/VicColombo/ottaa_project_flutter/blob/master/AnalyticsImplementation.md) is the list of events that should be tracked.
+[Here](/analytics_implementation.md) is the list of events that should be tracked.
 
 ## As a translator
 
-We currently support Spanish, English, Portuguese and French, but we are open to adding new languages as users' needs arise. Everyone is welcome to contribute with suggestions, changes or error corrections via email at **support@ottaaproject.com**, use subject "Contribution".
+We currently support Spanish, English, Portuguese and French, but we are open to adding new languages as users' needs arise. Everyone is welcome to contribute with suggestions, changes or error corrections via email at **support@ottaaproject.com**, use the subject "Contribution".
 
-Our focus right now is growing in Latin America, with this in mind we would love some help with **pictogram localization**, that is to say, to have pictograms translated **based each country/region-specific culture and Spanish variety**. For example, we know that a car 🚗 is commonly *carro* in México but *auto* or *coche* in Argentina. 
+Our focus right now is growing in Latin America, with this in mind we would love some help with **pictogram localization**, that is to say, to have pictograms translated **based on each country/region-specific culture and Spanish variety**. For example, we know that a car 🚗 is commonly *carro* in México but *auto* or *coche* in Argentina. 
 
 Chile, Argentina, Colombia, and the Caribbean are our current priorities, but of course we welcome help with any of our supported languages and regions.
 

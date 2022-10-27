@@ -58,8 +58,7 @@ Widget step1Onboarding<widget>(
                           image: AssetImage('assets/imgs/logo_ottaa.webp'),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: verticalSize * 0.05),
+                          padding: EdgeInsets.only(bottom: verticalSize * 0.05),
                           child: Text(
                             "check_if_the_info_is_correct_nif_not_change_it_as_you_wish_this_will_help_us_to_personalize_the_app_for_you"
                                 .tr,
@@ -89,8 +88,8 @@ Widget step1Onboarding<widget>(
                                         contentPadding: const EdgeInsets.all(0),
                                         isDense: true,
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: kOTTAAOrangeNew),
+                                          borderSide: BorderSide(
+                                              color: kOTTAAOrangeNew),
                                         ),
                                       ),
                                       cursorColor: kOTTAAOrangeNew,
@@ -106,7 +105,7 @@ Widget step1Onboarding<widget>(
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    vertical: verticalSize * 0.05),
+                                    vertical: verticalSize * 0.02),
                                 child: GestureDetector(
                                   onTap: () {
                                     showDialog(
@@ -215,7 +214,7 @@ Widget step1Onboarding<widget>(
       ),
       Positioned(
         right: horizontalSize * 0.05,
-        bottom: verticalSize * 0.10,
+        bottom: verticalSize * 0.05,
         child: Container(
           width: horizontalSize * 0.35,
           child: Row(
@@ -257,9 +256,31 @@ Widget step1Onboarding<widget>(
                         child: CircularProgressIndicator(),
                       ),
                     );
-                    // await _.uploadInfo();
-                    // print('hi');
-                    // await _sharedPrefCient.setFirstTimePref();
+                    final male = 'Male'.tr;
+                    final female = 'Female'.tr;
+                    final binary = 'Binary'.tr;
+                    final fluid = 'Fluid'.tr;
+                    final other = 'Other'.tr;
+                    if (male.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for male
+                      await _.uploadDataForSelectedGender(maleOrFemale: true);
+                    } else if (female.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for female
+                      await _.uploadDataForSelectedGender(maleOrFemale: false);
+                    } else if (binary.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for binary
+                    } else if (fluid.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for fluid
+                    } else if (other.toString().toLowerCase() ==
+                        _.gender.value.toString().toLowerCase()) {
+                      //todo : add here for other
+                    }
+                    await _.uploadInfo();
+                    await _sharedPrefCient.setFirstTimePref();
                     Get.back();
                     controller.animateToPage(1,
                         duration: Duration(milliseconds: 300),

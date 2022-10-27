@@ -21,10 +21,12 @@ class StepButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final verticalSize = MediaQuery.of(context).size.height;
+    final horizontalSize = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: this.onTap,
       child: Container(
-        width: 150,
+        width: horizontalSize * 0.17,
         height: 40,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -32,9 +34,14 @@ class StepButton extends StatelessWidget {
           children: [
             if (this.leading != null)
               Icon(this.leading!, color: this.fontColor),
-            AutoSizeText(this.text,
-                style: TextStyle(
-                    color: this.fontColor, fontWeight: FontWeight.bold)),
+            Text(
+              this.text,
+              style: TextStyle(
+                color: this.fontColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
             if (this.trailing != null)
               Icon(this.trailing!, color: this.fontColor),
           ],
