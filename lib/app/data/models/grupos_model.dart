@@ -18,6 +18,7 @@ class Grupos {
   TextoGrupos texto;
   int tipo;
   ImagenGrupos imagen;
+  @JsonKey(nullable: true,includeIfNull: true,defaultValue: [])
   List<GrupoRelacion> relacion;
   int? frecuencia;
   List<String>? tags;

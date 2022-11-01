@@ -177,18 +177,13 @@ class HomeController extends GetxController {
           phrase: phrase,
         );
     }
-    List<String> dataUpload = [];
-    mostUsedSentences.forEach((element) {
-      final obj = jsonEncode(element);
-      dataUpload.add(obj);
-    });
     mostUsedSentences.forEach((element) {
       print(
           'Sentence: ${element.frase},Here is the frequency: ${element.frecuencia}');
     });
     await dataController.uploadFrases(
       language: language,
-      data: dataUpload.toString(),
+      data: mostUsedSentences,
       type: Constants.MOST_USED_SENTENCES,
     );
   }
@@ -331,7 +326,8 @@ class HomeController extends GetxController {
 
   addPictToSentence(Pict pict) async {
     if (this._sentencePicts.isEmpty) {
-      if (picts[0].relacion!.isEmpty) {
+      if (picts[0].relacion == null) {
+        picts[0].relacion = [];
         picts[0].relacion!.add(
               Relacion(id: pict.id, frec: 1),
             );
@@ -411,22 +407,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> loadPicts() async {
-    await Future.delayed(
-      Duration(milliseconds: 500),
-    );
-    /* if (_ttsController.languaje == Constants.LANGUAGE_CODES['French']) {
-      this.picts = await this._pictsRepository.getFrench();
-      this.grupos = await this._grupoRepository.getFrench();
-    }
-    if (_ttsController.languaje == Constants.LANGUAGE_CODES['Portuguese']) {
-      this.picts = await this._pictsRepository.getPortuguese();
-      this.grupos = await this._grupoRepository.getPortuguese();
-    }
-    if (_ttsController.languaje == Constants.LANGUAGE_CODES['Spanish'] ||
-        _ttsController.languaje == Constants.LANGUAGE_CODES['English']) {
-      this.picts = await this._pictsRepository.getAll();
-      this.grupos = await this._grupoRepository.getAll();
-    }*/
     this.picts = await this._pictsRepository.getAll();
     this.grupos = await this._grupoRepository.getAll();
     await suggest(0);
@@ -635,7 +615,7 @@ class HomeController extends GetxController {
     });
 
     /// saving changes to file
-    if (!kIsWeb) {
+   /* if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(
         data: fileDataPicts.toString(),
@@ -645,13 +625,18 @@ class HomeController extends GetxController {
     }
     //for the file data
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool('Pictos_file', true);
+    await instance.setBool(
+        Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
+        true);*/
     // print(res1);
     //upload to the firebase
-    await _pictogramController.uploadToFirebasePicto(
-      data: fileDataPicts.toString(),
+    await dataController.uploadPictosToFirebaseRealTime(
+      data: picts,
+      languageCode: language,
+      type: 'Pictos',
     );
-    await _pictogramController.pictoExistsOnFirebase();
+    // await _pictogramController.pictoExistsOnFirebase();
     suggestedPicts.removeAt(suggestedIndexMainScreen);
     update(['suggested']);
     Get.back();

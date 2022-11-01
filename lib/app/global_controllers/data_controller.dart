@@ -37,6 +37,54 @@ class DataController extends GetxController {
         languageCode: languageCode,
       );
 
+  Future<void> uploadGruposToFirebaseRealTime({
+    required List<Grupos> data,
+    required String type,
+    required String languageCode,
+  }) async =>
+      await _firebaseDatabaseController.uploadGruposToFirebaseRealTime(
+        data: data,
+        type: type,
+        languageCode: languageCode,
+      );
+
+  Future<void> uploadPictosToFirebaseRealTime({
+    required List<Pict> data,
+    required String type,
+    required String languageCode,
+  }) async =>
+      await _firebaseDatabaseController.uploadPictosToFirebaseRealTime(
+        data: data,
+        type: type,
+        languageCode: languageCode,
+      );
+
+  Future<void> uploadEditingPictoToFirebaseRealTime({
+    required Pict data,
+    required String type,
+    required String languageCode,
+    required int index,
+  }) async =>
+      await _firebaseDatabaseController.uploadEditingPictoToFirebaseRealTime(
+        data: data,
+        type: type,
+        languageCode: languageCode,
+        index: index,
+      );
+
+  Future<void> uploadGruposEditToFirebaseRealTime({
+    required Grupos data,
+    required String type,
+    required String languageCode,
+    required int index,
+  }) async =>
+      await _firebaseDatabaseController.uploadGruposEditToFirebaseRealTime(
+        data: data,
+        type: type,
+        languageCode: languageCode,
+        index: index,
+      );
+
   Future<void> uploadBoolToFirebaseRealtime({
     required bool data,
     required String type,
@@ -97,35 +145,9 @@ class DataController extends GetxController {
   String fetchCurrentUserUID() =>
       _firebaseDatabaseController.fetchCurrentUserUID();
 
-  Future<List<Pict>> fetchOtherPictos({
-    required String languageName,
-    required String assetName,
-    required String firebaseName,
-    required String fileName,
-  }) async =>
-      await _firebaseDatabaseController.fetchOtherPictos(
-        languageName: languageName,
-        assetName: assetName,
-        firebaseName: firebaseName,
-        fileName: fileName,
-      );
-
-  Future<List<Grupos>> fetchOtherGrupos({
-    required String languageName,
-    required String assetName,
-    required String firebaseName,
-    required String fileName,
-  }) async =>
-      await _firebaseDatabaseController.fetchOtherGrupos(
-        languageName: languageName,
-        assetName: assetName,
-        firebaseName: firebaseName,
-        fileName: fileName,
-      );
-
   Future<void> uploadFrases({
     required String language,
-    required String data,
+    required List<Sentence> data,
     required String type,
   }) async =>
       await _firebaseDatabaseController.uploadFrases(

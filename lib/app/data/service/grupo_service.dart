@@ -9,24 +9,6 @@ class GrupoService {
   Future<List<Grupos>> getAll() async {
     return await _dataController.fetchGrupos();
   }
-
-  Future<List<Grupos>> getFrench() async {
-    return _dataController.fetchOtherGrupos(
-      languageName: Constants.FRENCH_LANGUAGE_NAME,
-      assetName: 'assets/languages/grupos_fr.json',
-      firebaseName: Constants.FRENCH_GRUPO_FIREBASE_NAME,
-      fileName: Constants.FRENCH_GRUPO_FILE_NAME,
-    );
-  }
-
-  Future<List<Grupos>> getPortuguese() async {
-    return _dataController.fetchOtherGrupos(
-      languageName: Constants.PORTUGUESE_LANGUAGE_NAME,
-      assetName: 'assets/languages/grupos_pt.json',
-      firebaseName: Constants.PORTUGUESE_GRUPO_FIREBASE_NAME,
-      fileName: Constants.PORTUGUESE_GRUPO_FILE_NAME,
-    );
-  }
 }
 
 // final String grupoString =

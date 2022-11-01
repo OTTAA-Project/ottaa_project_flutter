@@ -5,6 +5,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +29,7 @@ class AuthService {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
         await googleUser!.authentication;
-    final name  = googleUser.displayName!;
+    final name = googleUser.displayName!;
     print('name from the google auth');
     print(name);
     final auth.OAuthCredential credential = auth.GoogleAuthProvider.credential(
@@ -42,7 +43,10 @@ class AuthService {
       // print(userCredentials.user!.photoURL);
       String url = userCredentials.user!.photoURL!;
       url.replaceFirst('s96-c', 's400-c');
-      await dataController.saveUserPhotoUrl(photoUrl: url);
+
+      /// saving imageUrl in a sharedPref to be upload afterwards
+      // await dataController.saveUserPhotoUrl(photoUrl: url);
+      await saveImageUrlTobeUsedLater(imageUrl: url);
       // print(userCredentials.user!.email);
     }
     print('name from the firebae auth');
@@ -52,20 +56,21 @@ class AuthService {
 
   Future<auth.UserCredential> signInWithFacebook() async {
     // Trigger the sign-in flow
-    final LoginResult result = await FacebookAuth.instance.login(permissions: ["user_birthday", "user_gender",'public_profile']);
-
+    final LoginResult result = await FacebookAuth.instance
+        .login(permissions: ["user_birthday", "user_gender", 'public_profile']);
     // Create a credential from the access token
     auth.OAuthCredential facebookAuthCredential =
         auth.FacebookAuthProvider.credential(result.accessToken!.token);
-print(result.accessToken!.token);
+    print(result.accessToken!.token);
     // Once signed in, return the UserCredential
     var userCredentials = await auth.FirebaseAuth.instance
         .signInWithCredential(facebookAuthCredential);
     if (userCredentials.user != null) {
+      print(userCredentials.additionalUserInfo!.isNewUser);
       print(userCredentials.user);
       String url = userCredentials.user!.photoURL!;
       url = url + '?type=large';
-      await dataController.saveUserPhotoUrl(photoUrl: url);
+      await saveImageUrlTobeUsedLater(imageUrl: url);
     }
     return userCredentials;
   }
@@ -107,7 +112,11 @@ print(result.accessToken!.token);
   Future<void> signOut() async {
     final sharedPrefClient = await SharedPreferences.getInstance();
     await sharedPrefClient.setBool('First_time', false);
-    await sharedPrefClient.setBool('Pictos_file', false);
+    final instance = await SharedPreferences.getInstance();
+    await sharedPrefClient.setBool(
+        Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
+        false);
     Future.wait([
       _firebaseAuth.signOut(),
       _googleSignIn.signOut(),
@@ -153,5 +162,13 @@ print(result.accessToken!.token);
   Future<void> sendPasswordResetMail(String email) async {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
     return null;
+  }
+
+  Future<void> saveImageUrlTobeUsedLater({required String imageUrl}) async {
+    final instance = await SharedPreferences.getInstance();
+    await instance.setString(
+      'ImageUrl',
+      imageUrl,
+    );
   }
 }

@@ -13,19 +13,29 @@ import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app/modules/splash/splash_binding.dart';
 import 'app/routes/app_pages.dart';
-import 'package:build_daemon/constants.dart';
 import 'app/utils/dependency_injection.dart';
 
 void main() async {
+  await Future.delayed(
+    Duration(seconds: 2),
+  );
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+    if (kIsWeb)
+      await Firebase.initializeApp(
+        options: FirebaseOptions(
+
+        ),
+      );
+    else
+      await Firebase.initializeApp();
+
     DependencyInjection.init();
     // final String defaultSystemLocale = Platform.localeName;
-    final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
-    print('these are the locales Asim asked for');
-    print(systemLocales.toList());
-    print('above it');
+    final List<Locale> systemLocales = WidgetsBinding.instance.window.locales;
+    // print('these are the locales Asim asked for');
+    // print(systemLocales.toList());
+    // print('above it');
     // Pass all uncaught errors from the framework to Crashlytics.
     if (!kIsWeb) {
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
@@ -53,6 +63,7 @@ void main() async {
       ),
     );
   }, (error, stackTrace) {
+    print(error);
     if (!kIsWeb) {
       FirebaseCrashlytics.instance.recordError(error, stackTrace);
     }

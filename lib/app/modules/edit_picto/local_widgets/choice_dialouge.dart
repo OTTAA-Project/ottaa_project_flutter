@@ -9,7 +9,6 @@ import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
 import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
@@ -71,7 +70,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   fileDataGrupo.add(obj);
                 });
 
-                /// saving changes to file
+               /* /// saving changes to file
                 if (!kIsWeb) {
                   final localFile = LocalFileController();
                   await localFile.writeGruposToFile(
@@ -84,7 +83,9 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 final instance = await SharedPreferences.getInstance();
                 switch (_homeController.language) {
                   case "es-AR":
-                    await instance.setBool('Grupos_file', true);
+                    await instance.setBool(
+                        "${Constants.LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo",
+                        true);
                     break;
                   case "en-US":
                     await instance.setBool('Grupos_file', true);
@@ -100,14 +101,14 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   default:
                     await instance.setBool('Grupos_file', true);
                 }
-
+*/
                 // await instance.setBool('Grupos_file', true);
                 // print(res1);
                 //upload to the firebase
                 await _pictogramController.uploadToFirebaseGrupo(
-                  data: fileDataGrupo.toString(),
+                  data: dataGrupo,
                 );
-                await _pictogramController.gruposExistsOnFirebase();
+                // await _pictogramController.gruposExistsOnFirebase();
                 _pictogramController.selectedGruposPicts.removeAt(index!);
                 _pictogramController.pictoGridviewOrPageview.value =
                     !_pictogramController.pictoGridviewOrPageview.value;

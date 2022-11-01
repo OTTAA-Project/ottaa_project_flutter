@@ -1,3 +1,4 @@
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefClient {
@@ -19,11 +20,16 @@ class SharedPrefClient {
 
   Future<bool> getPictosFile() async {
     final instance = await SharedPreferences.getInstance();
-    return instance.getBool('Pictos_file') ?? false;
+    return instance.getBool(Constants.LANGUAGE_CODES[
+            instance.getString('Language_KEY') ?? 'Spanish']!) ??
+        false;
   }
 
   Future<void> setPictosFile() async {
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool('Pictos_file',true);
+    await instance.setBool(
+        Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
+        true);
   }
 }

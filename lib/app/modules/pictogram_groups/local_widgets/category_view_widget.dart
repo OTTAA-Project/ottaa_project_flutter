@@ -10,8 +10,8 @@ import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_grupo_page/edit_grupo_page.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
+import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../global_controllers/local_file_controller.dart';
 import '../../../utils/CustomAnalytics.dart';
 import '../../edit_picto/edit_picto_controller.dart';
 import 'category_page_widget.dart';
@@ -220,8 +220,6 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 Get.to(() => EditGrupoPage());
                 CustomAnalyticsEvents.setEventWithParameters("Touch",
                     CustomAnalyticsEvents.createMyMap('name', 'Edit '));
-                CustomAnalyticsEvents.setEventWithParameters("Touch",
-                    CustomAnalyticsEvents.createMyMap('name', 'Edit '));
               } else {
                 _homeController.initializePageViewer();
                 Get.to(() => BuyPaidVersionPage());
@@ -250,7 +248,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   fileDataGrupo.add(obj);
                 });
 
-                /// saving changes to file
+               /* /// saving changes to file
                 if (!kIsWeb) {
                   final localFile = LocalFileController();
                   await localFile.writeGruposToFile(
@@ -261,13 +259,15 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                 }
                 //for the file data
                 final instance = await SharedPreferences.getInstance();
-                await instance.setBool('Grupos_file', true);
+                await instance.setBool(
+                    "${Constants.LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo",
+                    true);
                 // print(res1);
-                //upload to the firebase
+                //upload to the firebase*/
                 await _pictogramController.uploadToFirebaseGrupo(
-                  data: fileDataGrupo.toString(),
+                  data: dataGrupo,
                 );
-                await _pictogramController.gruposExistsOnFirebase();
+                // await _pictogramController.gruposExistsOnFirebase();
                 Get.back();
               } else {
                 _homeController.initializePageViewer();

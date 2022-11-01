@@ -9,22 +9,4 @@ class PictsService {
   Future<List<Pict>> getAll() async {
     return _dataController.fetchPictos();
   }
-
-  Future<List<Pict>> getPortuguese() async {
-    return _dataController.fetchOtherPictos(
-      languageName: Constants.PORTUGUESE_LANGUAGE_NAME,
-      assetName: 'assets/languages/pictos_pt.json',
-      firebaseName: Constants.PORTUGUESE_PICTO_FIREBASE_NAME,
-      fileName: Constants.PORTUGUESE_PICTO_FILE_NAME,
-    );
-  }
-
-  Future<List<Pict>> getFrench() async {
-    return _dataController.fetchOtherPictos(
-      languageName: Constants.FRENCH_LANGUAGE_NAME,
-      assetName: 'assets/languages/pictos_fr.json',
-      firebaseName: Constants.FRENCH_PICTO_FIREBASE_NAME,
-      fileName: Constants.FRENCH_PICTO_FILE_NAME,
-    );
-  }
 }

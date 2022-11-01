@@ -11,9 +11,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
-import 'package:ottaa_project_flutter/app/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 
 class PictogramGroupsController extends GetxController {
   late ScrollController categoriesGridController;
@@ -411,7 +408,7 @@ class PictogramGroupsController extends GetxController {
     pict.imagen.picto = url;
   }
 
-  Future<void> uploadToFirebaseGrupo({required String data}) async {
+  Future<void> uploadToFirebaseGrupo({required List<Grupos> data}) async {
     // final language = _ttsController.languaje;
     // final User? auth = FirebaseAuth.instance.currentUser;
     // final ref = databaseRef.child('Grupo/${auth!.uid}/');
@@ -425,35 +422,35 @@ class PictogramGroupsController extends GetxController {
 
     switch (_homeController.language) {
       case "es-AR":
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadGruposToFirebaseRealTime(
           data: data,
           languageCode: ttsController.languaje,
           type: 'Grupos',
         );
         break;
       case "en-US":
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadGruposToFirebaseRealTime(
           data: data,
           languageCode: ttsController.languaje,
           type: 'Grupos',
         );
         break;
       case "fr-FR":
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadGruposToFirebaseRealTime(
           data: data,
           type: 'Grupos',
           languageCode: ttsController.languaje,
         );
         break;
       case "pt-BR":
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadGruposToFirebaseRealTime(
           data: data,
           type: 'Grupos',
           languageCode: ttsController.languaje,
         );
         break;
       default:
-        await _dataController.uploadDataToFirebaseRealTime(
+        await _dataController.uploadGruposToFirebaseRealTime(
           data: data,
           type: 'Grupos',
           languageCode: ttsController.languaje,
@@ -475,73 +472,73 @@ class PictogramGroupsController extends GetxController {
     );
   }
 
-  Future<void> gruposExistsOnFirebase() async {
-    // final User? auth = FirebaseAuth.instance.currentUser;
-    // final ref = databaseRef.child('GruposExistsOnFirebase/${auth!.uid}/');
-    // await ref.set({
-    //   'value': true,
-    // });
+  // Future<void> gruposExistsOnFirebase() async {
+  //   // final User? auth = FirebaseAuth.instance.currentUser;
+  //   // final ref = databaseRef.child('GruposExistsOnFirebase/${auth!.uid}/');
+  //   // await ref.set({
+  //   //   'value': true,
+  //   // });
+  //
+  //   switch (_homeController.language) {
+  //     case "es-AR":
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true, type: 'GruposExistsOnFirebase');
+  //       break;
+  //     case "en-US":
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true, type: 'GruposExistsOnFirebase');
+  //       break;
+  //     case "fr-FR":
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true,
+  //           type: 'GruposExistsOnFirebase${Constants.FRENCH_LANGUAGE_NAME}');
+  //       break;
+  //     case "pt-BR":
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true,
+  //           type:
+  //               'GruposExistsOnFirebase${Constants.PORTUGUESE_LANGUAGE_NAME}');
+  //       break;
+  //     default:
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true, type: 'GruposExistsOnFirebase');
+  //   }
+  //   // await _dataController.uploadBoolToFirebaseRealtime(
+  //   //     data: true, type: 'GruposExistsOnFirebase');
+  // }
 
-    switch (_homeController.language) {
-      case "es-AR":
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true, type: 'GruposExistsOnFirebase');
-        break;
-      case "en-US":
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true, type: 'GruposExistsOnFirebase');
-        break;
-      case "fr-FR":
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true,
-            type: 'GruposExistsOnFirebase${Constants.FRENCH_LANGUAGE_NAME}');
-        break;
-      case "pt-BR":
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true,
-            type:
-                'GruposExistsOnFirebase${Constants.PORTUGUESE_LANGUAGE_NAME}');
-        break;
-      default:
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true, type: 'GruposExistsOnFirebase');
-    }
-    // await _dataController.uploadBoolToFirebaseRealtime(
-    //     data: true, type: 'GruposExistsOnFirebase');
-  }
-
-  Future<void> pictoExistsOnFirebase() async {
-    // final User? auth = FirebaseAuth.instance.currentUser;
-    // final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
-    // await ref.set({
-    //   'value': true,
-    // });
-    switch (_homeController.language) {
-      case "es-AR":
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true, type: 'PictsExistsOnFirebase');
-        break;
-      case "en-US":
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true, type: 'PictsExistsOnFirebase');
-        break;
-      case "fr-FR":
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true,
-            type: 'PictsExistsOnFirebase${Constants.FRENCH_LANGUAGE_NAME}');
-        break;
-      case "pt-BR":
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true,
-            type: 'PictsExistsOnFirebase${Constants.PORTUGUESE_LANGUAGE_NAME}');
-        break;
-      default:
-        await _dataController.uploadBoolToFirebaseRealtime(
-            data: true, type: 'PictsExistsOnFirebase');
-    }
-    // await _dataController.uploadBoolToFirebaseRealtime(
-    //     data: true, type: 'PictsExistsOnFirebase');
-  }
+  // Future<void> pictoExistsOnFirebase() async {
+  //   // final User? auth = FirebaseAuth.instance.currentUser;
+  //   // final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
+  //   // await ref.set({
+  //   //   'value': true,
+  //   // });
+  //   switch (_homeController.language) {
+  //     case "es-AR":
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true, type: 'PictsExistsOnFirebase');
+  //       break;
+  //     case "en-US":
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true, type: 'PictsExistsOnFirebase');
+  //       break;
+  //     case "fr-FR":
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true,
+  //           type: 'PictsExistsOnFirebase${Constants.FRENCH_LANGUAGE_NAME}');
+  //       break;
+  //     case "pt-BR":
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true,
+  //           type: 'PictsExistsOnFirebase${Constants.PORTUGUESE_LANGUAGE_NAME}');
+  //       break;
+  //     default:
+  //       await _dataController.uploadBoolToFirebaseRealtime(
+  //           data: true, type: 'PictsExistsOnFirebase');
+  //   }
+  //   // await _dataController.uploadBoolToFirebaseRealtime(
+  //   //     data: true, type: 'PictsExistsOnFirebase');
+  // }
 
   void uploadGrupoEdit(
       {required BuildContext context, RxBool? editPicBool}) async {
@@ -623,7 +620,7 @@ class PictogramGroupsController extends GetxController {
     _homeController.grupos[index] = grupoToEdit;
     grupos[index] = grupoToEdit;
     final data = _homeController.grupos;
-    List<String> fileData = [];
+  /*  List<String> fileData = [];
     data.forEach((element) {
       final obj = jsonEncode(element);
       fileData.add(obj);
@@ -637,15 +634,17 @@ class PictogramGroupsController extends GetxController {
         language: _homeController.language,
       );
       // print('writing to file');
-    }
+    }*/
     //for the file data
-    final instance = await SharedPreferences.getInstance();
+ /*   final instance = await SharedPreferences.getInstance();
     switch (_homeController.language) {
       case "es-AR":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "en-US":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "fr-FR":
         await instance.setBool(Constants.FRENCH_GRUPO_FILE_NAME, true);
@@ -654,13 +653,19 @@ class PictogramGroupsController extends GetxController {
         await instance.setBool(Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
         break;
       default:
-        await instance.setBool('Grupos_file', true);
-    }
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
+    }*/
     // await instance.setBool('Grupos_file', true);
     // print(res1);
     //upload to the firebase
-    await uploadToFirebaseGrupo(data: fileData.toString());
-    await gruposExistsOnFirebase();
+    await _dataController.uploadGruposEditToFirebaseRealTime(
+      data: grupoToEdit,
+      index: index,
+      languageCode: ttsController.languaje,
+      type: 'Grupos',
+    );
+    // await gruposExistsOnFirebase();
     // for refreshing the UI of listing
     categoryGridviewOrPageview.value = !categoryGridviewOrPageview.value;
     categoryGridviewOrPageview.value = !categoryGridviewOrPageview.value;
@@ -669,8 +674,10 @@ class PictogramGroupsController extends GetxController {
     Navigator.of(context).pop(true);
   }
 
-  void uploadChangesGrupos(
-      {required BuildContext context, RxBool? editPicBool}) async {
+  void uploadChangesGrupos({
+    required BuildContext context,
+    RxBool? editPicBool,
+  }) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -721,12 +728,12 @@ class PictogramGroupsController extends GetxController {
     grupo.texto.es = grupoNameController.text;
     grupo.id = _homeController.grupos.length;
     print(_homeController.grupos.length);
-    print(_homeController.grupos.last);
-    _homeController.grupos.add(grupo);
+    print(_homeController.grupos.last); //10,9
+    _homeController.grupos.add(grupo); //11,10
     print(_homeController.grupos.length);
     print(_homeController.grupos.last);
     final data = _homeController.grupos;
-    List<String> fileData = [];
+   /* List<String> fileData = [];
     data.forEach((element) {
       final obj = jsonEncode(element);
       fileData.add(obj);
@@ -740,15 +747,17 @@ class PictogramGroupsController extends GetxController {
         language: _homeController.language,
       );
       // print('writing to file');
-    }
+    }*/
     //for the file data
-    final instance = await SharedPreferences.getInstance();
+   /* final instance = await SharedPreferences.getInstance();
     switch (_homeController.language) {
       case "es-AR":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "en-US":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "fr-FR":
         await instance.setBool(Constants.FRENCH_GRUPO_FILE_NAME, true);
@@ -757,13 +766,19 @@ class PictogramGroupsController extends GetxController {
         await instance.setBool(Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
         break;
       default:
-        await instance.setBool('Grupos_file', true);
-    }
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
+    }*/
     // await instance.setBool('Grupos_file', true);
     // print(res1);
     //upload to the firebase
-    await uploadToFirebaseGrupo(data: fileData.toString());
-    await gruposExistsOnFirebase();
+    await _dataController.uploadGruposEditToFirebaseRealTime(
+      data: grupo,
+      index: _homeController.grupos.length - 2,
+      type: 'Grupos',
+      languageCode: ttsController.languaje,
+    );
+    // await gruposExistsOnFirebase();
     // for refreshing the UI of listing
     categoryGridviewOrPageview.value = !categoryGridviewOrPageview.value;
     categoryGridviewOrPageview.value = !categoryGridviewOrPageview.value;
@@ -772,8 +787,10 @@ class PictogramGroupsController extends GetxController {
     Navigator.of(context).pop(true);
   }
 
-  void uploadChangesPicto(
-      {required BuildContext context, RxBool? editPicBool}) async {
+  Future<void> uploadChangesPicto({
+    required BuildContext context,
+    RxBool? editPicBool,
+  }) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -874,14 +891,14 @@ class PictogramGroupsController extends GetxController {
     print(_homeController.picts.last.texto.en);
     print('values are : $index : ${selectedGrupos.id}');
     final data = _homeController.picts;
-    List<String> fileData = [];
+   /* List<String> fileData = [];
     data.forEach((element) {
       final obj = jsonEncode(element);
       fileData.add(obj);
-    });
+    });*/
 
     /// saving changes to file
-    if (!kIsWeb) {
+    /*if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(
         data: fileData.toString(),
@@ -893,10 +910,12 @@ class PictogramGroupsController extends GetxController {
     final instance = await SharedPreferences.getInstance();
     switch (_homeController.language) {
       case "es-AR":
-        await instance.setBool('Pictos_file', true);
+        await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
       case "en-US":
-        await instance.setBool('Pictos_file', true);
+        await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
       case "fr-FR":
         await instance.setBool(Constants.FRENCH_PICTO_FILE_NAME, true);
@@ -905,14 +924,21 @@ class PictogramGroupsController extends GetxController {
         await instance.setBool(Constants.PORTUGUESE_PICTO_FILE_NAME, true);
         break;
       default:
-        await instance.setBool('Pictos_file', true);
+        await instance.setBool(Constants
+        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
-    }
-    // await instance.setBool('Pictos_file', true);
+    }*/
+    // await instance.setBool(Constants
+    //     .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
     // print(res1);
     //upload to the firebase
-    await uploadToFirebasePicto(data: fileData.toString());
-    await pictoExistsOnFirebase();
+    await _dataController.uploadEditingPictoToFirebaseRealTime(
+      data: pict,
+      type: 'Pictos',
+      languageCode: ttsController.languaje,
+      index: _homeController.picts.length - 2,
+    );
+    // await pictoExistsOnFirebase();
 
     final dataGrupo = _homeController.grupos;
     List<String> fileDataGrupo = [];
@@ -922,7 +948,7 @@ class PictogramGroupsController extends GetxController {
     });
 
     /// saving changes to file
-    if (!kIsWeb) {
+    /*if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writeGruposToFile(
         data: fileDataGrupo.toString(),
@@ -933,10 +959,12 @@ class PictogramGroupsController extends GetxController {
     //for the file data
     switch (_homeController.language) {
       case "es-AR":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "en-US":
-        await instance.setBool('Grupos_file', true);
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
         break;
       case "fr-FR":
         await instance.setBool(Constants.FRENCH_GRUPO_FILE_NAME, true);
@@ -945,13 +973,14 @@ class PictogramGroupsController extends GetxController {
         await instance.setBool(Constants.PORTUGUESE_GRUPO_FILE_NAME, true);
         break;
       default:
-        await instance.setBool('Grupos_file', true);
-    }
+        await instance.setBool("${Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
+    }*/
     // await instance.setBool('Grupos_file', true);
     // print(res1);
     //upload to the firebase
-    await uploadToFirebaseGrupo(data: fileDataGrupo.toString());
-    await gruposExistsOnFirebase();
+    await uploadToFirebaseGrupo(data: dataGrupo);
+    // await gruposExistsOnFirebase();
 
     // for refreshing the UI of listing
     pictoGridviewOrPageview.value = !pictoGridviewOrPageview.value;
