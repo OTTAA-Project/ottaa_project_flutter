@@ -12,7 +12,6 @@ import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_gro
 import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../global_controllers/local_file_controller.dart';
 import '../../../utils/CustomAnalytics.dart';
 import '../../edit_picto/edit_picto_controller.dart';
 import 'category_page_widget.dart';
@@ -249,7 +248,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   fileDataGrupo.add(obj);
                 });
 
-                /// saving changes to file
+               /* /// saving changes to file
                 if (!kIsWeb) {
                   final localFile = LocalFileController();
                   await localFile.writeGruposToFile(
@@ -264,7 +263,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                     "${Constants.LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo",
                     true);
                 // print(res1);
-                //upload to the firebase
+                //upload to the firebase*/
                 await _pictogramController.uploadToFirebaseGrupo(
                   data: dataGrupo,
                 );

@@ -9,7 +9,6 @@ import 'package:ottaa_project_flutter/app/routes/app_routes.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/paid_version_page/buy_paid_version_page.dart';
 import 'package:ottaa_project_flutter/app/utils/CustomAnalytics.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/edit_picto_controller.dart';
@@ -71,7 +70,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   fileDataGrupo.add(obj);
                 });
 
-                /// saving changes to file
+               /* /// saving changes to file
                 if (!kIsWeb) {
                   final localFile = LocalFileController();
                   await localFile.writeGruposToFile(
@@ -102,7 +101,7 @@ class ChoiceDialogue extends GetView<EditPictoController> {
                   default:
                     await instance.setBool('Grupos_file', true);
                 }
-
+*/
                 // await instance.setBool('Grupos_file', true);
                 // print(res1);
                 //upload to the firebase

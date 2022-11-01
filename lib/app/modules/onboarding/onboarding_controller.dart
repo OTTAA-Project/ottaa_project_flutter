@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,6 @@ import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -109,20 +107,20 @@ class OnboardingController extends GetxController {
       type: 'Pictos',
       languageCode: "es-AR",
     );
-    if (!kIsWeb) {
-      final localFile = LocalFileController();
-      await localFile.writePictoToFile(
-        data: fileData.toString(),
-        language: 'es-AR',
-      );
-      // print('writing to file');
-      //for the file data
-      final instance = await SharedPreferences.getInstance();
-      await instance.setBool(
-          Constants
-              .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
-          true);
-    }
+    // if (!kIsWeb) {
+    //   final localFile = LocalFileController();
+    //   await localFile.writePictoToFile(
+    //     data: fileData.toString(),
+    //     language: 'es-AR',
+    //   );
+    //   // print('writing to file');
+    //   //for the file data
+    //   final instance = await SharedPreferences.getInstance();
+    //   await instance.setBool(
+    //       Constants
+    //           .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
+    //       true);
+    // }
     // await _dataController.uploadBoolToFirebaseRealtime(
     //   data: true,
     //   type: 'PictsExistsOnFirebase',
@@ -148,7 +146,7 @@ class OnboardingController extends GetxController {
       type: 'Grupos',
       languageCode: "es-AR",
     );
-    if (!kIsWeb) {
+    /*if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writeGruposToFile(
         data: fileData.toString(),
@@ -161,6 +159,6 @@ class OnboardingController extends GetxController {
       await instance.setBool(
           "${Constants.LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo",
           true);
-    }
+    }*/
   }
 }

@@ -326,7 +326,8 @@ class HomeController extends GetxController {
 
   addPictToSentence(Pict pict) async {
     if (this._sentencePicts.isEmpty) {
-      if (picts[0].relacion!.isEmpty) {
+      if (picts[0].relacion == null) {
+        picts[0].relacion = [];
         picts[0].relacion!.add(
               Relacion(id: pict.id, frec: 1),
             );
@@ -614,7 +615,7 @@ class HomeController extends GetxController {
     });
 
     /// saving changes to file
-    if (!kIsWeb) {
+   /* if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(
         data: fileDataPicts.toString(),
@@ -624,8 +625,10 @@ class HomeController extends GetxController {
     }
     //for the file data
     final instance = await SharedPreferences.getInstance();
-    await instance.setBool(Constants
-        .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
+    await instance.setBool(
+        Constants
+            .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
+        true);*/
     // print(res1);
     //upload to the firebase
     await dataController.uploadPictosToFirebaseRealTime(

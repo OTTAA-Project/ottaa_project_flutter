@@ -11,9 +11,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
-import 'package:ottaa_project_flutter/app/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 
 class PictogramGroupsController extends GetxController {
   late ScrollController categoriesGridController;
@@ -623,7 +620,7 @@ class PictogramGroupsController extends GetxController {
     _homeController.grupos[index] = grupoToEdit;
     grupos[index] = grupoToEdit;
     final data = _homeController.grupos;
-    List<String> fileData = [];
+  /*  List<String> fileData = [];
     data.forEach((element) {
       final obj = jsonEncode(element);
       fileData.add(obj);
@@ -637,9 +634,9 @@ class PictogramGroupsController extends GetxController {
         language: _homeController.language,
       );
       // print('writing to file');
-    }
+    }*/
     //for the file data
-    final instance = await SharedPreferences.getInstance();
+ /*   final instance = await SharedPreferences.getInstance();
     switch (_homeController.language) {
       case "es-AR":
         await instance.setBool("${Constants
@@ -658,7 +655,7 @@ class PictogramGroupsController extends GetxController {
       default:
         await instance.setBool("${Constants
             .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
-    }
+    }*/
     // await instance.setBool('Grupos_file', true);
     // print(res1);
     //upload to the firebase
@@ -736,7 +733,7 @@ class PictogramGroupsController extends GetxController {
     print(_homeController.grupos.length);
     print(_homeController.grupos.last);
     final data = _homeController.grupos;
-    List<String> fileData = [];
+   /* List<String> fileData = [];
     data.forEach((element) {
       final obj = jsonEncode(element);
       fileData.add(obj);
@@ -750,9 +747,9 @@ class PictogramGroupsController extends GetxController {
         language: _homeController.language,
       );
       // print('writing to file');
-    }
+    }*/
     //for the file data
-    final instance = await SharedPreferences.getInstance();
+   /* final instance = await SharedPreferences.getInstance();
     switch (_homeController.language) {
       case "es-AR":
         await instance.setBool("${Constants
@@ -771,7 +768,7 @@ class PictogramGroupsController extends GetxController {
       default:
         await instance.setBool("${Constants
             .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
-    }
+    }*/
     // await instance.setBool('Grupos_file', true);
     // print(res1);
     //upload to the firebase
@@ -894,14 +891,14 @@ class PictogramGroupsController extends GetxController {
     print(_homeController.picts.last.texto.en);
     print('values are : $index : ${selectedGrupos.id}');
     final data = _homeController.picts;
-    List<String> fileData = [];
+   /* List<String> fileData = [];
     data.forEach((element) {
       final obj = jsonEncode(element);
       fileData.add(obj);
-    });
+    });*/
 
     /// saving changes to file
-    if (!kIsWeb) {
+    /*if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(
         data: fileData.toString(),
@@ -930,7 +927,7 @@ class PictogramGroupsController extends GetxController {
         await instance.setBool(Constants
         .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
-    }
+    }*/
     // await instance.setBool(Constants
     //     .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
     // print(res1);
@@ -951,7 +948,7 @@ class PictogramGroupsController extends GetxController {
     });
 
     /// saving changes to file
-    if (!kIsWeb) {
+    /*if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writeGruposToFile(
         data: fileDataGrupo.toString(),
@@ -978,7 +975,7 @@ class PictogramGroupsController extends GetxController {
       default:
         await instance.setBool("${Constants
             .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo", true);
-    }
+    }*/
     // await instance.setBool('Grupos_file', true);
     // print(res1);
     //upload to the firebase

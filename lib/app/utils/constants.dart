@@ -17,6 +17,6 @@ class Constants {
   static const PORTUGUESE_PICTO_FIREBASE_NAME = 'pt-BR';
   static const FRENCH_GRUPO_FIREBASE_NAME = 'fr-FR';
   static const PORTUGUESE_GRUPO_FIREBASE_NAME = 'pt-BR';
-  static const MOST_USED_SENTENCES = 'most_used_sentences';
-  static const FAVOURITE_SENTENCES = 'favourite_sentences';
+  static const MOST_USED_SENTENCES = 'MostUsedFrases';
+  static const FAVOURITE_SENTENCES = 'FavouriteFrases';
 }

@@ -23,19 +23,24 @@ class LeftColumnWidget extends StatelessWidget {
           FittedBox(
             child: GestureDetector(
               onTap: () async {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  barrierColor: Colors.transparent,
-                  builder: (context) {
-                    return EmptyTextDialogWidget(
-                      text: "we_are_working_on_this_feature".tr,
-                    );
-                  },
-                );
-                await _homeController.startTimerForDialogueExit();
-                CustomAnalyticsEvents.setEventWithParameters("Touch",
-                    CustomAnalyticsEvents.createMyMap('Principal', 'Games'));
+                // showDialog(
+                //   context: context,
+                //   barrierDismissible: false,
+                //   barrierColor: Colors.transparent,
+                //   builder: (context) {
+                //     return EmptyTextDialogWidget(
+                //       text: "we_are_working_on_this_feature".tr,
+                //     );
+                //   },
+                // );
+                // await _homeController.startTimerForDialogueExit();
+                // CustomAnalyticsEvents.setEventWithParameters(
+                //   "Touch",
+                //   CustomAnalyticsEvents.createMyMap('Principal', 'Games'),
+                // );
+                final data = await _homeController.dataController.fetchFrases(language: 'en-US', type: 'MostUsedFrases');
+                print(data.length);
+                print(data.first);
                 // Get.toNamed(AppRoutes.GAMES);
                 // await runToGetDataFromOtherPlatform(
                 //   email: 'asimjawad2723@gmail.com',
@@ -101,7 +106,7 @@ class LeftColumnWidget extends StatelessWidget {
 //   });
 //   return cartItem;
 // }
-  /*Future<void> runToGetDataFromOtherPlatform({
+/*Future<void> runToGetDataFromOtherPlatform({
     required String email,
     required String uid,
   }) async {

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pict_model.g.dart';
@@ -25,6 +27,7 @@ class Pict {
   int id;
   Texto texto;
   int tipo;
+  @JsonKey(nullable: true,includeIfNull: true)
   Imagen imagen;
   List<Relacion>? relacion;
   int? agenda;
@@ -54,6 +57,7 @@ class Imagen {
     this.pushKey,
   });
 
+  @JsonKey(defaultValue: '',nullable: true,)
   String picto;
   String? pictoEditado;
   String? urlFoto;

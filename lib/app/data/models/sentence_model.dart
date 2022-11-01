@@ -27,16 +27,29 @@ class Sentence {
   final int id;
   bool favouriteOrNot;
 
-  factory Sentence.fromJson(Map<String, dynamic> json) => Sentence(
-        frase: json["frase"],
-        frecuencia: json["frecuencia"],
-        complejidad: Complejidad.fromJson(json["complejidad"]),
-        fecha: List<int>.from(json["fecha"].map((x) => x)),
-        locale: json["locale"],
-        id: json["id"],
-        favouriteOrNot:
-            json['favouriteOrNot'] == null ? false : json['favouriteOrNot'],
-      );
+  factory Sentence.fromJson(Map<String, dynamic> json) {
+    late List<int> fecha;
+    if (json["fecha"].runtimeType == int) {
+      fecha = List.empty(growable: true);
+      fecha.add(json["fecha"]);
+    } else {
+      fecha = List.empty(growable: true);
+      fecha = List<int>.from(json["fecha"].map((x) => x));
+    }
+    return Sentence(
+      frase: json["frase"],
+      frecuencia: json["frecuencia"],
+      complejidad: Complejidad.fromJson(json["complejidad"]),
+      // fecha: json["fecha"] is int
+      //     ? json["fecha"]
+      //     : List<int>.from(json["fecha"].map((x) => x)),
+      fecha: fecha,
+      locale: json["locale"],
+      id: json["id"],
+      favouriteOrNot:
+          json['favouriteOrNot'] == null ? false : json['favouriteOrNot'],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "frase": frase,
@@ -89,7 +102,7 @@ class PictosComponente {
   factory PictosComponente.fromJson(Map<String, dynamic> json) =>
       PictosComponente(
         id: json["id"],
-        esSugerencia: json["esSugerencia"],
+        esSugerencia: json["esSugerencia"] == null ? false : json["esSugerencia"],
         hora: json["hora"] == null
             ? null
             : List<String>.from(json["hora"].map((x) => x)),

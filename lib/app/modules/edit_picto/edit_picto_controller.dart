@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/data/models/search_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/shared_pref_client.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
@@ -185,7 +184,7 @@ class EditPictoController extends GetxController {
       maxHeight: 300,
       maxWidth: 300,
     );
-    if (imageTobeUploaded != null) {
+    if (imageTobeUploaded.value != null) {
       print('yes');
       fileImage.value = File(imageTobeUploaded.value!.path);
       editingPicture.value = true;
@@ -200,7 +199,7 @@ class EditPictoController extends GetxController {
     if (kIsWeb) {
       imageTobeUploaded.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploaded != null) {
+      if (imageTobeUploaded.value != null) {
         print('I was here');
         final imageInBytes = await imageTobeUploaded.value!.readAsBytes();
         imageWidget.value = Image.memory(
@@ -215,7 +214,7 @@ class EditPictoController extends GetxController {
     } else {
       imageTobeUploaded.value =
           await picker.pickImage(source: ImageSource.gallery);
-      if (imageTobeUploaded != null) {
+      if (imageTobeUploaded.value != null) {
         fileImage.value = File(imageTobeUploaded.value!.path);
         editingPicture.value = true;
         Get.back();
@@ -291,7 +290,7 @@ class EditPictoController extends GetxController {
     });
 
     /// saving changes to file
-    if (!kIsWeb) {
+   /* if (!kIsWeb) {
       final localFile = LocalFileController();
       await localFile.writePictoToFile(
         data: fileData.toString(),
@@ -320,10 +319,10 @@ class EditPictoController extends GetxController {
         await instance.setBool(Constants
         .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
         break;
-    }
+    }*/
     // await instance.setBool(Constants
     //     .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!, true);
-    await sharedPref.getPictosFile();
+    // await sharedPref.getPictosFile();
     // print(res1);
     //upload to the firebase
     await uploadToFirebase(

@@ -1,15 +1,11 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/global_controllers/tts_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/edit_picto/local_widgets/choice_dialouge.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
-import 'package:ottaa_project_flutter/app/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'category_page_widget.dart';
 import 'category_widget.dart';
 
@@ -23,7 +19,7 @@ class PictoPageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final languaje = _ttsController.languaje;
     final horizontalSize = MediaQuery.of(context).size.width;
-    final verticalSize = MediaQuery.of(context).size.height;
+    // final verticalSize = MediaQuery.of(context).size.height;
     return Obx(
       () => _pictogramController.pictoGridviewOrPageview.value
           ? GridView.builder(
@@ -136,34 +132,27 @@ class PictoPageWidget extends StatelessWidget {
       await _homeController
           .addPictToSentence(_pictogramController.selectedGruposPicts[index]);
       _homeController.fromAdd = false;
-      final data = _homeController.picts;
-      List<String> fileData = [];
-      data.forEach((element) {
-        final obj = jsonEncode(element);
-        fileData.add(obj);
-      });
-      if (!kIsWeb) {
-        final localFile = LocalFileController();
-        await localFile.writePictoToFile(
-          data: fileData.toString(),
-          language: _ttsController.languaje,
-        );
-        print('writing to file');
-      }
-      //for the file data
-      final instance = await SharedPreferences.getInstance();
-      await instance.setBool(
-          Constants
-              .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
-          true);
-      final res1 = instance.getBool(Constants.LANGUAGE_CODES[
-              instance.getString('Language_KEY') ?? 'Spanish']!) ??
-          false;
+      // if (!kIsWeb) {
+      //   final localFile = LocalFileController();
+      //   await localFile.writePictoToFile(
+      //     data: fileData.toString(),
+      //     language: _ttsController.languaje,
+      //   );
+      //   print('writing to file');
+      // }
+      // //for the file data
+      // final instance = await SharedPreferences.getInstance();
+      // await instance.setBool(
+      //     Constants
+      //         .LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!,
+      //     true);
+      // final res1 = instance.getBool(Constants.LANGUAGE_CODES[
+      //         instance.getString('Language_KEY') ?? 'Spanish']!) ??
+      //     false;
 
-      print(res1);
+      // print(res1);
       //upload to the firebase
-      uploadToFirebase(data: fileData.toString());
-      pictsExistsOnFirebase();
+      uploadToFirebase(data: _homeController.picts);
       _pictogramController.selectedPicto = '';
       Get.back();
       Get.back();
@@ -175,28 +164,16 @@ class PictoPageWidget extends StatelessWidget {
     // Get.toNamed(AppRoutes.SELECTPICTO);
   }
 
-  Future<void> uploadToFirebase({required String data}) async {
+  Future<void> uploadToFirebase({required  List<Pict> data}) async {
     // final User? auth = FirebaseAuth.instance.currentUser;
     // final ref = databaseRef.child('Picto/${auth!.uid}/');
     // await ref.set({
     //   'data': data,
     // });
-    await _dataController.uploadDataToFirebaseRealTime(
+    await _dataController.uploadPictosToFirebaseRealTime(
       data: data,
       type: 'Pictos',
       languageCode: _ttsController.languaje,
-    );
-  }
-
-  Future<void> pictsExistsOnFirebase() async {
-    // final User? auth = FirebaseAuth.instance.currentUser;
-    // final ref = databaseRef.child('PictsExistsOnFirebase/${auth!.uid}/');
-    // await ref.set({
-    //   'value': true,
-    // });
-    await _dataController.uploadBoolToFirebaseRealtime(
-      data: true,
-      type: 'PictsExistsOnFirebase',
     );
   }
 }

@@ -1,16 +1,10 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/data/models/grupos_model.dart';
 import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
 import 'package:ottaa_project_flutter/app/modules/pictogram_groups/pictogram_groups_controller.dart';
 import 'package:get/get.dart';
-import 'package:ottaa_project_flutter/app/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/local_file_controller.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'local_widgets/add_picto_to_group_widget.dart';
 import 'local_widgets/otta_logo_widget.dart';
@@ -147,7 +141,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                               });
 
                               /// saving changes to file
-                              if (!kIsWeb) {
+                             /* if (!kIsWeb) {
                                 final localFile = LocalFileController();
                                 await localFile.writeGruposToFile(
                                   data: fileData.toString(),
@@ -160,7 +154,7 @@ class AddPictoToGroupPage extends GetView<PictogramGroupsController> {
                                   await SharedPreferences.getInstance();
                               await instance.setBool(
                                   "${Constants.LANGUAGE_CODES[instance.getString('Language_KEY') ?? 'Spanish']!}_grupo",
-                                  true);
+                                  true);*/
                               // print(res1);
                               //upload to the firebase
                               await controller.uploadToFirebaseGrupo(
