@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
@@ -11,6 +10,13 @@ class AppRouter {
 
   AppRouter._();
 
+  String get initialAppResolver {
+    //if has user === /aplsh
+    //if has a logged user that not have a db === /onboarding
+    //if there is no user === /login
+    return '/login';
+  }
+
   final GoRouter router = GoRouter(
     routes: <GoRoute>[
       GoRoute(
@@ -22,6 +28,6 @@ class AppRouter {
         builder: (context, state) => const LoginScreen(),
       ),
     ],
-    initialLocation: FirebaseAuth.instance.currentUser == null ? '/login' : '/splash', //Replace with db check
+    initialLocation: '/login', //Replace with db check
   );
 }

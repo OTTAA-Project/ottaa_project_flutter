@@ -1,16 +1,10 @@
 import 'dart:math';
 
-import 'package:either_dart/either.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
-import 'package:ottaa_project_flutter/application/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
-import 'package:ottaa_project_flutter/presentation/common/ui/jumping_dots.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/ui/sign_in_button.dart';
 
 class LoginScreen extends StatelessWidget {

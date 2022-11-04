@@ -62,7 +62,6 @@ class JumpingDotsProgressIndicatorState extends State<JumpingDotsProgressIndicat
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    print(size);
     return SizedBox(
       width: size.width,
       height: 30,

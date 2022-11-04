@@ -1,5 +1,3 @@
-import 'package:either_dart/either.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
@@ -25,9 +23,10 @@ class SignInButton extends ConsumerWidget {
             fixedSize: const Size.fromHeight(50),
           ),
       onPressed: () async {
-        Either<String, User> result = await auth.signIn(type);
+        final result = await auth.signIn(type);
 
         if (result.isLeft) {
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(result.left),

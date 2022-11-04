@@ -42,8 +42,12 @@ dependencies:
   screenshot: ^1.2.3
   share_plus: ^5.0.0
   url_launcher: ^6.1.6
+  json_serializable: ^6.5.4
+  json_annotation: ^4.7.0
+  path_provider: ^2.0.11
 
 dev_dependencies:
+  build_runner: ^2.3.2
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter

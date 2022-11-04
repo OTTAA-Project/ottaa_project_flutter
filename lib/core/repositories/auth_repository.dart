@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:either_dart/either.dart';
-import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
+import 'package:ottaa_project_flutter/core/models/user_model.dart';
 
-abstract class AuthRepository<U> extends ChangeNotifier {
-  FutureOr<Either<String, U>> signIn(SignInType type);
+abstract class AuthRepository {
+  Future<Either<String, UserModel>> signIn(SignInType type);
 
-  FutureOr<Either<String, U>> getCurrentUser();
+  Future<Either<String, UserModel>> getCurrentUser();
 
-  FutureOr<bool> isLoggedIn();
+  Future<bool> isLoggedIn();
 
-  FutureOr<void> logout();
+  Future<void> logout();
 }
