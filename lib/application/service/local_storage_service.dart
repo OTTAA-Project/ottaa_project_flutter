@@ -6,7 +6,7 @@ import 'package:ottaa_project_flutter/core/models/groups_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
 import 'package:path_provider/path_provider.dart';
 
-class LocalStorageServiceImpl extends LocalStorageRepository {
+class LocalStorageService extends LocalStorageRepository {
   Future<String> get _directoryPath async {
     Directory directory = await getApplicationDocumentsDirectory();
     return directory.path;
@@ -69,7 +69,7 @@ class LocalStorageServiceImpl extends LocalStorageRepository {
   }
 
   @override
-  Future<List<Grupos>> readGruposFromFile({
+  Future<List<Groups>> readGruposFromFile({
     required String language,
   }) async {
     // final File file = await _gruposFile;
@@ -91,7 +91,7 @@ class LocalStorageServiceImpl extends LocalStorageRepository {
         file = await _gruposFile;
     }
     final response = await file.readAsString();
-    return (jsonDecode(response) as List).map((e) => Grupos.fromJson(e)).toList();
+    return (jsonDecode(response) as List).map((e) => Groups.fromJson(e)).toList();
   }
 
   @override

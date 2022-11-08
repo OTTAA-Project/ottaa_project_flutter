@@ -3,8 +3,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'sentence_model.g.dart';
 
 @JsonSerializable()
-class FraseModel {
-  FraseModel({
+class SentenceModel {
+  SentenceModel({
     required this.frase,
     required this.frecuencia,
     required this.complejidad,
@@ -15,19 +15,19 @@ class FraseModel {
 
   String frase;
   int frecuencia;
-  Complejidad complejidad;
+  Complex complejidad;
   List<int> fecha;
   String locale;
   int id;
 
-  factory FraseModel.fromJson(Map<String, dynamic> json) => _$FraseModelFromJson(json);
+  factory SentenceModel.fromJson(Map<String, dynamic> json) => _$FraseModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$FraseModelToJson(this);
 }
 
 @JsonSerializable()
-class Complejidad {
-  Complejidad({
+class Complex {
+  Complex({
     required this.valor,
     required this.pictosComponentes,
   });
@@ -36,7 +36,7 @@ class Complejidad {
   @JsonKey(name: 'pictos componentes')
   List<PictosComponente> pictosComponentes;
 
-  factory Complejidad.fromJson(Map<String, dynamic> json) => _$ComplejidadFromJson(json);
+  factory Complex.fromJson(Map<String, dynamic> json) => _$ComplejidadFromJson(json);
 
   Map<String, dynamic> toJson() => _$ComplejidadToJson(this);
 }

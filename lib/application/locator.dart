@@ -27,8 +27,8 @@ Future<void> setupServices() async {
   final deviceLocale = Intl.getCurrentLocale().split("_")[0];
   final i18n = await I18N(deviceLocale).init();
 
-  final AuthRepository authService = AuthServiceImpl();
-  final LocalStorageRepository localStorageService = LocalStorageServiceImpl();
+  final AuthRepository authService = AuthService();
+  final LocalStorageRepository localStorageService = LocalStorageService();
   late final RemoteStorageRepository remoteStorageService;
 
   if (kIsWeb) {
@@ -50,7 +50,7 @@ Future<void> setupServices() async {
     authService,
   );
 
-  final AboutRepository aboutService = AboutServiceImpl(authService);
+  final AboutRepository aboutService = AboutService(authService);
   final SentencesRepository sentencesService = SentencesService(authService);
 
   locator.registerSingleton<I18N>(i18n);

@@ -3,20 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'dart:async';
 
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 
-class AuthServiceImpl extends AuthRepository {
+class AuthService extends AuthRepository {
   final FirebaseAuth _authProvider = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookAuth _facebookAuth = FacebookAuth.instance;
 
   final databaseRef = FirebaseDatabase.instance.ref();
 
-  AuthServiceImpl();
+  AuthService();
 
   @override
   Future<Either<String, UserModel>> getCurrentUser() async {
@@ -153,4 +154,7 @@ class AuthServiceImpl extends AuthRepository {
       return Left(e.toString());
     }
   }
+
+  @override
+  bool get isLogged => _authProvider.currentUser != null;
 }
