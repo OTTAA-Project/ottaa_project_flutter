@@ -7,7 +7,7 @@ abstract class LocalStorageRepository {
     required String language,
   });
 
-  Future<List<Grupos>> readGruposFromFile({
+  Future<List<Groups>> readGruposFromFile({
     required String language,
   });
 

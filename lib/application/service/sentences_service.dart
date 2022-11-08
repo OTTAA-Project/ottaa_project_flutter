@@ -12,7 +12,7 @@ class SentencesService implements SentencesRepository {
   SentencesService(this._auth);
 
   @override
-  Future<List<FraseModel>> fetchSentences({required String language, required String type, bool isFavorite = false}) async {
+  Future<List<SentenceModel>> fetchSentences({required String language, required String type, bool isFavorite = false}) async {
     final authResult = await _auth.getCurrentUser();
 
     if (authResult.isLeft) return [];
@@ -24,13 +24,13 @@ class SentencesService implements SentencesRepository {
     if (resNew.exists && resNew.value != null) {
       final encode = jsonEncode(resNew.value);
       // print('returned from bew');
-      return (jsonDecode(encode) as List).map((e) => FraseModel.fromJson(e)).toList();
+      return (jsonDecode(encode) as List).map((e) => SentenceModel.fromJson(e)).toList();
     } else {
       final refOld = _database.child('Frases/${user.id}/$language/$type');
       final resOld = await refOld.get();
       if (resOld.exists && resOld.value != null) {
         final data = resOld.children.first.value as String;
-        final da = (jsonDecode(data) as List).map((e) => FraseModel.fromJson(e)).toList();
+        final da = (jsonDecode(data) as List).map((e) => SentenceModel.fromJson(e)).toList();
 
         return da;
       } else {
@@ -41,7 +41,7 @@ class SentencesService implements SentencesRepository {
   }
 
   @override
-  Future<void> uploadSentences({required String language, required List<FraseModel> data, required String type}) async {
+  Future<void> uploadSentences({required String language, required List<SentenceModel> data, required String type}) async {
     final authResult = await _auth.getCurrentUser();
 
     if (authResult.isLeft) return;

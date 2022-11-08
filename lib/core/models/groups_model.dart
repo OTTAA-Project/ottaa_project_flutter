@@ -3,8 +3,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'groups_model.g.dart';
 
 @JsonSerializable()
-class Grupos {
-  Grupos({
+class Groups {
+  Groups({
     required this.id,
     required this.texto,
     this.tipo = 0,
@@ -15,21 +15,21 @@ class Grupos {
   });
 
   int id;
-  TextoGrupos texto;
+  TextGroups texto;
   int tipo;
-  ImagenGrupos imagen;
-  List<GrupoRelacion> relacion;
+  ImageGroups imagen;
+  List<GroupRelation> relacion;
   int? frecuencia;
   List<String>? tags;
 
-  factory Grupos.fromJson(Map<String, dynamic> json) => _$GruposFromJson(json);
+  factory Groups.fromJson(Map<String, dynamic> json) => _$GruposFromJson(json);
 
   Map<String, dynamic> toJson() => _$GruposToJson(this);
 }
 
 @JsonSerializable()
-class ImagenGrupos {
-  ImagenGrupos({
+class ImageGroups {
+  ImageGroups({
     required this.picto,
     this.pictoEditado,
     this.urlFoto,
@@ -41,14 +41,14 @@ class ImagenGrupos {
   String? urlFoto;
   String? pushKey;
 
-  factory ImagenGrupos.fromJson(Map<String, dynamic> json) => _$ImagenGruposFromJson(json);
+  factory ImageGroups.fromJson(Map<String, dynamic> json) => _$ImagenGruposFromJson(json);
 
   Map<String, dynamic> toJson() => _$ImagenGruposToJson(this);
 }
 
 @JsonSerializable()
-class GrupoRelacion {
-  GrupoRelacion({
+class GroupRelation {
+  GroupRelation({
     required this.id,
     this.frec,
     this.texto,
@@ -64,24 +64,24 @@ class GrupoRelacion {
 
   int id;
   int? frec;
-  TextoGrupos? texto;
+  TextGroups? texto;
   int? tipo;
-  ImagenGrupos? imagen;
-  List<RelacionRelacion>? relacion;
+  ImageGroups? imagen;
+  List<RelationRelation>? relacion;
   int? agenda;
   int? gps;
   bool? esSugerencia;
   List<String>? edad;
   List<String>? horario;
 
-  factory GrupoRelacion.fromJson(Map<String, dynamic> json) => _$GrupoRelacionFromJson(json);
+  factory GroupRelation.fromJson(Map<String, dynamic> json) => _$GrupoRelacionFromJson(json);
 
   Map<String, dynamic> toJson() => _$GrupoRelacionToJson(this);
 }
 
 @JsonSerializable()
-class RelacionRelacion {
-  RelacionRelacion({
+class RelationRelation {
+  RelationRelation({
     required this.id,
     required this.frec,
   });
@@ -89,14 +89,14 @@ class RelacionRelacion {
   int id;
   int frec;
 
-  factory RelacionRelacion.fromJson(Map<String, dynamic> json) => _$RelacionRelacionFromJson(json);
+  factory RelationRelation.fromJson(Map<String, dynamic> json) => _$RelacionRelacionFromJson(json);
 
   Map<String, dynamic> toJson() => _$RelacionRelacionToJson(this);
 }
 
 @JsonSerializable()
-class TextoGrupos {
-  TextoGrupos({
+class TextGroups {
+  TextGroups({
     this.en = '',
     this.es = '',
     this.fr = '',
@@ -108,7 +108,7 @@ class TextoGrupos {
   String fr;
   String pt;
 
-  factory TextoGrupos.fromJson(Map<String, dynamic> json) => _$TextoGruposFromJson(json);
+  factory TextGroups.fromJson(Map<String, dynamic> json) => _$TextoGruposFromJson(json);
 
   Map<String, dynamic> toJson() => _$TextoGruposToJson(this);
 }

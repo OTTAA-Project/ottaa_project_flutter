@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
-import 'package:ottaa_project_flutter/application/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/jumping_dots.dart';
 

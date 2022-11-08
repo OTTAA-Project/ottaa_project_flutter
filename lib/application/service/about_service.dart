@@ -12,12 +12,12 @@ import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AboutServiceImpl extends AboutRepository {
+class AboutService extends AboutRepository {
   final DatabaseReference databaseRef = FirebaseDatabase.instance.ref();
 
   final AuthRepository _auth;
 
-  AboutServiceImpl(this._auth);
+  AboutService(this._auth);
 
   @override
   Future<String> getAppVersion() async {

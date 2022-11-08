@@ -18,7 +18,7 @@ class GroupsService extends GroupsRepository {
   GroupsService(this._authService, this._remoteStorageService);
 
   @override
-  Future<List<Grupos>> getAllGroups() async {
+  Future<List<Groups>> getAllGroups() async {
     await Future.delayed(
       const Duration(seconds: kIsWeb ? 2 : 1),
     );
@@ -35,19 +35,19 @@ class GroupsService extends GroupsRepository {
     final String data = await _remoteStorageService.readRemoteFile(path: "Grupos", fileName: 'assets/grupos.json');
 
     final List<dynamic> json = jsonDecode(data);
-    final List<Grupos> groups = json.map((e) => Grupos.fromJson(e)).toList();
+    final List<Groups> groups = json.map((e) => Groups.fromJson(e)).toList();
 
     return groups;
   }
 
   @override
-  Future<List<Grupos>> getGroups(BasicSearch search) {
+  Future<List<Groups>> getGroups(BasicSearch search) {
     // TODO: implement getPictograms
     throw UnimplementedError();
   }
 
   @override
-  Future<void> uploadGroups(List<Grupos> data, String type, String language) async {
+  Future<void> uploadGroups(List<Groups> data, String type, String language) async {
     dynamic jsonData = List.empty(growable: true);
     for (var e in data) {
       final relactions = e.relacion.map((e) => e.toJson()).toList();
@@ -70,7 +70,7 @@ class GroupsService extends GroupsRepository {
   }
 
   @override
-  Future<void> updateGroups(Grupos data, String type, String language, int index) async {
+  Future<void> updateGroups(Groups data, String type, String language, int index) async {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
     final UserModel auth = result.right;

@@ -2,10 +2,10 @@ import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
 import 'package:ottaa_project_flutter/core/models/groups_model.dart';
 
 abstract class GroupsRepository {
-  Future<List<Grupos>> getAllGroups();
+  Future<List<Groups>> getAllGroups();
 
-  Future<void> uploadGroups(List<Grupos> data, String type, String language);
-  Future<void> updateGroups(Grupos data, String type, String language, int index);
+  Future<void> uploadGroups(List<Groups> data, String type, String language);
+  Future<void> updateGroups(Groups data, String type, String language, int index);
 
-  Future<List<Grupos>> getGroups(BasicSearch search);
+  Future<List<Groups>> getGroups(BasicSearch search);
 }

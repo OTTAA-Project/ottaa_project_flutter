@@ -4,10 +4,10 @@ import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 
-class AboutRepositoryImpl extends ChangeNotifier {
+class AboutProvider extends ChangeNotifier {
   final AboutRepository aboutService;
 
-  AboutRepositoryImpl(this.aboutService);
+  AboutProvider(this.aboutService);
 
   Future<String> getAppVersion() => aboutService.getAppVersion();
 
@@ -28,7 +28,7 @@ class AboutRepositoryImpl extends ChangeNotifier {
   Future<void> uploadUserInformation() => aboutService.uploadUserInformation();
 }
 
-final aboutProvider = ChangeNotifierProvider<AboutRepositoryImpl>((ref) {
+final aboutProvider = ChangeNotifierProvider<AboutProvider>((ref) {
   final AboutRepository aboutService = GetIt.I.get<AboutRepository>();
-  return AboutRepositoryImpl(aboutService);
+  return AboutProvider(aboutService);
 });
