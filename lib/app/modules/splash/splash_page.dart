@@ -18,7 +18,7 @@ class SplashPage extends StatelessWidget {
               color: Colors.deepOrange,
             ),
             SizedBox(height: 10),
-            Text("we_are_preparing_everything".tr)
+            Text("we_are_preparing_everything".ltr)
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/presentation/screens/login/login_page.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
 
@@ -25,9 +26,9 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.login,
-        builder: (context, state) => const LoginScreen(),
+        builder: (context, state) => const LoginPage(),
       ),
     ],
-    initialLocation: '/login', //Replace with db check
+    initialLocation: AppRoutes.splash, //Replace with db check
   );
 }

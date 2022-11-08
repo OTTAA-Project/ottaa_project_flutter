@@ -23,7 +23,11 @@ class AuthServiceImpl extends AuthRepository {
     User? user = _authProvider.currentUser;
 
     if (user != null) {
-      final UserModel userModel = UserModel(id: user.uid, name: user.displayName ?? "No Available", email: user.email!, photoUrl: user.photoURL);
+      final UserModel userModel = UserModel(
+          id: user.uid,
+          name: user.displayName ?? "No Available",
+          email: user.email!,
+          photoUrl: user.photoURL);
       return Right(userModel);
     } else {
       return const Left("user_not_logged"); //TODO: Translate
@@ -56,7 +60,8 @@ class AuthServiceImpl extends AuthRepository {
       case SignInType.apple:
       case SignInType.email:
       default:
-        return const Left("error_no_implement_auth_method"); //TODO: Implement translate method.
+        return const Left(
+            "error_no_implement_auth_method"); //TODO: Implement translate method.
     }
 
     if (result.isRight) {
@@ -71,7 +76,20 @@ class AuthServiceImpl extends AuthRepository {
 
       }
 
-      final UserModel userModel = UserModel(id: user.uid, name: user.displayName ?? "No Available", email: user.email!, photoUrl: user.photoURL);
+      ///sometimes the email does not come with the user.email, it is given in the providedData,
+
+      late String email;
+
+      if (user.email == null) {
+        email = user.providerData[0].email!;
+      } else {
+        email = user.email!;
+      }
+      final UserModel userModel = UserModel(
+          id: user.uid,
+          name: user.displayName ?? "No Available",
+          email: email,
+          photoUrl: user.photoURL);
       return Right(userModel);
     }
 
@@ -86,14 +104,16 @@ class AuthServiceImpl extends AuthRepository {
         return const Left("error_google_sign_in_cancelled");
       }
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
+      final UserCredential userCredential =
+          await _authProvider.signInWithCredential(credential);
 
       if (userCredential.user == null) {
         return const Left("error_google_sign_in_cancelled");
@@ -114,9 +134,11 @@ class AuthServiceImpl extends AuthRepository {
       if (result.status == LoginStatus.success) {
         final AccessToken accessToken = result.accessToken!;
 
-        final AuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
+        final AuthCredential credential =
+            FacebookAuthProvider.credential(accessToken.token);
 
-        final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
+        final UserCredential userCredential =
+            await _authProvider.signInWithCredential(credential);
 
         if (userCredential.user == null) {
           return const Left("error_facebook_sign_in_cancelled");

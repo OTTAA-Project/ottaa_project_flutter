@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:ottaa_project_flutter/application/application.dart';
 import 'package:ottaa_project_flutter/application/injector.dart';
@@ -23,7 +24,14 @@ void main() async {
 
   await setupServices();
 
-  runApp(const Injector(
-    application: Application(),
-  ));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.landscapeLeft,
+  ]).then(
+    (value) => runApp(
+      const Injector(
+        application: Application(),
+      ),
+    ),
+  );
 }
