@@ -14,4 +14,6 @@ abstract class AboutRepository {
   Future<void> uploadProfilePicture(String photo);
 
   Future<String> getProfilePicture();
+
+  Future<bool> isCurrentUserAvatarExist();
 }

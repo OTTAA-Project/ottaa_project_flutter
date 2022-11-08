@@ -17,7 +17,6 @@ import 'package:ottaa_project_flutter/core/repositories/local_storage_repository
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/splash_repository.dart';
 
 import 'service/about_service.dart';
 
@@ -46,16 +45,12 @@ Future<void> setupServices() async {
     authService,
     remoteStorageService,
   );
-  final SplashRepository splashService = SplashServiceImpl(
-    authService,
-  );
 
   final AboutRepository aboutService = AboutService(authService);
   final SentencesRepository sentencesService = SentencesService(authService);
 
   locator.registerSingleton<I18N>(i18n);
   locator.registerSingleton<AuthRepository>(authService);
-  locator.registerSingleton<SplashRepository>(splashService);
   locator.registerSingleton<LocalStorageRepository>(localStorageService);
   locator.registerSingleton<RemoteStorageRepository>(remoteStorageService);
   locator.registerSingleton<PictogramsRepository>(pictogramsService);

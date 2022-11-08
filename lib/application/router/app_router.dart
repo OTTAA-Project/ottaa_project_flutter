@@ -2,7 +2,6 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
-import 'package:ottaa_project_flutter/presentation/screens/login/login_page.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
 
@@ -25,6 +24,12 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.splash,
           builder: (context, state) => const SplashScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.onboarding,
+          builder: (context, state) {
+            int pageIndex = state.extra as int;
+          },
         ),
         GoRoute(
           path: AppRoutes.login,

@@ -81,12 +81,21 @@ class AboutService extends AboutRepository {
 
   @override
   Future<void> sendSupportEmail() async {
-    final data = await Future.wait([getEmail(), getAppVersion(), getAvailableAppVersion(), getDeviceName()]);
+    final data = await Future.wait([
+      getEmail(),
+      getAppVersion(),
+      getAvailableAppVersion(),
+      getDeviceName()
+    ]);
     final userType = await getUserType();
-    final Uri params = Uri(scheme: 'mailto', path: 'support@ottaaproject.com', queryParameters: {
-      'subject': 'Support',
-      'body': '''Account: ${data[0]},\nAccount Type: ${userType.name},\nCurrent OTTAA Installed: ${data[1]}\nCurrent OTTAA Version: ${data[3]}\nDevice Name: ${data[4]}''',
-    });
+    final Uri params = Uri(
+        scheme: 'mailto',
+        path: 'support@ottaaproject.com',
+        queryParameters: {
+          'subject': 'Support',
+          'body':
+              '''Account: ${data[0]},\nAccount Type: ${userType.name},\nCurrent OTTAA Installed: ${data[1]}\nCurrent OTTAA Version: ${data[3]}\nDevice Name: ${data[4]}''',
+        });
     if (await canLaunchUrl(params)) {
       await launchUrl(params);
     } else {
@@ -142,5 +151,25 @@ class AboutService extends AboutRepository {
       'birth_date': user.birthdate ?? 0,
       'pref_sexo': user.gender ?? "N/A",
     });
+  }
+
+  @override
+  Future<bool> isCurrentUserAvatarExist() async {
+    final result = await _auth.getCurrentUser();
+    if (result.isLeft) {
+      return false;
+    }
+
+    final res = result.right;
+    final refNew = databaseRef.child('${res.id}/Usuarios/Avatar/urlFoto/');
+
+    DataSnapshot resNew = await refNew.get();
+
+    if (resNew.value == null || !resNew.exists) {
+      final refOld = databaseRef.child('Avatar/${res.id}/urlFoto/');
+      resNew = await refOld.get();
+    }
+
+    return resNew.exists;
   }
 }
