@@ -54,7 +54,7 @@ class ChartWidget extends StatelessWidget {
                         interval: 1,
                       ),
                     )
-                  : Center(
+                  : const Center(
                       child: CircularProgressIndicator(
                         color: kOTTAAOrangeNew,
                       ),

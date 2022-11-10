@@ -15,25 +15,26 @@ class OnboardingPage extends StatelessWidget {
     final PageController controller =
         PageController(initialPage: _controller.pageNumber.value);
     return GetBuilder<OnboardingController>(
-        id: "onboarding",
-        builder: (_) {
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: SafeArea(
-              child: PageView(
-                /// [PageView.scrollDirection] defaults to [Axis.horizontal].
-                /// Use [Axis.vertical] to scroll vertically.
-                physics: NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                controller: controller,
-                children: <Widget>[
-                  step1Onboarding(_, controller, context),
-                  step2Onboarding(_, controller, context),
-                  step3Onboarding(_, controller, context),
-                ],
-              ),
+      id: "onboarding",
+      builder: (_) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: SafeArea(
+            child: PageView(
+              /// [PageView.scrollDirection] defaults to [Axis.horizontal].
+              /// Use [Axis.vertical] to scroll vertically.
+              physics: NeverScrollableScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              controller: controller,
+              children: <Widget>[
+                step1Onboarding(_, controller, context),
+                step2Onboarding(_, controller, context),
+                step3Onboarding(_, controller, context),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

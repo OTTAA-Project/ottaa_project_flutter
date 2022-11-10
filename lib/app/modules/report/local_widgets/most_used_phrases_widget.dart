@@ -9,7 +9,7 @@ class MostUsedPhrasesWidget extends StatelessWidget {
     required this.heading,
   }) : super(key: key);
   final String heading;
-  final controller = Get.find<ReportController>();
+  // final controller = Get.find<ReportController>();
 
   @override
   Widget build(BuildContext context) {

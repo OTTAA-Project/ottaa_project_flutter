@@ -9,7 +9,9 @@ import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 
 import '../onboarding_controller.dart';
 import 'header_wave.dart';
+
 final _sharedPrefClient = SharedPrefClient();
+
 Widget step3Onboarding<widget>(
     OnboardingController _, PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
@@ -109,7 +111,8 @@ Widget step3Onboarding<widget>(
                     ),
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(top: verticalSize * 0.02,bottom: verticalSize * 0.1),
+                    padding: EdgeInsets.only(
+                        top: verticalSize * 0.02, bottom: verticalSize * 0.1),
                     child: Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -119,9 +122,11 @@ Widget step3Onboarding<widget>(
                             // leading: Icons.chevron_left,
                             onTap: () {
                               _.pageNumber.value = 1;
-                              controller.animateToPage(_.pageNumber.value,
-                                  duration: Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut);
+                              controller.animateToPage(
+                                _.pageNumber.value,
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
                             },
                             backgroundColor: kQuantumGrey,
                             fontColor: Colors.white,

@@ -1,48 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 
-step3Tutorial<widget>(PageController controller, context) {
+step4Tutorial<widget>(PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
   double horizontalSize = MediaQuery.of(context).size.width;
   return Container(
-    color: kOTTAAOrangeNew,
+    color: Colors.grey.withOpacity(0.5),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
           child: Container(),
         ),
-        Container(
+        SizedBox(
           height: verticalSize * 0.45,
           child: FittedBox(
-            child: SvgPicture.asset(
-              'assets/Group 729.svg',
-              placeholderBuilder: (BuildContext context) => Container(
-                child: const CircularProgressIndicator(),
-              ),
+            child: Image.asset(
+              'assets/Group 727.png',
+              fit: BoxFit.fill,
             ),
           ),
         ),
         Column(
           children: [
             Container(
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               height: horizontalSize * 0.05,
               child: FittedBox(
                 child: Text(
-                  "Access_thousands_of_pictograms".tr,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600),
+                  "Play_and_learn".trl,
+                  style: const TextStyle(
+                      color: kOTTAAOrangeNew, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.2),
               child: Text(
-                'Step3_long'.tr,
+                "${'Step4_long'.trl}!.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 20, color: Colors.black87),
                 maxLines: 3,
               ),
             ),
@@ -55,22 +54,22 @@ step3Tutorial<widget>(PageController controller, context) {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             StepButton(
-              text: "Previous".tr,
+              text: "Previous".trl,
               leading: Icons.chevron_left,
-              onTap: () => controller.animateToPage(1,
-                  duration: Duration(milliseconds: 300),
+              onTap: () => controller.animateToPage(2,
+                  duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut),
               backgroundColor: Colors.white,
               fontColor: Colors.grey,
             ),
             StepButton(
-              text: "Next".tr,
+              text: "Ready".trl,
               trailing: Icons.chevron_right,
-              onTap: () => controller.animateToPage(3,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.easeInOut),
-              backgroundColor: Colors.white,
-              fontColor: kOTTAAOrangeNew,
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              backgroundColor: kOTTAAOrangeNew,
+              fontColor: Colors.white,
             ),
           ],
         ),
