@@ -15,7 +15,7 @@ Widget step3Tutorial<widget>(PageController controller, context) {
         Expanded(
           child: Container(),
         ),
-        SizedBox(
+        Container(
           height: verticalSize * 0.45,
           child: FittedBox(
             child: Image.asset(

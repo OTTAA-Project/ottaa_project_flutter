@@ -15,13 +15,12 @@ Widget step4Tutorial<widget>(PageController controller, context) {
         Expanded(
           child: Container(),
         ),
-        SizedBox(
+        Container(
           height: verticalSize * 0.45,
-          child: FittedBox(
-            child: Image.asset(
-              AppImages.kStep4Tutorial,
-              fit: BoxFit.fill,
-            ),
+          width:  horizontalSize * 0.25,
+          child: Image.asset(
+            AppImages.kStep4Tutorial,
+            fit: BoxFit.fill,
           ),
         ),
         Column(
@@ -69,7 +68,7 @@ Widget step4Tutorial<widget>(PageController controller, context) {
               text: "Ready".trl,
               trailing: Icons.chevron_right,
               onTap: () {
-                Navigator.of(context).pop();
+                //todo: add the path where you want to go 
               },
               backgroundColor: kOTTAAOrangeNew,
               fontColor: Colors.white,

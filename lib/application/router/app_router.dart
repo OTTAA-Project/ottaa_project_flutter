@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
+import 'package:ottaa_project_flutter/presentation/tutorial/tutorial_page.dart';
 
 final AppRouter appRouterSingleton = AppRouter();
 
@@ -45,6 +46,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.home,
           builder: (context, state) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.tutorial,
+          builder: (context, state) => const TutorialPage(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),

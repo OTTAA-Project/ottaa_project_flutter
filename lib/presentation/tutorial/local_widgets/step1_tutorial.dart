@@ -15,14 +15,12 @@ Widget step1Tutorial<widget>(PageController controller, context) {
         Expanded(
           child: Container(),
         ),
-        SizedBox(
+        Container(
           height: verticalSize * 0.45,
-          child: FittedBox(
-            fit: BoxFit.cover,
-            child: Image.asset(
-              AppImages.kStep1Tutorial,
-              fit: BoxFit.fill,
-            ),
+          width: horizontalSize*0.20,
+          child: Image.asset(
+            AppImages.kStep1Tutorial,
+            fit: BoxFit.fill,
           ),
         ),
         Column(
