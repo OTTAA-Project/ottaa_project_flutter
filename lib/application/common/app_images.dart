@@ -1618,4 +1618,13 @@ class AppImages {
   static const kZumoDeNaranja = "assets/imgs/zumo_de_naranja.webp";
 
   static const kZumoDeUva = "assets/imgs/zumo_de_uva.webp";
+
+  static const kStep1Tutorial = "assets/Group 729.png";
+
+  static const kStep2Tutorial = "assets/Group 728.png";
+
+  static const kStep3Tutorial = "assets/Group 729.png";
+
+  static const kStep4Tutorial = "assets/Group 727.png";
+
 }

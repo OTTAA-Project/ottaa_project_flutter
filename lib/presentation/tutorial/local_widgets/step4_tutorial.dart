@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 
 step4Tutorial<widget>(PageController controller, context) {
@@ -18,7 +19,7 @@ step4Tutorial<widget>(PageController controller, context) {
           height: verticalSize * 0.45,
           child: FittedBox(
             child: Image.asset(
-              'assets/Group 727.png',
+              AppImages.kStep4Tutorial,
               fit: BoxFit.fill,
             ),
           ),
