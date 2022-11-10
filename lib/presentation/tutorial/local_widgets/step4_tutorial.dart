@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
-import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/presentation/tutorial/local_widgets/step_button.dart';
 
-step4Tutorial<widget>(PageController controller, context) {
+Widget step4Tutorial<widget>(PageController controller, context) {
   double verticalSize = MediaQuery.of(context).size.height;
   double horizontalSize = MediaQuery.of(context).size.width;
   return Container(
@@ -57,9 +57,11 @@ step4Tutorial<widget>(PageController controller, context) {
             StepButton(
               text: "Previous".trl,
               leading: Icons.chevron_left,
-              onTap: () => controller.animateToPage(2,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut),
+              onTap: () => controller.animateToPage(
+                2,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              ),
               backgroundColor: Colors.white,
               fontColor: Colors.grey,
             ),
