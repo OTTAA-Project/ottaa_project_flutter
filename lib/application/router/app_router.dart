@@ -1,44 +1,59 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/tutorial/tutorial_screen.dart';
+
+final AppRouter appRouterSingleton = AppRouter();
 
 class AppRouter {
-  static final AppRouter _instance = AppRouter._();
+  String get initialAppResolver {
+    final authService = GetIt.I.get<AuthRepository>();
 
-  factory AppRouter() => _instance;
+    if (!authService.isLogged) {
+      return AppRoutes.login;
+    }
 
-  AppRouter._();
+    return AppRoutes.splash;
+  }
 
-  final GoRouter router = GoRouter(
-    routes: <GoRoute>[
-      GoRoute(
-        path: AppRoutes.splash,
-      ),
-      GoRoute(
-        path: AppRoutes.home,
-      ),
-      GoRoute(
-        path: AppRoutes.login,
-      ),
-      GoRoute(
-        path: AppRoutes.onboarding,
-      ),
-      GoRoute(
-        path: AppRoutes.sentences,
-      ),
-      GoRoute(
-        path: AppRoutes.settings,
-      ),
-      GoRoute(
-        path: AppRoutes.settingslang,
-      ),
-      GoRoute(
-        path: AppRoutes.settingsvoice,
-      ),
-      GoRoute(
-        path: AppRoutes.tutorial,
-      ),
-    ],
-    initialLocation: FirebaseAuth.instance.currentUser == null ? '/login' : '/splash',
-  );
+  late final GoRouter router;
+
+  AppRouter() {
+    router = GoRouter(
+      routes: <GoRoute>[
+        GoRoute(
+          path: AppRoutes.splash,
+          builder: (context, state) => const SplashScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.onboarding,
+          builder: (context, state) {
+            int? pageIndex = state.extra as int?;
+
+            return OnBoardingScreen(defaultIndex: pageIndex ?? 0);
+          },
+        ),
+        GoRoute(
+          path: AppRoutes.login,
+          builder: (context, state) => const LoginScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.home,
+          builder: (context, state) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.tutorial,
+          builder: (context, state) => const TutorialScreen(),
+        ),
+      ],
+      errorBuilder: (context, state) => const ErrorScreen(),
+      initialLocation: initialAppResolver,
+    );
+  }
 }

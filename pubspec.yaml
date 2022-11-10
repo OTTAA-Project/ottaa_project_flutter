@@ -42,15 +42,59 @@ dependencies:
   screenshot: ^1.2.3
   share_plus: ^5.0.0
   url_launcher: ^6.1.6
+  json_serializable: ^6.5.4
+  json_annotation: ^4.7.0
+  path_provider: ^2.0.11
+  syncfusion_flutter_charts: ^20.3.56
+  textfield_datepicker: ^0.1.0
+  sqflite: ^2.2.0+3
+  path: ^1.8.2
 
 dev_dependencies:
+  build_runner: ^2.3.2
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
 
 flutter:
   uses-material-design: true
-
   assets:
     - assets/imgs/
     - assets/
+    - assets/profiles/
+    - assets/games_images/
+    - assets/audios/
+    - assets/languages/
+    - assets/gender_based/
+    - assets/gender_based/pictos/
+    - assets/gender_based/grupos/
+    - assets/i18n/
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Roboto-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Roboto-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Roboto-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Roboto-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Roboto-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Roboto-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Roboto-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Roboto-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: OTTAAProjectCustomIcon
+      fonts:
+        - asset: assets/custom_icons/Ottaa_project_custom_icons.ttf
