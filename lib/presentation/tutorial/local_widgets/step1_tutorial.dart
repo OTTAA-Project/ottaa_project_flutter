@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ottaa_project_flutter/app/global_widgets/step_button.dart';
 import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
@@ -19,10 +18,9 @@ Widget step1Tutorial<widget>(PageController controller, context) {
           height: verticalSize * 0.45,
           child: FittedBox(
             fit: BoxFit.cover,
-            child: SvgPicture.asset(
-              'assets/Group 729.svg',
-              placeholderBuilder: (BuildContext context) =>
-                  const CircularProgressIndicator(),
+            child: Image.asset(
+              'assets/Group 729.png',
+              fit: BoxFit.fill,
             ),
           ),
         ),
