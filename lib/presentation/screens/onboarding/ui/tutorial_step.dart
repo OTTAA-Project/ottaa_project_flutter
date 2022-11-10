@@ -81,7 +81,7 @@ class _UserInfoStepState extends ConsumerState<TutorialStep> with AutomaticKeepA
                             backgroundColor: Colors.grey,
                             // color: kOTTAAOrange,
                             // disabledColor: kQuantumGrey,
-                            onTap: () {},
+                            onTap: () {}, //TODO: Context go to tutorial screen
                             text: "Launch_short_tutorial".trl,
                             // shape: GFButtonShape.pills,
                             // size: verticalSize * 0.07,

@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/left_column_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/right_column_widget.dart';
 import 'package:go_router/go_router.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 

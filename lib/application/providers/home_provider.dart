@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
+import 'package:ottaa_project_flutter/application/database/sql_database.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/groups_model.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
@@ -34,7 +35,10 @@ class HomeProvider extends ChangeNotifier {
   late AnimationController pictoAnimationController;
 
   Future<void> fetchMostUsedSentences() async {
-    mostUsedSentences = await _sentencesService.fetchSentences(language: "", type: Constants.kMostUsedSentences);
+    mostUsedSentences = await _sentencesService.fetchSentences(
+      language: "", //TODO!: Fetch language code LANG-CODE
+      type: Constants.kMostUsedSentences,
+    );
     notifyListeners();
   }
 
@@ -44,7 +48,7 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  voidbuildSuggestion(int id) {
+  void buildSuggestion(int id) {
     suggestedPicts = [];
     suggestedIndex = 0;
 

@@ -122,7 +122,7 @@ class AboutService extends AboutRepository {
 
     final UserModel user = userResult.right;
 
-    final ref = databaseRef.child('${user.id}/Avatar/');
+    final ref = databaseRef.child('${user.id}/Usuarios/Avatar/');
     await ref.set({
       //todo: change the name over here
       'name': 'TestName',
