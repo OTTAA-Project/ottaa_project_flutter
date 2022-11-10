@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/jumping_dots.dart';
 
@@ -33,6 +35,8 @@ class SignInButton extends ConsumerWidget {
             ),
           );
         }
+        // ignore: use_build_context_synchronously
+        context.go(AppRoutes.splash);
       },
       child: Flex(
         direction: Axis.horizontal,

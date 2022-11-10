@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:ottaa_project_flutter/application/application.dart';
+import 'package:ottaa_project_flutter/application/database/sql_database.dart';
 import 'package:ottaa_project_flutter/application/injector.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 
@@ -14,7 +15,7 @@ void main() async {
 
   if (kIsWeb) {
     // initialiaze the facebook javascript SDK
-    FacebookAuth.i.webInitialize(
+    await FacebookAuth.i.webInitialize(
       appId: "658779868360186", //<-- YOUR APP_ID
       cookie: true,
       xfbml: true,
@@ -22,16 +23,18 @@ void main() async {
     );
   }
 
+  await SqlDatabase.db.init();
+
   await setupServices();
 
-  SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,
     DeviceOrientation.landscapeLeft,
-  ]).then(
-    (value) => runApp(
-      const Injector(
-        application: Application(),
-      ),
+  ]);
+
+  runApp(
+    const Injector(
+      application: Application(),
     ),
   );
 }

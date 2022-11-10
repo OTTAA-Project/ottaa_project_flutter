@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
+import 'package:ottaa_project_flutter/application/database/sql_database.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'dart:async';
@@ -24,12 +24,17 @@ class AuthService extends AuthRepository {
     User? user = _authProvider.currentUser;
 
     if (user != null) {
-      final UserModel userModel = UserModel(
-          id: user.uid,
-          name: user.displayName ?? "No Available",
-          email: user.email!,
-          photoUrl: user.photoURL);
-      return Right(userModel);
+      UserModel? model = SqlDatabase.user;
+
+      model ??= UserModel(
+        id: user.uid,
+        name: user.displayName ?? "No Available",
+        email: user.email!,
+      );
+
+      await SqlDatabase.db.setUser(model);
+
+      return Right(model);
     } else {
       return const Left("user_not_logged"); //TODO: Translate
     }
@@ -37,14 +42,14 @@ class AuthService extends AuthRepository {
 
   @override
   Future<bool> isLoggedIn() async {
-    return _authProvider.currentUser != null;
+    return SqlDatabase.user != null;
   }
 
   @override
   Future<void> logout() async {
     await _authProvider.signOut();
     await _googleSignIn.signOut();
-    await _facebookAuth.logOut();
+    // await _facebookAuth.logOut(); //TODO!: Comment this line due a [MissingPluginException] error
   }
 
   @override
@@ -61,8 +66,7 @@ class AuthService extends AuthRepository {
       case SignInType.apple:
       case SignInType.email:
       default:
-        return const Left(
-            "error_no_implement_auth_method"); //TODO: Implement translate method.
+        return const Left("error_no_implement_auth_method"); //TODO: Implement translate method.
     }
 
     if (result.isRight) {
@@ -70,12 +74,6 @@ class AuthService extends AuthRepository {
 
       final ref = databaseRef.child('Usuarios/${user.uid}/');
       final res = await ref.get();
-      if (res.exists) {
-        // final instance = await SharedPreferences.getInstance();
-        // instance.setBool('First_time', true);
-        // instance.setBool('Avatar_photo', true);
-
-      }
 
       ///sometimes the email does not come with the user.email, it is given in the providedData,
 
@@ -86,11 +84,11 @@ class AuthService extends AuthRepository {
       } else {
         email = user.email!;
       }
-      final UserModel userModel = UserModel(
-          id: user.uid,
-          name: user.displayName ?? "No Available",
-          email: email,
-          photoUrl: user.photoURL);
+
+      final userNameRef = databaseRef.child('${user.uid}/Usuarios/Nombre');
+      final userName = await userNameRef.get();
+
+      final UserModel userModel = UserModel(id: user.uid, name: user.displayName ?? userName.value?.toString() ?? "No Available", email: email, isFirstTime: res.exists);
       return Right(userModel);
     }
 
@@ -105,16 +103,14 @@ class AuthService extends AuthRepository {
         return const Left("error_google_sign_in_cancelled");
       }
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential =
-          await _authProvider.signInWithCredential(credential);
+      final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
 
       if (userCredential.user == null) {
         return const Left("error_google_sign_in_cancelled");
@@ -135,11 +131,9 @@ class AuthService extends AuthRepository {
       if (result.status == LoginStatus.success) {
         final AccessToken accessToken = result.accessToken!;
 
-        final AuthCredential credential =
-            FacebookAuthProvider.credential(accessToken.token);
+        final AuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
 
-        final UserCredential userCredential =
-            await _authProvider.signInWithCredential(credential);
+        final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
 
         if (userCredential.user == null) {
           return const Left("error_facebook_sign_in_cancelled");
@@ -156,5 +150,5 @@ class AuthService extends AuthRepository {
   }
 
   @override
-  bool get isLogged => _authProvider.currentUser != null;
+  bool get isLogged => SqlDatabase.user != null;
 }

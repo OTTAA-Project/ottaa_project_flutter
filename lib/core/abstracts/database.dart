@@ -1,1 +1,4 @@
-abstract class Database<U> {}
+abstract class Database {
+  Future<void> init();
+  Future<void> close();
+}

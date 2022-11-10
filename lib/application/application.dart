@@ -9,7 +9,7 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routerConfig: AppRouter().router,
+      routerConfig: appRouterSingleton.router,
       theme: AppTheme.instance.defaultThemeData(),
     );
   }

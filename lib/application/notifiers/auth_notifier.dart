@@ -6,11 +6,11 @@ class AuthNotifier extends StateNotifier<bool> {
   final AuthRepository _authRepository;
 
   AuthNotifier(this._authRepository) : super(false) {
-    (_authRepository.isLoggedIn()).then((value) => state = value);
+    state = _authRepository.isLogged;
   }
 }
 
-final loadingProvider = StateNotifierProvider<AuthNotifier, bool>((ref) {
+final authNotifier = StateNotifierProvider<AuthNotifier, bool>((ref) {
   final authService = GetIt.I<AuthRepository>();
   return AuthNotifier(authService);
 });

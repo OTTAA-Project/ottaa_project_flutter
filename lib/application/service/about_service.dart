@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
@@ -81,21 +82,12 @@ class AboutService extends AboutRepository {
 
   @override
   Future<void> sendSupportEmail() async {
-    final data = await Future.wait([
-      getEmail(),
-      getAppVersion(),
-      getAvailableAppVersion(),
-      getDeviceName()
-    ]);
+    final data = await Future.wait([getEmail(), getAppVersion(), getAvailableAppVersion(), getDeviceName()]);
     final userType = await getUserType();
-    final Uri params = Uri(
-        scheme: 'mailto',
-        path: 'support@ottaaproject.com',
-        queryParameters: {
-          'subject': 'Support',
-          'body':
-              '''Account: ${data[0]},\nAccount Type: ${userType.name},\nCurrent OTTAA Installed: ${data[1]}\nCurrent OTTAA Version: ${data[3]}\nDevice Name: ${data[4]}''',
-        });
+    final Uri params = Uri(scheme: 'mailto', path: 'support@ottaaproject.com', queryParameters: {
+      'subject': 'Support',
+      'body': '''Account: ${data[0]},\nAccount Type: ${userType.name},\nCurrent OTTAA Installed: ${data[1]}\nCurrent OTTAA Version: ${data[3]}\nDevice Name: ${data[4]}''',
+    });
     if (await canLaunchUrl(params)) {
       await launchUrl(params);
     } else {
@@ -139,6 +131,32 @@ class AboutService extends AboutRepository {
   }
 
   @override
+  Future<Either<String, UserModel>> getUserInformation() async {
+    final userResult = await _auth.getCurrentUser();
+    if (userResult.isLeft) return Left(userResult.left);
+
+    final UserModel user = userResult.right;
+
+    final userRef = databaseRef.child('${user.id}/Usuarios/');
+
+    final userValue = await userRef.get();
+
+    if (userValue.value == null) {
+      return const Left('User not found');
+    }
+
+    final dynamic userData = userValue.value as dynamic;
+
+    final UserModel newUser = user.copyWith(
+      birthdate: userData['birth_date'],
+      name: userData['Nombre'],
+      gender: userData['pref_sexo'],
+    );
+
+    return Right(newUser);
+  }
+
+  @override
   Future<void> uploadUserInformation() async {
     final userResult = await _auth.getCurrentUser();
     if (userResult.isLeft) return;
@@ -161,6 +179,7 @@ class AboutService extends AboutRepository {
     }
 
     final res = result.right;
+
     final refNew = databaseRef.child('${res.id}/Usuarios/Avatar/urlFoto/');
 
     DataSnapshot resNew = await refNew.get();
@@ -170,6 +189,17 @@ class AboutService extends AboutRepository {
       resNew = await refOld.get();
     }
 
-    return resNew.exists;
+    return resNew.value != null;
+  }
+
+  @override
+  Future<bool> isFirstTime() async {
+    final result = await _auth.getCurrentUser();
+
+    if (result.isLeft) {
+      return false;
+    }
+
+    return result.right.isFirstTime;
   }
 }
