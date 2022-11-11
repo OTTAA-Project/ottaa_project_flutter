@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/left_column_widget.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/right_column_widget.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/column_widget.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,17 +19,103 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          const Align(
+          Align(
             alignment: Alignment.bottomLeft,
-            child: LeftColumnWidget(),
+            child: ColumnWidget(
+              columnType: ColumnType.left,
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    onPressed: () async {},
+                    child: Center(
+                      child: Icon(
+                        Icons.videogame_asset,
+                        color: Colors.white,
+                        size: height / 12,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    onPressed: () async {},
+                    child: Center(
+                      child: Icon(
+                        Icons.image,
+                        color: Colors.white,
+                        size: height / 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-          const Align(
+          Align(
             alignment: Alignment.bottomRight,
-            child: RightColumnWidget(),
+            child: ColumnWidget(
+              columnType: ColumnType.right,
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    onPressed: () async {},
+                    child: Center(
+                      child: Icon(
+                        Icons.share,
+                        color: Colors.white,
+                        size: height / 12,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    onPressed: () async {},
+                    child: Center(
+                      child: Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                        size: height / 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           Column(
-            //MAIN COLUMN
-            // mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Expanded(
                 flex: 8,
@@ -49,46 +134,48 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: height * 0.045),
-                        child: SizedBox(
-                          width: width / 4,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.menu_sharp,
-                                color: Colors.white,
-                                size: height / 10,
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: height * 0.045),
+                          child: SizedBox(
+                            width: width / 4,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.menu_sharp,
+                                  color: Colors.white,
+                                  size: height / 10,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10),
                       Container(),
-                      const SizedBox(width: 10),
-                      Padding(
-                        padding: EdgeInsets.only(top: height * 0.045),
-                        child: SizedBox(
-                          width: width / 4,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.backspace_rounded,
-                                color: Colors.white,
-                                size: height / 10,
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: height * 0.045),
+                          child: SizedBox(
+                            width: width / 4,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.backspace_rounded,
+                                  color: Colors.white,
+                                  size: height / 10,
+                                ),
                               ),
                             ),
                           ),
@@ -116,36 +203,37 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            left: width / 3,
-            right: width / 3,
-            bottom: height * 0.045,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: kOTTAAOrangeNew,
-                shadowColor: Colors.transparent,
-                padding: EdgeInsets.zero,
-                shape: const CircleBorder(
-                  side: BorderSide(
-                    color: Colors.black,
-                    width: 4,
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: height * 0.045),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  backgroundColor: kOTTAAOrangeNew,
+                  shadowColor: Colors.transparent,
+                  padding: EdgeInsets.zero,
+                  shape: const CircleBorder(
+                    side: BorderSide(
+                      color: Colors.black,
+                      width: 4,
+                    ),
                   ),
                 ),
-              ),
-              onPressed: () {
-                //TODO: Add tts function
-                context.go(AppRoutes.tutorial);
-              },
-              child: SizedBox(
-                height: height * 0.16,
-                width: height * 0.16,
-                child: Center(
-                  child: Image.asset(
-                    AppImages.kIconoOttaa,
-                    color: Colors.white,
-                    height: height * 0.05,
-                    width: width * 0.05,
+                onPressed: () {
+                  //TODO: Add tts function
+                  context.push(AppRoutes.tutorial);
+                },
+                child: SizedBox(
+                  height: height * 0.16,
+                  width: height * 0.16,
+                  child: Center(
+                    child: Image.asset(
+                      AppImages.kIconoOttaa,
+                      color: Colors.white,
+                      height: height * 0.1,
+                      width: width * 0.1,
+                    ),
                   ),
                 ),
               ),
