@@ -102,17 +102,24 @@ class AboutService extends AboutRepository {
 
     final String id = userResult.right.id;
 
+    /// Get the profile picture from the database at the new path
     final refNew = databaseRef.child('$id/Usuarios/Avatar/urlFoto/');
     final resNew = await refNew.get();
     if (resNew.exists && resNew.value != null) {
-      return resNew.value as String;
-    } else {
-      final refOld = databaseRef.child('Avatar/$id/urlFoto/');
-      final resOld = await refOld.get();
-      print('here is the user urlfoto');
-      print(resOld.value);
-      return resOld.value as String;
+      return resNew.value.toString();
     }
+
+    /// Get the profile picture from the database at the old path
+    final refOld = databaseRef.child('Avatar/$id/urlFoto/');
+    final resOld = await refOld.get();
+    print('here is the user urlfoto');
+    print(resOld.value);
+    if (resOld.exists && resOld.value != null) {
+      return resOld.value.toString();
+    }
+
+    //Return an default image
+    return "671";
   }
 
   @override
@@ -124,7 +131,7 @@ class AboutService extends AboutRepository {
 
     final ref = databaseRef.child('${user.id}/Usuarios/Avatar/');
     await ref.set({
-      //todo: change the name over here
+      //todo!: change the name over here and in the local db !!
       'name': 'TestName',
       'urlFoto': photo,
     });
@@ -145,12 +152,15 @@ class AboutService extends AboutRepository {
       return const Left('User not found');
     }
 
+    final userPhoto = await getProfilePicture();
+
     final dynamic userData = userValue.value as dynamic;
 
     final UserModel newUser = user.copyWith(
       birthdate: userData['birth_date'],
       name: userData['Nombre'],
       gender: userData['pref_sexo'],
+      photoUrl: userPhoto,
     );
 
     return Right(newUser);
