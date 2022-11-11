@@ -28,7 +28,7 @@ class SqlDatabase implements DatabaseRepository {
   Future<Database> initDB() async {
     return await openDatabase(
       join(await getDatabasesPath(), 'ottaa_database.db'),
-      version: 1,
+      version: 2,
       onConfigure: _onConfigure,
       onUpgrade: _onUpgrade,
       onDowngrade: _onUpgrade,
@@ -54,7 +54,8 @@ class SqlDatabase implements DatabaseRepository {
         birthdate INTEGER,
         gender TEXT,
         language TEXT,
-        isFirstTime INTEGER
+        isFirstTime INTEGER,
+        avatar TEXT
       )
     ''');
   }

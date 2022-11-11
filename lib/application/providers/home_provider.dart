@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
-import 'package:ottaa_project_flutter/application/database/sql_database.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/groups_model.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
@@ -32,7 +31,11 @@ class HomeProvider extends ChangeNotifier {
 
   int suggestedQuantity = 4;
 
-  late AnimationController pictoAnimationController;
+  Future<void> init() async {
+    await fetchPictograms();
+    buildSuggestion(0);
+    notifyListeners();
+  }
 
   Future<void> fetchMostUsedSentences() async {
     mostUsedSentences = await _sentencesService.fetchSentences(
@@ -71,7 +74,7 @@ class HomeProvider extends ChangeNotifier {
       suggestedPicts = [];
     }
 
-    /// *
+    ///
     /// predictive algorithm will replace teh code from here
 
     // recomendedPicts.forEach((recommendedPict) {
@@ -80,14 +83,13 @@ class HomeProvider extends ChangeNotifier {
     // });
 
     /// to here
-    /// *
+    ///
     suggestedPicts.add(addPict);
 
     while (suggestedPicts.isEmpty || suggestedPicts.length % suggestedQuantity != 0) {
       suggestedPicts.add(addPict);
     }
 
-    pictoAnimationController.forward(from: 0.0);
     notifyListeners();
   }
 

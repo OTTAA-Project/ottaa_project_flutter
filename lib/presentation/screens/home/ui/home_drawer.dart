@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/database/sql_database.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
@@ -19,6 +20,7 @@ class HomeDrawer extends ConsumerWidget {
     final height = size.height;
 
     final auth = ref.read(authProvider.notifier);
+    final userAvatar = ref.watch(userAvatarNotifier);
 
     return SafeArea(
       child: Drawer(
@@ -41,9 +43,12 @@ class HomeDrawer extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset(
-                        'assets/profiles/Group ${SqlDatabase.user?.photoUrl}@2x.png',
-                        height: height * 0.05,
+                      GestureDetector(
+                        onTap: () => context.push(AppRoutes.onboarding, extra: 2),
+                        child: Image.asset(
+                          'assets/profiles/Group $userAvatar@2x.png',
+                          height: height * 0.05,
+                        ),
                       ),
                       Image.asset(
                         AppImages.kWhiteLogoOttaa,

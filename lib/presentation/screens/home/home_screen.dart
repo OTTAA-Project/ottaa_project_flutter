@@ -1,20 +1,38 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
+import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/column_widget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/pictogram_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_drawer.dart';
+import 'package:picto_widget/picto_widget.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    final provider = ref.read(homeProvider);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await LoadingModal.show(context, future: provider.init);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final double height = size.height;
     final double width = size.width;
+
+    final provider = ref.watch(homeProvider);
+
+    print(provider.suggestedPicts);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -32,7 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onHorizontalDragEnd: (details) {
-          if (details.velocity.pixelsPerSecond.dx > 0) {
+          if (details.velocity.pixelsPerSecond.dx.abs() > 0) {
+            //TODO!: WORK FOR ASIM :) (build context: asim told he can do that better than me)
+            //Another work for asim translate this: papi chulo :(
             _scaffoldKey.currentState?.openDrawer();
           }
         },
@@ -215,9 +239,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(
                   height: height * 0.58,
                   width: width * 0.78,
+                  padding: EdgeInsets.symmetric(vertical: height * 0.02),
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: provider.suggestedPicts.isNotEmpty
+                        ? provider.suggestedPicts
+                            .sublist(0, 4)
+                            .map(
+                              (picto) => PictogramWidget(pictogam: picto, onTap: () {}),
+                            )
+                            .toList()
+                        : [],
                   ),
                 ),
               ),

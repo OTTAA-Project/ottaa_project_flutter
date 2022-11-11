@@ -30,6 +30,7 @@ class AuthService extends AuthRepository {
         id: user.uid,
         name: user.displayName ?? "No Available",
         email: user.email!,
+        photoUrl: user.photoURL ?? "",
       );
 
       await SqlDatabase.db.setUser(model);
@@ -72,10 +73,14 @@ class AuthService extends AuthRepository {
     if (result.isRight) {
       final User user = result.right;
 
-      final ref = databaseRef.child('Usuarios/${user.uid}/');
+      final ref = databaseRef.child('${user.uid}/Usuarios/');
       final res = await ref.get();
 
       ///sometimes the email does not come with the user.email, it is given in the providedData,
+
+      if (res.value == null || !res.exists) {
+        await signUp();
+      }
 
       late String email;
 
@@ -88,7 +93,13 @@ class AuthService extends AuthRepository {
       final userNameRef = databaseRef.child('${user.uid}/Usuarios/Nombre');
       final userName = await userNameRef.get();
 
-      final UserModel userModel = UserModel(id: user.uid, name: user.displayName ?? userName.value?.toString() ?? "No Available", email: email, isFirstTime: res.exists);
+      final UserModel userModel = UserModel(
+        id: user.uid,
+        name: user.displayName ?? userName.value?.toString() ?? "No Available",
+        email: email,
+        isFirstTime: res.exists,
+        photoUrl: user.photoURL ?? "",
+      );
       return Right(userModel);
     }
 
@@ -151,4 +162,28 @@ class AuthService extends AuthRepository {
 
   @override
   bool get isLogged => SqlDatabase.user != null;
+
+  @override
+  Future<Either<String, bool>> signUp() async {
+    final user = _authProvider.currentUser;
+
+    if (user == null) {
+      return const Left("error_user_not_logged");
+    }
+
+    final ref = databaseRef.child('${user.uid}/Usuarios/');
+
+    await ref.set(<String, Object>{
+      'Nombre': user.displayName!,
+      'birth_date': 0,
+      'pref_sexo': "N/A",
+      'Avatar': {
+        //todo!: change the name over here and in the local db !!
+        'name': user.photoURL,
+        'urlFoto': 617,
+      }
+    });
+
+    return const Right(true);
+  }
 }

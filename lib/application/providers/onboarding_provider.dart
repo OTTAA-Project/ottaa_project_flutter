@@ -116,7 +116,7 @@ class OnBoardingNotifier extends ChangeNotifier {
     final user = result.right;
     await _about.uploadProfilePicture(_userAvatar.getAvatar());
     UserModel newUser = user.copyWith(
-      photoUrl: _userAvatar.getAvatar(),
+      avatar: _userAvatar.getAvatar(),
     );
 
     await SqlDatabase.db.setUser(newUser);

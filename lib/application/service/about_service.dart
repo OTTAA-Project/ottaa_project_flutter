@@ -105,6 +105,8 @@ class AboutService extends AboutRepository {
     /// Get the profile picture from the database at the new path
     final refNew = databaseRef.child('$id/Usuarios/Avatar/urlFoto/');
     final resNew = await refNew.get();
+    print('here is new the user urlfoto');
+    print(resNew.value);
     if (resNew.exists && resNew.value != null) {
       return resNew.value.toString();
     }
@@ -112,7 +114,7 @@ class AboutService extends AboutRepository {
     /// Get the profile picture from the database at the old path
     final refOld = databaseRef.child('Avatar/$id/urlFoto/');
     final resOld = await refOld.get();
-    print('here is the user urlfoto');
+    print('here is the old user urlfoto');
     print(resOld.value);
     if (resOld.exists && resOld.value != null) {
       return resOld.value.toString();
@@ -130,7 +132,8 @@ class AboutService extends AboutRepository {
     final UserModel user = userResult.right;
 
     final ref = databaseRef.child('${user.id}/Usuarios/Avatar/');
-    await ref.set({
+
+    await ref.update({
       //todo!: change the name over here and in the local db !!
       'name': 'TestName',
       'urlFoto': photo,
@@ -178,6 +181,11 @@ class AboutService extends AboutRepository {
       'Nombre': user.name,
       'birth_date': user.birthdate ?? 0,
       'pref_sexo': user.gender ?? "N/A",
+      'Avatar': {
+        //todo!: change the name over here and in the local db !!
+        'name': user.photoUrl,
+        'urlFoto': user.avatar,
+      }
     });
   }
 
@@ -190,16 +198,18 @@ class AboutService extends AboutRepository {
 
     final res = result.right;
 
+    //Check for the new path
     final refNew = databaseRef.child('${res.id}/Usuarios/Avatar/urlFoto/');
 
-    DataSnapshot resNew = await refNew.get();
+    DataSnapshot photoDb = await refNew.get();
 
-    if (resNew.value == null || !resNew.exists) {
+    if (photoDb.value == null || !photoDb.exists) {
+      //Check for the old path
       final refOld = databaseRef.child('Avatar/${res.id}/urlFoto/');
-      resNew = await refOld.get();
+      photoDb = await refOld.get();
     }
 
-    return resNew.value != null;
+    return photoDb.value != null || photoDb.exists;
   }
 
   @override

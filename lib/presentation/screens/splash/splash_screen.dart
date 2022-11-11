@@ -44,8 +44,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       }
       if (mounted) return context.go(AppRoutes.login);
     });
-
-    print("ACA");
   }
 
   @override
