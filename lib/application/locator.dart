@@ -55,6 +55,8 @@ Future<void> setupServices() async {
   final TTSRepository ttsService = TTSService();
 
   locator.registerSingleton<I18N>(i18n);
+  locator.registerSingleton<LocalDatabaseRepository>(databaseRepository);
+  locator.registerSingleton<ServerRepository>(serverRepository);
   locator.registerSingleton<TTSRepository>(ttsService);
   locator.registerSingleton<AuthRepository>(authService);
   locator.registerSingleton<LocalStorageRepository>(localStorageService);

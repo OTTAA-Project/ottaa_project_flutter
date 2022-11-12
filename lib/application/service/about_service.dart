@@ -154,6 +154,6 @@ class AboutService extends AboutRepository {
       return false;
     }
 
-    return result.right.isFirstTime;
+    return result.right.birthdate == 0;
   }
 }

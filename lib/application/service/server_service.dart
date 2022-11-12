@@ -69,7 +69,7 @@ class ServerService implements ServerRepository {
 
     final userValue = await userRef.get();
 
-    if (!userValue.exists || userValue.value == null) null;
+    if (!userValue.exists || userValue.value == null) return null;
 
     final dynamic user = userValue.value as dynamic;
 
