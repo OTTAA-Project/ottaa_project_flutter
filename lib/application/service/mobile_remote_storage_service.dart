@@ -7,14 +7,14 @@ import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
 class MobileRemoteStorageService implements RemoteStorageRepository {
-  final _databaseRef = FirebaseDatabase.instance.ref();
-
   final AuthRepository _authService;
+  final ServerRepository _serverRepository;
   final I18N _i18n;
 
-  MobileRemoteStorageService(this._authService, this._i18n);
+  MobileRemoteStorageService(this._authService, this._serverRepository, this._i18n);
 
   @override
   Future<void> deleteFile(String path, String fileName) {
@@ -31,20 +31,21 @@ class MobileRemoteStorageService implements RemoteStorageRepository {
     final UserModel auth = result.right;
     final languageCode = _i18n.languageCode;
 
-    final refNew = _databaseRef.child('${auth.id}/$path/$languageCode');
-    final resNew = await refNew.get();
-    final refOld = _databaseRef.child('$path/${auth.id}/$languageCode');
-    final resOld = await refOld.get();
-    if (resNew.exists && resNew.value != null) {
-      final encode = jsonEncode(resNew.value);
-      return encode;
-    } else if (resOld.exists && resOld.value != null) {
-      final data = resOld.children.first.value as String;
-      return data;
-    } else {
-      final data = await rootBundle.loadString(fileName);
-      return data;
+    List<dynamic>? fetchedData;
+
+    if (path == "Pictos") {
+      fetchedData = await _serverRepository.getAllPictograms(auth.id, languageCode);
+    } else if (path == "Grupos") {
+      fetchedData = await _serverRepository.getAllGroups(auth.id, languageCode);
     }
+
+    if (fetchedData != null) {
+      final encode = jsonEncode(fetchedData);
+      return encode;
+    }
+
+    final cachedData = await rootBundle.loadString(fileName);
+    return cachedData;
   }
 
   @override

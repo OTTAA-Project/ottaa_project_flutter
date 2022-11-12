@@ -1,49 +1,38 @@
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:ottaa_project_flutter/application/database/sql_database.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'dart:async';
 
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
 class AuthService extends AuthRepository {
   final FirebaseAuth _authProvider = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookAuth _facebookAuth = FacebookAuth.instance;
 
-  final databaseRef = FirebaseDatabase.instance.ref();
+  final LocalDatabaseRepository _databaseRepository;
+  final ServerRepository _serverRepository;
 
-  AuthService();
+  AuthService(this._databaseRepository, this._serverRepository);
 
   @override
   Future<Either<String, UserModel>> getCurrentUser() async {
-    User? user = _authProvider.currentUser;
-
-    if (user != null) {
-      UserModel? model = SqlDatabase.user;
-
-      model ??= UserModel(
-        id: user.uid,
-        name: user.displayName ?? "No Available",
-        email: user.email!,
-        photoUrl: user.photoURL ?? "",
-      );
-
-      await SqlDatabase.db.setUser(model);
-
-      return Right(model);
-    } else {
-      return const Left("user_not_logged"); //TODO: Translate
+    UserModel? userDb = _databaseRepository.user;
+    if (userDb == null) {
+      return const Left("No user logged");
     }
+
+    return Right(userDb);
   }
 
   @override
   Future<bool> isLoggedIn() async {
-    return SqlDatabase.user != null;
+    return _databaseRepository.user != null;
   }
 
   @override
@@ -51,6 +40,7 @@ class AuthService extends AuthRepository {
     await _authProvider.signOut();
     await _googleSignIn.signOut();
     // await _facebookAuth.logOut(); //TODO!: Comment this line due a [MissingPluginException] error
+    await _databaseRepository.deleteUser();
   }
 
   @override
@@ -73,33 +63,28 @@ class AuthService extends AuthRepository {
     if (result.isRight) {
       final User user = result.right;
 
-      final ref = databaseRef.child('${user.uid}/Usuarios/');
-      final res = await ref.get();
-
       ///sometimes the email does not come with the user.email, it is given in the providedData,
 
-      if (res.value == null || !res.exists) {
+      Map<String, dynamic>? userInfo = await _serverRepository.getUserInformation(user.uid);
+      UserModel? userModel;
+      if (userInfo == null) {
         await signUp();
-      }
 
-      late String email;
+        final nameRetriever = user.displayName ?? user.providerData[0].displayName;
+        final emailRetriever = user.email ?? user.providerData[0].email;
 
-      if (user.email == null) {
-        email = user.providerData[0].email!;
+        userModel = UserModel(
+          id: user.uid,
+          name: nameRetriever ?? "",
+          email: emailRetriever ?? "",
+          photoUrl: user.photoURL ?? "",
+          isFirstTime: true,
+          language: "es",
+        );
       } else {
-        email = user.email!;
+        userModel = UserModel.fromRemote(userInfo);
       }
 
-      final userNameRef = databaseRef.child('${user.uid}/Usuarios/Nombre');
-      final userName = await userNameRef.get();
-
-      final UserModel userModel = UserModel(
-        id: user.uid,
-        name: user.displayName ?? userName.value?.toString() ?? "No Available",
-        email: email,
-        isFirstTime: res.exists,
-        photoUrl: user.photoURL ?? "",
-      );
       return Right(userModel);
     }
 
@@ -161,7 +146,7 @@ class AuthService extends AuthRepository {
   }
 
   @override
-  bool get isLogged => SqlDatabase.user != null;
+  bool get isLogged => _databaseRepository.user != null;
 
   @override
   Future<Either<String, bool>> signUp() async {
@@ -171,18 +156,19 @@ class AuthService extends AuthRepository {
       return const Left("error_user_not_logged");
     }
 
-    final ref = databaseRef.child('${user.uid}/Usuarios/');
+    final nameRetriever = user.displayName ?? user.providerData[0].displayName;
+    final emailRetriever = user.email ?? user.providerData[0].email;
 
-    await ref.set(<String, Object>{
-      'Nombre': user.displayName!,
-      'birth_date': 0,
-      'pref_sexo': "N/A",
-      'Avatar': {
-        //todo!: change the name over here and in the local db !!
-        'name': user.photoURL,
-        'urlFoto': 617,
-      }
-    });
+    final userModel = UserModel(
+      id: user.uid,
+      name: nameRetriever ?? "",
+      email: emailRetriever ?? "",
+      photoUrl: user.photoURL ?? "",
+      isFirstTime: true,
+      language: "es",
+    );
+
+    await _serverRepository.uploadUserInformation(user.uid, userModel.toRemote());
 
     return const Right(true);
   }

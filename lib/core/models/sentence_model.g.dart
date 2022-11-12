@@ -6,16 +6,19 @@ part of 'sentence_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SentenceModel _$FraseModelFromJson(Map<String, dynamic> json) => SentenceModel(
+SentenceModel _$SentenceModelFromJson(Map<String, dynamic> json) =>
+    SentenceModel(
       frase: json['frase'] as String,
       frecuencia: json['frecuencia'] as int,
-      complejidad: Complex.fromJson(json['complejidad'] as Map<String, dynamic>),
+      complejidad:
+          Complex.fromJson(json['complejidad'] as Map<String, dynamic>),
       fecha: (json['fecha'] as List<dynamic>).map((e) => e as int).toList(),
       locale: json['locale'] as String,
       id: json['id'] as int,
     );
 
-Map<String, dynamic> _$FraseModelToJson(SentenceModel instance) => <String, dynamic>{
+Map<String, dynamic> _$SentenceModelToJson(SentenceModel instance) =>
+    <String, dynamic>{
       'frase': instance.frase,
       'frecuencia': instance.frecuencia,
       'complejidad': instance.complejidad,
@@ -24,17 +27,20 @@ Map<String, dynamic> _$FraseModelToJson(SentenceModel instance) => <String, dyna
       'id': instance.id,
     };
 
-Complex _$ComplejidadFromJson(Map<String, dynamic> json) => Complex(
+Complex _$ComplexFromJson(Map<String, dynamic> json) => Complex(
       valor: json['valor'] as int,
-      pictosComponentes: (json['pictos componentes'] as List<dynamic>).map((e) => PictosComponente.fromJson(e as Map<String, dynamic>)).toList(),
+      pictosComponentes: (json['pictos componentes'] as List<dynamic>)
+          .map((e) => PictosComponente.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$ComplejidadToJson(Complex instance) => <String, dynamic>{
+Map<String, dynamic> _$ComplexToJson(Complex instance) => <String, dynamic>{
       'valor': instance.valor,
       'pictos componentes': instance.pictosComponentes,
     };
 
-PictosComponente _$PictosComponenteFromJson(Map<String, dynamic> json) => PictosComponente(
+PictosComponente _$PictosComponenteFromJson(Map<String, dynamic> json) =>
+    PictosComponente(
       id: json['id'] as int,
       esSugerencia: json['esSugerencia'] as bool,
       hora: (json['hora'] as List<dynamic>?)?.map((e) => e as String?).toList(),
@@ -42,7 +48,8 @@ PictosComponente _$PictosComponenteFromJson(Map<String, dynamic> json) => Pictos
       sexo: (json['sexo'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$PictosComponenteToJson(PictosComponente instance) => <String, dynamic>{
+Map<String, dynamic> _$PictosComponenteToJson(PictosComponente instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'esSugerencia': instance.esSugerencia,
       'hora': instance.hora,

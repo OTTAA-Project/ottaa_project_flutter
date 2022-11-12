@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/database/sql_database.dart';
+import 'package:ottaa_project_flutter/application/service/sql_database.dart';
 import 'package:ottaa_project_flutter/application/service/auth_service.dart';
 import 'package:ottaa_project_flutter/application/service/groups_service.dart';
 import 'package:ottaa_project_flutter/application/service/local_storage_service.dart';
@@ -13,24 +13,26 @@ import 'package:ottaa_project_flutter/application/service/tts_service.dart';
 import 'package:ottaa_project_flutter/application/service/web_remote_storage_service.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
-import 'package:sqflite/sqflite.dart';
-
 import 'service/about_service.dart';
 
 final locator = GetIt.instance;
 
 Future<void> setupServices() async {
   final deviceLocale = Intl.getCurrentLocale().split("_")[0];
+
+  final LocalDatabaseRepository databaseRepository = SqlDatabase();
+  await databaseRepository.init();
+
   final i18n = await I18N(deviceLocale).init();
 
-  final AuthRepository authService = AuthService();
+  final AuthRepository authService = AuthService(databaseRepository);
   final LocalStorageRepository localStorageService = LocalStorageService();
   late final RemoteStorageRepository remoteStorageService;
 

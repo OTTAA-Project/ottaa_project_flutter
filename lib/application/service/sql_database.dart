@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
-import 'package:ottaa_project_flutter/core/repositories/database_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:path/path.dart';
 
-class SqlDatabase implements DatabaseRepository {
-  SqlDatabase._();
-  static final SqlDatabase db = SqlDatabase._();
-
+class SqlDatabase implements LocalDatabaseRepository {
   Database? _database;
-  static UserModel? user;
+
+  @override
+  UserModel? user;
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -84,7 +83,7 @@ class SqlDatabase implements DatabaseRepository {
     await db.delete('user');
     await db.insert('user', user.toMap());
 
-    SqlDatabase.user = user;
+    this.user = user;
   }
 
   @override
@@ -102,6 +101,6 @@ class SqlDatabase implements DatabaseRepository {
     final db = await database;
     await db.delete('user');
 
-    SqlDatabase.user = null;
+    user = null;
   }
 }

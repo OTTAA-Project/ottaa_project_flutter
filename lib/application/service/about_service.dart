@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:either_dart/either.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
@@ -10,15 +9,16 @@ import 'dart:async';
 
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutService extends AboutRepository {
-  final DatabaseReference databaseRef = FirebaseDatabase.instance.ref();
+  final ServerRepository _serverRepository;
 
   final AuthRepository _auth;
 
-  AboutService(this._auth);
+  AboutService(this._auth, this._serverRepository);
 
   @override
   Future<String> getAppVersion() async {
@@ -27,11 +27,7 @@ class AboutService extends AboutRepository {
   }
 
   @override
-  Future<String> getAvailableAppVersion() async {
-    final DatabaseReference ref = databaseRef.child('version/');
-    final DataSnapshot res = await ref.get();
-    return res.value.toString();
-  }
+  Future<String> getAvailableAppVersion() => _serverRepository.getAvailableAppVersion();
 
   @override
   Future<String> getDeviceName() async {
@@ -71,13 +67,10 @@ class AboutService extends AboutRepository {
     if (result.isLeft) {
       return UserType.free;
     }
+
     final user = result.right;
 
-    final ref = databaseRef.child('Pago/${user.id}/Pago');
-    final res = await ref.get();
-    if (res.value == null) return UserType.free;
-
-    return UserType.premium;
+    return _serverRepository.getUserType(user.id);
   }
 
   @override
@@ -102,26 +95,9 @@ class AboutService extends AboutRepository {
 
     final String id = userResult.right.id;
 
-    /// Get the profile picture from the database at the new path
-    final refNew = databaseRef.child('$id/Usuarios/Avatar/urlFoto/');
-    final resNew = await refNew.get();
-    print('here is new the user urlfoto');
-    print(resNew.value);
-    if (resNew.exists && resNew.value != null) {
-      return resNew.value.toString();
-    }
-
-    /// Get the profile picture from the database at the old path
-    final refOld = databaseRef.child('Avatar/$id/urlFoto/');
-    final resOld = await refOld.get();
-    print('here is the old user urlfoto');
-    print(resOld.value);
-    if (resOld.exists && resOld.value != null) {
-      return resOld.value.toString();
-    }
-
+    final String? url = await _serverRepository.getUserProfilePicture(id);
     //Return an default image
-    return "671";
+    return url ?? "671";
   }
 
   @override
@@ -131,13 +107,7 @@ class AboutService extends AboutRepository {
 
     final UserModel user = userResult.right;
 
-    final ref = databaseRef.child('${user.id}/Usuarios/Avatar/');
-
-    await ref.update({
-      //todo!: change the name over here and in the local db !!
-      'name': 'TestName',
-      'urlFoto': photo,
-    });
+    await _serverRepository.uploadUserPicture(user.id, photo, user.photoUrl);
   }
 
   @override
@@ -147,24 +117,11 @@ class AboutService extends AboutRepository {
 
     final UserModel user = userResult.right;
 
-    final userRef = databaseRef.child('${user.id}/Usuarios/');
+    final userData = await _serverRepository.getUserInformation(user.id);
 
-    final userValue = await userRef.get();
+    if (userData == null) return const Left("no_user_found");
 
-    if (userValue.value == null) {
-      return const Left('User not found');
-    }
-
-    final userPhoto = await getProfilePicture();
-
-    final dynamic userData = userValue.value as dynamic;
-
-    final UserModel newUser = user.copyWith(
-      birthdate: userData['birth_date'],
-      name: userData['Nombre'],
-      gender: userData['pref_sexo'],
-      photoUrl: userPhoto,
-    );
+    final UserModel newUser = UserModel.fromRemote(userData);
 
     return Right(newUser);
   }
@@ -176,17 +133,7 @@ class AboutService extends AboutRepository {
 
     final UserModel user = userResult.right;
 
-    final ref = databaseRef.child('${user.id}/Usuarios/');
-    await ref.set(<String, Object>{
-      'Nombre': user.name,
-      'birth_date': user.birthdate ?? 0,
-      'pref_sexo': user.gender ?? "N/A",
-      'Avatar': {
-        //todo!: change the name over here and in the local db !!
-        'name': user.photoUrl,
-        'urlFoto': user.avatar,
-      }
-    });
+    await _serverRepository.uploadUserInformation(user.id, user.toRemote());
   }
 
   @override
@@ -196,20 +143,7 @@ class AboutService extends AboutRepository {
       return false;
     }
 
-    final res = result.right;
-
-    //Check for the new path
-    final refNew = databaseRef.child('${res.id}/Usuarios/Avatar/urlFoto/');
-
-    DataSnapshot photoDb = await refNew.get();
-
-    if (photoDb.value == null || !photoDb.exists) {
-      //Check for the old path
-      final refOld = databaseRef.child('Avatar/${res.id}/urlFoto/');
-      photoDb = await refOld.get();
-    }
-
-    return photoDb.value != null || photoDb.exists;
+    return result.right.avatar != null || result.right.photoUrl == "0";
   }
 
   @override

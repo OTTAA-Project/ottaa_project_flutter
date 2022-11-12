@@ -1,9 +1,7 @@
 import 'package:either_dart/either.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ottaa_project_flutter/application/database/sql_database.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
@@ -14,8 +12,6 @@ import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 
 class AuthProvider extends ChangeNotifier {
   final LoadingNotifier _loadingNotifier;
-
-  final databaseRef = FirebaseDatabase.instance.ref();
 
   final AuthRepository _authService;
   final AboutRepository _aboutService;
@@ -33,7 +29,6 @@ class AuthProvider extends ChangeNotifier {
     Either<String, UserModel> result = await _authService.signIn(type);
 
     if (result.isRight) {
-      await SqlDatabase.db.setUser(result.right);
       await _aboutService.getUserInformation();
     }
 
