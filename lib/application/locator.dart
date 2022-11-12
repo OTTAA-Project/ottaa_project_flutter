@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
+import 'package:ottaa_project_flutter/application/service/server_service.dart';
 import 'package:ottaa_project_flutter/application/service/sql_database.dart';
 import 'package:ottaa_project_flutter/application/service/auth_service.dart';
 import 'package:ottaa_project_flutter/application/service/groups_service.dart';
@@ -19,6 +20,7 @@ import 'package:ottaa_project_flutter/core/repositories/local_storage_repository
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
 import 'service/about_service.dart';
 
@@ -30,30 +32,26 @@ Future<void> setupServices() async {
   final LocalDatabaseRepository databaseRepository = SqlDatabase();
   await databaseRepository.init();
 
+  final ServerRepository serverRepository = ServerService();
+
   final i18n = await I18N(deviceLocale).init();
 
-  final AuthRepository authService = AuthService(databaseRepository);
+  final AuthRepository authService = AuthService(databaseRepository, serverRepository);
   final LocalStorageRepository localStorageService = LocalStorageService();
   late final RemoteStorageRepository remoteStorageService;
 
   if (kIsWeb) {
-    remoteStorageService = WebRemoteStorageService(authService, i18n);
+    remoteStorageService = WebRemoteStorageService(authService, serverRepository, i18n);
   } else {
-    remoteStorageService = MobileRemoteStorageService(authService, i18n);
+    remoteStorageService = MobileRemoteStorageService(authService, serverRepository, i18n);
   }
 
-  final PictogramsRepository pictogramsService = PictogramsService(
-    authService,
-    remoteStorageService,
-  );
+  final PictogramsRepository pictogramsService = PictogramsService(authService, serverRepository, remoteStorageService);
 
-  final GroupsRepository groupsService = GroupsService(
-    authService,
-    remoteStorageService,
-  );
+  final GroupsRepository groupsService = GroupsService(authService, remoteStorageService, serverRepository);
 
-  final AboutRepository aboutService = AboutService(authService);
-  final SentencesRepository sentencesService = SentencesService(authService);
+  final AboutRepository aboutService = AboutService(authService, serverRepository);
+  final SentencesRepository sentencesService = SentencesService(authService, serverRepository);
   final TTSRepository ttsService = TTSService();
 
   locator.registerSingleton<I18N>(i18n);
