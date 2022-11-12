@@ -22,9 +22,9 @@ class Groups {
   int? frecuencia;
   List<String>? tags;
 
-  factory Groups.fromJson(Map<String, dynamic> json) => _$GruposFromJson(json);
+  factory Groups.fromJson(Map<String, dynamic> json) => _$GroupsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$GruposToJson(this);
+  Map<String, dynamic> toJson() => _$GroupsToJson(this);
 }
 
 @JsonSerializable()
@@ -41,9 +41,9 @@ class ImageGroups {
   String? urlFoto;
   String? pushKey;
 
-  factory ImageGroups.fromJson(Map<String, dynamic> json) => _$ImagenGruposFromJson(json);
+  factory ImageGroups.fromJson(Map<String, dynamic> json) => _$ImageGroupsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ImagenGruposToJson(this);
+  Map<String, dynamic> toJson() => _$ImageGroupsToJson(this);
 }
 
 @JsonSerializable()
@@ -74,9 +74,9 @@ class GroupRelation {
   List<String>? edad;
   List<String>? horario;
 
-  factory GroupRelation.fromJson(Map<String, dynamic> json) => _$GrupoRelacionFromJson(json);
+  factory GroupRelation.fromJson(Map<String, dynamic> json) => _$GroupRelationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$GrupoRelacionToJson(this);
+  Map<String, dynamic> toJson() => _$GroupRelationToJson(this);
 }
 
 @JsonSerializable()
@@ -89,9 +89,9 @@ class RelationRelation {
   int id;
   int frec;
 
-  factory RelationRelation.fromJson(Map<String, dynamic> json) => _$RelacionRelacionFromJson(json);
+  factory RelationRelation.fromJson(Map<String, dynamic> json) => _$RelationRelationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RelacionRelacionToJson(this);
+  Map<String, dynamic> toJson() => _$RelationRelationToJson(this);
 }
 
 @JsonSerializable()
@@ -108,7 +108,7 @@ class TextGroups {
   String fr;
   String pt;
 
-  factory TextGroups.fromJson(Map<String, dynamic> json) => _$TextoGruposFromJson(json);
+  factory TextGroups.fromJson(Map<String, dynamic> json) => _$TextGroupsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TextoGruposToJson(this);
+  Map<String, dynamic> toJson() => _$TextGroupsToJson(this);
 }

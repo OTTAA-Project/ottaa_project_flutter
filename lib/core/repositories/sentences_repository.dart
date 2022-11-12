@@ -6,6 +6,7 @@ abstract class SentencesRepository {
     required String type,
     bool isFavorite = false,
   });
+
   Future<void> uploadSentences({
     required String language,
     required List<SentenceModel> data,

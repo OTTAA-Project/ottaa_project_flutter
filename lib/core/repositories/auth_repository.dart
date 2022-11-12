@@ -9,6 +9,8 @@ abstract class AuthRepository {
 
   Future<Either<String, UserModel>> signIn(SignInType type);
 
+  Future<Either<String, bool>> signUp();
+
   Future<Either<String, UserModel>> getCurrentUser();
 
   Future<bool> isLoggedIn();

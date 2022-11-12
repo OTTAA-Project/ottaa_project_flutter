@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/database/sql_database.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 
 class OnBoardingNotifier extends ChangeNotifier {
-  late PageController controller;
+  final PageController controller = PageController(initialPage: 0);
 
   final List<GlobalKey<FormState>> formKeys = [
     GlobalKey<FormState>(),
@@ -28,10 +28,9 @@ class OnBoardingNotifier extends ChangeNotifier {
   final AboutRepository _about;
 
   final UserAvatarNotifier _userAvatar;
+  final LocalDatabaseRepository _localDatabase;
 
-  OnBoardingNotifier(this._auth, this._about, this._loading, this._userAvatar) {
-    controller = PageController(initialPage: 0);
-  }
+  OnBoardingNotifier(this._auth, this._about, this._localDatabase, this._loading, this._userAvatar);
 
   void nextPage() {
     controller.nextPage(
@@ -58,7 +57,6 @@ class OnBoardingNotifier extends ChangeNotifier {
   Future<void> signOut() async {
     _loading.showLoading();
     await _auth.logout();
-    await SqlDatabase.db.deleteUser();
     _loading.hideLoading();
   }
 
@@ -91,7 +89,7 @@ class OnBoardingNotifier extends ChangeNotifier {
       birthdate: time.millisecondsSinceEpoch,
     );
 
-    await SqlDatabase.db.setUser(newUser);
+    _localDatabase.setUser(newUser);
 
     await _about.uploadUserInformation();
 
@@ -116,10 +114,10 @@ class OnBoardingNotifier extends ChangeNotifier {
     final user = result.right;
     await _about.uploadProfilePicture(_userAvatar.getAvatar());
     UserModel newUser = user.copyWith(
-      photoUrl: _userAvatar.getAvatar(),
+      avatar: _userAvatar.getAvatar(),
     );
 
-    await SqlDatabase.db.setUser(newUser);
+    await _localDatabase.setUser(newUser);
 
     await _about.uploadUserInformation();
     _loading.hideLoading();
@@ -129,7 +127,8 @@ class OnBoardingNotifier extends ChangeNotifier {
 final onBoardingProvider = Provider<OnBoardingNotifier>((ref) {
   final auth = GetIt.I<AuthRepository>();
   final about = GetIt.I<AboutRepository>();
+  final localDatabase = GetIt.I<LocalDatabaseRepository>();
   final loadingNotifier = ref.watch(loadingProvider.notifier);
   final avatarNotifier = ref.watch(userAvatarNotifier.notifier);
-  return OnBoardingNotifier(auth, about, loadingNotifier, avatarNotifier);
+  return OnBoardingNotifier(auth, about, localDatabase, loadingNotifier, avatarNotifier);
 });
