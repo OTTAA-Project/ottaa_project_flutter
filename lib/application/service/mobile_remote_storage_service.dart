@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
