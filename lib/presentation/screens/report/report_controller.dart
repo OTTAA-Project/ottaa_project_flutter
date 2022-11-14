@@ -1,14 +1,4 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
-import 'package:ottaa_project_flutter/app/data/models/frases_statistics_model.dart';
-import 'package:ottaa_project_flutter/app/data/models/pict_model.dart';
-import 'package:ottaa_project_flutter/app/data/models/picto_statistics_model.dart';
-import 'package:ottaa_project_flutter/app/data/models/report_chart_data_model.dart';
-import 'package:ottaa_project_flutter/app/global_controllers/data_controller.dart';
-import 'package:ottaa_project_flutter/app/modules/home/home_controller.dart';
+
 
 class ReportController {
   //todo: need to get the values from other controllers
