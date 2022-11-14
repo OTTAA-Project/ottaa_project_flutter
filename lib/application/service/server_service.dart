@@ -213,7 +213,7 @@ class ServerService implements ServerRepository {
     } catch (e) {
       return Left(e.toString());
     }
-  }
+ }
 
   @override
   Future<EitherMap> getMostUsedSentences(String userId, String languageCode) async {
