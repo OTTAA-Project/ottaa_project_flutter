@@ -20,9 +20,9 @@ class SentenceModel {
   String locale;
   int id;
 
-  factory SentenceModel.fromJson(Map<String, dynamic> json) => _$FraseModelFromJson(json);
+  factory SentenceModel.fromJson(Map<String, dynamic> json) => _$SentenceModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$FraseModelToJson(this);
+  Map<String, dynamic> toJson() => _$SentenceModelToJson(this);
 }
 
 @JsonSerializable()
@@ -36,9 +36,9 @@ class Complex {
   @JsonKey(name: 'pictos componentes')
   List<PictosComponente> pictosComponentes;
 
-  factory Complex.fromJson(Map<String, dynamic> json) => _$ComplejidadFromJson(json);
+  factory Complex.fromJson(Map<String, dynamic> json) => _$ComplexFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ComplejidadToJson(this);
+  Map<String, dynamic> toJson() => _$ComplexToJson(this);
 }
 
 @JsonSerializable()

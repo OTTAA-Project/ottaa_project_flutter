@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ottaa_project_flutter/core/models/groups_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
@@ -8,14 +7,14 @@ import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
 class GroupsService extends GroupsRepository {
-  final _databaseRef = FirebaseDatabase.instance.ref();
-
   final AuthRepository _authService;
   final RemoteStorageRepository _remoteStorageService;
+  final ServerRepository _serverRepository;
 
-  GroupsService(this._authService, this._remoteStorageService);
+  GroupsService(this._authService, this._remoteStorageService, this._serverRepository);
 
   @override
   Future<List<Groups>> getAllGroups() async {
@@ -23,14 +22,8 @@ class GroupsService extends GroupsRepository {
       const Duration(seconds: kIsWeb ? 2 : 1),
     );
 
-    /// updated one for loading the pictos...
-    /// check if data exists online or not
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return [];
-    final UserModel auth = result.right;
-    debugPrint('the value from stream is ${auth.name}');
-    // final ref = databaseRef.child('PictsExistsOnFirebase/${auth.uid}/');
-    // final res = await ref.get();
 
     final String data = await _remoteStorageService.readRemoteFile(path: "Grupos", fileName: 'assets/grupos.json');
 
@@ -48,6 +41,9 @@ class GroupsService extends GroupsRepository {
 
   @override
   Future<void> uploadGroups(List<Groups> data, String type, String language) async {
+    final result = await _authService.getCurrentUser();
+    if (result.isLeft) return;
+
     dynamic jsonData = List.empty(growable: true);
     for (var e in data) {
       final relactions = e.relacion.map((e) => e.toJson()).toList();
@@ -61,12 +57,10 @@ class GroupsService extends GroupsRepository {
         'tags': e.tags,
       });
     }
-    final result = await _authService.getCurrentUser();
-    if (result.isLeft) return;
+
     final UserModel auth = result.right;
 
-    final ref = _databaseRef.child('${auth.id}/$type/$language');
-    await ref.set(jsonData);
+    await _serverRepository.uploadGroups(auth.id, language, data: jsonData);
   }
 
   @override
@@ -74,11 +68,10 @@ class GroupsService extends GroupsRepository {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
     final UserModel auth = result.right;
-    final ref = _databaseRef.child('${auth.id}/$type/$language/$index');
 
     final relactions = data.relacion.map((e) => e.toJson()).toList();
 
-    await ref.update({
+    final payload = {
       'id': data.id,
       'texto': data.texto.toJson(),
       'tipo': data.tipo,
@@ -86,6 +79,8 @@ class GroupsService extends GroupsRepository {
       'relacion': relactions,
       'frecuencia': data.frecuencia,
       'tags': data.tags,
-    });
+    };
+
+    await _serverRepository.updateGroup(auth.id, language, index, data: payload);
   }
 }

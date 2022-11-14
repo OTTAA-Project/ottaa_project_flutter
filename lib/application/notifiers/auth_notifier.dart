@@ -8,6 +8,14 @@ class AuthNotifier extends StateNotifier<bool> {
   AuthNotifier(this._authRepository) : super(false) {
     state = _authRepository.isLogged;
   }
+
+  void setSignedIn() {
+    state = true;
+  }
+
+  void setSignedOut() {
+    state = false;
+  }
 }
 
 final authNotifier = StateNotifierProvider<AuthNotifier, bool>((ref) {

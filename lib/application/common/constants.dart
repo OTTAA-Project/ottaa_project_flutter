@@ -5,10 +5,10 @@ class Constants {
   static const kPortugueseGrupoFileName = 'pt-BRgrupo';
   static const kFrenchLanguageName = 'fr-FR';
   static const kPortugueseLanguageName = 'pt-BR';
-  static const kFrenchPictoFirebaseName = 'fr-FR';
-  static const kPortuguesePictoFirebaseName = 'pt-BR';
-  static const kFrenchGrupoFirebaseName = 'fr-FR';
-  static const kPortugueseGrupoFirebaseName = 'pt-BR';
+  static const kFrenchPictoName = 'fr-FR';
+  static const kPortuguesePictoName = 'pt-BR';
+  static const kFrenchGrupoName = 'fr-FR';
+  static const kPortugueseGrupoName = 'pt-BR';
   static const kMostUsedSentences = 'MostUsedFrases';
   static const kFavouriteSentences = 'FavouriteFrases';
 }

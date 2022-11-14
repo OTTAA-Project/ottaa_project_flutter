@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 
 class SimpleButton extends StatelessWidget {
   final VoidCallback onTap;

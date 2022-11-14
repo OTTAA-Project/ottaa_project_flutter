@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
@@ -7,29 +6,20 @@ import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
 class PictogramsService extends PictogramsRepository {
-  final _databaseRef = FirebaseDatabase.instance.ref();
-
   final AuthRepository _authService;
   final RemoteStorageRepository _remoteStorageService;
+  final ServerRepository _serverRepository;
 
-  PictogramsService(this._authService, this._remoteStorageService);
+  PictogramsService(this._authService, this._serverRepository, this._remoteStorageService);
 
   @override
   Future<List<Pict>> getAllPictograms() async {
     await Future.delayed(
       const Duration(seconds: kIsWeb ? 2 : 1),
     );
-
-    /// updated one for loading the pictos...
-    /// check if data exists online or not
-    final result = await _authService.getCurrentUser();
-    if (result.isLeft) return [];
-    final UserModel auth = result.right;
-    debugPrint('the value from stream is ${auth.name}');
-    // final ref = databaseRef.child('PictsExistsOnFirebase/${auth.uid}/');
-    // final res = await ref.get();
 
     final String data = await _remoteStorageService.readRemoteFile(path: "Pictos", fileName: 'assets/pictos.json');
 
@@ -46,7 +36,7 @@ class PictogramsService extends PictogramsRepository {
   }
 
   @override
-  Future<void> uploadPictograms(List<Pict> data, String type, String language) async {
+  Future<void> uploadPictograms(List<Pict> data, String language) async {
     dynamic jsonData = List.empty(growable: true);
     for (var e in data) {
       final relactions = e.relacion?.map((e) => e.toJson()).toList();
@@ -71,12 +61,15 @@ class PictogramsService extends PictogramsRepository {
     if (result.isLeft) return;
     final UserModel auth = result.right;
 
-    final ref = _databaseRef.child('${auth.id}/$type/$language');
-    await ref.set(jsonData);
+    await _serverRepository.uploadPictograms(
+      auth.id,
+      language,
+      data: jsonData,
+    );
   }
 
   @override
-  Future<void> updatePictogram(Pict pictogram, String type, String language, int index) async {
+  Future<void> updatePictogram(Pict pictogram, String language, int index) async {
     final relactions = pictogram.relacion?.map((e) => e.toJson()).toList();
 
     final result = await _authService.getCurrentUser();
@@ -85,8 +78,7 @@ class PictogramsService extends PictogramsRepository {
 
     final String id = result.right.id;
 
-    final ref = _databaseRef.child('$id/$type/$language/$index');
-    await ref.update({
+    await _serverRepository.updatePictogram(id, language, index, data: {
       'id': pictogram.id,
       'texto': pictogram.texto.toJson(),
       'tipo': pictogram.tipo,

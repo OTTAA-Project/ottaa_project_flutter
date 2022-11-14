@@ -1067,6 +1067,8 @@ class AppImages {
 
   static const kLocked = "assets/imgs/locked.webp";
 
+  static const kWhiteLogoOttaa = "assets/otta_drawer_logo.png";
+
   static const kLogoOttaa = "assets/imgs/logo_ottaa.webp";
 
   static const kLogoOttaaDev = "assets/imgs/logo_ottaa_dev.webp";
