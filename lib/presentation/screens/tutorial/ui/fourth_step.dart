@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
@@ -72,9 +73,7 @@ class FourthStep extends StatelessWidget {
               SimpleButton(
                 text: "Ready".trl,
                 trailing: Icons.chevron_right,
-                onTap: () {
-                  //todo: add the path where you want to go
-                },
+                onTap: () => context.pop(),
                 backgroundColor: kOTTAAOrangeNew,
                 fontColor: Colors.white,
               ),

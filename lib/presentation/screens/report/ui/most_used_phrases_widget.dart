@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:ottaa_project_flutter/application/common/app_images.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 
 class MostUsedPhrasesWidget extends StatelessWidget {
   const MostUsedPhrasesWidget({
+    required this.pageController,
     Key? key,
   }) : super(key: key);
-  // final controller = Get.find<ReportController>();
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +26,8 @@ class MostUsedPhrasesWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            heading,
-            style: TextStyle(
+            'most_used_phrases'.trl,
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
               color: Colors.black,
               // fontSize: verticalSize * 0.022,
@@ -33,7 +37,7 @@ class MostUsedPhrasesWidget extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
               child: PageView.builder(
-                controller: controller.pageController,
+                controller: pageController,
                 itemCount: 4,
                 itemBuilder: (context, indexMain) {
                   return Container(
@@ -54,7 +58,8 @@ class MostUsedPhrasesWidget extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, indexSecond) {
                                     return Container(
-                                      padding: EdgeInsets.only(left: verticalSize * 0.01),
+                                      padding: EdgeInsets.only(
+                                          left: verticalSize * 0.01),
                                       height: verticalSize * 0.15,
                                       width: verticalSize * 0.15,
                                       child: Image.network(controller
@@ -64,7 +69,7 @@ class MostUsedPhrasesWidget extends StatelessWidget {
                                   },
                                 ),
                               )
-                            : Expanded(
+                            : const Expanded(
                                 child: Center(
                                   child: CircularProgressIndicator(
                                     color: kOTTAAOrangeNew,
@@ -72,15 +77,15 @@ class MostUsedPhrasesWidget extends StatelessWidget {
                                 ),
                               ),
                         Align(
+                          alignment: Alignment.centerRight,
                           child: Padding(
                             padding:
                                 EdgeInsets.only(right: verticalSize * 0.03),
                             child: Image.asset(
-                              'assets/otta_drawer_logo.png',
+                              AppImages.kOttaaDrawerLogo,
                               height: verticalSize * 0.05,
                             ),
                           ),
-                          alignment: Alignment.centerRight,
                         ),
                       ],
                     ),

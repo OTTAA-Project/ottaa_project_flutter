@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 
 class PointsWithText extends StatelessWidget {
   const PointsWithText({
     Key? key,
     required this.boxColor,
     required this.textColor,
+    required this.description,
     required this.score,
   }) : super(key: key);
   final Color boxColor, textColor;
-  final String score;
+  final String score, description;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class PointsWithText extends StatelessWidget {
             ),
           ),
           Text(
-            'phrases_last_seven_days'.trl,
+            description,
             style: TextStyle(
               color: textColor,
               fontWeight: FontWeight.w400,

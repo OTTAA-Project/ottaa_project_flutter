@@ -1626,5 +1626,6 @@ class AppImages {
   static const kStep3Tutorial = "assets/Group 729.png";
 
   static const kStep4Tutorial = "assets/Group 727.png";
+  static const kOttaaDrawerLogo = "assets/otta_drawer_logo.png";
 
 }
