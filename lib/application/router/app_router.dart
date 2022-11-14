@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.da
 import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/report/report_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/tutorial/tutorial_screen.dart';
 
@@ -50,6 +51,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.tutorial,
           builder: (context, state) => const TutorialScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.report,
+          builder: (context, state) => const ReportScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),

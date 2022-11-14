@@ -4,6 +4,7 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
+import 'package:http/http.dart' as http;
 
 class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
@@ -211,6 +212,52 @@ class ServerService implements ServerRepository {
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
+    }
+ }
+
+  @override
+  Future<EitherMap> getMostUsedSentences(String userId, String languageCode) async {
+    final uri = Uri.parse(
+      'https://us-central1-ottaaproject-flutter.cloudfunctions.net/onReqFunc',
+    );
+    //todo: get the language here after talking with Emir
+    final body = {
+      'UserID': userId,
+      'Language': languageCode,
+    };
+    final res = await http.post(
+      uri,
+      body: jsonEncode(body),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      return Right(data);
+    } else {
+      return Left("an error occurred"); //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
+    final body = {
+      'UserID': userId,
+      //todo: add here the language too
+      'Language': 'ES-AR',
+    };
+    final res = await http.post(
+      uri,
+      body: jsonEncode(body),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      return Right(data);
+    } else {
+      return Left("an error occurred"); //TODO: Handle the main error
     }
   }
 }
