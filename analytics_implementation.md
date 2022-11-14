@@ -1,22 +1,19 @@
 ## Analytics Implementation
 
-### Kind of events
-* **Talk**  *-Interaction Event*
-* **Erase** *- Event-related with Erase action*
-* **Delete** *- Event-related with Delete a pictogram or group*
-* **Accessibility** *- Event-related with accessibility*
-* **Settings**   *- Event-related with setting action*
-* **Pictograms** *- Event-related with action add or edit about a pictogram or group*
+### Types of events
 
-### List of events
+* **Talk**  *-Interaction event*
+* **Erase** *- Event related to an erase action*
+* **Delete** *- Event related to deleting a pictogram or group*
+* **Accessibility** *- Event related to accessibility*
+* **Settings**   *- Event related to a setting action*
+* **Pictograms** *- Event related to an add or edit action on a pictogram or group*
 
-#### Erase Event
 
-| Class     | Action | Name of Event |
-|-----------|--------|---------------|
-| Principal | Borrar | Borrar        |
+### Specifications on each type
 
-#### Talk Events
+
+#### Talk 
 
 | Screen    | Action                      | Name of Event    |
 |-----------|-----------------------------|--------------------|
@@ -24,7 +21,16 @@
 | Principal | Hablar Y Borrar             | Talk and Erase     |
 | Principal | Hablar en Modo Experimental | Phrase With NLG    |
 
+
+#### Erase
+
+| Class     | Action | Name of Event |
+|-----------|--------|---------------|
+| Principal | Borrar | Borrar        |
+
+
 #### Accessibility
+
 | Screen         | Action                                  | Name of Event                |
 |----------------|-----------------------------------------|-------------------------------|
 | Principal      | Hablar Con Dispositivo de accesibilidad | Talk with accesibility device |
@@ -37,16 +43,6 @@
 | Galeria Pictos | Editar Pictogramas                      | Edit Pictograms               |
 | Galeria Pictos | Boton de Anterior                       | Previous Button               |
 | Galeria Pictos | Boton de Siguiente                      | Backpress Button              |
-
-#### Pictograms
-
-| Screen        | Action                   | Name of Event                           |
-|---------------|--------------------------|------------------------------------------|
-| Editar Grupos | Asignar Tags             | Hour Tag, Location Tag,GenderTag,Age Tag |
-| Editar Grupos | Agregar Pictograma Nuevo | Add Pictogram                            |
-| Editar Grupos | Editar Pictograma        | Edit Pictogram                           |
-| Editar Grupos | Agregar Grupo Nuevo      | Add Group                                |
-| Editar Grupos | Editar Grupo             | Edit Group                               |
 
 
 #### Settings
@@ -71,6 +67,17 @@
 | Voz Y Subtitulo  | Subtitulo Personalizado     | Custom Subtitle       |
 | Idioma           | Selecciona un idioma        | Language              |
 | Idioma           | OTTAA Labs                  | Experimental Mode     |
+
+#### Pictograms
+
+| Screen        | Action                   | Name of Event                           |
+|---------------|--------------------------|------------------------------------------|
+| Editar Grupos | Asignar Tags             | Hour Tag, Location Tag,GenderTag,Age Tag |
+| Editar Grupos | Agregar Pictograma Nuevo | Add Pictogram                            |
+| Editar Grupos | Editar Pictograma        | Edit Pictogram                           |
+| Editar Grupos | Agregar Grupo Nuevo      | Add Group                                |
+| Editar Grupos | Editar Grupo             | Edit Group                               |
+
 
 #### Touch
 | Screen           | Action                               | Name of Event             |

@@ -9,6 +9,8 @@ You can be a part of this open source project and help build life changing techn
 <img src="/public/images/ottaa_project/ARG_VENTURE_OTTAA%20(1%20of%201)-36.jpg" alt="ottaa_img" width="400"/>
 </p>
 
+Read our [Project's Roadmap](https://github.com/orgs/OTTAA-Project/projects/4/views/1) to learn about what features we are currently working on, what stage they are in, and when we expect to deliver them to you. 
+
 ## How does it work?
 
 The OTTA app facilitates human communication via pictograms for those who are speech impaired, suggesting each user the most appropriate pictograms based on preference, need, and environment. Watch this video for a more comprehensive walk through. 
@@ -23,38 +25,24 @@ The OTTA app facilitates human communication via pictograms for those who are sp
 * Run `flutter pub run build_runner build` to generate the model class code.
 * Run `flutter run` to run the project.
 
-- run `flutter pub get` to get the dependencies.
-- run `flutter pub run build_runner build` to generate the model class code.
-- run `flutter run` to run the project.
-- run `flutter packages pub run build_runner build --delete-conflicting-outputs` if there are some errors for models building.
-- run `flutter build web --release --web-renderer canvaskit` for building the project.
-- run `flutter deploy` for deploying it on the master.
-- run `firebase deploy --only hosting:dev-ottaaproject` for deploying it on dev.
- * [Web Page](https://ottaaproject.com)
-\* If this is not your first time setting up and you encounter any errors for model building:
+\* In case you encounter any errors for model building:
 
 * Run `flutter packages pub run build_runner build --delete-conflicting-outputs`.
 
 
 ## Resources
 
-### Libraries
+### Libraries & tools
 
-  * [Volley](https://github.com/google/volley) - Network requests
 
-  * [Android-RateThisApp](https://github.com/kobakei/Android-RateThisApp) - App rating
+The OTTAA Project was developed and runs mainly on:
 
-  * [Lottie for Android](https://github.com/airbnb/lottie-android) - Dynamic animations
+* [Flutter](https://flutter.dev/) 
 
-  * [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) - Graphic reports
+* [Firebase](https://firebase.google.com/) 
 
-  * [Glide](https://github.com/bumptech/glide) - Image loading
 
-  * [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API) Stream API for Java 7
-
-  * [SimpleNLG](https://github.com/simplenlg/simplenlg) - Natural language processing
-
-  * [Android Support Library](https://developer.android.com) - Android (Google) support library
+The complete list of libraries used and their functions can be found [here](libraries.md).
 
 
 ### Tools
@@ -76,8 +64,9 @@ The OTTA app facilitates human communication via pictograms for those who are sp
 <img src="/public/images/tools_libraries/test_project.png" alt="test_platform" width="40" height="40"/> [Testproject](http://testproject.io)
 
 
-### API Reference
- * Find the API reference information [here](https://ottaaproject.com/javadoc).
+### API reference
+
+ * We are using [Dartdoc](https://pub.dev/packages/dartdoc) to automate the [API reference documentation] ()(add link when completed). For some help getting started with dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.  
 
 ## Contributing
 
