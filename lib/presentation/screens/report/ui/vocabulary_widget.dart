@@ -76,7 +76,7 @@ class VocabularyWidget extends StatelessWidget {
                                 value: firstValueProgress,
                                 color: Colors.amberAccent,
                               ),
-                              child: Container(
+                              child: SizedBox(
                                 height: verticalSize * 0.29,
                                 width: verticalSize * 0.29,
                               ),
@@ -92,7 +92,7 @@ class VocabularyWidget extends StatelessWidget {
                               value: 100,
                               color: Colors.white,
                             ),
-                            child: Container(
+                            child: SizedBox(
                               height: verticalSize * 0.25,
                               width: verticalSize * 0.25,
                             ),
@@ -116,7 +116,7 @@ class VocabularyWidget extends StatelessWidget {
                                 value: secondValueProgress,
                                 color: Colors.brown,
                               ),
-                              child: Container(
+                              child: SizedBox(
                                 height: verticalSize * 0.22,
                                 width: verticalSize * 0.22,
                               ),
@@ -132,7 +132,7 @@ class VocabularyWidget extends StatelessWidget {
                               value: 100,
                               color: Colors.white,
                             ),
-                            child: Container(
+                            child: SizedBox(
                               height: verticalSize * 0.18,
                               width: verticalSize * 0.18,
                             ),
@@ -157,7 +157,7 @@ class VocabularyWidget extends StatelessWidget {
                                 value: thirdValueProgress,
                                 color: Colors.pink,
                               ),
-                              child: Container(
+                              child: SizedBox(
                                 height: verticalSize * 0.15,
                                 width: verticalSize * 0.15,
                               ),
@@ -173,7 +173,7 @@ class VocabularyWidget extends StatelessWidget {
                               value: 100,
                               color: Colors.white,
                             ),
-                            child: Container(
+                            child: SizedBox(
                               height: verticalSize * 0.11,
                               width: verticalSize * 0.11,
                             ),
@@ -198,7 +198,7 @@ class VocabularyWidget extends StatelessWidget {
                                 value: fourthValueProgress,
                                 color: Colors.blue,
                               ),
-                              child: Container(
+                              child: SizedBox(
                                 height: verticalSize * 0.085,
                                 width: verticalSize * 0.085,
                               ),
@@ -214,7 +214,7 @@ class VocabularyWidget extends StatelessWidget {
                               value: 100,
                               color: Colors.white,
                             ),
-                            child: Container(
+                            child: SizedBox(
                               height: verticalSize * 0.055,
                               width: verticalSize * 0.055,
                             ),
@@ -289,7 +289,7 @@ class RowWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SmallCircularWidget(color: color),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Text(
@@ -314,14 +314,14 @@ class SmallCircularWidget extends StatelessWidget {
     final horizontalSize = MediaQuery.of(context).size.width;
     return CustomPaint(
       painter: ProgressPainter(color: color, value: 100),
-      child: Container(
+      child: SizedBox(
         height: verticalSize * 0.05,
         width: verticalSize * 0.05,
         child: Padding(
           padding: EdgeInsets.all(verticalSize * 0.01),
           child: CustomPaint(
             painter: ProgressPainter(value: 100, color: Colors.white),
-            child: Container(
+            child: SizedBox(
               height: verticalSize * 0.03,
               width: verticalSize * 0.03,
             ),

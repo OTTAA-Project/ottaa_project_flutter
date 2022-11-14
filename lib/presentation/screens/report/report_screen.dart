@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/ui/bottom_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/ui/chart_widget.dart';
@@ -67,11 +66,10 @@ class ReportPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     vertical: verticalSize * 0.03,
                   ),
-                  child: ChartWidget(),
+                  child: const ChartWidget(),
                 ),
                 BottomWidget(
                   pageController: pageController,
-                  averageSentenceString: 'pictogram_by_sentence_on_average'.trl,
                   averageSentenceValue:
                       controller.averagePictoFrase.value == 0.00
                           ? 0.00
@@ -79,7 +77,6 @@ class ReportPage extends StatelessWidget {
                               .toStrling()
                               .substrling(0, 3)
                               .toStrling()),
-                  sevenDaysString: 'phrases_last_seven_days'.trl,
                   sevenDaysValue: controller.frases7Days.value,
                 ),
               ],
