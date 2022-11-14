@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/image_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/ui/progress_painter.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class OTTAAScoreWidget extends StatelessWidget {
   const OTTAAScoreWidget({
@@ -52,8 +54,7 @@ class OTTAAScoreWidget extends StatelessWidget {
                   Center(
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(verticalSize * 0.3),
+                        borderRadius: BorderRadius.circular(verticalSize * 0.3),
                         color: kOTTAAOrangeNew.withOpacity(.5),
                       ),
                       child: CustomPaint(
@@ -122,8 +123,7 @@ class OTTAAScoreWidget extends StatelessWidget {
                   ),
                   Text(
                     scoreText,
-                    style: TextStyle(
-                        color: Colors.black, fontSize: verticalSize * 0.018),
+                    style: TextStyle(color: Colors.black, fontSize: verticalSize * 0.018),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -133,26 +133,5 @@ class OTTAAScoreWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class ImageWidget extends StatelessWidget {
-  const ImageWidget({
-    Key? key,
-    required this.url,
-  }) : super(key: key);
-  final String url;
-
-  @override
-  Widget build(BuildContext context) {
-    return kIsWeb
-        ? Image.network(
-            url,
-            fit: BoxFit.fill,
-          )
-        : CachedNetworkImage(
-            imageUrl: url,
-            fit: BoxFit.fill,
-          );
   }
 }

@@ -16,19 +16,17 @@ class ProgressPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()..color = color;
 
-    final rect = Rect.fromCenter(
-        center: Offset(size.height / 2, size.width / 2),
-        width: size.width,
-        height: size.height);
+    final rect = Rect.fromCenter(center: Offset(size.height / 2, size.width / 2), width: size.width, height: size.height);
 
     canvas.drawArc(
-        rect,
-        deg2rad(-90),
-        deg2rad(
-          (value * 360) / 100, // % to degree
-        ),
-        true,
-        paint);
+      rect,
+      deg2rad(-90),
+      deg2rad(
+        (value * 360) / 100, // % to degree
+      ),
+      true,
+      paint,
+    );
   }
 
   @override

@@ -20,7 +20,7 @@ class BottomWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final verticalSize = MediaQuery.of(context).size.height;
     final horizontalSize = MediaQuery.of(context).size.width;
-    return Container(
+    return SizedBox(
       height: verticalSize * 0.3,
       child: Row(
         children: [

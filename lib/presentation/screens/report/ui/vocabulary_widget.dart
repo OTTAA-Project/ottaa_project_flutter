@@ -15,16 +15,9 @@ class VocabularyWidget extends StatelessWidget {
     required this.fourthValueText,
     required this.vocabularyHeading,
   }) : super(key: key);
-  final double firstValueProgress,
-      secondValueProgress,
-      thirdValueProgress,
-      fourthValueProgress;
-  final String firstValueText,
-      secondValueText,
-      thirdValueText,
-      fourthValueText,
-      heading,
-      vocabularyHeading;
+
+  final double firstValueProgress, secondValueProgress, thirdValueProgress, fourthValueProgress;
+  final String firstValueText, secondValueText, thirdValueText, fourthValueText, heading, vocabularyHeading;
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +54,7 @@ class VocabularyWidget extends StatelessWidget {
                       children: [
                         ///first one
                         Padding(
-                          padding: EdgeInsets.only(
-                              left: verticalSize * 0.005,
-                              top: verticalSize * 0.005),
+                          padding: EdgeInsets.only(left: verticalSize * 0.005, top: verticalSize * 0.005),
                           child: Container(
                             height: verticalSize * 0.29,
                             width: verticalSize * 0.29,
@@ -84,9 +75,7 @@ class VocabularyWidget extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              left: verticalSize * 0.025,
-                              top: verticalSize * 0.025),
+                          padding: EdgeInsets.only(left: verticalSize * 0.025, top: verticalSize * 0.025),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
@@ -101,9 +90,7 @@ class VocabularyWidget extends StatelessWidget {
 
                         /// second value
                         Padding(
-                          padding: EdgeInsets.only(
-                              top: verticalSize * 0.04,
-                              left: verticalSize * 0.04),
+                          padding: EdgeInsets.only(top: verticalSize * 0.04, left: verticalSize * 0.04),
                           child: Container(
                             height: verticalSize * 0.22,
                             width: verticalSize * 0.22,
@@ -124,9 +111,7 @@ class VocabularyWidget extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              left: verticalSize * 0.06,
-                              top: verticalSize * 0.06),
+                          padding: EdgeInsets.only(left: verticalSize * 0.06, top: verticalSize * 0.06),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
@@ -165,9 +150,7 @@ class VocabularyWidget extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              left: verticalSize * 0.095,
-                              top: verticalSize * 0.095),
+                          padding: EdgeInsets.only(left: verticalSize * 0.095, top: verticalSize * 0.095),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
@@ -206,9 +189,7 @@ class VocabularyWidget extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              left: verticalSize * 0.122,
-                              top: verticalSize * 0.122),
+                          padding: EdgeInsets.only(left: verticalSize * 0.122, top: verticalSize * 0.122),
                           child: CustomPaint(
                             painter: ProgressPainter(
                               value: 100,
@@ -233,8 +214,7 @@ class VocabularyWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: verticalSize * 0.02),
+                    padding: EdgeInsets.symmetric(vertical: verticalSize * 0.02),
                     child: Text(
                       heading,
                     ),
@@ -251,8 +231,7 @@ class VocabularyWidget extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: verticalSize * 0.01),
+                    padding: EdgeInsets.symmetric(vertical: verticalSize * 0.01),
                     child: RowWidget(
                       color: Colors.pink,
                       text: thirdValueText,
