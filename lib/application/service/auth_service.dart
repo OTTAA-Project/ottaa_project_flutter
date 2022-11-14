@@ -65,9 +65,9 @@ class AuthService extends AuthRepository {
 
       ///sometimes the email does not come with the user.email, it is given in the providedData,
 
-      Map<String, dynamic>? userInfo = await _serverRepository.getUserInformation(user.uid);
+      EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
       UserModel? userModel;
-      if (userInfo == null) {
+      if (userInfo.isLeft) {
         await signUp();
 
         final nameRetriever = user.displayName ?? user.providerData[0].displayName;
@@ -82,7 +82,7 @@ class AuthService extends AuthRepository {
           language: "es",
         );
       } else {
-        userModel = UserModel.fromRemote(userInfo);
+        userModel = UserModel.fromRemote(userInfo.right);
       }
 
       return Right(userModel);

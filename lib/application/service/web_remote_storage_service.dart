@@ -31,7 +31,7 @@ class WebRemoteStorageService implements RemoteStorageRepository {
     final UserModel auth = result.right;
     final languageCode = _i18n.languageCode;
 
-    List<dynamic>? fetchedData;
+    EitherListMap? fetchedData;
 
     if (path == "Pictos") {
       fetchedData = await _serverRepository.getAllPictograms(auth.id, languageCode);
@@ -39,8 +39,8 @@ class WebRemoteStorageService implements RemoteStorageRepository {
       fetchedData = await _serverRepository.getAllGroups(auth.id, languageCode);
     }
 
-    if (fetchedData != null) {
-      final encode = jsonEncode(fetchedData);
+    if (fetchedData != null && fetchedData.isRight) {
+      final encode = jsonEncode(fetchedData.right);
       return encode;
     }
 
