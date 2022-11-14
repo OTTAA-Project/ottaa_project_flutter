@@ -1,38 +1,44 @@
+import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+
+typedef EitherVoid = Either<String, void>;
+typedef EitherString = Either<String, String>;
+typedef EitherListMap = Either<String, List<Map<String, dynamic>>>;
+typedef EitherMap = Either<String, Map<String, dynamic>>;
 
 abstract class ServerRepository {
   Future<void> init();
   Future<void> close();
 
-  Future<String> getAvailableAppVersion();
+  Future<EitherString> getAvailableAppVersion(String platform);
 
   Future<UserType> getUserType(String userId);
 
-  Future<String?> getUserProfilePicture(String userId);
+  Future<EitherString> getUserProfilePicture(String userId);
 
-  Future<void> uploadUserPicture(String userId, String picture, String photoUrl);
+  Future<EitherVoid> uploadUserPicture(String userId, String picture, String photoUrl);
 
-  Future<Map<String, dynamic>?> getUserInformation(String id);
+  Future<EitherMap> getUserInformation(String id);
 
-  Future<void> uploadUserInformation(String userId, Map<String, dynamic> data);
+  Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data);
 
-  Future<List<Map<String, dynamic>>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false});
+  Future<EitherListMap> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false});
 
-  Future<void> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data);
+  Future<EitherVoid> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data);
 
-  Future<List<Map<String, dynamic>>?> getAllPictograms(String userId, String languageCode);
+  Future<EitherListMap> getAllPictograms(String userId, String languageCode);
 
-  Future<void> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data});
+  Future<EitherVoid> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data});
 
-  Future<void> updatePictogram(String userId, String language, int index, {required Map<String, dynamic> data});
+  Future<EitherVoid> updatePictogram(String userId, String language, int index, {required Map<String, dynamic> data});
 
-  Future<List<Map<String, dynamic>>?> getAllGroups(String userId, String languageCode);
+  Future<EitherListMap> getAllGroups(String userId, String languageCode);
 
-  Future<void> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data});
+  Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data});
 
   Future<void> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data});
 
-  Future<Map<String, dynamic>?> getPictogramsStatistics(String userId, String languageCode);
+  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode);
 
-  Future<Map<String, dynamic>?> getMostUsedSentences(String userId, String languageCode);
+  Future<EitherMap> getMostUsedSentences(String userId, String languageCode);
 }

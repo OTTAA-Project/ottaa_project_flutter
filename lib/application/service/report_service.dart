@@ -12,8 +12,8 @@ class ReportService implements ReportRepository {
   Future<FrasesStatisticsModel?> getMostUsedSentences(String userId, String languageCode) async {
     final response = await _serverRepository.getMostUsedSentences(userId, languageCode);
 
-    if (response != null) {
-      return FrasesStatisticsModel.fromJson(response);
+    if (response.isRight) {
+      return FrasesStatisticsModel.fromJson(response.right);
     }
 
     return null;
@@ -23,8 +23,8 @@ class ReportService implements ReportRepository {
   Future<PictoStatisticsModel?> getPictogramsStatistics(String userId, String languageCode) async {
     final response = await _serverRepository.getPictogramsStatistics(userId, languageCode);
 
-    if (response != null) {
-      return PictoStatisticsModel.fromJson(response);
+    if (response.isRight) {
+      return PictoStatisticsModel.fromJson(response.right);
     }
 
     return null;

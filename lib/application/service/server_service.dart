@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
@@ -15,110 +16,6 @@ class ServerService implements ServerRepository {
   Future<void> close() async {}
 
   @override
-  Future<List<Map<String, dynamic>>?> getAllGroups(String userId, String languageCode) async {
-    //Fetch new data from server
-    final refNew = _database.child('$userId/Grupos/$languageCode');
-    final resNew = await refNew.get();
-
-    if (resNew.exists && resNew.value != null) {
-      return resNew.value as dynamic;
-    }
-
-    //Fetch old data from serve (for compatibility)
-    final refOld = _database.child('Grupos/$userId/$languageCode');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return resOld.value as dynamic;
-    }
-
-    return null;
-  }
-
-  @override
-  Future<List<Map<String, dynamic>>?> getAllPictograms(String userId, String languageCode) async {
-    //Fetch new data from server
-    final refNew = _database.child('$userId/Pictos/$languageCode');
-    final resNew = await refNew.get();
-
-    if (resNew.exists && resNew.value != null) {
-      return resNew.value as dynamic;
-    }
-
-    //Fetch old data from serve (for compatibility)
-    final refOld = _database.child('Pictos/$userId/$languageCode');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return resOld.value as dynamic;
-    }
-
-    return null;
-  }
-
-  @override
-  Future<String> getAvailableAppVersion() async {
-    final DatabaseReference ref = _database.child('version/');
-    final DataSnapshot res = await ref.get();
-
-    return res.toString();
-  }
-
-  @override
-  Future<Map<String, dynamic>?> getUserInformation(String id) async {
-    final userRef = _database.child('$id/Usuarios/');
-
-    final userValue = await userRef.get();
-
-    if (!userValue.exists || userValue.value == null) return null;
-
-    final dynamic user = userValue.value as dynamic;
-
-    return Map<String, dynamic>.from(user);
-  }
-
-  @override
-  Future<String?> getUserProfilePicture(String userId) async {
-    final refNew = _database.child('$userId/Usuarios/Avatar/urlFoto/');
-    final resNew = await refNew.get();
-
-    if (resNew.exists && resNew.value != null) {
-      return resNew.value.toString();
-    }
-
-    /// Get the profile picture from the database at the old path
-    final refOld = _database.child('Avatar/$userId/urlFoto/');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return resOld.value.toString();
-    }
-
-    return null;
-  }
-
-  @override
-  Future<List<Map<String, dynamic>>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
-    final refNew = _database.child('$userId/Frases/$language/$type');
-    final resNew = await refNew.get();
-    if (resNew.exists && resNew.value != null) {
-      final encode = jsonEncode(resNew.value);
-      // print('returned from bew');
-      return jsonDecode(encode);
-    } else {
-      final refOld = _database.child('Frases/$userId/$language/$type');
-      final resOld = await refOld.get();
-      if (resOld.exists && resOld.value != null) {
-        final data = resOld.children.first.value as String;
-        return jsonDecode(data);
-      } else {
-        /// if there are no frases we will be returning the empty string
-        return [];
-      }
-    }
-  }
-
-  @override
   Future<UserType> getUserType(String userId) async {
     final ref = _database.child('$userId/Pago/Pago');
     final res = await ref.get();
@@ -128,58 +25,198 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data}) async {
+  Future<EitherListMap> getAllGroups(String userId, String languageCode) async {
+    //Fetch new data from server
+    final refNew = _database.child('$userId/Grupos/$languageCode');
+    final resNew = await refNew.get();
+
+    if (resNew.exists && resNew.value != null) {
+      return Right(resNew.value as dynamic);
+    }
+
+    //Fetch old data from serve (for compatibility)
+    final refOld = _database.child('Grupos/$userId/$languageCode');
+    final resOld = await refOld.get();
+
+    if (resOld.exists && resOld.value != null) {
+      return Right(resOld.value as dynamic);
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<EitherListMap> getAllPictograms(String userId, String languageCode) async {
+    //Fetch new data from server
+    final refNew = _database.child('$userId/Pictos/$languageCode');
+    final resNew = await refNew.get();
+
+    if (resNew.exists && resNew.value != null) {
+      return Right(resNew.value as dynamic);
+    }
+
+    //Fetch old data from serve (for compatibility)
+    final refOld = _database.child('Pictos/$userId/$languageCode');
+    final resOld = await refOld.get();
+
+    if (resOld.exists && resOld.value != null) {
+      return Right(resOld.value as dynamic);
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<EitherString> getAvailableAppVersion(String platform) async {
+    final DatabaseReference ref = _database.child('version/');
+    final DataSnapshot res = await ref.get();
+
+    if (!res.exists || res.value == null) return const Left("no_data_found");
+
+    return Right(res.toString());
+  }
+
+  @override
+  Future<EitherMap> getUserInformation(String id) async {
+    final userRef = _database.child('$id/Usuarios/');
+
+    final userValue = await userRef.get();
+
+    if (!userValue.exists || userValue.value == null) return const Left("no_data_found");
+
+    final dynamic user = userValue.value as dynamic;
+
+    return Right(Map<String, dynamic>.from(user));
+  }
+
+  @override
+  Future<EitherString> getUserProfilePicture(String userId) async {
+    final refNew = _database.child('$userId/Usuarios/Avatar/urlFoto/');
+    final resNew = await refNew.get();
+
+    if (resNew.exists && resNew.value != null) {
+      return Right(resNew.value.toString());
+    }
+
+    /// Get the profile picture from the database at the old path
+    final refOld = _database.child('Avatar/$userId/urlFoto/');
+    final resOld = await refOld.get();
+
+    if (resOld.exists && resOld.value != null) {
+      return Right(resOld.value.toString());
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<EitherListMap> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
+    final refNew = _database.child('$userId/Frases/$language/$type');
+    final resNew = await refNew.get();
+    if (resNew.exists && resNew.value != null) {
+      final data = jsonEncode(resNew.value);
+      // print('returned from bew');
+      return Right(jsonDecode(data));
+    }
+
+    final refOld = _database.child('Frases/$userId/$language/$type');
+    final resOld = await refOld.get();
+    if (resOld.exists && resOld.value != null) {
+      final data = resOld.children.first.value as String;
+      return Right(jsonDecode(data));
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<EitherVoid> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data}) async {
     final ref = _database.child('$userId/Grupos/$language/$index');
 
-    await ref.update(data);
+    try {
+      await ref.update(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 
   @override
-  Future<void> updatePictogram(String userId, String language, int index, {required Map<String, dynamic> data}) async {
+  Future<EitherVoid> updatePictogram(String userId, String language, int index, {required Map<String, dynamic> data}) async {
     final ref = _database.child('$userId/Pictos/$language/$index');
 
-    await ref.update(data);
+    try {
+      await ref.update(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 
   @override
-  Future<void> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
+  Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/Grupos/$language');
-
-    await ref.set(data);
+    try {
+      await ref.set(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 
   @override
-  Future<void> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data}) async {
+  Future<EitherVoid> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/Pictos/$language');
 
-    await ref.set(data);
+    try {
+      await ref.set(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 
   @override
-  Future<void> uploadUserInformation(String userId, Map<String, dynamic> data) async {
+  Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data) async {
     final ref = _database.child('$userId/Usuarios/');
 
-    await ref.set(data);
+    try {
+      await ref.set(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 
   @override
-  Future<void> uploadUserPicture(String userId, String picture, String photoUrl) async {
+  Future<EitherVoid> uploadUserPicture(String userId, String picture, String photoUrl) async {
     final ref = _database.child('$userId/Usuarios/Avatar/');
-    await ref.update({
-      'name': photoUrl,
-      'urlFoto': picture,
-    });
+
+    try {
+      await ref.update({
+        'name': photoUrl,
+        'urlFoto': picture,
+      });
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 
   @override
-  Future<void> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data) async {
+  Future<EitherVoid> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data) async {
     final ref = _database.child('$userId/Frases/$language/$type');
 
-    await ref.set(data);
+    try {
+      await ref.set(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 
   @override
-  Future<Map<String, dynamic>?> getMostUsedSentences(String userId, String languageCode) async {
+  Future<EitherMap> getMostUsedSentences(String userId, String languageCode) async {
     final uri = Uri.parse(
       'https://us-central1-ottaaproject-flutter.cloudfunctions.net/onReqFunc',
     );
@@ -196,14 +233,14 @@ class ServerService implements ServerRepository {
 
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body) as Map<String, dynamic>;
-      return data;
+      return Right(data);
     } else {
-      return null;
+      return Left("an error occurred"); //TODO: Handle the main error
     }
   }
 
   @override
-  Future<Map<String, dynamic>?> getPictogramsStatistics(String userId, String languageCode) async {
+  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode) async {
     final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
     final body = {
       'UserID': userId,
@@ -218,9 +255,9 @@ class ServerService implements ServerRepository {
 
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body) as Map<String, dynamic>;
-      return data;
+      return Right(data);
     } else {
-      return null;
+      return Left("an error occurred"); //TODO: Handle the main error
     }
   }
 }

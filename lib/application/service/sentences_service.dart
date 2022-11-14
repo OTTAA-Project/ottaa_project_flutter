@@ -1,3 +1,4 @@
+import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
@@ -10,16 +11,20 @@ class SentencesService implements SentencesRepository {
   SentencesService(this._auth, this._serverRepository);
 
   @override
-  Future<List<SentenceModel>> fetchSentences({required String language, required String type, bool isFavorite = false}) async {
+  Future<Either<String, List<SentenceModel>>> fetchSentences({required String language, required String type, bool isFavorite = false}) async {
     final authResult = await _auth.getCurrentUser();
 
-    if (authResult.isLeft) return [];
+    if (authResult.isLeft) return Left(authResult.left);
 
     final user = authResult.right;
 
     final data = await _serverRepository.getUserSentences(user.id, language: language, type: type);
 
-    return data.map((e) => SentenceModel.fromJson(e)).toList();
+    if (data.isLeft) return Left(data.left);
+
+    final sentences = data.right;
+
+    return Right(sentences.map((e) => SentenceModel.fromJson(e)).toList());
   }
 
   @override
