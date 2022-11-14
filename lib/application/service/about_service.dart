@@ -27,7 +27,13 @@ class AboutService extends AboutRepository {
   }
 
   @override
-  Future<String> getAvailableAppVersion() => _serverRepository.getAvailableAppVersion();
+  Future<String> getAvailableAppVersion() async {
+    final platform = Platform.isAndroid ? "android" : "ios";
+
+    final Either<String, String> result = await _serverRepository.getAvailableAppVersion(platform);
+
+    return result.fold((l) => l, (r) => r);
+  }
 
   @override
   Future<String> getDeviceName() async {
@@ -95,9 +101,9 @@ class AboutService extends AboutRepository {
 
     final String id = userResult.right.id;
 
-    final String? url = await _serverRepository.getUserProfilePicture(id);
-    //Return an default image
-    return url ?? "671";
+    final EitherString url = await _serverRepository.getUserProfilePicture(id);
+
+    return url.fold((left) => "671", (right) => right);
   }
 
   @override
@@ -119,9 +125,9 @@ class AboutService extends AboutRepository {
 
     final userData = await _serverRepository.getUserInformation(user.id);
 
-    if (userData == null) return const Left("no_user_found");
+    if (userData.isLeft) return const Left("no_user_found");
 
-    final UserModel newUser = UserModel.fromRemote(userData);
+    final UserModel newUser = UserModel.fromRemote(userData.right);
 
     return Right(newUser);
   }
