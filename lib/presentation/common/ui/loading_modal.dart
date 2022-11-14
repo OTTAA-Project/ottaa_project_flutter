@@ -27,6 +27,7 @@ class _LoadingModalState extends State<LoadingModal> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (widget.future != null) {
         await widget.future!();
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pop();
       }
     });
