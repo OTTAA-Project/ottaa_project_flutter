@@ -1,21 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ottaa_project_flutter/application/service/report_service.dart';
 import 'package:ottaa_project_flutter/core/models/picto_statistics_model.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/core/models/report_chart_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/sentence_statistics_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/report_repository.dart';
 
 class ReportProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
+  final ReportRepository _reportService;
   final AuthRepository _auth;
 
-  ReportProvider(this._pictogramsService, this._auth);
+  ReportProvider(this._pictogramsService, this._reportService, this._auth);
 
   final PageController pageController = PageController();
 
@@ -64,43 +66,22 @@ class ReportProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictoStatisticsData() async {
-    final uri = Uri.parse(
-      'https://us-central1-ottaaproject-flutter.cloudfunctions.net/onReqFunc',
-    );
-    //todo: get the language here after talking with Emir
-    final body = {
-      'UserID': uid,
-      'Language': 'ES-AR',
-    };
-    final res = await http.post(
-      uri,
-      body: jsonEncode(body),
-      headers: {"Content-Type": "application/json"},
-    );
-    // print(res.body);
-    pictoStatisticsModel = PictoStatisticsModel.fromJson(
-      jsonDecode(res.body),
-    );
+    final pictosResponse = await _reportService.getPictogramsStatistics(uid, "ES-AR"); //TODO: Connect to service
+
+    if (pictosResponse == null) return;
+
+    pictoStatisticsModel = pictosResponse;
     notifyListeners();
     await makeMostUsedSentencesList();
   }
 
   Future<void> fetchMostUsedSentences() async {
-    final uri = Uri.parse(
-        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
-    final body = {
-      'UserID': uid,
-      //todo: add here the language too
-      'Language': 'ES-AR',
-    };
-    final res = await http.post(
-      uri,
-      body: jsonEncode(body),
-      headers: {"Content-Type": "application/json"},
-    );
     // print(res.body);
-    frasesStatisticsModel =
-        FrasesStatisticsModel.fromJson(jsonDecode(res.body));
+    final sentencesResponse = await _reportService.getMostUsedSentences(uid, "ES-AR"); //TODO: Connect to service
+
+    if (sentencesResponse == null) return;
+
+    frasesStatisticsModel = sentencesResponse;
     frases7Days = frasesStatisticsModel.frases7Days;
     averagePictoFrase = frasesStatisticsModel.averagePictoFrase;
     notifyListeners();
@@ -185,10 +166,7 @@ class ReportProvider extends ChangeNotifier {
       last7DaysUsage = last7DaysUsage + value;
     });
     double score = 0;
-    score = (last7DaysUsage * a) +
-        (frasesStatisticsModel.frases7Days * b) +
-        (averagePictoFrase * c) +
-        (usedGrupos * d);
+    score = (last7DaysUsage * a) + (frasesStatisticsModel.frases7Days * b) + (averagePictoFrase * c) + (usedGrupos * d);
     scoreProfile = score;
     String val = score.toString();
     val = val.substring(1);
@@ -298,5 +276,6 @@ class ReportProvider extends ChangeNotifier {
 final reportProvider = ChangeNotifierProvider<ReportProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final AuthRepository authService = GetIt.I.get<AuthRepository>();
-  return ReportProvider(pictogramService, authService);
+  final ReportService reportService = GetIt.I.get<ReportService>();
+  return ReportProvider(pictogramService, reportService, authService);
 });

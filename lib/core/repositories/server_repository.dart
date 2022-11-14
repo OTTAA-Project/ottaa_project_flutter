@@ -31,4 +31,8 @@ abstract class ServerRepository {
   Future<void> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data});
 
   Future<void> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data});
+
+  Future<Map<String, dynamic>?> getPictogramsStatistics(String userId, String languageCode);
+
+  Future<Map<String, dynamic>?> getMostUsedSentences(String userId, String languageCode);
 }
