@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:ottaa_project_flutter/application/providers/report_provider.dart';
 import 'package:ottaa_project_flutter/core/models/report_chart_data_model.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart' as ch;
 
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 
-class ChartWidget extends StatelessWidget {
+class ChartWidget extends ConsumerWidget {
   const ChartWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final horizontalSize = MediaQuery.of(context).size.width;
     final verticalSize = MediaQuery.of(context).size.height;
-    //todo: we need to update the chart for the values
+    final provider = ref.watch(reportProvider);
     return Container(
       padding: const EdgeInsets.all(10),
       height: verticalSize * 0.4,
@@ -25,7 +27,7 @@ class ChartWidget extends StatelessWidget {
         ),
       ),
       //todo: add a loading here
-      child: controller.chartShow.value
+      child: provider.chartShow
           ? SfCartesianChart(
               series: <SplineSeries>[
                 SplineSeries<ChartModel, int>(
@@ -33,7 +35,7 @@ class ChartWidget extends StatelessWidget {
                   splineType: ch.SplineType.natural,
                   width: 6,
                   //todo: get data here from teh providers
-                  dataSource: controller.chartModel,
+                  dataSource: provider.chartModel,
                   xValueMapper: (ChartModel developerSeries, _) {
                     // return '12';
                     final date = DateTime.fromMillisecondsSinceEpoch(

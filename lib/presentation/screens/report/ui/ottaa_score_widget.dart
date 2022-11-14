@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/app/modules/report/local_widgets/progress_painter.dart';
-import 'package:ottaa_project_flutter/app/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/presentation/screens/report/ui/progress_painter.dart';
 
 class OTTAAScoreWidget extends StatelessWidget {
   const OTTAAScoreWidget({

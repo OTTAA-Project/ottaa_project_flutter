@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/app/modules/report/local_widgets/progress_painter.dart';
+import 'package:ottaa_project_flutter/presentation/screens/report/ui/progress_painter.dart';
 
 class VocabularyWidget extends StatelessWidget {
   const VocabularyWidget({
@@ -29,8 +29,8 @@ class VocabularyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final verticalSize = MediaQuery.of(context).size.height;
-    final horizontalSize = MediaQuery.of(context).size.width;
-    print('the vertical size is ${verticalSize.toString()}');
+    // final horizontalSize = MediaQuery.of(context).size.width;
+    // print('the vertical size is ${verticalSize.toString()}');
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -311,7 +311,7 @@ class SmallCircularWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final verticalSize = MediaQuery.of(context).size.height;
-    final horizontalSize = MediaQuery.of(context).size.width;
+    // final horizontalSize = MediaQuery.of(context).size.width;
     return CustomPaint(
       painter: ProgressPainter(color: color, value: 100),
       child: SizedBox(

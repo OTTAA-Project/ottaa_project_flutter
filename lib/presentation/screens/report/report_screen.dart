@@ -1,21 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/report_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/ui/bottom_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/ui/chart_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/ui/ottaa_score_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/ui/vocabulary_widget.dart';
 
-class ReportPage extends StatelessWidget {
-  ReportPage({Key? key}) : super(key: key);
-  final PageController pageController = PageController(
-    initialPage: 0,
-  );
+class ReportScreen extends ConsumerStatefulWidget {
+  const ReportScreen({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _ReportScreenState();
+}
+
+
+
+class _ReportScreenState extends ConsumerState<ReportScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    final provider = ref.read(reportProvider);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await LoadingModal.show(context, future: provider.init);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final horizontalSize = MediaQuery.of(context).size.width;
     final verticalSize = MediaQuery.of(context).size.height;
+    final provider = ref.watch(reportProvider);
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
@@ -35,29 +54,29 @@ class ReportPage extends StatelessWidget {
                     //todo: update the values init
                     OTTAAScoreWidget(
                       progressIndicatorScore:
-                          controller.scorePercentageScore.value,
+                      provider.scorePercentageScore,
                       verticalSize: verticalSize,
                       horizontalSize: horizontalSize,
                       headingText: 'ottaa_score'.trl,
-                      photoUrl: controller.photoUrl.value,
+                      photoUrl: provider.photoUrl,
                       scoreText: 'score_text_1'.trl,
-                      level: ((controller.scoreProfile / 1000).toInt())
-                          .toStrling(),
+                      level: (provider.scoreProfile ~/ 1000)
+                          .toString(),
                     ),
                     SizedBox(
                       width: horizontalSize * 0.02,
                     ),
                     //todo: update the values over here from provider
                     VocabularyWidget(
-                      firstValueProgress: controller.firstValueProgress.value,
-                      secondValueProgress: controller.secondValueProgress.value,
-                      thirdValueProgress: controller.thirdValueProgress.value,
+                      firstValueProgress: provider.firstValueProgress,
+                      secondValueProgress: provider.secondValueProgress,
+                      thirdValueProgress: provider.thirdValueProgress,
                       heading: 'most_used_groups'.trl,
-                      firstValueText: controller.firstValueText.value,
-                      secondValueText: controller.secondValueText.value,
-                      thirdValueText: controller.thirdValueText.value,
-                      fourthValueProgress: controller.fourthValueProgress.value,
-                      fourthValueText: controller.fourthValueText.value,
+                      firstValueText: provider.firstValueText,
+                      secondValueText: provider.secondValueText,
+                      thirdValueText: provider.thirdValueText,
+                      fourthValueProgress: provider.fourthValueProgress,
+                      fourthValueText: provider.fourthValueText,
                       vocabularyHeading: 'vocabulary'.trl,
                     ),
                   ],
@@ -69,15 +88,15 @@ class ReportPage extends StatelessWidget {
                   child: const ChartWidget(),
                 ),
                 BottomWidget(
-                  pageController: pageController,
+                  pageController: provider.pageController,
                   averageSentenceValue:
-                      controller.averagePictoFrase.value == 0.00
+                  provider.averagePictoFrase == 0.00
                           ? 0.00
-                          : double.parse(controller.averagePictoFrase.value
-                              .toStrling()
-                              .substrling(0, 3)
-                              .toStrling()),
-                  sevenDaysValue: controller.frases7Days.value,
+                          : double.parse(provider.averagePictoFrase
+                              .toString()
+                              .substring(0, 3)
+                              .toString()),
+                  sevenDaysValue: provider.frases7Days,
                 ),
               ],
             ),
