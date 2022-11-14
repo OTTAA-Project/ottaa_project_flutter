@@ -87,8 +87,7 @@ class HomeDrawer extends ConsumerWidget {
               leading: const Icon(Icons.view_kanban_outlined),
               title: Text('report'.trl),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                context.go(AppRoutes.report);
               },
             ),
             ListTile(

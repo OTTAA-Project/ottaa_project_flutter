@@ -8,4 +8,5 @@ class AppRoutes {
   static const settingsvoice = "/settings_voice";
   static const onboarding = "/onboarding";
   static const tutorial = "/tutorial";
+  static const report = "/report";
 }

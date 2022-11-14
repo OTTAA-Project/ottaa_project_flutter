@@ -26,7 +26,7 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
     final provider = ref.read(reportProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await LoadingModal.show(context, future: provider.init);
+      await provider.init();
     });
   }
 
