@@ -35,10 +35,8 @@ abstract class ServerRepository {
   Future<EitherListMap> getAllGroups(String userId, String languageCode);
 
   Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data});
-  
+
   Future<EitherVoid> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data});
-  
- // Future<void> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data});
 
   Future<EitherMap> getPictogramsStatistics(String userId, String languageCode);
 
