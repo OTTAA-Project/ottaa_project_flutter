@@ -16,7 +16,7 @@ We would love your help in the OTTAA Project. We have compiled this useful guide
     <li><a href="#Code-conventions">Code conventions</a></li>
     <li><a href="#Analytics-implementation">Analytics implementation</a></li>
   </ol>
-</li>
+
 <li><a href="#As-a-translator">As a Translator</a></li>
 <li><a href="#As-a-manual-tester">As a manual tester</a></li>
 <li><a href="#As-an-automation-tester">As an automation tester</a></li>
