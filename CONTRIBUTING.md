@@ -262,11 +262,11 @@ index
 
 ## As a translator
 
-We currently support Spanish, English, Portuguese and French, but we are open to adding new languages as users' needs arise. Everyone is welcome to contribute with suggestions, changes or error corrections via email at **support@ottaaproject.com**, use the subject "Contribution".
+To help with translations, localization, and proofreading please use our translation management platform: [https://crowdin.com/project/cboard](https://crowdin.com/project/ottaa-project).
 
-Our focus right now is growing in Latin America, with this in mind we would love some help with **pictogram localization**, that is to say, to have pictograms translated **based on each country/region-specific culture and Spanish variety**. For example, we know that a car 🚗 is commonly *carro* in México but *auto* or *coche* in Argentina. 
+We currently support Spanish, English, Portuguese and French, but we are open to adding new languages as users' needs arise. 
 
-Chile, Argentina, Colombia, and the Caribbean are our current priorities, but of course we welcome help with any of our supported languages and regions.
+Our focus right now is growing in Latin America, specifically Argentina, Chile, Colombia, and the Caribbean. With this in mind we would love some help with **pictogram localization**, that is to say, to have pictograms translated **based on each country/region-specific culture and Spanish variety**. For example, we know that a car 🚗 is commonly *carro* in México but *auto* or *coche* in Argentina. 
 
 
 ## As a manual tester
