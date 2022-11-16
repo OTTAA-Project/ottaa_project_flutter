@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/column_widget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/pictogram_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_drawer.dart';
 import 'package:picto_widget/picto_widget.dart';
@@ -251,7 +252,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ? provider.suggestedPicts
                             .sublist(0, 4)
                             .map(
-                              (picto) => PictogramWidget(pictogam: picto, onTap: () {}),
+                              (picto) => PictogramWidget(
+                                  pictogam: picto, onTap: () {}),
                             )
                             .toList()
                         : [],
@@ -259,7 +261,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
             ),
-            Align(
+           /* Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: EdgeInsets.only(bottom: height * 0.045),
@@ -276,10 +278,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    //TODO: Add tts function
-                    context.push(AppRoutes.tutorial);
-                  },
+                  onPressed: () {},
                   child: SizedBox(
                     height: height * 0.16,
                     width: height * 0.16,
@@ -294,7 +293,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ),
-            )
+            ),*/
+            OttaaLogoWidget(
+              onTap: () {
+                //TODO: Add tts function
+                context.push(AppRoutes.tutorial);
+              },
+            ),
           ],
         ),
       ),
