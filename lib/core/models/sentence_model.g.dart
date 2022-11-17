@@ -15,6 +15,7 @@ SentenceModel _$SentenceModelFromJson(Map<String, dynamic> json) =>
       fecha: (json['fecha'] as List<dynamic>).map((e) => e as int).toList(),
       locale: json['locale'] as String,
       id: json['id'] as int,
+      favouriteOrNot: json['favouriteOrNot'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$SentenceModelToJson(SentenceModel instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$SentenceModelToJson(SentenceModel instance) =>
       'fecha': instance.fecha,
       'locale': instance.locale,
       'id': instance.id,
+      'favouriteOrNot': instance.favouriteOrNot,
     };
 
 Complex _$ComplexFromJson(Map<String, dynamic> json) => Complex(

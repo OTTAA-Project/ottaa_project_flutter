@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 
-class FavouriteScreenPage extends StatelessWidget {
+class FavouriteScreenPage extends ConsumerWidget {
   const FavouriteScreenPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
+    final provider = ref.watch(sentencesProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOTTAAOrangeNew,
@@ -17,9 +23,7 @@ class FavouriteScreenPage extends StatelessWidget {
         elevation: 0,
 
         /// that one time when getx was high on weed and was not doing the translations
-        title: Text(controller.ttsController.languaje == 'es-AR'
-            ? 'Oraciones favoritas'
-            : 'Favourite Sentences'),
+        title: Text('favourite_sentences'.trl),
         actions: [
           GestureDetector(
             onTap: () {
@@ -120,7 +124,7 @@ class FavouriteScreenPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            _.favouriteSentences.isNotEmpty
+                            provider.favouriteSentences.isNotEmpty
                                 ? Container(
                                     height: verticalSize / 3,
                                     width: horizontalSize * 0.78,
@@ -130,10 +134,11 @@ class FavouriteScreenPage extends StatelessWidget {
                                       child: ListView.builder(
                                         shrinkWrap: true,
                                         scrollDirection: Axis.horizontal,
-                                        itemCount:
-                                            _.favouritePicts[_.selectedIndexFav]
-                                                    .length +
-                                                1,
+                                        itemCount: provider
+                                                .favouritePicts[
+                                                    provider.selectedIndexFav]
+                                                .length +
+                                            1,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           final Pict speakPict = Pict(
@@ -144,20 +149,21 @@ class FavouriteScreenPage extends StatelessWidget {
                                             imagen:
                                                 Imagen(picto: "logo_ottaa_dev"),
                                           );
-                                          if (_
+                                          if (provider
                                                   .favouritePicts[
-                                                      _.selectedIndexFav]
+                                                      provider.selectedIndexFav]
                                                   .length >
                                               index) {
-                                            final Pict pict = _.favouritePicts[
-                                                _.selectedIndexFav][index];
+                                            final Pict pict =
+                                                provider.favouritePicts[provider
+                                                    .selectedIndexFav][index];
                                             return Container(
                                               margin: const EdgeInsets.all(10),
                                               child: MiniPicto(
                                                 localImg: pict.localImg,
                                                 pict: pict,
                                                 onTap: () {
-                                                  _.speakFavOrNot();
+                                                  provider.speakFavOrNot();
                                                 },
                                               ),
                                             );
@@ -168,7 +174,7 @@ class FavouriteScreenPage extends StatelessWidget {
                                                 localImg: speakPict.localImg,
                                                 pict: speakPict,
                                                 onTap: () {
-                                                  _.speakFavOrNot();
+                                                  provider.speakFavOrNot();
                                                 },
                                               ),
                                             );
@@ -188,7 +194,7 @@ class FavouriteScreenPage extends StatelessWidget {
             ),
 
             ///circularProgressIndicator
-            controller.showCircular.value
+            provider.showCircular
                 ? const Center(
                     child: CircularProgressIndicator(
                       color: kOTTAAOrangeNew,
@@ -211,7 +217,7 @@ class FavouriteScreenPage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       //todo: add the required code
-                      controller.selectedIndexFav--;
+                      provider.selectedIndexFav--;
                     },
                     child: Icon(
                       Icons.skip_previous,
@@ -238,7 +244,7 @@ class FavouriteScreenPage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       //todo: add the required code
-                      controller.selectedIndexFav++;
+                      provider.selectedIndexFav++;
                     },
                     child: Icon(
                       Icons.skip_next,
@@ -256,7 +262,7 @@ class FavouriteScreenPage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () async {
                   //todo: add the required code
-                  await controller.speak();
+                  await provider.speak();
                 },
                 child: OttaaLogoWidget(
                   onTap: () {},

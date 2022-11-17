@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 
-class AddOrRemoveFavouritePage extends StatelessWidget {
-  AddOrRemoveFavouritePage({Key? key}) : super(key: key);
-  final controller = Get.find<SentencesController>();
+class AddOrRemoveFavouritePage extends ConsumerWidget {
+  const AddOrRemoveFavouritePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
+    final provider = ref.watch(sentencesProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOTTAAOrangeNew,
         automaticallyImplyLeading: false,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: Text(controller.ttsController.languaje == 'es-AR'
-            ? 'Oraciones favoritas'
-            : 'Favourite Sentences'),
+        title: Text('favourite_sentences'.trl),
         actions: [
           GestureDetector(
             onTap: () {
@@ -78,7 +81,7 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
                                 );
                               },
                             );
-                            await _.saveFavourite();
+                            await provider.saveFavourite();
                             //todo: go back to the sentences screen
                             // Get.back();
                             // Get.back();
@@ -111,11 +114,13 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _.favouriteOrNotPicts.isNotEmpty
+                      provider.favouriteOrNotPicts.isNotEmpty
                           ? Container(
                               height: verticalSize / 2.5,
                               width: horizontalSize * 0.78,
-                              color: _.sentences[_.selectedIndexFavSelection]
+                              color: provider
+                                      .sentences[
+                                          provider.selectedIndexFavSelection]
                                       .favouriteOrNot
                                   ? Colors.blue
                                   : Colors.transparent,
@@ -125,9 +130,9 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: _
-                                          .favouriteOrNotPicts[
-                                              _.selectedIndexFavSelection]
+                                  itemCount: provider
+                                          .favouriteOrNotPicts[provider
+                                              .selectedIndexFavSelection]
                                           .length +
                                       1,
                                   itemBuilder:
@@ -139,28 +144,30 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
                                       tipo: 6,
                                       imagen: Imagen(picto: "logo_ottaa_dev"),
                                     );
-                                    if (_
-                                            .favouriteOrNotPicts[
-                                                _.selectedIndexFavSelection]
+                                    if (provider
+                                            .favouriteOrNotPicts[provider
+                                                .selectedIndexFavSelection]
                                             .length >
                                         index) {
-                                      final Pict pict = _.favouriteOrNotPicts[
-                                          _.selectedIndexFavSelection][index];
+                                      final Pict pict =
+                                          provider.favouriteOrNotPicts[provider
+                                                  .selectedIndexFavSelection]
+                                              [index];
                                       return Container(
                                         margin: const EdgeInsets.all(10),
                                         child: MiniPicto(
                                           localImg: pict.localImg,
                                           pict: pict,
                                           onTap: () {
-                                            _
-                                                    .sentences[_
+                                            provider
+                                                    .sentences[provider
                                                         .selectedIndexFavSelection]
                                                     .favouriteOrNot =
-                                                !_
-                                                    .sentences[_
+                                                !provider
+                                                    .sentences[provider
                                                         .selectedIndexFavSelection]
                                                     .favouriteOrNot;
-                                            _.speakFavOrNot();
+                                            provider.speakFavOrNot();
                                           },
                                         ),
                                       );
@@ -171,15 +178,15 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
                                           localImg: speakPict.localImg,
                                           pict: speakPict,
                                           onTap: () {
-                                            _
-                                                    .sentences[_
+                                            provider
+                                                    .sentences[provider
                                                         .selectedIndexFavSelection]
                                                     .favouriteOrNot =
-                                                !_
-                                                    .sentences[_
+                                                !provider
+                                                    .sentences[provider
                                                         .selectedIndexFavSelection]
                                                     .favouriteOrNot;
-                                            _.speakFavOrNot();
+                                            provider.speakFavOrNot();
                                           },
                                         ),
                                       );
@@ -196,7 +203,7 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
             ),
 
             ///circularProgressIndicator
-            _.showCircular.value
+            provider.showCircular
                 ? const Center(
                     child: CircularProgressIndicator(
                       color: kOTTAAOrangeNew,
@@ -219,7 +226,7 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       //todo: add the required code
-                      _.selectedIndexFavSelection--;
+                      provider.selectedIndexFavSelection--;
                     },
                     child: Icon(
                       Icons.skip_previous,
@@ -246,7 +253,7 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       //todo: add teh required call
-                      _.selectedIndexFavSelection++;
+                      provider.selectedIndexFavSelection++;
                     },
                     child: Icon(
                       Icons.skip_next,
@@ -264,7 +271,7 @@ class AddOrRemoveFavouritePage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () async {
                   //todo: add the required call
-                  await _.speakFavOrNot();
+                  await provider.speakFavOrNot();
                 },
                 child: OttaaLogoWidget(
                   onTap: () {},

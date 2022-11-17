@@ -1,13 +1,30 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/application/common/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
+import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
+import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 
-class SentencesController extends ChangeNotifier {
-  final ttsController = Get.find<TTSController>();
-  final _pictsRepository = Get.find<PictsRepository>();
-  final _sentencesRepository = Get.find<SentencesRepository>();
-  final dataController = Get.find<DataController>();
+class SentencesProvider extends ChangeNotifier {
+  final SentencesRepository sentenceService;
+  final TTSProvider _tts;
+  final PictogramsRepository _pictogramsService;
+  static const String mostUsedSentences = 'MostUsedFrases';
+  static const String favouriteSentence = 'FavouriteFrases';
+
+  SentencesProvider(
+    this.sentenceService,
+    this._tts,
+    this._pictogramsService,
+  );
+
+  // final _tts = Get.find<_tts>();
+  // final _pictsRepository = Get.find<PictsRepository>();
+  // final _sentencesRepository = Get.find<SentencesRepository>();
+  // final dataController = Get.find<DataController>();
   final searchController = TextEditingController();
   bool showCircular = true;
   late AnimationController sentenceAnimationController;
@@ -15,16 +32,16 @@ class SentencesController extends ChangeNotifier {
   bool searchOrIcon = false;
 
   List<Pict> _picts = [];
-  List<Sentence> sentences = [];
+  List<SentenceModel> sentences = [];
   List<Pict> _sentencePicts = [];
   List<List<Pict>> favouritePicts = [];
-  List<Sentence> favouriteSentences = [];
+  List<SentenceModel> favouriteSentences = [];
   int currentFavIndex = 0;
   List<List<Pict>> favouriteOrNotPicts = [];
-  List<Sentence> favouriteOrNotSentences = [];
+  List<SentenceModel> favouriteOrNotSentences = [];
   int currentFavOrNotIndex = 0;
   ScrollController favouriteSelectionController = ScrollController();
-  List<List<Pict>> _sentencesPicts = [];
+  final List<List<Pict>> _sentencesPicts = [];
   int _selectedIndexFavSelection = 0;
   int _selectedIndexFav = 0;
 
@@ -38,10 +55,12 @@ class SentencesController extends ChangeNotifier {
   set sentencesIndex(value) {
     _sentencesIndex = value;
 
-    if (sentencesIndex == sentencesPicts.length)
+    if (sentencesIndex == sentencesPicts.length) {
       _sentencesIndex = 0;
-    if (sentencesIndex == -1)
+    }
+    if (sentencesIndex == -1) {
       _sentencesIndex = sentencesPicts.length - 1;
+    }
     sentenceAnimationController.forward(from: 0.0);
     notifyListeners();
   }
@@ -49,10 +68,12 @@ class SentencesController extends ChangeNotifier {
   set selectedIndexFavSelection(value) {
     _selectedIndexFavSelection = value;
 
-    if (_selectedIndexFavSelection == favouriteOrNotPicts.length)
+    if (_selectedIndexFavSelection == favouriteOrNotPicts.length) {
       _selectedIndexFavSelection = 0;
-    if (_selectedIndexFavSelection == -1)
+    }
+    if (_selectedIndexFavSelection == -1) {
       _selectedIndexFavSelection = favouriteOrNotPicts.length - 1;
+    }
     notifyListeners();
   }
 
@@ -61,10 +82,12 @@ class SentencesController extends ChangeNotifier {
   set selectedIndexFav(value) {
     _selectedIndexFav = value;
 
-    if (_selectedIndexFav == favouritePicts.length)
+    if (_selectedIndexFav == favouritePicts.length) {
       _selectedIndexFav = 0;
-    if (_selectedIndexFav == -1)
+    }
+    if (_selectedIndexFav == -1) {
       _selectedIndexFav = favouritePicts.length - 1;
+    }
     notifyListeners();
   }
 
@@ -74,7 +97,7 @@ class SentencesController extends ChangeNotifier {
   List<SearchIndexedSentences> sentencesForSearch = [];
   List<SearchIndexedSentences> sentencesForList = [];
 
-  void inIt() async {
+  Future<void> inIt() async {
     await _loadPicts();
     fetchFavOrNot();
     createListForSearching();
@@ -82,16 +105,17 @@ class SentencesController extends ChangeNotifier {
   }
 
   Future<void> saveFavourite() async {
-    List<Sentence> toBeSaved = [];
+    List<SentenceModel> toBeSaved = [];
     for (var element in sentences) {
       if (element.favouriteOrNot) {
         toBeSaved.add(element);
       }
     }
-    await dataController.uploadFrases(
-      language: ttsController.languaje,
+    await sentenceService.uploadSentences(
+      //todo: add the language here
+      language: 'es-AR',
       data: toBeSaved,
-      type: Constants.FAVOURITE_SENTENCES,
+      type: favouriteSentence,
     );
     await fetchFavourites();
     notifyListeners();
@@ -100,61 +124,79 @@ class SentencesController extends ChangeNotifier {
   }
 
   Future<void> _loadPicts() async {
-    _picts = await _pictsRepository.getAll();
-    final language = ttsController.languaje;
+    _picts = await _pictogramsService.getAllPictograms();
+    //todo: add the language here
+    final language = 'es-AR';
     switch (language) {
       case "es-AR":
-        sentences = await _sentencesRepository.getAll(
-              language: language,
-              type: Constants.MOST_USED_SENTENCES,
-            );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: mostUsedSentences,
+        );
+        if (res.isRight) {
+          sentences = res.right;
+        }
         break;
       case "en-US":
-        sentences = await _sentencesRepository.getAll(
-              language: language,
-              type: Constants.MOST_USED_SENTENCES,
-            );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: mostUsedSentences,
+        );
+        if (res.isRight) {
+          sentences = res.right;
+        }
         break;
       case "fr-FR":
-        sentences = await _sentencesRepository.getAll(
-              language: language,
-              type: Constants.MOST_USED_SENTENCES,
-            );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: mostUsedSentences,
+        );
+        if (res.isRight) {
+          sentences = res.right;
+        }
         break;
       case "pt-BR":
-        sentences = await _sentencesRepository.getAll(
-              language: language,
-              type: Constants.MOST_USED_SENTENCES,
-            );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: mostUsedSentences,
+        );
+        if (res.isRight) {
+          sentences = res.right;
+        }
         break;
       default:
-        sentences = await _sentencesRepository.getAll(
-              language: language,
-              type: Constants.MOST_USED_SENTENCES,
-            );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: mostUsedSentences,
+        );
+        if (res.isRight) {
+          sentences = res.right;
+        }
+        break;
     }
 
     ///sorting
-    Comparator<Sentence> sortById =
+    Comparator<SentenceModel> sortById =
         (a, b) => a.frecuencia.compareTo(b.frecuencia);
     sentences.sort(sortById);
     sentences = sentences.reversed.toList();
     if (sentences.length >= 10) {
       for (int i = 0; i <= 9; i++) {
         _sentencePicts = [];
-        sentences[i].complejidad.pictosComponentes.forEach((pictoComponente) {
+        for (var pictoComponente
+            in sentences[i].complejidad.pictosComponentes) {
           _sentencePicts
               .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
-        });
+        }
         _sentencesPicts.add(_sentencePicts);
       }
     } else {
       for (var sentence in sentences) {
         _sentencePicts = [];
-        sentence.complejidad.pictosComponentes.forEach((pictoComponente) {
+        for (var pictoComponente in sentence.complejidad.pictosComponentes) {
           _sentencePicts
               .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
-        });
+        }
         _sentencesPicts.add(_sentencePicts);
       }
     }
@@ -162,79 +204,95 @@ class SentencesController extends ChangeNotifier {
   }
 
   void fetchFavOrNot() {
-    Comparator<Sentence> sortById =
+    Comparator<SentenceModel> sortById =
         (a, b) => a.frecuencia.compareTo(b.frecuencia);
     sentences.sort(sortById);
     sentences = sentences.reversed.toList();
     for (var element in sentences) {
       _sentencePicts = [];
-      element.complejidad.pictosComponentes.forEach((pictoComponente) {
+      for (var pictoComponente in element.complejidad.pictosComponentes) {
         _sentencePicts
             .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
-      });
+      }
       favouriteOrNotPicts.add(_sentencePicts);
     }
     print('the size is this: ${favouriteOrNotPicts.length}');
   }
 
   Future<void> fetchFavourites() async {
-    final language = ttsController.languaje;
+    //todo:
+    final language = 'es-AR';
     switch (language) {
       case "es-AR":
-        favouriteSentences =
-            await _sentencesRepository.fetchFavouriteFrases(
-                  language: language,
-                  type: Constants.FAVOURITE_SENTENCES,
-                );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: favouriteSentence,
+          isFavorite: true,
+        );
+        if (res.isRight) {
+          favouriteSentences = res.right;
+        }
+
         break;
       case "en-US":
-        favouriteSentences =
-            await _sentencesRepository.fetchFavouriteFrases(
-                  language: language,
-                  type: Constants.FAVOURITE_SENTENCES,
-                );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: favouriteSentence,
+          isFavorite: true,
+        );
+        if (res.isRight) {
+          favouriteSentences = res.right;
+        }
         break;
       case "fr-FR":
-        favouriteSentences =
-            await _sentencesRepository.fetchFavouriteFrases(
-                  language: language,
-                  type: Constants.FAVOURITE_SENTENCES,
-                );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: favouriteSentence,
+          isFavorite: true,
+        );
+        if (res.isRight) {
+          favouriteSentences = res.right;
+        }
         break;
       case "pt-BR":
-        favouriteSentences =
-            await _sentencesRepository.fetchFavouriteFrases(
-                  language: language,
-                  type: Constants.FAVOURITE_SENTENCES,
-                );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: favouriteSentence,
+          isFavorite: true,
+        );
+        if (res.isRight) {
+          favouriteSentences = res.right;
+        }
         break;
       default:
-        favouriteSentences =
-            await _sentencesRepository.fetchFavouriteFrases(
-                  language: language,
-                  type: Constants.FAVOURITE_SENTENCES,
-                );
+        final res = await sentenceService.fetchSentences(
+          language: language,
+          type: favouriteSentence,
+          isFavorite: true,
+        );
+        if (res.isRight) {
+          favouriteSentences = res.right;
+        }
+        break;
     }
 
     if (favouriteSentences.length >= 10) {
       for (int i = 0; i <= 9; i++) {
         _sentencePicts = [];
-        favouriteSentences[i]
-            .complejidad
-            .pictosComponentes
-            .forEach((pictoComponente) {
+        for (var pictoComponente
+            in favouriteSentences[i].complejidad.pictosComponentes) {
           _sentencePicts
               .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
-        });
+        }
         favouritePicts.add(_sentencePicts);
       }
     } else {
       for (var sentence in favouriteSentences) {
         _sentencePicts = [];
-        sentence.complejidad.pictosComponentes.forEach((pictoComponente) {
+        for (var pictoComponente in sentence.complejidad.pictosComponentes) {
           _sentencePicts
               .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
-        });
+        }
         favouritePicts.add(_sentencePicts);
       }
     }
@@ -244,7 +302,8 @@ class SentencesController extends ChangeNotifier {
     if (_sentencesPicts[_sentencesIndex].isNotEmpty) {
       String voiceText = "";
       for (var pict in _sentencesPicts[_sentencesIndex]) {
-        switch (ttsController.languaje) {
+        //todo: add the language here too
+        switch ('es-AR') {
           // case "es-AR":
           //   voiceText += ' ' + pict.texto.es;
           //   break;
@@ -265,7 +324,7 @@ class SentencesController extends ChangeNotifier {
         }
       }
 
-      await ttsController.speak(voiceText);
+      await _tts.speak(voiceText);
       print(sentencesForSearch[_sentencesIndex].sentence);
       print(_sentencesIndex);
     }
@@ -275,7 +334,8 @@ class SentencesController extends ChangeNotifier {
     if (favouriteOrNotPicts[_selectedIndexFavSelection].isNotEmpty) {
       String voiceText = "";
       for (var pict in favouriteOrNotPicts[_selectedIndexFavSelection]) {
-        switch (ttsController.languaje) {
+        //todo: add teh language here
+        switch ('es-AR') {
           // case "es-AR":
           //   voiceText += ' ' + pict.texto.es;
           //   break;
@@ -296,7 +356,7 @@ class SentencesController extends ChangeNotifier {
         }
       }
 
-      await ttsController.speak(voiceText);
+      await _tts.speak(voiceText);
       print(voiceText);
       notifyListeners();
       // print(favouriteOrNotPicts[this._selectedIndexFavSelection]);
@@ -308,7 +368,8 @@ class SentencesController extends ChangeNotifier {
     if (_sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
       String voiceText = "";
       for (var pict in _sentencesPicts[sentencesForList[searchIndex].index]) {
-        switch (ttsController.languaje) {
+        //todo: add the language here
+        switch ('es-AR') {
           // case "es-AR":
           //   voiceText += ' ' + pict.texto.es;
           //   break;
@@ -329,7 +390,7 @@ class SentencesController extends ChangeNotifier {
         }
       }
 
-      await ttsController.speak(voiceText);
+      await _tts.speak(voiceText);
       print(sentencesForList[searchIndex].sentence);
       print('search index is $searchIndex');
       print(
@@ -342,7 +403,8 @@ class SentencesController extends ChangeNotifier {
     for (var e1 in _sentencesPicts) {
       String sentence = '';
       for (var e2 in e1) {
-        switch (ttsController.languaje) {
+        //todo: add the language here
+        switch ('es-AR') {
           // case "es":
           //   sentence += ' ' + e2.texto.es;
           //   break;
@@ -413,7 +475,6 @@ class SentencesController extends ChangeNotifier {
     notifyListeners();
     print(searchIndex);
   }
-
 }
 
 class SearchIndexedSentences {
@@ -425,3 +486,16 @@ class SearchIndexedSentences {
   final String sentence;
   final int index;
 }
+
+final sentencesProvider = ChangeNotifierProvider<SentencesProvider>((ref) {
+  final pictogramService = GetIt.I<PictogramsRepository>();
+
+  final sentencesService = GetIt.I<SentencesRepository>();
+  final tts = ref.watch(ttsProvider);
+
+  return SentencesProvider(
+    sentencesService,
+    tts,
+    pictogramService,
+  );
+});

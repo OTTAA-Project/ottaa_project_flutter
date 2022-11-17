@@ -30,7 +30,8 @@ class AboutService extends AboutRepository {
   Future<String> getAvailableAppVersion() async {
     final platform = Platform.isAndroid ? "android" : "ios";
 
-    final Either<String, String> result = await _serverRepository.getAvailableAppVersion(platform);
+    final Either<String, String> result =
+        await _serverRepository.getAvailableAppVersion(platform);
 
     return result.fold((l) => l, (r) => r);
   }
@@ -45,7 +46,7 @@ class AboutService extends AboutRepository {
 
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      return androidInfo.model!;
+      return androidInfo.model;
     } else if (Platform.isIOS) {
       IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
       return iosDeviceInfo.utsname.machine!;
@@ -81,12 +82,21 @@ class AboutService extends AboutRepository {
 
   @override
   Future<void> sendSupportEmail() async {
-    final data = await Future.wait([getEmail(), getAppVersion(), getAvailableAppVersion(), getDeviceName()]);
+    final data = await Future.wait([
+      getEmail(),
+      getAppVersion(),
+      getAvailableAppVersion(),
+      getDeviceName()
+    ]);
     final userType = await getUserType();
-    final Uri params = Uri(scheme: 'mailto', path: 'support@ottaaproject.com', queryParameters: {
-      'subject': 'Support',
-      'body': '''Account: ${data[0]},\nAccount Type: ${userType.name},\nCurrent OTTAA Installed: ${data[1]}\nCurrent OTTAA Version: ${data[3]}\nDevice Name: ${data[4]}''',
-    });
+    final Uri params = Uri(
+        scheme: 'mailto',
+        path: 'support@ottaaproject.com',
+        queryParameters: {
+          'subject': 'Support',
+          'body':
+              '''Account: ${data[0]},\nAccount Type: ${userType.name},\nCurrent OTTAA Installed: ${data[1]}\nCurrent OTTAA Version: ${data[3]}\nDevice Name: ${data[4]}''',
+        });
     if (await canLaunchUrl(params)) {
       await launchUrl(params);
     } else {

@@ -1,18 +1,39 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 
-
-class SentencesPage extends StatelessWidget {
+class SentencesPage extends ConsumerStatefulWidget {
   const SentencesPage({Key? key}) : super(key: key);
+
+  // @override
+  // State<SentencesPage> createState() => _SentencesPageState();
+  @override
+  ConsumerState<SentencesPage> createState() => _SentencesPageState();
+}
+
+class _SentencesPageState extends ConsumerState<SentencesPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    final provider = ref.read(sentencesProvider);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await provider.inIt();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
+    final provider = ref.watch(sentencesProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOTTAAOrangeNew,
@@ -24,7 +45,7 @@ class SentencesPage extends StatelessWidget {
           GestureDetector(
             onTap: () async {
               //todo: go to the route and fetch the favorites
-              await _.fetchFavourites();
+              await provider.fetchFavourites();
               // Get.toNamed(AppRoutes.FAVOURITESCREENPAGE);
             },
             child: const Icon(Icons.star),
@@ -55,8 +76,7 @@ class SentencesPage extends StatelessWidget {
                           Container(),
                           GestureDetector(
                             //todo: back to the previous screen
-                            onTap: () {
-                            },
+                            onTap: () {},
                             child: Icon(
                               Icons.cancel,
                               size: verticalSize * 0.1,
@@ -104,7 +124,7 @@ class SentencesPage extends StatelessWidget {
                     //todo: add the required update into it
                     child: FadeInDown(
                       controller: (controller) =>
-                      _.sentenceAnimationController = controller,
+                      provider.sentenceAnimationController = controller,
                       from: 30,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -112,61 +132,61 @@ class SentencesPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            _.sentencesPicts.isNotEmpty
+                            provider.sentencesPicts.isNotEmpty
                                 ? Container(
-                              height: verticalSize / 3,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount:
-                                _.sentencesPicts[_.sentencesIndex]
-                                    .length +
-                                    1,
-                                itemBuilder:
-                                    (BuildContext context, int index) {
-                                  final Pict speakPict = Pict(
-                                    localImg: true,
-                                    id: 0,
-                                    texto: Texto(),
-                                    tipo: 6,
-                                    imagen:
-                                    Imagen(picto: "logo_ottaa_dev"),
-                                  );
-                                  if (_.sentencesPicts[_.sentencesIndex]
-                                      .length >
-                                      index) {
-                                    final Pict pict = _.sentencesPicts[
-                                    _.sentencesIndex][index];
-                                    return Container(
-                                      margin: const EdgeInsets.all(10),
-                                      child: MiniPicto(
-                                        localImg: pict.localImg,
-                                        pict: pict,
-                                        onTap: () {
-                                          _.speak();
-                                        },
-                                      ),
-                                    );
-                                  } else {
-                                    return Bounce(
-                                      from: 6,
-                                      infinite: true,
-                                      child: Container(
-                                        margin:
-                                        const EdgeInsets.all(10),
-                                        child: MiniPicto(
-                                          localImg: speakPict.localImg,
-                                          pict: speakPict,
-                                          onTap: () {
-                                            _.speak();
-                                          },
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                },
-                              ),
-                            )
+                                    height: verticalSize / 3,
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: provider
+                                              .sentencesPicts[provider.sentencesIndex]
+                                              .length +
+                                          1,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        final Pict speakPict = Pict(
+                                          localImg: true,
+                                          id: 0,
+                                          texto: Texto(),
+                                          tipo: 6,
+                                          imagen:
+                                              Imagen(picto: "logo_ottaa_dev"),
+                                        );
+                                        if (provider.sentencesPicts[provider.sentencesIndex]
+                                                .length >
+                                            index) {
+                                          final Pict pict =
+                                          provider.sentencesPicts[provider.sentencesIndex]
+                                                  [index];
+                                          return Container(
+                                            margin: const EdgeInsets.all(10),
+                                            child: MiniPicto(
+                                              localImg: pict.localImg,
+                                              pict: pict,
+                                              onTap: () {
+                                                provider.speak();
+                                              },
+                                            ),
+                                          );
+                                        } else {
+                                          return Bounce(
+                                            from: 6,
+                                            infinite: true,
+                                            child: Container(
+                                              margin: const EdgeInsets.all(10),
+                                              child: MiniPicto(
+                                                localImg: speakPict.localImg,
+                                                pict: speakPict,
+                                                onTap: () {
+                                                  provider.speak();
+                                                },
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  )
                                 : Container()
                           ],
                         ),
@@ -176,7 +196,7 @@ class SentencesPage extends StatelessWidget {
                 ),
               ),
             ),
-            controller.showCircular.value
+            provider.showCircular
                 ? const Center(
                     child: CircularProgressIndicator(
                       color: kOTTAAOrangeNew,
@@ -198,7 +218,7 @@ class SentencesPage extends StatelessWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      controller.sentencesIndex--;
+                      provider.sentencesIndex--;
                     },
                     child: Icon(
                       Icons.skip_previous,
@@ -224,7 +244,7 @@ class SentencesPage extends StatelessWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      controller.sentencesIndex++;
+                      provider.sentencesIndex++;
                     },
                     child: Icon(
                       Icons.skip_next,
@@ -241,7 +261,7 @@ class SentencesPage extends StatelessWidget {
               right: horizontalSize * 0.43,
               child: GestureDetector(
                 onTap: () async {
-                  await controller.speak();
+                  await provider.speak();
                 },
                 child: OttaaLogoWidget(
                   onTap: () {},

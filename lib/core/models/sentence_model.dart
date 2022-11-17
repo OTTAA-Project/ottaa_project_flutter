@@ -11,6 +11,7 @@ class SentenceModel {
     required this.fecha,
     required this.locale,
     required this.id,
+    this.favouriteOrNot = false,
   });
 
   String frase;
@@ -19,8 +20,10 @@ class SentenceModel {
   List<int> fecha;
   String locale;
   int id;
+  bool favouriteOrNot;
 
-  factory SentenceModel.fromJson(Map<String, dynamic> json) => _$SentenceModelFromJson(json);
+  factory SentenceModel.fromJson(Map<String, dynamic> json) =>
+      _$SentenceModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$SentenceModelToJson(this);
 }
@@ -36,7 +39,8 @@ class Complex {
   @JsonKey(name: 'pictos componentes')
   List<PictosComponente> pictosComponentes;
 
-  factory Complex.fromJson(Map<String, dynamic> json) => _$ComplexFromJson(json);
+  factory Complex.fromJson(Map<String, dynamic> json) =>
+      _$ComplexFromJson(json);
 
   Map<String, dynamic> toJson() => _$ComplexToJson(this);
 }
@@ -57,7 +61,8 @@ class PictosComponente {
   List<String> edad;
   List<String> sexo;
 
-  factory PictosComponente.fromJson(Map<String, dynamic> json) => _$PictosComponenteFromJson(json);
+  factory PictosComponente.fromJson(Map<String, dynamic> json) =>
+      _$PictosComponenteFromJson(json);
 
   Map<String, dynamic> toJson() => _$PictosComponenteToJson(this);
 }

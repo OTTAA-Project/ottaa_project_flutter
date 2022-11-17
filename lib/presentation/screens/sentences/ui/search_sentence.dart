@@ -1,18 +1,22 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/column_widget.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 
-class SearchSentence extends StatelessWidget {
+class SearchSentence extends ConsumerWidget {
   const SearchSentence({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
+    final provider = ref.watch(sentencesProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -31,7 +35,7 @@ class SearchSentence extends StatelessWidget {
                   child: TextFormField(
                     autofocus: true,
                     //todo: add the searchtext controller here
-                    controller: controller.searchController,
+                    controller: provider.searchController,
                     decoration: InputDecoration(
                       hintText: '${'search'.trl}...',
                       hintStyle: const TextStyle(
@@ -44,7 +48,7 @@ class SearchSentence extends StatelessWidget {
                     ),
                     onChanged: (v) {
                       //todo: add teh call here to change the view according to the search
-                      controller.onChangedText(v);
+                      provider.onChangedText(v);
                     },
                   ),
                 ),
@@ -52,7 +56,7 @@ class SearchSentence extends StatelessWidget {
                   width: horizontalSize * 0.02,
                 ),
                 GestureDetector(
-                  onTap: () => controller.searchOrIcon.value = false,
+                  onTap: () => provider.searchOrIcon = false,
                   child: const Icon(
                     Icons.clear,
                   ),
@@ -84,16 +88,16 @@ class SearchSentence extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              _.sentencesForList.isNotEmpty
+                              provider.sentencesForList.isNotEmpty
                                   ? Container(
                                       height: verticalSize / 3,
                                       child: ListView.builder(
                                         shrinkWrap: true,
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: _
-                                                .sentencesPicts[_
+                                        itemCount: provider
+                                                .sentencesPicts[provider
                                                     .sentencesForList[
-                                                        _.searchIndex]
+                                                        provider.searchIndex]
                                                     .index]
                                                 .length +
                                             1,
@@ -107,23 +111,25 @@ class SearchSentence extends StatelessWidget {
                                             imagen:
                                                 Imagen(picto: "logo_ottaa_dev"),
                                           );
-                                          if (_
-                                                  .sentencesPicts[_
+                                          if (provider
+                                                  .sentencesPicts[provider
                                                       .sentencesForList[
-                                                          _.searchIndex]
+                                                          provider.searchIndex]
                                                       .index]
                                                   .length >
                                               index) {
-                                            final Pict pict = _.sentencesPicts[_
-                                                .sentencesForList[_.searchIndex]
-                                                .index][index];
+                                            final Pict pict =
+                                                provider.sentencesPicts[provider
+                                                    .sentencesForList[
+                                                        provider.searchIndex]
+                                                    .index][index];
                                             return Container(
                                               margin: const EdgeInsets.all(10),
                                               child: MiniPicto(
                                                 localImg: pict.localImg,
                                                 pict: pict,
                                                 onTap: () {
-                                                  _.searchSpeak();
+                                                  provider.searchSpeak();
                                                 },
                                               ),
                                             );
@@ -138,7 +144,7 @@ class SearchSentence extends StatelessWidget {
                                                   localImg: speakPict.localImg,
                                                   pict: speakPict,
                                                   onTap: () {
-                                                    _.searchSpeak();
+                                                    provider.searchSpeak();
                                                   },
                                                 ),
                                               ),
@@ -171,7 +177,9 @@ class SearchSentence extends StatelessWidget {
                         children: [
                           Container(),
                           GestureDetector(
-                            onTap: () => Get.back(),
+                            onTap: () {
+                              //todo: get back from here
+                            },
                             child: Icon(
                               Icons.cancel,
                               size: verticalSize * 0.1,
@@ -195,7 +203,7 @@ class SearchSentence extends StatelessWidget {
               children: [
                 GestureDetector(
                   //todo: decrement one from here
-                  onTap: controller.decrementOne,
+                  onTap: provider.decrementOne,
                   child: Icon(
                     Icons.skip_previous,
                     size: verticalSize * 0.1,
@@ -232,7 +240,7 @@ class SearchSentence extends StatelessWidget {
               columnType: ColumnType.right,
               children: [
                 GestureDetector(
-                  onTap: controller.incrementOne,
+                  onTap: provider.incrementOne,
                   child: Icon(
                     Icons.skip_next,
                     size: verticalSize * 0.1,
@@ -244,7 +252,7 @@ class SearchSentence extends StatelessWidget {
             OttaaLogoWidget(
               onTap: () async {
                 //todo: add the required function call here
-                await controller.searchSpeak();
+                await provider.searchSpeak();
               },
             ),
           ],
