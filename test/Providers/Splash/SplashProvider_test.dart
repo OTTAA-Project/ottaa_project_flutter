@@ -17,8 +17,7 @@ void main(){
   late MockAuthRepository mockAuthRepository;
   late MockUserAvatarNotifier mockUserAvatarNotifier;
   late UserModel fakeUser;
-  late MockSplashProvider mockSplashProvider;
-  late bool result;
+
   setUp((){
       fakeUser = const UserModel(
         id: "0",
