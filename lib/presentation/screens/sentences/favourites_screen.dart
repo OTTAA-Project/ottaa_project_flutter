@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 
-class FavouriteScreenPage extends ConsumerWidget {
-  const FavouriteScreenPage({Key? key}) : super(key: key);
+class FavouriteScreen extends ConsumerWidget {
+  const FavouriteScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,10 +29,7 @@ class FavouriteScreenPage extends ConsumerWidget {
         actions: [
           GestureDetector(
             onTap: () {
-              //todo: go to the add or remove fav screen
-              // Get.toNamed(
-              //   AppRoutes.ADDORREMOVEFAVOURITEPAGE,
-              // );
+              context.push(AppRoutes.addOrRemoveFavouriteSentences);
             },
             child: const Icon(
               Icons.favorite,
@@ -62,8 +61,7 @@ class FavouriteScreenPage extends ConsumerWidget {
                           Container(),
                           GestureDetector(
                             onTap: () {
-                              //todo: get back ot the previous screen
-                              // Get.back();
+                              context.pop();
                             },
                             child: Icon(
                               Icons.cancel,
@@ -75,11 +73,8 @@ class FavouriteScreenPage extends ConsumerWidget {
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
                           GestureDetector(
-                            //todo: add the callback and also change the icon on the click and view
                             onTap: () {
-                              // Get.toNamed(
-                              // AppRoutes.ADDORREMOVEFAVOURITEPAGE,
-                              // );
+                              context.push(AppRoutes.addOrRemoveFavouriteSentences);
                             },
                             child: Icon(
                               Icons.edit,
@@ -216,7 +211,6 @@ class FavouriteScreenPage extends ConsumerWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      //todo: add the required code
                       provider.selectedIndexFav--;
                     },
                     child: Icon(
@@ -243,7 +237,6 @@ class FavouriteScreenPage extends ConsumerWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      //todo: add the required code
                       provider.selectedIndexFav++;
                     },
                     child: Icon(
@@ -261,7 +254,6 @@ class FavouriteScreenPage extends ConsumerWidget {
               right: horizontalSize * 0.43,
               child: GestureDetector(
                 onTap: () async {
-                  //todo: add the required code
                   await provider.speak();
                 },
                 child: OttaaLogoWidget(

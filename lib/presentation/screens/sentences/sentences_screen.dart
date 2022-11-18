@@ -1,23 +1,25 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 
-class SentencesPage extends ConsumerStatefulWidget {
-  const SentencesPage({Key? key}) : super(key: key);
+class SentencesScreen extends ConsumerStatefulWidget {
+  const SentencesScreen({Key? key}) : super(key: key);
 
   // @override
   // State<SentencesPage> createState() => _SentencesPageState();
   @override
-  ConsumerState<SentencesPage> createState() => _SentencesPageState();
+  ConsumerState<SentencesScreen> createState() => _SentencesPageState();
 }
 
-class _SentencesPageState extends ConsumerState<SentencesPage> {
+class _SentencesPageState extends ConsumerState<SentencesScreen> {
   @override
   void initState() {
     super.initState();
@@ -43,10 +45,9 @@ class _SentencesPageState extends ConsumerState<SentencesPage> {
         title: Text('most_used_sentences'.trl),
         actions: [
           GestureDetector(
-            onTap: () async {
-              //todo: go to the route and fetch the favorites
-              await provider.fetchFavourites();
-              // Get.toNamed(AppRoutes.FAVOURITESCREENPAGE);
+            onTap: () {
+              provider.fetchFavourites();
+              context.push(AppRoutes.favouriteSentences);
             },
             child: const Icon(Icons.star),
           ),
@@ -75,8 +76,9 @@ class _SentencesPageState extends ConsumerState<SentencesPage> {
                         children: [
                           Container(),
                           GestureDetector(
-                            //todo: back to the previous screen
-                            onTap: () {},
+                            onTap: () {
+                              context.pop();
+                            },
                             child: Icon(
                               Icons.cancel,
                               size: verticalSize * 0.1,
@@ -88,8 +90,7 @@ class _SentencesPageState extends ConsumerState<SentencesPage> {
                           Container(),
                           GestureDetector(
                             onTap: () {
-                              //todo: go to the search sentence screen
-                              // Get.to(SearchSentence());
+                              context.push(AppRoutes.searchSentences);
                             },
                             child: Icon(
                               Icons.search,
@@ -121,7 +122,6 @@ class _SentencesPageState extends ConsumerState<SentencesPage> {
                   padding:
                       EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                   child: Center(
-                    //todo: add the required update into it
                     child: FadeInDown(
                       controller: (controller) =>
                       provider.sentenceAnimationController = controller,

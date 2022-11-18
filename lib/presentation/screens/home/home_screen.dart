@@ -146,7 +146,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      onPressed: () async {},
+                      onPressed: () async {
+                        context.push(AppRoutes.sentences);
+                      },
                       child: Center(
                         child: Icon(
                           Icons.favorite,

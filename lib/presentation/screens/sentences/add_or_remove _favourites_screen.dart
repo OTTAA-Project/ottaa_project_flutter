@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
@@ -7,8 +8,8 @@ import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 
-class AddOrRemoveFavouritePage extends ConsumerWidget {
-  const AddOrRemoveFavouritePage({Key? key}) : super(key: key);
+class AddOrRemoveFavouriteScreen extends ConsumerWidget {
+  const AddOrRemoveFavouriteScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,8 +26,7 @@ class AddOrRemoveFavouritePage extends ConsumerWidget {
         actions: [
           GestureDetector(
             onTap: () {
-              //todo: go back to the previous screen
-              // Get.back();
+              context.pop();
             },
             child: const Icon(
               Icons.favorite,
@@ -57,8 +57,7 @@ class AddOrRemoveFavouritePage extends ConsumerWidget {
                         Container(),
                         GestureDetector(
                           onTap: () {
-                            //todo: go back to previous screen
-                            // Get.back();
+                           context.pop();
                           },
                           child: Icon(
                             Icons.cancel,
@@ -82,9 +81,8 @@ class AddOrRemoveFavouritePage extends ConsumerWidget {
                               },
                             );
                             await provider.saveFavourite();
-                            //todo: go back to the sentences screen
-                            // Get.back();
-                            // Get.back();
+                            context.pop();
+                            context.pop();
                           },
                           child: Icon(
                             Icons.save,
@@ -225,7 +223,6 @@ class AddOrRemoveFavouritePage extends ConsumerWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      //todo: add the required code
                       provider.selectedIndexFavSelection--;
                     },
                     child: Icon(
@@ -252,7 +249,6 @@ class AddOrRemoveFavouritePage extends ConsumerWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      //todo: add teh required call
                       provider.selectedIndexFavSelection++;
                     },
                     child: Icon(
@@ -270,7 +266,6 @@ class AddOrRemoveFavouritePage extends ConsumerWidget {
               right: horizontalSize * 0.43,
               child: GestureDetector(
                 onTap: () async {
-                  //todo: add the required call
                   await provider.speakFavOrNot();
                 },
                 child: OttaaLogoWidget(

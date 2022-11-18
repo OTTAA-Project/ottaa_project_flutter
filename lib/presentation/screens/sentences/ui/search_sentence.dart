@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
@@ -9,8 +10,8 @@ import 'package:ottaa_project_flutter/presentation/common/widgets/column_widget.
 import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 
-class SearchSentence extends ConsumerWidget {
-  const SearchSentence({super.key});
+class SearchSentenceScreen extends ConsumerWidget {
+  const SearchSentenceScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,7 +35,6 @@ class SearchSentence extends ConsumerWidget {
                 Expanded(
                   child: TextFormField(
                     autofocus: true,
-                    //todo: add the searchtext controller here
                     controller: provider.searchController,
                     decoration: InputDecoration(
                       hintText: '${'search'.trl}...',
@@ -47,7 +47,6 @@ class SearchSentence extends ConsumerWidget {
                       color: Colors.white,
                     ),
                     onChanged: (v) {
-                      //todo: add teh call here to change the view according to the search
                       provider.onChangedText(v);
                     },
                   ),
@@ -80,7 +79,6 @@ class SearchSentence extends ConsumerWidget {
                       padding: EdgeInsets.symmetric(
                         horizontal: horizontalSize * 0.02,
                       ),
-                      //todo: add the changes here to make them on spot
                       child: Center(
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
@@ -178,7 +176,7 @@ class SearchSentence extends ConsumerWidget {
                           Container(),
                           GestureDetector(
                             onTap: () {
-                              //todo: get back from here
+                              context.pop();
                             },
                             child: Icon(
                               Icons.cancel,
@@ -202,7 +200,6 @@ class SearchSentence extends ConsumerWidget {
               columnType: ColumnType.left,
               children: [
                 GestureDetector(
-                  //todo: decrement one from here
                   onTap: provider.decrementOne,
                   child: Icon(
                     Icons.skip_previous,
@@ -251,7 +248,6 @@ class SearchSentence extends ConsumerWidget {
             ),
             OttaaLogoWidget(
               onTap: () async {
-                //todo: add the required function call here
                 await provider.searchSpeak();
               },
             ),
