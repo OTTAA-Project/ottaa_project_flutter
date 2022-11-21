@@ -20,7 +20,8 @@ class AuthProvider extends ChangeNotifier {
   final LocalDatabaseRepository _localDatabaseRepository;
   final AuthNotifier authData;
 
-  AuthProvider(this._loadingNotifier, this._authService, this._aboutService, this._localDatabaseRepository, this.authData);
+  AuthProvider(this._loadingNotifier, this._authService, this._aboutService,
+      this._localDatabaseRepository, this.authData);
 
   Future<void> logout() async {
     await _authService.logout();
@@ -36,7 +37,11 @@ class AuthProvider extends ChangeNotifier {
 
     if (result.isRight) {
       await _localDatabaseRepository.setUser(result.right);
-      await _aboutService.getUserInformation();
+      //todo: talk with Emir about this and resolve it
+      final res = await _aboutService.getUserInformation();
+      if (res.isRight) {
+
+      }
 
       authData.setSignedIn();
     }
@@ -52,9 +57,11 @@ final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
 
   final AuthRepository authService = GetIt.I.get<AuthRepository>();
   final AboutRepository aboutService = GetIt.I.get<AboutRepository>();
-  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+  final LocalDatabaseRepository localDatabaseRepository =
+      GetIt.I.get<LocalDatabaseRepository>();
 
   final AuthNotifier authData = ref.watch(authNotifier.notifier);
 
-  return AuthProvider(loadingNotifier, authService, aboutService, localDatabaseRepository, authData);
+  return AuthProvider(loadingNotifier, authService, aboutService,
+      localDatabaseRepository, authData);
 });
