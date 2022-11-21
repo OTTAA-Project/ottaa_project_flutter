@@ -40,7 +40,7 @@ class AuthProvider extends ChangeNotifier {
       //todo: talk with Emir about this and resolve it
       final res = await _aboutService.getUserInformation();
       if (res.isRight) {
-
+        await _authService.runToGetDataFromOtherPlatform(email: res.right.email,id: res.right.id);
       }
 
       authData.setSignedIn();
@@ -50,6 +50,8 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     return result;
   }
+
+
 }
 
 final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
