@@ -181,7 +181,7 @@ class ServerService implements ServerRepository {
     final ref = _database.child('$userId/Usuarios/');
 
     try {
-      await ref.set(data);
+      await ref.update(data);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
