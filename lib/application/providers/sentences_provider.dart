@@ -376,6 +376,40 @@ class SentencesProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> speakFav() async {
+    if (favouritePicts[_selectedIndexFav].isNotEmpty) {
+      String voiceText = "";
+      for (var pict in favouritePicts[_selectedIndexFav]) {
+        //todo: add teh language here
+        switch ('es-AR') {
+        // case "es-AR":
+        //   voiceText += ' ' + pict.texto.es;
+        //   break;
+          case "es-AR":
+            voiceText += ' ${pict.texto.es}';
+            break;
+          case "en-US":
+            voiceText += ' ${pict.texto.en}';
+            break;
+          case "fr-FR":
+            voiceText += ' ${pict.texto.fr}';
+            break;
+          case "pt-BR":
+            voiceText += ' ${pict.texto.pt}';
+            break;
+          default:
+            voiceText += ' ${pict.texto.es}';
+        }
+      }
+
+      await _tts.speak(voiceText);
+      print(voiceText);
+      notifyListeners();
+      // print(favouriteOrNotPicts[this._selectedIndexFavSelection]);
+      // print(favouriteOrNotPicts[this._sel);
+    }
+  }
+
   Future<void> searchSpeak() async {
     if (_sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
       String voiceText = "";

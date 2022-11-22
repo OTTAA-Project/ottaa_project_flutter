@@ -159,7 +159,7 @@ class FavouriteScreen extends ConsumerWidget {
                                                 localImg: pict.localImg,
                                                 pict: pict,
                                                 onTap: () {
-                                                  provider.speakFavOrNot();
+                                                  provider.speakFav();
                                                 },
                                               ),
                                             );
@@ -170,7 +170,7 @@ class FavouriteScreen extends ConsumerWidget {
                                                 localImg: speakPict.localImg,
                                                 pict: speakPict,
                                                 onTap: () {
-                                                  provider.speakFavOrNot();
+                                                  provider.speakFav();
                                                 },
                                               ),
                                             );
@@ -255,7 +255,7 @@ class FavouriteScreen extends ConsumerWidget {
               right: horizontalSize * 0.43,
               child: OttaaLogoWidget(
                 onTap: () async {
-                  await provider.speakFavOrNot();
+                  await provider.speakFav();
                 },
               ),
             ),
