@@ -196,19 +196,6 @@ class SearchSentenceScreen extends ConsumerWidget {
                 ],
               ),
             ),
-            ColumnWidget(
-              columnType: ColumnType.left,
-              children: [
-                GestureDetector(
-                  onTap: provider.decrementOne,
-                  child: Icon(
-                    Icons.skip_previous,
-                    size: verticalSize * 0.1,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
             /* Positioned(
               left: 0,
               bottom: 0,
@@ -233,23 +220,43 @@ class SearchSentenceScreen extends ConsumerWidget {
                 ),
               ),
             ),*/
-            ColumnWidget(
-              columnType: ColumnType.right,
-              children: [
-                GestureDetector(
-                  onTap: provider.incrementOne,
-                  child: Icon(
-                    Icons.skip_next,
-                    size: verticalSize * 0.1,
-                    color: Colors.white,
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: ColumnWidget(
+                columnType: ColumnType.right,
+                children: [
+                  GestureDetector(
+                    onTap: provider.incrementOne,
+                    child: Icon(
+                      Icons.skip_next,
+                      size: verticalSize * 0.1,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             OttaaLogoWidget(
               onTap: () async {
                 await provider.searchSpeak();
               },
+            ),
+            Positioned(
+              bottom: 0,
+              child: ColumnWidget(
+                columnType: ColumnType.left,
+                children: [
+                  GestureDetector(
+                    onTap: provider.decrementOne,
+                    child: Icon(
+                      Icons.skip_previous,
+                      size: verticalSize * 0.1,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -98,7 +98,7 @@ class SentencesProvider extends ChangeNotifier {
   List<SearchIndexedSentences> sentencesForList = [];
 
   Future<void> inIt() async {
-    await _loadPicts();
+    await _loadSentences();
     fetchFavOrNot();
     createListForSearching();
     showCircular = false;
@@ -123,7 +123,7 @@ class SentencesProvider extends ChangeNotifier {
     _selectedIndexFavSelection = 0;
   }
 
-  Future<void> _loadPicts() async {
+  Future<void> _loadSentences() async {
     _picts = await _pictogramsService.getAllPictograms();
     //todo: add the language here
     final language = 'es-AR';
@@ -212,9 +212,19 @@ class SentencesProvider extends ChangeNotifier {
       _sentencePicts = [];
       for (var pictoComponente in element.complejidad.pictosComponentes) {
         // if()
-        _sentencePicts.add(
-          _picts.firstWhere((pict) => pict.id == pictoComponente.id),
-        );
+        //todo: will fix it when we will be working on the new UI, For now it is juts a lazy fix
+        bool found = false;
+        int index = -1;
+        for (var element in _picts) {
+          if (element.id == pictoComponente.id) {
+            found = true;
+          }
+          index++;
+        }
+        // _picts.firstWhere((pict) => pict.id == pictoComponente.id);
+        if (found) {
+          _sentencePicts.add(_picts[index]);
+        }
       }
       favouriteOrNotPicts.add(_sentencePicts);
     }

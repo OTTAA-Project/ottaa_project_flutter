@@ -74,7 +74,8 @@ class FavouriteScreen extends ConsumerWidget {
                           Container(),
                           GestureDetector(
                             onTap: () {
-                              context.push(AppRoutes.addOrRemoveFavouriteSentences);
+                              context.push(
+                                  AppRoutes.addOrRemoveFavouriteSentences);
                             },
                             child: Icon(
                               Icons.edit,
@@ -252,13 +253,10 @@ class FavouriteScreen extends ConsumerWidget {
               bottom: verticalSize * 0.02,
               left: horizontalSize * 0.43,
               right: horizontalSize * 0.43,
-              child: GestureDetector(
+              child: OttaaLogoWidget(
                 onTap: () async {
-                  await provider.speak();
+                  await provider.speakFavOrNot();
                 },
-                child: OttaaLogoWidget(
-                  onTap: () {},
-                ),
               ),
             ),
           ],
