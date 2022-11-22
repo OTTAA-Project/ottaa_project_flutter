@@ -129,49 +129,49 @@ class SentencesProvider extends ChangeNotifier {
     final language = 'es-AR';
     switch (language) {
       case "es-AR":
-        final res = await sentenceService.fetchSentences(
+        sentences = await sentenceService.fetchSentences(
           language: language,
           type: mostUsedSentences,
         );
-        if (res.isRight) {
-          sentences = res.right;
-        }
+        // if (res.isRight) {
+        //   sentences = res.right;
+        // }
         break;
       case "en-US":
-        final res = await sentenceService.fetchSentences(
+        sentences = await sentenceService.fetchSentences(
           language: language,
           type: mostUsedSentences,
         );
-        if (res.isRight) {
-          sentences = res.right;
-        }
+        // if (res.isRight) {
+        //   sentences = res.right;
+        // }
         break;
       case "fr-FR":
-        final res = await sentenceService.fetchSentences(
+        sentences = await sentenceService.fetchSentences(
           language: language,
           type: mostUsedSentences,
         );
-        if (res.isRight) {
-          sentences = res.right;
-        }
+        // if (res.isRight) {
+        //   sentences = res.right;
+        // }
         break;
       case "pt-BR":
-        final res = await sentenceService.fetchSentences(
+        sentences = await sentenceService.fetchSentences(
           language: language,
           type: mostUsedSentences,
         );
-        if (res.isRight) {
-          sentences = res.right;
-        }
+        // if (res.isRight) {
+        //   sentences = res.right;
+        // }
         break;
       default:
-        final res = await sentenceService.fetchSentences(
+        sentences = await sentenceService.fetchSentences(
           language: language,
           type: mostUsedSentences,
         );
-        if (res.isRight) {
-          sentences = res.right;
-        }
+        // if (res.isRight) {
+        //   sentences = res.right;
+        // }
         break;
     }
 
@@ -211,8 +211,10 @@ class SentencesProvider extends ChangeNotifier {
     for (var element in sentences) {
       _sentencePicts = [];
       for (var pictoComponente in element.complejidad.pictosComponentes) {
-        _sentencePicts
-            .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+        // if()
+        _sentencePicts.add(
+          _picts.firstWhere((pict) => pict.id == pictoComponente.id),
+        );
       }
       favouriteOrNotPicts.add(_sentencePicts);
     }
@@ -224,55 +226,55 @@ class SentencesProvider extends ChangeNotifier {
     final language = 'es-AR';
     switch (language) {
       case "es-AR":
-        final res = await sentenceService.fetchSentences(
+        favouriteSentences = await sentenceService.fetchSentences(
           language: language,
           type: favouriteSentence,
           isFavorite: true,
         );
-        if (res.isRight) {
-          favouriteSentences = res.right;
-        }
+        // if (res.isRight) {
+        //   favouriteSentences = res.right;
+        // }
 
         break;
       case "en-US":
-        final res = await sentenceService.fetchSentences(
+        favouriteSentences = await sentenceService.fetchSentences(
           language: language,
           type: favouriteSentence,
           isFavorite: true,
         );
-        if (res.isRight) {
-          favouriteSentences = res.right;
-        }
+        // if (res.isRight) {
+        //   favouriteSentences = res.right;
+        // }
         break;
       case "fr-FR":
-        final res = await sentenceService.fetchSentences(
+        favouriteSentences = await sentenceService.fetchSentences(
           language: language,
           type: favouriteSentence,
           isFavorite: true,
         );
-        if (res.isRight) {
-          favouriteSentences = res.right;
-        }
+        // if (res.isRight) {
+        //   favouriteSentences = res.right;
+        // }
         break;
       case "pt-BR":
-        final res = await sentenceService.fetchSentences(
+        favouriteSentences = await sentenceService.fetchSentences(
           language: language,
           type: favouriteSentence,
           isFavorite: true,
         );
-        if (res.isRight) {
-          favouriteSentences = res.right;
-        }
+        // if (res.isRight) {
+        //   favouriteSentences = res.right;
+        // }
         break;
       default:
-        final res = await sentenceService.fetchSentences(
+        favouriteSentences = await sentenceService.fetchSentences(
           language: language,
           type: favouriteSentence,
           isFavorite: true,
         );
-        if (res.isRight) {
-          favouriteSentences = res.right;
-        }
+        // if (res.isRight) {
+        //   favouriteSentences = res.right;
+        // }
         break;
     }
 
