@@ -9,4 +9,5 @@ class AppRoutes {
   static const onboarding = "/onboarding";
   static const tutorial = "/tutorial";
   static const report = "/report";
+  static const profileChooserScreen = "/profile_chooser_screen";
 }
