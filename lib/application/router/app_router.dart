@@ -58,6 +58,18 @@ class AppRouter {
           builder: (context, state) => const ReportScreen(),
         ),
         GoRoute(
+          path: AppRoutes.profileWaitingScreen,
+          builder: (context, state) => const ProfileChooserScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileMainScreen,
+          builder: (context, state) => const ProfileChooserScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileSettingsScreen,
+          builder: (context, state) => const ProfileChooserScreen(),
+        ),
+        GoRoute(
           path: AppRoutes.profileChooserScreen,
           builder: (context, state) => const ProfileChooserScreen(),
         ),
