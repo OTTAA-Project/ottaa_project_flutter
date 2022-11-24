@@ -23,7 +23,7 @@ void main() async {
 
   if (kIsWeb) {
     // initialiaze the facebook javascript SDK
-    await FacebookAuth.i.webInitialize(
+    await FacebookAuth.i.webAndDesktopInitialize(
       appId: "658779868360186", //<-- YOUR APP_ID
       cookie: true,
       xfbml: true,

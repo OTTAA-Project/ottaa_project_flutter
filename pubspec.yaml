@@ -16,13 +16,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   device_info_plus: ^6.0.0
   either_dart: ^0.2.0
-  firebase_analytics: ^9.3.8
-  firebase_auth: ^3.11.2
-  firebase_core: ^1.24.0
-  firebase_crashlytics: ^2.9.0
-  firebase_database: ^9.1.7
-  firebase_storage: ^10.3.11
-  flutter_facebook_auth: ^4.4.1+1
+  firebase_analytics: ^10.0.5
+  firebase_auth: ^4.1.2
+  firebase_core: ^2.2.0
+  firebase_crashlytics: ^3.0.5
+  firebase_database: ^10.0.5
+  firebase_storage: ^11.0.5
+  flutter_facebook_auth: ^5.0.6
   flutter_riverpod: ^2.0.2
   flutter_tts: ^3.5.3
   fluttertoast: ^8.1.1
