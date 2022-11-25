@@ -1,6 +1,6 @@
 ## Analytics Implementation
 
-(place_holder: see https://github.com/OTTAA-Project/ottaa_project_flutter/issues/106 questions 1,2 and 3 for possible changes/add ons)
+(place_holder: see  [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/106) questions 1,2 and 3 for possible changes/add ons)
 
 ### Types of events
 
