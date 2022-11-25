@@ -67,12 +67,16 @@ The complete list of libraries used and their functions can be found [here](libr
 
 ### API reference
 
- * We are using [Dartdoc](https://pub.dev/packages/dartdoc) to automate the [API reference documentation] ()(add link when completed). For some help getting started with dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.  
+ * We are using [Dartdoc](https://pub.dev/packages/dartdoc) to automate the [API reference documentation] (place_holder: link to API reference). For some help getting started with dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.  
 
 ## Contributing
 
 Contributors help the OTTAA Project grow. If you would like to become a contributor, please read [Contribute](CONTRIBUTING.md).
 
+
+## FAQ
+
+We have compiles a list of FAQ, you can check it [here](place_holder: link to FAQ in .io)
 
 ## Acknowledgements
 
