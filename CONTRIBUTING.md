@@ -35,9 +35,9 @@ You may contribute to OTTAA
 
 ## As a developer
 
-### Required knowledge (placeholder)
+### Required knowledge (place_holder: complete template of required knowledge)
 
-In order to contribute as a developer, you will need to have a basic understanding of [this/these coding languge/s] and [this/these tool/s (could be a framework, library, platform)]. We also strongly recommend you be familiar with [these language/technology that might not be as important as the other two mentioned but is still important] .
+In order to contribute as a developer, you will need to have a basic understanding of [this/these coding languge/s] and [this/these tool/s (could be a framework, library, platform)]. We also strongly recommend you be familiar with [these language/technology that might not be as important as the other two mentioned but is still important].
 
 #### Setting up your IDE
 
@@ -181,7 +181,7 @@ If this is your first time using it or you have any doubts about installation, e
 
 * Use Grandle level app
 
-Example :
+Example : (place_holder: add code example)
 
 ```add code example here```
 
@@ -191,14 +191,14 @@ Example :
 
  Switch case
  
-Example :
+Example : (place_holder: add code example)
 
 ```add code example here```
 
 
 If / else or else if
 
-Example :
+Example : (place_holder: add code example)
 
 ```add code example here```
 
@@ -214,7 +214,7 @@ Example :
 
 * Class names should be nouns in UpperCamelCase, with the first letter of every word capitalized.
 
-Example :
+Example : (place_holder: add code example)
 
 ```add code example here```
 
@@ -222,7 +222,7 @@ Example :
 
 * Local variables, instance variables, and class variables should be written in lowerCamelCase: with the exception of the first world, the first letter of every word should be capitalized.
 
-Example :
+Example : (place_holder: add code example)
 
 ```add code example here```
 
@@ -230,13 +230,13 @@ Example :
 
 * Constants should be written in UPPERCASE with words separated by underscores.
 
-Example:
+Example: (place_holder: add code example)
 
 ```add code example here```
 
 #### Firebase index:
 
-[FIREBASE TREE INDEX NEEDS UPDATING]
+[(place_holder: firebase index needs updating)]
 ```
 #!code
 
