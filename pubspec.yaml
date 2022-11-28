@@ -71,6 +71,7 @@ flutter:
     - assets/gender_based/pictos/
     - assets/gender_based/grupos/
     - assets/i18n/
+    - assets/profile/
   fonts:
     - family: Roboto
       fonts:

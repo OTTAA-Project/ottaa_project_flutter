@@ -20,6 +20,10 @@ class AppRouter {
     if (!authService.isLogged) {
       return AppRoutes.login;
     }
+    //todo: talk with emir about it
+    if(authService.isLogged){
+      return AppRoutes.home;
+    }
 
     return AppRoutes.splash;
   }

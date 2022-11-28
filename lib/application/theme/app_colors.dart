@@ -4,6 +4,7 @@ const Color kFacebookColor = Color(0xff3b5998);
 const Color kOTTAAOrange = Color(0xFFFF8138);
 const Color kOTTAAOrangeNew = Color(0xFFFF6900);
 const Color kOTTAABackgroundNew = Color(0xFFF5F5F5);
+const Color kOTTAABackground = Color(0xFFE8E3E3);
 const Color kQuantumGrey = Color(0xFFE0E0E0);
 const Color kWhite = Color(0xFFF5F5F5);
 

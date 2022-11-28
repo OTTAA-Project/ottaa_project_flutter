@@ -1628,6 +1628,11 @@ class AppImages {
   static const kStep3Tutorial = "assets/Group 729.png";
 
   static const kStep4Tutorial = "assets/Group 727.png";
+
   static const kOttaaDrawerLogo = "assets/otta_drawer_logo.png";
+
+  static const kProfileIcon1 = "assets/profile/profile_chooser_screen_icon_1.png";
+
+  static const kProfileIcon2 = "assets/profile/profile_chooser_screen_icon_2.png";
 
 }
