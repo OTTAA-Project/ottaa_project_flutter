@@ -1,6 +1,6 @@
 # Contributing to the OTTAA Project
 
-We would love your help in the OTTAA Project. We have compiled this useful guide to all the ways you can collaborate. Reading it carefully before you start is important to maintain consistency in the project quality and ensure a respectful and positive environment in our community.
+We would love your help with the OTTAA Project. We have compiled this useful guide to all the ways you can collaborate. Reading it carefully before you start is important to maintain consistency in the project quality and ensure a respectful and positive environment in our community.
 
 ## Table of contents
 
@@ -44,11 +44,11 @@ In order to contribute as a developer, you will need to have a basic understandi
 - Run `flutter pub get` to get the dependencies.
 - Run `flutter pub run build_runner build` to generate the model class code.
 - Run `flutter run` to run the project.
-- If you encounter any errors for model building, run `flutter packages pub run build_runner build --delete-conflicting-outputs`.
+- If you encounter any errors in model building, run `flutter packages pub run build_runner build --delete-conflicting-outputs`.
 
 ### Reporting an issue
 
-Any bug or hotfix that results from manual testing should be reported via an [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues) in our GitHub repository using the **[template](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/new?assignees=&labels=&template=bug_report.md&title=)** for bug reporting and **providing as much information as possible** about the bug, including: used **version of OTTAA** and/or **version of web navigator** and clear instructions on how to **reproduce** the bug.
+Any bug or hotfix that results from manual testing should be reported via an [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues) in our GitHub repository. Please **use the [template](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/new?assignees=&labels=&template=bug_report.md&title=)** for bug reporting and **provide as much information as possible** about the bug, including the used **version of OTTAA**, and/or **version of web navigator**, and clear instructions on how to **reproduce** the bug.
 
 
 ### Submitting a pull request
@@ -56,7 +56,7 @@ Any bug or hotfix that results from manual testing should be reported via an [is
 Please bear the following in mind when creating a PR:
 
 * Avoid file conflicts with the source code.
-* Make a detailed description about the features it applies to.
+* Make a detailed description of the features it applies to.
 * Make the PR in the corresponding branch.
 * Avoid your PR containing unrelated commits, keep it focused on its scope. 
 
@@ -80,7 +80,7 @@ Bear in mind:
 3) Types other than *fix:*: and *feat:*: are allowed, for example *build:*, *chore:*, *ci:*, *docs:*, *style:*, *refactor:*, *perf:*, *test:*.
 4) Footer BREAKING CHANGE or *!* after type/scope: introduces a breaking API change (correlating with MAJOR in Semantic Versioning). 
 5) A BREAKING CHANGE can be part of commits of any type.
-6) Footers other than *BREAKING CHANGE* may be provided and follow a convention similar to [git trailer format](https://git-scm.com/docs/git-interpret-trailers).
+6) Footers other than *BREAKING CHANGE* may be provided and follow a convention similar to the [git trailer format](https://git-scm.com/docs/git-interpret-trailers).
 
 ##### Examples
 
@@ -123,7 +123,7 @@ Consistent code writing, commenting and documenting style is key to collaboratio
 
 To get familiarized with the code, check the [API reference] (place_holder: link to API reference). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it and will ask you to use it as well when commenting your code. If you require assistance with Dartdoc please check [Using Dartdoc](#using-dartdoc) below.
 
-* Classes, variables, constants and relationship between classes should always be documented.
+* Classes, variables, constants, and relationships between classes should always be documented.
 
 * Your comments should be full English sentences.
 
@@ -173,8 +173,8 @@ If this is your first time using it or you have any doubts about installation, e
 |--------|-----------|
 | Google | Library related to google |
 | Android | Library related to android |
-|Firebase | Library related to firebase api|
-|Test |Library related to test app|
+|Firebase | Library related to firebase API|
+|Test |Library related to testing app|
 | Library | Library related to different apps|
 
 * Sort by alphabetical order.
@@ -206,13 +206,14 @@ Example : (place_holder: add code example)
 
 * The attributes of the class must be protected or private.
 
-* The Method of the class can be public, private or protected.
+* The Method of the class can be public, private, or protected.
 
 * Classes can be public or private.
 
-* Class names must be transparent and representative of its purpose.
+* Class names must be transparent and representative of their purpose.
 
 * Class names should be nouns in UpperCamelCase, with the first letter of every word capitalized.
+
 
 Example : (place_holder: add code example)
 
@@ -266,7 +267,7 @@ To help with translations, localization, and proofreading please use our transla
 
 We currently support Spanish, English, Portuguese and French, but we are open to adding new languages as users' needs arise. 
 
-Our focus right now is growing in Latin America, specifically Argentina, Chile, Colombia, and the Caribbean. With this in mind we would love some help with **pictogram localization**, that is to say, to have pictograms translated **based on each country/region-specific culture and Spanish variety**. For example, we know that a car 🚗 is commonly *carro* in México but *auto* or *coche* in Argentina. 
+Our focus right now is growing in Latin America, specifically Argentina, Chile, Colombia, and the Caribbean. Because of that, we would love some help with **pictogram localization**, that is to say, to have pictograms translated **based on each country/region-specific culture and Spanish variety**. For example, we know that a car 🚗 is commonly *carro* in México but *auto* or *coche* in Argentina. 
 
 
 ## As a manual tester
