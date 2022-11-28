@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/new_simple_button.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 
 class ProfileChooserScreen extends StatelessWidget {
@@ -64,7 +65,8 @@ class ProfileChooserScreen extends StatelessWidget {
                 ],
               ),
               NewSimpleButton(
-                onTap: () {},
+                //todo: add the proper way for handling the waiting screen, hector said is should be their for 4 seconds at least
+                onTap: () => context.push(AppRoutes.profileWaitingScreen),
                 active: false,
                 text: "profile.continuar",
               ),

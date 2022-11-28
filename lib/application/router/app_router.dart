@@ -7,6 +7,9 @@ import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_chooser_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_settings_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/report_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/tutorial/tutorial_screen.dart';
@@ -63,15 +66,15 @@ class AppRouter {
         ),
         GoRoute(
           path: AppRoutes.profileWaitingScreen,
-          builder: (context, state) => const ProfileChooserScreen(),
+          builder: (context, state) => const ProfileWaitingScreen(),
         ),
         GoRoute(
           path: AppRoutes.profileMainScreen,
-          builder: (context, state) => const ProfileChooserScreen(),
+          builder: (context, state) => const ProfileMainScreen(),
         ),
         GoRoute(
           path: AppRoutes.profileSettingsScreen,
-          builder: (context, state) => const ProfileChooserScreen(),
+          builder: (context, state) => const ProfileSettingsScreen(),
         ),
         GoRoute(
           path: AppRoutes.profileChooserScreen,
