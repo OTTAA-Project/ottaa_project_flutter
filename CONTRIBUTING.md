@@ -121,7 +121,7 @@ Consistent code writing, commenting and documenting style is key to collaboratio
 
 #### On commenting and documenting code
 
-To get familiarized with the code, check the [API reference]()(add link to automatic doc when ready). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it and will ask you to use it as well when commenting your code. If you require assistance with Dartdoc please check [Using Dartdoc](#using-dartdoc) below.
+To get familiarized with the code, check the [API reference] (place_holder: link to API reference). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it and will ask you to use it as well when commenting your code. If you require assistance with Dartdoc please check [Using Dartdoc](#using-dartdoc) below.
 
 * Classes, variables, constants and relationship between classes should always be documented.
 
