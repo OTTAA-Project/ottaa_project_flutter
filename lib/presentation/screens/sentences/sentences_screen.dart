@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/list_pictos_widget.dart';
 
 class SentencesScreen extends ConsumerStatefulWidget {
   const SentencesScreen({Key? key}) : super(key: key);
@@ -35,7 +36,17 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
   Widget build(BuildContext context) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
-    final provider = ref.watch(sentencesProvider);
+    // final provider = ref.watch(sentencesProvider);
+
+    final speak = ref.read(sentencesProvider.select((prov) => prov.speak));
+
+    final showCircular = ref.watch(sentencesProvider.select((prov) => prov.showCircular));
+
+    var sentencesIndex = ref.read(sentencesProvider.select((prov) => prov.sentencesIndex));
+    final changeSentencesIndex = ref.read(sentencesProvider.select((prov) => prov.changeSelectedIndexFav));
+
+    final fetchFavourites = ref.read(sentencesProvider.select((prov) => prov.fetchFavourites));
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOTTAAOrangeNew,
@@ -46,7 +57,7 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
         actions: [
           GestureDetector(
             onTap: () {
-              provider.fetchFavourites();
+              fetchFavourites();
               context.push(AppRoutes.favouriteSentences);
             },
             child: const Icon(Icons.star),
@@ -112,19 +123,16 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
               bottom: verticalSize * 0.17,
               child: Container(
                 height: verticalSize * 0.8,
-                padding:
-                    EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                   child: Center(
                     child: FadeInDown(
-                      controller: (controller) =>
-                      provider.sentenceAnimationController = controller,
+                      controller: (controller) => ref.read(sentencesProvider.select((prov) => prov.setAnimationController))(controller),
                       from: 30,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -132,62 +140,9 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            provider.sentencesPicts.isNotEmpty
-                                ? Container(
-                                    height: verticalSize / 3,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: provider
-                                              .sentencesPicts[provider.sentencesIndex]
-                                              .length +
-                                          1,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        final Pict speakPict = Pict(
-                                          localImg: true,
-                                          id: 0,
-                                          texto: Texto(),
-                                          tipo: 6,
-                                          imagen:
-                                              Imagen(picto: "logo_ottaa_dev"),
-                                        );
-                                        if (provider.sentencesPicts[provider.sentencesIndex]
-                                                .length >
-                                            index) {
-                                          final Pict pict =
-                                          provider.sentencesPicts[provider.sentencesIndex]
-                                                  [index];
-                                          return Container(
-                                            margin: const EdgeInsets.all(10),
-                                            child: MiniPicto(
-                                              localImg: pict.localImg,
-                                              pict: pict,
-                                              onTap: () {
-                                                provider.speak();
-                                              },
-                                            ),
-                                          );
-                                        } else {
-                                          return Bounce(
-                                            from: 6,
-                                            infinite: true,
-                                            child: Container(
-                                              margin: const EdgeInsets.all(10),
-                                              child: MiniPicto(
-                                                localImg: speakPict.localImg,
-                                                pict: speakPict,
-                                                onTap: () {
-                                                  provider.speak();
-                                                },
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                      },
-                                    ),
-                                  )
-                                : Container()
+                            ListPictosWidget(
+                              height: verticalSize / 3,
+                            )
                           ],
                         ),
                       ),
@@ -196,7 +151,7 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
                 ),
               ),
             ),
-            provider.showCircular
+            showCircular
                 ? const Center(
                     child: CircularProgressIndicator(
                       color: kOTTAAOrangeNew,
@@ -218,7 +173,7 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      provider.sentencesIndex--;
+                      changeSentencesIndex(sentencesIndex--);
                     },
                     child: Icon(
                       Icons.skip_previous,
@@ -244,7 +199,7 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      provider.sentencesIndex++;
+                      changeSentencesIndex(sentencesIndex++);
                     },
                     child: Icon(
                       Icons.skip_next,
@@ -261,7 +216,7 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
               right: horizontalSize * 0.43,
               child: GestureDetector(
                 onTap: () async {
-                  await provider.speak();
+                  await speak();
                 },
                 child: OttaaLogoWidget(
                   onTap: () {},

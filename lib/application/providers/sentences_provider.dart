@@ -2,8 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ottaa_project_flutter/application/common/constants.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/core/models/search_indexed_sentences_model.dart';
 import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
@@ -12,8 +14,6 @@ class SentencesProvider extends ChangeNotifier {
   final SentencesRepository sentenceService;
   final TTSProvider _tts;
   final PictogramsRepository _pictogramsService;
-  static const String mostUsedSentences = 'MostUsedFrases';
-  static const String favouriteSentence = 'FavouriteFrases';
 
   SentencesProvider(
     this.sentenceService,
@@ -104,6 +104,8 @@ class SentencesProvider extends ChangeNotifier {
     showCircular = false;
   }
 
+  void setAnimationController(AnimationController anim) => sentenceAnimationController = anim;
+
   Future<void> saveFavourite() async {
     List<SentenceModel> toBeSaved = [];
     for (var element in sentences) {
@@ -115,7 +117,7 @@ class SentencesProvider extends ChangeNotifier {
       //todo: add the language here
       language: 'es-AR',
       data: toBeSaved,
-      type: favouriteSentence,
+      type: kFavouriteSentences,
     );
     await fetchFavourites();
     notifyListeners();
@@ -131,7 +133,7 @@ class SentencesProvider extends ChangeNotifier {
       case "es-AR":
         sentences = await sentenceService.fetchSentences(
           language: language,
-          type: mostUsedSentences,
+          type: kMostUsedSentences,
         );
         // if (res.isRight) {
         //   sentences = res.right;
@@ -140,7 +142,7 @@ class SentencesProvider extends ChangeNotifier {
       case "en-US":
         sentences = await sentenceService.fetchSentences(
           language: language,
-          type: mostUsedSentences,
+          type: kMostUsedSentences,
         );
         // if (res.isRight) {
         //   sentences = res.right;
@@ -149,7 +151,7 @@ class SentencesProvider extends ChangeNotifier {
       case "fr-FR":
         sentences = await sentenceService.fetchSentences(
           language: language,
-          type: mostUsedSentences,
+          type: kMostUsedSentences,
         );
         // if (res.isRight) {
         //   sentences = res.right;
@@ -158,7 +160,7 @@ class SentencesProvider extends ChangeNotifier {
       case "pt-BR":
         sentences = await sentenceService.fetchSentences(
           language: language,
-          type: mostUsedSentences,
+          type: kMostUsedSentences,
         );
         // if (res.isRight) {
         //   sentences = res.right;
@@ -167,7 +169,7 @@ class SentencesProvider extends ChangeNotifier {
       default:
         sentences = await sentenceService.fetchSentences(
           language: language,
-          type: mostUsedSentences,
+          type: kMostUsedSentences,
         );
         // if (res.isRight) {
         //   sentences = res.right;
@@ -176,17 +178,14 @@ class SentencesProvider extends ChangeNotifier {
     }
 
     ///sorting
-    Comparator<SentenceModel> sortById =
-        (a, b) => a.frecuencia.compareTo(b.frecuencia);
+    Comparator<SentenceModel> sortById = (a, b) => a.frecuencia.compareTo(b.frecuencia);
     sentences.sort(sortById);
     sentences = sentences.reversed.toList();
     if (sentences.length >= 10) {
       for (int i = 0; i <= 9; i++) {
         _sentencePicts = [];
-        for (var pictoComponente
-            in sentences[i].complejidad.pictosComponentes) {
-          _sentencePicts
-              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+        for (var pictoComponente in sentences[i].complejidad.pictosComponentes) {
+          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         _sentencesPicts.add(_sentencePicts);
       }
@@ -194,8 +193,7 @@ class SentencesProvider extends ChangeNotifier {
       for (var sentence in sentences) {
         _sentencePicts = [];
         for (var pictoComponente in sentence.complejidad.pictosComponentes) {
-          _sentencePicts
-              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         _sentencesPicts.add(_sentencePicts);
       }
@@ -204,8 +202,7 @@ class SentencesProvider extends ChangeNotifier {
   }
 
   void fetchFavOrNot() {
-    Comparator<SentenceModel> sortById =
-        (a, b) => a.frecuencia.compareTo(b.frecuencia);
+    Comparator<SentenceModel> sortById = (a, b) => a.frecuencia.compareTo(b.frecuencia);
     sentences.sort(sortById);
     sentences = sentences.reversed.toList();
     for (var element in sentences) {
@@ -238,7 +235,7 @@ class SentencesProvider extends ChangeNotifier {
       case "es-AR":
         favouriteSentences = await sentenceService.fetchSentences(
           language: language,
-          type: favouriteSentence,
+          type: kFavouriteSentences,
           isFavorite: true,
         );
         // if (res.isRight) {
@@ -249,7 +246,7 @@ class SentencesProvider extends ChangeNotifier {
       case "en-US":
         favouriteSentences = await sentenceService.fetchSentences(
           language: language,
-          type: favouriteSentence,
+          type: kFavouriteSentences,
           isFavorite: true,
         );
         // if (res.isRight) {
@@ -259,7 +256,7 @@ class SentencesProvider extends ChangeNotifier {
       case "fr-FR":
         favouriteSentences = await sentenceService.fetchSentences(
           language: language,
-          type: favouriteSentence,
+          type: kFavouriteSentences,
           isFavorite: true,
         );
         // if (res.isRight) {
@@ -269,7 +266,7 @@ class SentencesProvider extends ChangeNotifier {
       case "pt-BR":
         favouriteSentences = await sentenceService.fetchSentences(
           language: language,
-          type: favouriteSentence,
+          type: kFavouriteSentences,
           isFavorite: true,
         );
         // if (res.isRight) {
@@ -279,7 +276,7 @@ class SentencesProvider extends ChangeNotifier {
       default:
         favouriteSentences = await sentenceService.fetchSentences(
           language: language,
-          type: favouriteSentence,
+          type: kFavouriteSentences,
           isFavorite: true,
         );
         // if (res.isRight) {
@@ -291,10 +288,8 @@ class SentencesProvider extends ChangeNotifier {
     if (favouriteSentences.length >= 10) {
       for (int i = 0; i <= 9; i++) {
         _sentencePicts = [];
-        for (var pictoComponente
-            in favouriteSentences[i].complejidad.pictosComponentes) {
-          _sentencePicts
-              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+        for (var pictoComponente in favouriteSentences[i].complejidad.pictosComponentes) {
+          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         favouritePicts.add(_sentencePicts);
       }
@@ -302,8 +297,7 @@ class SentencesProvider extends ChangeNotifier {
       for (var sentence in favouriteSentences) {
         _sentencePicts = [];
         for (var pictoComponente in sentence.complejidad.pictosComponentes) {
-          _sentencePicts
-              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         favouritePicts.add(_sentencePicts);
       }
@@ -315,7 +309,9 @@ class SentencesProvider extends ChangeNotifier {
       String voiceText = "";
       for (var pict in _sentencesPicts[_sentencesIndex]) {
         //todo: add the language here too
-        switch ('es-AR') {
+        final language = 'es-AR'; //FUCK THE POLICE!!!
+
+        switch (language) {
           // case "es-AR":
           //   voiceText += ' ' + pict.texto.es;
           //   break;
@@ -382,9 +378,9 @@ class SentencesProvider extends ChangeNotifier {
       for (var pict in favouritePicts[_selectedIndexFav]) {
         //todo: add teh language here
         switch ('es-AR') {
-        // case "es-AR":
-        //   voiceText += ' ' + pict.texto.es;
-        //   break;
+          // case "es-AR":
+          //   voiceText += ' ' + pict.texto.es;
+          //   break;
           case "es-AR":
             voiceText += ' ${pict.texto.es}';
             break;
@@ -439,8 +435,7 @@ class SentencesProvider extends ChangeNotifier {
       await _tts.speak(voiceText);
       print(sentencesForList[searchIndex].sentence);
       print('search index is $searchIndex');
-      print(
-          'the index from controller is ${sentencesForList[searchIndex].index}');
+      print('the index from controller is ${sentencesForList[searchIndex].index}');
     }
   }
 
@@ -486,9 +481,7 @@ class SentencesProvider extends ChangeNotifier {
     List<SearchIndexedSentences> listData = [];
     if (v.isNotEmpty) {
       for (var element in sentencesForSearch) {
-        final b = element.sentence
-            .toUpperCase()
-            .contains(v.toString().toUpperCase(), 0);
+        final b = element.sentence.toUpperCase().contains(v.toString().toUpperCase(), 0);
         if (b) {
           listData.add(element);
         }
@@ -521,16 +514,16 @@ class SentencesProvider extends ChangeNotifier {
     notifyListeners();
     print(searchIndex);
   }
-}
 
-class SearchIndexedSentences {
-  SearchIndexedSentences({
-    required this.sentence,
-    required this.index,
-  });
+  void changeSelectedIndexFavSelection(int index) {
+    _selectedIndexFavSelection = index;
+    notifyListeners();
+  }
 
-  final String sentence;
-  final int index;
+  void changeSelectedIndexFav(int index) {
+    _selectedIndexFav = index;
+    notifyListeners();
+  }
 }
 
 final sentencesProvider = ChangeNotifierProvider<SentencesProvider>((ref) {

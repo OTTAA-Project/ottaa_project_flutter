@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/list_pictos_widget.dart';
 
 class FavouriteScreen extends ConsumerWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
@@ -16,21 +17,25 @@ class FavouriteScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
-    final provider = ref.watch(sentencesProvider);
+
+    final speak = ref.read(sentencesProvider.select((prov) => prov.speakFav));
+    final showCircular = ref.watch(sentencesProvider.select((prov) => prov.showCircular));
+
+    var sentencesIndex = ref.read(sentencesProvider.select((prov) => prov.sentencesIndex));
+    final changeSentencesIndex = ref.read(sentencesProvider.select((prov) => prov.changeSelectedIndexFav));
+
+    final favouritesList = ref.read(sentencesProvider.select((prov) => prov.favouriteSentences));
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOTTAAOrangeNew,
         automaticallyImplyLeading: false,
         foregroundColor: Colors.white,
         elevation: 0,
-
-        /// that one time when getx was high on weed and was not doing the translations
         title: Text('favourite_sentences'.trl),
         actions: [
           GestureDetector(
-            onTap: () {
-              context.push(AppRoutes.addOrRemoveFavouriteSentences);
-            },
+            onTap: () => context.push(AppRoutes.addOrRemoveFavouriteSentences),
             child: const Icon(
               Icons.favorite,
             ),
@@ -74,8 +79,7 @@ class FavouriteScreen extends ConsumerWidget {
                           Container(),
                           GestureDetector(
                             onTap: () {
-                              context.push(
-                                  AppRoutes.addOrRemoveFavouriteSentences);
+                              context.push(AppRoutes.addOrRemoveFavouriteSentences);
                             },
                             child: Icon(
                               Icons.edit,
@@ -98,15 +102,13 @@ class FavouriteScreen extends ConsumerWidget {
               child: Container(
                 height: verticalSize * 0.8,
                 width: horizontalSize * 0.8,
-                padding:
-                    EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                   child: Center(
                     //todo: update the view according to the things
                     child: SizedBox(
@@ -120,64 +122,11 @@ class FavouriteScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            provider.favouriteSentences.isNotEmpty
-                                ? Container(
+                            favouritesList.isNotEmpty
+                                ? ListPictosWidget(
                                     height: verticalSize / 3,
                                     width: horizontalSize * 0.78,
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: verticalSize * 0.05),
-                                    child: Center(
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: provider
-                                                .favouritePicts[
-                                                    provider.selectedIndexFav]
-                                                .length +
-                                            1,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          final Pict speakPict = Pict(
-                                            localImg: true,
-                                            id: 0,
-                                            texto: Texto(),
-                                            tipo: 6,
-                                            imagen:
-                                                Imagen(picto: "logo_ottaa_dev"),
-                                          );
-                                          if (provider
-                                                  .favouritePicts[
-                                                      provider.selectedIndexFav]
-                                                  .length >
-                                              index) {
-                                            final Pict pict =
-                                                provider.favouritePicts[provider
-                                                    .selectedIndexFav][index];
-                                            return Container(
-                                              margin: const EdgeInsets.all(10),
-                                              child: MiniPicto(
-                                                localImg: pict.localImg,
-                                                pict: pict,
-                                                onTap: () {
-                                                  provider.speakFav();
-                                                },
-                                              ),
-                                            );
-                                          } else {
-                                            return Container(
-                                              margin: const EdgeInsets.all(10),
-                                              child: MiniPicto(
-                                                localImg: speakPict.localImg,
-                                                pict: speakPict,
-                                                onTap: () {
-                                                  provider.speakFav();
-                                                },
-                                              ),
-                                            );
-                                          }
-                                        },
-                                      ),
-                                    ),
+                                    padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
                                   )
                                 : Container()
                           ],
@@ -190,7 +139,7 @@ class FavouriteScreen extends ConsumerWidget {
             ),
 
             ///circularProgressIndicator
-            provider.showCircular
+            showCircular
                 ? const Center(
                     child: CircularProgressIndicator(
                       color: kOTTAAOrangeNew,
@@ -212,7 +161,7 @@ class FavouriteScreen extends ConsumerWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      provider.selectedIndexFav--;
+                      changeSentencesIndex(sentencesIndex--);
                     },
                     child: Icon(
                       Icons.skip_previous,
@@ -238,7 +187,7 @@ class FavouriteScreen extends ConsumerWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      provider.selectedIndexFav++;
+                      changeSentencesIndex(sentencesIndex++);
                     },
                     child: Icon(
                       Icons.skip_next,
@@ -255,7 +204,7 @@ class FavouriteScreen extends ConsumerWidget {
               right: horizontalSize * 0.43,
               child: OttaaLogoWidget(
                 onTap: () async {
-                  await provider.speakFav();
+                  await speak();
                 },
               ),
             ),
