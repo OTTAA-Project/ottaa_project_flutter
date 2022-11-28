@@ -136,13 +136,13 @@
   "add_group": "Añadir grupo",
   "add_pict": "Agregar imagen",
   "galeria_grupos": "Galeria Grupos",
-
-
   "profile.omitir": "Omitir",
   "profile.continuar": "Continuar",
   "profile.selection.text1": "¿Quién usará la aplicación en este dispositivo?",
   "profile.acompanante": "Acompañante",
   "profile.profesionales.familiares": "Profesionales / Familiares",
   "profile.necesita.comunicarse": "Necesita comunicarse",
-  "profile.usuario/a": "Usuario / a"
+  "profile.usuario.a": "Usuario / a",
+  "profile.aguarde": "Aguarde",
+  "profile.configurando.su.experiencia": "Configurando su experiencia..."
 }
