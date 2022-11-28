@@ -236,7 +236,7 @@ Example: (place_holder: add code example)
 
 #### Firebase index:
 
-[(place_holder: firebase index needs updating)]
+(place_holder: firebase index needs updating see [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/104))
 ```
 #!code
 
