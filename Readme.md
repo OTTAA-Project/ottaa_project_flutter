@@ -1,13 +1,13 @@
 ![image](https://ottaaproject.com/img/ottaa-project.svg)
 
-(place_holder: continuos integration and DPG certificate, see [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/125))
+(place_holder: continuous integration and DPG certificate, see [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/125))
 
 
 # Welcome to the OTTAA Project #
 
-The [OTTAA Project](https://www.ottaaproject.com/) is an augmentative and alternative communication (AAC) mobile application intended for users with speech and language impairments. It is a fast and effective tool that significantly improves users' quality of life and facilitates their social and labor reintegration. We have already positively impacted the lives of more than 40000 people in 11 countries, helping individuals with cerebral palsy, aphasia, autism, Down syndrome and mild ALS.
+The [OTTAA Project](https://www.ottaaproject.com/) is an augmentative and alternative communication (AAC) mobile application intended for users with speech and language impairments. It is a fast and effective tool that significantly improves users' quality of life and facilitates their social and labor reintegration. We have already positively impacted the lives of more than 40000 people in 11 countries, helping individuals with cerebral palsy, aphasia, autism, Down syndrome, and mild ALS.
 
-You can be a part of this open source project and help build life changing technology, join us!
+You can be a part of this open-source project and help build life-changing technology, join us!
 
 <p align="center">
 <img src="/public/images/ottaa_project/usar_ottaa.gif" alt="ottaa_img" width="500"/>
@@ -17,7 +17,7 @@ Read our [Project's Roadmap](https://github.com/orgs/OTTAA-Project/projects/4/vi
 
 ## How does it work?
 
-The OTTA app facilitates human communication via pictograms for those who are speech impaired, suggesting each user the most appropriate pictograms based on preference, need, and environment. Watch this video for a more comprehensive walk through. 
+The OTTA app facilitates human communication via pictograms for those who are speech impaired, suggesting to each user the most appropriate pictograms based on preference, need, and environment. Watch this video for a more comprehensive walkthrough. 
 
 <p align="center">
 <a href="https://www.youtube.com/watch?v=nQZRzBOWD-c"><img src="https://img.youtube.com/vi/nQZRzBOWD-c/0.jpg" alt="OTTAA The first intelligent communication platform for speech impaired people" width="480" height="360"></a>
@@ -29,7 +29,7 @@ The OTTA app facilitates human communication via pictograms for those who are sp
 * Run `flutter pub run build_runner build` to generate the model class code.
 * Run `flutter run` to run the project.
 
-\* In case you encounter any errors for model building:
+\* In case you encounter any errors in model building:
 
 * Run `flutter packages pub run build_runner build --delete-conflicting-outputs`.
 
@@ -70,18 +70,28 @@ The complete list of libraries used and their functions can be found [here](libr
 
 ### API reference
 
- * We are using [Dartdoc](https://pub.dev/packages/dartdoc) to automate the [API reference documentation] (place_holder: link to API reference). For some help getting started with dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.  
+ * We are using [Dartdoc](https://pub.dev/packages/dartdoc) to automate the [API reference documentation] (place_holder: link to API reference). For some help getting started with Dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.  
 
 ## Contributing
 
 Contributors help the OTTAA Project grow. If you would like to become a contributor, please read [Contribute](CONTRIBUTING.md).
 
+## Technology Standards
+
+Open standards establish protocols and building blocks to help make digital public goods more functional and interoperable. This not only streamlines product development but also removes vendor-imposed boundaries to read or write data files by improving data exchange and open-source development support that is why we use the following Technology standards across our software and implementations.
+
+* HTTPS for secure communication over networks
+* OAuth 2 for authentication and user authorization
+* UTF-8 for string localization and internalization
+* JSON for database structure and data transfer
+* PNG & Webp for images and pictograms
+* OGG for audio files
 
 ## FAQ
 
-We have compiles a list of FAQ, you can check it [here](place_holder: link to FAQ in .io)
+We have compiled a list of FAQs, you can check it [here](place_holder: link to FAQs once posted in [web](https://ottaa-project.github.io/docs/welcome))
 
-## Acknowledgements
+## Acknowledgments
 
 
 <p float="left">
