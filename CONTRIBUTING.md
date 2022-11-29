@@ -10,16 +10,18 @@ We would love your help with the OTTAA Project. We have compiled this useful gui
   <li><a href="#Ways-of-contributing">Ways of contributing</a>
   <li><a href="#As-a-developer">As a developer</a></li>
   <ol>
+    <li><a href="#Required-knowledge">Required knowledge</a></li>
     <li><a href="#Setting-up-your-IDE">Setting up your IDE</a></li>
     <li><a href="#Reporting-an-issue">Reporting an issue</a></li>
     <li><a href="#Submitting-a-pull-request">Submitting a pull request</a></li>
     <li><a href="#Code-conventions">Code conventions</a></li>
     <li><a href="#Analytics-implementation">Analytics implementation</a></li>
+    <li><a href="#Components-architecture">Components architecture</a></li>
   </ol>
 </li>
 <li><a href="#As-a-translator">As a Translator</a></li>
 <li><a href="#As-a-manual-tester">As a manual tester</a></li>
-<li><a href="#As-an-automation-tester">As an automation tester</a></li>
+<li><a href="#As-an-automation-tester">As an automation tester</a></li>  
 <li><a href="#On-our-code-of-conduct">Code of conduct</a></li>
 </ol>
 </div>
@@ -35,7 +37,9 @@ You may contribute to OTTAA
 
 ## As a developer
 
-### Required knowledge (place_holder: complete template of required knowledge)
+### Required knowledge
+
+(place_holder: complete template of required knowledge, see [issue #86](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/86))
 
 In order to contribute as a developer, you will need to have a basic understanding of [this/these coding languge/s] and [this/these tool/s (could be a framework, library, platform)]. We also strongly recommend you be familiar with [these language/technology that might not be as important as the other two mentioned but is still important].
 
@@ -121,7 +125,7 @@ Consistent code writing, commenting and documenting style is key to collaboratio
 
 #### On commenting and documenting code
 
-To get familiarized with the code, check the [API reference] (place_holder: link to API reference). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it and will ask you to use it as well when commenting your code. If you require assistance with Dartdoc please check [Using Dartdoc](#using-dartdoc) below.
+To get familiarized with the code, check the [API reference] (place_holder: link to API reference, see [issue #]()). We use [Dartdoc](https://pub.dev/packages/dartdoc) to build it and will ask you to use it as well when commenting your code. If you require assistance with Dartdoc please check [Using Dartdoc](#using-dartdoc) below.
 
 * Classes, variables, constants, and relationships between classes should always be documented.
 
@@ -237,7 +241,7 @@ Example: (place_holder: add code example)
 
 #### Firebase index:
 
-(place_holder: firebase index needs updating see [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/104))
+(place_holder: firebase index needs updating see [issue #104](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/104))
 ```
 #!code
 
@@ -260,6 +264,10 @@ index
 ### Analytics implementation
 
 [Here](/analytics_implementation.md) is the list of events that should be tracked.
+
+### Components architecture
+
+place_holder: paste components architecture diagram once finished. see [issue #128](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/128)
 
 ## As a translator
 
