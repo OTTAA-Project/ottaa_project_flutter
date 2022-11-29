@@ -1,6 +1,6 @@
 ![image](https://ottaaproject.com/img/ottaa-project.svg)
 
-(place_holder: continuous integration and DPG certificate, see [issue](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/125))
+(place_holder: continuous integration and DPG certificate, see [issue #125](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/125))
 
 
 # Welcome to the OTTAA Project #
