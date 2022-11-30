@@ -1635,4 +1635,12 @@ class AppImages {
 
   static const kProfileIcon2 = "assets/profile/profile_chooser_screen_icon_2.png";
 
+  static const kNotificationIcon = "assets/profile/notification_icon.png";
+
+  static const kProfileMainScreenIcon = "assets/profile/profile_main_screen_icon2.png";
+
+  static const kProfileAddIcon = "assets/profile/profile_add_icon.png";
+
+  static const kProfileLinkIcon = "assets/profile/profile_link_icon.png";
+
 }

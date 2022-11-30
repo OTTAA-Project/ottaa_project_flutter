@@ -144,5 +144,13 @@
   "profile.necesita.comunicarse": "Necesita comunicarse",
   "profile.usuario.a": "Usuario / a",
   "profile.aguarde": "Aguarde",
-  "profile.configurando.su.experiencia": "Configurando su experiencia..."
+  "profile.configurando.su.experiencia": "Configurando su experiencia...",
+  "profile.hola": "Hola",
+  "profile.vincular.con.cuenta": "Vincular con cuenta",
+  "profile.crear.nueva.cuenta": "Crear nueva cuenta",
+  "profile.usar.ottaa": "Usar Ottaa",
+  "profile.modo.sin.perfil": "Modo sin perfil",
+  "profile.nuevo.existente": "Nuevo / Existente",
+  "profile.agregar.cuenta": "Agregar cuenta",
+  "profile.qué.deseas.hacer": "¿Qué deseas hacer?"
 }

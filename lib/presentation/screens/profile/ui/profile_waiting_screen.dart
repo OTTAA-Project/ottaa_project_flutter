@@ -19,7 +19,7 @@ class _ProfileWaitingScreenState extends State<ProfileWaitingScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(
         const Duration(seconds: 2),
-        () => context.push(AppRoutes.profileMainScreen),
+        () => context.replace(AppRoutes.profileMainScreen),
       );
     });
   }
