@@ -280,7 +280,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    //TODO: Add tts function
+                    context.push(AppRoutes.profileChooserScreen);
+                  },
                   child: SizedBox(
                     height: height * 0.16,
                     width: height * 0.16,

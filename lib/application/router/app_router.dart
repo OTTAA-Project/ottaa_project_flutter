@@ -6,6 +6,10 @@ import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.da
 import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_chooser_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/report_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/sentences/add_or_remove%20_favourites_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/sentences/favourites_screen.dart';
@@ -22,6 +26,10 @@ class AppRouter {
 
     if (!authService.isLogged) {
       return AppRoutes.login;
+    }
+    //todo: talk with emir about it
+    if(authService.isLogged){
+      return AppRoutes.home;
     }
 
     return AppRoutes.splash;
@@ -75,6 +83,22 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.searchSentences,
           builder: (context, state) => const SearchSentenceScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileWaitingScreen,
+          builder: (context, state) => const ProfileWaitingScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileMainScreen,
+          builder: (context, state) => const ProfileMainScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileSettingsScreen,
+          builder: (context, state) => const ProfileSettingsScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileChooserScreen,
+          builder: (context, state) => const ProfileChooserScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),

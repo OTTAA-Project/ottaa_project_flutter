@@ -179,7 +179,8 @@ class AppImages {
 
   static const kCamisas = "assets/imgs/camisas.webp";
 
-  static const kCamisetaDeMangaLarga = "assets/imgs/camiseta_de_manga_larga.webp";
+  static const kCamisetaDeMangaLarga =
+      "assets/imgs/camiseta_de_manga_larga.webp";
 
   static const kCampera = "assets/imgs/campera.webp";
 
@@ -381,7 +382,8 @@ class AppImages {
 
   static const kEnamorados = "assets/imgs/enamorados.webp";
 
-  static const kEncenderLaTelevision = "assets/imgs/encender_la_television.webp";
+  static const kEncenderLaTelevision =
+      "assets/imgs/encender_la_television.webp";
 
   static const kEnfermo = "assets/imgs/enfermo.webp";
 
@@ -569,7 +571,8 @@ class AppImages {
 
   static const kIcCanalDeportes = "assets/imgs/ic_canal_deportes.webp";
 
-  static const kIcCanalDibujosAnimados = "assets/imgs/ic_canal_dibujos_animados.webp";
+  static const kIcCanalDibujosAnimados =
+      "assets/imgs/ic_canal_dibujos_animados.webp";
 
   static const kIcCanalNoticiero = "assets/imgs/ic_canal_noticiero.webp";
 
@@ -597,7 +600,8 @@ class AppImages {
 
   static const kIcClases = "assets/imgs/ic_clases.webp";
 
-  static const kIcCloudDownloadBlack24dp = "assets/imgs/ic_cloud_download_black_24dp.webp";
+  static const kIcCloudDownloadBlack24dp =
+      "assets/imgs/ic_cloud_download_black_24dp.webp";
 
   static const kIcColores = "assets/imgs/ic_colores.webp";
 
@@ -613,7 +617,8 @@ class AppImages {
 
   static const kIcControlRemoto = "assets/imgs/ic_control_remoto.webp";
 
-  static const kIcControlarTelevision = "assets/imgs/ic_controlar_television.webp";
+  static const kIcControlarTelevision =
+      "assets/imgs/ic_controlar_television.webp";
 
   static const kIcCorner = "assets/imgs/ic_corner.webp";
 
@@ -739,7 +744,8 @@ class AppImages {
 
   static const kIcHambre = "assets/imgs/ic_hambre.webp";
 
-  static const kIcHelpOutlineWhite24dp = "assets/imgs/ic_help_outline_white_24dp.webp";
+  static const kIcHelpOutlineWhite24dp =
+      "assets/imgs/ic_help_outline_white_24dp.webp";
 
   static const kIcHermano = "assets/imgs/ic_hermano.webp";
 
@@ -815,7 +821,8 @@ class AppImages {
 
   static const kIcModifiers = "assets/imgs/ic_modifiers.webp";
 
-  static const kIcMoreVertWhite24dp = "assets/imgs/ic_more_vert_white_24dp.webp";
+  static const kIcMoreVertWhite24dp =
+      "assets/imgs/ic_more_vert_white_24dp.webp";
 
   static const kIcMujer = "assets/imgs/ic_mujer.webp";
 
@@ -947,9 +954,11 @@ class AppImages {
 
   static const kIcVioleta = "assets/imgs/ic_violeta.webp";
 
-  static const kIcVolumeOffWhite24dp = "assets/imgs/ic_volume_off_white_24dp.webp";
+  static const kIcVolumeOffWhite24dp =
+      "assets/imgs/ic_volume_off_white_24dp.webp";
 
-  static const kIcVolumeUpWhite24dp = "assets/imgs/ic_volume_up_white_24dp.webp";
+  static const kIcVolumeUpWhite24dp =
+      "assets/imgs/ic_volume_up_white_24dp.webp";
 
   static const kIcVolumenMenos = "assets/imgs/ic_volumen_menos.webp";
 
@@ -1049,7 +1058,8 @@ class AppImages {
 
   static const kLibroViaje = "assets/imgs/libro_viaje.webp";
 
-  static const kLicenciaAccesibilidad = "assets/imgs/licencia_accesibilidad.webp";
+  static const kLicenciaAccesibilidad =
+      "assets/imgs/licencia_accesibilidad.webp";
 
   static const kLicenciaGames = "assets/imgs/licencia_games.webp";
 
@@ -1443,7 +1453,8 @@ class AppImages {
 
   static const kSweater = "assets/imgs/sweater.webp";
 
-  static const kTableroDeComunicacion = "assets/imgs/tablero_de_comunicacion.webp";
+  static const kTableroDeComunicacion =
+      "assets/imgs/tablero_de_comunicacion.webp";
 
   static const kTagHorarioWhite = "assets/imgs/tag_horario_white.webp";
 
@@ -1561,7 +1572,8 @@ class AppImages {
 
   static const kZapato = "assets/imgs/zapato.webp";
 
-  static const kZicAddCircleOutlineWhite24dp = "assets/imgs/zic_add_circle_outline_white_24dp.webp";
+  static const kZicAddCircleOutlineWhite24dp =
+      "assets/imgs/zic_add_circle_outline_white_24dp.webp";
 
   static const kZicV1Perdonar = "assets/imgs/zic_v1_perdonar.webp";
 
@@ -1593,7 +1605,8 @@ class AppImages {
 
   static const kZidGripe = "assets/imgs/zid_gripe.webp";
 
-  static const kZidHamburguesaYPatatasFritas = "assets/imgs/zid_hamburguesa_y_patatas_fritas.webp";
+  static const kZidHamburguesaYPatatasFritas =
+      "assets/imgs/zid_hamburguesa_y_patatas_fritas.webp";
 
   static const kZidHelado = "assets/imgs/zid_helado.webp";
 
@@ -1628,6 +1641,40 @@ class AppImages {
   static const kStep3Tutorial = "assets/Group 729.png";
 
   static const kStep4Tutorial = "assets/Group 727.png";
+
   static const kOttaaDrawerLogo = "assets/otta_drawer_logo.png";
 
+  static const kProfileIcon1 =
+      "assets/profile/profile_chooser_screen_icon_1.png";
+
+  static const kProfileIcon2 =
+      "assets/profile/profile_chooser_screen_icon_2.png";
+
+  static const kNotificationIcon = "assets/profile/notification_icon.png";
+
+  static const kProfileMainScreenIcon =
+      "assets/profile/profile_main_screen_icon2.png";
+
+  static const kProfileAddIcon = "assets/profile/profile_add_icon.png";
+
+  static const kProfileLinkIcon = "assets/profile/profile_link_icon.png";
+
+  static const kProfileOttaalogo = "assets/profile/profile_ottaa_logo.png";
+
+  static const kProfileSettingsIcon1 =
+      "assets/profile/profile_settings_icon_1.png";
+
+  static const kProfileSettingsIcon2 =
+      "assets/profile/profile_settings_icon_2.png";
+
+  static const kProfileSettingsIcon3 =
+      "assets/profile/profile_settings_icon_3.png";
+
+  static const kProfileSettingsIcon4 =
+      "assets/profile/profile_settings_icon_4.png";
+
+  static const kProfileSettingsIcon5 =
+      "assets/profile/profile_settings_icon_5.png";
+  static const kTestImage =
+      'https://cdn.pixabay.com/photo/2020/05/25/17/21/link-5219567_1280.jpg';
 }
