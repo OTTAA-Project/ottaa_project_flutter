@@ -7,6 +7,10 @@ import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/report_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/sentences/add_or_remove%20_favourites_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/sentences/favourites_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/sentences/sentences_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/search_sentence.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/tutorial/tutorial_screen.dart';
 
@@ -55,6 +59,22 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.report,
           builder: (context, state) => const ReportScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.sentences,
+          builder: (context, state) => const SentencesScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.favouriteSentences,
+          builder: (context, state) => const FavouriteScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.addOrRemoveFavouriteSentences,
+          builder: (context, state) => const AddOrRemoveFavouriteScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.searchSentences,
+          builder: (context, state) => const SearchSentenceScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),

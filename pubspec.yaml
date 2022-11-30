@@ -11,18 +11,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  animate_do: ^2.1.0
+  animate_do: ^3.0.2
   auto_size_text: ^3.0.0
   cupertino_icons: ^1.0.2
-  device_info_plus: ^6.0.0
-  either_dart: ^0.2.0
-  firebase_analytics: ^9.3.8
-  firebase_auth: ^3.11.2
-  firebase_core: ^1.24.0
-  firebase_crashlytics: ^2.9.0
-  firebase_database: ^9.1.7
-  firebase_storage: ^10.3.11
-  flutter_facebook_auth: ^4.4.1+1
+  device_info_plus: ^8.0.0
+  either_dart: ^0.3.0
+  firebase_analytics: ^10.0.5
+  firebase_auth: ^4.1.2
+  firebase_core: ^2.2.0
+  firebase_crashlytics: ^3.0.5
+  firebase_database: ^10.0.5
+  firebase_storage: ^11.0.5
+  flutter_facebook_auth: ^5.0.6
   flutter_riverpod: ^2.0.2
   flutter_tts: ^3.5.3
   fluttertoast: ^8.1.1
@@ -37,10 +37,10 @@ dependencies:
   intl: ^0.17.0
   json_theme: ^4.0.1+4
   just_audio: ^0.9.29
-  package_info_plus: ^2.0.0
-  picto_widget: 0.0.3
+  package_info_plus: ^3.0.2
+  picto_widget: ^0.0.4
   screenshot: ^1.2.3
-  share_plus: ^5.0.0
+  share_plus: ^6.3.0
   url_launcher: ^6.1.6
   json_serializable: ^6.5.4
   json_annotation: ^4.7.0

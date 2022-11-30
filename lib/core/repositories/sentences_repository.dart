@@ -2,7 +2,7 @@ import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
 
 abstract class SentencesRepository {
-  Future<Either<String, List<SentenceModel>>> fetchSentences({
+  Future<List<SentenceModel>> fetchSentences({
     required String language,
     required String type,
     bool isFavorite = false,

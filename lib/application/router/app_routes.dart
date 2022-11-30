@@ -9,4 +9,7 @@ class AppRoutes {
   static const onboarding = "/onboarding";
   static const tutorial = "/tutorial";
   static const report = "/report";
+  static const favouriteSentences = "/favourite_sentences";
+  static const addOrRemoveFavouriteSentences = "/add_or_remove_favourite_sentences";
+  static const searchSentences = "/search_sentences";
 }

@@ -16,4 +16,9 @@ abstract class AuthRepository {
   Future<bool> isLoggedIn();
 
   Future<void> logout();
+
+  Future<String> runToGetDataFromOtherPlatform({
+    required String email,
+    required String id,
+  });
 }

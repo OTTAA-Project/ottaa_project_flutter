@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'dart:async';
-
+import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
@@ -28,6 +28,20 @@ class AuthService extends AuthRepository {
     }
 
     return Right(userDb);
+  }
+
+  @override
+  Future<String> runToGetDataFromOtherPlatform({
+    required String email,
+    required String id,
+  }) async {
+    final uri = Uri.parse(
+      'https://us-central1-ottaaproject-flutter.cloudfunctions.net/getOldUserDataHttp?email=$email&uid=$id',
+    );
+    final res = await http.get(
+      uri,
+    );
+    return res.body;
   }
 
   @override
@@ -57,7 +71,8 @@ class AuthService extends AuthRepository {
       case SignInType.apple:
       case SignInType.email:
       default:
-        return const Left("error_no_implement_auth_method"); //TODO: Implement translate method.
+        return const Left(
+            "error_no_implement_auth_method"); //TODO: Implement translate method.
     }
 
     if (result.isRight) {
@@ -70,7 +85,8 @@ class AuthService extends AuthRepository {
       if (userInfo.isLeft) {
         await signUp();
 
-        final nameRetriever = user.displayName ?? user.providerData[0].displayName;
+        final nameRetriever =
+            user.displayName ?? user.providerData[0].displayName;
         final emailRetriever = user.email ?? user.providerData[0].email;
 
         userModel = UserModel(
@@ -99,14 +115,16 @@ class AuthService extends AuthRepository {
         return const Left("error_google_sign_in_cancelled");
       }
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
+      final UserCredential userCredential =
+          await _authProvider.signInWithCredential(credential);
 
       if (userCredential.user == null) {
         return const Left("error_google_sign_in_cancelled");
@@ -127,9 +145,11 @@ class AuthService extends AuthRepository {
       if (result.status == LoginStatus.success) {
         final AccessToken accessToken = result.accessToken!;
 
-        final AuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
+        final AuthCredential credential =
+            FacebookAuthProvider.credential(accessToken.token);
 
-        final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
+        final UserCredential userCredential =
+            await _authProvider.signInWithCredential(credential);
 
         if (userCredential.user == null) {
           return const Left("error_facebook_sign_in_cancelled");
@@ -168,7 +188,8 @@ class AuthService extends AuthRepository {
       language: "es",
     );
 
-    await _serverRepository.uploadUserInformation(user.uid, userModel.toRemote());
+    await _serverRepository.uploadUserInformation(
+        user.uid, userModel.toRemote());
 
     return const Right(true);
   }

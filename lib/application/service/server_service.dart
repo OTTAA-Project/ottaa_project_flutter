@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -110,23 +111,25 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherListMap> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
+  Future<List<SentenceModel>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
     final refNew = _database.child('$userId/Frases/$language/$type');
     final resNew = await refNew.get();
     if (resNew.exists && resNew.value != null) {
-      final data = jsonEncode(resNew.value);
+      final encode = jsonEncode(resNew.value);
       // print('returned from bew');
-      return Right(jsonDecode(data));
+      return (jsonDecode(encode) as List).map((e) => SentenceModel.fromJson(e)).toList();
+      // print('returned from bew');
+      // return Right(jsonDecode(data));
     }
 
     final refOld = _database.child('Frases/$userId/$language/$type');
     final resOld = await refOld.get();
     if (resOld.exists && resOld.value != null) {
       final data = resOld.children.first.value as String;
-      return Right(jsonDecode(data));
+      return (jsonDecode(data) as List).map((e) => SentenceModel.fromJson(e)).toList();
     }
 
-    return const Left("no_data_found");
+    return const [];
   }
 
   @override
@@ -181,7 +184,7 @@ class ServerService implements ServerRepository {
     final ref = _database.child('$userId/Usuarios/');
 
     try {
-      await ref.set(data);
+      await ref.update(data);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -213,7 +216,7 @@ class ServerService implements ServerRepository {
     } catch (e) {
       return Left(e.toString());
     }
- }
+  }
 
   @override
   Future<EitherMap> getMostUsedSentences(String userId, String languageCode) async {
