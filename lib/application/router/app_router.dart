@@ -8,7 +8,7 @@ import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.da
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_chooser_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen.dart';
-import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_settings_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/report_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';

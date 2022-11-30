@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/drop_down_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/profile/ui/photo_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 
 bool change = true;
@@ -30,10 +32,14 @@ class ProfileMainScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const PhotoWidget(
-                        //todo: add the image link here, from the userData
-                        image:
-                            'https://cdn.pixabay.com/photo/2020/05/25/17/21/link-5219567_1280.jpg',
+                      //todo: add the link here to go to the profile setting screen
+                      GestureDetector(
+                        onTap: () =>
+                            context.push(AppRoutes.profileSettingsScreen),
+                        child: const ProfilePhotoWidget(
+                          //todo: add the image link here, from the userData
+                          image: AppImages.kTestImage,
+                        ),
                       ),
                       const SizedBox(
                         width: 16,
