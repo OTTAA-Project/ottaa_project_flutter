@@ -87,19 +87,19 @@ void main(){
     });
   });
   group('Test default', () {
-    test('Write Groups EN', () async {
+    test('Write Groups IT', () async {
       String result = await rootBundle.loadString('assets/grupos.json');
       await localStorageService.writeGruposToFile(data: result, language: 'it-IT');
     });
-    test('Read Groups EN',() async {
+    test('Read Groups IT',() async {
       List en = await localStorageService.readGruposFromFile(language:'it-IT');
       print( en);
     });
-    test('Read Pictos EN', () async {
+    test('Read Pictos IT', () async {
       String result = await rootBundle.loadString('assets/pictos.json');
       await localStorageService.writePictoToFile(data: result, language: 'it-IT');
     });
-    test('Read Pictos EN',() async {
+    test('Read Pictos IT',() async {
       List en = await localStorageService.readPictoFromFile(language:'it-IT');
       print( en);
     });

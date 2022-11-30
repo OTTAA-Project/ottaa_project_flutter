@@ -63,13 +63,14 @@ void main() {
     sentencesService =
         SentencesService(mockAuthRepository, mockServerRepository);
   });
-  /*group('Sentences Service Testing', () {
+  /*
+  group('Sentences Service Testing', () {
     test('description', () async {
       when(MockAuthRepository().getCurrentUser())
           .thenAnswer((realInvocation) async => Right(fakeUser));
       when(MockServerRepository().getUserSentences('0',
               language: 'es-ar', type: Constants.kMostUsedSentences))
-          .thenAnswer((realInvocation) async=> Right(List[fakeSentenceModel1]));
+          .thenAnswer((realInvocation) async=> Right([fakeSentenceModel1,fakeSentenceModel2]););
       sentencesService.fetchSentences(
           language: 'es', type: Constants.kMostUsedSentences);
     });

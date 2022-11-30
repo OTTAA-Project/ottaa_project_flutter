@@ -34,7 +34,6 @@ void main(){
       mockAboutRepository = MockAboutRepository();
       mockAuthRepository = MockAuthRepository();
       mockUserAvatarNotifier = MockUserAvatarNotifier();
-      mockSplashProvider =MockSplashProvider();
       splashProvider = SplashProvider(mockAboutRepository, mockAuthRepository, mockUserAvatarNotifier);
   });
   group('Splash Provider Testing', () {
