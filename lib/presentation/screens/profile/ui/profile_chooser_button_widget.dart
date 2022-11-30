@@ -50,6 +50,9 @@ class ProfileChooserButtonWidget extends StatelessWidget {
                   ),
                   Text(
                     subtitle,
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
                 ],
               ),

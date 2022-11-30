@@ -92,7 +92,10 @@ class ProfileSettingsScreen extends StatelessWidget {
                 icon: AppImages.kProfileSettingsIcon5,
                 text: "profile.ottaa.tips".trl,
               ),
-              Text("profile.cerrar.sesión".trl),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text("profile.cerrar.sesión".trl,),
+              ),
             ],
           ),
         ),
