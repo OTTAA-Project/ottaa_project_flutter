@@ -13,4 +13,7 @@ class AppRoutes {
   static const profileMainScreen = "/profile_main_screen";
   static const profileSettingsScreen = "/profile_settings_screen";
   static const profileWaitingScreen = "/profile_waiting_screen";
+  static const favouriteSentences = "/favourite_sentences";
+  static const addOrRemoveFavouriteSentences = "/add_or_remove_favourite_sentences";
+  static const searchSentences = "/search_sentences";
 }

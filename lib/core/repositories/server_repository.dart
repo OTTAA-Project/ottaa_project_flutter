@@ -1,5 +1,6 @@
 import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
 
 typedef EitherVoid = Either<String, void>;
 typedef EitherString = Either<String, String>;
@@ -22,7 +23,7 @@ abstract class ServerRepository {
 
   Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data);
 
-  Future<EitherListMap> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false});
+  Future<List<SentenceModel>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false});
 
   Future<EitherVoid> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data);
 

@@ -1,8 +1,13 @@
-import 'package:json_annotation/json_annotation.dart';
+// To parse this JSON data, do
+//
+//     final sentence = sentenceFromJson(jsonString);
 
-part 'sentence_model.g.dart';
+import 'dart:convert';
 
-@JsonSerializable()
+SentenceModel sentenceFromJson(String str) => SentenceModel.fromJson(json.decode(str));
+
+String sentenceToJson(SentenceModel data) => json.encode(data.toJson());
+
 class SentenceModel {
   SentenceModel({
     required this.frase,
@@ -11,53 +16,109 @@ class SentenceModel {
     required this.fecha,
     required this.locale,
     required this.id,
+    this.favouriteOrNot = false,
   });
 
-  String frase;
+  final String frase;
   int frecuencia;
-  Complex complejidad;
+  final Complejidad complejidad;
   List<int> fecha;
-  String locale;
-  int id;
+  final String locale;
+  final int id;
+  bool favouriteOrNot;
 
-  factory SentenceModel.fromJson(Map<String, dynamic> json) => _$SentenceModelFromJson(json);
+  factory SentenceModel.fromJson(Map<String, dynamic> json) {
+    late List<int> fecha;
+    if (json["fecha"].runtimeType == int) {
+      fecha = List.empty(growable: true);
+      fecha.add(json["fecha"]);
+    } else {
+      fecha = List.empty(growable: true);
+      fecha = List<int>.from(json["fecha"].map((x) => x));
+    }
+    return SentenceModel(
+      frase: json["frase"],
+      frecuencia: json["frecuencia"],
+      complejidad: Complejidad.fromJson(json["complejidad"]),
+      // fecha: json["fecha"] is int
+      //     ? json["fecha"]
+      //     : List<int>.from(json["fecha"].map((x) => x)),
+      fecha: fecha,
+      locale: json["locale"],
+      id: json["id"],
+      favouriteOrNot:
+      json['favouriteOrNot'] == null ? false : json['favouriteOrNot'],
+    );
+  }
 
-  Map<String, dynamic> toJson() => _$SentenceModelToJson(this);
+  Map<String, dynamic> toJson() => {
+    "frase": frase,
+    "frecuencia": frecuencia,
+    "complejidad": complejidad.toJson(),
+    "fecha": List<dynamic>.from(fecha.map((x) => x)),
+    "locale": locale,
+    "id": id,
+  };
 }
 
-@JsonSerializable()
-class Complex {
-  Complex({
+class Complejidad {
+  Complejidad({
     required this.valor,
     required this.pictosComponentes,
   });
 
-  int valor;
-  @JsonKey(name: 'pictos componentes')
-  List<PictosComponente> pictosComponentes;
+  final int valor;
+  final List<PictosComponente> pictosComponentes;
 
-  factory Complex.fromJson(Map<String, dynamic> json) => _$ComplexFromJson(json);
+  factory Complejidad.fromJson(Map<String, dynamic> json) => Complejidad(
+    valor: json["valor"],
+    pictosComponentes: List<PictosComponente>.from(
+        json["pictos componentes"]
+            .map((x) => PictosComponente.fromJson(x))),
+  );
 
-  Map<String, dynamic> toJson() => _$ComplexToJson(this);
+  Map<String, dynamic> toJson() => {
+    "valor": valor,
+    "pictos componentes":
+    List<dynamic>.from(pictosComponentes.map((x) => x.toJson())),
+  };
 }
 
-@JsonSerializable()
 class PictosComponente {
   PictosComponente({
     required this.id,
     required this.esSugerencia,
     this.hora,
-    required this.edad,
-    required this.sexo,
+    this.sexo,
+    this.edad,
   });
 
-  int id;
-  bool esSugerencia;
-  List<String?>? hora;
-  List<String> edad;
-  List<String> sexo;
+  final int id;
+  final bool esSugerencia;
+  final List<String>? hora;
+  final List<String>? sexo;
+  final List<String>? edad;
 
-  factory PictosComponente.fromJson(Map<String, dynamic> json) => _$PictosComponenteFromJson(json);
+  factory PictosComponente.fromJson(Map<String, dynamic> json) =>
+      PictosComponente(
+        id: json["id"],
+        esSugerencia: json["esSugerencia"] ?? false,
+        hora: json["hora"] == null
+            ? null
+            : List<String>.from(json["hora"].map((x) => x)),
+        sexo: json["sexo"] == null
+            ? null
+            : List<String>.from(json["sexo"].map((x) => x)),
+        edad: json["edad"] == null
+            ? null
+            : List<String>.from(json["edad"].map((x) => x)),
+      );
 
-  Map<String, dynamic> toJson() => _$PictosComponenteToJson(this);
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "esSugerencia": esSugerencia,
+    "hora": hora == null ? null : List<String>.from(hora!.map((x) => x)),
+    "sexo": sexo == null ? null : List<String>.from(sexo!.map((x) => x)),
+    "edad": edad == null ? null : List<String>.from(edad!.map((x) => x)),
+  };
 }
