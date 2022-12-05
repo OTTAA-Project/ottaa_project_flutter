@@ -302,7 +302,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             OttaaLogoWidget(
               onTap: () {
                 //TODO: Add tts function
-                context.push(AppRoutes.tutorial);
+                context.push(AppRoutes.profileMainScreen);
               },
             ),
           ],

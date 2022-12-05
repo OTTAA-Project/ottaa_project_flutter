@@ -16,4 +16,6 @@ class AppRoutes {
   static const favouriteSentences = "/favourite_sentences";
   static const addOrRemoveFavouriteSentences = "/add_or_remove_favourite_sentences";
   static const searchSentences = "/search_sentences";
+  static const profileSettingsEditScreen = "/profile_settings_edit_screen";
+  static const profileChooserScreenSelected = "/profile_chooser_screen_selected";
 }

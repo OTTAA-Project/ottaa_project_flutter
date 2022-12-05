@@ -7,7 +7,9 @@ import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_chooser_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_chooser_screen_selected_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_edit_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/report/report_screen.dart';
@@ -99,6 +101,14 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.profileChooserScreen,
           builder: (context, state) => const ProfileChooserScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileSettingsEditScreen,
+          builder: (context, state) => const ProfileSettingsEditScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileChooserScreenSelected,
+          builder: (context, state) => const ProfileChooserScreenSelected(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),

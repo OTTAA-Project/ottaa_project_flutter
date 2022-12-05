@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/category_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
 
@@ -68,12 +69,13 @@ class ProfileSettingsScreen extends StatelessWidget {
                 height: 32,
               ),
               CategoryWidget(
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.profileSettingsEditScreen),
                 icon: AppImages.kProfileSettingsIcon1,
                 text: "profile.perfil".trl,
               ),
               CategoryWidget(
-                onTap: () {},
+                onTap: () =>
+                    context.push(AppRoutes.profileChooserScreenSelected),
                 icon: AppImages.kProfileSettingsIcon2,
                 text: "profile.rol.de.uso".trl,
               ),
@@ -94,7 +96,9 @@ class ProfileSettingsScreen extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text("profile.cerrar.sesión".trl,),
+                child: Text(
+                  "profile.cerrar.sesión".trl,
+                ),
               ),
             ],
           ),

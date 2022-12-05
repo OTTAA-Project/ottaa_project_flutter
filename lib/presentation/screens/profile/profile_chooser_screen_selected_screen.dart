@@ -7,8 +7,8 @@ import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/new_simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 
-class ProfileChooserScreen extends StatelessWidget {
-  const ProfileChooserScreen({Key? key}) : super(key: key);
+class ProfileChooserScreenSelected extends StatelessWidget {
+  const ProfileChooserScreenSelected({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +28,35 @@ class ProfileChooserScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    //todo: add text style here after emir has created the theme files
-                    child: Text(
-                      'profile.omitir'.trl,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 30,
+                    ),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => context.pop(),
+                          child: const Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 24,
+                        ),
+                        Text(
+                          "profile.rol.de.uso".trl,
+                        ),
+                      ],
                     ),
                   ),
                   //todo: add text style here after emir has created the theme files
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 36,
+                      top: 8,
                       bottom: 24,
                     ),
                     child: Text(
-                      'profile.selection.text1'.trl,
+                      "profile.chooser.screen.heading".trl,
                     ),
                   ),
                   ProfileChooserButtonWidget(
@@ -68,7 +82,7 @@ class ProfileChooserScreen extends StatelessWidget {
                 //todo: add the proper way for handling the waiting screen, hector said is should be their for 4 seconds at least
                 onTap: () => context.push(AppRoutes.profileWaitingScreen),
                 active: false,
-                text: "profile.continuar".trl,
+                text: "profile.chooser.screen.button".trl,
               ),
             ],
           ),
