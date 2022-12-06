@@ -1,0 +1,64 @@
+{
+  "profile.selection.text1": "Who is going to use the app on this device?",
+  "profile.crear.nueva.cuenta": "Create new account",
+  "profile.agregar.cuenta": "Add account",
+  "profile.ottaa.tips": "OTTAA Tips",
+  "profile.mail": "Mail",
+  "profile.date": "Date of birth",
+  "profile.faq.title": "Frequently Asked Questions",
+  "profile.help.title2": "Contact support",
+  "global": {
+    "hello_world": "Hello World",
+    "hello": "Hello",
+    "continue": "Continue",
+    "next": "Next",
+    "previous": "Previous",
+    "please_enter_text": "Please enter some text",
+    "done": "Done",
+    "yes": "Yes",
+    "delete": "Delete",
+    "edit": "Edit",
+    "no": "No",
+    "mute": "Mute",
+    "important": "Important",
+    "save_changes": "Do you want to save your changes?"
+  },
+  "profile.caregiver": "Caregiver",
+  "profile.caregivers_families": "Caregivers/Relatives",
+  "profile.user": "User",
+  "profile.wait": "Please wait",
+  "profile.setting_exp": "Setting up your experience...",
+  "profile.link_account": "Link to an account",
+  "global.omitir": "Skip",
+  "profile.use.ottaa": "Use OTTAA",
+  "profile.no_account": "No account mode",
+  "profile.new_existant": "New/Existent",
+  "profile.what_do": "What do you want to do?",
+  "profile.profile": "Profile",
+  "profile.help": "Help",
+  "global.save_changes": "Save changes",
+  "profile.linked_accounts": "Linked accounts",
+  "profile.name": "Name",
+  "profile.logout": "Logout",
+  "profile.last_name": "Last Name",
+  "profile.role": "Role",
+  "profile.day": "Day",
+  "profile.month": "Month",
+  "profile.year": "Year",
+  "onboarding2": {
+    "title": "Atajos en la pantalla principal",
+    "text": "Personaliza de acuerdo a los gustos y necesidades",
+    "upperText": "Personaliza tu Home"
+  },
+  "onboarding1": {
+    "title": "¿Quién usa OTTAA hoy?",
+    "text": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
+  },
+  "onboarding": {
+    "upperText": "Pantalla de perfiles"
+  },
+  "onboarding3": {
+    "title": "Acompañamos en el proceso de aprendizaje ",
+    "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+  }
+}

@@ -1,5 +1,7 @@
 ![image](https://ottaaproject.com/img/ottaa-project.svg)
 
+[![Crowdin](https://badges.crowdin.net/ottaa-project/localized.svg)](https://crowdin.com/project/ottaa-project)
+
 # Welcome to the OTTAA Project #
 
 The [OTTAA Project](https://www.ottaaproject.com/) is an augmentative and alternative communication (AAC) mobile application intended for users with speech and language impairments. It is a fast and effective tool that significantly improves users' quality of life and facilitates their social and labor reintegration. We have already positively impacted the lives of more than 40000 people in 11 countries, helping individuals with cerebral palsy, aphasia, autism, Down syndrome and mild ALS.
