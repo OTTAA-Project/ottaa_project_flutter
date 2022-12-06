@@ -53,7 +53,7 @@ int get length => ...
 
 ## Style tips we follow
 
-We intend for our API reference documentation to be straight forward, concise and user friendly. Make sure your Dartdoc comments are correctly formatted by following these tips. For a more comprehensive explanation and examples of each tip, please read [this section](https://dart.dev/guides/language/effective-dart/documentation#:~:text=use%20//.-,Doc%20comments,-Doc%20comments%20are) of the official Dartdoc guide.
+We intend for our API reference documentation to be straightforward, concise, and user-friendly. Make sure your Dartdoc comments are correctly formatted by following these tips. For a more comprehensive explanation and examples of each tip, please read [this section](https://dart.dev/guides/language/effective-dart/documentation#:~:text=use%20//.-,Doc%20comments,-Doc%20comments%20are) of the official Dartdoc guide.
 
 ### General writing tips
 

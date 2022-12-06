@@ -1,35 +1,59 @@
-## OTTAA Project Open Source Code of Conduct
+# The OTTAA Project contributor code of conduct
 
-### Our core principles
+## Our core principles
 
-**Diversity helps us  grow**  
+ *Diversity helps us  grow*. Diversity of experiences, backgrounds, and knowledge contributes to building a better and more complete tool that more accurately reflects the real needs of potential users of the OTTAA Project. 
 
-We truly believe that diversity of experiences, backgrounds and knowledge contributes to building a better and more complete tool which more accurately reflects the real needs of potential users of the OTTAA Project. With that in mind we respect and welcome all differences in our users' and developers' age, gender, nationality, race or sexual orientation.
+*Debate enriches us*. We encourage all members of the OTTAA Project to speak up and bring their experiences and ideas to the table while maintaining a respectful and friendly environment. That way, we can all work better and faster in improving the OTTAA Project, reaching a consensus, and resolving issues.
 
-**Debate enriches us** 
+## Our Pledge
 
-In line with our first core principle we encourage developers, testers, contributors, users and other members of the OTTAA Project to speak up and bring their experience and ideas to the table while maintaining a respectful and friendly environment. That way, we can all work better and faster in improving the OTTAA Project, reaching consensus and resolving issues.
+In line with our core principles, we pledge to respect and welcome all differences in our users' and contributors' age, gender, nationality, race, or sexual orientation, making participation in our project and our community a harassment-free experience.
 
-### Behavior in accordance with our principles
 
-Bearing our core principles in mind, we ask everyone to comply with the following guidelines in our code of conduct in any and every interaction among the OTTAA community:
+## Our behaviors standards
 
-* Be mindful of other people's feelings and situations and put your best foot forward.
+#### Examples of behavior that contributes to creating a positive environment include:
 
-* Respect privacy: refrain from publishing users' details or relevant information.
+* Use welcoming and inclusive language
+
+* Show empathy towards other community members, and be mindful of other people's feelings and personal situations.
 
 * Refrain from making funny remarks or jokes that might be offensive to others.
 
 * Avoid insults or harsh language.
 
-* Refrain from judging or discriminating against others based on their religion, sexual orientation, nationality, ethnic procedence, or any other characteristic.
-
-* It is strictly forbidden to post any pornographic content.
+* Be respectful of differing viewpoints and experiences.
 
 
-### Reporting breaches to the code of conduct
+#### Examples of unacceptable behavior by participants include:
 
-Any violations of our code of conduct should be reported. Please follow these steps:
+* Publishing others' private or relevant information, such as a physical or electronic address, without explicit permission.
+
+* Posting any pornographic content.
+
+* Using sexualized language or imagery and unwelcome sexual attention or advances.
+
+* Trolling, insulting comments, and personal or political attacks.
+
+* Public or private harassment.
+
+* Other behaviors which could reasonably be considered inappropriate in a professional setting.
+
+
+## Our Responsibilities
+
+Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
+
+Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned with this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+
+## Scope
+
+This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.
+
+## Enforcement
+
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported in the following manner:
 
 * Contact us via email at: support@ottaaproject.com with the subject: "code of conduct breach".
 
@@ -40,12 +64,17 @@ Any violations of our code of conduct should be reported. Please follow these st
 * If possible, share your contact details.
 
 
-Upon revision of the breach report, the team assigned to analyze the case will carry out the following actions:
+All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality concerning the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 
-1. Notify the user of the breach.
-2. Devise a way for the user to amend their error.
+Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
+
 
 The following situations can result in the user being **expelled** from the community:
 
 * Repeated inadequate conduct.
 * Posting pornographic content.
+
+## Attribution
+This Code of Conduct is adapted from the Contributor Covenant, version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html.
+
+For answers to common questions about this code of conduct, see https://www.contributor-covenant.org/faq.
