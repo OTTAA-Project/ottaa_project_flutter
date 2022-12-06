@@ -21,7 +21,8 @@
     "no": "Não",
     "mute": "Silenciar",
     "important": "Importante",
-    "save_changes": "Deseja salvar as alterações?"
+    "save_changes": "Deseja salvar as alterações?",
+    "send": "Enviar"
   },
   "profile.caregiver": "Acompanhante",
   "profile.caregivers_families": "Profissionais/Família",
@@ -60,5 +61,42 @@
   "onboarding3": {
     "title": "Acompañamos en el proceso de aprendizaje ",
     "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+  },
+  "profile": {
+    "tips": {
+      "title1": "Estadísticas",
+      "title2": "Tableros",
+      "title3": "Historial",
+      "title4": "Favoritos",
+      "text1": "Mira las estadísticas de tu paciente / familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
+      "text2": "Oculta los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
+      "text3": "Con este ícono reconoceras los alimentos  que no hayan tenido contacto y/o sean sin trigo, avena.",
+      "text4": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rapidamente."
+    },
+    "unlink": "Desvincular"
+  },
+  "signin": {
+    "title": "Ingresá con tu cuenta",
+    "signup": "¿Todavía no tenés tu cuenta? Registrate acá"
+  },
+  "terms": {
+    "button": "Acepto los términos",
+    "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\r\nVer términos"
+  },
+  "loginWait": {
+    "text": "Te damos la bienvenida!\r\nAl mundo de OTTAA"
+  },
+  "link": {
+    "title": "Ingrese el correo electrónico de la cuenta de OTTAA a vincular",
+    "text1": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
+    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este codígo arriba."
+  },
+  "token": {
+    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
+    "text": "¿Inconvenientes para enlazar las cuentas?",
+    "button": {
+      "resend": "Reenviar email",
+      "anothermail": "Ingresá otro email."
+    }
   }
 }
