@@ -1677,4 +1677,9 @@ class AppImages {
       "assets/profile/profile_settings_icon_5.png";
   static const kTestImage =
       'https://cdn.pixabay.com/photo/2020/05/25/17/21/link-5219567_1280.jpg';
+  static const kProfileHelpIcon1 =
+      'assets/profile/profile_help_screen_icon_1.png';
+
+  static const kProfileHelpIcon2 =
+      'assets/profile/profile_help_screen_icon_2.png';
 }

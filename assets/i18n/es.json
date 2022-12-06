@@ -167,5 +167,8 @@
   "profile.ano": "Año",
   "profile.date": "Fecha de nacimiento",
   "profile.chooser.screen.button": "Guardar cambios",
-  "profile.chooser.screen.heading" : "¿Quién usa la aplicación en este dispositivo?"
+  "profile.chooser.screen.heading" : "¿Quién usa la aplicación en este dispositivo?",
+  "profile.faq.title" : "Preguntas frecuentes",
+  "profile.help.title1" : "Preguntas frecuentes",
+  "profile.help.title2" : "Contactar con soporte"
 }

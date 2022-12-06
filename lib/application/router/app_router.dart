@@ -8,6 +8,8 @@ import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.da
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_chooser_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_chooser_screen_selected_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_faq_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_help_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_edit_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_screen.dart';
@@ -109,6 +111,14 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.profileChooserScreenSelected,
           builder: (context, state) => const ProfileChooserScreenSelected(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileFAQScreen,
+          builder: (context, state) => const ProfileFAQScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileHelpScreen,
+          builder: (context, state) => const ProfileHelpScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),

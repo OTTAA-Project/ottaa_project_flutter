@@ -80,7 +80,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                 text: "profile.rol.de.uso".trl,
               ),
               CategoryWidget(
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.profileHelpScreen),
                 icon: AppImages.kProfileSettingsIcon3,
                 text: "profile.ayuda".trl,
               ),

@@ -18,4 +18,6 @@ class AppRoutes {
   static const searchSentences = "/search_sentences";
   static const profileSettingsEditScreen = "/profile_settings_edit_screen";
   static const profileChooserScreenSelected = "/profile_chooser_screen_selected";
+  static const profileFAQScreen = "/profile_faq_screen";
+  static const profileHelpScreen = "/profile_help_screen";
 }
