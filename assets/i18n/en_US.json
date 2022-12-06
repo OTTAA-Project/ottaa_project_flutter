@@ -44,5 +44,21 @@
   "profile.role": "Role",
   "profile.day": "Day",
   "profile.month": "Month",
-  "profile.year": "Year"
+  "profile.year": "Year",
+  "onboarding2": {
+    "title": "Atajos en la pantalla principal",
+    "text": "Personaliza de acuerdo a los gustos y necesidades",
+    "upperText": "Personaliza tu Home"
+  },
+  "onboarding1": {
+    "title": "¿Quién usa OTTAA hoy?",
+    "text": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
+  },
+  "onboarding": {
+    "upperText": "Pantalla de perfiles"
+  },
+  "onboarding3": {
+    "title": "Acompañamos en el proceso de aprendizaje ",
+    "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+  }
 }
