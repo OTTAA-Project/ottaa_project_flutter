@@ -1,0 +1,102 @@
+{
+  "profile.selection.text1": "¿Quién usará la aplicación en este dispositivo?",
+  "profile.crear.nueva.cuenta": "Crear nueva cuenta",
+  "profile.agregar.cuenta": "Agregar cuenta",
+  "profile.ottaa.tips": "OTTAA tips",
+  "profile.mail": "Mail",
+  "profile.date": "Fecha de nacimiento",
+  "profile.faq.title": "Preguntas frecuentes",
+  "profile.help.title2": "Contactar con soporte",
+  "global": {
+    "hello_world": "Hola Mundo",
+    "hello": "Hola",
+    "continue": "Continuar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "please_enter_text": "Por favor ingrese un texto",
+    "done": "Listo",
+    "yes": "Sí",
+    "delete": "Borrar",
+    "edit": "Editar",
+    "no": "No",
+    "mute": "Silenciar",
+    "important": "Importante",
+    "save_changes": "¿Querés guardar los cambios?",
+    "send": "Enviar"
+  },
+  "profile.caregiver": "Acompañante",
+  "profile.caregivers_families": "Profesionales/Familiares",
+  "profile.user": "Usuario/a",
+  "profile.wait": "Por favor esperá",
+  "profile.setting_exp": "Configurando su experiencia...",
+  "profile.link_account": "Vincular con cuenta",
+  "global.omitir": "Omitir",
+  "profile.use.ottaa": "Usar OTTAA",
+  "profile.no_account": "Modo sin perfil",
+  "profile.new_existant": "Nuevo/Existente",
+  "profile.what_do": "¿Qué querés hacer?",
+  "profile.profile": "Perfil",
+  "profile.help": "Ayuda",
+  "global.save_changes": "Guardar cambios",
+  "profile.linked_accounts": "Cuentas vinculadas",
+  "profile.name": "Nombre",
+  "profile.logout": "Cerrar sesión",
+  "profile.last_name": "Apellido",
+  "profile.role": "Rol de uso",
+  "profile.day": "Día",
+  "profile.month": "Mes",
+  "profile.year": "Año",
+  "onboarding2": {
+    "title": "Atajos en la pantalla principal",
+    "text": "Personaliza de acuerdo a los gustos y necesidades",
+    "upperText": "Personaliza tu Home"
+  },
+  "onboarding1": {
+    "title": "¿Quién usa OTTAA hoy?",
+    "text": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
+  },
+  "onboarding": {
+    "upperText": "Pantalla de perfiles"
+  },
+  "onboarding3": {
+    "title": "Acompañamos en el proceso de aprendizaje ",
+    "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+  },
+  "profile": {
+    "tips": {
+      "title1": "Estadísticas",
+      "title2": "Tableros",
+      "title3": "Historial",
+      "title4": "Favoritos",
+      "text1": "Mira las estadísticas de tu paciente / familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
+      "text2": "Oculta los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
+      "text3": "Con este ícono reconoceras los alimentos  que no hayan tenido contacto y/o sean sin trigo, avena.",
+      "text4": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rapidamente."
+    },
+    "unlink": "Desvincular"
+  },
+  "signin": {
+    "title": "Ingresá con tu cuenta",
+    "signup": "¿Todavía no tenés tu cuenta? Registrate acá"
+  },
+  "terms": {
+    "button": "Acepto los términos",
+    "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\r\nVer términos"
+  },
+  "loginWait": {
+    "text": "Te damos la bienvenida!\r\nAl mundo de OTTAA"
+  },
+  "link": {
+    "title": "Ingrese el correo electrónico de la cuenta de OTTAA a vincular",
+    "text1": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
+    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este codígo arriba."
+  },
+  "token": {
+    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
+    "text": "¿Inconvenientes para enlazar las cuentas?",
+    "button": {
+      "resend": "Reenviar email",
+      "anothermail": "Ingresá otro email."
+    }
+  }
+}
