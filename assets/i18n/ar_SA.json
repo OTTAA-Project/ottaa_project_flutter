@@ -4,7 +4,7 @@
   "profile.agregar.cuenta": "Agregar cuenta",
   "profile.ottaa.tips": "OTTAA tips",
   "profile.mail": "Mail",
-  "profile.date": "Fecha de nacimiento",
+  "profile.date": "تاريخ الميلاد",
   "profile.faq.title": "Preguntas frecuentes",
   "profile.help.title2": "Contactar con soporte",
   "global": {
@@ -14,11 +14,11 @@
     "next": "Siguiente",
     "previous": "Anterior",
     "please_enter_text": "Por favor ingrese un texto",
-    "done": "Listo",
+    "done": "تم",
     "yes": "Sí",
     "delete": "Borrar",
     "edit": "Editar",
-    "no": "No",
+    "no": "لا",
     "mute": "Silenciar",
     "important": "Importante",
     "save_changes": "¿Querés guardar los cambios?"
@@ -44,5 +44,21 @@
   "profile.role": "Rol de uso",
   "profile.day": "Día",
   "profile.month": "Mes",
-  "profile.year": "Año"
+  "profile.year": "عام",
+  "onboarding2": {
+    "title": "Atajos en la pantalla principal",
+    "text": "Personaliza de acuerdo a los gustos y necesidades",
+    "upperText": "Personaliza tu Home"
+  },
+  "onboarding1": {
+    "title": "¿Quién usa OTTAA hoy?",
+    "text": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
+  },
+  "onboarding": {
+    "upperText": "Pantalla de perfiles"
+  },
+  "onboarding3": {
+    "title": "Acompañamos en el proceso de aprendizaje ",
+    "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+  }
 }
