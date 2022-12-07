@@ -48,32 +48,32 @@
   "profile.year": "Year",
   "onboarding2": {
     "title": "Shortcuts on main screen",
-    "text": "Personaliza de acuerdo a los gustos y necesidades",
-    "upperText": "Personaliza tu Home"
+    "text": "Customize according to your tastes and needs",
+    "upperText": "Customize your Home"
   },
   "onboarding1": {
-    "title": "¿Quién usa OTTAA hoy?",
-    "text": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
+    "title": "Who is using OTTAA today?",
+    "text": "With the profile selection you will be able to use OTTAA from any device, keeping your pictograms and styles!"
   },
   "onboarding": {
-    "upperText": "Pantalla de perfiles"
+    "upperText": "Profiles screen"
   },
   "onboarding3": {
-    "title": "Acompañamos en el proceso de aprendizaje ",
+    "title": "We accompany in the learning process",
     "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
   },
   "profile": {
     "tips": {
-      "title1": "Estadísticas",
-      "title2": "Tableros",
-      "title3": "Historial",
-      "title4": "Favoritos",
-      "text1": "Mira las estadísticas de tu paciente / familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
+      "title1": "Stats",
+      "title2": "Dashboards",
+      "title3": "History",
+      "title4": "Favorites",
+      "text1": "See the statistics of your patient / family member, to check their activity and how they improved over the days, weeks and months.",
       "text2": "Oculta los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
       "text3": "Con este ícono reconoceras los alimentos  que no hayan tenido contacto y/o sean sin trigo, avena.",
       "text4": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rapidamente."
     },
-    "unlink": "Desvincular"
+    "unlink": "Unlink"
   },
   "signin": {
     "title": "Ingresá con tu cuenta",
