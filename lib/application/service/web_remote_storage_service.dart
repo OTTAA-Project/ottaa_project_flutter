@@ -29,7 +29,9 @@ class WebRemoteStorageService implements RemoteStorageRepository {
     if (result.isLeft) return "";
 
     final UserModel auth = result.right;
-    final languageCode = _i18n.languageCode;
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
     EitherListMap? fetchedData;
 
