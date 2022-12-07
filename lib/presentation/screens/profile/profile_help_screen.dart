@@ -1,9 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/ui/help_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 
 class ProfileHelpScreen extends StatelessWidget {
@@ -59,7 +61,13 @@ class ProfileHelpScreen extends StatelessWidget {
                 heading: "profile.help.title2".trl,
                 subtitle: '',
                 imagePath: AppImages.kProfileHelpIcon2,
-                onTap: () {},
+                onTap: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) => HelpWidget(),
+                  );
+                },
                 selected: false,
               ),
             ],
