@@ -22,7 +22,7 @@
     "mute": "Mute",
     "important": "Important",
     "save_changes": "Do you want to save your changes?",
-    "send": "Enviar"
+    "send": "Submit"
   },
   "profile.caregiver": "Caregiver",
   "profile.caregivers_families": "Caregivers/Relatives",
@@ -47,7 +47,7 @@
   "profile.month": "Month",
   "profile.year": "Year",
   "onboarding2": {
-    "title": "Atajos en la pantalla principal",
+    "title": "Shortcuts on main screen",
     "text": "Personaliza de acuerdo a los gustos y necesidades",
     "upperText": "Personaliza tu Home"
   },
