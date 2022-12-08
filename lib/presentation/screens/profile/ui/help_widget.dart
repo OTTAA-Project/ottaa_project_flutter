@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_ui_kit/widgets.dart';
 
 class HelpWidget extends StatelessWidget {
   const HelpWidget({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class HelpWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
+        width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(24),
         decoration: const BoxDecoration(
           color: kOTTAABackground,
@@ -21,6 +23,7 @@ class HelpWidget extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Align(
               alignment: Alignment.centerRight,
@@ -59,12 +62,30 @@ class HelpWidget extends StatelessWidget {
               height: 24 * 2,
             ),
             Text(
-              "profile.help.text".trl,
+              "profile.help.heading".trl,
             ),
             const SizedBox(
               height: 16,
             ),
-            //todo:add those 2 buttons here after discussing with emir about the theme and the widgets
+            Row(
+              children: [
+                Expanded(
+                  child: SecondaryButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    text: 'profile.help.button1'.trl,
+                  ),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: PrimaryButton(
+                    onPressed: () {},
+                    text: 'profile.help.button2'.trl,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

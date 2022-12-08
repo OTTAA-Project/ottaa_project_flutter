@@ -20,4 +20,5 @@ class AppRoutes {
   static const profileChooserScreenSelected = "/profile_chooser_screen_selected";
   static const profileFAQScreen = "/profile_faq_screen";
   static const profileHelpScreen = "/profile_help_screen";
+  static const profileAccountScreen = "/profile_account_screen";
 }

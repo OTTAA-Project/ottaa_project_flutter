@@ -10,6 +10,7 @@ import 'package:ottaa_project_flutter/presentation/screens/profile/profile_choos
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_chooser_screen_selected_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_faq_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_help_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_linked_account_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_edit_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_screen.dart';
@@ -119,6 +120,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.profileHelpScreen,
           builder: (context, state) => const ProfileHelpScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileAccountScreen,
+          builder: (context, state) => const ProfileLinkedAccountScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),
