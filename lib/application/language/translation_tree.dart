@@ -33,18 +33,18 @@ class TranslationTree {
     return "$key.$newKey";
   }
 
-  void addTranslations(Map<String, dynamic> translations) {
-    void processMap(Map<String, dynamic> translations, String? parentKey) {
-      translations.forEach((key, value) {
-        final String fullKey = parentKey != null ? "$parentKey.$key" : key;
-        if (value is String) {
-          addTranslation(fullKey, value);
-        } else {
-          processMap(value, fullKey);
-        }
-      });
-    }
+  void processMap(Map<String, dynamic> translations, String? parentKey) {
+    translations.forEach((key, value) {
+      final String fullKey = parentKey != null ? "$parentKey.$key" : key;
+      if (value is String) {
+        addTranslation(fullKey, value);
+      } else {
+        processMap(value, fullKey);
+      }
+    });
+  }
 
+  void addTranslations(Map<String, dynamic> translations) {
     processMap(translations, null);
   }
 
