@@ -14,6 +14,7 @@ class I18N {
 
   Future<I18N> init() async {
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    print(languageCode);
 
     if (_languages.containsKey(languageCode)) {
       _currentLanguage = _languages[languageCode]!;
@@ -23,7 +24,7 @@ class I18N {
     final newLanguage = await loadTranslation(locale);
 
     if (newLanguage != null) {
-      _languages[languageCode] = newLanguage;
+      _languages.putIfAbsent(languageCode, () => newLanguage);
       _currentLanguage = newLanguage;
     }
 
@@ -32,6 +33,11 @@ class I18N {
 
   Future<TranslationTree?> loadTranslation(Locale locale) async {
     try {
+
+      if (locale.languageCode == "es" && locale.countryCode == "US") {
+        locale = const Locale("en", "US");
+      }
+
       final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
       if (_languages.containsKey(languageCode)) {
@@ -40,18 +46,15 @@ class I18N {
 
       final languageString = await rootBundle.loadString("assets/i18n/$languageCode.json");
 
-      final languageJson = Map.from(json.decode(languageString));
+      final languageJson = json.decode(languageString) as Map<String, dynamic>;
 
       final newLanguage = TranslationTree(locale);
 
-      languageJson.forEach((key, value) {
-        newLanguage.addTranslation(key, value);
-      });
-
-      _languages.putIfAbsent(languageCode, () => newLanguage);
+      newLanguage.addTranslations(languageJson);
 
       return newLanguage;
     } catch (e) {
+      print(e);
       return null;
     }
   }
