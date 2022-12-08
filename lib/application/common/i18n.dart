@@ -14,7 +14,6 @@ class I18N {
 
   Future<I18N> init() async {
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    print(languageCode);
 
     if (_languages.containsKey(languageCode)) {
       _currentLanguage = _languages[languageCode]!;
@@ -33,7 +32,6 @@ class I18N {
 
   Future<TranslationTree?> loadTranslation(Locale locale) async {
     try {
-
       if (locale.languageCode == "es" && locale.countryCode == "US") {
         locale = const Locale("en", "US");
       }
@@ -54,7 +52,6 @@ class I18N {
 
       return newLanguage;
     } catch (e) {
-      print(e);
       return null;
     }
   }

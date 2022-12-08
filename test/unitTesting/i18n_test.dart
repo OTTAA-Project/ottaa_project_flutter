@@ -22,7 +22,7 @@ void main() async {
       expect(language.locale.languageCode, 'en');
     });
     test('null testing', () async {
-      var result = await language.loadTranslation(const Locale('es', 'US'));
+      var result = await language.loadTranslation(const Locale('es', 'PT'));
       expect(result, null);
     });
     test('It should load the translations of en_US.json', () async {
