@@ -1,7 +1,8 @@
 ![image](https://ottaaproject.com/img/ottaa-project.svg)
 
-(place_holder: continuous integration and DPG certificate, see [issue #125](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/125))
-
+[![Digital public good](https://github.com/cboard-org/cboard/blob/master/public/images/dpg-badge.png)](https://digitalpublicgoods.net/registry/)
+[![Crowdin](https://badges.crowdin.net/ottaa-project/localized.svg)](https://crowdin.com/project/ottaa-project)
+[![Codemagic build status](https://api.codemagic.io/apps/633ae2406e6d53fd76823f7f/633ae2406e6d53fd76823f7e/status_badge.svg)](https://codemagic.io/apps/633ae2406e6d53fd76823f7f/633ae2406e6d53fd76823f7e/latest_build)
 
 # Welcome to the OTTAA Project #
 
