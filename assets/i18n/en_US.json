@@ -2,7 +2,7 @@
   "profile.selection.text1": "Who is going to use the app on this device?",
   "profile.crear.nueva.cuenta": "Create new account",
   "profile.agregar.cuenta": "Add account",
-  "profile.ottaa.tips": "Ottaa tips ",
+  "profile.ottaa.tips": "OTTAA tips",
   "profile.mail": "Mail",
   "profile.date": "Date of birth",
   "profile.faq.title": "Frequently Asked Questions",
@@ -59,7 +59,7 @@
     "upperText": "Profiles screen"
   },
   "onboarding3": {
-    "title": "We accompany in the learning process",
+    "title": "We guide you in the learning process",
     "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
   },
   "profile": {
@@ -76,11 +76,11 @@
     "unlink": "Unlink"
   },
   "signin": {
-    "title": "Ingresá con tu cuenta",
-    "signup": "¿Todavía no tenés tu cuenta? Registrate acá"
+    "title": "Log in with your account",
+    "signup": "Don't have an account yet? Sign up here"
   },
   "terms": {
-    "button": "Acepto los términos",
+    "button": "I accept the terms",
     "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\r\nVer términos"
   },
   "loginWait": {
@@ -95,8 +95,8 @@
     "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "¿Inconvenientes para enlazar las cuentas?",
     "button": {
-      "resend": "Reenviar email",
-      "anothermail": "Ingresá otro email."
+      "resend": "Resend email",
+      "anothermail": "Give us another email."
     }
   }
 }
