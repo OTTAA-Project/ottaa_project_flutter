@@ -60,7 +60,7 @@
   },
   "onboarding3": {
     "title": "We guide you in the learning process",
-    "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+    "text": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
   },
   "profile": {
     "tips": {
@@ -69,9 +69,9 @@
       "title3": "History",
       "title4": "Favorites",
       "text1": "See the statistics of your patient / family member, to check their activity and how they improved over the days, weeks and months.",
-      "text2": "Oculta los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
-      "text3": "Con este ícono reconoceras los alimentos  que no hayan tenido contacto y/o sean sin trigo, avena.",
-      "text4": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rapidamente."
+      "text2": "Hide boards the user does not need, so we only show what is important.",
+      "text3": "Use the history feature to see old sentences, what you did during the day, or tell stories.",
+      "text4": "Save pictograms and sentences in Favorites, so you can access them quickly."
     },
     "unlink": "Unlink"
   },
@@ -81,19 +81,19 @@
   },
   "terms": {
     "button": "I accept the terms",
-    "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\r\nVer términos"
+    "text": "To continue we need you to accept the terms & conditions.\nSee terms & conditions"
   },
   "loginWait": {
-    "text": "Te damos la bienvenida!\r\nAl mundo de OTTAA"
+    "text": "Welcome!\nTo the OTTAA World"
   },
   "link": {
-    "title": "Ingrese el correo electrónico de la cuenta de OTTAA a vincular",
-    "text1": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este codígo arriba."
+    "title": "Enter the email of the account you want to link",
+    "text1": "*Be sure you are in contact with the person using this email.",
+    "text2": "*We are going to show you a token, input the token above."
   },
   "token": {
-    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
-    "text": "¿Inconvenientes para enlazar las cuentas?",
+    "title": "Input the verification code that is shown in the screen of the account to link.",
+    "text": "Having trouble linking accounts?",
     "button": {
       "resend": "Resend email",
       "anothermail": "Give us another email."
