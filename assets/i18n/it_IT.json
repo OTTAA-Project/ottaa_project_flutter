@@ -22,7 +22,7 @@
     "mute": "Silenzia",
     "important": "Importante",
     "save_changes": "Vuoi salvare le modifiche?",
-    "send": "Enviar"
+    "send": "Invia"
   },
   "profile.caregiver": "Badante",
   "profile.caregivers_families": "Professionisti / Famiglia",
@@ -48,8 +48,8 @@
   "profile.year": "Anno",
   "onboarding2": {
     "title": "Atajos en la pantalla principal",
-    "text": "Personaliza de acuerdo a los gustos y necesidades",
-    "upperText": "Personaliza tu Home"
+    "text": "Personalizá de acuerdo a los gustos y necesidades",
+    "upperText": "Personalizza il tuo Home"
   },
   "onboarding1": {
     "title": "¿Quién usa OTTAA hoy?",
@@ -59,19 +59,19 @@
     "upperText": "Pantalla de perfiles"
   },
   "onboarding3": {
-    "title": "Acompañamos en el proceso de aprendizaje",
-    "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+    "title": "Te acompañamos en el proceso de aprendizaje",
+    "text": "Activá o desactivá tableros o pictogramas para modificar la predicción, vos tenés el control."
   },
   "profile": {
     "tips": {
-      "title1": "Estadísticas",
-      "title2": "Tableros",
-      "title3": "Historial",
-      "title4": "Favoritos",
-      "text1": "Mira las estadísticas de tu paciente / familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
-      "text2": "Oculta los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
-      "text3": "Con este ícono reconoceras los alimentos  que no hayan tenido contacto y/o sean sin trigo, avena.",
-      "text4": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rapidamente."
+      "title1": "Statistiche",
+      "title2": "Schede",
+      "title3": "Cronolgia",
+      "title4": "Preferiti",
+      "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
+      "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
+      "text3": "Usá el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
+      "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
     },
     "unlink": "Desvincular"
   },
@@ -80,22 +80,22 @@
     "signup": "¿Todavía no tenés tu cuenta? Registrate acá"
   },
   "terms": {
-    "button": "Acepto los términos",
+    "button": "Accetto i termini",
     "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\r\nVer términos"
   },
   "loginWait": {
     "text": "Te damos la bienvenida!\r\nAl mundo de OTTAA"
   },
   "link": {
-    "title": "Ingrese el correo electrónico de la cuenta de OTTAA a vincular",
-    "text1": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este codígo arriba."
+    "title": "Ingresá el correo electrónico de la cuenta de OTTAA a vincular",
+    "text1": "*Asegurate de estar en contacto con la persona que tenga este correo electrónico.",
+    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este código arriba."
   },
   "token": {
     "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "¿Inconvenientes para enlazar las cuentas?",
     "button": {
-      "resend": "Reenviar email",
+      "resend": "Rinvia email",
       "anothermail": "Ingresá otro email."
     }
   }
