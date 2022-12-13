@@ -90,9 +90,9 @@ class ProfileSettingsScreen extends StatelessWidget {
                 text: "profile.cuentas.vinculadas".trl,
               ),
               CategoryWidget(
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.profileTipsScreen),
                 icon: AppImages.kProfileSettingsIcon5,
-                text: "profile.ottaa.tips".trl,
+                text: "profile.tips".trl,
               ),
               Align(
                 alignment: Alignment.centerLeft,

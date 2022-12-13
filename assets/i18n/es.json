@@ -154,9 +154,7 @@
   "profile.agregar.cuenta": "Agregar cuenta",
   "profile.qué.deseas.hacer": "¿Qué deseas hacer?",
   "profile.perfil": "Perfil",
-  "profile.ayuda": "Ayuda",
   "profile.cerrar.sesión": "Cerrar sesión",
-  "profile.ottaa.tips": "Ottaa tips ",
   "profile.cuentas.vinculadas": "Cuentas vinculadas",
   "profile.rol.de.uso": "Rol de uso",
   "profile.nombre": "Nombre",
@@ -190,7 +188,17 @@
       "title": "Soporte",
       "heading": "¿Desea comunicarse por teléfono con soporte técnico?",
       "button1": "Cancelar",
-      "button2": "Llamar"
+      "button2": "Llamar",
+      "ayuda": "Ayuda",
+      "tips": "Ottaa tips",
+      "faq1": "ESTADÍSTICAS",
+      "faq1s": "Mira las estadísticas de tu paciente / familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
+      "faq2": "TABLEROS",
+      "faq2s": "Oculta los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
+      "faq3": "HISTORIAL",
+      "faq3s": "Con este ícono reconoceras los alimentos  que no hayan tenido contacto y/o sean sin trigo, avena.",
+      "faq4": "FAVORITOS",
+      "faq4s": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rapidamente."
     }
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileLinkedAccountScreen extends StatelessWidget {
@@ -14,9 +16,14 @@ class ProfileLinkedAccountScreen extends StatelessWidget {
             children: [
               //todo: why it is giving the error Emir-Chan
               OTTAAAppBar(
-                title: Text("Ayuda"),
-                leading: Icon(
-                  Icons.arrow_back_ios_new,
+                title: Text(
+                  "profile.ayuda".trl,
+                ),
+                leading: GestureDetector(
+                  onTap: () => context.pop(),
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                  ),
                 ),
                 actions: [],
               ),
