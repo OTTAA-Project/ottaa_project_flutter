@@ -147,11 +147,11 @@
   "profile.configurando.su.experiencia": "Configurando su experiencia...",
   "profile.hola": "Hola",
   "profile.vincular.con.cuenta": "Vincular con cuenta",
-  "profile.crear.nueva.cuenta": "Registrati",
+  "profile.crear.nueva.cuenta": "Crear nueva cuenta",
   "profile.usar.ottaa": "Usar Ottaa",
   "profile.modo.sin.perfil": "Modo sin perfil",
   "profile.nuevo.existente": "Nuevo / Existente",
-  "profile.agregar.cuenta": "Aggiungi account",
+  "profile.agregar.cuenta": "Agregar cuenta",
   "profile.qué.deseas.hacer": "¿Qué deseas hacer?",
   "profile.perfil": "Perfil",
   "profile.cerrar.sesión": "Cerrar sesión",
@@ -181,16 +181,16 @@
       "faq4s": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rapidamente."
     },
     "edit": {
-      "nombre": "Nombre",
-      "apellido": "Apellido",
-      "mail": "Mail",
-      "dia": "Día",
-      "mes": "Mes",
-      "ano": "Año",
-      "date": "Fecha de nacimiento"
+      "nombre": "نام",
+      "apellido": "کنیت",
+      "mail": "ای میل",
+      "dia": "دن",
+      "mes": "مہینہ",
+      "ano": "سال",
+      "date": "تاریخ پیدائش"
     },
     "faq": {
-      "title": "Preguntas frecuentes",
+      "title": "اکثر پوچھے جانے والے سوالات",
       "title1": "",
       "title2": "",
       "title3": "",
