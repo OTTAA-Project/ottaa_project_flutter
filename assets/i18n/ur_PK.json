@@ -181,16 +181,16 @@
       "faq4s": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rapidamente."
     },
     "edit": {
-      "nombre": "Nombre",
-      "apellido": "Apellido",
-      "mail": "Mail",
-      "dia": "Día",
-      "mes": "Mes",
-      "ano": "Año",
-      "date": "Fecha de nacimiento"
+      "nombre": "نام",
+      "apellido": "کنیت",
+      "mail": "ای میل",
+      "dia": "دن",
+      "mes": "مہینہ",
+      "ano": "سال",
+      "date": "تاریخ پیدائش"
     },
     "faq": {
-      "title": "Preguntas frecuentes",
+      "title": "اکثر پوچھے جانے والے سوالات",
       "title1": "",
       "title2": "",
       "title3": "",
