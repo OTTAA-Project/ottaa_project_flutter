@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/faq_container_widget.dart';
@@ -21,25 +22,31 @@ class ProfileFAQScreen extends StatelessWidget {
                   top: 46,
                   bottom: 38,
                 ),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                    ),
-                    const SizedBox(
-                      width: 24,
-                    ),
-                    Text(
-                      "profile.faq.title".trl,
-                    ),
-                  ],
+                child: GestureDetector(
+                  onTap: () => context.pop(),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                      ),
+                      const SizedBox(
+                        width: 24,
+                      ),
+                      Text(
+                        "profile.faq.title".trl,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
+                //todo: add the required variables here
                 child: ListView.builder(
-                  itemCount: 9,
+                  itemCount: 7,
                   itemBuilder: (context, index) => FaqContainerWidget(
-                    selected: false,
+                    selected: true,
+                    subtitle: "profile.faq.title${index + 1}.trl",
+                    heading: "profile.faq.subtitle${index + 1}".trl,
                   ),
                 ),
               ),

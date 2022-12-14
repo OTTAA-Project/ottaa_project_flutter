@@ -85,14 +85,14 @@ class ProfileSettingsScreen extends StatelessWidget {
                 text: "profile.ayuda".trl,
               ),
               CategoryWidget(
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.profileAccountScreen),
                 icon: AppImages.kProfileSettingsIcon4,
                 text: "profile.cuentas.vinculadas".trl,
               ),
               CategoryWidget(
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.profileTipsScreen),
                 icon: AppImages.kProfileSettingsIcon5,
-                text: "profile.ottaa.tips".trl,
+                text: "profile.tips.title".trl,
               ),
               Align(
                 alignment: Alignment.centerLeft,

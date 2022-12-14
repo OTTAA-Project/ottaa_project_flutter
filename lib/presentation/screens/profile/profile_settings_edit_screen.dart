@@ -7,14 +7,19 @@ import 'package:ottaa_project_flutter/presentation/common/widgets/new_simple_but
 import 'package:ottaa_project_flutter/presentation/common/widgets/new_text_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/date_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/image_edit_widget.dart';
+import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileSettingsEditScreen extends StatelessWidget {
   const ProfileSettingsEditScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
     return Scaffold(
-      backgroundColor: kOTTAABackground,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: colorScheme.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -27,23 +32,19 @@ class ProfileSettingsEditScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => context.pop(),
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          size: 16,
-                          color: Colors.black,
-                        ),
+                  //todo: emir will fix the appbar
+                  OTTAAAppBar(
+                    title: Text(
+                      "profile.perfi l".trl,
+                    ),
+                    leading: GestureDetector(
+                      onTap: () => context.pop(),
+                      child: const Icon(
+                        Icons.arrow_back_ios,
+                        size: 16,
+                        color: Colors.black,
                       ),
-                      const SizedBox(
-                        width: 24,
-                      ),
-                      Text(
-                        "profile.perfil".trl,
-                      ),
-                    ],
+                    ),
                   ),
                   const SizedBox(
                     height: 36,
@@ -57,44 +58,45 @@ class ProfileSettingsEditScreen extends StatelessWidget {
                     height: 24,
                   ),
                   NewTextWidget(
-                    hintText: 'profile.nombre'.trl,
+                    hintText: 'profile.edit.nombre'.trl,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: NewTextWidget(
-                      hintText: 'profile.apellido'.trl,
+                      hintText: 'profile.edit.apellido'.trl,
                     ),
                   ),
                   NewTextWidget(
-                    hintText: 'profile.mail'.trl,
+                    hintText: 'profile.edit.mail'.trl,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 24, bottom: 8),
                     child: Text(
-                      "profile.date".trl,
+                      "profile.edit.date".trl,
+                      style: textTheme.headline4,
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       DateWidget(
-                        text: 'profile.dia'.trl,
+                        text: 'profile.edit.dia'.trl,
                         onTap: () {},
                       ),
                       DateWidget(
-                        text: 'profile.mes'.trl,
+                        text: 'profile.edit.mes'.trl,
                         onTap: () {},
                       ),
                       DateWidget(
-                        text: 'profile.ano'.trl,
+                        text: 'profile.edit.ano'.trl,
                         onTap: () {},
                       ),
                     ],
                   ),
                 ],
               ),
-              NewSimpleButton(
-                onTap: () {},
+              PrimaryButton(
+                onPressed: () {},
                 text: 'Continuar',
               ),
             ],
