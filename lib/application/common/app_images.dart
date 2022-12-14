@@ -1682,4 +1682,8 @@ class AppImages {
 
   static const kProfileHelpIcon2 =
       'assets/profile/profile_help_screen_icon_2.png';
+
+  static const kBoardImageEdit1 = 'assets/board/board_edit_image_1.png';
+
+  static const kBoardImageEdit2 = 'assets/board/board_edit_image_2.png';
 }
