@@ -11,6 +11,9 @@ class DateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
     //todo: add the theme here
     return GestureDetector(
       onTap: onTap,
@@ -21,10 +24,10 @@ class DateWidget extends StatelessWidget {
           bottom: 16,
         ),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: colorScheme.onPrimary,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: Colors.black,
+            color: colorScheme.onBackground,
             width: 0.5,
           ),
         ),
@@ -32,6 +35,7 @@ class DateWidget extends StatelessWidget {
           children: [
             Text(
               text,
+              style: textTheme.headline3,
             ),
             Icon(
               Icons.keyboard_arrow_down_sharp,

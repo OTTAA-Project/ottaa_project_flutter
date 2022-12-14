@@ -92,7 +92,7 @@ class ProfileSettingsScreen extends StatelessWidget {
               CategoryWidget(
                 onTap: () => context.push(AppRoutes.profileTipsScreen),
                 icon: AppImages.kProfileSettingsIcon5,
-                text: "profile.tips".trl,
+                text: "profile.tips.title".trl,
               ),
               Align(
                 alignment: Alignment.centerLeft,
