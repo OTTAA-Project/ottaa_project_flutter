@@ -1,12 +1,58 @@
 {
-  "profile.selection.text1": "Who is going to use the app on this device?",
-  "profile.crear.nueva.cuenta": "Create new account",
-  "profile.agregar.cuenta": "Add account",
-  "profile.ottaa.tips": "OTTAA tips",
-  "profile.mail": "Mail",
-  "profile.date": "Date of birth",
-  "profile.faq.title": "Frequently Asked Questions",
-  "profile.help.title2": "Contact support",
+  "profile": {
+    "selection": {
+      "text1": "Who is going to use the app on this device?"
+    },
+    "crear": {
+      "nueva": {
+        "cuenta": "Create new account"
+      }
+    },
+    "agregar": {
+      "cuenta": "Add account"
+    },
+    "ottaa": {
+      "tips": "OTTAA tips"
+    },
+    "mail": "Mail",
+    "date": "Date of birth",
+    "faq": {
+      "title": "Frequently Asked Questions"
+    },
+    "help": "Help",
+    "caregiver": "Caregiver",
+    "caregivers_families": "Caregivers/Relatives",
+    "user": "User",
+    "wait": "Please wait",
+    "setting_exp": "Setting up your experience...",
+    "link_account": "Link to an account",
+    "use": {
+      "ottaa": "Use OTTAA"
+    },
+    "no_account": "No account mode",
+    "new_existant": "New/Existent",
+    "what_do": "What do you want to do?",
+    "profile": "Profile",
+    "linked_accounts": "Linked accounts",
+    "name": "Name",
+    "logout": "Logout",
+    "last_name": "Last Name",
+    "role": "Role",
+    "day": "Day",
+    "month": "Month",
+    "year": "Year",
+    "tips": {
+      "title1": "Stats",
+      "title2": "Dashboards",
+      "title3": "History",
+      "title4": "Favorites",
+      "text1": "See the statistics of your patient / family member, to check their activity and how they improved over the days, weeks and months.",
+      "text2": "Hide boards the user does not need, so we only show what is important.",
+      "text3": "Use the history feature to see old sentences, what you did during the day, or tell stories.",
+      "text4": "Save pictograms and sentences in Favorites, so you can access them quickly."
+    },
+    "unlink": "Unlink"
+  },
   "global": {
     "hello_world": "Hello World",
     "hello": "Hello",
@@ -21,31 +67,10 @@
     "no": "No",
     "mute": "Mute",
     "important": "Important",
-    "save_changes": "Do you want to save your changes?",
-    "send": "Submit"
+    "save_changes": "Save changes",
+    "send": "Submit",
+    "omitir": "Skip"
   },
-  "profile.caregiver": "Caregiver",
-  "profile.caregivers_families": "Caregivers/Relatives",
-  "profile.user": "User",
-  "profile.wait": "Please wait",
-  "profile.setting_exp": "Setting up your experience...",
-  "profile.link_account": "Link to an account",
-  "global.omitir": "Skip",
-  "profile.use.ottaa": "Use OTTAA",
-  "profile.no_account": "No account mode",
-  "profile.new_existant": "New/Existent",
-  "profile.what_do": "What do you want to do?",
-  "profile.profile": "Profile",
-  "profile.help": "Help",
-  "global.save_changes": "Save changes",
-  "profile.linked_accounts": "Linked accounts",
-  "profile.name": "Name",
-  "profile.logout": "Logout",
-  "profile.last_name": "Last Name",
-  "profile.role": "Role",
-  "profile.day": "Day",
-  "profile.month": "Month",
-  "profile.year": "Year",
   "onboarding2": {
     "title": "Shortcuts on main screen",
     "text": "Customize according to your tastes and needs",
@@ -61,19 +86,6 @@
   "onboarding3": {
     "title": "We guide you in the learning process",
     "text": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
-  },
-  "profile": {
-    "tips": {
-      "title1": "Stats",
-      "title2": "Dashboards",
-      "title3": "History",
-      "title4": "Favorites",
-      "text1": "See the statistics of your patient / family member, to check their activity and how they improved over the days, weeks and months.",
-      "text2": "Hide boards the user does not need, so we only show what is important.",
-      "text3": "Use the history feature to see old sentences, what you did during the day, or tell stories.",
-      "text4": "Save pictograms and sentences in Favorites, so you can access them quickly."
-    },
-    "unlink": "Unlink"
   },
   "signin": {
     "title": "Log in with your account",

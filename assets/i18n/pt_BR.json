@@ -1,12 +1,58 @@
 {
-  "profile.selection.text1": "Quem usará o aplicativo neste dispositivo?",
-  "profile.crear.nueva.cuenta": "Cadastre-se",
-  "profile.agregar.cuenta": "Adicionar conta",
-  "profile.ottaa.tips": "Ottaa tips ",
-  "profile.mail": "Mail",
-  "profile.date": "Data de nascimento",
-  "profile.faq.title": "Perguntas frequentes (FAQ)",
-  "profile.help.title2": "Contato com o suporte",
+  "profile": {
+    "selection": {
+      "text1": "Quem usará o aplicativo neste dispositivo?"
+    },
+    "crear": {
+      "nueva": {
+        "cuenta": "Cadastre-se"
+      }
+    },
+    "agregar": {
+      "cuenta": "Adicionar conta"
+    },
+    "ottaa": {
+      "tips": "Ottaa tips "
+    },
+    "mail": "Mail",
+    "date": "Data de nascimento",
+    "faq": {
+      "title": "Perguntas frequentes (FAQ)"
+    },
+    "help": "Ajuda",
+    "caregiver": "Acompanhante",
+    "caregivers_families": "Profissionais/Família",
+    "user": "Usuário",
+    "wait": "Por favor, aguarde",
+    "setting_exp": "Configurando sua experiência...",
+    "link_account": "Vincular Conta",
+    "use": {
+      "ottaa": "Usar OTTAA"
+    },
+    "no_account": "Modo sem perfil",
+    "new_existant": "Novo/Existente",
+    "what_do": "Que eu posso fazer?",
+    "profile": "Perfil",
+    "linked_accounts": "Contas conectadas",
+    "name": "Nome",
+    "logout": "Deslogar",
+    "last_name": "Apelido",
+    "role": "Função de uso",
+    "day": "Dia",
+    "month": "Mês",
+    "year": "Ano",
+    "tips": {
+      "title1": "Estatísticas",
+      "title2": "Paineis",
+      "title3": "História",
+      "title4": "Favoritos",
+      "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
+      "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
+      "text3": "Usá el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
+      "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
+    },
+    "unlink": "Desvincular"
+  },
   "global": {
     "hello_world": "Hello World",
     "hello": "Olá",
@@ -21,31 +67,10 @@
     "no": "Não",
     "mute": "Silenciar",
     "important": "Importante",
-    "save_changes": "Deseja salvar as alterações?",
-    "send": "Enviar"
+    "save_changes": "Salvar alterações",
+    "send": "Enviar",
+    "omitir": "Pular"
   },
-  "profile.caregiver": "Acompanhante",
-  "profile.caregivers_families": "Profissionais/Família",
-  "profile.user": "Usuário",
-  "profile.wait": "Por favor, aguarde",
-  "profile.setting_exp": "Configurando sua experiência...",
-  "profile.link_account": "Vincular Conta",
-  "global.omitir": "Pular",
-  "profile.use.ottaa": "Usar OTTAA",
-  "profile.no_account": "Modo sem perfil",
-  "profile.new_existant": "Novo/Existente",
-  "profile.what_do": "Que eu posso fazer?",
-  "profile.profile": "Perfil",
-  "profile.help": "Ajuda",
-  "global.save_changes": "Salvar alterações",
-  "profile.linked_accounts": "Contas conectadas",
-  "profile.name": "Nome",
-  "profile.logout": "Deslogar",
-  "profile.last_name": "Apelido",
-  "profile.role": "Função de uso",
-  "profile.day": "Dia",
-  "profile.month": "Mês",
-  "profile.year": "Ano",
   "onboarding2": {
     "title": "Atajos en la pantalla principal",
     "text": "Personalizá de acuerdo a los gustos y necesidades",
@@ -61,19 +86,6 @@
   "onboarding3": {
     "title": "Te acompañamos en el proceso de aprendizaje",
     "text": "Activá o desactivá tableros o pictogramas para modificar la predicción, vos tenés el control."
-  },
-  "profile": {
-    "tips": {
-      "title1": "Estatísticas",
-      "title2": "Paineis",
-      "title3": "História",
-      "title4": "Favoritos",
-      "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
-      "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
-      "text3": "Usá el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
-      "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
-    },
-    "unlink": "Desvincular"
   },
   "signin": {
     "title": "Ingresá con tu cuenta",
