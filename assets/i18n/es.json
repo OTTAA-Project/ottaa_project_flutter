@@ -167,8 +167,12 @@
   "profile.ano": "Año",
   "profile.date": "Fecha de nacimiento",
   "profile.chooser.screen.button": "Guardar cambios",
-  "profile.chooser.screen.heading" : "¿Quién usa la aplicación en este dispositivo?",
-  "profile.faq.title" : "Preguntas frecuentes",
-  "profile.help.title1" : "Preguntas frecuentes",
-  "profile.help.title2" : "Contactar con soporte"
+  "profile.chooser.screen.heading": "¿Quién usa la aplicación en este dispositivo?",
+  "profile.faq.title": "Preguntas frecuentes",
+  "profile.help.title1": "Preguntas frecuentes",
+  "profile.help.title2": "Contactar con soporte",
+
+  "onboarding.profiles.title": "Pantalla de perfiles",
+  "onboarding.profiles.text": "¿Quién usa OTTAA hoy?",
+  "onboarding.profiles.subtitle": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
 }

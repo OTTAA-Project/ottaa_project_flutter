@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ottaa_project_flutter/application/common/app_images.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/onboarding_provider.dart';
-import 'package:ottaa_project_flutter/presentation/screens/onboarding/ui/tutorial_step.dart';
-import 'package:ottaa_project_flutter/presentation/screens/onboarding/ui/user_avatar_selector_step.dart';
-import 'package:ottaa_project_flutter/presentation/screens/onboarding/ui/user_info_step.dart';
+import 'package:ottaa_project_flutter/presentation/screens/onboarding/ui/onboarding_layout.dart';
+import 'package:ottaa_ui_kit/widgets.dart';
 
 class OnBoardingScreen extends ConsumerStatefulWidget {
   final int defaultIndex;
@@ -29,16 +30,50 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: OTTAAAppBar(
+        leading: TextButton.icon(
+          onPressed: () {},
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          label: Text("back".trl),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              "skip".trl,
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         top: false,
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.horizontal,
           controller: provider.controller,
-          children: const <Widget>[
-            UserInfoStep(),
-            TutorialStep(),
-            UserAvatarSelectorStep(),
+          children: <Widget>[
+            OnboardingLayout(
+              title: "onboarding_title_1".trl,
+              subtitle: "onboarding_title_1".trl,
+              description: "onboarding_title_1".trl,
+              image: AppImages.kOnboardingFirstScreen,
+            ),
+            OnboardingLayout(
+              title: "onboarding_title_1".trl,
+              subtitle: "onboarding_title_1".trl,
+              description: "onboarding_title_1".trl,
+              image: AppImages.kOnboardingSecondScreen,
+            ),
+            OnboardingLayout(
+              title: "onboarding_title_1".trl,
+              subtitle: "onboarding_title_1".trl,
+              description: "onboarding_title_1".trl,
+              image: AppImages.kOnboardingThirdScreen,
+            ),
           ],
         ),
       ),
