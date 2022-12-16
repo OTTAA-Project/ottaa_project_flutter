@@ -32,7 +32,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
       setState(() {});
 
-      return context.go(AppRoutes.waitingLogin, extra: 0);
       if (isLogged) {
         bool isFirstTime = await provider.isFirstTime();
         bool hasPhoto = await provider.checkUserAvatar();

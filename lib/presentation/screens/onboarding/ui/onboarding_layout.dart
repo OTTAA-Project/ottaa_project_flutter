@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ottaa_project_flutter/application/providers/onboarding_provider.dart';
 
 class OnboardingLayout extends ConsumerStatefulWidget {
   final String title;
@@ -28,29 +27,53 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          widget.title,
-          style: textTheme.headline3,
-        ),
-        SizedBox(height: height * 0.05),
-        Text(
-          widget.subtitle,
-          style: textTheme.headline1?.copyWith(
-            color: colorScheme.primary,
+    return SizedBox.fromSize(
+      size: size,
+      child: Flex(
+        direction: Axis.vertical,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            flex: 1,
+            fit: FlexFit.loose,
+            child: Text(
+              widget.title,
+              style: textTheme.headline3,
+            ),
           ),
-        ),
-        SizedBox(height: height * 0.05),
-        Image.asset(
-          widget.image,
-        ),
-        SizedBox(height: height * 0.05),
-        Text(widget.description, style: textTheme.headline3),
-        SizedBox(height: height * 0.05),
-      ],
+          const SizedBox(height: 20),
+          Flexible(
+            flex: 1,
+            fit: FlexFit.loose,
+            child: Text(
+              widget.subtitle,
+              style: textTheme.headline1?.copyWith(
+                color: colorScheme.primary,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Flexible(
+            fit: FlexFit.tight,
+            flex: 10,
+            child: Image.asset(
+              widget.image,
+              width: size.width,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          const SizedBox(height: 30),
+          Flexible(
+            flex: 1,
+            fit: FlexFit.loose,
+            child: Text(
+              widget.description,
+              style: textTheme.headline3,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

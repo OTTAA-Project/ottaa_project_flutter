@@ -82,6 +82,8 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
       ),
       body: SafeArea(
         top: false,
+        left: true,
+        right: true,
         child: SizedBox.fromSize(
           size: MediaQuery.of(context).size,
           child: Flex(
@@ -90,8 +92,9 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                flex: 5,
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 10,
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
@@ -104,15 +107,15 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                       image: AppImages.kOnboardingFirstScreen,
                     ),
                     OnboardingLayout(
-                      title: "onboarding.profile.title".trl,
-                      subtitle: "onboarding.profile.subtitle".trl,
-                      description: "onboarding.profile.description".trl,
+                      title: "onboarding.home.title".trl,
+                      subtitle: "onboarding.home.subtitle".trl,
+                      description: "onboarding.home.description".trl,
                       image: AppImages.kOnboardingSecondScreen,
                     ),
                     OnboardingLayout(
-                      title: "onboarding.profile.title".trl,
-                      subtitle: "onboarding.profile.subtitle".trl,
-                      description: "onboarding.profile.description".trl,
+                      title: "onboarding.customize.title".trl,
+                      subtitle: "onboarding.customize.subtitle".trl,
+                      description: "onboarding.customize.description".trl,
                       image: AppImages.kOnboardingThirdScreen,
                     )
                   ],

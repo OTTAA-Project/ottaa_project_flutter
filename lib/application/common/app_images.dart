@@ -1661,7 +1661,7 @@ class AppImages {
 
   static const kOnboardingFirstScreen = 'assets/onboarding/1.png';
   static const kOnboardingSecondScreen = 'assets/onboarding/2.png';
-  static const kOnboardingThirdScreen = 'assets/onboarding/2.png';
+  static const kOnboardingThirdScreen = 'assets/onboarding/3.png';
 
   static const kOttaaTablet = 'assets/ottaa_tablet.png';
 }
