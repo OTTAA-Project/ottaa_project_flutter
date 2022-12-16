@@ -28,32 +28,29 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return SizedBox.fromSize(
-      size: size,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            widget.title,
-            style: textTheme.headline3,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          widget.title,
+          style: textTheme.headline3,
+        ),
+        SizedBox(height: height * 0.05),
+        Text(
+          widget.subtitle,
+          style: textTheme.headline1?.copyWith(
+            color: colorScheme.primary,
           ),
-          SizedBox(height: height * 0.05),
-          Text(
-            widget.subtitle,
-            style: textTheme.headline1?.copyWith(
-              color: colorScheme.primary,
-            ),
-          ),
-          SizedBox(height: height * 0.05),
-          Image.asset(
-            widget.image,
-          ),
-          SizedBox(height: height * 0.05),
-          Text(widget.subtitle, style: textTheme.headline3),
-          SizedBox(height: height * 0.05),
-        ],
-      ),
+        ),
+        SizedBox(height: height * 0.05),
+        Image.asset(
+          widget.image,
+        ),
+        SizedBox(height: height * 0.05),
+        Text(widget.description, style: textTheme.headline3),
+        SizedBox(height: height * 0.05),
+      ],
     );
   }
 
