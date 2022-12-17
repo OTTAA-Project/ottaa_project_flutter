@@ -223,6 +223,34 @@
     "help": {
       "title1": "Preguntas frecuentes",
       "title2": "Contactar con soporte"
+    },
+    "link": {
+      "title": "Vincular Cuenta",
+      "mail": {
+        "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+        "input": {
+          "required": "El correo electrónico es requerido",
+          "invalid": "El correo electrónico es inválido"
+        },
+        "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
+        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
+        "send": "Enviar"
+      },
+      "token": {
+        "title": "Coloque el código de verificación que llegó al correo electrónico.",
+        "problem": "¿Inconvenientes para enlazar las cuentas?",
+        "resend": "Reenviar código",
+        "back": "Ingresar otro email"
+      },
+      "wait": {
+        "title": "Aguarde",
+        "subtitle": "Cargando perfil..."
+      },
+      "success": {
+        "title": "Perfil vinculado con éxito!",
+        "lastTime": "Últ. vez Ayer {date}",
+        "continue": "Continuar"
+      }
     }
   }
 }

@@ -22,7 +22,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final isLogged = ref.read(authNotifier);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      print(isLogged);
+      return context.push(AppRoutes.linkMailScreen);
       if (isLogged) {
         bool isFirstTime = await provider.isFirstTime();
         bool hasPhoto = await provider.checkUserAvatar();

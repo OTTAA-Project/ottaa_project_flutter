@@ -4,6 +4,9 @@ import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/link/link_mail_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/link/link_success_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/link/link_token_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_chooser_screen.dart';
@@ -21,18 +24,20 @@ import 'package:ottaa_project_flutter/presentation/screens/sentences/sentences_s
 import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/search_sentence.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/tutorial/tutorial_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_screen.dart';
 
 final AppRouter appRouterSingleton = AppRouter();
 
 class AppRouter {
   String get initialAppResolver {
     final authService = GetIt.I.get<AuthRepository>();
+    return AppRoutes.splash;
 
     if (!authService.isLogged) {
       return AppRoutes.login;
     }
     //todo: talk with emir about it
-    if(authService.isLogged){
+    if (authService.isLogged) {
       return AppRoutes.home;
     }
 
@@ -120,6 +125,20 @@ class AppRouter {
           path: AppRoutes.profileHelpScreen,
           builder: (context, state) => const ProfileHelpScreen(),
         ),
+        GoRoute(name: AppRoutes.linkMailScreen, path: AppRoutes.linkMailScreen, builder: (context, state) => const LinkMailScreen(), routes: [
+          GoRoute(
+            path: "token",
+            builder: (context, state) => const LinkTokenScreen(),
+          ),
+          GoRoute(
+            path: "wait",
+            builder: (context, state) => const LinkWaitingScreen(),
+          ),
+          GoRoute(
+            path: "success",
+            builder: (context, state) => const LinkSuccessScreen(),
+          )
+        ])
       ],
       errorBuilder: (context, state) => const ErrorScreen(),
       initialLocation: initialAppResolver,
