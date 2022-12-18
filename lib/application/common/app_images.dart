@@ -1686,4 +1686,20 @@ class AppImages {
   static const kBoardImageEdit1 = 'assets/board/board_edit_image_1.png';
 
   static const kBoardImageEdit2 = 'assets/board/board_edit_image_2.png';
+
+  static const kBoardFavouriteIcon = "assets/board/icons/icons_not_selected/favourite.png";
+  static const kBoardRefreshIcon = "assets/board/icons/icons_not_selected/refresh.png";
+  static const kBoardCameraIcon = "assets/board/icons/icons_not_selected/camera.png";
+  static const kBoardDiceIcon = "assets/board/icons/icons_not_selected/dice.png";
+  static const kBoardYesIcon = "assets/board/icons/icons_not_selected/yes.png";
+  static const kBoardNoIcon = "assets/board/icons/icons_not_selected/no.png";
+  static const kBoardShareIcon = "assets/board/icons/icons_not_selected/share.png";
+
+  static const kBoardIconFavouriteSelected = "assets/board/icons/icons_selected/favourite.png";
+  static const kBoardIconRefreshSelected = "assets/board/icons/icons_selected/refresh.png";
+  static const kBoardIconDiceSelected = "assets/board/icons/icons_selected/dice.png";
+  static const kBoardIconCameraSelected = "assets/board/icons/icons_selected/camera.png";
+  static const kBoardIconYesSelected = "assets/board/icons/icons_selected/yes.png";
+  static const kBoardIconNoSelected = "assets/board/icons/icons_selected/no.png";
+  static const kBoardIconShareSelected = "assets/board/icons/icons_selected/share.png";
 }

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_shortcut_screen.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
-class CustomizedBoardScreen extends StatefulWidget {
-  const CustomizedBoardScreen({Key? key}) : super(key: key);
+class CustomizedMainTabScreen extends StatefulWidget {
+  const CustomizedMainTabScreen({Key? key}) : super(key: key);
 
   @override
-  State<CustomizedBoardScreen> createState() => _CustomizedBoardScreenState();
+  State<CustomizedMainTabScreen> createState() =>
+      _CustomizedMainTabScreenState();
 }
 
-class _CustomizedBoardScreenState extends State<CustomizedBoardScreen> {
+class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
   int index = 1;
-  bool status = true;
+  bool tabChange = false;
 
   @override
   Widget build(BuildContext context) {
@@ -120,35 +123,9 @@ class _CustomizedBoardScreenState extends State<CustomizedBoardScreen> {
                   ],
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  padding:
-                      const EdgeInsets.only(left: 24, right: 24, bottom: 16),
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    //todo: plavce holder values
-                    child: PictogramCard(
-                      title: "title",
-                      actionText: "actionText",
-                      //todo: a holder for the picto
-                      pictogram: AssetImage(AppImages.kAbrigos),
-                      status: status,
-                      onChange: (bool a) {
-                        print('tapped');
-                        setState(() {
-                          status = !status;
-                        });
-                      },
-                      onPressed: () {
-                        //todo: if needed to be implemented
-                        print('pressed');
-                      },
-                    ),
-                  ),
-                ),
-              ),
+              tabChange
+                  ? const CustomizeBoardScreen()
+                  : const CustomizeShortcutScreen(),
             ],
           ),
           Positioned(
@@ -157,7 +134,11 @@ class _CustomizedBoardScreenState extends State<CustomizedBoardScreen> {
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: PrimaryButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    tabChange = !tabChange;
+                  });
+                },
                 //todo: add text here after discussing with the team
                 text: "Continuar".trl,
               ),
