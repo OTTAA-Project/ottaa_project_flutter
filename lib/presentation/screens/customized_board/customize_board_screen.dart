@@ -19,25 +19,28 @@ class _CustomizeBoardScreenState extends State<CustomizeBoardScreen> {
         const EdgeInsets.only(left: 24, right: 24, bottom: 16),
         shrinkWrap: true,
         itemCount: 10,
-        itemBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          //todo: plavce holder values
-          child: PictogramCard(
-            title: "title",
-            actionText: "actionText",
-            //todo: a holder for the picto
-            pictogram: AssetImage(AppImages.kAbrigos),
-            status: status,
-            onChange: (bool a) {
-              print('tapped');
-              setState(() {
-                status = !status;
-              });
-            },
-            onPressed: () {
-              //todo: if needed to be implemented
-              print('pressed');
-            },
+        itemBuilder: (context, index) => Container(
+          width: MediaQuery.of(context).size.width - 48,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            //todo: plavce holder values
+            child: PictogramCard(
+              title: "title",
+              actionText: "actionText",
+              //todo: a holder for the picto
+              pictogram: AssetImage(AppImages.kAbrigos),
+              status: status,
+              onChange: (bool a) {
+                print('tapped');
+                setState(() {
+                  status = !status;
+                });
+              },
+              onPressed: () {
+                //todo: if needed to be implemented
+                print('pressed');
+              },
+            ),
           ),
         ),
       ),

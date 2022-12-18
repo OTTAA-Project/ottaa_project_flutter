@@ -72,8 +72,7 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 24, right: 24, bottom: 16, top: 32),
+                padding: const EdgeInsets.only(left: 24, right: 24, top: 32),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,6 +122,17 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                   ],
                 ),
               ),
+              // Expanded(
+              //   child: ListView(
+              //     shrinkWrap: true,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     scrollDirection: Axis.horizontal,
+              //     children: const [
+              //       CustomizeBoardScreen(),
+              //       CustomizeShortcutScreen(),
+              //     ],
+              //   ),
+              // )
               tabChange
                   ? const CustomizeBoardScreen()
                   : const CustomizeShortcutScreen(),
