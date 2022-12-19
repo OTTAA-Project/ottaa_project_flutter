@@ -15,7 +15,10 @@ class CustomizedMainTabScreen extends StatefulWidget {
 
 class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
   int index = 1;
-  bool tabChange = false;
+  final PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,9 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "board.customize.title".trl,
+                      index == 1
+                          ? "board.customize.title".trl
+                          : "board.shortcut.title".trl,
                       style: textTheme.headline3,
                     ),
                     const SizedBox(
@@ -49,14 +54,18 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                       onPressed: () => BasicBottomSheet.show(
                         context,
                         // title: "",
-                        subtitle: "helpText".trl,
+                        subtitle: index == 1
+                            ? "board.customize.helpText".trl
+                            : "board.shortcut.title".trl,
                         children: <Widget>[
                           Image.asset(
-                            AppImages.kBoardImageEdit1,
+                            index == 1
+                                ? AppImages.kBoardImageEdit1
+                                : AppImages.kBoardImageEdit2,
                             height: 166,
                           ),
                         ],
-                        okButtonText: "okText".trl,
+                        okButtonText: "board.customize.okText".trl,
                       ),
                       padding: const EdgeInsets.all(0),
                       color: colorScheme.onSurface,
@@ -64,13 +73,19 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                   ],
                 ),
                 actions: [
-                  Text(
-                    "Omitir".trl,
-                    style: textTheme.headline4!
-                        .copyWith(color: colorScheme.onSurface),
+                  GestureDetector(
+                    onTap: () {
+                      //todo: add the required things here
+                    },
+                    child: Text(
+                      "board.customize.omitir".trl,
+                      style: textTheme.headline4!
+                          .copyWith(color: colorScheme.onSurface),
+                    ),
                   ),
                 ],
               ),
+              //todo: add the emir widgets here
               Padding(
                 padding: const EdgeInsets.only(left: 24, right: 24, top: 32),
                 child: Column(
@@ -79,9 +94,10 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                   children: [
                     Row(
                       children: [
-                        Container(
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
                           height: 12,
-                          width: 32,
+                          width: index == 1 ? 32 : 16,
                           decoration: BoxDecoration(
                             color: colorScheme.primary,
                             borderRadius: BorderRadius.circular(8),
@@ -90,9 +106,10 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                         const SizedBox(
                           width: 4,
                         ),
-                        Container(
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
                           height: 12,
-                          width: 16,
+                          width: index == 2 ? 32 : 16,
                           decoration: BoxDecoration(
                             color: colorScheme.onSurface,
                             borderRadius: BorderRadius.circular(8),
@@ -102,7 +119,7 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                           width: 8,
                         ),
                         Text(
-                          "Paso $index/2",
+                          "${"board.customize.paso".trl} $index / 2",
                           style: textTheme.headline4!
                               .copyWith(color: colorScheme.onSurface),
                         ),
@@ -112,7 +129,9 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                       height: 8,
                     ),
                     Text(
-                      "board.customize.heading".trl,
+                      index == 1
+                          ? "board.customize.heading".trl
+                          : "board.shortcut.heading".trl,
                       style: textTheme.headline3!
                           .copyWith(fontWeight: FontWeight.w600),
                     ),
@@ -122,20 +141,19 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                   ],
                 ),
               ),
-              // Expanded(
-              //   child: ListView(
-              //     shrinkWrap: true,
-              //     physics: const NeverScrollableScrollPhysics(),
-              //     scrollDirection: Axis.horizontal,
-              //     children: const [
-              //       CustomizeBoardScreen(),
-              //       CustomizeShortcutScreen(),
-              //     ],
-              //   ),
-              // )
-              tabChange
-                  ? const CustomizeBoardScreen()
-                  : const CustomizeShortcutScreen(),
+
+              /// main view is here
+              Expanded(
+                child: PageView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: pageController,
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    CustomizeBoardScreen(),
+                    CustomizeShortcutScreen(),
+                  ],
+                ),
+              ),
             ],
           ),
           Positioned(
@@ -145,12 +163,23 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: PrimaryButton(
                 onPressed: () {
+                  //todo: add the proper things here
                   setState(() {
-                    tabChange = !tabChange;
+                    if (pageController.page == 1) {
+                      pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeIn);
+                      index = 1;
+                    } else {
+                      pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeIn);
+                      index = 2;
+                    }
                   });
                 },
                 //todo: add text here after discussing with the team
-                text: "Continuar".trl,
+                text: "golbal.continuar".trl,
               ),
             ),
           ),

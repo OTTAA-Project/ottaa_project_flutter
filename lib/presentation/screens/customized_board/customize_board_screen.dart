@@ -13,34 +13,32 @@ class _CustomizeBoardScreenState extends State<CustomizeBoardScreen> {
   bool status = true;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        padding:
-        const EdgeInsets.only(left: 24, right: 24, bottom: 16),
-        shrinkWrap: true,
-        itemCount: 10,
-        itemBuilder: (context, index) => Container(
-          width: MediaQuery.of(context).size.width - 48,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            //todo: plavce holder values
-            child: PictogramCard(
-              title: "title",
-              actionText: "actionText",
-              //todo: a holder for the picto
-              pictogram: AssetImage(AppImages.kAbrigos),
-              status: status,
-              onChange: (bool a) {
-                print('tapped');
-                setState(() {
-                  status = !status;
-                });
-              },
-              onPressed: () {
-                //todo: if needed to be implemented
-                print('pressed');
-              },
-            ),
+    return ListView.builder(
+      padding:
+      const EdgeInsets.only(left: 24, right: 24, bottom: 16),
+      shrinkWrap: true,
+      itemCount: 10,
+      itemBuilder: (context, index) => Container(
+        width: MediaQuery.of(context).size.width - 48,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          //todo: plavce holder values
+          child: PictogramCard(
+            title: "title",
+            actionText: "actionText",
+            //todo: a holder for the picto
+            pictogram: AssetImage(AppImages.kAbrigos),
+            status: status,
+            onChange: (bool a) {
+              print('tapped');
+              setState(() {
+                status = !status;
+              });
+            },
+            onPressed: () {
+              //todo: if needed to be implemented
+              print('pressed');
+            },
           ),
         ),
       ),

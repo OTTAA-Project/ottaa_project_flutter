@@ -1687,19 +1687,33 @@ class AppImages {
 
   static const kBoardImageEdit2 = 'assets/board/board_edit_image_2.png';
 
-  static const kBoardFavouriteIcon = "assets/board/icons/icons_not_selected/favourite.png";
-  static const kBoardHistoryIcon = "assets/board/icons/icons_not_selected/history.png";
-  static const kBoardCameraIcon = "assets/board/icons/icons_not_selected/camara.png";
-  static const kBoardDiceIcon = "assets/board/icons/icons_not_selected/dice.png";
+  static const kBoardFavouriteIcon =
+      "assets/board/icons/icons_not_selected/favourite.png";
+  static const kBoardHistoryIcon =
+      "assets/board/icons/icons_not_selected/history.png";
+  static const kBoardCameraIcon =
+      "assets/board/icons/icons_not_selected/camara.png";
+  static const kBoardDiceIcon =
+      "assets/board/icons/icons_not_selected/dice.png";
   static const kBoardYesIcon = "assets/board/icons/icons_not_selected/yes.png";
   static const kBoardNoIcon = "assets/board/icons/icons_not_selected/no.png";
-  static const kBoardShareIcon = "assets/board/icons/icons_not_selected/share.png";
+  static const kBoardShareIcon =
+      "assets/board/icons/icons_not_selected/share.png";
 
-  static const kBoardFavouriteIconSelected = "assets/board/icons/icons_selected/favourite.png";
-  static const kBoardHistoryIconSelected = "assets/board/icons/icons_selected/history.png";
-  static const kBoardDiceIconSelected = "assets/board/icons/icons_selected/dice.png";
-  static const kBoardCameraIconSelected = "assets/board/icons/icons_selected/camara.png";
-  static const kBoardYesIconSelected = "assets/board/icons/icons_selected/yes.png";
-  static const kBoardNoIconSelected = "assets/board/icons/icons_selected/no.png";
-  static const kBoardShareIconSelected = "assets/board/icons/icons_selected/share.png";
+  static const kBoardFavouriteIconSelected =
+      "assets/board/icons/icons_selected/favourite.png";
+  static const kBoardHistoryIconSelected =
+      "assets/board/icons/icons_selected/history.png";
+  static const kBoardDiceIconSelected =
+      "assets/board/icons/icons_selected/dice.png";
+  static const kBoardCameraIconSelected =
+      "assets/board/icons/icons_selected/camara.png";
+  static const kBoardYesIconSelected =
+      "assets/board/icons/icons_selected/yes.png";
+  static const kBoardNoIconSelected =
+      "assets/board/icons/icons_selected/no.png";
+  static const kBoardShareIconSelected =
+      "assets/board/icons/icons_selected/share.png";
+  static const kBoardCustomizeWaitIcon =
+      "assets/board/customize_wait_icon.png";
 }

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_main_tab_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_wait_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/login_screen.dart';
@@ -124,6 +125,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.customizedBoardScreen,
           builder: (context, state) => const CustomizedMainTabScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.customizeWaitScreen,
+          builder: (context, state) => const CustomizeWaitScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),

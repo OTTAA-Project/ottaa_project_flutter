@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ottaa_ui_kit/theme.dart';
 
 class ShortcutWidget extends StatelessWidget {
   const ShortcutWidget({
@@ -21,31 +22,38 @@ class ShortcutWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-              border: selected
-                  ? Border.all(color: colorScheme.primary, width: 1)
-                  : Border.all(),
+      child: Container(
+        width: 80,
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: colorScheme.onPrimary,
+                borderRadius: BorderRadius.circular(8),
+                border: selected
+                    ? Border.all(color: colorScheme.primary, width: 1)
+                    : Border.all(),
+              ),
+              padding: const EdgeInsets.all(18),
+              child: Image.asset(
+                selected ? image2 : image,
+                height: 44,
+                width: 44,
+              ),
             ),
-            padding: const EdgeInsets.all(18),
-            child: Image.asset(
-              selected ? image2 : image,
-              height: 44,
-              width: 44,
+            const SizedBox(
+              height: 16,
             ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Text(
-            heading,
-            style: textTheme.headline3,
-          ),
-        ],
+            Text(
+              heading,
+              style: selected
+                  ? textTheme.headline3
+                  : textTheme.headline3!.copyWith(color: kDarkenGrayColor),
+              textAlign: TextAlign.center,
+              maxLines: 3,
+            ),
+          ],
+        ),
       ),
     );
   }
