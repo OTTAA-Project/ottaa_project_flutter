@@ -136,66 +136,93 @@
   "add_group": "Añadir grupo",
   "add_pict": "Agregar imagen",
   "galeria_grupos": "Galeria Grupos",
-  "profile.omitir": "Omitir",
-  "profile.continuar": "Continuar",
-  "profile.selection.text1": "¿Quién usará la aplicación en este dispositivo?",
-  "profile.acompanante": "Acompañante",
-  "profile.profesionales.familiares": "Profesionales / Familiares",
-  "profile.necesita.comunicarse": "Necesita comunicarse",
-  "profile.usuario.a": "Usuario / a",
-  "profile.aguarde": "Aguarde",
-  "profile.configurando.su.experiencia": "Configurando su experiencia...",
-  "profile.hola": "Hola",
-  "profile.vincular.con.cuenta": "Vincular con cuenta",
-  "profile.crear.nueva.cuenta": "Crear nueva cuenta",
-  "profile.usar.ottaa": "Usar Ottaa",
-  "profile.modo.sin.perfil": "Modo sin perfil",
-  "profile.nuevo.existente": "Nuevo / Existente",
-  "profile.agregar.cuenta": "Agregar cuenta",
-  "profile.qué.deseas.hacer": "¿Qué deseas hacer?",
-  "profile.perfil": "Perfil",
-  "profile.ayuda": "Ayuda",
-  "profile.cerrar.sesión": "Cerrar sesión",
-  "profile.ottaa.tips": "Ottaa tips ",
-  "profile.cuentas.vinculadas": "Cuentas vinculadas",
-  "profile.rol.de.uso": "Rol de uso",
-  "profile.nombre": "Nombre",
-  "profile.apellido": "Apellido",
-  "profile.mail": "Mail",
-  "profile.dia": "Día",
-  "profile.mes": "Mes",
-  "profile.ano": "Año",
-  "profile.date": "Fecha de nacimiento",
-  "profile.chooser.screen.button": "Guardar cambios",
-  "profile.chooser.screen.heading": "¿Quién usa la aplicación en este dispositivo?",
-  "profile.faq.title": "Preguntas frecuentes",
-  "profile.help.title1": "Preguntas frecuentes",
-  "profile.help.title2": "Contactar con soporte",
-  "board": {
-    "customize": {
-      "title": "Tableros predictivos",
-      "heading": "¿Qué tableros utilizará el usuario para comunicarse?",
-      "helpText": "Los tableros predictivos permiten configurar que grupo de pictogramas se mostrarán en la pantalla del usuario/a final.",
-      "okText": "OK! Entendido",
-      "omitir": "Omitir",
-      "paso": "Paso"
+  "profile": {
+    "omitir": "Omitir",
+    "continuar": "Continuar",
+    "selection": {
+      "text1": "¿Quién usará la aplicación en este dispositivo?"
     },
-    "shortcut": {
-      "title": "Atajos",
-      "heading": "Selecciona los atajos que aparecerán en la pantalla principal.",
-      "helpText": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal.",
-      "favoritos": "Favoritos",
-      "historial": "Historial",
-      "camera": "Cámara",
-      "juegos": "Juegos",
-      "yes": "Respuesta \nrápida: Si",
-      "no": "Respuesta \nrápida: No",
-      "compartir": "Compartir"
+    "acompanante": "Acompañante",
+    "profesionales": {
+      "familiares": "Profesionales / Familiares"
     },
-    "wait": {
-      "heading": "¡Felicitaciones!",
-      "subtitle": "Haz configurado la experiencia de Juan!",
-      "button": "Ir al panel de perfiles"
+    "necesita": {
+      "comunicarse": "Necesita comunicarse"
+    },
+    "usuario": {
+      "a": "Usuario / a"
+    },
+    "aguarde": "Aguarde",
+    "configurando": {
+      "su": {
+        "experiencia": "Configurando su experiencia..."
+      }
+    },
+    "hola": "Hola",
+    "vincular": {
+      "con": {
+        "cuenta": "Vincular con cuenta"
+      }
+    },
+    "crear": {
+      "nueva": {
+        "cuenta": "Crear nueva cuenta"
+      }
+    },
+    "usar": {
+      "ottaa": "Usar Ottaa"
+    },
+    "modo": {
+      "sin": {
+        "perfil": "Modo sin perfil"
+      }
+    },
+    "nuevo": {
+      "existente": "Nuevo / Existente"
+    },
+    "agregar": {
+      "cuenta": "Agregar cuenta"
+    },
+    "qué": {
+      "deseas": {
+        "hacer": "¿Qué deseas hacer?"
+      }
+    },
+    "perfil": "Perfil",
+    "ayuda": "Ayuda",
+    "cerrar": {
+      "sesión": "Cerrar sesión"
+    },
+    "ottaa": {
+      "tips": "Ottaa tips "
+    },
+    "cuentas": {
+      "vinculadas": "Cuentas vinculadas"
+    },
+    "rol": {
+      "de": {
+        "uso": "Rol de uso"
+      }
+    },
+    "nombre": "Nombre",
+    "apellido": "Apellido",
+    "mail": "Mail",
+    "dia": "Día",
+    "mes": "Mes",
+    "ano": "Año",
+    "date": "Fecha de nacimiento",
+    "chooser": {
+      "screen": {
+        "button": "Guardar cambios",
+        "heading": "¿Quién usa la aplicación en este dispositivo?"
+      }
+    },
+    "faq": {
+      "title": "Preguntas frecuentes"
+    },
+    "help": {
+      "title1": "Preguntas frecuentes",
+      "title2": "Contactar con soporte"
     }
   }
 }
