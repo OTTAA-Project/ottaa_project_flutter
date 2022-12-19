@@ -1,12 +1,58 @@
 {
-  "profile.selection.text1": "Chi utilizzerà l'app su questo dispositivo?",
-  "profile.crear.nueva.cuenta": "Registrati",
-  "profile.agregar.cuenta": "Aggiungi account",
-  "profile.ottaa.tips": "OTTAA tips",
-  "profile.mail": "Mail",
-  "profile.date": "Data di nascita",
-  "profile.faq.title": "Domande frequenti (FAQ)",
-  "profile.help.title2": "Contatta il supporto",
+  "profile": {
+    "selection": {
+      "text1": "Chi utilizzerà l'app su questo dispositivo?"
+    },
+    "crear": {
+      "nueva": {
+        "cuenta": "Registrati"
+      }
+    },
+    "agregar": {
+      "cuenta": "Aggiungi account"
+    },
+    "ottaa": {
+      "tips": "OTTAA tips"
+    },
+    "mail": "Mail",
+    "date": "Data di nascita",
+    "faq": {
+      "title": "Domande frequenti (FAQ)"
+    },
+    "help": "Aiuto",
+    "caregiver": "Badante",
+    "caregivers_families": "Professionisti / Famiglia",
+    "user": "Utente",
+    "wait": "Sei pregato d'attendere",
+    "setting_exp": "Impostando la tua esperienza...",
+    "link_account": "Link account",
+    "use": {
+      "ottaa": "Usa OTTAA"
+    },
+    "no_account": "Modo senza profilo",
+    "new_existant": "Nuovo/Esistente",
+    "what_do": "Che cosa vuoi fare?",
+    "profile": "Profilo",
+    "linked_accounts": "Accounts connessi",
+    "name": "Nome",
+    "logout": "Disconnetti",
+    "last_name": "Cognome",
+    "role": "Ruolo d'uso",
+    "day": "Giorno",
+    "month": "Mese",
+    "year": "Anno",
+    "tips": {
+      "title1": "Statistiche",
+      "title2": "Schede",
+      "title3": "Cronolgia",
+      "title4": "Preferiti",
+      "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
+      "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
+      "text3": "Usá el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
+      "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
+    },
+    "unlink": "Desvincular"
+  },
   "global": {
     "hello_world": "Hello World",
     "hello": "Ciao",
@@ -21,34 +67,14 @@
     "no": "No",
     "mute": "Silenzia",
     "important": "Importante",
-    "save_changes": "Vuoi salvare le modifiche?"
+    "save_changes": "Salva le modifiche",
+    "send": "Invia",
+    "omitir": "Salta"
   },
-  "profile.caregiver": "Badante",
-  "profile.caregivers_families": "Professionisti / Famiglia",
-  "profile.user": "Utente",
-  "profile.wait": "Sei pregato d'attendere",
-  "profile.setting_exp": "Impostando la tua esperienza...",
-  "profile.link_account": "Link account",
-  "global.omitir": "Salta",
-  "profile.use.ottaa": "Usa OTTAA",
-  "profile.no_account": "Modo senza profilo",
-  "profile.new_existant": "Nuovo/Esistente",
-  "profile.what_do": "Che cosa vuoi fare?",
-  "profile.profile": "Profilo",
-  "profile.help": "Aiuto",
-  "global.save_changes": "Salva le modifiche",
-  "profile.linked_accounts": "Accounts connessi",
-  "profile.name": "Nome",
-  "profile.logout": "Disconnetti",
-  "profile.last_name": "Cognome",
-  "profile.role": "Ruolo d'uso",
-  "profile.day": "Giorno",
-  "profile.month": "Mese",
-  "profile.year": "Anno",
   "onboarding2": {
     "title": "Atajos en la pantalla principal",
-    "text": "Personaliza de acuerdo a los gustos y necesidades",
-    "upperText": "Personaliza tu Home"
+    "text": "Personalizá de acuerdo a los gustos y necesidades",
+    "upperText": "Personalizza il tuo Home"
   },
   "onboarding1": {
     "title": "¿Quién usa OTTAA hoy?",
@@ -58,7 +84,31 @@
     "upperText": "Pantalla de perfiles"
   },
   "onboarding3": {
-    "title": "Acompañamos en el proceso de aprendizaje ",
-    "text": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+    "title": "Te acompañamos en el proceso de aprendizaje",
+    "text": "Activá o desactivá tableros o pictogramas para modificar la predicción, vos tenés el control."
+  },
+  "signin": {
+    "title": "Ingresá con tu cuenta",
+    "signup": "¿Todavía no tenés tu cuenta? Registrate acá"
+  },
+  "terms": {
+    "button": "Accetto i termini",
+    "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\r\nVer términos"
+  },
+  "loginWait": {
+    "text": "Te damos la bienvenida!\r\nAl mundo de OTTAA"
+  },
+  "link": {
+    "title": "Ingresá el correo electrónico de la cuenta de OTTAA a vincular",
+    "text1": "*Asegurate de estar en contacto con la persona que tenga este correo electrónico.",
+    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este código arriba."
+  },
+  "token": {
+    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
+    "text": "¿Inconvenientes para enlazar las cuentas?",
+    "button": {
+      "resend": "Rinvia email",
+      "anothermail": "Ingresá otro email."
+    }
   }
 }
