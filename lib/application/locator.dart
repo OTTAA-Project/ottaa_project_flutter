@@ -1,15 +1,18 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
-import 'package:intl/intl.dart';
+
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/service/server_service.dart';
-import 'package:ottaa_project_flutter/application/service/sql_database.dart';
 import 'package:ottaa_project_flutter/application/service/auth_service.dart';
 import 'package:ottaa_project_flutter/application/service/groups_service.dart';
 import 'package:ottaa_project_flutter/application/service/local_storage_service.dart';
 import 'package:ottaa_project_flutter/application/service/mobile_remote_storage_service.dart';
 import 'package:ottaa_project_flutter/application/service/pictograms_service.dart';
 import 'package:ottaa_project_flutter/application/service/sentences_service.dart';
+import 'package:ottaa_project_flutter/application/service/server_service.dart';
+import 'package:ottaa_project_flutter/application/service/sql_database.dart';
 import 'package:ottaa_project_flutter/application/service/tts_service.dart';
 import 'package:ottaa_project_flutter/application/service/web_remote_storage_service.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
@@ -22,12 +25,20 @@ import 'package:ottaa_project_flutter/core/repositories/remote_storage_repositor
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
+
 import 'service/about_service.dart';
 
 final locator = GetIt.instance;
 
 Future<void> setupServices() async {
-  final deviceLocale = Intl.getCurrentLocale().split("_")[0];
+  final List<Locale> systemLocales = window.locales;
+  final List<String> deviceLanguage = Platform.localeName.split('_');
+  Locale deviceLocale;
+  if (deviceLanguage.length == 2) {
+    deviceLocale = Locale(deviceLanguage[0], deviceLanguage[1]);
+  } else {
+    deviceLocale = systemLocales.firstWhere((element) => element.languageCode == deviceLanguage[0], orElse: () => const Locale('en', 'US'));
+  }
 
   final LocalDatabaseRepository databaseRepository = SqlDatabase();
   await databaseRepository.init();
