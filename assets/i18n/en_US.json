@@ -46,7 +46,7 @@
       "title2": "Dashboards",
       "title3": "History",
       "title4": "Favorites",
-      "text1": "See the statistics of your patient / family member, to check their activity and how they improved over the days, weeks and months.",
+      "text1": "See the statistics of your patient/family member, to check their activity and how they improved over the days, weeks and months.",
       "text2": "Hide boards the user does not need, so we only show what is important.",
       "text3": "Use the history feature to see old sentences, what you did during the day, or tell stories.",
       "text4": "Save pictograms and sentences in Favorites, so you can access them quickly."
@@ -78,7 +78,7 @@
   },
   "onboarding1": {
     "title": "Who is using OTTAA today?",
-    "text": "With the profile selection you will be able to use OTTAA from any device, keeping your pictograms and styles!"
+    "text": "With the profile selection, you will be able to use OTTAA from any device, keeping your pictograms and styles!"
   },
   "onboarding": {
     "upperText": "Profiles screen"
@@ -104,7 +104,7 @@
     "text2": "*We are going to show you a token, input the token above."
   },
   "token": {
-    "title": "Input the verification code that is shown in the screen of the account to link.",
+    "title": "Input the verification code that is shown on the screen of the account to link.",
     "text": "Having trouble linking accounts?",
     "button": {
       "resend": "Resend email",
