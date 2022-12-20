@@ -135,20 +135,25 @@ class AppRouter {
           path: AppRoutes.profileHelpScreen,
           builder: (context, state) => const ProfileHelpScreen(),
         ),
-        GoRoute(name: AppRoutes.linkMailScreen, path: AppRoutes.linkMailScreen, builder: (context, state) => const LinkMailScreen(), routes: [
-          GoRoute(
-            path: "token",
-            builder: (context, state) => const LinkTokenScreen(),
-          ),
-          GoRoute(
-            path: "wait",
-            builder: (context, state) => const LinkWaitingScreen(),
-          ),
-          GoRoute(
-            path: "success",
-            builder: (context, state) => const LinkSuccessScreen(),
-          )
-        ])
+        GoRoute(
+          name: AppRoutes.linkMailScreen,
+          path: AppRoutes.linkMailScreen,
+          builder: (context, state) => const LinkMailScreen(),
+          routes: [
+            GoRoute(
+              path: "token",
+              builder: (context, state) => const LinkTokenScreen(),
+            ),
+            GoRoute(
+              path: "wait",
+              builder: (context, state) => const LinkWaitingScreen(),
+            ),
+            GoRoute(
+              path: "success",
+              builder: (context, state) => const LinkSuccessScreen(),
+            )
+          ],
+        ),
         GoRoute(
           path: AppRoutes.customizedBoardScreen,
           builder: (context, state) => const CustomizedMainTabScreen(),
