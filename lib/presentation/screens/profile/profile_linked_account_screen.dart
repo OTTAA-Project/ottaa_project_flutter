@@ -11,7 +11,7 @@ class ProfileLinkedAccountScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
               //todo: why it is giving the error Emir-Chan
@@ -21,13 +21,12 @@ class ProfileLinkedAccountScreen extends StatelessWidget {
                 ),
                 leading: GestureDetector(
                   onTap: () => context.pop(),
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios_new,
                   ),
                 ),
-                actions: [],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 36,
               ),
               //todo: discuss the last text with the hector

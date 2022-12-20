@@ -14,7 +14,9 @@ class ProfileOTTAATipsScreen extends StatelessWidget {
       backgroundColor: kOTTAABackground,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+          ),
           child: Column(
             children: [
               //todo: emir will fix it
@@ -24,7 +26,7 @@ class ProfileOTTAATipsScreen extends StatelessWidget {
                 ),
                 leading: GestureDetector(
                   onTap: () => context.pop(),
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios_new_rounded,
                   ),
                 ),
