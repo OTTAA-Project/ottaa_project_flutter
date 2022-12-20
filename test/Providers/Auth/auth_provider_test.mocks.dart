@@ -286,6 +286,22 @@ class MockAuthService extends _i1.Mock implements _i12.AuthService {
         )),
       ) as _i5.Future<_i3.Either<String, _i6.UserModel>>);
   @override
+  _i5.Future<String> runToGetDataFromOtherPlatform({
+    required String? email,
+    required String? id,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #runToGetDataFromOtherPlatform,
+          [],
+          {
+            #email: email,
+            #id: id,
+          },
+        ),
+        returnValue: _i5.Future<String>.value(''),
+      ) as _i5.Future<String>);
+  @override
   _i5.Future<bool> isLoggedIn() => (super.noSuchMethod(
         Invocation.method(
           #isLoggedIn,

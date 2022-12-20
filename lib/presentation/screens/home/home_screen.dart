@@ -186,7 +186,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             child: SizedBox(
                               width: width / 4,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.push(AppRoutes.customizedBoardScreen);
+                                },
                                 style: ElevatedButton.styleFrom(
                                   elevation: 0,
                                   backgroundColor: Colors.transparent,

@@ -37,7 +37,7 @@ void main() {
       fecha: [0],
       locale: "es",
       id: 0,
-      complejidad: Complex(
+      complejidad: Complejidad(
         valor: 0,
         pictosComponentes: [
           PictosComponente(id: 0, esSugerencia: false, edad: ["0"], sexo: ["0"])
@@ -50,7 +50,7 @@ void main() {
       fecha: [0],
       locale: "es",
       id: 0,
-      complejidad: Complex(
+      complejidad: Complejidad(
         valor: 0,
         pictosComponentes: [
           PictosComponente(id: 0, esSugerencia: false, edad: ["0"], sexo: ["0"])

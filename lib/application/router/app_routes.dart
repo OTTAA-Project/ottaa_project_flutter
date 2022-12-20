@@ -20,4 +20,12 @@ class AppRoutes {
   static const profileChooserScreenSelected = "/profile_chooser_screen_selected";
   static const profileFAQScreen = "/profile_faq_screen";
   static const profileHelpScreen = "/profile_help_screen";
+  static const customizedBoardScreen = "/customized_board_screen";
+  static const customizeWaitScreen = "/customized_wait_screen";
+
+  static const linkMailScreen = "/link";
+  static const linkTokenScreen = "/link/token";
+  static const linkWaitScreen = "/link/wait";
+  static const linkSuccessScreen = "/link/success";
+  static const waitingLogin = "/login/waiting";
 }
