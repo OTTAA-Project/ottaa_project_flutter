@@ -1682,6 +1682,4 @@ class AppImages {
 
   static const kProfileHelpIcon2 =
       'assets/profile/profile_help_screen_icon_2.png';
-  static const kProfileTipsIcon =
-      'assets/profile/tips_logo.png';
 }

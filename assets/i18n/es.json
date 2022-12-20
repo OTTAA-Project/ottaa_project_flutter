@@ -136,77 +136,93 @@
   "add_group": "Añadir grupo",
   "add_pict": "Agregar imagen",
   "galeria_grupos": "Galeria Grupos",
-  "profile.omitir": "Omitir",
-  "profile.continuar": "Continuar",
-  "profile.selection.text1": "¿Quién usará la aplicación en este dispositivo?",
-  "profile.acompanante": "Acompañante",
-  "profile.profesionales.familiares": "Profesionales / Familiares",
-  "profile.necesita.comunicarse": "Necesita comunicarse",
-  "profile.usuario.a": "Usuario / a",
-  "profile.aguarde": "Aguarde",
-  "profile.configurando.su.experiencia": "Configurando su experiencia...",
-  "profile.hola": "Hola",
-  "profile.vincular.con.cuenta": "Vincular con cuenta",
-  "profile.crear.nueva.cuenta": "Crear nueva cuenta",
-  "profile.usar.ottaa": "Usar Ottaa",
-  "profile.modo.sin.perfil": "Modo sin perfil",
-  "profile.nuevo.existente": "Nuevo / Existente",
-  "profile.agregar.cuenta": "Agregar cuenta",
-  "profile.qué.deseas.hacer": "¿Qué deseas hacer?",
-  "profile.perfil": "Perfil",
-  "profile.cerrar.sesión": "Cerrar sesión",
-  "profile.cuentas.vinculadas": "Cuentas vinculadas",
-  "profile.rol.de.uso": "Rol de uso",
-  "profile.chooser.screen.button": "Guardar cambios",
-  "profile.chooser.screen.heading": "¿Quién usa la aplicación en este dispositivo?",
   "profile": {
-    "help": {
-      "title": "Soporte",
-      "heading": "¿Desea comunicarse por teléfono con soporte técnico?",
-      "button1": "Cancelar",
-      "button2": "Llamar",
-      "ayuda": "Ayuda",
-      "title1": "Preguntas frecuentes",
-      "  title2": "Contactar con soporte"
+    "omitir": "Omitir",
+    "continuar": "Continuar",
+    "selection": {
+      "text1": "¿Quién usará la aplicación en este dispositivo?"
     },
-    "tips": {
-      "title": "Ottaa tips",
-      "faq1": "ESTADÍSTICAS",
-      "faq1s": "Mira las estadísticas de tu paciente / familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
-      "faq2": "TABLEROS",
-      "faq2s": "Oculta los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
-      "faq3": "HISTORIAL",
-      "faq3s": "Con este ícono reconoceras los alimentos  que no hayan tenido contacto y/o sean sin trigo, avena.",
-      "faq4": "FAVORITOS",
-      "faq4s": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rapidamente."
+    "acompanante": "Acompañante",
+    "profesionales": {
+      "familiares": "Profesionales / Familiares"
     },
-    "edit": {
-      "nombre": "Nombre",
-      "apellido": "Apellido",
-      "mail": "Mail",
-      "dia": "Día",
-      "mes": "Mes",
-      "ano": "Año",
-      "date": "Fecha de nacimiento"
+    "necesita": {
+      "comunicarse": "Necesita comunicarse"
+    },
+    "usuario": {
+      "a": "Usuario / a"
+    },
+    "aguarde": "Aguarde",
+    "configurando": {
+      "su": {
+        "experiencia": "Configurando su experiencia..."
+      }
+    },
+    "hola": "Hola",
+    "vincular": {
+      "con": {
+        "cuenta": "Vincular con cuenta"
+      }
+    },
+    "crear": {
+      "nueva": {
+        "cuenta": "Crear nueva cuenta"
+      }
+    },
+    "usar": {
+      "ottaa": "Usar Ottaa"
+    },
+    "modo": {
+      "sin": {
+        "perfil": "Modo sin perfil"
+      }
+    },
+    "nuevo": {
+      "existente": "Nuevo / Existente"
+    },
+    "agregar": {
+      "cuenta": "Agregar cuenta"
+    },
+    "qué": {
+      "deseas": {
+        "hacer": "¿Qué deseas hacer?"
+      }
+    },
+    "perfil": "Perfil",
+    "ayuda": "Ayuda",
+    "cerrar": {
+      "sesión": "Cerrar sesión"
+    },
+    "ottaa": {
+      "tips": "Ottaa tips "
+    },
+    "cuentas": {
+      "vinculadas": "Cuentas vinculadas"
+    },
+    "rol": {
+      "de": {
+        "uso": "Rol de uso"
+      }
+    },
+    "nombre": "Nombre",
+    "apellido": "Apellido",
+    "mail": "Mail",
+    "dia": "Día",
+    "mes": "Mes",
+    "ano": "Año",
+    "date": "Fecha de nacimiento",
+    "chooser": {
+      "screen": {
+        "button": "Guardar cambios",
+        "heading": "¿Quién usa la aplicación en este dispositivo?"
+      }
     },
     "faq": {
-      "title": "Preguntas frecuentes",
-      "title1": "",
-      "title2": "",
-      "title3": "",
-      "title4": "",
-      "title5": "",
-      "title6": "",
-      "title7": "",
-      "subtitle1": "",
-      "subtitle2": "",
-      "subtitle3": "",
-      "subtitle4": "",
-      "subtitle5": "",
-      "subtitle6": "",
-      "subtitle7": ""
+      "title": "Preguntas frecuentes"
     },
-    "chooserScreen": {
+    "help": {
+      "title1": "Preguntas frecuentes",
+      "title2": "Contactar con soporte"
     }
   }
 }

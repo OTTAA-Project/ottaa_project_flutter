@@ -1,50 +1,50 @@
 {
   "profile": {
     "selection": {
-      "text1": "Quem usará o aplicativo neste dispositivo?"
+      "text1": "¿Quién va a usar la aplicación en este dispositivo?"
     },
     "crear": {
       "nueva": {
-        "cuenta": "Cadastre-se"
+        "cuenta": "Crear nueva cuenta"
       }
     },
     "agregar": {
-      "cuenta": "Adicionar conta"
+      "cuenta": "Agregar cuenta"
     },
     "ottaa": {
-      "tips": "Ottaa tips "
+      "tips": "OTTAA tips"
     },
     "mail": "Mail",
-    "date": "Data de nascimento",
+    "date": "تاريخ الميلاد",
     "faq": {
-      "title": "Perguntas frequentes (FAQ)"
+      "title": "Preguntas frecuentes"
     },
-    "help": "Ajuda",
-    "caregiver": "Acompanhante",
-    "caregivers_families": "Profissionais/Família",
-    "user": "Usuário",
-    "wait": "Por favor, aguarde",
-    "setting_exp": "Configurando sua experiência...",
-    "link_account": "Vincular Conta",
+    "help": "Ayuda",
+    "caregiver": "Acompañante",
+    "caregivers_families": "Profesionales/Familiares",
+    "user": "Usuario/a",
+    "wait": "Por favor esperá",
+    "setting_exp": "Configurando tu experiencia...",
+    "link_account": "Vincular una cuenta",
     "use": {
       "ottaa": "Usar OTTAA"
     },
-    "no_account": "Modo sem perfil",
-    "new_existant": "Novo/Existente",
-    "what_do": "Que eu posso fazer?",
+    "no_account": "Modo sin perfil",
+    "new_existant": "Nuevo/Existente",
+    "what_do": "¿Qué querés hacer?",
     "profile": "Perfil",
-    "linked_accounts": "Contas conectadas",
-    "name": "Nome",
-    "logout": "Deslogar",
-    "last_name": "Apelido",
-    "role": "Função de uso",
-    "day": "Dia",
-    "month": "Mês",
-    "year": "Ano",
+    "linked_accounts": "Cuentas vinculadas",
+    "name": "Nombre",
+    "logout": "Cerrar sesión",
+    "last_name": "Apellido",
+    "role": "Rol de uso",
+    "day": "Día",
+    "month": "Mes",
+    "year": "عام",
     "tips": {
-      "title1": "Estatísticas",
-      "title2": "Paineis",
-      "title3": "História",
+      "title1": "Estadísticas",
+      "title2": "Tableros",
+      "title3": "Historial",
       "title4": "Favoritos",
       "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
       "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
@@ -54,22 +54,22 @@
     "unlink": "Desvincular"
   },
   "global": {
-    "hello_world": "Hello World",
-    "hello": "Olá",
-    "continue": "Avançar",
-    "next": "Próximo",
-    "previous": "Prévio",
-    "please_enter_text": "Por favor, digite um texto",
-    "done": "Feito",
-    "yes": "Sim",
-    "delete": "Limpiar",
+    "hello_world": "Hola Mundo",
+    "hello": "Hola",
+    "continue": "Continuar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "please_enter_text": "Por favor ingrese un texto",
+    "done": "تم",
+    "yes": "Sí",
+    "delete": "Borrar",
     "edit": "Editar",
-    "no": "Não",
+    "no": "لا",
     "mute": "Silenciar",
     "important": "Importante",
-    "save_changes": "Salvar alterações",
+    "save_changes": "Guardar cambios",
     "send": "Enviar",
-    "omitir": "Pular"
+    "omitir": "Omitir"
   },
   "onboarding2": {
     "title": "Atajos en la pantalla principal",
@@ -92,7 +92,7 @@
     "signup": "¿Todavía no tenés tu cuenta? Registrate acá"
   },
   "terms": {
-    "button": "Aceito os termos",
+    "button": "Acepto los términos",
     "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\r\nVer términos"
   },
   "loginWait": {
@@ -107,7 +107,7 @@
     "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "¿Inconvenientes para enlazar las cuentas?",
     "button": {
-      "resend": "Reenviar e-mail",
+      "resend": "Reenviar email",
       "anothermail": "Ingresá otro email."
     }
   }
