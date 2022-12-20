@@ -66,7 +66,7 @@ dev_dependencies:
   test: ^1.22.0
 
 dependency_overrides:
-#  firebase_core_platform_interface: 4.5.1
+  #  firebase_core_platform_interface: 4.5.1
   test_api: 0.4.12
 
 
@@ -75,6 +75,10 @@ flutter:
   assets:
     - assets/imgs/
     - assets/
+    - assets/board/
+    - assets/board/icons/
+    - assets/board/icons/icons_not_selected/
+    - assets/board/icons/icons_selected/
     - assets/profiles/
     - assets/games_images/
     - assets/audios/
