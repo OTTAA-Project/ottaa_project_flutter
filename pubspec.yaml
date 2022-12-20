@@ -85,6 +85,7 @@ flutter:
     - assets/i18n/
     - assets/profile/
     - assets/rive/
+    - assets/onboarding/
   fonts:
     - family: Roboto
       fonts:

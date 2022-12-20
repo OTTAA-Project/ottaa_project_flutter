@@ -25,4 +25,5 @@ class AppRoutes {
   static const linkTokenScreen = "/link/token";
   static const linkWaitScreen = "/link/wait";
   static const linkSuccessScreen = "/link/success";
+  static const waitingLogin = "/login/waiting";
 }

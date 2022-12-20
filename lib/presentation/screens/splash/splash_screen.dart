@@ -1,10 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -22,7 +28,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final isLogged = ref.read(authNotifier);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      return context.push(AppRoutes.linkMailScreen);
+      await blockPortraitMode();
+
+      setState(() {});
+
       if (isLogged) {
         bool isFirstTime = await provider.isFirstTime();
         bool hasPhoto = await provider.checkUserAvatar();
@@ -49,19 +58,37 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Image(
-            image: AssetImage('assets/imgs/logo_ottaa.webp'),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const OttaaLoadingAnimation(
+                width: 40,
+                height: 100,
+              ),
+              const SizedBox(width: 20),
+              Text(
+                "Hello".trl,
+                style: textTheme.headline1?.copyWith(color: Theme.of(context).primaryColor, fontSize: 40),
+              ), //TODO: CHange this
+            ],
           ),
-          const LinearProgressIndicator(
-            backgroundColor: Colors.grey,
-            color: Colors.deepOrange,
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image(
+              image: AssetImage(AppImages.kLogoOttaa),
+              width: size.width * 0.5,
+            ),
           ),
-          const SizedBox(height: 10),
-          Text("we_are_preparing_everything".trl)
         ],
       ),
     );
