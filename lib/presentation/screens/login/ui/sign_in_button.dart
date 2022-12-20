@@ -6,6 +6,8 @@ import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/jumping_dots.dart';
+import 'package:ottaa_ui_kit/theme.dart';
+import 'package:ottaa_ui_kit/widgets.dart';
 
 class SignInButton extends ConsumerWidget {
   final SignInType type;
@@ -19,12 +21,28 @@ class SignInButton extends ConsumerWidget {
     final loading = ref.watch(loadingProvider);
     final auth = ref.watch(authProvider);
 
+    final colorSchema = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return ElevatedButton(
       style: style ??
           ElevatedButton.styleFrom(
-            fixedSize: const Size.fromHeight(50),
+            fixedSize: const Size.fromHeight(48),
+            backgroundColor: kWhiteColor,
+            elevation: 0,
+            shadowColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: const BorderSide(
+                color: Colors.grey,
+                width: 1,
+              ),
+            ),
+            foregroundColor: Colors.grey,
           ),
       onPressed: () async {
+        final BuildContext localContext = context;
+
         final result = await auth.signIn(type);
 
         if (result.isLeft) {
@@ -35,8 +53,18 @@ class SignInButton extends ConsumerWidget {
             ),
           );
         }
-        // ignore: use_build_context_synchronously
-        context.go(AppRoutes.splash);
+
+        if (result.isRight) {
+          // ignore: use_build_context_synchronously
+          await BasicBottomSheet.show(
+            localContext,
+            subtitle: "Para continuar, necesitamos que acepter los términos y condiciones.",
+            okButtonText: "Aceptar Términos",
+          );
+
+          // ignore: use_build_context_synchronously
+          localContext.go(AppRoutes.waitingLogin);
+        }
       },
       child: Flex(
         direction: Axis.horizontal,
@@ -44,18 +72,21 @@ class SignInButton extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: loading
             ? [
-                const Expanded(
-                  child: JumpingDotsProgressIndicator(),
+                Expanded(
+                  child: JumpingDotsProgressIndicator(
+                    dotColor: colorSchema.primary,
+                  ),
                 ),
               ]
             : [
-                Expanded(
+                Flexible(
                   flex: 1,
                   child: Image.asset(logo, height: 20),
                 ),
-                Expanded(
+                const SizedBox(width: 10),
+                Flexible(
                   flex: 2,
-                  child: Text(text),
+                  child: Text(text, style: textTheme.headline3),
                 )
               ],
       ),

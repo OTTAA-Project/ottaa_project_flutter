@@ -53,8 +53,9 @@ dependencies:
   transparent_image: ^2.0.0
   ottaa_ui_kit:
     git:
-      url: https://github.com/OTTAA-Project/OTTAA_flutter_theme/
+      url: https://github.com/OTTAA-Project/OTTAA_flutter_theme.git
       ref: master
+  rive: ^0.9.1
 
 dev_dependencies:
   build_runner: ^2.3.2
@@ -87,6 +88,8 @@ flutter:
     - assets/gender_based/grupos/
     - assets/i18n/
     - assets/profile/
+    - assets/rive/
+    - assets/onboarding/
   fonts:
     - family: Roboto
       fonts:
