@@ -2,10 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart';
-import 'package:ottaa_project_flutter/application/locator.dart';
 
 class I18N extends ChangeNotifier {
   final Map<String, TranslationTree> _languages = {};
@@ -58,6 +55,7 @@ class I18N extends ChangeNotifier {
       return null;
     }
   }
+
   TranslationTree? get currentLanguage => _currentLanguage;
 
   Future<void> changeLanguage(String languageCode) async {
@@ -81,8 +79,23 @@ class I18N extends ChangeNotifier {
   void notify() {
     notifyListeners();
   }
+
+  static I18N of(BuildContext context) {
+    final provider = (context.dependOnInheritedWidgetOfExactType<I18nNotifier>());
+    assert(provider != null, "No I18nNotifier found in context");
+
+    final notifier = provider!.notifier;
+    assert(notifier != null, "No I18N found in context");
+
+    return notifier!;
+  }
 }
 
-final i18nProvider = ChangeNotifierProvider<I18N>((ref) {
-  return locator<I18N>();
-});
+class I18nNotifier extends InheritedNotifier<I18N> {
+  const I18nNotifier({super.key, super.notifier, required super.child});
+
+  @override
+  bool updateShouldNotify(I18nNotifier oldWidget) {
+    return oldWidget.notifier?.locale != notifier?.locale;
+  }
+}
