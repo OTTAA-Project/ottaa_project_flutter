@@ -21,18 +21,20 @@ import 'package:ottaa_project_flutter/presentation/screens/sentences/sentences_s
 import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/search_sentence.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/tutorial/tutorial_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
 final AppRouter appRouterSingleton = AppRouter();
 
 class AppRouter {
   String get initialAppResolver {
+    return AppRoutes.splash;
     final authService = GetIt.I.get<AuthRepository>();
 
     if (!authService.isLogged) {
       return AppRoutes.login;
     }
     //todo: talk with emir about it
-    if(authService.isLogged){
+    if (authService.isLogged) {
       return AppRoutes.home;
     }
 
@@ -59,6 +61,12 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.login,
           builder: (context, state) => const LoginScreen(),
+          routes: [
+            GoRoute(
+              path: "waiting",
+              builder: (context, state) => const LoginWaitingScreen(),
+            ),
+          ],
         ),
         GoRoute(
           path: AppRoutes.home,
