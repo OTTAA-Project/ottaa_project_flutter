@@ -1698,4 +1698,6 @@ class AppImages {
       "assets/board/icons/icons_selected/share.png";
   static const kBoardCustomizeWaitIcon =
       "assets/board/customize_wait_icon.png";
+  static const kProfileTipsIcon =
+      'assets/profile/icon_tips.png';
 }
