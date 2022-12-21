@@ -82,7 +82,7 @@
     "hello": "Hola",
     "continue": "Continuar",
     "next": "Siguiente",
-    "previous": "Anterior",
+    "back": "Anterior",
     "please_enter_text": "Por favor, ingrese un texto",
     "done": "Listo",
     "yes": "Sí",
@@ -93,9 +93,10 @@
     "important": "Importante",
     "save_changes": "Guardar cambios",
     "send": "Enviar",
-    "omitir": "Omitir"
+    "skip": "Omitir"
   },
   "onboarding": {
+    "start": "Comenzar",
     "profile": {
       "title": "Pantalla de perfiles",
       "subtitle": "¿Quién usa OTTAA hoy?",
@@ -111,10 +112,6 @@
       "subtitle": "Acompañamos en el proceso de aprendizaje",
       "description": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
     }
-  },
-  "signin": {
-    "title": "Ingresá con tu cuenta",
-    "signup": "¿Todavía no tenés tu cuenta? Registrate acá"
   },
   "terms": {
     "button": "Acepto los términos",

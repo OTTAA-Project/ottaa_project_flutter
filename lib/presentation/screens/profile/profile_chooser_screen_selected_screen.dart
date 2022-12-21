@@ -44,7 +44,7 @@ class ProfileChooserScreenSelected extends StatelessWidget {
                           width: 24,
                         ),
                         Text(
-                          "profile.rol.de.uso".trl,
+                          "profile.role".trl,
                         ),
                       ],
                     ),
@@ -60,8 +60,8 @@ class ProfileChooserScreenSelected extends StatelessWidget {
                     ),
                   ),
                   ProfileChooserButtonWidget(
-                    heading: 'profile.acompanante'.trl,
-                    subtitle: 'profile.profesionales.familiares'.trl,
+                    heading: 'profile.caregiver'.trl,
+                    subtitle: 'profile.caregivers_families'.trl,
                     imagePath: AppImages.kProfileIcon1,
                     onTap: () {},
                     selected: false,
@@ -70,7 +70,7 @@ class ProfileChooserScreenSelected extends StatelessWidget {
                     height: 16,
                   ),
                   ProfileChooserButtonWidget(
-                    heading: 'profile.acompanante'.trl,
+                    heading: 'profile.user'.trl,
                     subtitle: 'profile.necesita.comunicarse'.trl,
                     imagePath: AppImages.kProfileIcon2,
                     onTap: () {},

@@ -46,7 +46,7 @@ class ProfileChooserScreen extends StatelessWidget {
                     ),
                   ),
                   ProfileChooserButtonWidget(
-                    heading: 'profile.acompanante'.trl,
+                    heading: 'profile.caregivers_families'.trl,
                     subtitle: 'profile.profesionales.familiares'.trl,
                     imagePath: AppImages.kProfileIcon1,
                     onTap: () {},
@@ -56,7 +56,7 @@ class ProfileChooserScreen extends StatelessWidget {
                     height: 16,
                   ),
                   ProfileChooserButtonWidget(
-                    heading: 'profile.acompanante'.trl,
+                    heading: 'profile.user'.trl,
                     subtitle: 'profile.necesita.comunicarse'.trl,
                     imagePath: AppImages.kProfileIcon2,
                     onTap: () {},
@@ -68,7 +68,7 @@ class ProfileChooserScreen extends StatelessWidget {
                 //todo: add the proper way for handling the waiting screen, hector said is should be their for 4 seconds at least
                 onTap: () => context.push(AppRoutes.profileWaitingScreen),
                 active: false,
-                text: "profile.continuar".trl,
+                text: "global.continue".trl,
               ),
             ],
           ),

@@ -42,7 +42,7 @@ class ProfileSettingsEditScreen extends StatelessWidget {
                         width: 24,
                       ),
                       Text(
-                        "profile.perfil".trl,
+                        "profile.profile".trl,
                       ),
                     ],
                   ),
@@ -58,12 +58,12 @@ class ProfileSettingsEditScreen extends StatelessWidget {
                     height: 24,
                   ),
                   NewTextWidget(
-                    hintText: 'profile.nombre'.trl,
+                    hintText: 'profile.name'.trl,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: NewTextWidget(
-                      hintText: 'profile.apellido'.trl,
+                      hintText: 'profile.last_name'.trl,
                     ),
                   ),
                   NewTextWidget(
@@ -79,15 +79,15 @@ class ProfileSettingsEditScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       DateWidget(
-                        text: 'profile.dia'.trl,
+                        text: 'profile.day'.trl,
                         onTap: () {},
                       ),
                       DateWidget(
-                        text: 'profile.mes'.trl,
+                        text: 'profile.month'.trl,
                         onTap: () {},
                       ),
                       DateWidget(
-                        text: 'profile.ano'.trl,
+                        text: 'profile.year'.trl,
                         onTap: () {},
                       ),
                     ],

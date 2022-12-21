@@ -39,7 +39,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                         width: 24,
                       ),
                       Text(
-                        "profile.perfil".trl,
+                        "profile.profile".trl,
                       ),
                     ],
                   ),
@@ -63,7 +63,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                 height: 16,
               ),
               Text(
-                "UserName will be here",
+                "global.hello_world".trl,
               ),
               const SizedBox(
                 height: 32,
@@ -71,33 +71,33 @@ class ProfileSettingsScreen extends StatelessWidget {
               CategoryWidget(
                 onTap: () => context.push(AppRoutes.profileSettingsEditScreen),
                 icon: AppImages.kProfileSettingsIcon1,
-                text: "profile.perfil".trl,
+                text: "profile.profile".trl,
               ),
               CategoryWidget(
                 onTap: () =>
                     context.push(AppRoutes.profileChooserScreenSelected),
                 icon: AppImages.kProfileSettingsIcon2,
-                text: "profile.rol.de.uso".trl,
+                text: "profile.role".trl,
               ),
               CategoryWidget(
                 onTap: () => context.push(AppRoutes.profileHelpScreen),
                 icon: AppImages.kProfileSettingsIcon3,
-                text: "profile.ayuda".trl,
+                text: "profile.help.help".trl,
               ),
               CategoryWidget(
                 onTap: () {},
                 icon: AppImages.kProfileSettingsIcon4,
-                text: "profile.cuentas.vinculadas".trl,
+                text: "profile.linked_accounts".trl,
               ),
               CategoryWidget(
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.profileOttaaTips),
                 icon: AppImages.kProfileSettingsIcon5,
                 text: "profile.ottaa.tips".trl,
               ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "profile.cerrar.sesión".trl,
+                  "profile.logout".trl,
                 ),
               ),
             ],
