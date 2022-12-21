@@ -1,89 +1,50 @@
 {
   "profile": {
-    "omitir": "Omitir",
-    "continuar": "Continuar",
     "selection": {
-      "text1": "Quem usará o aplicativo neste dispositivo?"
-    },
-    "acompanante": "Acompañante",
-    "profesionales": {
-      "familiares": "Profesionales / Familiares"
-    },
-    "necesita": {
-      "comunicarse": "Necesita comunicarse"
-    },
-    "usuario": {
-      "a": "Usuario / a"
-    },
-    "aguarde": "Aguarde",
-    "configurando": {
-      "su": {
-        "experiencia": "Configurando su experiencia..."
-      }
-    },
-    "hola": "Hola",
-    "vincular": {
-      "con": {
-        "cuenta": "Vincular con cuenta"
-      }
-    },
-    "crear": {
-      "nueva": {
-        "cuenta": "Cadastre-se"
-      }
-    },
-    "usar": {
-      "ottaa": "Usar Ottaa"
-    },
-    "modo": {
-      "sin": {
-        "perfil": "Modo sin perfil"
-      }
-    },
-    "nuevo": {
-      "existente": "Nuevo / Existente"
-    },
-    "agregar": {
-      "cuenta": "Adicionar conta"
-    },
-    "qué": {
-      "deseas": {
-        "hacer": "¿Qué deseas hacer?"
-      }
-    },
-    "perfil": "Perfil",
-    "ayuda": "Ayuda",
-    "cerrar": {
-      "sesión": "Cerrar sesión"
+      "text1": "¿Quién va a usar la aplicación en este dispositivo?"
     },
     "ottaa": {
-      "tips": "Ottaa tips "
+      "tips": "OTTAA tips"
     },
-    "cuentas": {
-      "vinculadas": "Cuentas vinculadas"
-    },
-    "rol": {
-      "de": {
-        "uso": "Rol de uso"
-      }
-    },
-    "nombre": "Nombre",
-    "apellido": "Apellido",
     "mail": "Mail",
-    "dia": "Día",
-    "mes": "Mes",
-    "ano": "Año",
     "date": "Data de nascimento",
-    "chooser": {
-      "screen": {
-        "button": "Guardar cambios",
-        "heading": "¿Quién usa la aplicación en este dispositivo?"
-      }
-    },
     "faq": {
       "title": "Perguntas frequentes (FAQ)"
     },
+    "caregiver": "Acompañante",
+    "caregivers_families": "Profesionales/Familiares",
+    "user": "Usuario/a",
+    "wait": "Por favor esperá",
+    "setting_exp": "Configurando tu experiencia...",
+    "link_account": "Vincular una cuenta",
+    "use": {
+      "ottaa": "Usar OTTAA"
+    },
+    "no_account": "Modo sin perfil",
+    "new_existant": "Nuevo/Existente",
+    "what_do": "¿Qué querés hacer?",
+    "profile": "Perfil",
+    "linked_accounts": "Cuentas vinculadas",
+    "name": "Nombre",
+    "logout": "Cerrar sesión",
+    "last_name": "Apellido",
+    "role": "Rol de uso",
+    "day": "Día",
+    "month": "Mes",
+    "year": "Año",
+    "tips": {
+      "title1": "Estadísticas",
+      "title2": "Tableros",
+      "title3": "Historial",
+      "title4": "Favoritos",
+      "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
+      "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
+      "text3": "Usá el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
+      "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
+    },
+    "unlink": "Desvincular",
     "help": {
+      "help": "Ayuda",
       "title1": "Perguntas frequentes (FAQ)",
       "title2": "Contactar con soporte"
     },
@@ -116,6 +77,24 @@
       }
     }
   },
+  "global": {
+    "hello_world": "Hola Mundo",
+    "hello": "Hola",
+    "continue": "Continuar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "please_enter_text": "Por favor, ingrese un texto",
+    "done": "Listo",
+    "yes": "Sí",
+    "delete": "Borrar",
+    "edit": "Editar",
+    "no": "No",
+    "mute": "Silenciar",
+    "important": "Importante",
+    "save_changes": "Guardar cambios",
+    "send": "Enviar",
+    "omitir": "Omitir"
+  },
   "onboarding": {
     "profile": {
       "title": "Pantalla de perfiles",
@@ -131,6 +110,30 @@
       "title": "Personaliza tu Home",
       "subtitle": "Acompañamos en el proceso de aprendizaje",
       "description": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+    }
+  },
+  "signin": {
+    "title": "Ingresá con tu cuenta",
+    "signup": "¿Todavía no tenés tu cuenta? Registrate acá"
+  },
+  "terms": {
+    "button": "Acepto los términos",
+    "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\nVer términos"
+  },
+  "loginWait": {
+    "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
+  },
+  "link": {
+    "title": "Ingresá el correo electrónico de la cuenta de OTTAA a vincular",
+    "text1": "*Asegurate de estar en contacto con la persona que tenga este correo electrónico.",
+    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este código arriba."
+  },
+  "token": {
+    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
+    "text": "¿Inconvenientes para enlazar las cuentas?",
+    "button": {
+      "resend": "Reenviar email",
+      "anothermail": "Ingresá otro email."
     }
   },
   "login": {
