@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_picto_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_main_tab_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_wait_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
@@ -161,6 +162,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.customizeWaitScreen,
           builder: (context, state) => const CustomizeWaitScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.customizePictoScreen,
+          builder: (context, state) => const CustomizePictoScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),
