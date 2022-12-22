@@ -46,7 +46,7 @@ class ProfileMainScreen extends StatelessWidget {
                       ),
                       //todo: replace it with the name from the userData
                       Text(
-                        '${"profile.hola".trl} $userName!',
+                        '${"global.hello".trl} $userName!',
                       ),
                     ],
                   ),
@@ -59,14 +59,14 @@ class ProfileMainScreen extends StatelessWidget {
                 height: 32,
               ),
               Text(
-                "profile.qué.deseas.hacer".trl,
+                "profile.what_do".trl,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ProfileChooserButtonWidget(
-                  subtitle: "profile.nuevo.existente".trl,
+                  subtitle: "profile.new_existant".trl,
                   selected: !change,
-                  heading: "profile.agregar.cuenta".trl,
+                  heading: "profile.link_account".trl,
                   imagePath: AppImages.kProfileMainScreenIcon,
                   onTap: () {
                     change = !change;
@@ -96,16 +96,16 @@ class ProfileMainScreen extends StatelessWidget {
                       DropDownWidget(
                         onTap: () {},
                         image: AppImages.kProfileLinkIcon,
-                        text: "profile.vincular.con.cuenta".trl,
+                        text: "profile.link_account".trl,
                       ),
                     ],
                   ),
                 ),
               ),
               ProfileChooserButtonWidget(
-                subtitle: "profile.modo.sin.perfil".trl,
+                subtitle: "profile.no_account".trl,
                 selected: false,
-                heading: "profile.usar.ottaa".trl,
+                heading: "profile.use.ottaa".trl,
                 imagePath: AppImages.kProfileIcon2,
                 onTap: () {},
               ),

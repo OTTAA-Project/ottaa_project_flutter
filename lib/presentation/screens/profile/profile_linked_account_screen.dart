@@ -17,7 +17,7 @@ class ProfileLinkedAccountScreen extends StatelessWidget {
               //todo: why it is giving the error Emir-Chan
               OTTAAAppBar(
                 title: Text(
-                  "profile.ayuda".trl,
+                  "profile.help.help".trl,
                 ),
                 leading: GestureDetector(
                   onTap: () => context.pop(),

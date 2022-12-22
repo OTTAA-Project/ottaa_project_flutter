@@ -30,4 +30,8 @@ class AppRoutes {
   static const linkSuccessScreen = "/link/success";
   static const waitingLogin = "/login/waiting";
 
+  static const profileOttaaTips = "/profile_ottaa_tips_screen";
+
+
+
 }

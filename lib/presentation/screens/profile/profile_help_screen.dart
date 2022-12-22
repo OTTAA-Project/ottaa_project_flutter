@@ -40,7 +40,7 @@ class ProfileHelpScreen extends StatelessWidget {
                       width: 24,
                     ),
                     Text(
-                      "profile.ayuda".trl,
+                      "profile.help.help".trl,
                     ),
                   ],
                 ),

@@ -36,14 +36,14 @@ class _ProfileWaitingScreenState extends State<ProfileWaitingScreen> {
         children: [
           Center(
             child: Text(
-              "profile.aguarde".trl,
+              "profile.wait".trl,
             ),
           ),
           const SizedBox(
             height: 16,
           ),
           Text(
-            "profile.configurando.su.experiencia".trl,
+            "profile.setting_exp".trl,
             textAlign: TextAlign.center,
           ),
         ],

@@ -3,14 +3,6 @@
     "selection": {
       "text1": "¿Quién va a usar la aplicación en este dispositivo?"
     },
-    "crear": {
-      "nueva": {
-        "cuenta": "Crear nueva cuenta"
-      }
-    },
-    "agregar": {
-      "cuenta": "Agregar cuenta"
-    },
     "ottaa": {
       "tips": "OTTAA tips"
     },
@@ -19,7 +11,6 @@
     "faq": {
       "title": "Preguntas frecuentes"
     },
-    "help": "Ayuda",
     "caregiver": "Acompañante",
     "caregivers_families": "Profesionales/Familiares",
     "user": "Usuario/a",
@@ -51,15 +42,48 @@
       "text3": "Usá el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
       "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
     },
-    "unlink": "Desvincular"
+    "unlink": "Desvincular",
+    "help": {
+      "help": "Ayuda",
+      "title1": "Preguntas frecuentes",
+      "title2": "Contactar con soporte"
+    },
+    "link": {
+      "title": "Vincular Cuenta",
+      "mail": {
+        "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+        "input": {
+          "required": "El correo electrónico es requerido",
+          "invalid": "El correo electrónico es inválido"
+        },
+        "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
+        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
+        "send": "Enviar"
+      },
+      "token": {
+        "title": "Coloque el código de verificación que llegó al correo electrónico.",
+        "problem": "¿Inconvenientes para enlazar las cuentas?",
+        "resend": "Reenviar código",
+        "back": "Ingresar otro email"
+      },
+      "wait": {
+        "title": "Aguarde",
+        "subtitle": "Cargando perfil..."
+      },
+      "success": {
+        "title": "Perfil vinculado con éxito!",
+        "lastTime": "Últ. vez Ayer {date}",
+        "continue": "Continuar"
+      }
+    }
   },
   "global": {
     "hello_world": "Hola Mundo",
     "hello": "Hola",
     "continue": "Continuar",
     "next": "Siguiente",
-    "previous": "Anterior",
-    "please_enter_text": "Por favor ingrese un texto",
+    "back": "Anterior",
+    "please_enter_text": "Por favor, ingrese un texto",
     "done": "Listo",
     "yes": "Sí",
     "delete": "Borrar",
@@ -69,34 +93,32 @@
     "important": "Importante",
     "save_changes": "Guardar cambios",
     "send": "Enviar",
-    "omitir": "Omitir"
-  },
-  "onboarding2": {
-    "title": "Atajos en la pantalla principal",
-    "text": "Personalizá de acuerdo a los gustos y necesidades",
-    "upperText": "Personalizá tu pantalla principal"
-  },
-  "onboarding1": {
-    "title": "¿Quién usa OTTAA hoy?",
-    "text": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
+    "skip": "Omitir"
   },
   "onboarding": {
-    "upperText": "Pantalla de perfiles"
-  },
-  "onboarding3": {
-    "title": "Te acompañamos en el proceso de aprendizaje",
-    "text": "Activá o desactivá tableros o pictogramas para modificar la predicción, vos tenés el control."
-  },
-  "signin": {
-    "title": "Ingresá con tu cuenta",
-    "signup": "¿Todavía no tenés tu cuenta? Registrate acá"
+    "start": "Comenzar",
+    "profile": {
+      "title": "Pantalla de perfiles",
+      "subtitle": "¿Quién usa OTTAA hoy?",
+      "description": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
+    },
+    "home": {
+      "title": "Personaliza tu Home",
+      "subtitle": "Atajos en la pantalla principal",
+      "description": "Personaliza de acuerdo a los gustos y necesidades"
+    },
+    "customize": {
+      "title": "Personaliza tu Home",
+      "subtitle": "Acompañamos en el proceso de aprendizaje",
+      "description": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+    }
   },
   "terms": {
     "button": "Acepto los términos",
-    "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\r\nVer términos"
+    "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\nVer términos"
   },
   "loginWait": {
-    "text": "Te damos la bienvenida!\r\nAl mundo de OTTAA"
+    "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
   },
   "link": {
     "title": "Ingresá el correo electrónico de la cuenta de OTTAA a vincular",
@@ -110,5 +132,11 @@
       "resend": "Reenviar email",
       "anothermail": "Ingresá otro email."
     }
+  },
+  "login": {
+    "title": "Ingresá con tu cuenta",
+    "google": "Continuar con Google",
+    "facebook": "Continuar con Facebook",
+    "register": "Todavía no tenés cuenta? Registrate acá"
   }
 }
