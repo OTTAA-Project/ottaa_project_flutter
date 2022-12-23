@@ -19,7 +19,7 @@ class UserModel {
         birthdate: json['birthdate'] ?? 0,
         gender: json['gender'] ?? 'n/a',
         isFirstTime: json['isFirstTime'] == 0 ? false : true,
-        language: json['language'] ?? 'es',
+        language: json['language'] ?? 'es_AR',
         avatar: json['avatar'] ?? "617",
       );
 
@@ -31,7 +31,7 @@ class UserModel {
         birthdate: json['birth_date'] ?? 0,
         gender: json['pref_sexo'] ?? 'n/a',
         isFirstTime: false,
-        language: 'es',
+        language: 'es_AR',
         avatar: json['Avatar']['urlFoto'] ?? "617",
       );
 
@@ -43,7 +43,7 @@ class UserModel {
         'birthdate': birthdate ?? 0,
         'gender': gender ?? 'n/a',
         'isFirstTime': isFirstTime ? 1 : 0,
-        'language': language ?? 'es',
+        'language': language ?? 'es_AR',
         'avatar': avatar ?? "617",
       };
 

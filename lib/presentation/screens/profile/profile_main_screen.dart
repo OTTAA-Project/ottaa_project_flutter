@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/drop_down_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
+import 'package:ottaa_ui_kit/widgets.dart';
 
-bool change = true;
-
-class ProfileMainScreen extends StatelessWidget {
+class ProfileMainScreen extends ConsumerWidget {
   const ProfileMainScreen({Key? key}) : super(key: key);
 
   //todo: a jojo reference XD
   final String userName = 'Dio';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
+    final provider = ref.watch(profileProvider);
+
+    final user = ref.watch(userNotifier);
+
     return Scaffold(
-      //todo: add the theme here
-      backgroundColor: kOTTAABackground,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -34,20 +40,16 @@ class ProfileMainScreen extends StatelessWidget {
                     children: [
                       //todo: add the link here to go to the profile setting screen
                       GestureDetector(
-                        onTap: () =>
-                            context.push(AppRoutes.profileSettingsScreen),
-                        child: const ProfilePhotoWidget(
+                        onTap: () => context.push(AppRoutes.profileSettingsScreen),
+                        child: ProfilePhotoWidget(
                           //todo: add the image link here, from the userData
-                          image: AppImages.kTestImage,
+                          image: user?.photoUrl ?? "",
                         ),
                       ),
                       const SizedBox(
                         width: 16,
                       ),
-                      //todo: replace it with the name from the userData
-                      Text(
-                        '${"global.hello".trl} $userName!',
-                      ),
+                      Text("profile.hello".trlf({"name": user?.name})),
                     ],
                   ),
                   Image.asset(
@@ -60,16 +62,19 @@ class ProfileMainScreen extends StatelessWidget {
               ),
               Text(
                 "profile.what_do".trl,
+                style: textTheme.headline2,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ProfileChooserButtonWidget(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: ActionCard(
+                  title: "profile.link_account".trl,
                   subtitle: "profile.new_existant".trl,
-                  selected: !change,
-                  heading: "profile.link_account".trl,
-                  imagePath: AppImages.kProfileMainScreenIcon,
-                  onTap: () {
-                    change = !change;
+                  trailingImage: const AssetImage(AppImages.kProfileMainScreenIcon),
+                  imageSize: const Size(94, 96),
+                  focused: provider.isLinkAccountOpen,
+                  onPressed: () {
+                    provider.isLinkAccountOpen = !provider.isLinkAccountOpen;
+                    provider.notify();
                   },
                 ),
               ),
@@ -79,22 +84,24 @@ class ProfileMainScreen extends StatelessWidget {
                   color: Colors.transparent,
                 ),
                 duration: const Duration(milliseconds: 500),
-                height: change ? 0 : 140,
+                height: provider.isLinkAccountOpen ? 70 : 0,
                 width: double.maxFinite,
                 child: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
                   child: Column(
                     children: [
+                      // DropDownWidget(
+                      //   onTap: () {},
+                      //   image: AppImages.kProfileAddIcon,
+                      //   text: "profile.crear.nueva.cuenta".trl,
+                      // ),
+                      // const SizedBox(
+                      //   height: 16,
+                      // ),
                       DropDownWidget(
-                        onTap: () {},
-                        image: AppImages.kProfileAddIcon,
-                        text: "profile.crear.nueva.cuenta".trl,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      DropDownWidget(
-                        onTap: () {},
+                        onTap: () {
+                          context.push(AppRoutes.linkMailScreen);
+                        },
                         image: AppImages.kProfileLinkIcon,
                         text: "profile.link_account".trl,
                       ),
@@ -102,12 +109,13 @@ class ProfileMainScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              ProfileChooserButtonWidget(
+              ActionCard(
                 subtitle: "profile.no_account".trl,
-                selected: false,
-                heading: "profile.use.ottaa".trl,
-                imagePath: AppImages.kProfileIcon2,
-                onTap: () {},
+                focused: false,
+                title: "profile.use.ottaa".trl,
+                trailingImage: const AssetImage(AppImages.kProfileIcon2),
+                imageSize: const Size(129, 96),
+                onPressed: () {},
               ),
             ],
           ),

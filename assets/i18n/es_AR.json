@@ -3,6 +3,7 @@
     "selection": {
       "text1": "¿Quién va a usar la aplicación en este dispositivo?"
     },
+    "hello": "Hola {name}!",
     "ottaa": {
       "tips": "OTTAA tips"
     },
@@ -111,6 +112,9 @@
       "title": "Personaliza tu Home",
       "subtitle": "Acompañamos en el proceso de aprendizaje",
       "description": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+    },
+    "skip": {
+      "title": "¿Estás de acuerdo en saltar la introducción?"
     }
   },
   "terms": {
@@ -137,6 +141,10 @@
     "title": "Ingresá con tu cuenta",
     "google": "Continuar con Google",
     "facebook": "Continuar con Facebook",
-    "register": "Todavía no tenés cuenta? Registrate acá"
+    "register": "Todavía no tenés cuenta? Registrate acá",
+    "wait": {
+      "title": "Te damos la bienvenida!",
+      "subtitle": "Al nuevo mundo de OTTAA Project"
+    }
   }
 }

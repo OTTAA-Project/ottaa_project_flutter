@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/presentation/common/widgets/new_simple_but
 import 'package:ottaa_project_flutter/presentation/common/widgets/new_text_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/date_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/image_edit_widget.dart';
+import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileSettingsEditScreen extends StatelessWidget {
   const ProfileSettingsEditScreen({Key? key}) : super(key: key);
@@ -14,7 +15,9 @@ class ProfileSettingsEditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kOTTAABackground,
+      appBar: OTTAAAppBar(
+        title: Text("profile.profile".trl),
+      ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
@@ -28,27 +31,6 @@ class ProfileSettingsEditScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => context.pop(),
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          size: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 24,
-                      ),
-                      Text(
-                        "profile.profile".trl,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 36,
-                  ),
                   Center(
                     child: ImageEditWidget(
                       image: AppImages.kTestImage,
@@ -57,16 +39,16 @@ class ProfileSettingsEditScreen extends StatelessWidget {
                   const SizedBox(
                     height: 24,
                   ),
-                  NewTextWidget(
+                  OTTAATextInput(
                     hintText: 'profile.name'.trl,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: NewTextWidget(
+                    child: OTTAATextInput(
                       hintText: 'profile.last_name'.trl,
                     ),
                   ),
-                  NewTextWidget(
+                  OTTAATextInput(
                     hintText: 'profile.mail'.trl,
                   ),
                   Padding(

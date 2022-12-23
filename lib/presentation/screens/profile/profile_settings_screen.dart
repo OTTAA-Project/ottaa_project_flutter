@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/category_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
 
-class ProfileSettingsScreen extends StatelessWidget {
+class ProfileSettingsScreen extends ConsumerWidget {
   const ProfileSettingsScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.read(userNotifier);
+    final auth = ref.read(authProvider);
+
     return Scaffold(
       //todo: add the required theme here
       body: SafeArea(
@@ -54,8 +62,8 @@ class ProfileSettingsScreen extends StatelessWidget {
                 height: 36,
               ),
               //todo: add the image link here
-              const ProfilePhotoWidget(
-                image: AppImages.kTestImage,
+              ProfilePhotoWidget(
+                image: user?.photoUrl ?? "",
                 height: 120,
                 width: 120,
               ),
@@ -63,7 +71,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                 height: 16,
               ),
               Text(
-                "global.hello_world".trl,
+                user?.name ?? "",
               ),
               const SizedBox(
                 height: 32,
@@ -74,8 +82,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                 text: "profile.profile".trl,
               ),
               CategoryWidget(
-                onTap: () =>
-                    context.push(AppRoutes.profileChooserScreenSelected),
+                onTap: () => context.push(AppRoutes.profileChooserScreenSelected),
                 icon: AppImages.kProfileSettingsIcon2,
                 text: "profile.role".trl,
               ),
@@ -94,11 +101,14 @@ class ProfileSettingsScreen extends StatelessWidget {
                 icon: AppImages.kProfileSettingsIcon5,
                 text: "profile.ottaa.tips".trl,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "profile.logout".trl,
-                ),
+              CategoryWidget(
+                divider: false,
+                onTap: () async {
+                  await LoadingModal.show(context, future: auth.logout);
+                  context.go(AppRoutes.login);
+                },
+                icon: null,
+                text: "profile.logout".trl,
               ),
             ],
           ),
