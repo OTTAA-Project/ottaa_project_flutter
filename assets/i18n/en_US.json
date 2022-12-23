@@ -57,8 +57,7 @@
           "invalid": "Invalid email"
         },
         "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
-        "send": "Enviar"
+        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles."
       },
       "token": {
         "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
@@ -71,7 +70,7 @@
         "subtitle": "Loading profile..."
       },
       "success": {
-        "title": "Perfil vinculado con éxito!",
+        "title": "Profile successfully linked!",
         "lastTime": "Last seen {date}",
         "continue": "Continuar"
       }
@@ -82,7 +81,7 @@
     "hello": "Hello",
     "continue": "Continue",
     "next": "Next",
-    "back": "Anterior",
+    "back": "Previous",
     "please_enter_text": "Please enter some text",
     "done": "Done",
     "yes": "Yes",
@@ -93,7 +92,7 @@
     "important": "Important",
     "save_changes": "Save changes",
     "send": "Submit",
-    "skip": "Omitir"
+    "skip": "Skip"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -108,7 +107,7 @@
       "description": "Personaliza de acuerdo a los gustos y necesidades"
     },
     "customize": {
-      "title": "Personaliza tu Home",
+      "title": "Customize your Home",
       "subtitle": "We guide you in the learning process",
       "description": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
     }

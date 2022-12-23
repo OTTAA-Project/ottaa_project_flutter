@@ -57,8 +57,7 @@
           "invalid": "El correo electrónico es inválido"
         },
         "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
-        "send": "Enviar"
+        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles."
       },
       "token": {
         "title": "Coloque el código de verificación que llegó al correo electrónico.",
