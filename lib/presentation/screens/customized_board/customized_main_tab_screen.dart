@@ -99,7 +99,9 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                           height: 12,
                           width: index == 1 ? 32 : 16,
                           decoration: BoxDecoration(
-                            color: colorScheme.primary,
+                            color: index == 1
+                                ? colorScheme.primary
+                                : colorScheme.onSurface,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
@@ -111,7 +113,9 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                           height: 12,
                           width: index == 2 ? 32 : 16,
                           decoration: BoxDecoration(
-                            color: colorScheme.onSurface,
+                            color: index == 2
+                                ? colorScheme.primary
+                                : colorScheme.onSurface,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),

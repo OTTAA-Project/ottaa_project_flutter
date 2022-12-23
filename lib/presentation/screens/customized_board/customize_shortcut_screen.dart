@@ -47,7 +47,9 @@ class _CustomizeShortcutScreenState extends State<CustomizeShortcutScreen> {
                 selected: selected,
               ),
               ShortcutWidget(
-                onTap: () {},
+                onTap: () {
+                  context.push(AppRoutes.customizePictoScreen);
+                },
                 heading: "board.shortcut.camera".trl,
                 image2: AppImages.kBoardCameraIconSelected,
                 image: AppImages.kBoardCameraIcon,

@@ -22,6 +22,7 @@ class AppRoutes {
   static const profileHelpScreen = "/profile_help_screen";
   static const customizedBoardScreen = "/customized_board_screen";
   static const customizeWaitScreen = "/customized_wait_screen";
+  static const customizePictoScreen = "/customized_picto_screen";
 
   static const linkMailScreen = "/link";
   static const linkTokenScreen = "/link/token";
