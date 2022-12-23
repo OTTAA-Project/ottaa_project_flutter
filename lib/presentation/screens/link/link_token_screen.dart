@@ -21,7 +21,7 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
     final reset = ref.read(linkProvider.select((value) => value.reset));
     return Scaffold(
       appBar: OTTAAAppBar(
-        title: Text("link.title".trl),
+        title: Text("global.back".trl),
       ),
       body: Center(
         child: SizedBox(
@@ -33,7 +33,7 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "link.token.title".trl,
+                "profile.link.token.title".trl,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline2,
               ),
@@ -41,13 +41,13 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
               const OTPWidget(),
               const Spacer(),
               Text(
-                "link.token.problem".trl,
+                "profile.link.token.problem".trl,
                 style: textTheme.bodyText2,
               ),
               const SizedBox(height: 16),
               SecondaryButton(
                 onPressed: () {},
-                text: "link.token.resend".trl,
+                text: "profile.link.token.resend".trl,
               ),
               const SizedBox(height: 16),
               SecondaryButton(
@@ -55,7 +55,7 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
                   reset();
                   Navigator.of(context).pop();
                 },
-                text: "link.token.back".trl,
+                text: "profile.link.token.back".trl,
               ),
               const SizedBox(height: 48),
             ],

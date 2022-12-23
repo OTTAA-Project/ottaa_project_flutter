@@ -22,7 +22,7 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: OTTAAAppBar(
-        title: Text("link.title".trl),
+        title: Text("global.back".trl),
       ),
       body: Center(
         child: SizedBox(
@@ -34,7 +34,7 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "link.mail.title".trl,
+                "profile.link.mail.title".trl,
                 textAlign: TextAlign.center,
                 style: textTheme.headline2,
               ),
@@ -47,11 +47,11 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
                   controller: provider.emailController,
                   validator: (value) {
                     if (value != null && value.trim().isEmpty) {
-                      return "link.mail.input.required".trl;
+                      return "profile.link.mail.input.required".trl;
                     }
 
                     if (value != null && !value.isEmail) {
-                      return "link.mail.input.invalid".trl;
+                      return "profile.link.mail.input.invalid".trl;
                     }
                     return null;
                   },
@@ -59,19 +59,19 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
               ),
               const SizedBox(height: 32),
               Text(
-                "link.mail.contact",
+                "profile.link.mail.contact",
                 textAlign: TextAlign.center,
                 style: textTheme.bodyText2,
               ),
               const SizedBox(height: 16),
               Text(
-                "link.mail.warn",
+                "profile.link.mail.warn",
                 textAlign: TextAlign.center,
                 style: textTheme.bodyText2,
               ),
               const Spacer(),
               OptionalButton(
-                text: "link.mail.send",
+                text: "global.send",
                 onPressed: () {
                   if (provider.formKey.currentState!.validate()) {
                     //TODO:
