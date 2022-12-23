@@ -14,7 +14,7 @@
     "caregiver": "Caregiver",
     "caregivers_families": "Caregivers/Relatives",
     "user": "User",
-    "user_description": "La persona que necesita comunicarse",
+    "user_description": "The person who need to communicate",
     "wait": "Please wait",
     "setting_exp": "Setting up your experience...",
     "link_account": "Link to an account",
@@ -52,16 +52,16 @@
     "link": {
       "title": "Link to an account",
       "mail": {
-        "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+        "title": "Enter the email of the account you want to link",
         "input": {
           "required": "Email is required",
           "invalid": "Invalid email"
         },
-        "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-        "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles."
+        "contact": "*Be sure you are in contact with the person using this email.",
+        "warn": "*We will show a token on the device you want to link"
       },
       "token": {
-        "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
+        "title": "Enter the token shown in the screen of the device you want to link.",
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email"
@@ -94,20 +94,20 @@
     "send": "Submit",
     "skip": "Skip",
     "email": "Email",
-    "step": "Paso",
-    "share": "Compartir"
+    "step": "Step",
+    "share": "Share"
   },
   "onboarding": {
-    "start": "Comenzar",
+    "start": "Get Started",
     "profile": {
       "title": "Profiles screen",
-      "subtitle": "¿Quién va a usar OTTAA hoy?",
+      "subtitle": "Who is using OTTAA today?",
       "description": "With the profile selection, you will be able to use OTTAA from any device, keeping your pictograms and styles!"
     },
     "home": {
       "title": "Customize your Home",
       "subtitle": "Shortcuts on main screen",
-      "description": "Personaliza de acuerdo a los gustos y necesidades"
+      "description": "Customize according to your tastes and needs"
     },
     "customize": {
       "title": "Customize your Home",
@@ -123,21 +123,21 @@
     "text": "Welcome!\nTo the OTTAA World"
   },
   "login": {
-    "title": "Ingresá con tu cuenta",
+    "title": "Log in with your account",
     "google": "Login with Google",
     "facebook": "Login with Facebook",
-    "register": "Todavía no tenés cuenta? Registrate acá"
+    "register": "Don't have an account yet? Sign up here"
   },
   "customize": {
     "board": {
-      "title": "¿Qué tableros va a usar el usuario?"
+      "title": "Which boards the user is going to use?"
     },
     "shortcut": {
-      "title": "¿Qué atajos va anecesitar el usuario?",
+      "title": "Which shortcuts the user is going to need?",
       "favorites": "Favorites",
       "history": "History",
-      "camera": "Cámara",
-      "games": "Juegos"
+      "camera": "Camera",
+      "games": "Games"
     }
   }
 }
