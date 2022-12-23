@@ -16,6 +16,7 @@ import 'package:ottaa_project_flutter/presentation/screens/profile/profile_choos
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_faq_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_help_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_ottaa_tips_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_edit_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_waiting_screen.dart';
@@ -134,6 +135,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.profileHelpScreen,
           builder: (context, state) => const ProfileHelpScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileOttaaTips,
+          builder: (context, state) => const ProfileOTTAATipsScreen()
         ),
         GoRoute(
           name: AppRoutes.linkMailScreen,
