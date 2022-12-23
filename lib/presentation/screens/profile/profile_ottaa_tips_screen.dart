@@ -11,7 +11,17 @@ class ProfileOTTAATipsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kOTTAABackground,
+      appBar: OTTAAAppBar(
+        title: Text(
+          "profile.ottaa.tips".trl,
+        ),
+        leading: GestureDetector(
+          onTap: () => context.pop(),
+          child: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -19,21 +29,6 @@ class ProfileOTTAATipsScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              //todo: emir will fix it
-              OTTAAAppBar(
-                title: Text(
-                  "profile.ottaa.tips".trl,
-                ),
-                leading: GestureDetector(
-                  onTap: () => context.pop(),
-                  child: const Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 36,
-              ),
               Expanded(
                 child: ListView.builder(
                   itemCount: 4,

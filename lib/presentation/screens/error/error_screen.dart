@@ -14,7 +14,7 @@ class ErrorScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('¿Whot 😀?'),
+            const Text('¿Whot 😀?'),
             Padding(
               padding: const EdgeInsets.all(24),
               child: PrimaryButton(
