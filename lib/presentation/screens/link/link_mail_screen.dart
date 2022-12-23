@@ -21,6 +21,7 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
     final provider = ref.watch(linkProvider);
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: OTTAAAppBar(
         title: Text("link.title".trl),
       ),

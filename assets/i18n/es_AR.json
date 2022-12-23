@@ -94,7 +94,8 @@
     "important": "Importante",
     "save_changes": "Guardar cambios",
     "send": "Enviar",
-    "skip": "Omitir"
+    "skip": "Omitir",
+    "email": "Correo electrónico"
   },
   "onboarding": {
     "start": "Comenzar",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
@@ -47,12 +48,12 @@ class _LinkWaitingScreenState extends ConsumerState<LinkWaitingScreen> {
             const OttaaLoadingAnimation(),
             const SizedBox(height: 40),
             Text(
-              "link.wait.title",
+              "link.wait.title".trl,
               style: textTheme.headline2,
             ),
             const SizedBox(height: 10),
             Text(
-              "link.wait.subtitle",
+              "link.wait.subtitle".trl,
               style: textTheme.headline3,
             ),
           ],

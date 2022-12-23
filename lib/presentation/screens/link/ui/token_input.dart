@@ -11,10 +11,10 @@ class TokenInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller:controller,
+      controller: controller,
       focusNode: node,
       style: const TextStyle(
-        fontSize: 55,
+        fontSize: 40,
       ),
       onChanged: (value) => onChanged?.call(tokenId, value),
       textAlign: TextAlign.center,
