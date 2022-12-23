@@ -125,9 +125,32 @@
     "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
   },
   "link": {
-    "title": "Ingresá el correo electrónico de la cuenta de OTTAA a vincular",
-    "text1": "*Asegurate de estar en contacto con la persona que tenga este correo electrónico.",
-    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este código arriba."
+    "title": "Vincular Cuenta",
+    "mail": {
+      "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+      "input": {
+        "required": "El correo electrónico es requerido",
+        "invalid": "El correo electrónico es inválido"
+      },
+      "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
+      "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
+      "send": "Enviar"
+    },
+    "token": {
+      "title": "Coloque el código de verificación que llegó al correo electrónico.",
+      "problem": "¿Inconvenientes para enlazar las cuentas?",
+      "resend": "Reenviar código",
+      "back": "Ingresar otro email"
+    },
+    "wait": {
+      "title": "Aguarde",
+      "subtitle": "Cargando perfil..."
+    },
+    "success": {
+      "title": "Perfil vinculado con éxito!",
+      "lastTime": "Últ. vez Ayer {date}",
+      "continue": "Continuar"
+    }
   },
   "token": {
     "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",

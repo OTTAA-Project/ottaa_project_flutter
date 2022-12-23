@@ -59,19 +59,19 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
               ),
               const SizedBox(height: 32),
               Text(
-                "link.mail.contact",
+                "link.mail.contact".trl,
                 textAlign: TextAlign.center,
                 style: textTheme.bodyText2,
               ),
               const SizedBox(height: 16),
               Text(
-                "link.mail.warn",
+                "link.mail.warn".trl,
                 textAlign: TextAlign.center,
                 style: textTheme.bodyText2,
               ),
               const Spacer(),
               OptionalButton(
-                text: "link.mail.send",
+                text: "link.mail.send".trl,
                 onPressed: () {
                   if (provider.formKey.currentState!.validate()) {
                     //TODO:
