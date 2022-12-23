@@ -14,6 +14,7 @@
     "caregiver": "Caregiver",
     "caregivers_families": "Caregivers/Relatives",
     "user": "User",
+    "user_description": "La persona que necesita comunicarse",
     "wait": "Please wait",
     "setting_exp": "Setting up your experience...",
     "link_account": "Link to an account",
@@ -57,8 +58,7 @@
           "invalid": "Invalid email"
         },
         "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
-        "send": "Enviar"
+        "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles."
       },
       "token": {
         "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
@@ -72,8 +72,7 @@
       },
       "success": {
         "title": "Profile successfully linked!",
-        "lastTime": "Last seen {date}",
-        "continue": "Continuar"
+        "lastTime": "Last seen {date}"
       }
     }
   },
@@ -93,13 +92,16 @@
     "important": "Important",
     "save_changes": "Save changes",
     "send": "Submit",
-    "skip": "Skip"
+    "skip": "Skip",
+    "email": "Email",
+    "step": "Paso",
+    "share": "Compartir"
   },
   "onboarding": {
     "start": "Comenzar",
     "profile": {
       "title": "Profiles screen",
-      "subtitle": "Who is using OTTAA today?",
+      "subtitle": "¿Quién va a usar OTTAA hoy?",
       "description": "With the profile selection, you will be able to use OTTAA from any device, keeping your pictograms and styles!"
     },
     "home": {
@@ -120,23 +122,22 @@
   "loginWait": {
     "text": "Welcome!\nTo the OTTAA World"
   },
-  "link": {
-    "title": "Ingresá el correo electrónico de la cuenta de OTTAA a vincular",
-    "text1": "*Asegurate de estar en contacto con la persona que tenga este correo electrónico.",
-    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este código arriba."
-  },
-  "token": {
-    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
-    "text": "¿Inconvenientes para enlazar las cuentas?",
-    "button": {
-      "resend": "Resend email",
-      "anothermail": "Ingresá otro email."
-    }
-  },
   "login": {
     "title": "Ingresá con tu cuenta",
     "google": "Login with Google",
     "facebook": "Login with Facebook",
     "register": "Todavía no tenés cuenta? Registrate acá"
+  },
+  "customize": {
+    "board": {
+      "title": "¿Qué tableros va a usar el usuario?"
+    },
+    "shortcut": {
+      "title": "¿Qué atajos va anecesitar el usuario?",
+      "favorites": "Favorites",
+      "history": "History",
+      "camera": "Cámara",
+      "games": "Juegos"
+    }
   }
 }
