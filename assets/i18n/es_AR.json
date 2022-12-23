@@ -138,5 +138,11 @@
     "google": "Continuar con Google",
     "facebook": "Continuar con Facebook",
     "register": "Todavía no tenés cuenta? Registrate acá"
+  },
+  "customize": {
+    "picto": {
+      "title": "Tablero {name}",
+      "switch": "Activar tablero"
+    }
   }
 }
