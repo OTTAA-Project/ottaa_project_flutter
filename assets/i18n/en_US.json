@@ -71,7 +71,7 @@
         "subtitle": "Loading profile..."
       },
       "success": {
-        "title": "Perfil vinculado con éxito!",
+        "title": "Profile successfully linked!",
         "lastTime": "Last seen {date}",
         "continue": "Continuar"
       }
@@ -82,7 +82,7 @@
     "hello": "Hello",
     "continue": "Continue",
     "next": "Next",
-    "back": "Anterior",
+    "back": "Previous",
     "please_enter_text": "Please enter some text",
     "done": "Done",
     "yes": "Yes",
@@ -93,7 +93,7 @@
     "important": "Important",
     "save_changes": "Save changes",
     "send": "Submit",
-    "skip": "Omitir"
+    "skip": "Skip"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -108,7 +108,7 @@
       "description": "Personaliza de acuerdo a los gustos y necesidades"
     },
     "customize": {
-      "title": "Personaliza tu Home",
+      "title": "Customize your Home",
       "subtitle": "We guide you in the learning process",
       "description": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
     }
