@@ -94,7 +94,7 @@ class ProfileMainScreen extends StatelessWidget {
                         height: 16,
                       ),
                       DropDownWidget(
-                        onTap: () {},
+                        onTap: () => context.push(AppRoutes.linkMailScreen),
                         image: AppImages.kProfileLinkIcon,
                         text: "profile.link_account".trl,
                       ),

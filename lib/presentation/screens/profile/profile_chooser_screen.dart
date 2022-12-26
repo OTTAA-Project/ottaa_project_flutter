@@ -32,7 +32,7 @@ class ProfileChooserScreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     //todo: add text style here after emir has created the theme files
                     child: Text(
-                      'profile.omitir'.trl,
+                      'global.skip'.trl,
                     ),
                   ),
                   //todo: add text style here after emir has created the theme files
@@ -46,8 +46,8 @@ class ProfileChooserScreen extends StatelessWidget {
                     ),
                   ),
                   ProfileChooserButtonWidget(
-                    heading: 'profile.caregivers_families'.trl,
-                    subtitle: 'profile.profesionales.familiares'.trl,
+                    heading: 'profile.caregiver'.trl,
+                    subtitle: 'profile.caregivers_families'.trl,
                     imagePath: AppImages.kProfileIcon1,
                     onTap: () {},
                     selected: false,
@@ -57,7 +57,7 @@ class ProfileChooserScreen extends StatelessWidget {
                   ),
                   ProfileChooserButtonWidget(
                     heading: 'profile.user'.trl,
-                    subtitle: 'profile.necesita.comunicarse'.trl,
+                    subtitle: 'profile.user_description'.trl,
                     imagePath: AppImages.kProfileIcon2,
                     onTap: () {},
                     selected: false,

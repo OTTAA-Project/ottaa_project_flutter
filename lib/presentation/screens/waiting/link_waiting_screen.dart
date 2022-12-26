@@ -47,12 +47,12 @@ class _LinkWaitingScreenState extends ConsumerState<LinkWaitingScreen> {
             const OttaaLoadingAnimation(),
             const SizedBox(height: 40),
             Text(
-              "link.wait.title",
+              "profile.link.wait.title",
               style: textTheme.headline2,
             ),
             const SizedBox(height: 10),
             Text(
-              "link.wait.subtitle",
+              "profile.link.wait.subtitle",
               style: textTheme.headline3,
             ),
           ],

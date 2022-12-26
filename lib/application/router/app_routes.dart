@@ -33,5 +33,4 @@ class AppRoutes {
   static const profileOttaaTips = "/profile_ottaa_tips_screen";
 
 
-
 }
