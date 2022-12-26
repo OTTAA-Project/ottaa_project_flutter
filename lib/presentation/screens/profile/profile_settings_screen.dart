@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
@@ -82,7 +81,8 @@ class ProfileSettingsScreen extends ConsumerWidget {
                 text: "profile.profile".trl,
               ),
               CategoryWidget(
-                onTap: () => context.push(AppRoutes.profileChooserScreenSelected),
+                onTap: () =>
+                    context.push(AppRoutes.profileChooserScreenSelected),
                 icon: AppImages.kProfileSettingsIcon2,
                 text: "profile.role".trl,
               ),
@@ -92,7 +92,7 @@ class ProfileSettingsScreen extends ConsumerWidget {
                 text: "profile.help.help".trl,
               ),
               CategoryWidget(
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.profileLinkedAccountScreen),
                 icon: AppImages.kProfileSettingsIcon4,
                 text: "profile.linked_accounts".trl,
               ),

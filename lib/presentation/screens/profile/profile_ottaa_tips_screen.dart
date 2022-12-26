@@ -15,12 +15,6 @@ class ProfileOTTAATipsScreen extends StatelessWidget {
         title: Text(
           "profile.ottaa.tips".trl,
         ),
-        leading: GestureDetector(
-          onTap: () => context.pop(),
-          child: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-          ),
-        ),
       ),
       body: SafeArea(
         child: Padding(
