@@ -52,16 +52,16 @@
     "link": {
       "title": "Link to an account",
       "mail": {
-        "title": "Enter the email of the account you want to link",
+        "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
         "input": {
           "required": "Email is required",
           "invalid": "Invalid email"
         },
         "contact": "*Be sure you are in contact with the person using this email.",
-        "warn": "*We will show a token on the device you want to link"
+        "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles."
       },
       "token": {
-        "title": "Enter the token shown in the screen of the device you want to link.",
+        "title": "Coloque el código de verificación que llegó al correo electrónico.",
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email"
@@ -133,11 +133,15 @@
       "title": "Which boards the user is going to use?"
     },
     "shortcut": {
-      "title": "Which shortcuts the user is going to need?",
+      "title": "¿Qué atajos va anecesitar el usuario?",
       "favorites": "Favorites",
       "history": "History",
       "camera": "Camera",
       "games": "Games"
+    },
+    "picto": {
+      "title": "Tablero {name}",
+      "switch": "Activar tablero"
     }
   }
 }
