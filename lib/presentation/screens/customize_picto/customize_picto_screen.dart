@@ -75,7 +75,7 @@ class _CustomizePictoScreenState extends State<CustomizePictoScreen> {
                   BoardWidget(
                     title: "customize.picto.title".trl,
                     //todo: this one is a placeholder for now
-                    image: AssetImage(AppImages.kAbeja),
+                    image: const AssetImage(AppImages.kAbeja),
                     customizeOnTap: () {
                       print('customize on tap');
                     },
@@ -99,7 +99,7 @@ class _CustomizePictoScreenState extends State<CustomizePictoScreen> {
               child: GridView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
@@ -119,8 +119,3 @@ class _CustomizePictoScreenState extends State<CustomizePictoScreen> {
   }
 }
 
-final map = {
-  "customize": {
-    "picto": {"title": "Tablero animales", "switch": "Activar tablero"}
-  }
-};
