@@ -96,7 +96,6 @@
     "email": "Email",
     "step": "Paso",
     "share": "Compartir"
-
   },
   "onboarding": {
     "start": "Comenzar",
@@ -139,6 +138,10 @@
       "history": "Historial",
       "camera": "Cámara",
       "games": "Juegos"
+    },
+    "picto": {
+      "title": "Tablero {name}",
+      "switch": "Activar tablero"
     }
   }
 }

@@ -75,6 +75,8 @@ flutter:
   assets:
     - assets/imgs/
     - assets/
+    - assets/edit/
+    - assets/edit/picto/
     - assets/board/
     - assets/board/icons/
     - assets/board/icons/icons_not_selected/
