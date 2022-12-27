@@ -39,8 +39,8 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                   children: [
                     Text(
                       index == 1
-                          ? "board.customize.title".trl
-                          : "board.shortcut.title".trl,
+                          ? "customize.board.title".trl
+                          : "customize.shortcut.title".trl,
                       style: textTheme.headline3,
                     ),
                     const SizedBox(
@@ -55,8 +55,9 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                         context,
                         // title: "",
                         subtitle: index == 1
+                        //TODO: check this if it is OK
                             ? "board.customize.helpText".trl
-                            : "board.shortcut.title".trl,
+                            : "global.back".trl,
                         children: <Widget>[
                           Image.asset(
                             index == 1
@@ -78,7 +79,7 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                       //todo: add the required things here
                     },
                     child: Text(
-                      "board.customize.omitir".trl,
+                      "global.skip".trl,
                       style: textTheme.headline4!
                           .copyWith(color: colorScheme.onSurface),
                     ),
@@ -99,7 +100,9 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                           height: 12,
                           width: index == 1 ? 32 : 16,
                           decoration: BoxDecoration(
-                            color: colorScheme.primary,
+                            color: index == 1
+                                ? colorScheme.primary
+                                : colorScheme.onSurface,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
@@ -111,7 +114,9 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                           height: 12,
                           width: index == 2 ? 32 : 16,
                           decoration: BoxDecoration(
-                            color: colorScheme.onSurface,
+                            color: index == 2
+                                ? colorScheme.primary
+                                : colorScheme.onSurface,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
@@ -119,7 +124,7 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                           width: 8,
                         ),
                         Text(
-                          "${"board.customize.paso".trl} $index / 2",
+                          "${"global.step".trl} $index / 2",
                           style: textTheme.headline4!
                               .copyWith(color: colorScheme.onSurface),
                         ),
@@ -130,7 +135,7 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                     ),
                     Text(
                       index == 1
-                          ? "board.customize.heading".trl
+                          ? "customize.board.title".trl
                           : "board.shortcut.heading".trl,
                       style: textTheme.headline3!
                           .copyWith(fontWeight: FontWeight.w600),
@@ -179,7 +184,7 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
                   });
                 },
                 //todo: add text here after discussing with the team
-                text: "golbal.continuar".trl,
+                text: "global.next".trl,
               ),
             ),
           ),

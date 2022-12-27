@@ -19,12 +19,6 @@ class ProfileLinkedAccountScreen extends StatelessWidget {
                 title: Text(
                   "profile.help.help".trl,
                 ),
-                leading: GestureDetector(
-                  onTap: () => context.pop(),
-                  child: const Icon(
-                    Icons.arrow_back_ios_new,
-                  ),
-                ),
               ),
               const SizedBox(
                 height: 36,

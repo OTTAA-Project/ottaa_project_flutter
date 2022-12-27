@@ -32,7 +32,7 @@ class _CustomizeShortcutScreenState extends State<CustomizeShortcutScreen> {
                     selected = !selected;
                   });
                 },
-                heading: "board.shortcut.favoritos".trl,
+                heading: "customize.shortcut.favorites".trl,
                 image: AppImages.kBoardFavouriteIcon,
                 image2: AppImages.kBoardFavouriteIconSelected,
                 selected: selected,
@@ -41,14 +41,16 @@ class _CustomizeShortcutScreenState extends State<CustomizeShortcutScreen> {
                 onTap: () {
                   context.push(AppRoutes.customizeWaitScreen);
                 },
-                heading: "board.shortcut.historial".trl,
+                heading: "customize.shortcut.history".trl,
                 image: AppImages.kBoardHistoryIcon,
                 image2: AppImages.kBoardHistoryIconSelected,
                 selected: selected,
               ),
               ShortcutWidget(
-                onTap: () {},
-                heading: "board.shortcut.camera".trl,
+                onTap: () {
+                  context.push(AppRoutes.customizePictoScreen);
+                },
+                heading: "customize.shortcut.camera".trl,
                 image2: AppImages.kBoardCameraIconSelected,
                 image: AppImages.kBoardCameraIcon,
                 selected: selected,
@@ -62,21 +64,21 @@ class _CustomizeShortcutScreenState extends State<CustomizeShortcutScreen> {
               children: [
                 ShortcutWidget(
                   onTap: () {},
-                  heading: "board.shortcut.juegos".trl,
+                  heading: "customize.shortcut.games".trl,
                   image: AppImages.kBoardDiceIcon,
                   image2: AppImages.kBoardDiceIconSelected,
                   selected: selected,
                 ),
                 ShortcutWidget(
                   onTap: () {},
-                  heading: "board.shortcut.yes".trl,
+                  heading: "global.yes".trl,
                   image: AppImages.kBoardYesIcon,
                   image2: AppImages.kBoardYesIconSelected,
                   selected: selected,
                 ),
                 ShortcutWidget(
                   onTap: () {},
-                  heading: "board.shortcut.no".trl,
+                  heading: "global.no".trl,
                   image: AppImages.kBoardNoIcon,
                   image2: AppImages.kBoardNoIconSelected,
                   selected: selected,
@@ -89,7 +91,7 @@ class _CustomizeShortcutScreenState extends State<CustomizeShortcutScreen> {
             children: [
               ShortcutWidget(
                 onTap: () {},
-                heading: "board.shortcut.compartir".trl,
+                heading: "global.share".trl,
                 image: AppImages.kBoardShareIcon,
                 image2: AppImages.kBoardShareIconSelected,
                 selected: selected,

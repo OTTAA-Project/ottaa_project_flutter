@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -18,7 +19,7 @@ class LinkSuccessScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
-          Text("link.success.title".trl, style: textTheme.headline2),
+          Text("profile.link.success.title".trl, style: textTheme.headline2),
           const SizedBox(height: 16),
           Center(
             child: SizedBox(
@@ -46,10 +47,8 @@ class LinkSuccessScreen extends StatelessWidget {
           SizedBox(
             width: size.width * 0.8,
             child: PrimaryButton(
-              onPressed: () {
-                //TODO: Redirect to customize board screen
-              },
-              text: "global.continue".trl,
+              onPressed: ()  => context.push(AppRoutes.customizedBoardScreen),
+              text: "global.continue",
             ),
           ),
           const SizedBox(height: 48),

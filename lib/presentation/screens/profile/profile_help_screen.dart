@@ -3,8 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
-import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileHelpScreen extends StatelessWidget {
@@ -15,7 +13,10 @@ class ProfileHelpScreen extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: OTTAAAppBar(
-        title: Text("profile.help.help".trl),
+        title: Text(
+          "profile.help.help".trl,
+          style: textTheme.headline3,
+        ),
       ),
       body: SafeArea(
         child: Padding(

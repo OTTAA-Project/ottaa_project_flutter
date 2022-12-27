@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/new_simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
-class ProfileChooserScreenSelected extends StatelessWidget {
+class ProfileChooserScreenSelected extends ConsumerWidget {
   const ProfileChooserScreenSelected({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    final provider = ref.watch(profileProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text("profile.role".trl),
@@ -35,7 +39,9 @@ class ProfileChooserScreenSelected extends StatelessWidget {
                       bottom: 24,
                     ),
                     child: Text(
-                      "profile.chooser.screen.heading".trl,
+                      "onboarding.profile.subtitle".trl,
+                      style: textTheme.button!
+                          .copyWith(color: colorScheme.onBackground),
                     ),
                   ),
                   ProfileChooserButtonWidget(
@@ -50,7 +56,7 @@ class ProfileChooserScreenSelected extends StatelessWidget {
                   ),
                   ProfileChooserButtonWidget(
                     heading: 'profile.user'.trl,
-                    subtitle: 'profile.necesita.comunicarse'.trl,
+                    subtitle: 'profile.user_description'.trl,
                     imagePath: AppImages.kProfileIcon2,
                     onTap: () {},
                     selected: false,
@@ -62,7 +68,7 @@ class ProfileChooserScreenSelected extends StatelessWidget {
                 //todo: add the proper way for handling the waiting screen, hector said is should be their for 4 seconds at least
                 onPressed: () => context.push(AppRoutes.profileWaitingScreen),
                 enabled: false,
-                text: "profile.chooser.screen.button".trl,
+                text: "global.save_changes".trl,
               ),
               const SizedBox(
                 height: 48,

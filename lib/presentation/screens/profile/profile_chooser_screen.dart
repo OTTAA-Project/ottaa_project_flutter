@@ -28,6 +28,13 @@ class ProfileChooserScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Align(
+                    alignment: Alignment.centerRight,
+                    //todo: add text style here after emir has created the theme files
+                    child: Text(
+                      'global.skip'.trl,
+                    ),
+                  ),
                   //todo: add text style here after emir has created the theme files
                   Padding(
                     padding: const EdgeInsets.only(
@@ -40,8 +47,8 @@ class ProfileChooserScreen extends ConsumerWidget {
                     ),
                   ),
                   ActionCard(
-                    title: 'profile.caregivers_families'.trl,
-                    subtitle: 'profile.profesionales.familiares'.trl,
+                    title: 'profile.caregiver'.trl,
+                    subtitle: 'profile.caregivers_families'.trl,
                     trailingImage: const AssetImage(AppImages.kProfileIcon1),
                     onPressed: () {
                       provider.isCaregiver = !provider.isCaregiver;
@@ -56,7 +63,7 @@ class ProfileChooserScreen extends ConsumerWidget {
                   ),
                   ActionCard(
                     title: 'profile.user'.trl,
-                    subtitle: 'profile.necesita.comunicarse'.trl,
+                    subtitle: 'profile.user_description'.trl,
                     trailingImage: const AssetImage(AppImages.kProfileIcon2),
                     onPressed: () {
                       provider.isUser = !provider.isUser;

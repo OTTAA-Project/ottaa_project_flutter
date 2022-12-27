@@ -1,7 +1,9 @@
 {
   "profile": {
     "selection": {
-      "text1": "¿Quién va a usar la aplicación en este dispositivo?"
+      "text1": "¿Quién va a usar la aplicación en este dispositivo?",
+      "caregiver_text": "Necesita comunicarse",
+      "user_text": "Necesita comunicarse"
     },
     "hello": "Hola {name}!",
     "ottaa": {
@@ -15,6 +17,7 @@
     "caregiver": "Acompañante",
     "caregivers_families": "Profesionales/Familiares",
     "user": "Usuario/a",
+    "user_description": "La persona que necesita comunicarse",
     "wait": "Por favor esperá",
     "setting_exp": "Configurando tu experiencia...",
     "link_account": "Vincular una cuenta",
@@ -58,7 +61,7 @@
           "invalid": "El correo electrónico es inválido"
         },
         "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
+        "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles.",
         "send": "Enviar"
       },
       "token": {
@@ -95,13 +98,15 @@
     "save_changes": "Guardar cambios",
     "send": "Enviar",
     "skip": "Omitir",
-    "email": "Correo electrónico"
+    "email": "Email",
+    "step": "Paso",
+    "share": "Compartir"
   },
   "onboarding": {
     "start": "Comenzar",
     "profile": {
       "title": "Pantalla de perfiles",
-      "subtitle": "¿Quién usa OTTAA hoy?",
+      "subtitle": "¿Quién va a usar OTTAA hoy?",
       "description": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
     },
     "home": {
@@ -169,6 +174,22 @@
     "wait": {
       "title": "Te damos la bienvenida!",
       "subtitle": "Al nuevo mundo de OTTAA Project"
+    }
+  },
+  "customize": {
+    "board": {
+      "title": "¿Qué tableros va a usar el usuario?"
+    },
+    "shortcut": {
+      "title": "¿Qué atajos va anecesitar el usuario?",
+      "favorites": "Favoritos",
+      "history": "Historial",
+      "camera": "Cámara",
+      "games": "Juegos"
+    },
+    "picto": {
+      "title": "Tablero {name}",
+      "switch": "Activar tablero"
     }
   }
 }
