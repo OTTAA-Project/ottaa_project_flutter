@@ -52,9 +52,10 @@ class ProfileSettingsScreen extends ConsumerWidget {
                     ],
                   ),
                   Image.asset(
-                    AppImages.kProfileOttaalogo,
+                    AppImages.kLogoOttaa,
                     height: 36,
                     width: 116,
+                    fit: BoxFit.cover,
                   ),
                 ],
               ),

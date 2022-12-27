@@ -49,7 +49,7 @@ class LinkSuccessScreen extends StatelessWidget {
               onPressed: () {
                 //TODO: Redirect to customize board screen
               },
-              text: "link.success.continue",
+              text: "global.continue".trl,
             ),
           ),
           const SizedBox(height: 48),

@@ -12,8 +12,12 @@ extension TranslateString on String {
     return currentTree.translate(this) ?? this;
   }
 
-  String trlf(Map<String, dynamic> args) {
+  String trlf([Map<String, dynamic>? args]) {
     final translation = trl;
+
+    if(args == null) {
+      return translation;
+    }
 
     if (args.isEmpty) {
       return translation;
