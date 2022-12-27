@@ -17,6 +17,8 @@ class ProfileChooserButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -25,41 +27,49 @@ class ProfileChooserButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: Colors.white,
-          border: selected ? Border.all(
-            color: kOTTAAOrangeNew,
-            width: 3,
-          ) : const Border(),
+          border: selected
+              ? Border.all(
+                  color: kOTTAAOrangeNew,
+                  width: 3,
+                )
+              : const Border(),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 16,
-                top: 16,
-              ),
+            const SizedBox(
+              width: 16,
+            ),
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //todo: add the theme here
+                  const SizedBox(
+                    height: 16,
+                  ),
                   Text(
                     heading,
+                    style: textTheme.subtitle2,
                   ),
                   const SizedBox(
                     height: 4,
                   ),
                   Text(
                     subtitle,
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
+                    style: textTheme.subtitle1,
+                    maxLines: 2,
                   ),
                 ],
               ),
             ),
-            Image.asset(
-              imagePath,
-              fit: BoxFit.fitHeight,
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
             ),
           ],
         ),

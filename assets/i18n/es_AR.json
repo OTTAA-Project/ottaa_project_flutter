@@ -1,7 +1,9 @@
 {
   "profile": {
     "selection": {
-      "text1": "¿Quién va a usar la aplicación en este dispositivo?"
+      "text1": "¿Quién va a usar la aplicación en este dispositivo?",
+      "caregiver_text": "Necesita comunicarse",
+      "user_text": "Necesita comunicarse"
     },
     "hello": "Hola {name}!",
     "ottaa": {
