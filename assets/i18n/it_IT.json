@@ -61,7 +61,7 @@
         "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles."
       },
       "token": {
-        "title": "Coloque el código de verificación que llegó al correo electrónico.",
+        "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
         "problem": "¿Inconvenientes para enlazar las cuentas?",
         "resend": "Reenviar código",
         "back": "Ingresar otro email"
@@ -133,7 +133,7 @@
       "title": "¿Qué tableros va a usar el usuario?"
     },
     "shortcut": {
-      "title": "¿Qué atajos va anecesitar el usuario?",
+      "title": "¿Qué atajos va a necesitar el usuario?",
       "favorites": "Favoritos",
       "history": "Historial",
       "camera": "Cámara",
