@@ -32,10 +32,10 @@ class AuthProvider extends ChangeNotifier {
     _userNotifier.setUser(null);
   }
 
-  Future<Either<String, UserModel>> signIn(SignInType type) async {
+  Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     _loadingNotifier.showLoading();
 
-    Either<String, UserModel> result = await _authService.signIn(type);
+    Either<String, UserModel> result = await _authService.signIn(type, email, password);
 
     if (result.isRight) {
       await _localDatabaseRepository.setUser(result.right);

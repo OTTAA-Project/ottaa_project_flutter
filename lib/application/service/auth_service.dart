@@ -58,7 +58,7 @@ class AuthService extends AuthRepository {
   }
 
   @override
-  Future<Either<String, UserModel>> signIn(SignInType type) async {
+  Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     Either<String, User> result;
 
     switch (type) {
