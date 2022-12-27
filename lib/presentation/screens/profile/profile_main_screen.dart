@@ -99,9 +99,15 @@ class ProfileMainScreen extends ConsumerWidget {
                       //   height: 16,
                       // ),
                       DropDownWidget(
-                        onTap: () {
-                          context.push(AppRoutes.linkMailScreen);
-                        },
+                        onTap: () {},
+                        image: AppImages.kProfileAddIcon,
+                        text: "profile.crear.nueva.cuenta".trl,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      DropDownWidget(
+                        onTap: () => context.push(AppRoutes.linkMailScreen),
                         image: AppImages.kProfileLinkIcon,
                         text: "profile.link_account".trl,
                       ),
