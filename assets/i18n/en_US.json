@@ -35,7 +35,7 @@
     "year": "Year",
     "tips": {
       "title1": "Stats",
-      "title2": "Board",
+      "title2": "Boards",
       "title3": "History",
       "title4": "Favorites",
       "text1": "Take a look at the statistics of your patient/family member, to check their activity and how they improved over the days, weeks and months.",
@@ -61,7 +61,7 @@
         "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles."
       },
       "token": {
-        "title": "Coloque el código de verificación que llegó al correo electrónico.",
+        "title": "Enter the token shown in the screen of the device you want to link.",
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email"
@@ -133,15 +133,15 @@
       "title": "Which boards the user is going to use?"
     },
     "shortcut": {
-      "title": "¿Qué atajos va anecesitar el usuario?",
+      "title": "Which shortcuts will the user need?",
       "favorites": "Favorites",
       "history": "History",
       "camera": "Camera",
       "games": "Games"
     },
     "picto": {
-      "title": "Tablero {name}",
-      "switch": "Activar tablero"
+      "title": "Board {name}",
+      "switch": "Enable board"
     }
   }
 }
