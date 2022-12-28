@@ -15,12 +15,36 @@ class ProfileNotifier extends ChangeNotifier {
       TextEditingController();
   final TextEditingController profileEditEmailController =
       TextEditingController();
+
   //profile chooser screen
   bool professionalSelected = false;
   bool userSelected = false;
 
+  int day = 0, month = 0, year = 0;
+
   void notify() {
     notifyListeners();
+  }
+
+  bool validateDate() {
+    //todo: check for values
+    if (day == 0 || month == 0 || year == 0) {
+      return false;
+    }
+    //todo: continue with the process
+    return true;
+  }
+
+  int convertDate() {
+    final date = DateTime(year, month, day);
+    return date.millisecondsSinceEpoch;
+  }
+
+  Future<void> updateChanges() async {
+    final check = validateDate();
+    if (check) {
+      //todo: upload to the firebase
+    } else {}
   }
 
   Future<void> pickImage({required bool cameraOrGallery}) async {

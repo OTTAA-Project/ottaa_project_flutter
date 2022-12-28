@@ -29,9 +29,8 @@ class _ProfileFAQScreenState extends State<ProfileFAQScreen> {
                 child: ListView.builder(
                   itemCount: 9,
                   itemBuilder: (context, index) => FaqContainerWidget(
-                    selected: true,
-                    //todo: add the proper term here
-                    heading: "faq1".trl,
+                    selected: selected,
+                    heading: "faq${index}".trl,
                     subtitle: "faq1Description",
                     onTap: () {
                       setState(() {
