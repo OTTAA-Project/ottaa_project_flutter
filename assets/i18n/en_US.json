@@ -52,13 +52,13 @@
     "link": {
       "title": "Link to an account",
       "mail": {
-        "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+        "title": "Enter the email of the account you want to link",
         "input": {
           "required": "Email is required",
           "invalid": "Invalid email"
         },
         "contact": "*Be sure you are in contact with the person using this email.",
-        "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles."
+        "warn": "*We will show a token on the device screen to link accounts."
       },
       "token": {
         "title": "Enter the token shown in the screen of the device you want to link.",
