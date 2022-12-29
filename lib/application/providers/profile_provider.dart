@@ -52,11 +52,24 @@ class ProfileNotifier extends ChangeNotifier {
 
 
   Future<void> openDialer() async {
-    Uri callUrl = Uri.parse('tel:=03036308035');
+    Uri callUrl = Uri.parse('tel:=+123456789');
     if (await canLaunchUrl(callUrl)) {
       await launchUrl(callUrl);
     } else {
       throw 'Could not open the dialler.';
+    }
+  }
+
+  Future<void> openEmail()async{
+    final email = Uri(
+      scheme: 'mailto',
+      path: 'asim@ottaa.com',
+      query: 'subject=Hello&body=Test',
+    );
+    if (await canLaunchUrl(email)) {
+      launchUrl(email);
+    } else {
+      throw 'Could not launch $email';
     }
   }
 

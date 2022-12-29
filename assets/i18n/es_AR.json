@@ -100,7 +100,8 @@
     "skip": "Omitir",
     "email": "Email",
     "step": "Paso",
-    "share": "Compartir"
+    "share": "Compartir",
+    "support" : "Soporte"
   },
   "onboarding": {
     "start": "Comenzar",

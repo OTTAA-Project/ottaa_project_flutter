@@ -45,29 +45,29 @@ class ProfileHelpScreen extends ConsumerWidget {
                 subtitle: '',
                 trailingImage: const AssetImage(AppImages.kProfileHelpIcon2),
                 onPressed: () async {
-                  bool? wantsCall = await BasicBottomSheet.show<bool>(context,
-                      title: "Soporte",
+                  bool? wantsCall = await BasicBottomSheet.show(context,
+                      title: 'global.support'.trl,
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Mail:", style: textTheme.headline3),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                //TODO: Openurl
-                              },
-                              child: Text(
-                                "support@ottaaproject.com",
-                                style: textTheme.headline3?.copyWith(
-                                  decoration: TextDecoration.underline,
-                                ),
+                        GestureDetector(
+                          onTap: () async => await provider.openEmail(),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Mail:", style: textTheme.headline3),
+                              const SizedBox(
+                                width: 4,
                               ),
-                            )
-                          ],
+                              GestureDetector(
+                                child: Text(
+                                  "support@ottaaproject.com",
+                                  style: textTheme.headline3?.copyWith(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 32,
