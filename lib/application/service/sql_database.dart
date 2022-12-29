@@ -26,7 +26,7 @@ class SqlDatabase implements LocalDatabaseRepository {
 
   Future<Database> initDB() async {
     return await openDatabase(
-      join(await getDatabasesPath(), 'ottaa_database_test.db'),
+      join(await getDatabasesPath(), 'ottaa_database_test1.db'),
       version: 2,
       onConfigure: _onConfigure,
       onUpgrade: _onUpgrade,

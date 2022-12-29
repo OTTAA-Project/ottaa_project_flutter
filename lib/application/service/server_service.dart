@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
@@ -9,6 +12,7 @@ import 'package:http/http.dart' as http;
 
 class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
+  final Reference _storageRef = FirebaseStorage.instance.ref();
 
   @override
   Future<void> init() async {}
@@ -283,6 +287,7 @@ class ServerService implements ServerRepository {
     }
   }
 
+  @override
   Future<void> updateUserData({
     required Map<String, dynamic> data,
     required String userId,
@@ -293,5 +298,26 @@ class ServerService implements ServerRepository {
     } catch (e) {
       print(e);
     }
+  }
+
+  @override
+  Future<String> uploadUserImage({
+    required String path,
+    required String name,
+    required String userId,
+  }) async {
+    Reference ref = _storageRef.child('userProfilePics').child('$name.jpg');
+    final metadata = SettableMetadata(
+      contentType: 'image/jpeg',
+      customMetadata: {'picked-file-path': path},
+    );
+    late String url;
+    if (kIsWeb) {
+      // uploadTask = ref.putData(await file.readAsBytes(), metadata);
+    } else {
+      final uploadTask = await ref.putFile(File(path), metadata);
+      url = await uploadTask.ref.getDownloadURL();
+    }
+    return url;
   }
 }
