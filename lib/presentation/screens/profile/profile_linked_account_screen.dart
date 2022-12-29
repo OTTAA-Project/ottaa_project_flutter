@@ -8,41 +8,34 @@ class ProfileLinkedAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            children: [
-              //todo: why it is giving the error Emir-Chan
-              OTTAAAppBar(
-                title: Text(
-                  "profile.help.help".trl,
-                ),
-              ),
-              const SizedBox(
-                height: 36,
-              ),
-              //todo: discuss the last text with the hector
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: const ProfileCard(
-                      title: 'Juan Varela',
-                      subtitle: 'Usuario',
-                      actions: Text('Text to be added'),
-                      leadingImage: NetworkImage(
-                        'https://cdn.discordapp.com/avatars/854381699559718922/517e6e3900959a7a4bb89f3b16dab238.png?size=1024',
-                      ),
-                    ),
+      body: Column(
+        children: [
+          OTTAAAppBar(
+            title: Text(
+              "profile.help.help".trl,
+              style: textTheme.headline3,
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              itemCount: 3,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: const ProfileCard(
+                  title: 'Juan Varela',
+                  subtitle: 'Usuario',
+                  actions: Text('Text to be added'),
+                  leadingImage: NetworkImage(
+                    'https://cdn.discordapp.com/avatars/854381699559718922/517e6e3900959a7a4bb89f3b16dab238.png?size=1024',
                   ),
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
