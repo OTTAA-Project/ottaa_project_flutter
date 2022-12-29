@@ -49,7 +49,9 @@ Future<void> setupServices() async {
 
   final ServerRepository serverRepository = ServerService();
 
-  final i18n = await I18N(deviceLocale).init();
+  //todo: change it afterwards
+  // final i18n = await I18N(deviceLocale).init();
+  final i18n = await I18N(const Locale('en', 'US')).init();
 
   final AuthRepository authService =
       AuthService(databaseRepository, serverRepository);

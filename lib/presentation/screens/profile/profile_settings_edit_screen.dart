@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
@@ -18,14 +19,11 @@ class ProfileSettingsEditScreen extends ConsumerWidget {
     // final colorScheme = Theme.of(context).colorScheme;
     final user = ref.watch(userNotifier);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await provider.setDate();
       provider.profileEditNameController.text = user!.name;
-      provider.profileEditSurnameController.text = "user.lastName!";
+      provider.profileEditSurnameController.text = user.lastName!;
       provider.profileEditEmailController.text = user.email;
-      final birthday = user.birthdate!;
-      final date = DateTime.fromMillisecondsSinceEpoch(birthday);
-      provider.day = date.day;
-      provider.month = date.month;
-      provider.year = date.year;
+
     });
     return Scaffold(
       appBar: OTTAAAppBar(
@@ -93,10 +91,12 @@ class ProfileSettingsEditScreen extends ConsumerWidget {
                           selected: provider.day.toString(),
                           onChanged: (String? a) {
                             provider.day = int.parse(a!);
+                            provider.notify();
+                            print("day is $a");
                           },
                           items: List.generate(
                             32,
-                                (index) => (index).toString(),
+                            (index) => (index).toString(),
                           ),
                           label: (String item) => Text(
                             item,
@@ -112,10 +112,12 @@ class ProfileSettingsEditScreen extends ConsumerWidget {
                           selected: provider.month.toString(),
                           onChanged: (String? a) {
                             provider.month = int.parse(a!);
+                            provider.notify();
+                            print("month is $a");
                           },
                           items: List.generate(
                             13,
-                                (index) => index.toString(),
+                            (index) => index.toString(),
                           ),
                           label: (String item) => Text(
                             item,
@@ -130,13 +132,15 @@ class ProfileSettingsEditScreen extends ConsumerWidget {
                           selected: provider.year.toString(),
                           onChanged: (String? a) {
                             provider.year = int.parse(a!);
+                            provider.notify();
+                            print(a);
                           },
                           items: List.generate(
                             80,
-                                (index) => index.toString(),
+                            (index) => (currentYear - index).toString(),
                           ),
                           label: (String item) => Text(
-                            (currentYear - (int.parse(item) - 1)).toString(),
+                            item,
                           ),
                         ),
                       ),
@@ -145,7 +149,13 @@ class ProfileSettingsEditScreen extends ConsumerWidget {
                 ],
               ),
               PrimaryButton(
-                onPressed: () async => provider.updateChanges(),
+                onPressed: () async {
+                  await provider.updateChanges();
+
+                  /// reset to get new image
+                  provider.imageSelected = false;
+                  context.pop();
+                },
                 text: 'global.continue'.trl,
               ),
             ],

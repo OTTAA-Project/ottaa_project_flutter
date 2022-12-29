@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
-class ProfileHelpScreen extends StatelessWidget {
+class ProfileHelpScreen extends ConsumerWidget {
   const ProfileHelpScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
+    final provider = ref.watch(profileProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text(
@@ -85,7 +88,7 @@ class ProfileHelpScreen extends StatelessWidget {
                       cancelButtonEnabled: true);
 
                   if (wantsCall == true) {
-                    //TODO: call behaviour
+                    await provider.openDialer();
                   }
                 },
                 imageSize: const Size(129, 96),
