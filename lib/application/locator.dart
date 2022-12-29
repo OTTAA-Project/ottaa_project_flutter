@@ -10,6 +10,7 @@ import 'package:ottaa_project_flutter/application/service/groups_service.dart';
 import 'package:ottaa_project_flutter/application/service/local_storage_service.dart';
 import 'package:ottaa_project_flutter/application/service/mobile_remote_storage_service.dart';
 import 'package:ottaa_project_flutter/application/service/pictograms_service.dart';
+import 'package:ottaa_project_flutter/application/service/profile_services.dart';
 import 'package:ottaa_project_flutter/application/service/sentences_service.dart';
 import 'package:ottaa_project_flutter/application/service/server_service.dart';
 import 'package:ottaa_project_flutter/application/service/sql_database.dart';
@@ -21,6 +22,7 @@ import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
@@ -37,7 +39,9 @@ Future<void> setupServices() async {
   if (deviceLanguage.length == 2) {
     deviceLocale = Locale(deviceLanguage[0], deviceLanguage[1]);
   } else {
-    deviceLocale = systemLocales.firstWhere((element) => element.languageCode == deviceLanguage[0], orElse: () => const Locale('en', 'US'));
+    deviceLocale = systemLocales.firstWhere(
+        (element) => element.languageCode == deviceLanguage[0],
+        orElse: () => const Locale('en', 'US'));
   }
 
   final LocalDatabaseRepository databaseRepository = SqlDatabase();
@@ -47,23 +51,31 @@ Future<void> setupServices() async {
 
   final i18n = await I18N(deviceLocale).init();
 
-  final AuthRepository authService = AuthService(databaseRepository, serverRepository);
+  final AuthRepository authService =
+      AuthService(databaseRepository, serverRepository);
   final LocalStorageRepository localStorageService = LocalStorageService();
   late final RemoteStorageRepository remoteStorageService;
 
   if (kIsWeb) {
-    remoteStorageService = WebRemoteStorageService(authService, serverRepository, i18n);
+    remoteStorageService =
+        WebRemoteStorageService(authService, serverRepository, i18n);
   } else {
-    remoteStorageService = MobileRemoteStorageService(authService, serverRepository, i18n);
+    remoteStorageService =
+        MobileRemoteStorageService(authService, serverRepository, i18n);
   }
 
-  final PictogramsRepository pictogramsService = PictogramsService(authService, serverRepository, remoteStorageService);
+  final PictogramsRepository pictogramsService =
+      PictogramsService(authService, serverRepository, remoteStorageService);
 
-  final GroupsRepository groupsService = GroupsService(authService, remoteStorageService, serverRepository);
+  final GroupsRepository groupsService =
+      GroupsService(authService, remoteStorageService, serverRepository);
 
-  final AboutRepository aboutService = AboutService(authService, serverRepository);
-  final SentencesRepository sentencesService = SentencesService(authService, serverRepository);
+  final AboutRepository aboutService =
+      AboutService(authService, serverRepository);
+  final SentencesRepository sentencesService =
+      SentencesService(authService, serverRepository);
   final TTSRepository ttsService = TTSService();
+  final ProfileRepository profileServices = ProfileService(serverRepository);
 
   locator.registerSingleton<I18N>(i18n);
   locator.registerSingleton<LocalDatabaseRepository>(databaseRepository);
@@ -76,4 +88,5 @@ Future<void> setupServices() async {
   locator.registerSingleton<GroupsRepository>(groupsService);
   locator.registerSingleton<AboutRepository>(aboutService);
   locator.registerSingleton<SentencesRepository>(sentencesService);
+  locator.registerSingleton<ProfileRepository>(profileServices);
 }
