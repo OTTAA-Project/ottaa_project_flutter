@@ -4,7 +4,6 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
-import 'package:ottaa_project_flutter/presentation/screens/profile/ui/date_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/image_edit_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -13,10 +12,21 @@ class ProfileSettingsEditScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final int currentYear = DateTime.now().year;
     final provider = ref.watch(profileProvider);
     final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    // final colorScheme = Theme.of(context).colorScheme;
     final user = ref.watch(userNotifier);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      provider.profileEditNameController.text = user!.name;
+      provider.profileEditSurnameController.text = "user.lastName!";
+      provider.profileEditEmailController.text = user.email;
+      final birthday = user.birthdate!;
+      final date = DateTime.fromMillisecondsSinceEpoch(birthday);
+      provider.day = date.day;
+      provider.month = date.month;
+      provider.year = date.year;
+    });
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text(
@@ -77,24 +87,65 @@ class ProfileSettingsEditScreen extends ConsumerWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      DateWidget(
-                        text: 'profile.day'.trl,
-                        onTap: () {},
+                      //days
+                      Expanded(
+                        child: OTTAADropdown<String>(
+                          selected: provider.day.toString(),
+                          onChanged: (String? a) {
+                            provider.day = int.parse(a!);
+                          },
+                          items: List.generate(
+                            32,
+                                (index) => (index).toString(),
+                          ),
+                          label: (String item) => Text(
+                            item,
+                          ),
+                        ),
                       ),
-                      DateWidget(
-                        text: 'profile.month'.trl,
-                        onTap: () {},
+                      const SizedBox(
+                        width: 16,
                       ),
-                      DateWidget(
-                        text: 'profile.year'.trl,
-                        onTap: () {},
+                      //months
+                      Expanded(
+                        child: OTTAADropdown<String>(
+                          selected: provider.month.toString(),
+                          onChanged: (String? a) {
+                            provider.month = int.parse(a!);
+                          },
+                          items: List.generate(
+                            13,
+                                (index) => index.toString(),
+                          ),
+                          label: (String item) => Text(
+                            item,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                        child: OTTAADropdown<String>(
+                          selected: provider.year.toString(),
+                          onChanged: (String? a) {
+                            provider.year = int.parse(a!);
+                          },
+                          items: List.generate(
+                            80,
+                                (index) => index.toString(),
+                          ),
+                          label: (String item) => Text(
+                            (currentYear - (int.parse(item) - 1)).toString(),
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ],
               ),
               PrimaryButton(
-                onPressed: () {},
+                onPressed: () async => provider.updateChanges(),
                 text: 'global.continue'.trl,
               ),
             ],
