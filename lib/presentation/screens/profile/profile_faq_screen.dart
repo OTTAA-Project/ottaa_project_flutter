@@ -12,39 +12,97 @@ class ProfileFAQScreen extends StatefulWidget {
 
 class _ProfileFAQScreenState extends State<ProfileFAQScreen> {
   bool selected = false;
+  final List<Item> _data = generateItems(8);
 
   @override
   Widget build(BuildContext context) {
-    //todo: add the theme here
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: OTTAAAppBar(
-        title: Text("profile.faq.title".trl),
+        title: Text(
+          "profile.faq.title".trl,
+          style: textTheme.headline3,
+        ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 9,
-                  itemBuilder: (context, index) => FaqContainerWidget(
-                    selected: true,
-                    //todo: add the proper term here
-                    heading: "faq1".trl,
-                    subtitle: "faq1Description",
-                    onTap: () {
-                      setState(() {
-                        selected = !selected;
-                      });
-                    },
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: SingleChildScrollView(
+          child: ExpansionPanelList(
+            dividerColor: colorScheme.background,
+            expandedHeaderPadding: const EdgeInsets.symmetric(vertical: 16),
+            animationDuration: const Duration(milliseconds: 500),
+            expansionCallback: (int index, bool isExpanded) {
+              setState(() {
+                _data[index].isExpanded = !isExpanded;
+              });
+            },
+            children: _data.map<ExpansionPanel>((Item item) {
+              return ExpansionPanel(
+                canTapOnHeader: true,
+                headerBuilder: (BuildContext context, bool isExpanded) {
+                  return Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(
+                        width: 24,
+                      ),
+                      Text(
+                        item.headerValue,
+                        style: textTheme.subtitle2!
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  );
+                },
+                body: Column(
+                  children: [
+                    Divider(
+                      height: 2,
+                      color: colorScheme.background,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      padding:
+                          const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                      child: Text(
+                        item.expandedValue,
+                        style: textTheme.subtitle1,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                isExpanded: item.isExpanded,
+
+              );
+            }).toList(),
           ),
         ),
       ),
     );
   }
+}
+
+// stores ExpansionPanel state information
+class Item {
+  Item({
+    required this.expandedValue,
+    required this.headerValue,
+    this.isExpanded = false,
+  });
+
+  String expandedValue;
+  String headerValue;
+  bool isExpanded;
+}
+
+List<Item> generateItems(int numberOfItems) {
+  return List<Item>.generate(numberOfItems, (int index) {
+    return Item(
+      headerValue: 'faq$index'.trl,
+      expandedValue: 'faq${index}Description'.trl,
+    );
+  });
 }
