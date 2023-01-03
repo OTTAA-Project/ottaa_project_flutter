@@ -320,4 +320,34 @@ class ServerService implements ServerRepository {
     }
     return url;
   }
+
+  @override
+  Future<dynamic> getConnectedUsers({required String userId}) async {
+    final ref = _database.child('$userId/users');
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return res.value;
+    } else {
+      return "an error occurred"; //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<dynamic> fetchConnectedUserData({required String userId})async {
+    final ref = _database.child('$userId/settings/data');
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return res.value;
+    } else {
+      return "an error occurred"; //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<void> removeCurrentUser({required String userId,required String careGiverId})async {
+    await _database.child('$careGiverId/users/$userId').remove();
+  }
+
 }

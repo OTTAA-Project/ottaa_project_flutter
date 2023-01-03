@@ -47,6 +47,7 @@
       "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
     },
     "unlink": "Desvincular",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas de perfil?",
     "help": {
       "help": "Ayuda",
       "title1": "Preguntas frecuentes",
@@ -101,7 +102,7 @@
     "email": "Email",
     "step": "Paso",
     "share": "Compartir",
-    "support" : "Soporte"
+    "support": "Soporte"
   },
   "onboarding": {
     "start": "Comenzar",

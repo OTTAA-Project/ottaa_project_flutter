@@ -59,4 +59,11 @@ abstract class ServerRepository {
 
   Future<void> updateUser(
       {required Map<String, dynamic> data, required String userId});
+
+  Future<dynamic> getConnectedUsers({required String userId});
+
+  Future<dynamic> fetchConnectedUserData({required String userId});
+
+  Future<void> removeCurrentUser(
+      {required String userId, required String careGiverId});
 }

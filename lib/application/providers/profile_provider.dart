@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ottaa_project_flutter/core/models/care_giver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/connected_user_data_model.dart';
+import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
@@ -15,6 +20,7 @@ class ProfileNotifier extends ChangeNotifier {
   ProfileNotifier(this._pictogramsService, this._auth, this._profileService);
 
   bool isCaregiver = false;
+  late UserModel user;
   bool isUser = false;
   bool imageSelected = false;
   XFile? profileEditImage;
@@ -32,8 +38,14 @@ class ProfileNotifier extends ChangeNotifier {
   bool professionalSelected = false;
   bool userSelected = false;
 
+  //profile edit screen
   int day = 0, month = 0, year = 0;
   String yearForDropDown = "0";
+
+  //connected users screen
+  List<CareGiverUser> connectedUsers = [];
+  List<ConnectedUserData> connectedusersData = [];
+  bool dataFetched = false;
 
   void notify() {
     notifyListeners();
@@ -41,7 +53,7 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> setDate() async {
     final res = await _auth.getCurrentUser();
-    final user = res.right;
+    user = res.right;
     final birthday = user.birthdate!;
     final date = DateTime.fromMillisecondsSinceEpoch(birthday);
     day = date.day;
@@ -49,7 +61,6 @@ class ProfileNotifier extends ChangeNotifier {
     year = date.year;
     notifyListeners();
   }
-
 
   Future<void> openDialer() async {
     Uri callUrl = Uri.parse('tel:=+123456789');
@@ -60,7 +71,7 @@ class ProfileNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> openEmail()async{
+  Future<void> openEmail() async {
     final email = Uri(
       scheme: 'mailto',
       path: 'asim@ottaa.com',
@@ -124,6 +135,48 @@ class ProfileNotifier extends ChangeNotifier {
       imageSelected = true;
       notifyListeners();
     }
+  }
+
+  Future<void> getConnectedUsers({required String userId}) async {
+    connectedUsers = [];
+    final res = await _profileService.getConnectedUsers(userId: userId);
+
+    final jso = jsonEncode(res);
+    final Map<String, dynamic> json = jsonDecode(jso);
+    json.forEach((key, value) {
+      connectedUsers.add(CareGiverUser.fromJson(value));
+      print(key);
+    });
+    print('ids are followings');
+
+    /// fetching their names and pics from the database
+  }
+
+  Future<void> fetchConnectedUsersData() async {
+    connectedusersData = [];
+    connectedUsers.forEach((e) async {
+      final res =
+          await _profileService.fetchConnectedUserData(userId: e.userId);
+      final jso = jsonEncode(res);
+      final Map<String, dynamic> json = jsonDecode(jso);
+      connectedusersData.add(
+        ConnectedUserData(name: json['name'], image: json['avatar']['name']),
+      );
+      print(json['name']);
+    });
+    dataFetched = true;
+  }
+
+  Future<void> removeCurrentUser(
+      {required String userId, required String careGiverId}) async {
+    await _profileService.removeCurrentUser(
+        userId: userId, careGiverId: careGiverId);
+
+    ///update the whole list again
+    dataFetched = false;
+    await getConnectedUsers(userId: careGiverId);
+    await fetchConnectedUsersData();
+    dataFetched = true;
   }
 }
 

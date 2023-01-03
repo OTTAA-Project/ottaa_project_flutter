@@ -603,4 +603,58 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<String> uploadUserImage({
+    required String? path,
+    required String? name,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadUserImage,
+          [],
+          {
+            #path: path,
+            #name: name,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<String>.value(''),
+      ) as _i4.Future<String>);
+  @override
+  _i4.Future<void> updateUser({
+    required Map<String, dynamic>? data,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUser,
+          [],
+          {
+            #data: data,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> getConnectedUsers(
+          {required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getConnectedUsers,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #getConnectedUsers,
+            [],
+            {#userId: userId},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
 }

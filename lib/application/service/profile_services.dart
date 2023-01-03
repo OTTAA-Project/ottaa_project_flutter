@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ottaa_project_flutter/core/models/care_giver_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
@@ -19,5 +22,22 @@ class ProfileService implements ProfileRepository {
       required String userId}) async {
     return await _serverRepository.uploadUserImage(
         path: path, name: name, userId: userId);
+  }
+
+  @override
+  Future<dynamic> getConnectedUsers({required String userId}) async {
+    return await _serverRepository.getConnectedUsers(userId: userId);
+  }
+
+  @override
+  Future<dynamic> fetchConnectedUserData({required String userId}) async {
+    return await _serverRepository.fetchConnectedUserData(userId: userId);
+  }
+
+  @override
+  Future<void> removeCurrentUser(
+      {required String userId, required String careGiverId}) async {
+    return await _serverRepository.removeCurrentUser(
+        userId: userId, careGiverId: careGiverId);
   }
 }
