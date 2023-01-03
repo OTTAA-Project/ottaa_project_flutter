@@ -34,6 +34,7 @@ class _ProfileLinkedAccountScreen
     final colorScheme = Theme.of(context).colorScheme;
     final provider = ref.watch(profileProvider);
     final user = ref.read(userNotifier);
+    print(provider.dataFetched);
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text(
@@ -74,7 +75,6 @@ class _ProfileLinkedAccountScreen
                                   cancelButtonEnabled: true,
                                 );
                                 if (cancel != null && cancel) {
-                                  //todo: add the unlink procedure here
                                   await provider.removeCurrentUser(
                                       userId:
                                           provider.connectedUsers[index].userId,

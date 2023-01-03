@@ -154,7 +154,7 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> fetchConnectedUsersData() async {
     connectedusersData = [];
-    connectedUsers.forEach((e) async {
+    for (var e in connectedUsers) {
       final res =
           await _profileService.fetchConnectedUserData(userId: e.userId);
       final jso = jsonEncode(res);
@@ -163,8 +163,9 @@ class ProfileNotifier extends ChangeNotifier {
         ConnectedUserData(name: json['name'], image: json['avatar']['name']),
       );
       print(json['name']);
-    });
+    }
     dataFetched = true;
+    notifyListeners();
   }
 
   Future<void> removeCurrentUser(
@@ -177,6 +178,7 @@ class ProfileNotifier extends ChangeNotifier {
     await getConnectedUsers(userId: careGiverId);
     await fetchConnectedUsersData();
     dataFetched = true;
+    notifyListeners();
   }
 }
 
