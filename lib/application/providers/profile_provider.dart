@@ -141,11 +141,11 @@ class ProfileNotifier extends ChangeNotifier {
       return;
     }
 
-    for (var element in res.right.values) {
-      connectedUsers.add(
-        CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
-      );
-    }
+    connectedUsers.addAll(res.right.values
+        .map<CareGiverUser>(
+          (element) => CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
+        )
+        .toList());
   }
 
   Future<void> fetchConnectedUsersData() async {
@@ -174,7 +174,7 @@ class ProfileNotifier extends ChangeNotifier {
   Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
     await _profileService.removeCurrentUser(userId: userId, careGiverId: careGiverId);
 
-    ///update the whole list again
+    // update the whole list again
     dataFetched = false;
     await getConnectedUsers(userId: careGiverId);
     await fetchConnectedUsersData();
