@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/models/care_giver_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
@@ -10,34 +11,27 @@ class ProfileService implements ProfileRepository {
   ProfileService(this._serverRepository);
 
   @override
-  Future<void> updateUser(
-      {required Map<String, dynamic> data, required String userId}) async {
+  Future<void> updateUser({required Map<String, dynamic> data, required String userId}) async {
     return await _serverRepository.updateUser(data: data, userId: userId);
   }
 
   @override
-  Future<String> uploadUserImage(
-      {required String path,
-      required String name,
-      required String userId}) async {
-    return await _serverRepository.uploadUserImage(
-        path: path, name: name, userId: userId);
+  Future<String> uploadUserImage({required String path, required String name, required String userId}) async {
+    return await _serverRepository.uploadUserImage(path: path, name: name, userId: userId);
   }
 
   @override
-  Future<dynamic> getConnectedUsers({required String userId}) async {
+  Future<Either<String, Map<String, dynamic>>> getConnectedUsers({required String userId}) async {
     return await _serverRepository.getConnectedUsers(userId: userId);
   }
 
   @override
-  Future<dynamic> fetchConnectedUserData({required String userId}) async {
+  Future<Either<String, Map<String, dynamic>>> fetchConnectedUserData({required String userId}) async {
     return await _serverRepository.fetchConnectedUserData(userId: userId);
   }
 
   @override
-  Future<void> removeCurrentUser(
-      {required String userId, required String careGiverId}) async {
-    return await _serverRepository.removeCurrentUser(
-        userId: userId, careGiverId: careGiverId);
+  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
+    return await _serverRepository.removeCurrentUser(userId: userId, careGiverId: careGiverId);
   }
 }

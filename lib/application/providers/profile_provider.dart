@@ -27,12 +27,9 @@ class ProfileNotifier extends ChangeNotifier {
   late String imageUrl;
   final ImagePicker _picker = ImagePicker();
   bool isLinkAccountOpen = false;
-  final TextEditingController profileEditNameController =
-      TextEditingController();
-  final TextEditingController profileEditSurnameController =
-      TextEditingController();
-  final TextEditingController profileEditEmailController =
-      TextEditingController();
+  final TextEditingController profileEditNameController = TextEditingController();
+  final TextEditingController profileEditSurnameController = TextEditingController();
+  final TextEditingController profileEditEmailController = TextEditingController();
 
   //profile chooser screen
   bool professionalSelected = false;
@@ -110,7 +107,7 @@ class ProfileNotifier extends ChangeNotifier {
       "last-name": profileEditSurnameController.text,
       "avatar": {
         "name": "local-use",
-        "url": imageSelected ? imageUrl : user.photoUrl
+        "url": imageSelected ? imageUrl : user.photoUrl,
       }
     };
     await _profileService.updateUser(data: data, userId: user.id);
@@ -133,52 +130,56 @@ class ProfileNotifier extends ChangeNotifier {
     }
     if (profileEditImage != null) {
       imageSelected = true;
-      notifyListeners();
+      notify();
     }
   }
 
   Future<void> getConnectedUsers({required String userId}) async {
     connectedUsers = [];
     final res = await _profileService.getConnectedUsers(userId: userId);
+    if (res.isLeft) {
+      return;
+    }
 
-    final jso = jsonEncode(res);
-    final Map<String, dynamic> json = jsonDecode(jso);
-    json.forEach((key, value) {
-      connectedUsers.add(CareGiverUser.fromJson(value));
-      print(key);
-    });
-    print('ids are followings');
-
-    /// fetching their names and pics from the database
+    for (var element in res.right.values) {
+      connectedUsers.add(
+        CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
+      );
+    }
   }
 
   Future<void> fetchConnectedUsersData() async {
     connectedusersData = [];
-    for (var e in connectedUsers) {
-      final res =
-          await _profileService.fetchConnectedUserData(userId: e.userId);
-      final jso = jsonEncode(res);
-      final Map<String, dynamic> json = jsonDecode(jso);
-      connectedusersData.add(
-        ConnectedUserData(name: json['name'], image: json['avatar']['name']),
-      );
-      print(json['name']);
-    }
+
+    await Future.wait(connectedUsers.map((e) async {
+      final res = await _profileService.fetchConnectedUserData(userId: e.userId);
+      if (res.isRight) {
+        final json = res.right;
+
+        connectedusersData.add(
+          ConnectedUserData(
+            name: json['name'],
+            image: json['avatar']['name'],
+          ),
+        );
+
+        print(json["name"]);
+      }
+    }));
+
     dataFetched = true;
-    notifyListeners();
+    notify();
   }
 
-  Future<void> removeCurrentUser(
-      {required String userId, required String careGiverId}) async {
-    await _profileService.removeCurrentUser(
-        userId: userId, careGiverId: careGiverId);
+  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
+    await _profileService.removeCurrentUser(userId: userId, careGiverId: careGiverId);
 
     ///update the whole list again
     dataFetched = false;
     await getConnectedUsers(userId: careGiverId);
     await fetchConnectedUsersData();
     dataFetched = true;
-    notifyListeners();
+    notify();
   }
 }
 
