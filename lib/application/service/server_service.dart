@@ -334,7 +334,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<dynamic> fetchConnectedUserData({required String userId})async {
+  Future<dynamic> fetchConnectedUserData({required String userId}) async {
     final ref = _database.child('$userId/settings/data');
     final res = await ref.get();
 
@@ -346,8 +346,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> removeCurrentUser({required String userId,required String careGiverId})async {
+  Future<void> removeCurrentUser(
+      {required String userId, required String careGiverId}) async {
     await _database.child('$careGiverId/users/$userId').remove();
   }
-
 }
