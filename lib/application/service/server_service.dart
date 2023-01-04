@@ -263,4 +263,47 @@ class ServerService implements ServerRepository {
       return Left("an error occurred"); //TODO: Handle the main error
     }
   }
+
+  @override
+  Future<EitherMap> getEmailToken(String ownEmail, String email) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
+    final body = {
+      'src': ownEmail,
+      'dst': email,
+    };
+    final res = await http.post(
+      uri,
+      body: jsonEncode(body),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      return Right(data);
+    } else {
+      return Left("an error occurred"); //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
+    final body = {
+      'src': ownEmail,
+      'dst': email,
+      'token': token,
+    };
+    final res = await http.post(
+      uri,
+      body: jsonEncode(body),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      return Right(data);
+    } else {
+      return Left("an error occurred"); //TODO: Handle the main error
+    }
+  }
 }

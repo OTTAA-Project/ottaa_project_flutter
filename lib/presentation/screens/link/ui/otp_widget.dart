@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/ui/token_input.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -41,17 +42,21 @@ class _OTPWidgetState extends ConsumerState<OTPWidget> {
                 tokenId: tokenId,
                 controller: provider.controllers[tokenId],
                 node: provider.focusNodes[tokenId],
-                onChanged: (_, value) {
+                onChanged: (_, value) async {
                   provider.tokenChanged(tokenId, value);
-                  bool? isValid = provider.validateCode();
-                  if (isValid == null) return;
+                  bool isCode = provider.isValidCode();
+                  if (isCode) {
+                    bool isValid = false;
+                    await LoadingModal.show(context, future: () async {
+                      isValid = await provider.validateCode();
+                    });
 
-                  if (!isValid) {
-                    OTTAANotification.secondary(context, text: "link.token.invalid");
-                    return;
+                    if (!isValid) {
+                      OTTAANotification.secondary(context, text: "link.token.invalid");
+                      return;
+                    }
+                    context.push(AppRoutes.linkWaitScreen);
                   }
-
-                  context.push(AppRoutes.linkWaitScreen);
                 },
               ),
             );

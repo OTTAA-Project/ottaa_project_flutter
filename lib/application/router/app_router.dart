@@ -34,7 +34,7 @@ final AppRouter appRouterSingleton = AppRouter();
 
 class AppRouter {
   String get initialAppResolver {
-    return AppRoutes.splash;
+    return AppRoutes.linkMailScreen;
     final authService = GetIt.I.get<AuthRepository>();
     return AppRoutes.splash;
 

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:collection/collection.dart';
+import 'package:ottaa_project_flutter/application/locator.dart';
+import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/use_cases/create_email_token.dart';
+import 'package:ottaa_project_flutter/core/use_cases/verify_email_token.dart';
 
 class LinkNotifier extends ChangeNotifier {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -10,6 +14,13 @@ class LinkNotifier extends ChangeNotifier {
 
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
   List<TextEditingController> controllers = List.generate(4, (index) => TextEditingController());
+
+  final CreateEmailToken createEmailToken;
+  final VerifyEmailToken verifyEmailToken;
+
+  final AuthRepository _auth;
+
+  LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._auth);
 
   void tokenChanged(int id, String value) {
     if (value.length > 2) {
@@ -39,14 +50,34 @@ class LinkNotifier extends ChangeNotifier {
     }
   }
 
-  bool? validateCode() {
+  Future<void> sendEmail() async {
+    if (formKey.currentState?.validate() ?? false) {
+      final currentUser = await _auth.getCurrentUser();
+      if (currentUser.isRight) {
+        final email = currentUser.right.email;
+        await createEmailToken.createEmailToken(email, emailController.text);
+      }
+    }
+  }
+
+  bool isValidCode() {
     final code = controllers.map((e) => e.text).join();
-    if (code.length == 4 && (codeFormKey.currentState?.validate() ?? false)) {
-      //TODO: Validate code
-      return code == '1234';
+    return code.length == 4 && (codeFormKey.currentState?.validate() ?? false);
+  }
+
+  Future<bool> validateCode() async {
+    final code = controllers.map((e) => e.text).join();
+    final currentUser = await _auth.getCurrentUser();
+    if (currentUser.isRight) {
+      final email = currentUser.right.email;
+      return await verifyEmailToken.verifyEmailToken(
+        email,
+        emailController.text,
+        code,
+      );
     }
 
-    return null;
+    return false;
   }
 
   void reset() {
@@ -60,5 +91,8 @@ class LinkNotifier extends ChangeNotifier {
 }
 
 final linkProvider = ChangeNotifierProvider<LinkNotifier>((ref) {
-  return LinkNotifier();
+  final createEmailToken = locator<CreateEmailToken>();
+  final verifyEmailToken = locator<VerifyEmailToken>();
+  final authRepository = locator<AuthRepository>();
+  return LinkNotifier(createEmailToken, verifyEmailToken, authRepository);
 });
