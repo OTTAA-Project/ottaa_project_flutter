@@ -14,6 +14,7 @@
     "caregiver": "Acompañante",
     "caregivers_families": "Profesionales/Familiares",
     "user": "Usuario/a",
+    "user_description": "La persona que necesita comunicarse",
     "wait": "Por favor esperá",
     "setting_exp": "Configurando tu experiencia...",
     "link_account": "Vincular una cuenta",
@@ -57,10 +58,10 @@
           "invalid": "El correo electrónico es inválido"
         },
         "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles."
+        "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles."
       },
       "token": {
-        "title": "Coloque el código de verificación que llegó al correo electrónico.",
+        "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
         "problem": "¿Inconvenientes para enlazar las cuentas?",
         "resend": "Reenviar código",
         "back": "Ingresar otro email"
@@ -71,8 +72,7 @@
       },
       "success": {
         "title": "Perfil vinculado con éxito!",
-        "lastTime": "Últ. vez Ayer {date}",
-        "continue": "Continuar"
+        "lastTime": "Últ. vez Ayer {date}"
       }
     }
   },
@@ -92,13 +92,16 @@
     "important": "Importante",
     "save_changes": "Guardar cambios",
     "send": "Enviar",
-    "skip": "Omitir"
+    "skip": "Omitir",
+    "email": "Email",
+    "step": "Paso",
+    "share": "Compartir"
   },
   "onboarding": {
     "start": "Comenzar",
     "profile": {
       "title": "Pantalla de perfiles",
-      "subtitle": "¿Quién usa OTTAA hoy?",
+      "subtitle": "¿Quién va a usar OTTAA hoy?",
       "description": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
     },
     "home": {
@@ -119,23 +122,26 @@
   "loginWait": {
     "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
   },
-  "link": {
-    "title": "Ingresá el correo electrónico de la cuenta de OTTAA a vincular",
-    "text1": "*Asegurate de estar en contacto con la persona que tenga este correo electrónico.",
-    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este código arriba."
-  },
-  "token": {
-    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
-    "text": "¿Inconvenientes para enlazar las cuentas?",
-    "button": {
-      "resend": "Reenviar email",
-      "anothermail": "Ingresá otro email."
-    }
-  },
   "login": {
     "title": "Ingresá con tu cuenta",
     "google": "Continuar con Google",
     "facebook": "Continuar con Facebook",
     "register": "Todavía no tenés cuenta? Registrate acá"
+  },
+  "customize": {
+    "board": {
+      "title": "¿Qué tableros va a usar el usuario?"
+    },
+    "shortcut": {
+      "title": "¿Qué atajos va a necesitar el usuario?",
+      "favorites": "Favoritos",
+      "history": "Historial",
+      "camera": "Cámara",
+      "games": "Juegos"
+    },
+    "picto": {
+      "title": "Tablero {name}",
+      "switch": "Activar tablero"
+    }
   }
 }
