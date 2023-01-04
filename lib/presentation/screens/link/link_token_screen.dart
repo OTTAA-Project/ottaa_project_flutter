@@ -23,6 +23,7 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
       appBar: OTTAAAppBar(
         title: Text("global.back".trl),
       ),
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: SizedBox(
           width: size.width * 0.8,
@@ -42,6 +43,7 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
               const Spacer(),
               Text(
                 "profile.link.token.problem".trl,
+                textAlign: TextAlign.center,
                 style: textTheme.bodyText2,
               ),
               const SizedBox(height: 16),

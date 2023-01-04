@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
@@ -63,13 +64,13 @@ class SignInButton extends ConsumerWidget {
                 );
               }
 
-              if (result.isRight) {
-                // ignore: use_build_context_synchronously
-                await BasicBottomSheet.show(
-                  localContext,
-                  subtitle: "Para continuar, necesitamos que acepter los términos y condiciones.",
-                  okButtonText: "Aceptar Términos",
-                );
+        if (result.isRight) {
+          // ignore: use_build_context_synchronously
+          await BasicBottomSheet.show(
+            localContext,
+            subtitle: "terms.text".trl,
+            okButtonText: "terms.button".trl,
+          );
 
                 // ignore: use_build_context_synchronously
                 localContext.go(AppRoutes.waitingLogin);

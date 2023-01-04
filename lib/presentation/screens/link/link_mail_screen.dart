@@ -22,6 +22,7 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
     final provider = ref.watch(linkProvider);
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: OTTAAAppBar(
         title: Text("global.back".trl),
       ),
@@ -60,13 +61,13 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
               ),
               const SizedBox(height: 32),
               Text(
-                "profile.link.mail.contact",
+                "profile.link.mail.contact".trl,
                 textAlign: TextAlign.center,
                 style: textTheme.bodyText2,
               ),
               const SizedBox(height: 16),
               Text(
-                "profile.link.mail.warn",
+                "profile.link.mail.warn".trl,
                 textAlign: TextAlign.center,
                 style: textTheme.bodyText2,
               ),

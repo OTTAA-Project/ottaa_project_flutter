@@ -1,20 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/new_simple_button.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/new_text_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/profile/ui/date_widget.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/image_edit_widget.dart';
+import 'package:ottaa_ui_kit/widgets.dart';
 
-class ProfileSettingsEditScreen extends StatelessWidget {
+class ProfileSettingsEditScreen extends ConsumerWidget {
   const ProfileSettingsEditScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final int currentYear = DateTime.now().year;
+    final provider = ref.watch(profileProvider);
+    final textTheme = Theme.of(context).textTheme;
+    // final colorScheme = Theme.of(context).colorScheme;
+    final user = ref.watch(userNotifier);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      provider.profileEditNameController.text = user!.name;
+      provider.profileEditSurnameController.text = user.lastName!;
+      provider.profileEditEmailController.text = user.email;
+      final birthday = user.birthdate!;
+      final date = DateTime.fromMillisecondsSinceEpoch(birthday);
+      provider.day = date.day;
+      provider.month = date.month;
+      provider.year = date.year;
+    });
     return Scaffold(
-      backgroundColor: kOTTAABackground,
+      appBar: OTTAAAppBar(
+        title: Text(
+          "profile.profile".trl,
+          style: textTheme.headline3,
+        ),
+      ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
@@ -28,46 +47,36 @@ class ProfileSettingsEditScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => context.pop(),
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          size: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 24,
-                      ),
-                      Text(
-                        "profile.profile".trl,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 36,
-                  ),
                   Center(
                     child: ImageEditWidget(
-                      image: AppImages.kTestImage,
+                      cameraOnTap: () =>
+                          provider.pickImage(cameraOrGallery: true),
+                      galleryOnTap: () =>
+                          provider.pickImage(cameraOrGallery: false),
+                      imagePath: provider.profileEditImage != null
+                          ? provider.profileEditImage!.path
+                          : "",
+                      imageSelected: provider.imageSelected,
+                      imageUrl: user?.photoUrl ?? AppImages.kTestImage,
                     ),
                   ),
                   const SizedBox(
                     height: 24,
                   ),
-                  NewTextWidget(
+                  OTTAATextInput(
                     hintText: 'profile.name'.trl,
+                    controller: provider.profileEditNameController,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: NewTextWidget(
+                    child: OTTAATextInput(
                       hintText: 'profile.last_name'.trl,
+                      controller: provider.profileEditSurnameController,
                     ),
                   ),
-                  NewTextWidget(
+                  OTTAATextInput(
                     hintText: 'profile.mail'.trl,
+                    controller: provider.profileEditEmailController,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 24, bottom: 8),
@@ -78,25 +87,66 @@ class ProfileSettingsEditScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      DateWidget(
-                        text: 'profile.day'.trl,
-                        onTap: () {},
+                      //days
+                      Expanded(
+                        child: OTTAADropdown<String>(
+                          selected: provider.day.toString(),
+                          onChanged: (String? a) {
+                            provider.day = int.parse(a!);
+                          },
+                          items: List.generate(
+                            32,
+                            (index) => (index).toString(),
+                          ),
+                          label: (String item) => Text(
+                            item,
+                          ),
+                        ),
                       ),
-                      DateWidget(
-                        text: 'profile.month'.trl,
-                        onTap: () {},
+                      const SizedBox(
+                        width: 16,
                       ),
-                      DateWidget(
-                        text: 'profile.year'.trl,
-                        onTap: () {},
+                      //months
+                      Expanded(
+                        child: OTTAADropdown<String>(
+                          selected: provider.month.toString(),
+                          onChanged: (String? a) {
+                            provider.month = int.parse(a!);
+                          },
+                          items: List.generate(
+                            13,
+                            (index) => index.toString(),
+                          ),
+                          label: (String item) => Text(
+                            item,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                        child: OTTAADropdown<String>(
+                          selected: provider.year.toString(),
+                          onChanged: (String? a) {
+                            provider.year = int.parse(a!);
+                          },
+                          items: List.generate(
+                            80,
+                            (index) => index.toString(),
+                          ),
+                          label: (String item) => Text(
+                            (currentYear - (int.parse(item) - 1)).toString(),
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ],
               ),
-              NewSimpleButton(
-                onTap: () {},
-                text: 'Continuar',
+              PrimaryButton(
+                onPressed: () async => provider.updateChanges(),
+                text: 'global.continue'.trl,
               ),
             ],
           ),

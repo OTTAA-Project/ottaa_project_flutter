@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/onboarding_provider.dart';
@@ -81,7 +82,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
         ],
       ),
       body: SafeArea(
-        top: false,
+        top: true,
         left: true,
         right: true,
         child: SizedBox.fromSize(
@@ -121,6 +122,9 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 16,
+              ),
               Flexible(
                 flex: 1,
                 fit: FlexFit.loose,
@@ -134,6 +138,9 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                     OnboardinPageIndicator(active: currentIndex == 2),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 30,
               ),
               Flexible(
                 flex: 1,

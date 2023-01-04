@@ -6,10 +6,13 @@ class CategoryWidget extends StatelessWidget {
     required this.onTap,
     required this.text,
     required this.icon,
+    this.divider = true,
   }) : super(key: key);
 
-  final String icon, text;
+  final String? icon;
+  final String text;
   final void Function()? onTap;
+  final bool divider;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +24,12 @@ class CategoryWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(
-                icon,
-                height: 24,
-                width: 24,
-              ),
+              if (icon != null)
+                Image.asset(
+                  icon!,
+                  height: 24,
+                  width: 24,
+                ),
               const SizedBox(
                 width: 16,
               ),
@@ -34,12 +38,14 @@ class CategoryWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 12,
-          ),
-          const Divider(
-            color: Colors.black,
-          ),
+          if (divider) ...[
+            const SizedBox(
+              height: 12,
+            ),
+            const Divider(
+              color: Colors.black,
+            ),
+          ],
           const SizedBox(
             height: 16,
           ),

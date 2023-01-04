@@ -12,17 +12,25 @@ class TipsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final textTheme =   theme.textTheme;
+    final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           children: [
-            Image.asset(
-              AppImages.kProfileTipsIcon,
-              height: 24,
-              width: 24,
+            Container(
+              decoration: BoxDecoration(
+                color: colorScheme.primary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Image.asset(
+                AppImages.kIconoOttaa,
+                height: 12,
+                width: 12,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(
               width: 8,

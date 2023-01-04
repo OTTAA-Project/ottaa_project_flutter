@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
@@ -44,12 +45,12 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
             const OttaaLoadingAnimation(),
             const SizedBox(height: 40),
             Text(
-              "Te damos la bienvenida",
+              "login.wait.title".trl,
               style: textTheme.headline2,
             ),
             const SizedBox(height: 10),
             Text(
-              "Al nuevo Mundo de OTTAA Project",
+              "login.wait.subtitle",
               style: textTheme.headline3,
             ),
           ],

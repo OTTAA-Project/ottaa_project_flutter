@@ -6,8 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
@@ -33,23 +35,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       setState(() {});
 
       if (isLogged) {
-        bool isFirstTime = await provider.isFirstTime();
-        bool hasPhoto = await provider.checkUserAvatar();
         bool hasInfo = await provider.fetchUserInformation();
 
+        final user = ref.read(userNotifier);
+
         if (mounted) {
+          I18N.of(context).changeLanguage(user?.language ?? "en_US");
           if (!hasInfo) {
             return context.go(AppRoutes.login);
           }
-          if (isFirstTime) {
-            return context.go(AppRoutes.onboarding, extra: 0);
-          }
-
-          if (!hasPhoto) {
-            return context.go(AppRoutes.onboarding, extra: 2);
-          }
-
-          return context.go(AppRoutes.home);
+          return context.go(AppRoutes.onboarding);
         }
       }
       if (mounted) return context.go(AppRoutes.login);

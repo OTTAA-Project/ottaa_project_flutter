@@ -22,8 +22,6 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
 
     final size = MediaQuery.of(context).size;
 
-    final height = size.height;
-
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -46,10 +44,15 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
           Flexible(
             flex: 1,
             fit: FlexFit.loose,
-            child: Text(
-              widget.subtitle,
-              style: textTheme.headline1?.copyWith(
-                color: colorScheme.primary,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                widget.subtitle,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.visible,
+                style: textTheme.headline1?.copyWith(
+                  color: colorScheme.primary,
+                ),
               ),
             ),
           ),
@@ -67,9 +70,13 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
           Flexible(
             flex: 1,
             fit: FlexFit.loose,
-            child: Text(
-              widget.description,
-              style: textTheme.headline3,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                widget.description,
+                textAlign: TextAlign.center,
+                style: textTheme.headline3,
+              ),
             ),
           ),
         ],

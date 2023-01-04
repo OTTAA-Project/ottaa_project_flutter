@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/new_simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
+import 'package:ottaa_ui_kit/widgets.dart';
 
-class ProfileChooserScreenSelected extends StatelessWidget {
+class ProfileChooserScreenSelected extends ConsumerWidget {
   const ProfileChooserScreenSelected({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    final provider = ref.watch(profileProvider);
     return Scaffold(
-      //todo: add the color here
-      backgroundColor: kOTTAABackground,
+      appBar: OTTAAAppBar(
+        title: Text("profile.role".trl),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 24,
-            vertical: 16,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,34 +34,14 @@ class ProfileChooserScreenSelected extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 30,
-                    ),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => context.pop(),
-                          child: const Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 24,
-                        ),
-                        Text(
-                          "profile.role".trl,
-                        ),
-                      ],
-                    ),
-                  ),
-                  //todo: add text style here after emir has created the theme files
-                  Padding(
                     padding: const EdgeInsets.only(
                       top: 8,
                       bottom: 24,
                     ),
                     child: Text(
                       "onboarding.profile.subtitle".trl,
+                      style: textTheme.button!
+                          .copyWith(color: colorScheme.onBackground),
                     ),
                   ),
                   ProfileChooserButtonWidget(
@@ -78,11 +63,15 @@ class ProfileChooserScreenSelected extends StatelessWidget {
                   ),
                 ],
               ),
-              NewSimpleButton(
+              const Spacer(),
+              PrimaryButton(
                 //todo: add the proper way for handling the waiting screen, hector said is should be their for 4 seconds at least
-                onTap: () => context.push(AppRoutes.profileWaitingScreen),
-                active: false,
+                onPressed: () => context.push(AppRoutes.profileWaitingScreen),
+                enabled: false,
                 text: "global.save_changes".trl,
+              ),
+              const SizedBox(
+                height: 48,
               ),
             ],
           ),

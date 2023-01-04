@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/theme.dart';
@@ -18,15 +19,15 @@ class LinkSuccessScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
-          Text("profile.link.success.title", style: textTheme.headline2),
+          Text("profile.link.success.title".trl, style: textTheme.headline2),
           const SizedBox(height: 16),
           Center(
             child: SizedBox(
               width: 312,
               child: ProfileCard(
                 title: "Juan Varela",
-                subtitle: "Últ. vez Ayer 24:23",//TODO: Re do this u.u
-                leadingImage: AssetImage("assets/profiles/Group 673@2x.png"),
+                subtitle: "link.success.lastTime".trlf({"date": "33:33 PM"}),//TODO: Re do this u.u
+                leadingImage: const AssetImage("assets/profiles/Group 673@2x.png"),
                 actions: IconButton(
                   onPressed: () {},
                   color: kBlackColor,

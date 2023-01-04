@@ -101,18 +101,30 @@ class MockAuthRepository extends _i1.Mock implements _i6.AuthRepository {
         returnValue: false,
       ) as bool);
   @override
-  _i4.Future<_i2.Either<String, _i7.UserModel>> signIn(_i8.SignInType? type) =>
+  _i4.Future<_i2.Either<String, _i7.UserModel>> signIn(
+    _i8.SignInType? type, [
+    String? email,
+    String? password,
+  ]) =>
       (super.noSuchMethod(
         Invocation.method(
           #signIn,
-          [type],
+          [
+            type,
+            email,
+            password,
+          ],
         ),
         returnValue: _i4.Future<_i2.Either<String, _i7.UserModel>>.value(
             _FakeEither_0<String, _i7.UserModel>(
           this,
           Invocation.method(
             #signIn,
-            [type],
+            [
+              type,
+              email,
+              password,
+            ],
           ),
         )),
       ) as _i4.Future<_i2.Either<String, _i7.UserModel>>);

@@ -7,7 +7,6 @@ import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/ui/sign_in_button.dart';
 import 'package:ottaa_ui_kit/theme.dart';
-import 'package:ottaa_ui_kit/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -84,13 +83,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 16,
-                      ),
-                      foregroundColor: kBlackColor),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 16,
+                    ),
+                    foregroundColor: kBlackColor,
+                  ),
                   child: Text(
                     "login.register".trl,
+                    textAlign: TextAlign.center,
                     style: textTheme.bodyText1?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
