@@ -26,6 +26,59 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
     return Scaffold(
+      appBar: OTTAAAppBar(
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              index == 1
+                  ? "customize.board.title".trl
+                  : "customize.shortcut.title".trl,
+              style: textTheme.headline3!.copyWith(fontSize: 13),
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.help_outline_rounded,
+                size: 24,
+              ),
+              onPressed: () => BasicBottomSheet.show(
+                context,
+                // title: "",
+                subtitle: index == 1
+                    //TODO: check this if it is OK
+                    ? "board.customize.helpText".trl
+                    : "global.back".trl,
+                children: <Widget>[
+                  Image.asset(
+                    index == 1
+                        ? AppImages.kBoardImageEdit1
+                        : AppImages.kBoardImageEdit2,
+                    height: 166,
+                  ),
+                ],
+                okButtonText: "board.customize.okText".trl,
+              ),
+              padding: const EdgeInsets.all(0),
+              color: colorScheme.onSurface,
+            ),
+          ],
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              //todo: add the required things here
+            },
+            child: Text(
+              "global.skip".trl,
+              style:
+                  textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+            ),
+          ),
+        ],
+      ),
       backgroundColor: colorScheme.background,
       body: Stack(
         children: [
@@ -33,59 +86,6 @@ class _CustomizedMainTabScreenState extends State<CustomizedMainTabScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               //todo: emir fix it again XD
-              OTTAAAppBar(
-                title: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      index == 1
-                          ? "customize.board.title".trl
-                          : "customize.shortcut.title".trl,
-                      style: textTheme.headline3,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.help_outline_rounded,
-                        size: 24,
-                      ),
-                      onPressed: () => BasicBottomSheet.show(
-                        context,
-                        // title: "",
-                        subtitle: index == 1
-                        //TODO: check this if it is OK
-                            ? "board.customize.helpText".trl
-                            : "global.back".trl,
-                        children: <Widget>[
-                          Image.asset(
-                            index == 1
-                                ? AppImages.kBoardImageEdit1
-                                : AppImages.kBoardImageEdit2,
-                            height: 166,
-                          ),
-                        ],
-                        okButtonText: "board.customize.okText".trl,
-                      ),
-                      padding: const EdgeInsets.all(0),
-                      color: colorScheme.onSurface,
-                    ),
-                  ],
-                ),
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      //todo: add the required things here
-                    },
-                    child: Text(
-                      "global.skip".trl,
-                      style: textTheme.headline4!
-                          .copyWith(color: colorScheme.onSurface),
-                    ),
-                  ),
-                ],
-              ),
               //todo: add the emir widgets here
               Padding(
                 padding: const EdgeInsets.only(left: 24, right: 24, top: 32),

@@ -84,7 +84,7 @@ class ProfileMainScreen extends ConsumerWidget {
                   color: Colors.transparent,
                 ),
                 duration: const Duration(milliseconds: 500),
-                height: provider.isLinkAccountOpen ? 70 : 0,
+                height: provider.isLinkAccountOpen ? 65 : 0,
                 width: double.maxFinite,
                 child: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
