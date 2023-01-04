@@ -71,7 +71,7 @@ class UserModel {
       'name': photoUrl,
       'urlFoto': avatar ?? "617",
     },
-    'last_name': lastName ?? 'n/a'
+        'last_name': lastName ?? 'n/a'
   };
 
   UserModel copyWith({

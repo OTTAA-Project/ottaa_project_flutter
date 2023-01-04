@@ -14,6 +14,10 @@ import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.da
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:ottaa_project_flutter/application/service/profile_services.dart';
+import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 
 class ProfileNotifier extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
