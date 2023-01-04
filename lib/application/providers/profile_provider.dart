@@ -33,7 +33,6 @@ class ProfileNotifier extends ChangeNotifier {
   final TextEditingController profileEditNameController = TextEditingController();
   final TextEditingController profileEditSurnameController = TextEditingController();
   final TextEditingController profileEditEmailController = TextEditingController();
-
   //profile chooser screen
   bool professionalSelected = false;
   bool userSelected = false;

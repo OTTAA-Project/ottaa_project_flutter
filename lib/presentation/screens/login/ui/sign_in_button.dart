@@ -14,8 +14,16 @@ class SignInButton extends ConsumerWidget {
   final SignInType type;
   final String text, logo;
   final ButtonStyle? style;
+  final bool enabled;
 
-  const SignInButton({super.key, required this.type, required this.text, required this.logo, this.style});
+  const SignInButton({
+    super.key,
+    required this.type,
+    required this.text,
+    required this.logo,
+    this.style,
+    this.enabled = true,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,19 +49,20 @@ class SignInButton extends ConsumerWidget {
             ),
             foregroundColor: Colors.grey,
           ),
-      onPressed: () async {
-        final BuildContext localContext = context;
+      onPressed: enabled
+          ? () async {
+              final BuildContext localContext = context;
 
-        final result = await auth.signIn(type);
+              final result = await auth.signIn(type);
 
-        if (result.isLeft) {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(result.left),
-            ),
-          );
-        }
+              if (result.isLeft) {
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(result.left),
+                  ),
+                );
+              }
 
         if (result.isRight) {
           // ignore: use_build_context_synchronously
@@ -63,10 +72,11 @@ class SignInButton extends ConsumerWidget {
             okButtonText: "terms.button".trl,
           );
 
-          // ignore: use_build_context_synchronously
-          localContext.go(AppRoutes.waitingLogin);
-        }
-      },
+                // ignore: use_build_context_synchronously
+                localContext.go(AppRoutes.waitingLogin);
+              }
+            }
+          : null,
       child: Flex(
         direction: Axis.horizontal,
         crossAxisAlignment: CrossAxisAlignment.center,

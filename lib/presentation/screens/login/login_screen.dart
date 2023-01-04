@@ -74,15 +74,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           type: SignInType.google,
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: SignInButton(
-                          text: "login.facebook".trl,
-                          logo: AppImages.kFacebookIcon,
-                          type: SignInType.facebook,
-                        ),
-                      ),
                     ],
                   ),
                 ),

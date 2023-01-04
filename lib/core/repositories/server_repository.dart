@@ -69,4 +69,14 @@ abstract class ServerRepository {
 
   Future<EitherVoid> setShortcutsForUser(
       {required Map<String, dynamic> shortcuts, required String userId});
+
+  Future<String> uploadUserImage(
+      {required String path, required String name, required String userId});
+
+  Future<void> updateUserData(
+      {required Map<String, dynamic> data, required String userId});
+
+  Future<EitherMap> getEmailToken(String ownEmail, String email);
+
+  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token);
 }

@@ -14,6 +14,7 @@
     "caregiver": "Caregiver",
     "caregivers_families": "Caregivers/Relatives",
     "user": "User",
+    "user_description": "The person who need to communicate",
     "wait": "Please wait",
     "setting_exp": "Setting up your experience...",
     "link_account": "Link to an account",
@@ -34,7 +35,7 @@
     "year": "Year",
     "tips": {
       "title1": "Stats",
-      "title2": "Board",
+      "title2": "Boards",
       "title3": "History",
       "title4": "Favorites",
       "text1": "Take a look at the statistics of your patient/family member, to check their activity and how they improved over the days, weeks and months.",
@@ -51,16 +52,16 @@
     "link": {
       "title": "Link to an account",
       "mail": {
-        "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+        "title": "Enter the email of the account you want to link",
         "input": {
           "required": "Email is required",
           "invalid": "Invalid email"
         },
-        "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-        "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles."
+        "contact": "*Be sure you are in contact with the person using this email.",
+        "warn": "*We will show a token on the device screen to link accounts."
       },
       "token": {
-        "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
+        "title": "Enter the token shown in the screen of the device you want to link.",
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email"
@@ -71,8 +72,7 @@
       },
       "success": {
         "title": "Profile successfully linked!",
-        "lastTime": "Last seen {date}",
-        "continue": "Continuar"
+        "lastTime": "Last seen {date}"
       }
     }
   },
@@ -92,10 +92,13 @@
     "important": "Important",
     "save_changes": "Save changes",
     "send": "Submit",
-    "skip": "Skip"
+    "skip": "Skip",
+    "email": "Email",
+    "step": "Step",
+    "share": "Share"
   },
   "onboarding": {
-    "start": "Comenzar",
+    "start": "Get Started",
     "profile": {
       "title": "Profiles screen",
       "subtitle": "Who is using OTTAA today?",
@@ -104,7 +107,7 @@
     "home": {
       "title": "Customize your Home",
       "subtitle": "Shortcuts on main screen",
-      "description": "Personaliza de acuerdo a los gustos y necesidades"
+      "description": "Customize according to your tastes and needs"
     },
     "customize": {
       "title": "Customize your Home",
@@ -119,23 +122,26 @@
   "loginWait": {
     "text": "Welcome!\nTo the OTTAA World"
   },
-  "link": {
-    "title": "Ingresá el correo electrónico de la cuenta de OTTAA a vincular",
-    "text1": "*Asegurate de estar en contacto con la persona que tenga este correo electrónico.",
-    "text2": "*Va a aparecer un código en la pantalla de la cuenta a vincular, copiá este código arriba."
-  },
-  "token": {
-    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
-    "text": "¿Inconvenientes para enlazar las cuentas?",
-    "button": {
-      "resend": "Resend email",
-      "anothermail": "Ingresá otro email."
-    }
-  },
   "login": {
-    "title": "Ingresá con tu cuenta",
+    "title": "Log in with your account",
     "google": "Login with Google",
     "facebook": "Login with Facebook",
-    "register": "Todavía no tenés cuenta? Registrate acá"
+    "register": "Don't have an account yet? Sign up here"
+  },
+  "customize": {
+    "board": {
+      "title": "Which boards the user is going to use?"
+    },
+    "shortcut": {
+      "title": "Which shortcuts will the user need?",
+      "favorites": "Favorites",
+      "history": "History",
+      "camera": "Camera",
+      "games": "Games"
+    },
+    "picto": {
+      "title": "Board {name}",
+      "switch": "Enable board"
+    }
   }
 }
