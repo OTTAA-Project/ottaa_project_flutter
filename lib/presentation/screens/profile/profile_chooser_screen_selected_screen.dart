@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
-import 'package:ottaa_project_flutter/application/router/app_routes.dart';
-import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -48,8 +46,8 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                     heading: 'profile.caregiver'.trl,
                     subtitle: 'profile.caregivers_families'.trl,
                     imagePath: AppImages.kProfileIcon1,
-                    onTap: () {},
-                    selected: false,
+                    onTap: () => provider.isCaregiver = !provider.isCaregiver,
+                    selected: provider.isCaregiver,
                   ),
                   const SizedBox(
                     height: 16,
@@ -58,15 +56,19 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                     heading: 'profile.user'.trl,
                     subtitle: 'profile.user_description'.trl,
                     imagePath: AppImages.kProfileIcon2,
-                    onTap: () {},
-                    selected: false,
+                    onTap: () => provider.isCaregiver = !provider.isCaregiver,
+                    selected: !provider.isCaregiver,
                   ),
                 ],
               ),
               const Spacer(),
               PrimaryButton(
                 //todo: add the proper way for handling the waiting screen, hector said is should be their for 4 seconds at least
-                onPressed: () => context.push(AppRoutes.profileWaitingScreen),
+                onPressed: () {
+                  print(provider.isCaregiver);
+                  provider.notify();
+                  context.pop();
+                },
                 enabled: false,
                 text: "global.save_changes".trl,
               ),

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -41,7 +39,7 @@ class ProfileNotifier extends ChangeNotifier {
 
   //connected users screen
   List<CareGiverUser> connectedUsers = [];
-  List<ConnectedUserData> connectedusersData = [];
+  List<ConnectedUserData> connectedUsersData = [];
   bool dataFetched = false;
 
   void notify() {
@@ -149,14 +147,14 @@ class ProfileNotifier extends ChangeNotifier {
   }
 
   Future<void> fetchConnectedUsersData() async {
-    connectedusersData = [];
+    connectedUsersData = [];
 
     await Future.wait(connectedUsers.map((e) async {
       final res = await _profileService.fetchConnectedUserData(userId: e.userId);
       if (res.isRight) {
         final json = res.right;
 
-        connectedusersData.add(
+        connectedUsersData.add(
           ConnectedUserData(
             name: json['name'],
             image: json['avatar']['name'],

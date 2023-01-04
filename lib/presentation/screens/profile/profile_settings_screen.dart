@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/category_widget.dart';
@@ -17,7 +18,10 @@ class ProfileSettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.read(userNotifier);
     final auth = ref.read(authProvider);
-
+    final provider = ref.watch(profileProvider);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await provider.setDate();
+    });
     return Scaffold(
       //todo: add the required theme here
       body: SafeArea(
@@ -81,22 +85,27 @@ class ProfileSettingsScreen extends ConsumerWidget {
                 icon: AppImages.kProfileSettingsIcon1,
                 text: "profile.profile".trl,
               ),
-              CategoryWidget(
-                onTap: () =>
-                    context.push(AppRoutes.profileChooserScreenSelected),
-                icon: AppImages.kProfileSettingsIcon2,
-                text: "profile.role".trl,
-              ),
+              provider.isUser
+                  ? Container()
+                  : CategoryWidget(
+                      onTap: () =>
+                          context.push(AppRoutes.profileChooserScreenSelected),
+                      icon: AppImages.kProfileSettingsIcon2,
+                      text: "profile.role".trl,
+                    ),
               CategoryWidget(
                 onTap: () => context.push(AppRoutes.profileHelpScreen),
                 icon: AppImages.kProfileSettingsIcon3,
                 text: "profile.help.help".trl,
               ),
-              CategoryWidget(
-                onTap: () => context.push(AppRoutes.profileLinkedAccountScreen),
-                icon: AppImages.kProfileSettingsIcon4,
-                text: "profile.linked_accounts".trl,
-              ),
+              provider.isUser
+                  ? Container()
+                  : CategoryWidget(
+                      onTap: () =>
+                          context.push(AppRoutes.profileLinkedAccountScreen),
+                      icon: AppImages.kProfileSettingsIcon4,
+                      text: "profile.linked_accounts".trl,
+                    ),
               CategoryWidget(
                 onTap: () => context.push(AppRoutes.profileOttaaTips),
                 icon: AppImages.kProfileSettingsIcon5,

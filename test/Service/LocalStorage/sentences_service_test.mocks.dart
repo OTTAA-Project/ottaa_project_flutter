@@ -657,4 +657,40 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> fetchConnectedUserData(
+          {required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchConnectedUserData,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #fetchConnectedUserData,
+            [],
+            {#userId: userId},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<void> removeCurrentUser({
+    required String? userId,
+    required String? careGiverId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeCurrentUser,
+          [],
+          {
+            #userId: userId,
+            #careGiverId: careGiverId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

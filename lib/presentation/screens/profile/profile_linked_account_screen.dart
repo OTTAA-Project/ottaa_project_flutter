@@ -54,11 +54,11 @@ class _ProfileLinkedAccountScreen
               provider.dataFetched
                   ? Expanded(
                       child: ListView.builder(
-                        itemCount: provider.connectedusersData.length,
+                        itemCount: provider.connectedUsersData.length,
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.only(bottom: 16),
                           child: ProfileCard(
-                            title: provider.connectedusersData[index].name,
+                            title: provider.connectedUsersData[index].name,
                             subtitle: "profile.user".trl,
                             actions: GestureDetector(
                               onTap: () async {
@@ -68,7 +68,7 @@ class _ProfileLinkedAccountScreen
                                   okButtonEnabled: true,
                                   title: "profile.unlink_account".trlf({
                                     "name":
-                                        provider.connectedusersData[index].name
+                                        provider.connectedUsersData[index].name
                                   }),
                                   okButtonText: "unlink",
                                   cancelButtonText: 'cancel',
@@ -88,7 +88,7 @@ class _ProfileLinkedAccountScreen
                               ),
                             ),
                             leadingImage: NetworkImage(
-                              provider.connectedusersData[index].image,
+                              provider.connectedUsersData[index].image,
                             ),
                           ),
                         ),
