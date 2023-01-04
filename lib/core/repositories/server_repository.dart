@@ -42,4 +42,8 @@ abstract class ServerRepository {
   Future<EitherMap> getPictogramsStatistics(String userId, String languageCode);
 
   Future<EitherMap> getMostUsedSentences(String userId, String languageCode);
+
+  Future<EitherMap> getEmailToken(String ownEmail, String email);
+
+  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token);
 }

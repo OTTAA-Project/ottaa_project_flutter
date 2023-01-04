@@ -15,6 +15,8 @@ import 'package:ottaa_project_flutter/application/service/server_service.dart';
 import 'package:ottaa_project_flutter/application/service/sql_database.dart';
 import 'package:ottaa_project_flutter/application/service/tts_service.dart';
 import 'package:ottaa_project_flutter/application/service/web_remote_storage_service.dart';
+import 'package:ottaa_project_flutter/application/use_cases/create_email_token_impl.dart';
+import 'package:ottaa_project_flutter/application/use_cases/verify_email_token_impl.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
@@ -25,6 +27,8 @@ import 'package:ottaa_project_flutter/core/repositories/remote_storage_repositor
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
+import 'package:ottaa_project_flutter/core/use_cases/create_email_token.dart';
+import 'package:ottaa_project_flutter/core/use_cases/verify_email_token.dart';
 
 import 'service/about_service.dart';
 
@@ -65,6 +69,9 @@ Future<void> setupServices() async {
   final SentencesRepository sentencesService = SentencesService(authService, serverRepository);
   final TTSRepository ttsService = TTSService();
 
+  final CreateEmailToken createEmailToken = CreateEmailTokenImpl(serverRepository);
+  final VerifyEmailToken verifyEmailToken = VerifyEmailTokenImpl(serverRepository);
+
   locator.registerSingleton<I18N>(i18n);
   locator.registerSingleton<LocalDatabaseRepository>(databaseRepository);
   locator.registerSingleton<ServerRepository>(serverRepository);
@@ -76,4 +83,6 @@ Future<void> setupServices() async {
   locator.registerSingleton<GroupsRepository>(groupsService);
   locator.registerSingleton<AboutRepository>(aboutService);
   locator.registerSingleton<SentencesRepository>(sentencesService);
+  locator.registerSingleton<CreateEmailToken>(createEmailToken);
+  locator.registerSingleton<VerifyEmailToken>(verifyEmailToken);
 }

@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/common/extensions/validator_string.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class LinkMailScreen extends ConsumerStatefulWidget {
@@ -72,11 +73,11 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
               const Spacer(),
               OptionalButton(
                 text: "global.send",
-                onPressed: () {
+                onPressed: () async {
                   if (provider.formKey.currentState!.validate()) {
-                    //TODO:
-                    // 1. Send email to provider.emailController.text
-                    // 2. Navigate to LinkTokeScreen
+                    await LoadingModal.show(context, future: () async {
+                      await provider.sendEmail();
+                    });
                     context.push(AppRoutes.linkTokenScreen);
                   }
                 },
