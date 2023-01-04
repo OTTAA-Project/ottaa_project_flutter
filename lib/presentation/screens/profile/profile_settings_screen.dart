@@ -19,11 +19,8 @@ class ProfileSettingsScreen extends ConsumerWidget {
     final user = ref.read(userNotifier);
     final auth = ref.read(authProvider);
     final provider = ref.watch(profileProvider);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.setDate();
-    });
     return Scaffold(
-      //todo: add the required theme here
+      // sorry for doing this, emir helped me in making it better
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
