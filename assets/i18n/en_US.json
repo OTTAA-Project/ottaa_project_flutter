@@ -1,8 +1,11 @@
 {
   "profile": {
     "selection": {
-      "text1": "Who is going to use the app on this device?"
+      "text1": "Who is going to use the app on this device?",
+      "caregiver_text": "Necesita comunicarse",
+      "user_text": "Necesita comunicarse"
     },
+    "hello": "Hola {name}!",
     "ottaa": {
       "tips": "OTTAA tips"
     },
@@ -58,10 +61,11 @@
           "invalid": "Invalid email"
         },
         "contact": "*Be sure you are in contact with the person using this email.",
-        "warn": "*We will show a token on the device screen to link accounts."
+        "warn": "*We will show a token on the device screen to link accounts.",
+        "send": "Submit"
       },
       "token": {
-        "title": "Enter the token shown in the screen of the device you want to link.",
+        "title": "Coloque el código de verificación que llegó al correo electrónico.",
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email"
@@ -72,7 +76,8 @@
       },
       "success": {
         "title": "Profile successfully linked!",
-        "lastTime": "Last seen {date}"
+        "lastTime": "Last seen {date}",
+        "continue": "Continue"
       }
     }
   },
@@ -113,6 +118,9 @@
       "title": "Customize your Home",
       "subtitle": "We guide you in the learning process",
       "description": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
+    },
+    "skip": {
+      "title": "¿Estás de acuerdo en saltar la introducción?"
     }
   },
   "terms": {
@@ -122,18 +130,58 @@
   "loginWait": {
     "text": "Welcome!\nTo the OTTAA World"
   },
+  "link": {
+    "title": "Link to an account",
+    "mail": {
+      "title": "Enter the email of the account you want to link",
+      "input": {
+        "required": "Email is required",
+        "invalid": "Invalid email"
+      },
+      "contact": "*Be sure you are in contact with the person using this email.",
+      "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
+      "send": "Submit"
+    },
+    "token": {
+      "title": "Coloque el código de verificación que llegó al correo electrónico.",
+      "problem": "Having trouble linking accounts?",
+      "resend": "Resend code",
+      "back": "Please enter another email"
+    },
+    "wait": {
+      "title": "Wait",
+      "subtitle": "Loading profile..."
+    },
+    "success": {
+      "title": "Profile successfully linked!",
+      "lastTime": "Last seen {date}",
+      "continue": "Continue"
+    }
+  },
+  "token": {
+    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
+    "text": "Having trouble linking accounts?",
+    "button": {
+      "resend": "Reenviar email",
+      "anothermail": "Ingresá otro email."
+    }
+  },
   "login": {
     "title": "Log in with your account",
     "google": "Login with Google",
     "facebook": "Login with Facebook",
-    "register": "Don't have an account yet? Sign up here"
+    "register": "Don't have an account yet? Sign up here",
+    "wait": {
+      "title": "Te damos la bienvenida!",
+      "subtitle": "Al nuevo mundo de OTTAA Project"
+    }
   },
   "customize": {
     "board": {
       "title": "Which boards the user is going to use?"
     },
     "shortcut": {
-      "title": "Which shortcuts will the user need?",
+      "title": "¿Qué atajos va anecesitar el usuario?",
       "favorites": "Favorites",
       "history": "History",
       "camera": "Camera",
