@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +13,6 @@ import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.da
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:ottaa_project_flutter/application/service/profile_services.dart';
-import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 
 class ProfileNotifier extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
@@ -34,9 +29,12 @@ class ProfileNotifier extends ChangeNotifier {
   late String imageUrl;
   final ImagePicker _picker = ImagePicker();
   bool isLinkAccountOpen = false;
-  final TextEditingController profileEditNameController = TextEditingController();
-  final TextEditingController profileEditSurnameController = TextEditingController();
-  final TextEditingController profileEditEmailController = TextEditingController();
+  final TextEditingController profileEditNameController =
+      TextEditingController();
+  final TextEditingController profileEditSurnameController =
+      TextEditingController();
+  final TextEditingController profileEditEmailController =
+      TextEditingController();
 
   //profile chooser screen
   bool professionalSelected = false;
@@ -154,7 +152,8 @@ class ProfileNotifier extends ChangeNotifier {
 
     connectedUsers.addAll(res.right.values
         .map<CareGiverUser>(
-          (element) => CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
+          (element) =>
+              CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
         )
         .toList());
   }
@@ -163,7 +162,8 @@ class ProfileNotifier extends ChangeNotifier {
     connectedUsersData = [];
 
     await Future.wait(connectedUsers.map((e) async {
-      final res = await _profileService.fetchConnectedUserData(userId: e.userId);
+      final res =
+          await _profileService.fetchConnectedUserData(userId: e.userId);
       if (res.isRight) {
         final json = res.right;
 
@@ -182,8 +182,10 @@ class ProfileNotifier extends ChangeNotifier {
     notify();
   }
 
-  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
-    await _profileService.removeCurrentUser(userId: userId, careGiverId: careGiverId);
+  Future<void> removeCurrentUser(
+      {required String userId, required String careGiverId}) async {
+    await _profileService.removeCurrentUser(
+        userId: userId, careGiverId: careGiverId);
 
     // update the whole list again
     dataFetched = false;
@@ -192,7 +194,6 @@ class ProfileNotifier extends ChangeNotifier {
     dataFetched = true;
     notify();
   }
-
 
   Future<void> fetchInstalledVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -253,8 +254,6 @@ class ProfileNotifier extends ChangeNotifier {
       throw 'Could not launch $email';
     }
   }*/
-
-
 
 }
 

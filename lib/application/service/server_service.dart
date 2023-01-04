@@ -346,12 +346,14 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
+  Future<void> removeCurrentUser(
+      {required String userId, required String careGiverId}) async {
     await _database.child('$careGiverId/users/$userId').remove();
   }
 
   @override
-  Future<EitherVoid> setShortcutsForUser({required Map<String,dynamic> shortcuts,required String userId})async{
+  Future<EitherVoid> setShortcutsForUser(
+      {required Map<String, dynamic> shortcuts, required String userId}) async {
     final ref = _database.child('$userId/shortcuts.');
 
     try {
@@ -364,7 +366,8 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getEmailToken(String ownEmail, String email) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
+    final uri = Uri.parse(
+        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
     final body = {
       'src': ownEmail,
       'dst': email,
@@ -384,8 +387,10 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
+  Future<EitherMap> verifyEmailToken(
+      String ownEmail, String email, String token) async {
+    final uri = Uri.parse(
+        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
     final body = {
       'src': ownEmail,
       'dst': email,
@@ -416,26 +421,5 @@ class ServerService implements ServerRepository {
     } catch (e) {
       print(e);
     }
-  }
-
-  @override
-  Future<String> uploadUserImage({
-    required String path,
-    required String name,
-    required String userId,
-  }) async {
-    Reference ref = _storageRef.child('userProfilePics').child('$name.jpg');
-    final metadata = SettableMetadata(
-      contentType: 'image/jpeg',
-      customMetadata: {'picked-file-path': path},
-    );
-    late String url;
-    if (kIsWeb) {
-      // uploadTask = ref.putData(await file.readAsBytes(), metadata);
-    } else {
-      final uploadTask = await ref.putFile(File(path), metadata);
-      url = await uploadTask.ref.getDownloadURL();
-    }
-    return url;
   }
 }

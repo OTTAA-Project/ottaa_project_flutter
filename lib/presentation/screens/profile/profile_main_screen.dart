@@ -12,14 +12,22 @@ import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_ph
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
-class ProfileMainScreen extends ConsumerWidget {
+class ProfileMainScreen extends ConsumerStatefulWidget {
   const ProfileMainScreen({Key? key}) : super(key: key);
 
+  @override
+  ConsumerState<ProfileMainScreen> createState() => _ProfileMainScreenState();
+}
+
+class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
   //todo: a jojo reference XD
   final String userName = 'Dio';
 
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(
+    BuildContext context,
+  ) {
     final textTheme = Theme.of(context).textTheme;
 
     final provider = ref.watch(profileProvider);
@@ -27,6 +35,7 @@ class ProfileMainScreen extends ConsumerWidget {
     final user = ref.watch(userNotifier);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -38,11 +47,10 @@ class ProfileMainScreen extends ConsumerWidget {
                 children: [
                   Row(
                     children: [
-                      //todo: add the link here to go to the profile setting screen
                       GestureDetector(
-                        onTap: () => context.push(AppRoutes.profileSettingsScreen),
+                        onTap: () =>
+                            context.push(AppRoutes.profileSettingsScreen),
                         child: ProfilePhotoWidget(
-                          //todo: add the image link here, from the userData
                           image: user?.photoUrl ?? "",
                         ),
                       ),
@@ -69,7 +77,8 @@ class ProfileMainScreen extends ConsumerWidget {
                 child: ActionCard(
                   title: "profile.link_account".trl,
                   subtitle: "profile.new_existant".trl,
-                  trailingImage: const AssetImage(AppImages.kProfileMainScreenIcon),
+                  trailingImage:
+                      const AssetImage(AppImages.kProfileMainScreenIcon),
                   imageSize: const Size(94, 96),
                   focused: provider.isLinkAccountOpen,
                   onPressed: () {

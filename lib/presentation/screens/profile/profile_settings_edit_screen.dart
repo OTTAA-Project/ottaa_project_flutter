@@ -8,25 +8,47 @@ import 'package:ottaa_project_flutter/application/providers/profile_provider.dar
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/image_edit_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
-class ProfileSettingsEditScreen extends ConsumerWidget {
-  const ProfileSettingsEditScreen({Key? key}) : super(key: key);
+class ProfileSettingsEditScreen extends ConsumerStatefulWidget {
+  const ProfileSettingsEditScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfileSettingsEditScreen> createState() =>
+      _ProfileSettingsEditScreenState();
+}
+
+class _ProfileSettingsEditScreenState
+    extends ConsumerState<ProfileSettingsEditScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final provider = ref.read(profileProvider);
+      provider.setDate();
+      final user = ref.read(userNotifier);
+      provider.profileEditNameController.text = user!.name;
+      provider.profileEditSurnameController.text = user.lastName!;
+      provider.profileEditEmailController.text = user.email;
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final int currentYear = DateTime.now().year;
     final provider = ref.watch(profileProvider);
     final textTheme = Theme.of(context).textTheme;
     // final colorScheme = Theme.of(context).colorScheme;
     final user = ref.watch(userNotifier);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.setDate();
-      provider.profileEditNameController.text = user!.name;
-      provider.profileEditSurnameController.text = user.lastName!;
-      provider.profileEditEmailController.text = user.email;
-
-    });
     return Scaffold(
       appBar: OTTAAAppBar(
+        leading: GestureDetector(
+          onTap: () {
+            provider.imageSelected = false;
+            context.pop();
+          },
+          child: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+          ),
+        ),
         title: Text(
           "profile.profile".trl,
           style: textTheme.headline3,
