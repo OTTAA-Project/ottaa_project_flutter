@@ -12,7 +12,23 @@
     "mail": "Mail",
     "date": "Data di nascita",
     "faq": {
-      "title": "Domande frequenti (FAQ)"
+      "title": "Domande frequenti (FAQ)",
+      "faq0": "FAQ 0 Test",
+      "faq0Description": "FAQ 0 Description all cool",
+      "faq1": "FAQ 1 Test",
+      "faq1Description": "FAQ 1 Description all cool",
+      "faq2": "FAQ 2 Test",
+      "faq2Description": "FAQ 2 Description all cool",
+      "faq3": "FAQ 3 Test",
+      "faq3Description": "FAQ 3 Description all cool",
+      "faq4": "FAQ 4 Test",
+      "faq4Description": "FAQ 4 Description all cool",
+      "faq5": "FAQ 5 Test",
+      "faq5Description": "FAQ 5 Description all cool",
+      "faq6": "FAQ 6 Test",
+      "faq6Description": "FAQ 6 Description all cool",
+      "faq7": "FAQ 7 Test",
+      "faq7Description": "FAQ 7 Description all cool"
     },
     "caregiver": "Acompañante",
     "caregivers_families": "Profesionales/Familiares",
@@ -47,6 +63,7 @@
       "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
     },
     "unlink": "Desvincular",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas de perfil?",
     "help": {
       "help": "Ayuda",
       "title1": "Domande frequenti (FAQ)",
@@ -68,7 +85,8 @@
         "title": "Coloque el código de verificación que llegó al correo electrónico.",
         "problem": "¿Inconvenientes para enlazar las cuentas?",
         "resend": "Reenviar código",
-        "back": "Ingresar otro email"
+        "back": "Ingresar otro email",
+        "invalid": "Token inválido"
       },
       "wait": {
         "title": "Aguarde",
@@ -100,7 +118,9 @@
     "skip": "Omitir",
     "email": "Email",
     "step": "Paso",
-    "share": "Compartir"
+    "share": "Compartir",
+    "support": "Soporte",
+    "congrats": "Felicitaciones"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -178,18 +198,26 @@
   },
   "customize": {
     "board": {
-      "title": "¿Qué tableros va a usar el usuario?"
+      "title": "¿Qué tableros utilizará el usuario para comunicarse?",
+      "appbar": "Tableros predictivos",
+      "skip": "¿Omitir la elección de tableros?"
     },
     "shortcut": {
-      "title": "¿Qué atajos va anecesitar el usuario?",
+      "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
+      "appbar": "Atajos",
       "favorites": "Favoritos",
       "history": "Historial",
       "camera": "Cámara",
       "games": "Juegos"
     },
+    "wait": {
+      "button": "Ir al panel de perfiles",
+      "description": "Configuraste correctamente la experiencia de {name}"
+    },
     "picto": {
       "title": "Tablero {name}",
       "switch": "Activar tablero"
-    }
+    },
+    "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
 }
