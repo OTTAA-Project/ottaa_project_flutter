@@ -107,14 +107,14 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                       // const SizedBox(
                       //   height: 16,
                       // ),
-                      DropDownWidget(
-                        onTap: () {},
-                        image: AppImages.kProfileAddIcon,
-                        text: "profile.crear.nueva.cuenta".trl,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      // DropDownWidget(
+                      //   onTap: () {},
+                      //   image: AppImages.kProfileAddIcon,
+                      //   text: "profile.crear.nueva.cuenta".trl,
+                      // ),
+                      // const SizedBox(
+                      //   height: 16,
+                      // ),
                       DropDownWidget(
                         onTap: () => context.push(AppRoutes.linkMailScreen),
                         image: AppImages.kProfileLinkIcon,

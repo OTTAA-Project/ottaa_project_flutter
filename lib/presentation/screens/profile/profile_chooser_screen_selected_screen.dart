@@ -46,7 +46,10 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                     heading: 'profile.caregiver'.trl,
                     subtitle: 'profile.caregivers_families'.trl,
                     imagePath: AppImages.kProfileIcon1,
-                    onTap: () => provider.isCaregiver = !provider.isCaregiver,
+                    onTap: () {
+                      provider.isCaregiver = !provider.isCaregiver;
+                      provider.notify();
+                    },
                     selected: provider.isCaregiver,
                   ),
                   const SizedBox(
@@ -56,7 +59,10 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                     heading: 'profile.user'.trl,
                     subtitle: 'profile.user_description'.trl,
                     imagePath: AppImages.kProfileIcon2,
-                    onTap: () => provider.isCaregiver = !provider.isCaregiver,
+                    onTap: () {
+                      provider.isCaregiver = !provider.isCaregiver;
+                      provider.notify();
+                    },
                     selected: !provider.isCaregiver,
                   ),
                 ],
@@ -69,7 +75,7 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                   provider.notify();
                   context.pop();
                 },
-                enabled: false,
+                enabled: true,
                 text: "global.save_changes".trl,
               ),
               const SizedBox(

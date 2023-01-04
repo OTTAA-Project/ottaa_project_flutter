@@ -49,9 +49,12 @@ class _ProfileSettingsEditScreenState
             Icons.arrow_back_ios_new_rounded,
           ),
         ),
-        title: Text(
-          "profile.profile".trl,
-          style: textTheme.headline3,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: Text(
+            "profile.profile".trl,
+            style: textTheme.headline3,
+          ),
         ),
       ),
       resizeToAvoidBottomInset: false,
