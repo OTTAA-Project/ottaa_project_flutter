@@ -330,4 +330,16 @@ class ServerService implements ServerRepository {
   Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
     await _database.child('$careGiverId/users/$userId').remove();
   }
+
+  @override
+  Future<EitherVoid> setShortcutsForUser({required Map<String,dynamic> shortcuts,required String userId})async{
+    final ref = _database.child('$userId/shortcuts.');
+
+    try {
+      await ref.set(shortcuts);
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

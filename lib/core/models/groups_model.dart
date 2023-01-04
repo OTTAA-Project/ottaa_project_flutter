@@ -12,7 +12,9 @@ class Groups {
     required this.relacion,
     this.frecuencia,
     this.tags,
+    this.selected = true,
   });
+
 
   int id;
   TextGroups texto;
@@ -21,6 +23,7 @@ class Groups {
   List<GroupRelation> relacion;
   int? frecuencia;
   List<String>? tags;
+  bool? selected;
 
   factory Groups.fromJson(Map<String, dynamic> json) => _$GroupsFromJson(json);
 
@@ -41,7 +44,8 @@ class ImageGroups {
   String? urlFoto;
   String? pushKey;
 
-  factory ImageGroups.fromJson(Map<String, dynamic> json) => _$ImageGroupsFromJson(json);
+  factory ImageGroups.fromJson(Map<String, dynamic> json) =>
+      _$ImageGroupsFromJson(json);
 
   Map<String, dynamic> toJson() => _$ImageGroupsToJson(this);
 }
@@ -74,7 +78,8 @@ class GroupRelation {
   List<String>? edad;
   List<String>? horario;
 
-  factory GroupRelation.fromJson(Map<String, dynamic> json) => _$GroupRelationFromJson(json);
+  factory GroupRelation.fromJson(Map<String, dynamic> json) =>
+      _$GroupRelationFromJson(json);
 
   Map<String, dynamic> toJson() => _$GroupRelationToJson(this);
 }
@@ -89,7 +94,8 @@ class RelationRelation {
   int id;
   int frec;
 
-  factory RelationRelation.fromJson(Map<String, dynamic> json) => _$RelationRelationFromJson(json);
+  factory RelationRelation.fromJson(Map<String, dynamic> json) =>
+      _$RelationRelationFromJson(json);
 
   Map<String, dynamic> toJson() => _$RelationRelationToJson(this);
 }
@@ -108,7 +114,8 @@ class TextGroups {
   String fr;
   String pt;
 
-  factory TextGroups.fromJson(Map<String, dynamic> json) => _$TextGroupsFromJson(json);
+  factory TextGroups.fromJson(Map<String, dynamic> json) =>
+      _$TextGroupsFromJson(json);
 
   Map<String, dynamic> toJson() => _$TextGroupsToJson(this);
 }

@@ -180,10 +180,12 @@
   },
   "customize": {
     "board": {
-      "title": "¿Qué tableros va a usar el usuario?"
+      "title": "¿Qué tableros utilizará el usuario para comunicarse?",
+      "appbar": "Tableros predictivos"
     },
     "shortcut": {
-      "title": "¿Qué atajos va anecesitar el usuario?",
+      "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
+      "appbar": "Atajos",
       "favorites": "Favoritos",
       "history": "Historial",
       "camera": "Cámara",
@@ -192,6 +194,7 @@
     "picto": {
       "title": "Tablero {name}",
       "switch": "Activar tablero"
-    }
+    },
+    "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
 }

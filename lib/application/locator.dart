@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/service/auth_service.dart';
+import 'package:ottaa_project_flutter/application/service/customise_service.dart';
 import 'package:ottaa_project_flutter/application/service/groups_service.dart';
 import 'package:ottaa_project_flutter/application/service/local_storage_service.dart';
 import 'package:ottaa_project_flutter/application/service/mobile_remote_storage_service.dart';
@@ -18,6 +19,7 @@ import 'package:ottaa_project_flutter/application/service/tts_service.dart';
 import 'package:ottaa_project_flutter/application/service/web_remote_storage_service.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/customise_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
@@ -78,6 +80,7 @@ Future<void> setupServices() async {
       SentencesService(authService, serverRepository);
   final TTSRepository ttsService = TTSService();
   final ProfileRepository profileServices = ProfileService(serverRepository);
+  final CustomiseRepository customiseServices = CustomiseService(serverRepository);
 
   locator.registerSingleton<I18N>(i18n);
   locator.registerSingleton<LocalDatabaseRepository>(databaseRepository);
@@ -91,4 +94,5 @@ Future<void> setupServices() async {
   locator.registerSingleton<AboutRepository>(aboutService);
   locator.registerSingleton<SentencesRepository>(sentencesService);
   locator.registerSingleton<ProfileRepository>(profileServices);
+  locator.registerSingleton<CustomiseRepository>(customiseServices);
 }
