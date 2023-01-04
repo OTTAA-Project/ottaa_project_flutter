@@ -1,8 +1,11 @@
 {
   "profile": {
     "selection": {
-      "text1": "Chi utilizzerà l'app su questo dispositivo?"
+      "text1": "Chi utilizzerà l'app su questo dispositivo?",
+      "caregiver_text": "Necesita comunicarse",
+      "user_text": "Necesita comunicarse"
     },
+    "hello": "Hola {name}!",
     "ottaa": {
       "tips": "OTTAA tips"
     },
@@ -58,10 +61,11 @@
           "invalid": "El correo electrónico es inválido"
         },
         "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-        "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles."
+        "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles.",
+        "send": "Enviar"
       },
       "token": {
-        "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
+        "title": "Coloque el código de verificación que llegó al correo electrónico.",
         "problem": "¿Inconvenientes para enlazar las cuentas?",
         "resend": "Reenviar código",
         "back": "Ingresar otro email"
@@ -72,7 +76,8 @@
       },
       "success": {
         "title": "Perfil vinculado con éxito!",
-        "lastTime": "Últ. vez Ayer {date}"
+        "lastTime": "Últ. vez Ayer {date}",
+        "continue": "Continuar"
       }
     }
   },
@@ -113,6 +118,9 @@
       "title": "Personaliza tu Home",
       "subtitle": "Acompañamos en el proceso de aprendizaje",
       "description": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+    },
+    "skip": {
+      "title": "¿Estás de acuerdo en saltar la introducción?"
     }
   },
   "terms": {
@@ -122,18 +130,58 @@
   "loginWait": {
     "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
   },
+  "link": {
+    "title": "Vincular Cuenta",
+    "mail": {
+      "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+      "input": {
+        "required": "El correo electrónico es requerido",
+        "invalid": "El correo electrónico es inválido"
+      },
+      "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
+      "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
+      "send": "Enviar"
+    },
+    "token": {
+      "title": "Coloque el código de verificación que llegó al correo electrónico.",
+      "problem": "¿Inconvenientes para enlazar las cuentas?",
+      "resend": "Reenviar código",
+      "back": "Ingresar otro email"
+    },
+    "wait": {
+      "title": "Aguarde",
+      "subtitle": "Cargando perfil..."
+    },
+    "success": {
+      "title": "Perfil vinculado con éxito!",
+      "lastTime": "Últ. vez Ayer {date}",
+      "continue": "Continuar"
+    }
+  },
+  "token": {
+    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
+    "text": "¿Inconvenientes para enlazar las cuentas?",
+    "button": {
+      "resend": "Reenviar email",
+      "anothermail": "Ingresá otro email."
+    }
+  },
   "login": {
     "title": "Ingresá con tu cuenta",
     "google": "Continuar con Google",
     "facebook": "Continuar con Facebook",
-    "register": "Todavía no tenés cuenta? Registrate acá"
+    "register": "Todavía no tenés cuenta? Registrate acá",
+    "wait": {
+      "title": "Te damos la bienvenida!",
+      "subtitle": "Al nuevo mundo de OTTAA Project"
+    }
   },
   "customize": {
     "board": {
       "title": "¿Qué tableros va a usar el usuario?"
     },
     "shortcut": {
-      "title": "¿Qué atajos va a necesitar el usuario?",
+      "title": "¿Qué atajos va anecesitar el usuario?",
       "favorites": "Favoritos",
       "history": "Historial",
       "camera": "Cámara",
