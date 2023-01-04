@@ -121,7 +121,9 @@ class ProfileMainScreen extends ConsumerWidget {
                 title: "profile.use.ottaa".trl,
                 trailingImage: const AssetImage(AppImages.kProfileIcon2),
                 imageSize: const Size(129, 96),
-                onPressed: () {},
+                onPressed: () {
+                  context.push(AppRoutes.customizedBoardScreen);
+                },
               ),
             ],
           ),

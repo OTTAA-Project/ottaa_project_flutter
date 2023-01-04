@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -8,6 +12,7 @@ import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileNotifier extends ChangeNotifier {
@@ -41,6 +46,10 @@ class ProfileNotifier extends ChangeNotifier {
   List<CareGiverUser> connectedUsers = [];
   List<ConnectedUserData> connectedUsersData = [];
   bool dataFetched = false;
+
+  //profile email send
+  String currentOTTAAInstalled = '';
+  String deviceName = '';
 
   void notify() {
     notifyListeners();
@@ -179,6 +188,70 @@ class ProfileNotifier extends ChangeNotifier {
     dataFetched = true;
     notify();
   }
+
+
+  Future<void> fetchInstalledVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+    currentOTTAAInstalled = version;
+  }
+
+  Future<void> fetchDeviceName() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (kIsWeb) {
+      WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
+      deviceName = webBrowserInfo.userAgent!;
+      print('Browser name is this: 101 ${webBrowserInfo.userAgent!}');
+    } else {
+      if (Platform.isAndroid) {
+        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+        deviceName = androidInfo.model;
+      } else if (Platform.isIOS) {
+        IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+        deviceName = iosDeviceInfo.utsname.machine!;
+      }
+    }
+  }
+
+/*  Future<void> fetchAccountType() async {
+
+    final res = await _dataController.fetchAccountType();
+
+    /// this means there is a value
+    if (res == 1) {
+      userSubscription = 'Premium';
+    } else {
+      userSubscription = 'Free';
+    }
+  }
+
+  Future<void> fetchCurrentVersion() async {
+    // final ref = databaseRef.child('version/');
+    // final res = await ref.get();
+    final double res = await _dataController.fetchCurrentVersion();
+    currentOTTAAVersion.value = res.toString();
+  }
+
+  Future<void> launchEmailSubmission() async {
+    final Uri params = Uri(
+        scheme: 'mailto',
+        path: 'support@ottaaproject.com',
+        queryParameters: {
+          'subject': 'Support',
+          'body':
+          '''Account: ${user.email},\nAccount Type: $userSubscription,\nCurrent OTTAA Installed: $currentOTTAAInstalled\nCurrent OTTAA Version: $currentOTTAAVersion\nDevice Name: $deviceName''',
+        });
+    String url = params.toString();
+    final value = url.replaceAll('+', ' ');
+    if (await canLaunchUrl(value)) {
+      launchUrl(email);
+    } else {
+      throw 'Could not launch $email';
+    }
+  }*/
+
+
+
 }
 
 final profileProvider = ChangeNotifierProvider<ProfileNotifier>((ref) {
