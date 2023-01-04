@@ -89,7 +89,7 @@ class _CustomizedMainTabScreenState
               final bool? res = await BasicBottomSheet.show(
                 context,
                 cancelButtonEnabled: true,
-                title: "customise.skip".trl,
+                title: "customize.board.skip".trl,
               );
               if (res != null && res == true) {
                 context.push(AppRoutes.customizeWaitScreen);

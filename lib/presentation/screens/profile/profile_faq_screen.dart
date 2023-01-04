@@ -101,8 +101,8 @@ class Item {
 List<Item> generateItems(int numberOfItems) {
   return List<Item>.generate(numberOfItems, (int index) {
     return Item(
-      headerValue: 'faq$index'.trl,
-      expandedValue: 'faq${index}Description'.trl,
+      headerValue: 'profile.faq.faq$index'.trl,
+      expandedValue: 'profile.faq.faq${index}Description'.trl,
     );
   });
 }

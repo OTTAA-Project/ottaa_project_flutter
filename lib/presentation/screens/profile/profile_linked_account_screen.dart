@@ -38,7 +38,7 @@ class _ProfileLinkedAccountScreen
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text(
-          "profile.help.help".trl,
+          "profile.linked_accounts".trl,
           style: textTheme.headline3,
         ),
       ),

@@ -32,7 +32,7 @@ class CustomizeWaitScreen extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    "board.wait.heading".trl,
+                    "global.congrats".trl,
                     style: textTheme.button!.copyWith(
                       color: colorScheme.onBackground,
                     ),
@@ -43,7 +43,7 @@ class CustomizeWaitScreen extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    "board.wait.subtitle".trl,
+                    "customize.wait.subtitle".trl,
                     style: textTheme.headline3,
                   ),
                 ),
@@ -53,7 +53,7 @@ class CustomizeWaitScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 24,right: 24,bottom: 16),
               child: PrimaryButton(
                 onPressed: () {},
-                text: "board.wait.button".trl,
+                text: "customize.wait.button".trl,
               ),
             ),
           ],
