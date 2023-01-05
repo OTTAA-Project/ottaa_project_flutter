@@ -693,4 +693,101 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<_i2.Either<String, void>> setShortcutsForUser({
+    required Map<String, dynamic>? shortcuts,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setShortcutsForUser,
+          [],
+          {
+            #shortcuts: shortcuts,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
+          this,
+          Invocation.method(
+            #setShortcutsForUser,
+            [],
+            {
+              #shortcuts: shortcuts,
+              #userId: userId,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, void>>);
+  @override
+  _i4.Future<void> updateUserData({
+    required Map<String, dynamic>? data,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserData,
+          [],
+          {
+            #data: data,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> getEmailToken(
+    String? ownEmail,
+    String? email,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getEmailToken,
+          [
+            ownEmail,
+            email,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #getEmailToken,
+            [
+              ownEmail,
+              email,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> verifyEmailToken(
+    String? ownEmail,
+    String? email,
+    String? token,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #verifyEmailToken,
+          [
+            ownEmail,
+            email,
+            token,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #verifyEmailToken,
+            [
+              ownEmail,
+              email,
+              token,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
 }

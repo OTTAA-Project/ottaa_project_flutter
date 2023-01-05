@@ -27,6 +27,7 @@ Pict _$PictFromJson(Map<String, dynamic> json) => Pict(
           ?.map((e) => e as String)
           .toList(),
       score: json['score'] as int?,
+      blocked: json['blocked'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$PictToJson(Pict instance) => <String, dynamic>{
@@ -44,6 +45,7 @@ Map<String, dynamic> _$PictToJson(Pict instance) => <String, dynamic>{
       'horario': instance.horario,
       'ubicacion': instance.ubicacion,
       'score': instance.score,
+      'blocked': instance.blocked,
       'localImg': instance.localImg,
     };
 

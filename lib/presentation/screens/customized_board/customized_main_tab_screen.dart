@@ -67,6 +67,7 @@ class _CustomizedMainTabScreenState
                   // title: "",
                   subtitle: index == 1
                       //TODO: check this if it is OK
+
                       ? "board.customize.helpText".trl
                       : "global.back".trl,
                   children: <Widget>[

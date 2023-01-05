@@ -181,7 +181,8 @@
   "customize": {
     "board": {
       "title": "¿Qué tableros utilizará el usuario para comunicarse?",
-      "appbar": "Tableros predictivos"
+      "appbar": "Tableros predictivos",
+      "subtitle" : "Ver pictogramas"
     },
     "shortcut": {
       "title": "Selecciona los atajos que aparecerán en la pantalla principal.",

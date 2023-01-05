@@ -16,7 +16,7 @@ Groups _$GroupsFromJson(Map<String, dynamic> json) => Groups(
           .toList(),
       frecuencia: json['frecuencia'] as int?,
       tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      selected: json['selected'] as bool? ?? true,
+      blocked: json['blocked'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$GroupsToJson(Groups instance) => <String, dynamic>{
@@ -27,7 +27,7 @@ Map<String, dynamic> _$GroupsToJson(Groups instance) => <String, dynamic>{
       'relacion': instance.relacion,
       'frecuencia': instance.frecuencia,
       'tags': instance.tags,
-      'selected': instance.selected,
+      'blocked': instance.blocked,
     };
 
 ImageGroups _$ImageGroupsFromJson(Map<String, dynamic> json) => ImageGroups(

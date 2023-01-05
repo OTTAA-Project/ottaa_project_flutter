@@ -20,6 +20,7 @@ class Pict {
     this.sexo,
     this.ubicacion,
     this.score,
+    this.blocked = false,
   });
 
   int id;
@@ -36,6 +37,7 @@ class Pict {
   List<String>? horario;
   List<String>? ubicacion;
   int? score;
+  bool? blocked;
 
   //local used variables
   bool localImg;
@@ -74,7 +76,8 @@ class Relacion {
   int id;
   int? frec;
 
-  factory Relacion.fromJson(Map<String, dynamic> json) => _$RelacionFromJson(json);
+  factory Relacion.fromJson(Map<String, dynamic> json) =>
+      _$RelacionFromJson(json);
 
   Map<String, dynamic> toJson() => _$RelacionToJson(this);
 }

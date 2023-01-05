@@ -12,23 +12,25 @@ class CustomiseProvider extends ChangeNotifier {
   List<Pict> pictograms = [];
   List<Groups> groups = [];
   bool pictosFetched = false;
+  String selectedGroup = '';
 
   CustomiseProvider(this._pictogramsService, this._groupsService);
 
   List<bool> selectedShortcuts = List.generate(7, (index) => true);
 
   Future<void> setShortcutsForUser(
-      {required Map<String, dynamic> shortcuts,
-      required String userId}) async {
-    final map = {
-
-    };
+      {required Map<String, dynamic> shortcuts, required String userId}) async {
+    final map = {};
   }
 
   Future<void> fetchPictograms() async {
     pictograms = await _pictogramsService.getAllPictograms();
     groups = await _groupsService.getAllGroups();
     pictosFetched = true;
+    notifyListeners();
+  }
+
+  void notify() {
     notifyListeners();
   }
 }

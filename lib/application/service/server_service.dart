@@ -32,7 +32,7 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherListMap> getAllGroups(String userId, String languageCode) async {
     //Fetch new data from server
-    final refNew = _database.child('$userId/Grupos/$languageCode');
+    final refNew = _database.child('$userId/groups/$languageCode');
     final resNew = await refNew.get();
 
     if (resNew.exists && resNew.value != null) {
