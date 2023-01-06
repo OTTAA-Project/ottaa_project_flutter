@@ -3,12 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/core/models/groups_model.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/core/repositories/customise_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 
 class CustomiseProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
+  final CustomiseRepository _customiseService;
   List<Pict> pictograms = [];
   List<Groups> groups = [];
   List<Pict> selectedGruposPicts = [];
@@ -18,11 +20,15 @@ class CustomiseProvider extends ChangeNotifier {
   String selectedGroupImage = '';
   bool selectedGroupStatus = false;
 
-  CustomiseProvider(this._pictogramsService, this._groupsService);
+  CustomiseProvider(
+    this._pictogramsService,
+    this._groupsService,
+    this._customiseService,
+  );
 
   List<bool> selectedShortcuts = List.generate(7, (index) => true);
 
-  void setGrupoData({required int index}) {
+  Future<void> setGrupoData({required int index}) async {
     selectedGroup = index;
     selectedGroupImage =
         (groups[index].imagen.pictoEditado ?? groups[index].imagen.picto);
@@ -33,17 +39,17 @@ class CustomiseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setShortcutsForUser(
-      {required Map<String, dynamic> shortcuts, required String userId}) async {
+  Future<void> setShortcutsForUser({required String userId}) async {
     final map = {
       'favourite': selectedShortcuts[0],
-      'favourite': selectedShortcuts[1],
-      'favourite': selectedShortcuts[2],
-      'favourite': selectedShortcuts[3],
-      'favourite': selectedShortcuts[4],
-      'favourite': selectedShortcuts[5],
-      'favourite': selectedShortcuts[6]
+      'history': selectedShortcuts[1],
+      'camera': selectedShortcuts[2],
+      'random': selectedShortcuts[3],
+      'yes': selectedShortcuts[4],
+      'no': selectedShortcuts[5],
+      'share': selectedShortcuts[6]
     };
+    await _customiseService.setShortcutsForUser(shortcuts: map, userId: userId);
   }
 
   Future<void> fetchDesiredPictos() async {
@@ -67,11 +73,17 @@ class CustomiseProvider extends ChangeNotifier {
   void notify() {
     notifyListeners();
   }
+
+  Future<void> getDefaultGroups() async {
+    final res = await _customiseService.fetchDefaultGroups(languageCode: 'en');
+    print(res.length);
+  }
 }
 
 final customiseProvider = ChangeNotifierProvider<CustomiseProvider>((ref) {
-  // final CustomiseRepository customiseService = GetIt.I.get<CustomiseRepository>();
+  final CustomiseRepository customiseService =
+      GetIt.I.get<CustomiseRepository>();
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupService = GetIt.I<GroupsRepository>();
-  return CustomiseProvider(pictogramService, groupService);
+  return CustomiseProvider(pictogramService, groupService, customiseService);
 });

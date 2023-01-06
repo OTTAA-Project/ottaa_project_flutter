@@ -11,9 +11,10 @@ Groups _$GroupsFromJson(Map<String, dynamic> json) => Groups(
       texto: TextGroups.fromJson(json['texto'] as Map<String, dynamic>),
       tipo: json['tipo'] as int? ?? 0,
       imagen: ImageGroups.fromJson(json['imagen'] as Map<String, dynamic>),
-      relacion: (json['relacion'] as List<dynamic>)
-          .map((e) => GroupRelation.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      relacion: (json['relacion'] as List<dynamic>?)
+              ?.map((e) => GroupRelation.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       frecuencia: json['frecuencia'] as int?,
       tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
       blocked: json['blocked'] as bool? ?? false,

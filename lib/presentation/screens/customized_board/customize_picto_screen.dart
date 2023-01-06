@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
-import 'package:ottaa_project_flutter/presentation/screens/customize_picto/ui/board_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/customized_board/ui/board_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 
@@ -92,10 +92,11 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
                     print('delete on tap');
                   },
                   onChanged: (bool a) {
-                    provider.groups[provider.selectedGroup].blocked = a;
+                    provider.groups[provider.selectedGroup].blocked = !a;
+                    provider.selectedGroupStatus = !a;
                     provider.notify();
                   },
-                  status: provider.selectedGroupStatus,
+                  status: !provider.selectedGroupStatus,
                 ),
                 const SizedBox(
                   height: 16,
@@ -112,12 +113,13 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
                 crossAxisCount: 3,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
-                mainAxisExtent: 120,
+                mainAxisExtent: 130,
               ),
               itemBuilder: (context, index) => PictoWidget(
                 onTap: () {
                   provider.selectedGruposPicts[index].blocked =
                       !provider.selectedGruposPicts[index].blocked!;
+                  provider.notify();
                 },
                 imageUrl: provider.selectedGruposPicts[index].imagen.picto,
                 text: provider.selectedGruposPicts[index].texto.es,

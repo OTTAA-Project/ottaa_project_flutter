@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
@@ -37,6 +38,7 @@ class _CustomizedMainTabScreenState
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
+    final user = ref.read(userNotifier);
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
@@ -190,7 +192,7 @@ class _CustomizedMainTabScreenState
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: PrimaryButton(
-                onPressed: () {
+                onPressed: () async{
                   if (pageController.page == 0) {
                     setState(() {
                       pageController.nextPage(
@@ -199,6 +201,7 @@ class _CustomizedMainTabScreenState
                       index = 2;
                     });
                   } else {
+                    await provider.setShortcutsForUser(userId: user!.id);
                     context.push(AppRoutes.customizeWaitScreen);
                   }
                 },

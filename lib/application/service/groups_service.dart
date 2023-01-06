@@ -17,7 +17,7 @@ class GroupsService extends GroupsRepository {
   GroupsService(this._authService, this._remoteStorageService, this._serverRepository);
 
   @override
-  Future<List<Groups>> getAllGroups() async {
+  Future<List<Groups>> getAllGroups({bool defaultGroups = false}) async {
     await Future.delayed(
       const Duration(seconds: kIsWeb ? 2 : 1),
     );
@@ -82,5 +82,11 @@ class GroupsService extends GroupsRepository {
     };
 
     await _serverRepository.updateGroup(auth.id, language, index, data: payload);
+  }
+
+  @override
+  Future<List<Groups>> getDefaultGroups() {
+    // TODO: implement getDefaultGroups
+    throw UnimplementedError();
   }
 }

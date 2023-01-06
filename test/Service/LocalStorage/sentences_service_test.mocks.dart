@@ -790,4 +790,13 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<dynamic> getDefaultGroups(String? languageCode) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDefaultGroups,
+          [languageCode],
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
 }

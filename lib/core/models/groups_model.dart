@@ -20,6 +20,7 @@ class Groups {
   TextGroups texto;
   int tipo;
   ImageGroups imagen;
+  @JsonKey(defaultValue: [])
   List<GroupRelation> relacion;
   int? frecuencia;
   List<String>? tags;

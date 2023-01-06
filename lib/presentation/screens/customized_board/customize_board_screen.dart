@@ -43,8 +43,8 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
                         !provider.groups[index].blocked!;
                     provider.notify();
                   },
-                  onPressed: () {
-                    provider.setGrupoData(index: index);
+                  onPressed: () async{
+                    await provider.setGrupoData(index: index);
                     context.push(AppRoutes.customizePictoScreen);
                   },
                 ),
