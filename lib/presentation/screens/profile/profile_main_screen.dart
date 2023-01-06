@@ -60,8 +60,14 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                       Text("profile.hello".trlf({"name": user?.name})),
                     ],
                   ),
-                  Image.asset(
-                    AppImages.kNotificationIcon,
+                  //todo: remove it
+                  GestureDetector(
+                    onTap: (){
+                      context.push(AppRoutes.customizedBoardScreen);
+                    },
+                    child: Image.asset(
+                      AppImages.kNotificationIcon,
+                    ),
                   ),
                 ],
               ),
