@@ -31,7 +31,7 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
                 //todo: add the values here according to the language
                 child: PictogramCard(
                   title: provider.groups[index].texto.es,
-                  actionText: "customize.subtitle".trl,
+                  actionText: "customize.board.subtitle".trl,
                   pictogram: CachedNetworkImageProvider(
                     provider.groups[index].imagen.pictoEditado != null
                         ? provider.groups[index].imagen.pictoEditado!
@@ -44,8 +44,7 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
                     provider.notify();
                   },
                   onPressed: () {
-                    print('pressed');
-                    provider.selectedGroup = provider.groups[index].texto.es;
+                    provider.setGrupoData(index: index);
                     context.push(AppRoutes.customizePictoScreen);
                   },
                 ),

@@ -11,16 +11,50 @@ class CustomiseProvider extends ChangeNotifier {
   final GroupsRepository _groupsService;
   List<Pict> pictograms = [];
   List<Groups> groups = [];
+  List<Pict> selectedGruposPicts = [];
   bool pictosFetched = false;
-  String selectedGroup = '';
+  int selectedGroup = 00;
+  String selectedGroupName = '';
+  String selectedGroupImage = '';
+  bool selectedGroupStatus = false;
 
   CustomiseProvider(this._pictogramsService, this._groupsService);
 
   List<bool> selectedShortcuts = List.generate(7, (index) => true);
 
+  void setGrupoData({required int index}) {
+    selectedGroup = index;
+    selectedGroupImage =
+        (groups[index].imagen.pictoEditado ?? groups[index].imagen.picto);
+    //todo: set the language here too
+    selectedGroupName = groups[index].texto.es;
+    selectedGroupStatus = groups[index].blocked!;
+    fetchDesiredPictos();
+    notifyListeners();
+  }
+
   Future<void> setShortcutsForUser(
       {required Map<String, dynamic> shortcuts, required String userId}) async {
-    final map = {};
+    final map = {
+      'favourite': selectedShortcuts[0],
+      'favourite': selectedShortcuts[1],
+      'favourite': selectedShortcuts[2],
+      'favourite': selectedShortcuts[3],
+      'favourite': selectedShortcuts[4],
+      'favourite': selectedShortcuts[5],
+      'favourite': selectedShortcuts[6]
+    };
+  }
+
+  Future<void> fetchDesiredPictos() async {
+    selectedGruposPicts = [];
+    for (int i = 0; i < groups[selectedGroup].relacion.length; i++) {
+      for (var e in pictograms) {
+        if (e.id == groups[selectedGroup].relacion[i].id) {
+          selectedGruposPicts.add(e);
+        }
+      }
+    }
   }
 
   Future<void> fetchPictograms() async {
