@@ -218,6 +218,6 @@
       "title": "Tablero {name}",
       "switch": "Activar tablero"
     },
-    "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
+    "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
 }
