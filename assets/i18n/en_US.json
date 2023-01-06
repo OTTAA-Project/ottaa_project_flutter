@@ -5,7 +5,7 @@
       "caregiver_text": "Necesita comunicarse",
       "user_text": "Necesita comunicarse"
     },
-    "hello": "Hola {name}!",
+    "hello": "Hi {name}!",
     "ottaa": {
       "tips": "OTTAA tips"
     },
@@ -63,7 +63,7 @@
       "text4": "Save pictograms and sentences in Favorites, so you can access them quickly."
     },
     "unlink": "Unlink",
-    "unlink_account": "¿Desea desvincular a {name} de sus cuentas de perfil?",
+    "unlink_account": "Do you want to unlink {name} from your accounts?",
     "help": {
       "help": "Help",
       "title1": "Frequently Asked Questions",
@@ -86,7 +86,7 @@
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email",
-        "invalid": "Token inválido"
+        "invalid": "Invalid token"
       },
       "wait": {
         "title": "Wait",
@@ -119,8 +119,8 @@
     "email": "Email",
     "step": "Step",
     "share": "Share",
-    "support": "Soporte",
-    "congrats": "Felicitaciones"
+    "support": "Support",
+    "congrats": "Congratulations"
   },
   "onboarding": {
     "start": "Get Started",
@@ -140,7 +140,7 @@
       "description": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
     },
     "skip": {
-      "title": "¿Estás de acuerdo en saltar la introducción?"
+      "title": "Do you really want to skip the tutorial?"
     }
   },
   "terms": {
@@ -182,8 +182,8 @@
     "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "Having trouble linking accounts?",
     "button": {
-      "resend": "Reenviar email",
-      "anothermail": "Ingresá otro email."
+      "resend": "Resend email",
+      "anothermail": "Enter another email."
     }
   },
   "login": {
@@ -192,32 +192,32 @@
     "facebook": "Login with Facebook",
     "register": "Don't have an account yet? Sign up here",
     "wait": {
-      "title": "Te damos la bienvenida!",
-      "subtitle": "Al nuevo mundo de OTTAA Project"
+      "title": "Welcome!",
+      "subtitle": "To the OTTAA Project World"
     }
   },
   "customize": {
     "board": {
-      "title": "¿Qué tableros utilizará el usuario para comunicarse?",
-      "appbar": "Tableros predictivos",
-      "skip": "¿Omitir la elección de tableros?"
+      "title": "What boards will the user use?",
+      "appbar": "Predictive boards",
+      "skip": "Do you skip board customization?"
     },
     "shortcut": {
-      "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
-      "appbar": "Atajos",
+      "title": "Choose the shortcuts to use on Home screen.",
+      "appbar": "Shortcuts",
       "favorites": "Favorites",
       "history": "History",
       "camera": "Camera",
       "games": "Games"
     },
     "wait": {
-      "button": "Ir al panel de perfiles",
-      "description": "Configuraste correctamente la experiencia de {name}"
+      "button": "Go to profile screen",
+      "description": "{name} experience is set up correctly"
     },
     "picto": {
       "title": "Board {name}",
       "switch": "Enable board"
     },
-    "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
+    "skip": "Do you want to skip profile customization?"
   }
 }
