@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class CustomizeWaitScreen extends ConsumerWidget {
@@ -35,7 +37,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
                 ),
                 Center(
                   child: Text(
-                    "board.wait.heading".trl,
+                    "customize.wait.heading".trl,
                     style: textTheme.button!.copyWith(
                       color: colorScheme.onBackground,
                     ),
@@ -46,7 +48,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
                 ),
                 Center(
                   child: Text(
-                    "board.wait.subtitle".trl,
+                    "customize.wait.subtitle".trl,
                     style: textTheme.headline3,
                   ),
                 ),
@@ -55,8 +57,10 @@ class CustomizeWaitScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
               child: PrimaryButton(
-                onPressed: () async {},
-                text: "board.wait.button".trl,
+                onPressed: () async {
+                  context.go(AppRoutes.profileMainScreen);
+                },
+                text: "customize.wait.button".trl,
               ),
             ),
           ],

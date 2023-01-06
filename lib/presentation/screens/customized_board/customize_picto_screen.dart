@@ -117,9 +117,7 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
               ),
               itemBuilder: (context, index) => PictoWidget(
                 onTap: () {
-                  provider.selectedGruposPicts[index].blocked =
-                      !provider.selectedGruposPicts[index].blocked!;
-                  provider.notify();
+                  provider.block(index: index);
                 },
                 imageUrl: provider.selectedGruposPicts[index].imagen.picto,
                 text: provider.selectedGruposPicts[index].texto.es,

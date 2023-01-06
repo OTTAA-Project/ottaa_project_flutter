@@ -174,7 +174,7 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherVoid> uploadGroups(String userId, String language,
       {required List<Map<String, dynamic>> data}) async {
-    final ref = _database.child('$userId/Grupos/$language');
+    final ref = _database.child('$userId/groups/$language');
     try {
       await ref.set(data);
       return const Right(null);
@@ -186,7 +186,7 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherVoid> uploadPictograms(String userId, String language,
       {required List<Map<String, dynamic>> data}) async {
-    final ref = _database.child('$userId/Pictos/$language');
+    final ref = _database.child('$userId/pictos/$language');
 
     try {
       await ref.set(data);

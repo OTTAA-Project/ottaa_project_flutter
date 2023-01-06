@@ -19,6 +19,7 @@ class CustomiseProvider extends ChangeNotifier {
   String selectedGroupName = '';
   String selectedGroupImage = '';
   bool selectedGroupStatus = false;
+  Map<int, int> pictosMap = {};
 
   CustomiseProvider(
     this._pictogramsService,
@@ -63,11 +64,19 @@ class CustomiseProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> fetchPictograms() async {
-    pictograms = await _pictogramsService.getAllPictograms();
+  Future<void> fetchData() async {
     groups = await _groupsService.getAllGroups();
     pictosFetched = true;
     notifyListeners();
+    pictograms = await _pictogramsService.getAllPictograms();
+    await createMapForPictos();
+  }
+
+  Future<void> uploadData({required String userId}) async {
+    //todo: change the languages
+    await _pictogramsService.uploadPictograms(pictograms, 'es');
+    await _groupsService.uploadGroups(groups, 'type', 'es');
+    await setShortcutsForUser(userId: userId);
   }
 
   void notify() {
@@ -77,6 +86,21 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> getDefaultGroups() async {
     final res = await _customiseService.fetchDefaultGroups(languageCode: 'en');
     print(res.length);
+  }
+
+  Future<void> createMapForPictos() async {
+    int i = 0;
+    for (var element in pictograms) {
+      pictosMap[element.id] = i;
+    }
+  }
+
+  void block({required int index}) async {
+    selectedGruposPicts[index].blocked = !selectedGruposPicts[index].blocked!;
+
+    pictograms[pictosMap[selectedGruposPicts[index].id]!].blocked =
+        !pictograms[pictosMap[selectedGruposPicts[index].id]!].blocked!;
+    notifyListeners();
   }
 }
 

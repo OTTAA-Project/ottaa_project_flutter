@@ -131,7 +131,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                 trailingImage: const AssetImage(AppImages.kProfileIcon2),
                 imageSize: const Size(129, 96),
                 onPressed: () {
-                  context.push(AppRoutes.customizedBoardScreen);
+                  context.push(AppRoutes.home);
                 },
               ),
             ],

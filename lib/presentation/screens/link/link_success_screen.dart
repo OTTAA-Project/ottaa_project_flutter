@@ -40,7 +40,7 @@ class LinkSuccessScreen extends StatelessWidget {
                   ),
                   splashRadius: 10,
                 ),
-              ),
+              )
             ),
           ),
           const Spacer(),

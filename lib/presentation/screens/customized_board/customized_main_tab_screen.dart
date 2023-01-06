@@ -31,7 +31,7 @@ class _CustomizedMainTabScreenState
     final provider = ref.read(customiseProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.fetchPictograms();
+      await provider.fetchData();
     });
   }
 
@@ -192,7 +192,7 @@ class _CustomizedMainTabScreenState
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: PrimaryButton(
-                onPressed: () async{
+                onPressed: () async {
                   if (pageController.page == 0) {
                     setState(() {
                       pageController.nextPage(
@@ -201,7 +201,15 @@ class _CustomizedMainTabScreenState
                       index = 2;
                     });
                   } else {
-                    await provider.setShortcutsForUser(userId: user!.id);
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                    );
+                    await provider.uploadData(userId: user!.id);
                     context.push(AppRoutes.customizeWaitScreen);
                   }
                 },

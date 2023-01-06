@@ -44,7 +44,7 @@ class GroupsService extends GroupsRepository {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
 
-    dynamic jsonData = List.empty(growable: true);
+    List<Map<String, dynamic>> jsonData = List.empty(growable: true);
     for (var e in data) {
       final relactions = e.relacion.map((e) => e.toJson()).toList();
       jsonData.add({
