@@ -49,14 +49,14 @@
     "logout": "Cerrar sesión",
     "last_name": "Apellido",
     "role": "Rol de uso",
-    "day": "Día",
-    "month": "Mes",
-    "year": "Año",
+    "day": "Giorno",
+    "month": "Mese",
+    "year": "Anno",
     "tips": {
-      "title1": "Estadísticas",
+      "title1": "Statistiche",
       "title2": "Tableros",
-      "title3": "Historial",
-      "title4": "Favoritos",
+      "title3": "Cronolgia",
+      "title4": "Preferiti",
       "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
       "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
       "text3": "Usá el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
@@ -79,7 +79,7 @@
         },
         "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
         "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles.",
-        "send": "Enviar"
+        "send": "Invia"
       },
       "token": {
         "title": "Coloque el código de verificación que llegó al correo electrónico.",
@@ -89,53 +89,53 @@
         "invalid": "Token inválido"
       },
       "wait": {
-        "title": "Aguarde",
+        "title": "Aspettare",
         "subtitle": "Cargando perfil..."
       },
       "success": {
         "title": "Perfil vinculado con éxito!",
         "lastTime": "Últ. vez Ayer {date}",
-        "continue": "Continuar"
+        "continue": "Procedi"
       }
     }
   },
   "global": {
-    "hello_world": "Hola Mundo",
-    "hello": "Hola",
-    "continue": "Continuar",
-    "next": "Siguiente",
-    "back": "Anterior",
-    "please_enter_text": "Por favor, ingrese un texto",
-    "done": "Listo",
-    "yes": "Sí",
-    "delete": "Borrar",
-    "edit": "Editar",
+    "hello_world": "Ciao Mondo",
+    "hello": "Ciao",
+    "continue": "Procedi",
+    "next": "Avanti",
+    "back": "Indietro",
+    "please_enter_text": "Si prega di inserire un testo.",
+    "done": "Pronto",
+    "yes": "Sì",
+    "delete": "Cancella",
+    "edit": "Modifica",
     "no": "No",
-    "mute": "Silenciar",
+    "mute": "Silenzia",
     "important": "Importante",
-    "save_changes": "Guardar cambios",
-    "send": "Enviar",
-    "skip": "Omitir",
-    "email": "Email",
+    "save_changes": "Salva le modifiche",
+    "send": "Invia",
+    "skip": "Salta",
+    "email": "Indirizzo e-mail",
     "step": "Paso",
-    "share": "Compartir",
-    "support": "Soporte",
-    "congrats": "Felicitaciones"
+    "share": "Share",
+    "support": "Supporto",
+    "congrats": "Congratulazioni"
   },
   "onboarding": {
-    "start": "Comenzar",
+    "start": "Iniziare",
     "profile": {
       "title": "Pantalla de perfiles",
       "subtitle": "¿Quién va a usar OTTAA hoy?",
       "description": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
     },
     "home": {
-      "title": "Personaliza tu Home",
+      "title": "Personalizza il tuo Home",
       "subtitle": "Atajos en la pantalla principal",
       "description": "Personaliza de acuerdo a los gustos y necesidades"
     },
     "customize": {
-      "title": "Personaliza tu Home",
+      "title": "Personalizza il tuo Home",
       "subtitle": "Acompañamos en el proceso de aprendizaje",
       "description": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
     },
@@ -144,14 +144,14 @@
     }
   },
   "terms": {
-    "button": "Acepto los términos",
+    "button": "Accetto i termini",
     "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\nVer términos"
   },
   "loginWait": {
     "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
   },
   "link": {
-    "title": "Vincular Cuenta",
+    "title": "Associa account",
     "mail": {
       "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
       "input": {
@@ -160,7 +160,7 @@
       },
       "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
       "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
-      "send": "Enviar"
+      "send": "Invia"
     },
     "token": {
       "title": "Coloque el código de verificación que llegó al correo electrónico.",
@@ -169,13 +169,13 @@
       "back": "Ingresar otro email"
     },
     "wait": {
-      "title": "Aguarde",
+      "title": "Aspettare",
       "subtitle": "Cargando perfil..."
     },
     "success": {
       "title": "Perfil vinculado con éxito!",
       "lastTime": "Últ. vez Ayer {date}",
-      "continue": "Continuar"
+      "continue": "Procedi"
     }
   },
   "token": {
@@ -205,8 +205,8 @@
     "shortcut": {
       "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
       "appbar": "Atajos",
-      "favorites": "Favoritos",
-      "history": "Historial",
+      "favorites": "Preferiti",
+      "history": "Cronolgia",
       "camera": "Cámara",
       "games": "Juegos"
     },
