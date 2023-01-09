@@ -5,7 +5,7 @@
       "caregiver_text": "Necesita comunicarse",
       "user_text": "Necesita comunicarse"
     },
-    "hello": "Hola {name}!",
+    "hello": "Olá, {name}!",
     "ottaa": {
       "tips": "Ottaa tips "
     },
@@ -13,49 +13,49 @@
     "date": "Data de nascimento",
     "faq": {
       "title": "Perguntas frequentes (FAQ)",
-      "faq0": "FAQ 0 Test",
-      "faq0Description": "FAQ 0 Description all cool",
-      "faq1": "FAQ 1 Test",
-      "faq1Description": "FAQ 1 Description all cool",
-      "faq2": "FAQ 2 Test",
-      "faq2Description": "FAQ 2 Description all cool",
-      "faq3": "FAQ 3 Test",
-      "faq3Description": "FAQ 3 Description all cool",
-      "faq4": "FAQ 4 Test",
-      "faq4Description": "FAQ 4 Description all cool",
-      "faq5": "FAQ 5 Test",
-      "faq5Description": "FAQ 5 Description all cool",
+      "faq0": "¿Quién puede usar la aplicación OTTAA?",
+      "faq0Description": "OTTAA está diseñado para personas no verbales, es decir, cualquier persona que no utilice el habla oral para comunicarse. Las personas que usan OTTAA hoy en día fueron diagnosticadas con autismo, parálisis cerebral, síndrome de Down, esclerosis lateral amiotrófica (ELA), atrofia muscular espinal (AME) o síndrome de enclaustramiento post al accidente cerebrovascular (LiS), entre otras afecciones. Al ser una herramienta de comunicación dinámica, OTTAA requiere que sus usuarios posean funciones cognitivas de nivel medio a alto. Sin embargo, nos gusta considerar cada caso individualmente, así que no dude en ponerte en contacto y solicitar una evaluación en línea con nuestro equipo.",
+      "faq1": "¿Cómo funciona la aplicación?",
+      "faq1Description": "La aplicación OTTAA proporciona al usuario pictogramas: imágenes que representan acciones, objetos, sentimientos o emociones. El usuario puede elegir los pictogramas que necesita y crear una frase, esta se traduce de los pictogramas a una oración escrita que aparece en la pantalla y que la aplicación también lee en voz alta. Consultá nuestro canal de Youtube para obtener una explicación más visual.",
+      "faq2": "¿En qué se diferencia esta aplicación de otros dispositivos AAC (comunicación aumentativa y alternativa)?",
+      "faq2Description": "La aplicación OTTAA es diferente de otras aplicaciones de CAA debido a su innovador algoritmo predictivo y generador de lenguaje natural, que permite que la aplicación aprenda del comportamiento del usuario en la aplicación, su edad, sexo, la hora del día y su ubicación para pre -seleccionar pictograma(s) para el momento comunicacional en el que se encuentran.",
+      "faq3": "¿Cuánto cuesta la aplicación OTTAA?",
+      "faq3Description": "La aplicación OTTAA es gratuita para descargar y usar. Para crear un producto sostenible que resista el paso del tiempo, hay algunas características que requieren una suscripción para utilizarlas. Sin embargo, estamos trabajando arduamente para brindar financiamiento a todos los que lo necesitan.\n\nSi estás en Argentina, cualquier ayuda técnica que necesite una persona debe estar cubierto por un seguro de salud. Comuníquese con nuestro equipo para obtener orientación y asistencia sobre cómo obtener esta cobertura.\n\nSi sos de cualquier otro país de LATAM y querés compartir tu experiencia sobre este tema, no dudes en comunicarte, tu contribución podría ayudar a muchas personas.",
+      "faq4": "¿Qué idiomas son compatibles con el Proyecto OTTAA?",
+      "faq4Description": "Actualmente admitimos español, inglés, portugués y francés. Para español, tenemos versiones localizadas de Argentina, Chile, Colombia y España. Estamos buscando activamente contribuciones sobre nuevos idiomas o una mejor localización para las variedades españolas. Únase a nuestra comunidad de crowdin para contribuir.",
+      "faq5": "¿Cómo puedo colaborar con el Proyecto OTTAA?",
+      "faq5Description": "Los colaboradores pueden ayudar a OTTAA con el desarrollo, las pruebas y/o la traducción. Para leer más sobre el tema y comenzar, consulte la sección Contribuir en el repositorio oficial de OTTAA en GitHub.",
       "faq6": "FAQ 6 Test",
       "faq6Description": "FAQ 6 Description all cool",
       "faq7": "FAQ 7 Test",
       "faq7Description": "FAQ 7 Description all cool"
     },
-    "caregiver": "Acompañante",
-    "caregivers_families": "Profesionales/Familiares",
-    "user": "Usuario/a",
+    "caregiver": "Acompanhante",
+    "caregivers_families": "Profissionais/Família",
+    "user": "Usuário/a",
     "user_description": "La persona que necesita comunicarse",
-    "wait": "Por favor esperá",
-    "setting_exp": "Configurando tu experiencia...",
-    "link_account": "Vincular una cuenta",
+    "wait": "Por favor, aguarde",
+    "setting_exp": "Configurando sua experiência...",
+    "link_account": "Vincular Conta",
     "use": {
       "ottaa": "Usar OTTAA"
     },
-    "no_account": "Modo sin perfil",
-    "new_existant": "Nuevo/Existente",
-    "what_do": "¿Qué querés hacer?",
+    "no_account": "Modo sem perfil",
+    "new_existant": "Novo/Existente",
+    "what_do": "Que eu posso fazer?",
     "profile": "Perfil",
-    "linked_accounts": "Cuentas vinculadas",
-    "name": "Nombre",
-    "logout": "Cerrar sesión",
-    "last_name": "Apellido",
-    "role": "Rol de uso",
-    "day": "Día",
-    "month": "Mes",
-    "year": "Año",
+    "linked_accounts": "Contas conectadas",
+    "name": "Nome",
+    "logout": "Deslogar",
+    "last_name": "Apelido",
+    "role": "Função de uso",
+    "day": "Dia",
+    "month": "Mês",
+    "year": "Ano",
     "tips": {
-      "title1": "Estadísticas",
+      "title1": "Estatísticas",
       "title2": "Tableros",
-      "title3": "Historial",
+      "title3": "História",
       "title4": "Favoritos",
       "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
       "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
@@ -65,12 +65,12 @@
     "unlink": "Desvincular",
     "unlink_account": "¿Desea desvincular a {name} de sus cuentas de perfil?",
     "help": {
-      "help": "Ayuda",
+      "help": "Ajuda",
       "title1": "Perguntas frequentes (FAQ)",
-      "title2": "Contactar con soporte"
+      "title2": "Contato com o suporte"
     },
     "link": {
-      "title": "Vincular Cuenta",
+      "title": "Vincular Conta",
       "mail": {
         "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
         "input": {
@@ -95,35 +95,35 @@
       "success": {
         "title": "Perfil vinculado con éxito!",
         "lastTime": "Últ. vez Ayer {date}",
-        "continue": "Continuar"
+        "continue": "Avançar"
       }
     }
   },
   "global": {
-    "hello_world": "Hola Mundo",
-    "hello": "Hola",
-    "continue": "Continuar",
-    "next": "Siguiente",
-    "back": "Anterior",
-    "please_enter_text": "Por favor, ingrese un texto",
-    "done": "Listo",
-    "yes": "Sí",
-    "delete": "Borrar",
+    "hello_world": "Olá Mundo",
+    "hello": "Olá",
+    "continue": "Avançar",
+    "next": "Próximo",
+    "back": "Prévio",
+    "please_enter_text": "Por favor, digite um texto",
+    "done": "Feito",
+    "yes": "Sim",
+    "delete": "Limpiar",
     "edit": "Editar",
-    "no": "No",
+    "no": "Não",
     "mute": "Silenciar",
     "important": "Importante",
-    "save_changes": "Guardar cambios",
+    "save_changes": "Salvar alterações",
     "send": "Enviar",
     "skip": "Omitir",
-    "email": "Email",
-    "step": "Paso",
+    "email": "E-mail",
+    "step": "Passo",
     "share": "Compartir",
-    "support": "Soporte",
-    "congrats": "Felicitaciones"
+    "support": "Assistência técnica",
+    "congrats": "Parabéns"
   },
   "onboarding": {
-    "start": "Comenzar",
+    "start": "Começar",
     "profile": {
       "title": "Pantalla de perfiles",
       "subtitle": "¿Quién va a usar OTTAA hoy?",
@@ -144,19 +144,19 @@
     }
   },
   "terms": {
-    "button": "Acepto los términos",
+    "button": "Aceito os termos",
     "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\nVer términos"
   },
   "loginWait": {
     "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
   },
   "link": {
-    "title": "Vincular Cuenta",
+    "title": "Vincular Conta",
     "mail": {
       "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
       "input": {
         "required": "El correo electrónico es requerido",
-        "invalid": "El correo electrónico es inválido"
+        "invalid": "E-mail é inválido"
       },
       "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
       "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
@@ -166,7 +166,7 @@
       "title": "Coloque el código de verificación que llegó al correo electrónico.",
       "problem": "¿Inconvenientes para enlazar las cuentas?",
       "resend": "Reenviar código",
-      "back": "Ingresar otro email"
+      "back": "Insira outro email"
     },
     "wait": {
       "title": "Aguarde",
@@ -175,15 +175,14 @@
     "success": {
       "title": "Perfil vinculado con éxito!",
       "lastTime": "Últ. vez Ayer {date}",
-      "continue": "Continuar"
+      "continue": "Avançar"
     }
   },
   "token": {
     "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "¿Inconvenientes para enlazar las cuentas?",
     "button": {
-      "resend": "Reenviar email",
-      "anothermail": "Ingresá otro email."
+      "resend": "Reenviar email"
     }
   },
   "login": {
@@ -206,9 +205,9 @@
       "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
       "appbar": "Atajos",
       "favorites": "Favoritos",
-      "history": "Historial",
-      "camera": "Cámara",
-      "games": "Juegos"
+      "history": "História",
+      "camera": "Camera",
+      "games": "Jogos"
     },
     "wait": {
       "button": "Ir al panel de perfiles",
