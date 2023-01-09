@@ -34,4 +34,9 @@ class ProfileService implements ProfileRepository {
   Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
     return await _serverRepository.removeCurrentUser(userId: userId, careGiverId: careGiverId);
   }
+
+  @override
+  Future<Either<String, Map<String, dynamic>>> getProfileByEmail({required String email}) {
+    return _serverRepository.getProfileByEmail(email: email);
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
+import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/ui/otp_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/ui/token_input.dart';
 import 'package:ottaa_ui_kit/theme.dart';
@@ -19,6 +20,9 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final reset = ref.read(linkProvider.select((value) => value.reset));
+
+    final sendEmail = ref.read(linkProvider.select((value) => value.sendEmail));
+
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text("global.back".trl),
@@ -48,7 +52,9 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
               ),
               const SizedBox(height: 16),
               SecondaryButton(
-                onPressed: () {},
+                onPressed: () {
+                  LoadingModal.show(context, future: sendEmail);
+                },
                 text: "profile.link.token.resend".trl,
               ),
               const SizedBox(height: 16),
