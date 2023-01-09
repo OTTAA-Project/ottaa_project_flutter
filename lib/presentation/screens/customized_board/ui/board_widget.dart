@@ -46,8 +46,11 @@ class BoardWidget extends StatelessWidget {
                     width: 8,
                   ),
                   Text(
-                    title,
-                    style: textTheme.subtitle2,
+                    title.length >= 21 ? '${title.substring(0, 21)}...' : title,
+                    style: textTheme.subtitle2!.copyWith(
+                        // overflow: TextOverflow.ellipsis,
+                        ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

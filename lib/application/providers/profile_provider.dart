@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/core/models/care_giver_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/connected_user_data_model.dart';
+import 'package:ottaa_project_flutter/core/models/proflie_connected_accounts_model.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
@@ -15,7 +16,7 @@ class ProfileNotifier extends ChangeNotifier {
   final ProfileRepository _profileService;
   final AuthRepository _auth;
 
-  ProfileNotifier(this._pictogramsService, this._auth, this._profileService);
+  ProfileNotifier(this._pictogramsService,this._auth, this._profileService);
 
   bool isCaregiver = false;
   late UserModel user;
@@ -25,6 +26,8 @@ class ProfileNotifier extends ChangeNotifier {
   late String imageUrl;
   final ImagePicker _picker = ImagePicker();
   bool isLinkAccountOpen = false;
+  bool connectedUsersFetched = false;
+  List<ProfileConnectedAccounts> connectedUsersProfileData = [];
   final TextEditingController profileEditNameController =
       TextEditingController();
   final TextEditingController profileEditSurnameController =
@@ -70,19 +73,6 @@ class ProfileNotifier extends ChangeNotifier {
       await launchUrl(callUrl);
     } else {
       throw 'Could not open the dialler.';
-    }
-  }
-
-  Future<void> openEmail() async {
-    final email = Uri(
-      scheme: 'mailto',
-      path: 'asim@ottaa.com',
-      query: 'subject=Hello&body=Test',
-    );
-    if (await canLaunchUrl(email)) {
-      launchUrl(email);
-    } else {
-      throw 'Could not launch $email';
     }
   }
 
@@ -152,6 +142,9 @@ class ProfileNotifier extends ChangeNotifier {
               CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
         )
         .toList());
+    connectedUsersFetched = true;
+
+    notifyListeners();
   }
 
   Future<void> fetchConnectedUsersData() async {
@@ -175,7 +168,8 @@ class ProfileNotifier extends ChangeNotifier {
     }));
 
     dataFetched = true;
-    notify();
+    connectedUsersFetched = true;
+    notifyListeners();
   }
 
   Future<void> removeCurrentUser(

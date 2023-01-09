@@ -158,7 +158,6 @@ class _ProfileSettingsEditScreenState
                           onChanged: (String? a) {
                             provider.year = int.parse(a!);
                             provider.notify();
-                            print(a);
                           },
                           items: List.generate(
                             80,

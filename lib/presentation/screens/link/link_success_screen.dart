@@ -23,31 +23,32 @@ class LinkSuccessScreen extends StatelessWidget {
           const SizedBox(height: 16),
           Center(
             child: SizedBox(
-              width: 312,
-              child: ProfileCard(
-                title: "Juan Varela",
-                subtitle: "link.success.lastTime".trlf({"date": "33:33 PM"}),//TODO: Re do this u.u
-                leadingImage: const AssetImage("assets/profiles/Group 673@2x.png"),
-                actions: IconButton(
-                  onPressed: () {},
-                  color: kBlackColor,
-                  icon: const Icon(
-                    Icons.keyboard_arrow_down,
+                width: 312,
+                child: ProfileCard(
+                  title: "Juan Varela",
+                  subtitle: "link.success.lastTime".trlf({"date": "33:33 PM"}),
+                  //TODO: Re do this u.u
+                  leadingImage:
+                      const AssetImage("assets/profiles/Group 673@2x.png"),
+                  actions: IconButton(
+                    onPressed: () {},
                     color: kBlackColor,
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: kBlackColor,
+                    ),
+                    style: IconButton.styleFrom(
+                      foregroundColor: kBlackColor,
+                    ),
+                    splashRadius: 10,
                   ),
-                  style: IconButton.styleFrom(
-                    foregroundColor: kBlackColor,
-                  ),
-                  splashRadius: 10,
-                ),
-              )
-            ),
+                )),
           ),
           const Spacer(),
           SizedBox(
             width: size.width * 0.8,
             child: PrimaryButton(
-              onPressed: ()  => context.push(AppRoutes.customizedBoardScreen),
+              onPressed: () => context.push(AppRoutes.customizedBoardScreen),
               text: "global.continue",
             ),
           ),

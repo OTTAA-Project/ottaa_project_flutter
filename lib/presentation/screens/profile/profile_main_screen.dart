@@ -6,10 +6,9 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
-import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/ui/connected_users_list.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/drop_down_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileMainScreen extends ConsumerStatefulWidget {
@@ -23,13 +22,24 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
   //todo: a jojo reference XD
   final String userName = 'Dio';
 
+  @override
+  void initState() {
+    super.initState();
+    final provider = ref.read(profileProvider);
+    final user = ref.read(userNotifier);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await provider.setDate();
+      await provider.getConnectedUsers(userId: user!.id);
+      await provider.fetchConnectedUsersData();
+    });
+  }
 
   @override
   Widget build(
     BuildContext context,
   ) {
     final textTheme = Theme.of(context).textTheme;
-
+    final colorScheme = Theme.of(context).colorScheme;
     final provider = ref.watch(profileProvider);
 
     final user = ref.watch(userNotifier);
@@ -57,12 +67,14 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("profile.hello".trlf({"name": user?.name})),
+                      Text(
+                        "profile.hello".trlf({"name": user?.name}),
+                      ),
                     ],
                   ),
                   //todo: remove it
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       context.push(AppRoutes.customizedBoardScreen);
                     },
                     child: Image.asset(
@@ -78,6 +90,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                 "profile.what_do".trl,
                 style: textTheme.headline2,
               ),
+              ConnectedUsersList(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: ActionCard(

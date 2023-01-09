@@ -113,7 +113,8 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
                 crossAxisCount: 3,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
-                mainAxisExtent: 130,
+                // mainAxisExtent: 140,
+                childAspectRatio: 0.73,
               ),
               itemBuilder: (context, index) => PictoWidget(
                 onTap: () {
