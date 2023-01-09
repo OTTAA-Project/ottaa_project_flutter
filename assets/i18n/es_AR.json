@@ -24,6 +24,8 @@
     "use": {
       "ottaa": "Usar OTTAA"
     },
+    "close_profile" : "Esconder perfil",
+    "open_profile": "Ver perfil",
     "no_account": "Modo sin perfil",
     "new_existant": "Nuevo/Existente",
     "what_do": "¿Qué querés hacer?",
@@ -102,7 +104,10 @@
     "email": "Email",
     "step": "Paso",
     "share": "Compartir",
-    "support": "Soporte"
+    "support": "Soporte",
+    "pictogram" : "Pictograms",
+    "configuration" : "Configuración",
+    "user_ottaa" : "Usar Ottaa {name}"
   },
   "onboarding": {
     "start": "Comenzar",

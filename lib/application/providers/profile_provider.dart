@@ -16,7 +16,7 @@ class ProfileNotifier extends ChangeNotifier {
   final ProfileRepository _profileService;
   final AuthRepository _auth;
 
-  ProfileNotifier(this._pictogramsService,this._auth, this._profileService);
+  ProfileNotifier(this._pictogramsService, this._auth, this._profileService);
 
   bool isCaregiver = false;
   late UserModel user;
@@ -136,20 +136,20 @@ class ProfileNotifier extends ChangeNotifier {
       return;
     }
 
-    connectedUsers.addAll(res.right.values
-        .map<CareGiverUser>(
-          (element) =>
-              CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
-        )
-        .toList());
-    connectedUsersFetched = true;
-
+    connectedUsers.addAll(
+      res.right.values
+          .map<CareGiverUser>(
+            (element) =>
+                CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
+          )
+          .toList(),
+    );
     notifyListeners();
   }
 
   Future<void> fetchConnectedUsersData() async {
     connectedUsersData = [];
-
+    connectedUsersProfileData = [];
     await Future.wait(connectedUsers.map((e) async {
       final res =
           await _profileService.fetchConnectedUserData(userId: e.userId);
@@ -162,7 +162,14 @@ class ProfileNotifier extends ChangeNotifier {
             image: json['avatar']['name'],
           ),
         );
-
+        connectedUsersProfileData.add(
+          ProfileConnectedAccounts(
+            name: json['name'],
+            imageUrl: json['avatar']['name'],
+            id: e.userId,
+            isExpanded: false,
+          ),
+        );
         print(json["name"]);
       }
     }));
