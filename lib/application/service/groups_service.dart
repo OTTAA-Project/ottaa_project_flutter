@@ -14,7 +14,8 @@ class GroupsService extends GroupsRepository {
   final RemoteStorageRepository _remoteStorageService;
   final ServerRepository _serverRepository;
 
-  GroupsService(this._authService, this._remoteStorageService, this._serverRepository);
+  GroupsService(
+      this._authService, this._remoteStorageService, this._serverRepository);
 
   @override
   Future<List<Groups>> getAllGroups({bool defaultGroups = false}) async {
@@ -25,7 +26,8 @@ class GroupsService extends GroupsRepository {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return [];
 
-    final String data = await _remoteStorageService.readRemoteFile(path: "Grupos", fileName: 'assets/grupos.json');
+    final String data = await _remoteStorageService.readRemoteFile(
+        path: "Grupos", fileName: 'assets/grupos.json');
 
     final List<dynamic> json = jsonDecode(data);
     final List<Groups> groups = json.map((e) => Groups.fromJson(e)).toList();
@@ -40,11 +42,13 @@ class GroupsService extends GroupsRepository {
   }
 
   @override
-  Future<void> uploadGroups(List<Groups> data, String type, String language) async {
+  Future<void> uploadGroups(List<Groups> data, String type, String language,
+      {String? userId}) async {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
 
     List<Map<String, dynamic>> jsonData = List.empty(growable: true);
+    print(data.length);
     for (var e in data) {
       final relactions = e.relacion.map((e) => e.toJson()).toList();
       jsonData.add({
@@ -57,14 +61,16 @@ class GroupsService extends GroupsRepository {
         'tags': e.tags,
       });
     }
+    print(jsonData.length);
 
     final UserModel auth = result.right;
-
-    await _serverRepository.uploadGroups(auth.id, language, data: jsonData);
+    await _serverRepository.uploadGroups(userId ?? auth.id, language,
+        data: jsonData);
   }
 
   @override
-  Future<void> updateGroups(Groups data, String type, String language, int index) async {
+  Future<void> updateGroups(
+      Groups data, String type, String language, int index) async {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
     final UserModel auth = result.right;
@@ -81,7 +87,8 @@ class GroupsService extends GroupsRepository {
       'tags': data.tags,
     };
 
-    await _serverRepository.updateGroup(auth.id, language, index, data: payload);
+    await _serverRepository.updateGroup(auth.id, language, index,
+        data: payload);
   }
 
   @override

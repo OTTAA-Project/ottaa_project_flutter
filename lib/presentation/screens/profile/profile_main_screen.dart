@@ -29,8 +29,10 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
     final user = ref.read(userNotifier);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await provider.setDate();
-      await provider.getConnectedUsers(userId: user!.id);
-      await provider.fetchConnectedUsersData();
+      if (provider.isCaregiver) {
+        await provider.getConnectedUsers(userId: user!.id);
+        await provider.fetchConnectedUsersData();
+      }
     });
   }
 
@@ -73,8 +75,13 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                         ),
                       ],
                     ),
-                    Image.asset(
-                      AppImages.kNotificationIcon,
+                    GestureDetector(
+                      onTap: () {
+                        context.push(AppRoutes.customizedBoardScreen);
+                      },
+                      child: Image.asset(
+                        AppImages.kNotificationIcon,
+                      ),
                     ),
                   ],
                 ),

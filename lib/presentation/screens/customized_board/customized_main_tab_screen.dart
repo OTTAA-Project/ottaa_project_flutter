@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_shortcut_screen.dart';
@@ -42,6 +43,8 @@ class _CustomizedMainTabScreenState
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
+    //todo: using that variable here from the linkProvider
+    final userID = ref.read(linkProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Row(
@@ -209,7 +212,7 @@ class _CustomizedMainTabScreenState
                         );
                       },
                     );
-                    await provider.uploadData(userId: user!.id);
+                    await provider.uploadData(userId: userID.userId);
                     context.push(AppRoutes.customizeWaitScreen);
                   }
                 },

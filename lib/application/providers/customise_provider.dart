@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/core/models/groups_model.dart';
 import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/customise_repository.dart';
@@ -11,6 +12,7 @@ class CustomiseProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
   final CustomiseRepository _customiseService;
+  final I18N _i18n;
   List<Pict> pictograms = [];
   List<Groups> groups = [];
   List<Pict> selectedGruposPicts = [];
@@ -25,11 +27,12 @@ class CustomiseProvider extends ChangeNotifier {
     this._pictogramsService,
     this._groupsService,
     this._customiseService,
+    this._i18n,
   );
 
   List<bool> selectedShortcuts = List.generate(7, (index) => true);
 
-  Future<void> setGrupoData({required int index}) async {
+  Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
     selectedGroupImage =
         (groups[index].imagen.pictoEditado ?? groups[index].imagen.picto);
@@ -42,7 +45,7 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setShortcutsForUser({required String userId}) async {
     final map = {
-      'favourite': selectedShortcuts[0],
+      'favs': selectedShortcuts[0],
       'history': selectedShortcuts[1],
       'camera': selectedShortcuts[2],
       'random': selectedShortcuts[3],
@@ -74,8 +77,14 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> uploadData({required String userId}) async {
     //todo: change the languages
-    await _pictogramsService.uploadPictograms(pictograms, 'es');
-    await _groupsService.uploadGroups(groups, 'type', 'es');
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+
+    await _pictogramsService.uploadPictograms(pictograms, languageCode,
+        userId: userId);
+    await _groupsService.uploadGroups(groups, 'type', languageCode,
+        userId: userId);
     await setShortcutsForUser(userId: userId);
   }
 
@@ -109,5 +118,7 @@ final customiseProvider = ChangeNotifierProvider<CustomiseProvider>((ref) {
       GetIt.I.get<CustomiseRepository>();
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupService = GetIt.I<GroupsRepository>();
-  return CustomiseProvider(pictogramService, groupService, customiseService);
+  final i18N = GetIt.I<I18N>();
+  return CustomiseProvider(
+      pictogramService, groupService, customiseService, i18N);
 });

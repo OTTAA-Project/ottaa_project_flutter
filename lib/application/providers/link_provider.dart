@@ -20,6 +20,9 @@ class LinkNotifier extends ChangeNotifier {
 
   final AuthRepository _auth;
 
+  //todo: add the proper value here
+  String userId = 'k1234';
+
   LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._auth);
 
   void tokenChanged(int id, String value) {

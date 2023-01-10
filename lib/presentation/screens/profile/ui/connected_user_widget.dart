@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_user_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -60,7 +62,7 @@ class ConnectedUserWidget extends StatelessWidget {
           ),
           AnimatedContainer(
             duration: const Duration(milliseconds: 500),
-            height: show ? 350 : 0,
+            height: show ? 362 : 0,
             width: double.infinity,
             child: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
@@ -99,7 +101,11 @@ class ConnectedUserWidget extends StatelessWidget {
                         ),
                         ProfileUserWidget(
                           title: 'profile.help.help'.trl,
-                          onTap: () {},
+                          onTap: () =>
+                              context.push(AppRoutes.profileHelpScreen),
+                        ),
+                        const SizedBox(
+                          height: 16,
                         ),
                         PrimaryButton(
                           text: 'global.user_ottaa'.trlf({'name': title}),
