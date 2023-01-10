@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:ottaa_project_flutter/core/models/groups_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
+import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
@@ -51,21 +52,29 @@ class GroupsService extends GroupsRepository {
     print(data.length);
     for (var e in data) {
       final relactions = e.relacion.map((e) => e.toJson()).toList();
+      //todo: find the error
+      final textoJson = {
+        'en': e.texto.en,
+        'es': e.texto.es,
+        'fr': e.texto.fr,
+        'pt': e.texto.pt,
+      };
       jsonData.add({
         'id': e.id,
-        'texto': e.texto.toJson(),
+        'texto': textoJson,
         'tipo': e.tipo,
         'imagen': e.imagen.toJson(),
         'relacion': relactions,
         'frecuencia': e.frecuencia,
         'tags': e.tags,
+        'blocked': e.blocked
       });
     }
-    print(jsonData.length);
+    // print(jsonData.length);
 
     final UserModel auth = result.right;
-    await _serverRepository.uploadGroups(userId ?? auth.id, language,
-        data: jsonData);
+    final res = await _serverRepository
+        .uploadGroups(userId ?? auth.id, language, data: jsonData);
   }
 
   @override

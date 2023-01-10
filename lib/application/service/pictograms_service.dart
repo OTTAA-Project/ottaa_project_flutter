@@ -58,6 +58,7 @@ class PictogramsService extends PictogramsRepository {
         'horario': e.horario,
         'ubicacion': e.ubicacion,
         'score': e.score,
+        'blocked': e.blocked
       });
     }
     final result = await _authService.getCurrentUser();

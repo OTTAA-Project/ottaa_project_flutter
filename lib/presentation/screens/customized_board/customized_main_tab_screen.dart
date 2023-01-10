@@ -205,6 +205,7 @@ class _CustomizedMainTabScreenState
                     });
                   } else {
                     showDialog(
+                      barrierDismissible: false,
                       context: context,
                       builder: (context) {
                         return const Center(

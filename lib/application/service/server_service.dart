@@ -176,7 +176,9 @@ class ServerService implements ServerRepository {
       {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
     try {
-      await ref.set(data);
+      await ref.set({
+        'maps':true
+      });
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
