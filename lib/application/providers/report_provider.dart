@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/service/report_service.dart';
+import 'package:ottaa_project_flutter/core/models/chart_model.dart';
+import 'package:ottaa_project_flutter/core/models/phrases_statistics_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_statistics_model.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/core/models/report_chart_data_model.dart';
-import 'package:ottaa_project_flutter/core/models/sentence_statistics_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/report_repository.dart';
@@ -37,9 +37,9 @@ class ReportProvider extends ChangeNotifier {
   String fourthValueText = 'fourth';
   List<List<String>> mostUsedSentences = [];
   late PictoStatisticsModel pictoStatisticsModel;
-  late FrasesStatisticsModel frasesStatisticsModel;
+  late PhraseStatisticModel frasesStatisticsModel;
   late List<String> randomPictos;
-  late List<Pict> _pictos;
+  late List<Picto> _pictos;
   double averagePictoFrase = 0.00;
   bool loadingMostUsedSentences = false;
   int frases7Days = 0;
@@ -52,7 +52,7 @@ class ReportProvider extends ChangeNotifier {
     _pictos = await _pictogramsService.getAllPictograms();
     final user = await _auth.getCurrentUser();
     uid = user.right.id;
-    photoUrl = user.right.photoUrl;
+    photoUrl = user.right.settings.data.avatar.network!;
     await fetchPictoStatisticsData();
     await fetchMostUsedSentences();
     calculateScoreForProfile();
@@ -106,7 +106,7 @@ class ReportProvider extends ChangeNotifier {
       for (var id in element) {
         for (var element in _pictos) {
           if (element.id == id) {
-            final val = element.imagen.pictoEditado ?? element.imagen.picto;
+            final val = element.resource.network!;
             res.add(val);
           }
         }

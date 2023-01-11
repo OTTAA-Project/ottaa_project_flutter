@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ottaa_project_flutter/core/models/care_giver_user_model.dart';
-import 'package:ottaa_project_flutter/core/models/connected_user_data_model.dart';
-import 'package:ottaa_project_flutter/core/models/proflie_connected_accounts_model.dart';
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
@@ -16,7 +15,7 @@ class ProfileNotifier extends ChangeNotifier {
   final ProfileRepository _profileService;
   final AuthRepository _auth;
 
-  ProfileNotifier(this._pictogramsService,this._auth, this._profileService);
+  ProfileNotifier(this._pictogramsService, this._auth, this._profileService);
 
   bool isCaregiver = false;
   late UserModel user;
@@ -27,13 +26,10 @@ class ProfileNotifier extends ChangeNotifier {
   final ImagePicker _picker = ImagePicker();
   bool isLinkAccountOpen = false;
   bool connectedUsersFetched = false;
-  List<ProfileConnectedAccounts> connectedUsersProfileData = [];
-  final TextEditingController profileEditNameController =
-      TextEditingController();
-  final TextEditingController profileEditSurnameController =
-      TextEditingController();
-  final TextEditingController profileEditEmailController =
-      TextEditingController();
+  List<CaregiverUsers> connectedUsersProfileData = [];
+  final TextEditingController profileEditNameController = TextEditingController();
+  final TextEditingController profileEditSurnameController = TextEditingController();
+  final TextEditingController profileEditEmailController = TextEditingController();
 
   //profile chooser screen
   bool professionalSelected = false;
@@ -44,8 +40,10 @@ class ProfileNotifier extends ChangeNotifier {
   String yearForDropDown = "0";
 
   //connected users screen
-  List<CareGiverUser> connectedUsers = [];
-  List<ConnectedUserData> connectedUsersData = [];
+  List<CaregiverUsers> connectedUsers = [];
+  List<PatientUserModel> connectedUsersData = [];
+
+  List<bool> expasionList = [];
   bool dataFetched = false;
 
   //profile email send
@@ -59,8 +57,7 @@ class ProfileNotifier extends ChangeNotifier {
   Future<void> setDate() async {
     final res = await _auth.getCurrentUser();
     user = res.right;
-    final birthday = user.birthdate!;
-    final date = DateTime.fromMillisecondsSinceEpoch(birthday);
+    final date = user.settings.data.birthDate;
     day = date.day;
     month = date.month;
     year = date.year;
@@ -87,7 +84,7 @@ class ProfileNotifier extends ChangeNotifier {
     if (imageSelected) {
       /// upload the image and fetch its url
       imageUrl = await _profileService.uploadUserImage(
-        name: user.name,
+        name: user.settings.data.name,
         path: profileEditImage!.path,
         userId: user.id,
       );
@@ -95,17 +92,18 @@ class ProfileNotifier extends ChangeNotifier {
 
     /// create the data for the upload
     final birthdate = convertDate();
-    final Map<String, dynamic> data = {
-      "name": profileEditNameController.text,
-      "birth-date": birthdate,
-      "gender-pref": user.gender,
-      "last-name": profileEditSurnameController.text,
-      "avatar": {
-        "name": "local-use",
-        "url": imageSelected ? imageUrl : user.photoUrl,
-      }
-    };
-    await _profileService.updateUser(data: data, userId: user.id);
+    // final Map<String, dynamic> data = {
+    //   "name": profileEditNameController.text,
+    //   "birth-date": birthdate,
+    //   "gender-pref": user.settings.data.genderPref,
+    //   "last-name": profileEditSurnameController.text,
+    //   "avatar": {
+    //     "name": "local-use",
+    //     "url": imageSelected ? imageUrl : user.settings.data.avatar.network ?? ,
+    //   }
+    // };
+
+    // await _profileService.updateUser(data: data, userId: user.id);
   }
 
   Future<void> pickImage({required bool cameraOrGallery}) async {
@@ -136,12 +134,11 @@ class ProfileNotifier extends ChangeNotifier {
       return;
     }
 
-    connectedUsers.addAll(res.right.values
-        .map<CareGiverUser>(
-          (element) =>
-              CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
-        )
-        .toList());
+    // connectedUsers.addAll(res.right.values
+    //     .map<CareGiverUser>(
+    //       (element) => CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
+    //     )
+    //     .toList());
     connectedUsersFetched = true;
 
     notifyListeners();
@@ -151,20 +148,19 @@ class ProfileNotifier extends ChangeNotifier {
     connectedUsersData = [];
 
     await Future.wait(connectedUsers.map((e) async {
-      final res =
-          await _profileService.fetchConnectedUserData(userId: e.userId);
-      if (res.isRight) {
-        final json = res.right;
+      // final res = await _profileService.fetchConnectedUserData(userId: e.userId);
+      // if (res.isRight) {
+      //   final json = res.right;
 
-        connectedUsersData.add(
-          ConnectedUserData(
-            name: json['name'],
-            image: json['avatar']['name'],
-          ),
-        );
+      // connectedUsersData.add(
+      //   ConnectedUserData(
+      //     name: json['name'],
+      //     image: json['avatar']['name'],
+      //   ),
+      // );
 
-        print(json["name"]);
-      }
+      //   print(json["name"]);
+      // }
     }));
 
     dataFetched = true;
@@ -172,10 +168,8 @@ class ProfileNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> removeCurrentUser(
-      {required String userId, required String careGiverId}) async {
-    await _profileService.removeCurrentUser(
-        userId: userId, careGiverId: careGiverId);
+  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
+    await _profileService.removeCurrentUser(userId: userId, careGiverId: careGiverId);
 
     // update the whole list again
     dataFetched = false;

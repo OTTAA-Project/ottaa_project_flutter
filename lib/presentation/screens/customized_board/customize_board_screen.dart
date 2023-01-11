@@ -30,17 +30,15 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
                 padding: const EdgeInsets.only(bottom: 16),
                 //todo: add the values here according to the language
                 child: PictogramCard(
-                  title: provider.groups[index].texto.es,
+                  title: provider.groups[index].text["es"]!,
                   actionText: "customize.board.subtitle".trl,
                   pictogram: CachedNetworkImageProvider(
-                    provider.groups[index].imagen.pictoEditado != null
-                        ? provider.groups[index].imagen.pictoEditado!
-                        : provider.groups[index].imagen.picto,
+                    provider.groups[index].resource.network!,
                   ),
-                  status: !provider.groups[index].blocked!,
+                  status: !provider.groups[index].block,
                   onChange: (bool a) {
-                    provider.groups[index].blocked =
-                        !provider.groups[index].blocked!;
+                    provider.groups[index].block =
+                        !provider.groups[index].block;
                     provider.notify();
                   },
                   onPressed: () async{

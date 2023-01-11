@@ -92,7 +92,7 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
                     print('delete on tap');
                   },
                   onChanged: (bool a) {
-                    provider.groups[provider.selectedGroup].blocked = !a;
+                    provider.groups[provider.selectedGroup].block = !a;
                     provider.selectedGroupStatus = !a;
                     provider.notify();
                   },
@@ -120,10 +120,10 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
                 onTap: () {
                   provider.block(index: index);
                 },
-                imageUrl: provider.selectedGruposPicts[index].imagen.picto,
-                text: provider.selectedGruposPicts[index].texto.es,
-                colorNumber: provider.selectedGruposPicts[index].tipo,
-                disable: provider.selectedGruposPicts[index].blocked!,
+                imageUrl: provider.selectedGruposPicts[index].resource.network,
+                text: provider.selectedGruposPicts[index].text["es"]!,
+                colorNumber: provider.selectedGruposPicts[index].type,
+                disable: provider.selectedGruposPicts[index].block,
               ),
             ),
           ),

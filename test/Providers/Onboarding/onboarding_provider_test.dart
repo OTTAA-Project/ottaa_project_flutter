@@ -6,7 +6,7 @@ import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dar
 import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/onboarding_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';

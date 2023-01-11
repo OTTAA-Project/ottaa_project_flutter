@@ -9,12 +9,10 @@ class ProfileLinkedAccountScreen extends ConsumerStatefulWidget {
   const ProfileLinkedAccountScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _ProfileLinkedAccountScreen();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProfileLinkedAccountScreen();
 }
 
-class _ProfileLinkedAccountScreen
-    extends ConsumerState<ProfileLinkedAccountScreen> {
+class _ProfileLinkedAccountScreen extends ConsumerState<ProfileLinkedAccountScreen> {
   @override
   Widget build(
     BuildContext context,
@@ -47,37 +45,32 @@ class _ProfileLinkedAccountScreen
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.only(bottom: 16),
                           child: ProfileCard(
-                            title: provider.connectedUsersData[index].name,
+                            title: provider.connectedUsersData[index].settings.data.name,
                             subtitle: "profile.user".trl,
                             actions: GestureDetector(
                               onTap: () async {
-                                final bool? cancel =
-                                    await BasicBottomSheet.show(
+                                final bool? cancel = await BasicBottomSheet.show(
                                   context,
                                   okButtonEnabled: true,
-                                  title: "profile.unlink_account".trlf({
-                                    "name":
-                                        provider.connectedUsersData[index].name
-                                  }),
+                                  title: "profile.unlink_account".trlf({"name": provider.connectedUsersData[index].settings.data.name}),
                                   okButtonText: "unlink",
                                   cancelButtonText: 'cancel',
                                   cancelButtonEnabled: true,
                                 );
                                 if (cancel != null && cancel) {
                                   await provider.removeCurrentUser(
-                                      userId:
-                                          provider.connectedUsers[index].userId,
-                                      careGiverId: user!.id);
+                                    userId: provider.connectedUsers[index].id,
+                                    careGiverId: user!.id,
+                                  );
                                 }
                               },
                               child: Text(
                                 'profile.unlink'.trl,
-                                style: textTheme.subtitle1!
-                                    .copyWith(color: colorScheme.primary),
+                                style: textTheme.subtitle1!.copyWith(color: colorScheme.primary),
                               ),
                             ),
                             leadingImage: NetworkImage(
-                              provider.connectedUsersData[index].image,
+                              provider.connectedUsersData[index].settings.data.avatar.network!,
                             ),
                           ),
                         ),

@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/list_pictos_widget.dart';
 
@@ -128,7 +126,7 @@ class AddOrRemoveFavouriteScreen extends ConsumerWidget {
                           ? ListPictosWidget(
                               height: verticalSize / 2.5,
                               width: horizontalSize * 0.78,
-                              backgrounColor: sentences[selectedIndexFavSelection].favouriteOrNot ? Colors.blue : Colors.transparent,
+                              // backgrounColor: sentences[selectedIndexFavSelection].favouriteOrNot ? Colors.blue : Colors.transparent, TODO: Change this to uncomment code :/
                               padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
                             )
                           : Container()

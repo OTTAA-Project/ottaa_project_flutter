@@ -1,4 +1,4 @@
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 
 abstract class LocalDatabaseRepository {
   UserModel? get user;

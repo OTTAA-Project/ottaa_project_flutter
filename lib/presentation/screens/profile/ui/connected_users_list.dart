@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
-import 'package:ottaa_project_flutter/core/models/proflie_connected_accounts_model.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ConnectedUsersList extends ConsumerStatefulWidget {
@@ -26,17 +27,16 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
       animationDuration: const Duration(milliseconds: 500),
       expansionCallback: (int index, bool isExpanded) {
         setState(() {
-          provider.connectedUsersProfileData[index].isExpanded = !isExpanded;
+          provider.expasionList[index] = !isExpanded; //TODO: Load the user data by the index
         });
       },
-      children: provider.connectedUsersProfileData
-          .map<ExpansionPanel>((ProfileConnectedAccounts item) {
+      children: provider.connectedUsersData.mapIndexed<ExpansionPanel>((int index, PatientUserModel item) {
         return ExpansionPanel(
           canTapOnHeader: true,
           headerBuilder: (BuildContext context, bool isExpanded) {
             return ProfileCard(
               title: "Juan",
-              leadingImage: CachedNetworkImageProvider(user!.photoUrl),
+              leadingImage: CachedNetworkImageProvider(user!.settings.data.avatar.network!),
               subtitle: 'time will be here',
               onPressed: () {},
               actions: Text('actions'),
@@ -52,8 +52,7 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: Text(
                   'item.expandedValue',
                   style: textTheme.subtitle1,
@@ -61,7 +60,7 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
               ),
             ],
           ),
-          isExpanded: item.isExpanded,
+          isExpanded: provider.expasionList[index],
         );
       }).toList(),
     );

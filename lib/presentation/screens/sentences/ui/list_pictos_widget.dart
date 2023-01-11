@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 
 class ListPictosWidget extends ConsumerWidget {
@@ -29,22 +30,21 @@ class ListPictosWidget extends ConsumerWidget {
           scrollDirection: Axis.horizontal,
           itemCount: provider.favouriteOrNotPicts[provider.selectedIndexFavSelection].length + 1,
           itemBuilder: (BuildContext context, int index) {
-            final Pict speakPict = Pict(
-              localImg: true,
+            final Picto speakPict = Picto(
               id: 0,
-              texto: Texto(),
-              tipo: 6,
-              imagen: Imagen(picto: "logo_ottaa_dev"),
+              type: 6,
+              resource: AssetsImage(asset: "logo_ottaa_dev", network: null),
             );
             if (provider.favouriteOrNotPicts[provider.selectedIndexFavSelection].length > index) {
-              final Pict pict = provider.favouriteOrNotPicts[provider.selectedIndexFavSelection][index];
+              final Picto pict = provider.favouriteOrNotPicts[provider.selectedIndexFavSelection][index];
               return Container(
                 margin: const EdgeInsets.all(10),
                 child: MiniPicto(
-                  localImg: pict.localImg,
+                  localImg: pict.resource.asset != null,
                   pict: pict,
                   onTap: () {
-                    provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot = !provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot;
+                    // provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot = !provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot;
+                    //TODO: Fix this
                     provider.speakFavOrNot();
                   },
                 ),
@@ -53,10 +53,11 @@ class ListPictosWidget extends ConsumerWidget {
               return Container(
                 margin: const EdgeInsets.all(10),
                 child: MiniPicto(
-                  localImg: speakPict.localImg,
+                  localImg: speakPict.resource.asset != null,
                   pict: speakPict,
                   onTap: () {
-                    provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot = !provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot;
+                    // provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot = !provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot;
+                    //TODO: Fix this
                     provider.speakFavOrNot();
                   },
                 ),

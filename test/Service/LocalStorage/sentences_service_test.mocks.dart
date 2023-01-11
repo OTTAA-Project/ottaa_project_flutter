@@ -9,10 +9,12 @@ import 'package:either_dart/either.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/service/sentences_service.dart'
     as _i3;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i7;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i8;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i10;
-import 'package:ottaa_project_flutter/core/models/sentence_model.dart' as _i5;
-import 'package:ottaa_project_flutter/core/models/user_model.dart' as _i7;
+import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i11;
+import 'package:ottaa_project_flutter/core/models/phrase_model.dart' as _i5;
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i12;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
     as _i6;
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
@@ -48,7 +50,7 @@ class MockSentencesService extends _i1.Mock implements _i3.SentencesService {
   }
 
   @override
-  _i4.Future<List<_i5.SentenceModel>> fetchSentences({
+  _i4.Future<List<_i5.Phrase>> fetchSentences({
     required String? language,
     required String? type,
     bool? isFavorite = false,
@@ -63,13 +65,12 @@ class MockSentencesService extends _i1.Mock implements _i3.SentencesService {
             #isFavorite: isFavorite,
           },
         ),
-        returnValue:
-            _i4.Future<List<_i5.SentenceModel>>.value(<_i5.SentenceModel>[]),
-      ) as _i4.Future<List<_i5.SentenceModel>>);
+        returnValue: _i4.Future<List<_i5.Phrase>>.value(<_i5.Phrase>[]),
+      ) as _i4.Future<List<_i5.Phrase>>);
   @override
   _i4.Future<void> uploadSentences({
     required String? language,
-    required List<_i5.SentenceModel>? data,
+    required List<_i5.Phrase>? data,
     required String? type,
   }) =>
       (super.noSuchMethod(
@@ -243,7 +244,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
           #getUserType,
           [userId],
         ),
-        returnValue: _i4.Future<_i10.UserType>.value(_i10.UserType.free),
+        returnValue: _i4.Future<_i10.UserType>.value(_i10.UserType.caregiver),
       ) as _i4.Future<_i10.UserType>);
   @override
   _i4.Future<_i2.Either<String, String>> getUserProfilePicture(
@@ -265,16 +266,14 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   @override
   _i4.Future<_i2.Either<String, void>> uploadUserPicture(
     String? userId,
-    String? picture,
-    String? photoUrl,
+    _i11.AssetsImage? image,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
           #uploadUserPicture,
           [
             userId,
-            picture,
-            photoUrl,
+            image,
           ],
         ),
         returnValue: _i4.Future<_i2.Either<String, void>>.value(
@@ -284,8 +283,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             #uploadUserPicture,
             [
               userId,
-              picture,
-              photoUrl,
+              image,
             ],
           ),
         )),
@@ -333,7 +331,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         )),
       ) as _i4.Future<_i2.Either<String, void>>);
   @override
-  _i4.Future<List<_i5.SentenceModel>> getUserSentences(
+  _i4.Future<List<_i5.Phrase>> getUserSentences(
     String? userId, {
     required String? language,
     required String? type,
@@ -349,9 +347,8 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             #isFavorite: isFavorite,
           },
         ),
-        returnValue:
-            _i4.Future<List<_i5.SentenceModel>>.value(<_i5.SentenceModel>[]),
-      ) as _i4.Future<List<_i5.SentenceModel>>);
+        returnValue: _i4.Future<List<_i5.Phrase>>.value(<_i5.Phrase>[]),
+      ) as _i4.Future<List<_i5.Phrase>>);
   @override
   _i4.Future<_i2.Either<String, void>> uploadUserSentences(
     String? userId,
@@ -695,7 +692,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
       ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Either<String, void>> setShortcutsForUser({
-    required Map<String, dynamic>? shortcuts,
+    required _i12.Shortcuts? shortcuts,
     required String? userId,
   }) =>
       (super.noSuchMethod(

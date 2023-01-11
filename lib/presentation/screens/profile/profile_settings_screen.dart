@@ -64,7 +64,7 @@ class ProfileSettingsScreen extends ConsumerWidget {
               ),
               //todo: add the image link here
               ProfilePhotoWidget(
-                image: user?.photoUrl ?? "",
+                image: user?.settings.data.avatar.network ?? "",
                 height: 120,
                 width: 120,
               ),
@@ -72,7 +72,7 @@ class ProfileSettingsScreen extends ConsumerWidget {
                 height: 16,
               ),
               Text(
-                user?.name ?? "",
+                user?.settings.data.name ?? "",
               ),
               const SizedBox(
                 height: 32,

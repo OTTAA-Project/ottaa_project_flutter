@@ -40,7 +40,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         final user = ref.read(userNotifier);
 
         if (mounted) {
-          I18N.of(context).changeLanguage(user?.language ?? "en_US");
+          I18N.of(context).changeLanguage(user?.settings.language ?? "en_US");
           if (!hasInfo) {
             return context.go(AppRoutes.login);
           }

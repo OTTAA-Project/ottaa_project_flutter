@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:ottaa_project_flutter/core/models/groups_model.dart';
+import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
@@ -17,7 +17,7 @@ class GroupsService extends GroupsRepository {
   GroupsService(this._authService, this._remoteStorageService, this._serverRepository);
 
   @override
-  Future<List<Groups>> getAllGroups({bool defaultGroups = false}) async {
+  Future<List<Group>> getAllGroups({bool defaultGroups = false}) async {
     await Future.delayed(
       const Duration(seconds: kIsWeb ? 2 : 1),
     );
@@ -28,34 +28,35 @@ class GroupsService extends GroupsRepository {
     final String data = await _remoteStorageService.readRemoteFile(path: "Grupos", fileName: 'assets/grupos.json');
 
     final List<dynamic> json = jsonDecode(data);
-    final List<Groups> groups = json.map((e) => Groups.fromJson(e)).toList();
+    final List<Group> groups = json.map((e) => Group.fromJson(e)).toList();
 
     return groups;
   }
 
   @override
-  Future<List<Groups>> getGroups(BasicSearch search) {
+  Future<List<Group>> getGroups(BasicSearch search) {
     // TODO: implement getPictograms
     throw UnimplementedError();
   }
 
   @override
-  Future<void> uploadGroups(List<Groups> data, String type, String language) async {
+  Future<void> uploadGroups(List<Group> data, String type, String language) async {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
 
     List<Map<String, dynamic>> jsonData = List.empty(growable: true);
     for (var e in data) {
-      final relactions = e.relacion.map((e) => e.toJson()).toList();
-      jsonData.add({
-        'id': e.id,
-        'texto': e.texto.toJson(),
-        'tipo': e.tipo,
-        'imagen': e.imagen.toJson(),
-        'relacion': relactions,
-        'frecuencia': e.frecuencia,
-        'tags': e.tags,
-      });
+      final relactions = e.relations.map((e) => e.toJson()).toList();
+      // jsonData.add({
+      //   'id': e.id,
+      //   'texto': e.text.toJson(),
+      //   'tipo': e.tipo,
+      //   'imagen': e.imagen.toJson(),
+      //   'relacion': relactions,
+      //   'frecuencia': e.frecuencia,
+      //   'tags': e.tags,
+      // });
+      //TODO: Fix this service :/
     }
 
     final UserModel auth = result.right;
@@ -64,28 +65,16 @@ class GroupsService extends GroupsRepository {
   }
 
   @override
-  Future<void> updateGroups(Groups data, String type, String language, int index) async {
+  Future<void> updateGroups(Group data, String type, String language, int index) async {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
     final UserModel auth = result.right;
 
-    final relactions = data.relacion.map((e) => e.toJson()).toList();
-
-    final payload = {
-      'id': data.id,
-      'texto': data.texto.toJson(),
-      'tipo': data.tipo,
-      'imagen': data.imagen.toJson(),
-      'relacion': relactions,
-      'frecuencia': data.frecuencia,
-      'tags': data.tags,
-    };
-
-    await _serverRepository.updateGroup(auth.id, language, index, data: payload);
+    await _serverRepository.updateGroup(auth.id, language, index, data: data.toMap());
   }
 
   @override
-  Future<List<Groups>> getDefaultGroups() {
+  Future<List<Group>> getDefaultGroups() {
     // TODO: implement getDefaultGroups
     throw UnimplementedError();
   }

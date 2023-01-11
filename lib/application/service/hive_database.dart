@@ -1,0 +1,83 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
+import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/group_model.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/payment_model.dart';
+import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
+import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
+
+class HiveDatabase extends LocalDatabaseRepository {
+  @override
+  UserModel? user;
+
+  @override
+  Future<void> close() async {
+    await Hive.close();
+  }
+
+  @override
+  Future<void> deleteUser() async {
+    await Hive.box('user').clear();
+    await Hive.box('caregiver').clear();
+    await Hive.box('clear').clear();
+  }
+
+  @override
+  Future<UserModel?> getUser() async {
+    UserModel? user;
+
+    user ??= Hive.box<PatientUserModel>('user').get('user');
+
+    user ??= Hive.box<CaregiverUserModel>('caregiver').get('caregiver');
+
+    user ??= Hive.box<BaseUserModel>('none').get('none');
+
+    return this.user ?? user;
+  }
+
+  @override
+  Future<void> init() async {
+    await Hive.initFlutter();
+
+    Hive.registerAdapter(PatientUserModelAdapter());
+    Hive.registerAdapter(BaseSettingsModelAdapter());
+    Hive.registerAdapter(UserDataAdapter());
+    Hive.registerAdapter(AssetsImageAdapter());
+    Hive.registerAdapter(PhraseAdapter());
+    Hive.registerAdapter(PaymentAdapter());
+    Hive.registerAdapter(ShortcutsAdapter());
+    Hive.registerAdapter(PictoAdapter());
+    Hive.registerAdapter(PictoRelationAdapter());
+    Hive.registerAdapter(SequenceAdapter());
+    // Hive.registerAdapter(TagsAdapter());
+    Hive.registerAdapter(GroupAdapter());
+    Hive.registerAdapter(GroupRelationAdapter());
+    Hive.registerAdapter(CaregiverUserModelAdapter());
+    Hive.registerAdapter(PatientSettingsAdapter());
+    Hive.registerAdapter(CaregiverUsersAdapter());
+    Hive.registerAdapter(BaseUserModelAdapter());
+    Hive.registerAdapter(UserTypeAdapter());
+
+    await Hive.openBox(UserType.user.name);
+
+    await Hive.openBox(UserType.caregiver.name);
+
+    await Hive.openBox(UserType.none.name);
+  }
+
+  @override
+  Future<void> setUser(UserModel user) async {
+    await Hive.box(user.type.name).put(user.type.name, user);
+    user = await Hive.box(user.type.name).get(user.type.name);
+    this.user = user;
+  }
+}

@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Shortcuts;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ottaa_project_flutter/core/models/groups_model.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/core/models/group_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/customise_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
@@ -11,9 +12,9 @@ class CustomiseProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
   final CustomiseRepository _customiseService;
-  List<Pict> pictograms = [];
-  List<Groups> groups = [];
-  List<Pict> selectedGruposPicts = [];
+  List<Picto> pictograms = [];
+  List<Group> groups = [];
+  List<Picto> selectedGruposPicts = [];
   bool pictosFetched = false;
   int selectedGroup = 00;
   String selectedGroupName = '';
@@ -31,11 +32,10 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGrupoData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage =
-        (groups[index].imagen.pictoEditado ?? groups[index].imagen.picto);
+    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset)!; //TODO: Check this with asimA
     //todo: set the language here too
-    selectedGroupName = groups[index].texto.es;
-    selectedGroupStatus = groups[index].blocked!;
+    selectedGroupName = groups[index].text["es"]!; //TODO: Change it to user language
+    selectedGroupStatus = groups[index].block;
     fetchDesiredPictos();
     notifyListeners();
   }
@@ -48,16 +48,25 @@ class CustomiseProvider extends ChangeNotifier {
       'random': selectedShortcuts[3],
       'yes': selectedShortcuts[4],
       'no': selectedShortcuts[5],
-      'share': selectedShortcuts[6]
+      'share': selectedShortcuts[6],
     };
-    await _customiseService.setShortcutsForUser(shortcuts: map, userId: userId);
+    await _customiseService.setShortcutsForUser(
+      shortcuts: Shortcuts(
+        favs: selectedShortcuts[0],
+        gallery: selectedShortcuts[1],
+        games: selectedShortcuts[2],
+        share: selectedShortcuts[3],
+        shuffle: selectedShortcuts[4],
+      ),
+      userId: userId,
+    );
   }
 
   Future<void> fetchDesiredPictos() async {
     selectedGruposPicts = [];
-    for (int i = 0; i < groups[selectedGroup].relacion.length; i++) {
+    for (int i = 0; i < groups[selectedGroup].relations.length; i++) {
       for (var e in pictograms) {
-        if (e.id == groups[selectedGroup].relacion[i].id) {
+        if (e.id == groups[selectedGroup].relations[i].id) {
           selectedGruposPicts.add(e);
         }
       }
@@ -96,17 +105,15 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   void block({required int index}) async {
-    selectedGruposPicts[index].blocked = !selectedGruposPicts[index].blocked!;
+    selectedGruposPicts[index].block = !selectedGruposPicts[index].block;
 
-    pictograms[pictosMap[selectedGruposPicts[index].id]!].blocked =
-        !pictograms[pictosMap[selectedGruposPicts[index].id]!].blocked!;
+    pictograms[pictosMap[selectedGruposPicts[index].id]!].block = !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
     notifyListeners();
   }
 }
 
 final customiseProvider = ChangeNotifierProvider<CustomiseProvider>((ref) {
-  final CustomiseRepository customiseService =
-      GetIt.I.get<CustomiseRepository>();
+  final CustomiseRepository customiseService = GetIt.I.get<CustomiseRepository>();
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupService = GetIt.I<GroupsRepository>();
   return CustomiseProvider(pictogramService, groupService, customiseService);

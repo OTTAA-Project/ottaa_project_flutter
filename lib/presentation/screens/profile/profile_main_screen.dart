@@ -61,14 +61,14 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                         onTap: () =>
                             context.push(AppRoutes.profileSettingsScreen),
                         child: ProfilePhotoWidget(
-                          image: user?.photoUrl ?? "",
+                          image: user?.settings.data.avatar.network ?? "",
                         ),
                       ),
                       const SizedBox(
                         width: 16,
                       ),
                       Text(
-                        "profile.hello".trlf({"name": user?.name}),
+                        "profile.hello".trlf({"name": user?.settings.data.name}),
                       ),
                     ],
                   ),

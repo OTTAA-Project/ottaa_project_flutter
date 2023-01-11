@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:either_dart/either.dart';
-import 'package:ottaa_project_flutter/core/models/care_giver_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 

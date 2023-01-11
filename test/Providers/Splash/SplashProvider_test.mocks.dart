@@ -7,22 +7,23 @@ import 'dart:async' as _i5;
 import 'dart:ui' as _i6;
 
 import 'package:either_dart/either.dart' as _i2;
-import 'package:flutter_riverpod/flutter_riverpod.dart' as _i12;
+import 'package:flutter_riverpod/flutter_riverpod.dart' as _i13;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart'
-    as _i11;
+    as _i12;
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart'
-    as _i14;
+    as _i15;
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart'
     as _i4;
-import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i10;
-import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i8;
-import 'package:ottaa_project_flutter/core/models/user_model.dart' as _i3;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i3;
+import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i11;
+import 'package:ottaa_project_flutter/core/enums/user_payment.dart' as _i8;
+import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i9;
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart'
     as _i7;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
-    as _i9;
-import 'package:state_notifier/state_notifier.dart' as _i13;
+    as _i10;
+import 'package:state_notifier/state_notifier.dart' as _i14;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -159,13 +160,13 @@ class MockAboutRepository extends _i1.Mock implements _i7.AboutRepository {
         returnValue: _i5.Future<String>.value(''),
       ) as _i5.Future<String>);
   @override
-  _i5.Future<_i8.UserType> getUserType() => (super.noSuchMethod(
+  _i5.Future<_i8.UserPayment> getUserType() => (super.noSuchMethod(
         Invocation.method(
           #getUserType,
           [],
         ),
-        returnValue: _i5.Future<_i8.UserType>.value(_i8.UserType.free),
-      ) as _i5.Future<_i8.UserType>);
+        returnValue: _i5.Future<_i8.UserPayment>.value(_i8.UserPayment.free),
+      ) as _i5.Future<_i8.UserPayment>);
   @override
   _i5.Future<String> getAvailableAppVersion() => (super.noSuchMethod(
         Invocation.method(
@@ -193,10 +194,11 @@ class MockAboutRepository extends _i1.Mock implements _i7.AboutRepository {
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
   @override
-  _i5.Future<void> uploadProfilePicture(String? photo) => (super.noSuchMethod(
+  _i5.Future<void> uploadProfilePicture(_i9.AssetsImage? image) =>
+      (super.noSuchMethod(
         Invocation.method(
           #uploadProfilePicture,
-          [photo],
+          [image],
         ),
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
@@ -246,7 +248,7 @@ class MockAboutRepository extends _i1.Mock implements _i7.AboutRepository {
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i9.AuthRepository {
+class MockAuthRepository extends _i1.Mock implements _i10.AuthRepository {
   MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -258,7 +260,7 @@ class MockAuthRepository extends _i1.Mock implements _i9.AuthRepository {
       ) as bool);
   @override
   _i5.Future<_i2.Either<String, _i3.UserModel>> signIn(
-    _i10.SignInType? type, [
+    _i11.SignInType? type, [
     String? email,
     String? password,
   ]) =>
@@ -354,13 +356,13 @@ class MockAuthRepository extends _i1.Mock implements _i9.AuthRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserAvatarNotifier extends _i1.Mock
-    implements _i11.UserAvatarNotifier {
+    implements _i12.UserAvatarNotifier {
   MockUserAvatarNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set onError(_i12.ErrorListener? _onError) => super.noSuchMethod(
+  set onError(_i13.ErrorListener? _onError) => super.noSuchMethod(
         Invocation.setter(
           #onError,
           _onError,
@@ -432,8 +434,8 @@ class MockUserAvatarNotifier extends _i1.Mock
         returnValue: false,
       ) as bool);
   @override
-  _i12.RemoveListener addListener(
-    _i13.Listener<int>? listener, {
+  _i13.RemoveListener addListener(
+    _i14.Listener<int>? listener, {
     bool? fireImmediately = true,
   }) =>
       (super.noSuchMethod(
@@ -443,7 +445,7 @@ class MockUserAvatarNotifier extends _i1.Mock
           {#fireImmediately: fireImmediately},
         ),
         returnValue: () {},
-      ) as _i12.RemoveListener);
+      ) as _i13.RemoveListener);
   @override
   void dispose() => super.noSuchMethod(
         Invocation.method(
@@ -457,7 +459,7 @@ class MockUserAvatarNotifier extends _i1.Mock
 /// A class which mocks [UserNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserNotifier extends _i1.Mock implements _i14.UserNotifier {
+class MockUserNotifier extends _i1.Mock implements _i15.UserNotifier {
   MockUserNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -471,7 +473,7 @@ class MockUserNotifier extends _i1.Mock implements _i14.UserNotifier {
         ),
       ) as _i3.UserModel);
   @override
-  set onError(_i12.ErrorListener? _onError) => super.noSuchMethod(
+  set onError(_i13.ErrorListener? _onError) => super.noSuchMethod(
         Invocation.setter(
           #onError,
           _onError,
@@ -525,8 +527,8 @@ class MockUserNotifier extends _i1.Mock implements _i14.UserNotifier {
         returnValue: false,
       ) as bool);
   @override
-  _i12.RemoveListener addListener(
-    _i13.Listener<_i3.UserModel?>? listener, {
+  _i13.RemoveListener addListener(
+    _i14.Listener<_i3.UserModel?>? listener, {
     bool? fireImmediately = true,
   }) =>
       (super.noSuchMethod(
@@ -536,7 +538,7 @@ class MockUserNotifier extends _i1.Mock implements _i14.UserNotifier {
           {#fireImmediately: fireImmediately},
         ),
         returnValue: () {},
-      ) as _i12.RemoveListener);
+      ) as _i13.RemoveListener);
   @override
   void dispose() => super.noSuchMethod(
         Invocation.method(

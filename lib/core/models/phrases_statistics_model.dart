@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'sentence_statistics_model.g.dart';
+part 'phrases_statistics_model.g.dart';
 
 @JsonSerializable()
-class FrasesStatisticsModel {
-  FrasesStatisticsModel({
+class PhraseStatisticModel {
+  PhraseStatisticModel({
     required this.totalFrases,
     required this.frases7Days,
     required this.averagePictoFrase,
@@ -19,7 +19,7 @@ class FrasesStatisticsModel {
   @JsonKey(name: 'frecLast7days')
   Map<String, int> frecLast7Days;
 
-  factory FrasesStatisticsModel.fromJson(Map<String, dynamic> json) => _$FrasesStatisticsModelFromJson(json);
+  factory PhraseStatisticModel.fromJson(Map<String, dynamic> json) => _$PhraseStatisticModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$FrasesStatisticsModelToJson(this);
+  Map<String, dynamic> toJson() => _$PhraseStatisticModelToJson(this);
 }

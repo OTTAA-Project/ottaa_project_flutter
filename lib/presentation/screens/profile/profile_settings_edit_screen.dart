@@ -12,20 +12,19 @@ class ProfileSettingsEditScreen extends ConsumerStatefulWidget {
   const ProfileSettingsEditScreen({super.key});
 
   @override
-  ConsumerState<ProfileSettingsEditScreen> createState() =>
-      _ProfileSettingsEditScreenState();
+  ConsumerState<ProfileSettingsEditScreen> createState() => _ProfileSettingsEditScreenState();
 }
 
-class _ProfileSettingsEditScreenState
-    extends ConsumerState<ProfileSettingsEditScreen> {
+class _ProfileSettingsEditScreenState extends ConsumerState<ProfileSettingsEditScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final provider = ref.read(profileProvider);
       provider.setDate();
       final user = ref.read(userNotifier);
-      provider.profileEditNameController.text = user!.name;
-      provider.profileEditSurnameController.text = user.lastName!;
+      final data = user!.settings.data;
+      provider.profileEditNameController.text = data.name;
+      provider.profileEditSurnameController.text = data.lastName;
       provider.profileEditEmailController.text = user.email;
     });
     super.initState();
@@ -72,15 +71,11 @@ class _ProfileSettingsEditScreenState
                 children: [
                   Center(
                     child: ImageEditWidget(
-                      cameraOnTap: () =>
-                          provider.pickImage(cameraOrGallery: true),
-                      galleryOnTap: () =>
-                          provider.pickImage(cameraOrGallery: false),
-                      imagePath: provider.profileEditImage != null
-                          ? provider.profileEditImage!.path
-                          : "",
+                      cameraOnTap: () => provider.pickImage(cameraOrGallery: true),
+                      galleryOnTap: () => provider.pickImage(cameraOrGallery: false),
+                      imagePath: provider.profileEditImage != null ? provider.profileEditImage!.path : "",
                       imageSelected: provider.imageSelected,
-                      imageUrl: user?.photoUrl ?? AppImages.kTestImage,
+                      imageUrl: user?.settings.data.avatar.network ?? AppImages.kTestImage,
                     ),
                   ),
                   const SizedBox(

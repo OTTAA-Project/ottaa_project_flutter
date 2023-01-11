@@ -54,8 +54,9 @@ class LinkNotifier extends ChangeNotifier {
     if (formKey.currentState?.validate() ?? false) {
       final currentUser = await _auth.getCurrentUser();
       if (currentUser.isRight) {
-        final email = currentUser.right.email;
-        await createEmailToken.createEmailToken(email, emailController.text);
+        //TODO: Check for id
+        // final email = currentUser.right.settings.data;
+        // await createEmailToken.createEmailToken(email, emailController.text);
       }
     }
   }
@@ -69,7 +70,7 @@ class LinkNotifier extends ChangeNotifier {
     final code = controllers.map((e) => e.text).join();
     final currentUser = await _auth.getCurrentUser();
     if (currentUser.isRight) {
-      final email = currentUser.right.email;
+      final email = ""; //TODO: Check for id
       return await verifyEmailToken.verifyEmailToken(
         email,
         emailController.text,

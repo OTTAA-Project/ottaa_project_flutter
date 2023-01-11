@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:picto_widget/picto_widget.dart';
 
 class PictogramWidget extends StatelessWidget {
-  final Pict pictogam;
+  final Picto pictogam;
   final VoidCallback onTap;
   final String language;
 
@@ -15,12 +15,12 @@ class PictogramWidget extends StatelessWidget {
     final double height = size.height;
     final double width = size.width;
     return PictoWidget(
-      text: pictogam.texto.toJson()[language],
-      imageUrl: pictogam.imagen.pictoEditado ?? pictogam.imagen.picto,
+      text: pictogam.text[language]!,
+      imageUrl: pictogam.resource.network,
       onTap: onTap,
       height: height * 0.38,
       width: width * 0.175,
-      colorNumber: pictogam.tipo,
+      colorNumber: pictogam.type,
     );
   }
 }

@@ -14,18 +14,19 @@ import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart'
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart'
     as _i9;
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart'
-    as _i16;
+    as _i17;
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart'
     as _i5;
 import 'package:ottaa_project_flutter/application/service/about_service.dart'
     as _i13;
 import 'package:ottaa_project_flutter/application/service/auth_service.dart'
     as _i12;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i4;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i7;
-import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i14;
-import 'package:ottaa_project_flutter/core/models/user_model.dart' as _i4;
+import 'package:ottaa_project_flutter/core/enums/user_payment.dart' as _i14;
+import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i15;
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
-    as _i15;
+    as _i16;
 import 'package:state_notifier/state_notifier.dart' as _i11;
 
 // ignore_for_file: type=lint
@@ -428,13 +429,13 @@ class MockAboutService extends _i1.Mock implements _i13.AboutService {
         returnValue: _i6.Future<String>.value(''),
       ) as _i6.Future<String>);
   @override
-  _i6.Future<_i14.UserType> getUserType() => (super.noSuchMethod(
+  _i6.Future<_i14.UserPayment> getUserType() => (super.noSuchMethod(
         Invocation.method(
           #getUserType,
           [],
         ),
-        returnValue: _i6.Future<_i14.UserType>.value(_i14.UserType.free),
-      ) as _i6.Future<_i14.UserType>);
+        returnValue: _i6.Future<_i14.UserPayment>.value(_i14.UserPayment.free),
+      ) as _i6.Future<_i14.UserPayment>);
   @override
   _i6.Future<void> sendSupportEmail() => (super.noSuchMethod(
         Invocation.method(
@@ -453,10 +454,11 @@ class MockAboutService extends _i1.Mock implements _i13.AboutService {
         returnValue: _i6.Future<String>.value(''),
       ) as _i6.Future<String>);
   @override
-  _i6.Future<void> uploadProfilePicture(String? photo) => (super.noSuchMethod(
+  _i6.Future<void> uploadProfilePicture(_i15.AssetsImage? image) =>
+      (super.noSuchMethod(
         Invocation.method(
           #uploadProfilePicture,
-          [photo],
+          [image],
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
@@ -508,7 +510,7 @@ class MockAboutService extends _i1.Mock implements _i13.AboutService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i15.LocalDatabaseRepository {
+    implements _i16.LocalDatabaseRepository {
   MockLocalDatabaseRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -673,7 +675,7 @@ class MockAuthNotifier extends _i1.Mock implements _i2.AuthNotifier {
 /// A class which mocks [UserNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserNotifier extends _i1.Mock implements _i16.UserNotifier {
+class MockUserNotifier extends _i1.Mock implements _i17.UserNotifier {
   MockUserNotifier() {
     _i1.throwOnMissingStub(this);
   }

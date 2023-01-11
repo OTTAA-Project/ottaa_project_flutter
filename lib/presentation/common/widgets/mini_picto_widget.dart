@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 
 class MiniPicto extends StatelessWidget {
-  final Pict pict;
+  final Picto pict;
   final VoidCallback onTap;
   final bool localImg;
 
@@ -25,16 +25,16 @@ class MiniPicto extends StatelessWidget {
           child: localImg
               ? Image(
                   image: AssetImage(
-                    'assets/imgs/${pict.imagen.picto}.webp',
+                    'assets/imgs/${pict.resource.asset}.webp',
                   ),
                   fit: BoxFit.fitHeight,
                 )
               : kIsWeb
                   ? Image.network(
-                      pict.imagen.pictoEditado == null ? pict.imagen.picto : pict.imagen.pictoEditado!,
+                      pict.resource.network!,
                     )
                   : CachedNetworkImage(
-                      imageUrl: pict.imagen.pictoEditado == null ? pict.imagen.picto : pict.imagen.pictoEditado!,
+                      imageUrl: pict.resource.network!,
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(),
                       ),

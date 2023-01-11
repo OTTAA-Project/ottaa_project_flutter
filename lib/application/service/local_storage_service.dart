@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
-import 'package:ottaa_project_flutter/core/models/groups_model.dart';
+import 'package:ottaa_project_flutter/core/models/group_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -69,7 +69,7 @@ class LocalStorageService extends LocalStorageRepository {
   }
 
   @override
-  Future<List<Groups>> readGruposFromFile({
+  Future<List<Group>> readGruposFromFile({
     required String language,
   }) async {
     // final File file = await _gruposFile;
@@ -91,7 +91,7 @@ class LocalStorageService extends LocalStorageRepository {
         file = await _gruposFile;
     }
     final response = await file.readAsString();
-    return (jsonDecode(response) as List).map((e) => Groups.fromJson(e)).toList();
+    return (jsonDecode(response) as List).map((e) => Group.fromJson(e)).toList();
   }
 
   @override
@@ -118,7 +118,7 @@ class LocalStorageService extends LocalStorageRepository {
   }
 
   @override
-  Future<List<Pict>> readPictoFromFile({required String language}) async {
+  Future<List<Picto>> readPictoFromFile({required String language}) async {
     // final file = await _pictoFile;
     late File file;
     switch (language) {
@@ -138,6 +138,6 @@ class LocalStorageService extends LocalStorageRepository {
         file = await _pictoFile;
     }
     final response = await file.readAsString();
-    return (jsonDecode(response) as List).map((e) => Pict.fromJson(e)).toList();
+    return (jsonDecode(response) as List).map((e) => Picto.fromJson(e)).toList();
   }
 }

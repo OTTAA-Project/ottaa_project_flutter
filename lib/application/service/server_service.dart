@@ -5,8 +5,11 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
-import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,11 +25,13 @@ class ServerService implements ServerRepository {
 
   @override
   Future<UserType> getUserType(String userId) async {
-    final ref = _database.child('$userId/Pago/Pago');
+    final ref = _database.child('$userId/type');
     final res = await ref.get();
-    if (res.value == null || res.value.toString() == "0") return UserType.free;
 
-    return UserType.premium;
+    return UserType.values.firstWhere(
+      (element) => element.name == res.value.toString(),
+      orElse: () => UserType.none,
+    );
   }
 
   @override
@@ -51,8 +56,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherListMap> getAllPictograms(
-      String userId, String languageCode) async {
+  Future<EitherListMap> getAllPictograms(String userId, String languageCode) async {
     //Fetch new data from server
     final refNew = _database.child('$userId/Pictos/$languageCode');
     final resNew = await refNew.get();
@@ -84,12 +88,11 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getUserInformation(String id) async {
-    final userRef = _database.child('$id/Usuarios/');
+    final userRef = _database.child(id);
 
     final userValue = await userRef.get();
 
-    if (!userValue.exists || userValue.value == null)
-      return const Left("no_data_found");
+    if (!userValue.exists || userValue.value == null) return const Left("no_data_found");
 
     final dynamic user = userValue.value as dynamic;
 
@@ -98,37 +101,24 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherString> getUserProfilePicture(String userId) async {
-    final refNew = _database.child('$userId/Usuarios/Avatar/urlFoto/');
+    final refNew = _database.child('$userId/settings/data/avatar/');
     final resNew = await refNew.get();
 
     if (resNew.exists && resNew.value != null) {
       return Right(resNew.value.toString());
     }
 
-    /// Get the profile picture from the database at the old path
-    final refOld = _database.child('Avatar/$userId/urlFoto/');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return Right(resOld.value.toString());
-    }
-
     return const Left("no_data_found");
   }
 
   @override
-  Future<List<SentenceModel>> getUserSentences(String userId,
-      {required String language,
-      required String type,
-      bool isFavorite = false}) async {
+  Future<List<Phrase>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
     final refNew = _database.child('$userId/Frases/$language/$type');
     final resNew = await refNew.get();
     if (resNew.exists && resNew.value != null) {
       final encode = jsonEncode(resNew.value);
       // print('returned from bew');
-      return (jsonDecode(encode) as List)
-          .map((e) => SentenceModel.fromJson(e))
-          .toList();
+      return (jsonDecode(encode) as List).map((e) => Phrase.fromJson(e)).toList();
       // print('returned from bew');
       // return Right(jsonDecode(data));
     }
@@ -137,17 +127,14 @@ class ServerService implements ServerRepository {
     final resOld = await refOld.get();
     if (resOld.exists && resOld.value != null) {
       final data = resOld.children.first.value as String;
-      return (jsonDecode(data) as List)
-          .map((e) => SentenceModel.fromJson(e))
-          .toList();
+      return (jsonDecode(data) as List).map((e) => Phrase.fromJson(e)).toList();
     }
 
     return const [];
   }
 
   @override
-  Future<EitherVoid> updateGroup(String userId, String language, int index,
-      {required Map<String, dynamic> data}) async {
+  Future<EitherVoid> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data}) async {
     final ref = _database.child('$userId/Grupos/$language/$index');
 
     try {
@@ -159,8 +146,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> updatePictogram(String userId, String language, int index,
-      {required Map<String, dynamic> data}) async {
+  Future<EitherVoid> updatePictogram(String userId, String language, int index, {required Map<String, dynamic> data}) async {
     final ref = _database.child('$userId/Pictos/$language/$index');
 
     try {
@@ -172,8 +158,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadGroups(String userId, String language,
-      {required List<Map<String, dynamic>> data}) async {
+  Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
     try {
       await ref.set(data);
@@ -184,8 +169,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadPictograms(String userId, String language,
-      {required List<Map<String, dynamic>> data}) async {
+  Future<EitherVoid> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/pictos/$language');
 
     try {
@@ -197,9 +181,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadUserInformation(
-      String userId, Map<String, dynamic> data) async {
-    final ref = _database.child('$userId/Usuarios/');
+  Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data) async {
+    final ref = _database.child(userId);
 
     try {
       await ref.update(data);
@@ -210,15 +193,11 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadUserPicture(
-      String userId, String picture, String photoUrl) async {
-    final ref = _database.child('$userId/Usuarios/Avatar/');
+  Future<EitherVoid> uploadUserPicture(String userId, AssetsImage image) async {
+    final ref = _database.child('$userId/settings/data/avatar');
 
     try {
-      await ref.update({
-        'name': photoUrl,
-        'urlFoto': picture,
-      });
+      await ref.update(image.toMap());
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -226,8 +205,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadUserSentences(String userId, String language,
-      String type, List<Map<String, dynamic>> data) async {
+  Future<EitherVoid> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data) async {
     final ref = _database.child('$userId/Frases/$language/$type');
 
     try {
@@ -239,8 +217,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getMostUsedSentences(
-      String userId, String languageCode) async {
+  Future<EitherMap> getMostUsedSentences(String userId, String languageCode) async {
     final uri = Uri.parse(
       'https://us-central1-ottaaproject-flutter.cloudfunctions.net/onReqFunc',
     );
@@ -264,10 +241,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getPictogramsStatistics(
-      String userId, String languageCode) async {
-    final uri = Uri.parse(
-        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
+  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
     final body = {
       'UserID': userId,
       //todo: add here the language too
@@ -346,14 +321,12 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> removeCurrentUser(
-      {required String userId, required String careGiverId}) async {
+  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
     await _database.child('$careGiverId/users/$userId').remove();
   }
 
   @override
-  Future<EitherVoid> setShortcutsForUser(
-      {required Map<String, dynamic> shortcuts, required String userId}) async {
+  Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId}) async {
     final ref = _database.child('$userId/shortcuts/');
 
     try {
@@ -366,8 +339,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getEmailToken(String ownEmail, String email) async {
-    final uri = Uri.parse(
-        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
     final body = {
       'src': ownEmail,
       'dst': email,
@@ -387,10 +359,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> verifyEmailToken(
-      String ownEmail, String email, String token) async {
-    final uri = Uri.parse(
-        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
+  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
     final body = {
       'src': ownEmail,
       'dst': email,

@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
 import 'package:ottaa_project_flutter/application/service/sentences_service.dart';
 import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
