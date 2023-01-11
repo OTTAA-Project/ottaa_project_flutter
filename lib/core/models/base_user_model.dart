@@ -57,6 +57,5 @@ class BaseUserModel extends UserModel {
         'id': id,
         'settings': settings.toMap(),
         'type': type.name,
-        'email': email,
       };
 }
