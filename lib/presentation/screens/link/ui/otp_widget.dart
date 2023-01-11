@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/ui/token_input.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 
 class OTPWidget extends ConsumerStatefulWidget {
   const OTPWidget({super.key});
@@ -52,7 +53,8 @@ class _OTPWidgetState extends ConsumerState<OTPWidget> {
                     });
 
                     if (!isValid) {
-                      OTTAANotification.secondary(context, text: "link.token.invalid");
+                      //TODO Emir check that this is OK
+                      OTTAANotification.secondary(context, text: "profile.link.token.invalid".trl);
                       return;
                     }
                     context.push(AppRoutes.linkWaitScreen);

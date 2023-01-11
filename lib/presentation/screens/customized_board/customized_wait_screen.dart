@@ -35,7 +35,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
                 ),
                 Center(
                   child: Text(
-                    "customize.wait.heading".trl,
+                    "global.congrats".trl,
                     style: textTheme.button!.copyWith(
                       color: colorScheme.onBackground,
                     ),
@@ -55,9 +55,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
               child: PrimaryButton(
-                onPressed: () async {
-                  context.go(AppRoutes.profileMainScreen);
-                },
+                onPressed: () {},
                 text: "customize.wait.button".trl,
               ),
             ),

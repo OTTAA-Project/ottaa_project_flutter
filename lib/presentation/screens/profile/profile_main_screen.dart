@@ -58,8 +58,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                   Row(
                     children: [
                       GestureDetector(
-                        onTap: () =>
-                            context.push(AppRoutes.profileSettingsScreen),
+                        onTap: () => context.push(AppRoutes.profileSettingsScreen),
                         child: ProfilePhotoWidget(
                           image: user?.settings.data.avatar.network ?? "",
                         ),
@@ -96,8 +95,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                 child: ActionCard(
                   title: "profile.link_account".trl,
                   subtitle: "profile.new_existant".trl,
-                  trailingImage:
-                      const AssetImage(AppImages.kProfileMainScreenIcon),
+                  trailingImage: const AssetImage(AppImages.kProfileMainScreenIcon),
                   imageSize: const Size(94, 96),
                   focused: provider.isLinkAccountOpen,
                   onPressed: () {

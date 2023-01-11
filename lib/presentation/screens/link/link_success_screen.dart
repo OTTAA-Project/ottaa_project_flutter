@@ -48,8 +48,8 @@ class LinkSuccessScreen extends StatelessWidget {
           SizedBox(
             width: size.width * 0.8,
             child: PrimaryButton(
-              onPressed: () => context.push(AppRoutes.customizedBoardScreen),
-              text: "global.continue",
+              onPressed: ()  => context.push(AppRoutes.customizedBoardScreen),
+              text: "global.continue".trl,
             ),
           ),
           const SizedBox(height: 48),
