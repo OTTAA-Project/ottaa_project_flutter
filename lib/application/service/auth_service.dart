@@ -29,7 +29,7 @@ class AuthService extends AuthRepository {
 
   @override
   Future<Either<String, UserModel>> getCurrentUser() async {
-    UserModel? userDb = _databaseRepository.user;
+    UserModel? userDb = await _databaseRepository.getUser();
     if (userDb == null) {
       return const Left("No user logged");
     }
