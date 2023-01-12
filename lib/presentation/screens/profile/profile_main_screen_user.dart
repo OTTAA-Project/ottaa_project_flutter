@@ -76,7 +76,7 @@ class ProfileMainScreenUser extends ConsumerWidget {
             ),
             const Spacer(),
             PrimaryButton(
-              onPressed: () {},
+              onPressed: () => context.push(AppRoutes.home),
               text: '${'profile.use.ottaa'.trl} ${user.name}',
             ),
             const SizedBox(
