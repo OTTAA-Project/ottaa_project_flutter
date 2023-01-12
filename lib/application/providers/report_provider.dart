@@ -66,7 +66,7 @@ class ReportProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictoStatisticsData() async {
-    final pictosResponse = await _reportService.getPictogramsStatistics(uid, "ES-AR"); //TODO: Connect to service
+    final pictosResponse = await _reportService.getPictogramsStatistics(uid, "es_AR"); //TODO: Connect to service
 
     if (pictosResponse == null) return;
 
@@ -77,7 +77,7 @@ class ReportProvider extends ChangeNotifier {
 
   Future<void> fetchMostUsedSentences() async {
     // print(res.body);
-    final sentencesResponse = await _reportService.getMostUsedSentences(uid, "ES-AR"); //TODO: Connect to service
+    final sentencesResponse = await _reportService.getMostUsedSentences(uid, "es_AR"); //TODO: Connect to service
 
     if (sentencesResponse == null) return;
 
@@ -189,7 +189,7 @@ class ReportProvider extends ChangeNotifier {
     }
     values.sort((a, b) => b.compareTo(a));
     //todo: add here the language too
-    final language = 'ES-AR';
+    final language = 'es_AR';
     firstValueProgress = values[0];
     secondValueProgress = values[1];
     thirdValueProgress = values[2];
@@ -198,7 +198,7 @@ class ReportProvider extends ChangeNotifier {
     for (var element in pictoStatisticsModel.pictoUsagePerGroup) {
       if (element.percentage == firstValueProgress) {
         switch (language) {
-          case "es-AR":
+          case "es_AR":
             firstValueText = element.name.es;
             break;
           case "en-US":
@@ -216,7 +216,7 @@ class ReportProvider extends ChangeNotifier {
       }
       if (element.percentage == secondValueProgress) {
         switch (language) {
-          case "es-AR":
+          case "es_AR":
             secondValueText = element.name.es;
             break;
           case "en-US":
@@ -234,7 +234,7 @@ class ReportProvider extends ChangeNotifier {
       }
       if (element.percentage == thirdValueProgress) {
         switch (language) {
-          case "es-AR":
+          case "es_AR":
             thirdValueText = element.name.es;
             break;
           case "en-US":
@@ -252,7 +252,7 @@ class ReportProvider extends ChangeNotifier {
       }
       if (element.percentage == fourthValueProgress) {
         switch (language) {
-          case "es-AR":
+          case "es_AR":
             fourthValueText = element.name.es;
             break;
           case "en-US":

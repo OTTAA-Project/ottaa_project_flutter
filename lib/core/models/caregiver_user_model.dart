@@ -21,7 +21,7 @@ class CaregiverUserModel extends UserModel {
 
   @override
   @HiveField(1)
-  BaseSettingsModel settings;
+  UserSettings settings;
 
   @override
   @HiveField(2)
@@ -42,6 +42,7 @@ class CaregiverUserModel extends UserModel {
     required this.email,
   });
 
+  @override
   CaregiverUserModel copyWith({
     String? id,
     BaseSettingsModel? settings,

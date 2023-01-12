@@ -29,7 +29,7 @@ void main() {
       birthdate: 0,
       gender: "male",
       isFirstTime: true,
-      language: "es-ar",
+      language: "es_AR",
     );
     fakeSentenceModel = SentenceModel(
       frase: "Fake",
@@ -69,7 +69,7 @@ void main() {
       when(MockAuthRepository().getCurrentUser())
           .thenAnswer((realInvocation) async => Right(fakeUser));
       when(MockServerRepository().getUserSentences('0',
-              language: 'es-ar', type: Constants.kMostUsedSentences))
+              language: 'es_AR', type: Constants.kMostUsedSentences))
           .thenAnswer((realInvocation) async=> Right([fakeSentenceModel1,fakeSentenceModel2]););
       sentencesService.fetchSentences(
           language: 'es', type: Constants.kMostUsedSentences);

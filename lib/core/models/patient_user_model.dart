@@ -32,7 +32,9 @@ class PatientUserModel extends UserModel {
 
   @override
   @HiveField(4)
-  PatientSettings settings;
+  UserSettings settings;
+
+  PatientSettings get patientSettings => settings as PatientSettings;
 
   @override
   @HiveField(5)
@@ -155,17 +157,17 @@ class PatientUserModel extends UserModel {
 class PatientSettings extends UserSettings {
   @override
   @HiveField(0)
-  final UserData data;
+  UserData data;
 
   @override
   @HiveField(1)
-  final String language;
+  String language;
 
   @HiveField(2)
-  final Payment payment;
+  Payment payment;
 
   @HiveField(3)
-  final Shortcuts shortcuts;
+  Shortcuts shortcuts;
 
   PatientSettings({
     required this.data,

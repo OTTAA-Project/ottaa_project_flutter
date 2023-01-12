@@ -80,7 +80,7 @@ class AboutService extends AboutRepository {
       return UserPayment.free;
     }
 
-    return (result.right as PatientUserModel).settings.payment.payment ? UserPayment.premium : UserPayment.free;
+    return (result.right as PatientUserModel).patientSettings.payment.payment ? UserPayment.premium : UserPayment.free;
   }
 
   @override
@@ -123,6 +123,9 @@ class AboutService extends AboutRepository {
   @override
   Future<Either<String, UserModel>> getUserInformation() async {
     final userResult = await _auth.getCurrentUser();
+
+    print(userResult);
+
     if (userResult.isLeft) return Left(userResult.left);
 
     final UserModel user = userResult.right;

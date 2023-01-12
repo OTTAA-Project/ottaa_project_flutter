@@ -11,13 +11,13 @@ part 'base_settings_model.g.dart';
 class BaseSettingsModel extends UserSettings {
   @override
   @HiveField(0)
-  final UserData data;
+  UserData data;
 
   @override
   @HiveField(1)
-  final String language;
+  String language;
 
-  const BaseSettingsModel({
+  BaseSettingsModel({
     required this.data,
     required this.language,
   });
@@ -32,6 +32,7 @@ class BaseSettingsModel extends UserSettings {
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'data': data.toMap(),

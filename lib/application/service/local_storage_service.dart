@@ -50,7 +50,7 @@ class LocalStorageService extends LocalStorageRepository {
     // final file = await _gruposFile;
     late File file;
     switch (language) {
-      case "es-AR":
+      case "es_AR":
         file = await _gruposFile;
         break;
       case "en-US":
@@ -75,7 +75,7 @@ class LocalStorageService extends LocalStorageRepository {
     // final File file = await _gruposFile;
     late File file;
     switch (language) {
-      case "es-AR":
+      case "es_AR":
         file = await _gruposFile;
         break;
       case "en-US":
@@ -99,7 +99,7 @@ class LocalStorageService extends LocalStorageRepository {
     // final file = await _pictoFile;
     late File file;
     switch (language) {
-      case "es-AR":
+      case "es_AR":
         file = await _pictoFile;
         break;
       case "en-US":
@@ -122,7 +122,7 @@ class LocalStorageService extends LocalStorageRepository {
     // final file = await _pictoFile;
     late File file;
     switch (language) {
-      case "es-AR":
+      case "es_AR":
         file = await _pictoFile;
         break;
       case "en-US":

@@ -40,7 +40,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> fetchMostUsedSentences() async {
     mostUsedSentences = await _sentencesService.fetchSentences(
-      language: "es-AR", //TODO!: Fetch language code LANG-CODE
+      language: "es_AR", //TODO!: Fetch language code LANG-CODE
       type: kMostUsedSentences,
     );
 
@@ -64,7 +64,7 @@ class HomeProvider extends ChangeNotifier {
     final Picto addPict = Picto(
       id: 0,
       text: {
-        "es-AR": "Agregar nuevo pictograma",
+        "es_AR": "Agregar nuevo pictograma",
       },
       type: 6,
       resource: AssetsImage(asset: "ic_agregar_nuevo", network: ""),

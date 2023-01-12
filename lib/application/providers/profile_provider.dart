@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,8 +16,10 @@ class ProfileNotifier extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final ProfileRepository _profileService;
   final AuthRepository _auth;
+  final LocalDatabaseRepository _localDatabaseRepository;
+  final UserNotifier _userNotifier;
 
-  ProfileNotifier(this._pictogramsService, this._auth, this._profileService);
+  ProfileNotifier(this._pictogramsService, this._auth, this._profileService, this._localDatabaseRepository, this._userNotifier);
 
   bool isCaregiver = false;
   late UserModel user;
@@ -103,7 +107,25 @@ class ProfileNotifier extends ChangeNotifier {
     //   }
     // };
 
-    // await _profileService.updateUser(data: data, userId: user.id);
+    user.settings.data = user.settings.data.copyWith(
+      name: profileEditNameController.text,
+      birthDate: DateTime.fromMillisecondsSinceEpoch(birthdate),
+      lastName: profileEditSurnameController.text,
+      avatar: imageSelected
+          ? user.settings.data.avatar.copyWith(
+              network: imageUrl,
+            )
+          : user.settings.data.avatar,
+    );
+
+    await _profileService.updateUser(data: user.settings.data.toMap(), userId: user.id);
+
+    await user.save();
+
+    await _localDatabaseRepository.setUser(user);
+    _userNotifier.setUser(user);
+
+    notifyListeners();
   }
 
   Future<void> pickImage({required bool cameraOrGallery}) async {
@@ -184,5 +206,7 @@ final profileProvider = ChangeNotifierProvider<ProfileNotifier>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final AuthRepository authService = GetIt.I.get<AuthRepository>();
   final ProfileRepository profileService = GetIt.I.get<ProfileRepository>();
-  return ProfileNotifier(pictogramService, authService, profileService);
+  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+  final userNot = ref.read(userNotifier.notifier);
+  return ProfileNotifier(pictogramService, authService, profileService, localDatabaseRepository, userNot);
 });

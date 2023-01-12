@@ -39,7 +39,7 @@ void main(){
       birthdate: 0,
       gender: "male",
       isFirstTime: true,
-      language: "es-ar",
+      language: "es_AR",
     );
     mockAuthProvider = MockAuthProvider();
     mockLoadingNotifier = MockLoadingNotifier();

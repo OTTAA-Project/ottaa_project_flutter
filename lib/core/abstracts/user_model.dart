@@ -8,6 +8,7 @@ abstract class UserModel extends HiveObject {
   String get id;
   UserType get type;
   UserSettings get settings;
+  set settings(UserSettings settings);
   String get email;
 
   UserModel fromJson(Map<String, dynamic> json);

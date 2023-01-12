@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 
@@ -17,7 +18,7 @@ class BaseUserModel extends UserModel {
 
   @override
   @HiveField(3)
-  BaseSettingsModel settings;
+  UserSettings settings;
 
   @override
   @HiveField(5)
@@ -58,4 +59,14 @@ class BaseUserModel extends UserModel {
         'settings': settings.toMap(),
         'type': type.name,
       };
+
+  @override
+  UserModel copyWith(other) {
+    return BaseUserModel(
+      id: other.id ?? id,
+      settings: other.settings ?? settings,
+      type: other.type ?? type,
+      email: other.email ?? email,
+    );
+  }
 }

@@ -5,4 +5,7 @@ abstract class UserSettings {
 
   String get language;
   UserData get data;
+  set data(UserData data);
+
+  Map<String, dynamic> toMap();
 }

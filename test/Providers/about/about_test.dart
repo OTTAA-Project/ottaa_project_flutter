@@ -33,7 +33,7 @@ void main() {
           name: "John",
           lastName: "Doe",
         ),
-        language: "es-ar",
+        language: "es_AR",
       ),
       email: "test@mail.com",
     );
@@ -130,7 +130,7 @@ void main() {
           name: "John",
           lastName: "Doe",
         ),
-        language: "es-ar",
+        language: "es_AR",
       ),
       email: "test@mail.com",
     );

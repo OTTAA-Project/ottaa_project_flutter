@@ -105,7 +105,7 @@ class AuthService extends AuthRepository {
                 lastName: "",
                 name: nameRetriever ?? "",
               ),
-              language: "es-ar"),
+              language: "es_AR"),
           email: emailRetriever ?? "",
         );
       } else {
@@ -208,7 +208,7 @@ class AuthService extends AuthRepository {
             lastName: "",
             name: nameRetriever ?? "",
           ),
-          language: "es-ar"),
+          language: "es_AR"),
       email: emailRetriever ?? "",
     );
     await _serverRepository.uploadUserInformation(user.uid, userModel.toMap());

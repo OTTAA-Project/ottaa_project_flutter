@@ -27,23 +27,20 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     super.initState();
     SplashProvider provider = ref.read(splashProvider);
 
-    final isLogged = ref.read(authNotifier);
+    final auth = ref.read(authNotifier.notifier);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await blockPortraitMode();
 
       setState(() {});
 
+      bool isLogged = await provider.fetchUserInformation();
+
       if (isLogged) {
-        bool hasInfo = await provider.fetchUserInformation();
-
         final user = ref.read(userNotifier);
-
+        auth.setSignedIn();
         if (mounted) {
           I18N.of(context).changeLanguage(user?.settings.language ?? "en_US");
-          if (!hasInfo) {
-            return context.go(AppRoutes.login);
-          }
           return context.go(AppRoutes.onboarding);
         }
       }

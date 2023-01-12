@@ -35,11 +35,11 @@ class HiveDatabase extends LocalDatabaseRepository {
   Future<UserModel?> getUser() async {
     UserModel? user;
 
-    user ??= Hive.box('user').get('user');
+    user ??= Hive.box(UserType.user.name).get(UserType.user.name);
 
-    user ??= Hive.box('caregiver').get('caregiver');
+    user ??= Hive.box(UserType.caregiver.name).get(UserType.caregiver.name);
 
-    user ??= Hive.box('none').get('none');
+    user ??= Hive.box(UserType.none.name).get(UserType.none.name);
 
     return this.user ?? user;
   }
@@ -72,6 +72,8 @@ class HiveDatabase extends LocalDatabaseRepository {
     await Hive.openBox(UserType.caregiver.name);
 
     await Hive.openBox(UserType.none.name);
+
+    await getUser();
   }
 
   @override

@@ -246,7 +246,7 @@ class ServerService implements ServerRepository {
     final body = {
       'UserID': userId,
       //todo: add here the language too
-      'Language': 'ES-AR',
+      'Language': 'es_AR',
     };
     final res = await http.post(
       uri,

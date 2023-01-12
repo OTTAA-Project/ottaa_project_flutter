@@ -114,7 +114,7 @@ class SentencesProvider extends ChangeNotifier {
     // }
     // await sentenceService.uploadSentences(
     //   //todo: add the language here
-    //   language: 'es-AR',
+    //   language: 'es_AR',
     //   data: toBeSaved,
     //   type: kFavouriteSentences,
     // );
@@ -127,9 +127,9 @@ class SentencesProvider extends ChangeNotifier {
   Future<void> _loadSentences() async {
     _picts = await _pictogramsService.getAllPictograms();
     //todo: add the language here
-    final language = 'es-AR';
+    final language = 'es_AR';
     switch (language) {
-      case "es-AR":
+      case "es_AR":
         sentences = await sentenceService.fetchSentences(
           language: language,
           type: kMostUsedSentences,
@@ -229,9 +229,9 @@ class SentencesProvider extends ChangeNotifier {
 
   Future<void> fetchFavourites() async {
     //todo:
-    final language = 'es-AR';
+    final language = 'es_AR';
     switch (language) {
-      case "es-AR":
+      case "es_AR":
         favouriteSentences = await sentenceService.fetchSentences(
           language: language,
           type: kFavouriteSentences,
@@ -308,7 +308,7 @@ class SentencesProvider extends ChangeNotifier {
       String voiceText = "";
       for (var pict in _sentencesPicts[_sentencesIndex]) {
         //todo: add the language here too
-        final language = 'es-AR'; //FUCK THE POLICE!!!
+        final language = 'es_AR'; //FUCK THE POLICE!!!
         voiceText += ' ${pict.text[language]}';
       }
 
@@ -359,11 +359,11 @@ class SentencesProvider extends ChangeNotifier {
     //   String voiceText = "";
     //   for (var pict in _sentencesPicts[sentencesForList[searchIndex].index]) {
     //     //todo: add the language here
-    //     switch ('es-AR') {
-    //       // case "es-AR":
+    //     switch ('es_AR') {
+    //       // case "es_AR":
     //       //   voiceText += ' ' + pict.texto.es;
     //       //   break;
-    //       case "es-AR":
+    //       case "es_AR":
     //         voiceText += ' ${pict.texto.es}';
     //         break;
     //       case "en-US":
@@ -393,11 +393,11 @@ class SentencesProvider extends ChangeNotifier {
       String sentence = '';
       // for (var e2 in e1) {
       //   //todo: add the language here
-      //   switch ('es-AR') {
+      //   switch ('es_AR') {
       //     // case "es":
       //     //   sentence += ' ' + e2.texto.es;
       //     //   break;
-      //     case "es-AR":
+      //     case "es_AR":
       //       sentence += ' ${e2.texto.es}';
       //       break;
       //     case "en-US":
