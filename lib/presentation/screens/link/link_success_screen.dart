@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
-class LinkSuccessScreen extends StatelessWidget {
+class LinkSuccessScreen extends ConsumerStatefulWidget {
   const LinkSuccessScreen({super.key});
+
+  @override
+  ConsumerState<LinkSuccessScreen> createState() => _LinkSuccessScreenState();
+}
+
+class _LinkSuccessScreenState extends ConsumerState<LinkSuccessScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +56,7 @@ class LinkSuccessScreen extends StatelessWidget {
             width: size.width * 0.8,
             child: PrimaryButton(
               onPressed: () => context.push(AppRoutes.customizedBoardScreen),
-              text: "global.continue",
+              text: "global.continue".trl,
             ),
           ),
           const SizedBox(height: 48),

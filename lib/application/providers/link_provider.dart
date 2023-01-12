@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:collection/collection.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:ottaa_project_flutter/core/use_cases/create_email_token.dart';
 import 'package:ottaa_project_flutter/core/use_cases/verify_email_token.dart';
 
@@ -20,6 +21,9 @@ class LinkNotifier extends ChangeNotifier {
 
   final AuthRepository _auth;
 
+  final ProfileRepository _profileService;
+
+  LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._profileService, this._auth);
   //todo: add the proper value here
   String userId = 'k1234';
 
@@ -53,14 +57,16 @@ class LinkNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> sendEmail() async {
+  Future<String?> sendEmail() async {
     if (formKey.currentState?.validate() ?? false) {
       final currentUser = await _auth.getCurrentUser();
       if (currentUser.isRight) {
         final email = currentUser.right.email;
-        await createEmailToken.createEmailToken(email, emailController.text);
+        return await createEmailToken.createEmailToken(email, emailController.text);
       }
     }
+
+    return "Error";
   }
 
   bool isValidCode() {
@@ -68,7 +74,7 @@ class LinkNotifier extends ChangeNotifier {
     return code.length == 4 && (codeFormKey.currentState?.validate() ?? false);
   }
 
-  Future<bool> validateCode() async {
+  Future<String?> validateCode() async {
     final code = controllers.map((e) => e.text).join();
     final currentUser = await _auth.getCurrentUser();
     if (currentUser.isRight) {
@@ -80,7 +86,20 @@ class LinkNotifier extends ChangeNotifier {
       );
     }
 
-    return false;
+    return "Error";
+  }
+
+  Future<void> userSuccessLinkAccount() async {
+    final res = await _profileService.getProfileByEmail(email: emailController.text);
+    if (res.isLeft) {
+      print(res.left);
+      return;
+    }
+
+    final user = res.right;
+
+    print(user);
+
   }
 
   void reset() {
@@ -97,5 +116,6 @@ final linkProvider = ChangeNotifierProvider<LinkNotifier>((ref) {
   final createEmailToken = locator<CreateEmailToken>();
   final verifyEmailToken = locator<VerifyEmailToken>();
   final authRepository = locator<AuthRepository>();
-  return LinkNotifier(createEmailToken, verifyEmailToken, authRepository);
+  final profileRepository = locator<ProfileRepository>();
+  return LinkNotifier(createEmailToken, verifyEmailToken, profileRepository, authRepository);
 });

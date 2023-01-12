@@ -35,7 +35,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
                 ),
                 Center(
                   child: Text(
-                    "customize.wait.heading".trl,
+                    "global.congrats".trl,
                     style: textTheme.button!.copyWith(
                       color: colorScheme.onBackground,
                     ),

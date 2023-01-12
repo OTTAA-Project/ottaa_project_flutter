@@ -12,7 +12,23 @@
     "mail": "Mail",
     "date": "Fecha de nacimiento",
     "faq": {
-      "title": "Preguntas frecuentes"
+      "title": "Preguntas frecuentes",
+      "faq0": "FAQ 0 Test",
+      "faq0Description": "FAQ 0 Description all cool",
+      "faq1": "FAQ 1 Test",
+      "faq1Description": "FAQ 1 Description all cool",
+      "faq2": "FAQ 2 Test",
+      "faq2Description": "FAQ 2 Description all cool",
+      "faq3": "FAQ 3 Test",
+      "faq3Description": "FAQ 3 Description all cool",
+      "faq4": "FAQ 4 Test",
+      "faq4Description": "FAQ 4 Description all cool",
+      "faq5": "FAQ 5 Test",
+      "faq5Description": "FAQ 5 Description all cool",
+      "faq6": "FAQ 6 Test",
+      "faq6Description": "FAQ 6 Description all cool",
+      "faq7": "FAQ 7 Test",
+      "faq7Description": "FAQ 7 Description all cool"
     },
     "caregiver": "Acompañante",
     "caregivers_families": "Profesionales/Familiares",
@@ -71,7 +87,8 @@
         "title": "Coloque el código de verificación que llegó al correo electrónico.",
         "problem": "¿Inconvenientes para enlazar las cuentas?",
         "resend": "Reenviar código",
-        "back": "Ingresar otro email"
+        "back": "Ingresar otro email",
+        "invalid": "Token inválido"
       },
       "wait": {
         "title": "Aguarde",
@@ -82,6 +99,13 @@
         "lastTime": "Últ. vez Ayer {date}",
         "continue": "Continuar"
       }
+    }
+  },
+  "user": {
+    "main": {
+      "title": "Configura tu experiencia",
+      "subtitle1" : "Uso de la aplicación",
+      "subtitle2" : "Lenguaje predictivo"
     }
   },
   "global": {
@@ -104,6 +128,11 @@
     "email": "Email",
     "step": "Paso",
     "share": "Compartir",
+    "support": "Soporte",
+    "congrats": "Felicitaciones",
+    "settings" : "Configuración",
+    "general" : "General",
+    "pictograms" : "Pictogramas"
     "support": "Soporte",
     "pictogram" : "Pictograms",
     "configuration" : "Configuración",
@@ -187,6 +216,8 @@
     "board": {
       "title": "¿Qué tableros utilizará el usuario para comunicarse?",
       "appbar": "Tableros predictivos",
+      "skip": "¿Omitir la elección de tableros?"
+      "appbar": "Tableros predictivos",
       "subtitle": "Ver pictogramas"
     },
     "shortcut": {
@@ -196,6 +227,10 @@
       "history": "Historial",
       "camera": "Cámara",
       "games": "Juegos"
+    },
+    "wait": {
+      "button": "Ir al panel de perfiles",
+      "description": "Configuraste correctamente la experiencia de {name}"
     },
     "picto": {
       "title": "Tablero {name}",

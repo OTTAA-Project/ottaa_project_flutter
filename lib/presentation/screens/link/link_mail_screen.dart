@@ -73,13 +73,20 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
               ),
               const Spacer(),
               OptionalButton(
-                text: "global.send",
+                text: "global.send".trl,
                 onPressed: () async {
                   if (provider.formKey.currentState!.validate()) {
+                    String? result;
                     await LoadingModal.show(context, future: () async {
-                      await provider.sendEmail();
+                      result = await provider.sendEmail();
                     });
-                    context.push(AppRoutes.linkTokenScreen);
+                    if (mounted) {
+                      if (result != null) {
+                        OTTAANotification.primary(context, text: "link.error.$result".trl);
+                      } else {
+                        context.push(AppRoutes.linkTokenScreen);
+                      }
+                    }
                   }
                 },
               ),

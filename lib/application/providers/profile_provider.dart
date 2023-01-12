@@ -28,12 +28,9 @@ class ProfileNotifier extends ChangeNotifier {
   bool isLinkAccountOpen = false;
   bool connectedUsersFetched = false;
   List<ProfileConnectedAccounts> connectedUsersProfileData = [];
-  final TextEditingController profileEditNameController =
-      TextEditingController();
-  final TextEditingController profileEditSurnameController =
-      TextEditingController();
-  final TextEditingController profileEditEmailController =
-      TextEditingController();
+  final TextEditingController profileEditNameController = TextEditingController();
+  final TextEditingController profileEditSurnameController = TextEditingController();
+  final TextEditingController profileEditEmailController = TextEditingController();
 
   //profile chooser screen
   bool professionalSelected = false;
@@ -151,8 +148,7 @@ class ProfileNotifier extends ChangeNotifier {
     connectedUsersData = [];
     connectedUsersProfileData = [];
     await Future.wait(connectedUsers.map((e) async {
-      final res =
-          await _profileService.fetchConnectedUserData(userId: e.userId);
+      final res = await _profileService.fetchConnectedUserData(userId: e.userId);
       if (res.isRight) {
         final json = res.right;
 
@@ -179,10 +175,8 @@ class ProfileNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> removeCurrentUser(
-      {required String userId, required String careGiverId}) async {
-    await _profileService.removeCurrentUser(
-        userId: userId, careGiverId: careGiverId);
+  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
+    await _profileService.removeCurrentUser(userId: userId, careGiverId: careGiverId);
 
     // update the whole list again
     dataFetched = false;
