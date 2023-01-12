@@ -37,8 +37,6 @@ final AppRouter appRouterSingleton = AppRouter();
 
 class AppRouter {
   String get initialAppResolver {
-    //final authService = GetIt.I.get<AuthRepository>();
-    //return AppRoutes.splash;
 
     //if (!authService.isLogged) {
     //  return AppRoutes.login;
