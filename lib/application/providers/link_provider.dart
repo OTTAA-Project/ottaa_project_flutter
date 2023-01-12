@@ -27,7 +27,7 @@ class LinkNotifier extends ChangeNotifier {
   //todo: add the proper value here
   String userId = 'k1234';
 
-  LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._auth);
+  // LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._auth);
 
   void tokenChanged(int id, String value) {
     if (value.length > 2) {

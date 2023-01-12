@@ -70,7 +70,8 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                         const SizedBox(
                           width: 16,
                         ),
-                        //TODO Emir this is not workingText(
+                        //TODO Emir this is not working
+                        Text(
                           "profile.hello".trlf({"name": user?.name}),
                         ),
                       ],
