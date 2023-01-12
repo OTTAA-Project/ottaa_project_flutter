@@ -49,7 +49,7 @@ class _OTPWidgetState extends ConsumerState<OTPWidget> {
                   if (isCode) {
                     bool isValid = false;
                     await LoadingModal.show(context, future: () async {
-                      isValid = await provider.validateCode();
+                      isValid = await provider.validateCode() == null;
                     });
 
                     if (!isValid) {

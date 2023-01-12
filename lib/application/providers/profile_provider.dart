@@ -29,12 +29,9 @@ class ProfileNotifier extends ChangeNotifier {
   late String imageUrl;
   final ImagePicker _picker = ImagePicker();
   bool isLinkAccountOpen = false;
-  final TextEditingController profileEditNameController =
-      TextEditingController();
-  final TextEditingController profileEditSurnameController =
-      TextEditingController();
-  final TextEditingController profileEditEmailController =
-      TextEditingController();
+  final TextEditingController profileEditNameController = TextEditingController();
+  final TextEditingController profileEditSurnameController = TextEditingController();
+  final TextEditingController profileEditEmailController = TextEditingController();
 
   //profile chooser screen
   bool professionalSelected = false;
@@ -152,8 +149,7 @@ class ProfileNotifier extends ChangeNotifier {
 
     connectedUsers.addAll(res.right.values
         .map<CareGiverUser>(
-          (element) =>
-              CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
+          (element) => CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
         )
         .toList());
   }
@@ -162,8 +158,7 @@ class ProfileNotifier extends ChangeNotifier {
     connectedUsersData = [];
 
     await Future.wait(connectedUsers.map((e) async {
-      final res =
-          await _profileService.fetchConnectedUserData(userId: e.userId);
+      final res = await _profileService.fetchConnectedUserData(userId: e.userId);
       if (res.isRight) {
         final json = res.right;
 
@@ -182,10 +177,8 @@ class ProfileNotifier extends ChangeNotifier {
     notify();
   }
 
-  Future<void> removeCurrentUser(
-      {required String userId, required String careGiverId}) async {
-    await _profileService.removeCurrentUser(
-        userId: userId, careGiverId: careGiverId);
+  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
+    await _profileService.removeCurrentUser(userId: userId, careGiverId: careGiverId);
 
     // update the whole list again
     dataFetched = false;
