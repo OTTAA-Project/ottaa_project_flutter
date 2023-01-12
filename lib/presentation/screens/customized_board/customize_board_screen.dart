@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ottaa_project_flutter/application/common/app_images.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class CustomizeBoardScreen extends ConsumerStatefulWidget {
@@ -13,8 +16,6 @@ class CustomizeBoardScreen extends ConsumerStatefulWidget {
 }
 
 class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
-  bool status = true;
-
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
@@ -22,27 +23,29 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
         ? ListView.builder(
             padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
             shrinkWrap: true,
-            itemCount: 10,
+            itemCount: provider.groups.length,
             itemBuilder: (context, index) => Container(
               width: MediaQuery.of(context).size.width - 48,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                //todo: plavce holder values
+                //todo: add the values here according to the language
                 child: PictogramCard(
-                  title: "title",
-                  actionText: "actionText",
-                  //todo: a holder for the picto
-                  pictogram: AssetImage(AppImages.kAbrigos),
-                  status: status,
+                  title: provider.groups[index].texto.es,
+                  actionText: "customize.board.subtitle".trl,
+                  pictogram: CachedNetworkImageProvider(
+                    provider.groups[index].imagen.pictoEditado != null
+                        ? provider.groups[index].imagen.pictoEditado!
+                        : provider.groups[index].imagen.picto,
+                  ),
+                  status: !provider.groups[index].blocked!,
                   onChange: (bool a) {
-                    print('tapped');
-                    setState(() {
-                      status = !status;
-                    });
+                    provider.groups[index].blocked =
+                        !provider.groups[index].blocked!;
+                    provider.notify();
                   },
-                  onPressed: () {
-                    //todo: if needed to be implemented
-                    print('pressed');
+                  onPressed: () async{
+                    await provider.setGroupData(index: index);
+                    context.push(AppRoutes.customizePictoScreen);
                   },
                 ),
               ),

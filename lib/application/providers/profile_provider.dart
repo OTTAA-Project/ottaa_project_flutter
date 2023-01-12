@@ -1,17 +1,14 @@
-import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/core/models/care_giver_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/connected_user_data_model.dart';
+import 'package:ottaa_project_flutter/core/models/proflie_connected_accounts_model.dart';
 import 'package:ottaa_project_flutter/core/models/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileNotifier extends ChangeNotifier {
@@ -29,6 +26,8 @@ class ProfileNotifier extends ChangeNotifier {
   late String imageUrl;
   final ImagePicker _picker = ImagePicker();
   bool isLinkAccountOpen = false;
+  bool connectedUsersFetched = false;
+  List<ProfileConnectedAccounts> connectedUsersProfileData = [];
   final TextEditingController profileEditNameController = TextEditingController();
   final TextEditingController profileEditSurnameController = TextEditingController();
   final TextEditingController profileEditEmailController = TextEditingController();
@@ -66,24 +65,11 @@ class ProfileNotifier extends ChangeNotifier {
   }
 
   Future<void> openDialer() async {
-    Uri callUrl = Uri.parse('tel:=+123456789');
+    Uri callUrl = Uri.parse('tel:=+5493518102353');
     if (await canLaunchUrl(callUrl)) {
       await launchUrl(callUrl);
     } else {
       throw 'Could not open the dialler.';
-    }
-  }
-
-  Future<void> openEmail() async {
-    final email = Uri(
-      scheme: 'mailto',
-      path: 'asim@ottaa.com',
-      query: 'subject=Hello&body=Test',
-    );
-    if (await canLaunchUrl(email)) {
-      launchUrl(email);
-    } else {
-      throw 'Could not launch $email';
     }
   }
 
@@ -147,16 +133,20 @@ class ProfileNotifier extends ChangeNotifier {
       return;
     }
 
-    connectedUsers.addAll(res.right.values
-        .map<CareGiverUser>(
-          (element) => CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
-        )
-        .toList());
+    connectedUsers.addAll(
+      res.right.values
+          .map<CareGiverUser>(
+            (element) =>
+                CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
+          )
+          .toList(),
+    );
+    notifyListeners();
   }
 
   Future<void> fetchConnectedUsersData() async {
     connectedUsersData = [];
-
+    connectedUsersProfileData = [];
     await Future.wait(connectedUsers.map((e) async {
       final res = await _profileService.fetchConnectedUserData(userId: e.userId);
       if (res.isRight) {
@@ -168,13 +158,21 @@ class ProfileNotifier extends ChangeNotifier {
             image: json['avatar']['name'],
           ),
         );
-
+        connectedUsersProfileData.add(
+          ProfileConnectedAccounts(
+            name: json['name'],
+            imageUrl: json['avatar']['name'],
+            id: e.userId,
+            isExpanded: false,
+          ),
+        );
         print(json["name"]);
       }
     }));
 
     dataFetched = true;
-    notify();
+    connectedUsersFetched = true;
+    notifyListeners();
   }
 
   Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
@@ -187,67 +185,6 @@ class ProfileNotifier extends ChangeNotifier {
     dataFetched = true;
     notify();
   }
-
-  Future<void> fetchInstalledVersion() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String version = packageInfo.version;
-    currentOTTAAInstalled = version;
-  }
-
-  Future<void> fetchDeviceName() async {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (kIsWeb) {
-      WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
-      deviceName = webBrowserInfo.userAgent!;
-      print('Browser name is this: 101 ${webBrowserInfo.userAgent!}');
-    } else {
-      if (Platform.isAndroid) {
-        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-        deviceName = androidInfo.model;
-      } else if (Platform.isIOS) {
-        IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-        deviceName = iosDeviceInfo.utsname.machine!;
-      }
-    }
-  }
-
-/*  Future<void> fetchAccountType() async {
-
-    final res = await _dataController.fetchAccountType();
-
-    /// this means there is a value
-    if (res == 1) {
-      userSubscription = 'Premium';
-    } else {
-      userSubscription = 'Free';
-    }
-  }
-
-  Future<void> fetchCurrentVersion() async {
-    // final ref = databaseRef.child('version/');
-    // final res = await ref.get();
-    final double res = await _dataController.fetchCurrentVersion();
-    currentOTTAAVersion.value = res.toString();
-  }
-
-  Future<void> launchEmailSubmission() async {
-    final Uri params = Uri(
-        scheme: 'mailto',
-        path: 'support@ottaaproject.com',
-        queryParameters: {
-          'subject': 'Support',
-          'body':
-          '''Account: ${user.email},\nAccount Type: $userSubscription,\nCurrent OTTAA Installed: $currentOTTAAInstalled\nCurrent OTTAA Version: $currentOTTAAVersion\nDevice Name: $deviceName''',
-        });
-    String url = params.toString();
-    final value = url.replaceAll('+', ' ');
-    if (await canLaunchUrl(value)) {
-      launchUrl(email);
-    } else {
-      throw 'Could not launch $email';
-    }
-  }*/
-
 }
 
 final profileProvider = ChangeNotifierProvider<ProfileNotifier>((ref) {

@@ -16,17 +16,6 @@ class ProfileLinkedAccountScreen extends ConsumerStatefulWidget {
 class _ProfileLinkedAccountScreen
     extends ConsumerState<ProfileLinkedAccountScreen> {
   @override
-  void initState() {
-    super.initState();
-    final provider = ref.read(profileProvider);
-    final user = ref.read(userNotifier);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.getConnectedUsers(userId: user!.id);
-      await provider.fetchConnectedUsersData();
-    });
-  }
-
-  @override
   Widget build(
     BuildContext context,
   ) {

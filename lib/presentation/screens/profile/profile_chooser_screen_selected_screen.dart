@@ -42,28 +42,28 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                           .copyWith(color: colorScheme.onBackground),
                     ),
                   ),
-                  ProfileChooserButtonWidget(
-                    heading: 'profile.caregiver'.trl,
+                  ActionCard(
+                    title: 'profile.caregiver'.trl,
                     subtitle: 'profile.caregivers_families'.trl,
-                    imagePath: AppImages.kProfileIcon1,
-                    onTap: () {
+                    trailingImage: const AssetImage(AppImages.kProfileIcon1),
+                    onPressed: () {
                       provider.isCaregiver = !provider.isCaregiver;
                       provider.notify();
                     },
-                    selected: provider.isCaregiver,
+                    focused: provider.isCaregiver,
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  ProfileChooserButtonWidget(
-                    heading: 'profile.user'.trl,
+                  ActionCard(
+                    title: 'profile.user'.trl,
                     subtitle: 'profile.user_description'.trl,
-                    imagePath: AppImages.kProfileIcon2,
-                    onTap: () {
+                    trailingImage: const AssetImage(AppImages.kProfileIcon2),
+                    onPressed: () {
                       provider.isCaregiver = !provider.isCaregiver;
                       provider.notify();
                     },
-                    selected: !provider.isCaregiver,
+                    focused: !provider.isCaregiver,
                   ),
                 ],
               ),

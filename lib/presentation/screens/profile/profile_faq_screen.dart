@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/presentation/screens/profile/ui/faq_container_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileFAQScreen extends StatefulWidget {
@@ -62,11 +61,11 @@ class _ProfileFAQScreenState extends State<ProfileFAQScreen> {
                       color: colorScheme.background,
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                       ),
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 24),
                       child: Text(
                         item.expandedValue,
                         style: textTheme.subtitle1,
@@ -75,7 +74,6 @@ class _ProfileFAQScreenState extends State<ProfileFAQScreen> {
                   ],
                 ),
                 isExpanded: item.isExpanded,
-
               );
             }).toList(),
           ),

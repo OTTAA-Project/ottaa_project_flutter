@@ -12,7 +12,7 @@ class Groups {
     required this.relacion,
     this.frecuencia,
     this.tags,
-    this.selected = true,
+    this.blocked = false,
   });
 
 
@@ -20,10 +20,11 @@ class Groups {
   TextGroups texto;
   int tipo;
   ImageGroups imagen;
+  @JsonKey(defaultValue: [])
   List<GroupRelation> relacion;
   int? frecuencia;
   List<String>? tags;
-  bool? selected;
+  bool? blocked;
 
   factory Groups.fromJson(Map<String, dynamic> json) => _$GroupsFromJson(json);
 

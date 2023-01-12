@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_shortcut_screen.dart';
@@ -30,16 +32,19 @@ class _CustomizedMainTabScreenState
     final provider = ref.read(customiseProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.fetchPictograms();
+      await provider.fetchData();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
+    final user = ref.read(userNotifier);
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
+    //todo: using that variable here from the linkProvider
+    final userID = ref.read(linkProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Row(
@@ -67,6 +72,7 @@ class _CustomizedMainTabScreenState
                   // title: "",
                   subtitle: index == 1
                       //TODO: check this if it is OK
+
                       ? "board.customize.helpText".trl
                       : "global.back".trl,
                   children: <Widget>[
@@ -189,7 +195,7 @@ class _CustomizedMainTabScreenState
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: PrimaryButton(
-                onPressed: () {
+                onPressed: () async {
                   if (pageController.page == 0) {
                     setState(() {
                       pageController.nextPage(
@@ -198,6 +204,16 @@ class _CustomizedMainTabScreenState
                       index = 2;
                     });
                   } else {
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                    );
+                    await provider.uploadData(userId: userID.userId);
                     context.push(AppRoutes.customizeWaitScreen);
                   }
                 },

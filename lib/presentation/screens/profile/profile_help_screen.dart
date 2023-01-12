@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/about_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -14,6 +15,7 @@ class ProfileHelpScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final provider = ref.watch(profileProvider);
+    final mailProvider = ref.read(aboutProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text(
@@ -49,7 +51,8 @@ class ProfileHelpScreen extends ConsumerWidget {
                       title: 'global.support'.trl,
                       children: [
                         GestureDetector(
-                          onTap: () async => await provider.openEmail(),
+                          onTap: () async =>
+                              await mailProvider.sendSupportEmail(),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,

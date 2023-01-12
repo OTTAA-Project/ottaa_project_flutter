@@ -32,7 +32,7 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherListMap> getAllGroups(String userId, String languageCode) async {
     //Fetch new data from server
-    final refNew = _database.child('$userId/Grupos/$languageCode');
+    final refNew = _database.child('$userId/groups/$languageCode');
     final resNew = await refNew.get();
 
     if (resNew.exists && resNew.value != null) {
@@ -162,9 +162,11 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
-    final ref = _database.child('$userId/Grupos/$language');
+    final ref = _database.child('$userId/groups/$language');
     try {
-      await ref.set(data);
+      await ref.set({
+        'maps':true
+      });
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -173,7 +175,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherVoid> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data}) async {
-    final ref = _database.child('$userId/Pictos/$language');
+    final ref = _database.child('$userId/pictos/$language');
 
     try {
       await ref.set(data);
@@ -333,7 +335,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherVoid> setShortcutsForUser({required Map<String, dynamic> shortcuts, required String userId}) async {
-    final ref = _database.child('$userId/shortcuts.');
+    final ref = _database.child('$userId/shortcuts/');
 
     try {
       await ref.set(shortcuts);
@@ -410,5 +412,17 @@ class ServerService implements ServerRepository {
     } else {
       return const Left("No Data found"); //TODO: Handle the main error
     }
+  }
+
+  @override
+  Future<dynamic> getDefaultGroups(String languageCode) async {
+    final ref = _database.child('default/groups/$languageCode');
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(res.value as dynamic);
+    }
+
+    return const Left("no_data_found");
   }
 }
