@@ -76,6 +76,7 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
                 widget.description,
                 textAlign: TextAlign.center,
                 style: textTheme.headline3,
+                overflow: TextOverflow.visible,
               ),
             ),
           ),

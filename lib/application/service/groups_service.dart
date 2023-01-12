@@ -40,11 +40,12 @@ class GroupsService extends GroupsRepository {
   }
 
   @override
-  Future<void> uploadGroups(List<Group> data, String type, String language) async {
+  Future<void> uploadGroups(List<Group> data, String type, String language, {String? userId}) async {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
 
     List<Map<String, dynamic>> jsonData = List.empty(growable: true);
+    print(data.length);
     for (var e in data) {
       final relactions = e.relations.map((e) => e.toJson()).toList();
       // jsonData.add({
@@ -58,19 +59,19 @@ class GroupsService extends GroupsRepository {
       // });
       //TODO: Fix this service :/
     }
+    // print(jsonData.length);
 
     final UserModel auth = result.right;
-
-    await _serverRepository.uploadGroups(auth.id, language, data: jsonData);
+    final res = await _serverRepository.uploadGroups(userId ?? auth.id, language, data: jsonData);
   }
 
   @override
-  Future<void> updateGroups(Group data, String type, String language, int index) async {
+  Future<void> updateGroups(Group data, String type, String language, int index, {String? userId}) async {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
     final UserModel auth = result.right;
 
-    await _serverRepository.updateGroup(auth.id, language, index, data: data.toMap());
+    await _serverRepository.updateGroup(userId ?? auth.id, language, index, data: data.toMap());
   }
 
   @override

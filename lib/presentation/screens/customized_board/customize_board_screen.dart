@@ -42,7 +42,7 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
                     provider.notify();
                   },
                   onPressed: () async{
-                    await provider.setGrupoData(index: index);
+                    await provider.setGroupData(index: index);
                     context.push(AppRoutes.customizePictoScreen);
                   },
                 ),

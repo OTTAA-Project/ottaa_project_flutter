@@ -160,7 +160,7 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> fetchConnectedUsersData() async {
     connectedUsersData = [];
-
+    connectedUsersProfileData = [];
     await Future.wait(connectedUsers.map((e) async {
       // final res = await _profileService.fetchConnectedUserData(userId: e.userId);
       // if (res.isRight) {

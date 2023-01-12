@@ -6,7 +6,7 @@ abstract class GroupsRepository {
 
   Future<List<Group>> getDefaultGroups();
 
-  Future<void> uploadGroups(List<Group> data, String type, String language);
+  Future<void> uploadGroups(List<Group> data, String type, String language, {String? userId});
 
   Future<void> updateGroups(Group data, String type, String language, int index);
 

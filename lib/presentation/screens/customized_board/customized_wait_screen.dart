@@ -55,7 +55,9 @@ class CustomizeWaitScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
               child: PrimaryButton(
-                onPressed: () {},
+                onPressed: () async {
+                  context.go(AppRoutes.profileMainScreen);
+                },
                 text: "customize.wait.button".trl,
               ),
             ),

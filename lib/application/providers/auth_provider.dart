@@ -42,7 +42,7 @@ class AuthProvider extends ChangeNotifier {
       //todo: talk with Emir about this and resolve it
       final res = await _aboutService.getUserInformation();
       if (res.isRight) {
-        final re = await _authService.runToGetDataFromOtherPlatform(email: res.right.settings.data.name, id: res.right.id);
+        final re = await _authService.runToGetDataFromOtherPlatform(email: res.right.email, id: res.right.id);
         print('here is the result $re');
       }
       _userNotifier.setUser(result.right);

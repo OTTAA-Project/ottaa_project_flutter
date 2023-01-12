@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/ui/connected_user_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ConnectedUsersList extends ConsumerStatefulWidget {
@@ -17,52 +18,33 @@ class ConnectedUsersList extends ConsumerStatefulWidget {
 class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     final user = ref.read(userNotifier);
     final provider = ref.watch(profileProvider);
-    return ExpansionPanelList(
-      dividerColor: colorScheme.background,
-      expandedHeaderPadding: const EdgeInsets.symmetric(vertical: 16),
-      animationDuration: const Duration(milliseconds: 500),
-      expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          provider.expasionList[index] = !isExpanded; //TODO: Load the user data by the index
-        });
-      },
-      children: provider.connectedUsersData.mapIndexed<ExpansionPanel>((int index, PatientUserModel item) {
-        return ExpansionPanel(
-          canTapOnHeader: true,
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return ProfileCard(
-              title: "Juan",
-              leadingImage: CachedNetworkImageProvider(user!.settings.data.avatar.network!),
-              subtitle: 'time will be here',
-              onPressed: () {},
-              actions: Text('actions'),
-            );
-          },
-          body: Column(
-            children: [
-              Divider(
-                height: 2,
-                color: colorScheme.background,
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-                child: Text(
-                  'item.expandedValue',
-                  style: textTheme.subtitle1,
-                ),
-              ),
-            ],
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: provider.connectedUsersProfileData.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: ConnectedUserWidget(
+            title: provider.connectedUsersProfileData[index].name,
+            image: provider.connectedUsersProfileData[index].imageUrl,
+            onPressed: () {
+              provider.connectedUsersProfileData[index].isExpanded =
+                  !provider.connectedUsersProfileData[index].isExpanded;
+              provider.notify();
+            },
+            actionTap: () {
+              provider.connectedUsersProfileData[index].isExpanded =
+                  !provider.connectedUsersProfileData[index].isExpanded;
+              provider.notify();
+            },
+            timeText: 'time text',
+            show: provider.connectedUsersProfileData[index].isExpanded,
           ),
-          isExpanded: provider.expasionList[index],
         );
-      }).toList(),
+      },
     );
   }
 }

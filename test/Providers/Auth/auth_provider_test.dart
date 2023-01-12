@@ -52,6 +52,7 @@ void main(){
   });
   group('auth Provider testing', () {
     test('sign in', () async {
+      when(mockAuthService.runToGetDataFromOtherPlatform(email: fakeUser.email, id: fakeUser.id)).thenAnswer((realInvocation) async=>fakeUser.email);
       when(mockAuthService.signIn(SignInType.email)).thenAnswer((realInvocation) async => Right(fakeUser));
       when(mockLocalDatabaseRepository.setUser(fakeUser)).thenAnswer((realInvocation) async => {});
       when(mockAboutService.getUserInformation()).thenAnswer((realInvocation) async => Right(fakeUser));

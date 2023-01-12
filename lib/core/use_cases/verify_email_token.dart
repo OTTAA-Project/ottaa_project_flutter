@@ -5,5 +5,5 @@ abstract class VerifyEmailToken {
 
   const VerifyEmailToken(this.serverService);
 
-  Future<bool> verifyEmailToken(String ownEmail, String email, String token);
+  Future<String?> verifyEmailToken(String ownEmail, String email, String token);
 }

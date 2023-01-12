@@ -161,7 +161,9 @@ class ServerService implements ServerRepository {
   Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
     try {
-      await ref.set(data);
+      await ref.set({
+        'maps':true
+      });
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -298,7 +300,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getConnectedUsers({required String userId}) async {
-    final ref = _database.child('$userId/users');
+    final ref = _database.child('temp/linkTests/$userId/users'); //TODO: Change this to the real path
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
@@ -310,7 +312,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> fetchConnectedUserData({required String userId}) async {
-    final ref = _database.child('$userId/settings/data');
+    final ref = _database.child('$userId'); //TODO: Change to real path
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
@@ -330,7 +332,7 @@ class ServerService implements ServerRepository {
     final ref = _database.child('$userId/shortcuts/');
 
     try {
-      await ref.set(shortcuts);
+      await ref.set(shortcuts.toMap());
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -350,11 +352,11 @@ class ServerService implements ServerRepository {
       headers: {"Content-Type": "application/json"},
     );
 
+    final data = jsonDecode(res.body) as Map<String, dynamic>;
     if (res.statusCode == 200) {
-      final data = jsonDecode(res.body) as Map<String, dynamic>;
       return Right(data);
     } else {
-      return Left("an error occurred"); //TODO: Handle the main error
+      return Left(data["code"] ?? res.body); //TODO: Handle the main error
     }
   }
 
@@ -372,11 +374,11 @@ class ServerService implements ServerRepository {
       headers: {"Content-Type": "application/json"},
     );
 
+    final data = jsonDecode(res.body) as Map<String, dynamic>;
     if (res.statusCode == 200) {
-      final data = jsonDecode(res.body) as Map<String, dynamic>;
       return Right(data);
     } else {
-      return Left("an error occurred"); //TODO: Handle the main error
+      return Left(data["code"] ?? res.body); //TODO: Handle the main error
     }
   }
 
@@ -390,6 +392,19 @@ class ServerService implements ServerRepository {
       await ref.update(data);
     } catch (e) {
       print(e);
+    }
+  }
+
+  @override
+  Future<EitherMap> getProfileByEmail({required String email}) async {
+    final ref = _database.child("/").orderByChild("Usuarios.Email").equalTo(email);
+
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    } else {
+      return const Left("No Data found"); //TODO: Handle the main error
     }
   }
 

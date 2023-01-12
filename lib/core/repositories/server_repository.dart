@@ -64,5 +64,7 @@ abstract class ServerRepository {
 
   Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token);
 
+  Future<EitherMap> getProfileByEmail({required String email});
+
   Future<dynamic> getDefaultGroups(String languageCode);
 }

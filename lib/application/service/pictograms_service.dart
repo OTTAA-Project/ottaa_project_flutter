@@ -13,7 +13,8 @@ class PictogramsService extends PictogramsRepository {
   final RemoteStorageRepository _remoteStorageService;
   final ServerRepository _serverRepository;
 
-  PictogramsService(this._authService, this._serverRepository, this._remoteStorageService);
+  PictogramsService(
+      this._authService, this._serverRepository, this._remoteStorageService);
 
   @override
   Future<List<Picto>> getAllPictograms() async {
@@ -21,7 +22,8 @@ class PictogramsService extends PictogramsRepository {
       const Duration(seconds: kIsWeb ? 2 : 1),
     );
 
-    final String data = await _remoteStorageService.readRemoteFile(path: "Pictos", fileName: 'assets/pictos.json');
+    final String data = await _remoteStorageService.readRemoteFile(
+        path: "Pictos", fileName: 'assets/pictos.json');
 
     final List<dynamic> json = jsonDecode(data);
     final List<Picto> pictograms = json.map((e) => Picto.fromJson(e)).toList();
@@ -36,7 +38,7 @@ class PictogramsService extends PictogramsRepository {
   }
 
   @override
-  Future<void> uploadPictograms(List<Picto> data, String language) async {
+  Future<void> uploadPictograms(List<Picto> data, String language, {String? userId}) async {
     List<Map<String, dynamic>> jsonData = List.empty(growable: true);
     // for (var e in data) {
     //   final relactions = e.relacion?.map((e) => e.toJson()).toList();
@@ -60,9 +62,8 @@ class PictogramsService extends PictogramsRepository {
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
     final UserModel auth = result.right;
-
     await _serverRepository.uploadPictograms(
-      auth.id,
+      userId ?? auth.id,
       language,
       data: jsonData,
     );

@@ -8,9 +8,12 @@ class VerifyEmailTokenImpl implements VerifyEmailToken {
   const VerifyEmailTokenImpl(this.serverService);
 
   @override
-  Future<bool> verifyEmailToken(String ownEmail, String email, String token) async {
+  Future<String?> verifyEmailToken(String ownEmail, String email, String token) async {
     final result = await serverService.verifyEmailToken(ownEmail, email, token);
 
-    return result.isRight;
+    return result.fold(
+      (l) => l,
+      (r) => null,
+    );
   }
 }

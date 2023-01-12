@@ -1724,4 +1724,6 @@ class AppImages {
   static const kProfileTipsIcon = 'assets/profile/icon_tips.png';
   static const kCustomizePictoIcon = 'assets/edit/picto/picto_edit_icon.png';
   static const kDeletePictoIcon = 'assets/edit/picto/delete_picto_icon.png';
+  static const kProfileUserIcon1 = 'assets/profile/user_profile_icon_1.png';
+  static const kProfileUserIcon2 = 'assets/profile/user_profile_icon_2.png';
 }

@@ -18,6 +18,7 @@ import 'package:ottaa_project_flutter/presentation/screens/profile/profile_faq_s
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_help_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_linked_account_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen_user.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_ottaa_tips_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_edit_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_screen.dart';
@@ -36,17 +37,14 @@ final AppRouter appRouterSingleton = AppRouter();
 
 class AppRouter {
   String get initialAppResolver {
-    return AppRoutes.splash;
-    final authService = GetIt.I.get<AuthRepository>();
-    return AppRoutes.splash;
 
-    if (!authService.isLogged) {
-      return AppRoutes.login;
-    }
+    //if (!authService.isLogged) {
+    //  return AppRoutes.login;
+    //}
     //todo: talk with emir about it
-    if (authService.isLogged) {
-      return AppRoutes.home;
-    }
+    //if (authService.isLogged) {
+    //  return AppRoutes.home;
+    //}
 
     return AppRoutes.splash;
   }
@@ -174,6 +172,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.customizePictoScreen,
           builder: (context, state) => const CustomizePictoScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileMainScreenUser,
+          builder: (context, state) => const ProfileMainScreenUser(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),
