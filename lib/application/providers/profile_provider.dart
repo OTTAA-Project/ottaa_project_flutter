@@ -82,6 +82,8 @@ class ProfileNotifier extends ChangeNotifier {
     return date.millisecondsSinceEpoch;
   }
 
+  Future<void> settingUpUserType() async {}
+
   Future<void> updateChanges() async {
     final res = await _auth.getCurrentUser();
     final user = res.right;
@@ -96,16 +98,6 @@ class ProfileNotifier extends ChangeNotifier {
 
     /// create the data for the upload
     final birthdate = convertDate();
-    // final Map<String, dynamic> data = {
-    //   "name": profileEditNameController.text,
-    //   "birth-date": birthdate,
-    //   "gender-pref": user.settings.data.genderPref,
-    //   "last-name": profileEditSurnameController.text,
-    //   "avatar": {
-    //     "name": "local-use",
-    //     "url": imageSelected ? imageUrl : user.settings.data.avatar.network ?? ,
-    //   }
-    // };
 
     user.settings.data = user.settings.data.copyWith(
       name: profileEditNameController.text,

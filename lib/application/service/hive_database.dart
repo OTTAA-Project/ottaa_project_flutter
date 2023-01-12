@@ -28,7 +28,7 @@ class HiveDatabase extends LocalDatabaseRepository {
   Future<void> deleteUser() async {
     await Hive.box('user').clear();
     await Hive.box('caregiver').clear();
-    await Hive.box('clear').clear();
+    await Hive.box('none').clear();
   }
 
   @override

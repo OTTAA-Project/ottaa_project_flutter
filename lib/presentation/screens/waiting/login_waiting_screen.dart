@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
@@ -22,6 +24,11 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await provider.fetchUserInformation();
+
+
+      final user = ref.read(userNotifier);
+
+      I18N.of(context).changeLanguage(user?.settings.language ?? "en_US");
 
       if (mounted) localContext.go(AppRoutes.profileChooserScreen);
     });

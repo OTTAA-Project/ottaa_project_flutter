@@ -44,6 +44,8 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
 
     final user = ref.watch(userNotifier);
 
+    if(user == null) return Container();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
