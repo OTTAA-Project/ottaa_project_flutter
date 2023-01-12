@@ -99,6 +99,13 @@
       }
     }
   },
+  "user": {
+    "main": {
+      "title": "Configura tu experiencia",
+      "subtitle1" : "Uso de la aplicación",
+      "subtitle2" : "Lenguaje predictivo"
+    }
+  },
   "global": {
     "hello_world": "Hola Mundo",
     "hello": "Hola",
@@ -120,7 +127,10 @@
     "step": "Paso",
     "share": "Compartir",
     "support": "Soporte",
-    "congrats": "Felicitaciones"
+    "congrats": "Felicitaciones",
+    "settings" : "Configuración",
+    "general" : "General",
+    "pictograms" : "Pictogramas"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -213,7 +223,6 @@
     "wait": {
       "button": "Ir al panel de perfiles",
       "description": "Configuraste correctamente la experiencia de {name}"
-
     },
     "picto": {
       "title": "Tablero {name}",

@@ -18,6 +18,7 @@ import 'package:ottaa_project_flutter/presentation/screens/profile/profile_faq_s
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_help_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_linked_account_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/profile_main_screen_user.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_ottaa_tips_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_edit_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_screen.dart';
@@ -174,6 +175,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.customizePictoScreen,
           builder: (context, state) => const CustomizePictoScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.profileMainScreenUser,
+          builder: (context, state) => const ProfileMainScreenUser(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),
