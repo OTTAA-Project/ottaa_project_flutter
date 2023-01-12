@@ -37,17 +37,16 @@ final AppRouter appRouterSingleton = AppRouter();
 
 class AppRouter {
   String get initialAppResolver {
-    return AppRoutes.linkMailScreen;
-    final authService = GetIt.I.get<AuthRepository>();
-    return AppRoutes.splash;
+    //final authService = GetIt.I.get<AuthRepository>();
+    //return AppRoutes.splash;
 
-    if (!authService.isLogged) {
-      return AppRoutes.login;
-    }
+    //if (!authService.isLogged) {
+    //  return AppRoutes.login;
+    //}
     //todo: talk with emir about it
-    if (authService.isLogged) {
-      return AppRoutes.home;
-    }
+    //if (authService.isLogged) {
+    //  return AppRoutes.home;
+    //}
 
     return AppRoutes.splash;
   }
