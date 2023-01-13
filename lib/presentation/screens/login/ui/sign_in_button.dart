@@ -64,13 +64,13 @@ class SignInButton extends ConsumerWidget {
                 );
               }
 
-        if (result.isRight) {
-          // ignore: use_build_context_synchronously
-          await BasicBottomSheet.show(
-            localContext,
-            subtitle: "terms.text".trl,
-            okButtonText: "terms.button".trl,
-          );
+              if (result.isRight) {
+                // ignore: use_build_context_synchronously
+                await BasicBottomSheet.show(
+                  localContext,
+                  subtitle: "terms.text".trl,
+                  okButtonText: "terms.button".trl,
+                );
 
                 // ignore: use_build_context_synchronously
                 localContext.go(AppRoutes.waitingLogin);

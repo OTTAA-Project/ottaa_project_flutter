@@ -25,12 +25,12 @@ class SplashProvider extends ChangeNotifier {
 
   Future<bool> fetchUserInformation() async {
     final result = await _aboutRepository.getUserInformation();
-
+    // print(result);
     if (result.isLeft) {
       await _auth.logout();
       return false;
     }
-    _avatarNotifier.changeAvatar(int.tryParse(result.right.avatar ?? "615") ?? 615);
+    _avatarNotifier.changeAvatar(int.tryParse(result.right.settings.data.avatar.asset ?? "615") ?? 615);
     _userNotifier.setUser(result.right);
     return result.isRight;
   }

@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
-import 'package:ottaa_project_flutter/core/models/groups_model.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
-import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/group_model.dart';
+import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
@@ -19,13 +20,13 @@ class HomeProvider extends ChangeNotifier {
 
   HomeProvider(this._pictogramsService, this._groupsService, this._sentencesService, this._tts);
 
-  List<SentenceModel> mostUsedSentences = [];
+  List<Phrase> mostUsedSentences = [];
   int indexForMostUsed = 0;
 
-  List<Pict> pictograms = [];
-  List<Groups> groups = [];
+  List<Picto> pictograms = [];
+  List<Group> groups = [];
 
-  List<Pict> suggestedPicts = [];
+  List<Picto> suggestedPicts = [];
 
   int suggestedIndex = 0;
 
@@ -39,7 +40,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> fetchMostUsedSentences() async {
     mostUsedSentences = await _sentencesService.fetchSentences(
-      language: "es-AR", //TODO!: Fetch language code LANG-CODE
+      language: "es_AR", //TODO!: Fetch language code LANG-CODE
       type: kMostUsedSentences,
     );
 
@@ -60,20 +61,21 @@ class HomeProvider extends ChangeNotifier {
     suggestedPicts = [];
     suggestedIndex = 0;
 
-    final Pict addPict = Pict(
+    final Picto addPict = Picto(
       id: 0,
-      texto: Texto(en: "add", es: "agregar"),
-      tipo: 6,
-      imagen: Imagen(picto: "ic_agregar_nuevo"),
-      localImg: true,
+      text: {
+        "es_AR": "Agregar nuevo pictograma",
+      },
+      type: 6,
+      resource: AssetsImage(asset: "ic_agregar_nuevo", network: ""),
     );
 
-    final Pict pict = pictograms.firstWhere((pict) => pict.id == id);
+    final Picto pict = pictograms.firstWhere((pict) => pict.id == id);
     print('the id of the pict is ${pict.id}');
 
-    if (pict.relacion!.isNotEmpty) {
-      final List<Relacion> recomendedPicts = pict.relacion!.toList();
-      recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec!));
+    if (pict.relations.isNotEmpty) {
+      final List<PictoRelation> recomendedPicts = pict.relations.toList();
+      // recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec!)); //TODO: Check this with assim
       suggestedPicts = predictiveAlgorithm(list: recomendedPicts);
     } else {
       suggestedPicts = [];
@@ -98,7 +100,7 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Pict> predictiveAlgorithm({required List<Relacion> list}) {
+  List<Picto> predictiveAlgorithm({required List<PictoRelation> list}) {
     const int pesoFrec = 2,
         // pesoAgenda = 8,
         // pesoGps = 12,
@@ -107,7 +109,7 @@ class HomeProvider extends ChangeNotifier {
         pesoHora = 50;
     final time = DateTime.now().hour;
 
-    List<Pict> requiredPicts = [];
+    List<Picto> requiredPicts = [];
 
     for (var recommendedPict in list) {
       requiredPicts.add(
@@ -130,20 +132,20 @@ class HomeProvider extends ChangeNotifier {
       int hora = 0;
 
       /// '0' should be replaced by the value of HORA
-      if (e.hora == null) {
+      if (e.tags["hour"] == null) {
         hora = 0;
       } else {
-        for (var e in e.hora!) {
+        for (var e in e.tags["hour"]!) {
           if (tag == e) {
             hora = 1;
           }
         }
       }
-      e.score = (list[i].frec! * pesoFrec) + (hora * pesoHora);
+      // e.freq = (list[i].value! * pesoFrec) + (hora * pesoHora); //TODO: Check this with asim
       // print(e.score);
     }
 
-    requiredPicts.sort((b, a) => a.score!.compareTo(b.score!));
+    // requiredPicts.sort((b, a) => a.score!.compareTo(b.score!)); //TODO: Check this with assim too
 
     return requiredPicts;
   }

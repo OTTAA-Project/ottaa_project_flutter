@@ -32,18 +32,18 @@ void main(){
   group('Test es-AR', () {
     test('Write Groups ES', () async {
       String result = await rootBundle.loadString('assets/gender_based/grupos/grupos_es_male.json');
-      await localStorageService.writeGruposToFile(data: result, language: 'es-AR');
+      await localStorageService.writeGruposToFile(data: result, language: 'es_AR');
     });
     test('Read Groups ES',() async {
-      List esG = await localStorageService.readGruposFromFile(language:'es-AR');
+      List esG = await localStorageService.readGruposFromFile(language:'es_AR');
       print( esG);
     });
     test('WritePictograms ES', () async {
       String result = await rootBundle.loadString('assets/gender_based/pictos/pictos_es_male.json');
-      await localStorageService.writePictoToFile(data: result, language: 'es-AR');
+      await localStorageService.writePictoToFile(data: result, language: 'es_AR');
     });
     test('Read Pictograms ES',() async {
-      List esG = await localStorageService.readPictoFromFile(language:'es-AR');
+      List esG = await localStorageService.readPictoFromFile(language:'es_AR');
       print( esG);
     });
   });

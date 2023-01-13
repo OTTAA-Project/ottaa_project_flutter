@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ottaa_project_flutter/core/models/care_giver_user_model.dart';
-import 'package:ottaa_project_flutter/core/models/connected_user_data_model.dart';
-import 'package:ottaa_project_flutter/core/models/proflie_connected_accounts_model.dart';
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,20 +19,30 @@ import 'package:url_launcher/url_launcher.dart';
 class ProfileNotifier extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final ProfileRepository _profileService;
+  final AboutRepository _aboutService;
   final AuthRepository _auth;
+  final LocalDatabaseRepository _localDatabaseRepository;
+  final UserNotifier _userNotifier;
 
-  ProfileNotifier(this._pictogramsService, this._auth, this._profileService);
+  ProfileNotifier(
+    this._pictogramsService,
+    this._auth,
+    this._profileService,
+    this._localDatabaseRepository,
+    this._userNotifier,
+    this._aboutService,
+  );
 
   bool isCaregiver = false;
-  late UserModel user;
   bool isUser = false;
+
   bool imageSelected = false;
   XFile? profileEditImage;
   late String imageUrl;
   final ImagePicker _picker = ImagePicker();
   bool isLinkAccountOpen = false;
   bool connectedUsersFetched = false;
-  List<ProfileConnectedAccounts> connectedUsersProfileData = [];
+  List<bool> connectedUsersProfileDataExpanded = [];
   final TextEditingController profileEditNameController = TextEditingController();
   final TextEditingController profileEditSurnameController = TextEditingController();
   final TextEditingController profileEditEmailController = TextEditingController();
@@ -41,8 +56,9 @@ class ProfileNotifier extends ChangeNotifier {
   String yearForDropDown = "0";
 
   //connected users screen
-  List<CareGiverUser> connectedUsers = [];
-  List<ConnectedUserData> connectedUsersData = [];
+  List<BaseUserModel> connectedUsersData = [];
+
+  List<bool> expasionList = [];
   bool dataFetched = false;
 
   //profile email send
@@ -54,10 +70,7 @@ class ProfileNotifier extends ChangeNotifier {
   }
 
   Future<void> setDate() async {
-    final res = await _auth.getCurrentUser();
-    user = res.right;
-    final birthday = user.birthdate!;
-    final date = DateTime.fromMillisecondsSinceEpoch(birthday);
+    final date = _userNotifier.user.settings.data.birthDate;
     day = date.day;
     month = date.month;
     year = date.year;
@@ -78,13 +91,47 @@ class ProfileNotifier extends ChangeNotifier {
     return date.millisecondsSinceEpoch;
   }
 
+  Future<void> settingUpUserType() async {
+    final user = _userNotifier.user;
+
+    UserModel? newUser;
+
+    if (isCaregiver) {
+      newUser = CaregiverUserModel.fromMap({
+        ...user.toMap(),
+        "type": UserType.caregiver.name,
+        "email": user.email,
+      });
+    } else if (isUser) {
+      newUser = PatientUserModel.fromMap({
+        ...user.toMap(),
+        "type": UserType.user.name,
+        "email": user.email,
+      });
+    } else {
+      if (user is CaregiverUserModel) {
+        isCaregiver = true;
+      } else if (user is PatientUserModel) {
+        isUser = true;
+      }
+    }
+
+    //Update the user type at the realtime database
+    await _aboutService.updateUserType(id: user.id, userType: (newUser ?? user).type);
+    if (newUser != null) await _profileService.updateUser(data: newUser.toMap(), userId: user.id);
+
+    await _localDatabaseRepository.setUser(newUser ?? user);
+    _userNotifier.setUser(newUser ?? user);
+
+    notifyListeners();
+  }
+
   Future<void> updateChanges() async {
-    final res = await _auth.getCurrentUser();
-    final user = res.right;
+    final user = _userNotifier.user;
     if (imageSelected) {
       /// upload the image and fetch its url
       imageUrl = await _profileService.uploadUserImage(
-        name: user.name,
+        name: user.settings.data.name,
         path: profileEditImage!.path,
         userId: user.id,
       );
@@ -92,17 +139,24 @@ class ProfileNotifier extends ChangeNotifier {
 
     /// create the data for the upload
     final birthdate = convertDate();
-    final Map<String, dynamic> data = {
-      "name": profileEditNameController.text,
-      "birth-date": birthdate,
-      "gender-pref": user.gender,
-      "last-name": profileEditSurnameController.text,
-      "avatar": {
-        "name": "local-use",
-        "url": imageSelected ? imageUrl : user.photoUrl,
-      }
-    };
-    await _profileService.updateUser(data: data, userId: user.id);
+
+    user.settings.data = user.settings.data.copyWith(
+      name: profileEditNameController.text,
+      birthDate: DateTime.fromMillisecondsSinceEpoch(birthdate),
+      lastName: profileEditSurnameController.text,
+      avatar: imageSelected
+          ? user.settings.data.avatar.copyWith(
+              network: imageUrl,
+            )
+          : user.settings.data.avatar,
+    );
+
+    await _profileService.updateUserSettings(data: user.settings.data.toMap(), userId: user.id);
+
+    await _localDatabaseRepository.setUser(user);
+    _userNotifier.setUser(user);
+
+    notifyListeners();
   }
 
   Future<void> pickImage({required bool cameraOrGallery}) async {
@@ -126,47 +180,18 @@ class ProfileNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> getConnectedUsers({required String userId}) async {
-    connectedUsers = [];
-    final res = await _profileService.getConnectedUsers(userId: userId);
-    if (res.isLeft) {
-      return;
-    }
-
-    connectedUsers.addAll(
-      res.right.values
-          .map<CareGiverUser>(
-            (element) =>
-                CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
-          )
-          .toList(),
-    );
-    notifyListeners();
-  }
-
   Future<void> fetchConnectedUsersData() async {
     connectedUsersData = [];
-    connectedUsersProfileData = [];
+    final connectedUsers = _userNotifier.user.caregiver.users.values.toList();
     await Future.wait(connectedUsers.map((e) async {
-      final res = await _profileService.fetchConnectedUserData(userId: e.userId);
+      final res = await _profileService.fetchConnectedUserData(userId: e.id);
       if (res.isRight) {
         final json = res.right;
 
         connectedUsersData.add(
-          ConnectedUserData(
-            name: json['name'],
-            image: json['avatar']['name'],
-          ),
+          BaseUserModel.fromMap(json),
         );
-        connectedUsersProfileData.add(
-          ProfileConnectedAccounts(
-            name: json['name'],
-            imageUrl: json['avatar']['name'],
-            id: e.userId,
-            isExpanded: false,
-          ),
-        );
-        print(json["name"]);
+        connectedUsersProfileDataExpanded.add(false);
       }
     }));
 
@@ -180,7 +205,8 @@ class ProfileNotifier extends ChangeNotifier {
 
     // update the whole list again
     dataFetched = false;
-    await getConnectedUsers(userId: careGiverId);
+    _userNotifier.user.caregiver.users.removeWhere((key, value) => key == userId);
+    _localDatabaseRepository.setUser(_userNotifier.user);
     await fetchConnectedUsersData();
     dataFetched = true;
     notify();
@@ -191,5 +217,16 @@ final profileProvider = ChangeNotifierProvider<ProfileNotifier>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final AuthRepository authService = GetIt.I.get<AuthRepository>();
   final ProfileRepository profileService = GetIt.I.get<ProfileRepository>();
-  return ProfileNotifier(pictogramService, authService, profileService);
+  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+  final userNot = ref.read(userNotifier.notifier);
+
+  final AboutRepository aboutRepository = GetIt.I.get<AboutRepository>();
+  return ProfileNotifier(
+    pictogramService,
+    authService,
+    profileService,
+    localDatabaseRepository,
+    userNot,
+    aboutRepository,
+  );
 });

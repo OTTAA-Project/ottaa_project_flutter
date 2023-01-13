@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:collection/collection.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:ottaa_project_flutter/core/use_cases/create_email_token.dart';
@@ -25,9 +28,8 @@ class LinkNotifier extends ChangeNotifier {
 
   LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._profileService, this._auth);
   //todo: add the proper value here
-  String userId = 'k1234';
-
-  // LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._auth);
+  String? userId;
+  UserModel? user;
 
   void tokenChanged(int id, String value) {
     if (value.length > 2) {
@@ -62,6 +64,7 @@ class LinkNotifier extends ChangeNotifier {
       final currentUser = await _auth.getCurrentUser();
       if (currentUser.isRight) {
         final email = currentUser.right.email;
+        print(email);
         return await createEmailToken.createEmailToken(email, emailController.text);
       }
     }
@@ -78,28 +81,34 @@ class LinkNotifier extends ChangeNotifier {
     final code = controllers.map((e) => e.text).join();
     final currentUser = await _auth.getCurrentUser();
     if (currentUser.isRight) {
-      final email = currentUser.right.email;
-      return await verifyEmailToken.verifyEmailToken(
+      final email = currentUser.right.email; //TODO: Check for id
+      final result = await verifyEmailToken.verifyEmailToken(
         email,
         emailController.text,
         code,
       );
+
+      if (result.isLeft) {
+        return result.left;
+      }
+
+      userId = result.right;
+
+      return null;
     }
 
     return "Error";
   }
 
   Future<void> userSuccessLinkAccount() async {
-    final res = await _profileService.getProfileByEmail(email: emailController.text);
+    final res = await _profileService.getProfileById(id: userId!);
     if (res.isLeft) {
-      print(res.left);
       return;
     }
 
-    final user = res.right;
+    user = BaseUserModel.fromMap(res.right);
 
-    print(user);
-
+    notifyListeners();
   }
 
   void reset() {

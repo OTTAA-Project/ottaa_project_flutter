@@ -4,9 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
-import 'package:ottaa_project_flutter/core/models/search_indexed_sentences_model.dart';
-import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
+import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 
@@ -31,21 +30,21 @@ class SentencesProvider extends ChangeNotifier {
 
   bool searchOrIcon = false;
 
-  List<Pict> _picts = [];
-  List<SentenceModel> sentences = [];
-  List<Pict> _sentencePicts = [];
-  List<List<Pict>> favouritePicts = [];
-  List<SentenceModel> favouriteSentences = [];
+  List<Picto> _picts = [];
+  List<Phrase> sentences = [];
+  List<Picto> _sentencePicts = [];
+  List<List<Picto>> favouritePicts = [];
+  List<Phrase> favouriteSentences = [];
   int currentFavIndex = 0;
-  List<List<Pict>> favouriteOrNotPicts = [];
-  List<SentenceModel> favouriteOrNotSentences = [];
+  List<List<Picto>> favouriteOrNotPicts = [];
+  List<Phrase> favouriteOrNotSentences = [];
   int currentFavOrNotIndex = 0;
   ScrollController favouriteSelectionController = ScrollController();
-  final List<List<Pict>> _sentencesPicts = [];
+  final List<List<Picto>> _sentencesPicts = [];
   int _selectedIndexFavSelection = 0;
   int _selectedIndexFav = 0;
 
-  List<List<Pict>> get sentencesPicts => _sentencesPicts;
+  List<List<Picto>> get sentencesPicts => _sentencesPicts;
 
   int _sentencesIndex = 0;
   int searchIndex = 0;
@@ -94,8 +93,8 @@ class SentencesProvider extends ChangeNotifier {
   int get selectedIndexFav => _selectedIndexFav;
 
   // sentences for searching list
-  List<SearchIndexedSentences> sentencesForSearch = [];
-  List<SearchIndexedSentences> sentencesForList = [];
+  // List<SearchIndexedSentences> sentencesForSearch = [];
+  // List<SearchIndexedSentences> sentencesForList = [];
 
   Future<void> inIt() async {
     await _loadSentences();
@@ -107,30 +106,30 @@ class SentencesProvider extends ChangeNotifier {
   void setAnimationController(AnimationController anim) => sentenceAnimationController = anim;
 
   Future<void> saveFavourite() async {
-    List<SentenceModel> toBeSaved = [];
-    for (var element in sentences) {
-      if (element.favouriteOrNot) {
-        toBeSaved.add(element);
-      }
-    }
-    await sentenceService.uploadSentences(
-      //todo: add the language here
-      language: 'es-AR',
-      data: toBeSaved,
-      type: kFavouriteSentences,
-    );
-    await fetchFavourites();
-    notifyListeners();
-    _selectedIndexFav = 0;
-    _selectedIndexFavSelection = 0;
+    // List<SentenceModel> toBeSaved = [];
+    // for (var element in sentences) {
+    //   if (element.favouriteOrNot) {
+    //     toBeSaved.add(element);
+    //   }
+    // }
+    // await sentenceService.uploadSentences(
+    //   //todo: add the language here
+    //   language: 'es_AR',
+    //   data: toBeSaved,
+    //   type: kFavouriteSentences,
+    // );
+    // await fetchFavourites();
+    // notifyListeners();
+    // _selectedIndexFav = 0;
+    // _selectedIndexFavSelection = 0;
   }
 
   Future<void> _loadSentences() async {
     _picts = await _pictogramsService.getAllPictograms();
     //todo: add the language here
-    final language = 'es-AR';
+    final language = 'es_AR';
     switch (language) {
-      case "es-AR":
+      case "es_AR":
         sentences = await sentenceService.fetchSentences(
           language: language,
           type: kMostUsedSentences,
@@ -178,23 +177,23 @@ class SentencesProvider extends ChangeNotifier {
     }
 
     ///sorting
-    Comparator<SentenceModel> sortById = (a, b) => a.frecuencia.compareTo(b.frecuencia);
-    sentences.sort(sortById);
+    // Comparator<Phrase> sortById = (a, b) => a.frecuencia.compareTo(b.frecuencia);
+    // sentences.sort(sortById);
     sentences = sentences.reversed.toList();
     if (sentences.length >= 10) {
       for (int i = 0; i <= 9; i++) {
         _sentencePicts = [];
-        for (var pictoComponente in sentences[i].complejidad.pictosComponentes) {
-          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
-        }
+        // for (var pictoComponente in sentences[i].complejidad.pictosComponentes) {
+        //   _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+        // }
         _sentencesPicts.add(_sentencePicts);
       }
     } else {
       for (var sentence in sentences) {
         _sentencePicts = [];
-        for (var pictoComponente in sentence.complejidad.pictosComponentes) {
-          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
-        }
+        // for (var pictoComponente in sentence.complejidad.pictosComponentes) {
+        //   _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+        // }
         _sentencesPicts.add(_sentencePicts);
       }
     }
@@ -202,12 +201,12 @@ class SentencesProvider extends ChangeNotifier {
   }
 
   void fetchFavOrNot() {
-    Comparator<SentenceModel> sortById = (a, b) => a.frecuencia.compareTo(b.frecuencia);
-    sentences.sort(sortById);
+    // Comparator<SentenceModel> sortById = (a, b) => a.frecuencia.compareTo(b.frecuencia);
+    // sentences.sort(sortById);
     sentences = sentences.reversed.toList();
     for (var element in sentences) {
       _sentencePicts = [];
-      for (var pictoComponente in element.complejidad.pictosComponentes) {
+      for (var pictoComponente in element.sequence) {
         // if()
         //todo: will fix it when we will be working on the new UI, For now it is juts a lazy fix
         bool found = false;
@@ -230,9 +229,9 @@ class SentencesProvider extends ChangeNotifier {
 
   Future<void> fetchFavourites() async {
     //todo:
-    final language = 'es-AR';
+    final language = 'es_AR';
     switch (language) {
-      case "es-AR":
+      case "es_AR":
         favouriteSentences = await sentenceService.fetchSentences(
           language: language,
           type: kFavouriteSentences,
@@ -288,7 +287,7 @@ class SentencesProvider extends ChangeNotifier {
     if (favouriteSentences.length >= 10) {
       for (int i = 0; i <= 9; i++) {
         _sentencePicts = [];
-        for (var pictoComponente in favouriteSentences[i].complejidad.pictosComponentes) {
+        for (var pictoComponente in favouriteSentences[i].sequence) {
           _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         favouritePicts.add(_sentencePicts);
@@ -296,7 +295,7 @@ class SentencesProvider extends ChangeNotifier {
     } else {
       for (var sentence in favouriteSentences) {
         _sentencePicts = [];
-        for (var pictoComponente in sentence.complejidad.pictosComponentes) {
+        for (var pictoComponente in sentence.sequence) {
           _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         favouritePicts.add(_sentencePicts);
@@ -309,31 +308,12 @@ class SentencesProvider extends ChangeNotifier {
       String voiceText = "";
       for (var pict in _sentencesPicts[_sentencesIndex]) {
         //todo: add the language here too
-        final language = 'es-AR'; //FUCK THE POLICE!!!
-
-        switch (language) {
-          // case "es-AR":
-          //   voiceText += ' ' + pict.texto.es;
-          //   break;
-          case "es-AR":
-            voiceText += ' ${pict.texto.es}';
-            break;
-          case "en-US":
-            voiceText += ' ${pict.texto.en}';
-            break;
-          case "fr-FR":
-            voiceText += ' ${pict.texto.fr}';
-            break;
-          case "pt-BR":
-            voiceText += ' ${pict.texto.pt}';
-            break;
-          default:
-            voiceText += ' ${pict.texto.es}';
-        }
+        final language = 'es_AR'; //FUCK THE POLICE!!!
+        voiceText += ' ${pict.text[language]}';
       }
 
       await _tts.speak(voiceText);
-      print(sentencesForSearch[_sentencesIndex].sentence);
+      // print(sentencesForSearch[_sentencesIndex].sentence);
       print(_sentencesIndex);
     }
   }
@@ -343,25 +323,9 @@ class SentencesProvider extends ChangeNotifier {
       String voiceText = "";
       for (var pict in favouriteOrNotPicts[_selectedIndexFavSelection]) {
         //todo: add teh language here
-        switch ('es-AR') {
-          // case "es-AR":
-          //   voiceText += ' ' + pict.texto.es;
-          //   break;
-          case "es-AR":
-            voiceText += ' ${pict.texto.es}';
-            break;
-          case "en-US":
-            voiceText += ' ${pict.texto.en}';
-            break;
-          case "fr-FR":
-            voiceText += ' ${pict.texto.fr}';
-            break;
-          case "pt-BR":
-            voiceText += ' ${pict.texto.pt}';
-            break;
-          default:
-            voiceText += ' ${pict.texto.es}';
-        }
+        voiceText += ' ${pict.text['es']}';
+
+        ///TODO: Update this
       }
 
       await _tts.speak(voiceText);
@@ -377,25 +341,9 @@ class SentencesProvider extends ChangeNotifier {
       String voiceText = "";
       for (var pict in favouritePicts[_selectedIndexFav]) {
         //todo: add teh language here
-        switch ('es-AR') {
-          // case "es-AR":
-          //   voiceText += ' ' + pict.texto.es;
-          //   break;
-          case "es-AR":
-            voiceText += ' ${pict.texto.es}';
-            break;
-          case "en-US":
-            voiceText += ' ${pict.texto.en}';
-            break;
-          case "fr-FR":
-            voiceText += ' ${pict.texto.fr}';
-            break;
-          case "pt-BR":
-            voiceText += ' ${pict.texto.pt}';
-            break;
-          default:
-            voiceText += ' ${pict.texto.es}';
-        }
+        voiceText += ' ${pict.text['es']}';
+
+        ///TODO: Update this
       }
 
       await _tts.speak(voiceText);
@@ -407,96 +355,96 @@ class SentencesProvider extends ChangeNotifier {
   }
 
   Future<void> searchSpeak() async {
-    if (_sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
-      String voiceText = "";
-      for (var pict in _sentencesPicts[sentencesForList[searchIndex].index]) {
-        //todo: add the language here
-        switch ('es-AR') {
-          // case "es-AR":
-          //   voiceText += ' ' + pict.texto.es;
-          //   break;
-          case "es-AR":
-            voiceText += ' ${pict.texto.es}';
-            break;
-          case "en-US":
-            voiceText += ' ${pict.texto.en}';
-            break;
-          case "fr-FR":
-            voiceText += ' ${pict.texto.fr}';
-            break;
-          case "pt-BR":
-            voiceText += ' ${pict.texto.pt}';
-            break;
-          default:
-            voiceText += ' ${pict.texto.es}';
-        }
-      }
+    // if (_sentencesPicts[sentencesForList[searchIndex].index].isNotEmpty) {
+    //   String voiceText = "";
+    //   for (var pict in _sentencesPicts[sentencesForList[searchIndex].index]) {
+    //     //todo: add the language here
+    //     switch ('es_AR') {
+    //       // case "es_AR":
+    //       //   voiceText += ' ' + pict.texto.es;
+    //       //   break;
+    //       case "es_AR":
+    //         voiceText += ' ${pict.texto.es}';
+    //         break;
+    //       case "en-US":
+    //         voiceText += ' ${pict.texto.en}';
+    //         break;
+    //       case "fr-FR":
+    //         voiceText += ' ${pict.texto.fr}';
+    //         break;
+    //       case "pt-BR":
+    //         voiceText += ' ${pict.texto.pt}';
+    //         break;
+    //       default:
+    //         voiceText += ' ${pict.texto.es}';
+    //     }
+    //   }
 
-      await _tts.speak(voiceText);
-      print(sentencesForList[searchIndex].sentence);
-      print('search index is $searchIndex');
-      print('the index from controller is ${sentencesForList[searchIndex].index}');
-    }
+    //   await _tts.speak(voiceText);
+    //   print(sentencesForList[searchIndex].sentence);
+    //   print('search index is $searchIndex');
+    //   print('the index from controller is ${sentencesForList[searchIndex].index}');
+    // }
   }
 
   Future<void> createListForSearching() async {
     int i = 0;
     for (var e1 in _sentencesPicts) {
       String sentence = '';
-      for (var e2 in e1) {
-        //todo: add the language here
-        switch ('es-AR') {
-          // case "es":
-          //   sentence += ' ' + e2.texto.es;
-          //   break;
-          case "es-AR":
-            sentence += ' ${e2.texto.es}';
-            break;
-          case "en-US":
-            sentence += ' ${e2.texto.en}';
-            break;
-          case "fr-FR":
-            sentence += ' ${e2.texto.fr}';
-            break;
-          case "pt-BR":
-            sentence += ' ${e2.texto.pt}';
-            break;
-          default:
-            sentence += ' ${e2.texto.es}';
-        }
-      }
+      // for (var e2 in e1) {
+      //   //todo: add the language here
+      //   switch ('es_AR') {
+      //     // case "es":
+      //     //   sentence += ' ' + e2.texto.es;
+      //     //   break;
+      //     case "es_AR":
+      //       sentence += ' ${e2.texto.es}';
+      //       break;
+      //     case "en-US":
+      //       sentence += ' ${e2.texto.en}';
+      //       break;
+      //     case "fr-FR":
+      //       sentence += ' ${e2.texto.fr}';
+      //       break;
+      //     case "pt-BR":
+      //       sentence += ' ${e2.texto.pt}';
+      //       break;
+      //     default:
+      //       sentence += ' ${e2.texto.es}';
+      //   }
+      // }
 
-      sentencesForSearch.add(
-        SearchIndexedSentences(sentence: sentence, index: i),
-      );
+      // sentencesForSearch.add(
+      //   SearchIndexedSentences(sentence: sentence, index: i),
+      // );
       i++;
     }
-    for (var element in sentencesForSearch) {
-      print(element.sentence);
-    }
-    sentencesForList.addAll(sentencesForSearch);
+    // for (var element in sentencesForSearch) {
+    //   print(element.sentence);
+    // }
+    // sentencesForList.addAll(sentencesForSearch);
   }
 
   Future<void> onChangedText(String v) async {
-    List<SearchIndexedSentences> listData = [];
-    if (v.isNotEmpty) {
-      for (var element in sentencesForSearch) {
-        final b = element.sentence.toUpperCase().contains(v.toString().toUpperCase(), 0);
-        if (b) {
-          listData.add(element);
-        }
-      }
-      sentencesForList.clear();
-      sentencesForList.addAll(listData);
-      searchIndex = 0;
-      print(sentencesForList.length);
-      notifyListeners();
-    } else {
-      sentencesForList.addAll(sentencesForSearch);
-      searchIndex = 0;
-      print(sentencesForList.length);
-      notifyListeners();
-    }
+    // List<SearchIndexedSentences> listData = [];
+    // if (v.isNotEmpty) {
+    //   for (var element in sentencesForSearch) {
+    //     final b = element.sentence.toUpperCase().contains(v.toString().toUpperCase(), 0);
+    //     if (b) {
+    //       listData.add(element);
+    //     }
+    //   }
+    //   sentencesForList.clear();
+    //   sentencesForList.addAll(listData);
+    //   searchIndex = 0;
+    //   print(sentencesForList.length);
+    //   notifyListeners();
+    // } else {
+    //   sentencesForList.addAll(sentencesForSearch);
+    //   searchIndex = 0;
+    //   print(sentencesForList.length);
+    //   notifyListeners();
+    // }
   }
 
   void decrementOne() {
@@ -508,11 +456,7 @@ class SentencesProvider extends ChangeNotifier {
   }
 
   void incrementOne() {
-    if (sentencesForList.length - 1 != searchIndex) {
-      searchIndex++;
-    }
-    notifyListeners();
-    print(searchIndex);
+    // s
   }
 
   void changeSelectedIndexFavSelection(int index) {

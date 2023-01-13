@@ -38,8 +38,7 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                     ),
                     child: Text(
                       "onboarding.profile.subtitle".trl,
-                      style: textTheme.button!
-                          .copyWith(color: colorScheme.onBackground),
+                      style: textTheme.button!.copyWith(color: colorScheme.onBackground),
                     ),
                   ),
                   ActionCard(
@@ -51,6 +50,7 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                       provider.notify();
                     },
                     focused: provider.isCaregiver,
+                    imageSize: const Size(129, 96),
                   ),
                   const SizedBox(
                     height: 16,
@@ -64,6 +64,7 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                       provider.notify();
                     },
                     focused: !provider.isCaregiver,
+                    imageSize: const Size(129, 96),
                   ),
                 ],
               ),

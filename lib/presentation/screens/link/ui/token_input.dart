@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TokenInput extends StatelessWidget {
   final TextEditingController controller;
@@ -18,6 +19,10 @@ class TokenInput extends StatelessWidget {
       ),
       onChanged: (value) => onChanged?.call(tokenId, value),
       textAlign: TextAlign.center,
+      keyboardType: TextInputType.number,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
     );
   }
 }

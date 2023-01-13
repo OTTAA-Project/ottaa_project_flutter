@@ -30,7 +30,6 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await provider.setDate();
       if (provider.isCaregiver) {
-        await provider.getConnectedUsers(userId: user!.id);
         await provider.fetchConnectedUsersData();
       }
     });
@@ -45,6 +44,8 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
     final provider = ref.watch(profileProvider);
 
     final user = ref.watch(userNotifier);
+
+    if(user == null) return Container();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -64,7 +65,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                           onTap: () =>
                               context.push(AppRoutes.profileSettingsScreen),
                           child: ProfilePhotoWidget(
-                            image: user?.photoUrl ?? "",
+                            image: user.settings.data.avatar.network ?? "",
                           ),
                         ),
                         const SizedBox(
@@ -72,7 +73,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                         ),
                         //TODO Emir this is not working
                         Text(
-                          "profile.hello".trlf({"name": user?.name}),
+                          "profile.hello".trlf({"name": user.settings.data.name}),
                         ),
                       ],
                     ),

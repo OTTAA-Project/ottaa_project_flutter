@@ -3,9 +3,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
+import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
@@ -22,7 +29,7 @@ class AuthService extends AuthRepository {
 
   @override
   Future<Either<String, UserModel>> getCurrentUser() async {
-    UserModel? userDb = _databaseRepository.user;
+    UserModel? userDb = await _databaseRepository.getUser();
     if (userDb == null) {
       return const Left("No user logged");
     }
@@ -71,8 +78,7 @@ class AuthService extends AuthRepository {
       case SignInType.apple:
       case SignInType.email:
       default:
-        return const Left(
-            "error_no_implement_auth_method"); //TODO: Implement translate method.
+        return const Left("error_no_implement_auth_method"); //TODO: Implement translate method.
     }
 
     if (result.isRight) {
@@ -85,20 +91,45 @@ class AuthService extends AuthRepository {
       if (userInfo.isLeft) {
         await signUp();
 
-        final nameRetriever =
-            user.displayName ?? user.providerData[0].displayName;
+        final nameRetriever = user.displayName ?? user.providerData[0].displayName;
         final emailRetriever = user.email ?? user.providerData[0].email;
 
-        userModel = UserModel(
+        userModel = BaseUserModel(
           id: user.uid,
-          name: nameRetriever ?? "",
+          settings: BaseSettingsModel(
+              data: UserData(
+                avatar: AssetsImage(asset: "671", network: user.photoURL),
+                birthDate: DateTime.fromMillisecondsSinceEpoch(0),
+                genderPref: "n/a",
+                lastConnection: DateTime.now(),
+                lastName: "",
+                name: nameRetriever ?? "",
+              ),
+              language: "es_AR"),
           email: emailRetriever ?? "",
-          photoUrl: user.photoURL ?? "",
-          isFirstTime: true,
-          language: "es",
         );
       } else {
-        userModel = UserModel.fromRemote(userInfo.right);
+        switch (userInfo.right["type"]) {
+          case "caregiver":
+            userModel = CaregiverUserModel.fromMap({
+              "email": user.email ?? user.providerData[0].email,
+              ...userInfo.right,
+            });
+            break;
+          case "user":
+            userModel = PatientUserModel.fromMap({
+              "email": user.email ?? user.providerData[0].email,
+              ...userInfo.right,
+            });
+            break;
+          case "none":
+          default:
+            userModel = BaseUserModel.fromMap({
+              "email": user.email ?? user.providerData[0].email,
+              ...userInfo.right,
+            });
+            break;
+        }
       }
 
       return Right(userModel);
@@ -115,16 +146,14 @@ class AuthService extends AuthRepository {
         return const Left("error_google_sign_in_cancelled");
       }
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential =
-          await _authProvider.signInWithCredential(credential);
+      final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
 
       if (userCredential.user == null) {
         return const Left("error_google_sign_in_cancelled");
@@ -145,11 +174,9 @@ class AuthService extends AuthRepository {
       if (result.status == LoginStatus.success) {
         final AccessToken accessToken = result.accessToken!;
 
-        final AuthCredential credential =
-            FacebookAuthProvider.credential(accessToken.token);
+        final AuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
 
-        final UserCredential userCredential =
-            await _authProvider.signInWithCredential(credential);
+        final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
 
         if (userCredential.user == null) {
           return const Left("error_facebook_sign_in_cancelled");
@@ -179,17 +206,21 @@ class AuthService extends AuthRepository {
     final nameRetriever = user.displayName ?? user.providerData[0].displayName;
     final emailRetriever = user.email ?? user.providerData[0].email;
 
-    final userModel = UserModel(
+    final userModel = BaseUserModel(
       id: user.uid,
-      name: nameRetriever ?? "",
+      settings: BaseSettingsModel(
+          data: UserData(
+            avatar: AssetsImage(asset: "671", network: user.photoURL),
+            birthDate: DateTime.fromMillisecondsSinceEpoch(0),
+            genderPref: "n/a",
+            lastConnection: DateTime.now(),
+            lastName: "",
+            name: nameRetriever ?? "",
+          ),
+          language: "es_AR"),
       email: emailRetriever ?? "",
-      photoUrl: user.photoURL ?? "",
-      isFirstTime: true,
-      language: "es",
     );
-
-    await _serverRepository.uploadUserInformation(
-        user.uid, userModel.toRemote());
+    await _serverRepository.uploadUserInformation(user.uid, userModel.toMap());
 
     return const Right(true);
   }

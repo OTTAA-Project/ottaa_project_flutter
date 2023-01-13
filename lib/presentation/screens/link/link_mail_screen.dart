@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -80,6 +82,7 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
                     await LoadingModal.show(context, future: () async {
                       result = await provider.sendEmail();
                     });
+                    log(result ?? "EROR");
                     if (mounted) {
                       if (result != null) {
                         OTTAANotification.primary(context, text: "link.error.$result".trl);

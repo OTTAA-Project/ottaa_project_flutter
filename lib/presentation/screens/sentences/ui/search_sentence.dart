@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/column_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
@@ -86,80 +86,61 @@ class SearchSentenceScreen extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              provider.sentencesForList.isNotEmpty
-                                  ? Container(
-                                      height: verticalSize / 3,
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: provider
-                                                .sentencesPicts[provider
-                                                    .sentencesForList[
-                                                        provider.searchIndex]
-                                                    .index]
-                                                .length +
-                                            1,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          final Pict speakPict = Pict(
-                                            localImg: true,
-                                            id: 0,
-                                            texto: Texto(),
-                                            tipo: 6,
-                                            imagen:
-                                                Imagen(picto: "logo_ottaa_dev"),
-                                          );
-                                          if (provider
-                                                  .sentencesPicts[provider
-                                                      .sentencesForList[
-                                                          provider.searchIndex]
-                                                      .index]
-                                                  .length >
-                                              index) {
-                                            final Pict pict =
-                                                provider.sentencesPicts[provider
-                                                    .sentencesForList[
-                                                        provider.searchIndex]
-                                                    .index][index];
-                                            return Container(
-                                              margin: const EdgeInsets.all(10),
-                                              child: MiniPicto(
-                                                localImg: pict.localImg,
-                                                pict: pict,
-                                                onTap: () {
-                                                  provider.searchSpeak();
-                                                },
-                                              ),
-                                            );
-                                          } else {
-                                            return Bounce(
-                                              from: 6,
-                                              infinite: true,
-                                              child: Container(
-                                                margin:
-                                                    const EdgeInsets.all(10),
-                                                child: MiniPicto(
-                                                  localImg: speakPict.localImg,
-                                                  pict: speakPict,
-                                                  onTap: () {
-                                                    provider.searchSpeak();
-                                                  },
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                      ),
-                                    )
-                                  : Center(
-                                      child: Text(
-                                        'please_enter_a_valid_search'.trl,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 23,
-                                        ),
-                                      ),
-                                    ),
+                              // provider.sentences.isNotEmpty
+                              //     ? Container(
+                              //         height: verticalSize / 3,
+                              //         child: ListView.builder(
+                              //           shrinkWrap: true,
+                              //           scrollDirection: Axis.horizontal,
+                              //           itemCount: provider.sentencesPicts[provider.sentencesForList[provider.searchIndex].index].length + 1,
+                              //           itemBuilder: (BuildContext context, int index) {
+                              //             final Picto speakPict = Picto(
+                              //               localImg: true,
+                              //               id: 0,
+                              //               texto: Texto(),
+                              //               tipo: 6,
+                              //               imagen: Imagen(picto: "logo_ottaa_dev"),
+                              //             );
+                              //             if (provider.sentencesPicts[provider.sentencesForList[provider.searchIndex].index].length > index) {
+                              //               final Picto pict = provider.sentencesPicts[provider.sentencesForList[provider.searchIndex].index][index];
+                              //               return Container(
+                              //                 margin: const EdgeInsets.all(10),
+                              //                 child: MiniPicto(
+                              //                   localImg: pict.localImg,
+                              //                   pict: pict,
+                              //                   onTap: () {
+                              //                     provider.searchSpeak();
+                              //                   },
+                              //                 ),
+                              //               );
+                              //             } else {
+                              //               return Bounce(
+                              //                 from: 6,
+                              //                 infinite: true,
+                              //                 child: Container(
+                              //                   margin: const EdgeInsets.all(10),
+                              //                   child: MiniPicto(
+                              //                     localImg: speakPict.localImg,
+                              //                     pict: speakPict,
+                              //                     onTap: () {
+                              //                       provider.searchSpeak();
+                              //                     },
+                              //                   ),
+                              //                 ),
+                              //               );
+                              //             }
+                              //           },
+                              //         ),
+                              //       )
+                              //     : Center(
+                              //         child: Text(
+                              //           'please_enter_a_valid_search'.trl,
+                              //           style: const TextStyle(
+                              //             color: Colors.white,
+                              //             fontSize: 23,
+                              //           ),
+                              //         ),
+                              //       ),
                             ],
                           ),
                         ),

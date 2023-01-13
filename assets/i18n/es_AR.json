@@ -40,7 +40,7 @@
     "use": {
       "ottaa": "Usar OTTAA"
     },
-    "close_profile" : "Esconder perfil",
+    "close_profile": "Esconder perfil",
     "open_profile": "Ver perfil",
     "no_account": "Modo sin perfil",
     "new_existant": "Nuevo/Existente",
@@ -104,8 +104,8 @@
   "user": {
     "main": {
       "title": "Configura tu experiencia",
-      "subtitle1" : "Uso de la aplicación",
-      "subtitle2" : "Lenguaje predictivo"
+      "subtitle1": "Uso de la aplicación",
+      "subtitle2": "Lenguaje predictivo"
     }
   },
   "global": {
@@ -130,13 +130,12 @@
     "share": "Compartir",
     "support": "Soporte",
     "congrats": "Felicitaciones",
-    "settings" : "Configuración",
-    "general" : "General",
-    "pictograms" : "Pictogramas"
-    "support": "Soporte",
-    "pictogram" : "Pictograms",
-    "configuration" : "Configuración",
-    "user_ottaa" : "Usar Ottaa {name}"
+    "settings": "Configuración",
+    "general": "General",
+    "pictograms": "Pictogramas",
+    "pictogram": "Pictograms",
+    "configuration": "Configuración",
+    "user_ottaa": "Usar Ottaa {name}"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -216,8 +215,7 @@
     "board": {
       "title": "¿Qué tableros utilizará el usuario para comunicarse?",
       "appbar": "Tableros predictivos",
-      "skip": "¿Omitir la elección de tableros?"
-      "appbar": "Tableros predictivos",
+      "skip": "¿Omitir la elección de tableros?",
       "subtitle": "Ver pictogramas"
     },
     "shortcut": {
@@ -227,10 +225,6 @@
       "history": "Historial",
       "camera": "Cámara",
       "games": "Juegos"
-    },
-    "wait": {
-      "button": "Ir al panel de perfiles",
-      "description": "Configuraste correctamente la experiencia de {name}"
     },
     "picto": {
       "title": "Tablero {name}",

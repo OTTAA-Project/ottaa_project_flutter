@@ -5,8 +5,11 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
-import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,11 +25,13 @@ class ServerService implements ServerRepository {
 
   @override
   Future<UserType> getUserType(String userId) async {
-    final ref = _database.child('$userId/Pago/Pago');
+    final ref = _database.child('$userId/type');
     final res = await ref.get();
-    if (res.value == null || res.value.toString() == "0") return UserType.free;
 
-    return UserType.premium;
+    return UserType.values.firstWhere(
+      (element) => element.name == res.value.toString(),
+      orElse: () => UserType.none,
+    );
   }
 
   @override
@@ -83,7 +88,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getUserInformation(String id) async {
-    final userRef = _database.child('$id/Usuarios/');
+    final userRef = _database.child(id);
 
     final userValue = await userRef.get();
 
@@ -96,32 +101,24 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherString> getUserProfilePicture(String userId) async {
-    final refNew = _database.child('$userId/Usuarios/Avatar/urlFoto/');
+    final refNew = _database.child('$userId/settings/data/avatar/');
     final resNew = await refNew.get();
 
     if (resNew.exists && resNew.value != null) {
       return Right(resNew.value.toString());
     }
 
-    /// Get the profile picture from the database at the old path
-    final refOld = _database.child('Avatar/$userId/urlFoto/');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return Right(resOld.value.toString());
-    }
-
     return const Left("no_data_found");
   }
 
   @override
-  Future<List<SentenceModel>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
+  Future<List<Phrase>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
     final refNew = _database.child('$userId/Frases/$language/$type');
     final resNew = await refNew.get();
     if (resNew.exists && resNew.value != null) {
       final encode = jsonEncode(resNew.value);
       // print('returned from bew');
-      return (jsonDecode(encode) as List).map((e) => SentenceModel.fromJson(e)).toList();
+      return (jsonDecode(encode) as List).map((e) => Phrase.fromJson(e)).toList();
       // print('returned from bew');
       // return Right(jsonDecode(data));
     }
@@ -130,7 +127,7 @@ class ServerService implements ServerRepository {
     final resOld = await refOld.get();
     if (resOld.exists && resOld.value != null) {
       final data = resOld.children.first.value as String;
-      return (jsonDecode(data) as List).map((e) => SentenceModel.fromJson(e)).toList();
+      return (jsonDecode(data) as List).map((e) => Phrase.fromJson(e)).toList();
     }
 
     return const [];
@@ -164,9 +161,7 @@ class ServerService implements ServerRepository {
   Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
     try {
-      await ref.set({
-        'maps':true
-      });
+      await ref.set({'maps': true});
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -187,7 +182,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data) async {
-    final ref = _database.child('$userId/Usuarios/');
+    final ref = _database.child(userId);
 
     try {
       await ref.update(data);
@@ -198,14 +193,11 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadUserPicture(String userId, String picture, String photoUrl) async {
-    final ref = _database.child('$userId/Usuarios/Avatar/');
+  Future<EitherVoid> uploadUserPicture(String userId, AssetsImage image) async {
+    final ref = _database.child('$userId/settings/data/avatar');
 
     try {
-      await ref.update({
-        'name': photoUrl,
-        'urlFoto': picture,
-      });
+      await ref.update(image.toMap());
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -254,7 +246,7 @@ class ServerService implements ServerRepository {
     final body = {
       'UserID': userId,
       //todo: add here the language too
-      'Language': 'ES-AR',
+      'Language': 'es_AR',
     };
     final res = await http.post(
       uri,
@@ -271,7 +263,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> updateUser({
+  Future<void> updateUserSettings({
     required Map<String, dynamic> data,
     required String userId,
   }) async {
@@ -334,11 +326,11 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> setShortcutsForUser({required Map<String, dynamic> shortcuts, required String userId}) async {
+  Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId}) async {
     final ref = _database.child('$userId/shortcuts/');
 
     try {
-      await ref.set(shortcuts);
+      await ref.set(shortcuts.toMap());
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -402,8 +394,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getProfileByEmail({required String email}) async {
-    final ref = _database.child("/").orderByChild("Usuarios.Email").equalTo(email);
+  Future<EitherMap> getProfileById({required String id}) async {
+    final ref = _database.child(id);
 
     final res = await ref.get();
 
@@ -424,5 +416,12 @@ class ServerService implements ServerRepository {
     }
 
     return const Left("no_data_found");
+  }
+
+  @override
+  Future<void> updateUserType({required String id, required UserType userType}) async {
+    final ref = _database.child("$id/type");
+
+    await ref.set(userType.name);
   }
 }

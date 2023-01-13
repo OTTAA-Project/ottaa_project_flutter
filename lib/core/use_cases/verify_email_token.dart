@@ -1,3 +1,4 @@
+import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
 abstract class VerifyEmailToken {
@@ -5,5 +6,5 @@ abstract class VerifyEmailToken {
 
   const VerifyEmailToken(this.serverService);
 
-  Future<String?> verifyEmailToken(String ownEmail, String email, String token);
+  Future<Either<String, String>> verifyEmailToken(String ownEmail, String email, String token);
 }

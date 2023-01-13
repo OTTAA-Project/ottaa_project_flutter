@@ -10,7 +10,7 @@ import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/service/about_service.dart';
 import 'package:ottaa_project_flutter/application/service/auth_service.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,7 +39,7 @@ void main(){
       birthdate: 0,
       gender: "male",
       isFirstTime: true,
-      language: "es-ar",
+      language: "es_AR",
     );
     mockAuthProvider = MockAuthProvider();
     mockLoadingNotifier = MockLoadingNotifier();

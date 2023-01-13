@@ -21,13 +21,13 @@ class ProfileMainScreenUser extends ConsumerWidget {
         leading: GestureDetector(
           onTap: () => context.push(AppRoutes.profileSettingsScreen),
           child: ProfilePhotoWidget(
-            image: user?.photoUrl ?? "",
+            image: user?.settings.data.avatar.network ?? "",
           ),
         ),
         title: Padding(
           padding: const EdgeInsets.only(left: 24),
           child: Text(
-            'profile.hello'.trlf({'name': user!.name}),
+            'profile.hello'.trlf({'name': user!.settings.data.name}),
             style: textTheme.headline3,
           ),
         ),
@@ -46,8 +46,7 @@ class ProfileMainScreenUser extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ActionCard(
-                title:
-                    '${'profile.tips.title2'.trl} / ${'global.pictograms'.trl}',
+                title: '${'profile.tips.title2'.trl} / ${'global.pictograms'.trl}',
                 subtitle: 'user.main.subtitle2'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
                 onPressed: () {},
@@ -77,7 +76,7 @@ class ProfileMainScreenUser extends ConsumerWidget {
             const Spacer(),
             PrimaryButton(
               onPressed: () => context.push(AppRoutes.home),
-              text: '${'profile.use.ottaa'.trl} ${user.name}',
+              text: '${'profile.use.ottaa'.trl} ${user.settings.data.name}',
             ),
             const SizedBox(
               height: 24,

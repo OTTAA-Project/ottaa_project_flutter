@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:either_dart/either.dart';
-import 'package:ottaa_project_flutter/core/models/care_giver_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
@@ -11,8 +10,8 @@ class ProfileService implements ProfileRepository {
   ProfileService(this._serverRepository);
 
   @override
-  Future<void> updateUser({required Map<String, dynamic> data, required String userId}) async {
-    return await _serverRepository.updateUser(data: data, userId: userId);
+  Future<void> updateUserSettings({required Map<String, dynamic> data, required String userId}) async {
+    return await _serverRepository.updateUserSettings(data: data, userId: userId);
   }
 
   @override
@@ -36,7 +35,12 @@ class ProfileService implements ProfileRepository {
   }
 
   @override
-  Future<Either<String, Map<String, dynamic>>> getProfileByEmail({required String email}) {
-    return _serverRepository.getProfileByEmail(email: email);
+  Future<Either<String, Map<String, dynamic>>> getProfileById({required String id}) {
+    return _serverRepository.getProfileById(id: id);
+  }
+
+  @override
+  Future<void> updateUser({required Map<String, dynamic> data, required String userId}) async{
+    await _serverRepository.uploadUserInformation(userId, data);
   }
 }
