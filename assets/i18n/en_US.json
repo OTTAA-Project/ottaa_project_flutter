@@ -2,8 +2,7 @@
   "profile": {
     "selection": {
       "text1": "Who is going to use the app on this device?",
-      "caregiver_text": "Necesita comunicarse",
-      "user_text": "Necesita comunicarse"
+      "user_text": "Needs to comunicate"
     },
     "hello": "Hi {name}!",
     "ottaa": {
@@ -13,31 +12,31 @@
     "date": "Date of birth",
     "faq": {
       "title": "Frequently Asked Questions",
-      "faq0": "¿Quién puede usar la aplicación OTTAA?",
-      "faq0Description": "OTTAA está diseñado para personas no verbales, es decir, cualquier persona que no utilice el habla oral para comunicarse. Las personas que usan OTTAA hoy en día fueron diagnosticadas con autismo, parálisis cerebral, síndrome de Down, esclerosis lateral amiotrófica (ELA), atrofia muscular espinal (AME) o síndrome de enclaustramiento post al accidente cerebrovascular (LiS), entre otras afecciones. Al ser una herramienta de comunicación dinámica, OTTAA requiere que sus usuarios posean funciones cognitivas de nivel medio a alto. Sin embargo, nos gusta considerar cada caso individualmente, así que no dude en ponerte en contacto y solicitar una evaluación en línea con nuestro equipo.",
-      "faq1": "¿Cómo funciona la aplicación?",
-      "faq1Description": "La aplicación OTTAA proporciona al usuario pictogramas: imágenes que representan acciones, objetos, sentimientos o emociones. El usuario puede elegir los pictogramas que necesita y crear una frase, esta se traduce de los pictogramas a una oración escrita que aparece en la pantalla y que la aplicación también lee en voz alta. Consultá nuestro canal de Youtube para obtener una explicación más visual.",
-      "faq2": "¿En qué se diferencia esta aplicación de otros dispositivos AAC (comunicación aumentativa y alternativa)?",
-      "faq2Description": "La aplicación OTTAA es diferente de otras aplicaciones de CAA debido a su innovador algoritmo predictivo y generador de lenguaje natural, que permite que la aplicación aprenda del comportamiento del usuario en la aplicación, su edad, sexo, la hora del día y su ubicación para pre -seleccionar pictograma(s) para el momento comunicacional en el que se encuentran.",
-      "faq3": "¿Cuánto cuesta la aplicación OTTAA?",
-      "faq3Description": "La aplicación OTTAA es gratuita para descargar y usar. Para crear un producto sostenible que resista el paso del tiempo, hay algunas características que requieren una suscripción para utilizarlas. Sin embargo, estamos trabajando arduamente para brindar financiamiento a todos los que lo necesitan.\n\nSi estás en Argentina, cualquier ayuda técnica que necesite una persona debe estar cubierto por un seguro de salud. Comuníquese con nuestro equipo para obtener orientación y asistencia sobre cómo obtener esta cobertura.\n\nSi sos de cualquier otro país de LATAM y querés compartir tu experiencia sobre este tema, no dudes en comunicarte, tu contribución podría ayudar a muchas personas.",
-      "faq4": "¿Qué idiomas son compatibles con el Proyecto OTTAA?",
-      "faq4Description": "Actualmente admitimos español, inglés, portugués y francés. Para español, tenemos versiones localizadas de Argentina, Chile, Colombia y España. Estamos buscando activamente contribuciones sobre nuevos idiomas o una mejor localización para las variedades españolas. Únase a nuestra comunidad de crowdin para contribuir.",
-      "faq5": "¿Cómo puedo colaborar con el Proyecto OTTAA?",
-      "faq5Description": "Los colaboradores pueden ayudar a OTTAA con el desarrollo, las pruebas y/o la traducción. Para leer más sobre el tema y comenzar, consulte la sección Contribuir en el repositorio oficial de OTTAA en GitHub."
+      "faq0": "Who can use the OTTAA app?",
+      "faq0Description": "OTTAA is designed for non-verbal individuals, that is anyone that does not use oral speech to communicate. People that are using OTTAA today were diagnosed with autism, cerebral palsy, Down syndrome, Amyotrophic Lateral Sclerosis (ALS), Spinal Motor Atrophy (SMA), or post-stroke locked-in syndrome (LiS), among other affections. Being a dynamic communication tool, OTTAA requires its users to be capable of mid to high-level cognitive functions. However, we like to consider every case individually so do not hesitate to get in touch and request an online assessment with our team.",
+      "faq1": "How does the app work?",
+      "faq1Description": "The OTTAA app provides the user with pictograms: images that represent actions, objects, feelings, or emotions. The user can choose the pictogram(s) he or she needs and create a speech utterance. The utterance is translated from the pictogram(s) to a written sentence that appears on the screen and is also read out loud by the app. Check out our Youtube channel for a more visual explanation.",
+      "faq2": "How is this app different from other AAC (augmentative and alternative communication) devices?",
+      "faq2Description": "The OTTAA app is different from other AAC apps because of its innovative predictive algorithm and natural language generator, which allow the app to learn from the user’s behavior on the app, their age, gender, the time of the day, and their location to pre-select pictogram(s) for the communicational moment they are in.",
+      "faq3": "How much does the OTTAA app cost?",
+      "faq3Description": "The OTTAA app is free to download & use. In order to create a sustainable product that withstands the passage of time, there are some features that require a subscription to access. However, we are working hard to provide financing to everyone that needs it.\n\nIf you are in Argentina, any assistive device a person needs should be covered by health insurance. Contact our team to get guidance and assistance on how to obtain this coverage.\n\nIf you are from any other country in LATAM and want to share your experience around this subject, feel free to reach out, your contribution might help many people in need.",
+      "faq4": "Which languages are supported by the OTTAA Project?",
+      "faq4Description": "We currently support Spanish, English, Portuguese, and French. For Spanish, we have localized versions from Argentina, Chile, Colombia, and Spain. We are actively looking for contributions on new languages or better localization for Spanish varieties. Join our crowdin community to contribute.",
+      "faq5": "How can I collaborate with the OTTAA Project?",
+      "faq5Description": "Contributors can help OTTAA with developing, testing, and/or translation. To read more about the subject and get started, please see the Contributing section in the official OTTAA GitHub repository."
     },
     "caregiver": "Caregiver",
     "caregivers_families": "Caregivers/Relatives",
     "user": "User",
-    "user_description": "Persona no verbal",
+    "user_description": "Non-verbal person",
     "wait": "Please wait",
     "setting_exp": "Setting up your experience...",
     "link_account": "Link to an account",
     "use": {
       "ottaa": "Use OTTAA"
     },
-    "close_profile": "Esconder",
-    "open_profile": "Ver perfil",
+    "close_profile": "Hide",
+    "open_profile": "View profile",
     "no_account": "No account mode",
     "new_existant": "New/Existent",
     "what_do": "What do you want to do?",
@@ -101,7 +100,7 @@
     "main": {
       "title": "Configura tu experiencia",
       "subtitle1": "Uso de la aplicación",
-      "subtitle2": "Lenguaje predictivo"
+      "subtitle2": "Prediction"
     }
   },
   "global": {
@@ -126,11 +125,10 @@
     "share": "Share",
     "support": "Support",
     "congrats": "Congratulations",
-    "settings": "Configuración",
+    "settings": "Settings",
     "general": "General",
-    "pictogram": "Pictogramas",
-    "configuration": "Configuración",
-    "user_ottaa": "Usar Ottaa como {name}"
+    "pictogram": "Pictograms",
+    "user_ottaa": "Use OTTAA as {name}"
   },
   "onboarding": {
     "start": "Get Started",
@@ -193,7 +191,7 @@
     "text": "Having trouble linking accounts?",
     "button": {
       "resend": "Resend email",
-      "anothermail": "Ingresá otro email."
+      "anothermail": "Enter another email."
     }
   },
   "login": {
@@ -211,7 +209,7 @@
       "title": "What boards will the user use?",
       "appbar": "Predictive boards",
       "skip": "Do you skip board customization?",
-      "subtitle": "Ver pictogramas"
+      "subtitle": "See pictograms"
     },
     "shortcut": {
       "title": "Choose the shortcuts to use on Home screen.",
@@ -226,10 +224,9 @@
       "switch": "Enable board"
     },
     "wait": {
-      "title": "¡Felicitaciones!",
       "subtitle": "Haz configurado la experiencia de Juan!",
       "button": "Go to profile screen"
     },
-    "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
+    "skip": "Do you want to skip profile customization?"
   }
 }
