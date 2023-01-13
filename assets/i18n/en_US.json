@@ -2,6 +2,7 @@
   "profile": {
     "selection": {
       "text1": "Who is going to use the app on this device?",
+      "caregiver_text": "Needs to comunicate",
       "user_text": "Needs to comunicate"
     },
     "hello": "Hi {name}!",
@@ -74,12 +75,11 @@
           "required": "Email is required",
           "invalid": "Invalid email"
         },
-        "contact": "*Be sure you are in contact with the person using this email.",
         "warn": "*We will show a token on the device screen to link accounts.",
         "send": "Submit"
       },
       "token": {
-        "title": "Coloque el código de verificación que llegó al correo electrónico.",
+        "title": "Enter the verification token that was sent to that email.",
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email",
@@ -98,8 +98,8 @@
   },
   "user": {
     "main": {
-      "title": "Configura tu experiencia",
-      "subtitle1": "Uso de la aplicación",
+      "title": "Setting up your experience",
+      "subtitle1": "Application usage",
       "subtitle2": "Prediction"
     }
   },
@@ -128,7 +128,8 @@
     "settings": "Settings",
     "general": "General",
     "pictogram": "Pictograms",
-    "user_ottaa": "Use OTTAA as {name}"
+    "configuration": "Settings",
+    "user_ottaa": "Usar Ottaa como {name}"
   },
   "onboarding": {
     "start": "Get Started",
@@ -161,17 +162,17 @@
   "link": {
     "title": "Link to an account",
     "mail": {
-      "title": "Enter the email of the account you want to link",
+      "title": "Ingresá el correo electrónico vinculado a la cuenta de OTTAA",
       "input": {
         "required": "Email is required",
         "invalid": "Invalid email"
       },
-      "contact": "*Be sure you are in contact with the person using this email.",
-      "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
+      "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico.",
+      "warn": "*We will send an email with a token to link the profiles.",
       "send": "Submit"
     },
     "token": {
-      "title": "Coloque el código de verificación que llegó al correo electrónico.",
+      "title": "Enter the verification token that was sent to that email.",
       "problem": "Having trouble linking accounts?",
       "resend": "Resend code",
       "back": "Please enter another email"
@@ -184,10 +185,13 @@
       "title": "Profile successfully linked!",
       "lastTime": "Last seen {date}",
       "continue": "Continue"
+    },
+    "error": {
+      "link-exist": "Ya están vinculadas",
+      "error2": "Error2"
     }
   },
   "token": {
-    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "Having trouble linking accounts?",
     "button": {
       "resend": "Resend email",
@@ -224,9 +228,10 @@
       "switch": "Enable board"
     },
     "wait": {
-      "subtitle": "Haz configurado la experiencia de Juan!",
+      "title": "¡Felicitaciones!",
+      "subtitle": "{name} experience is all set up!",
       "button": "Go to profile screen"
     },
-    "skip": "Do you want to skip profile customization?"
+    "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
 }
