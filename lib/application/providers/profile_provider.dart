@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
@@ -30,7 +32,7 @@ class ProfileNotifier extends ChangeNotifier {
   final ImagePicker _picker = ImagePicker();
   bool isLinkAccountOpen = false;
   bool connectedUsersFetched = false;
-  List<CaregiverUsers> connectedUsersProfileData = [];
+  List<bool> connectedUsersProfileDataExpanded = [];
   final TextEditingController profileEditNameController = TextEditingController();
   final TextEditingController profileEditSurnameController = TextEditingController();
   final TextEditingController profileEditEmailController = TextEditingController();
@@ -44,8 +46,7 @@ class ProfileNotifier extends ChangeNotifier {
   String yearForDropDown = "0";
 
   //connected users screen
-  List<CaregiverUsers> connectedUsers = [];
-  List<PatientUserModel> connectedUsersData = [];
+  List<BaseUserModel> connectedUsersData = [];
 
   List<bool> expasionList = [];
   bool dataFetched = false;
@@ -141,40 +142,19 @@ class ProfileNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> getConnectedUsers({required String userId}) async {
-    connectedUsers = [];
-    final res = await _profileService.getConnectedUsers(userId: userId);
-    if (res.isLeft) {
-      return;
-    }
-
-    // connectedUsers.addAll(res.right.values
-    //     .map<CareGiverUser>(
-    //       (element) => CareGiverUser.fromJson(Map<String, dynamic>.from(element)),
-    //     )
-    //     .toList());
-    connectedUsersFetched = true;
-
-    notifyListeners();
-  }
-
   Future<void> fetchConnectedUsersData() async {
     connectedUsersData = [];
-    connectedUsersProfileData = [];
+    final connectedUsers = _userNotifier.user.caregiver.users.values.toList();
     await Future.wait(connectedUsers.map((e) async {
-      // final res = await _profileService.fetchConnectedUserData(userId: e.userId);
-      // if (res.isRight) {
-      //   final json = res.right;
+      final res = await _profileService.fetchConnectedUserData(userId: e.id);
+      if (res.isRight) {
+        final json = res.right;
 
-      // connectedUsersData.add(
-      //   ConnectedUserData(
-      //     name: json['name'],
-      //     image: json['avatar']['name'],
-      //   ),
-      // );
-
-      //   print(json["name"]);
-      // }
+        connectedUsersData.add(
+          BaseUserModel.fromMap(json),
+        );
+        connectedUsersProfileDataExpanded.add(false);
+      }
     }));
 
     dataFetched = true;
@@ -187,7 +167,8 @@ class ProfileNotifier extends ChangeNotifier {
 
     // update the whole list again
     dataFetched = false;
-    await getConnectedUsers(userId: careGiverId);
+    _userNotifier.user.caregiver.users.removeWhere((key, value) => key == userId);
+    _localDatabaseRepository.setUser(_userNotifier.user);
     await fetchConnectedUsersData();
     dataFetched = true;
     notify();

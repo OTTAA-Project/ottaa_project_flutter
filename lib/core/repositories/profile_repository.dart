@@ -7,7 +7,7 @@ abstract class ProfileRepository {
 
   Future<Either<String, Map<String, dynamic>>> getConnectedUsers({required String userId});
 
-  Future<Either<String, Map<String, dynamic>>> getProfileByEmail({required String email});
+  Future<Either<String, Map<String, dynamic>>> getProfileById({required String id});
 
   Future<Either<String, Map<String, dynamic>>> fetchConnectedUserData({required String userId});
 

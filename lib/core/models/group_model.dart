@@ -29,7 +29,7 @@ class Group {
   final int freq;
 
   Group({
-    required this.block,
+    this.block = false,
     required this.id,
     required this.relations,
     required this.text,
@@ -68,16 +68,18 @@ class Group {
 
   factory Group.fromMap(Map<String, dynamic> map) {
     return Group(
-      block: map['block'] as bool,
+      block: map['block'] != null ? map['block'] as bool : false,
       id: map['id'] as int,
-      relations: List<GroupRelation>.from(
-        (map['relations'] as List<int>).map<GroupRelation>(
-          (x) => GroupRelation.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-      text: Map.from(map['text'] as Map<String, dynamic>),
-      resource: AssetsImage.fromMap(map['resource'] as Map<String, dynamic>),
-      freq: map['freq'] as int,
+      relations: map['relations'] != null
+          ? List<GroupRelation>.from(
+              (map['relations'] as List<int>).map<GroupRelation>(
+                (x) => GroupRelation.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : [],
+      text: map['text'] != null ? Map.from(map['text'] as Map<String, dynamic>) : {},
+      resource: AssetsImage.fromMap(map['resource'] != null ? map['resource'] as Map<String, dynamic> : {}),
+      freq: map['freq'] != null ? map['freq'] as int : 0,
     );
   }
 

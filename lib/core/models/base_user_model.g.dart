@@ -18,7 +18,7 @@ class BaseUserModelAdapter extends TypeAdapter<BaseUserModel> {
     };
     return BaseUserModel(
       id: fields[0] as String,
-      settings: fields[3] as BaseSettingsModel,
+      settings: fields[3] as UserSettings,
       email: fields[6] as String,
       type: fields[5] as UserType,
     );

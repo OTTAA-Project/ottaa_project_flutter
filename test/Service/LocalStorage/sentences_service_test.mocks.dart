@@ -788,6 +788,25 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         )),
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> getProfileById(
+          {required String? email}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getProfileByEmail,
+          [],
+          {#email: email},
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #getProfileByEmail,
+            [],
+            {#email: email},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
   _i4.Future<dynamic> getDefaultGroups(String? languageCode) =>
       (super.noSuchMethod(
         Invocation.method(

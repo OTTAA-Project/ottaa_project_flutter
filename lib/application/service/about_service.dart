@@ -138,14 +138,23 @@ class AboutService extends AboutRepository {
 
     switch (userData.right["type"]) {
       case "caregiver":
-        model = CaregiverUserModel.fromMap(userData.right);
+        model = CaregiverUserModel.fromMap({
+          "email": user.email,
+          ...userData.right,
+        });
         break;
       case "user":
-        model = PatientUserModel.fromMap(userData.right);
+        model = PatientUserModel.fromMap({
+          "email": user.email,
+          ...userData.right,
+        });
         break;
       case "none":
       default:
-        model = BaseUserModel.fromMap(userData.right);
+        model = BaseUserModel.fromMap({
+          "email": user.email,
+          ...userData.right,
+        });
     }
     return Right(model);
   }

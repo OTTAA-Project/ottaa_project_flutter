@@ -25,7 +25,7 @@ class SplashProvider extends ChangeNotifier {
 
   Future<bool> fetchUserInformation() async {
     final result = await _aboutRepository.getUserInformation();
-
+    // print(result);
     if (result.isLeft) {
       await _auth.logout();
       return false;

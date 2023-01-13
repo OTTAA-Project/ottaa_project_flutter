@@ -24,7 +24,7 @@ class PatientUserModelAdapter extends TypeAdapter<PatientUserModel> {
           MapEntry(k as String, (v as List).cast<Phrase>())),
       pictos: (fields[3] as Map).map((dynamic k, dynamic v) =>
           MapEntry(k as String, (v as List).cast<Picto>())),
-      settings: fields[4] as PatientSettings,
+      settings: fields[4] as UserSettings,
       type: fields[5] as UserType,
       email: fields[6] as String,
     );

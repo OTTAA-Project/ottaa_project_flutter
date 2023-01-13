@@ -18,7 +18,7 @@ class CaregiverUserModelAdapter extends TypeAdapter<CaregiverUserModel> {
     };
     return CaregiverUserModel(
       id: fields[0] as String,
-      settings: fields[1] as BaseSettingsModel,
+      settings: fields[1] as UserSettings,
       type: fields[2] as UserType,
       users: (fields[3] as Map).cast<String, CaregiverUsers>(),
       email: fields[4] as String,
@@ -64,7 +64,7 @@ class CaregiverUsersAdapter extends TypeAdapter<CaregiverUsers> {
     };
     return CaregiverUsers(
       id: fields[0] as String,
-      name: fields[1] as String,
+      alias: fields[1] as String,
     );
   }
 
@@ -75,7 +75,7 @@ class CaregiverUsersAdapter extends TypeAdapter<CaregiverUsers> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name);
+      ..write(obj.alias);
   }
 
   @override

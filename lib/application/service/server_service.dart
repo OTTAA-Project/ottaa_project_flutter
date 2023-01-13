@@ -396,8 +396,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getProfileByEmail({required String email}) async {
-    final ref = _database.child("/").orderByChild("Usuarios.Email").equalTo(email);
+  Future<EitherMap> getProfileById({required String id}) async {
+    final ref = _database.child(id);
 
     final res = await ref.get();
 

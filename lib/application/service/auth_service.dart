@@ -111,14 +111,23 @@ class AuthService extends AuthRepository {
       } else {
         switch (userInfo.right["type"]) {
           case "caregiver":
-            userModel = CaregiverUserModel.fromMap(userInfo.right);
+            userModel = CaregiverUserModel.fromMap({
+              "email": user.email ?? user.providerData[0].email,
+              ...userInfo.right,
+            });
             break;
           case "user":
-            userModel = PatientUserModel.fromMap(userInfo.right);
+            userModel = PatientUserModel.fromMap({
+              "email": user.email ?? user.providerData[0].email,
+              ...userInfo.right,
+            });
             break;
           case "none":
           default:
-            userModel = BaseUserModel.fromMap(userInfo.right);
+            userModel = BaseUserModel.fromMap({
+              "email": user.email ?? user.providerData[0].email,
+              ...userInfo.right,
+            });
             break;
         }
       }

@@ -26,7 +26,7 @@ class PictogramsService extends PictogramsRepository {
         path: "Pictos", fileName: 'assets/pictos.json');
 
     final List<dynamic> json = jsonDecode(data);
-    final List<Picto> pictograms = json.map((e) => Picto.fromJson(e)).toList();
+    final List<Picto> pictograms = json.map((e) => Picto.fromMap(e)).toList();
 
     return pictograms;
   }

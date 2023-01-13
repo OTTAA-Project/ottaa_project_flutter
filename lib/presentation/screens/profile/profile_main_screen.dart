@@ -30,7 +30,6 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await provider.setDate();
       if (provider.isCaregiver) {
-        await provider.getConnectedUsers(userId: user!.id);
         await provider.fetchConnectedUsersData();
       }
     });

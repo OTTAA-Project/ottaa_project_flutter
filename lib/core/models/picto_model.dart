@@ -82,18 +82,20 @@ class Picto {
 
   factory Picto.fromMap(Map<String, dynamic> map) {
     return Picto(
-      block: map['block'] as bool,
-      id: map['id'] as int,
-      relations: List<PictoRelation>.from(
-        (map['relations'] as List<int>).map<PictoRelation>(
-          (x) => PictoRelation.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-      text: (map['text'] as Map<String, String>),
-      resource: AssetsImage.fromMap(map['resource'] as Map<String, dynamic>),
-      freq: map['freq'] as int,
-      tags: Map<String, List<String>>.from((map['tags'] as Map<String, List<String>>)),
-      type: map['type'] as int,
+      block: map['block'] ?? false,
+      id: map['id'] ?? 0,
+      relations: map['relations'] != null
+          ? List<PictoRelation>.from(
+              (map['relations'] as List<int>).map<PictoRelation>(
+                (x) => PictoRelation.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : [],
+      text: map['text'] != null ? Map.from(map['text'] as Map<dynamic, dynamic>) : {},
+      resource: AssetsImage.fromMap(Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
+      freq: map['freq'] ?? 0,
+      tags: Map<String, List<String>>.from(((map['tags'] ?? {}) as Map<dynamic, dynamic>)),
+      type: map['type'] ?? 0,
     );
   }
 

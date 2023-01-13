@@ -23,25 +23,23 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: provider.connectedUsersProfileData.length,
+      itemCount: provider.connectedUsersData.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(top: 16),
           child: ConnectedUserWidget(
-            title: provider.connectedUsersProfileData[index].name,
-            image: provider.connectedUsersProfileData[index].imageUrl,
+            title: provider.connectedUsersData[index].settings.data.name,
+            image: provider.connectedUsersData[index].settings.data.avatar.network!,
             onPressed: () {
-              provider.connectedUsersProfileData[index].isExpanded =
-                  !provider.connectedUsersProfileData[index].isExpanded;
+              provider.connectedUsersProfileDataExpanded[index] = !provider.connectedUsersProfileDataExpanded[index];
               provider.notify();
             },
             actionTap: () {
-              provider.connectedUsersProfileData[index].isExpanded =
-                  !provider.connectedUsersProfileData[index].isExpanded;
+              provider.connectedUsersProfileDataExpanded[index] = !provider.connectedUsersProfileDataExpanded[index];
               provider.notify();
             },
             timeText: 'time text',
-            show: provider.connectedUsersProfileData[index].isExpanded,
+            show: provider.connectedUsersProfileDataExpanded[index],
           ),
         );
       },

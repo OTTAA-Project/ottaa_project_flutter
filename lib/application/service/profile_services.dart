@@ -35,7 +35,7 @@ class ProfileService implements ProfileRepository {
   }
 
   @override
-  Future<Either<String, Map<String, dynamic>>> getProfileByEmail({required String email}) {
-    return _serverRepository.getProfileByEmail(email: email);
+  Future<Either<String, Map<String, dynamic>>> getProfileById({required String id}) {
+    return _serverRepository.getProfileById(id: id);
   }
 }

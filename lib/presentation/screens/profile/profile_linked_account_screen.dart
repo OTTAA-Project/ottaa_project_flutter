@@ -14,9 +14,17 @@ class ProfileLinkedAccountScreen extends ConsumerStatefulWidget {
 
 class _ProfileLinkedAccountScreen extends ConsumerState<ProfileLinkedAccountScreen> {
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  void initState() {
+    final provider = ref.read(profileProvider);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await provider.fetchConnectedUsersData();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     final provider = ref.watch(profileProvider);
@@ -59,7 +67,7 @@ class _ProfileLinkedAccountScreen extends ConsumerState<ProfileLinkedAccountScre
                                 );
                                 if (cancel != null && cancel) {
                                   await provider.removeCurrentUser(
-                                    userId: provider.connectedUsers[index].id,
+                                    userId: provider.connectedUsersData[index].id,
                                     careGiverId: user!.id,
                                   );
                                 }

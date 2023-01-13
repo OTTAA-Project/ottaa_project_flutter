@@ -73,9 +73,17 @@ class CaregiverUserModel extends UserModel {
   factory CaregiverUserModel.fromMap(Map<String, dynamic> map) {
     return CaregiverUserModel(
       id: map['id'] as String,
-      settings: BaseSettingsModel.fromMap(map['settings'] as Map<String, dynamic>),
+      settings: BaseSettingsModel.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
       type: UserType.caregiver,
-      users: Map<String, CaregiverUsers>.from((map['users'] as Map<String, CaregiverUsers>)),
+      users: (map['users']) != null
+          ? Map.from((map['users'] as Map<dynamic, dynamic>).map(
+              (key, value) => MapEntry(
+                  key,
+                  CaregiverUsers.fromMap(
+                    Map.from(value as Map<dynamic, dynamic>),
+                  )),
+            ))
+          : <String, CaregiverUsers>{},
       email: map['email'] as String,
     );
   }
@@ -111,33 +119,34 @@ class CaregiverUsers {
   @HiveField(0)
   final String id;
   @HiveField(1)
-  final String name;
+  final String alias;
 
   const CaregiverUsers({
     required this.id,
-    required this.name,
+    required this.alias,
   });
 
   CaregiverUsers copyWith({
     String? id,
-    String? name,
+    String? alias,
   }) {
     return CaregiverUsers(
-      name: name ?? this.name,
+      alias: alias ?? this.alias,
       id: id ?? this.id,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'name': name,
+      'alias': alias,
+      'id': id,
     };
   }
 
   factory CaregiverUsers.fromMap(Map<String, dynamic> map) {
     return CaregiverUsers(
-      name: map['name'] as String,
-      id: "",
+      alias: map['alias'] as String,
+      id: map['id'] as String,
     );
   }
 
@@ -146,15 +155,15 @@ class CaregiverUsers {
   factory CaregiverUsers.fromJson(String source) => CaregiverUsers.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'CaregiverUsers(name: $name)';
+  String toString() => 'CaregiverUsers(alias: $alias)';
 
   @override
   bool operator ==(covariant CaregiverUsers other) {
     if (identical(this, other)) return true;
 
-    return other.name == name;
+    return other.alias == alias;
   }
 
   @override
-  int get hashCode => name.hashCode;
+  int get hashCode => alias.hashCode;
 }
