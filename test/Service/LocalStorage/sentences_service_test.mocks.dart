@@ -619,7 +619,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
   @override
-  _i4.Future<void> updateUser({
+  _i4.Future<void> updateUserSettings({
     required Map<String, dynamic>? data,
     required String? userId,
   }) =>
@@ -789,20 +789,20 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> getProfileById(
-          {required String? email}) =>
+          {required String? id}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getProfileByEmail,
+          #getProfileById,
           [],
-          {#email: email},
+          {#id: id},
         ),
         returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
             _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
-            #getProfileByEmail,
+            #getProfileById,
             [],
-            {#email: email},
+            {#id: id},
           ),
         )),
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);

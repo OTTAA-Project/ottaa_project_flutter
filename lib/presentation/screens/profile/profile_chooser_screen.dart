@@ -28,13 +28,6 @@ class ProfileChooserScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    //todo: add text style here after emir has created the theme files
-                    child: Text(
-                      'global.skip'.trl,
-                    ),
-                  ),
                   //todo: add text style here after emir has created the theme files
                   Padding(
                     padding: const EdgeInsets.only(
@@ -77,9 +70,7 @@ class ProfileChooserScreen extends ConsumerWidget {
               ),
               PrimaryButton(
                 //todo: add the proper way for handling the waiting screen, hector said is should be their for 4 seconds at least
-                onPressed: (provider.isCaregiver || provider.isUser)
-                    ? () => context.push(AppRoutes.profileWaitingScreen)
-                    : null,
+                onPressed: (provider.isCaregiver || provider.isUser) ? () => context.push(AppRoutes.profileWaitingScreen) : null,
                 text: "global.continue".trl,
               ),
             ],

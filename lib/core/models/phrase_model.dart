@@ -44,7 +44,7 @@ class Phrase {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'date': date.millisecondsSinceEpoch,
       'id': id,
       'sequence': sequence.map((x) => x.toMap()).toList(),

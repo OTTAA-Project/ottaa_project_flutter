@@ -9,7 +9,6 @@ import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
-import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 
 part 'caregiver_user_model.g.dart';
 
@@ -65,8 +64,7 @@ class CaregiverUserModel extends UserModel {
       'id': id,
       'settings': settings.toMap(),
       'type': type.name,
-      'users': users,
-      'email': email,
+      'users': users.map((key, value) => MapEntry(key, value.toMap())),
     };
   }
 
@@ -84,7 +82,7 @@ class CaregiverUserModel extends UserModel {
                   )),
             ))
           : <String, CaregiverUsers>{},
-      email: map['email'] as String,
+      email: map['email'] ?? "",
     );
   }
 

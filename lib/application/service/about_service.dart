@@ -176,7 +176,7 @@ class AboutService extends AboutRepository {
       return false;
     }
 
-    return result.right.settings.data.avatar.asset != null || result.right.settings.data.avatar.network != null;
+    return result.right.settings.data.avatar.network != null;
   }
 
   @override
@@ -187,6 +187,11 @@ class AboutService extends AboutRepository {
       return false;
     }
     //TODO: Check for first time!
-    return result.right.settings.data.birthDate == DateTime.now();
+    return result.right.settings.data.birthDate == DateTime(0);
+  }
+
+  @override
+  Future<void> updateUserType({required String id, required UserType userType}) async {
+    await _serverRepository.updateUserType(id: id, userType: userType);
   }
 }

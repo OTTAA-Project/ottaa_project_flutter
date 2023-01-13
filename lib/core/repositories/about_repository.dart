@@ -24,4 +24,6 @@ abstract class AboutRepository {
   Future<bool> isFirstTime();
 
   Future<Either<String, UserModel>> getUserInformation();
+
+  Future<void> updateUserType({required String id, required UserType userType});
 }

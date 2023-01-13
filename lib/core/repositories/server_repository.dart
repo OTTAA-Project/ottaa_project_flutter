@@ -48,7 +48,7 @@ abstract class ServerRepository {
 
   Future<String> uploadUserImage({required String path, required String name, required String userId});
 
-  Future<void> updateUser({required Map<String, dynamic> data, required String userId});
+  Future<void> updateUserSettings({required Map<String, dynamic> data, required String userId});
 
   Future<EitherMap> getConnectedUsers({required String userId});
 
@@ -67,4 +67,6 @@ abstract class ServerRepository {
   Future<EitherMap> getProfileById({required String id});
 
   Future<dynamic> getDefaultGroups(String languageCode);
+
+  Future<void> updateUserType({required String id, required UserType userType});
 }

@@ -21,6 +21,7 @@ class PatientUserModel extends UserModel {
   @override
   @HiveField(0)
   String id;
+
   @HiveField(1)
   Map<String, List<Group>> groups;
 
@@ -78,9 +79,24 @@ class PatientUserModel extends UserModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'groups': groups,
-      'phrases': phrases,
-      'pictos': pictos,
+      'groups': groups.map(
+        (k, e) => MapEntry(
+          k,
+          e.map((x) => x.toMap()).toList(),
+        ),
+      ),
+      'phrases': phrases.map(
+        (k, e) => MapEntry(
+          k,
+          e.map((x) => x.toMap()).toList(),
+        ),
+      ),
+      'pictos': pictos.map(
+        (k, e) => MapEntry(
+          k,
+          e.map((x) => x.toMap()).toList(),
+        ),
+      ),
       'settings': settings.toMap(),
       'type': type.name,
     };
@@ -90,36 +106,39 @@ class PatientUserModel extends UserModel {
     return PatientUserModel(
       email: "",
       id: map['id'] as String,
-      groups: map['groups'] != null
-          ? Map<String, List<Group>>.fromIterables(
-              map['groups'].keys,
-              map['groups'].values.map(
-                    (e) => List<Group>.from(
-                      e.map((x) => Group.fromMap(x as Map<String, dynamic>)),
-                    ),
-                  ),
-            )
-          : <String, List<Group>>{},
-      phrases: map['phrases'] != null
-          ? Map<String, List<Phrase>>.fromIterables(
-              map['phrases'].keys,
-              map['groups'].values.map(
-                    (e) => List<Phrase>.from(
-                      e.map((x) => Phrase.fromMap(x as Map<String, dynamic>)),
-                    ),
-                  ),
-            )
-          : <String, List<Phrase>>{},
-      pictos: map['pictos'] != null
-          ? Map<String, List<Picto>>.fromIterables(
-              map['pictos'].keys,
-              map['pictos'].values.map(
-                    (e) => List<Picto>.from(
-                      e.map((x) => Picto.fromMap(x as Map<String, dynamic>)),
-                    ),
-                  ),
-            )
-          : <String, List<Picto>>{},
+      groups: <String, List<Group>>{},
+      //  map['groups'] != null
+      //     ? Map<String, List<Group>>.fromIterables(
+      //         map['groups'].keys,
+      //         map['groups'].values.map(
+      //               (e) => List<Group>.from(
+      //                 e.map((x) => Group.fromMap(x as Map<String, dynamic>)),
+      //               ),
+      //             ),
+      //       )
+      //     : <String, List<Group>>{},
+      phrases: <String, List<Phrase>>{},
+      // map['phrases'] != null
+      //     ? Map<String, List<Phrase>>.fromIterables(
+      //         map['phrases'].keys,
+      //         map['groups'].values.map(
+      //               (e) => List<Phrase>.from(
+      //                 e.map((x) => Phrase.fromMap(x as Map<String, dynamic>)),
+      //               ),
+      //             ),
+      //       )
+      //     : <String, List<Phrase>>{},
+      pictos: <String, List<Picto>>{},
+      // map['pictos'] != null
+      //     ? Map<String, List<Picto>>.fromIterables(
+      //         map['pictos'].keys,
+      //         map['pictos'].values.map(
+      //               (e) => List<Picto>.from(
+      //                 e.map((x) => Picto.fromMap(x as Map<String, dynamic>)),
+      //               ),
+      //             ),
+      //       )
+      //     : <String, List<Picto>>{},
       settings: PatientSettings.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
       type: UserType.values.firstWhere((element) => element.name == map['type'] as String),
     );
@@ -203,8 +222,8 @@ class PatientSettings extends UserSettings {
     return PatientSettings(
       data: UserData.fromMap(Map.from(map['data'] as Map<dynamic, dynamic>)),
       language: map['language'] as String,
-      payment: Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>)),
-      shortcuts: Shortcuts.fromMap(Map.from(map['shortcuts'] as Map<dynamic, dynamic>)),
+      payment: map['payment'] != null ? Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>)) : Payment.none(),
+      shortcuts: map['shortcuts'] != null ? Shortcuts.fromMap(Map.from(map['shortcuts'] as Map<dynamic, dynamic>)) : Shortcuts.none(),
     );
   }
 

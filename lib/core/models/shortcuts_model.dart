@@ -30,6 +30,14 @@ class Shortcuts {
     required this.shuffle,
   });
 
+  factory Shortcuts.none() => Shortcuts(
+        favs: false,
+        gallery: false,
+        games: false,
+        share: false,
+        shuffle: false,
+      );
+
   Shortcuts copyWith({
     bool? favs,
     bool? gallery,

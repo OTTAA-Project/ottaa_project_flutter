@@ -27,6 +27,7 @@ class _ProfileWaitingScreenState extends ConsumerState<ProfileWaitingScreen> {
       await Future.delayed(
         const Duration(seconds: 2),
         () {
+
           if (provider.isCaregiver) {
             context.replace(AppRoutes.profileMainScreen);
           } else {

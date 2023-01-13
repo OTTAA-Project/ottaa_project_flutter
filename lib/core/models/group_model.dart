@@ -56,7 +56,7 @@ class Group {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'block': block,
       'id': id,
       'relations': relations.map((x) => x.toMap()).toList(),

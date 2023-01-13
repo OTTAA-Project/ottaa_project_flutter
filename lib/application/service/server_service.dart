@@ -161,9 +161,7 @@ class ServerService implements ServerRepository {
   Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
     try {
-      await ref.set({
-        'maps':true
-      });
+      await ref.set({'maps': true});
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -265,7 +263,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> updateUser({
+  Future<void> updateUserSettings({
     required Map<String, dynamic> data,
     required String userId,
   }) async {
@@ -418,5 +416,12 @@ class ServerService implements ServerRepository {
     }
 
     return const Left("no_data_found");
+  }
+
+  @override
+  Future<void> updateUserType({required String id, required UserType userType}) async {
+    final ref = _database.child("$id/type");
+
+    await ref.set(userType.name);
   }
 }

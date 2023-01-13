@@ -8,19 +8,25 @@ part 'payment_model.g.dart';
 @HiveType(typeId: HiveTypesIds.paymentTypeId)
 class Payment {
   @HiveField(0, defaultValue: false)
-  final bool payment;
+  bool payment;
 
   @HiveField(1, defaultValue: 0)
-  final int paymentDate;
+  int paymentDate;
 
   @HiveField(2, defaultValue: 0)
-  final int paymentExpire;
+  int paymentExpire;
 
-  const Payment({
+  Payment({
     required this.payment,
     required this.paymentDate,
     required this.paymentExpire,
   });
+
+  factory Payment.none() => Payment(
+        payment: false,
+        paymentDate: 0,
+        paymentExpire: 0,
+      );
 
   Payment copyWith({
     bool? payment,

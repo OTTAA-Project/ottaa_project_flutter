@@ -17,7 +17,7 @@ class AssetsImageAdapter extends TypeAdapter<AssetsImage> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AssetsImage(
-      asset: fields[0] as String?,
+      asset: fields[0] as String,
       network: fields[1] as String?,
     );
   }

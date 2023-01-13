@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:collection/collection.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
@@ -106,6 +107,7 @@ class LinkNotifier extends ChangeNotifier {
     }
 
     user = BaseUserModel.fromMap(res.right);
+
     notifyListeners();
   }
 

@@ -6,10 +6,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 
 part 'assets_image.g.dart';
+
 @HiveType(typeId: HiveTypesIds.assetsTypeId)
 class AssetsImage {
   @HiveField(0)
-  String? asset;
+  String asset;
 
   @HiveField(1)
   String? network;
@@ -38,7 +39,7 @@ class AssetsImage {
 
   factory AssetsImage.fromMap(Map<String, dynamic> map) {
     return AssetsImage(
-      asset: map['asset'] != null ? map['asset'] as String : null,
+      asset: map['asset'] as String,
       network: map['network'] != null ? map['network'] as String : null,
     );
   }

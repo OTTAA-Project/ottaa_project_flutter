@@ -10,8 +10,8 @@ class ProfileService implements ProfileRepository {
   ProfileService(this._serverRepository);
 
   @override
-  Future<void> updateUser({required Map<String, dynamic> data, required String userId}) async {
-    return await _serverRepository.updateUser(data: data, userId: userId);
+  Future<void> updateUserSettings({required Map<String, dynamic> data, required String userId}) async {
+    return await _serverRepository.updateUserSettings(data: data, userId: userId);
   }
 
   @override
@@ -37,5 +37,10 @@ class ProfileService implements ProfileRepository {
   @override
   Future<Either<String, Map<String, dynamic>>> getProfileById({required String id}) {
     return _serverRepository.getProfileById(id: id);
+  }
+
+  @override
+  Future<void> updateUser({required Map<String, dynamic> data, required String userId}) async{
+    await _serverRepository.uploadUserInformation(userId, data);
   }
 }
