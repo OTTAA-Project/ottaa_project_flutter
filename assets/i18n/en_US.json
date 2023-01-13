@@ -40,6 +40,8 @@
     "use": {
       "ottaa": "Use OTTAA"
     },
+    "close_profile": "Esconder perfil",
+    "open_profile": "Ver perfil",
     "no_account": "No account mode",
     "new_existant": "New/Existent",
     "what_do": "What do you want to do?",
@@ -130,7 +132,10 @@
     "congrats": "Congratulations",
     "settings": "Configuración",
     "general": "General",
-    "pictograms": "Pictogramas"
+    "pictograms": "Pictogramas",
+    "pictogram": "Pictograms",
+    "configuration": "Configuración",
+    "user_ottaa": "Usar Ottaa {name}"
   },
   "onboarding": {
     "start": "Get Started",
@@ -210,7 +215,8 @@
     "board": {
       "title": "What boards will the user use?",
       "appbar": "Predictive boards",
-      "skip": "Do you skip board customization?"
+      "skip": "Do you skip board customization?",
+      "subtitle": "Ver pictogramas"
     },
     "shortcut": {
       "title": "Choose the shortcuts to use on Home screen.",
@@ -220,13 +226,14 @@
       "camera": "Camera",
       "games": "Games"
     },
-    "wait": {
-      "button": "Go to profile screen",
-      "description": "{name} experience is set up correctly"
-    },
     "picto": {
       "title": "Board {name}",
       "switch": "Enable board"
+    },
+    "wait": {
+      "title": "¡Felicitaciones!",
+      "subtitle": "Haz configurado la experiencia de Juan!",
+      "button": "Go to profile screen"
     },
     "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
