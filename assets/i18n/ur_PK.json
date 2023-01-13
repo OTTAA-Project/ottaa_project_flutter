@@ -2,7 +2,6 @@
   "profile": {
     "selection": {
       "text1": "¿Quién va a usar la aplicación en este dispositivo?",
-      "caregiver_text": "Necesita comunicarse",
       "user_text": "Necesita comunicarse"
     },
     "hello": "Hola {name}!",
@@ -24,22 +23,20 @@
       "faq4": "¿Qué idiomas son compatibles con el Proyecto OTTAA?",
       "faq4Description": "Actualmente admitimos español, inglés, portugués y francés. Para español, tenemos versiones localizadas de Argentina, Chile, Colombia y España. Estamos buscando activamente contribuciones sobre nuevos idiomas o una mejor localización para las variedades españolas. Únase a nuestra comunidad de crowdin para contribuir.",
       "faq5": "¿Cómo puedo colaborar con el Proyecto OTTAA?",
-      "faq5Description": "Los colaboradores pueden ayudar a OTTAA con el desarrollo, las pruebas y/o la traducción. Para leer más sobre el tema y comenzar, consulte la sección Contribuir en el repositorio oficial de OTTAA en GitHub.",
-      "faq6": "FAQ 6 Test",
-      "faq6Description": "FAQ 6 Description all cool",
-      "faq7": "FAQ 7 Test",
-      "faq7Description": "FAQ 7 Description all cool"
+      "faq5Description": "Los colaboradores pueden ayudar a OTTAA con el desarrollo, las pruebas y/o la traducción. Para leer más sobre el tema y comenzar, consulte la sección Contribuir en el repositorio oficial de OTTAA en GitHub."
     },
     "caregiver": "Acompañante",
     "caregivers_families": "Profesionales/Familiares",
     "user": "Usuario/a",
-    "user_description": "La persona que necesita comunicarse",
+    "user_description": "Persona no verbal",
     "wait": "Por favor esperá",
     "setting_exp": "Configurando tu experiencia...",
     "link_account": "Vincular una cuenta",
     "use": {
       "ottaa": "Usar OTTAA"
     },
+    "close_profile": "Esconder",
+    "open_profile": "Ver perfil",
     "no_account": "Modo sin perfil",
     "new_existant": "Nuevo/Existente",
     "what_do": "¿Qué querés hacer?",
@@ -99,6 +96,13 @@
       }
     }
   },
+  "user": {
+    "main": {
+      "title": "Configura tu experiencia",
+      "subtitle1": "Uso de la aplicación",
+      "subtitle2": "Lenguaje predictivo"
+    }
+  },
   "global": {
     "hello_world": "Hola Mundo",
     "hello": "Hola",
@@ -120,7 +124,11 @@
     "step": "Paso",
     "share": "Compartir",
     "support": "Soporte",
-    "congrats": "Felicitaciones"
+    "congrats": "Felicitaciones",
+    "settings": "Configuración",
+    "general": "General",
+    "pictogram": "Pictogramas",
+    "user_ottaa": "Usar OTTAA como {name}"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -182,7 +190,8 @@
     "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "¿Inconvenientes para enlazar las cuentas?",
     "button": {
-      "resend": "Reenviar email"
+      "resend": "Reenviar email",
+      "anothermail": "Ingresá otro email."
     }
   },
   "login": {
@@ -199,7 +208,8 @@
     "board": {
       "title": "¿Qué tableros utilizará el usuario para comunicarse?",
       "appbar": "Tableros predictivos",
-      "skip": "¿Omitir la elección de tableros?"
+      "skip": "¿Omitir la elección de tableros?",
+      "subtitle": "Ver pictogramas"
     },
     "shortcut": {
       "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
@@ -209,13 +219,13 @@
       "camera": "Cámara",
       "games": "Juegos"
     },
-    "wait": {
-      "button": "Ir al panel de perfiles",
-      "description": "Configuraste correctamente la experiencia de {name}"
-    },
     "picto": {
       "title": "Tablero {name}",
       "switch": "Activar tablero"
+    },
+    "wait": {
+      "subtitle": "Haz configurado la experiencia de Juan!",
+      "button": "Ir al panel de perfiles"
     },
     "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
