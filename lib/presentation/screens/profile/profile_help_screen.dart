@@ -47,48 +47,48 @@ class ProfileHelpScreen extends ConsumerWidget {
                 subtitle: '',
                 trailingImage: const AssetImage(AppImages.kProfileHelpIcon2),
                 onPressed: () async {
-                  bool? wantsCall = await BasicBottomSheet.show(context,
-                      title: 'global.support'.trl,
-                      children: [
-                        GestureDetector(
-                          onTap: () async =>
-                              await mailProvider.sendSupportEmail(),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Mail:", style: textTheme.headline3),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              GestureDetector(
-                                child: Text(
-                                  "support@ottaaproject.com",
-                                  style: textTheme.headline3?.copyWith(
-                                    decoration: TextDecoration.underline,
-                                  ),
+                  bool? wantsCall = await BasicBottomSheet.show(
+                    context,
+                    title: 'global.support'.trl,
+                    children: [
+                      GestureDetector(
+                        onTap: () async => await mailProvider.sendSupportEmail(),
+                        child: Wrap(
+                          alignment: WrapAlignment.center,
+                          children: [
+                            Text("Mail:", style: textTheme.headline3),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            GestureDetector(
+                              child: Text(
+                                "support@ottaaproject.com",
+                                style: textTheme.headline3?.copyWith(
+                                  decoration: TextDecoration.underline,
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
-                        const SizedBox(
-                          height: 32,
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      Text(
+                        "¿Desea comunicarse por teléfono con soporte técnico?",
+                        textAlign: TextAlign.center,
+                        style: textTheme.headline3?.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
-                        Text(
-                          "¿Desea comunicarse por teléfono con soporte técnico?",
-                          textAlign: TextAlign.center,
-                          style: textTheme.headline3?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                      okButtonText: "Llamar",
-                      cancelButtonText: "Cancelar",
-                      cancelButtonEnabled: true);
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                    okButtonText: "Llamar",
+                    cancelButtonText: "Cancelar",
+                    cancelButtonEnabled: true,
+                  );
 
                   if (wantsCall == true) {
                     await provider.openDialer();
