@@ -75,7 +75,6 @@
           "required": "El correo electrónico es requerido",
           "invalid": "El correo electrónico es inválido"
         },
-        "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
         "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles.",
         "send": "Enviar"
       },
@@ -163,12 +162,12 @@
   "link": {
     "title": "Vincular Cuenta",
     "mail": {
-      "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+      "title": "Ingresá el correo electrónico vinculado a la cuenta de OTTAA",
       "input": {
         "required": "El correo electrónico es requerido",
         "invalid": "El correo electrónico es inválido"
       },
-      "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
+      "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico.",
       "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
       "send": "Enviar"
     },
@@ -186,10 +185,13 @@
       "title": "Perfil vinculado con éxito!",
       "lastTime": "Últ. vez Ayer {date}",
       "continue": "Continuar"
+    },
+    "error": {
+      "link-exist": "Ya están vinculadas",
+      "error2": "Error2"
     }
   },
   "token": {
-    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "¿Inconvenientes para enlazar las cuentas?",
     "button": {
       "resend": "Reenviar email",
