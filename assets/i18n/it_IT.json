@@ -2,7 +2,6 @@
   "profile": {
     "selection": {
       "text1": "Chi utilizzerà l'app su questo dispositivo?",
-      "caregiver_text": "Necesita comunicarse",
       "user_text": "Necesita comunicarse"
     },
     "hello": "Hola {name}!",
@@ -129,8 +128,7 @@
     "settings": "Configuración",
     "general": "General",
     "pictogram": "Pictogramas",
-    "configuration": "Configuración",
-    "user_ottaa": "Usar Ottaa como {name}"
+    "user_ottaa": "Usar OTTAA como {name}"
   },
   "onboarding": {
     "start": "Iniziare",
@@ -226,10 +224,9 @@
       "switch": "Activar tablero"
     },
     "wait": {
-      "title": "¡Felicitaciones!",
       "subtitle": "Haz configurado la experiencia de Juan!",
       "button": "Ir al panel de perfiles"
     },
-    "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
+    "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
 }
