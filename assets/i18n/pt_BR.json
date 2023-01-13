@@ -2,6 +2,7 @@
   "profile": {
     "selection": {
       "text1": "Quem usará o aplicativo neste dispositivo?",
+      "caregiver_text": "Necesita comunicarse",
       "user_text": "Necesita comunicarse"
     },
     "hello": "Olá, {name}!",
@@ -74,7 +75,6 @@
           "required": "El correo electrónico es requerido",
           "invalid": "El correo electrónico es inválido"
         },
-        "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
         "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles.",
         "send": "Enviar"
       },
@@ -128,7 +128,8 @@
     "settings": "Configuración",
     "general": "General",
     "pictogram": "Pictogramas",
-    "user_ottaa": "Usar OTTAA como {name}"
+    "configuration": "Configuración",
+    "user_ottaa": "Usar Ottaa como {name}"
   },
   "onboarding": {
     "start": "Começar",
@@ -161,12 +162,12 @@
   "link": {
     "title": "Vincular Conta",
     "mail": {
-      "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+      "title": "Ingresá el correo electrónico vinculado a la cuenta de OTTAA",
       "input": {
         "required": "El correo electrónico es requerido",
         "invalid": "E-mail é inválido"
       },
-      "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
+      "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico.",
       "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
       "send": "Enviar"
     },
@@ -184,10 +185,13 @@
       "title": "Perfil vinculado con éxito!",
       "lastTime": "Últ. vez Ayer {date}",
       "continue": "Avançar"
+    },
+    "error": {
+      "link-exist": "Ya están vinculadas",
+      "error2": "Error2"
     }
   },
   "token": {
-    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "¿Inconvenientes para enlazar las cuentas?",
     "button": {
       "resend": "Reenviar email",
@@ -224,9 +228,10 @@
       "switch": "Activar tablero"
     },
     "wait": {
+      "title": "¡Felicitaciones!",
       "subtitle": "Haz configurado la experiencia de Juan!",
       "button": "Ir al panel de perfiles"
     },
-    "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
+    "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
 }
