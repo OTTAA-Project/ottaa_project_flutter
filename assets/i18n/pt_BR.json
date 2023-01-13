@@ -40,6 +40,8 @@
     "use": {
       "ottaa": "Usar OTTAA"
     },
+    "close_profile": "Esconder perfil",
+    "open_profile": "Ver perfil",
     "no_account": "Modo sem perfil",
     "new_existant": "Novo/Existente",
     "what_do": "Que eu posso fazer?",
@@ -130,7 +132,10 @@
     "congrats": "Parabéns",
     "settings": "Configuración",
     "general": "General",
-    "pictograms": "Pictogramas"
+    "pictograms": "Pictogramas",
+    "pictogram": "Pictograms",
+    "configuration": "Configuración",
+    "user_ottaa": "Usar Ottaa {name}"
   },
   "onboarding": {
     "start": "Começar",
@@ -210,7 +215,8 @@
     "board": {
       "title": "¿Qué tableros utilizará el usuario para comunicarse?",
       "appbar": "Tableros predictivos",
-      "skip": "¿Omitir la elección de tableros?"
+      "skip": "¿Omitir la elección de tableros?",
+      "subtitle": "Ver pictogramas"
     },
     "shortcut": {
       "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
@@ -220,13 +226,14 @@
       "camera": "Camera",
       "games": "Jogos"
     },
-    "wait": {
-      "button": "Ir al panel de perfiles",
-      "description": "Configuraste correctamente la experiencia de {name}"
-    },
     "picto": {
       "title": "Tablero {name}",
       "switch": "Activar tablero"
+    },
+    "wait": {
+      "title": "¡Felicitaciones!",
+      "subtitle": "Haz configurado la experiencia de Juan!",
+      "button": "Ir al panel de perfiles"
     },
     "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
