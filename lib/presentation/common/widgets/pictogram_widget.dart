@@ -15,7 +15,7 @@ class PictogramWidget extends StatelessWidget {
     final double height = size.height;
     final double width = size.width;
     return PictoWidget(
-      text: pictogam.text[language]!,
+      text: pictogam.text,
       imageUrl: pictogam.resource.network,
       onTap: onTap,
       height: height * 0.38,

@@ -129,34 +129,30 @@ class PatientUserModel extends UserModel {
               : <String, List<Group>>{},
       phrases:
           // <String, List<Phrase>>{},
-          map['phrases'] != null&& map['phrases'].isNotEmpty
+          map['phrases'] != null && map['phrases'].isNotEmpty
               ? Map<String, List<Phrase>>.fromIterables(
                   map['phrases'].keys,
                   map['groups'].values.map(
                         (e) => List<Phrase>.from(
-                          e.map(
-                              (x) => Phrase.fromMap(x as Map<String, dynamic>)),
+                          e.map((x) => Phrase.fromMap(x as Map<String, dynamic>)),
                         ),
                       ),
                 )
               : <String, List<Phrase>>{},
       pictos:
           // <String, List<Picto>>{},
-          map['pictos'] != null&& map['pictos'].isNotEmpty
+          map['pictos'] != null && map['pictos'].isNotEmpty
               ? Map<String, List<Picto>>.fromIterables(
                   map['pictos'].keys,
                   map['pictos'].values.map(
                         (e) => List<Picto>.from(
-                          e.map(
-                              (x) => Picto.fromMap(x as Map<String, dynamic>)),
+                          e.map((x) => Picto.fromMap(x as Map<String, dynamic>)),
                         ),
                       ),
                 )
               : <String, List<Picto>>{},
-      settings: PatientSettings.fromMap(
-          Map.from(map['settings'] as Map<dynamic, dynamic>)),
-      type: UserType.values
-          .firstWhere((element) => element.name == map['type'] as String),
+      settings: PatientSettings.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
+      type: UserType.values.firstWhere((element) => element.name == map['type'] as String),
     );
   }
 
@@ -176,27 +172,16 @@ class PatientUserModel extends UserModel {
   bool operator ==(covariant PatientUserModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
-        mapEquals(other.groups, groups) &&
-        mapEquals(other.phrases, phrases) &&
-        mapEquals(other.pictos, pictos) &&
-        other.settings == settings &&
-        other.type == type;
+    return other.id == id && mapEquals(other.groups, groups) && mapEquals(other.phrases, phrases) && mapEquals(other.pictos, pictos) && other.settings == settings && other.type == type;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        groups.hashCode ^
-        phrases.hashCode ^
-        pictos.hashCode ^
-        settings.hashCode ^
-        type.hashCode;
+    return id.hashCode ^ groups.hashCode ^ phrases.hashCode ^ pictos.hashCode ^ settings.hashCode ^ type.hashCode;
   }
 
   @override
-  UserModel fromJson(Map<String, dynamic> json) =>
-      PatientUserModel.fromMap(json);
+  UserModel fromJson(Map<String, dynamic> json) => PatientUserModel.fromMap(json);
 }
 
 @HiveType(typeId: HiveTypesIds.patientSettingsTypeId)
@@ -249,20 +234,14 @@ class PatientSettings extends UserSettings {
     return PatientSettings(
       data: UserData.fromMap(Map.from(map['data'] as Map<dynamic, dynamic>)),
       language: map['language'] as String,
-      payment: map['payment'] != null
-          ? Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>))
-          : Payment.none(),
-      shortcuts: map['shortcuts'] != null
-          ? Shortcuts.fromMap(
-              Map.from(map['shortcuts'] as Map<dynamic, dynamic>))
-          : Shortcuts.none(),
+      payment: map['payment'] != null ? Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>)) : Payment.none(),
+      shortcuts: map['shortcuts'] != null ? Shortcuts.fromMap(Map.from(map['shortcuts'] as Map<dynamic, dynamic>)) : Shortcuts.none(),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PatientSettings.fromJson(String source) =>
-      PatientSettings.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory PatientSettings.fromJson(String source) => PatientSettings.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -273,17 +252,11 @@ class PatientSettings extends UserSettings {
   bool operator ==(covariant PatientSettings other) {
     if (identical(this, other)) return true;
 
-    return other.data == data &&
-        other.language == language &&
-        other.payment == payment &&
-        other.shortcuts == shortcuts;
+    return other.data == data && other.language == language && other.payment == payment && other.shortcuts == shortcuts;
   }
 
   @override
   int get hashCode {
-    return data.hashCode ^
-        language.hashCode ^
-        payment.hashCode ^
-        shortcuts.hashCode;
+    return data.hashCode ^ language.hashCode ^ payment.hashCode ^ shortcuts.hashCode;
   }
 }

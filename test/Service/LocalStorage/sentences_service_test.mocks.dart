@@ -625,7 +625,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #updateUser,
+          #updateUserSettings,
           [],
           {
             #data: data,
@@ -815,4 +815,21 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<void> updateUserType({
+    required String? id,
+    required _i10.UserType? userType,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserType,
+          [],
+          {
+            #id: id,
+            #userType: userType,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

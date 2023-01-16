@@ -309,7 +309,7 @@ class SentencesProvider extends ChangeNotifier {
       for (var pict in _sentencesPicts[_sentencesIndex]) {
         //todo: add the language here too
         final language = 'es_AR'; //FUCK THE POLICE!!!
-        voiceText += ' ${pict.text[language]}';
+        voiceText += ' ${pict.text}';
       }
 
       await _tts.speak(voiceText);
@@ -323,7 +323,7 @@ class SentencesProvider extends ChangeNotifier {
       String voiceText = "";
       for (var pict in favouriteOrNotPicts[_selectedIndexFavSelection]) {
         //todo: add teh language here
-        voiceText += ' ${pict.text['es']}';
+        voiceText += ' ${pict.text}';
 
         ///TODO: Update this
       }
@@ -341,7 +341,7 @@ class SentencesProvider extends ChangeNotifier {
       String voiceText = "";
       for (var pict in favouritePicts[_selectedIndexFav]) {
         //todo: add teh language here
-        voiceText += ' ${pict.text['es']}';
+        voiceText += ' ${pict.text}';
 
         ///TODO: Update this
       }

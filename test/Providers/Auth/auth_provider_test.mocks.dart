@@ -14,7 +14,7 @@ import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart'
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart'
     as _i9;
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart'
-    as _i17;
+    as _i18;
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart'
     as _i5;
 import 'package:ottaa_project_flutter/application/service/about_service.dart'
@@ -24,9 +24,10 @@ import 'package:ottaa_project_flutter/application/service/auth_service.dart'
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i4;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i7;
 import 'package:ottaa_project_flutter/core/enums/user_payment.dart' as _i14;
+import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i16;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i15;
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
-    as _i16;
+    as _i17;
 import 'package:state_notifier/state_notifier.dart' as _i11;
 
 // ignore_for_file: type=lint
@@ -504,13 +505,30 @@ class MockAboutService extends _i1.Mock implements _i13.AboutService {
         ),
         returnValue: _i6.Future<bool>.value(false),
       ) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> updateUserType({
+    required String? id,
+    required _i16.UserType? userType,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserType,
+          [],
+          {
+            #id: id,
+            #userType: userType,
+          },
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
 
 /// A class which mocks [LocalDatabaseRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i16.LocalDatabaseRepository {
+    implements _i17.LocalDatabaseRepository {
   MockLocalDatabaseRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -675,7 +693,7 @@ class MockAuthNotifier extends _i1.Mock implements _i2.AuthNotifier {
 /// A class which mocks [UserNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserNotifier extends _i1.Mock implements _i17.UserNotifier {
+class MockUserNotifier extends _i1.Mock implements _i18.UserNotifier {
   MockUserNotifier() {
     _i1.throwOnMissingStub(this);
   }

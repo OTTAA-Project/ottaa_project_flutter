@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:hive_flutter/hive_flutter.dart';
@@ -28,6 +27,9 @@ class UserData {
   @HiveField(5)
   final String name;
 
+  @HiveField(6, defaultValue: "")
+  final String number;
+
   const UserData({
     required this.avatar,
     required this.birthDate,
@@ -35,6 +37,7 @@ class UserData {
     required this.lastConnection,
     required this.lastName,
     required this.name,
+    this.number = "",
   });
 
   UserData copyWith({
@@ -44,6 +47,7 @@ class UserData {
     DateTime? lastConnection,
     String? lastName,
     String? name,
+    String? number,
   }) {
     return UserData(
       avatar: avatar ?? this.avatar,
@@ -52,6 +56,7 @@ class UserData {
       lastConnection: lastConnection ?? this.lastConnection,
       lastName: lastName ?? this.lastName,
       name: name ?? this.name,
+      number: number ?? this.number,
     );
   }
 
@@ -63,6 +68,7 @@ class UserData {
       'lastConnection': lastConnection.millisecondsSinceEpoch,
       'lastName': lastName,
       'name': name,
+      'number': number,
     };
   }
 
@@ -74,6 +80,7 @@ class UserData {
       lastConnection: DateTime.fromMillisecondsSinceEpoch(map['lastConnection'] as int),
       lastName: map['lastName'] as String,
       name: map['name'] as String,
+      number: map['number'] as String,
     );
   }
 
@@ -83,18 +90,18 @@ class UserData {
 
   @override
   String toString() {
-    return 'UserData(avatar: $avatar, birthDate: $birthDate, genderPref: $genderPref, lastConnection: $lastConnection, lastName: $lastName, name: $name)';
+    return 'UserData(avatar: $avatar, birthDate: $birthDate, genderPref: $genderPref, lastConnection: $lastConnection, lastName: $lastName, name: $name, number: $number)';
   }
 
   @override
   bool operator ==(covariant UserData other) {
     if (identical(this, other)) return true;
 
-    return other.avatar == avatar && other.birthDate == birthDate && other.genderPref == genderPref && other.lastConnection == lastConnection && other.lastName == lastName && other.name == name;
+    return other.avatar == avatar && other.birthDate == birthDate && other.genderPref == genderPref && other.lastConnection == lastConnection && other.lastName == lastName && other.name == name && other.number == number;
   }
 
   @override
   int get hashCode {
-    return avatar.hashCode ^ birthDate.hashCode ^ genderPref.hashCode ^ lastConnection.hashCode ^ lastName.hashCode ^ name.hashCode;
+    return avatar.hashCode ^ birthDate.hashCode ^ genderPref.hashCode ^ lastConnection.hashCode ^ lastName.hashCode ^ name.hashCode ^ number.hashCode;
   }
 }

@@ -37,7 +37,7 @@ class CustomiseProvider extends ChangeNotifier {
     selectedGroup = index;
     selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset)!; //TODO: Check this with asimA
     //todo: set the language here too
-    selectedGroupName = groups[index].text["es"]!; //TODO: Change it to user language
+    selectedGroupName = groups[index].text; //TODO: Change it to user language
     selectedGroupStatus = groups[index].block;
     fetchDesiredPictos();
     notifyListeners();

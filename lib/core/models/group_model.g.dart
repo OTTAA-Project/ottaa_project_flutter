@@ -20,7 +20,7 @@ class GroupAdapter extends TypeAdapter<Group> {
       block: fields[0] == null ? false : fields[0] as bool,
       id: fields[1] as int,
       relations: (fields[2] as List).cast<GroupRelation>(),
-      text: (fields[3] as Map).cast<String, String>(),
+      text: fields[3] as String,
       resource: fields[4] as AssetsImage,
       freq: fields[5] as int,
     );

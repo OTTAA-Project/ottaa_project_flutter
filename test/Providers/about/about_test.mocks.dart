@@ -11,6 +11,7 @@ import 'package:ottaa_project_flutter/application/service/about_service.dart'
     as _i3;
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i7;
 import 'package:ottaa_project_flutter/core/enums/user_payment.dart' as _i5;
+import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i8;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i6;
 
 // ignore_for_file: type=lint
@@ -150,4 +151,21 @@ class MockAboutService extends _i1.Mock implements _i3.AboutService {
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+  @override
+  _i4.Future<void> updateUserType({
+    required String? id,
+    required _i8.UserType? userType,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserType,
+          [],
+          {
+            #id: id,
+            #userType: userType,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
