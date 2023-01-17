@@ -103,9 +103,6 @@ class PatientUserModel extends UserModel {
   }
 
   factory PatientUserModel.fromMap(Map<String, dynamic> map) {
-    if (map['groups'].isEmpty) {
-      print('yes');
-    }
     return PatientUserModel(
       email: "",
       id: map['id'] as String,

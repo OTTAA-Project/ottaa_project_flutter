@@ -28,7 +28,7 @@ class UserData {
   final String name;
 
   @HiveField(6, defaultValue: "")
-  final String number;
+  final String? number;
 
   const UserData({
     required this.avatar,
@@ -80,7 +80,7 @@ class UserData {
       lastConnection: DateTime.fromMillisecondsSinceEpoch(map['lastConnection'] as int),
       lastName: map['lastName'] as String,
       name: map['name'] as String,
-      number: map['number'] as String,
+      number: map['number'] as String?,
     );
   }
 
