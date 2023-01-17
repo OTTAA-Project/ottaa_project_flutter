@@ -38,7 +38,7 @@ class ConnectedUserWidget extends StatelessWidget {
               // provider.connectedUsersProfileData[index].imageUrl,
             ),
             onPressed: onPressed,
-            subtitle: 'time will be here',
+            subtitle: timeText,
             actions: GestureDetector(
               onTap: actionTap,
               child: Row(

@@ -38,7 +38,7 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
               provider.connectedUsersProfileDataExpanded[index] = !provider.connectedUsersProfileDataExpanded[index];
               provider.notify();
             },
-            timeText: 'time text',
+            timeText: provider.connectedUsersData[index].settings.data.lastConnection.toString(),
             show: provider.connectedUsersProfileDataExpanded[index],
           ),
         );
