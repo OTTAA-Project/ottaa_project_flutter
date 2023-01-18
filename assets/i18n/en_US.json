@@ -2,8 +2,7 @@
   "profile": {
     "selection": {
       "text1": "Who is going to use the app on this device?",
-      "caregiver_text": "Necesita comunicarse",
-      "user_text": "Necesita comunicarse"
+      "user_text": "Needs to comunicate"
     },
     "hello": "Hi {name}!",
     "ottaa": {
@@ -24,22 +23,20 @@
       "faq4": "Which languages are supported by the OTTAA Project?",
       "faq4Description": "We currently support Spanish, English, Portuguese, and French. For Spanish, we have localized versions from Argentina, Chile, Colombia, and Spain. We are actively looking for contributions on new languages or better localization for Spanish varieties. Join our crowdin community to contribute.",
       "faq5": "How can I collaborate with the OTTAA Project?",
-      "faq5Description": "Contributors can help OTTAA with developing, testing, and/or translation. To read more about the subject and get started, please see the Contributing section in the official OTTAA GitHub repository.",
-      "faq6": "FAQ 6 Test",
-      "faq6Description": "FAQ 6 Description all cool",
-      "faq7": "FAQ 7 Test",
-      "faq7Description": "FAQ 7 Description all cool"
+      "faq5Description": "Contributors can help OTTAA with developing, testing, and/or translation. To read more about the subject and get started, please see the Contributing section in the official OTTAA GitHub repository."
     },
     "caregiver": "Caregiver",
     "caregivers_families": "Caregivers/Relatives",
     "user": "User",
-    "user_description": "The person who need to communicate",
+    "user_description": "Non-verbal person",
     "wait": "Please wait",
     "setting_exp": "Setting up your experience...",
     "link_account": "Link to an account",
     "use": {
       "ottaa": "Use OTTAA"
     },
+    "close_profile": "Hide",
+    "open_profile": "View profile",
     "no_account": "No account mode",
     "new_existant": "New/Existent",
     "what_do": "What do you want to do?",
@@ -99,6 +96,13 @@
       }
     }
   },
+  "user": {
+    "main": {
+      "title": "Configura tu experiencia",
+      "subtitle1": "Uso de la aplicación",
+      "subtitle2": "Prediction"
+    }
+  },
   "global": {
     "hello_world": "Hello World",
     "hello": "Hello",
@@ -120,7 +124,11 @@
     "step": "Step",
     "share": "Share",
     "support": "Support",
-    "congrats": "Congratulations"
+    "congrats": "Congratulations",
+    "settings": "Settings",
+    "general": "General",
+    "pictogram": "Pictograms",
+    "user_ottaa": "Use OTTAA as {name}"
   },
   "onboarding": {
     "start": "Get Started",
@@ -182,7 +190,8 @@
     "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
     "text": "Having trouble linking accounts?",
     "button": {
-      "resend": "Resend email"
+      "resend": "Resend email",
+      "anothermail": "Enter another email."
     }
   },
   "login": {
@@ -199,7 +208,8 @@
     "board": {
       "title": "What boards will the user use?",
       "appbar": "Predictive boards",
-      "skip": "Do you skip board customization?"
+      "skip": "Do you skip board customization?",
+      "subtitle": "See pictograms"
     },
     "shortcut": {
       "title": "Choose the shortcuts to use on Home screen.",
@@ -209,13 +219,13 @@
       "camera": "Camera",
       "games": "Games"
     },
-    "wait": {
-      "button": "Go to profile screen",
-      "description": "{name} experience is set up correctly"
-    },
     "picto": {
       "title": "Board {name}",
       "switch": "Enable board"
+    },
+    "wait": {
+      "subtitle": "Haz configurado la experiencia de Juan!",
+      "button": "Go to profile screen"
     },
     "skip": "Do you want to skip profile customization?"
   }
