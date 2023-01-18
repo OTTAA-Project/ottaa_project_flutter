@@ -1,11 +1,9 @@
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:ottaa_project_flutter/core/use_cases/create_email_token.dart';
 
-class CreateEmailTokenImpl implements CreateEmailToken {
-  @override
-  final ServerRepository serverService;
+class CreateEmailTokenImpl extends CreateEmailToken {
 
-  const CreateEmailTokenImpl(this.serverService);
+  const CreateEmailTokenImpl(super.serverService);
 
   @override
   Future<String?> createEmailToken(String ownEmail, String email) async {

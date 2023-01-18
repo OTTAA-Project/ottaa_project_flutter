@@ -1,4 +1,5 @@
 import 'package:either_dart/either.dart';
+import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
@@ -69,4 +70,11 @@ abstract class ServerRepository {
   Future<dynamic> getDefaultGroups(String languageCode);
 
   Future<void> updateUserType({required String id, required UserType userType});
+
+  Future<Map<String, dynamic>?> createPictoGroupData({
+    required String userId,
+    required String language,
+    required BoardDataType type,
+    required Map<String, dynamic> data,
+  });
 }
