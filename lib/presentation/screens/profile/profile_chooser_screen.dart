@@ -28,7 +28,6 @@ class ProfileChooserScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //todo: add text style here after emir has created the theme files
                   Padding(
                     padding: const EdgeInsets.only(
                       top: 36,

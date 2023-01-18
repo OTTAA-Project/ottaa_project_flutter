@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/onboarding_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/ui/onboarding_layout.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/ui/onboarding_page_indicator.dart';
@@ -17,8 +18,10 @@ class OnBoardingScreen extends ConsumerStatefulWidget {
   final int defaultIndex;
 
   const OnBoardingScreen({super.key, this.defaultIndex = 0});
+
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _OnBoardingScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _OnBoardingScreenState();
 }
 
 class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
@@ -26,7 +29,8 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      ref.read(onBoardingProvider.select((value) => value.goToPage))(widget.defaultIndex);
+      ref.read(onBoardingProvider.select((value) => value.goToPage))(
+          widget.defaultIndex);
 
       await blockPortraitMode();
 
@@ -42,8 +46,10 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = ref.read(onBoardingProvider);
+    final spProvider = ref.read(splashProvider);
 
-    final currentIndex = ref.watch(onBoardingProvider.select((value) => value.currentIndex));
+    final currentIndex =
+        ref.watch(onBoardingProvider.select((value) => value.currentIndex));
 
     final isLogged = ref.read(authNotifier);
 
@@ -73,7 +79,12 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                 );
 
                 if (skip != null && skip) {
-                  if (mounted) context.go(isLogged ? AppRoutes.profileChooserScreen : AppRoutes.login);
+                  if (mounted) {
+                    await spProvider.setFirstTime();
+                    context.go(isLogged
+                        ? AppRoutes.profileChooserScreen
+                        : AppRoutes.login);
+                  }
                 }
               },
               style: TextButton.styleFrom(foregroundColor: Colors.grey),
@@ -149,14 +160,19 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: PrimaryButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (currentIndex == 2) {
-                          context.go(isLogged ? AppRoutes.profileChooserScreen : AppRoutes.login);
+                          await spProvider.setFirstTime();
+                          context.go(isLogged
+                              ? AppRoutes.profileChooserScreen
+                              : AppRoutes.login);
                           return;
                         }
                         provider.nextPage();
                       },
-                      text: currentIndex == 2 ? "onboarding.start".trl : "global.next".trl,
+                      text: currentIndex == 2
+                          ? "onboarding.start".trl
+                          : "global.next".trl,
                     ),
                   ),
                 ),

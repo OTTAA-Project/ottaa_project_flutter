@@ -35,13 +35,19 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       setState(() {});
 
       bool isLogged = await provider.fetchUserInformation();
+      bool isFirstTime = await provider.isFirstTime();
+      print('first ti,e is here $isFirstTime');
 
       if (isLogged) {
         final user = ref.read(userNotifier);
         auth.setSignedIn();
         if (mounted) {
           I18N.of(context).changeLanguage(user?.settings.language ?? "es_AR");
-          return context.go(AppRoutes.onboarding);
+          if (isFirstTime) {
+            return context.go(AppRoutes.profileChooserScreen);
+          } else {
+            return context.go(AppRoutes.onboarding);
+          }
         }
       }
       if (mounted) return context.go(AppRoutes.login);
@@ -69,7 +75,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               const SizedBox(width: 20),
               Text(
                 "Hello".trl,
-                style: textTheme.headline1?.copyWith(color: Theme.of(context).primaryColor, fontSize: 40),
+                style: textTheme.headline1?.copyWith(
+                    color: Theme.of(context).primaryColor, fontSize: 40),
               ), //TODO: CHange this
             ],
           ),

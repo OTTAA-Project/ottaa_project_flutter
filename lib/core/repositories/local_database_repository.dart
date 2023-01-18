@@ -10,4 +10,6 @@ abstract class LocalDatabaseRepository {
   Future<void> setUser(UserModel user);
   Future<UserModel?> getUser();
   Future<void> deleteUser();
+  Future<bool> getIntro();
+  Future<void> setIntro();
 }
