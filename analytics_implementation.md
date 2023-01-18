@@ -1,5 +1,7 @@
 ## Analytics Implementation
 
+(place_holder: see  [issue #106](https://github.com/OTTAA-Project/ottaa_project_flutter/issues/106) questions 1,2 and 3 for possible changes/add ons)
+
 ### Types of events
 
 * **Talk**  *-Interaction event*
