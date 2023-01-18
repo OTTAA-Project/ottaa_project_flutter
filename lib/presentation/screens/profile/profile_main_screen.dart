@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/application.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/connected_users_list.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/drop_down_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
@@ -29,7 +31,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
     final user = ref.read(userNotifier);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await provider.setDate();
-      if (provider.isCaregiver) {
+      if (user!.type == UserType.caregiver) {
         await provider.fetchConnectedUsersData();
       }
     });
@@ -99,7 +101,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                 ),
                 provider.connectedUsersFetched
                     ? const ConnectedUsersList()
-                    : Container(),
+                    : const SizedBox.shrink(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: ActionCard(

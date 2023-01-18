@@ -39,8 +39,7 @@ class SplashProvider extends ChangeNotifier {
       await _auth.logout();
       return false;
     }
-    _avatarNotifier.changeAvatar(
-        int.tryParse(result.right.settings.data.avatar.asset) ?? 615);
+    _avatarNotifier.changeAvatar(int.tryParse(result.right.settings.data.avatar.asset) ?? 615);
     _userNotifier.setUser(result.right);
     return result.isRight;
   }
@@ -49,10 +48,8 @@ class SplashProvider extends ChangeNotifier {
 final splashProvider = ChangeNotifierProvider<SplashProvider>((ref) {
   final AboutRepository aboutService = GetIt.I.get<AboutRepository>();
   final AuthRepository authService = GetIt.I.get<AuthRepository>();
-  final LocalDatabaseRepository localDatabaseRepository =
-      GetIt.I.get<LocalDatabaseRepository>();
-  final UserAvatarNotifier avatarNotifier =
-      ref.read(userAvatarNotifier.notifier);
+  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+  final UserAvatarNotifier avatarNotifier = ref.read(userAvatarNotifier.notifier);
   final UserNotifier userState = ref.read(userNotifier.notifier);
   return SplashProvider(
     aboutService,

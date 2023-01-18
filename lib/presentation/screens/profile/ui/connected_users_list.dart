@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
@@ -38,7 +39,7 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
               provider.connectedUsersProfileDataExpanded[index] = !provider.connectedUsersProfileDataExpanded[index];
               provider.notify();
             },
-            timeText: provider.connectedUsersData[index].settings.data.lastConnection.toString(),
+            timeText: DateFormat("DD/MM/yy HH:mm").format(provider.connectedUsersData[index].settings.data.lastConnection),
             show: provider.connectedUsersProfileDataExpanded[index],
           ),
         );

@@ -12,6 +12,7 @@ import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -36,17 +37,20 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
       bool isLogged = await provider.fetchUserInformation();
       bool isFirstTime = await provider.isFirstTime();
-      print('first ti,e is here $isFirstTime');
 
       if (isLogged) {
         final user = ref.read(userNotifier);
         auth.setSignedIn();
+        await I18N.of(context).changeLanguage(user?.settings.language ?? "es_AR");
         if (mounted) {
-          I18N.of(context).changeLanguage(user?.settings.language ?? "es_AR");
           if (isFirstTime) {
-            return context.go(AppRoutes.profileChooserScreen);
-          } else {
             return context.go(AppRoutes.onboarding);
+          }
+
+          if (user!.type == UserType.caregiver) {
+            return context.go(AppRoutes.profileMainScreen);
+          } else {
+            return context.go(AppRoutes.profileMainScreenUser);
           }
         }
       }
@@ -75,8 +79,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               const SizedBox(width: 20),
               Text(
                 "Hello".trl,
-                style: textTheme.headline1?.copyWith(
-                    color: Theme.of(context).primaryColor, fontSize: 40),
+                style: textTheme.headline1?.copyWith(color: Theme.of(context).primaryColor, fontSize: 40),
               ), //TODO: CHange this
             ],
           ),

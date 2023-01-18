@@ -299,7 +299,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getConnectedUsers({required String userId}) async {
-    final ref = _database.child('temp/linkTests/$userId/users'); //TODO: Change this to the real path
+    final ref = _database.child('$userId/users'); //TODO: Change this to the real path
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
