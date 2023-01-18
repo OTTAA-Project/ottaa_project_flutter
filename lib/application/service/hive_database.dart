@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
@@ -45,6 +44,12 @@ class HiveDatabase extends LocalDatabaseRepository {
   }
 
   @override
+  Future<bool> getIntro()async{
+    final res = Hive.box('intro').get('first');
+    return res ?? false;
+  }
+
+  @override
   Future<void> init() async {
     await Hive.initFlutter();
 
@@ -73,6 +78,8 @@ class HiveDatabase extends LocalDatabaseRepository {
 
     await Hive.openBox(UserType.none.name);
 
+    await Hive.openBox('intro');
+
     await getUser();
   }
 
@@ -81,5 +88,10 @@ class HiveDatabase extends LocalDatabaseRepository {
     await Hive.box(user.type.name).put(user.type.name, user);
     user = await Hive.box(user.type.name).get(user.type.name);
     this.user = user;
+  }
+
+  @override
+  Future<void> setIntro() async {
+    await Hive.box('intro').put('first', true);
   }
 }

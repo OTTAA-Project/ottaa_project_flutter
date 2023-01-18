@@ -2,11 +2,9 @@ import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:ottaa_project_flutter/core/use_cases/verify_email_token.dart';
 
-class VerifyEmailTokenImpl implements VerifyEmailToken {
-  @override
-  final ServerRepository serverService;
+class VerifyEmailTokenImpl extends VerifyEmailToken {
 
-  const VerifyEmailTokenImpl(this.serverService);
+  const VerifyEmailTokenImpl(super.serverService);
 
   @override
   Future<Either<String, String>> verifyEmailToken(String ownEmail, String email, String token) async {

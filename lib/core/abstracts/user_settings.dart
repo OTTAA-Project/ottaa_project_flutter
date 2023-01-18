@@ -4,6 +4,8 @@ abstract class UserSettings {
   const UserSettings();
 
   String get language;
+  set language(String language);
+
   UserData get data;
   set data(UserData data);
 

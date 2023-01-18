@@ -13,19 +13,20 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart'
     as _i10;
 import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart'
-    as _i16;
+    as _i17;
 import 'package:ottaa_project_flutter/application/providers/onboarding_provider.dart'
     as _i4;
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i8;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i9;
 import 'package:ottaa_project_flutter/core/enums/user_payment.dart' as _i14;
+import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i16;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i15;
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart'
     as _i13;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
     as _i6;
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
-    as _i17;
+    as _i18;
 import 'package:state_notifier/state_notifier.dart' as _i12;
 
 // ignore_for_file: type=lint
@@ -495,13 +496,30 @@ class MockAboutRepository extends _i1.Mock implements _i13.AboutRepository {
           ),
         )),
       ) as _i7.Future<_i3.Either<String, _i8.UserModel>>);
+  @override
+  _i7.Future<void> updateUserType({
+    required String? id,
+    required _i16.UserType? userType,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserType,
+          [],
+          {
+            #id: id,
+            #userType: userType,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [UserAvatarNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserAvatarNotifier extends _i1.Mock
-    implements _i16.UserAvatarNotifier {
+    implements _i17.UserAvatarNotifier {
   MockUserAvatarNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -605,7 +623,7 @@ class MockUserAvatarNotifier extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i17.LocalDatabaseRepository {
+    implements _i18.LocalDatabaseRepository {
   MockLocalDatabaseRepository() {
     _i1.throwOnMissingStub(this);
   }

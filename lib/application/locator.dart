@@ -1,41 +1,13 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/service/auth_service.dart';
-import 'package:ottaa_project_flutter/application/service/customise_service.dart';
-import 'package:ottaa_project_flutter/application/service/groups_service.dart';
-import 'package:ottaa_project_flutter/application/service/hive_database.dart';
-import 'package:ottaa_project_flutter/application/service/local_storage_service.dart';
-import 'package:ottaa_project_flutter/application/service/mobile_remote_storage_service.dart';
-import 'package:ottaa_project_flutter/application/service/pictograms_service.dart';
-import 'package:ottaa_project_flutter/application/service/profile_services.dart';
-import 'package:ottaa_project_flutter/application/service/sentences_service.dart';
-import 'package:ottaa_project_flutter/application/service/server_service.dart';
-import 'package:ottaa_project_flutter/application/service/tts_service.dart';
-import 'package:ottaa_project_flutter/application/service/web_remote_storage_service.dart';
-import 'package:ottaa_project_flutter/application/use_cases/create_email_token_impl.dart';
-import 'package:ottaa_project_flutter/application/use_cases/verify_email_token_impl.dart';
-import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/customise_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
-import 'package:ottaa_project_flutter/core/use_cases/create_email_token.dart';
-import 'package:ottaa_project_flutter/core/use_cases/verify_email_token.dart';
-
-import 'service/about_service.dart';
+import 'package:ottaa_project_flutter/application/service/service.dart';
+import 'package:ottaa_project_flutter/application/use_cases/use_cases.dart';
+import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
+import 'package:ottaa_project_flutter/core/use_cases/use_cases.dart';
 
 final locator = GetIt.instance;
 
@@ -54,9 +26,7 @@ Future<void> setupServices() async {
 
   final ServerRepository serverRepository = ServerService();
 
-  //todo: change it afterwards
   final i18n = await I18N(deviceLocale).init();
-  // final i18n = await I18N(const Locale('en', 'US')).init();
 
   final AuthRepository authService = AuthService(databaseRepository, serverRepository);
   final LocalStorageRepository localStorageService = LocalStorageService();
@@ -81,6 +51,10 @@ Future<void> setupServices() async {
   final CreateEmailToken createEmailToken = CreateEmailTokenImpl(serverRepository);
   final VerifyEmailToken verifyEmailToken = VerifyEmailTokenImpl(serverRepository);
 
+  final CreateGroupData createGroupData = CreateGroupDataImpl(serverRepository);
+  final CreatePictoData createPictoData = CreatePictoDataImpl(serverRepository);
+  final CreatePhraseData createPhraseData = CreatePhraseDataImpl(serverRepository);
+
   locator.registerSingleton<I18N>(i18n);
   locator.registerSingleton<LocalDatabaseRepository>(databaseRepository);
   locator.registerSingleton<ServerRepository>(serverRepository);
@@ -96,4 +70,7 @@ Future<void> setupServices() async {
   locator.registerSingleton<CustomiseRepository>(customiseServices);
   locator.registerSingleton<CreateEmailToken>(createEmailToken);
   locator.registerSingleton<VerifyEmailToken>(verifyEmailToken);
+  locator.registerSingleton<CreateGroupData>(createGroupData);
+  locator.registerSingleton<CreatePictoData>(createPictoData);
+  locator.registerSingleton<CreatePhraseData>(createPhraseData);
 }

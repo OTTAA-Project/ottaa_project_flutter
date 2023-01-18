@@ -20,7 +20,7 @@ class Group {
   @HiveField(2)
   final List<GroupRelation> relations;
   @HiveField(3)
-  final GroupText text;
+  final String text;
 
   @HiveField(4)
   final AssetsImage resource;
@@ -41,7 +41,7 @@ class Group {
     bool? block,
     int? id,
     List<GroupRelation>? relations,
-    GroupText? text,
+    String? text,
     AssetsImage? resource,
     int? freq,
   }) {
@@ -77,7 +77,7 @@ class Group {
               ),
             )
           : [],
-      text: map['text'] != null ? Map.from(map['text'] as Map<String, dynamic>) : {},
+      text: map['text'],
       resource: AssetsImage.fromMap(map['resource'] != null ? map['resource'] as Map<String, dynamic> : {}),
       freq: map['freq'] != null ? map['freq'] as int : 0,
     );

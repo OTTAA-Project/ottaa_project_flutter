@@ -9,8 +9,6 @@ import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 
 part 'picto_model.g.dart';
 
-typedef PictoText = Map<String, String>;
-
 @HiveType(typeId: HiveTypesIds.pictoTypeId)
 class Picto {
   @HiveField(0, defaultValue: false)
@@ -20,7 +18,7 @@ class Picto {
   @HiveField(2)
   final List<PictoRelation> relations;
   @HiveField(3, defaultValue: <String, String>{})
-  PictoText text;
+  String text;
 
   @HiveField(4)
   AssetsImage resource;
@@ -38,7 +36,7 @@ class Picto {
     required this.id,
     required this.type,
     required this.resource,
-    this.text = const <String, String>{},
+    this.text = "",
     this.freq = 0,
     this.block = false,
     this.relations = const [],
@@ -49,7 +47,7 @@ class Picto {
     bool? block,
     int? id,
     List<PictoRelation>? relations,
-    PictoText? text,
+    String? text,
     AssetsImage? resource,
     int? freq,
     Map<String, List<String>>? tags,
@@ -91,7 +89,7 @@ class Picto {
               ),
             )
           : [],
-      text: map['text'] != null ? Map.from(map['text'] as Map<dynamic, dynamic>) : {},
+      text: map['text'],
       resource: AssetsImage.fromMap(Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
       freq: map['freq'] ?? 0,
       tags: Map<String, List<String>>.from(((map['tags'] ?? {}) as Map<dynamic, dynamic>)),

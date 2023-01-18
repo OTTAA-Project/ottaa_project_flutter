@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
 
 class LoginWaitingScreen extends ConsumerStatefulWidget {
@@ -14,6 +15,12 @@ class LoginWaitingScreen extends ConsumerStatefulWidget {
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _LoginWaitingScreenState();
 }
+
+const Map<UserType, String> _userTypeRoutes = {
+  UserType.caregiver: AppRoutes.profileMainScreen,
+  UserType.user: AppRoutes.profileMainScreenUser,
+  UserType.none: AppRoutes.profileChooserScreen,
+};
 
 class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
   @override
@@ -25,12 +32,12 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await provider.fetchUserInformation();
 
-
       final user = ref.read(userNotifier);
 
-      I18N.of(context).changeLanguage(user?.settings.language ?? "en_US");
-
-      if (mounted) localContext.go(AppRoutes.profileChooserScreen);
+      await I18N.of(context).changeLanguage(user?.settings.language ?? "en_US");
+      if (mounted) {
+        localContext.go(_userTypeRoutes[user!.type]!);
+      }
     });
     super.initState();
   }

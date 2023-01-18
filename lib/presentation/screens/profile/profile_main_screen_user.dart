@@ -46,7 +46,7 @@ class ProfileMainScreenUser extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ActionCard(
-                title: '${'profile.tips.title2'.trl} / ${'global.pictograms'.trl}',
+                title: '${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}',
                 subtitle: 'user.main.subtitle2'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
                 onPressed: () {},

@@ -40,16 +40,16 @@ class _ProfileFAQScreenState extends State<ProfileFAQScreen> {
               return ExpansionPanel(
                 canTapOnHeader: true,
                 headerBuilder: (BuildContext context, bool isExpanded) {
-                  return Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  return Wrap(
                     children: [
-                      const SizedBox(
-                        width: 24,
-                      ),
-                      Text(
-                        item.headerValue,
-                        style: textTheme.subtitle2!
-                            .copyWith(fontWeight: FontWeight.w600),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 24),
+                        child: Text(
+                          item.headerValue,
+                          style: textTheme.subtitle2!
+                              .copyWith(fontWeight: FontWeight.w600),
+                          textAlign: TextAlign.start,
+                        ),
                       ),
                     ],
                   );

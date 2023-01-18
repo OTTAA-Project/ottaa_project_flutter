@@ -93,6 +93,7 @@ class _ProfileSettingsEditScreenState extends ConsumerState<ProfileSettingsEditS
                     ),
                   ),
                   OTTAATextInput(
+                    isReadOnly: true,
                     hintText: 'profile.mail'.trl,
                     controller: provider.profileEditEmailController,
                   ),

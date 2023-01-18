@@ -5,6 +5,7 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
@@ -298,7 +299,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getConnectedUsers({required String userId}) async {
-    final ref = _database.child('temp/linkTests/$userId/users'); //TODO: Change this to the real path
+    final ref = _database.child('$userId/users'); //TODO: Change this to the real path
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
@@ -344,17 +345,23 @@ class ServerService implements ServerRepository {
       'src': ownEmail,
       'dst': email,
     };
-    final res = await http.post(
-      uri,
-      body: jsonEncode(body),
-      headers: {"Content-Type": "application/json"},
-    );
+    try {
+      final res = await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {"Content-Type": "application/json"},
+      );
 
-    final data = jsonDecode(res.body) as Map<String, dynamic>;
-    if (res.statusCode == 200) {
-      return Right(data);
-    } else {
-      return Left(data["code"] ?? res.body); //TODO: Handle the main error
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      print(res.statusCode);
+      if (res.statusCode == 200) {
+        return Right(data);
+      } else {
+        return Left(data["code"] ?? res.body); //TODO: Handle the main error
+      }
+    } catch (e) {
+      print(e);
+      return Left(e.toString());
     }
   }
 
@@ -423,5 +430,24 @@ class ServerService implements ServerRepository {
     final ref = _database.child("$id/type");
 
     await ref.set(userType.name);
+  }
+
+  @override
+  Future<Map<String, dynamic>?> createPictoGroupData({required String userId, required String language, required BoardDataType type, required Map<String, dynamic> data}) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/newCustomData');
+    final body = {"uid": userId, "lang": language, "type": type.name, "data": data};
+    try {
+      final res = await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {"Content-Type": "application/json"},
+      );
+
+      return jsonDecode(res.body) as Map<String, dynamic>;
+    } catch (e) {
+      return {
+        "error": e.toString(),
+      };
+    }
   }
 }

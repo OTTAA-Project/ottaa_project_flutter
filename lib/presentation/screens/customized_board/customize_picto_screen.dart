@@ -121,7 +121,7 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
                   provider.block(index: index);
                 },
                 imageUrl: provider.selectedGruposPicts[index].resource.network,
-                text: provider.selectedGruposPicts[index].text["es"]!,
+                text: provider.selectedGruposPicts[index].text,
                 colorNumber: provider.selectedGruposPicts[index].type,
                 disable: provider.selectedGruposPicts[index].block,
               ),
