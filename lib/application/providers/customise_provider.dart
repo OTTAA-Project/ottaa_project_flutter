@@ -35,7 +35,7 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset)!; //TODO: Check this with asimA
+    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset); //TODO: Check this with asimA
     //todo: set the language here too
     selectedGroupName = groups[index].text; //TODO: Change it to user language
     selectedGroupStatus = groups[index].block;
@@ -77,15 +77,14 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> fetchData() async {
-    groups = await _groupsService.getAllGroups();
+    await getDefaultGroups();
     pictosFetched = true;
     notifyListeners();
-    pictograms = await _pictogramsService.getAllPictograms();
-    await createMapForPictos();
+    // pictograms = await _pictogramsService.getAllPictograms();
+    // await createMapForPictos();
   }
 
   Future<void> uploadData({required String userId}) async {
-    //todo: change the languages
     final locale = _i18n.locale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
@@ -100,8 +99,12 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> getDefaultGroups() async {
-    final res = await _customiseService.fetchDefaultGroups(languageCode: 'en');
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}-${locale.countryCode}";
+    final res = await _customiseService.fetchDefaultGroups(languageCode: languageCode);
     print(res.length);
+    groups = res;
   }
 
   Future<void> createMapForPictos() async {

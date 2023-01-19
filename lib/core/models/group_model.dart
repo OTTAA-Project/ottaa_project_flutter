@@ -78,14 +78,17 @@ class Group {
             )
           : [],
       text: map['text'],
-      resource: AssetsImage.fromMap(map['resource'] != null ? map['resource'] as Map<String, dynamic> : {}),
+      resource: AssetsImage.fromMap(map['resource'] != null
+          ? map['resource'] as Map<String, dynamic>
+          : {}),
       freq: map['freq'] != null ? map['freq'] as int : 0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Group.fromJson(String source) => Group.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Group.fromJson(String source) =>
+      Group.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -96,12 +99,22 @@ class Group {
   bool operator ==(covariant Group other) {
     if (identical(this, other)) return true;
 
-    return other.block == block && other.id == id && listEquals(other.relations, relations) && other.text == text && other.resource == resource && other.freq == freq;
+    return other.block == block &&
+        other.id == id &&
+        listEquals(other.relations, relations) &&
+        other.text == text &&
+        other.resource == resource &&
+        other.freq == freq;
   }
 
   @override
   int get hashCode {
-    return block.hashCode ^ id.hashCode ^ relations.hashCode ^ text.hashCode ^ resource.hashCode ^ freq.hashCode;
+    return block.hashCode ^
+        id.hashCode ^
+        relations.hashCode ^
+        text.hashCode ^
+        resource.hashCode ^
+        freq.hashCode;
   }
 }
 
@@ -143,7 +156,8 @@ class GroupRelation {
 
   String toJson() => json.encode(toMap());
 
-  factory GroupRelation.fromJson(String source) => GroupRelation.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory GroupRelation.fromJson(String source) =>
+      GroupRelation.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'GroupRelation(id: $id, value: $value)';
