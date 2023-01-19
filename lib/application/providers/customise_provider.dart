@@ -35,7 +35,8 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset); //TODO: Check this with asimA
+    selectedGroupImage = (groups[index].resource.network ??
+        groups[index].resource.asset); //TODO: Check this with asimA
     //todo: set the language here too
     selectedGroupName = groups[index].text; //TODO: Change it to user language
     selectedGroupStatus = groups[index].block;
@@ -80,8 +81,12 @@ class CustomiseProvider extends ChangeNotifier {
     await getDefaultGroups();
     pictosFetched = true;
     notifyListeners();
-    // pictograms = await _pictogramsService.getAllPictograms();
-    // await createMapForPictos();
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}-${locale.countryCode}";
+    pictograms =
+        await _customiseService.fetchDefaultPictos(languageCode: languageCode);
+    await createMapForPictos();
   }
 
   Future<void> uploadData({required String userId}) async {
@@ -89,8 +94,10 @@ class CustomiseProvider extends ChangeNotifier {
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
-    await _pictogramsService.uploadPictograms(pictograms, languageCode, userId: userId);
-    await _groupsService.uploadGroups(groups, 'type', languageCode, userId: userId);
+    await _pictogramsService.uploadPictograms(pictograms, languageCode,
+        userId: userId);
+    await _groupsService.uploadGroups(groups, 'type', languageCode,
+        userId: userId);
     await setShortcutsForUser(userId: userId);
   }
 
@@ -102,7 +109,8 @@ class CustomiseProvider extends ChangeNotifier {
     final locale = _i18n.locale;
 
     final languageCode = "${locale.languageCode}-${locale.countryCode}";
-    final res = await _customiseService.fetchDefaultGroups(languageCode: languageCode);
+    final res =
+        await _customiseService.fetchDefaultGroups(languageCode: languageCode);
     print(res.length);
     groups = res;
   }
@@ -110,22 +118,25 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> createMapForPictos() async {
     int i = 0;
     for (var element in pictograms) {
-      pictosMap[element.id] = i;
+      pictosMap[element.id.toString()] = i;
     }
   }
 
   void block({required int index}) async {
     selectedGruposPicts[index].block = !selectedGruposPicts[index].block;
 
-    pictograms[pictosMap[selectedGruposPicts[index].id]!].block = !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
+    pictograms[pictosMap[selectedGruposPicts[index].id]!].block =
+        !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
     notifyListeners();
   }
 }
 
 final customiseProvider = ChangeNotifierProvider<CustomiseProvider>((ref) {
-  final CustomiseRepository customiseService = GetIt.I.get<CustomiseRepository>();
+  final CustomiseRepository customiseService =
+      GetIt.I.get<CustomiseRepository>();
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupService = GetIt.I<GroupsRepository>();
   final i18N = GetIt.I<I18N>();
-  return CustomiseProvider(pictogramService, groupService, customiseService, i18N);
+  return CustomiseProvider(
+      pictogramService, groupService, customiseService, i18N);
 });
