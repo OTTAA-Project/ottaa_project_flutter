@@ -11,19 +11,23 @@ class CustomiseService implements CustomiseRepository {
   CustomiseService(this._serverRepository);
 
   @override
-  Future<EitherVoid> setShortcutsForUser(
-          {required Shortcuts shortcuts, required String userId}) async =>
-      await _serverRepository.setShortcutsForUser(
-          shortcuts: shortcuts, userId: userId);
+  Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId}) async => await _serverRepository.setShortcutsForUser(shortcuts: shortcuts, userId: userId);
 
   @override
   Future<List<Group>> fetchDefaultGroups({required String languageCode}) async {
     final res = await _serverRepository.getDefaultGroups(languageCode);
     if (res.isRight) {
+      print(res.right[0]);
       final json = res.right;
-      final List<Group> groups = json.map((e) => Group.fromJson(e)).toList();
+      final List<Group> groups = json.keys.map<Group>((e) {
+        final data = Map.from(json[e] as Map<dynamic, dynamic>);
+        return Group.fromMap({
+          "id": e,
+          ...data,
+        });
+      }).toList();
 
-      return [];
+      return groups;
     } else {
       return [];
     }

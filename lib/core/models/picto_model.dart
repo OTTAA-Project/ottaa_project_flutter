@@ -14,10 +14,10 @@ class Picto {
   @HiveField(0, defaultValue: false)
   bool block;
   @HiveField(1)
-  final int id;
+  final String id;
   @HiveField(2)
   final List<PictoRelation> relations;
-  @HiveField(3, defaultValue: <String, String>{})
+  @HiveField(3, defaultValue: "")
   String text;
 
   @HiveField(4)
@@ -45,7 +45,7 @@ class Picto {
 
   Picto copyWith({
     bool? block,
-    int? id,
+    String? id,
     List<PictoRelation>? relations,
     String? text,
     AssetsImage? resource,
@@ -122,7 +122,7 @@ class Picto {
 @HiveType(typeId: HiveTypesIds.pictoTextTypeId)
 class PictoRelation {
   @HiveField(0)
-  final int id;
+  final String id;
   @HiveField(1)
   final double value;
 
@@ -132,7 +132,7 @@ class PictoRelation {
   });
 
   PictoRelation copyWith({
-    int? id,
+    String? id,
     double? value,
   }) {
     return PictoRelation(
@@ -150,7 +150,7 @@ class PictoRelation {
 
   factory PictoRelation.fromMap(Map<String, dynamic> map) {
     return PictoRelation(
-      id: map['id'] as int,
+      id: map['id'] as String,
       value: map['value'] as double,
     );
   }

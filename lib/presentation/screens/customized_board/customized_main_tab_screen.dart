@@ -173,37 +173,34 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                   ],
                 ),
               ),
-            ],
-          ),
-          Positioned(
-            bottom: 16,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: PrimaryButton(
-                onPressed: () async {
-                  if (pageController.page == 0) {
-                    setState(() {
-                      pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-                      index = 2;
-                    });
-                  } else {
-                    await showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (context) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                    );
-                    await provider.uploadData(userId: userID.userId!);
-                    context.push(AppRoutes.customizeWaitScreen);
-                  }
-                },
-                text: "global.next".trl,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.all(24),
+                child: PrimaryButton(
+                  onPressed: () async {
+                    if (pageController.page == 0) {
+                      setState(() {
+                        pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+                        index = 2;
+                      });
+                    } else {
+                      await showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
+                      await provider.uploadData(userId: userID.userId!);
+                      context.push(AppRoutes.customizeWaitScreen);
+                    }
+                  },
+                  text: "global.next".trl,
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

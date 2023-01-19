@@ -23,13 +23,14 @@ class UserDataAdapter extends TypeAdapter<UserData> {
       lastConnection: fields[3] as DateTime,
       lastName: fields[4] as String,
       name: fields[5] as String,
+      number: fields[6] == null ? '' : fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserData obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.avatar)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class UserDataAdapter extends TypeAdapter<UserData> {
       ..writeByte(4)
       ..write(obj.lastName)
       ..writeByte(5)
-      ..write(obj.name);
+      ..write(obj.name)
+      ..writeByte(6)
+      ..write(obj.number);
   }
 
   @override

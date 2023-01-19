@@ -680,4 +680,21 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+  @override
+  _i7.Future<bool> getIntro() => (super.noSuchMethod(
+        Invocation.method(
+          #getIntro,
+          [],
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+  @override
+  _i7.Future<void> setIntro() => (super.noSuchMethod(
+        Invocation.method(
+          #setIntro,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }

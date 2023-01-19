@@ -16,7 +16,7 @@ class Group {
   @HiveField(0, defaultValue: false)
   bool block;
   @HiveField(1)
-  final int id;
+  final String id;
   @HiveField(2)
   final List<GroupRelation> relations;
   @HiveField(3)
@@ -39,7 +39,7 @@ class Group {
 
   Group copyWith({
     bool? block,
-    int? id,
+    String? id,
     List<GroupRelation>? relations,
     String? text,
     AssetsImage? resource,
@@ -69,26 +69,23 @@ class Group {
   factory Group.fromMap(Map<String, dynamic> map) {
     return Group(
       block: map['block'] != null ? map['block'] as bool : false,
-      id: map['id'] as int,
+      id: map['id'] as String,
       relations: map['relations'] != null
           ? List<GroupRelation>.from(
-              (map['relations'] as List<int>).map<GroupRelation>(
-                (x) => GroupRelation.fromMap(x as Map<String, dynamic>),
+              (List.from(map['relations'] as List<dynamic>)).map<GroupRelation>(
+                (x) => GroupRelation.fromMap(Map.from(x as Map<dynamic, dynamic>)),
               ),
             )
           : [],
       text: map['text'],
-      resource: AssetsImage.fromMap(map['resource'] != null
-          ? map['resource'] as Map<String, dynamic>
-          : {}),
+      resource: AssetsImage.fromMap(map['resource'] != null ? Map.from(map['resource'] as Map<dynamic, dynamic>) : {}),
       freq: map['freq'] != null ? map['freq'] as int : 0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Group.fromJson(String source) =>
-      Group.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Group.fromJson(String source) => Group.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -99,29 +96,19 @@ class Group {
   bool operator ==(covariant Group other) {
     if (identical(this, other)) return true;
 
-    return other.block == block &&
-        other.id == id &&
-        listEquals(other.relations, relations) &&
-        other.text == text &&
-        other.resource == resource &&
-        other.freq == freq;
+    return other.block == block && other.id == id && listEquals(other.relations, relations) && other.text == text && other.resource == resource && other.freq == freq;
   }
 
   @override
   int get hashCode {
-    return block.hashCode ^
-        id.hashCode ^
-        relations.hashCode ^
-        text.hashCode ^
-        resource.hashCode ^
-        freq.hashCode;
+    return block.hashCode ^ id.hashCode ^ relations.hashCode ^ text.hashCode ^ resource.hashCode ^ freq.hashCode;
   }
 }
 
 @HiveType(typeId: HiveTypesIds.groupRelationTypeId)
 class GroupRelation {
   @HiveField(0)
-  final int id;
+  final String id;
   @HiveField(1)
   final double value;
 
@@ -131,7 +118,7 @@ class GroupRelation {
   });
 
   GroupRelation copyWith({
-    int? id,
+    String? id,
     double? value,
   }) {
     return GroupRelation(
@@ -149,15 +136,14 @@ class GroupRelation {
 
   factory GroupRelation.fromMap(Map<String, dynamic> map) {
     return GroupRelation(
-      id: map['id'] as int,
-      value: map['value'] as double,
+      id: map['id'] as String,
+      value: ((map['value'] ?? 0) as int).toDouble(),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory GroupRelation.fromJson(String source) =>
-      GroupRelation.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory GroupRelation.fromJson(String source) => GroupRelation.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'GroupRelation(id: $id, value: $value)';

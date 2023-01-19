@@ -62,7 +62,7 @@ class HomeProvider extends ChangeNotifier {
     suggestedIndex = 0;
 
     final Picto addPict = Picto(
-      id: 0,
+      id: "",
       text: "Agregar nuevo pictograma",
       type: 6,
       resource: AssetsImage(asset: "ic_agregar_nuevo", network: ""),

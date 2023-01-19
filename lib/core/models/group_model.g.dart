@@ -18,7 +18,7 @@ class GroupAdapter extends TypeAdapter<Group> {
     };
     return Group(
       block: fields[0] == null ? false : fields[0] as bool,
-      id: fields[1] as int,
+      id: fields[1] as String,
       relations: (fields[2] as List).cast<GroupRelation>(),
       text: fields[3] as String,
       resource: fields[4] as AssetsImage,
@@ -66,7 +66,7 @@ class GroupRelationAdapter extends TypeAdapter<GroupRelation> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GroupRelation(
-      id: fields[0] as int,
+      id: fields[0] as String,
       value: fields[1] as double,
     );
   }
