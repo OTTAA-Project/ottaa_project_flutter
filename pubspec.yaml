@@ -38,7 +38,7 @@ dependencies:
   json_theme: ^4.0.1+4
   just_audio: ^0.9.29
   package_info_plus: ^3.0.2
-  picto_widget: ^0.0.5+5
+  picto_widget: ^0.0.5+10
   screenshot: ^1.2.3
   share_plus: ^6.3.0
   url_launcher: ^6.1.6

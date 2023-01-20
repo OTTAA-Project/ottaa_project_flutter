@@ -84,15 +84,17 @@ class Picto {
       id: map['id'] ?? 0,
       relations: map['relations'] != null
           ? List<PictoRelation>.from(
-              (map['relations'] as List<int>).map<PictoRelation>(
-                (x) => PictoRelation.fromMap(x as Map<String, dynamic>),
+              (map['relations'] as List<dynamic>).map<PictoRelation>(
+                (x) => PictoRelation.fromMap(Map.from(x as Map<dynamic, dynamic>)),
               ),
             )
           : [],
-      text: map['text'],
+      tags: Map<String, List<String>>.from(((map['tags'] ?? {}) as Map<dynamic, dynamic>).map((key, value) {
+        return MapEntry<String, List<String>>(key as String, List<String>.from(value as List<dynamic>));
+      })),
       resource: AssetsImage.fromMap(Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
+      text: map['text'],
       freq: map['freq'] ?? 0,
-      tags: Map<String, List<String>>.from(((map['tags'] ?? {}) as Map<dynamic, dynamic>)),
       type: map['type'] ?? 0,
     );
   }
@@ -151,7 +153,7 @@ class PictoRelation {
   factory PictoRelation.fromMap(Map<String, dynamic> map) {
     return PictoRelation(
       id: map['id'] as String,
-      value: map['value'] as double,
+      value: ((map['value'] ?? 0) as int).toDouble(),
     );
   }
 

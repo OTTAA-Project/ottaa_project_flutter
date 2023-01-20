@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,8 +14,7 @@ class CustomizePictoScreen extends ConsumerStatefulWidget {
   const CustomizePictoScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CustomizePictoScreen> createState() =>
-      _CustomizePictoScreenState();
+  ConsumerState<CustomizePictoScreen> createState() => _CustomizePictoScreenState();
 }
 
 class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
@@ -30,10 +30,11 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
       appBar: OTTAAAppBar(
         title: Row(
           children: [
-            Text(
-              "customize.picto.title"
-                  .trlf({"name": provider.selectedGroupName}),
-              style: textTheme.headline3,
+            Expanded(
+              child: AutoSizeText(
+                "customize.picto.title".trlf({"name": provider.selectedGroupName}),
+                style: textTheme.headline3,
+              ),
             ),
             IconButton(
               icon: const Icon(
@@ -64,8 +65,7 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
             },
             child: Text(
               "global.skip".trl,
-              style:
-                  textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+              style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
             ),
           ),
         ],
@@ -80,11 +80,9 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
                   height: 32,
                 ),
                 BoardWidget(
-                  title: "customize.picto.title"
-                      .trlf({"name": provider.selectedGroupName}),
+                  title: "customize.picto.title".trlf({"name": provider.selectedGroupName}),
                   //todo: this one is a placeholder for now
-                  image:
-                      CachedNetworkImageProvider(provider.selectedGroupImage),
+                  image: CachedNetworkImageProvider(provider.selectedGroupImage),
                   customizeOnTap: () {
                     print('customize on tap');
                   },
@@ -113,8 +111,7 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
                 crossAxisCount: 3,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
-                // mainAxisExtent: 140,
-                childAspectRatio: 0.73,
+                mainAxisExtent: 119,
               ),
               itemBuilder: (context, index) => PictoWidget(
                 onTap: () {
