@@ -40,16 +40,12 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(
-                height: 200,
-                width: 80,
-                child: PictoWidget(
-                  onTap: () {},
-                  image: Image.network(
-                    "https://static.arasaac.org/pictograms/2282/2282_300.png",
-                  ),
-                  text: "HOLA",
-                ),
+              PictoWidget(
+                width: 64,
+                height: 140,
+                onTap: () {},
+                imageUrl: "https://static.arasaac.org/pictograms/2282/2282_300.png",
+                text: "HOLA",
               ),
             ],
           ),
