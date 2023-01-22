@@ -26,8 +26,7 @@ class LinkNotifier extends ChangeNotifier {
   final ProfileRepository _profileService;
 
   LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._profileService, this._auth);
-  //todo: add the proper value here
-  String? userId;
+  String? userId = '112233';
   UserModel? user;
 
   void tokenChanged(int id, String value) {

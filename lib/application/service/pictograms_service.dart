@@ -40,6 +40,9 @@ class PictogramsService extends PictogramsRepository {
   @override
   Future<void> uploadPictograms(List<Picto> data, String language, {String? userId}) async {
     List<Map<String, dynamic>> jsonData = List.empty(growable: true);
+    for (var e in data) {
+      jsonData.add(e.toMap());
+    }
     // for (var e in data) {
     //   final relactions = e.relacion?.map((e) => e.toJson()).toList();
     //   jsonData.add({
