@@ -61,7 +61,7 @@
       "text4": "Save pictograms and sentences in Favorites, so you can access them quickly."
     },
     "unlink": "Unlink",
-    "unlink_account": "Do you want to unlink {name} from your accounts?",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Help",
       "title1": "Frequently Asked Questions",
@@ -76,7 +76,7 @@
           "invalid": "Invalid email"
         },
         "warn": "*We will show a token on the device screen to link accounts.",
-        "send": "Submit"
+        "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico."
       },
       "token": {
         "title": "Enter the verification token that was sent to that email.",
@@ -91,8 +91,11 @@
       },
       "success": {
         "title": "Profile successfully linked!",
-        "lastTime": "Last seen {date}",
-        "continue": "Continue"
+        "lastTime": "Últ. vez {date}"
+      },
+      "error": {
+        "error2": "Error2",
+        "link-exist": "Ya están vinculadas"
       }
     }
   },
@@ -129,7 +132,8 @@
     "general": "General",
     "pictogram": "Pictograms",
     "configuration": "Settings",
-    "user_ottaa": "Usar Ottaa como {name}"
+    "user_ottaa": "Usar Ottaa como {name}",
+    "cancel": "Cancelar"
   },
   "onboarding": {
     "start": "Get Started",
@@ -158,45 +162,6 @@
   },
   "loginWait": {
     "text": "Welcome!\nTo the OTTAA World"
-  },
-  "link": {
-    "title": "Link to an account",
-    "mail": {
-      "title": "Ingresá el correo electrónico vinculado a la cuenta de OTTAA",
-      "input": {
-        "required": "Email is required",
-        "invalid": "Invalid email"
-      },
-      "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico.",
-      "warn": "*We will send an email with a token to link the profiles.",
-      "send": "Submit"
-    },
-    "token": {
-      "title": "Enter the verification token that was sent to that email.",
-      "problem": "Having trouble linking accounts?",
-      "resend": "Resend code",
-      "back": "Please enter another email"
-    },
-    "wait": {
-      "title": "Wait",
-      "subtitle": "Loading profile..."
-    },
-    "success": {
-      "title": "Profile successfully linked!",
-      "lastTime": "Last seen {date}",
-      "continue": "Continue"
-    },
-    "error": {
-      "link-exist": "Ya están vinculadas",
-      "error2": "Error2"
-    }
-  },
-  "token": {
-    "text": "Having trouble linking accounts?",
-    "button": {
-      "resend": "Resend email",
-      "anothermail": "Enter another email."
-    }
   },
   "login": {
     "title": "Log in with your account",
