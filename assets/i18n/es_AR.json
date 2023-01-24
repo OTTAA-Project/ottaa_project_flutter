@@ -76,7 +76,7 @@
           "invalid": "El correo electrónico es inválido"
         },
         "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles.",
-        "send": "Enviar"
+        "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico."
       },
       "token": {
         "title": "Coloque el código de verificación que llegó al correo electrónico.",
@@ -91,8 +91,11 @@
       },
       "success": {
         "title": "Perfil vinculado con éxito!",
-        "lastTime": "Últ. vez Ayer {date}",
-        "continue": "Continuar"
+        "lastTime": "Últ. vez {date}"
+      },
+      "error": {
+        "error2": "Error2",
+        "link-exist": "Ya están vinculadas"
       }
     }
   },
@@ -158,45 +161,6 @@
   },
   "loginWait": {
     "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
-  },
-  "link": {
-    "title": "Vincular Cuenta",
-    "mail": {
-      "title": "Ingresá el correo electrónico vinculado a la cuenta de OTTAA",
-      "input": {
-        "required": "El correo electrónico es requerido",
-        "invalid": "El correo electrónico es inválido"
-      },
-      "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico.",
-      "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
-      "send": "Enviar"
-    },
-    "token": {
-      "title": "Coloque el código de verificación que llegó al correo electrónico.",
-      "problem": "¿Inconvenientes para enlazar las cuentas?",
-      "resend": "Reenviar código",
-      "back": "Ingresar otro email"
-    },
-    "wait": {
-      "title": "Aguarde",
-      "subtitle": "Cargando perfil..."
-    },
-    "success": {
-      "title": "Perfil vinculado con éxito!",
-      "lastTime": "Últ. vez Ayer {date}",
-      "continue": "Continuar"
-    },
-    "error": {
-      "link-exist": "Ya están vinculadas",
-      "error2": "Error2"
-    }
-  },
-  "token": {
-    "text": "¿Inconvenientes para enlazar las cuentas?",
-    "button": {
-      "resend": "Reenviar email",
-      "anothermail": "Ingresá otro email."
-    }
   },
   "login": {
     "title": "Ingresá con tu cuenta",
