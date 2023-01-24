@@ -192,11 +192,15 @@
       "title": "Tablero {name}",
       "switch": "Activar tablero"
     },
+    "help": {
+      "boards": "Los tableros predictivos permiten configurar que grupo de pictogramas se mostrarán en la pantalla del usuario/a final.",
+      "shortcut": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal."
+    },
     "wait": {
       "title": "¡Felicitaciones!",
       "subtitle": "Haz configurado la experiencia de Juan!",
       "button": "Ir al panel de perfiles"
     },
-    "skip": "Texto de la notificación: ¿Estás de acuerdo en saltar las preferencias del perfil?"
+    "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
 }

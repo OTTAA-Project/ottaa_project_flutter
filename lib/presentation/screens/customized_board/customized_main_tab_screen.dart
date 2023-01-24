@@ -73,8 +73,8 @@ class _CustomizedMainTabScreenState
                   context,
                   // title: "",
                   subtitle: index == 1
-                      ? "board.customize.helpText".trl
-                      : "global.back".trl,
+                      ? "customize.help.boards".trl
+                      : "customize.help.shortcut".trl,
                   children: <Widget>[
                     Image.asset(
                       index == 1
@@ -83,7 +83,7 @@ class _CustomizedMainTabScreenState
                       height: 166,
                     ),
                   ],
-                  okButtonText: "board.customize.okText".trl,
+                  okButtonText: "global.done".trl,
                 );
               },
             ),
@@ -164,7 +164,7 @@ class _CustomizedMainTabScreenState
                     Text(
                       index == 1
                           ? "customize.board.title".trl
-                          : "board.shortcut.title".trl,
+                          : "customize.shortcut.title".trl,
                       style: textTheme.headline3!
                           .copyWith(fontWeight: FontWeight.w600),
                     ),
