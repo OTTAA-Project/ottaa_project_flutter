@@ -14,10 +14,10 @@ class Picto {
   @HiveField(0, defaultValue: false)
   bool block;
   @HiveField(1)
-  final int id;
+  final String id;
   @HiveField(2)
   final List<PictoRelation> relations;
-  @HiveField(3, defaultValue: <String, String>{})
+  @HiveField(3, defaultValue: "")
   String text;
 
   @HiveField(4)
@@ -45,7 +45,7 @@ class Picto {
 
   Picto copyWith({
     bool? block,
-    int? id,
+    String? id,
     List<PictoRelation>? relations,
     String? text,
     AssetsImage? resource,
@@ -84,22 +84,29 @@ class Picto {
       id: map['id'] ?? 0,
       relations: map['relations'] != null
           ? List<PictoRelation>.from(
-              (map['relations'] as List<int>).map<PictoRelation>(
-                (x) => PictoRelation.fromMap(x as Map<String, dynamic>),
+              (map['relations'] as List<dynamic>).map<PictoRelation>(
+                (x) =>
+                    PictoRelation.fromMap(Map.from(x as Map<dynamic, dynamic>)),
               ),
             )
           : [],
+      tags: Map<String, List<String>>.from(
+          ((map['tags'] ?? {}) as Map<dynamic, dynamic>).map((key, value) {
+        return MapEntry<String, List<String>>(
+            key as String, List<String>.from(value as List<dynamic>));
+      })),
+      resource: AssetsImage.fromMap(
+          Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
       text: map['text'],
-      resource: AssetsImage.fromMap(Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
       freq: map['freq'] ?? 0,
-      tags: Map<String, List<String>>.from(((map['tags'] ?? {}) as Map<dynamic, dynamic>)),
       type: map['type'] ?? 0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Picto.fromJson(String source) => Picto.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Picto.fromJson(String source) =>
+      Picto.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -110,19 +117,33 @@ class Picto {
   bool operator ==(covariant Picto other) {
     if (identical(this, other)) return true;
 
-    return other.block == block && other.id == id && listEquals(other.relations, relations) && other.text == text && other.resource == resource && other.freq == freq && mapEquals(other.tags, tags) && other.type == type;
+    return other.block == block &&
+        other.id == id &&
+        listEquals(other.relations, relations) &&
+        other.text == text &&
+        other.resource == resource &&
+        other.freq == freq &&
+        mapEquals(other.tags, tags) &&
+        other.type == type;
   }
 
   @override
   int get hashCode {
-    return block.hashCode ^ id.hashCode ^ relations.hashCode ^ text.hashCode ^ resource.hashCode ^ freq.hashCode ^ tags.hashCode ^ type.hashCode;
+    return block.hashCode ^
+        id.hashCode ^
+        relations.hashCode ^
+        text.hashCode ^
+        resource.hashCode ^
+        freq.hashCode ^
+        tags.hashCode ^
+        type.hashCode;
   }
 }
 
 @HiveType(typeId: HiveTypesIds.pictoTextTypeId)
 class PictoRelation {
   @HiveField(0)
-  final int id;
+  final String id;
   @HiveField(1)
   final double value;
 
@@ -132,7 +153,7 @@ class PictoRelation {
   });
 
   PictoRelation copyWith({
-    int? id,
+    String? id,
     double? value,
   }) {
     return PictoRelation(
@@ -150,14 +171,15 @@ class PictoRelation {
 
   factory PictoRelation.fromMap(Map<String, dynamic> map) {
     return PictoRelation(
-      id: map['id'] as int,
-      value: map['value'] as double,
+      id: map['id'] as String,
+      value: ((map['value'] ?? 0) as int).toDouble(),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PictoRelation.fromJson(String source) => PictoRelation.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory PictoRelation.fromJson(String source) =>
+      PictoRelation.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'GroupRelation(id: $id, value: $value)';

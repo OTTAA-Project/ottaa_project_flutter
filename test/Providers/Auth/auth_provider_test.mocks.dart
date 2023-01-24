@@ -585,6 +585,23 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
+  @override
+  _i6.Future<bool> getIntro() => (super.noSuchMethod(
+        Invocation.method(
+          #getIntro,
+          [],
+        ),
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> setIntro() => (super.noSuchMethod(
+        Invocation.method(
+          #setIntro,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
 
 /// A class which mocks [AuthNotifier].

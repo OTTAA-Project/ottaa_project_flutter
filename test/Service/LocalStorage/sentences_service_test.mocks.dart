@@ -10,6 +10,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/service/sentences_service.dart'
     as _i3;
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i7;
+import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i13;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i8;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i10;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i11;
@@ -816,6 +817,15 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
   @override
+  _i4.Future<dynamic> getDefaultPictos(String? languageCode) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDefaultPictos,
+          [languageCode],
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+  @override
   _i4.Future<void> updateUserType({
     required String? id,
     required _i10.UserType? userType,
@@ -832,4 +842,24 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<Map<String, dynamic>?> createPictoGroupData({
+    required String? userId,
+    required String? language,
+    required _i13.BoardDataType? type,
+    required Map<String, dynamic>? data,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createPictoGroupData,
+          [],
+          {
+            #userId: userId,
+            #language: language,
+            #type: type,
+            #data: data,
+          },
+        ),
+        returnValue: _i4.Future<Map<String, dynamic>?>.value(),
+      ) as _i4.Future<Map<String, dynamic>?>);
 }

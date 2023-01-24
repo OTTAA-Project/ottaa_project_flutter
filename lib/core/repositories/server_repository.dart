@@ -4,6 +4,7 @@ import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
+import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 typedef EitherVoid = Either<String, void>;
 typedef EitherString = Either<String, String>;
@@ -68,6 +69,7 @@ abstract class ServerRepository {
   Future<EitherMap> getProfileById({required String id});
 
   Future<dynamic> getDefaultGroups(String languageCode);
+  Future<dynamic> getDefaultPictos(String languageCode);
 
   Future<void> updateUserType({required String id, required UserType userType});
 

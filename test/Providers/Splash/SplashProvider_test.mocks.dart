@@ -87,6 +87,15 @@ class MockSplashProvider extends _i1.Mock implements _i4.SplashProvider {
         returnValue: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
   @override
+  _i5.Future<void> setFirstTime() => (super.noSuchMethod(
+        Invocation.method(
+          #setFirstTime,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
   _i5.Future<bool> fetchUserInformation() => (super.noSuchMethod(
         Invocation.method(
           #fetchUserInformation,

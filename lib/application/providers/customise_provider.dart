@@ -22,7 +22,7 @@ class CustomiseProvider extends ChangeNotifier {
   String selectedGroupName = '';
   String selectedGroupImage = '';
   bool selectedGroupStatus = false;
-  Map<int, int> pictosMap = {};
+  Map<String, int> pictosMap = {};
 
   CustomiseProvider(
     this._pictogramsService,
@@ -35,7 +35,8 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset)!; //TODO: Check this with asimA
+    selectedGroupImage = (groups[index].resource.network ??
+        groups[index].resource.asset); //TODO: Check this with asimA
     //todo: set the language here too
     selectedGroupName = groups[index].text; //TODO: Change it to user language
     selectedGroupStatus = groups[index].block;
@@ -44,15 +45,6 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> setShortcutsForUser({required String userId}) async {
-    final map = {
-      'favs': selectedShortcuts[0],
-      'history': selectedShortcuts[1],
-      'camera': selectedShortcuts[2],
-      'random': selectedShortcuts[3],
-      'yes': selectedShortcuts[4],
-      'no': selectedShortcuts[5],
-      'share': selectedShortcuts[6],
-    };
     await _customiseService.setShortcutsForUser(
       shortcuts: Shortcuts(
         favs: selectedShortcuts[0],
@@ -60,6 +52,7 @@ class CustomiseProvider extends ChangeNotifier {
         games: selectedShortcuts[2],
         share: selectedShortcuts[3],
         shuffle: selectedShortcuts[4],
+
       ),
       userId: userId,
     );
@@ -77,21 +70,26 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> fetchData() async {
-    groups = await _groupsService.getAllGroups();
+    await getDefaultGroups();
     pictosFetched = true;
     notifyListeners();
-    pictograms = await _pictogramsService.getAllPictograms();
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}-${locale.countryCode}";
+    pictograms =
+        await _customiseService.fetchDefaultPictos(languageCode: languageCode);
     await createMapForPictos();
   }
 
   Future<void> uploadData({required String userId}) async {
-    //todo: change the languages
     final locale = _i18n.locale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
-    await _pictogramsService.uploadPictograms(pictograms, languageCode, userId: userId);
-    await _groupsService.uploadGroups(groups, 'type', languageCode, userId: userId);
+    await _pictogramsService.uploadPictograms(pictograms, languageCode,
+        userId: userId);
+    await _groupsService.uploadGroups(groups, 'type', languageCode,
+        userId: userId);
     await setShortcutsForUser(userId: userId);
   }
 
@@ -100,29 +98,37 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> getDefaultGroups() async {
-    final res = await _customiseService.fetchDefaultGroups(languageCode: 'en');
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}-${locale.countryCode}";
+    final res =
+        await _customiseService.fetchDefaultGroups(languageCode: languageCode);
     print(res.length);
+    groups = res;
   }
 
   Future<void> createMapForPictos() async {
     int i = 0;
     for (var element in pictograms) {
-      pictosMap[element.id] = i;
+      pictosMap[element.id.toString()] = i;
     }
   }
 
   void block({required int index}) async {
     selectedGruposPicts[index].block = !selectedGruposPicts[index].block;
 
-    pictograms[pictosMap[selectedGruposPicts[index].id]!].block = !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
+    pictograms[pictosMap[selectedGruposPicts[index].id]!].block =
+        !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
     notifyListeners();
   }
 }
 
 final customiseProvider = ChangeNotifierProvider<CustomiseProvider>((ref) {
-  final CustomiseRepository customiseService = GetIt.I.get<CustomiseRepository>();
+  final CustomiseRepository customiseService =
+      GetIt.I.get<CustomiseRepository>();
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupService = GetIt.I<GroupsRepository>();
   final i18N = GetIt.I<I18N>();
-  return CustomiseProvider(pictogramService, groupService, customiseService, i18N);
+  return CustomiseProvider(
+      pictogramService, groupService, customiseService, i18N);
 });
