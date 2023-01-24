@@ -137,7 +137,7 @@ class GroupRelation {
   factory GroupRelation.fromMap(Map<String, dynamic> map) {
     return GroupRelation(
       id: map['id'] as String,
-      value: ((map['value'] ?? 0) as int).toDouble(),
+      value: ((map['value'] ?? 0) as num).toDouble(),
     );
   }
 

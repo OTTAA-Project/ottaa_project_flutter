@@ -29,7 +29,7 @@ class SplashProvider extends ChangeNotifier {
   }
 
   Future<void> setFirstTime() async {
-    await _hiveRepository.setIntro();
+    await _hiveRepository.setIntro(false);
   }
 
   Future<bool> fetchUserInformation() async {

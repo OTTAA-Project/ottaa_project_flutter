@@ -18,7 +18,7 @@ Future<void> setupServices() async {
   if (deviceLanguage.length == 2) {
     deviceLocale = Locale(deviceLanguage[0], deviceLanguage[1]);
   } else {
-    deviceLocale = systemLocales.firstWhere((element) => element.languageCode == deviceLanguage[0], orElse: () => const Locale('en', 'US'));
+    deviceLocale = systemLocales.firstWhere((element) => element.languageCode == deviceLanguage[0], orElse: () => const Locale('es', 'AR'));
   }
 
   final LocalDatabaseRepository databaseRepository = HiveDatabase();

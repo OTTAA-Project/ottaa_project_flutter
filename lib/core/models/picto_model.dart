@@ -172,7 +172,7 @@ class PictoRelation {
   factory PictoRelation.fromMap(Map<String, dynamic> map) {
     return PictoRelation(
       id: map['id'] as String,
-      value: ((map['value'] ?? 0) as int).toDouble(),
+      value: ((map['value'] ?? 0) as num).toDouble(),
     );
   }
 
