@@ -61,7 +61,7 @@
       "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
     },
     "unlink": "Desvincular",
-    "unlink_account": "¿Desea desvincular a {name} de sus cuentas de perfil?",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Ayuda",
       "title1": "Preguntas frecuentes",
@@ -132,7 +132,8 @@
     "general": "General",
     "pictogram": "Pictogramas",
     "configuration": "Configuración",
-    "user_ottaa": "Usar Ottaa como {name}"
+    "user_ottaa": "Usar Ottaa como {name}",
+    "cancel": "Cancelar"
   },
   "onboarding": {
     "start": "Comenzar",

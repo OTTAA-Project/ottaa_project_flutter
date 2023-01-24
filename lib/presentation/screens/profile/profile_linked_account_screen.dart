@@ -61,8 +61,8 @@ class _ProfileLinkedAccountScreen extends ConsumerState<ProfileLinkedAccountScre
                                   context,
                                   okButtonEnabled: true,
                                   title: "profile.unlink_account".trlf({"name": provider.connectedUsersData[index].settings.data.name}),
-                                  okButtonText: "unlink",
-                                  cancelButtonText: 'cancel',
+                                  okButtonText: "profile.unlink",
+                                  cancelButtonText: 'global.cancel',
                                   cancelButtonEnabled: true,
                                 );
                                 if (cancel != null && cancel) {
