@@ -1,5 +1,6 @@
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
@@ -11,6 +12,7 @@ import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
@@ -132,6 +134,13 @@ class AuthService extends AuthRepository {
         }
       }
 
+      userModel.currentToken = DeviceToken(deviceToken: await getDeviceId(), lastUsage: DateTime.now());
+
+      await _serverRepository.updateDevicesId(
+        userId: userModel.id,
+        deviceToken: userModel.currentToken,
+      );
+
       return Right(userModel);
     }
 
@@ -223,5 +232,10 @@ class AuthService extends AuthRepository {
     await _serverRepository.uploadUserInformation(user.uid, userModel.toMap());
 
     return const Right(true);
+  }
+
+  @override
+  Future<String> getDeviceId() async {
+    return await FirebaseMessaging.instance.getToken() ?? "";
   }
 }

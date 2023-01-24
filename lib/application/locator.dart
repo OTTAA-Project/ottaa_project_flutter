@@ -4,9 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
+import 'package:ottaa_project_flutter/application/service/notifications_service_impl.dart';
 import 'package:ottaa_project_flutter/application/service/service.dart';
 import 'package:ottaa_project_flutter/application/use_cases/use_cases.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
+import 'package:ottaa_project_flutter/core/service/notifications_service.dart';
 import 'package:ottaa_project_flutter/core/use_cases/use_cases.dart';
 
 final locator = GetIt.instance;
@@ -37,6 +39,8 @@ Future<void> setupServices() async {
   } else {
     remoteStorageService = MobileRemoteStorageService(authService, serverRepository, i18n);
   }
+
+  final NotificationsService notificationsService = await NotificationsServiceImpl().init();
 
   final PictogramsRepository pictogramsService = PictogramsService(authService, serverRepository, remoteStorageService);
 
@@ -73,4 +77,5 @@ Future<void> setupServices() async {
   locator.registerSingleton<CreateGroupData>(createGroupData);
   locator.registerSingleton<CreatePictoData>(createPictoData);
   locator.registerSingleton<CreatePhraseData>(createPhraseData);
+  locator.registerSingleton<NotificationsService>(notificationsService);
 }

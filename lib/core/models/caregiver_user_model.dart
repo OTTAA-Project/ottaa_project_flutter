@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 
 part 'caregiver_user_model.g.dart';
 
@@ -33,6 +34,10 @@ class CaregiverUserModel extends UserModel {
   @HiveField(4)
   String email;
 
+  @override
+  @HiveField(5)
+  late DeviceToken currentToken;
+
   CaregiverUserModel({
     required this.id,
     required this.settings,
@@ -41,7 +46,6 @@ class CaregiverUserModel extends UserModel {
     required this.email,
   });
 
-  @override
   CaregiverUserModel copyWith({
     String? id,
     BaseSettingsModel? settings,

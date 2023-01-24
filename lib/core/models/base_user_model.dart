@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 
 part 'base_user_model.g.dart';
 
@@ -28,6 +29,9 @@ class BaseUserModel extends UserModel {
   @HiveField(6)
   String email;
 
+  @override
+  @HiveField(6)
+  late DeviceToken currentToken;
   BaseUserModel({
     required this.id,
     required this.settings,
@@ -60,7 +64,6 @@ class BaseUserModel extends UserModel {
         'type': type.name,
       };
 
-  @override
   UserModel copyWith(other) {
     return BaseUserModel(
       id: other.id ?? id,

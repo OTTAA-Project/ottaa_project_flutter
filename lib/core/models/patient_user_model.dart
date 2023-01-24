@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 
@@ -44,6 +45,10 @@ class PatientUserModel extends UserModel {
   @override
   @HiveField(6)
   String email;
+
+  @override
+  @HiveField(7)
+  late DeviceToken currentToken;
 
   PatientUserModel({
     required this.id,

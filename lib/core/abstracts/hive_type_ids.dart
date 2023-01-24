@@ -35,4 +35,6 @@ class HiveTypesIds {
   static const int baseUserTypeId = 18;
 
   static const int userEnumTypeId = 19;
+
+  static const int userDeviceTypeId = 20;
 }

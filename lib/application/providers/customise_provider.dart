@@ -35,7 +35,7 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset)!; //TODO: Check this with asimA
+    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset); //TODO: Check this with asimA
     //todo: set the language here too
     selectedGroupName = groups[index].text; //TODO: Change it to user language
     selectedGroupStatus = groups[index].block;

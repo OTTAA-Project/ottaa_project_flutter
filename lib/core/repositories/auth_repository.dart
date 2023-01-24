@@ -21,4 +21,6 @@ abstract class AuthRepository {
     required String email,
     required String id,
   });
+
+  Future<String> getDeviceId();
 }
