@@ -73,7 +73,6 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                         const SizedBox(
                           width: 16,
                         ),
-                        //TODO Emir this is not working
                         Text(
                           "profile.hello".trlf({"name": user.settings.data.name}),
                         ),
@@ -81,7 +80,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.push(AppRoutes.customizedBoardScreen);
+                        // context.push(AppRoutes.customizedBoardScreen);
                       },
                       child: Image.asset(
                         AppImages.kNotificationIcon,

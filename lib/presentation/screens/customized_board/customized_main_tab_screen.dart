@@ -73,8 +73,6 @@ class _CustomizedMainTabScreenState
                   context,
                   // title: "",
                   subtitle: index == 1
-                      //TODO: check this if it is OK
-
                       ? "board.customize.helpText".trl
                       : "global.back".trl,
                   children: <Widget>[
@@ -202,7 +200,7 @@ class _CustomizedMainTabScreenState
                         index = 2;
                       });
                     } else {
-                      await showDialog(
+                      showDialog(
                         barrierDismissible: false,
                         context: context,
                         builder: (context) {
