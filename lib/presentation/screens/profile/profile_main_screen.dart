@@ -81,7 +81,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.push(AppRoutes.customizedBoardScreen);
+                        // context.push(AppRoutes.customizedBoardScreen);
                       },
                       child: Image.asset(
                         AppImages.kNotificationIcon,
