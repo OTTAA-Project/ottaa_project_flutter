@@ -48,11 +48,12 @@ class CustomiseProvider extends ChangeNotifier {
     await _customiseService.setShortcutsForUser(
       shortcuts: Shortcuts(
         favs: selectedShortcuts[0],
-        gallery: selectedShortcuts[1],
-        games: selectedShortcuts[2],
-        share: selectedShortcuts[3],
-        shuffle: selectedShortcuts[4],
-
+        history: selectedShortcuts[1],
+        camera: selectedShortcuts[2],
+        games: selectedShortcuts[3],
+        yes: selectedShortcuts[4],
+        no: selectedShortcuts[5],
+        share: selectedShortcuts[6],
       ),
       userId: userId,
     );
