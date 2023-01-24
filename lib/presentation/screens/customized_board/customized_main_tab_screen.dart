@@ -212,6 +212,7 @@ class _CustomizedMainTabScreenState
                         },
                       );
                       await provider.uploadData(userId: userID.userId!);
+                      context.pop();
                       context.push(AppRoutes.customizeWaitScreen);
                     }
                   },

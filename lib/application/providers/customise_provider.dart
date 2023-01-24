@@ -45,15 +45,6 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> setShortcutsForUser({required String userId}) async {
-    final map = {
-      'favs': selectedShortcuts[0],
-      'history': selectedShortcuts[1],
-      'camera': selectedShortcuts[2],
-      'random': selectedShortcuts[3],
-      'yes': selectedShortcuts[4],
-      'no': selectedShortcuts[5],
-      'share': selectedShortcuts[6],
-    };
     await _customiseService.setShortcutsForUser(
       shortcuts: Shortcuts(
         favs: selectedShortcuts[0],
@@ -61,6 +52,7 @@ class CustomiseProvider extends ChangeNotifier {
         games: selectedShortcuts[2],
         share: selectedShortcuts[3],
         shuffle: selectedShortcuts[4],
+
       ),
       userId: userId,
     );

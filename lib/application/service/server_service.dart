@@ -58,7 +58,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherListMap> getAllPictograms(String userId, String languageCode) async {
+  Future<EitherListMap> getAllPictograms(
+      String userId, String languageCode) async {
     //Fetch new data from server
     final refNew = _database.child('$userId/Pictos/$languageCode');
     final resNew = await refNew.get();
@@ -94,7 +95,8 @@ class ServerService implements ServerRepository {
 
     final userValue = await userRef.get();
 
-    if (!userValue.exists || userValue.value == null) return const Left("no_data_found");
+    if (!userValue.exists || userValue.value == null)
+      return const Left("no_data_found");
 
     final dynamic user = userValue.value as dynamic;
 
@@ -114,13 +116,18 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<List<Phrase>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
+  Future<List<Phrase>> getUserSentences(String userId,
+      {required String language,
+      required String type,
+      bool isFavorite = false}) async {
     final refNew = _database.child('$userId/Frases/$language/$type');
     final resNew = await refNew.get();
     if (resNew.exists && resNew.value != null) {
       final encode = jsonEncode(resNew.value);
       // print('returned from bew');
-      return (jsonDecode(encode) as List).map((e) => Phrase.fromJson(e)).toList();
+      return (jsonDecode(encode) as List)
+          .map((e) => Phrase.fromJson(e))
+          .toList();
       // print('returned from bew');
       // return Right(jsonDecode(data));
     }
@@ -136,7 +143,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data}) async {
+  Future<EitherVoid> updateGroup(String userId, String language, int index,
+      {required Map<String, dynamic> data}) async {
     final ref = _database.child('$userId/Grupos/$language/$index');
 
     try {
@@ -148,7 +156,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> updatePictogram(String userId, String language, int index, {required Map<String, dynamic> data}) async {
+  Future<EitherVoid> updatePictogram(String userId, String language, int index,
+      {required Map<String, dynamic> data}) async {
     final ref = _database.child('$userId/Pictos/$language/$index');
 
     try {
@@ -160,10 +169,11 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
+  Future<EitherVoid> uploadGroups(String userId, String language,
+      {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
     try {
-      await ref.set({'maps': true});
+      await ref.set(data);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -171,7 +181,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data}) async {
+  Future<EitherVoid> uploadPictograms(String userId, String language,
+      {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/pictos/$language');
 
     try {
@@ -183,7 +194,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data) async {
+  Future<EitherVoid> uploadUserInformation(
+      String userId, Map<String, dynamic> data) async {
     final ref = _database.child(userId);
 
     try {
@@ -207,7 +219,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data) async {
+  Future<EitherVoid> uploadUserSentences(String userId, String language,
+      String type, List<Map<String, dynamic>> data) async {
     final ref = _database.child('$userId/Frases/$language/$type');
 
     try {
@@ -219,7 +232,8 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getMostUsedSentences(String userId, String languageCode) async {
+  Future<EitherMap> getMostUsedSentences(
+      String userId, String languageCode) async {
     final uri = Uri.parse(
       'https://us-central1-ottaaproject-flutter.cloudfunctions.net/onReqFunc',
     );
@@ -243,8 +257,10 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
+  Future<EitherMap> getPictogramsStatistics(
+      String userId, String languageCode) async {
+    final uri = Uri.parse(
+        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
     final body = {
       'UserID': userId,
       //todo: add here the language too
@@ -300,7 +316,8 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getConnectedUsers({required String userId}) async {
-    final ref = _database.child('$userId/users'); //TODO: Change this to the real path
+    final ref =
+        _database.child('$userId/users'); //TODO: Change this to the real path
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
@@ -323,12 +340,14 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
+  Future<void> removeCurrentUser(
+      {required String userId, required String careGiverId}) async {
     await _database.child('$careGiverId/users/$userId').remove();
   }
 
   @override
-  Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId}) async {
+  Future<EitherVoid> setShortcutsForUser(
+      {required Shortcuts shortcuts, required String userId}) async {
     final ref = _database.child('$userId/shortcuts/');
 
     try {
@@ -341,7 +360,8 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getEmailToken(String ownEmail, String email) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
+    final uri = Uri.parse(
+        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
     final body = {
       'src': ownEmail,
       'dst': email,
@@ -367,8 +387,10 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
+  Future<EitherMap> verifyEmailToken(
+      String ownEmail, String email, String token) async {
+    final uri = Uri.parse(
+        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
     final body = {
       'src': ownEmail,
       'dst': email,
@@ -439,16 +461,27 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> updateUserType({required String id, required UserType userType}) async {
+  Future<void> updateUserType(
+      {required String id, required UserType userType}) async {
     final ref = _database.child("$id/type");
 
     await ref.set(userType.name);
   }
 
   @override
-  Future<Map<String, dynamic>?> createPictoGroupData({required String userId, required String language, required BoardDataType type, required Map<String, dynamic> data}) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/newCustomData');
-    final body = {"uid": userId, "lang": language, "type": type.name, "data": data};
+  Future<Map<String, dynamic>?> createPictoGroupData(
+      {required String userId,
+      required String language,
+      required BoardDataType type,
+      required Map<String, dynamic> data}) async {
+    final uri = Uri.parse(
+        'https://us-central1-ottaaproject-flutter.cloudfunctions.net/newCustomData');
+    final body = {
+      "uid": userId,
+      "lang": language,
+      "type": type.name,
+      "data": data
+    };
     try {
       final res = await http.post(
         uri,
