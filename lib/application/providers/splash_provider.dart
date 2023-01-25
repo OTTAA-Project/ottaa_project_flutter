@@ -43,6 +43,16 @@ class SplashProvider extends ChangeNotifier {
     _userNotifier.setUser(result.right);
     return result.isRight;
   }
+  Future<void> updateLastConnectionTime({
+    required String userId,
+    required int time,
+  }) async {
+    await _aboutRepository.updateUserLastConnectionTime(
+      userId: userId,
+      time: time,
+    );
+  }
+
 }
 
 final splashProvider = ChangeNotifierProvider<SplashProvider>((ref) {

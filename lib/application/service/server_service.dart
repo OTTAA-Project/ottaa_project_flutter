@@ -169,6 +169,21 @@ class ServerService implements ServerRepository {
   }
 
   @override
+  Future<EitherVoid> updateUserLastConnectionTime({
+    required String userId,
+    required int time,
+  }) async {
+    final ref = _database.child('$userId/settings/data');
+
+    try {
+      await ref.update({'lastConnection': time});
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
   Future<EitherVoid> uploadGroups(String userId, String language,
       {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
