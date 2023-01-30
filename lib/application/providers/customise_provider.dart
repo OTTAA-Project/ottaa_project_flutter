@@ -22,7 +22,7 @@ class CustomiseProvider extends ChangeNotifier {
   String selectedGroupName = '';
   String selectedGroupImage = '';
   bool selectedGroupStatus = false;
-  Map<int, int> pictosMap = {};
+  Map<String, int> pictosMap = {};
 
   CustomiseProvider(
     this._pictogramsService,

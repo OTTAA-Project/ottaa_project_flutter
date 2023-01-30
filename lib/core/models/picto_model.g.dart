@@ -17,11 +17,11 @@ class PictoAdapter extends TypeAdapter<Picto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Picto(
-      id: fields[1] as int,
+      id: fields[1] as String,
       type: fields[7] as int,
       resource: fields[4] as AssetsImage,
       text: fields[3] == null ? "" : fields[3] as String,
-      freq: fields[5] as int,
+      freq: fields[5] as double,
       block: fields[0] == null ? false : fields[0] as bool,
       relations: (fields[2] as List).cast<PictoRelation>(),
       tags: fields[6] == null
@@ -75,7 +75,7 @@ class PictoRelationAdapter extends TypeAdapter<PictoRelation> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PictoRelation(
-      id: fields[0] as int,
+      id: fields[0] as String,
       value: fields[1] as double,
     );
   }

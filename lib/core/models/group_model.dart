@@ -15,7 +15,7 @@ class Group {
   @HiveField(0, defaultValue: false)
   bool block;
   @HiveField(1)
-  final int id;
+  final String id;
   @HiveField(2)
   final List<GroupRelation> relations;
   @HiveField(3)
@@ -38,7 +38,7 @@ class Group {
 
   Group copyWith({
     bool? block,
-    int? id,
+    String? id,
     List<GroupRelation>? relations,
     String? text,
     AssetsImage? resource,
@@ -68,13 +68,13 @@ class Group {
   factory Group.fromMap(Map<String, dynamic> map) {
     return Group(
       block: map['block'] != null ? map['block'] as bool : false,
-      id: map['id'] as int,
+      id: map['id'] as String,
       relations: map['relations'] != null
           ? List<GroupRelation>.from(
-              (map['relations'] as List<int>).map<GroupRelation>(
-                (x) => GroupRelation.fromMap(x as Map<String, dynamic>),
+              (map['relations'] as List).map(
+                (k) => GroupRelation.fromMap(Map.from(k as Map<dynamic, dynamic>)),
               ),
-            )
+            ).toList()
           : [],
       text: map['text'],
       resource: AssetsImage.fromMap(map['resource'] != null ? map['resource'] as Map<String, dynamic> : {}),
@@ -107,7 +107,7 @@ class Group {
 @HiveType(typeId: HiveTypesIds.groupRelationTypeId)
 class GroupRelation {
   @HiveField(0)
-  final int id;
+  final String id;
   @HiveField(1)
   final double value;
 
@@ -117,7 +117,7 @@ class GroupRelation {
   });
 
   GroupRelation copyWith({
-    int? id,
+    String? id,
     double? value,
   }) {
     return GroupRelation(
@@ -135,8 +135,8 @@ class GroupRelation {
 
   factory GroupRelation.fromMap(Map<String, dynamic> map) {
     return GroupRelation(
-      id: map['id'] as int,
-      value: map['value'] as double,
+      id: map['id'] as String,
+      value: (map['value'] as num).toDouble(),
     );
   }
 

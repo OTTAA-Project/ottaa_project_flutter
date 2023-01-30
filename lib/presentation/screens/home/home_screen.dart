@@ -1,21 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
-import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
-import 'package:ottaa_project_flutter/application/router/app_routes.dart';
-import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/column_widget.dart';
-import 'package:go_router/go_router.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/pictogram_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_drawer.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/pictos_bar.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/word_bar.dart';
-import 'package:picto_widget/picto_widget.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -31,19 +20,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
 
-    final provider = ref.read(homeProvider);
-
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       blockLandscapeMode();
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
       setState(() {});
-      // await LoadingModal.show(context, future: provider.init);
     });
   }
 
   @override
   void dispose() {
     unblockRotation();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+
     super.dispose();
   }
 
@@ -60,6 +48,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           size: size,
           child: Flex(
             direction: Axis.vertical,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
               Flexible(
@@ -69,6 +59,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   width: size.width,
                   height: 80,
                   child: const WordBarUI(),
+                ),
+              ),
+              const SizedBox(height: 11),
+              Flexible(
+                fit: FlexFit.loose,
+                flex: 2,
+                child: SizedBox(
+                  width: size.width,
+                  height: 212,
+                  child: const PictosBarUI(),
+                ),
+              ),
+              Flexible(
+                fit: FlexFit.loose,
+                flex: 1,
+                child: SizedBox(
+                  width: size.width,
+                  height: 88,
+                  child: const ActionsBarUI(),
                 ),
               ),
             ],
