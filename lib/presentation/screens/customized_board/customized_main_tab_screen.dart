@@ -94,6 +94,8 @@ class _CustomizedMainTabScreenState
             onTap: () async {
               final bool? res = await BasicBottomSheet.show(
                 context,
+                okButtonText: "global.yes".trl,
+                cancelButtonText: "global.cancel".trl,
                 cancelButtonEnabled: true,
                 title: "customize.board.skip".trl,
               );

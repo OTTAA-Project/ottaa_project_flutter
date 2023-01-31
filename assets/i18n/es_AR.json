@@ -94,8 +94,16 @@
         "lastTime": "Últ. vez {date}"
       },
       "error": {
-        "error2": "Error2",
-        "link-exist": "Ya están vinculadas"
+        "link-exist": "Ya están vinculadas",
+        "miss-caregiver": "Error:Caregiver 404",
+        "miss-user": "Error:User 404",
+        "user-no-comp": "Error: User 406",
+        "caregiver-no-comp": "Error: Caregiver 406",
+        "autolink": "Error: Misma cuenta",
+        "auth/user-not-found": "Usuario no encontrado",
+        "miss-token": "Falta el Token",
+        "invalid-token": "Token inválido",
+        "expired-token": "Token vencido"
       }
     }
   },
@@ -198,7 +206,7 @@
     },
     "wait": {
       "title": "¡Felicitaciones!",
-      "subtitle": "Haz configurado la experiencia de Juan!",
+      "subtitle": "Haz configurado la experiencia de {name}",
       "button": "Ir al panel de perfiles"
     },
     "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"

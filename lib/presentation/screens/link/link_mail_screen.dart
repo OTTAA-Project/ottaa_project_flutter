@@ -74,7 +74,7 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
                 style: textTheme.bodyText2,
               ),
               const Spacer(),
-              OptionalButton(
+              PrimaryButton(
                 text: "global.send".trl,
                 onPressed: () async {
                   if (provider.formKey.currentState!.validate()) {
