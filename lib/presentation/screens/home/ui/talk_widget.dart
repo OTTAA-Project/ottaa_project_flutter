@@ -9,14 +9,14 @@ import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 import 'package:collection/collection.dart';
 
-class WordBarUI extends ConsumerStatefulWidget {
-  const WordBarUI({super.key});
+class TalkWidget extends ConsumerStatefulWidget {
+  const TalkWidget({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _WordBarUIState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _TalkWidgetState();
 }
 
-class _WordBarUIState extends ConsumerState<WordBarUI> {
+class _TalkWidgetState extends ConsumerState<TalkWidget> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -42,7 +42,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
     int pictoCount = ((size.width - 390) / pictoSize).floor();
 
     final pictoWords = ref.watch(homeProvider).pictoWords;
-
+    final currentWord = ref.watch(homeProvider).selectedWord;
     final pictosIsEmpty = pictoWords.isEmpty;
 
     final removeLastPictogram =
@@ -50,21 +50,9 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
     return Flex(
       direction: Axis.horizontal,
       children: [
-        GestureDetector(
-          onLongPressEnd: (details) {
-            //TODO: Show back dialog :)
-          },
-          child: Container(
-            width: 20,
-            height: 80,
-            decoration: BoxDecoration(
-              color: colorScheme.primary,
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(16),
-                bottomRight: Radius.circular(16),
-              ),
-            ),
-          ),
+        Container(
+          width: 20,
+          height: 80,
         ),
         const SizedBox(width: 32),
         Flexible(
@@ -87,7 +75,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                         width: 64,
                         height: 140,
                         decoration: const BoxDecoration(
-                          color: Colors.white,
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                       );
@@ -123,6 +111,9 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                               "assets/img/${pict.text}.webp",
                             ),
                       text: pict.text,
+
+                      /// add disabled here for the widgets
+                      disable: currentWord == pict.text ? false : true,
                     );
                   },
                 ),
@@ -131,65 +122,14 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
           ),
         ),
         const SizedBox(width: 16),
-        SizedBox(
+        const SizedBox(
           width: 138,
           height: 80,
-          child: BaseButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  pictosIsEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-              overlayColor: MaterialStateProperty.all(
-                  colorScheme.primary.withOpacity(0.1)),
-              shape: MaterialStateProperty.all(
-                const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(9)),
-                ),
-              ),
-              padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-              elevation: MaterialStateProperty.all(0),
-            ),
-            onPressed: pictosIsEmpty ? null : removeLastPictogram,
-            child: Image.asset(
-              pictosIsEmpty ? AppImages.kDelete : AppImages.kDeleteOrange,
-              width: 59,
-              height: 59,
-            ),
-          ),
         ),
         const SizedBox(width: 16),
-        SizedBox(
+        const SizedBox(
           width: 138,
           height: 80,
-          child: BaseButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(pictosIsEmpty
-                  ? colorScheme.primary.withOpacity(.12)
-                  : colorScheme.primary),
-              overlayColor:
-                  MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
-              shape: MaterialStateProperty.all(
-                const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(9)),
-                ),
-              ),
-              padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-              elevation: MaterialStateProperty.all(0),
-            ),
-            onPressed: () async {
-              final pro = ref.watch(homeProvider);
-              pro.show = true;
-              pro.notify();
-              await ref.read(homeProvider.notifier).speakSentence();
-              pro.show = false;
-              pro.notify();
-            },
-            child: Image.asset(
-              AppImages.kOttaaMinimalist,
-              color: Colors.white,
-              width: 59,
-              height: 59,
-            ),
-          ),
         ),
         const SizedBox(width: 24),
       ],

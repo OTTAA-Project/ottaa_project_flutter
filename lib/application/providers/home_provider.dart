@@ -19,7 +19,8 @@ class HomeProvider extends ChangeNotifier {
 
   final TTSProvider _tts;
 
-  HomeProvider(this._pictogramsService, this._groupsService, this._sentencesService, this._tts);
+  HomeProvider(this._pictogramsService, this._groupsService,
+      this._sentencesService, this._tts);
 
   List<Phrase> mostUsedSentences = [];
   int indexForMostUsed = 0;
@@ -36,6 +37,9 @@ class HomeProvider extends ChangeNotifier {
   int suggestedQuantity = 4;
 
   int wordsQuantity = 6;
+
+  bool show = false;
+  String selectedWord = '';
 
   void setSuggedtedQuantity(int quantity) {
     suggestedQuantity = quantity;
@@ -86,6 +90,10 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void notify() {
+    notifyListeners();
+  }
+
   Future<void> fetchPictograms() async {
     pictograms = await _pictogramsService.getAllPictograms();
     groups = await _groupsService.getAllGroups();
@@ -95,7 +103,8 @@ class HomeProvider extends ChangeNotifier {
   void buildSuggestion([int? id]) {
     id ??= 0;
 
-    Picto? pict = pictograms.firstWhereIndexedOrNull((index, picto) => index == id);
+    Picto? pict =
+        pictograms.firstWhereIndexedOrNull((index, picto) => index == id);
 
     if (pict == null) return;
 
@@ -124,7 +133,8 @@ class HomeProvider extends ChangeNotifier {
 
     for (var recommendedPict in list) {
       requiredPicts.add(
-        pictograms.firstWhere((suggestedPict) => suggestedPict.id == recommendedPict.id),
+        pictograms.firstWhere(
+            (suggestedPict) => suggestedPict.id == recommendedPict.id),
       );
     }
     late String tag;
@@ -152,18 +162,27 @@ class HomeProvider extends ChangeNotifier {
           }
         }
       }
-      e.freq = (list[i].value * pesoFrec) + (hora * pesoHora); //TODO: Check this with asim
-
+      e.freq = (list[i].value * pesoFrec) +
+          (hora * pesoHora); //TODO: Check this with asim
     }
 
-    requiredPicts.sort((b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
+    requiredPicts.sort(
+        (b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
 
     return requiredPicts;
   }
 
   Future<void> speakSentence() async {
-    final sentence = pictoWords.map((e) => e.text).join(' ');
-    await _tts.speak(sentence);
+    if (!show) {
+      final sentence = pictoWords.map((e) => e.text).join(' ');
+      await _tts.speak(sentence);
+    }
+    for (var e in pictoWords) {
+      selectedWord = e.text;
+      notifyListeners();
+      await _tts.speak(e.text);
+      print('done');
+    }
   }
 }
 
