@@ -50,7 +50,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
     return Flex(
       direction: Axis.horizontal,
       children: [
-        Container(
+        const SizedBox(
           width: 20,
           height: 80,
         ),

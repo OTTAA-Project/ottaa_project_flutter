@@ -89,14 +89,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ],
               ),
             ),
-            provider.show
-                ? Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black54,
-                    ),
-                  )
-                : const SizedBox.shrink(),
-            provider.show ? const TalkWidget() : const SizedBox.shrink(),
+            if (provider.show) ...[
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.black54,
+                ),
+              ),
+             const  TalkWidget(),
+            ]
           ],
         ),
       ),
