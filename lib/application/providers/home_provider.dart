@@ -40,6 +40,7 @@ class HomeProvider extends ChangeNotifier {
 
   bool show = false;
   String selectedWord = '';
+  ScrollController scrollController = ScrollController();
 
   void setSuggedtedQuantity(int quantity) {
     suggestedQuantity = quantity;
@@ -177,12 +178,26 @@ class HomeProvider extends ChangeNotifier {
       final sentence = pictoWords.map((e) => e.text).join(' ');
       await _tts.speak(sentence);
     }
+    print('totoal values are');
+    print(scrollController.position.maxScrollExtent);
+    int i = 0;
     for (var e in pictoWords) {
       selectedWord = e.text;
+      scrollController.animateTo(
+        i == 0 ? 0 : i *30,
+        duration: Duration(microseconds: 50),
+        curve: Curves.easeIn,
+      );
       notifyListeners();
       await _tts.speak(e.text);
-      print('done');
+      i++;
     }
+    scrollController.animateTo(
+      0,
+      duration: Duration(microseconds: 50),
+      curve: Curves.easeIn,
+    );
+    notifyListeners();
   }
 }
 

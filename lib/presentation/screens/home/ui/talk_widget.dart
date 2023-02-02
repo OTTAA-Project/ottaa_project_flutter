@@ -34,105 +34,97 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final colorScheme = Theme.of(context).colorScheme;
-
-    int pictoSize = 64;
-
-    int pictoCount = ((size.width - 390) / pictoSize).floor();
-
     final pictoWords = ref.watch(homeProvider).pictoWords;
     final currentWord = ref.watch(homeProvider).selectedWord;
-    final pictosIsEmpty = pictoWords.isEmpty;
+    final scrollCon = ref.watch(homeProvider).scrollController;
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        children: [
+          const SizedBox(
+            width: 20,
+            height: 80,
+          ),
+          const SizedBox(width: 32),
+          SizedBox(
+            height: 80,
+            width: 445,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: pictoWords.length + 6,
+              controller: scrollCon,
+              itemBuilder: (context, index) {
+                Picto? pict = pictoWords.firstWhereIndexedOrNull(
+                    (elIndex, element) => elIndex == index);
 
-    final removeLastPictogram =
-        ref.read(homeProvider.select((value) => value.removeLastPictogram));
-    return Flex(
-      direction: Axis.horizontal,
-      children: [
-        const SizedBox(
-          width: 20,
-          height: 80,
-        ),
-        const SizedBox(width: 32),
-        Flexible(
-          fit: FlexFit.tight,
-          flex: 2,
-          child: Stack(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: List.generate(
-                  pictoCount,
-                  (index) {
-                    Picto? pict = pictoWords.firstWhereIndexedOrNull(
-                        (elIndex, element) => elIndex == index);
-
-                    if (pict == null) {
-                      return Container(
-                        width: 64,
-                        height: 140,
-                        decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                      );
-                    }
-
-                    return PictoWidget(
+                if (pict == null) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Container(
                       width: 64,
                       height: 140,
-                      onTap: () {},
-                      image: pict.resource.network != null
-                          ? CachedNetworkImage(
-                              imageUrl: pict.resource.network!,
-                              fit: BoxFit.fill,
-                              progressIndicatorBuilder:
-                                  (context, url, progress) {
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    color: colorScheme.primary,
-                                    value: progress.totalSize != null
-                                        ? progress.downloaded /
-                                            progress.totalSize!
-                                        : null,
-                                  ),
-                                );
-                              },
-                              errorWidget: (context, url, error) => Image.asset(
-                                fit: BoxFit.fill,
-                                "assets/img/${pict.text}.webp",
-                              ),
-                            )
-                          : Image.asset(
+                      decoration: BoxDecoration(
+                        color: pictoWords.length < pictoWords.length + 6
+                            ? Colors.transparent
+                            : Colors.white,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  );
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: PictoWidget(
+                    width: 64,
+                    height: 140,
+                    onTap: () {},
+                    image: pict.resource.network != null
+                        ? CachedNetworkImage(
+                            imageUrl: pict.resource.network!,
+                            fit: BoxFit.fill,
+                            progressIndicatorBuilder: (context, url, progress) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  color: colorScheme.primary,
+                                  value: progress.totalSize != null
+                                      ? progress.downloaded /
+                                          progress.totalSize!
+                                      : null,
+                                ),
+                              );
+                            },
+                            errorWidget: (context, url, error) => Image.asset(
                               fit: BoxFit.fill,
                               "assets/img/${pict.text}.webp",
                             ),
-                      text: pict.text,
-
-                      /// add disabled here for the widgets
-                      disable: currentWord == pict.text ? false : true,
-                    );
-                  },
-                ),
-              ),
-            ],
+                          )
+                        : Image.asset(
+                            fit: BoxFit.fill,
+                            "assets/img/${pict.text}.webp",
+                          ),
+                    text: pict.text,
+                    disable: pict.text == currentWord ? false : true,
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-        const SizedBox(width: 16),
-        const SizedBox(
-          width: 138,
-          height: 80,
-        ),
-        const SizedBox(width: 16),
-        const SizedBox(
-          width: 138,
-          height: 80,
-        ),
-        const SizedBox(width: 24),
-      ],
+          const SizedBox(width: 16),
+          const SizedBox(
+            width: 138,
+            height: 80,
+          ),
+          const SizedBox(width: 16),
+          const SizedBox(
+            width: 138,
+            height: 80,
+          ),
+          const SizedBox(width: 24),
+        ],
+      ),
     );
   }
 }

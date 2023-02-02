@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.d
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/pictos_bar.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/talk_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/word_bar.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -49,6 +50,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       },
       child: Scaffold(
         body: Stack(
+          fit: StackFit.expand,
           children: [
             SizedBox.fromSize(
               size: size,
@@ -95,7 +97,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   color: Colors.black54,
                 ),
               ),
-             const  TalkWidget(),
+              Positioned(
+                top: 26,
+                child: const TalkWidget(),
+              ),
             ]
           ],
         ),
