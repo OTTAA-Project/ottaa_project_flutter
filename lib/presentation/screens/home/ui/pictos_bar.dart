@@ -29,7 +29,8 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
       //We are using size.height because at this time the screen is not rotated
       int pictoCount = ((size.height - 200) / pictoSize).floor();
 
-      final setSuggested = ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
+      final setSuggested =
+          ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
 
       setSuggested(pictoCount);
 
@@ -44,7 +45,8 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
     final pictos = ref.watch(homeProvider).suggestedPicts;
 
-    final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
+    final addPictogram =
+        ref.read(homeProvider.select((value) => value.addPictogram));
 
     int pictoSize = 116;
 
@@ -74,8 +76,11 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                 onPressed: pictos.isEmpty ? null : () {},
                 style: ButtonStyle(
                   fixedSize: MaterialStateProperty.all(const Size(64, 64)),
-                  backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                  overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                  backgroundColor: MaterialStateProperty.all(pictos.isEmpty
+                      ? Colors.grey.withOpacity(.12)
+                      : Colors.white),
+                  overlayColor: MaterialStateProperty.all(
+                      colorScheme.primary.withOpacity(0.1)),
                   shape: MaterialStateProperty.all(
                     const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(9)),
@@ -92,8 +97,11 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                 onPressed: pictos.isEmpty ? null : () {},
                 style: ButtonStyle(
                   fixedSize: MaterialStateProperty.all(const Size(64, 64)),
-                  backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                  overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                  backgroundColor: MaterialStateProperty.all(pictos.isEmpty
+                      ? Colors.grey.withOpacity(.12)
+                      : Colors.white),
+                  overlayColor: MaterialStateProperty.all(
+                      colorScheme.primary.withOpacity(0.1)),
                   shape: MaterialStateProperty.all(
                     const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(9)),
@@ -126,7 +134,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         children: pictos
-            .sublist(0, max(pictos.length, pictoCount))
+            .sublist(0, min(pictos.length, pictoCount))
             .mapIndexed(
               (i, e) => PictoWidget(
                 onTap: () {

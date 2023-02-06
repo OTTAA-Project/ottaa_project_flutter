@@ -38,6 +38,8 @@ class HomeProvider extends ChangeNotifier {
 
   int wordsQuantity = 6;
 
+  //talk feature
+  bool talkEnabled = true;
   bool show = false;
   String selectedWord = '';
   ScrollController scrollController = ScrollController();
@@ -174,30 +176,34 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    if (!show) {
+    if (!talkEnabled) {
       final sentence = pictoWords.map((e) => e.text).join(' ');
       await _tts.speak(sentence);
-    }
-    print('totoal values are');
-    print(scrollController.position.maxScrollExtent);
-    int i = 0;
-    for (var e in pictoWords) {
-      selectedWord = e.text;
+    } else {
+      show = true;
+      notifyListeners();
+      print('totoal values are');
+      print(scrollController.position.maxScrollExtent);
+      int i = 0;
+      for (var e in pictoWords) {
+        selectedWord = e.text;
+        scrollController.animateTo(
+          i == 0 ? 0 : i * 30,
+          duration: Duration(microseconds: 50),
+          curve: Curves.easeIn,
+        );
+        notifyListeners();
+        await _tts.speak(e.text);
+        i++;
+      }
       scrollController.animateTo(
-        i == 0 ? 0 : i *30,
+        0,
         duration: Duration(microseconds: 50),
         curve: Curves.easeIn,
       );
+      show = false;
       notifyListeners();
-      await _tts.speak(e.text);
-      i++;
     }
-    scrollController.animateTo(
-      0,
-      duration: Duration(microseconds: 50),
-      curve: Curves.easeIn,
-    );
-    notifyListeners();
   }
 }
 

@@ -225,12 +225,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
               elevation: MaterialStateProperty.all(0),
             ),
             onPressed: () async {
-              final pro = ref.watch(homeProvider);
-              pro.show = true;
-              pro.notify();
               await ref.read(homeProvider.notifier).speakSentence();
-              pro.show = false;
-              pro.notify();
             },
             child: Image.asset(
               AppImages.kOttaaMinimalist,
