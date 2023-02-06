@@ -92,5 +92,6 @@ abstract class ServerRepository {
     required String model,
     required List<String> groups,
     required Map<String, List<String>> tags,
+    bool reduced = false,
   });
 }
