@@ -82,13 +82,13 @@ class Shortcuts {
 
   factory Shortcuts.fromMap(Map<String, dynamic> map) {
     return Shortcuts.none().copyWith(
-      favs: map['favs'] as bool,
-      history: map['history'] as bool,
-      camera: map['camera'] as bool,
-      share: map['share'] as bool,
-      games: map['games'] as bool,
-      yes: map['yes'] as bool,
-      no: map['no'] as bool,
+      favs: map['favs'],
+      history: map['history'],
+      camera: map['camera'],
+      share: map['share'],
+      games: map['games'],
+      yes: map['yes'],
+      no: map['no'],
     );
   }
 
