@@ -8,13 +8,15 @@ abstract class LearnPictogram {
     required this.serverRepository,
   });
 
+  /// Call for learn pictograms, [sentence] is deprecated, use [tokens] instead
+  /// [sentence] or [tokens] is the sentence to learn, [uid] is the user id,
+  /// [language] is the language of the sentence, [model] is the model to use
+  ///
   Future<void> call({
-    String sentence,
-    String uid,
-    String language,
-    String model,
-    List<LearnToken> tokens,
+    @Deprecated("You should use tokens instead of this") required String sentence,
+    required String uid,
+    required String language,
+    required String model,
+    required List<LearnToken> tokens,
   });
-
-
 }

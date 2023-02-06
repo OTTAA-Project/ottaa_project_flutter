@@ -18,16 +18,6 @@ class WordBarUI extends ConsumerStatefulWidget {
 class _WordBarUIState extends ConsumerState<WordBarUI> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final size = MediaQuery.of(context).size;
-      final colorScheme = Theme.of(context).colorScheme;
-
-      int pictoSize = 64;
-
-      int pictoCount = ((size.height - 390) / pictoSize).floor();
-
-      ref.read(homeProvider.select((value) => value.setWordQuantity))(pictoCount);
-    });
     super.initState();
   }
 
@@ -66,61 +56,56 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
         ),
         const SizedBox(width: 32),
         Flexible(
-          fit: FlexFit.tight,
-          flex: 2,
-          child: Stack(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: List.generate(
-                  pictoCount,
-                  (index) {
-                    Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: pictoWords.length + 6,
+            itemBuilder: (context, index) {
+              Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
 
-                    if (pict == null) {
-                      return Container(
-                        width: 64,
-                        height: 140,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                      );
-                    }
-
-                    return PictoWidget(
-                      width: 64,
-                      height: 140,
-                      onTap: () {},
-                      image: pict.resource.network != null
-                          ? CachedNetworkImage(
-                              imageUrl: pict.resource.network!,
-                              fit: BoxFit.fill,
-                              progressIndicatorBuilder: (context, url, progress) {
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    color: colorScheme.primary,
-                                    value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
-                                  ),
-                                );
-                              },
-                              errorWidget: (context, url, error) => Image.asset(
-                                fit: BoxFit.fill,
-                                "assets/img/${pict.text}.webp",
+              if (pict == null) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Container(
+                    width: 64,
+                    height: 140,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: PictoWidget(
+                  width: 64,
+                  height: 140,
+                  onTap: () {},
+                  image: pict.resource.network != null
+                      ? CachedNetworkImage(
+                          imageUrl: pict.resource.network!,
+                          fit: BoxFit.fill,
+                          progressIndicatorBuilder: (context, url, progress) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: colorScheme.primary,
+                                value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
                               ),
-                            )
-                          : Image.asset(
-                              fit: BoxFit.fill,
-                              "assets/img/${pict.text}.webp",
-                            ),
-                      text: pict.text,
-                    );
-                  },
+                            );
+                          },
+                          errorWidget: (context, url, error) => Image.asset(
+                            fit: BoxFit.fill,
+                            "assets/img/${pict.text}.webp",
+                          ),
+                        )
+                      : Image.asset(
+                          fit: BoxFit.fill,
+                          "assets/img/${pict.text}.webp",
+                        ),
+                  text: pict.text,
                 ),
-              ),
-            ],
+              );
+            },
           ),
         ),
         const SizedBox(width: 16),

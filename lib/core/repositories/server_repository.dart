@@ -77,4 +77,20 @@ abstract class ServerRepository {
     required BoardDataType type,
     required Map<String, dynamic> data,
   });
+
+  Future<EitherMap> learnPictograms({
+    required String uid,
+    required String language,
+    required String model,
+    required List<Map<String, dynamic>> tokens,
+  });
+
+  Future<EitherMap> predictPictogram({
+    required String sentence,
+    required String uid,
+    required String language,
+    required String model,
+    required List<String> groups,
+    required Map<String, List<String>> tags,
+  });
 }

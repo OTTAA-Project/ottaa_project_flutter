@@ -12,6 +12,7 @@ import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.da
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 import 'package:collection/collection.dart';
 
+const int kStarterPictoIndex = 0;
 class HomeProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
@@ -35,27 +36,18 @@ class HomeProvider extends ChangeNotifier {
 
   int suggestedQuantity = 4;
 
-  int wordsQuantity = 6;
-
   void setSuggedtedQuantity(int quantity) {
     suggestedQuantity = quantity;
     notifyListeners();
   }
 
-  void setWordQuantity(int quantity) {
-    wordsQuantity = quantity;
-    notifyListeners();
-  }
 
   void addPictogram(Picto picto) {
-    if (pictoWords.length == wordsQuantity) {
-      pictoWords[wordsQuantity - 1] = picto;
-    } else {
-      pictoWords.add(picto);
-    }
+    pictoWords.add(picto);
+
     int pictoIndex = pictograms.indexOf(picto);
     suggestedPicts.clear();
-    buildSuggestion(pictoIndex);
+    buildSuggestion(pictoIndex == -1 ? kStarterPictoIndex : pictoIndex);
     notifyListeners();
   }
 
