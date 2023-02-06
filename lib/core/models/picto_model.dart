@@ -17,7 +17,7 @@ class Picto {
   final String id;
   @HiveField(2)
   final List<PictoRelation> relations;
-  @HiveField(3, defaultValue: <String, String>{})
+  @HiveField(3, defaultValue: "")
   String text;
 
   @HiveField(4)
@@ -84,24 +84,29 @@ class Picto {
       id: map['id'] ?? "",
       relations: map['relations'] != null
           ? List<PictoRelation>.from(
-              (map['relations'] as List).map(
-                (k) => PictoRelation.fromMap(Map.from(k as Map<dynamic, dynamic>)),
+              (map['relations'] as List<dynamic>).map<PictoRelation>(
+                (x) =>
+                    PictoRelation.fromMap(Map.from(x as Map<dynamic, dynamic>)),
               ),
             ).toList()
           : [],
+      tags: Map<String, List<String>>.from(
+          ((map['tags'] ?? {}) as Map<dynamic, dynamic>).map((key, value) {
+        return MapEntry<String, List<String>>(
+            key as String, List<String>.from(value as List<dynamic>));
+      })),
+      resource: AssetsImage.fromMap(
+          Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
       text: map['text'],
-      resource: AssetsImage.fromMap(Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
-      freq: ((map['freq'] ?? 0) as num).toDouble(),
-      tags: ((map['tags'] ?? {}) as Map).map((key, value) {
-        return MapEntry(key as String, List<String>.from(value as List));
-      }),
+      freq: map['freq'] ?? 0,
       type: map['type'] ?? 0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Picto.fromJson(String source) => Picto.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Picto.fromJson(String source) =>
+      Picto.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -112,12 +117,26 @@ class Picto {
   bool operator ==(covariant Picto other) {
     if (identical(this, other)) return true;
 
-    return other.block == block && other.id == id && listEquals(other.relations, relations) && other.text == text && other.resource == resource && other.freq == freq && mapEquals(other.tags, tags) && other.type == type;
+    return other.block == block &&
+        other.id == id &&
+        listEquals(other.relations, relations) &&
+        other.text == text &&
+        other.resource == resource &&
+        other.freq == freq &&
+        mapEquals(other.tags, tags) &&
+        other.type == type;
   }
 
   @override
   int get hashCode {
-    return block.hashCode ^ id.hashCode ^ relations.hashCode ^ text.hashCode ^ resource.hashCode ^ freq.hashCode ^ tags.hashCode ^ type.hashCode;
+    return block.hashCode ^
+        id.hashCode ^
+        relations.hashCode ^
+        text.hashCode ^
+        resource.hashCode ^
+        freq.hashCode ^
+        tags.hashCode ^
+        type.hashCode;
   }
 }
 
@@ -153,13 +172,14 @@ class PictoRelation {
   factory PictoRelation.fromMap(Map<String, dynamic> map) {
     return PictoRelation(
       id: map['id'] as String,
-      value: (map['value'] as num).toDouble(),
+      value: ((map['value'] ?? 0) as num).toDouble(),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PictoRelation.fromJson(String source) => PictoRelation.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory PictoRelation.fromJson(String source) =>
+      PictoRelation.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'PictoRelation(id: $id, value: $value)';

@@ -44,12 +44,6 @@ class HiveDatabase extends LocalDatabaseRepository {
   }
 
   @override
-  Future<bool> getIntro()async{
-    final res = Hive.box('intro').get('first');
-    return res ?? false;
-  }
-
-  @override
   Future<void> init() async {
     await Hive.initFlutter();
 
@@ -91,7 +85,13 @@ class HiveDatabase extends LocalDatabaseRepository {
   }
 
   @override
-  Future<void> setIntro() async {
-    await Hive.box('intro').put('first', true);
+  Future<void> setIntro([bool? value]) async {
+    await Hive.box('intro').put('first', value ?? true);
+  }
+
+  @override
+  Future<bool> getIntro() async {
+    final res = Hive.box('intro').get('first');
+    return res ?? true;
   }
 }

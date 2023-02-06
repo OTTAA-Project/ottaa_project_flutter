@@ -14,7 +14,7 @@ class Phrase {
   final DateTime date;
 
   @HiveField(1)
-  final int id;
+  final String id;
 
   @HiveField(2)
   final List<Sequence> sequence;
@@ -31,7 +31,7 @@ class Phrase {
 
   Phrase copyWith({
     DateTime? date,
-    int? id,
+    String? id,
     List<Sequence>? sequence,
     Map<String, List<String>>? tags,
   }) {
@@ -55,7 +55,7 @@ class Phrase {
   factory Phrase.fromMap(Map<String, dynamic> map) {
     return Phrase(
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
-      id: map['id'] as int,
+      id: map['id'] as String,
       sequence: List<Sequence>.from(
         (map['sequence'] as List<int>).map<Sequence>(
           (x) => Sequence.fromMap(x as Map<String, dynamic>),
@@ -90,14 +90,14 @@ class Phrase {
 @HiveType(typeId: HiveTypesIds.sequenceTypeId)
 class Sequence {
   @HiveField(0)
-  final int id;
+  final String id;
 
   const Sequence({
     required this.id,
   });
 
   Sequence copyWith({
-    int? id,
+    String? id,
   }) {
     return Sequence(
       id: id ?? this.id,
@@ -112,7 +112,7 @@ class Sequence {
 
   factory Sequence.fromMap(Map<String, dynamic> map) {
     return Sequence(
-      id: map['id'] as int,
+      id: map['id'] as String,
     );
   }
 

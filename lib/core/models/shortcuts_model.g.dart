@@ -18,27 +18,33 @@ class ShortcutsAdapter extends TypeAdapter<Shortcuts> {
     };
     return Shortcuts(
       favs: fields[0] == null ? false : fields[0] as bool,
-      gallery: fields[1] == null ? false : fields[1] as bool,
-      games: fields[2] == null ? false : fields[2] as bool,
+      history: fields[1] == null ? false : fields[1] as bool,
+      camera: fields[2] == null ? false : fields[2] as bool,
       share: fields[3] == null ? false : fields[3] as bool,
-      shuffle: fields[4] == null ? false : fields[4] as bool,
+      games: fields[4] == null ? false : fields[4] as bool,
+      no: fields[6] == null ? false : fields[6] as bool,
+      yes: fields[5] == null ? false : fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Shortcuts obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.favs)
       ..writeByte(1)
-      ..write(obj.gallery)
+      ..write(obj.history)
       ..writeByte(2)
-      ..write(obj.games)
+      ..write(obj.camera)
       ..writeByte(3)
       ..write(obj.share)
       ..writeByte(4)
-      ..write(obj.shuffle);
+      ..write(obj.games)
+      ..writeByte(5)
+      ..write(obj.yes)
+      ..writeByte(6)
+      ..write(obj.no);
   }
 
   @override

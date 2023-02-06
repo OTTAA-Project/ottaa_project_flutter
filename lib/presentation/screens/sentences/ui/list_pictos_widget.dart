@@ -31,7 +31,7 @@ class ListPictosWidget extends ConsumerWidget {
           itemCount: provider.favouriteOrNotPicts[provider.selectedIndexFavSelection].length + 1,
           itemBuilder: (BuildContext context, int index) {
             final Picto speakPict = Picto(
-              id: "0",
+              id: "",
               type: 6,
               resource: AssetsImage(asset: "logo_ottaa_dev", network: null),
             );

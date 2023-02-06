@@ -106,8 +106,12 @@ class HomeProvider extends ChangeNotifier {
   void buildSuggestion([int? id]) {
     id ??= 0;
 
-    Picto? pict =
-        pictograms.firstWhereIndexedOrNull((index, picto) => index == id);
+    final Picto addPict = Picto(
+      id: "",
+      text: "Agregar nuevo pictograma",
+      type: 6,
+      resource: AssetsImage(asset: "ic_agregar_nuevo", network: ""),
+    );
 
     if (pict == null) return;
 

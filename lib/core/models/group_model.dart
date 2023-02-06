@@ -71,13 +71,13 @@ class Group {
       id: map['id'] as String,
       relations: map['relations'] != null
           ? List<GroupRelation>.from(
-              (map['relations'] as List).map(
-                (k) => GroupRelation.fromMap(Map.from(k as Map<dynamic, dynamic>)),
+              (List.from(map['relations'] as List<dynamic>)).map<GroupRelation>(
+                (x) => GroupRelation.fromMap(Map.from(x as Map<dynamic, dynamic>)),
               ),
             ).toList()
           : [],
       text: map['text'],
-      resource: AssetsImage.fromMap(map['resource'] != null ? map['resource'] as Map<String, dynamic> : {}),
+      resource: AssetsImage.fromMap(map['resource'] != null ? Map.from(map['resource'] as Map<dynamic, dynamic>) : {}),
       freq: map['freq'] != null ? map['freq'] as int : 0,
     );
   }
@@ -136,7 +136,7 @@ class GroupRelation {
   factory GroupRelation.fromMap(Map<String, dynamic> map) {
     return GroupRelation(
       id: map['id'] as String,
-      value: (map['value'] as num).toDouble(),
+      value: ((map['value'] ?? 0) as num).toDouble(),
     );
   }
 

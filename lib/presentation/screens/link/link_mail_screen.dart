@@ -74,7 +74,7 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
                 style: textTheme.bodyText2,
               ),
               const Spacer(),
-              OptionalButton(
+              PrimaryButton(
                 text: "global.send".trl,
                 onPressed: () async {
                   if (provider.formKey.currentState!.validate()) {
@@ -82,10 +82,10 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
                     await LoadingModal.show(context, future: () async {
                       result = await provider.sendEmail();
                     });
-                    log(result ?? "EROR");
+                    log(result ?? "ERROR");
                     if (mounted) {
                       if (result != null) {
-                        OTTAANotification.primary(context, text: "link.error.$result".trl);
+                        OTTAANotification.primary(context, text: "profile.link.error.$result".trl);
                       } else {
                         context.push(AppRoutes.linkTokenScreen);
                       }

@@ -25,49 +25,66 @@ abstract class ServerRepository {
 
   Future<EitherMap> getUserInformation(String id);
 
-  Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data);
+  Future<EitherVoid> uploadUserInformation(
+      String userId, Map<String, dynamic> data);
 
-  Future<List<Phrase>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false});
+  Future<List<Phrase>> getUserSentences(String userId,
+      {required String language,
+      required String type,
+      bool isFavorite = false});
 
-  Future<EitherVoid> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data);
+  Future<EitherVoid> uploadUserSentences(String userId, String language,
+      String type, List<Map<String, dynamic>> data);
 
   Future<EitherListMap> getAllPictograms(String userId, String languageCode);
 
-  Future<EitherVoid> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data});
+  Future<EitherVoid> uploadPictograms(String userId, String language,
+      {required List<Map<String, dynamic>> data});
 
-  Future<EitherVoid> updatePictogram(String userId, String language, int index, {required Map<String, dynamic> data});
+  Future<EitherVoid> updatePictogram(String userId, String language, int index,
+      {required Map<String, dynamic> data});
 
   Future<EitherListMap> getAllGroups(String userId, String languageCode);
 
-  Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data});
+  Future<EitherVoid> uploadGroups(String userId, String language,
+      {required List<Map<String, dynamic>> data});
 
-  Future<EitherVoid> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data});
+  Future<EitherVoid> updateGroup(String userId, String language, int index,
+      {required Map<String, dynamic> data});
 
   Future<EitherMap> getPictogramsStatistics(String userId, String languageCode);
 
   Future<EitherMap> getMostUsedSentences(String userId, String languageCode);
 
-  Future<String> uploadUserImage({required String path, required String name, required String userId});
+  Future<String> uploadUserImage(
+      {required String path, required String name, required String userId});
 
-  Future<void> updateUserSettings({required Map<String, dynamic> data, required String userId});
+  Future<void> updateUserSettings(
+      {required Map<String, dynamic> data, required String userId});
 
   Future<EitherMap> getConnectedUsers({required String userId});
 
   Future<EitherMap> fetchConnectedUserData({required String userId});
 
-  Future<void> removeCurrentUser({required String userId, required String careGiverId});
+  Future<void> removeCurrentUser(
+      {required String userId, required String careGiverId});
 
-  Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId});
+  Future<EitherVoid> setShortcutsForUser(
+      {required Shortcuts shortcuts, required String userId});
 
-  Future<void> updateUserData({required Map<String, dynamic> data, required String userId});
+  Future<void> updateUserData(
+      {required Map<String, dynamic> data, required String userId});
 
   Future<EitherMap> getEmailToken(String ownEmail, String email);
 
-  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token);
+  Future<EitherMap> verifyEmailToken(
+      String ownEmail, String email, String token);
 
   Future<EitherMap> getProfileById({required String id});
 
   Future<dynamic> getDefaultGroups(String languageCode);
+
+  Future<dynamic> getDefaultPictos(String languageCode);
 
   Future<void> updateUserType({required String id, required UserType userType});
 
@@ -77,4 +94,7 @@ abstract class ServerRepository {
     required BoardDataType type,
     required Map<String, dynamic> data,
   });
+
+  Future<EitherVoid> updateUserLastConnectionTime(
+      {required String userId, required int time});
 }
