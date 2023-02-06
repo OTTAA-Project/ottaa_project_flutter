@@ -2,6 +2,7 @@
   "profile": {
     "selection": {
       "text1": "Who is going to use the app on this device?",
+      "caregiver_text": "Needs to comunicate",
       "user_text": "Needs to comunicate"
     },
     "hello": "Hi {name}!",
@@ -21,7 +22,7 @@
       "faq3": "How much does the OTTAA app cost?",
       "faq3Description": "The OTTAA app is free to download & use. In order to create a sustainable product that withstands the passage of time, there are some features that require a subscription to access. However, we are working hard to provide financing to everyone that needs it.\n\nIf you are in Argentina, any assistive device a person needs should be covered by health insurance. Contact our team to get guidance and assistance on how to obtain this coverage.\n\nIf you are from any other country in LATAM and want to share your experience around this subject, feel free to reach out, your contribution might help many people in need.",
       "faq4": "Which languages are supported by the OTTAA Project?",
-      "faq4Description": "We currently support Spanish, English, Portuguese, and French. For Spanish, we have localized versions from Argentina, Chile, Colombia, and Spain. We are actively looking for contributions on new languages or better localization for Spanish varieties. Join our crowdin community to contribute.",
+      "faq4Description": "We currently support Spanish, English, Portuguese, and French. For Spanish, we have localized versions from Argentina, Chile, Colombia, and Spain. We are actively looking for contributions to new languages or better localization for Spanish varieties. Join our Crowdin community to contribute.",
       "faq5": "How can I collaborate with the OTTAA Project?",
       "faq5Description": "Contributors can help OTTAA with developing, testing, and/or translation. To read more about the subject and get started, please see the Contributing section in the official OTTAA GitHub repository."
     },
@@ -60,7 +61,7 @@
       "text4": "Save pictograms and sentences in Favorites, so you can access them quickly."
     },
     "unlink": "Unlink",
-    "unlink_account": "Do you want to unlink {name} from your accounts?",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Help",
       "title1": "Frequently Asked Questions",
@@ -74,12 +75,11 @@
           "required": "Email is required",
           "invalid": "Invalid email"
         },
-        "contact": "*Be sure you are in contact with the person using this email.",
         "warn": "*We will show a token on the device screen to link accounts.",
-        "send": "Submit"
+        "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico."
       },
       "token": {
-        "title": "Coloque el código de verificación que llegó al correo electrónico.",
+        "title": "Enter the verification token that was sent to that email.",
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email",
@@ -91,15 +91,26 @@
       },
       "success": {
         "title": "Profile successfully linked!",
-        "lastTime": "Last seen {date}",
-        "continue": "Continue"
+        "lastTime": "Últ. vez {date}"
+      },
+      "error": {
+        "link-exist": "Ya están vinculadas",
+        "miss-caregiver": "Error:Caregiver 404",
+        "miss-user": "Error:User 404",
+        "user-no-comp": "Error: User 406",
+        "caregiver-no-comp": "Error: Caregiver 406",
+        "autolink": "Error: Misma cuenta",
+        "auth/user-not-found": "Usuario no encontrado",
+        "miss-token": "Falta el Token",
+        "invalid-token": "Invalid token",
+        "expired-token": "Token vencido"
       }
     }
   },
   "user": {
     "main": {
-      "title": "Configura tu experiencia",
-      "subtitle1": "Uso de la aplicación",
+      "title": "Setting up your experience",
+      "subtitle1": "Application usage",
       "subtitle2": "Prediction"
     }
   },
@@ -128,7 +139,9 @@
     "settings": "Settings",
     "general": "General",
     "pictogram": "Pictograms",
-    "user_ottaa": "Use OTTAA as {name}"
+    "configuration": "Settings",
+    "user_ottaa": "Usar Ottaa como {name}",
+    "cancel": "Cancelar"
   },
   "onboarding": {
     "start": "Get Started",
@@ -157,42 +170,6 @@
   },
   "loginWait": {
     "text": "Welcome!\nTo the OTTAA World"
-  },
-  "link": {
-    "title": "Link to an account",
-    "mail": {
-      "title": "Enter the email of the account you want to link",
-      "input": {
-        "required": "Email is required",
-        "invalid": "Invalid email"
-      },
-      "contact": "*Be sure you are in contact with the person using this email.",
-      "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
-      "send": "Submit"
-    },
-    "token": {
-      "title": "Coloque el código de verificación que llegó al correo electrónico.",
-      "problem": "Having trouble linking accounts?",
-      "resend": "Resend code",
-      "back": "Please enter another email"
-    },
-    "wait": {
-      "title": "Wait",
-      "subtitle": "Loading profile..."
-    },
-    "success": {
-      "title": "Profile successfully linked!",
-      "lastTime": "Last seen {date}",
-      "continue": "Continue"
-    }
-  },
-  "token": {
-    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
-    "text": "Having trouble linking accounts?",
-    "button": {
-      "resend": "Resend email",
-      "anothermail": "Enter another email."
-    }
   },
   "login": {
     "title": "Log in with your account",
@@ -223,10 +200,15 @@
       "title": "Board {name}",
       "switch": "Enable board"
     },
+    "help": {
+      "boards": "Los tableros predictivos permiten configurar que grupo de pictogramas se mostrarán en la pantalla del usuario/a final.",
+      "shortcut": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal."
+    },
     "wait": {
-      "subtitle": "Haz configurado la experiencia de Juan!",
+      "title": "¡Felicitaciones!",
+      "subtitle": "Haz configurado la experiencia de {name}",
       "button": "Go to profile screen"
     },
-    "skip": "Do you want to skip profile customization?"
+    "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
   }
 }

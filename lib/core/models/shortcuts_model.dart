@@ -81,21 +81,20 @@ class Shortcuts {
   }
 
   factory Shortcuts.fromMap(Map<String, dynamic> map) {
-    return Shortcuts(
-      favs: map['favs'] == null ? false : map['favs'] as bool,
-      history: map['history'] == null ? false : map['history'] as bool,
-      camera: map['camera'] == null ? false : map['camera'] as bool,
-      share: map['share'] == null ? false : map['share'] as bool,
-      games: map['games'] as bool,
-      yes: map['yes'] as bool,
-      no: map['no'] == null ? false : map['no'] as bool,
+    return Shortcuts.none().copyWith(
+      favs: map['favs'],
+      history: map['history'],
+      camera: map['camera'],
+      share: map['share'],
+      games: map['games'],
+      yes: map['yes'],
+      no: map['no'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Shortcuts.fromJson(String source) =>
-      Shortcuts.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Shortcuts.fromJson(String source) => Shortcuts.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -106,19 +105,11 @@ class Shortcuts {
   bool operator ==(covariant Shortcuts other) {
     if (identical(this, other)) return true;
 
-    return other.favs == favs &&
-        other.history == history &&
-        other.camera == camera &&
-        other.share == share &&
-        other.games == games;
+    return other.favs == favs && other.history == history && other.camera == camera && other.share == share && other.games == games;
   }
 
   @override
   int get hashCode {
-    return favs.hashCode ^
-        history.hashCode ^
-        camera.hashCode ^
-        share.hashCode ^
-        games.hashCode;
+    return favs.hashCode ^ history.hashCode ^ camera.hashCode ^ share.hashCode ^ games.hashCode;
   }
 }
