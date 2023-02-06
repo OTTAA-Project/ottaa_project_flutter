@@ -182,9 +182,11 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> fetchConnectedUsersData() async {
     connectedUsersData = [];
-    final connectedUsers = _userNotifier.user.caregiver.users.values.toList();
-    await Future.wait(connectedUsers.map((e) async {
-      final res = await _profileService.fetchConnectedUserData(userId: e.id);
+    final connectedUsers = await _profileService.getConnectedUsers(userId: _userNotifier.user.id);
+    if(connectedUsers.isLeft) return;
+
+    await Future.wait(connectedUsers.right.keys.map((e) async {
+      final res = await _profileService.fetchConnectedUserData(userId: e);
       if (res.isRight) {
         final json = res.right;
 

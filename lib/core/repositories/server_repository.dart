@@ -69,6 +69,8 @@ abstract class ServerRepository {
 
   Future<dynamic> getDefaultGroups(String languageCode);
 
+  Future<dynamic> getDefaultPictos(String languageCode);
+
   Future<void> updateUserType({required String id, required UserType userType});
 
   Future<Map<String, dynamic>?> createPictoGroupData({
@@ -94,4 +96,6 @@ abstract class ServerRepository {
     required Map<String, List<String>> tags,
     bool reduced = false,
   });
+
+  Future<EitherVoid> updateUserLastConnectionTime({required String userId, required int time});
 }

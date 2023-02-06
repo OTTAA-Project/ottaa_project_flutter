@@ -594,10 +594,10 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i6.Future<bool>.value(false),
       ) as _i6.Future<bool>);
   @override
-  _i6.Future<void> setIntro() => (super.noSuchMethod(
+  _i6.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
         Invocation.method(
           #setIntro,
-          [],
+          [value],
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),

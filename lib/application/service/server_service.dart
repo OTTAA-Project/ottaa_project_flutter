@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
@@ -159,10 +160,25 @@ class ServerService implements ServerRepository {
   }
 
   @override
+  Future<EitherVoid> updateUserLastConnectionTime({
+    required String userId,
+    required int time,
+  }) async {
+    final ref = _database.child('$userId/settings/data');
+
+    try {
+      await ref.update({'lastConnection': time});
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
   Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
     try {
-      await ref.set({'maps': true});
+      await ref.set(data);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -416,10 +432,22 @@ class ServerService implements ServerRepository {
   @override
   Future<dynamic> getDefaultGroups(String languageCode) async {
     final ref = _database.child('default/groups/$languageCode');
+    final DataSnapshot res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<dynamic> getDefaultPictos(String languageCode) async {
+    final ref = _database.child('default/pictos/$languageCode');
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
-      return Right(res.value as dynamic);
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
     }
 
     return const Left("no_data_found");
@@ -449,5 +477,30 @@ class ServerService implements ServerRepository {
         "error": e.toString(),
       };
     }
+  }
+
+  @override
+  Future<EitherMap> learnPictograms({
+    required String uid,
+    required String language,
+    required String model,
+    required List<Map<String, dynamic>> tokens,
+  }) async {
+    // TODO: implement learnPictograms
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<EitherMap> predictPictogram({
+    required String sentence,
+    required String uid,
+    required String language,
+    required String model,
+    required List<String> groups,
+    required Map<String, List<String>> tags,
+    bool reduced = false,
+  }) async {
+    // TODO: implement predictPictogram
+    throw UnimplementedError();
   }
 }

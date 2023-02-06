@@ -41,7 +41,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       if (isLogged) {
         final user = ref.read(userNotifier);
         auth.setSignedIn();
-        await I18N.of(context).changeLanguage(user?.settings.language ?? "es_AR");
+        await I18N
+            .of(context)
+            .changeLanguage(user?.settings.language ?? "es_AR");
         if (mounted) {
           if (isFirstTime) {
             return context.go(AppRoutes.onboarding);
@@ -50,6 +52,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           if (user!.type == UserType.caregiver) {
             return context.go(AppRoutes.profileMainScreen);
           } else {
+            final time = DateTime.now().millisecondsSinceEpoch;
+            provider.updateLastConnectionTime(userId: user.id, time: time);
             return context.go(AppRoutes.profileMainScreenUser);
           }
         }
@@ -79,7 +83,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               const SizedBox(width: 20),
               Text(
                 "Hello".trl,
-                style: textTheme.headline1?.copyWith(color: Theme.of(context).primaryColor, fontSize: 40),
+                style: textTheme.headline1?.copyWith(
+                    color: Theme.of(context).primaryColor, fontSize: 40),
               ), //TODO: CHange this
             ],
           ),

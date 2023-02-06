@@ -20,8 +20,7 @@ class OnBoardingScreen extends ConsumerStatefulWidget {
   const OnBoardingScreen({super.key, this.defaultIndex = 0});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _OnBoardingScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _OnBoardingScreenState();
 }
 
 class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
@@ -29,8 +28,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      ref.read(onBoardingProvider.select((value) => value.goToPage))(
-          widget.defaultIndex);
+      ref.read(onBoardingProvider.select((value) => value.goToPage))(widget.defaultIndex);
 
       await blockPortraitMode();
 
@@ -48,8 +46,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
     final provider = ref.read(onBoardingProvider);
     final spProvider = ref.read(splashProvider);
 
-    final currentIndex =
-        ref.watch(onBoardingProvider.select((value) => value.currentIndex));
+    final currentIndex = ref.watch(onBoardingProvider.select((value) => value.currentIndex));
 
     final isLogged = ref.read(authNotifier);
 
@@ -81,9 +78,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                 if (skip != null && skip) {
                   if (mounted) {
                     await spProvider.setFirstTime();
-                    context.go(isLogged
-                        ? AppRoutes.profileChooserScreen
-                        : AppRoutes.login);
+                    context.go(isLogged ? AppRoutes.profileChooserScreen : AppRoutes.login);
                   }
                 }
               },
@@ -163,16 +158,12 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                       onPressed: () async {
                         if (currentIndex == 2) {
                           await spProvider.setFirstTime();
-                          context.go(isLogged
-                              ? AppRoutes.profileChooserScreen
-                              : AppRoutes.login);
+                          context.go(isLogged ? AppRoutes.profileChooserScreen : AppRoutes.login);
                           return;
                         }
                         provider.nextPage();
                       },
-                      text: currentIndex == 2
-                          ? "onboarding.start".trl
-                          : "global.next".trl,
+                      text: currentIndex == 2 ? "onboarding.start".trl : "global.next".trl,
                     ),
                   ),
                 ),

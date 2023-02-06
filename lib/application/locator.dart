@@ -18,9 +18,24 @@ Future<void> setupServices() async {
   if (deviceLanguage.length == 2) {
     deviceLocale = Locale(deviceLanguage[0], deviceLanguage[1]);
   } else {
-    deviceLocale = systemLocales.firstWhere((element) => element.languageCode == deviceLanguage[0], orElse: () => const Locale('en', 'US'));
+    switch (deviceLanguage[0].toLowerCase()) {
+      case 'en':
+        deviceLocale = const Locale('en', 'US');
+        break;
+      case 'it':
+        deviceLocale = const Locale('it', 'IT');
+        break;
+      case 'pt':
+        deviceLocale = const Locale('pt', 'BR');
+        break;
+      case 'es':
+      default:
+        deviceLocale = const Locale('es', 'AR');
+        break;
+    }
   }
-
+  print('languages are here:');
+  print(deviceLocale);
   final LocalDatabaseRepository databaseRepository = HiveDatabase();
   await databaseRepository.init();
 
@@ -28,32 +43,43 @@ Future<void> setupServices() async {
 
   final i18n = await I18N(deviceLocale).init();
 
-  final AuthRepository authService = AuthService(databaseRepository, serverRepository);
+  final AuthRepository authService =
+      AuthService(databaseRepository, serverRepository);
   final LocalStorageRepository localStorageService = LocalStorageService();
   late final RemoteStorageRepository remoteStorageService;
 
   if (kIsWeb) {
-    remoteStorageService = WebRemoteStorageService(authService, serverRepository, i18n);
+    remoteStorageService =
+        WebRemoteStorageService(authService, serverRepository, i18n);
   } else {
-    remoteStorageService = MobileRemoteStorageService(authService, serverRepository, i18n);
+    remoteStorageService =
+        MobileRemoteStorageService(authService, serverRepository, i18n);
   }
 
-  final PictogramsRepository pictogramsService = PictogramsService(authService, serverRepository, remoteStorageService);
+  final PictogramsRepository pictogramsService =
+      PictogramsService(authService, serverRepository, remoteStorageService);
 
-  final GroupsRepository groupsService = GroupsService(authService, remoteStorageService, serverRepository);
+  final GroupsRepository groupsService =
+      GroupsService(authService, remoteStorageService, serverRepository);
 
-  final AboutRepository aboutService = AboutService(authService, serverRepository);
-  final SentencesRepository sentencesService = SentencesService(authService, serverRepository);
+  final AboutRepository aboutService =
+      AboutService(authService, serverRepository);
+  final SentencesRepository sentencesService =
+      SentencesService(authService, serverRepository);
   final TTSRepository ttsService = TTSService();
   final ProfileRepository profileServices = ProfileService(serverRepository);
-  final CustomiseRepository customiseServices = CustomiseService(serverRepository);
+  final CustomiseRepository customiseServices =
+      CustomiseService(serverRepository);
 
-  final CreateEmailToken createEmailToken = CreateEmailTokenImpl(serverRepository);
-  final VerifyEmailToken verifyEmailToken = VerifyEmailTokenImpl(serverRepository);
+  final CreateEmailToken createEmailToken =
+      CreateEmailTokenImpl(serverRepository);
+  final VerifyEmailToken verifyEmailToken =
+      VerifyEmailTokenImpl(serverRepository);
 
   final CreateGroupData createGroupData = CreateGroupDataImpl(serverRepository);
   final CreatePictoData createPictoData = CreatePictoDataImpl(serverRepository);
-  final CreatePhraseData createPhraseData = CreatePhraseDataImpl(serverRepository);
+  final CreatePhraseData createPhraseData =
+      CreatePhraseDataImpl(serverRepository);
 
   locator.registerSingleton<I18N>(i18n);
   locator.registerSingleton<LocalDatabaseRepository>(databaseRepository);

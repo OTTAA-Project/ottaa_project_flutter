@@ -77,7 +77,7 @@ class Group {
             ).toList()
           : [],
       text: map['text'],
-      resource: AssetsImage.fromMap(map['resource'] != null ? map['resource'] as Map<String, dynamic> : {}),
+      resource: AssetsImage.fromMap(map['resource'] != null ? Map.from(map['resource'] as Map<dynamic, dynamic>) : {}),
       freq: map['freq'] != null ? map['freq'] as int : 0,
     );
   }

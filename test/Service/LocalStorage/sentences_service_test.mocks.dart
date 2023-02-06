@@ -817,6 +817,15 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
   @override
+  _i4.Future<dynamic> getDefaultPictos(String? languageCode) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDefaultPictos,
+          [languageCode],
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+  @override
   _i4.Future<void> updateUserType({
     required String? id,
     required _i10.UserType? userType,
