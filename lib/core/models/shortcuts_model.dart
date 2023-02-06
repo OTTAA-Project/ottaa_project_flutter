@@ -81,7 +81,7 @@ class Shortcuts {
   }
 
   factory Shortcuts.fromMap(Map<String, dynamic> map) {
-    return Shortcuts(
+    return Shortcuts.none().copyWith(
       favs: map['favs'] as bool,
       history: map['history'] as bool,
       camera: map['camera'] as bool,
@@ -94,8 +94,7 @@ class Shortcuts {
 
   String toJson() => json.encode(toMap());
 
-  factory Shortcuts.fromJson(String source) =>
-      Shortcuts.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Shortcuts.fromJson(String source) => Shortcuts.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -106,19 +105,11 @@ class Shortcuts {
   bool operator ==(covariant Shortcuts other) {
     if (identical(this, other)) return true;
 
-    return other.favs == favs &&
-        other.history == history &&
-        other.camera == camera &&
-        other.share == share &&
-        other.games == games;
+    return other.favs == favs && other.history == history && other.camera == camera && other.share == share && other.games == games;
   }
 
   @override
   int get hashCode {
-    return favs.hashCode ^
-        history.hashCode ^
-        camera.hashCode ^
-        share.hashCode ^
-        games.hashCode;
+    return favs.hashCode ^ history.hashCode ^ camera.hashCode ^ share.hashCode ^ games.hashCode;
   }
 }
