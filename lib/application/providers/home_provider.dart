@@ -122,6 +122,7 @@ class HomeProvider extends ChangeNotifier {
 
     suggestedIndex = id;
     if (suggestedPicts.length >= suggestedQuantity) {
+
       suggestedPicts = suggestedPicts.sublist(0, suggestedQuantity);
       return notifyListeners();
     }
