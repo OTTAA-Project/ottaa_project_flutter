@@ -83,12 +83,12 @@ class Shortcuts {
   factory Shortcuts.fromMap(Map<String, dynamic> map) {
     return Shortcuts(
       favs: map['favs'] == null ? false : map['favs'] as bool,
-      history: map['history'] == null ? false : map['gallery'] as bool,
-      camera: map['camera'] == null ? false : map['games'] as bool,
+      history: map['history'] == null ? false : map['history'] as bool,
+      camera: map['camera'] == null ? false : map['camera'] as bool,
       share: map['share'] == null ? false : map['share'] as bool,
       games: map['games'] as bool,
       yes: map['yes'] as bool,
-      no: map['shuffle'] == null ? false : map['no'] as bool,
+      no: map['no'] == null ? false : map['no'] as bool,
     );
   }
 

@@ -85,19 +85,14 @@ class Picto {
       relations: map['relations'] != null
           ? List<PictoRelation>.from(
               (map['relations'] as List).map(
-                (k) => PictoRelation.fromMap(Map.from(k as Map<dynamic, dynamic>)),
+                (k) =>
+                    PictoRelation.fromMap(Map.from(k as Map<dynamic, dynamic>)),
               ),
             ).toList()
           : [],
-      tags: Map<String, List<String>>.from(
-          ((map['tags'] ?? {}) as Map<dynamic, dynamic>).map((key, value) {
-        return MapEntry<String, List<String>>(
-            key as String, List<String>.from(value as List<dynamic>));
-      })),
       resource: AssetsImage.fromMap(
           Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
       text: map['text'],
-      resource: AssetsImage.fromMap(Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
       freq: ((map['freq'] ?? 0) as num).toDouble(),
       tags: ((map['tags'] ?? {}) as Map).map((key, value) {
         return MapEntry(key as String, List<String>.from(value as List));
