@@ -188,7 +188,8 @@ class ServerService implements ServerRepository {
       {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
     try {
-      await ref.set(data);
+      final mapData = Map.fromIterables(data.map((e) => e["id"]), data);
+      await ref.set(mapData);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -201,7 +202,8 @@ class ServerService implements ServerRepository {
     final ref = _database.child('$userId/pictos/$language');
 
     try {
-      await ref.set(data);
+      final mapData = Map.fromIterables(data.map((e) => e["id"]), data);
+      await ref.set(mapData);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
