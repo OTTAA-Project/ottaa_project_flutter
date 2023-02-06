@@ -24,7 +24,7 @@ class Picto {
   AssetsImage resource;
 
   @HiveField(5)
-  int freq;
+  double freq;
 
   @HiveField(6, defaultValue: <String, List<String>>{})
   Map<String, List<String>> tags;
@@ -49,7 +49,7 @@ class Picto {
     List<PictoRelation>? relations,
     String? text,
     AssetsImage? resource,
-    int? freq,
+    double? freq,
     Map<String, List<String>>? tags,
     int? type,
   }) {
@@ -81,24 +81,22 @@ class Picto {
   factory Picto.fromMap(Map<String, dynamic> map) {
     return Picto(
       block: map['block'] ?? false,
-      id: map['id'] ?? 0,
+      id: map['id'] ?? "",
       relations: map['relations'] != null
           ? List<PictoRelation>.from(
-              (map['relations'] as List<dynamic>).map<PictoRelation>(
-                (x) =>
-                    PictoRelation.fromMap(Map.from(x as Map<dynamic, dynamic>)),
+              (map['relations'] as List).map(
+                (k) =>
+                    PictoRelation.fromMap(Map.from(k as Map<dynamic, dynamic>)),
               ),
-            )
+            ).toList()
           : [],
-      tags: Map<String, List<String>>.from(
-          ((map['tags'] ?? {}) as Map<dynamic, dynamic>).map((key, value) {
-        return MapEntry<String, List<String>>(
-            key as String, List<String>.from(value as List<dynamic>));
-      })),
       resource: AssetsImage.fromMap(
           Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
       text: map['text'],
-      freq: map['freq'] ?? 0,
+      freq: ((map['freq'] ?? 0) as num).toDouble(),
+      tags: ((map['tags'] ?? {}) as Map).map((key, value) {
+        return MapEntry(key as String, List<String>.from(value as List));
+      }),
       type: map['type'] ?? 0,
     );
   }
@@ -172,7 +170,7 @@ class PictoRelation {
   factory PictoRelation.fromMap(Map<String, dynamic> map) {
     return PictoRelation(
       id: map['id'] as String,
-      value: ((map['value'] ?? 0) as num).toDouble(),
+      value: (map['value'] as num).toDouble(),
     );
   }
 
@@ -182,7 +180,7 @@ class PictoRelation {
       PictoRelation.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'GroupRelation(id: $id, value: $value)';
+  String toString() => 'PictoRelation(id: $id, value: $value)';
 
   @override
   bool operator ==(covariant PictoRelation other) {

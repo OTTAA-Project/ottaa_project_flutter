@@ -27,7 +27,9 @@ class GroupsService extends GroupsRepository {
     if (result.isLeft) return [];
 
     final String data = await _remoteStorageService.readRemoteFile(
-        path: "Grupos", fileName: 'assets/grupos.json');
+      path: "Grupos",
+      fileName: 'assets/grupos.json',
+    );
 
     final List<dynamic> json = jsonDecode(data);
     final List<Group> groups = json.map((e) => Group.fromMap(e)).toList();

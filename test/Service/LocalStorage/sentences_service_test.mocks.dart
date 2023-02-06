@@ -862,4 +862,31 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<Map<String, dynamic>?>.value(),
       ) as _i4.Future<Map<String, dynamic>?>);
+  @override
+  _i4.Future<_i2.Either<String, void>> updateUserLastConnectionTime({
+    required String? userId,
+    required int? time,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserLastConnectionTime,
+          [],
+          {
+            #userId: userId,
+            #time: time,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
+          this,
+          Invocation.method(
+            #updateUserLastConnectionTime,
+            [],
+            {
+              #userId: userId,
+              #time: time,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, void>>);
 }

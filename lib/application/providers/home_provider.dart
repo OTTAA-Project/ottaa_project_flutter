@@ -10,6 +10,7 @@ import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
+import 'package:collection/collection.dart';
 
 class HomeProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
@@ -18,7 +19,8 @@ class HomeProvider extends ChangeNotifier {
 
   final TTSProvider _tts;
 
-  HomeProvider(this._pictogramsService, this._groupsService, this._sentencesService, this._tts);
+  HomeProvider(this._pictogramsService, this._groupsService,
+      this._sentencesService, this._tts);
 
   List<Phrase> mostUsedSentences = [];
   int indexForMostUsed = 0;
@@ -28,9 +30,49 @@ class HomeProvider extends ChangeNotifier {
 
   List<Picto> suggestedPicts = [];
 
+  List<Picto> pictoWords = [];
+
   int suggestedIndex = 0;
 
   int suggestedQuantity = 4;
+
+  int wordsQuantity = 6;
+
+  //talk feature
+  bool talkEnabled = true;
+  bool show = false;
+  String selectedWord = '';
+  ScrollController scrollController = ScrollController();
+
+  void setSuggedtedQuantity(int quantity) {
+    suggestedQuantity = quantity;
+    notifyListeners();
+  }
+
+  void setWordQuantity(int quantity) {
+    wordsQuantity = quantity;
+    notifyListeners();
+  }
+
+  void addPictogram(Picto picto) {
+    if (pictoWords.length == wordsQuantity) {
+      pictoWords[wordsQuantity - 1] = picto;
+    } else {
+      pictoWords.add(picto);
+    }
+    int pictoIndex = pictograms.indexOf(picto);
+    suggestedPicts.clear();
+    buildSuggestion(pictoIndex);
+    notifyListeners();
+  }
+
+  void removeLastPictogram() {
+    pictoWords.removeLast();
+    int pictoIndex = pictoWords.length - 1;
+    suggestedPicts.clear();
+    buildSuggestion(pictoIndex);
+    notifyListeners();
+  }
 
   Future<void> init() async {
     await fetchPictograms();
@@ -40,7 +82,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> fetchMostUsedSentences() async {
     mostUsedSentences = await _sentencesService.fetchSentences(
-      language: "es_AR", //TODO!: Fetch language code LANG-CODE
+      language: "es-AR", //TODO!: Fetch language code LANG-CODE
       type: kMostUsedSentences,
     );
 
@@ -51,67 +93,52 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void notify() {
+    notifyListeners();
+  }
+
   Future<void> fetchPictograms() async {
     pictograms = await _pictogramsService.getAllPictograms();
     groups = await _groupsService.getAllGroups();
     notifyListeners();
   }
 
-  void buildSuggestion(int id) {
-    suggestedPicts = [];
-    suggestedIndex = 0;
+  void buildSuggestion([int? id]) {
+    id ??= 0;
 
-    final Picto addPict = Picto(
-      id: "",
-      text: "Agregar nuevo pictograma",
-      type: 6,
-      resource: AssetsImage(asset: "ic_agregar_nuevo", network: ""),
-    );
+    Picto? pict =
+        pictograms.firstWhereIndexedOrNull((index, picto) => index == id);
 
-    final Picto pict = pictograms.firstWhere((pict) => pict.id == id);
+    if (pict == null) return;
+
     print('the id of the pict is ${pict.id}');
 
     if (pict.relations.isNotEmpty) {
       final List<PictoRelation> recomendedPicts = pict.relations.toList();
-      // recomendedPicts.sort((b, a) => a.frec!.compareTo(b.frec!)); //TODO: Check this with assim
-      suggestedPicts = predictiveAlgorithm(list: recomendedPicts);
-    } else {
-      suggestedPicts = [];
+      recomendedPicts.sort((b, a) => a.value.compareTo(b.value));
+      suggestedPicts.addAll(predictiveAlgorithm(list: recomendedPicts));
+      suggestedPicts = suggestedPicts.toSet().toList();
     }
 
-    ///
-    /// predictive algorithm will replace teh code from here
+    suggestedIndex = id;
+    if (suggestedPicts.length >= suggestedQuantity) {
 
-    // recomendedPicts.forEach((recommendedPict) {
-    //   this._suggestedPicts.add(picts.firstWhere(
-    //       (suggestedPict) => suggestedPict.id == recommendedPict.id));
-    // });
-
-    /// to here
-    ///
-    suggestedPicts.add(addPict);
-
-    while (suggestedPicts.isEmpty || suggestedPicts.length % suggestedQuantity != 0) {
-      suggestedPicts.add(addPict);
+      suggestedPicts = suggestedPicts.sublist(0, suggestedQuantity);
+      return notifyListeners();
     }
-
-    notifyListeners();
+    buildSuggestion(0);
   }
 
   List<Picto> predictiveAlgorithm({required List<PictoRelation> list}) {
-    const int pesoFrec = 2,
-        // pesoAgenda = 8,
-        // pesoGps = 12,
-        // pesoEdad = 5,
-        // pesoSexo = 3,
-        pesoHora = 50;
+    const int pesoFrec = 2, pesoHora = 50;
     final time = DateTime.now().hour;
 
     List<Picto> requiredPicts = [];
 
     for (var recommendedPict in list) {
       requiredPicts.add(
-        pictograms.firstWhere((suggestedPict) => suggestedPict.id == recommendedPict.id),
+        pictograms.firstWhere(
+            (suggestedPict) => suggestedPict.id == recommendedPict.id),
       );
     }
     late String tag;
@@ -139,13 +166,45 @@ class HomeProvider extends ChangeNotifier {
           }
         }
       }
-      // e.freq = (list[i].value! * pesoFrec) + (hora * pesoHora); //TODO: Check this with asim
-      // print(e.score);
+      e.freq = (list[i].value * pesoFrec) +
+          (hora * pesoHora); //TODO: Check this with asim
     }
 
-    // requiredPicts.sort((b, a) => a.score!.compareTo(b.score!)); //TODO: Check this with assim too
+    requiredPicts.sort(
+        (b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
 
     return requiredPicts;
+  }
+
+  Future<void> speakSentence() async {
+    if (!talkEnabled) {
+      final sentence = pictoWords.map((e) => e.text).join(' ');
+      await _tts.speak(sentence);
+    } else {
+      show = true;
+      notifyListeners();
+      print('totoal values are');
+      print(scrollController.position.maxScrollExtent);
+      int i = 0;
+      for (var e in pictoWords) {
+        selectedWord = e.text;
+        scrollController.animateTo(
+          i == 0 ? 0 : i * 30,
+          duration: Duration(microseconds: 50),
+          curve: Curves.easeIn,
+        );
+        notifyListeners();
+        await _tts.speak(e.text);
+        i++;
+      }
+      scrollController.animateTo(
+        0,
+        duration: Duration(microseconds: 50),
+        curve: Curves.easeIn,
+      );
+      show = false;
+      notifyListeners();
+    }
   }
 }
 

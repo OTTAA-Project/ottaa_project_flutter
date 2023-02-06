@@ -61,7 +61,7 @@ class ServerService implements ServerRepository {
   Future<EitherListMap> getAllPictograms(
       String userId, String languageCode) async {
     //Fetch new data from server
-    final refNew = _database.child('$userId/Pictos/$languageCode');
+    final refNew = _database.child('$userId/pictos/$languageCode');
     final resNew = await refNew.get();
 
     if (resNew.exists && resNew.value != null) {
