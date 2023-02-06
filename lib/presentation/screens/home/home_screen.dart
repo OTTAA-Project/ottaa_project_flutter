@@ -66,7 +66,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: SizedBox(
                       width: size.width,
                       height: 80,
-                      child: const WordBarUI(),
+                      // child: const WordBarUI(),
                     ),
                   ),
                   const SizedBox(height: 11),
@@ -91,6 +91,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ],
               ),
             ),
+            Positioned(
+              top: 20,
+              child: const WordBarUI(),
+            ),
             if (provider.show) ...[
               Container(
                 decoration: const BoxDecoration(
@@ -98,10 +102,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
               Positioned(
-                top: 26,
+                top: 20,
                 child: const TalkWidget(),
               ),
-            ]
+            ],
           ],
         ),
       ),

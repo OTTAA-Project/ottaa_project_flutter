@@ -76,7 +76,7 @@ class CustomiseProvider extends ChangeNotifier {
     notifyListeners();
     final locale = _i18n.locale;
 
-    final languageCode = "${locale.languageCode}-${locale.countryCode}";
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
     pictograms =
         await _customiseService.fetchDefaultPictos(languageCode: languageCode);
     await createMapForPictos();
@@ -101,7 +101,7 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> getDefaultGroups() async {
     final locale = _i18n.locale;
 
-    final languageCode = "${locale.languageCode}-${locale.countryCode}";
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
     final res =
         await _customiseService.fetchDefaultGroups(languageCode: languageCode);
     print(res.length);
