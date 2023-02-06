@@ -18,7 +18,7 @@ class PhraseAdapter extends TypeAdapter<Phrase> {
     };
     return Phrase(
       date: fields[0] as DateTime,
-      id: fields[1] as int,
+      id: fields[1] as String,
       sequence: (fields[2] as List).cast<Sequence>(),
       tags: (fields[3] as Map).map((dynamic k, dynamic v) =>
           MapEntry(k as String, (v as List).cast<String>())),
@@ -61,7 +61,7 @@ class SequenceAdapter extends TypeAdapter<Sequence> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Sequence(
-      id: fields[0] as int,
+      id: fields[0] as String,
     );
   }
 

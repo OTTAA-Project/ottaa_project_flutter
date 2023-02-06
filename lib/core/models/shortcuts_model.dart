@@ -11,66 +11,84 @@ class Shortcuts {
   bool favs;
 
   @HiveField(1, defaultValue: false)
-  bool gallery;
+  bool history;
 
   @HiveField(2, defaultValue: false)
-  bool games;
+  bool camera;
 
   @HiveField(3, defaultValue: false)
   bool share;
 
   @HiveField(4, defaultValue: false)
-  bool shuffle;
+  bool games;
+
+  @HiveField(5, defaultValue: false)
+  bool yes;
+
+  @HiveField(6, defaultValue: false)
+  bool no;
 
   Shortcuts({
     required this.favs,
-    required this.gallery,
-    required this.games,
+    required this.history,
+    required this.camera,
     required this.share,
-    required this.shuffle,
+    required this.games,
+    required this.no,
+    required this.yes,
   });
 
   factory Shortcuts.none() => Shortcuts(
         favs: false,
-        gallery: false,
-        games: false,
+        history: false,
+        camera: false,
         share: false,
-        shuffle: false,
+        games: false,
+        yes: false,
+        no: false,
       );
 
   Shortcuts copyWith({
     bool? favs,
-    bool? gallery,
-    bool? games,
+    bool? history,
+    bool? camera,
     bool? share,
-    bool? shuffle,
+    bool? games,
+    bool? yes,
+    bool? no,
   }) {
     return Shortcuts(
       favs: favs ?? this.favs,
-      gallery: gallery ?? this.gallery,
-      games: games ?? this.games,
+      history: history ?? this.history,
+      camera: camera ?? this.camera,
       share: share ?? this.share,
-      shuffle: shuffle ?? this.shuffle,
+      games: games ?? this.games,
+      yes: yes ?? this.yes,
+      no: no ?? this.no,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'favs': favs,
-      'gallery': gallery,
-      'games': games,
+      'history': history,
+      'camera': camera,
       'share': share,
-      'shuffle': shuffle,
+      'games': games,
+      'yes': yes,
+      'no': no,
     };
   }
 
   factory Shortcuts.fromMap(Map<String, dynamic> map) {
     return Shortcuts(
       favs: map['favs'] == null ? false : map['favs'] as bool,
-      gallery: map['gallery'] == null ? false : map['gallery'] as bool,
-      games: map['games'] == null ? false : map['games'] as bool,
+      history: map['history'] == null ? false : map['gallery'] as bool,
+      camera: map['camera'] == null ? false : map['games'] as bool,
       share: map['share'] == null ? false : map['share'] as bool,
-      shuffle: map['shuffle'] == null ? false : map['shuffle'] as bool,
+      games: map['games'] as bool,
+      yes: map['yes'] as bool,
+      no: map['shuffle'] == null ? false : map['no'] as bool,
     );
   }
 
@@ -81,7 +99,7 @@ class Shortcuts {
 
   @override
   String toString() {
-    return 'Shortcuts(favs: $favs, gallery: $gallery, games: $games, share: $share, shuffle: $shuffle)';
+    return 'Shortcuts(favs: $favs, history: $history, camera: $camera, share: $share, games: $games)';
   }
 
   @override
@@ -89,18 +107,18 @@ class Shortcuts {
     if (identical(this, other)) return true;
 
     return other.favs == favs &&
-        other.gallery == gallery &&
-        other.games == games &&
+        other.history == history &&
+        other.camera == camera &&
         other.share == share &&
-        other.shuffle == shuffle;
+        other.games == games;
   }
 
   @override
   int get hashCode {
     return favs.hashCode ^
-        gallery.hashCode ^
-        games.hashCode ^
+        history.hashCode ^
+        camera.hashCode ^
         share.hashCode ^
-        shuffle.hashCode;
+        games.hashCode;
   }
 }

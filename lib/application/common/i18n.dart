@@ -20,22 +20,17 @@ class I18N extends ChangeNotifier {
       return this;
     }
 
-    final newLanguage = await loadTranslation(locale);
+    TranslationTree? newLanguage = await loadTranslation(locale);
+    newLanguage ??= await loadTranslation(const Locale("es", "AR"));
 
-    if (newLanguage != null) {
-      _languages.putIfAbsent(languageCode, () => newLanguage);
-      _currentLanguage = newLanguage;
-    }
+    _languages.putIfAbsent(languageCode, () => newLanguage!);
+    _currentLanguage = newLanguage;
 
     return this;
   }
 
   Future<TranslationTree?> loadTranslation(Locale locale) async {
     try {
-      if (locale.languageCode == "es" && locale.countryCode == "US") {
-        locale = const Locale("en", "US");
-      }
-
       final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
       if (_languages.containsKey(languageCode)) {

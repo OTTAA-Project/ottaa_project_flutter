@@ -32,10 +32,17 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await provider.fetchUserInformation();
 
+      bool isFirstTime = await provider.isFirstTime();
+
       final user = ref.read(userNotifier);
 
       await I18N.of(context).changeLanguage(user?.settings.language ?? "en_US");
       if (mounted) {
+
+        if (isFirstTime) {
+          return localContext.go(AppRoutes.onboarding);
+        }
+
         localContext.go(_userTypeRoutes[user!.type]!);
       }
     });

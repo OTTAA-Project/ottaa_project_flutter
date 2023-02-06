@@ -29,7 +29,7 @@ class SplashProvider extends ChangeNotifier {
   }
 
   Future<void> setFirstTime() async {
-    await _hiveRepository.setIntro();
+    await _hiveRepository.setIntro(false);
   }
 
   Future<bool> fetchUserInformation() async {
@@ -43,6 +43,16 @@ class SplashProvider extends ChangeNotifier {
     _userNotifier.setUser(result.right);
     return result.isRight;
   }
+  Future<void> updateLastConnectionTime({
+    required String userId,
+    required int time,
+  }) async {
+    await _aboutRepository.updateUserLastConnectionTime(
+      userId: userId,
+      time: time,
+    );
+  }
+
 }
 
 final splashProvider = ChangeNotifierProvider<SplashProvider>((ref) {
