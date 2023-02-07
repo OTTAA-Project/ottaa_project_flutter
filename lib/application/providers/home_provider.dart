@@ -191,7 +191,7 @@ class HomeProvider extends ChangeNotifier {
       for (var e in pictoWords) {
         selectedWord = e.text;
         scrollController.animateTo(
-          i == 0 ? 0 : i * 30,
+          i == 0 ? 0 : i * 45,
           duration: Duration(microseconds: 50),
           curve: Curves.easeIn,
         );

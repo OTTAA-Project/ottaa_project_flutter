@@ -46,7 +46,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        return false; //TODO: Ask for pop :)
+        return true; //TODO: Ask for pop :)
       },
       child: Scaffold(
         body: Stack(
