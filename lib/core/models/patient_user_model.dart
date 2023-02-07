@@ -114,7 +114,7 @@ class PatientUserModel extends UserModel {
                   (List.from(map['groups'].values as Iterable<dynamic>)).map<List<Group>>(
                     (e) {
                       return List<Group>.from(
-                        e.map(
+                        e.values.map(
                           (x) {
                             return Group.fromMap(Map.from(x as Map<dynamic, dynamic>));
                           },
@@ -131,7 +131,7 @@ class PatientUserModel extends UserModel {
                   List.from(map['phrases'].keys as Iterable<dynamic>),
                   (List.from(map['phrases'].value as Iterable<dynamic>)).map(
                         (e) => List<Phrase>.from(
-                          e.map(
+                          e.values.map(
                               (x) => Phrase.fromMap(Map.from(x as Map<dynamic, dynamic>))),
                         ),
                       ),
@@ -144,7 +144,7 @@ class PatientUserModel extends UserModel {
                   List.from(map['pictos'].keys as Iterable<dynamic>),
                   List.from(map['pictos'].values as Iterable<dynamic>).map(
                         (e) => List<Picto>.from(
-                          e.map(
+                          e.values.map(
                               (x) => Picto.fromMap(Map.from(x as Map<dynamic, dynamic>))),
                         ),
                       ),
