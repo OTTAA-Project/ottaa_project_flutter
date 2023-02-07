@@ -31,16 +31,20 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
           padding: const EdgeInsets.only(top: 16),
           child: ConnectedUserWidget(
             title: provider.connectedUsersData[index].settings.data.name,
-            image: provider.connectedUsersData[index].settings.data.avatar.network!,
+            image: provider
+                .connectedUsersData[index].settings.data.avatar.network!,
             onPressed: () {
-              provider.connectedUsersProfileDataExpanded[index] = !provider.connectedUsersProfileDataExpanded[index];
+              provider.connectedUsersProfileDataExpanded[index] =
+                  !provider.connectedUsersProfileDataExpanded[index];
               provider.notify();
             },
             actionTap: () {
-              provider.connectedUsersProfileDataExpanded[index] = !provider.connectedUsersProfileDataExpanded[index];
+              provider.connectedUsersProfileDataExpanded[index] =
+                  !provider.connectedUsersProfileDataExpanded[index];
               provider.notify();
             },
-            timeText: provider.connectedUsersData[index].settings.data.lastConnection.timezonedDate.timeString,
+            timeText: provider.connectedUsersData[index].settings.data
+                .lastConnection.timezonedDate.timeString,
             show: provider.connectedUsersProfileDataExpanded[index],
           ),
         );
