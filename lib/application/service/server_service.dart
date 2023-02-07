@@ -39,21 +39,13 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherListMap> getAllGroups(String userId, String languageCode) async {
     //Fetch new data from server
-    final refNew = _database.child('$userId/groups/$languageCode');
-    final resNew = await refNew.get();
+    final ref = _database.child('$userId/groups/$languageCode');
+    final res = await ref.get();
 
-    if (resNew.exists && resNew.value != null) {
-      return Right(resNew.value as dynamic);
+    if (res.exists && res.value != null) {
+      final valu = jsonEncode((res.value as dynamic));
+      return Right(List.from(jsonDecode(valu).values.toList() as List));
     }
-
-    //Fetch old data from serve (for compatibility)
-    final refOld = _database.child('Grupos/$userId/$languageCode');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return Right(resOld.value as dynamic);
-    }
-
     return const Left("no_data_found");
   }
 
@@ -61,21 +53,13 @@ class ServerService implements ServerRepository {
   Future<EitherListMap> getAllPictograms(
       String userId, String languageCode) async {
     //Fetch new data from server
-    final refNew = _database.child('$userId/pictos/$languageCode');
-    final resNew = await refNew.get();
+    final ref = _database.child('$userId/pictos/$languageCode');
+    final res = await ref.get();
 
-    if (resNew.exists && resNew.value != null) {
-      return Right(resNew.value as dynamic);
+    if (res.exists && res.value != null) {
+      final valu = jsonEncode((res.value as dynamic));
+      return Right(List.from(jsonDecode(valu).values.toList() as List));
     }
-
-    //Fetch old data from serve (for compatibility)
-    final refOld = _database.child('Pictos/$userId/$languageCode');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return Right(resOld.value as dynamic);
-    }
-
     return const Left("no_data_found");
   }
 

@@ -32,7 +32,7 @@ class HomeProvider extends ChangeNotifier {
 
   List<Picto> pictoWords = [];
 
-  int suggestedIndex = 0;
+  String suggestedId = 'FWy18PiX2jLwZQF6-oNZR';
 
   int suggestedQuantity = 4;
 
@@ -55,14 +55,9 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void addPictogram(Picto picto) {
-    if (pictoWords.length == wordsQuantity) {
-      pictoWords[wordsQuantity - 1] = picto;
-    } else {
-      pictoWords.add(picto);
-    }
-    int pictoIndex = pictograms.indexOf(picto);
+    pictoWords.add(picto);
     suggestedPicts.clear();
-    buildSuggestion(pictoIndex);
+    buildSuggestion(picto.id);
     notifyListeners();
   }
 
@@ -70,13 +65,18 @@ class HomeProvider extends ChangeNotifier {
     pictoWords.removeLast();
     int pictoIndex = pictoWords.length - 1;
     suggestedPicts.clear();
-    buildSuggestion(pictoIndex);
+    if (pictoIndex == -1) {
+      buildSuggestion();
+      notifyListeners();
+      return;
+    }
+    buildSuggestion(pictoWords.last.id);
     notifyListeners();
   }
 
   Future<void> init() async {
     await fetchPictograms();
-    buildSuggestion(0);
+    buildSuggestion('FWy18PiX2jLwZQF6-oNZR');
     notifyListeners();
   }
 
@@ -103,11 +103,11 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void buildSuggestion([int? id]) {
-    id ??= 0;
+  void buildSuggestion([String? id]) {
+    id ??= 'FWy18PiX2jLwZQF6-oNZR';
 
     Picto? pict =
-        pictograms.firstWhereIndexedOrNull((index, picto) => index == id);
+        pictograms.firstWhereIndexedOrNull((index, picto) => picto.id == id);
 
     if (pict == null) return;
 
@@ -118,15 +118,17 @@ class HomeProvider extends ChangeNotifier {
       recomendedPicts.sort((b, a) => a.value.compareTo(b.value));
       suggestedPicts.addAll(predictiveAlgorithm(list: recomendedPicts));
       suggestedPicts = suggestedPicts.toSet().toList();
+    } else {
+      print(
+          'it is for you hector san to tell us what to do over here. If you have found this message contact us.');
     }
 
-    suggestedIndex = id;
-    if (suggestedPicts.length >= suggestedQuantity) {
-
-      suggestedPicts = suggestedPicts.sublist(0, suggestedQuantity);
-      return notifyListeners();
-    }
-    buildSuggestion(0);
+    suggestedId = id;
+    return notifyListeners();
+    // if (suggestedPicts.length >= suggestedQuantity) {
+    //   suggestedPicts = suggestedPicts.sublist(0, suggestedQuantity);
+    //
+    // }
   }
 
   List<Picto> predictiveAlgorithm({required List<PictoRelation> list}) {
