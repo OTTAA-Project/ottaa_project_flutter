@@ -14,9 +14,9 @@
     "faq": {
       "title": "Frequently Asked Questions",
       "faq0": "Who can use the OTTAA app?",
-      "faq0Description": "OTTAA is designed for non-verbal individuals, that is anyone that does not use oral speech to communicate. People that are using OTTAA today were diagnosed with autism, cerebral palsy, Down syndrome, Amyotrophic Lateral Sclerosis (ALS), Spinal Motor Atrophy (SMA), or post-stroke locked-in syndrome (LiS), among other affections. Being a dynamic communication tool, OTTAA requires its users to be capable of mid to high-level cognitive functions. However, we like to consider every case individually so do not hesitate to get in touch and request an online assessment with our team.",
+      "faq0Description": "OTTAA is designed for non-verbal individuals, that is anyone that does not use oral speech to communicate. People that are using OTTAA today were diagnosed with autism, cerebral palsy, Down syndrome, Amyotrophic Lateral Sclerosis (ALS), Spinal Motor Atrophy (SMA), or post-stroke locked-in syndrome (LiS), among other affections. Being a dynamic communication tool, OTTAA requires its users to be capable of mid to high-level cognitive functions. However, we usually study every case individually so do not hesitate to get in touch and request an online assessment with our team.",
       "faq1": "How does the app work?",
-      "faq1Description": "The OTTAA app provides the user with pictograms: images that represent actions, objects, feelings, or emotions. The user can choose the pictogram(s) he or she needs and create a speech utterance. The utterance is translated from the pictogram(s) to a written sentence that appears on the screen and is also read out loud by the app. Check out our Youtube channel for a more visual explanation.",
+      "faq1Description": "The OTTAA app provides the user with pictograms: images that represent actions, objects, feelings, or emotions. The user can choose the pictogram(s) he or she needs and create a speech utterance. The utterance is translated from the pictogram(s) to a written sentence that appears on the screen and it is also read out loud by the app. Check out our Youtube channel for a more visual explanation.",
       "faq2": "How is this app different from other AAC (augmentative and alternative communication) devices?",
       "faq2Description": "The OTTAA app is different from other AAC apps because of its innovative predictive algorithm and natural language generator, which allow the app to learn from the user’s behavior on the app, their age, gender, the time of the day, and their location to pre-select pictogram(s) for the communicational moment they are in.",
       "faq3": "How much does the OTTAA app cost?",
@@ -111,7 +111,7 @@
     "main": {
       "title": "Setting up your experience",
       "subtitle1": "Application usage",
-      "subtitle2": "Prediction"
+      "subtitle2": "Predictive texting"
     }
   },
   "global": {
