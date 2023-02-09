@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_shortcut_screen.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -33,7 +34,7 @@ class _CustomizedMainTabScreenState
     final provider = ref.read(customiseProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.fetchData();
+      await provider.inIt(userId: provider.userId);
     });
   }
 
@@ -44,7 +45,8 @@ class _CustomizedMainTabScreenState
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
-    //todo: using that variable here from the linkProvider
+
+    /// using that variable here from the linkProvider
     final userID = ref.read(linkProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
@@ -211,9 +213,24 @@ class _CustomizedMainTabScreenState
                           );
                         },
                       );
-                      await provider.uploadData(userId: userID.userId!);
-                      context.pop();
-                      context.push(AppRoutes.customizeWaitScreen);
+                      switch (provider.type) {
+                        case CustomiseDataType.user:
+                          await provider.uploadData(userId: provider.userId);
+                          provider.groupsFetched = false;
+                          provider.notify();
+                          context.pop();
+                          context.pop();
+                          break;
+                        case CustomiseDataType.careGiver:
+                          //todo: this case
+                          break;
+                        case CustomiseDataType.defaultCase:
+                        default:
+                          await provider.uploadData(userId: userID.userId!);
+                          context.pop();
+                          context.push(AppRoutes.customizeWaitScreen);
+                          break;
+                      }
                     }
                   },
                   text: "global.next".trl,
