@@ -101,6 +101,8 @@ class CustomiseProvider extends ChangeNotifier {
     final res = await _customiseService.fetchDefaultGroups(languageCode: languageCode);
     print(res.length);
     groups = res;
+
+    notifyListeners(); //<- This is the important part
   }
 
   Future<void> createMapForPictos() async {

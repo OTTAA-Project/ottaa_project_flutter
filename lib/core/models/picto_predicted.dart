@@ -43,10 +43,10 @@ class PictoPredicted extends PictoPredictedReduced {
         return MapEntry(key as String, value.toString());
       }),
       value: (map['value'] as num).toDouble(),
-      contextScore: map['contextScore'] as int,
-      tagScore: map['tagScore'] as int,
-      nameLength: map['nameLength'] as int,
-      nameSplitLength: map['nameSplitLength'] as int,
+      contextScore: ((map['contextScore'] ?? 0) as num).toInt(),
+      tagScore: ((map['tagScore'] ?? 0) as num).toInt(),
+      nameLength: ((map['nameLength'] ?? 0) as num).toInt(),
+      nameSplitLength: ((map['nameSplitLength'] ?? 0) as num).toInt(),
     );
   }
 

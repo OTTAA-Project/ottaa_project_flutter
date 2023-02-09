@@ -126,7 +126,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         children: pictos
-            .sublist(0, max(pictos.length, pictoCount))
+            .sublist(0, min(pictos.length, pictoCount))
             .mapIndexed(
               (i, e) => PictoWidget(
                 onTap: () {

@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
@@ -23,6 +27,7 @@ class HomeProvider extends ChangeNotifier {
   final GroupsRepository _groupsService;
   final SentencesRepository _sentencesService;
   final PatientNotifier patientState;
+  final UserNotifier userState;
 
   final TTSProvider _tts;
 
@@ -37,6 +42,7 @@ class HomeProvider extends ChangeNotifier {
     this.patientState,
     this.predictPictogram,
     this.learnPictogram,
+    this.userState,
   );
 
   List<Phrase> mostUsedSentences = [];
@@ -105,7 +111,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> buildSuggestion([String? id]) async {
     id ??= kStarterPictoId;
-
+    print(patientState.state);
     if (patientState.state != null && id != kStarterPictoId) {
       PatientUserModel user = patientState.user;
 
@@ -124,7 +130,7 @@ class HomeProvider extends ChangeNotifier {
 
         List<Picto> picts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
 
-        suggestedPicts = picts.sublist(0, suggestedQuantity);
+        suggestedPicts = picts;
         notifyListeners();
       }
 
@@ -145,7 +151,7 @@ class HomeProvider extends ChangeNotifier {
     }
 
     suggestedIndex = id;
-    suggestedPicts = suggestedPicts.sublist(0, suggestedQuantity);
+    suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
     return notifyListeners();
   }
 
@@ -205,6 +211,7 @@ final homeProvider = ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
   final sentencesService = GetIt.I<SentencesRepository>();
   final tts = ref.watch(ttsProvider);
   final patientState = ref.watch(patientNotifier.notifier);
+  final userState = ref.watch(userNotifier.notifier);
 
   final predictPictogram = GetIt.I<PredictPictogram>();
   final learnPictogram = GetIt.I<LearnPictogram>();
@@ -217,5 +224,6 @@ final homeProvider = ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
     patientState,
     predictPictogram,
     learnPictogram,
+    userState,
   );
 });
