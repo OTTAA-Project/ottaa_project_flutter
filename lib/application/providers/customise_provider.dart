@@ -80,7 +80,7 @@ class CustomiseProvider extends ChangeNotifier {
         await fetchUserCaseValues(userId: userId!);
         break;
       case CustomiseDataType.careGiver:
-        // TODO: Handle this case.
+        await fetchUserCaseValues(userId: userId!);
         break;
       case CustomiseDataType.defaultCase:
       default:

@@ -222,7 +222,11 @@ class _CustomizedMainTabScreenState
                           context.pop();
                           break;
                         case CustomiseDataType.careGiver:
-                          //todo: this case
+                          await provider.uploadData(userId: provider.userId);
+                          provider.groupsFetched = false;
+                          provider.notify();
+                          context.pop();
+                          context.pop();
                           break;
                         case CustomiseDataType.defaultCase:
                         default:
