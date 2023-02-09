@@ -3,7 +3,7 @@ import 'dart:convert';
 class PictoPredictedReduced {
   String name;
   bool isCached;
-  Map<String, List<String>> id;
+  Map<String, String> id;
 
   PictoPredictedReduced({
     required this.name,
@@ -24,7 +24,7 @@ class PictoPredictedReduced {
       name: map['name'] as String,
       isCached: map['isCached'] as bool,
       id: ((map['id'] ?? {}) as Map).map((key, value) {
-        return MapEntry(key as String, List<String>.from(value as List));
+        return MapEntry(key as String, value.toString());
       }),
     );
   }

@@ -1,13 +1,15 @@
 import 'package:either_dart/either.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/models/picto_predicted.dart';
 import 'package:ottaa_project_flutter/core/models/picto_predicted_reduced.dart';
 import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
+@Singleton(as: PredictPictogram)
 class PredictPictogramImpl extends PredictPictogram {
   PredictPictogramImpl({required super.serverRepository});
 
   @override
-  Future<Either<String, PictoPredictedReduced>> call({
+  Future<Either<String, List<PictoPredictedReduced>>> call({
     required String sentence,
     required String uid,
     required String language,
@@ -29,12 +31,12 @@ class PredictPictogramImpl extends PredictPictogram {
       return Left(response.left);
     }
 
-    final map = response.right;
+    final map = response.right["data"];
 
     if (reduced) {
-      return Right(PictoPredictedReduced.fromMap(map));
+      return Right(map.map<PictoPredictedReduced>((e) => PictoPredictedReduced.fromMap(e)).toList());
     }
 
-    return Right(PictoPredicted.fromMap(map));
+      return Right(map.map<PictoPredicted>((e) => PictoPredicted.fromMap(e)).toList());
   }
 }

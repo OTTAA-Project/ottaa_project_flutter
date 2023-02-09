@@ -13,7 +13,7 @@ abstract class PredictPictogram {
   /// [uid] is the user id, [language] is the language of the sentence,
   /// [model] is the model to use, [groups] is the list of groups to predict and it is used to filter the pictograms,
   /// [tags] is thePictoPredictedReduced map of tags to predict and it is used to filter the pictograms
-  Future<Either<String, PictoPredictedReduced>> call({
+  Future<Either<String, List<PictoPredictedReduced>>> call({
     required String sentence,
     required String uid,
     required String language,

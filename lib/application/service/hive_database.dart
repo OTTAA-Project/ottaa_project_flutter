@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
@@ -14,6 +15,7 @@ import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 
+@Singleton(as: LocalDatabaseRepository)
 class HiveDatabase extends LocalDatabaseRepository {
   @override
   UserModel? user;
@@ -41,6 +43,14 @@ class HiveDatabase extends LocalDatabaseRepository {
     user ??= Hive.box(UserType.none.name).get(UserType.none.name);
 
     return this.user ?? user;
+  }
+
+  @FactoryMethod(preResolve: true)
+  static Future<HiveDatabase> start() async {
+    HiveDatabase db = HiveDatabase();
+    await db.init();
+
+    return db;
   }
 
   @override

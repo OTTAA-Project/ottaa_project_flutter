@@ -2,72 +2,89 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
+import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 import 'package:collection/collection.dart';
+import 'package:ottaa_project_flutter/core/use_cases/learn_pictogram.dart';
+import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
-const int kStarterPictoIndex = 0;
+const String kStarterPictoId = "FWy18PiX2jLwZQF6-oNZR";
+
 class HomeProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
   final SentencesRepository _sentencesService;
+  final PatientNotifier patientState;
 
   final TTSProvider _tts;
 
-  HomeProvider(this._pictogramsService, this._groupsService, this._sentencesService, this._tts);
+  final PredictPictogram predictPictogram;
+  final LearnPictogram learnPictogram;
+
+  HomeProvider(
+    this._pictogramsService,
+    this._groupsService,
+    this._sentencesService,
+    this._tts,
+    this.patientState,
+    this.predictPictogram,
+    this.learnPictogram,
+  );
 
   List<Phrase> mostUsedSentences = [];
   int indexForMostUsed = 0;
 
-  List<Picto> pictograms = [];
-  List<Group> groups = [];
+  Map<String, Picto> pictograms = {};
+  Map<String, Group> groups = {};
 
   List<Picto> suggestedPicts = [];
 
   List<Picto> pictoWords = [];
 
-  int suggestedIndex = 0;
+  String suggestedIndex = kStarterPictoId;
 
   int suggestedQuantity = 4;
+
+  bool confirmExit = false;
 
   void setSuggedtedQuantity(int quantity) {
     suggestedQuantity = quantity;
     notifyListeners();
   }
 
-
   void addPictogram(Picto picto) {
     pictoWords.add(picto);
-
-    int pictoIndex = pictograms.indexOf(picto);
     suggestedPicts.clear();
-    buildSuggestion(pictoIndex == -1 ? kStarterPictoIndex : pictoIndex);
+    buildSuggestion(picto.id);
     notifyListeners();
   }
 
   void removeLastPictogram() {
     pictoWords.removeLast();
-    int pictoIndex = pictoWords.length - 1;
     suggestedPicts.clear();
-    buildSuggestion(pictoIndex);
+    Picto? lastPicto = pictoWords.lastOrNull;
+
+    buildSuggestion(lastPicto?.id);
     notifyListeners();
   }
 
   Future<void> init() async {
     await fetchPictograms();
-    buildSuggestion(0);
+    buildSuggestion();
     notifyListeners();
   }
 
   Future<void> fetchMostUsedSentences() async {
     mostUsedSentences = await _sentencesService.fetchSentences(
-      language: "es-AR", //TODO!: Fetch language code LANG-CODE
+      language: "es_AR", //TODO!: Fetch language code LANG-CODE
       type: kMostUsedSentences,
     );
 
@@ -79,15 +96,42 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictograms() async {
-    pictograms = await _pictogramsService.getAllPictograms();
-    groups = await _groupsService.getAllGroups();
+    final pictos = (await _pictogramsService.getAllPictograms());
+    final groupsData = await _groupsService.getAllGroups();
+    pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
+    groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
     notifyListeners();
   }
 
-  void buildSuggestion([int? id]) {
-    id ??= 0;
+  Future<void> buildSuggestion([String? id]) async {
+    id ??= kStarterPictoId;
 
-    Picto? pict = pictograms.firstWhereIndexedOrNull((index, picto) => index == id);
+    if (patientState.state != null && id != kStarterPictoId) {
+      PatientUserModel user = patientState.user;
+
+      final response = await predictPictogram.call(
+        sentence: pictoWords.map((e) => e.text).join(" "),
+        uid: user.id,
+        language: user.settings.language,
+        model: "test",
+        groups: [],
+        tags: {},
+        reduced: false,
+      );
+
+      if (response.isRight) {
+        print(response.right);
+
+        List<Picto> picts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
+
+        suggestedPicts = picts.sublist(0, suggestedQuantity);
+        notifyListeners();
+      }
+
+      return;
+    }
+
+    Picto? pict = pictograms[id];
 
     if (pict == null) return;
 
@@ -101,11 +145,8 @@ class HomeProvider extends ChangeNotifier {
     }
 
     suggestedIndex = id;
-    if (suggestedPicts.length >= suggestedQuantity) {
-      suggestedPicts = suggestedPicts.sublist(0, suggestedQuantity);
-      return notifyListeners();
-    }
-    buildSuggestion(0);
+    suggestedPicts = suggestedPicts.sublist(0, suggestedQuantity);
+    return notifyListeners();
   }
 
   List<Picto> predictiveAlgorithm({required List<PictoRelation> list}) {
@@ -116,7 +157,7 @@ class HomeProvider extends ChangeNotifier {
 
     for (var recommendedPict in list) {
       requiredPicts.add(
-        pictograms.firstWhere((suggestedPict) => suggestedPict.id == recommendedPict.id),
+        pictograms[recommendedPict.id]!,
       );
     }
     late String tag;
@@ -145,7 +186,6 @@ class HomeProvider extends ChangeNotifier {
         }
       }
       e.freq = (list[i].value * pesoFrec) + (hora * pesoHora); //TODO: Check this with asim
-
     }
 
     requiredPicts.sort((b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
@@ -159,11 +199,23 @@ class HomeProvider extends ChangeNotifier {
   }
 }
 
-final homeProvider = ChangeNotifierProvider<HomeProvider>((ref) {
+final homeProvider = ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final sentencesService = GetIt.I<SentencesRepository>();
   final tts = ref.watch(ttsProvider);
+  final patientState = ref.watch(patientNotifier.notifier);
 
-  return HomeProvider(pictogramService, groupsService, sentencesService, tts);
+  final predictPictogram = GetIt.I<PredictPictogram>();
+  final learnPictogram = GetIt.I<LearnPictogram>();
+
+  return HomeProvider(
+    pictogramService,
+    groupsService,
+    sentencesService,
+    tts,
+    patientState,
+    predictPictogram,
+    learnPictogram,
+  );
 });

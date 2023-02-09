@@ -40,9 +40,9 @@ class PictoPredicted extends PictoPredictedReduced {
       name: map['name'] as String,
       isCached: map['isCached'] as bool,
       id: ((map['id'] ?? {}) as Map).map((key, value) {
-        return MapEntry(key as String, List<String>.from(value as List));
+        return MapEntry(key as String, value.toString());
       }),
-      value: map['value'] as double,
+      value: (map['value'] as num).toDouble(),
       contextScore: map['contextScore'] as int,
       tagScore: map['tagScore'] as int,
       nameLength: map['nameLength'] as int,

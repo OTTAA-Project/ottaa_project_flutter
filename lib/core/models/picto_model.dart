@@ -97,7 +97,7 @@ class Picto {
       resource: AssetsImage.fromMap(
           Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
       text: map['text'],
-      freq: (map['freq'] as num).toDouble(),
+      freq: map['freq'] != null ? (map['freq'] as num).toDouble() : 0,
       type: (map['type'] as num).toInt(),
     );
   }

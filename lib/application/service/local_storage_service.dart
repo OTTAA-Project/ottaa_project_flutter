@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
 import 'package:path_provider/path_provider.dart';
 
+@Singleton(as: LocalStorageRepository)
 class LocalStorageService extends LocalStorageRepository {
   Future<String> get _directoryPath async {
     Directory directory = await getApplicationDocumentsDirectory();

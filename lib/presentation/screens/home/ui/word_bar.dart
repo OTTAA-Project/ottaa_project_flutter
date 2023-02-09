@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
@@ -40,7 +41,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
       children: [
         GestureDetector(
           onLongPressEnd: (details) {
-            //TODO: Show back dialog :)
+            context.pop();
           },
           child: Container(
             width: 20,

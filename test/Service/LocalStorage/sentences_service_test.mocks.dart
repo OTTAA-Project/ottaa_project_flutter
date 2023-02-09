@@ -862,4 +862,106 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<Map<String, dynamic>?>.value(),
       ) as _i4.Future<Map<String, dynamic>?>);
+  @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> learnPictograms({
+    required String? uid,
+    required String? language,
+    required String? model,
+    required List<Map<String, dynamic>>? tokens,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #learnPictograms,
+          [],
+          {
+            #uid: uid,
+            #language: language,
+            #model: model,
+            #tokens: tokens,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #learnPictograms,
+            [],
+            {
+              #uid: uid,
+              #language: language,
+              #model: model,
+              #tokens: tokens,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> predictPictogram({
+    required String? sentence,
+    required String? uid,
+    required String? language,
+    required String? model,
+    required List<String>? groups,
+    required Map<String, List<String>>? tags,
+    bool? reduced = false,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #predictPictogram,
+          [],
+          {
+            #sentence: sentence,
+            #uid: uid,
+            #language: language,
+            #model: model,
+            #groups: groups,
+            #tags: tags,
+            #reduced: reduced,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #predictPictogram,
+            [],
+            {
+              #sentence: sentence,
+              #uid: uid,
+              #language: language,
+              #model: model,
+              #groups: groups,
+              #tags: tags,
+              #reduced: reduced,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<_i2.Either<String, void>> updateUserLastConnectionTime({
+    required String? userId,
+    required int? time,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserLastConnectionTime,
+          [],
+          {
+            #userId: userId,
+            #time: time,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
+          this,
+          Invocation.method(
+            #updateUserLastConnectionTime,
+            [],
+            {
+              #userId: userId,
+              #time: time,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, void>>);
 }
