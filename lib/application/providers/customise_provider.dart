@@ -98,9 +98,9 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> fetchUserCaseValues({required String userId}) async {
     await fetchShortcutsForUser(userId: userId);
+    await fetchUserGroups(userId: userId);
     groupsFetched = true;
     notifyListeners();
-    await fetchUserGroups(userId: userId);
     await fetchUserPictos(userId: userId);
     await createMapForPictos();
   }
