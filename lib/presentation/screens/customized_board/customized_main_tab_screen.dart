@@ -50,6 +50,14 @@ class _CustomizedMainTabScreenState
     final userID = ref.read(linkProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            provider.groupsFetched = false;
+            context.pop();
+          },
+          splashRadius: 24,
+        ),
         title: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
