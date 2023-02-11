@@ -18,21 +18,6 @@ class TalkWidget extends ConsumerStatefulWidget {
 
 class _TalkWidgetState extends ConsumerState<TalkWidget> {
   @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final size = MediaQuery.of(context).size;
-
-      int pictoSize = 64;
-
-      int pictoCount = ((size.height - 390) / pictoSize).floor();
-
-      ref.read(homeProvider.select((value) => value.setWordQuantity))(
-          pictoCount);
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final pictoWords = ref.watch(homeProvider).pictoWords;
@@ -55,8 +40,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
               itemCount: pictoWords.length + 6,
               controller: scrollCon,
               itemBuilder: (context, index) {
-                Picto? pict = pictoWords.firstWhereIndexedOrNull(
-                    (elIndex, element) => elIndex == index);
+                Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
 
                 if (pict == null) {
                   return Padding(
@@ -65,9 +49,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                       width: 64,
                       height: 140,
                       decoration: BoxDecoration(
-                        color: pictoWords.length < pictoWords.length + 6
-                            ? Colors.transparent
-                            : Colors.white,
+                        color: pictoWords.length < pictoWords.length + 6 ? Colors.transparent : Colors.white,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(10),
                         ),
@@ -89,10 +71,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                               return Center(
                                 child: CircularProgressIndicator(
                                   color: colorScheme.primary,
-                                  value: progress.totalSize != null
-                                      ? progress.downloaded /
-                                          progress.totalSize!
-                                      : null,
+                                  value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
                                 ),
                               );
                             },

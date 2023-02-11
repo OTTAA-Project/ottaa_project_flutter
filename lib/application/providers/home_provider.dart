@@ -55,6 +55,9 @@ class HomeProvider extends ChangeNotifier {
 
   List<Picto> pictoWords = [];
 
+
+  List<Picto> basicPictograms = [];
+
   String suggestedIndex = kStarterPictoId;
 
   int suggestedQuantity = 4;
@@ -121,7 +124,6 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> buildSuggestion([String? id]) async {
     id ??= kStarterPictoId;
-    print(patientState.state);
     if (patientState.state != null && id != kStarterPictoId) {
       PatientUserModel user = patientState.user;
 
@@ -143,8 +145,6 @@ class HomeProvider extends ChangeNotifier {
         suggestedPicts = picts;
         notifyListeners();
       }
-
-      return;
     }
 
     Picto? pict = pictograms[id];
@@ -159,12 +159,11 @@ class HomeProvider extends ChangeNotifier {
       suggestedPicts.addAll(predictiveAlgorithm(list: recomendedPicts));
       suggestedPicts = suggestedPicts.toSet().toList();
     } else {
-      print(
-          'it is for you hector san to tell us what to do over here. If you have found this message contact us.');
+      print('it is for you hector san to tell us what to do over here. If you have found this message contact us. >w<');
     }
 
     suggestedIndex = id;
-    suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
+    // suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
     return notifyListeners();
   }
 
@@ -207,8 +206,7 @@ class HomeProvider extends ChangeNotifier {
       e.freq = (list[i].value * pesoFrec) + (hora * pesoHora); //TODO: Check this with asim
     }
 
-    requiredPicts.sort(
-        (b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
+    requiredPicts.sort((b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
 
     return requiredPicts;
   }

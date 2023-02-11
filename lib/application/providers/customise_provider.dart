@@ -99,8 +99,11 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> fetchUserCaseValues({required String userId}) async {
     await fetchShortcutsForUser(userId: userId);
     groupsFetched = true;
-    notifyListeners();
+
     await fetchUserGroups(userId: userId);
+
+    notifyListeners(); //OSDIFHUIDSFGYUIASDGBUYOF UIOSDYFSDIFSD
+
     await fetchUserPictos(userId: userId);
     await createMapForPictos();
   }
@@ -108,7 +111,7 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> uploadData({required String userId}) async {
     final locale = _i18n.locale;
 
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    final languageCode = locale.toString();
 
     await _pictogramsService.uploadPictograms(pictograms, languageCode, userId: userId);
     await _groupsService.uploadGroups(groups, 'type', languageCode, userId: userId);
@@ -122,17 +125,16 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> getDefaultGroups() async {
     final locale = _i18n.locale;
 
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    final languageCode = locale.toString();
 
     final res = await _customiseService.fetchDefaultGroups(languageCode: languageCode);
     groups = res;
-    notify();
   }
 
   Future<void> getDefaultPictos() async {
     final locale = _i18n.locale;
 
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    final languageCode = locale.toString();
     pictograms = await _customiseService.fetchDefaultPictos(languageCode: languageCode);
   }
 
@@ -171,6 +173,7 @@ class CustomiseProvider extends ChangeNotifier {
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
     final res = await _customiseService.fetchUserGroups(languageCode: languageCode, userId: userId);
     groups = res;
+    notify();
   }
 
   Future<void> fetchUserPictos({required String userId}) async {
