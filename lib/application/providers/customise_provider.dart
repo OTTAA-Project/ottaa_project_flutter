@@ -143,13 +143,12 @@ class CustomiseProvider extends ChangeNotifier {
     for (var element in pictograms) {
       pictosMap[element.id.toString()] = i;
     }
+
+    print(pictosMap);
   }
 
   void block({required int index}) async {
     selectedGruposPicts[index].block = !selectedGruposPicts[index].block;
-    print('here are the values');
-    print(pictosMap[selectedGruposPicts[index].id]);
-    print(pictograms[pictosMap[selectedGruposPicts[index].id]!].id);
     pictograms[pictosMap[selectedGruposPicts[index].id]!].block = !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
     notifyListeners();
   }
