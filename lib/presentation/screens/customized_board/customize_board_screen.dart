@@ -18,7 +18,7 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
-    return provider.pictosFetched
+    return provider.groupsFetched
         ? ListView.builder(
             padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
             shrinkWrap: true,
@@ -27,7 +27,6 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
               width: MediaQuery.of(context).size.width - 48,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                //todo: add the values here according to the language
                 child: PictogramCard(
                   title: provider.groups[index].text,
                   actionText: "customize.board.subtitle".trl,

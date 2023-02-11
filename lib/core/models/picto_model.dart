@@ -89,11 +89,6 @@ class Picto {
               ),
             ).toList()
           : [],
-      tags: Map<String, List<String>>.from(
-          ((map['tags'] ?? {}) as Map<dynamic, dynamic>).map((key, value) {
-        return MapEntry<String, List<String>>(
-            key as String, List<String>.from(value as List<dynamic>));
-      })),
       resource: AssetsImage.fromMap(
           Map.from((map['resource'] ?? {}) as Map<dynamic, dynamic>)),
       text: map['text'],

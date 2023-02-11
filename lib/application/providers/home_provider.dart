@@ -61,6 +61,12 @@ class HomeProvider extends ChangeNotifier {
 
   bool confirmExit = false;
 
+  //talk feature
+  bool talkEnabled = true;
+  bool show = false;
+  String selectedWord = '';
+  ScrollController scrollController = ScrollController();
+
   void setSuggedtedQuantity(int quantity) {
     suggestedQuantity = quantity;
     notifyListeners();
@@ -98,6 +104,10 @@ class HomeProvider extends ChangeNotifier {
     //   mostUsedSentences = result.right;
     // }
 
+    notifyListeners();
+  }
+
+  void notify() {
     notifyListeners();
   }
 
@@ -148,6 +158,9 @@ class HomeProvider extends ChangeNotifier {
       recomendedPicts.sort((b, a) => a.value.compareTo(b.value));
       suggestedPicts.addAll(predictiveAlgorithm(list: recomendedPicts));
       suggestedPicts = suggestedPicts.toSet().toList();
+    } else {
+      print(
+          'it is for you hector san to tell us what to do over here. If you have found this message contact us.');
     }
 
     suggestedIndex = id;
@@ -194,14 +207,41 @@ class HomeProvider extends ChangeNotifier {
       e.freq = (list[i].value * pesoFrec) + (hora * pesoHora); //TODO: Check this with asim
     }
 
-    requiredPicts.sort((b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
+    requiredPicts.sort(
+        (b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
 
     return requiredPicts;
   }
 
   Future<void> speakSentence() async {
-    final sentence = pictoWords.map((e) => e.text).join(' ');
-    await _tts.speak(sentence);
+    if (!talkEnabled) {
+      final sentence = pictoWords.map((e) => e.text).join(' ');
+      await _tts.speak(sentence);
+    } else {
+      show = true;
+      notifyListeners();
+      print('totoal values are');
+      print(scrollController.position.maxScrollExtent);
+      int i = 0;
+      for (var e in pictoWords) {
+        selectedWord = e.text;
+        scrollController.animateTo(
+          i == 0 ? 0 : i * 45,
+          duration: Duration(microseconds: 50),
+          curve: Curves.easeIn,
+        );
+        notifyListeners();
+        await _tts.speak(e.text);
+        i++;
+      }
+      scrollController.animateTo(
+        0,
+        duration: Duration(microseconds: 50),
+        curve: Curves.easeIn,
+      );
+      show = false;
+      notifyListeners();
+    }
   }
 }
 

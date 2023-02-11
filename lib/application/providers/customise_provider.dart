@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Shortcuts;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
+import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
@@ -17,12 +18,16 @@ class CustomiseProvider extends ChangeNotifier {
   List<Picto> pictograms = [];
   List<Group> groups = [];
   List<Picto> selectedGruposPicts = [];
-  bool pictosFetched = false;
+  bool groupsFetched = false;
   int selectedGroup = 00;
   String selectedGroupName = '';
   String selectedGroupImage = '';
   bool selectedGroupStatus = false;
   Map<String, int> pictosMap = {};
+  CustomiseDataType type = CustomiseDataType.defaultCase;
+
+  // userId for other use cases
+  String userId = '';
 
   CustomiseProvider(
     this._pictogramsService,
@@ -35,9 +40,8 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset);
-    //todo: set the language here too
-    selectedGroupName = groups[index].text; //TODO: Change it to user language
+    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset); //TODO: Check this with asim
+    selectedGroupName = groups[index].text;
     selectedGroupStatus = groups[index].block;
     fetchDesiredPictos();
     notifyListeners();
@@ -69,14 +73,35 @@ class CustomiseProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> fetchData() async {
-    await getDefaultGroups();
-    pictosFetched = true;
-    notifyListeners();
-    final locale = _i18n.locale;
+  Future<void> inIt({String? userId}) async {
+    switch (type) {
+      case CustomiseDataType.user:
+        await fetchUserCaseValues(userId: userId!);
+        break;
+      case CustomiseDataType.careGiver:
+        await fetchUserCaseValues(userId: userId!);
+        break;
+      case CustomiseDataType.defaultCase:
+      default:
+        await fetchDefaultCaseValues();
+        break;
+    }
+  }
 
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    pictograms = await _customiseService.fetchDefaultPictos(languageCode: languageCode);
+  Future<void> fetchDefaultCaseValues() async {
+    await getDefaultGroups();
+    groupsFetched = true;
+    notifyListeners();
+    await getDefaultPictos();
+    await createMapForPictos();
+  }
+
+  Future<void> fetchUserCaseValues({required String userId}) async {
+    await fetchShortcutsForUser(userId: userId);
+    groupsFetched = true;
+    notifyListeners();
+    await fetchUserGroups(userId: userId);
+    await fetchUserPictos(userId: userId);
     await createMapForPictos();
   }
 
@@ -96,13 +121,19 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> getDefaultGroups() async {
     final locale = _i18n.locale;
-    print(locale);
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    final res = await _customiseService.fetchDefaultGroups(languageCode: languageCode);
-    print(res.length);
-    groups = res;
 
-    notifyListeners(); //<- This is the important part
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+
+    final res = await _customiseService.fetchDefaultGroups(languageCode: languageCode);
+    groups = res;
+    notify();
+  }
+
+  Future<void> getDefaultPictos() async {
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    pictograms = await _customiseService.fetchDefaultPictos(languageCode: languageCode);
   }
 
   Future<void> createMapForPictos() async {
@@ -114,9 +145,39 @@ class CustomiseProvider extends ChangeNotifier {
 
   void block({required int index}) async {
     selectedGruposPicts[index].block = !selectedGruposPicts[index].block;
-
+    print('here are the values');
+    print(pictosMap[selectedGruposPicts[index].id]);
+    print(pictograms[pictosMap[selectedGruposPicts[index].id]!].id);
     pictograms[pictosMap[selectedGruposPicts[index].id]!].block = !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
     notifyListeners();
+  }
+
+  Future<void> fetchShortcutsForUser({required String userId}) async {
+    final res = await _customiseService.fetchShortcutsForUser(userId: userId);
+    selectedShortcuts[0] = res.favs;
+    selectedShortcuts[1] = res.history;
+    selectedShortcuts[2] = res.camera;
+    selectedShortcuts[3] = res.games;
+    selectedShortcuts[4] = res.yes;
+    selectedShortcuts[5] = res.no;
+    selectedShortcuts[6] = res.share;
+    print(res.toString());
+    notifyListeners();
+  }
+
+  Future<void> fetchUserGroups({required String userId}) async {
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    final res = await _customiseService.fetchUserGroups(languageCode: languageCode, userId: userId);
+    groups = res;
+  }
+
+  Future<void> fetchUserPictos({required String userId}) async {
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    pictograms = await _customiseService.fetchDefaultPictos(languageCode: languageCode);
   }
 }
 

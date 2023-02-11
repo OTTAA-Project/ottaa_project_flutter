@@ -7,6 +7,8 @@ extension TimeHelper on DateTime {
 
   DateTime get timezonedDate {
     final timeZoneOffset = DateTime.now().timeZoneOffset;
-    return DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch, isUtc: false).add(timeZoneOffset).toLocal();
+    return DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch)
+        .add(timeZoneOffset)
+        .toLocal();
   }
 }

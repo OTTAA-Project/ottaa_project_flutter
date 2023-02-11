@@ -73,6 +73,8 @@ abstract class ServerRepository {
 
   Future<void> updateUserType({required String id, required UserType userType});
 
+  Future<EitherMap> fetchShortcutsForUser({required String userId});
+
   Future<Map<String, dynamic>?> createPictoGroupData({
     required String userId,
     required String language,
@@ -98,4 +100,8 @@ abstract class ServerRepository {
   });
 
   Future<EitherVoid> updateUserLastConnectionTime({required String userId, required int time});
+
+  Future<dynamic> fetchUserGroups({required String languageCode, required String userId});
+
+  Future<dynamic> fetchUserPictos({required String languageCode, required String userId});
 }
