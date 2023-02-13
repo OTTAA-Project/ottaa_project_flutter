@@ -110,7 +110,7 @@ class _CustomizedMainTabScreenState
                 title: "customize.board.skip".trl,
               );
               if (res != null && res == true) {
-                provider.uploadData(userId: user!.id);
+                // provider.uploadData(userId: user!.id);
                 context.push(AppRoutes.customizeWaitScreen);
               }
             },

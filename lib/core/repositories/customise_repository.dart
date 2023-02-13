@@ -18,4 +18,7 @@ abstract class CustomiseRepository {
 
   Future<List<Picto>> fetchUserPictos(
       {required String languageCode, required String userId});
+
+  Future<bool> valuesExistOrNot(
+      {required String languageCode, required String userId});
 }

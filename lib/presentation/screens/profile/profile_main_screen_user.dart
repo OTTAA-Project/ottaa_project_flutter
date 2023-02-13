@@ -52,11 +52,32 @@ class ProfileMainScreenUser extends ConsumerWidget {
                     '${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}',
                 subtitle: 'user.main.subtitle2'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
-                onPressed: () {
+                onPressed: () async {
                   final provider = ref.watch(customiseProvider);
-                  provider.type = CustomiseDataType.user;
-                  provider.userId = user.id;
-                  context.push(AppRoutes.customizedBoardScreen);
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      });
+
+                  /// checking if the user has its data or not
+                  provider.dataExist =
+                      await provider.dataExistOrNot(userId: user.id);
+                  context.pop();
+                  print(provider.dataExist);
+                  provider.notify();
+                  if (!provider.dataExist) {
+                    provider.type = CustomiseDataType.defaultCase;
+                    provider.userId = user.id;
+                    context.push(AppRoutes.customizedBoardScreen);
+                  } else {
+                    provider.type = CustomiseDataType.user;
+                    provider.userId = user.id;
+                    context.push(AppRoutes.customizedBoardScreen);
+                  }
                 },
                 focused: false,
                 imageSize: const Size(129, 96),

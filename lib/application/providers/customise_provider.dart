@@ -28,6 +28,7 @@ class CustomiseProvider extends ChangeNotifier {
 
   // userId for other use cases
   String userId = '';
+  bool dataExist = true;
 
   CustomiseProvider(
     this._pictogramsService,
@@ -97,6 +98,12 @@ class CustomiseProvider extends ChangeNotifier {
     notifyListeners();
     await getDefaultPictos();
     await createMapForPictos();
+    if (dataExist) {
+    } else {
+      type = CustomiseDataType.user;
+      print('hi, from here');
+      notifyListeners();
+    }
   }
 
   Future<void> fetchUserCaseValues({required String userId}) async {
@@ -187,8 +194,17 @@ class CustomiseProvider extends ChangeNotifier {
     final locale = _i18n.locale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    pictograms =
-        await _customiseService.fetchDefaultPictos(languageCode: languageCode);
+    pictograms = await _customiseService.fetchUserPictos(
+        languageCode: languageCode, userId: userId);
+  }
+
+  Future<bool> dataExistOrNot({required String userId}) async {
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    final bool = _customiseService.valuesExistOrNot(
+        languageCode: languageCode, userId: userId);
+    return bool;
   }
 }
 
