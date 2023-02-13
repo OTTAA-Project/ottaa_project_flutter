@@ -18,7 +18,7 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
-    return provider.pictosFetched
+    return provider.groupsFetched
         ? ListView.builder(
             padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
             shrinkWrap: true,

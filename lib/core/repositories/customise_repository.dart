@@ -10,4 +10,15 @@ abstract class CustomiseRepository {
   Future<List<Group>> fetchDefaultGroups({required String languageCode});
 
   Future<List<Picto>> fetchDefaultPictos({required String languageCode});
+
+  Future<Shortcuts> fetchShortcutsForUser({required String userId});
+
+  Future<List<Group>> fetchUserGroups(
+      {required String languageCode, required String userId});
+
+  Future<List<Picto>> fetchUserPictos(
+      {required String languageCode, required String userId});
+
+  Future<bool> valuesExistOrNot(
+      {required String languageCode, required String userId});
 }
