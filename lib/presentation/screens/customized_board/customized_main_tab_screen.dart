@@ -110,6 +110,7 @@ class _CustomizedMainTabScreenState
                 title: "customize.board.skip".trl,
               );
               if (res != null && res == true) {
+                provider.uploadData(userId: user!.id);
                 context.push(AppRoutes.customizeWaitScreen);
               }
             },
@@ -225,12 +226,14 @@ class _CustomizedMainTabScreenState
                         case CustomiseDataType.user:
                           await provider.uploadData(userId: provider.userId);
                           provider.groupsFetched = false;
+                          provider.type = CustomiseDataType.defaultCase;
                           provider.notify();
                           context.pop();
                           context.pop();
                           break;
                         case CustomiseDataType.careGiver:
                           await provider.uploadData(userId: provider.userId);
+                          provider.type = CustomiseDataType.defaultCase;
                           provider.groupsFetched = false;
                           provider.notify();
                           context.pop();

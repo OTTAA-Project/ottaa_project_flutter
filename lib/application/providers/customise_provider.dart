@@ -40,7 +40,8 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset); //TODO: Check this with asim
+    selectedGroupImage = (groups[index].resource.network ??
+        groups[index].resource.asset); //TODO: Check this with asim
     selectedGroupName = groups[index].text;
     selectedGroupStatus = groups[index].block;
     fetchDesiredPictos();
@@ -82,6 +83,8 @@ class CustomiseProvider extends ChangeNotifier {
         await fetchUserCaseValues(userId: userId!);
         break;
       case CustomiseDataType.defaultCase:
+        await fetchDefaultCaseValues();
+        break;
       default:
         await fetchDefaultCaseValues();
         break;
@@ -110,8 +113,10 @@ class CustomiseProvider extends ChangeNotifier {
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
-    await _pictogramsService.uploadPictograms(pictograms, languageCode, userId: userId);
-    await _groupsService.uploadGroups(groups, 'type', languageCode, userId: userId);
+    await _pictogramsService.uploadPictograms(pictograms, languageCode,
+        userId: userId);
+    await _groupsService.uploadGroups(groups, 'type', languageCode,
+        userId: userId);
     await setShortcutsForUser(userId: userId);
   }
 
@@ -124,16 +129,19 @@ class CustomiseProvider extends ChangeNotifier {
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
-    final res = await _customiseService.fetchDefaultGroups(languageCode: languageCode);
+    final res =
+        await _customiseService.fetchDefaultGroups(languageCode: languageCode);
     groups = res;
     notify();
   }
 
   Future<void> getDefaultPictos() async {
     final locale = _i18n.locale;
-
+    print('here');
+    print(locale.toString());
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    pictograms = await _customiseService.fetchDefaultPictos(languageCode: languageCode);
+    pictograms =
+        await _customiseService.fetchDefaultPictos(languageCode: languageCode);
   }
 
   Future<void> createMapForPictos() async {
@@ -148,7 +156,8 @@ class CustomiseProvider extends ChangeNotifier {
     print('here are the values');
     print(pictosMap[selectedGruposPicts[index].id]);
     print(pictograms[pictosMap[selectedGruposPicts[index].id]!].id);
-    pictograms[pictosMap[selectedGruposPicts[index].id]!].block = !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
+    pictograms[pictosMap[selectedGruposPicts[index].id]!].block =
+        !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
     notifyListeners();
   }
 
@@ -169,7 +178,8 @@ class CustomiseProvider extends ChangeNotifier {
     final locale = _i18n.locale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    final res = await _customiseService.fetchUserGroups(languageCode: languageCode, userId: userId);
+    final res = await _customiseService.fetchUserGroups(
+        languageCode: languageCode, userId: userId);
     groups = res;
   }
 
@@ -177,14 +187,17 @@ class CustomiseProvider extends ChangeNotifier {
     final locale = _i18n.locale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    pictograms = await _customiseService.fetchDefaultPictos(languageCode: languageCode);
+    pictograms =
+        await _customiseService.fetchDefaultPictos(languageCode: languageCode);
   }
 }
 
 final customiseProvider = ChangeNotifierProvider<CustomiseProvider>((ref) {
-  final CustomiseRepository customiseService = GetIt.I.get<CustomiseRepository>();
+  final CustomiseRepository customiseService =
+      GetIt.I.get<CustomiseRepository>();
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupService = GetIt.I<GroupsRepository>();
   final i18N = GetIt.I<I18N>();
-  return CustomiseProvider(pictogramService, groupService, customiseService, i18N);
+  return CustomiseProvider(
+      pictogramService, groupService, customiseService, i18N);
 });
