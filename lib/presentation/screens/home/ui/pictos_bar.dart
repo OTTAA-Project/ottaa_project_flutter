@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -50,7 +51,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     int pictoSize = 116;
 
     int pictoCount = ((size.width - 200) / pictoSize).floor();
-    print(pictos.length);
+
     return Flex(
       direction: Axis.vertical,
       children: [
@@ -69,7 +70,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                         child: CircularProgressIndicator(),
                       ),
                     )
-                  : buildWidgets(pictoCount, pictos, addPictogram: addPictogram),
+                  : buildPictos(pictoCount, pictos, addPictogram: addPictogram),
               const SizedBox(width: 30),
               SizedBox(
                 width: 64,
@@ -78,7 +79,14 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     BaseButton(
-                      onPressed: pictos.isEmpty ? null : () {},
+                      onPressed: pictos.isEmpty
+                          ? null
+                          : () {
+                              final provider = ref.watch(homeProvider);
+
+                              provider.status = HomeScreenStatus.search;
+                              provider.notify();
+                            },
                       style: ButtonStyle(
                         fixedSize: MaterialStateProperty.all(const Size(64, 64)),
                         backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
@@ -129,7 +137,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     );
   }
 
-  Flexible buildWidgets(
+  Flexible buildPictos(
     int pictoCount,
     List<Picto> pictos, {
     required void Function(Picto) addPictogram,

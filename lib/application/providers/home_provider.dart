@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/user_extensi
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
@@ -69,6 +70,18 @@ class HomeProvider extends ChangeNotifier {
   String selectedWord = '';
   ScrollController scrollController = ScrollController();
 
+  HomeScreenStatus status = HomeScreenStatus.pictos;
+
+  // Home Tabs
+  late String currentGroup;
+  ScrollController groupGridScrollController = ScrollController();
+  ScrollController pictoGridScrollController = ScrollController();
+
+  void setCurrentGroup(String group) {
+    currentGroup = group;
+    notifyListeners();
+  }
+
   void setSuggedtedQuantity(int quantity) {
     suggestedQuantity = quantity;
     notifyListeners();
@@ -83,16 +96,18 @@ class HomeProvider extends ChangeNotifier {
 
   void removeLastPictogram() {
     pictoWords.removeLast();
+    notify();
     suggestedPicts.clear();
     Picto? lastPicto = pictoWords.lastOrNull;
-
+    print(lastPicto?.text);
     buildSuggestion(lastPicto?.id);
     notifyListeners();
   }
 
   Future<void> init() async {
     await fetchPictograms();
-    buildSuggestion();
+    await buildSuggestion();
+    currentGroup = groups.keys.first;
     notifyListeners();
   }
 
@@ -102,10 +117,6 @@ class HomeProvider extends ChangeNotifier {
       type: kMostUsedSentences,
     );
 
-    // if (result.isRight) {
-    //   mostUsedSentences = result.right;
-    // }
-
     notifyListeners();
   }
 
@@ -114,18 +125,16 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictograms() async {
-    final pictos = (await _pictogramsService.getAllPictograms());
-    final groupsData = await _groupsService.getAllGroups();
+    final pictos = (await _pictogramsService.getAllPictograms()).where((element) => !element.block);
+
+    final groupsData = (await _groupsService.getAllGroups()).where((element) => !element.block);
+
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
 
-    List<PictoRelation> ids = pictograms[kStarterPictoId]!.relations..sortBy<num>((element) => element.value);
+    List<PictoRelation> relatedBasicPictos = pictograms[kStarterPictoId]!.relations;
 
-    List<String> idsString = ids.map((e) => e.id).toList();
-
-    pictos.where((element) => idsString.contains(element.id)).forEach((element) {
-      basicPictograms.add(element);
-    });
+    basicPictograms.addAll(predictiveAlgorithm(list: relatedBasicPictos));
 
     notifyListeners();
   }
@@ -158,10 +167,11 @@ class HomeProvider extends ChangeNotifier {
 
     if (id == kStarterPictoId) {
       print("HELLo");
-      suggestedPicts.clear();
-      suggestedPicts = basicPictograms;
-      notifyListeners();
-      return;
+      suggestedPicts
+        ..clear()
+        ..addAll(basicPictograms);
+      print(basicPictograms);
+      return notifyListeners();
     }
 
     Picto? pict = pictograms[id];
@@ -172,16 +182,19 @@ class HomeProvider extends ChangeNotifier {
 
     if (pict.relations.isNotEmpty) {
       final List<PictoRelation> recomendedPicts = pict.relations.toList();
-      recomendedPicts.sortBy<num>((element) => element.value);
-      List<Picto> requiredPictos = predictiveAlgorithm(list: recomendedPicts)..sortBy<num>((element) => element.freq);
+      // recomendedPicts.sortBy<num>((element) => element.value);
+      List<Picto> requiredPictos = predictiveAlgorithm(list: recomendedPicts);
       suggestedPicts.addAll(requiredPictos);
       suggestedPicts = suggestedPicts.toSet().toList();
     }
 
     if (suggestedPicts.length < suggestedQuantity) {
       int pictosLeft = suggestedQuantity - suggestedPicts.length;
-      suggestedPicts.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
+      print('pictos left $pictosLeft');
+      suggestedPicts.addAll(basicPictograms);
     }
+
+    print(basicPictograms.length);
 
     suggestedIndex = id;
     // suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));

@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/groups_home_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/pictos_bar.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/talk_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/word_bar.dart';
@@ -37,6 +39,31 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.dispose();
   }
 
+  Widget currentHomeStatus(HomeScreenStatus status) {
+    final Size size = MediaQuery.of(context).size;
+
+    switch (status) {
+      case HomeScreenStatus.pictos:
+        return Flexible(
+          fit: FlexFit.loose,
+          flex: 2,
+          child: SizedBox(
+            width: size.width,
+            height: 312,
+            child: const PictosBarUI(),
+          ),
+        );
+      case HomeScreenStatus.search:
+        return const Expanded(
+          child: GroupsHomeUi(),
+        );
+      case HomeScreenStatus.favorites:
+
+      case HomeScreenStatus.history:
+        return Container();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -57,26 +84,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 20),
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 1,
-                    child: SizedBox(
-                      width: size.width,
-                      height: 80,
-                      // child: const WordBarUI(),
-                    ),
+                  SizedBox(
+                    width: size.width,
+                    height: 111,
+                    // child: const WordBarUI(),
                   ),
-                  const SizedBox(height: 11),
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 2,
-                    child: SizedBox(
-                      width: size.width,
-                      height: 312,
-                      child: const PictosBarUI(),
-                    ),
-                  ),
+                  currentHomeStatus(provider.status),
                 ],
               ),
             ),
