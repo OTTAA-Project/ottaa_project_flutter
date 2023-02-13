@@ -7,7 +7,6 @@ import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.d
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/pictos_bar.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/talk_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/word_bar.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -33,8 +32,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void dispose() {
     unblockRotation();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
 
     super.dispose();
   }
@@ -75,25 +73,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     flex: 2,
                     child: SizedBox(
                       width: size.width,
-                      height: 212,
+                      height: 312,
                       child: const PictosBarUI(),
-                    ),
-                  ),
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 1,
-                    child: SizedBox(
-                      width: size.width,
-                      height: 88,
-                      child: const ActionsBarUI(),
                     ),
                   ),
                 ],
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 20,
-              child: const WordBarUI(),
+              child: WordBarUI(),
             ),
             if (provider.show) ...[
               Container(
@@ -101,9 +90,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   color: Colors.black54,
                 ),
               ),
-              Positioned(
+              const Positioned(
                 top: 20,
-                child: const TalkWidget(),
+                child: TalkWidget(),
               ),
             ],
           ],

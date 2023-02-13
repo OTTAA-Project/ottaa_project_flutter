@@ -445,8 +445,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<dynamic> fetchUserGroups(
-      {required String languageCode, required String userId}) async {
+  Future<dynamic> fetchUserGroups({required String languageCode, required String userId}) async {
     final ref = _database.child('$userId/groups/$languageCode');
     final DataSnapshot res = await ref.get();
 
@@ -470,8 +469,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<dynamic> fetchUserPictos(
-      {required String languageCode, required String userId}) async {
+  Future<dynamic> fetchUserPictos({required String languageCode, required String userId}) async {
     final ref = _database.child('$userId/pictos/$languageCode');
     final res = await ref.get();
 
@@ -483,8 +481,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> updateUserType(
-      {required String id, required UserType userType}) async {
+  Future<void> updateUserType({required String id, required UserType userType}) async {
     final ref = _database.child("$id/type");
 
     await ref.set(userType.name);
@@ -548,10 +545,16 @@ class ServerService implements ServerRepository {
     required List<String> groups,
     required Map<String, List<String>> tags,
     bool reduced = false,
+    int limit = 10,
+    int chunk = 4,
   }) async {
     String url = 'https://us-central1-ottaaproject-flutter.cloudfunctions.net/speako/predict';
 
-    if (reduced) url = "$url?reduced";
+    url = "$url?limit=$limit&chunk=$chunk";
+
+    if (reduced) url = "$url&reduced";
+
+
 
     final uri = Uri.parse(url);
 

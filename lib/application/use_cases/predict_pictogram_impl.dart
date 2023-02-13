@@ -17,6 +17,8 @@ class PredictPictogramImpl extends PredictPictogram {
     List<String> groups = const [],
     Map<String, List<String>> tags = const {},
     bool reduced = true,
+    int limit = 10,
+    int chunk = 4,
   }) async {
     final response = await serverRepository.predictPictogram(
       sentence: sentence,
@@ -37,6 +39,6 @@ class PredictPictogramImpl extends PredictPictogram {
       return Right(map.map<PictoPredictedReduced>((e) => PictoPredictedReduced.fromMap(e)).toList());
     }
 
-      return Right(map.map<PictoPredicted>((e) => PictoPredicted.fromMap(e)).toList());
+    return Right(map.map<PictoPredicted>((e) => PictoPredicted.fromMap(e)).toList());
   }
 }

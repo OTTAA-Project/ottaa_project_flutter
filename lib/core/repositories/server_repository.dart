@@ -97,6 +97,8 @@ abstract class ServerRepository {
     required List<String> groups,
     required Map<String, List<String>> tags,
     bool reduced = false,
+    int limit = 10,
+    int chunk = 4,
   });
 
   Future<EitherVoid> updateUserLastConnectionTime({required String userId, required int time});

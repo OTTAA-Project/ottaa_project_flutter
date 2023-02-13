@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 
@@ -29,8 +30,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
       //We are using size.height because at this time the screen is not rotated
       int pictoCount = ((size.height - 200) / pictoSize).floor();
 
-      final setSuggested =
-          ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
+      final setSuggested = ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
 
       setSuggested(pictoCount);
 
@@ -45,79 +45,86 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
     final pictos = ref.watch(homeProvider).suggestedPicts;
 
-    final addPictogram =
-        ref.read(homeProvider.select((value) => value.addPictogram));
+    final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
     int pictoSize = 116;
 
     int pictoCount = ((size.width - 200) / pictoSize).floor();
     print(pictos.length);
     return Flex(
-      direction: Axis.horizontal,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      direction: Axis.vertical,
       children: [
-        const SizedBox(width: 30),
-        pictos.isEmpty
-            ? const Flexible(
-                fit: FlexFit.tight,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              )
-            : buildWidgets(pictoCount, pictos, addPictogram: addPictogram),
-        const SizedBox(width: 30),
-        SizedBox(
-          width: 64,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Flexible(
+          fit: FlexFit.tight,
+          flex: 1,
+          child: Flex(
+            direction: Axis.horizontal,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              BaseButton(
-                onPressed: pictos.isEmpty ? null : () {},
-                style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(const Size(64, 64)),
-                  backgroundColor: MaterialStateProperty.all(pictos.isEmpty
-                      ? Colors.grey.withOpacity(.12)
-                      : Colors.white),
-                  overlayColor: MaterialStateProperty.all(
-                      colorScheme.primary.withOpacity(0.1)),
-                  shape: MaterialStateProperty.all(
-                    const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(9)),
+              const SizedBox(width: 30),
+              pictos.isEmpty
+                  ? const Flexible(
+                      fit: FlexFit.tight,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : buildWidgets(pictoCount, pictos, addPictogram: addPictogram),
+              const SizedBox(width: 30),
+              SizedBox(
+                width: 64,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    BaseButton(
+                      onPressed: pictos.isEmpty ? null : () {},
+                      style: ButtonStyle(
+                        fixedSize: MaterialStateProperty.all(const Size(64, 64)),
+                        backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
+                        overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                        shape: MaterialStateProperty.all(
+                          const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(9)),
+                          ),
+                        ),
+                        padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+                        elevation: MaterialStateProperty.all(0),
+                      ),
+                      child: Image.asset(
+                        AppImages.kSearchOrange,
+                      ),
                     ),
-                  ),
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                  elevation: MaterialStateProperty.all(0),
-                ),
-                child: Image.asset(
-                  AppImages.kSearchOrange,
+                    BaseButton(
+                      onPressed: pictos.isEmpty ? null : () {},
+                      style: ButtonStyle(
+                        fixedSize: MaterialStateProperty.all(const Size(64, 64)),
+                        backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
+                        overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                        shape: MaterialStateProperty.all(
+                          const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(9)),
+                          ),
+                        ),
+                        padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+                        elevation: MaterialStateProperty.all(0),
+                      ),
+                      child: Image.asset(
+                        AppImages.kRefreshOrange,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              BaseButton(
-                onPressed: pictos.isEmpty ? null : () {},
-                style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(const Size(64, 64)),
-                  backgroundColor: MaterialStateProperty.all(pictos.isEmpty
-                      ? Colors.grey.withOpacity(.12)
-                      : Colors.white),
-                  overlayColor: MaterialStateProperty.all(
-                      colorScheme.primary.withOpacity(0.1)),
-                  shape: MaterialStateProperty.all(
-                    const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(9)),
-                    ),
-                  ),
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                  elevation: MaterialStateProperty.all(0),
-                ),
-                child: Image.asset(
-                  AppImages.kRefreshOrange,
-                ),
-              ),
+              const SizedBox(width: 24),
             ],
           ),
         ),
-        const SizedBox(width: 24),
+        SizedBox(
+          width: size.width,
+          height: 88,
+          child: const ActionsBarUI(),
+        )
       ],
     );
   }

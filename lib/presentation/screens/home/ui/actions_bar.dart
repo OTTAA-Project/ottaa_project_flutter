@@ -37,7 +37,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const SizedBox(width: 16),
-              if ((patient != null && patient.patientSettings.shortcuts.games))
+              if ((patient == null || patient.patientSettings.shortcuts.games))
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},
@@ -61,7 +61,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   ),
                 ),
               const SizedBox(width: 16),
-              if ((patient != null && patient.patientSettings.shortcuts.history))
+              if ((patient == null || patient.patientSettings.shortcuts.history))
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},
@@ -85,7 +85,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   ),
                 ),
               const SizedBox(width: 16),
-              if ((patient != null && patient.patientSettings.shortcuts.share))
+              if ((patient == null || patient.patientSettings.shortcuts.share))
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},
@@ -109,7 +109,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   ),
                 ),
               const SizedBox(width: 16),
-              if ((patient != null && patient.patientSettings.shortcuts.games))
+              if ((patient == null || patient.patientSettings.shortcuts.games))
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},

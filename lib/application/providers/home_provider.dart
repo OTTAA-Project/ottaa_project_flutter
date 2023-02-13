@@ -55,7 +55,6 @@ class HomeProvider extends ChangeNotifier {
 
   List<Picto> pictoWords = [];
 
-
   List<Picto> basicPictograms = [];
 
   String suggestedIndex = kStarterPictoId;
@@ -119,11 +118,21 @@ class HomeProvider extends ChangeNotifier {
     final groupsData = await _groupsService.getAllGroups();
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
+
+    List<PictoRelation> ids = pictograms[kStarterPictoId]!.relations..sortBy<num>((element) => element.value);
+
+    List<String> idsString = ids.map((e) => e.id).toList();
+
+    pictos.where((element) => idsString.contains(element.id)).forEach((element) {
+      basicPictograms.add(element);
+    });
+
     notifyListeners();
   }
 
   Future<void> buildSuggestion([String? id]) async {
     id ??= kStarterPictoId;
+
     if (patientState.state != null && id != kStarterPictoId) {
       PatientUserModel user = patientState.user;
 
@@ -147,6 +156,14 @@ class HomeProvider extends ChangeNotifier {
       }
     }
 
+    if (id == kStarterPictoId) {
+      print("HELLo");
+      suggestedPicts.clear();
+      suggestedPicts = basicPictograms;
+      notifyListeners();
+      return;
+    }
+
     Picto? pict = pictograms[id];
 
     if (pict == null) return;
@@ -155,11 +172,15 @@ class HomeProvider extends ChangeNotifier {
 
     if (pict.relations.isNotEmpty) {
       final List<PictoRelation> recomendedPicts = pict.relations.toList();
-      recomendedPicts.sort((b, a) => a.value.compareTo(b.value));
-      suggestedPicts.addAll(predictiveAlgorithm(list: recomendedPicts));
+      recomendedPicts.sortBy<num>((element) => element.value);
+      List<Picto> requiredPictos = predictiveAlgorithm(list: recomendedPicts)..sortBy<num>((element) => element.freq);
+      suggestedPicts.addAll(requiredPictos);
       suggestedPicts = suggestedPicts.toSet().toList();
-    } else {
-      print('it is for you hector san to tell us what to do over here. If you have found this message contact us. >w<');
+    }
+
+    if (suggestedPicts.length < suggestedQuantity) {
+      int pictosLeft = suggestedQuantity - suggestedPicts.length;
+      suggestedPicts.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
     }
 
     suggestedIndex = id;
