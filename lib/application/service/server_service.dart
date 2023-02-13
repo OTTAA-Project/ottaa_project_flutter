@@ -360,6 +360,21 @@ class ServerService implements ServerRepository {
   }
 
   @override
+  Future<EitherMap> fetchShortcutsForUser({
+    required String userId,
+  }) async {
+    final ref = _database.child('$userId/shortcuts');
+
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    } else {
+      return const Left("No Data found"); //TODO: Handle the main error
+    }
+  }
+
+  @override
   Future<EitherMap> getEmailToken(String ownEmail, String email) async {
     final uri = Uri.parse(
         'https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
@@ -450,8 +465,34 @@ class ServerService implements ServerRepository {
   }
 
   @override
+  Future<dynamic> fetchUserGroups(
+      {required String languageCode, required String userId}) async {
+    final ref = _database.child('$userId/groups/$languageCode');
+    final DataSnapshot res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
   Future<dynamic> getDefaultPictos(String languageCode) async {
     final ref = _database.child('default/pictos/$languageCode');
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<dynamic> fetchUserPictos(
+      {required String languageCode, required String userId}) async {
+    final ref = _database.child('$userId/pictos/$languageCode');
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
