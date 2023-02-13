@@ -15,10 +15,11 @@ class ConnectedUserWidget extends StatelessWidget {
     required this.actionTap,
     required this.timeText,
     required this.show,
+    required this.settingsTap,
   }) : super(key: key);
 
   final String title, image, timeText;
-  final void Function()? onPressed, actionTap;
+  final void Function()? onPressed, actionTap, settingsTap;
   final bool show;
 
   @override
@@ -45,11 +46,15 @@ class ConnectedUserWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    show ? 'profile.close_profile'.trl : 'profile.open_profile'.trl,
+                    show
+                        ? 'profile.close_profile'.trl
+                        : 'profile.open_profile'.trl,
                     style: textTheme.subtitle1,
                   ),
                   Icon(
-                    show ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
+                    show
+                        ? Icons.keyboard_arrow_up_rounded
+                        : Icons.keyboard_arrow_down_rounded,
                     color: Colors.black,
                   ),
                 ],
@@ -77,7 +82,8 @@ class ConnectedUserWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ProfileUserWidget(
-                          title: "${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}",
+                          title:
+                              "${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}",
                           onTap: () {},
                         ),
                         ProfileUserWidget(
@@ -86,7 +92,7 @@ class ConnectedUserWidget extends StatelessWidget {
                         ),
                         ProfileUserWidget(
                           title: 'global.configuration'.trl,
-                          onTap: () {},
+                          onTap: settingsTap,
                         ),
                         ProfileUserWidget(
                           title: 'profile.profile'.trl,
@@ -94,7 +100,8 @@ class ConnectedUserWidget extends StatelessWidget {
                         ),
                         ProfileUserWidget(
                           title: 'profile.help.help'.trl,
-                          onTap: () => context.push(AppRoutes.profileHelpScreen),
+                          onTap: () =>
+                              context.push(AppRoutes.profileHelpScreen),
                         ),
                         const SizedBox(
                           height: 16,

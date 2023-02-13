@@ -112,6 +112,12 @@
       "title": "Configura tu experiencia",
       "subtitle1": "Uso de la aplicación",
       "subtitle2": "Lenguaje predictivo"
+    },
+    "settings": {
+      "main_screen": "Pantalla principal",
+      "accessibility": "Accesibilidad",
+      "voice_and_subtitles": "Voz y subtítulos",
+      "Language": "Lenguaje"
     }
   },
   "global": {

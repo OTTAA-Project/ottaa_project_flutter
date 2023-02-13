@@ -14,25 +14,28 @@ class SettingScreenUser extends StatelessWidget {
           'profile.settings'.trl,
         ),
       ),
-      body: Column(
-        children: [
-          ProfileUserWidget(
-            title: ''.trl,
-            onTap: () {},
-          ),
-          ProfileUserWidget(
-            title: ''.trl,
-            onTap: () {},
-          ),
-          ProfileUserWidget(
-            title: ''.trl,
-            onTap: () {},
-          ),
-          ProfileUserWidget(
-            title: ''.trl,
-            onTap: () {},
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            ProfileUserWidget(
+              title: 'user.settings.main_screen'.trl,
+              onTap: () {},
+            ),
+            ProfileUserWidget(
+              title: 'user.settings.accessibility'.trl,
+              onTap: () {},
+            ),
+            ProfileUserWidget(
+              title: 'user.settings.voice_and_subtitles'.trl,
+              onTap: () {},
+            ),
+            ProfileUserWidget(
+              title: 'user.settings.language'.trl,
+              onTap: () {},
+            ),
+          ],
+        ),
       ),
     );
   }
