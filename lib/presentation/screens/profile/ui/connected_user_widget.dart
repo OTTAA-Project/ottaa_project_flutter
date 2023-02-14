@@ -16,10 +16,11 @@ class ConnectedUserWidget extends StatelessWidget {
     required this.timeText,
     required this.show,
     required this.settingsTap,
+    required this.customiseTap,
   }) : super(key: key);
 
   final String title, image, timeText;
-  final void Function()? onPressed, actionTap, settingsTap;
+  final void Function()? onPressed, actionTap, customiseTap,settingsTap;
   final bool show;
 
   @override
@@ -84,7 +85,7 @@ class ConnectedUserWidget extends StatelessWidget {
                         ProfileUserWidget(
                           title:
                               "${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}",
-                          onTap: () {},
+                          onTap: customiseTap,
                         ),
                         ProfileUserWidget(
                           title: 'profile.tips.title1'.trl,

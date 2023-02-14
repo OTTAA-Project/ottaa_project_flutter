@@ -5,7 +5,9 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -51,7 +53,33 @@ class ProfileMainScreenUser extends ConsumerWidget {
                     '${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}',
                 subtitle: 'user.main.subtitle2'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
-                onPressed: () {},
+                onPressed: () async {
+                  final provider = ref.watch(customiseProvider);
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      });
+
+                  /// checking if the user has its data or not
+                  provider.dataExist =
+                      await provider.dataExistOrNot(userId: user.id);
+                  context.pop();
+                  print(provider.dataExist);
+                  provider.notify();
+                  if (!provider.dataExist) {
+                    provider.type = CustomiseDataType.defaultCase;
+                    provider.userId = user.id;
+                    context.push(AppRoutes.customizedBoardScreen);
+                  } else {
+                    provider.type = CustomiseDataType.user;
+                    provider.userId = user.id;
+                    context.push(AppRoutes.customizedBoardScreen);
+                  }
+                },
                 focused: false,
                 imageSize: const Size(129, 96),
               ),
