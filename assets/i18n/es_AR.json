@@ -117,7 +117,11 @@
       "main_screen": "Pantalla principal",
       "accessibility": "Accesibilidad",
       "voice_and_subtitles": "Voz y subtítulos",
-      "Language": "Lenguaje"
+      "language": "Lenguaje"
+    },
+    "main_setting": {
+      "interaction": "Interacciones",
+
     }
   },
   "global": {

@@ -32,6 +32,7 @@ import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.
 import 'package:ottaa_project_flutter/presentation/screens/tutorial/tutorial_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/accessibility_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/language_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/user_settings/main_setting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/setting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/voice_and_subtitle_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_screen.dart';
@@ -195,6 +196,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.languageScreenUser,
           builder: (context, state) => const LanguageScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.mainSettingUser,
+          builder: (context, state) => const MainSettingScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),
