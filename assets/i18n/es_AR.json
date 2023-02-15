@@ -121,7 +121,14 @@
     },
     "main_setting": {
       "interaction": "Interacciones",
-
+      "delete_talking": "Borrar cuando habla",
+      "shortcut": "Atajos en el Home",
+      "board_view": "Vista de tableros",
+      "tabs": "Por pestañas",
+      "grid": "Grilla",
+      "ottaa_labs": "Ottaa Labs",
+      "labs_text": "Función frases verbales",
+      "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas"
     }
   },
   "global": {

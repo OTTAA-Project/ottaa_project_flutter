@@ -5,12 +5,22 @@ import 'package:ottaa_project_flutter/application/common/i18n.dart';
 
 class UserSettingsProvider extends ChangeNotifier {
   final I18N _i18n;
+
   ///also for the caregiver to change it
-  String userId='';
+  String userId = '';
+  bool deleteText = true;
+  bool shortcut = true;
+  List<bool> selectedShortcuts = [true, true, true, true, true, true, true];
+  bool boardView = true;
+  bool ottaaLabs = true;
 
   UserSettingsProvider(
     this._i18n,
   );
+
+  void notify() {
+    notifyListeners();
+  }
 }
 
 final userSettingsProvider =
