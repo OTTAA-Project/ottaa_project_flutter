@@ -129,6 +129,19 @@
       "ottaa_labs": "Ottaa Labs",
       "labs_text": "Función frases verbales",
       "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas"
+    },
+    "accessibility": {
+      "selection": "Selección",
+      "bar_text": "Tiempo de clickeo (Segundos)",
+      "connected": "Dispositivos conectados",
+      "device": "Dispositivo de accesibilidad",
+      "press": "Press&Press",
+      "scroll": "Scroll&Press",
+      "sip": "Sip&puff",
+      "selection_type": "Tipo de selección",
+      "swept": "Swept",
+      "speed": "Velocidad",
+      "selection_speed": "Velocidad de selección"
     }
   },
   "global": {
@@ -158,7 +171,11 @@
     "pictogram": "Pictogramas",
     "configuration": "Configuración",
     "user_ottaa": "Usar Ottaa como {name}",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "slow" : "Lenta",
+    "default": "Predeterminada",
+    "fast": "Rápida"
+
   },
   "onboarding": {
     "start": "Comenzar",

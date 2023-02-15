@@ -1739,7 +1739,7 @@ class AppImages {
   static const kAccessibilityIcon1 =
       'assets/user_settings/accessibility_icon_1.png';
   static const kAccessibilityIcon2 =
-      'assets/user_settings/accessibility_icon_1.png';
+      'assets/user_settings/accessibility_icon_2.png';
   static const kAccessibilityPhoto1 =
       'assets/user_settings/accessibility_photo_1.png';
   static const kAccessibilityPhoto2 =

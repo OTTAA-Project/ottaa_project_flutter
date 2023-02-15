@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/ui/shortcu_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/board_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/divider_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/shortcut_view.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/switch_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/tab_widget.dart';
@@ -48,13 +49,7 @@ class MainSettingScreen extends ConsumerWidget {
                 title: 'user.main_setting.delete_talking'.trl,
                 value: provider.deleteText,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 32),
-                child: Divider(
-                  height: 1,
-                  color: Colors.black,
-                ),
-              ),
+              const DividerWidget(),
               Text(
                 'customize.shortcut.appbar'.trl,
                 style: textTheme.headline2!.copyWith(
@@ -76,13 +71,7 @@ class MainSettingScreen extends ConsumerWidget {
                 height: 32,
               ),
               const ShortcutView(),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 32),
-                child: Divider(
-                  height: 1,
-                  color: Colors.black,
-                ),
-              ),
+              const DividerWidget(),
               Text(
                 'user.main_setting.board_view'.trl,
                 style: textTheme.headline2!.copyWith(
@@ -115,13 +104,7 @@ class MainSettingScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 32),
-                child: Divider(
-                  height: 1,
-                  color: Colors.black,
-                ),
-              ),
+              const DividerWidget(),
               Text(
                 'user.main_setting.ottaa_labs'.trl,
                 style: textTheme.headline2!.copyWith(

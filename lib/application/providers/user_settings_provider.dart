@@ -13,6 +13,11 @@ class UserSettingsProvider extends ChangeNotifier {
   List<bool> selectedShortcuts = [true, true, true, true, true, true, true];
   bool boardView = true;
   bool ottaaLabs = true;
+  bool accessibility = true;
+  double sliderValue = 1.0;
+  int selectedAccessibility = 0;
+  bool accessibilityType = true;
+  int accessibilitySpeed = 1;
 
   UserSettingsProvider(
     this._i18n,

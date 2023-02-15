@@ -13,7 +13,7 @@ class SettingScreenUser extends StatelessWidget {
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text(
-          'profile.settings'.trl,
+          'global.settings'.trl,
         ),
       ),
       body: Padding(
