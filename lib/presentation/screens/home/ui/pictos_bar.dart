@@ -129,6 +129,26 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
         itemBuilder: (context, index) {
           final e = pictos[index];
 
+          if (e.id == "-777") {
+            return FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Container(
+                  width: 116,
+                  height: 144,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(9),
+                    border: Border.all(
+                      color: Colors.grey.withOpacity(.12),
+                      width: 1,
+                    ),
+                  ),
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  )),
+            );
+          }
+
           return PictoWidget(
             onTap: () {
               addPictogram(e);
@@ -147,6 +167,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                     "assets/img/${e.text}.webp",
                   ),
             text: e.text,
+            colorNumber: e.type,
             width: 116,
             height: 144,
           );
