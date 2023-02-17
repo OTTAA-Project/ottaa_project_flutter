@@ -15,17 +15,22 @@ import 'dart:async';
 
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-@Singleton(as: AboutRepository,)
+@Singleton(
+  as: AboutRepository,
+)
 class AboutService extends AboutRepository {
   final ServerRepository _serverRepository;
 
+  final LocalDatabaseRepository _databaseRepository;
+
   final AuthRepository _auth;
 
-  AboutService(this._auth, this._serverRepository);
+  AboutService(this._auth, this._serverRepository, this._databaseRepository);
 
   @override
   Future<String> getAppVersion() async {
@@ -126,8 +131,6 @@ class AboutService extends AboutRepository {
   Future<Either<String, UserModel>> getUserInformation() async {
     final userResult = await _auth.getCurrentUser();
 
-    print(userResult);
-
     if (userResult.isLeft) return Left(userResult.left);
 
     final UserModel user = userResult.right;
@@ -158,6 +161,9 @@ class AboutService extends AboutRepository {
           ...userData.right,
         });
     }
+
+    await _databaseRepository.setUser(model);
+
     return Right(model);
   }
 

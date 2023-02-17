@@ -23,6 +23,8 @@ import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
 const String kStarterPictoId = "FWy18PiX2jLwZQF6-oNZR";
 
+List<Picto> basicPictograms = [];
+
 class HomeProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
@@ -56,15 +58,14 @@ class HomeProvider extends ChangeNotifier {
 
   List<Picto> pictoWords = [];
 
-  List<Picto> basicPictograms = [];
-
   String suggestedIndex = kStarterPictoId;
 
   int suggestedQuantity = 4;
 
+  int indexPage = 0;
+
   bool confirmExit = false;
 
-  //talk feature
   bool talkEnabled = true;
   bool show = false;
   String selectedWord = '';
@@ -79,6 +80,31 @@ class HomeProvider extends ChangeNotifier {
 
   void setCurrentGroup(String group) {
     currentGroup = group;
+    pictoGridScrollController.jumpTo(0);
+    notifyListeners();
+  }
+
+  Future<void> init() async {
+    await fetchPictograms();
+
+    basicPictograms = predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
+
+    currentGroup = groups.keys.first;
+
+    buildSuggestion();
+    notifyListeners();
+  }
+
+  Future<void> fetchMostUsedSentences() async {
+    mostUsedSentences = await _sentencesService.fetchSentences(
+      language: "es_AR", //TODO!: Fetch language code LANG-CODE
+      type: kMostUsedSentences,
+    );
+
+    notifyListeners();
+  }
+
+  void notify() {
     notifyListeners();
   }
 
@@ -99,28 +125,8 @@ class HomeProvider extends ChangeNotifier {
     notify();
     suggestedPicts.clear();
     Picto? lastPicto = pictoWords.lastOrNull;
-    print(lastPicto?.text);
+
     buildSuggestion(lastPicto?.id);
-    notifyListeners();
-  }
-
-  Future<void> init() async {
-    await fetchPictograms();
-    await buildSuggestion();
-    currentGroup = groups.keys.first;
-    notifyListeners();
-  }
-
-  Future<void> fetchMostUsedSentences() async {
-    mostUsedSentences = await _sentencesService.fetchSentences(
-      language: "es_AR", //TODO!: Fetch language code LANG-CODE
-      type: kMostUsedSentences,
-    );
-
-    notifyListeners();
-  }
-
-  void notify() {
     notifyListeners();
   }
 
@@ -132,15 +138,19 @@ class HomeProvider extends ChangeNotifier {
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
 
-    List<PictoRelation> relatedBasicPictos = pictograms[kStarterPictoId]!.relations;
-
-    basicPictograms.addAll(predictiveAlgorithm(list: relatedBasicPictos));
-
     notifyListeners();
   }
 
   Future<void> buildSuggestion([String? id]) async {
     id ??= kStarterPictoId;
+
+    indexPage = 0;
+
+    if (id == kStarterPictoId) {
+      suggestedPicts.clear();
+      suggestedPicts.addAll(basicPictograms);
+      notify();
+    }
 
     if (patientState.state != null && id != kStarterPictoId) {
       PatientUserModel user = patientState.user;
@@ -152,37 +162,25 @@ class HomeProvider extends ChangeNotifier {
         model: "test",
         groups: [],
         tags: {},
-        reduced: false,
+        reduced: true,
+        chunk: suggestedQuantity,
       );
 
       if (response.isRight) {
-        print(response.right);
-
-        List<Picto> picts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
-
-        suggestedPicts = picts;
+        suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
       }
     }
 
-    if (id == kStarterPictoId) {
-      print("HELLo");
-      suggestedPicts
-        ..clear()
-        ..addAll(basicPictograms);
-      print(basicPictograms);
-      return notifyListeners();
-    }
+    if (id == kStarterPictoId) return;
 
     Picto? pict = pictograms[id];
 
     if (pict == null) return;
 
-    print('the id of the pict is ${pict.id}');
-
     if (pict.relations.isNotEmpty) {
       final List<PictoRelation> recomendedPicts = pict.relations.toList();
-      // recomendedPicts.sortBy<num>((element) => element.value);
+      recomendedPicts.sortBy<num>((element) => element.value);
       List<Picto> requiredPictos = predictiveAlgorithm(list: recomendedPicts);
       suggestedPicts.addAll(requiredPictos);
       suggestedPicts = suggestedPicts.toSet().toList();
@@ -199,6 +197,30 @@ class HomeProvider extends ChangeNotifier {
     suggestedIndex = id;
     // suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
     return notifyListeners();
+  }
+
+  List<Picto> getPictograms() {
+    int currentPage = suggestedPicts.length ~/ suggestedQuantity;
+
+    print("Page: $currentPage");
+
+    if (indexPage > currentPage) {
+      indexPage = currentPage;
+    }
+    if (indexPage < 0) {
+      indexPage = 0;
+    }
+    int start = indexPage * suggestedQuantity;
+
+    List<Picto> pictos = suggestedPicts.sublist(start, min(suggestedPicts.length, (indexPage * suggestedQuantity) + suggestedQuantity));
+
+    if (pictos.length < suggestedQuantity) {
+      int pictosLeft = suggestedQuantity - pictos.length;
+      print("Pictos Left: $pictosLeft");
+      pictos.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
+    }
+
+    return pictos;
   }
 
   List<Picto> predictiveAlgorithm({required List<PictoRelation> list}) {
@@ -259,7 +281,7 @@ class HomeProvider extends ChangeNotifier {
         selectedWord = e.text;
         scrollController.animateTo(
           i == 0 ? 0 : i * 45,
-          duration: Duration(microseconds: 50),
+          duration: const Duration(microseconds: 50),
           curve: Curves.easeIn,
         );
         notifyListeners();
@@ -268,16 +290,57 @@ class HomeProvider extends ChangeNotifier {
       }
       scrollController.animateTo(
         0,
-        duration: Duration(microseconds: 50),
+        duration: const Duration(microseconds: 50),
         curve: Curves.easeIn,
       );
       show = false;
       notifyListeners();
     }
   }
+
+  void refreshPictograms() {
+    int currentPage = suggestedPicts.length ~/ suggestedQuantity;
+
+    print("Page: $currentPage");
+
+    indexPage++;
+
+    if (indexPage > currentPage) {
+      indexPage = 0;
+    }
+    if (indexPage < 0) {
+      indexPage = 0;
+    }
+
+    notifyListeners();
+  }
+
+  void goGroupsUp() {
+    int currentPosition = pictoGridScrollController.position.pixels.toInt();
+
+    if(currentPosition == 0) return;
+
+    pictoGridScrollController.animateTo(
+      currentPosition - 200,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
+  }
+
+  void goGroupsDown() {
+    int currentPosition = pictoGridScrollController.position.pixels.toInt();
+
+    if(currentPosition >= pictoGridScrollController.position.maxScrollExtent) return;
+
+    pictoGridScrollController.animateTo(
+      currentPosition + 200,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
+  }
 }
 
-final homeProvider = ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
+final ChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotifierProvider<HomeProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final sentencesService = GetIt.I<SentencesRepository>();

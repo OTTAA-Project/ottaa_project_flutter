@@ -332,7 +332,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId}) async {
-    final ref = _database.child('$userId/shortcuts/');
+    final ref = _database.child('$userId/settings/shortcuts/');
 
     try {
       await ref.set(shortcuts.toMap());
@@ -346,7 +346,7 @@ class ServerService implements ServerRepository {
   Future<EitherMap> fetchShortcutsForUser({
     required String userId,
   }) async {
-    final ref = _database.child('$userId/shortcuts');
+    final ref = _database.child('$userId/settings/shortcuts');
 
     final res = await ref.get();
 
@@ -553,8 +553,6 @@ class ServerService implements ServerRepository {
     url = "$url?limit=$limit&chunk=$chunk";
 
     if (reduced) url = "$url&reduced";
-
-
 
     final uri = Uri.parse(url);
 

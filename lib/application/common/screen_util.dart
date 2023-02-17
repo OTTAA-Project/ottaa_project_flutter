@@ -9,11 +9,6 @@ bool get kIsTablet {
 
   final diagonal = sqrt((size.width * size.width) + (size.height * size.height));
 
-  print('size: ${size.width}x${size.height}\n'
-      'pixelRatio: ${mediaQueryData.devicePixelRatio}\n'
-      'pixels: ${size.width * mediaQueryData.devicePixelRatio}x${size.height * mediaQueryData.devicePixelRatio}\n'
-      'diagonal: $diagonal');
-
   return diagonal >= 1100.0;
 }
 

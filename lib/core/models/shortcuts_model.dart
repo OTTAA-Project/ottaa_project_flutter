@@ -81,6 +81,7 @@ class Shortcuts {
   }
 
   factory Shortcuts.fromMap(Map<String, dynamic> map) {
+    print(map);
     return Shortcuts.none().copyWith(
       favs: map['favs'],
       history: map['history'],

@@ -86,15 +86,19 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               const SizedBox(width: 20),
               Text(
                 "Hello".trl,
-                style: textTheme.headline1?.copyWith(color: Theme.of(context).primaryColor, fontSize: 40),
-              ), //TODO: CHange this
+                style: textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
             ],
           ),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image(
-              image: AssetImage(AppImages.kLogoOttaa),
+              image: const AssetImage(AppImages.kLogoOttaa),
               width: size.width * 0.5,
             ),
           ),
