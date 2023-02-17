@@ -18,6 +18,12 @@ class UserSettingsProvider extends ChangeNotifier {
   int selectedAccessibility = 0;
   bool accessibilityType = true;
   int accessibilitySpeed = 1;
+  int voiceType = 0;
+  int voiceRate = 1;
+  bool mute = false;
+  bool show = false;
+  int size = 0;
+  bool capital = true;
 
   UserSettingsProvider(
     this._i18n,

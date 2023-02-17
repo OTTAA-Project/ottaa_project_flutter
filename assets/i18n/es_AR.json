@@ -142,6 +142,21 @@
       "swept": "Swept",
       "speed": "Velocidad",
       "selection_speed": "Velocidad de selección"
+    },
+    "voice_and_subtitle": {
+      "voice_types": "Tipos de voz",
+      "voice_rate": "Velocidad de voz",
+      "voz1": "Voz 1",
+      "voz2": "Voz 2",
+      "voz3": "Voz 3",
+      "mute": "Mutear pictogramas",
+      "subtitle": "Subtítulos",
+      "show": "Mostrar subtitulos",
+      "size": "Tamaño",
+      "capital": "Mayúsculas"
+    },
+    "language": {
+      "set": "Idioma establecido"
     }
   },
   "global": {
@@ -172,10 +187,13 @@
     "configuration": "Configuración",
     "user_ottaa": "Usar Ottaa como {name}",
     "cancel": "Cancelar",
-    "slow" : "Lenta",
+    "slow": "Lenta",
     "default": "Predeterminada",
-    "fast": "Rápida"
-
+    "fast": "Rápida",
+    "voice": "Voz",
+    "boy": "Chico",
+    "medium": "Mediano",
+    "big": "Grande"
   },
   "onboarding": {
     "start": "Comenzar",
