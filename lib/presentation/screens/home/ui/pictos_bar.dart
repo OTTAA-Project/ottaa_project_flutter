@@ -10,6 +10,7 @@ import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 
@@ -79,7 +80,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    BaseButton(
+                    HomeButton(
                       onPressed: pictos.isEmpty
                           ? null
                           : () {
@@ -88,40 +89,18 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                               provider.status = HomeScreenStatus.search;
                               provider.notify();
                             },
-                      style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(const Size(64, 64)),
-                        backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                        overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                        shape: MaterialStateProperty.all(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(9)),
-                          ),
-                        ),
-                        padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                        elevation: MaterialStateProperty.all(0),
-                      ),
+                      size: const Size(64, 64),
                       child: Image.asset(
                         AppImages.kSearchOrange,
                       ),
                     ),
-                    BaseButton(
+                    HomeButton(
                       onPressed: pictos.isEmpty
                           ? null
                           : () {
                               ref.read(homeProvider).refreshPictograms();
                             },
-                      style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(const Size(64, 64)),
-                        backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                        overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                        shape: MaterialStateProperty.all(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(9)),
-                          ),
-                        ),
-                        padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                        elevation: MaterialStateProperty.all(0),
-                      ),
+                      size: const Size(64, 64),
                       child: Image.asset(
                         AppImages.kRefreshOrange,
                       ),
@@ -149,7 +128,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     return Flexible(
       fit: FlexFit.loose,
       child: GridView.builder(
-        itemCount: kIsTablet ? 6 : 4,
+        itemCount: pictos.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: kIsTablet ? 6 : 4,
           childAspectRatio: 1,

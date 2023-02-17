@@ -321,7 +321,7 @@ class HomeProvider extends ChangeNotifier {
     if(currentPosition == 0) return;
 
     pictoGridScrollController.animateTo(
-      currentPosition - 200,
+      currentPosition - 144,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );
@@ -333,7 +333,7 @@ class HomeProvider extends ChangeNotifier {
     if(currentPosition >= pictoGridScrollController.position.maxScrollExtent) return;
 
     pictoGridScrollController.animateTo(
-      currentPosition + 200,
+      currentPosition + 144,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );

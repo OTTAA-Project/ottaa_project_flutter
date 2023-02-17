@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ActionsBarUI extends ConsumerStatefulWidget {
@@ -41,20 +42,9 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
               const SizedBox(width: 16),
               if (patient == null || patient.patientSettings.shortcuts.games)
                 Expanded(
-                  child: BaseButton(
+                  child: HomeButton(
+                    size: const Size(64, 64),
                     onPressed: pictos ? null : () {},
-                    style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                      shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(9)),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                      elevation: MaterialStateProperty.all(0),
-                    ),
                     child: Image.asset(
                       AppImages.kBoardDiceIconSelected,
                       width: 48,
@@ -65,120 +55,65 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
               const SizedBox(width: 16),
               if (patient == null || patient.patientSettings.shortcuts.history)
                 Expanded(
-                  child: BaseButton(
+                  child: HomeButton(
+                    size: const Size(64, 64),
                     onPressed: pictos ? null : () {},
-                    style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                      shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(9)),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                      elevation: MaterialStateProperty.all(0),
-                    ),
                     child: Image.asset(
                       AppImages.kBoardHistoryIconSelected,
-                      width: 64,
-                      height: 64,
+                      width: 48,
+                      height: 48,
                     ),
                   ),
                 ),
               const SizedBox(width: 16),
               if (patient == null || patient.patientSettings.shortcuts.share)
                 Expanded(
-                  child: BaseButton(
+                  child: HomeButton(
+                    size: const Size(64, 64),
                     onPressed: pictos ? null : () {},
-                    style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                      shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(9)),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                      elevation: MaterialStateProperty.all(0),
-                    ),
                     child: Image.asset(
                       AppImages.kBoardShareIconSelected,
-                      width: 64,
-                      height: 64,
+                      width: 48,
+                      height: 48,
                     ),
                   ),
                 ),
               const SizedBox(width: 16),
               if (patient == null || patient.patientSettings.shortcuts.camera)
                 Expanded(
-                  child: BaseButton(
+                  child: HomeButton(
+                    size: const Size(64, 64),
                     onPressed: pictos ? null : () {},
-                    style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                      shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(9)),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                      elevation: MaterialStateProperty.all(0),
-                    ),
                     child: Image.asset(
                       AppImages.kBoardCameraIconSelected,
-                      width: 64,
-                      height: 64,
+                      width: 48,
+                      height: 48,
                     ),
                   ),
                 ),
               const SizedBox(width: 16),
               if (patient == null || patient.patientSettings.shortcuts.yes)
                 Expanded(
-                  child: BaseButton(
+                  child: HomeButton(
+                    size: const Size(64, 64),
                     onPressed: pictos ? null : () {},
-                    style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                      shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(9)),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                      elevation: MaterialStateProperty.all(0),
-                    ),
                     child: Image.asset(
                       AppImages.kBoardYesIcon,
-                      width: 64,
-                      height: 64,
+                      width: 48,
+                      height: 48,
                     ),
                   ),
                 ),
               const SizedBox(width: 16),
               if (patient == null || patient.patientSettings.shortcuts.no)
                 Expanded(
-                  child: BaseButton(
+                  child: HomeButton(
+                    size: const Size(64, 64),
                     onPressed: pictos ? null : () {},
-                    style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                      shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(9)),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                      elevation: MaterialStateProperty.all(0),
-                    ),
                     child: Image.asset(
                       AppImages.kBoardNoIcon,
-                      width: 64,
-                      height: 64,
+                      width: 48,
+                      height: 48,
                     ),
                   ),
                 ),

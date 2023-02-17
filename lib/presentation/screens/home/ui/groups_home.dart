@@ -8,10 +8,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/resource_image.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
@@ -72,35 +74,24 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
               SizedBox(
                 width: 40,
                 height: 40,
-                child: BaseButton(
-                  onPressed: () {
-                    final controller = ref.read(homeProvider.select((value) => value.groupGridScrollController));
+                child: HomeButton(
+                  onPressed: groups.isEmpty
+                      ? null
+                      : () {
+                          final controller = ref.read(homeProvider.select((value) => value.groupGridScrollController));
 
-                    double offset = (controller.offset - 168);
+                          double offset = (controller.offset - 168);
 
-                    if (offset < 0) {
-                      offset = controller.position.maxScrollExtent;
-                    }
+                          if (offset < 0) {
+                            offset = controller.position.maxScrollExtent;
+                          }
 
-                    controller.animateTo(
-                      offset,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(groups.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                    foregroundColor: MaterialStateProperty.all(groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
-                    iconColor: MaterialStateProperty.all(groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
-                    overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                    shape: MaterialStateProperty.all(
-                      const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9)),
-                      ),
-                    ),
-                    padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                    elevation: MaterialStateProperty.all(0),
-                  ),
+                          controller.animateTo(
+                            offset,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        },
                   child: const Icon(
                     Icons.keyboard_arrow_left,
                     size: 30,
@@ -175,35 +166,23 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
               SizedBox(
                 width: 40,
                 height: 40,
-                child: BaseButton(
-                  onPressed: () {
-                    final controller = ref.read(homeProvider.select((value) => value.groupGridScrollController));
+                child: HomeButton(
+                  onPressed: groups.isEmpty
+                      ? null
+                      : () {
+                          final controller = ref.read(homeProvider.select((value) => value.groupGridScrollController));
 
-                    double offset = controller.offset + 168;
-                    if (offset > controller.position.maxScrollExtent) {
-                      offset = 0;
-                    }
+                          double offset = controller.offset + 168;
+                          if (offset > controller.position.maxScrollExtent) {
+                            offset = 0;
+                          }
 
-                    controller.animateTo(
-                      offset,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                  style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all(const Size(40, 40)),
-                    backgroundColor: MaterialStateProperty.all(groups.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                    foregroundColor: MaterialStateProperty.all(groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
-                    iconColor: MaterialStateProperty.all(groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
-                    overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                    shape: MaterialStateProperty.all(
-                      const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9)),
-                      ),
-                    ),
-                    padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                    elevation: MaterialStateProperty.all(0),
-                  ),
+                          controller.animateTo(
+                            offset,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        },
                   child: const Icon(
                     Icons.keyboard_arrow_right,
                     size: 30,
@@ -228,9 +207,9 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
                     childAspectRatio: 1,
+                    mainAxisExtent: 144,
                   ),
                   controller: ref.read(homeProvider.select((value) => value.pictoGridScrollController)),
-                  physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.only(top: 16, bottom: 16),
                   itemCount: pictos.length,
                   itemBuilder: (ctx, index) {
@@ -271,20 +250,14 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: BaseButton(
-                        onPressed: groups.isEmpty ? null : () {},
-                        style: ButtonStyle(
-                          fixedSize: MaterialStateProperty.all(const Size(40, 40)),
-                          backgroundColor: MaterialStateProperty.all(groups.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                          overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                          shape: MaterialStateProperty.all(
-                            const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(9)),
-                            ),
-                          ),
-                          padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                          elevation: MaterialStateProperty.all(0),
-                        ),
+                      child: HomeButton(
+                        onPressed: () {
+                          final provider = ref.watch(homeProvider);
+
+                          provider.status = HomeScreenStatus.pictos;
+                          provider.notify();
+                        },
+                        size: const Size(40, 40),
                         child: Image.asset(
                           AppImages.kSearchOrange,
                         ),
@@ -292,47 +265,25 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                     ),
                     const SizedBox(height: 16),
                     Expanded(
-                      child: BaseButton(
+                      child: HomeButton(
+                        size: const Size(40, 40),
                         onPressed: groups.isEmpty ? null : ref.watch(homeProvider.select((value) => value.goGroupsUp)),
-                        style: ButtonStyle(
-                          fixedSize: MaterialStateProperty.all(const Size(40, 40)),
-                          backgroundColor: MaterialStateProperty.all(groups.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                          overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                          shape: MaterialStateProperty.all(
-                            const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(9)),
-                            ),
-                          ),
-                          padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                          elevation: MaterialStateProperty.all(0),
-                          iconSize: MaterialStateProperty.all(30),
-                        ),
                         child: Icon(
                           Icons.keyboard_arrow_up,
                           color: groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary,
+                          size: 30,
                         ),
                       ),
                     ),
                     const SizedBox(height: 16),
                     Expanded(
-                      child: BaseButton(
+                      child: HomeButton(
+                        size: const Size(40, 40),
                         onPressed: groups.isEmpty ? null : ref.watch(homeProvider.select((value) => value.goGroupsDown)),
-                        style: ButtonStyle(
-                          fixedSize: MaterialStateProperty.all(const Size(40, 40)),
-                          backgroundColor: MaterialStateProperty.all(groups.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                          overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                          shape: MaterialStateProperty.all(
-                            const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(9)),
-                            ),
-                          ),
-                          padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                          elevation: MaterialStateProperty.all(0),
-                          iconSize: MaterialStateProperty.all(30),
-                        ),
                         child: Icon(
                           Icons.keyboard_arrow_down,
                           color: groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary,
+                          size: 30,
                         ),
                       ),
                     ),
