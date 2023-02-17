@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/time_helper.dart';
+import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
@@ -35,26 +37,27 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
           padding: const EdgeInsets.only(top: 16),
           child: ConnectedUserWidget(
             title: provider.connectedUsersData[index].settings.data.name,
-            image: provider
-                .connectedUsersData[index].settings.data.avatar.network!,
+            image: provider.connectedUsersData[index].settings.data.avatar.network!,
             onPressed: () {
-              provider.connectedUsersProfileDataExpanded[index] =
-                  !provider.connectedUsersProfileDataExpanded[index];
+              provider.connectedUsersProfileDataExpanded[index] = !provider.connectedUsersProfileDataExpanded[index];
               provider.notify();
             },
             actionTap: () {
-              provider.connectedUsersProfileDataExpanded[index] =
-                  !provider.connectedUsersProfileDataExpanded[index];
+              provider.connectedUsersProfileDataExpanded[index] = !provider.connectedUsersProfileDataExpanded[index];
               provider.notify();
             },
-            timeText: provider.connectedUsersData[index].settings.data
-                .lastConnection.timezonedDate.timeString,
+            timeText: provider.connectedUsersData[index].settings.data.lastConnection.timezonedDate.timeString,
             show: provider.connectedUsersProfileDataExpanded[index],
             customiseTap: () async {
               final customisePro = ref.watch(customiseProvider);
               customisePro.type = CustomiseDataType.careGiver;
               customisePro.userId = provider.connectedUsersData[index].id;
               context.push(AppRoutes.customizedBoardScreen);
+            },
+            useOTTAATap: () {
+              final user = provider.connectedUsersData[index];
+              ref.watch(patientNotifier.notifier).setUser(user.patient);
+              context.push(AppRoutes.home);
             },
           ),
         );

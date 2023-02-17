@@ -16,10 +16,11 @@ class ConnectedUserWidget extends StatelessWidget {
     required this.timeText,
     required this.show,
     required this.customiseTap,
+    required this.useOTTAATap
   }) : super(key: key);
 
   final String title, image, timeText;
-  final void Function()? onPressed, actionTap, customiseTap;
+  final void Function()? onPressed, actionTap, customiseTap, useOTTAATap;
   final bool show;
 
   @override
@@ -108,7 +109,7 @@ class ConnectedUserWidget extends StatelessWidget {
                         ),
                         PrimaryButton(
                           text: 'global.user_ottaa'.trlf({'name': title}),
-                          onPressed: () {},
+                          onPressed: useOTTAATap,
                           enabled: true,
                         ),
                       ],

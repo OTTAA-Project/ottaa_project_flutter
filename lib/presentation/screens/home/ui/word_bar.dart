@@ -84,6 +84,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                     width: 64,
                     height: 140,
                     onTap: () {},
+                    colorNumber: pict.type,
                     image: pict.resource.network != null
                         ? CachedNetworkImage(
                             imageUrl: pict.resource.network!,
