@@ -30,6 +30,11 @@ import 'package:ottaa_project_flutter/presentation/screens/sentences/sentences_s
 import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/search_sentence.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/tutorial/tutorial_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/user_settings/accessibility_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/user_settings/language_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/user_settings/main_setting_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/user_settings/setting_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/user_settings/voice_and_subtitle_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
@@ -37,7 +42,6 @@ final AppRouter appRouterSingleton = AppRouter();
 
 class AppRouter {
   String get initialAppResolver {
-
     //if (!authService.isLogged) {
     //  return AppRoutes.login;
     //}
@@ -176,6 +180,26 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.profileMainScreenUser,
           builder: (context, state) => const ProfileMainScreenUser(),
+        ),
+        GoRoute(
+          path: AppRoutes.settingScreenUser,
+          builder: (context, state) => const SettingScreenUser(),
+        ),
+        GoRoute(
+          path: AppRoutes.accessibilityScreenUser,
+          builder: (context, state) => const AccessibilityScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.voiceAndSubtitleScreenUser,
+          builder: (context, state) => const VoiceAndSubtitleScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.languageScreenUser,
+          builder: (context, state) => const LanguageScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.mainSettingUser,
+          builder: (context, state) => const MainSettingScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),
