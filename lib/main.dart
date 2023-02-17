@@ -29,7 +29,7 @@ void main() async {
     );
   }
 
-  await setupServices();
+  await configureDependencies();
 
   // await SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.landscapeRight,

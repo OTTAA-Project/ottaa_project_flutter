@@ -120,9 +120,9 @@ class LinkNotifier extends ChangeNotifier {
 }
 
 final linkProvider = ChangeNotifierProvider<LinkNotifier>((ref) {
-  final createEmailToken = locator<CreateEmailToken>();
-  final verifyEmailToken = locator<VerifyEmailToken>();
-  final authRepository = locator<AuthRepository>();
-  final profileRepository = locator<ProfileRepository>();
+  final createEmailToken = getIt<CreateEmailToken>();
+  final verifyEmailToken = getIt<VerifyEmailToken>();
+  final authRepository = getIt<AuthRepository>();
+  final profileRepository = getIt<ProfileRepository>();
   return LinkNotifier(createEmailToken, verifyEmailToken, profileRepository, authRepository);
 });

@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:either_dart/either.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
+
+@Singleton(as: ProfileRepository)
 class ProfileService implements ProfileRepository {
   final ServerRepository _serverRepository;
 

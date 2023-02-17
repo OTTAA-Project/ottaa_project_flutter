@@ -2,6 +2,7 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'dart:async';
@@ -17,6 +18,7 @@ import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
+@Singleton(as: AuthRepository)
 class AuthService extends AuthRepository {
   final FirebaseAuth _authProvider = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -82,57 +84,61 @@ class AuthService extends AuthRepository {
     }
 
     if (result.isRight) {
-      final User user = result.right;
+      try {
+        final User user = result.right;
 
-      ///sometimes the email does not come with the user.email, it is given in the providedData,
+        EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
+        UserModel? userModel;
+        if (userInfo.isLeft) {
+          await signUp();
 
-      EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
-      UserModel? userModel;
-      if (userInfo.isLeft) {
-        await signUp();
+          final nameRetriever = user.displayName ?? user.providerData[0].displayName;
+          final emailRetriever = user.email ?? user.providerData[0].email;
 
-        final nameRetriever = user.displayName ?? user.providerData[0].displayName;
-        final emailRetriever = user.email ?? user.providerData[0].email;
-
-        userModel = BaseUserModel(
-          id: user.uid,
-          settings: BaseSettingsModel(
-              data: UserData(
-                avatar: AssetsImage(asset: "671", network: user.photoURL),
-                birthDate: DateTime.fromMillisecondsSinceEpoch(0),
-                genderPref: "n/a",
-                lastConnection: DateTime.now(),
-                lastName: "",
-                name: nameRetriever ?? "",
-              ),
-              language: "es_AR"),
-          email: emailRetriever ?? "",
-        );
-      } else {
-        switch (userInfo.right["type"]) {
-          case "caregiver":
-            userModel = CaregiverUserModel.fromMap({
-              "email": user.email ?? user.providerData[0].email,
-              ...userInfo.right,
-            });
-            break;
-          case "user":
-            userModel = PatientUserModel.fromMap({
-              "email": user.email ?? user.providerData[0].email,
-              ...userInfo.right,
-            });
-            break;
-          case "none":
-          default:
-            userModel = BaseUserModel.fromMap({
-              "email": user.email ?? user.providerData[0].email,
-              ...userInfo.right,
-            });
-            break;
+          userModel = BaseUserModel(
+            id: user.uid,
+            settings: BaseSettingsModel(
+                data: UserData(
+                  avatar: AssetsImage(asset: "671", network: user.photoURL),
+                  birthDate: DateTime.fromMillisecondsSinceEpoch(0),
+                  genderPref: "n/a",
+                  lastConnection: DateTime.now(),
+                  lastName: "",
+                  name: nameRetriever ?? "",
+                ),
+                language: "es_AR"),
+            email: emailRetriever ?? "",
+          );
+        } else {
+          switch (userInfo.right["type"]) {
+            case "caregiver":
+              userModel = CaregiverUserModel.fromMap({
+                "email": user.email ?? user.providerData[0].email,
+                ...userInfo.right,
+              });
+              break;
+            case "user":
+              userModel = PatientUserModel.fromMap({
+                "email": user.email ?? user.providerData[0].email,
+                ...userInfo.right,
+              });
+              break;
+            case "none":
+            default:
+              userModel = BaseUserModel.fromMap({
+                "email": user.email ?? user.providerData[0].email,
+                ...userInfo.right,
+              });
+              break;
+          }
         }
-      }
 
-      return Right(userModel);
+        return Right(userModel);
+      } on Exception catch (e) {
+        print(e);
+        await _authProvider.signOut();
+        return Left("Error interno: ${e.toString()}");
+      }
     }
 
     return Left(result.left);

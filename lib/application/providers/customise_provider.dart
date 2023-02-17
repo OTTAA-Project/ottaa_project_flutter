@@ -110,7 +110,11 @@ class CustomiseProvider extends ChangeNotifier {
     await fetchShortcutsForUser(userId: userId);
     await fetchUserGroups(userId: userId);
     groupsFetched = true;
-    notifyListeners();
+
+    await fetchUserGroups(userId: userId);
+
+    notifyListeners(); //OSDIFHUIDSFGYUIASDGBUYOF UIOSDYFSDIFSD
+
     await fetchUserPictos(userId: userId);
     await createMapForPictos();
   }
@@ -118,7 +122,7 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> uploadData({required String userId}) async {
     final locale = _i18n.locale;
 
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    final languageCode = locale.toString();
 
     await _pictogramsService.uploadPictograms(pictograms, languageCode,
         userId: userId);
@@ -134,21 +138,18 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> getDefaultGroups() async {
     final locale = _i18n.locale;
 
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    final languageCode = locale.toString();
 
     final res =
         await _customiseService.fetchDefaultGroups(languageCode: languageCode);
     groups = res;
-    notify();
   }
 
   Future<void> getDefaultPictos() async {
     final locale = _i18n.locale;
-    print('here');
-    print(locale.toString());
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    pictograms =
-        await _customiseService.fetchDefaultPictos(languageCode: languageCode);
+
+    final languageCode = locale.toString();
+    pictograms = await _customiseService.fetchDefaultPictos(languageCode: languageCode);
   }
 
   Future<void> createMapForPictos() async {
@@ -156,15 +157,13 @@ class CustomiseProvider extends ChangeNotifier {
     for (var element in pictograms) {
       pictosMap[element.id.toString()] = i;
     }
+
+    print(pictosMap);
   }
 
   void block({required int index}) async {
     selectedGruposPicts[index].block = !selectedGruposPicts[index].block;
-    print('here are the values');
-    print(pictosMap[selectedGruposPicts[index].id]);
-    print(pictograms[pictosMap[selectedGruposPicts[index].id]!].id);
-    pictograms[pictosMap[selectedGruposPicts[index].id]!].block =
-        !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
+    pictograms[pictosMap[selectedGruposPicts[index].id]!].block = !pictograms[pictosMap[selectedGruposPicts[index].id]!].block;
     notifyListeners();
   }
 
@@ -188,6 +187,7 @@ class CustomiseProvider extends ChangeNotifier {
     final res = await _customiseService.fetchUserGroups(
         languageCode: languageCode, userId: userId);
     groups = res;
+    notify();
   }
 
   Future<void> fetchUserPictos({required String userId}) async {

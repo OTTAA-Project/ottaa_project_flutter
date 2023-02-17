@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
@@ -9,6 +10,7 @@ import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
+@Singleton(as: GroupsRepository)
 class GroupsService extends GroupsRepository {
   final AuthRepository _authService;
   final RemoteStorageRepository _remoteStorageService;
@@ -27,7 +29,7 @@ class GroupsService extends GroupsRepository {
     if (result.isLeft) return [];
 
     final String data = await _remoteStorageService.readRemoteFile(
-      path: "Grupos",
+      path: "groups",
       fileName: 'assets/grupos.json',
     );
 
