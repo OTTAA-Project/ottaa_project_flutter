@@ -101,6 +101,10 @@ class HomeProvider extends ChangeNotifier {
       type: kMostUsedSentences,
     );
 
+    // if (result.isRight) {
+    //   mostUsedSentences = result.right;
+    // }
+
     notifyListeners();
   }
 

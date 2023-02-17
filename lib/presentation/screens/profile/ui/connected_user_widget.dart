@@ -15,11 +15,12 @@ class ConnectedUserWidget extends StatelessWidget {
     required this.actionTap,
     required this.timeText,
     required this.show,
+    required this.settingsTap,
     required this.customiseTap,
   }) : super(key: key);
 
   final String title, image, timeText;
-  final void Function()? onPressed, actionTap, customiseTap;
+  final void Function()? onPressed, actionTap, customiseTap,settingsTap;
   final bool show;
 
   @override
@@ -92,7 +93,7 @@ class ConnectedUserWidget extends StatelessWidget {
                         ),
                         ProfileUserWidget(
                           title: 'global.configuration'.trl,
-                          onTap: () {},
+                          onTap: settingsTap,
                         ),
                         ProfileUserWidget(
                           title: 'profile.profile'.trl,

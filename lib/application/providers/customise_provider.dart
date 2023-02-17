@@ -28,6 +28,7 @@ class CustomiseProvider extends ChangeNotifier {
 
   // userId for other use cases
   String userId = '';
+  bool dataExist = true;
 
   CustomiseProvider(
     this._pictogramsService,
@@ -40,7 +41,8 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset); //TODO: Check this with asim
+    selectedGroupImage = (groups[index].resource.network ??
+        groups[index].resource.asset); //TODO: Check this with asim
     selectedGroupName = groups[index].text;
     selectedGroupStatus = groups[index].block;
     fetchDesiredPictos();
@@ -82,6 +84,8 @@ class CustomiseProvider extends ChangeNotifier {
         await fetchUserCaseValues(userId: userId!);
         break;
       case CustomiseDataType.defaultCase:
+        await fetchDefaultCaseValues();
+        break;
       default:
         await fetchDefaultCaseValues();
         break;
@@ -94,10 +98,17 @@ class CustomiseProvider extends ChangeNotifier {
     notifyListeners();
     await getDefaultPictos();
     await createMapForPictos();
+    if (dataExist) {
+    } else {
+      type = CustomiseDataType.user;
+      print('hi, from here');
+      notifyListeners();
+    }
   }
 
   Future<void> fetchUserCaseValues({required String userId}) async {
     await fetchShortcutsForUser(userId: userId);
+    await fetchUserGroups(userId: userId);
     groupsFetched = true;
 
     await fetchUserGroups(userId: userId);
@@ -113,8 +124,10 @@ class CustomiseProvider extends ChangeNotifier {
 
     final languageCode = locale.toString();
 
-    await _pictogramsService.uploadPictograms(pictograms, languageCode, userId: userId);
-    await _groupsService.uploadGroups(groups, 'type', languageCode, userId: userId);
+    await _pictogramsService.uploadPictograms(pictograms, languageCode,
+        userId: userId);
+    await _groupsService.uploadGroups(groups, 'type', languageCode,
+        userId: userId);
     await setShortcutsForUser(userId: userId);
   }
 
@@ -127,7 +140,8 @@ class CustomiseProvider extends ChangeNotifier {
 
     final languageCode = locale.toString();
 
-    final res = await _customiseService.fetchDefaultGroups(languageCode: languageCode);
+    final res =
+        await _customiseService.fetchDefaultGroups(languageCode: languageCode);
     groups = res;
   }
 
@@ -170,7 +184,8 @@ class CustomiseProvider extends ChangeNotifier {
     final locale = _i18n.locale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    final res = await _customiseService.fetchUserGroups(languageCode: languageCode, userId: userId);
+    final res = await _customiseService.fetchUserGroups(
+        languageCode: languageCode, userId: userId);
     groups = res;
     notify();
   }
@@ -179,14 +194,26 @@ class CustomiseProvider extends ChangeNotifier {
     final locale = _i18n.locale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    pictograms = await _customiseService.fetchDefaultPictos(languageCode: languageCode);
+    pictograms = await _customiseService.fetchUserPictos(
+        languageCode: languageCode, userId: userId);
+  }
+
+  Future<bool> dataExistOrNot({required String userId}) async {
+    final locale = _i18n.locale;
+
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    final bool = _customiseService.valuesExistOrNot(
+        languageCode: languageCode, userId: userId);
+    return bool;
   }
 }
 
 final customiseProvider = ChangeNotifierProvider<CustomiseProvider>((ref) {
-  final CustomiseRepository customiseService = GetIt.I.get<CustomiseRepository>();
+  final CustomiseRepository customiseService =
+      GetIt.I.get<CustomiseRepository>();
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupService = GetIt.I<GroupsRepository>();
   final i18N = GetIt.I<I18N>();
-  return CustomiseProvider(pictogramService, groupService, customiseService, i18N);
+  return CustomiseProvider(
+      pictogramService, groupService, customiseService, i18N);
 });

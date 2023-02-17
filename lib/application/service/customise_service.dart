@@ -91,6 +91,18 @@ class CustomiseService implements CustomiseRepository {
   }
 
   @override
+  Future<bool> valuesExistOrNot(
+      {required String languageCode, required String userId}) async {
+    final res = await _serverRepository.fetchUserGroups(
+        languageCode: languageCode, userId: userId);
+    if (res.isRight) {
+     return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
   Future<List<Picto>> fetchUserPictos({required String languageCode, required String userId}) async {
     final res = await _serverRepository.fetchUserPictos(languageCode: languageCode, userId: userId);
 

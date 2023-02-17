@@ -47,9 +47,14 @@ class _LinkSuccessScreenState extends ConsumerState<LinkSuccessScreen> {
                 width: 312,
                 child: ProfileCard(
                   title: provider.user!.settings.data.name,
-                  subtitle: "profile.link.success.lastTime".trlf({"date": DateFormat("dd/MM/yy HH:mm", provider.user!.settings.language).format(provider.user!.settings.data.lastConnection)}),
+                  subtitle: "profile.link.success.lastTime".trlf({
+                    "date": DateFormat(
+                            "dd/MM/yy HH:mm", provider.user!.settings.language)
+                        .format(provider.user!.settings.data.lastConnection)
+                  }),
                   //TODO: Re do this u.u
-                  leadingImage: CachedNetworkImageProvider(provider.user!.settings.data.avatar.network!),
+                  leadingImage: CachedNetworkImageProvider(
+                      provider.user!.settings.data.avatar.network!),
                   actions: IconButton(
                     onPressed: () {},
                     color: kBlackColor,

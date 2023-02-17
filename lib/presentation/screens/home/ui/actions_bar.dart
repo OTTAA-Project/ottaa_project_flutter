@@ -118,6 +118,54 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   ),
                 ),
               const SizedBox(width: 16),
+              if (patient == null || patient.patientSettings.shortcuts.yes)
+                Expanded(
+                  child: BaseButton(
+                    onPressed: pictos ? null : () {},
+                    style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
+                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
+                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                      shape: MaterialStateProperty.all(
+                        const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9)),
+                        ),
+                      ),
+                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      elevation: MaterialStateProperty.all(0),
+                    ),
+                    child: Image.asset(
+                      AppImages.kBoardYesIcon,
+                      width: 64,
+                      height: 64,
+                    ),
+                  ),
+                ),
+              const SizedBox(width: 16),
+              if (patient == null || patient.patientSettings.shortcuts.no)
+                Expanded(
+                  child: BaseButton(
+                    onPressed: pictos ? null : () {},
+                    style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
+                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
+                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                      shape: MaterialStateProperty.all(
+                        const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9)),
+                        ),
+                      ),
+                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      elevation: MaterialStateProperty.all(0),
+                    ),
+                    child: Image.asset(
+                      AppImages.kBoardNoIcon,
+                      width: 64,
+                      height: 64,
+                    ),
+                  ),
+                ),
+              const SizedBox(width: 16),
             ],
           ),
         ),

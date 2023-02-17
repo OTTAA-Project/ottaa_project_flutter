@@ -99,6 +99,7 @@ flutter:
     - assets/profile/
     - assets/rive/
     - assets/onboarding/
+    - assets/user_settings/
   fonts:
     - family: Roboto
       fonts:

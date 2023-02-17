@@ -50,10 +50,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
     final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
-    int pictoSize = 116;
-
-    int pictoCount = ((size.width - 200) / pictoSize).floor();
-
+    print(pictos.length);
     return Flex(
       direction: Axis.vertical,
       children: [
@@ -94,13 +91,24 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                         AppImages.kSearchOrange,
                       ),
                     ),
-                    HomeButton(
+                    BaseButton(
                       onPressed: pictos.isEmpty
                           ? null
                           : () {
                               ref.read(homeProvider).refreshPictograms();
                             },
-                      size: const Size(64, 64),
+                      style: ButtonStyle(
+                        fixedSize: MaterialStateProperty.all(const Size(64, 64)),
+                        backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
+                        overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                        shape: MaterialStateProperty.all(
+                          const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(9)),
+                          ),
+                        ),
+                        padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+                        elevation: MaterialStateProperty.all(0),
+                      ),
                       child: Image.asset(
                         AppImages.kRefreshOrange,
                       ),
@@ -128,7 +136,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     return Flexible(
       fit: FlexFit.loose,
       child: GridView.builder(
-        itemCount: pictos.length,
+        itemCount: kIsTablet ? 6 : 4,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: kIsTablet ? 6 : 4,
           childAspectRatio: 1,
@@ -144,7 +152,6 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
             onTap: () {
               addPictogram(e);
             },
-            colorNumber: e.type,
             image: e.resource.network != null
                 ? CachedNetworkImage(
                     imageUrl: e.resource.network!,

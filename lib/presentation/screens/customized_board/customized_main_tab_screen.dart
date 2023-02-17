@@ -47,6 +47,14 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
     final userID = ref.read(linkProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            provider.groupsFetched = false;
+            context.pop();
+          },
+          splashRadius: 24,
+        ),
         title: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -93,6 +101,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                 title: "customize.board.skip".trl,
               );
               if (res != null && res == true) {
+                // provider.uploadData(userId: user!.id);
                 context.push(AppRoutes.customizeWaitScreen);
               }
             },
@@ -197,12 +206,14 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                         case CustomiseDataType.user:
                           await provider.uploadData(userId: provider.userId);
                           provider.groupsFetched = false;
+                          provider.type = CustomiseDataType.defaultCase;
                           provider.notify();
                           context.pop();
                           context.pop();
                           break;
                         case CustomiseDataType.careGiver:
                           await provider.uploadData(userId: provider.userId);
+                          provider.type = CustomiseDataType.defaultCase;
                           provider.groupsFetched = false;
                           provider.notify();
                           context.pop();
