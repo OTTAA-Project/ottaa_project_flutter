@@ -24,6 +24,7 @@ class UserSettingsProvider extends ChangeNotifier {
   bool show = false;
   int size = 0;
   bool capital = true;
+  String language ='es_AR';
 
   UserSettingsProvider(
     this._i18n,
