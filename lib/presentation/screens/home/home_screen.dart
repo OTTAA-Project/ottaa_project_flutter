@@ -27,6 +27,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       blockLandscapeMode();
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+
+      final size = MediaQuery.of(context).size;
+      int pictoSize = 116;
+
+      //We are using size.height because at this time the screen is not rotated
+      int pictoCount = kIsTablet ? 6 : 4;
+
+      final setSuggested = ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
+
+      setSuggested(pictoCount);
+
+      await ref.read(homeProvider.select((value) => value.init))();
       setState(() {});
     });
   }

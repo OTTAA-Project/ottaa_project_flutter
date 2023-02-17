@@ -135,9 +135,19 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictograms() async {
-    final pictos = (await _pictogramsService.getAllPictograms()).where((element) => !element.block);
+    List<Picto>? pictos;
+    List<Group>? groupsData;
 
-    final groupsData = (await _groupsService.getAllGroups()).where((element) => !element.block);
+    if (patientState.state != null) {
+      pictos = patientState.user.pictos[patientState.user.settings.language];
+
+      groupsData = patientState.user.groups[patientState.user.settings.language];
+
+      print(patientState.user.groups);
+    }
+
+    pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
+    groupsData ??= (await _groupsService.getAllGroups()).where((element) => !element.block).toList();
 
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
@@ -322,7 +332,7 @@ class HomeProvider extends ChangeNotifier {
   void goGroupsUp() {
     int currentPosition = pictoGridScrollController.position.pixels.toInt();
 
-    if(currentPosition == 0) return;
+    if (currentPosition == 0) return;
 
     pictoGridScrollController.animateTo(
       currentPosition - 144,
@@ -334,7 +344,7 @@ class HomeProvider extends ChangeNotifier {
   void goGroupsDown() {
     int currentPosition = pictoGridScrollController.position.pixels.toInt();
 
-    if(currentPosition >= pictoGridScrollController.position.maxScrollExtent) return;
+    if (currentPosition >= pictoGridScrollController.position.maxScrollExtent) return;
 
     pictoGridScrollController.animateTo(
       currentPosition + 144,

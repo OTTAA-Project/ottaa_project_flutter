@@ -27,25 +27,6 @@ class GroupsHomeUi extends ConsumerStatefulWidget {
 
 class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      final size = MediaQuery.of(context).size;
-      int pictoSize = 116;
-
-      //We are using size.height because at this time the screen is not rotated
-      int pictoCount = ((size.height - 200) / pictoSize).floor();
-
-      final setSuggested = ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
-
-      setSuggested(pictoCount);
-
-      await ref.read(homeProvider.select((value) => value.init))();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final colorScheme = Theme.of(context).colorScheme;

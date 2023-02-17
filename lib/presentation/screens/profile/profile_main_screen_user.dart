@@ -57,17 +57,17 @@ class ProfileMainScreenUser extends ConsumerWidget {
                 onPressed: () async {
                   final provider = ref.watch(customiseProvider);
                   showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      });
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  );
 
                   /// checking if the user has its data or not
-                  provider.dataExist =
-                      await provider.dataExistOrNot(userId: user.id);
+                  provider.dataExist = await provider.dataExistOrNot(userId: user.id);
                   context.pop();
                   print(provider.dataExist);
                   provider.notify();

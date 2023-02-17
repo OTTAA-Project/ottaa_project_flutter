@@ -56,7 +56,7 @@ class ProfileNotifier extends ChangeNotifier {
   String yearForDropDown = "0";
 
   //connected users screen
-  List<BaseUserModel> connectedUsersData = [];
+  List<PatientUserModel> connectedUsersData = [];
 
   List<bool> expasionList = [];
   bool dataFetched = false;
@@ -183,7 +183,7 @@ class ProfileNotifier extends ChangeNotifier {
   Future<void> fetchConnectedUsersData() async {
     connectedUsersData = [];
     final connectedUsers = await _profileService.getConnectedUsers(userId: _userNotifier.user.id);
-    if(connectedUsers.isLeft) return;
+    if (connectedUsers.isLeft) return;
 
     await Future.wait(connectedUsers.right.keys.map((e) async {
       final res = await _profileService.fetchConnectedUserData(userId: e);
@@ -191,7 +191,7 @@ class ProfileNotifier extends ChangeNotifier {
         final json = res.right;
 
         connectedUsersData.add(
-          BaseUserModel.fromMap(json),
+          PatientUserModel.fromMap(json),
         );
         connectedUsersProfileDataExpanded.add(false);
       }
@@ -200,6 +200,19 @@ class ProfileNotifier extends ChangeNotifier {
     dataFetched = true;
     connectedUsersFetched = true;
     notifyListeners();
+  }
+
+  Future<void> fetchUserById(String id) async {
+    final userFetch = await _profileService.getProfileById(id: id);
+
+    if (userFetch.isLeft) return;
+
+    final userData = userFetch.right;
+
+    int currentIndex = connectedUsersData.indexWhere((element) => element.id == id);
+
+
+    connectedUsersData[currentIndex] = PatientUserModel.fromMap(userData);
   }
 
   Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {

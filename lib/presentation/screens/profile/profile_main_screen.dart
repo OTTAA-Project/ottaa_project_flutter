@@ -38,9 +38,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
   }
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     final provider = ref.watch(profileProvider);
