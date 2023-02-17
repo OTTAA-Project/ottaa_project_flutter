@@ -105,27 +105,6 @@ class MainSettingScreen extends ConsumerWidget {
                 ],
               ),
               const DividerWidget(),
-              Text(
-                'user.main_setting.ottaa_labs'.trl,
-                style: textTheme.headline2!.copyWith(
-                  color: colorScheme.primary,
-                ),
-              ),
-              SwitchWidget(
-                onChanged: (value) {
-                  provider.ottaaLabs = value;
-                  provider.notify();
-                },
-                title: 'user.main_setting.labs_text'.trl,
-                value: provider.ottaaLabs,
-              ),
-              Text(
-                  'user.main_setting.labs_long'.trl,
-                style: textTheme.headline2!.copyWith(fontSize: 14),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
             ],
           ),
         ),

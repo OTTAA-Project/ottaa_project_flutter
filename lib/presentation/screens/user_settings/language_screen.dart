@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/chooser_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/switch_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class LanguageScreen extends ConsumerWidget {
@@ -79,6 +80,31 @@ class LanguageScreen extends ConsumerWidget {
                   title: 'Italiano',
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Text(
+              'user.main_setting.ottaa_labs'.trl,
+              style: textTheme.headline2!.copyWith(
+                color: colorScheme.primary,
+              ),
+            ),
+
+            SwitchWidget(
+              onChanged: (value) {
+                provider.ottaaLabs = value;
+                provider.notify();
+              },
+              title: 'user.main_setting.labs_text'.trl,
+              value: provider.ottaaLabs,
+            ),
+            Text(
+              'user.main_setting.labs_long'.trl,
+              style: textTheme.headline2!.copyWith(fontSize: 14),
+            ),
+            const SizedBox(
+              height: 24,
             ),
           ],
         ),
