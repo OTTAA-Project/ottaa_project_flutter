@@ -5,8 +5,10 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -66,7 +68,11 @@ class _LinkSuccessScreenState extends ConsumerState<LinkSuccessScreen> {
           SizedBox(
             width: size.width * 0.8,
             child: PrimaryButton(
-              onPressed: () => context.push(AppRoutes.customizedBoardScreen),
+              onPressed: () {
+                final provider = ref.watch(customiseProvider);
+                provider.type = CustomiseDataType.defaultCase;
+                context.push(AppRoutes.customizedBoardScreen);
+              },
               text: "global.continue".trl,
             ),
           ),

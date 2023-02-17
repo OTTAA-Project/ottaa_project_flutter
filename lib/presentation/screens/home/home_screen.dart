@@ -57,17 +57,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 20),
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 1,
-                    child: SizedBox(
-                      width: size.width,
-                      height: 80,
-                      // child: const WordBarUI(),
-                    ),
-                  ),
-                  const SizedBox(height: 11),
+                  const SizedBox(height: 111),
                   Flexible(
                     fit: FlexFit.loose,
                     flex: 2,

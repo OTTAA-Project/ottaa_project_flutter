@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
+import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
@@ -28,7 +29,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
       int pictoSize = 116;
 
       //We are using size.height because at this time the screen is not rotated
-      int pictoCount = ((size.height - 200) / pictoSize).floor();
+      int pictoCount = kIsTablet ? 6 : 4;
 
       final setSuggested = ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
 
@@ -43,13 +44,10 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     final size = MediaQuery.of(context).size;
     final colorScheme = Theme.of(context).colorScheme;
 
-    final pictos = ref.watch(homeProvider).suggestedPicts;
+    final pictos = ref.watch(homeProvider).getPictograms();
 
     final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
-    int pictoSize = 116;
-
-    int pictoCount = ((size.width - 200) / pictoSize).floor();
     print(pictos.length);
     return Flex(
       direction: Axis.vertical,
@@ -69,7 +67,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                         child: CircularProgressIndicator(),
                       ),
                     )
-                  : buildWidgets(pictoCount, pictos, addPictogram: addPictogram),
+                  : buildWidgets(pictos, addPictogram: addPictogram),
               const SizedBox(width: 30),
               SizedBox(
                 width: 64,
@@ -96,7 +94,11 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                       ),
                     ),
                     BaseButton(
-                      onPressed: pictos.isEmpty ? null : () {},
+                      onPressed: pictos.isEmpty
+                          ? null
+                          : () {
+                              ref.read(homeProvider).refreshPictograms();
+                            },
                       style: ButtonStyle(
                         fixedSize: MaterialStateProperty.all(const Size(64, 64)),
                         backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
@@ -130,42 +132,46 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
   }
 
   Flexible buildWidgets(
-    int pictoCount,
     List<Picto> pictos, {
     required void Function(Picto) addPictogram,
   }) {
     return Flexible(
       fit: FlexFit.loose,
-      child: GridView.count(
-        crossAxisCount: pictoCount,
+      child: GridView.builder(
+        itemCount: kIsTablet ? 6 : 4,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: kIsTablet ? 6 : 4,
+          childAspectRatio: 1,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+        ),
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        children: pictos
-            .sublist(0, min(pictos.length, pictoCount))
-            .mapIndexed(
-              (i, e) => PictoWidget(
-                onTap: () {
-                  addPictogram(e);
-                },
-                image: e.resource.network != null
-                    ? CachedNetworkImage(
-                        imageUrl: e.resource.network!,
-                        fit: BoxFit.fill,
-                        errorWidget: (context, url, error) => Image.asset(
-                          fit: BoxFit.fill,
-                          "assets/img/${e.text}.webp",
-                        ),
-                      )
-                    : Image.asset(
-                        fit: BoxFit.fill,
-                        "assets/img/${e.text}.webp",
-                      ),
-                text: e.text,
-                width: 116,
-                height: 144,
-              ),
-            )
-            .toList(),
+        itemBuilder: (context, index) {
+          final e = pictos[index];
+
+          return PictoWidget(
+            onTap: () {
+              addPictogram(e);
+            },
+            image: e.resource.network != null
+                ? CachedNetworkImage(
+                    imageUrl: e.resource.network!,
+                    fit: BoxFit.fill,
+                    errorWidget: (context, url, error) => Image.asset(
+                      fit: BoxFit.fill,
+                      "assets/img/${e.text}.webp",
+                    ),
+                  )
+                : Image.asset(
+                    fit: BoxFit.fill,
+                    "assets/img/${e.text}.webp",
+                  ),
+            text: e.text,
+            width: 116,
+            height: 144,
+          );
+        },
       ),
     );
   }

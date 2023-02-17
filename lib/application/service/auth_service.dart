@@ -87,8 +87,6 @@ class AuthService extends AuthRepository {
       try {
         final User user = result.right;
 
-        ///sometimes the email does not come with the user.email, it is given in the providedData,
-
         EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
         UserModel? userModel;
         if (userInfo.isLeft) {

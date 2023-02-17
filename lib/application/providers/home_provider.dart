@@ -22,6 +22,8 @@ import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
 const String kStarterPictoId = "FWy18PiX2jLwZQF6-oNZR";
 
+List<Picto> basicPictograms = [];
+
 class HomeProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
@@ -55,43 +57,26 @@ class HomeProvider extends ChangeNotifier {
 
   List<Picto> pictoWords = [];
 
-  List<Picto> basicPictograms = [];
-
   String suggestedIndex = kStarterPictoId;
 
   int suggestedQuantity = 4;
 
+  int indexPage = 0;
+
   bool confirmExit = false;
 
-  //talk feature
   bool talkEnabled = true;
   bool show = false;
   String selectedWord = '';
   ScrollController scrollController = ScrollController();
 
-  void setSuggedtedQuantity(int quantity) {
-    suggestedQuantity = quantity;
-    notifyListeners();
-  }
-
-  void addPictogram(Picto picto) {
-    pictoWords.add(picto);
-    suggestedPicts.clear();
-    buildSuggestion(picto.id);
-    notifyListeners();
-  }
-
-  void removeLastPictogram() {
-    pictoWords.removeLast();
-    suggestedPicts.clear();
-    Picto? lastPicto = pictoWords.lastOrNull;
-
-    buildSuggestion(lastPicto?.id);
-    notifyListeners();
-  }
-
   Future<void> init() async {
     await fetchPictograms();
+
+    basicPictograms = predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
+
+    print(basicPictograms);
+
     buildSuggestion();
     notifyListeners();
   }
@@ -113,25 +98,47 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setSuggedtedQuantity(int quantity) {
+    suggestedQuantity = quantity;
+    notifyListeners();
+  }
+
+  void addPictogram(Picto picto) {
+    pictoWords.add(picto);
+    suggestedPicts.clear();
+    buildSuggestion(picto.id);
+    notifyListeners();
+  }
+
+  void removeLastPictogram() {
+    pictoWords.removeLast();
+    notify();
+    suggestedPicts.clear();
+    Picto? lastPicto = pictoWords.lastOrNull;
+
+    buildSuggestion(lastPicto?.id);
+    notifyListeners();
+  }
+
   Future<void> fetchPictograms() async {
     final pictos = (await _pictogramsService.getAllPictograms());
     final groupsData = await _groupsService.getAllGroups();
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
 
-    List<PictoRelation> ids = pictograms[kStarterPictoId]!.relations..sortBy<num>((element) => element.value);
-
-    List<String> idsString = ids.map((e) => e.id).toList();
-
-    pictos.where((element) => idsString.contains(element.id)).forEach((element) {
-      basicPictograms.add(element);
-    });
-
     notifyListeners();
   }
 
   Future<void> buildSuggestion([String? id]) async {
     id ??= kStarterPictoId;
+
+    indexPage = 0;
+
+    if (id == kStarterPictoId) {
+      suggestedPicts.clear();
+      suggestedPicts.addAll(basicPictograms);
+      notify();
+    }
 
     if (patientState.state != null && id != kStarterPictoId) {
       PatientUserModel user = patientState.user;
@@ -143,37 +150,26 @@ class HomeProvider extends ChangeNotifier {
         model: "test",
         groups: [],
         tags: {},
-        reduced: false,
+        reduced: true,
+        chunk: suggestedQuantity,
       );
 
       if (response.isRight) {
-        print(response.right);
-
-        List<Picto> picts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
-
-        suggestedPicts = picts;
+        suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
       }
     }
 
-    if (id == kStarterPictoId) {
-      print("HELLo");
-      suggestedPicts.clear();
-      suggestedPicts = basicPictograms;
-      notifyListeners();
-      return;
-    }
+    if (id == kStarterPictoId) return;
 
     Picto? pict = pictograms[id];
 
     if (pict == null) return;
 
-    print('the id of the pict is ${pict.id}');
-
     if (pict.relations.isNotEmpty) {
       final List<PictoRelation> recomendedPicts = pict.relations.toList();
       recomendedPicts.sortBy<num>((element) => element.value);
-      List<Picto> requiredPictos = predictiveAlgorithm(list: recomendedPicts)..sortBy<num>((element) => element.freq);
+      List<Picto> requiredPictos = predictiveAlgorithm(list: recomendedPicts);
       suggestedPicts.addAll(requiredPictos);
       suggestedPicts = suggestedPicts.toSet().toList();
     }
@@ -186,6 +182,30 @@ class HomeProvider extends ChangeNotifier {
     suggestedIndex = id;
     // suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
     return notifyListeners();
+  }
+
+  List<Picto> getPictograms() {
+    int currentPage = suggestedPicts.length ~/ suggestedQuantity;
+
+    print("Page: $currentPage");
+
+    if (indexPage > currentPage) {
+      indexPage = currentPage;
+    }
+    if (indexPage < 0) {
+      indexPage = 0;
+    }
+    int start = indexPage * suggestedQuantity;
+
+    List<Picto> pictos = suggestedPicts.sublist(start, min(suggestedPicts.length, (indexPage * suggestedQuantity) + suggestedQuantity));
+
+    if (pictos.length < suggestedQuantity) {
+      int pictosLeft = suggestedQuantity - pictos.length;
+      print("Pictos Left: $pictosLeft");
+      pictos.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
+    }
+
+    return pictos;
   }
 
   List<Picto> predictiveAlgorithm({required List<PictoRelation> list}) {
@@ -246,7 +266,7 @@ class HomeProvider extends ChangeNotifier {
         selectedWord = e.text;
         scrollController.animateTo(
           i == 0 ? 0 : i * 45,
-          duration: Duration(microseconds: 50),
+          duration: const Duration(microseconds: 50),
           curve: Curves.easeIn,
         );
         notifyListeners();
@@ -255,16 +275,33 @@ class HomeProvider extends ChangeNotifier {
       }
       scrollController.animateTo(
         0,
-        duration: Duration(microseconds: 50),
+        duration: const Duration(microseconds: 50),
         curve: Curves.easeIn,
       );
       show = false;
       notifyListeners();
     }
   }
+
+  void refreshPictograms() {
+    int currentPage = suggestedPicts.length ~/ suggestedQuantity;
+
+    print("Page: $currentPage");
+
+    indexPage++;
+
+    if (indexPage > currentPage) {
+      indexPage = 0;
+    }
+    if (indexPage < 0) {
+      indexPage = 0;
+    }
+
+    notifyListeners();
+  }
 }
 
-final homeProvider = ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
+final ChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotifierProvider<HomeProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final sentencesService = GetIt.I<SentencesRepository>();
