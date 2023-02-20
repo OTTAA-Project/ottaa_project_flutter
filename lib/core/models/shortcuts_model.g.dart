@@ -17,6 +17,7 @@ class ShortcutsAdapter extends TypeAdapter<Shortcuts> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Shortcuts(
+      enable: fields[7] == null ? false : fields[7] as bool,
       favs: fields[0] == null ? false : fields[0] as bool,
       history: fields[1] == null ? false : fields[1] as bool,
       camera: fields[2] == null ? false : fields[2] as bool,
@@ -30,7 +31,7 @@ class ShortcutsAdapter extends TypeAdapter<Shortcuts> {
   @override
   void write(BinaryWriter writer, Shortcuts obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.favs)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class ShortcutsAdapter extends TypeAdapter<Shortcuts> {
       ..writeByte(5)
       ..write(obj.yes)
       ..writeByte(6)
-      ..write(obj.no);
+      ..write(obj.no)
+      ..writeByte(7)
+      ..write(obj.enable);
   }
 
   @override

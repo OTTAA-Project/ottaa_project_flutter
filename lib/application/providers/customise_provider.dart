@@ -52,6 +52,7 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> setShortcutsForUser({required String userId}) async {
     await _customiseService.setShortcutsForUser(
       shortcuts: Shortcuts(
+        enable: true, //TODO: Change this
         favs: selectedShortcuts[0],
         history: selectedShortcuts[1],
         camera: selectedShortcuts[2],

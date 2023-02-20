@@ -28,7 +28,11 @@ class Shortcuts {
   @HiveField(6, defaultValue: false)
   bool no;
 
+  @HiveField(7, defaultValue: false)
+  bool enable;
+
   Shortcuts({
+    required this.enable,
     required this.favs,
     required this.history,
     required this.camera,
@@ -39,6 +43,7 @@ class Shortcuts {
   });
 
   factory Shortcuts.none() => Shortcuts(
+        enable: false,
         favs: false,
         history: false,
         camera: false,
@@ -56,8 +61,10 @@ class Shortcuts {
     bool? games,
     bool? yes,
     bool? no,
+    bool? enable,
   }) {
     return Shortcuts(
+      enable: enable ?? this.enable,
       favs: favs ?? this.favs,
       history: history ?? this.history,
       camera: camera ?? this.camera,
@@ -70,6 +77,7 @@ class Shortcuts {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'enable': enable,
       'favs': favs,
       'history': history,
       'camera': camera,
@@ -82,6 +90,7 @@ class Shortcuts {
 
   factory Shortcuts.fromMap(Map<String, dynamic> map) {
     return Shortcuts(
+      enable: map['enable'] ?? false,
       favs: map['favs'] == null ? false : map['favs'] as bool,
       history: map['history'] == null ? false : map['history'] as bool,
       camera: map['camera'] == null ? false : map['camera'] as bool,
