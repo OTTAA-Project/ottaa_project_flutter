@@ -1,9 +1,11 @@
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/customise_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
+@Singleton(as: CustomiseRepository)
 class CustomiseService implements CustomiseRepository {
   final ServerRepository _serverRepository;
 

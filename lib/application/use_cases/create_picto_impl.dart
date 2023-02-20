@@ -1,7 +1,9 @@
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/use_cases/create_picto_data.dart';
 
+@Singleton(as: CreatePictoData)
 class CreatePictoDataImpl extends CreatePictoData {
   const CreatePictoDataImpl(super.serverService);
 

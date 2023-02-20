@@ -110,42 +110,51 @@ class PatientUserModel extends UserModel {
     return PatientUserModel(
       email: "",
       id: map['id'] as String,
-      groups: map['groups'] != null && map['groups'].isNotEmpty
-          ? Map<String, List<Group>>.fromIterables(
-              List.from(map['groups'].keys as Iterable<dynamic>),
-              (List.from(map['groups'].values as Iterable<dynamic>)).map<List<Group>>(
-                (e) {
-                  return List<Group>.from(
-                    e.values.map(
-                      (x) {
-                        return Group.fromMap(Map.from(x as Map<dynamic, dynamic>));
-                      },
-                    ),
+      groups:
+          // <String, List<Group>>{},
+          map['groups'] != null
+              ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
+                  return MapEntry<String, List<Group>>(
+                    key.toString(),
+                    Map.from(value as dynamic)
+                        .values
+                        .map<Group>(
+                          (e) => Group.fromMap(Map.from(e as dynamic)),
+                        )
+                        .toList(),
                   );
-                },
-              ),
-            )
-          : <String, List<Group>>{},
-      phrases: map['phrases'] != null && map['phrases'].isNotEmpty
-          ? Map<String, List<Phrase>>.fromIterables(
-              List.from(map['phrases'].keys as Iterable<dynamic>),
-              (List.from(map['phrases'].value as Iterable<dynamic>)).map(
-                (e) => List<Phrase>.from(
-                  e.values.map((x) => Phrase.fromMap(Map.from(x as Map<dynamic, dynamic>))),
-                ),
-              ),
-            )
-          : <String, List<Phrase>>{},
-      pictos: map['pictos'] != null && map['pictos'].isNotEmpty
-          ? Map<String, List<Picto>>.fromIterables(
-              List.from(map['pictos'].keys as Iterable<dynamic>),
-              List.from(map['pictos'].values as Iterable<dynamic>).map(
-                (e) => List<Picto>.from(
-                  e.values.map((x) => Picto.fromMap(Map.from(x as Map<dynamic, dynamic>))),
-                ),
-              ),
-            )
-          : <String, List<Picto>>{},
+                }))
+              : <String, List<Group>>{},
+      phrases:
+          // <String, List<Phrase>>{},
+          map['phrases'] != null && map['phrases'].isNotEmpty
+              ? Map<String, List<Phrase>>.from((map['phrases'] as Map<dynamic, dynamic>).map((key, value) {
+                  return MapEntry<String, List<Phrase>>(
+                    key.toString(),
+                    Map.from(value as dynamic)
+                        .values
+                        .map<Phrase>(
+                          (e) => Phrase.fromMap(Map.from(e as dynamic)),
+                        )
+                        .toList(),
+                  );
+                }))
+              : <String, List<Phrase>>{},
+      pictos:
+          // <String, List<Picto>>{},
+          map['pictos'] != null && map['pictos'].isNotEmpty
+              ? Map<String, List<Picto>>.from((map['pictos'] as Map<dynamic, dynamic>).map((key, value) {
+                  return MapEntry<String, List<Picto>>(
+                    key.toString(),
+                    Map.from(value as dynamic)
+                        .values
+                        .map<Picto>(
+                          (e) => Picto.fromMap(Map.from(e as dynamic)),
+                        )
+                        .toList(),
+                  );
+                }))
+              : <String, List<Picto>>{},
       settings: PatientSettings.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
       type: UserType.values.firstWhere((element) => element.name == map['type'] as String),
     );

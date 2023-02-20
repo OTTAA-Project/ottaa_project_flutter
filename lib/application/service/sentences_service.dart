@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
+@Singleton(as: SentencesRepository)
 class SentencesService implements SentencesRepository {
   final AuthRepository _auth;
   final ServerRepository _serverRepository;

@@ -47,7 +47,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
 
     final user = ref.watch(userNotifier);
 
-    if(user == null) return Container();
+    if (user == null) return Container();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -64,8 +64,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                     Row(
                       children: [
                         GestureDetector(
-                          onTap: () =>
-                              context.push(AppRoutes.profileSettingsScreen),
+                          onTap: () => context.push(AppRoutes.profileSettingsScreen),
                           child: ProfilePhotoWidget(
                             image: user.settings.data.avatar.network ?? "",
                           ),
@@ -98,16 +97,13 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                 const SizedBox(
                   height: 4,
                 ),
-                provider.connectedUsersFetched
-                    ? const ConnectedUsersList()
-                    : const SizedBox.shrink(),
+                provider.connectedUsersFetched ? const ConnectedUsersList() : const SizedBox.shrink(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: ActionCard(
                     title: "profile.link_account".trl,
                     subtitle: "profile.new_existant".trl,
-                    trailingImage:
-                        const AssetImage(AppImages.kProfileMainScreenIcon),
+                    trailingImage: const AssetImage(AppImages.kProfileMainScreenIcon),
                     imageSize: const Size(94, 96),
                     focused: provider.isLinkAccountOpen,
                     onPressed: () {

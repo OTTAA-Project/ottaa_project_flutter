@@ -10,7 +10,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return I18nNotifier(
-      notifier: locator.get<I18N>(),
+      notifier: getIt.get<I18N>(),
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: appRouterSingleton.router,

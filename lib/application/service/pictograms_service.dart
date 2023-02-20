@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
@@ -8,6 +9,8 @@ import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.da
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
+
+@Singleton(as: PictogramsRepository)
 class PictogramsService extends PictogramsRepository {
   final AuthRepository _authService;
   final RemoteStorageRepository _remoteStorageService;

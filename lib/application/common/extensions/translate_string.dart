@@ -3,7 +3,7 @@ import 'package:ottaa_project_flutter/application/locator.dart';
 
 extension TranslateString on String {
   String get trl {
-    final currentTree = locator.get<I18N>().currentLanguage;
+    final currentTree = getIt.get<I18N>().currentLanguage;
 
     if (currentTree == null) {
       return this;

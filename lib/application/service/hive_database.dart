@@ -3,6 +3,7 @@ import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
 import 'package:ottaa_project_flutter/core/enums/sweep_modes.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/enums/velocity_types.dart';
 import 'package:ottaa_project_flutter/core/models/accessibility_setting.dart';
@@ -25,6 +26,7 @@ import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/voice_setting.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 
+@Singleton(as: LocalDatabaseRepository)
 class HiveDatabase extends LocalDatabaseRepository {
   @override
   UserModel? user;
@@ -52,6 +54,14 @@ class HiveDatabase extends LocalDatabaseRepository {
     user ??= Hive.box(UserType.none.name).get(UserType.none.name);
 
     return this.user ?? user;
+  }
+
+  @FactoryMethod(preResolve: true)
+  static Future<HiveDatabase> start() async {
+    HiveDatabase db = HiveDatabase();
+    await db.init();
+
+    return db;
   }
 
   @override

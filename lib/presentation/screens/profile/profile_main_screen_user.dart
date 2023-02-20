@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
+import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
@@ -49,8 +51,7 @@ class ProfileMainScreenUser extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ActionCard(
-                title:
-                    '${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}',
+                title: '${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}',
                 subtitle: 'user.main.subtitle2'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
                 onPressed: () async {
@@ -109,7 +110,10 @@ class ProfileMainScreenUser extends ConsumerWidget {
             ),
             const Spacer(),
             PrimaryButton(
-              onPressed: () => context.push(AppRoutes.home),
+              onPressed: () {
+                ref.watch(patientNotifier.notifier).setUser(user.patient);
+                context.push(AppRoutes.home);
+              },
               text: '${'profile.use.ottaa'.trl} ${user.settings.data.name}',
             ),
             const SizedBox(

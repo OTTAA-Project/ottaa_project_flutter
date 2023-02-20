@@ -19,16 +19,6 @@ class WordBarUI extends ConsumerStatefulWidget {
 class _WordBarUIState extends ConsumerState<WordBarUI> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final size = MediaQuery.of(context).size;
-
-      int pictoSize = 64;
-
-      int pictoCount = ((size.height - 390) / pictoSize).floor();
-
-      ref.read(homeProvider.select((value) => value.setWordQuantity))(
-          pictoCount);
-    });
     super.initState();
   }
 
@@ -43,8 +33,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
     final pictosIsEmpty = pictoWords.isEmpty;
     final scrollCon = ref.watch(homeProvider).scrollController;
 
-    final removeLastPictogram =
-        ref.read(homeProvider.select((value) => value.removeLastPictogram));
+    final removeLastPictogram = ref.read(homeProvider.select((value) => value.removeLastPictogram));
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
@@ -74,8 +63,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
               itemCount: pictoWords.length + 6,
               controller: scrollCon,
               itemBuilder: (context, index) {
-                Picto? pict = pictoWords.firstWhereIndexedOrNull(
-                    (elIndex, element) => elIndex == index);
+                Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
 
                 if (pict == null) {
                   return Padding(
@@ -104,10 +92,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                               return Center(
                                 child: CircularProgressIndicator(
                                   color: colorScheme.primary,
-                                  value: progress.totalSize != null
-                                      ? progress.downloaded /
-                                          progress.totalSize!
-                                      : null,
+                                  value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
                                 ),
                               );
                             },
@@ -133,11 +118,8 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
             height: 80,
             child: BaseButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(pictosIsEmpty
-                    ? Colors.grey.withOpacity(.12)
-                    : Colors.white),
-                overlayColor: MaterialStateProperty.all(
-                    colorScheme.primary.withOpacity(0.1)),
+                backgroundColor: MaterialStateProperty.all(pictosIsEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
+                overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
                 shape: MaterialStateProperty.all(
                   const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(9)),
@@ -160,11 +142,8 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
             height: 80,
             child: BaseButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(pictosIsEmpty
-                    ? colorScheme.primary.withOpacity(.12)
-                    : colorScheme.primary),
-                overlayColor:
-                    MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
+                backgroundColor: MaterialStateProperty.all(pictosIsEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
+                overlayColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
                 shape: MaterialStateProperty.all(
                   const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(9)),
