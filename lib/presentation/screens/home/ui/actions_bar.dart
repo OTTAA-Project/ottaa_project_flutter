@@ -19,7 +19,8 @@ class ActionsBarUI extends ConsumerStatefulWidget {
 class _ActionsBarState extends ConsumerState<ActionsBarUI> {
   @override
   Widget build(BuildContext context) {
-    final pictos = ref.watch(homeProvider.select((value) => value.suggestedPicts.isEmpty));
+    final pictos =
+        ref.watch(homeProvider.select((value) => value.suggestedPicts.isEmpty));
 
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -27,7 +28,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
 
     UserModel? user = ref.watch(userNotifier);
 
-    print(patient?.patientSettings.shortcuts);
+    print(patient?.patientSettings.layout.shortcuts);
 
     return Flex(
       direction: Axis.horizontal,
@@ -39,20 +40,25 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const SizedBox(width: 16),
-              if (patient == null || patient.patientSettings.shortcuts.games)
+              if (patient == null ||
+                  patient.patientSettings.layout.shortcuts.games)
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},
                     style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                      fixedSize:
+                          MaterialStateProperty.all(const Size.fromHeight(64)),
+                      backgroundColor: MaterialStateProperty.all(
+                          pictos ? Colors.grey.withOpacity(.12) : Colors.white),
+                      overlayColor: MaterialStateProperty.all(
+                          colorScheme.primary.withOpacity(0.1)),
                       shape: MaterialStateProperty.all(
                         const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9)),
                         ),
                       ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(8)),
                       elevation: MaterialStateProperty.all(0),
                     ),
                     child: Image.asset(
@@ -63,20 +69,25 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   ),
                 ),
               const SizedBox(width: 16),
-              if (patient == null || patient.patientSettings.shortcuts.history)
+              if (patient == null ||
+                  patient.patientSettings.layout.shortcuts.history)
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},
                     style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                      fixedSize:
+                          MaterialStateProperty.all(const Size.fromHeight(64)),
+                      backgroundColor: MaterialStateProperty.all(
+                          pictos ? Colors.grey.withOpacity(.12) : Colors.white),
+                      overlayColor: MaterialStateProperty.all(
+                          colorScheme.primary.withOpacity(0.1)),
                       shape: MaterialStateProperty.all(
                         const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9)),
                         ),
                       ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(8)),
                       elevation: MaterialStateProperty.all(0),
                     ),
                     child: Image.asset(
@@ -87,20 +98,25 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   ),
                 ),
               const SizedBox(width: 16),
-              if (patient == null || patient.patientSettings.shortcuts.share)
+              if (patient == null ||
+                  patient.patientSettings.layout.shortcuts.share)
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},
                     style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                      fixedSize:
+                          MaterialStateProperty.all(const Size.fromHeight(64)),
+                      backgroundColor: MaterialStateProperty.all(
+                          pictos ? Colors.grey.withOpacity(.12) : Colors.white),
+                      overlayColor: MaterialStateProperty.all(
+                          colorScheme.primary.withOpacity(0.1)),
                       shape: MaterialStateProperty.all(
                         const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9)),
                         ),
                       ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(8)),
                       elevation: MaterialStateProperty.all(0),
                     ),
                     child: Image.asset(
@@ -111,20 +127,25 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   ),
                 ),
               const SizedBox(width: 16),
-              if (patient == null || patient.patientSettings.shortcuts.camera)
+              if (patient == null ||
+                  patient.patientSettings.layout.shortcuts.camera)
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},
                     style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                      fixedSize:
+                          MaterialStateProperty.all(const Size.fromHeight(64)),
+                      backgroundColor: MaterialStateProperty.all(
+                          pictos ? Colors.grey.withOpacity(.12) : Colors.white),
+                      overlayColor: MaterialStateProperty.all(
+                          colorScheme.primary.withOpacity(0.1)),
                       shape: MaterialStateProperty.all(
                         const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9)),
                         ),
                       ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(8)),
                       elevation: MaterialStateProperty.all(0),
                     ),
                     child: Image.asset(
@@ -135,20 +156,25 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   ),
                 ),
               const SizedBox(width: 16),
-              if (patient == null || patient.patientSettings.shortcuts.yes)
+              if (patient == null ||
+                  patient.patientSettings.layout.shortcuts.yes)
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},
                     style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                      fixedSize:
+                          MaterialStateProperty.all(const Size.fromHeight(64)),
+                      backgroundColor: MaterialStateProperty.all(
+                          pictos ? Colors.grey.withOpacity(.12) : Colors.white),
+                      overlayColor: MaterialStateProperty.all(
+                          colorScheme.primary.withOpacity(0.1)),
                       shape: MaterialStateProperty.all(
                         const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9)),
                         ),
                       ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(8)),
                       elevation: MaterialStateProperty.all(0),
                     ),
                     child: Image.asset(
@@ -159,20 +185,25 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   ),
                 ),
               const SizedBox(width: 16),
-              if (patient == null || patient.patientSettings.shortcuts.no)
+              if (patient == null ||
+                  patient.patientSettings.layout.shortcuts.no)
                 Expanded(
                   child: BaseButton(
                     onPressed: pictos ? null : () {},
                     style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size.fromHeight(64)),
-                      backgroundColor: MaterialStateProperty.all(pictos ? Colors.grey.withOpacity(.12) : Colors.white),
-                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                      fixedSize:
+                          MaterialStateProperty.all(const Size.fromHeight(64)),
+                      backgroundColor: MaterialStateProperty.all(
+                          pictos ? Colors.grey.withOpacity(.12) : Colors.white),
+                      overlayColor: MaterialStateProperty.all(
+                          colorScheme.primary.withOpacity(0.1)),
                       shape: MaterialStateProperty.all(
                         const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9)),
                         ),
                       ),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(8)),
                       elevation: MaterialStateProperty.all(0),
                     ),
                     child: Image.asset(

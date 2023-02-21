@@ -923,6 +923,8 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
     required List<String>? groups,
     required Map<String, List<String>>? tags,
     bool? reduced = false,
+    int? limit = 10,
+    int? chunk = 4,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -936,6 +938,8 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             #groups: groups,
             #tags: tags,
             #reduced: reduced,
+            #limit: limit,
+            #chunk: chunk,
           },
         ),
         returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
@@ -952,6 +956,8 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
               #groups: groups,
               #tags: tags,
               #reduced: reduced,
+              #limit: limit,
+              #chunk: chunk,
             },
           ),
         )),

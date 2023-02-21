@@ -17,8 +17,11 @@ class VoiceSettingAdapter extends TypeAdapter<VoiceSetting> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return VoiceSetting(
-      voicesNames: fields[0] == null ? {} : (fields[0] as Map).cast<String, String>(),
-      voicesSpeed: fields[1] == null ? {} : (fields[1] as Map).cast<String, VelocityTypes>(),
+      voicesNames:
+          fields[0] == null ? {} : (fields[0] as Map).cast<String, String>(),
+      voicesSpeed: fields[1] == null
+          ? {}
+          : (fields[1] as Map).cast<String, VelocityTypes>(),
       mutePict: fields[2] == null ? false : fields[2] as bool,
     );
   }
@@ -39,5 +42,9 @@ class VoiceSettingAdapter extends TypeAdapter<VoiceSetting> {
   int get hashCode => typeId.hashCode;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is VoiceSettingAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is VoiceSettingAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
