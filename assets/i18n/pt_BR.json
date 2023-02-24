@@ -112,6 +112,51 @@
       "title": "Configura tu experiencia",
       "subtitle1": "Uso de la aplicación",
       "subtitle2": "Lenguaje predictivo"
+    },
+    "settings": {
+      "main_screen": "Pantalla principal",
+      "accessibility": "Accesibilidad",
+      "voice_and_subtitles": "Voz y subtítulos",
+      "language": "Lenguaje"
+    },
+    "main_setting": {
+      "interaction": "Interacciones",
+      "delete_talking": "Borrar cuando habla",
+      "shortcut": "Atajos en el Home",
+      "board_view": "Vista de tableros",
+      "tabs": "Por pestañas",
+      "grid": "Grilla",
+      "ottaa_labs": "Ottaa Labs",
+      "labs_text": "Función frases verbales",
+      "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas"
+    },
+    "accessibility": {
+      "selection": "Selección",
+      "bar_text": "Tiempo de clickeo (Segundos)",
+      "connected": "Dispositivos conectados",
+      "device": "Dispositivo de accesibilidad",
+      "press": "Press&Press",
+      "scroll": "Scroll&Press",
+      "sip": "Sip&puff",
+      "selection_type": "Tipo de selección",
+      "swept": "Swept",
+      "speed": "Velocidad",
+      "selection_speed": "Velocidad de selección"
+    },
+    "voice_and_subtitle": {
+      "voice_types": "Tipos de voz",
+      "voice_rate": "Velocidad de voz",
+      "voz1": "Voz 1",
+      "voz2": "Voz 2",
+      "voz3": "Voz 3",
+      "mute": "Mutear pictogramas",
+      "subtitle": "Subtítulos",
+      "show": "Mostrar subtitulos",
+      "size": "Tamaño",
+      "capital": "Mayúsculas"
+    },
+    "language": {
+      "set": "Idioma establecido"
     }
   },
   "global": {
@@ -141,7 +186,14 @@
     "pictogram": "Pictogramas",
     "configuration": "Configuración",
     "user_ottaa": "Usar Ottaa como {name}",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "slow": "Lenta",
+    "default": "Predeterminada",
+    "fast": "Rápida",
+    "voice": "Voz",
+    "boy": "Chico",
+    "medium": "Mediano",
+    "big": "Grande"
   },
   "onboarding": {
     "start": "Começar",
