@@ -55,6 +55,7 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
             },
             settingsTap: () {
               final prov = ref.watch(userSettingsProvider);
+              ///user id from here
               prov.userId = provider.connectedUsersData[index].id;
               context.push(AppRoutes.settingScreenUser);
             },

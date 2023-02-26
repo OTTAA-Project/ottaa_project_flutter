@@ -693,7 +693,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
       ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Either<String, void>> setShortcutsForUser({
-    required _i12.Shortcuts? shortcuts,
+    required _i12.ShortcutsModel? shortcuts,
     required String? userId,
   }) =>
       (super.noSuchMethod(

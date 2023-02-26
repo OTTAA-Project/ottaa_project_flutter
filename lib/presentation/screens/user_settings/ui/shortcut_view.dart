@@ -11,7 +11,9 @@ class ShortcutView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(userSettingsProvider);
+    final width= MediaQuery.of(context).size.width;
     return Stack(
+      fit: StackFit.loose,
       children: [
         Column(
           children: [
@@ -114,8 +116,10 @@ class ShortcutView extends ConsumerWidget {
         ),
         !provider.shortcut
             ? Container(
+          height: 400,
+          width: width - 48,
                 decoration: BoxDecoration(
-                  color: Colors.pink.withOpacity(0.4),
+                  color: Colors.grey.withOpacity(0.4),
                 ),
               )
             : const SizedBox.shrink(),

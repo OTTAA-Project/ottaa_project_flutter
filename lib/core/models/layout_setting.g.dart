@@ -20,7 +20,7 @@ class LayoutSettingAdapter extends TypeAdapter<LayoutSetting> {
       display:
           fields[2] == null ? DisplayTypes.grid : fields[2] as DisplayTypes,
       cleanup: fields[0] == null ? false : fields[0] as bool,
-      shortcuts: fields[1] as Shortcuts,
+      shortcuts: fields[1] as ShortcutsModel,
     );
   }
 

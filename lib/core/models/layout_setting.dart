@@ -13,7 +13,7 @@ class LayoutSetting {
   bool cleanup;
 
   @HiveField(1)
-  Shortcuts shortcuts;
+  ShortcutsModel shortcuts;
 
   @HiveField(2, defaultValue: DisplayTypes.grid)
   DisplayTypes display;
@@ -27,12 +27,12 @@ class LayoutSetting {
   factory LayoutSetting.build() => LayoutSetting(
         display: DisplayTypes.grid,
         cleanup: false,
-        shortcuts: Shortcuts.none(),
+        shortcuts: ShortcutsModel.none(),
       );
 
   LayoutSetting copyWith({
     bool? cleanup,
-    Shortcuts? shortcuts,
+    ShortcutsModel? shortcuts,
     DisplayTypes? display,
   }) {
     return LayoutSetting(
@@ -53,7 +53,7 @@ class LayoutSetting {
   factory LayoutSetting.fromMap(Map<String, dynamic> map) {
     return LayoutSetting(
       cleanup: (map['cleanup'] ?? false) as bool,
-      shortcuts: Shortcuts.fromMap(Map.from(map['shortcuts'] as dynamic)),
+      shortcuts: ShortcutsModel.fromMap(Map.from(map['shortcuts'] as dynamic)),
       display: DisplayTypes.values.firstWhere((e) => e.name == map['display'].toString()),
     );
   }

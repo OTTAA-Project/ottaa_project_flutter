@@ -128,6 +128,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                 value: provider.mute,
               ),
               const DividerWidget(),
+              //todo: add them into expanded and make the text size according to size
               Text(
                 'user.voice_and_subtitle.subtitle'.trl,
                 style: textTheme.headline3,

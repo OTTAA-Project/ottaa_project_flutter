@@ -57,7 +57,7 @@ abstract class ServerRepository {
 
   Future<void> removeCurrentUser({required String userId, required String careGiverId});
 
-  Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId});
+  Future<EitherVoid> setShortcutsForUser({required ShortcutsModel shortcuts, required String userId});
 
   Future<void> updateUserData({required Map<String, dynamic> data, required String userId});
 
@@ -106,4 +106,5 @@ abstract class ServerRepository {
   Future<dynamic> fetchUserGroups({required String languageCode, required String userId});
 
   Future<dynamic> fetchUserPictos({required String languageCode, required String userId});
+  Future<void> updateLanguageSettings({required Map<String,dynamic> map,required String userId});
 }

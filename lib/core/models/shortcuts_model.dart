@@ -6,7 +6,7 @@ import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 part 'shortcuts_model.g.dart';
 
 @HiveType(typeId: HiveTypesIds.shortcutsTypeId)
-class Shortcuts {
+class ShortcutsModel {
   @HiveField(0, defaultValue: false)
   bool favs;
 
@@ -31,7 +31,7 @@ class Shortcuts {
   @HiveField(7, defaultValue: false)
   bool enable;
 
-  Shortcuts({
+  ShortcutsModel({
     required this.enable,
     required this.favs,
     required this.history,
@@ -42,7 +42,7 @@ class Shortcuts {
     required this.yes,
   });
 
-  factory Shortcuts.none() => Shortcuts(
+  factory ShortcutsModel.none() => ShortcutsModel(
         enable: false,
         favs: false,
         history: false,
@@ -53,7 +53,7 @@ class Shortcuts {
         no: false,
       );
 
-  Shortcuts copyWith({
+  ShortcutsModel copyWith({
     bool? favs,
     bool? history,
     bool? camera,
@@ -63,7 +63,7 @@ class Shortcuts {
     bool? no,
     bool? enable,
   }) {
-    return Shortcuts(
+    return ShortcutsModel(
       enable: enable ?? this.enable,
       favs: favs ?? this.favs,
       history: history ?? this.history,
@@ -88,9 +88,9 @@ class Shortcuts {
     };
   }
 
-  factory Shortcuts.fromMap(Map<String, dynamic> map) {
+  factory ShortcutsModel.fromMap(Map<String, dynamic> map) {
     print(map);
-    return Shortcuts.none().copyWith(
+    return ShortcutsModel.none().copyWith(
       enable: map['enable'],
       favs: map['favs'],
       history: map['history'],
@@ -104,7 +104,7 @@ class Shortcuts {
 
   String toJson() => json.encode(toMap());
 
-  factory Shortcuts.fromJson(String source) => Shortcuts.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ShortcutsModel.fromJson(String source) => ShortcutsModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -112,7 +112,7 @@ class Shortcuts {
   }
 
   @override
-  bool operator ==(covariant Shortcuts other) {
+  bool operator ==(covariant ShortcutsModel other) {
     if (identical(this, other)) return true;
 
     return other.favs == favs && other.history == history && other.camera == camera && other.share == share && other.games == games;

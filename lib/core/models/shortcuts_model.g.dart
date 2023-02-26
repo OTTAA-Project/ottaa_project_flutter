@@ -6,17 +6,17 @@ part of 'shortcuts_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ShortcutsAdapter extends TypeAdapter<Shortcuts> {
+class ShortcutsModelAdapter extends TypeAdapter<ShortcutsModel> {
   @override
   final int typeId = 5;
 
   @override
-  Shortcuts read(BinaryReader reader) {
+  ShortcutsModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Shortcuts(
+    return ShortcutsModel(
       enable: fields[7] == null ? false : fields[7] as bool,
       favs: fields[0] == null ? false : fields[0] as bool,
       history: fields[1] == null ? false : fields[1] as bool,
@@ -29,7 +29,7 @@ class ShortcutsAdapter extends TypeAdapter<Shortcuts> {
   }
 
   @override
-  void write(BinaryWriter writer, Shortcuts obj) {
+  void write(BinaryWriter writer, ShortcutsModel obj) {
     writer
       ..writeByte(8)
       ..writeByte(0)
@@ -56,7 +56,7 @@ class ShortcutsAdapter extends TypeAdapter<Shortcuts> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ShortcutsAdapter &&
+      other is ShortcutsModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

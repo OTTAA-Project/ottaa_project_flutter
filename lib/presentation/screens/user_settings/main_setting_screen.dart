@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
-import 'package:ottaa_project_flutter/presentation/screens/customized_board/ui/shortcu_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/board_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/divider_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/shortcut_view.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/switch_widget.dart';

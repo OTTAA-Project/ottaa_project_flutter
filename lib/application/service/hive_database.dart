@@ -74,7 +74,7 @@ class HiveDatabase extends LocalDatabaseRepository {
     Hive.registerAdapter(AssetsImageAdapter());
     Hive.registerAdapter(PhraseAdapter());
     Hive.registerAdapter(PaymentAdapter());
-    Hive.registerAdapter(ShortcutsAdapter());
+    Hive.registerAdapter(ShortcutsModelAdapter());
     Hive.registerAdapter(PictoAdapter());
     Hive.registerAdapter(PictoRelationAdapter());
     Hive.registerAdapter(SequenceAdapter());
