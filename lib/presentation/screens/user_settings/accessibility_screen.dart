@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
+import 'package:ottaa_project_flutter/core/enums/sweep_modes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/accessibility_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/chooser_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/divider_widget.dart';
@@ -57,9 +59,7 @@ class AccessibilityScreen extends ConsumerWidget {
                 min: 0.2,
                 max: 5.0,
                 onChanged: (value) {
-                  provider.sliderValue = value;
-                  print(value);
-                  provider.notify();
+                  provider.changeSpeed(value: value);
                 },
               ),
               Padding(
@@ -80,48 +80,72 @@ class AccessibilityScreen extends ConsumerWidget {
               ),
               SwitchWidget(
                 onChanged: (value) {
-                  provider.accessibility = value;
-                  provider.notify();
+                  provider.changeDeviceOnOff(mode: value);
                 },
                 title: 'user.accessibility.device'.trl,
-                value: provider.accessibility,
+                value: provider.accessibilitySetting.device ==
+                        DevicesAccessibility.none
+                    ? false
+                    : true,
               ),
               const SizedBox(
                 height: 24,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Stack(
                 children: [
-                  AccessibilityWidget(
-                    title: 'user.accessibility.press'.trl,
-                    onTap: () {
-                      provider.selectedAccessibility = 0;
-                      provider.notify();
-                    },
-                    image: AppImages.kAccessibilityPhoto1,
-                    selected:
-                        provider.selectedAccessibility == 0 ? true : false,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AccessibilityWidget(
+                        title: 'user.accessibility.press'.trl,
+                        onTap: () {
+                          provider.changeDevice(
+                              devicesAccessibility: DevicesAccessibility.press);
+                        },
+                        image: AppImages.kAccessibilityPhoto1,
+                        selected: provider.selectedAccessibility ==
+                                DevicesAccessibility.press
+                            ? true
+                            : false,
+                      ),
+                      AccessibilityWidget(
+                        title: 'user.accessibility.scroll'.trl,
+                        onTap: () {
+                          provider.changeDevice(
+                              devicesAccessibility:
+                                  DevicesAccessibility.scroll);
+                        },
+                        image: AppImages.kAccessibilityPhoto2,
+                        selected: provider.selectedAccessibility ==
+                                DevicesAccessibility.scroll
+                            ? true
+                            : false,
+                      ),
+                      AccessibilityWidget(
+                        title: 'user.accessibility.sip'.trl,
+                        onTap: () {
+                          provider.changeDevice(
+                              devicesAccessibility:
+                                  DevicesAccessibility.sipuff);
+                        },
+                        image: AppImages.kAccessibilityPhoto3,
+                        selected: provider.selectedAccessibility ==
+                                DevicesAccessibility.sipuff
+                            ? true
+                            : false,
+                      ),
+                    ],
                   ),
-                  AccessibilityWidget(
-                    title: 'user.accessibility.scroll'.trl,
-                    onTap: () {
-                      provider.selectedAccessibility = 1;
-                      provider.notify();
-                    },
-                    image: AppImages.kAccessibilityPhoto2,
-                    selected:
-                        provider.selectedAccessibility == 1 ? true : false,
-                  ),
-                  AccessibilityWidget(
-                    title: 'user.accessibility.sip'.trl,
-                    onTap: () {
-                      provider.selectedAccessibility = 2;
-                      provider.notify();
-                    },
-                    image: AppImages.kAccessibilityPhoto3,
-                    selected:
-                        provider.selectedAccessibility == 2 ? true : false,
-                  ),
+                  provider.accessibilitySetting.device ==
+                          DevicesAccessibility.none
+                      ? Container(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width - 48,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.4),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                 ],
               ),
               const DividerWidget(),
@@ -139,18 +163,22 @@ class AccessibilityScreen extends ConsumerWidget {
                   TabWidget(
                     title: 'user.accessibility.selection'.trl,
                     image: AppImages.kAccessibilityIcon1,
-                    selected: provider.accessibilityType,
+                    selected: provider.selectionType == SweepModes.elements
+                        ? true
+                        : false,
                     onTap: () {
-                      provider.accessibilityType = true;
+                      provider.selectionType = SweepModes.elements;
                       provider.notify();
                     },
                   ),
                   TabWidget(
                     title: 'user.accessibility.swept'.trl,
                     image: AppImages.kAccessibilityIcon2,
-                    selected: !provider.accessibilityType,
+                    selected: provider.selectionType == SweepModes.sweep
+                        ? true
+                        : false,
                     onTap: () {
-                      provider.accessibilityType = false;
+                      provider.selectionType = SweepModes.sweep;
                       provider.notify();
                     },
                   ),
@@ -170,7 +198,7 @@ class AccessibilityScreen extends ConsumerWidget {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ChooserWidget(
                     selected: provider.accessibilitySpeed == 0 ? true : false,
@@ -180,13 +208,16 @@ class AccessibilityScreen extends ConsumerWidget {
                     },
                     title: 'global.slow'.trl,
                   ),
-                  ChooserWidget(
-                    selected: provider.accessibilitySpeed == 1 ? true : false,
-                    onTap: () {
-                      provider.accessibilitySpeed = 1;
-                      provider.notify();
-                    },
-                    title: 'global.default'.trl,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: ChooserWidget(
+                      selected: provider.accessibilitySpeed == 1 ? true : false,
+                      onTap: () {
+                        provider.accessibilitySpeed = 1;
+                        provider.notify();
+                      },
+                      title: 'global.default'.trl,
+                    ),
                   ),
                   ChooserWidget(
                     selected: provider.accessibilitySpeed == 2 ? true : false,

@@ -35,8 +35,8 @@ class UserSettingsProvider extends ChangeNotifier {
   bool ottaaLabs = false;
   bool accessibility = true;
   double sliderValue = 1.0;
-  int selectedAccessibility = 0;
-  bool accessibilityType = true;
+  DevicesAccessibility selectedAccessibility = DevicesAccessibility.press;
+  SweepModes selectionType = SweepModes.elements;
   int accessibilitySpeed = 1;
   String voiceType = 'default1';
   String voiceRate = VelocityTypes.mid.name;
@@ -62,18 +62,12 @@ class UserSettingsProvider extends ChangeNotifier {
   }
 
   Future<void> initialiseSettings() async {
+    final rs = {};
+    AccessibilitySetting.fromMap(rs['accesiblity']);
     if (false) {
     } else {
-      accessibilitySetting = AccessibilitySetting(
-        device: DevicesAccessibility.none,
-        sweepMode: SweepModes.elements,
-        sweepSpeed: VelocityTypes.mid,
-        clickTime: VelocityTypes.mid,
-      );
-      languageSetting = LanguageSetting(
-        language: language,
-        labs: false,
-      );
+      accessibilitySetting = AccessibilitySetting.empty();
+      languageSetting = LanguageSetting.empty();
       subtitlesSetting = SubtitlesSetting(
         show: false,
         size: SizeTypes.small,
@@ -142,9 +136,8 @@ class UserSettingsProvider extends ChangeNotifier {
       map: {
         "voice": {
           "name": voiceSetting.voicesNames,
-          "speed": voiceSetting.voicesSpeed.map((key, value) {
-            return MapEntry(key, value.name);
-          }),
+          "speed": voiceSetting.voicesSpeed
+              .map((key, value) => MapEntry(key, value.name)),
           "mutePict": voiceSetting.mutePict
         },
         "subtitles": {
@@ -191,6 +184,29 @@ class UserSettingsProvider extends ChangeNotifier {
   void changeCapital({required bool value}) {
     capital = value;
     subtitlesSetting.caps = value;
+    notifyListeners();
+  }
+
+  void changeSpeed({required double value}) {
+    ///
+    if (value >= 3.0) {}
+    accessibilitySetting.clickTime = VelocityTypes.mid;
+    sliderValue = value;
+    notifyListeners();
+  }
+
+  void changeDeviceOnOff({required bool mode}) {
+    if (mode) {
+      accessibilitySetting.device = DevicesAccessibility.press;
+    } else {
+      accessibilitySetting.device = DevicesAccessibility.none;
+    }
+    notifyListeners();
+  }
+
+  void changeDevice({required DevicesAccessibility devicesAccessibility}) {
+    accessibilitySetting.device = devicesAccessibility;
+    selectedAccessibility = devicesAccessibility;
     notifyListeners();
   }
 }
