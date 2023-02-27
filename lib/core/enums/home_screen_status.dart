@@ -1,6 +1,7 @@
 enum HomeScreenStatus {
   pictos,
-  search,
+  grid,
+  tabs,
   favorites,
   history,
 }

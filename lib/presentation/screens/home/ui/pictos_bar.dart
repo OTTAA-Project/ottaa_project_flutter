@@ -64,7 +64,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                           : () {
                               final provider = ref.watch(homeProvider);
 
-                              provider.status = HomeScreenStatus.search;
+                              provider.status = HomeScreenStatus.grid;
                               provider.notify();
                             },
                       size: const Size(64, 64),

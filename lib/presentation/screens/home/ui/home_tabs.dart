@@ -18,14 +18,14 @@ import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 
-class GroupsHomeUi extends ConsumerStatefulWidget {
-  const GroupsHomeUi({super.key});
+class HomeTabsUI extends ConsumerStatefulWidget {
+  const HomeTabsUI({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _GroupsHomeUi();
 }
 
-class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
+class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -33,7 +33,7 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
 
     final groups = ref.watch(homeProvider).groups.values.where((element) => !element.block).toList();
 
-    final currentGroup = ref.watch(homeProvider).groups[ref.watch(homeProvider).currentGroup];
+    final currentGroup = ref.watch(homeProvider).groups[ref.watch(homeProvider).currentTabGroup];
 
     final pictos = ref.watch(homeProvider).pictograms.values.where((element) => !element.block && currentGroup!.relations.any((group) => group.id == element.id)).toList();
 
@@ -59,7 +59,7 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                   onPressed: groups.isEmpty
                       ? null
                       : () {
-                          final controller = ref.read(homeProvider.select((value) => value.groupGridScrollController));
+                          final controller = ref.read(homeProvider.select((value) => value.groupTabsScrollController));
 
                           double offset = (controller.offset - 168);
 
@@ -86,7 +86,7 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                 child: SizedBox(
                   height: 48,
                   child: ListView.separated(
-                    controller: ref.read(homeProvider.select((value) => value.groupGridScrollController)),
+                    controller: ref.read(homeProvider.select((value) => value.groupTabsScrollController)),
                     scrollDirection: Axis.horizontal,
                     itemCount: groups.length,
                     separatorBuilder: (ctx, index) => const SizedBox(
@@ -96,7 +96,7 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                     itemBuilder: (ctx, index) {
                       Group group = groups.elementAt(index);
 
-                      bool isCurrent = ref.watch(homeProvider).currentGroup == group.id;
+                      bool isCurrent = ref.watch(homeProvider).currentTabGroup == group.id;
 
                       return GestureDetector(
                         onTap: () {
@@ -151,7 +151,7 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                   onPressed: groups.isEmpty
                       ? null
                       : () {
-                          final controller = ref.read(homeProvider.select((value) => value.groupGridScrollController));
+                          final controller = ref.read(homeProvider.select((value) => value.groupTabsScrollController));
 
                           double offset = controller.offset + 168;
                           if (offset > controller.position.maxScrollExtent) {
@@ -190,7 +190,7 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                     childAspectRatio: 1,
                     mainAxisExtent: 144,
                   ),
-                  controller: ref.read(homeProvider.select((value) => value.pictoGridScrollController)),
+                  controller: ref.read(homeProvider.select((value) => value.pictoTabsScrollController)),
                   padding: const EdgeInsets.only(top: 16, bottom: 16),
                   itemCount: pictos.length,
                   itemBuilder: (ctx, index) {
@@ -248,7 +248,7 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                     Expanded(
                       child: HomeButton(
                         size: const Size(40, 40),
-                        onPressed: groups.isEmpty ? null : ref.watch(homeProvider.select((value) => value.goGroupsUp)),
+                        onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollUp))(ref.read(homeProvider).pictoTabsScrollController, 144),
                         child: Icon(
                           Icons.keyboard_arrow_up,
                           color: groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary,
@@ -260,7 +260,7 @@ class _GroupsHomeUi extends ConsumerState<GroupsHomeUi> {
                     Expanded(
                       child: HomeButton(
                         size: const Size(40, 40),
-                        onPressed: groups.isEmpty ? null : ref.watch(homeProvider.select((value) => value.goGroupsDown)),
+                        onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollDown))(ref.read(homeProvider).pictoTabsScrollController, 144),
                         child: Icon(
                           Icons.keyboard_arrow_down,
                           color: groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary,

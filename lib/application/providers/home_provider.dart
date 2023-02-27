@@ -68,19 +68,23 @@ class HomeProvider extends ChangeNotifier {
 
   bool talkEnabled = true;
   bool show = false;
-  String selectedWord = '';
+  int? selectedWord;
   ScrollController scrollController = ScrollController();
 
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
   // Home Tabs
-  late String currentGroup;
-  ScrollController groupGridScrollController = ScrollController();
-  ScrollController pictoGridScrollController = ScrollController();
+  late String currentTabGroup;
+  ScrollController groupTabsScrollController = ScrollController();
+  ScrollController pictoTabsScrollController = ScrollController();
+
+  //Home grids
+  String? currentGridGroup;
+  ScrollController gridScrollController = ScrollController();
 
   void setCurrentGroup(String group) {
-    currentGroup = group;
-    pictoGridScrollController.jumpTo(0);
+    currentTabGroup = group;
+    pictoTabsScrollController.jumpTo(0);
     notifyListeners();
   }
 
@@ -89,7 +93,7 @@ class HomeProvider extends ChangeNotifier {
 
     basicPictograms = predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
 
-    currentGroup = groups.keys.first;
+    currentTabGroup = groups.keys.first;
 
     buildSuggestion();
     notifyListeners();
@@ -120,6 +124,11 @@ class HomeProvider extends ChangeNotifier {
   void addPictogram(Picto picto) {
     pictoWords.add(picto);
     suggestedPicts.clear();
+
+    if (pictoWords.length > 5) {
+      scrollController.jumpTo(scrollController.offset + 100);
+    }
+
     buildSuggestion(picto.id);
     notifyListeners();
   }
@@ -299,19 +308,15 @@ class HomeProvider extends ChangeNotifier {
     } else {
       show = true;
       notifyListeners();
-      print('totoal values are');
-      print(scrollController.position.maxScrollExtent);
-      int i = 0;
-      for (var e in pictoWords) {
-        selectedWord = e.text;
+      for (var i = 0; i < pictoWords.length; i++) {
+        selectedWord = i;
         scrollController.animateTo(
           i == 0 ? 0 : i * 45,
           duration: const Duration(microseconds: 50),
           curve: Curves.easeIn,
         );
         notifyListeners();
-        await _tts.speak(e.text);
-        i++;
+        await _tts.speak(pictoWords[i].text);
       }
       scrollController.animateTo(
         0,
@@ -340,32 +345,32 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void goGroupsUp() {
-    int currentPosition = pictoGridScrollController.position.pixels.toInt();
+  void scrollUp(ScrollController controller, double amount) {
+    int currentPosition = controller.position.pixels.toInt();
 
     if (currentPosition == 0) return;
 
-    pictoGridScrollController.animateTo(
-      currentPosition - 144,
+    controller.animateTo(
+      currentPosition - amount,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );
   }
 
-  void goGroupsDown() {
-    int currentPosition = pictoGridScrollController.position.pixels.toInt();
+  void scrollDown(ScrollController controller, double amount) {
+    int currentPosition = controller.position.pixels.toInt();
 
-    if (currentPosition >= pictoGridScrollController.position.maxScrollExtent) return;
+    if (currentPosition >= controller.position.maxScrollExtent) return;
 
-    pictoGridScrollController.animateTo(
-      currentPosition + 144,
+    controller.animateTo(
+      currentPosition + amount,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );
   }
 }
 
-final ChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotifierProvider<HomeProvider>((ref) {
+final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final sentencesService = GetIt.I<SentencesRepository>();

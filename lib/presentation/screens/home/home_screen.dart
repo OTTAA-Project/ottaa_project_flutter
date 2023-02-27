@@ -5,7 +5,8 @@ import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/groups_home.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_grid.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_tabs.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/pictos_bar.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/talk_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/word_bar.dart';
@@ -65,10 +66,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: const PictosBarUI(),
           ),
         );
-      case HomeScreenStatus.search:
+      case HomeScreenStatus.grid:
         return const Expanded(
           flex: 2,
-          child: GroupsHomeUi(),
+          child: HomeGridUI(),
+        );
+      case HomeScreenStatus.tabs:
+        return const Expanded(
+          flex: 2,
+          child: HomeTabsUI(),
         );
       case HomeScreenStatus.favorites:
 
