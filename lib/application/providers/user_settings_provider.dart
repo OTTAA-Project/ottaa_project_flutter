@@ -12,6 +12,8 @@ import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/models/subtitles_setting.dart';
+import 'package:ottaa_project_flutter/core/models/tts_setting.dart';
+import 'package:ottaa_project_flutter/core/models/voice_setting.dart';
 import 'package:ottaa_project_flutter/core/repositories/user_settings_repository.dart';
 
 class UserSettingsProvider extends ChangeNotifier {
@@ -36,23 +38,26 @@ class UserSettingsProvider extends ChangeNotifier {
   int selectedAccessibility = 0;
   bool accessibilityType = true;
   int accessibilitySpeed = 1;
-  int voiceType = 0;
-  int voiceRate = 0;
+  String voiceType = 'default1';
+  String voiceRate = VelocityTypes.mid.name;
   bool mute = false;
   bool show = false;
-  int size = 0;
+  SizeTypes size = SizeTypes.small;
   bool capital = true;
   String language = 'es_AR';
   late AccessibilitySetting accessibilitySetting;
   late LanguageSetting languageSetting;
   late SubtitlesSetting subtitlesSetting;
   late LayoutSetting layoutSetting;
+  late VoiceSetting voiceSetting;
+  late TTSSetting ttsSetting;
 
   void notify() {
     notifyListeners();
   }
 
   Future<void> init() async {
+    language = _i18n.currentLanguage!.locale.toString();
     initialiseSettings();
   }
 
@@ -71,7 +76,7 @@ class UserSettingsProvider extends ChangeNotifier {
       );
       subtitlesSetting = SubtitlesSetting(
         show: false,
-        size: SizeTypes.mid,
+        size: SizeTypes.small,
         caps: true,
       );
       layoutSetting = LayoutSetting(
@@ -87,6 +92,25 @@ class UserSettingsProvider extends ChangeNotifier {
           yes: true,
           no: true,
         ),
+      );
+      voiceSetting = VoiceSetting(
+        voicesNames: {
+          'es_AR': 'default1',
+          'en_US': 'default1',
+          'pt_BR': 'default1',
+          'it_IT': 'default1',
+        },
+        voicesSpeed: {
+          'es_AR': VelocityTypes.mid,
+          'en_US': VelocityTypes.mid,
+          'pt_BR': VelocityTypes.mid,
+          'it_IT': VelocityTypes.mid,
+        },
+        mutePict: false,
+      );
+      ttsSetting = TTSSetting(
+        voiceSetting: voiceSetting,
+        subtitlesSetting: subtitlesSetting,
       );
     }
   }
@@ -111,6 +135,63 @@ class UserSettingsProvider extends ChangeNotifier {
       map: languageSetting.toMap(),
       userId: userId,
     );
+  }
+
+  Future<void> updateVoiceAndSubtitleSettings() async {
+    _userSettingRepository.updateVoiceAndSubtitleSettings(
+      map: {
+        "voice": {
+          "name": voiceSetting.voicesNames,
+          "speed": voiceSetting.voicesSpeed.map((key, value) {
+            return MapEntry(key, value.name);
+          }),
+          "mutePict": voiceSetting.mutePict
+        },
+        "subtitles": {
+          "show": subtitlesSetting.show,
+          "size": subtitlesSetting.size.name,
+          "caps": subtitlesSetting.caps
+        }
+      },
+      userId: userId,
+    );
+  }
+
+  void changeVoiceType({required String type}) {
+    voiceType = type;
+    voiceSetting.voicesNames[language] = type;
+    notifyListeners();
+  }
+
+  void changeVoiceSpeed({required VelocityTypes type}) {
+    voiceRate = type.name;
+    print(type);
+    voiceSetting.voicesSpeed[language] = type;
+    notifyListeners();
+  }
+
+  void changeMute({required bool value}) {
+    voiceSetting.mutePict = value;
+    mute = value;
+    notifyListeners();
+  }
+
+  void changeSubtitle({required bool value}) {
+    subtitlesSetting.show = value;
+    show = value;
+    notifyListeners();
+  }
+
+  void changeTextType({required SizeTypes type}) {
+    size = type;
+    subtitlesSetting.size = type;
+    notifyListeners();
+  }
+
+  void changeCapital({required bool value}) {
+    capital = value;
+    subtitlesSetting.caps = value;
+    notifyListeners();
   }
 }
 

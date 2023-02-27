@@ -47,23 +47,28 @@ class TTSSetting {
 
   factory TTSSetting.fromMap(Map<String, dynamic> map) {
     return TTSSetting(
-      voiceSetting: VoiceSetting.fromMap(map['voiceSetting'] as Map<String, dynamic>),
-      subtitlesSetting: SubtitlesSetting.fromMap(map['subtitlesSetting'] as Map<String, dynamic>),
+      voiceSetting:
+          VoiceSetting.fromMap(map['voiceSetting'] as Map<String, dynamic>),
+      subtitlesSetting: SubtitlesSetting.fromMap(
+          map['subtitlesSetting'] as Map<String, dynamic>),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory TTSSetting.fromJson(String source) => TTSSetting.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory TTSSetting.fromJson(String source) =>
+      TTSSetting.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'TTSSetting(voiceSetting: $voiceSetting, subtitlesSetting: $subtitlesSetting)';
+  String toString() =>
+      'TTSSetting(voiceSetting: $voiceSetting, subtitlesSetting: $subtitlesSetting)';
 
   @override
   bool operator ==(covariant TTSSetting other) {
     if (identical(this, other)) return true;
 
-    return other.voiceSetting == voiceSetting && other.subtitlesSetting == subtitlesSetting;
+    return other.voiceSetting == voiceSetting &&
+        other.subtitlesSetting == subtitlesSetting;
   }
 
   @override

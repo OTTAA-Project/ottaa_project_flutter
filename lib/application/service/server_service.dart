@@ -623,4 +623,12 @@ class ServerService implements ServerRepository {
 
     ref.set(map);
   }
+
+  @override
+  Future<void> updateVoiceAndSubtitleSettings(
+      {required Map<String, dynamic> map, required String userId}) async {
+    final ref = _database.child("$userId/tts/");
+
+    ref.update(map);
+  }
 }
