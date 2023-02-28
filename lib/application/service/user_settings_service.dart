@@ -19,4 +19,10 @@ class UserSettingsService extends UserSettingRepository {
       {required Map<String, dynamic> map, required String userId}) async {
     _serverRepository.updateVoiceAndSubtitleSettings(map: map, userId: userId);
   }
+
+  @override
+  Future<void> updateAccessibilitySettings(
+      {required Map<String, dynamic> map, required String userId}) async {
+    _serverRepository.updateAccessibilitySettings(map: map, userId: userId);
+  }
 }

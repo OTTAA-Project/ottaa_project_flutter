@@ -37,7 +37,7 @@ class UserSettingsProvider extends ChangeNotifier {
   double sliderValue = 1.0;
   DevicesAccessibility selectedAccessibility = DevicesAccessibility.press;
   SweepModes selectionType = SweepModes.elements;
-  int accessibilitySpeed = 1;
+  VelocityTypes accessibilitySpeed = VelocityTypes.mid;
   String voiceType = 'default1';
   String voiceRate = VelocityTypes.mid.name;
   bool mute = false;
@@ -62,17 +62,13 @@ class UserSettingsProvider extends ChangeNotifier {
   }
 
   Future<void> initialiseSettings() async {
-    final rs = {};
-    AccessibilitySetting.fromMap(rs['accesiblity']);
+    // final rs = {};
+    // AccessibilitySetting.fromMap(rs['accesiblity']);
     if (false) {
     } else {
       accessibilitySetting = AccessibilitySetting.empty();
       languageSetting = LanguageSetting.empty();
-      subtitlesSetting = SubtitlesSetting(
-        show: false,
-        size: SizeTypes.small,
-        caps: true,
-      );
+      subtitlesSetting = SubtitlesSetting.empty();
       layoutSetting = LayoutSetting(
         display: DisplayTypes.grid,
         cleanup: true,
@@ -87,25 +83,8 @@ class UserSettingsProvider extends ChangeNotifier {
           no: true,
         ),
       );
-      voiceSetting = VoiceSetting(
-        voicesNames: {
-          'es_AR': 'default1',
-          'en_US': 'default1',
-          'pt_BR': 'default1',
-          'it_IT': 'default1',
-        },
-        voicesSpeed: {
-          'es_AR': VelocityTypes.mid,
-          'en_US': VelocityTypes.mid,
-          'pt_BR': VelocityTypes.mid,
-          'it_IT': VelocityTypes.mid,
-        },
-        mutePict: false,
-      );
-      ttsSetting = TTSSetting(
-        voiceSetting: voiceSetting,
-        subtitlesSetting: subtitlesSetting,
-      );
+      voiceSetting = VoiceSetting.empty();
+      ttsSetting = TTSSetting.empty();
     }
   }
 
@@ -146,6 +125,14 @@ class UserSettingsProvider extends ChangeNotifier {
           "caps": subtitlesSetting.caps
         }
       },
+      userId: userId,
+    );
+  }
+
+  Future<void> updateAccessibilitySettings() async {
+    print(accessibilitySetting.toMap());
+    _userSettingRepository.updateAccessibilitySettings(
+      map: accessibilitySetting.toMap(),
       userId: userId,
     );
   }
@@ -207,6 +194,18 @@ class UserSettingsProvider extends ChangeNotifier {
   void changeDevice({required DevicesAccessibility devicesAccessibility}) {
     accessibilitySetting.device = devicesAccessibility;
     selectedAccessibility = devicesAccessibility;
+    notifyListeners();
+  }
+
+  void changeSelection({required SweepModes modes}) {
+    accessibilitySetting.sweepMode = modes;
+    selectionType = modes;
+    notifyListeners();
+  }
+
+  void changeAccessibilitySpeed({required VelocityTypes speed}) {
+    accessibilitySetting.sweepSpeed = speed;
+    accessibilitySpeed = speed;
     notifyListeners();
   }
 }

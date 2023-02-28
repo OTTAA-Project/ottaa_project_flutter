@@ -130,4 +130,7 @@ abstract class ServerRepository {
 
   Future<void> updateVoiceAndSubtitleSettings(
       {required Map<String, dynamic> map, required String userId});
+
+  Future<void> updateAccessibilitySettings(
+      {required Map<String, dynamic> map, required String userId});
 }

@@ -631,4 +631,12 @@ class ServerService implements ServerRepository {
 
     ref.update(map);
   }
+
+  @override
+  Future<void> updateAccessibilitySettings(
+      {required Map<String, dynamic> map, required String userId}) async {
+    final ref = _database.child("$userId/accessibility/");
+
+    ref.update(map);
+  }
 }
