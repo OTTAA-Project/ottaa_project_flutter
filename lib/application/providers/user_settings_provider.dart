@@ -31,7 +31,7 @@ class UserSettingsProvider extends ChangeNotifier {
   bool deleteText = true;
   bool shortcut = true;
   List<bool> selectedShortcuts = [true, true, true, true, true, true, true];
-  bool boardView = true;
+  DisplayTypes boardView = DisplayTypes.grid;
   bool ottaaLabs = false;
   bool accessibility = true;
   double sliderValue = 1.0;
@@ -137,6 +137,14 @@ class UserSettingsProvider extends ChangeNotifier {
     );
   }
 
+  Future<void> updateMainSettings() async {
+    print(layoutSetting.toMap());
+    _userSettingRepository.updateMainSettings(
+      map: layoutSetting.toMap(),
+      userId: userId,
+    );
+  }
+
   void changeVoiceType({required String type}) {
     voiceType = type;
     voiceSetting.voicesNames[language] = type;
@@ -175,7 +183,7 @@ class UserSettingsProvider extends ChangeNotifier {
   }
 
   void changeSpeed({required double value}) {
-    ///
+    ///change it after doing some other work
     if (value >= 3.0) {}
     accessibilitySetting.clickTime = VelocityTypes.mid;
     sliderValue = value;
@@ -206,6 +214,24 @@ class UserSettingsProvider extends ChangeNotifier {
   void changeAccessibilitySpeed({required VelocityTypes speed}) {
     accessibilitySetting.sweepSpeed = speed;
     accessibilitySpeed = speed;
+    notifyListeners();
+  }
+
+  void changeDeleteText({required bool value}) {
+    layoutSetting.cleanup = value;
+    deleteText = value;
+    notifyListeners();
+  }
+
+  changeEnableShortcuts({required bool value}) {
+    layoutSetting.shortcuts.enable = value;
+    shortcut = value;
+    notifyListeners();
+  }
+
+  void changeTablet({required DisplayTypes value}) {
+    layoutSetting.display = value;
+    boardView = value;
     notifyListeners();
   }
 }

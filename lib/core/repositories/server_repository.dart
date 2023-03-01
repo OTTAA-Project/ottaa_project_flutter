@@ -133,4 +133,7 @@ abstract class ServerRepository {
 
   Future<void> updateAccessibilitySettings(
       {required Map<String, dynamic> map, required String userId});
+
+  Future<void> updateMainSettings(
+      {required Map<String, dynamic> map, required String userId});
 }

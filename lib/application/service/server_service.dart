@@ -639,4 +639,12 @@ class ServerService implements ServerRepository {
 
     ref.update(map);
   }
+
+  @override
+  Future<void> updateMainSettings(
+      {required Map<String, dynamic> map, required String userId}) async {
+    final ref = _database.child("$userId/layout/");
+
+    ref.update(map);
+  }
 }
