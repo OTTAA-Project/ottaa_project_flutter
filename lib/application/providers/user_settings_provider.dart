@@ -63,14 +63,16 @@ class UserSettingsProvider extends ChangeNotifier {
   late LayoutSetting layoutSetting;
   late TTSSetting ttsSetting;
 
-  PatientUserModel get currentUser => _patientNotifier.state ?? _userNotifier.user.patient;
+  PatientUserModel get currentUser =>
+      _patientNotifier.state ?? _userNotifier.user.patient;
 
   void notify() {
     notifyListeners();
   }
 
   Future<dynamic> fetchUserSettings() async {
-    return await _userSettingRepository.fetchUserSettings(userId: currentUser.id);
+    return await _userSettingRepository.fetchUserSettings(
+        userId: currentUser.id);
   }
 
   Future<void> init() async {
@@ -82,10 +84,18 @@ class UserSettingsProvider extends ChangeNotifier {
     final res = await fetchUserSettings();
     if (res.isRight) {
       final data = res.right;
-      accessibilitySetting = data['accessibility'] != null ? AccessibilitySetting.fromJson(jsonEncode(data['accessibility'])) : AccessibilitySetting.empty();
-      languageSetting = data['language'] != null ? LanguageSetting.fromJson(jsonEncode(data['language'])) : LanguageSetting.empty();
-      ttsSetting = data['tts'] != null ? TTSSetting.fromJson(jsonEncode(data['tts'])) : TTSSetting.empty();
-      layoutSetting = data['layout'] != null ? LayoutSetting.fromJson((jsonEncode(data['layout']))) : LayoutSetting.empty();
+      accessibilitySetting = data['accessibility'] != null
+          ? AccessibilitySetting.fromJson(jsonEncode(data['accessibility']))
+          : AccessibilitySetting.empty();
+      languageSetting = data['language'] != null
+          ? LanguageSetting.fromJson(jsonEncode(data['language']))
+          : LanguageSetting.empty();
+      ttsSetting = data['tts'] != null
+          ? TTSSetting.fromJson(jsonEncode(data['tts']))
+          : TTSSetting.empty();
+      layoutSetting = data['layout'] != null
+          ? LayoutSetting.fromJson((jsonEncode(data['layout'])))
+          : LayoutSetting.empty();
     } else {
       accessibilitySetting = AccessibilitySetting.empty();
       languageSetting = LanguageSetting.empty();
@@ -254,14 +264,18 @@ class UserSettingsProvider extends ChangeNotifier {
   }
 }
 
-final userSettingsProvider = ChangeNotifierProvider<UserSettingsProvider>((ref) {
+final userSettingsProvider =
+    ChangeNotifierProvider<UserSettingsProvider>((ref) {
   final i18N = GetIt.I<I18N>();
   final userSettingsService = GetIt.I<UserSettingRepository>();
 
   final UserNotifier userNotifierState = ref.watch(userNotifier.notifier);
-  final PatientNotifier patientNotifierState = ref.watch(patientNotifier.notifier);
+  final PatientNotifier patientNotifierState =
+      ref.watch(patientNotifier.notifier);
 
-  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+  final LocalDatabaseRepository localDatabaseRepository =
+      GetIt.I.get<LocalDatabaseRepository>();
 
-  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository);
+  return UserSettingsProvider(i18N, userSettingsService, userNotifierState,
+      patientNotifierState, localDatabaseRepository);
 });

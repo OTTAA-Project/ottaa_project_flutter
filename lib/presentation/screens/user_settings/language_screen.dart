@@ -62,28 +62,36 @@ class LanguageScreen extends ConsumerWidget {
                 runSpacing: 16,
                 children: [
                   ChooserWidget(
-                    selected: provider.language == 'es_AR' ? true : false,
+                    selected: provider.languageSetting.language == 'es_AR'
+                        ? true
+                        : false,
                     onTap: () async {
                       await provider.changeLanguage(languageCode: 'es_AR');
                     },
                     title: 'Español',
                   ),
                   ChooserWidget(
-                    selected: provider.language == 'en_US' ? true : false,
+                    selected: provider.languageSetting.language == 'en_US'
+                        ? true
+                        : false,
                     onTap: () async {
                       await provider.changeLanguage(languageCode: 'en_US');
                     },
                     title: 'English',
                   ),
                   ChooserWidget(
-                    selected: provider.language == 'pt_BR' ? true : false,
+                    selected: provider.languageSetting.language == 'pt_BR'
+                        ? true
+                        : false,
                     onTap: () async {
                       await provider.changeLanguage(languageCode: 'pt_BR');
                     },
                     title: 'Portugues',
                   ),
                   ChooserWidget(
-                    selected: provider.language == 'it_IT' ? true : false,
+                    selected: provider.languageSetting.language == 'it_IT'
+                        ? true
+                        : false,
                     onTap: () async {
                       await provider.changeLanguage(languageCode: 'it_IT');
                     },
@@ -105,7 +113,7 @@ class LanguageScreen extends ConsumerWidget {
                   await provider.changeOttaaLabs(value: value);
                 },
                 title: 'user.main_setting.labs_text'.trl,
-                value: provider.ottaaLabs,
+                value: provider.languageSetting.labs,
               ),
               Text(
                 'user.main_setting.labs_long'.trl,

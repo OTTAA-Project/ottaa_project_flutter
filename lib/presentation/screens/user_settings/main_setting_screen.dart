@@ -76,7 +76,7 @@ class MainSettingScreen extends ConsumerWidget {
                     provider.changeEnableShortcuts(value: value);
                   },
                   title: 'user.main_setting.shortcut'.trl,
-                  value: provider.shortcut,
+                  value: provider.layoutSetting.shortcuts.enable,
                 ),
                 const SizedBox(
                   height: 32,
@@ -98,7 +98,7 @@ class MainSettingScreen extends ConsumerWidget {
                     TabWidget(
                       title: 'user.main_setting.tabs'.trl,
                       image: AppImages.kMainSettingsIcon1,
-                      selected: provider.boardView == DisplayTypes.tab,
+                      selected: provider.layoutSetting.display == DisplayTypes.tab,
                       onTap: () {
                         provider.changeTablet(value: DisplayTypes.tab);
                       },
@@ -106,7 +106,7 @@ class MainSettingScreen extends ConsumerWidget {
                     TabWidget(
                       title: 'user.main_setting.grid'.trl,
                       image: AppImages.kMainSettingsIcon2,
-                      selected: provider.boardView == DisplayTypes.grid,
+                      selected: provider.layoutSetting.display == DisplayTypes.grid,
                       onTap: () {
                         provider.changeTablet(value: DisplayTypes.grid);
                       },
