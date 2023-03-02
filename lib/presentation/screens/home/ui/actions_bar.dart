@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 
 class ActionsBarUI extends ConsumerStatefulWidget {
@@ -17,8 +18,7 @@ class ActionsBarUI extends ConsumerStatefulWidget {
 class _ActionsBarState extends ConsumerState<ActionsBarUI> {
   @override
   Widget build(BuildContext context) {
-    final pictos =
-        ref.watch(homeProvider.select((value) => value.suggestedPicts.isEmpty));
+    final pictos = ref.watch(homeProvider.select((value) => value.suggestedPicts.isEmpty));
 
     PatientUserModel? patient = ref.watch(patientNotifier);
 
@@ -28,6 +28,8 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
 
     double shortCutSize = (size.width - (32 * shorcutsCount)) / shorcutsCount;
 
+    ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
+
     return SizedBox(
       height: 64,
       child: Flex(
@@ -35,14 +37,12 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-              if (patient == null ||
-                  patient.patientSettings.layout.shortcuts.games)
+          if (patient == null || shortcuts.games)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed:
-                          pictos ? null : () {},
+                onPressed: pictos ? null : () {},
                 child: Image.asset(
                   AppImages.kBoardDiceIconSelected,
                   width: 48,
@@ -50,15 +50,12 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-
-              if (patient == null ||
-                  patient.patientSettings.layout.shortcuts.history)
+          if (patient == null || shortcuts.history)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed:
-                          pictos ? null : () {},
+                onPressed: pictos ? null : () {},
                 child: Image.asset(
                   AppImages.kBoardHistoryIconSelected,
                   width: 48,
@@ -66,14 +63,12 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-              if (patient == null ||
-                  patient.patientSettings.layout.shortcuts.share)
+          if (patient == null || shortcuts.share)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed:
-                          pictos ? null : () {},
+                onPressed: pictos ? null : () {},
                 child: Image.asset(
                   AppImages.kBoardShareIconSelected,
                   width: 48,
@@ -81,9 +76,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-
-              if (patient == null ||
-                  patient.patientSettings.layout.shortcuts.camera)
+          if (patient == null || shortcuts.camera)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
@@ -96,7 +89,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-          if (patient == null || patient.patientSettings.shortcuts.favs)
+          if (patient == null || shortcuts.favs)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
@@ -107,15 +100,14 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                   width: 48,
                   height: 48,
                 ),
-              ),),
-              if (patient == null ||
-                  patient.patientSettings.layout.shortcuts.yes)
+              ),
+            ),
+          if (patient == null || shortcuts.yes)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed:
-                          pictos ? null : () {},
+                onPressed: pictos ? null : () {},
                 child: Image.asset(
                   AppImages.kBoardYesIconSelected,
                   width: 48,
@@ -123,14 +115,12 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-              if (patient == null ||
-                  patient.patientSettings.layout.shortcuts.no)
+          if (patient == null || shortcuts.no)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed:
-                          pictos ? null : () {},
+                onPressed: pictos ? null : () {},
                 child: Image.asset(
                   AppImages.kBoardNoIconSelected,
                   width: 48,
