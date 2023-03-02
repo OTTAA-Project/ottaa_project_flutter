@@ -262,5 +262,11 @@
       "button": "Ir al panel de perfiles"
     },
     "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
+  },
+  "home": {
+    "grid": {
+      "title": "Tableros",
+      "pictos": "Tablero {group}"
+    }
   }
 }
