@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 
 class ActionsBarUI extends ConsumerStatefulWidget {
@@ -23,9 +24,11 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
 
     final size = MediaQuery.of(context).size;
 
-    int shorcutsCount = patient?.patientSettings.shortcuts.toMap().values.where((element) => element).length ?? 7;
+    int shorcutsCount = patient?.patientSettings.layout.shortcuts.toMap().values.where((element) => element).length ?? 7;
 
     double shortCutSize = (size.width - (32 * shorcutsCount)) / shorcutsCount;
+
+    ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
 
     return SizedBox(
       height: 64,
@@ -34,7 +37,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (patient == null || patient.patientSettings.shortcuts.games)
+          if (patient == null || shortcuts.games)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
@@ -47,7 +50,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-          if (patient == null || patient.patientSettings.shortcuts.history)
+          if (patient == null || shortcuts.history)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
@@ -60,7 +63,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-          if (patient == null || patient.patientSettings.shortcuts.share)
+          if (patient == null || shortcuts.share)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
@@ -73,7 +76,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-          if (patient == null || patient.patientSettings.shortcuts.camera)
+          if (patient == null || shortcuts.camera)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
@@ -86,7 +89,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-          if (patient == null || patient.patientSettings.shortcuts.favs)
+          if (patient == null || shortcuts.favs)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
@@ -99,7 +102,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-          if (patient == null || patient.patientSettings.shortcuts.yes)
+          if (patient == null || shortcuts.yes)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
@@ -112,7 +115,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 ),
               ),
             ),
-          if (patient == null || patient.patientSettings.shortcuts.no)
+          if (patient == null || shortcuts.no)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
