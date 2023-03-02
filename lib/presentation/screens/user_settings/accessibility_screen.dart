@@ -210,7 +210,7 @@ class AccessibilityScreen extends ConsumerWidget {
                   children: [
                     ChooserWidget(
                       selected:
-                          provider.accessibilitySpeed == VelocityTypes.slow
+                          provider.accessibilitySetting.sweepSpeed == VelocityTypes.slow
                               ? true
                               : false,
                       onTap: () {
