@@ -173,7 +173,7 @@ class AccessibilityScreen extends ConsumerWidget {
                     TabWidget(
                       title: 'user.accessibility.selection'.trl,
                       image: AppImages.kAccessibilityIcon1,
-                      selected: provider.selectionType == SweepModes.elements
+                      selected: provider.accessibilitySetting.sweepMode == SweepModes.elements
                           ? true
                           : false,
                       onTap: () {
@@ -183,7 +183,7 @@ class AccessibilityScreen extends ConsumerWidget {
                     TabWidget(
                       title: 'user.accessibility.swept'.trl,
                       image: AppImages.kAccessibilityIcon2,
-                      selected: provider.selectionType == SweepModes.sweep
+                      selected: provider.accessibilitySetting.sweepMode == SweepModes.sweep
                           ? true
                           : false,
                       onTap: () {
