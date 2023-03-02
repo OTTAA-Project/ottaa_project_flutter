@@ -24,7 +24,7 @@ class AccessibilityScreen extends ConsumerWidget {
     var sliderValue = ref.watch(userSettingsProvider).sliderValue;
     final provider = ref.read(userSettingsProvider);
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         provider.updateAccessibilitySettings();
         return true;
       },
@@ -115,13 +115,12 @@ class AccessibilityScreen extends ConsumerWidget {
                           title: 'user.accessibility.press'.trl,
                           onTap: () {
                             provider.changeDevice(
-                                devicesAccessibility: DevicesAccessibility.press);
+                                devicesAccessibility:
+                                    DevicesAccessibility.press);
                           },
                           image: AppImages.kAccessibilityPhoto1,
-                          selected: provider.selectedAccessibility ==
-                                  DevicesAccessibility.press
-                              ? true
-                              : false,
+                          selected: provider.accessibilitySetting.sweepMode ==
+                              DevicesAccessibility.press,
                         ),
                         AccessibilityWidget(
                           title: 'user.accessibility.scroll'.trl,
@@ -131,10 +130,8 @@ class AccessibilityScreen extends ConsumerWidget {
                                     DevicesAccessibility.scroll);
                           },
                           image: AppImages.kAccessibilityPhoto2,
-                          selected: provider.selectedAccessibility ==
-                                  DevicesAccessibility.scroll
-                              ? true
-                              : false,
+                          selected: provider.accessibilitySetting.sweepMode ==
+                              DevicesAccessibility.scroll,
                         ),
                         AccessibilityWidget(
                           title: 'user.accessibility.sip'.trl,
@@ -144,10 +141,8 @@ class AccessibilityScreen extends ConsumerWidget {
                                     DevicesAccessibility.sipuff);
                           },
                           image: AppImages.kAccessibilityPhoto3,
-                          selected: provider.selectedAccessibility ==
-                                  DevicesAccessibility.sipuff
-                              ? true
-                              : false,
+                          selected: provider.accessibilitySetting.sweepMode ==
+                              DevicesAccessibility.sipuff,
                         ),
                       ],
                     ),
@@ -214,32 +209,34 @@ class AccessibilityScreen extends ConsumerWidget {
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ChooserWidget(
-                      selected: provider.accessibilitySpeed == VelocityTypes.slow
-                          ? true
-                          : false,
+                      selected:
+                          provider.accessibilitySpeed == VelocityTypes.slow
+                              ? true
+                              : false,
                       onTap: () {
-                        provider.changeAccessibilitySpeed(speed: VelocityTypes.slow);
+                        provider.changeAccessibilitySpeed(
+                            speed: VelocityTypes.slow);
                       },
                       title: 'global.slow'.trl,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: ChooserWidget(
-                        selected: provider.accessibilitySpeed == VelocityTypes.mid
-                            ? true
-                            : false,
+                        selected: provider.accessibilitySetting.sweepSpeed ==
+                            VelocityTypes.mid,
                         onTap: () {
-                          provider.changeAccessibilitySpeed(speed: VelocityTypes.mid);
+                          provider.changeAccessibilitySpeed(
+                              speed: VelocityTypes.mid);
                         },
                         title: 'global.default'.trl,
                       ),
                     ),
                     ChooserWidget(
-                      selected: provider.accessibilitySpeed == VelocityTypes.fast
-                          ? true
-                          : false,
+                      selected: provider.accessibilitySetting.sweepSpeed ==
+                          VelocityTypes.fast,
                       onTap: () {
-                        provider.changeAccessibilitySpeed(speed: VelocityTypes.fast);
+                        provider.changeAccessibilitySpeed(
+                            speed: VelocityTypes.fast);
                       },
                       title: 'global.fast'.trl,
                     ),
