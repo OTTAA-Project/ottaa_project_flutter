@@ -21,7 +21,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final pictoWords = ref.watch(homeProvider).pictoWords;
-    final currentWord = ref.watch(homeProvider).selectedWord;
+    final int? currentWord = ref.watch(homeProvider).selectedWord;
     final scrollCon = ref.watch(homeProvider).scrollController;
     return SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -85,7 +85,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                             "assets/img/${pict.text}.webp",
                           ),
                     text: pict.text,
-                    disable: pict.text == currentWord ? false : true,
+                    disable: index == currentWord ? false : true,
                   ),
                 );
               },

@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
@@ -215,6 +216,8 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                           await provider.uploadData(userId: provider.userId);
                           provider.type = CustomiseDataType.defaultCase;
                           provider.groupsFetched = false;
+
+                          await ref.read(profileProvider).fetchUserById(provider.userId);
                           provider.notify();
                           context.pop();
                           context.pop();

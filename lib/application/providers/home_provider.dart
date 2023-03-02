@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/user_extensi
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
@@ -67,15 +68,32 @@ class HomeProvider extends ChangeNotifier {
 
   bool talkEnabled = true;
   bool show = false;
-  String selectedWord = '';
+  int? selectedWord;
   ScrollController scrollController = ScrollController();
+
+  HomeScreenStatus status = HomeScreenStatus.pictos;
+
+  // Home Tabs
+  late String currentTabGroup;
+  ScrollController groupTabsScrollController = ScrollController();
+  ScrollController pictoTabsScrollController = ScrollController();
+
+  //Home grids
+  String? currentGridGroup;
+  ScrollController gridScrollController = ScrollController();
+
+  void setCurrentGroup(String group) {
+    currentTabGroup = group;
+    pictoTabsScrollController.jumpTo(0);
+    notifyListeners();
+  }
 
   Future<void> init() async {
     await fetchPictograms();
 
     basicPictograms = predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
 
-    print(basicPictograms);
+    currentTabGroup = groups.keys.first;
 
     buildSuggestion();
     notifyListeners();
@@ -106,6 +124,11 @@ class HomeProvider extends ChangeNotifier {
   void addPictogram(Picto picto) {
     pictoWords.add(picto);
     suggestedPicts.clear();
+
+    if (pictoWords.length > 5) {
+      scrollController.jumpTo(scrollController.offset + 100);
+    }
+
     buildSuggestion(picto.id);
     notifyListeners();
   }
@@ -121,8 +144,20 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictograms() async {
-    final pictos = (await _pictogramsService.getAllPictograms());
-    final groupsData = await _groupsService.getAllGroups();
+    List<Picto>? pictos;
+    List<Group>? groupsData;
+
+    if (patientState.state != null) {
+      pictos = patientState.user.pictos[patientState.user.settings.language];
+
+      groupsData = patientState.user.groups[patientState.user.settings.language];
+
+      print(patientState.user.groups);
+    }
+
+    pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
+    groupsData ??= (await _groupsService.getAllGroups()).where((element) => !element.block).toList();
+
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
 
@@ -176,8 +211,11 @@ class HomeProvider extends ChangeNotifier {
 
     if (suggestedPicts.length < suggestedQuantity) {
       int pictosLeft = suggestedQuantity - suggestedPicts.length;
-      suggestedPicts.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
+      print('pictos left $pictosLeft');
+      suggestedPicts.addAll(basicPictograms);
     }
+
+    print(basicPictograms.length);
 
     suggestedIndex = id;
     // suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
@@ -199,7 +237,18 @@ class HomeProvider extends ChangeNotifier {
 
     List<Picto> pictos = suggestedPicts.sublist(start, min(suggestedPicts.length, (indexPage * suggestedQuantity) + suggestedQuantity));
 
-    if (pictos.length < suggestedQuantity) {
+    if (pictos.isEmpty) {
+      return List.generate(4, (index) {
+        return Picto(
+            id: "-777",
+            text: "",
+            type: 0,
+            resource: AssetsImage(
+              asset: "",
+              network: null,
+            ));
+      });
+    } else if (pictos.length < suggestedQuantity) {
       int pictosLeft = suggestedQuantity - pictos.length;
       print("Pictos Left: $pictosLeft");
       pictos.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
@@ -259,19 +308,15 @@ class HomeProvider extends ChangeNotifier {
     } else {
       show = true;
       notifyListeners();
-      print('totoal values are');
-      print(scrollController.position.maxScrollExtent);
-      int i = 0;
-      for (var e in pictoWords) {
-        selectedWord = e.text;
+      for (var i = 0; i < pictoWords.length; i++) {
+        selectedWord = i;
         scrollController.animateTo(
           i == 0 ? 0 : i * 45,
           duration: const Duration(microseconds: 50),
           curve: Curves.easeIn,
         );
         notifyListeners();
-        await _tts.speak(e.text);
-        i++;
+        await _tts.speak(pictoWords[i].text);
       }
       scrollController.animateTo(
         0,
@@ -299,9 +344,33 @@ class HomeProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  void scrollUp(ScrollController controller, double amount) {
+    int currentPosition = controller.position.pixels.toInt();
+
+    if (currentPosition == 0) return;
+
+    controller.animateTo(
+      currentPosition - amount,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
+  }
+
+  void scrollDown(ScrollController controller, double amount) {
+    int currentPosition = controller.position.pixels.toInt();
+
+    if (currentPosition >= controller.position.maxScrollExtent) return;
+
+    controller.animateTo(
+      currentPosition + amount,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
+  }
 }
 
-final ChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotifierProvider<HomeProvider>((ref) {
+final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final sentencesService = GetIt.I<SentencesRepository>();

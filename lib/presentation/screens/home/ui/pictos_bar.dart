@@ -7,8 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 
@@ -20,25 +22,6 @@ class PictosBarUI extends ConsumerStatefulWidget {
 }
 
 class _PictosBarState extends ConsumerState<PictosBarUI> {
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      final size = MediaQuery.of(context).size;
-      int pictoSize = 116;
-
-      //We are using size.height because at this time the screen is not rotated
-      int pictoCount = kIsTablet ? 6 : 4;
-
-      final setSuggested = ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
-
-      setSuggested(pictoCount);
-
-      await ref.read(homeProvider.select((value) => value.init))();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -75,20 +58,16 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    BaseButton(
-                      onPressed: pictos.isEmpty ? null : () {},
-                      style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(const Size(64, 64)),
-                        backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                        overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                        shape: MaterialStateProperty.all(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(9)),
-                          ),
-                        ),
-                        padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                        elevation: MaterialStateProperty.all(0),
-                      ),
+                    HomeButton(
+                      onPressed: pictos.isEmpty
+                          ? null
+                          : () {
+                              final provider = ref.watch(homeProvider);
+
+                              provider.status = HomeScreenStatus.grid;
+                              provider.notify();
+                            },
+                      size: const Size(64, 64),
                       child: Image.asset(
                         AppImages.kSearchOrange,
                       ),
@@ -150,6 +129,26 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
         itemBuilder: (context, index) {
           final e = pictos[index];
 
+          if (e.id == "-777") {
+            return FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Container(
+                  width: 116,
+                  height: 144,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(9),
+                    border: Border.all(
+                      color: Colors.grey.withOpacity(.12),
+                      width: 1,
+                    ),
+                  ),
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  )),
+            );
+          }
+
           return PictoWidget(
             onTap: () {
               addPictogram(e);
@@ -168,6 +167,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                     "assets/img/${e.text}.webp",
                   ),
             text: e.text,
+            colorNumber: e.type,
             width: 116,
             height: 144,
           );

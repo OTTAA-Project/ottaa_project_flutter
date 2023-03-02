@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_grid.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_tabs.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/pictos_bar.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/talk_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/word_bar.dart';
@@ -25,6 +28,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       blockLandscapeMode();
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+
+      final size = MediaQuery.of(context).size;
+      int pictoSize = 116;
+
+      //We are using size.height because at this time the screen is not rotated
+      int pictoCount = kIsTablet ? 6 : 4;
+
+      final setSuggested = ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
+
+      setSuggested(pictoCount);
+
+      await ref.read(homeProvider.select((value) => value.init))();
       setState(() {});
     });
   }
@@ -35,6 +50,37 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
 
     super.dispose();
+  }
+
+  Widget currentHomeStatus(HomeScreenStatus status) {
+    final Size size = MediaQuery.of(context).size;
+
+    switch (status) {
+      case HomeScreenStatus.pictos:
+        return Flexible(
+          fit: FlexFit.loose,
+          flex: 2,
+          child: SizedBox(
+            width: size.width,
+            height: 312,
+            child: const PictosBarUI(),
+          ),
+        );
+      case HomeScreenStatus.grid:
+        return const Expanded(
+          flex: 2,
+          child: HomeGridUI(),
+        );
+      case HomeScreenStatus.tabs:
+        return const Expanded(
+          flex: 2,
+          child: HomeTabsUI(),
+        );
+      case HomeScreenStatus.favorites:
+
+      case HomeScreenStatus.history:
+        return Container();
+    }
   }
 
   @override
@@ -57,16 +103,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 111),
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 2,
-                    child: SizedBox(
-                      width: size.width,
-                      height: 312,
-                      child: const PictosBarUI(),
-                    ),
+                  SizedBox(
+                    width: size.width,
+                    height: 111,
+                    // child: const WordBarUI(),
                   ),
+                  currentHomeStatus(provider.status),
                 ],
               ),
             ),

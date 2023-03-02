@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 import 'package:collection/collection.dart';
@@ -22,39 +24,80 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
     super.initState();
   }
 
+  Widget buildExitButton({required HomeScreenStatus status}) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    switch (status) {
+      case HomeScreenStatus.pictos:
+        return Row(
+          children: [
+            GestureDetector(
+              onLongPressEnd: (details) {
+                //TODO: Show back dialog :)
+              },
+              child: Container(
+                width: 20,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: colorScheme.primary,
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 32),
+          ],
+        );
+      case HomeScreenStatus.grid:
+      case HomeScreenStatus.tabs:
+        return Row(
+          children: [
+            const SizedBox(width: 0),
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: HomeButton(
+                onPressed: () {
+                  if (status == HomeScreenStatus.tabs) {
+                    ref.read(homeProvider).status = HomeScreenStatus.pictos;
+                  } else {
+                    ref.read(homeProvider).currentGridGroup != null ? ref.read(homeProvider).currentGridGroup = null : ref.read(homeProvider).status = HomeScreenStatus.pictos;
+                  }
+                  ref.read(homeProvider).notify();
+                },
+                size: const Size(40, 40),
+                child: const Icon(Icons.close_rounded),
+              ),
+            ),
+            const SizedBox(width: 12),
+          ],
+        );
+
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final colorScheme = Theme.of(context).colorScheme;
     final pictoWords = ref.watch(homeProvider).pictoWords;
-    final selectedWord = ref.watch(homeProvider).selectedWord;
+    final int? selectedWord = ref.watch(homeProvider).selectedWord;
     final show = ref.watch(homeProvider).show;
 
     final pictosIsEmpty = pictoWords.isEmpty;
     final scrollCon = ref.watch(homeProvider).scrollController;
 
     final removeLastPictogram = ref.read(homeProvider.select((value) => value.removeLastPictogram));
+
+    final status = ref.watch(homeProvider.select((value) => value.status));
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
-          GestureDetector(
-            onLongPressEnd: (details) {
-              //TODO: Show back dialog :)
-            },
-            child: Container(
-              width: 20,
-              height: 80,
-              decoration: BoxDecoration(
-                color: colorScheme.primary,
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 32),
+          buildExitButton(status: status),
           SizedBox(
             height: 80,
             width: 445,
@@ -84,6 +127,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                     width: 64,
                     height: 140,
                     onTap: () {},
+                    colorNumber: pict.type,
                     image: pict.resource.network != null
                         ? CachedNetworkImage(
                             imageUrl: pict.resource.network!,
@@ -106,7 +150,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                             "assets/img/${pict.text}.webp",
                           ),
                     text: pict.text,
-                    disable: show && selectedWord == pict.text ? true : false,
+                    disable: show && selectedWord == index ? true : false,
                   ),
                 );
               },
