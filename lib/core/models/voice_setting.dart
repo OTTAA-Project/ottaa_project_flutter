@@ -50,16 +50,16 @@ class VoiceSetting {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'voicesNames': voicesNames,
-      'voicesSpeed': voicesSpeed,
+      'name': voicesNames,
+      'speed': voicesSpeed,
       'mutePict': mutePict,
     };
   }
 
   factory VoiceSetting.fromMap(Map<String, dynamic> map) {
     return VoiceSetting(
-      voicesNames: Map.from(map['voicesNames'] as dynamic),
-      voicesSpeed: Map.from(map['voicesSpeed'] as dynamic).map((key, value) {
+      voicesNames: Map.from(map['name'] as dynamic),
+      voicesSpeed: Map.from(map['speed'] as dynamic).map((key, value) {
         return MapEntry(key, VelocityTypes.values.firstWhere((element) => element.name == value.toString(), orElse: () => VelocityTypes.mid));
       }),
       mutePict: map['mutePict'] as bool,
@@ -71,7 +71,7 @@ class VoiceSetting {
   factory VoiceSetting.fromJson(String source) => VoiceSetting.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'VoiceAccessibilitySetting(voicesNames: $voicesNames, voicesSpeed: $voicesSpeed, mutePict: $mutePict)';
+  String toString() => 'VoiceAccessibilitySetting(name: $voicesNames, speed: $voicesSpeed, mutePict: $mutePict)';
 
   @override
   bool operator ==(covariant VoiceSetting other) {

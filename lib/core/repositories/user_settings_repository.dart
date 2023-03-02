@@ -10,4 +10,6 @@ abstract class UserSettingRepository {
 
   Future<void> updateMainSettings(
       {required Map<String, dynamic> map, required String userId});
+
+  Future<dynamic> fetchUserSettings({required String userId});
 }

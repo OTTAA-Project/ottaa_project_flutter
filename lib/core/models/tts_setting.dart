@@ -40,17 +40,17 @@ class TTSSetting {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'voiceSetting': voiceSetting.toMap(),
-      'subtitlesSetting': subtitlesSetting.toMap(),
+      'voice': voiceSetting.toMap(),
+      'subtitles': subtitlesSetting.toMap(),
     };
   }
 
   factory TTSSetting.fromMap(Map<String, dynamic> map) {
     return TTSSetting(
       voiceSetting:
-          VoiceSetting.fromMap(map['voiceSetting'] as Map<String, dynamic>),
+          VoiceSetting.fromMap(map['voice'] as Map<String, dynamic>),
       subtitlesSetting: SubtitlesSetting.fromMap(
-          map['subtitlesSetting'] as Map<String, dynamic>),
+          map['subtitles'] as Map<String, dynamic>),
     );
   }
 
@@ -61,7 +61,7 @@ class TTSSetting {
 
   @override
   String toString() =>
-      'TTSSetting(voiceSetting: $voiceSetting, subtitlesSetting: $subtitlesSetting)';
+      'TTSSetting(voice: $voiceSetting, subtitles: $subtitlesSetting)';
 
   @override
   bool operator ==(covariant TTSSetting other) {

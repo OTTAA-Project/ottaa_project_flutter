@@ -647,4 +647,15 @@ class ServerService implements ServerRepository {
 
     ref.update(map);
   }
+
+  @override
+  Future<dynamic> fetchUserSettings({required String userId}) async {
+    final ref = _database.child('$userId/');
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    }
+    return const Left("no_data_found");
+  }
 }

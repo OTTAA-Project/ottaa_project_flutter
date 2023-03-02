@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -11,9 +13,7 @@ import 'package:ottaa_project_flutter/core/models/accessibility_setting.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
-import 'package:ottaa_project_flutter/core/models/subtitles_setting.dart';
 import 'package:ottaa_project_flutter/core/models/tts_setting.dart';
-import 'package:ottaa_project_flutter/core/models/voice_setting.dart';
 import 'package:ottaa_project_flutter/core/repositories/user_settings_repository.dart';
 
 class UserSettingsProvider extends ChangeNotifier {
@@ -47,28 +47,38 @@ class UserSettingsProvider extends ChangeNotifier {
   String language = 'es_AR';
   late AccessibilitySetting accessibilitySetting;
   late LanguageSetting languageSetting;
-  late SubtitlesSetting subtitlesSetting;
   late LayoutSetting layoutSetting;
-  late VoiceSetting voiceSetting;
   late TTSSetting ttsSetting;
 
   void notify() {
     notifyListeners();
   }
 
+  Future<dynamic> fetchUserSettings() async {
+    return await _userSettingRepository.fetchUserSettings(userId: userId);
+  }
+
   Future<void> init() async {
     language = _i18n.currentLanguage!.locale.toString();
-    initialiseSettings();
+    await initialiseSettings();
   }
 
   Future<void> initialiseSettings() async {
-    // final rs = {};
-    // AccessibilitySetting.fromMap(rs['accesiblity']);
-    if (false) {
+    final res = await fetchUserSettings();
+    if (res.isRight) {
+      final data = res.right;
+      accessibilitySetting = AccessibilitySetting.fromMap(
+          jsonDecode(jsonEncode(data['accessibility']))
+              as Map<String, dynamic>);
+      languageSetting = LanguageSetting.fromMap(
+          jsonDecode(jsonEncode(data['language'])) as Map<String, dynamic>);
+      ttsSetting = TTSSetting.fromMap(
+          jsonDecode(jsonEncode(data['tts'])) as Map<String, dynamic>);
+      layoutSetting = LayoutSetting.fromMap(
+          jsonDecode(jsonEncode(data['layout'])) as Map<String, dynamic>);
     } else {
       accessibilitySetting = AccessibilitySetting.empty();
       languageSetting = LanguageSetting.empty();
-      subtitlesSetting = SubtitlesSetting.empty();
       layoutSetting = LayoutSetting(
         display: DisplayTypes.grid,
         cleanup: true,
@@ -83,7 +93,6 @@ class UserSettingsProvider extends ChangeNotifier {
           no: true,
         ),
       );
-      voiceSetting = VoiceSetting.empty();
       ttsSetting = TTSSetting.empty();
     }
   }
@@ -101,8 +110,6 @@ class UserSettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchUserSettings({required String userId}) async {}
-
   Future<void> updateLanguageSettings() async {
     _userSettingRepository.updateLanguageSettings(
       map: languageSetting.toMap(),
@@ -114,15 +121,15 @@ class UserSettingsProvider extends ChangeNotifier {
     _userSettingRepository.updateVoiceAndSubtitleSettings(
       map: {
         "voice": {
-          "name": voiceSetting.voicesNames,
-          "speed": voiceSetting.voicesSpeed
+          "name": ttsSetting.voiceSetting.voicesNames,
+          "speed": ttsSetting.voiceSetting.voicesSpeed
               .map((key, value) => MapEntry(key, value.name)),
-          "mutePict": voiceSetting.mutePict
+          "mutePict": ttsSetting.voiceSetting.mutePict
         },
         "subtitles": {
-          "show": subtitlesSetting.show,
-          "size": subtitlesSetting.size.name,
-          "caps": subtitlesSetting.caps
+          "show": ttsSetting.subtitlesSetting.show,
+          "size": ttsSetting.subtitlesSetting.size.name,
+          "caps": ttsSetting.subtitlesSetting.caps
         }
       },
       userId: userId,
@@ -147,38 +154,38 @@ class UserSettingsProvider extends ChangeNotifier {
 
   void changeVoiceType({required String type}) {
     voiceType = type;
-    voiceSetting.voicesNames[language] = type;
+    ttsSetting.voiceSetting.voicesNames[language] = type;
     notifyListeners();
   }
 
   void changeVoiceSpeed({required VelocityTypes type}) {
     voiceRate = type.name;
     print(type);
-    voiceSetting.voicesSpeed[language] = type;
+    ttsSetting.voiceSetting.voicesSpeed[language] = type;
     notifyListeners();
   }
 
   void changeMute({required bool value}) {
-    voiceSetting.mutePict = value;
+    ttsSetting.voiceSetting.mutePict = value;
     mute = value;
     notifyListeners();
   }
 
   void changeSubtitle({required bool value}) {
-    subtitlesSetting.show = value;
+    ttsSetting.subtitlesSetting.show = value;
     show = value;
     notifyListeners();
   }
 
   void changeTextType({required SizeTypes type}) {
     size = type;
-    subtitlesSetting.size = type;
+    ttsSetting.subtitlesSetting.size = type;
     notifyListeners();
   }
 
   void changeCapital({required bool value}) {
     capital = value;
-    subtitlesSetting.caps = value;
+    ttsSetting.subtitlesSetting.caps = value;
     notifyListeners();
   }
 

@@ -31,4 +31,9 @@ class UserSettingsService extends UserSettingRepository {
       {required Map<String, dynamic> map, required String userId}) async {
     _serverRepository.updateMainSettings(map: map, userId: userId);
   }
+
+  @override
+  Future<dynamic> fetchUserSettings({required String userId}) async {
+    return _serverRepository.fetchUserSettings(userId: userId);
+  }
 }
