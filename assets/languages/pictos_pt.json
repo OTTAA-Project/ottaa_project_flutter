@@ -1,18 +1,18 @@
 {
     "XxXxXxX": {
-      "en": "escort",
-      "pt": "escolta"
+        "en": "escort",
+        "pt": "escolta"
     },
     "aAaAaAaA": {
-      "en": "hello",
-      "pt": "hola"
+        "en": "hello",
+        "pt": "hola"
     },
     "bBbBbBbB": {
-      "en": "dog",
-      "pt": "perro"
+        "en": "dog",
+        "pt": "perro"
     },
     "cCcCcCcCcC": {
-      "en": "phone",
-      "pt": "telefono"
-    }, 
+        "en": "phone",
+        "pt": "telefono"
+    }
 }
