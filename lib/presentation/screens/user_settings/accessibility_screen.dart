@@ -119,7 +119,7 @@ class AccessibilityScreen extends ConsumerWidget {
                                     DevicesAccessibility.press);
                           },
                           image: AppImages.kAccessibilityPhoto1,
-                          selected: provider.accessibilitySetting.sweepMode ==
+                          selected: provider.accessibilitySetting.device ==
                               DevicesAccessibility.press,
                         ),
                         AccessibilityWidget(
@@ -130,7 +130,7 @@ class AccessibilityScreen extends ConsumerWidget {
                                     DevicesAccessibility.scroll);
                           },
                           image: AppImages.kAccessibilityPhoto2,
-                          selected: provider.accessibilitySetting.sweepMode ==
+                          selected: provider.accessibilitySetting.device ==
                               DevicesAccessibility.scroll,
                         ),
                         AccessibilityWidget(
@@ -141,7 +141,7 @@ class AccessibilityScreen extends ConsumerWidget {
                                     DevicesAccessibility.sipuff);
                           },
                           image: AppImages.kAccessibilityPhoto3,
-                          selected: provider.accessibilitySetting.sweepMode ==
+                          selected: provider.accessibilitySetting.device ==
                               DevicesAccessibility.sipuff,
                         ),
                       ],
