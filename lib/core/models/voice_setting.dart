@@ -51,7 +51,9 @@ class VoiceSetting {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': voicesNames,
-      'speed': voicesSpeed,
+      'speed': voicesSpeed.map((key, value) {
+        return MapEntry(key, value.name);
+      }),
       'mutePict': mutePict,
     };
   }

@@ -56,7 +56,7 @@ class ProfileNotifier extends ChangeNotifier {
   String yearForDropDown = "0";
 
   //connected users screen
-  List<BaseUserModel> connectedUsersData = [];
+  List<PatientUserModel> connectedUsersData = [];
 
   List<bool> expasionList = [];
   bool dataFetched = false;
@@ -191,7 +191,7 @@ class ProfileNotifier extends ChangeNotifier {
         final json = res.right;
 
         connectedUsersData.add(
-          BaseUserModel.fromMap(json),
+          PatientUserModel.fromMap(json),
         );
         connectedUsersProfileDataExpanded.add(false);
       }

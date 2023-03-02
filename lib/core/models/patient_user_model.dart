@@ -232,12 +232,15 @@ class PatientSettings extends UserSettings {
     };
   }
 
+  /// [Deprecated] pastientSettings.language is not more a String
+  /// Go to the languageSetting
+  ///
   factory PatientSettings.fromMap(Map<String, dynamic> map) {
     return PatientSettings(
       data: UserData.fromMap(Map.from(map['data'] as Map<dynamic, dynamic>)),
-      language: map['language'] as String,
+      language: "es_AR",
       payment: map['payment'] != null ? Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>)) : Payment.none(),
-      layout: map['layout'] != null ? LayoutSetting.fromMap(Map.from(map['layout'] as Map<dynamic, dynamic>)) : LayoutSetting.build(),
+      layout: map['layout'] != null ? LayoutSetting.fromMap(Map.from(map['layout'] as Map<dynamic, dynamic>)) : LayoutSetting.empty(),
       accessibility: map['accessibility'] != null ? AccessibilitySetting.fromMap(Map.from(map['accessibility'] as Map<dynamic, dynamic>)) : AccessibilitySetting.empty(),
       languageSetting: map['languageSetting'] != null ? LanguageSetting.fromMap(Map.from(map['languageSetting'] as Map<dynamic, dynamic>)) : LanguageSetting.empty(),
       tts: map['tts'] != null ? TTSSetting.fromMap(Map.from(map['tts'] as Map<dynamic, dynamic>)) : TTSSetting.empty(),

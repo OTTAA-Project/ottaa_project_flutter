@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';

@@ -24,10 +24,10 @@ class LayoutSetting {
     required this.shortcuts,
   });
 
-  factory LayoutSetting.build() => LayoutSetting(
+  factory LayoutSetting.empty() => LayoutSetting(
         display: DisplayTypes.grid,
         cleanup: false,
-        shortcuts: ShortcutsModel.none(),
+        shortcuts: ShortcutsModel.all(),
       );
 
   LayoutSetting copyWith({

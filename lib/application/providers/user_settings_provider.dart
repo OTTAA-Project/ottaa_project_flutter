@@ -3,7 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
+import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
@@ -12,8 +16,11 @@ import 'package:ottaa_project_flutter/core/enums/velocity_types.dart';
 import 'package:ottaa_project_flutter/core/models/accessibility_setting.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/models/tts_setting.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:ottaa_project_flutter/core/repositories/user_settings_repository.dart';
 
 class UserSettingsProvider extends ChangeNotifier {
@@ -21,13 +28,19 @@ class UserSettingsProvider extends ChangeNotifier {
 
   final UserSettingRepository _userSettingRepository;
 
+  final UserNotifier _userNotifier;
+  final PatientNotifier _patientNotifier;
+
+  final LocalDatabaseRepository _localDatabaseRepository;
+
   UserSettingsProvider(
     this._i18n,
     this._userSettingRepository,
+    this._userNotifier,
+    this._patientNotifier,
+    this._localDatabaseRepository,
   );
 
-  ///also for the caregiver to change it
-  String userId = '';
   bool deleteText = true;
   bool shortcut = true;
   List<bool> selectedShortcuts = [true, true, true, true, true, true, true];
@@ -50,12 +63,14 @@ class UserSettingsProvider extends ChangeNotifier {
   late LayoutSetting layoutSetting;
   late TTSSetting ttsSetting;
 
+  PatientUserModel get currentUser => _patientNotifier.state ?? _userNotifier.user.patient;
+
   void notify() {
     notifyListeners();
   }
 
   Future<dynamic> fetchUserSettings() async {
-    return await _userSettingRepository.fetchUserSettings(userId: userId);
+    return await _userSettingRepository.fetchUserSettings(userId: currentUser.id);
   }
 
   Future<void> init() async {
@@ -67,55 +82,18 @@ class UserSettingsProvider extends ChangeNotifier {
     final res = await fetchUserSettings();
     if (res.isRight) {
       final data = res.right;
-      accessibilitySetting = data['accessibility'] != null
-          ? AccessibilitySetting.fromMap(
-              jsonDecode(jsonEncode(data['accessibility']))
-                  as Map<String, dynamic>)
-          : AccessibilitySetting.empty();
-      languageSetting = data['language'] != null
-          ? LanguageSetting.fromMap(
-              jsonDecode(jsonEncode(data['language'])) as Map<String, dynamic>)
-          : LanguageSetting.empty();
-      ttsSetting = data['tts'] != null
-          ? TTSSetting.fromMap(
-              jsonDecode(jsonEncode(data['tts'])) as Map<String, dynamic>)
-          : TTSSetting.empty();
-      layoutSetting = data['layout']['clearup'] != null
-          ? LayoutSetting.fromMap(
-              jsonDecode(jsonEncode(data['layout'])) as Map<String, dynamic>)
-          : LayoutSetting(
-              display: DisplayTypes.grid,
-              cleanup: true,
-              shortcuts: ShortcutsModel(
-                enable: true,
-                favs: true,
-                history: true,
-                camera: true,
-                share: true,
-                games: true,
-                yes: true,
-                no: true,
-              ),
-            );
+      accessibilitySetting = data['accessibility'] != null ? AccessibilitySetting.fromJson(jsonEncode(data['accessibility'])) : AccessibilitySetting.empty();
+      languageSetting = data['language'] != null ? LanguageSetting.fromJson(jsonEncode(data['language'])) : LanguageSetting.empty();
+      ttsSetting = data['tts'] != null ? TTSSetting.fromJson(jsonEncode(data['tts'])) : TTSSetting.empty();
+      layoutSetting = data['layout'] != null ? LayoutSetting.fromJson((jsonEncode(data['layout']))) : LayoutSetting.empty();
     } else {
       accessibilitySetting = AccessibilitySetting.empty();
       languageSetting = LanguageSetting.empty();
-      layoutSetting = LayoutSetting(
-        display: DisplayTypes.grid,
-        cleanup: true,
-        shortcuts: ShortcutsModel(
-          enable: true,
-          favs: true,
-          history: true,
-          camera: true,
-          share: true,
-          games: true,
-          yes: true,
-          no: true,
-        ),
-      );
+      layoutSetting = LayoutSetting.empty();
       ttsSetting = TTSSetting.empty();
     }
+
+    notify();
   }
 
   Future<void> changeLanguage({required String languageCode}) async {
@@ -134,43 +112,55 @@ class UserSettingsProvider extends ChangeNotifier {
   Future<void> updateLanguageSettings() async {
     _userSettingRepository.updateLanguageSettings(
       map: languageSetting.toMap(),
-      userId: userId,
+      userId: currentUser.id,
     );
+
+    if (_userNotifier.user.isCaregiver) return;
+
+    currentUser.patientSettings.languageSetting = languageSetting;
+
+    _localDatabaseRepository.setUser(currentUser);
   }
 
   Future<void> updateVoiceAndSubtitleSettings() async {
     _userSettingRepository.updateVoiceAndSubtitleSettings(
-      map: {
-        "voice": {
-          "name": ttsSetting.voiceSetting.voicesNames,
-          "speed": ttsSetting.voiceSetting.voicesSpeed
-              .map((key, value) => MapEntry(key, value.name)),
-          "mutePict": ttsSetting.voiceSetting.mutePict
-        },
-        "subtitles": {
-          "show": ttsSetting.subtitlesSetting.show,
-          "size": ttsSetting.subtitlesSetting.size.name,
-          "caps": ttsSetting.subtitlesSetting.caps
-        }
-      },
-      userId: userId,
+      map: ttsSetting.toMap(),
+      userId: currentUser.id,
     );
+
+    if (_userNotifier.user.isCaregiver) return;
+
+    currentUser.patientSettings.accessibility = accessibilitySetting;
+
+    _localDatabaseRepository.setUser(currentUser);
   }
 
   Future<void> updateAccessibilitySettings() async {
     print(accessibilitySetting.toMap());
     _userSettingRepository.updateAccessibilitySettings(
       map: accessibilitySetting.toMap(),
-      userId: userId,
+      userId: currentUser.id,
     );
+
+    if (_userNotifier.user.isCaregiver) return;
+
+    currentUser.patientSettings.accessibility = accessibilitySetting;
+
+    _localDatabaseRepository.setUser(currentUser);
   }
 
   Future<void> updateMainSettings() async {
     print(layoutSetting.toMap());
     _userSettingRepository.updateMainSettings(
       map: layoutSetting.toMap(),
-      userId: userId,
+      userId: currentUser.id,
     );
+
+    if (_userNotifier.user.isCaregiver) return;
+
+    currentUser.patientSettings.layout = layoutSetting;
+
+    _localDatabaseRepository.setUser(currentUser);
   }
 
   void changeVoiceType({required String type}) {
@@ -264,9 +254,14 @@ class UserSettingsProvider extends ChangeNotifier {
   }
 }
 
-final userSettingsProvider =
-    ChangeNotifierProvider<UserSettingsProvider>((ref) {
+final userSettingsProvider = ChangeNotifierProvider<UserSettingsProvider>((ref) {
   final i18N = GetIt.I<I18N>();
   final userSettingsService = GetIt.I<UserSettingRepository>();
-  return UserSettingsProvider(i18N, userSettingsService);
+
+  final UserNotifier userNotifierState = ref.watch(userNotifier.notifier);
+  final PatientNotifier patientNotifierState = ref.watch(patientNotifier.notifier);
+
+  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+
+  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository);
 });

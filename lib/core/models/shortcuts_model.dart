@@ -52,7 +52,16 @@ class ShortcutsModel {
         yes: false,
         no: false,
       );
-
+  factory ShortcutsModel.all() => ShortcutsModel(
+        enable: true,
+        favs: true,
+        history: true,
+        camera: true,
+        share: true,
+        games: true,
+        yes: true,
+        no: true,
+      );
   ShortcutsModel copyWith({
     bool? favs,
     bool? history,
