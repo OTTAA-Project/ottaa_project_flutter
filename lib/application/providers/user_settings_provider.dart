@@ -67,15 +67,36 @@ class UserSettingsProvider extends ChangeNotifier {
     final res = await fetchUserSettings();
     if (res.isRight) {
       final data = res.right;
-      accessibilitySetting = AccessibilitySetting.fromMap(
-          jsonDecode(jsonEncode(data['accessibility']))
-              as Map<String, dynamic>);
-      languageSetting = LanguageSetting.fromMap(
-          jsonDecode(jsonEncode(data['language'])) as Map<String, dynamic>);
-      ttsSetting = TTSSetting.fromMap(
-          jsonDecode(jsonEncode(data['tts'])) as Map<String, dynamic>);
-      layoutSetting = LayoutSetting.fromMap(
-          jsonDecode(jsonEncode(data['layout'])) as Map<String, dynamic>);
+      accessibilitySetting = data['accessibility'] != null
+          ? AccessibilitySetting.fromMap(
+              jsonDecode(jsonEncode(data['accessibility']))
+                  as Map<String, dynamic>)
+          : AccessibilitySetting.empty();
+      languageSetting = data['language'] != null
+          ? LanguageSetting.fromMap(
+              jsonDecode(jsonEncode(data['language'])) as Map<String, dynamic>)
+          : LanguageSetting.empty();
+      ttsSetting = data['tts'] != null
+          ? TTSSetting.fromMap(
+              jsonDecode(jsonEncode(data['tts'])) as Map<String, dynamic>)
+          : TTSSetting.empty();
+      layoutSetting = data['layout']['clearup'] != null
+          ? LayoutSetting.fromMap(
+              jsonDecode(jsonEncode(data['layout'])) as Map<String, dynamic>)
+          : LayoutSetting(
+              display: DisplayTypes.grid,
+              cleanup: true,
+              shortcuts: ShortcutsModel(
+                enable: true,
+                favs: true,
+                history: true,
+                camera: true,
+                share: true,
+                games: true,
+                yes: true,
+                no: true,
+              ),
+            );
     } else {
       accessibilitySetting = AccessibilitySetting.empty();
       languageSetting = LanguageSetting.empty();
@@ -99,7 +120,7 @@ class UserSettingsProvider extends ChangeNotifier {
 
   Future<void> changeLanguage({required String languageCode}) async {
     language = languageCode;
-
+    languageSetting.language = languageCode;
     await _i18n.changeLanguage(languageCode);
     notifyListeners();
   }

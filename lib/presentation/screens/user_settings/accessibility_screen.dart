@@ -218,8 +218,7 @@ class AccessibilityScreen extends ConsumerWidget {
                           ? true
                           : false,
                       onTap: () {
-                        provider.accessibilitySpeed = VelocityTypes.slow;
-                        provider.notify();
+                        provider.changeAccessibilitySpeed(speed: VelocityTypes.slow);
                       },
                       title: 'global.slow'.trl,
                     ),
@@ -230,8 +229,7 @@ class AccessibilityScreen extends ConsumerWidget {
                             ? true
                             : false,
                         onTap: () {
-                          provider.accessibilitySpeed = VelocityTypes.mid;
-                          provider.notify();
+                          provider.changeAccessibilitySpeed(speed: VelocityTypes.mid);
                         },
                         title: 'global.default'.trl,
                       ),
@@ -241,8 +239,7 @@ class AccessibilityScreen extends ConsumerWidget {
                           ? true
                           : false,
                       onTap: () {
-                        provider.accessibilitySpeed = VelocityTypes.fast;
-                        provider.notify();
+                        provider.changeAccessibilitySpeed(speed: VelocityTypes.fast);
                       },
                       title: 'global.fast'.trl,
                     ),
