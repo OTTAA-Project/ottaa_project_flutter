@@ -351,10 +351,10 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherVoid> setShortcutsForUser(
       {required ShortcutsModel shortcuts, required String userId}) async {
-    final ref = _database.child('$userId/settings/shortcuts/');
+    final ref = _database.child('$userId/layout/shortcuts/');
 
     try {
-      await ref.set(shortcuts.toMap());
+      await ref.update(shortcuts.toMap());
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
