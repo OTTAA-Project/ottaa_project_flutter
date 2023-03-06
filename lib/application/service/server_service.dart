@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:openai_client/openai_client.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';

@@ -42,4 +42,6 @@ abstract class ServerRepository {
   Future<EitherMap> getPictogramsStatistics(String userId, String languageCode);
 
   Future<EitherMap> getMostUsedSentences(String userId, String languageCode);
+
+  Future<EitherString> generatePhraseGPT({required String prompt});
 }
