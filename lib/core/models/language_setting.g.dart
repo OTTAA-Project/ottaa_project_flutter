@@ -1,35 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'base_settings_model.dart';
+part of 'language_setting.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class BaseSettingsModelAdapter extends TypeAdapter<BaseSettingsModel> {
+class LanguageSettingAdapter extends TypeAdapter<LanguageSetting> {
   @override
-  final int typeId = 15;
+  final int typeId = 30;
 
   @override
-  BaseSettingsModel read(BinaryReader reader) {
+  LanguageSetting read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return BaseSettingsModel(
-      data: fields[0] as UserData,
-      language: fields[1] as LanguageSetting,
+    return LanguageSetting(
+      language: fields[0] as String,
+      labs: fields[1] == null ? false : fields[1] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, BaseSettingsModel obj) {
+  void write(BinaryWriter writer, LanguageSetting obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.data)
+      ..write(obj.language)
       ..writeByte(1)
-      ..write(obj.language);
+      ..write(obj.labs);
   }
 
   @override
@@ -38,7 +38,7 @@ class BaseSettingsModelAdapter extends TypeAdapter<BaseSettingsModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is BaseSettingsModelAdapter &&
+      other is LanguageSettingAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

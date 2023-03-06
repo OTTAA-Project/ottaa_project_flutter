@@ -1,35 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'base_settings_model.dart';
+part of 'tts_setting.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class BaseSettingsModelAdapter extends TypeAdapter<BaseSettingsModel> {
+class TTSSettingAdapter extends TypeAdapter<TTSSetting> {
   @override
-  final int typeId = 15;
+  final int typeId = 29;
 
   @override
-  BaseSettingsModel read(BinaryReader reader) {
+  TTSSetting read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return BaseSettingsModel(
-      data: fields[0] as UserData,
-      language: fields[1] as LanguageSetting,
+    return TTSSetting(
+      voiceSetting: fields[0] as VoiceSetting,
+      subtitlesSetting: fields[1] as SubtitlesSetting,
     );
   }
 
   @override
-  void write(BinaryWriter writer, BaseSettingsModel obj) {
+  void write(BinaryWriter writer, TTSSetting obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.data)
+      ..write(obj.voiceSetting)
       ..writeByte(1)
-      ..write(obj.language);
+      ..write(obj.subtitlesSetting);
   }
 
   @override
@@ -38,7 +38,7 @@ class BaseSettingsModelAdapter extends TypeAdapter<BaseSettingsModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is BaseSettingsModelAdapter &&
+      other is TTSSettingAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

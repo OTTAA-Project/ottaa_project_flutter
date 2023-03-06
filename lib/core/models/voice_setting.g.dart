@@ -1,35 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'base_settings_model.dart';
+part of 'voice_setting.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class BaseSettingsModelAdapter extends TypeAdapter<BaseSettingsModel> {
+class VoiceSettingAdapter extends TypeAdapter<VoiceSetting> {
   @override
-  final int typeId = 15;
+  final int typeId = 27;
 
   @override
-  BaseSettingsModel read(BinaryReader reader) {
+  VoiceSetting read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return BaseSettingsModel(
-      data: fields[0] as UserData,
-      language: fields[1] as LanguageSetting,
+    return VoiceSetting(
+      voicesNames:
+          fields[0] == null ? {} : (fields[0] as Map).cast<String, String>(),
+      voicesSpeed: fields[1] == null
+          ? {}
+          : (fields[1] as Map).cast<String, VelocityTypes>(),
+      mutePict: fields[2] == null ? false : fields[2] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, BaseSettingsModel obj) {
+  void write(BinaryWriter writer, VoiceSetting obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.data)
+      ..write(obj.voicesNames)
       ..writeByte(1)
-      ..write(obj.language);
+      ..write(obj.voicesSpeed)
+      ..writeByte(2)
+      ..write(obj.mutePict);
   }
 
   @override
@@ -38,7 +44,7 @@ class BaseSettingsModelAdapter extends TypeAdapter<BaseSettingsModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is BaseSettingsModelAdapter &&
+      other is VoiceSettingAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

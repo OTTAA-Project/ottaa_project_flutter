@@ -36,7 +36,7 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
 
       final user = ref.read(userNotifier);
 
-      await I18N.of(context).changeLanguage(user?.settings.language ?? "en_US");
+      await I18N.of(context).changeLanguage(user?.settings.language.language ?? "en_US");
       if (mounted) {
 
         if (isFirstTime) {

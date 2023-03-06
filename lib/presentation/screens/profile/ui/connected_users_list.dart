@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/time_helper.dart';
@@ -53,8 +54,7 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
               context.push(AppRoutes.customizedBoardScreen);
             },
             settingsTap: () {
-              final prov = ref.watch(userSettingsProvider);
-              prov.userId = provider.connectedUsersData[index].id;
+              ref.read(patientNotifier.notifier).setUser(provider.connectedUsersData[index].patient);
               context.push(AppRoutes.settingScreenUser);
             },
             useOTTAATap: () {

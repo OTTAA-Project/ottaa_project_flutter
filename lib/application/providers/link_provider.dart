@@ -119,7 +119,7 @@ class LinkNotifier extends ChangeNotifier {
   }
 }
 
-final linkProvider = ChangeNotifierProvider<LinkNotifier>((ref) {
+final linkProvider = ChangeNotifierProvider.autoDispose<LinkNotifier>((ref) {
   final createEmailToken = getIt<CreateEmailToken>();
   final verifyEmailToken = getIt<VerifyEmailToken>();
   final authRepository = getIt<AuthRepository>();

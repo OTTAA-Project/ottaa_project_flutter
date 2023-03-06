@@ -100,8 +100,6 @@ class ProfileMainScreenUser extends ConsumerWidget {
                 subtitle: 'global.general'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileIcon1),
                 onPressed: () {
-                  final prov = ref.watch(userSettingsProvider);
-                  prov.userId = user.id;
                   context.push(AppRoutes.settingScreenUser);
                 },
                 focused: false,
