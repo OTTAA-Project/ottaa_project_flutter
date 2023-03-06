@@ -231,7 +231,7 @@ class PatientSettings extends UserSettings {
       payment: map['payment'] != null ? Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>)) : Payment.none(),
       layout: map['layout'] != null ? LayoutSetting.fromMap(Map.from(map['layout'] as Map<dynamic, dynamic>)) : LayoutSetting.empty(),
       accessibility: map['accessibility'] != null ? AccessibilitySetting.fromMap(Map.from(map['accessibility'] as Map<dynamic, dynamic>)) : AccessibilitySetting.empty(),
-      language: map['language'] != null ? LanguageSetting.fromMap(Map.from(map['languageSetting'] as Map<dynamic, dynamic>)) : LanguageSetting.empty(),
+      language: map['language'] != null ? LanguageSetting.fromMap(Map.from(map['language'] as Map<dynamic, dynamic>)) : LanguageSetting.empty(),
       tts: map['tts'] != null ? TTSSetting.fromMap(Map.from(map['tts'] as Map<dynamic, dynamic>)) : TTSSetting.empty(),
     );
   }
