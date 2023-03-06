@@ -30,8 +30,12 @@ class VoiceSetting {
 
   factory VoiceSetting.empty() {
     return VoiceSetting(
-      voicesNames: {},
-      voicesSpeed: {},
+      voicesNames: {
+        "es_AR": "default2",
+      },
+      voicesSpeed: {
+        "es_AR": VelocityTypes.mid,
+      },
       mutePict: false,
     );
   }
