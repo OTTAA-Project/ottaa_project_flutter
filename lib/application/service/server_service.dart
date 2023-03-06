@@ -2,12 +2,17 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:openai_client/openai_client.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:openai_client/openai_client.dart' as openai;
+import 'package:openai_client/src/model/openai_chat/openai_chat.dart';
+
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
@@ -15,12 +20,17 @@ import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
-import 'package:http/http.dart' as http;
 
 @Singleton(as: ServerRepository)
 class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   final Reference _storageRef = FirebaseStorage.instance.ref();
+
+  late final openai.OpenAIClient _openAIClient = openai.OpenAIClient(
+    configuration: openai.OpenAIConfiguration(
+      apiKey: dotenv.get("openaiToken"),
+    ),
+  );
 
   @override
   Future<void> init() async {}
@@ -577,6 +587,25 @@ class ServerService implements ServerRepository {
     } catch (e) {
       // handle te responde error
       return Left("learn_error");
+    }
+  }
+
+  @override
+  Future<EitherString> generatePhraseGPT({required String prompt}) async {
+    try {
+      openai.Response<Chat> choice = (await (_openAIClient.chat
+          .create(
+            model: "text-curie-001",
+            message: ChatMessage(role: "user", content: prompt),
+            maxTokens: 1,
+          )
+          .go()));
+
+      if (choice.data != null || choice.data!.choices.isEmpty) return const Left("No completado");
+
+      return Right(choice.data!.choices.first.message.content);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

@@ -602,6 +602,25 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         )),
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
+  _i4.Future<_i2.Either<String, String>> generatePhraseGPT(
+          {required String? prompt}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #generatePhraseGPT,
+          [],
+          {#prompt: prompt},
+        ),
+        returnValue: _i4.Future<_i2.Either<String, String>>.value(
+            _FakeEither_0<String, String>(
+          this,
+          Invocation.method(
+            #generatePhraseGPT,
+            [],
+            {#prompt: prompt},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, String>>);
+  @override
   _i4.Future<String> uploadUserImage({
     required String? path,
     required String? name,
@@ -843,6 +862,25 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> fetchShortcutsForUser(
+          {required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchShortcutsForUser,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #fetchShortcutsForUser,
+            [],
+            {#userId: userId},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
   _i4.Future<Map<String, dynamic>?> createPictoGroupData({
     required String? userId,
     required String? language,
@@ -904,6 +942,8 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
     required List<String>? groups,
     required Map<String, List<String>>? tags,
     bool? reduced = false,
+    int? limit = 10,
+    int? chunk = 4,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -917,6 +957,8 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             #groups: groups,
             #tags: tags,
             #reduced: reduced,
+            #limit: limit,
+            #chunk: chunk,
           },
         ),
         returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
@@ -933,6 +975,8 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
               #groups: groups,
               #tags: tags,
               #reduced: reduced,
+              #limit: limit,
+              #chunk: chunk,
             },
           ),
         )),
@@ -964,4 +1008,36 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<String, void>>);
+  @override
+  _i4.Future<dynamic> fetchUserGroups({
+    required String? languageCode,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchUserGroups,
+          [],
+          {
+            #languageCode: languageCode,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> fetchUserPictos({
+    required String? languageCode,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchUserPictos,
+          [],
+          {
+            #languageCode: languageCode,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
 }

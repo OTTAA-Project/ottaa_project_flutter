@@ -233,7 +233,7 @@ class PatientSettings extends UserSettings {
   factory PatientSettings.fromMap(Map<String, dynamic> map) {
     return PatientSettings(
       data: UserData.fromMap(Map.from(map['data'] as Map<dynamic, dynamic>)),
-      language: map['language'] as String,
+      language: (map['language'] ?? "es_ar") as String,
       payment: map['payment'] != null ? Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>)) : Payment.none(),
       shortcuts: map['shortcuts'] != null ? Shortcuts.fromMap(Map.from(map['shortcuts'] as Map<dynamic, dynamic>)) : Shortcuts.none(),
     );

@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/common/constants.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
@@ -37,6 +38,8 @@ class HomeProvider extends ChangeNotifier {
   final PredictPictogram predictPictogram;
   final LearnPictogram learnPictogram;
 
+  final ChatGPTNotifier _chatGPTNotifier;
+
   HomeProvider(
     this._pictogramsService,
     this._groupsService,
@@ -46,6 +49,7 @@ class HomeProvider extends ChangeNotifier {
     this.predictPictogram,
     this.learnPictogram,
     this.userState,
+    this._chatGPTNotifier,
   );
 
   List<Phrase> mostUsedSentences = [];
@@ -302,9 +306,13 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
+    final String? sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+    if (sentence != null) {
+      return await _tts.speak(sentence);
+    }
+
     if (!talkEnabled) {
-      final sentence = pictoWords.map((e) => e.text).join(' ');
-      await _tts.speak(sentence);
+      await _tts.speak(pictoWords.map((e) => e.text).join(' '));
     } else {
       show = true;
       notifyListeners();
@@ -381,6 +389,8 @@ final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotif
   final predictPictogram = GetIt.I<PredictPictogram>();
   final learnPictogram = GetIt.I<LearnPictogram>();
 
+  final chatGptNotifier = ref.watch(chatGPTProvider.notifier);
+
   return HomeProvider(
     pictogramService,
     groupsService,
@@ -390,5 +400,6 @@ final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotif
     predictPictogram,
     learnPictogram,
     userState,
+    chatGptNotifier,
   );
 });
