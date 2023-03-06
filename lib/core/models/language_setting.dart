@@ -19,10 +19,10 @@ class LanguageSetting {
     required this.labs,
   });
 
-  factory  LanguageSetting.empty() {
+  factory  LanguageSetting.empty({String? language, bool? labs}) {
     return LanguageSetting(
-      language: 'es_AR',
-      labs: false,
+      language: language ?? 'es_AR',
+      labs: labs ?? false,
     );
   }
 

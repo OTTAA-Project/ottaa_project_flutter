@@ -111,6 +111,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                           ? true
                           : false,
                       onTap: () {
+                        print(provider.ttsSetting.voiceSetting.voicesSpeed[provider.language]!.name);
                         provider.changeVoiceSpeed(type: VelocityTypes.slow);
                         provider.notify();
                       },

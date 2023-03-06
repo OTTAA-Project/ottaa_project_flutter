@@ -59,7 +59,7 @@ class MainSettingScreen extends ConsumerWidget {
                     provider.changeDeleteText(value: value);
                   },
                   title: 'user.main_setting.delete_talking'.trl,
-                  value: provider.deleteText,
+                  value: provider.layoutSetting.cleanup,
                 ),
                 const DividerWidget(),
                 Text(

@@ -96,6 +96,9 @@ class UserSettingsProvider extends ChangeNotifier {
       layoutSetting = data['layout'] != null
           ? LayoutSetting.fromJson((jsonEncode(data['layout'])))
           : LayoutSetting.empty();
+      if(ttsSetting.voiceSetting.voicesSpeed[language]!.name !=null){
+        voiceRate = ttsSetting.voiceSetting.voicesSpeed[language]!.name;
+      }
     } else {
       accessibilitySetting = AccessibilitySetting.empty();
       languageSetting = LanguageSetting.empty();
@@ -127,7 +130,7 @@ class UserSettingsProvider extends ChangeNotifier {
 
     if (_userNotifier.user.isCaregiver) return;
 
-    currentUser.patientSettings.languageSetting = languageSetting;
+    currentUser.patientSettings.language = languageSetting;
 
     _localDatabaseRepository.setUser(currentUser);
   }

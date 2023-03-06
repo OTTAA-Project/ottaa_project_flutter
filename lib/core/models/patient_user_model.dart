@@ -110,51 +110,45 @@ class PatientUserModel extends UserModel {
     return PatientUserModel(
       email: "",
       id: map['id'] as String,
-      groups:
-          // <String, List<Group>>{},
-          map['groups'] != null
-              ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
-                  return MapEntry<String, List<Group>>(
-                    key.toString(),
-                    Map.from(value as dynamic)
-                        .values
-                        .map<Group>(
-                          (e) => Group.fromMap(Map.from(e as dynamic)),
-                        )
-                        .toList(),
-                  );
-                }))
-              : <String, List<Group>>{},
-      phrases:
-          // <String, List<Phrase>>{},
-          map['phrases'] != null && map['phrases'].isNotEmpty
-              ? Map<String, List<Phrase>>.from((map['phrases'] as Map<dynamic, dynamic>).map((key, value) {
-                  return MapEntry<String, List<Phrase>>(
-                    key.toString(),
-                    Map.from(value as dynamic)
-                        .values
-                        .map<Phrase>(
-                          (e) => Phrase.fromMap(Map.from(e as dynamic)),
-                        )
-                        .toList(),
-                  );
-                }))
-              : <String, List<Phrase>>{},
-      pictos:
-          // <String, List<Picto>>{},
-          map['pictos'] != null && map['pictos'].isNotEmpty
-              ? Map<String, List<Picto>>.from((map['pictos'] as Map<dynamic, dynamic>).map((key, value) {
-                  return MapEntry<String, List<Picto>>(
-                    key.toString(),
-                    Map.from(value as dynamic)
-                        .values
-                        .map<Picto>(
-                          (e) => Picto.fromMap(Map.from(e as dynamic)),
-                        )
-                        .toList(),
-                  );
-                }))
-              : <String, List<Picto>>{},
+      groups: map['groups'] != null
+          ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
+              return MapEntry<String, List<Group>>(
+                key.toString(),
+                Map.from(value as dynamic)
+                    .values
+                    .map<Group>(
+                      (e) => Group.fromMap(Map.from(e as dynamic)),
+                    )
+                    .toList(),
+              );
+            }))
+          : <String, List<Group>>{},
+      phrases: map['phrases'] != null && map['phrases'].isNotEmpty
+          ? Map<String, List<Phrase>>.from((map['phrases'] as Map<dynamic, dynamic>).map((key, value) {
+              return MapEntry<String, List<Phrase>>(
+                key.toString(),
+                Map.from(value as dynamic)
+                    .values
+                    .map<Phrase>(
+                      (e) => Phrase.fromMap(Map.from(e as dynamic)),
+                    )
+                    .toList(),
+              );
+            }))
+          : <String, List<Phrase>>{},
+      pictos: map['pictos'] != null && map['pictos'].isNotEmpty
+          ? Map<String, List<Picto>>.from((map['pictos'] as Map<dynamic, dynamic>).map((key, value) {
+              return MapEntry<String, List<Picto>>(
+                key.toString(),
+                Map.from(value as dynamic)
+                    .values
+                    .map<Picto>(
+                      (e) => Picto.fromMap(Map.from(e as dynamic)),
+                    )
+                    .toList(),
+              );
+            }))
+          : <String, List<Picto>>{},
       settings: PatientSettings.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
       type: UserType.values.firstWhere((element) => element.name == map['type'] as String),
     );
@@ -196,7 +190,7 @@ class PatientSettings extends UserSettings {
 
   @override
   @HiveField(1)
-  String language;
+  LanguageSetting language;
 
   @HiveField(2)
   Payment payment;
@@ -210,9 +204,6 @@ class PatientSettings extends UserSettings {
   @HiveField(5)
   TTSSetting tts;
 
-  @HiveField(6)
-  LanguageSetting languageSetting;
-
   PatientSettings({
     required this.data,
     required this.language,
@@ -220,7 +211,6 @@ class PatientSettings extends UserSettings {
     required this.layout,
     required this.accessibility,
     required this.tts,
-    required this.languageSetting,
   });
 
   Map<String, dynamic> toMap() {
@@ -238,11 +228,10 @@ class PatientSettings extends UserSettings {
   factory PatientSettings.fromMap(Map<String, dynamic> map) {
     return PatientSettings(
       data: UserData.fromMap(Map.from(map['data'] as Map<dynamic, dynamic>)),
-      language: "es_AR",
       payment: map['payment'] != null ? Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>)) : Payment.none(),
       layout: map['layout'] != null ? LayoutSetting.fromMap(Map.from(map['layout'] as Map<dynamic, dynamic>)) : LayoutSetting.empty(),
       accessibility: map['accessibility'] != null ? AccessibilitySetting.fromMap(Map.from(map['accessibility'] as Map<dynamic, dynamic>)) : AccessibilitySetting.empty(),
-      languageSetting: map['languageSetting'] != null ? LanguageSetting.fromMap(Map.from(map['languageSetting'] as Map<dynamic, dynamic>)) : LanguageSetting.empty(),
+      language: map['language'] != null ? LanguageSetting.fromMap(Map.from(map['language'] as Map<dynamic, dynamic>)) : LanguageSetting.empty(),
       tts: map['tts'] != null ? TTSSetting.fromMap(Map.from(map['tts'] as Map<dynamic, dynamic>)) : TTSSetting.empty(),
     );
   }
@@ -262,29 +251,28 @@ class PatientSettings extends UserSettings {
   }) {
     return PatientSettings(
       data: data ?? this.data,
-      language: language ?? this.language,
       payment: payment ?? this.payment,
       layout: layout ?? this.layout,
       accessibility: accessibility ?? this.accessibility,
       tts: tts ?? this.tts,
-      languageSetting: languageSetting ?? this.languageSetting,
+      language: languageSetting ?? this.language,
     );
   }
 
   @override
   String toString() {
-    return 'PatientSettings(data: $data, language: $language, payment: $payment, layout: $layout, accessibility: $accessibility, tts: $tts, languageSetting: $languageSetting)';
+    return 'PatientSettings(data: $data, language: $language, payment: $payment, layout: $layout, accessibility: $accessibility, tts: $tts, languageSetting: $language)';
   }
 
   @override
   bool operator ==(covariant PatientSettings other) {
     if (identical(this, other)) return true;
 
-    return other.data == data && other.language == language && other.payment == payment && other.layout == layout && other.accessibility == accessibility && other.tts == tts && other.languageSetting == languageSetting;
+    return other.data == data && other.language == language && other.payment == payment && other.layout == layout && other.accessibility == accessibility && other.tts == tts && other.language == language;
   }
 
   @override
   int get hashCode {
-    return data.hashCode ^ language.hashCode ^ payment.hashCode ^ layout.hashCode ^ accessibility.hashCode ^ tts.hashCode ^ languageSetting.hashCode;
+    return data.hashCode ^ language.hashCode ^ payment.hashCode ^ layout.hashCode ^ accessibility.hashCode ^ tts.hashCode ^ language.hashCode;
   }
 }
