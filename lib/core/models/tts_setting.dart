@@ -21,9 +21,11 @@ class TTSSetting {
     required this.subtitlesSetting,
   });
 
-  factory TTSSetting.empty() {
+  factory TTSSetting.empty({
+    String? language,
+  }) {
     return TTSSetting(
-      voiceSetting: VoiceSetting.empty(),
+      voiceSetting: VoiceSetting.empty(language: language),
       subtitlesSetting: SubtitlesSetting.empty(),
     );
   }
