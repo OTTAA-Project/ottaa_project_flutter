@@ -9,8 +9,10 @@ import 'package:either_dart/either.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/service/about_service.dart'
     as _i3;
-import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i5;
-import 'package:ottaa_project_flutter/core/models/user_model.dart' as _i6;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i7;
+import 'package:ottaa_project_flutter/core/enums/user_payment.dart' as _i5;
+import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i8;
+import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -74,13 +76,13 @@ class MockAboutService extends _i1.Mock implements _i3.AboutService {
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
   @override
-  _i4.Future<_i5.UserType> getUserType() => (super.noSuchMethod(
+  _i4.Future<_i5.UserPayment> getUserType() => (super.noSuchMethod(
         Invocation.method(
           #getUserType,
           [],
         ),
-        returnValue: _i4.Future<_i5.UserType>.value(_i5.UserType.free),
-      ) as _i4.Future<_i5.UserType>);
+        returnValue: _i4.Future<_i5.UserPayment>.value(_i5.UserPayment.free),
+      ) as _i4.Future<_i5.UserPayment>);
   @override
   _i4.Future<void> sendSupportEmail() => (super.noSuchMethod(
         Invocation.method(
@@ -99,30 +101,31 @@ class MockAboutService extends _i1.Mock implements _i3.AboutService {
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
   @override
-  _i4.Future<void> uploadProfilePicture(String? photo) => (super.noSuchMethod(
+  _i4.Future<void> uploadProfilePicture(_i6.AssetsImage? image) =>
+      (super.noSuchMethod(
         Invocation.method(
           #uploadProfilePicture,
-          [photo],
+          [image],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<_i2.Either<String, _i6.UserModel>> getUserInformation() =>
+  _i4.Future<_i2.Either<String, _i7.UserModel>> getUserInformation() =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserInformation,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<String, _i6.UserModel>>.value(
-            _FakeEither_0<String, _i6.UserModel>(
+        returnValue: _i4.Future<_i2.Either<String, _i7.UserModel>>.value(
+            _FakeEither_0<String, _i7.UserModel>(
           this,
           Invocation.method(
             #getUserInformation,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<String, _i6.UserModel>>);
+      ) as _i4.Future<_i2.Either<String, _i7.UserModel>>);
   @override
   _i4.Future<void> uploadUserInformation() => (super.noSuchMethod(
         Invocation.method(
@@ -148,4 +151,38 @@ class MockAboutService extends _i1.Mock implements _i3.AboutService {
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+  @override
+  _i4.Future<void> updateUserType({
+    required String? id,
+    required _i8.UserType? userType,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserType,
+          [],
+          {
+            #id: id,
+            #userType: userType,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> updateUserLastConnectionTime({
+    required String? userId,
+    required int? time,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserLastConnectionTime,
+          [],
+          {
+            #userId: userId,
+            #time: time,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

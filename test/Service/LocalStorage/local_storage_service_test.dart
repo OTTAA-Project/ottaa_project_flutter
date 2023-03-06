@@ -7,28 +7,43 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:ottaa_project_flutter/application/language/file_language.dart';
 import 'package:ottaa_project_flutter/application/service/local_storage_service.dart';
+
+import 'package:path_provider/path_provider.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+const String kTemporaryPath = 'temporaryPath';
+const String kApplicationSupportPath = 'applicationSupportPath';
+const String kDownloadsPath = 'downloadsPath';
+const String kLibraryPath = 'libraryPath';
+const String kApplicationDocumentsPath = 'applicationDocumentsPath';
+const String kExternalCachePath = 'externalCachePath';
+const String kExternalStoragePath = 'externalStoragePath';
+const String kAssetsPath='./';
 
 void main(){
   LocalStorageService localStorageService = LocalStorageService();
-  TestWidgetsFlutterBinding.ensureInitialized();
-  group('Test Local Storage Service ', () {
+  setUpAll(() {
+    PathProviderPlatform.instance = FakePathProviderPlatform();
+    TestWidgetsFlutterBinding.ensureInitialized();
+    // expose path_provider
+  });  group('Test Local Storage Service ', () {
   group('Test es-AR', () {
     test('Write Groups ES', () async {
       String result = await rootBundle.loadString('assets/gender_based/grupos/grupos_es_male.json');
-      await localStorageService.writeGruposToFile(data: result, language: 'es-AR');
+      await localStorageService.writeGruposToFile(data: result, language: 'es_AR');
     });
     test('Read Groups ES',() async {
-      List esG = await localStorageService.readGruposFromFile(language:'es-AR');
+      List esG = await localStorageService.readGruposFromFile(language:'es_AR');
       print( esG);
     });
     test('WritePictograms ES', () async {
       String result = await rootBundle.loadString('assets/gender_based/pictos/pictos_es_male.json');
-      await localStorageService.writePictoToFile(data: result, language: 'es-AR');
+      await localStorageService.writePictoToFile(data: result, language: 'es_AR');
     });
     test('Read Pictograms ES',() async {
-      List esG = await localStorageService.readPictoFromFile(language:'es-AR');
+      List esG = await localStorageService.readPictoFromFile(language:'es_AR');
       print( esG);
     });
   });
@@ -106,4 +121,97 @@ void main(){
   });
 
   });
+}
+class FakePathProviderPlatform extends Fake
+    with MockPlatformInterfaceMixin
+    implements PathProviderPlatform {
+  @override
+  Future<String?> getTemporaryPath() async {
+    return kTemporaryPath;
+  }
+
+  @override
+  Future<String?> getApplicationSupportPath() async {
+    return kApplicationSupportPath;
+  }
+
+  @override
+  Future<String?> getLibraryPath() async {
+    return kLibraryPath;
+  }
+
+  @override
+  Future<String?> getApplicationDocumentsPath() async {
+    return kApplicationDocumentsPath;
+  }
+
+  @override
+  Future<String?> getExternalStoragePath() async {
+    return kExternalStoragePath;
+  }
+
+  @override
+  Future<List<String>?> getExternalCachePaths() async {
+    return <String>[kExternalCachePath];
+  }
+
+  @override
+  Future<List<String>?> getExternalStoragePaths({
+    StorageDirectory? type,
+  }) async {
+    return <String>[kExternalStoragePath];
+  }
+
+  @override
+  Future<String?> getDownloadsPath() async {
+    return kDownloadsPath;
+  }
+}
+
+
+
+class AllNullFakePathProviderPlatform extends Fake
+    with MockPlatformInterfaceMixin
+    implements PathProviderPlatform {
+  @override
+  Future<String?> getTemporaryPath() async {
+    return null;
+  }
+
+  @override
+  Future<String?> getApplicationSupportPath() async {
+    return null;
+  }
+
+  @override
+  Future<String?> getLibraryPath() async {
+    return null;
+  }
+
+  @override
+  Future<String?> getApplicationDocumentsPath() async {
+    return null;
+  }
+
+  @override
+  Future<String?> getExternalStoragePath() async {
+    return null;
+  }
+
+  @override
+  Future<List<String>?> getExternalCachePaths() async {
+    return null;
+  }
+
+  @override
+  Future<List<String>?> getExternalStoragePaths({
+    StorageDirectory? type,
+  }) async {
+    return null;
+  }
+
+  @override
+  Future<String?> getDownloadsPath() async {
+    return null;
+  }
 }

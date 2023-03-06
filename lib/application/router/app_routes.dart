@@ -14,6 +14,31 @@ class AppRoutes {
   static const profileSettingsScreen = "/profile_settings_screen";
   static const profileWaitingScreen = "/profile_waiting_screen";
   static const favouriteSentences = "/favourite_sentences";
-  static const addOrRemoveFavouriteSentences = "/add_or_remove_favourite_sentences";
+  static const addOrRemoveFavouriteSentences =
+      "/add_or_remove_favourite_sentences";
   static const searchSentences = "/search_sentences";
+  static const profileSettingsEditScreen = "/profile_settings_edit_screen";
+  static const profileChooserScreenSelected =
+      "/profile_chooser_screen_selected";
+  static const profileFAQScreen = "/profile_faq_screen";
+  static const profileHelpScreen = "/profile_help_screen";
+  static const customizedBoardScreen = "/customized_board_screen";
+  static const customizeWaitScreen = "/customized_wait_screen";
+  static const profileLinkedAccountScreen = "/profile_linked_account_screen";
+  static const customizePictoScreen = "/customized_picto_screen";
+
+  static const linkMailScreen = "/link";
+  static const linkTokenScreen = "/link/token";
+  static const linkWaitScreen = "/link/wait";
+  static const linkSuccessScreen = "/link/success";
+  static const waitingLogin = "/login/waiting";
+
+  static const profileOttaaTips = "/profile_ottaa_tips_screen";
+  static const profileMainScreenUser = "/profile_main_screen_user";
+
+  static const settingScreenUser = "/setting_screen_user";
+  static const mainSettingUser = "/main_setting_screen_user";
+  static const accessibilityScreenUser = "/accessibility_screen_user";
+  static const voiceAndSubtitleScreenUser = "/voice_and_subtitle_screen_user";
+  static const languageScreenUser = "/language_screen_user";
 }

@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -11,6 +9,7 @@ import 'package:ottaa_project_flutter/application/injector.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 
+//March 2v2
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
@@ -34,7 +33,7 @@ void main() async {
     );
   }
 
-  await setupServices();
+  await configureDependencies();
 
   // await SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.landscapeRight,

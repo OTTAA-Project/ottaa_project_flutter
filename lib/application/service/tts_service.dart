@@ -1,10 +1,12 @@
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
 
+@Singleton(as: TTSRepository)
 class TTSService extends TTSRepository {
   final tts = FlutterTts();
 
-  String language = 'es-AR'; //TODO: Detect
+  String language = 'es_AR'; //TODO: Detect
   List<dynamic> availableTTS = [];
 
   bool customTTSEnable = false;

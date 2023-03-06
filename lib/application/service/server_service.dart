@@ -1,15 +1,26 @@
+import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:openai_client/openai_client.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
+import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
+import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
-import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:http/http.dart' as http;
 
+@Singleton(as: ServerRepository)
 class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
+  final Reference _storageRef = FirebaseStorage.instance.ref();
 
   @override
   Future<void> init() async {}
@@ -19,52 +30,38 @@ class ServerService implements ServerRepository {
 
   @override
   Future<UserType> getUserType(String userId) async {
-    final ref = _database.child('$userId/Pago/Pago');
+    final ref = _database.child('$userId/type');
     final res = await ref.get();
-    if (res.value == null || res.value.toString() == "0") return UserType.free;
 
-    return UserType.premium;
+    return UserType.values.firstWhere(
+      (element) => element.name == res.value.toString(),
+      orElse: () => UserType.none,
+    );
   }
 
   @override
   Future<EitherListMap> getAllGroups(String userId, String languageCode) async {
     //Fetch new data from server
-    final refNew = _database.child('$userId/Grupos/$languageCode');
-    final resNew = await refNew.get();
+    final ref = _database.child('$userId/groups/$languageCode');
+    final res = await ref.get();
 
-    if (resNew.exists && resNew.value != null) {
-      return Right(resNew.value as dynamic);
+    if (res.exists && res.value != null) {
+      final valu = jsonEncode((res.value as dynamic));
+      return Right(List.from(jsonDecode(valu).values.toList() as List));
     }
-
-    //Fetch old data from serve (for compatibility)
-    final refOld = _database.child('Grupos/$userId/$languageCode');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return Right(resOld.value as dynamic);
-    }
-
     return const Left("no_data_found");
   }
 
   @override
   Future<EitherListMap> getAllPictograms(String userId, String languageCode) async {
     //Fetch new data from server
-    final refNew = _database.child('$userId/Pictos/$languageCode');
-    final resNew = await refNew.get();
+    final ref = _database.child('$userId/pictos/$languageCode');
+    final res = await ref.get();
 
-    if (resNew.exists && resNew.value != null) {
-      return Right(resNew.value as dynamic);
+    if (res.exists && res.value != null) {
+      final valu = jsonEncode((res.value as dynamic));
+      return Right(List.from(jsonDecode(valu).values.toList() as List));
     }
-
-    //Fetch old data from serve (for compatibility)
-    final refOld = _database.child('Pictos/$userId/$languageCode');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return Right(resOld.value as dynamic);
-    }
-
     return const Left("no_data_found");
   }
 
@@ -80,7 +77,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getUserInformation(String id) async {
-    final userRef = _database.child('$id/Usuarios/');
+    final userRef = _database.child(id);
 
     final userValue = await userRef.get();
 
@@ -93,32 +90,24 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherString> getUserProfilePicture(String userId) async {
-    final refNew = _database.child('$userId/Usuarios/Avatar/urlFoto/');
+    final refNew = _database.child('$userId/settings/data/avatar/');
     final resNew = await refNew.get();
 
     if (resNew.exists && resNew.value != null) {
       return Right(resNew.value.toString());
     }
 
-    /// Get the profile picture from the database at the old path
-    final refOld = _database.child('Avatar/$userId/urlFoto/');
-    final resOld = await refOld.get();
-
-    if (resOld.exists && resOld.value != null) {
-      return Right(resOld.value.toString());
-    }
-
     return const Left("no_data_found");
   }
 
   @override
-  Future<List<SentenceModel>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
+  Future<List<Phrase>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
     final refNew = _database.child('$userId/Frases/$language/$type');
     final resNew = await refNew.get();
     if (resNew.exists && resNew.value != null) {
       final encode = jsonEncode(resNew.value);
       // print('returned from bew');
-      return (jsonDecode(encode) as List).map((e) => SentenceModel.fromJson(e)).toList();
+      return (jsonDecode(encode) as List).map((e) => Phrase.fromJson(e)).toList();
       // print('returned from bew');
       // return Right(jsonDecode(data));
     }
@@ -127,7 +116,7 @@ class ServerService implements ServerRepository {
     final resOld = await refOld.get();
     if (resOld.exists && resOld.value != null) {
       final data = resOld.children.first.value as String;
-      return (jsonDecode(data) as List).map((e) => SentenceModel.fromJson(e)).toList();
+      return (jsonDecode(data) as List).map((e) => Phrase.fromJson(e)).toList();
     }
 
     return const [];
@@ -158,10 +147,26 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
-    final ref = _database.child('$userId/Grupos/$language');
+  Future<EitherVoid> updateUserLastConnectionTime({
+    required String userId,
+    required int time,
+  }) async {
+    final ref = _database.child('$userId/settings/data');
+
     try {
-      await ref.set(data);
+      await ref.update({'lastConnection': time});
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
+    final ref = _database.child('$userId/groups/$language');
+    try {
+      final mapData = Map.fromIterables(data.map((e) => e["id"]), data);
+      await ref.set(mapData);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -170,10 +175,11 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherVoid> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data}) async {
-    final ref = _database.child('$userId/Pictos/$language');
+    final ref = _database.child('$userId/pictos/$language');
 
     try {
-      await ref.set(data);
+      final mapData = Map.fromIterables(data.map((e) => e["id"]), data);
+      await ref.set(mapData);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -182,7 +188,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data) async {
-    final ref = _database.child('$userId/Usuarios/');
+    final ref = _database.child(userId);
 
     try {
       await ref.update(data);
@@ -193,14 +199,11 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadUserPicture(String userId, String picture, String photoUrl) async {
-    final ref = _database.child('$userId/Usuarios/Avatar/');
+  Future<EitherVoid> uploadUserPicture(String userId, AssetsImage image) async {
+    final ref = _database.child('$userId/settings/data/avatar');
 
     try {
-      await ref.update({
-        'name': photoUrl,
-        'urlFoto': picture,
-      });
+      await ref.update(image.toMap());
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -249,7 +252,7 @@ class ServerService implements ServerRepository {
     final body = {
       'UserID': userId,
       //todo: add here the language too
-      'Language': 'ES-AR',
+      'Language': 'es_AR',
     };
     final res = await http.post(
       uri,
@@ -262,6 +265,318 @@ class ServerService implements ServerRepository {
       return Right(data);
     } else {
       return Left("an error occurred"); //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<void> updateUserSettings({
+    required Map<String, dynamic> data,
+    required String userId,
+  }) async {
+    final ref = _database.child('$userId/settings/data/');
+    try {
+      await ref.update(data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  Future<String> uploadUserImage({
+    required String path,
+    required String name,
+    required String userId,
+  }) async {
+    Reference ref = _storageRef.child('userProfilePics').child('$name.jpg');
+    final metadata = SettableMetadata(
+      contentType: 'image/jpeg',
+      customMetadata: {'picked-file-path': path},
+    );
+    late String url;
+    if (kIsWeb) {
+      // uploadTask = ref.putData(await file.readAsBytes(), metadata);
+    } else {
+      final uploadTask = await ref.putFile(File(path), metadata);
+      url = await uploadTask.ref.getDownloadURL();
+    }
+    return url;
+  }
+
+  @override
+  Future<EitherMap> getConnectedUsers({required String userId}) async {
+    final ref = _database.child('$userId/users'); //TODO: Change this to the real path
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    } else {
+      return const Left("No Data found"); //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<EitherMap> fetchConnectedUserData({required String userId}) async {
+    final ref = _database.child('$userId'); //TODO: Change to real path
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    } else {
+      return const Left("No Data found"); //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
+    await _database.child('$careGiverId/users/$userId').remove();
+  }
+
+  @override
+  Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId}) async {
+    final ref = _database.child('$userId/settings/shortcuts/');
+
+    try {
+      await ref.set(shortcuts.toMap());
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<EitherMap> fetchShortcutsForUser({
+    required String userId,
+  }) async {
+    final ref = _database.child('$userId/settings/shortcuts');
+
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    } else {
+      return const Left("No Data found"); //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<EitherMap> getEmailToken(String ownEmail, String email) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
+    final body = {
+      'src': ownEmail,
+      'dst': email,
+    };
+    try {
+      final res = await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {"Content-Type": "application/json"},
+      );
+
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      print(res.statusCode);
+      if (res.statusCode == 200) {
+        return Right(data);
+      } else {
+        return Left(data["code"] ?? res.body); //TODO: Handle the main error
+      }
+    } catch (e) {
+      print(e);
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
+    final body = {
+      'src': ownEmail,
+      'dst': email,
+      'token': token,
+    };
+    final res = await http.post(
+      uri,
+      body: jsonEncode(body),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    final data = jsonDecode(res.body) as Map<String, dynamic>;
+    if (res.statusCode == 200) {
+      return Right(data);
+    } else {
+      return Left(data["code"] ?? res.body); //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<void> updateUserData({
+    required Map<String, dynamic> data,
+    required String userId,
+  }) async {
+    final ref = _database.child('$userId/settings/data/');
+    try {
+      await ref.update(data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  Future<EitherMap> getProfileById({required String id}) async {
+    final ref = _database.child(id);
+
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    } else {
+      return const Left("No Data found"); //TODO: Handle the main error
+    }
+  }
+
+  @override
+  Future<dynamic> getDefaultGroups(String languageCode) async {
+    final ref = _database.child('default/groups/$languageCode');
+    final DataSnapshot res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<dynamic> fetchUserGroups({required String languageCode, required String userId}) async {
+    final ref = _database.child('$userId/groups/$languageCode');
+    final DataSnapshot res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<dynamic> getDefaultPictos(String languageCode) async {
+    final ref = _database.child('default/pictos/$languageCode');
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<dynamic> fetchUserPictos({required String languageCode, required String userId}) async {
+    final ref = _database.child('$userId/pictos/$languageCode');
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    }
+
+    return const Left("no_data_found");
+  }
+
+  @override
+  Future<void> updateUserType({required String id, required UserType userType}) async {
+    final ref = _database.child("$id/type");
+
+    await ref.set(userType.name);
+  }
+
+  @override
+  Future<Map<String, dynamic>?> createPictoGroupData({required String userId, required String language, required BoardDataType type, required Map<String, dynamic> data}) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/newCustomData');
+    final body = {"uid": userId, "lang": language, "type": type.name, "data": data};
+    try {
+      final res = await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {"Content-Type": "application/json"},
+      );
+
+      return jsonDecode(res.body) as Map<String, dynamic>;
+    } catch (e) {
+      return {
+        "error": e.toString(),
+      };
+    }
+  }
+
+  @override
+  Future<EitherMap> learnPictograms({
+    required String uid,
+    required String language,
+    required String model,
+    required List<Map<String, dynamic>> tokens,
+  }) async {
+    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/speako/users/learn');
+
+    final body = {
+      "uid": uid,
+      "language": language,
+      "model": model,
+      "tokens": tokens,
+    };
+
+    try {
+      final res = await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {"Content-Type": "application/json"},
+      );
+
+      return Right(jsonDecode(res.body) as Map<String, dynamic>);
+    } catch (e) {
+      // handle te responde error
+      return Left("learn_error");
+    }
+  }
+
+  @override
+  Future<EitherMap> predictPictogram({
+    required String sentence,
+    required String uid,
+    required String language,
+    required String model,
+    required List<String> groups,
+    required Map<String, List<String>> tags,
+    bool reduced = false,
+    int limit = 10,
+    int chunk = 4,
+  }) async {
+    String url = 'https://us-central1-ottaaproject-flutter.cloudfunctions.net/speako/predict';
+
+    url = "$url?limit=$limit&chunk=$chunk";
+
+    if (reduced) url = "$url&reduced";
+
+    final uri = Uri.parse(url);
+
+    final body = {
+      "sentence": sentence,
+      "uid": uid,
+      "language": language,
+      "model": model,
+      "groups": groups,
+      "tags": tags,
+    };
+
+    try {
+      final res = await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {"Content-Type": "application/json"},
+      );
+
+      return Right(jsonDecode(res.body) as Map<String, dynamic>);
+    } catch (e) {
+      // handle te responde error
+      return Left("learn_error");
     }
   }
 }

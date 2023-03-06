@@ -1,0 +1,1 @@
+enum UserPayment { free, premium }
