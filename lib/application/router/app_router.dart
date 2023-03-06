@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
@@ -140,17 +141,17 @@ class AppRouter {
           path: AppRoutes.profileHelpScreen,
           builder: (context, state) => const ProfileHelpScreen(),
         ),
+        GoRoute(path: AppRoutes.profileOttaaTips, builder: (context, state) => const ProfileOTTAATipsScreen()),
+        GoRoute(path: AppRoutes.profileLinkedAccountScreen, builder: (context, state) => const ProfileLinkedAccountScreen()),
         GoRoute(
-            path: AppRoutes.profileOttaaTips,
-            builder: (context, state) => const ProfileOTTAATipsScreen()),
-        GoRoute(
-            path: AppRoutes.profileLinkedAccountScreen,
-            builder: (context, state) => const ProfileLinkedAccountScreen()),
-        GoRoute(
-          name: AppRoutes.linkMailScreen,
-          path: AppRoutes.linkMailScreen,
-          builder: (context, state) => const LinkMailScreen(),
+          name: "link",
+          path: "/link",
+          builder: (context, state) => const SizedBox(),
           routes: [
+            GoRoute(
+              path: "email",
+              builder: (context, state) => const LinkMailScreen(),
+            ),
             GoRoute(
               path: "token",
               builder: (context, state) => const LinkTokenScreen(),

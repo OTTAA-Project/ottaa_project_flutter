@@ -127,7 +127,7 @@ class UserSettingsProvider extends ChangeNotifier {
 
     if (_userNotifier.user.isCaregiver) return;
 
-    currentUser.patientSettings.languageSetting = languageSetting;
+    currentUser.patientSettings.language = languageSetting;
 
     _localDatabaseRepository.setUser(currentUser);
   }

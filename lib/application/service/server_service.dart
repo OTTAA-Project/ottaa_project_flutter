@@ -84,6 +84,17 @@ class ServerService implements ServerRepository {
 
     final dynamic user = userValue.value as dynamic;
 
+    Map settingsData = user["settings"];
+
+    if (settingsData["language"].runtimeType == String) {
+      settingsData["language"] = {
+        "language": settingsData["language"] ?? "es_AR",
+        "labs": false,
+      };
+    }
+
+    user["settings"] = settingsData;
+
     return Right(Map<String, dynamic>.from(user));
   }
 

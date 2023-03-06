@@ -44,9 +44,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       if (isLogged) {
         final user = ref.read(userNotifier);
         auth.setSignedIn();
-        await I18N.of(context).changeLanguage(user?.settings.language ?? "es_AR");
+        await I18N.of(context).changeLanguage(user?.settings.language.language ?? "es_AR");
         if (mounted) {
-          initializeDateFormatting(user?.settings.language ?? "es_AR");
+          initializeDateFormatting(user?.settings.language.language ?? "es_AR");
           if (isFirstTime) {
             return context.go(AppRoutes.onboarding);
           }

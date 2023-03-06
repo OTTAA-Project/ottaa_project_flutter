@@ -1021,4 +1021,82 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<void> updateLanguageSettings({
+    required Map<String, dynamic>? map,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateLanguageSettings,
+          [],
+          {
+            #map: map,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> updateVoiceAndSubtitleSettings({
+    required Map<String, dynamic>? map,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateVoiceAndSubtitleSettings,
+          [],
+          {
+            #map: map,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> updateAccessibilitySettings({
+    required Map<String, dynamic>? map,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateAccessibilitySettings,
+          [],
+          {
+            #map: map,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> updateMainSettings({
+    required Map<String, dynamic>? map,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateMainSettings,
+          [],
+          {
+            #map: map,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<dynamic> fetchUserSettings({required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchUserSettings,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
 }

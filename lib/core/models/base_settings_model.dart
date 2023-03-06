@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
+import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 
 part 'base_settings_model.g.dart';
@@ -15,7 +16,7 @@ class BaseSettingsModel extends UserSettings {
 
   @override
   @HiveField(1)
-  String language;
+  LanguageSetting language;
 
   BaseSettingsModel({
     required this.data,
@@ -24,7 +25,7 @@ class BaseSettingsModel extends UserSettings {
 
   BaseSettingsModel copyWith({
     UserData? data,
-    String? language,
+    LanguageSetting? language,
   }) {
     return BaseSettingsModel(
       data: data ?? this.data,
@@ -36,14 +37,14 @@ class BaseSettingsModel extends UserSettings {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'data': data.toMap(),
-      'language': language,
+      'language': language.toMap(),
     };
   }
 
   factory BaseSettingsModel.fromMap(Map<String, dynamic> map) {
     return BaseSettingsModel(
-      data: UserData.fromMap(Map.from(map['data'] as Map<dynamic, dynamic>)),
-      language: map['language'] as String,
+      data: UserData.fromMap(Map.from(map['data'] as dynamic)),
+      language: map['language'] == null ? LanguageSetting.empty() : LanguageSetting.fromMap(Map.from(map['language'] as dynamic)),
     );
   }
 

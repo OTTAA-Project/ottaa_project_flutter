@@ -12,6 +12,7 @@ import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
@@ -98,36 +99,37 @@ class AuthService extends AuthRepository {
           userModel = BaseUserModel(
             id: user.uid,
             settings: BaseSettingsModel(
-                data: UserData(
-                  avatar: AssetsImage(asset: "671", network: user.photoURL),
-                  birthDate: DateTime.fromMillisecondsSinceEpoch(0),
-                  genderPref: "n/a",
-                  lastConnection: DateTime.now(),
-                  lastName: "",
-                  name: nameRetriever ?? "",
-                ),
-                language: "es_AR"),
+              data: UserData(
+                avatar: AssetsImage(asset: "671", network: user.photoURL),
+                birthDate: DateTime.fromMillisecondsSinceEpoch(0),
+                genderPref: "n/a",
+                lastConnection: DateTime.now(),
+                lastName: "",
+                name: nameRetriever ?? "",
+              ),
+              language: LanguageSetting.empty(),
+            ),
             email: emailRetriever ?? "",
           );
         } else {
           switch (userInfo.right["type"]) {
             case "caregiver":
               userModel = CaregiverUserModel.fromMap({
-                "email": user.email ?? user.providerData[0].email,
                 ...userInfo.right,
+                "email": user.email ?? user.providerData[0].email,
               });
               break;
             case "user":
               userModel = PatientUserModel.fromMap({
-                "email": user.email ?? user.providerData[0].email,
                 ...userInfo.right,
+                "email": user.email ?? user.providerData[0].email,
               });
               break;
             case "none":
             default:
               userModel = BaseUserModel.fromMap({
-                "email": user.email ?? user.providerData[0].email,
                 ...userInfo.right,
+                "email": user.email ?? user.providerData[0].email,
               });
               break;
           }
@@ -215,15 +217,16 @@ class AuthService extends AuthRepository {
     final userModel = BaseUserModel(
       id: user.uid,
       settings: BaseSettingsModel(
-          data: UserData(
-            avatar: AssetsImage(asset: "671", network: user.photoURL),
-            birthDate: DateTime.fromMillisecondsSinceEpoch(0),
-            genderPref: "n/a",
-            lastConnection: DateTime.now(),
-            lastName: "",
-            name: nameRetriever ?? "",
-          ),
-          language: "es_AR"),
+        data: UserData(
+          avatar: AssetsImage(asset: "671", network: user.photoURL),
+          birthDate: DateTime.fromMillisecondsSinceEpoch(0),
+          genderPref: "n/a",
+          lastConnection: DateTime.now(),
+          lastName: "",
+          name: nameRetriever ?? "",
+        ),
+        language: LanguageSetting.empty(),
+      ),
       email: emailRetriever ?? "",
     );
     await _serverRepository.uploadUserInformation(user.uid, userModel.toMap());

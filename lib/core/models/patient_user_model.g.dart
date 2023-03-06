@@ -73,19 +73,18 @@ class PatientSettingsAdapter extends TypeAdapter<PatientSettings> {
     };
     return PatientSettings(
       data: fields[0] as UserData,
-      language: fields[1] as String,
+      language: fields[1] as LanguageSetting,
       payment: fields[2] as Payment,
       layout: fields[3] as LayoutSetting,
       accessibility: fields[4] as AccessibilitySetting,
       tts: fields[5] as TTSSetting,
-      languageSetting: fields[6] as LanguageSetting,
     );
   }
 
   @override
   void write(BinaryWriter writer, PatientSettings obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.data)
       ..writeByte(1)
@@ -97,9 +96,7 @@ class PatientSettingsAdapter extends TypeAdapter<PatientSettings> {
       ..writeByte(4)
       ..write(obj.accessibility)
       ..writeByte(5)
-      ..write(obj.tts)
-      ..writeByte(6)
-      ..write(obj.languageSetting);
+      ..write(obj.tts);
   }
 
   @override

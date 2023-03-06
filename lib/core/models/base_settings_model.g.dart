@@ -18,7 +18,7 @@ class BaseSettingsModelAdapter extends TypeAdapter<BaseSettingsModel> {
     };
     return BaseSettingsModel(
       data: fields[0] as UserData,
-      language: fields[1] as String,
+      language: fields[1] as LanguageSetting,
     );
   }
 
