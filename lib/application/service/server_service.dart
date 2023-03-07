@@ -95,6 +95,17 @@ class ServerService implements ServerRepository {
 
     final dynamic user = userValue.value as dynamic;
 
+    Map settingsData = user["settings"];
+
+    if (settingsData["language"].runtimeType == String) {
+      settingsData["language"] = {
+        "language": settingsData["language"] ?? "es_AR",
+        "labs": false,
+      };
+    }
+
+    user["settings"] = settingsData;
+
     return Right(Map<String, dynamic>.from(user));
   }
 
@@ -342,11 +353,11 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId}) async {
-    final ref = _database.child('$userId/settings/shortcuts/');
+  Future<EitherVoid> setShortcutsForUser({required ShortcutsModel shortcuts, required String userId}) async {
+    final ref = _database.child('$userId/layout/shortcuts/');
 
     try {
-      await ref.set(shortcuts.toMap());
+      await ref.update(shortcuts.toMap());
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -607,5 +618,44 @@ class ServerService implements ServerRepository {
     } catch (e) {
       return Left(e.toString());
     }
+  }
+
+  @override
+  Future<void> updateLanguageSettings({required Map<String, dynamic> map, required String userId}) async {
+    final ref = _database.child("$userId/settings/language/");
+
+    ref.set(map);
+  }
+
+  @override
+  Future<void> updateVoiceAndSubtitleSettings({required Map<String, dynamic> map, required String userId}) async {
+    final ref = _database.child("$userId/settings/tts/");
+
+    ref.update(map);
+  }
+
+  @override
+  Future<void> updateAccessibilitySettings({required Map<String, dynamic> map, required String userId}) async {
+    final ref = _database.child("$userId/settings/accessibility/");
+
+    ref.update(map);
+  }
+
+  @override
+  Future<void> updateMainSettings({required Map<String, dynamic> map, required String userId}) async {
+    final ref = _database.child("$userId/settings/layout/");
+
+    ref.update(map);
+  }
+
+  @override
+  Future<dynamic> fetchUserSettings({required String userId}) async {
+    final ref = _database.child('$userId/settings/');
+    final res = await ref.get();
+
+    if (res.exists && res.value != null) {
+      return Right(Map.from(res.value as Map<dynamic, dynamic>));
+    }
+    return const Left("no_data_found");
   }
 }

@@ -185,7 +185,7 @@ class HomeProvider extends ChangeNotifier {
       final response = await predictPictogram.call(
         sentence: pictoWords.map((e) => e.text).join(" "),
         uid: user.id,
-        language: user.settings.language,
+        language: user.settings.language.language,
         model: "test",
         groups: [],
         tags: {},
