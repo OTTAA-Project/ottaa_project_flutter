@@ -268,5 +268,8 @@
       "title": "Tableros",
       "pictos": "Tablero {group}"
     }
+  },
+  "chatgpt": {
+    "prompt": "unir esta secuencia de palabras en una oración coherente dicha por un {age} {gender}: {pictograms}"
   }
 }

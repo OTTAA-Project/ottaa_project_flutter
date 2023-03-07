@@ -1,4 +1,5 @@
-import 'dart:math';
+import 'dart:developer';
+import 'dart:math' show min;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -321,9 +322,13 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    final String? sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
-    if (sentence != null) {
-      return await _tts.speak(sentence);
+    if (patientState.state?.patientSettings.language.labs ?? false) {
+      final String? sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+
+      if (sentence != null) {
+        log("LA FRASE GENERADA ES: $sentence");
+        return await _tts.speak(sentence);
+      }
     }
 
     if (!talkEnabled) {

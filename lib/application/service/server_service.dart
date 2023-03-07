@@ -26,7 +26,7 @@ class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   final Reference _storageRef = FirebaseStorage.instance.ref();
 
-  late final openai.OpenAIClient _openAIClient = openai.OpenAIClient(
+  final openai.OpenAIClient _openAIClient = openai.OpenAIClient(
     configuration: openai.OpenAIConfiguration(
       apiKey: dotenv.get("openaiToken"),
     ),
@@ -604,17 +604,16 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherString> generatePhraseGPT({required String prompt}) async {
     try {
-      openai.Response<Chat> choice = (await (_openAIClient.chat
-          .create(
-            model: "text-curie-001",
-            message: ChatMessage(role: "user", content: prompt),
-            maxTokens: 1,
-          )
-          .go()));
+      final choice = await _openAIClient.chat.create(
+        model: "gpt-3.5-turbo",
+        message: [
+          ChatMessage(role: "user", content: prompt),
+        ],
+      ).data;
 
-      if (choice.data != null || choice.data!.choices.isEmpty) return const Left("No completado");
+      if (!choice.choices.isNotEmpty) return const Left("No completado");
 
-      return Right(choice.data!.choices.first.message.content);
+      return Right(choice.choices.first.message.content);
     } catch (e) {
       return Left(e.toString());
     }

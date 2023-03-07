@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dar
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart';
+import 'dart:math' as math;
 
 class ChatGPTNotifier extends ChangeNotifier {
   final UserNotifier _userNotifier;
@@ -16,7 +17,7 @@ class ChatGPTNotifier extends ChangeNotifier {
   Future<String?> generatePhrase(List<Picto> pictograms) async {
     final user = _patientNotifier.state ?? _userNotifier.user;
 
-    String age = (user.settings.data.birthDate.difference(DateTime.now()).inDays / 365).toString();
+    String age = (user.settings.data.birthDate.difference(DateTime.now()).inDays / 365).round().abs().toString();
 
     String gender = user.settings.data.genderPref;
 
