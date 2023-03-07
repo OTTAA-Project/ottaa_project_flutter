@@ -62,10 +62,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                       onPressed: pictos.isEmpty
                           ? null
                           : () {
-                              final provider = ref.watch(homeProvider);
-
-                              provider.status = HomeScreenStatus.grid;
-                              provider.notify();
+                              ref.read(homeProvider).switchToPictograms();
                             },
                       size: const Size(64, 64),
                       child: Image.asset(
