@@ -41,4 +41,5 @@ class AppRoutes {
   static const accessibilityScreenUser = "/accessibility_screen_user";
   static const voiceAndSubtitleScreenUser = "/voice_and_subtitle_screen_user";
   static const languageScreenUser = "/language_screen_user";
+  static const gameScreen = "/game_screen";
 }
