@@ -79,7 +79,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.push(AppRoutes.customizedBoardScreen);
+                        // context.push(AppRoutes.customizedBoardScreen);
                       },
                       child: Image.asset(
                         AppImages.kNotificationIcon,
@@ -92,7 +92,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                 ),
                 Text(
                   "profile.what_do".trl,
-                  style: textTheme.headline2,
+                  style: textTheme.displayMedium,
                 ),
                 const SizedBox(
                   height: 4,
