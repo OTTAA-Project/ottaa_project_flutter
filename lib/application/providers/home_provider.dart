@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dar
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
@@ -78,7 +79,7 @@ class HomeProvider extends ChangeNotifier {
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
   // Home Tabs
-  late String currentTabGroup;
+  String currentTabGroup = "";
   ScrollController groupTabsScrollController = ScrollController();
   ScrollController pictoTabsScrollController = ScrollController();
 
@@ -101,6 +102,20 @@ class HomeProvider extends ChangeNotifier {
 
     buildSuggestion();
     notifyListeners();
+  }
+
+  void switchToPictograms() {
+    final currentUser = patientState.state ?? userState.state!;
+
+    bool isGrid = currentUser.isPatient && currentUser.patient.patientSettings.layout.display == DisplayTypes.grid;
+
+    if (isGrid) {
+      status = HomeScreenStatus.grid;
+    } else {
+      status = HomeScreenStatus.tabs;
+    }
+
+    notify();
   }
 
   Future<void> fetchMostUsedSentences() async {

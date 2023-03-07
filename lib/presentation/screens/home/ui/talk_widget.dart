@@ -91,17 +91,6 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
               },
             ),
           ),
-          const SizedBox(width: 16),
-          const SizedBox(
-            width: 138,
-            height: 80,
-          ),
-          const SizedBox(width: 16),
-          const SizedBox(
-            width: 138,
-            height: 80,
-          ),
-          const SizedBox(width: 24),
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -14,6 +15,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
+    final provider = ref.read(linkProvider);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -46,7 +48,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
                 ),
                 Center(
                   child: Text(
-                    "customize.wait.subtitle".trl,
+                    "customize.wait.subtitle".trlf({'name': provider.user!.settings.data.name}),
                     style: textTheme.headline3,
                   ),
                 ),

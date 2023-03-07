@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
