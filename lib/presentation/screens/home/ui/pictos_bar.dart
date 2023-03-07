@@ -29,6 +29,8 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
     final pictos = ref.watch(homeProvider).getPictograms();
 
+    final hasGroups = ref.watch(homeProvider).groups.isNotEmpty;
+
     final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
     print(pictos.length);
@@ -59,10 +61,10 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     HomeButton(
-                      onPressed: pictos.isEmpty
+                      onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
-                              ref.read(homeProvider).switchToPictograms();
+                              ref.watch(homeProvider).switchToPictograms();
                             },
                       size: const Size(64, 64),
                       child: Image.asset(
@@ -70,7 +72,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                       ),
                     ),
                     BaseButton(
-                      onPressed: pictos.isEmpty
+                      onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
                               ref.read(homeProvider).refreshPictograms();
