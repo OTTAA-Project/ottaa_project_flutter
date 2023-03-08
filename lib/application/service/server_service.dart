@@ -605,7 +605,7 @@ class ServerService implements ServerRepository {
   Future<EitherString> generatePhraseGPT({required String prompt}) async {
     try {
       final choice = await _openAIClient.chat.create(
-        model: "text-davinci-001",
+        model: "gpt-3.5-turbo-0301",
         message: [
           ChatMessage(role: "user", content: prompt),
         ],

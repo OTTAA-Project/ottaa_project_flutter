@@ -322,7 +322,8 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    if (patientState.state?.patientSettings.language.labs ?? false) {
+    // if (patientState.state?.patientSettings.language.labs ?? false) {
+    if (true) {
       String? sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
 
       if (sentence != null) {
