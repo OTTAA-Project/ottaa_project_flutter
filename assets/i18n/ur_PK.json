@@ -22,15 +22,15 @@
       "faq3": "OTTAA ایپ کی قیمت کتنی ہے؟",
       "faq3Description": "OTTAA ایپ ڈاؤن لوڈ اور استعمال کرنے کے لیے مفت ہے۔ ایک پائیدار پروڈکٹ بنانے کے لیے جو وقت کی کسوٹی پر کھڑی ہو، کچھ خصوصیات ہیں جن کو استعمال کرنے کے لیے سبسکرپشن کی ضرورت ہوتی ہے۔ تاہم، ہم ان تمام لوگوں کو فنڈ فراہم کرنے کے لیے سخت محنت کر رہے ہیں جنہیں اس کی ضرورت ہے۔\n\nاگر آپ ارجنٹائن میں ہیں تو، کسی بھی تکنیکی مدد کی جس کی کسی شخص کو ضرورت ہوتی ہے اسے ہیلتھ انشورنس کے ذریعے کور کیا جانا چاہیے۔ اس کوریج کو کیسے حاصل کیا جائے اس بارے میں رہنمائی اور مدد کے لیے ہماری ٹیم سے رابطہ کریں۔\n\nاگر آپ کسی دوسرے LATAM ملک سے ہیں اور اس موضوع پر اپنے تجربے کا اشتراک کرنا چاہتے ہیں، تو ہم سے رابطہ کرنے میں ہچکچاہٹ محسوس نہ کریں، آپ کا تعاون بہت سے لوگوں کی مدد کر سکتا ہے۔",
       "faq4": "OTTAA پروجیکٹ کے ذریعے کن زبانوں کی حمایت کی جاتی ہے؟",
-      "faq4Description": "Actualmente admitimos español, inglés, portugués y francés. Para español, tenemos versiones localizadas de Argentina, Chile, Colombia y España. Estamos buscando activamente contribuciones sobre nuevos idiomas o una mejor localización para las variedades españolas. Únase a nuestra comunidad de crowdin para contribuir.",
-      "faq5": "¿Cómo puedo colaborar con el Proyecto OTTAA?",
-      "faq5Description": "Los colaboradores pueden ayudar a OTTAA con el desarrollo, las pruebas y/o la traducción. Para leer más sobre el tema y comenzar, consulte la sección Contribuir en el repositorio oficial de OTTAA en GitHub."
+      "faq4Description": "ہم فی الحال ہسپانوی، انگریزی، پرتگالی اور فرانسیسی کو سپورٹ کرتے ہیں۔ ہسپانوی کے لیے، ہمارے پاس ارجنٹائن، چلی، کولمبیا اور اسپین کے لیے مقامی ورژن ہیں۔ ہم فعال طور پر نئی زبانوں میں شراکت یا ہسپانوی اقسام کے لیے بہتر لوکلائزیشن کی تلاش میں ہیں۔ حصہ ڈالنے کے لیے ہماری بھیڑ کمیونٹی میں شامل ہوں۔",
+      "faq5": "میں OTTAA پروجیکٹ کے ساتھ کیسے تعاون کر سکتا ہوں؟",
+      "faq5Description": "تعاون کرنے والے OTTAA کی ترقی، جانچ، اور/یا ترجمہ میں مدد کر سکتے ہیں۔ موضوع کے بارے میں مزید پڑھنے اور شروع کرنے کے لیے، GitHub پر OTTAA کے آفیشل ریپوزٹری پر تعاون کرنے والا سیکشن دیکھیں۔"
     },
-    "caregiver": "Acompañante",
-    "caregivers_families": "Profesionales/Familiares",
-    "user": "Usuario/a",
-    "user_description": "Persona no verbal",
-    "wait": "Por favor esperá",
+    "caregiver": "ساتھی",
+    "caregivers_families": "پیشہ ور افراد/خاندان",
+    "user": "صارف/صارفین",
+    "user_description": "غیر زبانی شخص",
+    "wait": "برائے مہربانی انتظار کریں",
     "setting_exp": "Configurando tu experiencia...",
     "link_account": "Vincular una cuenta",
     "use": {
