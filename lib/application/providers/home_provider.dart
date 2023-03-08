@@ -328,8 +328,6 @@ class HomeProvider extends ChangeNotifier {
 
       if (sentence != null) {
         log("LA FRASE GENERADA ES: $sentence");
-        //Remove all the special characters
-        sentence = sentence.replaceAll(RegExp(r'[^a-zA-Z0-9 ]'), '');
         return await _tts.speak(sentence);
       }
     }

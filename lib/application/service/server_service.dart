@@ -604,16 +604,15 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherString> generatePhraseGPT({required String prompt}) async {
     try {
-      final choice = await _openAIClient.chat.create(
-        model: "gpt-3.5-turbo-0301",
-        message: [
-          ChatMessage(role: "user", content: prompt),
-        ],
+      final choice = await _openAIClient.completions.create(
+        model: "text-davinci-001",
+        prompt: prompt,
+        temperature: 0
       ).data;
 
       if (!choice.choices.isNotEmpty) return const Left("No completado");
 
-      return Right(choice.choices.first.message.content);
+      return Right(choice.choices.first.text);
     } catch (e) {
       return Left(e.toString());
     }
