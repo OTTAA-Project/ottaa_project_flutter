@@ -323,10 +323,12 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> speakSentence() async {
     if (patientState.state?.patientSettings.language.labs ?? false) {
-      final String? sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+      String? sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
 
       if (sentence != null) {
         log("LA FRASE GENERADA ES: $sentence");
+        //Remove all the special characters
+        sentence = sentence.replaceAll(RegExp(r'[^a-zA-Z0-9 ]'), '');
         return await _tts.speak(sentence);
       }
     }

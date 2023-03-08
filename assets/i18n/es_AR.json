@@ -270,6 +270,6 @@
     }
   },
   "chatgpt": {
-    "prompt": "unir esta secuencia de palabras en una oración coherente dicha por un {age} {gender}: {pictograms}"
+    "prompt": "unir esta secuencia de palabras en una oración coherente dicha por una persona deHol {age} años {gender} agregando los conectores y articulos necesarios: {pictograms}"
   }
 }
