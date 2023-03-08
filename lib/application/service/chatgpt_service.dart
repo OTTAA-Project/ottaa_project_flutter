@@ -11,10 +11,13 @@ class ChatGPTService extends ChatGPTRepository {
   const ChatGPTService(this.serverService);
 
   @override
-  Future<Either<String, String>> getCompletion({required String age, required String gender, required String pictograms}) async {
+  Future<Either<String, String>> getCompletion({required String age, required String gender, required String pictograms, int maxTokens = 500}) async {
     final prompt = "chatgpt.prompt".trlf({"age": age, "gender": gender, "pictograms": pictograms});
 
-    final response = await serverService.generatePhraseGPT(prompt: prompt);
+    final response = await serverService.generatePhraseGPT(
+      prompt: prompt,
+      maxTokens: maxTokens,
+    );
 
     return response.fold(
       (l) => Left(l),

@@ -56,7 +56,7 @@ abstract class ServerRepository {
 
   Future<EitherMap> getMostUsedSentences(String userId, String languageCode);
 
-  Future<EitherString> generatePhraseGPT({required String prompt});
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens});
 
   Future<String> uploadUserImage({required String path, required String name, required String userId});
 

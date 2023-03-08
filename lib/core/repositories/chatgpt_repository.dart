@@ -5,5 +5,5 @@ abstract class ChatGPTRepository {
 
   const ChatGPTRepository();
 
-  Future<Either<String, String>> getCompletion({required String age, required String gender, required String pictograms});
+  Future<Either<String, String>> getCompletion({required String age, required String gender, required String pictograms, int maxTokens = 500});
 }

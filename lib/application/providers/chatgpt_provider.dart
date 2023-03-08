@@ -23,7 +23,14 @@ class ChatGPTNotifier extends ChangeNotifier {
 
     String pictogramsString = pictograms.map((e) => e.text).join(", ");
 
-    final response = await _chatGPTRepository.getCompletion(age: age, gender: gender, pictograms: pictogramsString);
+    int maxTokens = (pictograms.length * 10).round().clamp(300, 500);
+
+    final response = await _chatGPTRepository.getCompletion(
+      age: age,
+      gender: gender,
+      pictograms: pictogramsString,
+      maxTokens: maxTokens,
+    );
 
     return response.fold(
       (l) => null,
