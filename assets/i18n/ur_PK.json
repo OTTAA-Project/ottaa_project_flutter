@@ -70,10 +70,10 @@
     "link": {
       "title": "اکاؤنٹ لنک کریں۔",
       "mail": {
-        "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+        "title": "OTTAA اکاؤنٹ سے منسلک ای میل درج کریں۔",
         "input": {
-          "required": "El correo electrónico es requerido",
-          "invalid": "El correo electrónico es inválido"
+          "required": "ای میل درکار ہے۔",
+          "invalid": "ای میل غلط ہے۔"
         },
         "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles.",
         "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico."
