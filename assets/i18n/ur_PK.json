@@ -188,19 +188,19 @@
     "user_ottaa": "اوٹا کو بطور استعمال کریں۔{name}",
     "cancel": "منسوخ",
     "slow": "سست",
-    "default": "Predeterminada",
-    "fast": "Rápida",
-    "voice": "Voz",
-    "boy": "Chico",
-    "medium": "Mediano",
-    "big": "Grande"
+    "default": "پہلے سے طے شدہ\n",
+    "fast": "تیز",
+    "voice": "آواز",
+    "boy": "لڑکا",
+    "medium": "درمیانہ",
+    "big": "بڑا"
   },
   "onboarding": {
-    "start": "Comenzar",
+    "start": "شروع کریں",
     "profile": {
-      "title": "Pantalla de perfiles",
-      "subtitle": "¿Quién va a usar OTTAA hoy?",
-      "description": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
+      "title": "پروفائلز کی سکرین",
+      "subtitle": "آج کون اوٹا استعمال کرنے جا رہا ہے؟",
+      "description": "پروفائلز کے انتخاب کے ساتھ آپ اپنے تصویروں اور سٹائل کو مدنظر رکھتے ہوئے کسی بھی ڈیوائس سے اوٹا استعمال کر سکیں گے!"
     },
     "home": {
       "title": "Personaliza tu Home",
