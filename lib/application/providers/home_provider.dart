@@ -238,9 +238,8 @@ class HomeProvider extends ChangeNotifier {
   }
 
   List<Picto> getPictograms() {
-    int currentPage = suggestedPicts.length ~/ suggestedQuantity;
+    int currentPage = (suggestedPicts.length / suggestedQuantity).round();
 
-    print("Page: $currentPage");
 
     if (indexPage > currentPage) {
       indexPage = currentPage;
@@ -252,7 +251,7 @@ class HomeProvider extends ChangeNotifier {
 
     List<Picto> pictos = suggestedPicts.sublist(start, min(suggestedPicts.length, (indexPage * suggestedQuantity) + suggestedQuantity));
 
-    if (pictos.isEmpty) {
+    if (pictos.isEmpty && suggestedPicts.isEmpty) {
       return List.generate(4, (index) {
         return Picto(
             id: "-777",
@@ -265,7 +264,6 @@ class HomeProvider extends ChangeNotifier {
       });
     } else if (pictos.length < suggestedQuantity) {
       int pictosLeft = suggestedQuantity - pictos.length;
-      print("Pictos Left: $pictosLeft");
       pictos.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
     }
 
