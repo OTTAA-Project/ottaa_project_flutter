@@ -75,7 +75,7 @@ class HomeProvider extends ChangeNotifier {
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
   // Home Tabs
-  late String currentTabGroup;
+  String currentTabGroup = "";
   ScrollController groupTabsScrollController = ScrollController();
   ScrollController pictoTabsScrollController = ScrollController();
 
@@ -92,8 +92,7 @@ class HomeProvider extends ChangeNotifier {
   Future<void> init() async {
     await fetchPictograms();
 
-    basicPictograms =
-        predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
+    basicPictograms = predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
 
     currentTabGroup = groups.keys.first;
 
@@ -104,8 +103,7 @@ class HomeProvider extends ChangeNotifier {
   void switchToPictograms() {
     final currentUser = patientState.state ?? userState.state!;
 
-    bool isGrid = currentUser.isPatient &&
-        currentUser.patient.patientSettings.layout.display == DisplayTypes.grid;
+    bool isGrid = currentUser.isPatient && currentUser.patient.patientSettings.layout.display == DisplayTypes.grid;
 
     if (isGrid) {
       status = HomeScreenStatus.grid;
@@ -167,18 +165,13 @@ class HomeProvider extends ChangeNotifier {
     if (patientState.state != null) {
       pictos = patientState.user.pictos[patientState.user.settings.language];
 
-      groupsData =
-          patientState.user.groups[patientState.user.settings.language];
+      groupsData = patientState.user.groups[patientState.user.settings.language];
 
       print(patientState.user.groups);
     }
 
-    pictos ??= (await _pictogramsService.getAllPictograms())
-        .where((element) => !element.block)
-        .toList();
-    groupsData ??= (await _groupsService.getAllGroups())
-        .where((element) => !element.block)
-        .toList();
+    pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
+    groupsData ??= (await _groupsService.getAllGroups()).where((element) => !element.block).toList();
 
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
@@ -212,8 +205,7 @@ class HomeProvider extends ChangeNotifier {
       );
 
       if (response.isRight) {
-        suggestedPicts =
-            response.right.map((e) => pictograms[e.id["local"]]!).toList();
+        suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
       }
     }
@@ -246,9 +238,8 @@ class HomeProvider extends ChangeNotifier {
   }
 
   List<Picto> getPictograms() {
-    int currentPage = suggestedPicts.length ~/ suggestedQuantity;
+    int currentPage = (suggestedPicts.length / suggestedQuantity).round();
 
-    print("Page: $currentPage");
 
     if (indexPage > currentPage) {
       indexPage = currentPage;
@@ -258,12 +249,9 @@ class HomeProvider extends ChangeNotifier {
     }
     int start = indexPage * suggestedQuantity;
 
-    List<Picto> pictos = suggestedPicts.sublist(
-        start,
-        min(suggestedPicts.length,
-            (indexPage * suggestedQuantity) + suggestedQuantity));
+    List<Picto> pictos = suggestedPicts.sublist(start, min(suggestedPicts.length, (indexPage * suggestedQuantity) + suggestedQuantity));
 
-    if (pictos.isEmpty) {
+    if (pictos.isEmpty && suggestedPicts.isEmpty) {
       return List.generate(4, (index) {
         return Picto(
             id: "-777",
@@ -276,9 +264,7 @@ class HomeProvider extends ChangeNotifier {
       });
     } else if (pictos.length < suggestedQuantity) {
       int pictosLeft = suggestedQuantity - pictos.length;
-      print("Pictos Left: $pictosLeft");
-      pictos.addAll(
-          basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
+      pictos.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
     }
 
     return pictos;
@@ -320,12 +306,10 @@ class HomeProvider extends ChangeNotifier {
           }
         }
       }
-      e.freq = (list[i].value * pesoFrec) +
-          (hora * pesoHora); //TODO: Check this with asim
+      e.freq = (list[i].value * pesoFrec) + (hora * pesoHora); //TODO: Check this with asim
     }
 
-    requiredPicts.sort(
-        (b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
+    requiredPicts.sort((b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
 
     return requiredPicts;
   }
@@ -399,8 +383,7 @@ class HomeProvider extends ChangeNotifier {
   }
 }
 
-final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider =
-    ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
+final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final sentencesService = GetIt.I<SentencesRepository>();
