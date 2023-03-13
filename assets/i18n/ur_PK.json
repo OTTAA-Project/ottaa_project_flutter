@@ -221,47 +221,47 @@
     "text": "جاری رکھنے کے لیے، ہمیں آپ سے شرائط و ضوابط کو قبول کرنے کی ضرورت ہے۔\n\nشرائط دیکھیں"
   },
   "loginWait": {
-    "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
+    "text": "ہم آپ کو خوش آمدید کہتے ہیں!\n\nOTTAA کی دنیا کے لیے"
   },
   "login": {
-    "title": "Ingresá con tu cuenta",
-    "google": "Continuar con Google",
-    "facebook": "Continuar con Facebook",
-    "register": "Todavía no tenés cuenta? Registrate acá",
+    "title": "اپنے اکاؤنٹ سے سائن ان کریں۔",
+    "google": "گوگل کے ساتھ جاری رکھیں",
+    "facebook": "فیس بک کے ساتھ جاری رکھیں",
+    "register": "آپ کے پاس اب بھی اکاؤنٹ نہیں ہے؟ یہاں اندراج کریں",
     "wait": {
-      "title": "Te damos la bienvenida!",
-      "subtitle": "Al nuevo mundo de OTTAA Project"
+      "title": "ہم آپ کو خوش آمدید کہتے ہیں!",
+      "subtitle": "OTTAA پروجیکٹ کی نئی دنیا میں"
     }
   },
   "customize": {
     "board": {
-      "title": "¿Qué tableros utilizará el usuario para comunicarse?",
-      "appbar": "Tableros predictivos",
-      "skip": "¿Omitir la elección de tableros?",
-      "subtitle": "Ver pictogramas"
+      "title": "صارف مواصلت کے لیے کون سے بورڈ استعمال کرے گا؟",
+      "appbar": "پیش گوئی کرنے والے بورڈز",
+      "skip": "بورڈز کا انتخاب چھوڑ دیں؟",
+      "subtitle": "تصویریں دیکھیں"
     },
     "shortcut": {
-      "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
-      "appbar": "Atajos",
+      "title": "مین اسکرین پر ظاہر ہونے والے شارٹ کٹس کو منتخب کریں۔",
+      "appbar": "شارٹ کٹس",
       "favorites": "پسندیدہ",
       "history": "تاریخ(سرگزشت)",
-      "camera": "Cámara",
-      "games": "Juegos"
+      "camera": "کیمرے",
+      "games": "کھیل"
     },
     "picto": {
-      "title": "Tablero {name}",
-      "switch": "Activar tablero"
+      "title": "ادارتی ٹیم{name}",
+      "switch": "ڈیش بورڈ کو چالو کریں۔"
     },
     "help": {
-      "boards": "Los tableros predictivos permiten configurar que grupo de pictogramas se mostrarán en la pantalla del usuario/a final.",
-      "shortcut": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal."
+      "boards": "پیش گوئی کرنے والے بورڈز آپ کو یہ ترتیب دینے کی اجازت دیتے ہیں کہ آخر صارف کی سکرین پر تصویری گرام کا کون سا گروپ دکھایا جائے گا۔",
+      "shortcut": "شارٹ کٹس مختلف فنکشنز تک فوری رسائی ہیں جو اختتامی صارف کے لیے ان کی مرکزی اسکرین پر موجود ہیں۔"
     },
     "wait": {
-      "title": "¡Felicitaciones!",
-      "subtitle": "Haz configurado la experiencia de {name}",
-      "button": "Ir al panel de perfiles"
+      "title": "مبارک ہو",
+      "subtitle": "{name} کا تجربہ مرتب کریں۔",
+      "button": "پروفائلز پینل پر جائیں۔"
     },
-    "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
+    "skip": "کیا آپ پروفائل کی ترجیحات کو چھوڑنے سے اتفاق کرتے ہیں؟"
   },
   "home": {
     "grid": {
