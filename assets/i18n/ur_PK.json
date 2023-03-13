@@ -203,22 +203,22 @@
       "description": "پروفائلز کے انتخاب کے ساتھ آپ اپنے تصویروں اور سٹائل کو مدنظر رکھتے ہوئے کسی بھی ڈیوائس سے اوٹا استعمال کر سکیں گے!"
     },
     "home": {
-      "title": "Personaliza tu Home",
-      "subtitle": "Atajos en la pantalla principal",
-      "description": "Personaliza de acuerdo a los gustos y necesidades"
+      "title": "اپنے گھر کو حسب ضرورت بنائیں",
+      "subtitle": "مرکزی اسکرین پر شارٹ کٹس",
+      "description": "ذوق اور ضروریات کے مطابق اپنی مرضی کے مطابق بنائیں"
     },
     "customize": {
-      "title": "Personaliza tu Home",
-      "subtitle": "Acompañamos en el proceso de aprendizaje",
-      "description": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+      "title": "اپنے گھر کو حسب ضرورت بنائیں",
+      "subtitle": "ہم سیکھنے کے عمل میں ساتھ دیتے ہیں۔",
+      "description": "پیشین گوئی میں ترمیم کرنے کے لیے بورڈز یا تصویروں کو چالو یا غیر فعال کریں، آپ کے کنٹرول میں ہیں۔"
     },
     "skip": {
-      "title": "¿Estás de acuerdo en saltar la introducción?"
+      "title": "کیا آپ تعارف کو چھوڑنے سے اتفاق کرتے ہیں؟"
     }
   },
   "terms": {
-    "button": "Acepto los términos",
-    "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\nVer términos"
+    "button": "میں شرائط قبول کرتا ہوں۔",
+    "text": "جاری رکھنے کے لیے، ہمیں آپ سے شرائط و ضوابط کو قبول کرنے کی ضرورت ہے۔\n\nشرائط دیکھیں"
   },
   "loginWait": {
     "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
