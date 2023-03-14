@@ -268,5 +268,8 @@
       "title": "بورڈز",
       "pictos": "Tablero {group}"
     }
+  },
+  "chatgpt": {
+    "prompt": "formar una frase con estas palabras como si hablara un {age} {gender} en {language}, agregando conectores y artículos cuando sea necesario: {pictograms}"
   }
 }
