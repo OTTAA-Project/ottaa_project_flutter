@@ -240,7 +240,6 @@ class HomeProvider extends ChangeNotifier {
   List<Picto> getPictograms() {
     int currentPage = (suggestedPicts.length / suggestedQuantity).round();
 
-
     if (indexPage > currentPage) {
       indexPage = currentPage;
     }
@@ -380,6 +379,14 @@ class HomeProvider extends ChangeNotifier {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );
+  }
+
+  @override
+  void dispose() {
+
+    patientState.setUser(null);
+
+    super.dispose();
   }
 }
 
