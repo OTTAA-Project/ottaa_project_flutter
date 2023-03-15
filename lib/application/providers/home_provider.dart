@@ -163,9 +163,9 @@ class HomeProvider extends ChangeNotifier {
     List<Group>? groupsData;
 
     if (patientState.state != null) {
-      pictos = patientState.user.pictos[patientState.user.settings.language];
+      pictos = patientState.user.pictos[patientState.user.settings.language.language];
 
-      groupsData = patientState.user.groups[patientState.user.settings.language];
+      groupsData = patientState.user.groups[patientState.user.settings.language.language];
 
       print(patientState.user.groups);
     }
@@ -239,7 +239,6 @@ class HomeProvider extends ChangeNotifier {
 
   List<Picto> getPictograms() {
     int currentPage = (suggestedPicts.length / suggestedQuantity).round();
-
 
     if (indexPage > currentPage) {
       indexPage = currentPage;
@@ -380,6 +379,14 @@ class HomeProvider extends ChangeNotifier {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );
+  }
+
+  @override
+  void dispose() {
+
+    patientState.setUser(null);
+
+    super.dispose();
   }
 }
 
