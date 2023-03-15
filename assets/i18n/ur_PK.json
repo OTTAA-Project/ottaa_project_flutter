@@ -1,271 +1,271 @@
 {
   "profile": {
     "selection": {
-      "text1": "¿Quién va a usar la aplicación en este dispositivo?",
-      "caregiver_text": "Necesita comunicarse",
-      "user_text": "Necesita comunicarse"
+      "text1": "اس ڈیوائس پر ایپ کون استعمال کرے گا؟",
+      "caregiver_text": "رابطہ کرنے کی ضرورت",
+      "user_text": "رابطہ کرنے کی ضرورت"
     },
-    "hello": "Hola {name}!",
+    "hello": "ہیلو {name}!",
     "ottaa": {
-      "tips": "OTTAA tips"
+      "tips": "اوٹا تجاویز"
     },
     "mail": "Mail",
     "date": "Fecha de nacimiento",
     "faq": {
       "title": "Preguntas frecuentes",
-      "faq0": "¿Quién puede usar la aplicación OTTAA?",
-      "faq0Description": "OTTAA está diseñado para personas no verbales, es decir, cualquier persona que no utilice el habla oral para comunicarse. Las personas que usan OTTAA hoy en día fueron diagnosticadas con autismo, parálisis cerebral, síndrome de Down, esclerosis lateral amiotrófica (ELA), atrofia muscular espinal (AME) o síndrome de enclaustramiento post al accidente cerebrovascular (LiS), entre otras afecciones. Al ser una herramienta de comunicación dinámica, OTTAA requiere que sus usuarios posean funciones cognitivas de nivel medio a alto. Sin embargo, nos gusta considerar cada caso individualmente, así que no dude en ponerte en contacto y solicitar una evaluación en línea con nuestro equipo.",
-      "faq1": "¿Cómo funciona la aplicación?",
-      "faq1Description": "La aplicación OTTAA proporciona al usuario pictogramas: imágenes que representan acciones, objetos, sentimientos o emociones. El usuario puede elegir los pictogramas que necesita y crear una frase, esta se traduce de los pictogramas a una oración escrita que aparece en la pantalla y que la aplicación también lee en voz alta. Consultá nuestro canal de Youtube para obtener una explicación más visual.",
-      "faq2": "¿En qué se diferencia esta aplicación de otros dispositivos AAC (comunicación aumentativa y alternativa)?",
-      "faq2Description": "La aplicación OTTAA es diferente de otras aplicaciones de CAA debido a su innovador algoritmo predictivo y generador de lenguaje natural, que permite que la aplicación aprenda del comportamiento del usuario en la aplicación, su edad, sexo, la hora del día y su ubicación para pre -seleccionar pictograma(s) para el momento comunicacional en el que se encuentran.",
-      "faq3": "¿Cuánto cuesta la aplicación OTTAA?",
-      "faq3Description": "La aplicación OTTAA es gratuita para descargar y usar. Para crear un producto sostenible que resista el paso del tiempo, hay algunas características que requieren una suscripción para utilizarlas. Sin embargo, estamos trabajando arduamente para brindar financiamiento a todos los que lo necesitan.\n\nSi estás en Argentina, cualquier ayuda técnica que necesite una persona debe estar cubierto por un seguro de salud. Comuníquese con nuestro equipo para obtener orientación y asistencia sobre cómo obtener esta cobertura.\n\nSi sos de cualquier otro país de LATAM y querés compartir tu experiencia sobre este tema, no dudes en comunicarte, tu contribución podría ayudar a muchas personas.",
-      "faq4": "¿Qué idiomas son compatibles con el Proyecto OTTAA?",
-      "faq4Description": "Actualmente admitimos español, inglés, portugués y francés. Para español, tenemos versiones localizadas de Argentina, Chile, Colombia y España. Estamos buscando activamente contribuciones sobre nuevos idiomas o una mejor localización para las variedades españolas. Únase a nuestra comunidad de crowdin para contribuir.",
-      "faq5": "¿Cómo puedo colaborar con el Proyecto OTTAA?",
-      "faq5Description": "Los colaboradores pueden ayudar a OTTAA con el desarrollo, las pruebas y/o la traducción. Para leer más sobre el tema y comenzar, consulte la sección Contribuir en el repositorio oficial de OTTAA en GitHub."
+      "faq0": "OTTAA ایپ کون استعمال کر سکتا ہے؟",
+      "faq0Description": "اوٹا غیر زبانی لوگوں کے لیے ڈیزائن کیا گیا ہے، یعنی کوئی بھی جو بات چیت کے لیے زبانی کلام کا استعمال نہیں کرتا ہے۔ آج اوٹا استعمال کرنے والے لوگوں میں دیگر حالات کے علاوہ آٹزم، دماغی فالج، ڈاؤن سنڈروم، امیوٹروفک لیٹرل سکلیروسیس (ALS)، اسپائنل مسکولر ایٹروفی (SMA) یا پوسٹ اسٹروک لاک ان سنڈروم (LiS) کی تشخیص ہوئی ہے۔ ایک متحرک کمیونیکیشن ٹول ہونے کے ناطے، اوٹا اپنے صارفین سے متوسط ​​سے اعلیٰ سطح کے علمی افعال کے مالک ہونے کا تقاضا کرتا ہے۔ تاہم، ہم ہر معاملے پر انفرادی طور پر غور کرنا چاہتے ہیں، لہذا بلا جھجھک رابطہ کریں اور ہماری ٹیم کے ساتھ آن لائن تشخیص کی درخواست کریں۔",
+      "faq1": "ایپ کیسے کام کرتی ہے؟",
+      "faq1Description": "اوٹا ایپلیکیشن صارف کو پکٹوگرام فراہم کرتی ہے: ایسی تصاویر جو اعمال، اشیاء، احساسات یا جذبات کی نمائندگی کرتی ہیں۔ صارف اپنی ضرورت کے مطابق پکٹوگرامس کا انتخاب کر سکتا ہے اور ایک جملہ بنا سکتا ہے، جس کا تصویری گراف سے ایک تحریری جملے میں ترجمہ کیا جاتا ہے جو اسکرین پر ظاہر ہوتا ہے اور اسے ایپلی کیشن کے ذریعے بلند آواز میں پڑھا بھی جاتا ہے۔ مزید بصری وضاحت کے لیے ہمارا یوٹیوب چینل دیکھیں۔",
+      "faq2": "یہ ایپ دیگر AAC (Augmentative and Alternative Communication) آلات سے کس طرح مختلف ہے؟",
+      "faq2Description": "اوٹا ایپ اپنے اختراعی پیشن گوئی الگورتھم اور قدرتی زبان کے جنریٹر کی وجہ سے دیگر AAC ایپس سے مختلف ہے، جو ایپ کو ایپ میں صارف کے رویے، ان کی عمر، جنس، دن کا وقت، اور مقام کے بارے میں سیکھنے کی اجازت دیتی ہے مواصلت کے اس لمحے کے لیے جس میں وہ ہیں۔",
+      "faq3": "اوٹا ایپ کی قیمت کتنی ہے؟",
+      "faq3Description": "اوٹا ایپ ڈاؤن لوڈ اور استعمال کرنے کے لیے مفت ہے۔ ایک پائیدار پروڈکٹ بنانے کے لیے جو وقت کی کسوٹی پر کھڑی ہو، کچھ خصوصیات ہیں جن کو استعمال کرنے کے لیے سبسکرپشن کی ضرورت ہوتی ہے۔ تاہم، ہم ان تمام لوگوں کو فنڈ فراہم کرنے کے لیے سخت محنت کر رہے ہیں جنہیں اس کی ضرورت ہے۔\n\nاگر آپ ارجنٹائن میں ہیں تو، کسی بھی تکنیکی مدد کی جس کی کسی شخص کو ضرورت ہوتی ہے اسے ہیلتھ انشورنس کے ذریعے کور کیا جانا چاہیے۔ اس کوریج کو کیسے حاصل کیا جائے اس بارے میں رہنمائی اور مدد کے لیے ہماری ٹیم سے رابطہ کریں۔\n\nاگر آپ کسی دوسرے LATAM ملک سے ہیں اور اس موضوع پر اپنے تجربے کا اشتراک کرنا چاہتے ہیں، تو ہم سے رابطہ کرنے میں ہچکچاہٹ محسوس نہ کریں، آپ کا تعاون بہت سے لوگوں کی مدد کر سکتا ہے۔",
+      "faq4": "اوٹا پروجیکٹ کے ذریعے کن زبانوں کی حمایت کی جاتی ہے؟",
+      "faq4Description": "ہم فی الحال ہسپانوی، انگریزی، پرتگالی اور فرانسیسی کو سپورٹ کرتے ہیں۔ ہسپانوی کے لیے، ہمارے پاس ارجنٹائن، چلی، کولمبیا اور اسپین کے لیے مقامی ورژن ہیں۔ ہم فعال طور پر نئی زبانوں میں شراکت یا ہسپانوی اقسام کے لیے بہتر لوکلائزیشن کی تلاش میں ہیں۔ حصہ ڈالنے کے لیے ہماری بھیڑ کمیونٹی میں شامل ہوں۔",
+      "faq5": "میں اوٹا پروجیکٹ کے ساتھ کیسے تعاون کر سکتا ہوں؟",
+      "faq5Description": "تعاون کرنے والے اوٹا کی ترقی، جانچ، اور/یا ترجمہ میں مدد کر سکتے ہیں۔ موضوع کے بارے میں مزید پڑھنے اور شروع کرنے کے لیے، GitHub پر اوٹا کے آفیشل ریپوزٹری پر تعاون کرنے والا سیکشن دیکھیں۔"
     },
-    "caregiver": "Acompañante",
-    "caregivers_families": "Profesionales/Familiares",
-    "user": "Usuario/a",
-    "user_description": "Persona no verbal",
-    "wait": "Por favor esperá",
-    "setting_exp": "Configurando tu experiencia...",
-    "link_account": "Vincular una cuenta",
+    "caregiver": "ساتھی",
+    "caregivers_families": "پیشہ ور افراد/خاندان",
+    "user": "صارف/صارفین",
+    "user_description": "غیر زبانی شخص",
+    "wait": "برائے مہربانی انتظار کریں",
+    "setting_exp": "آپ کا تجربہ ترتیب دیا جا رہا ہے...",
+    "link_account": "ایک اکاؤنٹ کو لنک کریں",
     "use": {
-      "ottaa": "Usar OTTAA"
+      "ottaa": "اوٹا استعمال"
     },
-    "close_profile": "Esconder",
-    "open_profile": "Ver perfil",
-    "no_account": "Modo sin perfil",
-    "new_existant": "Nuevo/Existente",
-    "what_do": "¿Qué querés hacer?",
-    "profile": "Perfil",
-    "linked_accounts": "Cuentas vinculadas",
-    "name": "Nombre",
-    "logout": "Cerrar sesión",
-    "last_name": "Apellido",
-    "role": "Rol de uso",
-    "day": "Día",
-    "month": "Mes",
-    "year": "Año",
+    "close_profile": "چھپائیں",
+    "open_profile": "پروفائل کا مشاھدہ کریں",
+    "no_account": "غیر پروفائل موڈ",
+    "new_existant": "نیا/موجودہ",
+    "what_do": "آپ کیا کرنا چاہتے ہیں؟",
+    "profile": "پروفائل",
+    "linked_accounts": "منسلک اکاؤنٹس",
+    "name": "نام",
+    "logout": "لاگ آؤٹ",
+    "last_name": "کنیت",
+    "role": "استعمال کا کردار",
+    "day": "دن",
+    "month": "مہینہ",
+    "year": "سال",
     "tips": {
-      "title1": "Estadísticas",
-      "title2": "Tableros",
-      "title3": "Historial",
-      "title4": "Favoritos",
-      "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
-      "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
-      "text3": "Usá el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
-      "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
+      "title1": "اعداد و شمار",
+      "title2": "بورڈز",
+      "title3": "تاریخ(سرگزشت)",
+      "title4": "پسندیدہ",
+      "text1": "اپنے مریض/خاندان کے رکن کے اعدادوشمار دیکھیں، ان کی سرگرمی اور دنوں، ہفتوں اور مہینوں میں اس میں کیسے بہتری آئی ہے۔",
+      "text2": "ان بورڈز کو چھپائیں جو صارف استعمال نہیں کرتا ہے، تاکہ وہ بورڈز جو وہ استعمال کرتا ہے اور جس کی سب سے زیادہ ضرورت ہے وہ ظاہر ہوں۔",
+      "text3": "اپنے ماضی کے جملے دیکھنے کے لیے تاریخ کا استعمال کریں، آپ نے دن میں کیا کیا اور کہانیاں سنائیں۔",
+      "text4": "پسندیدہ تصویر یا فقرے محفوظ کریں، تاکہ آپ ان تک زیادہ تیزی سے رسائی حاصل کر سکیں۔"
     },
-    "unlink": "Desvincular",
-    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
+    "unlink": "لنک ختم کریں۔",
+    "unlink_account": "کیا آپ اپنے اکاؤنٹس سے {name} کا لنک ختم کرنا چاہتے ہیں؟",
     "help": {
-      "help": "Ayuda",
+      "help": "مدد",
       "title1": "Preguntas frecuentes",
-      "title2": "Contactar con soporte"
+      "title2": "سپورٹ سے رابطہ کریں۔"
     },
     "link": {
-      "title": "Vincular Cuenta",
+      "title": "اکاؤنٹ لنک کریں۔",
       "mail": {
-        "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
+        "title": "اوٹا اکاؤنٹ سے منسلک ای میل درج کریں۔",
         "input": {
-          "required": "El correo electrónico es requerido",
-          "invalid": "El correo electrónico es inválido"
+          "required": "ای میل درکار ہے۔",
+          "invalid": "ای میل غلط ہے۔"
         },
-        "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles.",
-        "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico."
+        "warn": "پروفائلز کو لنک کرنے کے لیے کوڈ کے ساتھ ایک توثیق ای میل بھیجا جائے گا۔",
+        "contact": "یقینی بنائیں کہ آپ اس ای میل کے مالک کے ساتھ رابطے میں ہیں۔"
       },
       "token": {
-        "title": "Coloque el código de verificación que llegó al correo electrónico.",
-        "problem": "¿Inconvenientes para enlazar las cuentas?",
-        "resend": "Reenviar código",
-        "back": "Ingresar otro email",
-        "invalid": "Token inválido"
+        "title": "تصدیقی کوڈ درج کریں جو ای میل میں آیا ہے۔",
+        "problem": "اکاؤنٹس کو لنک کرنے میں مشکلات؟",
+        "resend": "کوڈ پھر سے بھیجو",
+        "back": "ایک اور ای میل درج کریں۔",
+        "invalid": "غلط ٹوکن"
       },
       "wait": {
-        "title": "Aguarde",
-        "subtitle": "Cargando perfil..."
+        "title": "انتظار کرو",
+        "subtitle": "پروفائل لوڈ ہو رہا ہے..."
       },
       "success": {
-        "title": "Perfil vinculado con éxito!",
-        "lastTime": "Últ. vez {date}"
+        "title": "پروفائل کامیابی کے ساتھ منسلک ہو گیا!",
+        "lastTime": "آخری وقت{date}"
       },
       "error": {
-        "link-exist": "Ya están vinculadas",
-        "miss-caregiver": "Error:Caregiver 404",
-        "miss-user": "Error:User 404",
-        "user-no-comp": "Error: User 406",
-        "caregiver-no-comp": "Error: Caregiver 406",
-        "autolink": "Error: Misma cuenta",
-        "auth/user-not-found": "Usuario no encontrado",
-        "miss-token": "Falta el Token",
-        "invalid-token": "Token inválido",
-        "expired-token": "Token vencido"
+        "link-exist": "پہلے ہی جڑے ہوئے ہیں۔",
+        "miss-caregiver": "خرابی: دیکھ بھال کرنے والا 404",
+        "miss-user": "خرابی: صارف 404",
+        "user-no-comp": "خرابی: صارف 406",
+        "caregiver-no-comp": "خرابی: دیکھ بھال کرنے والا 406",
+        "autolink": "خرابی: ایک ہی اکاؤنٹ",
+        "auth/user-not-found": "صارف نہیں ملا",
+        "miss-token": "لاپتہ ٹوکن",
+        "invalid-token": "غلط ٹوکن",
+        "expired-token": "ختم شدہ ٹوکن"
       }
     }
   },
   "user": {
     "main": {
-      "title": "Configura tu experiencia",
-      "subtitle1": "Uso de la aplicación",
-      "subtitle2": "Lenguaje predictivo"
+      "title": "اپنے تجربے کو ترتیب دیں۔",
+      "subtitle1": "ایپ کا استعمال",
+      "subtitle2": "پیش گوئی کرنے والی زبان"
     },
     "settings": {
       "main_screen": "Pantalla principal",
-      "accessibility": "Accesibilidad",
-      "voice_and_subtitles": "Voz y subtítulos",
-      "language": "Lenguaje"
+      "accessibility": "رسائی",
+      "voice_and_subtitles": "آواز اور سب ٹائٹلز",
+      "language": "زبان"
     },
     "main_setting": {
-      "interaction": "Interacciones",
-      "delete_talking": "Borrar cuando habla",
-      "shortcut": "Atajos en el Home",
-      "board_view": "Vista de tableros",
-      "tabs": "Por pestañas",
-      "grid": "Grilla",
-      "ottaa_labs": "Ottaa Labs",
-      "labs_text": "Función frases verbales",
-      "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas"
+      "interaction": "تعاملات",
+      "delete_talking": "بات کرتے وقت حذف کریں۔",
+      "shortcut": "گھر میں شارٹ کٹس",
+      "board_view": "بورڈز دیکھیں",
+      "tabs": "ٹیبز کے ذریعے",
+      "grid": "گرڈ",
+      "ottaa_labs": "اوٹا لیبز",
+      "labs_text": "فعل فعل کے جملے",
+      "labs_long": "بیٹا موڈ میں خصوصیت\n\nآپ کو زیادہ پیچیدہ ادوار کے ساتھ جملے بنانے کی اجازت دیتا ہے۔"
     },
     "accessibility": {
-      "selection": "Selección",
-      "bar_text": "Tiempo de clickeo (Segundos)",
-      "connected": "Dispositivos conectados",
-      "device": "Dispositivo de accesibilidad",
-      "press": "Press&Press",
-      "scroll": "Scroll&Press",
-      "sip": "Sip&puff",
-      "selection_type": "Tipo de selección",
-      "swept": "Swept",
-      "speed": "Velocidad",
-      "selection_speed": "Velocidad de selección"
+      "selection": "انتخاب",
+      "bar_text": "کلک کرنے کا وقت (سیکنڈز)",
+      "connected": "منسلک آلات",
+      "device": "قابل رسائی آلہ",
+      "press": "دبائیں اور دبائیں",
+      "scroll": "اسکرول اینڈ پریس",
+      "sip": "گھونٹ اور پف",
+      "selection_type": "انتخاب کی قسم",
+      "swept": "جھاڑو",
+      "speed": "رفتار",
+      "selection_speed": "انتخاب کی رفتار"
     },
     "voice_and_subtitle": {
-      "voice_types": "Tipos de voz",
-      "voice_rate": "Velocidad de voz",
-      "voz1": "Voz 1",
-      "voz2": "Voz 2",
-      "voz3": "Voz 3",
-      "mute": "Mutear pictogramas",
-      "subtitle": "Subtítulos",
-      "show": "Mostrar subtitulos",
-      "size": "Tamaño",
-      "capital": "Mayúsculas"
+      "voice_types": "آواز کی اقسام",
+      "voice_rate": "آواز کی شرح",
+      "voz1": "آواز 1",
+      "voz2": "آواز 2",
+      "voz3": "آواز 3",
+      "mute": "تصویروں کو خاموش کریں۔",
+      "subtitle": "ذیلی عنوان",
+      "show": "سب ٹائٹلز دکھائیں۔",
+      "size": "سائز",
+      "capital": "بڑے حروف"
     },
     "language": {
-      "set": "Idioma establecido"
+      "set": "زبان مقرر کریں"
     }
   },
   "global": {
-    "hello_world": "Hola Mundo",
-    "hello": "Hola",
-    "continue": "Continuar",
-    "next": "Siguiente",
-    "back": "Anterior",
-    "please_enter_text": "Por favor, ingrese un texto",
-    "done": "Listo",
-    "yes": "Sí",
-    "delete": "Borrar",
-    "edit": "Editar",
-    "no": "No",
-    "mute": "Silenciar",
-    "important": "Importante",
-    "save_changes": "Guardar cambios",
-    "send": "Enviar",
-    "skip": "Omitir",
-    "email": "Email",
-    "step": "Paso",
-    "share": "Compartir",
-    "support": "Soporte",
-    "congrats": "Felicitaciones",
-    "settings": "Configuración",
-    "general": "General",
-    "pictogram": "Pictogramas",
-    "configuration": "Configuración",
-    "user_ottaa": "Usar Ottaa como {name}",
-    "cancel": "Cancelar",
-    "slow": "Lenta",
-    "default": "Predeterminada",
-    "fast": "Rápida",
-    "voice": "Voz",
-    "boy": "Chico",
-    "medium": "Mediano",
-    "big": "Grande"
+    "hello_world": "ہیلو ورلڈ",
+    "hello": "سلام ",
+    "continue": "جاری رکھیں",
+    "next": "اگلا",
+    "back": "سابقہ",
+    "please_enter_text": "براہ کرم ایک متن درج کریں۔",
+    "done": "مکمل",
+    "yes": "ہاں",
+    "delete": "ختم کریں",
+    "edit": "ترمیم",
+    "no": "نہیں",
+    "mute": "خاموش",
+    "important": "اہم",
+    "save_changes": "تبدیلیاں محفوظ کرو",
+    "send": "بھیجیں",
+    "skip": "چھوڑ دو",
+    "email": "ای میل",
+    "step": "اسٹیپ",
+    "share": "دوسروں کو بتائیں",
+    "support": "معاونت",
+    "congrats": "مبارک ہو",
+    "settings": "ترتیبات",
+    "general": "جنرل",
+    "pictogram": "تصویریں",
+    "configuration": "ترتیبات",
+    "user_ottaa": "اوٹا کو بطور استعمال کریں۔{name}",
+    "cancel": "منسوخ",
+    "slow": "سست",
+    "default": "پہلے سے طے شدہ\n",
+    "fast": "تیز",
+    "voice": "آواز",
+    "boy": "لڑکا",
+    "medium": "درمیانہ",
+    "big": "بڑا"
   },
   "onboarding": {
-    "start": "Comenzar",
+    "start": "شروع کریں",
     "profile": {
-      "title": "Pantalla de perfiles",
-      "subtitle": "¿Quién va a usar OTTAA hoy?",
-      "description": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
+      "title": "پروفائلز کی سکرین",
+      "subtitle": "آج کون اوٹا استعمال کرنے جا رہا ہے؟",
+      "description": "پروفائلز کے انتخاب کے ساتھ آپ اپنے تصویروں اور سٹائل کو مدنظر رکھتے ہوئے کسی بھی ڈیوائس سے اوٹا استعمال کر سکیں گے!"
     },
     "home": {
-      "title": "Personaliza tu Home",
-      "subtitle": "Atajos en la pantalla principal",
-      "description": "Personaliza de acuerdo a los gustos y necesidades"
+      "title": "اپنے گھر کو حسب ضرورت بنائیں",
+      "subtitle": "مرکزی اسکرین پر شارٹ کٹس",
+      "description": "ذوق اور ضروریات کے مطابق اپنی مرضی کے مطابق بنائیں"
     },
     "customize": {
-      "title": "Personaliza tu Home",
-      "subtitle": "Acompañamos en el proceso de aprendizaje",
-      "description": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
+      "title": "اپنے گھر کو حسب ضرورت بنائیں",
+      "subtitle": "ہم سیکھنے کے عمل میں ساتھ دیتے ہیں۔",
+      "description": "پیشین گوئی میں ترمیم کرنے کے لیے بورڈز یا تصویروں کو چالو یا غیر فعال کریں، آپ کے کنٹرول میں ہیں۔"
     },
     "skip": {
-      "title": "¿Estás de acuerdo en saltar la introducción?"
+      "title": "کیا آپ تعارف کو چھوڑنے سے اتفاق کرتے ہیں؟"
     }
   },
   "terms": {
-    "button": "Acepto los términos",
-    "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\nVer términos"
+    "button": "میں شرائط قبول کرتا ہوں۔",
+    "text": "جاری رکھنے کے لیے، ہمیں آپ سے شرائط و ضوابط کو قبول کرنے کی ضرورت ہے۔\n\nشرائط دیکھیں"
   },
   "loginWait": {
-    "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
+    "text": "ہم آپ کو خوش آمدید کہتے ہیں!\n\nOTTAA کی دنیا کے لیے"
   },
   "login": {
-    "title": "Ingresá con tu cuenta",
-    "google": "Continuar con Google",
-    "facebook": "Continuar con Facebook",
-    "register": "Todavía no tenés cuenta? Registrate acá",
+    "title": "اپنے اکاؤنٹ سے سائن ان کریں۔",
+    "google": "گوگل کے ساتھ جاری رکھیں",
+    "facebook": "فیس بک کے ساتھ جاری رکھیں",
+    "register": "آپ کے پاس اب بھی اکاؤنٹ نہیں ہے؟ یہاں اندراج کریں",
     "wait": {
-      "title": "Te damos la bienvenida!",
-      "subtitle": "Al nuevo mundo de OTTAA Project"
+      "title": "ہم آپ کو خوش آمدید کہتے ہیں!",
+      "subtitle": "OTTAA پروجیکٹ کی نئی دنیا میں"
     }
   },
   "customize": {
     "board": {
-      "title": "¿Qué tableros utilizará el usuario para comunicarse?",
-      "appbar": "Tableros predictivos",
-      "skip": "¿Omitir la elección de tableros?",
-      "subtitle": "Ver pictogramas"
+      "title": "صارف مواصلت کے لیے کون سے بورڈ استعمال کرے گا؟",
+      "appbar": "پیش گوئی کرنے والے بورڈز",
+      "skip": "بورڈز کا انتخاب چھوڑ دیں؟",
+      "subtitle": "تصویریں دیکھیں"
     },
     "shortcut": {
-      "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
-      "appbar": "Atajos",
-      "favorites": "Favoritos",
-      "history": "Historial",
-      "camera": "Cámara",
-      "games": "Juegos"
+      "title": "مین اسکرین پر ظاہر ہونے والے شارٹ کٹس کو منتخب کریں۔",
+      "appbar": "شارٹ کٹس",
+      "favorites": "پسندیدہ",
+      "history": "تاریخ(سرگزشت)",
+      "camera": "کیمرے",
+      "games": "کھیل"
     },
     "picto": {
-      "title": "Tablero {name}",
-      "switch": "Activar tablero"
+      "title": "ادارتی ٹیم{name}",
+      "switch": "ڈیش بورڈ کو چالو کریں۔"
     },
     "help": {
-      "boards": "Los tableros predictivos permiten configurar que grupo de pictogramas se mostrarán en la pantalla del usuario/a final.",
-      "shortcut": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal."
+      "boards": "پیش گوئی کرنے والے بورڈز آپ کو یہ ترتیب دینے کی اجازت دیتے ہیں کہ آخر صارف کی سکرین پر تصویری گرام کا کون سا گروپ دکھایا جائے گا۔",
+      "shortcut": "شارٹ کٹس مختلف فنکشنز تک فوری رسائی ہیں جو اختتامی صارف کے لیے ان کی مرکزی اسکرین پر موجود ہیں۔"
     },
     "wait": {
-      "title": "¡Felicitaciones!",
-      "subtitle": "Haz configurado la experiencia de {name}",
-      "button": "Ir al panel de perfiles"
+      "title": "مبارک ہو",
+      "subtitle": "{name} کا تجربہ مرتب کریں۔",
+      "button": "پروفائلز پینل پر جائیں۔"
     },
-    "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
+    "skip": "کیا آپ پروفائل کی ترجیحات کو چھوڑنے سے اتفاق کرتے ہیں؟"
   },
   "home": {
     "grid": {
-      "title": "Tableros",
+      "title": "بورڈز",
       "pictos": "Tablero {group}"
     }
   }
