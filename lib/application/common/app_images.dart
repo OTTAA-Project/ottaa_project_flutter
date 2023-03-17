@@ -1707,4 +1707,6 @@ class AppImages {
   static const kAccessibilityPhoto3 = 'assets/user_settings/accessibility_photo_3.png';
   static const kMainSettingsIcon1 = 'assets/user_settings/main_settings_icon_1.png';
   static const kMainSettingsIcon2 = 'assets/user_settings/main_settings_icon_2.png';
+  static const kGameBackgroundIcon = 'assets/games_images/game_icon.png';
+  static const kGameSelectPhoto = 'assets/games_images/game_select_photo.png';
 }

@@ -268,5 +268,17 @@
       "title": "Tableros",
       "pictos": "Tablero {group}"
     }
+  },
+  "game": {
+    "main": {
+      "play" : "Juguemos!",
+      "next" : "Jugar",
+      "game_header_0": "¿Cuál es el picto?",
+      "game_header_1": "Unir pictogramas",
+      "game_header_2": "Juego de la Memoria",
+      "game_sub_0" : "Responde las preguntas eligiendo el pictograma correcto. Aprende jugando",
+      "game_sub_1" : "Uní los pictogramas de manera correcta",
+      "game_sub_2" : "Prueba tu memoria, ¿Cuánto recordas los pictogramas?"
+    }
   }
 }
