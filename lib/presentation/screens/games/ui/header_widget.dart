@@ -6,8 +6,10 @@ class HeaderWidget extends StatelessWidget {
     Key? key,
     required this.headline,
     required this.subtitle,
+    this.bold = true,
   }) : super(key: key);
   final String headline, subtitle;
+  final bool? bold;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class HeaderWidget extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: ()=> context.pop(),
+            onTap: () => context.pop(),
             child: Card(
               child: Container(
                 padding: const EdgeInsets.all(14),
@@ -47,9 +49,13 @@ class HeaderWidget extends StatelessWidget {
               ),
               Text(
                 subtitle,
-                style: textTheme.headline3!.copyWith(
-                  color: colorScheme.primary,
-                ),
+                style: bold!
+                    ? textTheme.headline3!.copyWith(
+                        fontWeight: FontWeight.w600,
+                      )
+                    : textTheme.headline3!.copyWith(
+                        color: colorScheme.primary,
+                      ),
               ),
             ],
           ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/ui_widget.dart';
 
@@ -13,12 +15,20 @@ class GameScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.read(userNotifier);
+    final provider = ref.read(gameProvider);
+    final movers = ref.watch(gameProvider).moversMain;
     return Scaffold(
       body: UIWidget(
         subtitle: 'game.main.play'.trl,
         headline: 'profile.hello'.trlf({'name': user!.settings.data.name}),
         uiWidget: const GameScreenUI(),
-        show: true,
+        backward: () {
+          provider.moveBackward();
+        },
+        forward: () {
+          provider.moveForward();
+        },
+        show: movers,
       ),
     );
   }
@@ -69,7 +79,8 @@ class GameScreenUI extends ConsumerWidget {
                           ),
                           Text(
                             'game.main.game_sub_$index'.trl,
-                            style: textTheme.headline2!
+                            textAlign: TextAlign.center,
+                            style: textTheme.headline3!
                                 .copyWith(fontWeight: FontWeight.w400),
                           ),
                         ],
@@ -77,7 +88,10 @@ class GameScreenUI extends ConsumerWidget {
                       SimpleButton(
                         /// niceu emir chan
                         width: false,
-                        onTap: () {},
+                        onTap: () {
+                          provider.selectedGame = index;
+                          context.push(AppRoutes.selectGroupScreen);
+                        },
                         text: 'game.main.next'.trl,
                       ),
                     ],

@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/presentation/screens/customized_board/cust
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_wait_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/game_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/select_group_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/link_mail_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/link_success_screen.dart';
@@ -210,6 +211,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.gameScreen,
           builder: (context, state) => const GameScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.selectGroupScreen,
+          builder: (context, state) => const SelectGroupScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),

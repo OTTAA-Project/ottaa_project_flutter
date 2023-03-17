@@ -9,10 +9,13 @@ class UIWidget extends StatelessWidget {
     required this.headline,
     required this.uiWidget,
     required this.show,
+    required this.backward,
+    required this.forward,
   }) : super(key: key);
   final String headline, subtitle;
   final Widget uiWidget;
   final bool show;
+  final void Function()? forward, backward;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class UIWidget extends StatelessWidget {
         HeaderWidget(
           headline: headline,
           subtitle: subtitle,
+          bold: false,
         ),
         Center(
           child: uiWidget,
@@ -32,7 +36,7 @@ class UIWidget extends StatelessWidget {
                 bottom: 60,
                 left: 150,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: backward,
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -53,7 +57,7 @@ class UIWidget extends StatelessWidget {
                 bottom: 60,
                 right: 150,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: forward,
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(

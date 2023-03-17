@@ -42,4 +42,5 @@ class AppRoutes {
   static const voiceAndSubtitleScreenUser = "/voice_and_subtitle_screen_user";
   static const languageScreenUser = "/language_screen_user";
   static const gameScreen = "/game_screen";
+  static const selectGroupScreen = "/select_group_screen";
 }
