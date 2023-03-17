@@ -86,16 +86,12 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> inIt({String? userId}) async {
     switch (type) {
-      case CustomiseDataType.user:
-        await fetchUserCaseValues(userId: userId!);
-        break;
       case CustomiseDataType.careGiver:
+      case CustomiseDataType.user:
         await fetchUserCaseValues(userId: userId!);
         break;
       case CustomiseDataType.defaultCase:
         await fetchDefaultCaseValues();
-        break;
-      default:
         await fetchDefaultCaseValues();
         break;
     }
