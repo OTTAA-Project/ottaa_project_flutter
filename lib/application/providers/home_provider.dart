@@ -329,8 +329,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    if (patientState.user.patientSettings.accessibility.sweepMode ==
-        SweepModes.elements) {
+    if (!patientState.user.patientSettings.layout.oneToOne) {
       show = true;
       notifyListeners();
       final sentence = pictoWords.map((e) => e.text).join(' ');

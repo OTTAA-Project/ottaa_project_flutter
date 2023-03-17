@@ -61,6 +61,16 @@ class MainSettingScreen extends ConsumerWidget {
                   title: 'user.main_setting.delete_talking'.trl,
                   value: provider.layoutSetting.cleanup,
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
+                SwitchWidget(
+                  onChanged: (value) {
+                    provider.changeOneToOne(value: value);
+                  },
+                  title: 'user.main_setting.talk_delete'.trl,
+                  value: provider.layoutSetting.oneToOne,
+                ),
                 const DividerWidget(),
                 Text(
                   'customize.shortcut.appbar'.trl,

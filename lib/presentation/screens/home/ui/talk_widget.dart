@@ -23,14 +23,13 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
     final colorScheme = Theme.of(context).colorScheme;
     final pictoWords = ref.watch(homeProvider).pictoWords;
     final int? currentWord = ref.watch(homeProvider).selectedWord;
-    final bool showAll = ref
-            .watch(homeProvider)
-            .patientState
-            .user
-            .patientSettings
-            .accessibility
-            .sweepMode ==
-        SweepModes.elements;
+    final bool showAll = !ref
+        .watch(homeProvider)
+        .patientState
+        .user
+        .patientSettings
+        .layout
+        .oneToOne;
     final scrollCon = ref.watch(homeProvider).scrollController;
     print(showAll);
     return SizedBox(
