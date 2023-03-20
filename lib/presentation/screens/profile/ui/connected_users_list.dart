@@ -55,7 +55,7 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
               final customisePro = ref.watch(customiseProvider);
               customisePro.type = CustomiseDataType.careGiver;
               customisePro.userId = provider.connectedUsersData[index].id;
-              context.push(AppRoutes.customizedBoardScreen);
+              context.push(AppRoutes.customizeBoardScreen);
             },
             settingsTap: () {
               ref

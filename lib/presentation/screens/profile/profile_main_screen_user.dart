@@ -74,11 +74,11 @@ class ProfileMainScreenUser extends ConsumerWidget {
                   if (!provider.dataExist) {
                     provider.type = CustomiseDataType.defaultCase;
                     provider.userId = user.id;
-                    context.push(AppRoutes.customizedBoardScreen);
+                    context.push(AppRoutes.customizeBoardScreen);
                   } else {
                     provider.type = CustomiseDataType.user;
                     provider.userId = user.id;
-                    context.push(AppRoutes.customizedBoardScreen);
+                    context.push(AppRoutes.customizeBoardScreen);
                   }
                 },
                 focused: false,
