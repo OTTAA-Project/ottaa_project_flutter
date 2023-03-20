@@ -121,14 +121,15 @@
     },
     "main_setting": {
       "interaction": "Interações",
-      "delete_talking": "Apagar ao falar",
+      "talk_delete": "Hablar y Borrar",
       "shortcut": "Atalhos na Home",
       "board_view": "Visualização de painéis",
       "tabs": "Por abas",
       "grid": "Grade",
       "ottaa_labs": "Laboratórios da Ottaa",
       "labs_text": "Função frases verbais",
-      "labs_long": "Função em Modo Beta\nPermite gerar frases com tempos verbais mais complexos"
+      "labs_long": "Função em Modo Beta\nPermite gerar frases com tempos verbais mais complexos",
+      "one_by_one": "ONE by ONE"
     },
     "accessibility": {
       "selection": "Seleção",
