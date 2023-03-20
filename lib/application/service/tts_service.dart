@@ -25,7 +25,6 @@ class TTSService extends TTSRepository {
         await tts.setSpeechRate(speechRate);
         await tts.setPitch(pitch);
       }
-
       await tts.speak(text);
     }
   }
@@ -37,5 +36,12 @@ class TTSService extends TTSRepository {
     await tts.setLanguage(language);
     await tts.awaitSpeakCompletion(true);
     availableTTS = await tts.getLanguages;
+  }
+
+  @override
+  Future<void> fetchVoices(String languageCode) async {
+    final voices = await tts.getVoices;
+    print(voices.toString());
+    print(availableTTS.toString());
   }
 }

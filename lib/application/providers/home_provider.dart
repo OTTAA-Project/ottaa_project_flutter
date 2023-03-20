@@ -338,6 +338,7 @@ class HomeProvider extends ChangeNotifier {
       show = false;
       notifyListeners();
     }
+    await _tts.fetchVoices("es_AR");
   }
 
   void refreshPictograms() {

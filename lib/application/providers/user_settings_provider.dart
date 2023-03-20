@@ -110,6 +110,7 @@ class UserSettingsProvider extends ChangeNotifier {
     language = languageCode;
     languageSetting.language = languageCode;
     await _i18n.changeLanguage(languageCode);
+    print(_i18n.currentLanguage!.locale.toString());
     notifyListeners();
   }
 

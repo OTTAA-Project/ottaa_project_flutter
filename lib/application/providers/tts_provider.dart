@@ -9,6 +9,10 @@ class TTSProvider extends ChangeNotifier {
   TTSProvider(this.tts);
 
   Future<void> speak(String text) => tts.speak(text);
+
+  Future<void> fetchVoices(String languageCode)async {
+    tts.fetchVoices(languageCode);
+  }
 }
 
 final ttsProvider = ChangeNotifierProvider<TTSProvider>((ref) {
