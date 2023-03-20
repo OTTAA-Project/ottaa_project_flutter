@@ -140,7 +140,7 @@
       "scroll": "Rolar",
       "sip": "Soprar",
       "selection_type": "Tipo de seleção",
-      "swept": "Swept",
+      "swept": "Barrido",
       "speed": "Velocidade",
       "selection_speed": "Velocidade de seleção"
     },
@@ -186,7 +186,7 @@
     "general": "Geral",
     "pictogram": "Pictograma",
     "configuration": "Configuração",
-    "user_ottaa": "Usar Ottaa como {name}",
+    "user_ottaa": "Usar OTTAA como {name}",
     "cancel": "Cancelar",
     "slow": "Lento",
     "default": "Padrão",
