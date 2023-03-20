@@ -198,7 +198,7 @@ class HomeProvider extends ChangeNotifier {
         uid: user.id,
         language: user.settings.language.language,
         model: "test",
-        groups: [],
+        groups: user.groups[user.settings.language.language]!.where((element) => element.block).map((e) => e.id).toList(),
         tags: {},
         reduced: true,
         chunk: suggestedQuantity,
