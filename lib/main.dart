@@ -8,7 +8,7 @@ import 'package:ottaa_project_flutter/application/injector.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 
-//March 17v1
+//March 20v1
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
