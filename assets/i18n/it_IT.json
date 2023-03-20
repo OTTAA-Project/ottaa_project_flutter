@@ -61,7 +61,7 @@
       "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
     },
     "unlink": "Desvincular",
-    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
+    "unlink_account": "¿Querés desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Ayuda",
       "title1": "Domande frequenti (FAQ)",
@@ -126,7 +126,7 @@
       "board_view": "Vista de tableros",
       "tabs": "Por pestañas",
       "grid": "Grilla",
-      "ottaa_labs": "Ottaa Labs",
+      "ottaa_labs": "OTTAA Labs",
       "labs_text": "Función frases verbales",
       "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "Scroll&Press",
       "sip": "Sip&puff",
       "selection_type": "Tipo de selección",
-      "swept": "Swept",
+      "swept": "Barrido",
       "speed": "Velocidad",
       "selection_speed": "Velocidad de selección"
     },
@@ -186,7 +186,7 @@
     "general": "General",
     "pictogram": "Pictogramas",
     "configuration": "Configuración",
-    "user_ottaa": "Usar Ottaa como {name}",
+    "user_ottaa": "Usar OTTAA como {name}",
     "cancel": "Cancelar",
     "slow": "Lenta",
     "default": "Predeterminada",
