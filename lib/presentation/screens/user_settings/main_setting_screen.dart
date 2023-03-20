@@ -58,7 +58,7 @@ class MainSettingScreen extends ConsumerWidget {
                   onChanged: (value) {
                     provider.changeDeleteText(value: value);
                   },
-                  title: 'user.main_setting.delete_talking'.trl,
+                  title: 'user.main_setting.talk_delete'.trl,
                   value: provider.layoutSetting.cleanup,
                 ),
                 const SizedBox(
@@ -68,7 +68,7 @@ class MainSettingScreen extends ConsumerWidget {
                   onChanged: (value) {
                     provider.changeOneToOne(value: value);
                   },
-                  title: 'user.main_setting.talk_delete'.trl,
+                  title: 'user.main_setting.one_by_one'.trl,
                   value: provider.layoutSetting.oneToOne,
                 ),
                 const DividerWidget(),

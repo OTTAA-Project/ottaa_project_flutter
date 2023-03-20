@@ -121,7 +121,7 @@
     },
     "main_setting": {
       "interaction": "Interacciones",
-      "delete_talking": "Borrar cuando habla",
+      "talk_delete": "Hablar y Borrar",
       "shortcut": "Atajos en el Home",
       "board_view": "Vista de tableros",
       "tabs": "Por pestañas",
@@ -129,7 +129,7 @@
       "ottaa_labs": "Ottaa Labs",
       "labs_text": "Función frases verbales",
       "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas",
-      "talk_delete" : "Hablar y Borrar"
+      "one_by_one" : "ONE by ONE"
     },
     "accessibility": {
       "selection": "Selección",
