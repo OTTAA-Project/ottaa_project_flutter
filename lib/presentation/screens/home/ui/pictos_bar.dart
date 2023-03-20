@@ -9,7 +9,7 @@ import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
@@ -103,7 +103,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
         SizedBox(
           width: size.width,
           height: 88,
-          child: const ActionsBarUI(),
+          child: const ShortcutsUI(),
         )
       ],
     );
