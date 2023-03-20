@@ -121,14 +121,15 @@
     },
     "main_setting": {
       "interaction": "تعاملات",
-      "delete_talking": "بات کرتے وقت حذف کریں۔",
+      "talk_delete": "Hablar y Borrar",
       "shortcut": "گھر میں شارٹ کٹس",
       "board_view": "بورڈز دیکھیں",
       "tabs": "ٹیبز کے ذریعے",
       "grid": "گرڈ",
       "ottaa_labs": "اوٹا لیبز",
       "labs_text": "فعل فعل کے جملے",
-      "labs_long": "بیٹا موڈ میں خصوصیت\n\nآپ کو زیادہ پیچیدہ ادوار کے ساتھ جملے بنانے کی اجازت دیتا ہے۔"
+      "labs_long": "بیٹا موڈ میں خصوصیت\n\nآپ کو زیادہ پیچیدہ ادوار کے ساتھ جملے بنانے کی اجازت دیتا ہے۔",
+      "one_by_one": "ONE by ONE"
     },
     "accessibility": {
       "selection": "انتخاب",
