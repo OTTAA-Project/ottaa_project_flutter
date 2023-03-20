@@ -61,7 +61,7 @@
       "text4": "Save pictograms and sentences in Favorites, so you can access them quickly."
     },
     "unlink": "Unlink",
-    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
+    "unlink_account": "Do you want to unlink {name} from your accounts?",
     "help": {
       "help": "Help",
       "title1": "Frequently Asked Questions",
@@ -76,7 +76,7 @@
           "invalid": "Invalid email"
         },
         "warn": "*We will show a token on the device screen to link accounts.",
-        "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico."
+        "contact": "*Be sure you are in contact with the person using this email."
       },
       "token": {
         "title": "Enter the verification token that was sent to that email.",
@@ -91,19 +91,19 @@
       },
       "success": {
         "title": "Profile successfully linked!",
-        "lastTime": "Últ. vez {date}"
+        "lastTime": "Last seen {date}"
       },
       "error": {
-        "link-exist": "Ya están vinculadas",
+        "link-exist": "Already linked",
         "miss-caregiver": "Error:Caregiver 404",
         "miss-user": "Error:User 404",
         "user-no-comp": "Error: User 406",
         "caregiver-no-comp": "Error: Caregiver 406",
-        "autolink": "Error: Misma cuenta",
-        "auth/user-not-found": "Usuario no encontrado",
-        "miss-token": "Falta el Token",
+        "autolink": "Error: Same account",
+        "auth/user-not-found": "User not found",
+        "miss-token": "Missing token",
         "invalid-token": "Invalid token",
-        "expired-token": "Token vencido"
+        "expired-token": "Expired token"
       }
     }
   },
@@ -114,50 +114,50 @@
       "subtitle2": "Predictive texting"
     },
     "settings": {
-      "main_screen": "Pantalla principal",
-      "accessibility": "Accesibilidad",
-      "voice_and_subtitles": "Voz y subtítulos",
-      "language": "Lenguaje"
+      "main_screen": "Main Screen",
+      "accessibility": "Accessibility",
+      "voice_and_subtitles": "Voice & subtitles",
+      "language": "Language"
     },
     "main_setting": {
-      "interaction": "Interacciones",
-      "talk_delete": "Hablar y Borrar",
-      "shortcut": "Atajos en el Home",
-      "board_view": "Vista de tableros",
-      "tabs": "Por pestañas",
-      "grid": "Grilla",
-      "ottaa_labs": "Ottaa Labs",
+      "interaction": "Interactions",
+      "talk_delete": "Talk & Erase",
+      "shortcut": "Shortcuts",
+      "board_view": "Board view",
+      "tabs": "Tabs",
+      "grid": "Grid",
+      "ottaa_labs": "OTTAA Labs",
       "labs_text": "Función frases verbales",
       "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas",
       "one_by_one": "ONE by ONE"
     },
     "accessibility": {
-      "selection": "Selección",
+      "selection": "Selection",
       "bar_text": "Tiempo de clickeo (Segundos)",
       "connected": "Dispositivos conectados",
-      "device": "Dispositivo de accesibilidad",
+      "device": "Assistive device",
       "press": "Press&Press",
       "scroll": "Scroll&Press",
-      "sip": "Sip&puff",
-      "selection_type": "Tipo de selección",
-      "swept": "Swept",
-      "speed": "Velocidad",
-      "selection_speed": "Velocidad de selección"
+      "sip": "Sip&Puff",
+      "selection_type": "Selection method",
+      "swept": "Screen scanning",
+      "speed": "Speed",
+      "selection_speed": "Selection speed"
     },
     "voice_and_subtitle": {
-      "voice_types": "Tipos de voz",
-      "voice_rate": "Velocidad de voz",
-      "voz1": "Voz 1",
-      "voz2": "Voz 2",
-      "voz3": "Voz 3",
-      "mute": "Mutear pictogramas",
-      "subtitle": "Subtítulos",
-      "show": "Mostrar subtitulos",
-      "size": "Tamaño",
-      "capital": "Mayúsculas"
+      "voice_types": "Voices",
+      "voice_rate": "Speech rate",
+      "voz1": "Voice 1",
+      "voz2": "Voice 2",
+      "voz3": "Voice 3",
+      "mute": "Mute",
+      "subtitle": "Subtitles",
+      "show": "Show subtitles",
+      "size": "Size",
+      "capital": "Uppercase"
     },
     "language": {
-      "set": "Idioma establecido"
+      "set": "Language"
     }
   },
   "global": {
@@ -186,16 +186,16 @@
     "general": "General",
     "pictogram": "Pictograms",
     "configuration": "Settings",
-    "user_ottaa": "Usar Ottaa como {name}",
-    "cancel": "Cancelar",
-    "slow": "Lenta",
-    "default": "Predeterminada",
-    "fast": "Rápida",
-    "voice": "Voz",
-    "boy": "Chico",
-    "medium": "Mediano",
-    "big": "Grande",
-    "comingsoon": "Esta característica va estár disponible muy pronto!"
+    "user_ottaa": "Use OTTAA as {name}",
+    "cancel": "Cancel",
+    "slow": "Slow",
+    "default": "Default",
+    "fast": "Fast",
+    "voice": "Voice",
+    "boy": "Small",
+    "medium": "Medium",
+    "big": "Large",
+    "comingsoon": "This feature will be available very soon!"
   },
   "onboarding": {
     "start": "Get Started",
@@ -259,16 +259,16 @@
       "shortcut": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal."
     },
     "wait": {
-      "title": "¡Felicitaciones!",
-      "subtitle": "Haz configurado la experiencia de {name}",
+      "title": "¡Congratulations!",
+      "subtitle": "{name} experience is all set up",
       "button": "Go to profile screen"
     },
-    "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
+    "skip": "Do you want to skip profile customization?"
   },
   "home": {
     "grid": {
       "title": "Boards",
-      "pictos": "Tablero {group}"
+      "pictos": "Board {group}"
     }
   },
   "chatgpt": {
