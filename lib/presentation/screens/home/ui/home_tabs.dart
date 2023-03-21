@@ -12,7 +12,7 @@ import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/resource_image.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
