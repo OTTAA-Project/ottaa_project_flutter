@@ -1,12 +1,13 @@
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:injectable/injectable.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
 
 @Singleton(as: TTSRepository)
 class TTSService extends TTSRepository {
   final tts = FlutterTts();
-
-  String language = 'es_AR'; //TODO: Detect
+  final I18N _i18n;
+  String language = 'es_AR';
   List<dynamic> availableTTS = [];
 
   bool customTTSEnable = false;
@@ -14,7 +15,7 @@ class TTSService extends TTSRepository {
   double speechRate = 0.4;
   double pitch = 1.0;
 
-  TTSService() {
+  TTSService(this._i18n) {
     initTTS();
   }
 
@@ -22,6 +23,7 @@ class TTSService extends TTSRepository {
   Future<void> speak(String text) async {
     if (text.isNotEmpty) {
       if (customTTSEnable) {
+        await tts.setLanguage(language);
         await tts.setSpeechRate(speechRate);
         await tts.setPitch(pitch);
       }
@@ -39,9 +41,20 @@ class TTSService extends TTSRepository {
   }
 
   @override
+  Future<void> changeVoiceSpeed(double speed)async{
+    speechRate = speed;
+  }
+
+  @override
   Future<void> fetchVoices(String languageCode) async {
     final voices = await tts.getVoices;
-    print(voices.toString());
-    print(availableTTS.toString());
+    // print(speechRate);
+    // print(voices.toString());
+    // print(availableTTS.toString());
+  }
+
+  @override
+  Future<void> changeCustomTTs(bool value) async{
+    customTTSEnable = value;
   }
 }

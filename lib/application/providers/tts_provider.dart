@@ -13,6 +13,12 @@ class TTSProvider extends ChangeNotifier {
   Future<void> fetchVoices(String languageCode)async {
     tts.fetchVoices(languageCode);
   }
+  Future<void> changeVoiceSpeed(double speed)async {
+    tts.changeVoiceSpeed(speed);
+  }
+  Future<void> changeCustomTTs(bool value)async{
+    tts.changeCustomTTs(value);
+  }
 }
 
 final ttsProvider = ChangeNotifierProvider<TTSProvider>((ref) {

@@ -123,7 +123,7 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.singleton<_i6.LocalStorageRepository>(_i7.LocalStorageService());
     gh.singleton<_i8.ServerRepository>(_i9.ServerService());
-    gh.singleton<_i10.TTSRepository>(_i11.TTSService());
+    gh.singleton<_i10.TTSRepository>(_i11.TTSService(gh<_i3.I18N>()));
     gh.singleton<_i12.UserSettingRepository>(
         _i13.UserSettingsService(gh<_i8.ServerRepository>()));
     gh.singleton<_i14.VerifyEmailToken>(

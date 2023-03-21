@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
@@ -26,6 +27,7 @@ class UserSettingsProvider extends ChangeNotifier {
   final I18N _i18n;
 
   final UserSettingRepository _userSettingRepository;
+  final TTSRepository _ttsServices;
 
   final UserNotifier _userNotifier;
   final PatientNotifier _patientNotifier;
@@ -41,6 +43,7 @@ class UserSettingsProvider extends ChangeNotifier {
     this._patientNotifier,
     this._localDatabaseRepository,
     this._profileNotifier,
+    this._ttsServices,
   );
 
   bool deleteText = true;
@@ -222,8 +225,23 @@ class UserSettingsProvider extends ChangeNotifier {
   }
 
   void changeVoiceSpeed({required VelocityTypes type}) {
+    switch (type) {
+      case VelocityTypes.slow:
+        _ttsServices.changeCustomTTs(true);
+        _ttsServices.changeVoiceSpeed(0.2);
+        break;
+      case VelocityTypes.mid:
+        _ttsServices.changeCustomTTs(false);
+        _ttsServices.changeVoiceSpeed(0.4);
+        break;
+      case VelocityTypes.fast:
+        _ttsServices.changeCustomTTs(true);
+        _ttsServices.changeVoiceSpeed(0.8);
+        break;
+    }
     voiceRate = type.name;
     print(type);
+    print(_i18n.currentLanguage!.locale.toString());
     ttsSetting.voiceSetting.voicesSpeed[language] = type;
     notifyListeners();
   }
@@ -321,16 +339,17 @@ final userSettingsProvider =
       ref.watch(patientNotifier.notifier);
 
   final ProfileNotifier _profileNotifier = ref.watch(profileProvider);
+  final TTSRepository _ttsProvider = GetIt.I<TTSRepository>();
 
   final LocalDatabaseRepository localDatabaseRepository =
       GetIt.I.get<LocalDatabaseRepository>();
 
   return UserSettingsProvider(
-    i18N,
-    userSettingsService,
-    userNotifierState,
-    patientNotifierState,
-    localDatabaseRepository,
-    _profileNotifier,
-  );
+      i18N,
+      userSettingsService,
+      userNotifierState,
+      patientNotifierState,
+      localDatabaseRepository,
+      _profileNotifier,
+      _ttsProvider);
 });
