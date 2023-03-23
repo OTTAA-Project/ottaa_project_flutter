@@ -19,7 +19,7 @@ class GameScreen extends ConsumerWidget {
     final movers = ref.watch(gameProvider).moversMain;
     return Scaffold(
       body: UIWidget(
-        subtitle: 'game.main.play'.trl,
+        subtitle: 'game.play'.trl,
         headline: 'profile.hello'.trlf({'name': user!.settings.data.name}),
         uiWidget: const GameScreenUI(),
         backward: () {
@@ -73,12 +73,12 @@ class GameScreenUI extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             child: Text(
-                              'game.main.game_header_$index'.trl,
+                              'game.game_header_$index'.trl,
                               style: textTheme.headline2,
                             ),
                           ),
                           Text(
-                            'game.main.game_sub_$index'.trl,
+                            'game.game_sub_$index'.trl,
                             textAlign: TextAlign.center,
                             style: textTheme.headline3!
                                 .copyWith(fontWeight: FontWeight.w400),
@@ -92,7 +92,7 @@ class GameScreenUI extends ConsumerWidget {
                           provider.selectedGame = index;
                           context.push(AppRoutes.selectGroupScreen);
                         },
-                        text: 'game.main.next'.trl,
+                        text: 'game.next'.trl,
                       ),
                     ],
                   ),

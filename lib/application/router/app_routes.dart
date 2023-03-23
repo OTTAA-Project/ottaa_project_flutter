@@ -43,4 +43,8 @@ class AppRoutes {
   static const languageScreenUser = "/language_screen_user";
   static const gameScreen = "/game_screen";
   static const selectGroupScreen = "/select_group_screen";
+  static const matchPictogramScreen = "/match_pictogram_screen";
+  static const memoryGameScreen = "/memory_game_screen";
+  static const searchScreen = "/search_screen";
+  static const whatsThePictoScreen = "/whats_the_picto_screen";
 }

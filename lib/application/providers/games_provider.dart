@@ -6,7 +6,9 @@ class GamesProvider extends ChangeNotifier {
   int completedGroups = 0;
   bool moversMain = true;
   int selectedGame = 0;
+  int selectedGroupIndex = 0;
   final PageController mainPageController = PageController(initialPage: 0);
+  ScrollController gridScrollController = ScrollController();
 
   GamesProvider();
 
@@ -26,6 +28,31 @@ class GamesProvider extends ChangeNotifier {
       moversMain = true;
     }
     notifyListeners();
+  }
+
+  void scrollUp() {
+    int currentPosition = gridScrollController.position.pixels.toInt();
+
+    if (currentPosition == 0) return;
+
+    gridScrollController.animateTo(
+      currentPosition - 96,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
+  }
+
+  void scrollDown() {
+    int currentPosition = gridScrollController.position.pixels.toInt();
+
+    if (currentPosition >= gridScrollController.position.maxScrollExtent)
+      return;
+
+    gridScrollController.animateTo(
+      currentPosition + 96,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
   }
 }
 
