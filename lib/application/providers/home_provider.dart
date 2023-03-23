@@ -75,6 +75,7 @@ class HomeProvider extends ChangeNotifier {
 
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
+
   // Home Tabs
   String currentTabGroup = "";
   ScrollController groupTabsScrollController = ScrollController();

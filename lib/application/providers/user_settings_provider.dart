@@ -20,6 +20,7 @@ import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/tts_setting.dart';
+import 'package:ottaa_project_flutter/core/models/voices_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:ottaa_project_flutter/core/repositories/user_settings_repository.dart';
 
@@ -67,6 +68,8 @@ class UserSettingsProvider extends ChangeNotifier {
   late LanguageSetting languageSetting;
   late LayoutSetting layoutSetting;
   late TTSSetting ttsSetting;
+  List<Voices> voices = [];
+  String voiceName = "es-ES-language";
 
   PatientUserModel get currentUser =>
       _patientNotifier.state ?? _userNotifier.user.patient;
@@ -82,6 +85,7 @@ class UserSettingsProvider extends ChangeNotifier {
 
   Future<void> init() async {
     language = _i18n.currentLanguage!.locale.toString();
+    await fetchAllVoices();
     await initialiseSettings();
   }
 
@@ -246,6 +250,14 @@ class UserSettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void changeTTSVoice({required String value}) {
+    voiceName = value;
+    _ttsServices.changeCustomTTs(true);
+    _ttsServices.changeTTSVoice(value);
+    print(value);
+    notifyListeners();
+  }
+
   void changeMute({required bool value}) {
     ttsSetting.voiceSetting.mutePict = value;
     mute = value;
@@ -326,6 +338,10 @@ class UserSettingsProvider extends ChangeNotifier {
     layoutSetting.display = value;
     boardView = value;
     notifyListeners();
+  }
+
+  Future<void> fetchAllVoices() async {
+    voices = await _ttsServices.fetchVoices();
   }
 }
 

@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
 import 'package:ottaa_project_flutter/core/enums/velocity_types.dart';
+import 'package:ottaa_project_flutter/presentation/screens/profile/ui/drop_down_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/chooser_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/divider_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/switch_widget.dart';
@@ -111,7 +112,8 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                           ? true
                           : false,
                       onTap: () {
-                        print(provider.ttsSetting.voiceSetting.voicesSpeed[provider.language]!.name);
+                        print(provider.ttsSetting.voiceSetting
+                            .voicesSpeed[provider.language]!.name);
                         provider.changeVoiceSpeed(type: VelocityTypes.slow);
                         provider.notify();
                       },
@@ -139,6 +141,24 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                       title: 'global.fast'.trl,
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                DropdownButtonFormField(
+                  decoration: InputDecoration(
+
+                  ),
+                  value: provider.voiceName,
+                  items: provider.voices
+                      .map((value) => DropdownMenuItem(
+                            value: value.name,
+                            child: Text(value.locale),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    provider.changeTTSVoice(value:value!);
+                  },
                 ),
                 const SizedBox(
                   height: 32,
