@@ -146,18 +146,17 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                   height: 32,
                 ),
                 DropdownButtonFormField(
-                  decoration: InputDecoration(
-
-                  ),
                   value: provider.voiceName,
                   items: provider.voices
-                      .map((value) => DropdownMenuItem(
-                            value: value.name,
-                            child: Text(value.locale),
-                          ))
+                      .map(
+                        (value) => DropdownMenuItem(
+                          value: value.name,
+                          child: Text(value.locale),
+                        ),
+                      )
                       .toList(),
                   onChanged: (value) {
-                    provider.changeTTSVoice(value:value!);
+                    provider.changeTTSVoice(value: value!);
                   },
                 ),
                 const SizedBox(
