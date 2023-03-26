@@ -129,7 +129,7 @@
       "ottaa_labs": "Ottaa Labs",
       "labs_text": "Función frases verbales",
       "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas",
-      "one_by_one" : "ONE by ONE"
+      "one_by_one": "ONE by ONE"
     },
     "accessibility": {
       "selection": "Selección",
@@ -195,7 +195,16 @@
     "boy": "Chico",
     "medium": "Mediano",
     "big": "Grande",
-    "comingsoon": "Esta característica va estár disponible muy pronto!"
+    "comingsoon": "Esta característica va estár disponible muy pronto!",
+    "delicate": "delicade",
+    "chile": "Chile",
+    "spanish": "Español",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italiano",
+    "french": "French",
+    "portuguese" : "Portuguese"
   },
   "onboarding": {
     "start": "Comenzar",

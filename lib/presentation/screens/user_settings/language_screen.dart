@@ -62,43 +62,86 @@ class LanguageScreen extends ConsumerWidget {
                 runSpacing: 16,
                 children: [
                   ChooserWidget(
-                    selected: provider.languageSetting.language == 'es_AR'
-                        ? true
-                        : false,
+                    selected: provider.languageSetting.language.contains('es'),
                     onTap: () async {
                       await provider.changeLanguage(languageCode: 'es_AR');
                     },
-                    title: 'Español',
+                    title: 'global.spanish'.trl,
                   ),
                   ChooserWidget(
-                    selected: provider.languageSetting.language == 'en_US'
-                        ? true
-                        : false,
+                    selected: provider.languageSetting.language == 'en_US',
                     onTap: () async {
                       await provider.changeLanguage(languageCode: 'en_US');
                     },
-                    title: 'English',
+                    title: 'global.english'.trl,
                   ),
                   ChooserWidget(
-                    selected: provider.languageSetting.language == 'pt_BR'
-                        ? true
-                        : false,
+                    selected: provider.languageSetting.language == 'pt_BR',
                     onTap: () async {
                       await provider.changeLanguage(languageCode: 'pt_BR');
                     },
-                    title: 'Portugues',
+                    title: 'global.portuguese'.trl,
                   ),
                   ChooserWidget(
-                    selected: provider.languageSetting.language == 'it_IT'
-                        ? true
-                        : false,
+                    selected: provider.languageSetting.language == 'it_IT',
                     onTap: () async {
                       await provider.changeLanguage(languageCode: 'it_IT');
                     },
-                    title: 'Italiano',
+                    title: 'global.italian'.trl,
                   ),
                 ],
               ),
+              provider.languageSetting.language.contains('es')
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        Text(
+                          'global.delicate'.trl,
+                          style: textTheme.headline3,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        Wrap(
+                          direction: Axis.horizontal,
+                          spacing: 16,
+                          runSpacing: 16,
+                          children: [
+                            ChooserWidget(
+                              selected:
+                                  provider.languageSetting.language == 'es_AR',
+                              onTap: () async {
+                                await provider.changeLanguage(
+                                    languageCode: 'es_AR');
+                              },
+                              title: 'global.argentina'.trl,
+                            ),
+                            ChooserWidget(
+                              selected:
+                                  provider.languageSetting.language == 'es_CL',
+                              onTap: () async {
+                                await provider.changeLanguage(
+                                    languageCode: 'es_CL');
+                              },
+                              title: 'global.chile'.trl,
+                            ),
+                            ChooserWidget(
+                              selected:
+                                  provider.languageSetting.language == 'es_CO',
+                              onTap: () async {
+                                await provider.changeLanguage(
+                                    languageCode: 'es_CO');
+                              },
+                              title: 'global.colombia'.trl,
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  : const SizedBox.shrink(),
               const SizedBox(
                 height: 24,
               ),
