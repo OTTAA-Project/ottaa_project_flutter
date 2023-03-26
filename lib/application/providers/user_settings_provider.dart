@@ -69,6 +69,7 @@ class UserSettingsProvider extends ChangeNotifier {
   late LayoutSetting layoutSetting;
   late TTSSetting ttsSetting;
   List<Voices> voices = [];
+  List<Voices> filteredVoices = [];
   String voiceName = "es-ES-language";
 
   PatientUserModel get currentUser =>
@@ -224,6 +225,7 @@ class UserSettingsProvider extends ChangeNotifier {
 
   void changeVoiceType({required String type}) {
     voiceType = type;
+    changeTTSVoice(value: type);
     ttsSetting.voiceSetting.voicesNames[language] = type;
     notifyListeners();
   }
@@ -342,6 +344,14 @@ class UserSettingsProvider extends ChangeNotifier {
 
   Future<void> fetchAllVoices() async {
     voices = await _ttsServices.fetchVoices();
+    filteredVoices = [];
+    final s = language.split('_');
+    voices.forEach((v) {
+      if (v.name.contains(s[0])) {
+        print(v.name);
+        filteredVoices.add(v);
+      }
+    });
   }
 }
 

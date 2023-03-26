@@ -61,39 +61,24 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                Row(
-                  children: [
-                    ChooserWidget(
-                      selected: provider.ttsSetting.voiceSetting
-                              .voicesNames[provider.language] ==
-                          'default1',
-                      onTap: () {
-                        provider.changeVoiceType(type: 'default1');
-                      },
-                      title: 'user.voice_and_subtitle.voz1'.trl,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: ChooserWidget(
-                        selected: provider.ttsSetting.voiceSetting
-                                .voicesNames[provider.language] ==
-                            'default2',
-                        onTap: () {
-                          provider.changeVoiceType(type: 'default2');
-                        },
-                        title: 'user.voice_and_subtitle.voz2'.trl,
-                      ),
-                    ),
-                    ChooserWidget(
-                      selected: provider.ttsSetting.voiceSetting
-                              .voicesNames[provider.language] ==
-                          'default3',
-                      onTap: () {
-                        provider.changeVoiceType(type: 'default3');
-                      },
-                      title: 'user.voice_and_subtitle.voz3'.trl,
-                    ),
-                  ],
+                SizedBox(
+                  height: 30,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: provider.filteredVoices.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: ChooserWidget(
+                            selected: provider.ttsSetting.voiceSetting
+                                    .voicesNames[provider.language] ==
+                                provider.filteredVoices[index].name,
+                            title: '${'global.voice'.trl} $index',
+                            onTap: () => provider.changeVoiceType(
+                                type: provider.filteredVoices[index].name),
+                          ),
+                        );
+                      }),
                 ),
                 const SizedBox(
                   height: 32,
@@ -141,23 +126,6 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                       title: 'global.fast'.trl,
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                DropdownButtonFormField(
-                  value: provider.voiceName,
-                  items: provider.voices
-                      .map(
-                        (value) => DropdownMenuItem(
-                          value: value.name,
-                          child: Text(value.locale),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) {
-                    provider.changeTTSVoice(value: value!);
-                  },
                 ),
                 const SizedBox(
                   height: 32,
