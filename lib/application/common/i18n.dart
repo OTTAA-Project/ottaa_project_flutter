@@ -9,6 +9,12 @@ import 'package:ottaa_project_flutter/application/language/translation_tree.dart
 @Singleton()
 class I18N extends ChangeNotifier {
   final Map<String, TranslationTree> _languages = {};
+  final platformLanguages = {
+    "es": const Locale("es", "AR"),
+    "en": const Locale("en", "US"),
+    "it": const Locale("it", "IT"),
+    "pt": const Locale("pt", "BR"),
+  };
 
   late Locale locale;
   TranslationTree? _currentLanguage;
@@ -23,21 +29,7 @@ class I18N extends ChangeNotifier {
     if (deviceLanguage.length == 2) {
       deviceLocale = Locale(deviceLanguage[0], deviceLanguage[1]);
     } else {
-      switch (deviceLanguage[0].toLowerCase()) {
-        case 'en':
-          deviceLocale = const Locale('en', 'US');
-          break;
-        case 'it':
-          deviceLocale = const Locale('it', 'IT');
-          break;
-        case 'pt':
-          deviceLocale = const Locale('pt', 'BR');
-          break;
-        case 'es':
-        default:
-          deviceLocale = const Locale('es', 'AR');
-          break;
-      }
+      deviceLocale = platformLanguages[deviceLanguage[0]] ?? const Locale("es", "AR");
     }
 
     locale = deviceLocale;
