@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
@@ -22,6 +23,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
   Widget build(BuildContext context) {
     final pictos =
         ref.watch(homeProvider.select((value) => value.suggestedPicts.isEmpty));
+    final provider = ref.read(gameProvider);
 
     PatientUserModel? patient = ref.watch(patientNotifier);
 
@@ -54,6 +56,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
                 onPressed: pictos
                     ? null
                     : () {
+                        provider.fetchPictograms();
                         context.push(AppRoutes.gameScreen);
                       },
                 child: Image.asset(

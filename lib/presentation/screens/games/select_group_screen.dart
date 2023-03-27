@@ -74,8 +74,9 @@ class SelectGroupScreen extends ConsumerWidget {
                       // padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
                       elevation: MaterialStateProperty.all(0),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       provider.selectedGroupIndex = index;
+                      await provider.fetchSelectedPictos();
                       switch (provider.selectedGame) {
                         case 0:
                           context.push(AppRoutes.whatsThePictoScreen);

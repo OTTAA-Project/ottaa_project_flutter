@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
@@ -66,11 +67,13 @@ class SearchScreen extends StatelessWidget {
                   width: 400,
                   child: TextFormField(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16, bottom: 36),
-                  child: Text('game.find'.trl,style: textTheme.headline3,),
+                const SizedBox(
+                  height: 36,
                 ),
-
+                Image.asset(
+                  AppImages.kGameSearch,
+                  height: 180,
+                ),
               ],
             ),
           ),
