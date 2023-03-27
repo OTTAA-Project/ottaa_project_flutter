@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:test/test.dart';
-
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  I18N language = await I18N(const Locale('en', 'US')).init();
+  I18N language = await I18N().init();
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();

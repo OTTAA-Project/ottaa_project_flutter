@@ -4,8 +4,12 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
 import 'package:ottaa_project_flutter/application/service/sentences_service.dart';
-import 'package:ottaa_project_flutter/core/models/sentence_model.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
+import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
@@ -17,51 +21,27 @@ void main() {
   late MockServerRepository mockServerRepository;
   late SentencesService sentencesService;
   late UserModel fakeUser;
-  late SentenceModel fakeSentenceModel,fakeSentenceModel1;
 
   setUp(() {
-    fakeUser = const UserModel(
+    fakeUser = BaseUserModel(
       id: "0",
-      name: "fake user",
-      email: "fake@mail.com",
-      photoUrl: "https://test.com",
-      avatar: "0",
-      birthdate: 0,
-      gender: "male",
-      isFirstTime: true,
-      language: "es_AR",
-    );
-    fakeSentenceModel = SentenceModel(
-      frase: "Fake",
-      frecuencia: 1,
-      fecha: [0],
-      locale: "es",
-      id: 0,
-      complejidad: Complejidad(
-        valor: 0,
-        pictosComponentes: [
-          PictosComponente(id: 0, esSugerencia: false, edad: ["0"], sexo: ["0"])
-        ],
+      settings: BaseSettingsModel(
+        data: UserData(
+          avatar: AssetsImage(asset: "test", network: "https://test.com"),
+          birthDate: DateTime(0),
+          genderPref: "n/a",
+          lastConnection: DateTime(0),
+          name: "John",
+          lastName: "Doe",
+        ),
+        language: LanguageSetting.empty(),
       ),
-    );
-    fakeSentenceModel1 = SentenceModel(
-      frase: "Sentence",
-      frecuencia: 1,
-      fecha: [0],
-      locale: "es",
-      id: 0,
-      complejidad: Complejidad(
-        valor: 0,
-        pictosComponentes: [
-          PictosComponente(id: 0, esSugerencia: false, edad: ["0"], sexo: ["0"])
-        ],
-      ),
+      email: "test@mail.com",
     );
 
     mockAuthRepository = MockAuthRepository();
     mockServerRepository = MockServerRepository();
-    sentencesService =
-        SentencesService(mockAuthRepository, mockServerRepository);
+    sentencesService = SentencesService(mockAuthRepository, mockServerRepository);
   });
   /*
   group('Sentences Service Testing', () {
@@ -75,5 +55,4 @@ void main() {
           language: 'es', type: Constants.kMostUsedSentences);
     });
   });*/
-
 }

@@ -1,4 +1,4 @@
-import 'package:test/test.dart';
+
 import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart';
 
 void main(){

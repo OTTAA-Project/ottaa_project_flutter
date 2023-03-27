@@ -24,6 +24,8 @@ import 'package:ottaa_project_flutter/core/repositories/about_repository.dart'
     as _i7;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
     as _i11;
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
+    as _i17;
 import 'package:state_notifier/state_notifier.dart' as _i15;
 
 // ignore_for_file: type=lint
@@ -608,4 +610,84 @@ class MockUserNotifier extends _i1.Mock implements _i16.UserNotifier {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [LocalDatabaseRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocalDatabaseRepository extends _i1.Mock
+    implements _i17.LocalDatabaseRepository {
+  MockLocalDatabaseRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  set user(_i3.UserModel? user) => super.noSuchMethod(
+        Invocation.setter(
+          #user,
+          user,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i5.Future<void> init() => (super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setUser(_i3.UserModel? user) => (super.noSuchMethod(
+        Invocation.method(
+          #setUser,
+          [user],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<_i3.UserModel?> getUser() => (super.noSuchMethod(
+        Invocation.method(
+          #getUser,
+          [],
+        ),
+        returnValue: _i5.Future<_i3.UserModel?>.value(),
+      ) as _i5.Future<_i3.UserModel?>);
+  @override
+  _i5.Future<void> deleteUser() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteUser,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<bool> getIntro() => (super.noSuchMethod(
+        Invocation.method(
+          #getIntro,
+          [],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+  @override
+  _i5.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
+        Invocation.method(
+          #setIntro,
+          [value],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }
