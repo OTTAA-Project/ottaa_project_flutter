@@ -5,8 +5,10 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -31,7 +33,7 @@ class _LinkSuccessScreenState extends ConsumerState<LinkSuccessScreen> {
 
     final provider = ref.watch(linkProvider);
 
-    initializeDateFormatting(provider.user!.settings.language);
+    initializeDateFormatting(provider.user!.settings.language.language);
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,7 +47,7 @@ class _LinkSuccessScreenState extends ConsumerState<LinkSuccessScreen> {
                 width: 312,
                 child: ProfileCard(
                   title: provider.user!.settings.data.name,
-                  subtitle: "link.success.lastTime".trlf({"date": DateFormat("dd/MM/yy HH:mm", provider.user!.settings.language).format(provider.user!.settings.data.lastConnection)}),
+                  subtitle: "profile.link.success.lastTime".trlf({"date": DateFormat("dd/MM/yy HH:mm", provider.user!.settings.language.language).format(provider.user!.settings.data.lastConnection)}),
                   //TODO: Re do this u.u
                   leadingImage: CachedNetworkImageProvider(provider.user!.settings.data.avatar.network!),
                   actions: IconButton(
@@ -66,7 +68,11 @@ class _LinkSuccessScreenState extends ConsumerState<LinkSuccessScreen> {
           SizedBox(
             width: size.width * 0.8,
             child: PrimaryButton(
-              onPressed: () => context.push(AppRoutes.customizedBoardScreen),
+              onPressed: () {
+                final provider = ref.watch(customiseProvider);
+                provider.type = CustomiseDataType.defaultCase;
+                context.push(AppRoutes.customizedBoardScreen);
+              },
               text: "global.continue".trl,
             ),
           ),

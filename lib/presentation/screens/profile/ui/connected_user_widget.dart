@@ -15,10 +15,13 @@ class ConnectedUserWidget extends StatelessWidget {
     required this.actionTap,
     required this.timeText,
     required this.show,
+    required this.settingsTap,
+    required this.customiseTap,
+    required this.useOTTAATap,
   }) : super(key: key);
 
   final String title, image, timeText;
-  final void Function()? onPressed, actionTap;
+  final void Function()? onPressed, actionTap, customiseTap, settingsTap, useOTTAATap;
   final bool show;
 
   @override
@@ -78,7 +81,7 @@ class ConnectedUserWidget extends StatelessWidget {
                       children: [
                         ProfileUserWidget(
                           title: "${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}",
-                          onTap: () {},
+                          onTap: customiseTap,
                         ),
                         ProfileUserWidget(
                           title: 'profile.tips.title1'.trl,
@@ -86,7 +89,7 @@ class ConnectedUserWidget extends StatelessWidget {
                         ),
                         ProfileUserWidget(
                           title: 'global.configuration'.trl,
-                          onTap: () {},
+                          onTap: settingsTap,
                         ),
                         ProfileUserWidget(
                           title: 'profile.profile'.trl,
@@ -101,7 +104,7 @@ class ConnectedUserWidget extends StatelessWidget {
                         ),
                         PrimaryButton(
                           text: 'global.user_ottaa'.trlf({'name': title}),
-                          onPressed: () {},
+                          onPressed: useOTTAATap,
                           enabled: true,
                         ),
                       ],

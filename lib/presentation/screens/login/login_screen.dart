@@ -78,26 +78,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 16,
-                    ),
-                    foregroundColor: kBlackColor,
-                  ),
-                  child: Text(
-                    "login.register".trl,
-                    textAlign: TextAlign.center,
-                    style: textTheme.bodyText1?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              )
+              // Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: TextButton(
+              //     onPressed: () {},
+              //     style: TextButton.styleFrom(
+              //       padding: const EdgeInsets.symmetric(
+              //         horizontal: 24,
+              //         vertical: 16,
+              //       ),
+              //       foregroundColor: kBlackColor,
+              //     ),
+              //     child: Text(
+              //       "login.register".trl,
+              //       textAlign: TextAlign.center,
+              //       style: textTheme.bodyText1?.copyWith(
+              //         fontWeight: FontWeight.w600,
+              //       ),
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),

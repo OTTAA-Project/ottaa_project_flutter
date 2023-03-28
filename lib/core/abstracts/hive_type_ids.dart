@@ -36,5 +36,27 @@ class HiveTypesIds {
 
   static const int userEnumTypeId = 19;
 
-  static const int userDeviceTypeId = 20;
+  static const int layoutTypeId = 20;
+
+  static const int displayTypeEnumTypeId = 21;
+
+  static const int devicesAccessibilityEnumTypeId = 22;
+
+  static const int sweepModesEnumTypeId = 23;
+
+  static const int velocityTypeEnumTypeId = 24;
+
+  static const int sizeTypeEnumTypeId = 25;
+
+  static const int accessibilityTypeId = 26;
+
+  static const int voiceAccessibilityTypeId = 27;
+
+  static const int subtitlesSettingTypeId = 28;
+
+  static const int ttsSettingTypeId = 29;
+
+  static const int languageSettingTypeId = 30;
+
+  static const int userDeviceTypeId = 31;
 }

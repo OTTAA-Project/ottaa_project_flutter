@@ -58,7 +58,7 @@ abstract class ServerRepository {
 
   Future<void> removeCurrentUser({required String userId, required String careGiverId});
 
-  Future<EitherVoid> setShortcutsForUser({required Shortcuts shortcuts, required String userId});
+  Future<EitherVoid> setShortcutsForUser({required ShortcutsModel shortcuts, required String userId});
 
   Future<void> updateUserData({required Map<String, dynamic> data, required String userId});
 
@@ -70,7 +70,11 @@ abstract class ServerRepository {
 
   Future<dynamic> getDefaultGroups(String languageCode);
 
+  Future<dynamic> getDefaultPictos(String languageCode);
+
   Future<void> updateUserType({required String id, required UserType userType});
+
+  Future<EitherMap> fetchShortcutsForUser({required String userId});
 
   Future<Map<String, dynamic>?> createPictoGroupData({
     required String userId,
@@ -80,4 +84,38 @@ abstract class ServerRepository {
   });
 
   Future<void> updateDevicesId({required String userId, required DeviceToken deviceToken});
+  Future<EitherMap> learnPictograms({
+    required String uid,
+    required String language,
+    required String model,
+    required List<Map<String, dynamic>> tokens,
+  });
+
+  Future<EitherMap> predictPictogram({
+    required String sentence,
+    required String uid,
+    required String language,
+    required String model,
+    required List<String> groups,
+    required Map<String, List<String>> tags,
+    bool reduced = false,
+    int limit = 10,
+    int chunk = 4,
+  });
+
+  Future<EitherVoid> updateUserLastConnectionTime({required String userId, required int time});
+
+  Future<dynamic> fetchUserGroups({required String languageCode, required String userId});
+
+  Future<dynamic> fetchUserPictos({required String languageCode, required String userId});
+
+  Future<void> updateLanguageSettings({required Map<String, dynamic> map, required String userId});
+
+  Future<void> updateVoiceAndSubtitleSettings({required Map<String, dynamic> map, required String userId});
+
+  Future<void> updateAccessibilitySettings({required Map<String, dynamic> map, required String userId});
+
+  Future<void> updateMainSettings({required Map<String, dynamic> map, required String userId});
+
+  Future<dynamic> fetchUserSettings({required String userId});
 }

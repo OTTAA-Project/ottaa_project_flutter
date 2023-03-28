@@ -6,39 +6,48 @@ part of 'shortcuts_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ShortcutsAdapter extends TypeAdapter<Shortcuts> {
+class ShortcutsModelAdapter extends TypeAdapter<ShortcutsModel> {
   @override
   final int typeId = 5;
 
   @override
-  Shortcuts read(BinaryReader reader) {
+  ShortcutsModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Shortcuts(
+    return ShortcutsModel(
+      enable: fields[7] == null ? false : fields[7] as bool,
       favs: fields[0] == null ? false : fields[0] as bool,
-      gallery: fields[1] == null ? false : fields[1] as bool,
-      games: fields[2] == null ? false : fields[2] as bool,
+      history: fields[1] == null ? false : fields[1] as bool,
+      camera: fields[2] == null ? false : fields[2] as bool,
       share: fields[3] == null ? false : fields[3] as bool,
-      shuffle: fields[4] == null ? false : fields[4] as bool,
+      games: fields[4] == null ? false : fields[4] as bool,
+      no: fields[6] == null ? false : fields[6] as bool,
+      yes: fields[5] == null ? false : fields[5] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Shortcuts obj) {
+  void write(BinaryWriter writer, ShortcutsModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.favs)
       ..writeByte(1)
-      ..write(obj.gallery)
+      ..write(obj.history)
       ..writeByte(2)
-      ..write(obj.games)
+      ..write(obj.camera)
       ..writeByte(3)
       ..write(obj.share)
       ..writeByte(4)
-      ..write(obj.shuffle);
+      ..write(obj.games)
+      ..writeByte(5)
+      ..write(obj.yes)
+      ..writeByte(6)
+      ..write(obj.no)
+      ..writeByte(7)
+      ..write(obj.enable);
   }
 
   @override
@@ -47,7 +56,7 @@ class ShortcutsAdapter extends TypeAdapter<Shortcuts> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ShortcutsAdapter &&
+      other is ShortcutsModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

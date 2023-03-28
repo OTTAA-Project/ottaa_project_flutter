@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
@@ -8,6 +9,8 @@ import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.da
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
+
+@Singleton(as: PictogramsRepository)
 class PictogramsService extends PictogramsRepository {
   final AuthRepository _authService;
   final RemoteStorageRepository _remoteStorageService;
@@ -38,27 +41,12 @@ class PictogramsService extends PictogramsRepository {
   }
 
   @override
-  Future<void> uploadPictograms(List<Picto> data, String language, {String? userId}) async {
+  Future<void> uploadPictograms(List<Picto> data, String language,
+      {String? userId}) async {
     List<Map<String, dynamic>> jsonData = List.empty(growable: true);
-    // for (var e in data) {
-    //   final relactions = e.relacion?.map((e) => e.toJson()).toList();
-    //   jsonData.add({
-    //     'id': e.id,
-    //     'texto': e.texto.toJson(),
-    //     'tipo': e.tipo,
-    //     'imagen': e.imagen.toJson(),
-    //     'relacion': relactions,
-    //     'agenda': e.agenda,
-    //     'gps': e.gps,
-    //     'hora': e.hora,
-    //     'edad': e.edad,
-    //     'sexo': e.sexo,
-    //     'esSugerencia': e.esSugerencia,
-    //     'horario': e.horario,
-    //     'ubicacion': e.ubicacion,
-    //     'score': e.score,
-    //   });
-    // }
+    for (var e in data) {
+      jsonData.add(e.toMap());
+    }
     final result = await _authService.getCurrentUser();
     if (result.isLeft) return;
     final UserModel auth = result.right;
@@ -70,7 +58,8 @@ class PictogramsService extends PictogramsRepository {
   }
 
   @override
-  Future<void> updatePictogram(Picto pictogram, String language, int index) async {
+  Future<void> updatePictogram(
+      Picto pictogram, String language, int index) async {
     final relactions = pictogram.relations.map((e) => e.toJson()).toList();
 
     final result = await _authService.getCurrentUser();

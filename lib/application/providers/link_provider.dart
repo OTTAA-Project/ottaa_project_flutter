@@ -26,7 +26,6 @@ class LinkNotifier extends ChangeNotifier {
   final ProfileRepository _profileService;
 
   LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._profileService, this._auth);
-  //todo: add the proper value here
   String? userId;
   UserModel? user;
 
@@ -120,10 +119,10 @@ class LinkNotifier extends ChangeNotifier {
   }
 }
 
-final linkProvider = ChangeNotifierProvider<LinkNotifier>((ref) {
-  final createEmailToken = locator<CreateEmailToken>();
-  final verifyEmailToken = locator<VerifyEmailToken>();
-  final authRepository = locator<AuthRepository>();
-  final profileRepository = locator<ProfileRepository>();
+final linkProvider = ChangeNotifierProvider.autoDispose<LinkNotifier>((ref) {
+  final createEmailToken = getIt<CreateEmailToken>();
+  final verifyEmailToken = getIt<VerifyEmailToken>();
+  final authRepository = getIt<AuthRepository>();
+  final profileRepository = getIt<ProfileRepository>();
   return LinkNotifier(createEmailToken, verifyEmailToken, profileRepository, authRepository);
 });

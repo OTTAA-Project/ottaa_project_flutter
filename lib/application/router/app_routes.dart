@@ -27,7 +27,7 @@ class AppRoutes {
   static const profileLinkedAccountScreen = "/profile_linked_account_screen";
   static const customizePictoScreen = "/customized_picto_screen";
 
-  static const linkMailScreen = "/link";
+  static const linkMailScreen = "/link/email";
   static const linkTokenScreen = "/link/token";
   static const linkWaitScreen = "/link/wait";
   static const linkSuccessScreen = "/link/success";
@@ -35,4 +35,10 @@ class AppRoutes {
 
   static const profileOttaaTips = "/profile_ottaa_tips_screen";
   static const profileMainScreenUser = "/profile_main_screen_user";
+
+  static const settingScreenUser = "/setting_screen_user";
+  static const mainSettingUser = "/main_setting_screen_user";
+  static const accessibilityScreenUser = "/accessibility_screen_user";
+  static const voiceAndSubtitleScreenUser = "/voice_and_subtitle_screen_user";
+  static const languageScreenUser = "/language_screen_user";
 }

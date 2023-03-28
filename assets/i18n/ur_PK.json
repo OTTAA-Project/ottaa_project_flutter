@@ -2,6 +2,7 @@
   "profile": {
     "selection": {
       "text1": "¿Quién va a usar la aplicación en este dispositivo?",
+      "caregiver_text": "Necesita comunicarse",
       "user_text": "Necesita comunicarse"
     },
     "hello": "Hola {name}!",
@@ -60,7 +61,7 @@
       "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
     },
     "unlink": "Desvincular",
-    "unlink_account": "¿Desea desvincular a {name} de sus cuentas de perfil?",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Ayuda",
       "title1": "Preguntas frecuentes",
@@ -74,9 +75,8 @@
           "required": "El correo electrónico es requerido",
           "invalid": "El correo electrónico es inválido"
         },
-        "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
         "warn": "*Se enviará un mail de validación con un código para enlazar los perfiles.",
-        "send": "Enviar"
+        "contact": "*Asegurate de estar en contacto con la persona que posea este correo electrónico."
       },
       "token": {
         "title": "Coloque el código de verificación que llegó al correo electrónico.",
@@ -91,8 +91,19 @@
       },
       "success": {
         "title": "Perfil vinculado con éxito!",
-        "lastTime": "Últ. vez Ayer {date}",
-        "continue": "Continuar"
+        "lastTime": "Últ. vez {date}"
+      },
+      "error": {
+        "link-exist": "Ya están vinculadas",
+        "miss-caregiver": "Error:Caregiver 404",
+        "miss-user": "Error:User 404",
+        "user-no-comp": "Error: User 406",
+        "caregiver-no-comp": "Error: Caregiver 406",
+        "autolink": "Error: Misma cuenta",
+        "auth/user-not-found": "Usuario no encontrado",
+        "miss-token": "Falta el Token",
+        "invalid-token": "Token inválido",
+        "expired-token": "Token vencido"
       }
     }
   },
@@ -101,6 +112,51 @@
       "title": "Configura tu experiencia",
       "subtitle1": "Uso de la aplicación",
       "subtitle2": "Lenguaje predictivo"
+    },
+    "settings": {
+      "main_screen": "Pantalla principal",
+      "accessibility": "Accesibilidad",
+      "voice_and_subtitles": "Voz y subtítulos",
+      "language": "Lenguaje"
+    },
+    "main_setting": {
+      "interaction": "Interacciones",
+      "delete_talking": "Borrar cuando habla",
+      "shortcut": "Atajos en el Home",
+      "board_view": "Vista de tableros",
+      "tabs": "Por pestañas",
+      "grid": "Grilla",
+      "ottaa_labs": "Ottaa Labs",
+      "labs_text": "Función frases verbales",
+      "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas"
+    },
+    "accessibility": {
+      "selection": "Selección",
+      "bar_text": "Tiempo de clickeo (Segundos)",
+      "connected": "Dispositivos conectados",
+      "device": "Dispositivo de accesibilidad",
+      "press": "Press&Press",
+      "scroll": "Scroll&Press",
+      "sip": "Sip&puff",
+      "selection_type": "Tipo de selección",
+      "swept": "Swept",
+      "speed": "Velocidad",
+      "selection_speed": "Velocidad de selección"
+    },
+    "voice_and_subtitle": {
+      "voice_types": "Tipos de voz",
+      "voice_rate": "Velocidad de voz",
+      "voz1": "Voz 1",
+      "voz2": "Voz 2",
+      "voz3": "Voz 3",
+      "mute": "Mutear pictogramas",
+      "subtitle": "Subtítulos",
+      "show": "Mostrar subtitulos",
+      "size": "Tamaño",
+      "capital": "Mayúsculas"
+    },
+    "language": {
+      "set": "Idioma establecido"
     }
   },
   "global": {
@@ -128,7 +184,16 @@
     "settings": "Configuración",
     "general": "General",
     "pictogram": "Pictogramas",
-    "user_ottaa": "Usar OTTAA como {name}"
+    "configuration": "Configuración",
+    "user_ottaa": "Usar Ottaa como {name}",
+    "cancel": "Cancelar",
+    "slow": "Lenta",
+    "default": "Predeterminada",
+    "fast": "Rápida",
+    "voice": "Voz",
+    "boy": "Chico",
+    "medium": "Mediano",
+    "big": "Grande"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -157,42 +222,6 @@
   },
   "loginWait": {
     "text": "Te damos la bienvenida!\nAl mundo de OTTAA"
-  },
-  "link": {
-    "title": "Vincular Cuenta",
-    "mail": {
-      "title": "Ingrese el correo electrónico vinculado a la cuenta de OTTAA",
-      "input": {
-        "required": "El correo electrónico es requerido",
-        "invalid": "El correo electrónico es inválido"
-      },
-      "contact": "*Asegurese de estar en contacto con la persona que posea este correo electrónico.",
-      "warn": "*Se enviará un mail de validación con un código para enlazar los pefiles.",
-      "send": "Enviar"
-    },
-    "token": {
-      "title": "Coloque el código de verificación que llegó al correo electrónico.",
-      "problem": "¿Inconvenientes para enlazar las cuentas?",
-      "resend": "Reenviar código",
-      "back": "Ingresar otro email"
-    },
-    "wait": {
-      "title": "Aguarde",
-      "subtitle": "Cargando perfil..."
-    },
-    "success": {
-      "title": "Perfil vinculado con éxito!",
-      "lastTime": "Últ. vez Ayer {date}",
-      "continue": "Continuar"
-    }
-  },
-  "token": {
-    "title": "Colocá el código de verificación que se muestra en la pantalla de la cuenta a vincular.",
-    "text": "¿Inconvenientes para enlazar las cuentas?",
-    "button": {
-      "resend": "Reenviar email",
-      "anothermail": "Ingresá otro email."
-    }
   },
   "login": {
     "title": "Ingresá con tu cuenta",
@@ -223,10 +252,21 @@
       "title": "Tablero {name}",
       "switch": "Activar tablero"
     },
+    "help": {
+      "boards": "Los tableros predictivos permiten configurar que grupo de pictogramas se mostrarán en la pantalla del usuario/a final.",
+      "shortcut": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal."
+    },
     "wait": {
-      "subtitle": "Haz configurado la experiencia de Juan!",
+      "title": "¡Felicitaciones!",
+      "subtitle": "Haz configurado la experiencia de {name}",
       "button": "Ir al panel de perfiles"
     },
     "skip": "¿Estás de acuerdo en saltar las preferencias del perfil?"
+  },
+  "home": {
+    "grid": {
+      "title": "Tableros",
+      "pictos": "Tablero {group}"
+    }
   }
 }

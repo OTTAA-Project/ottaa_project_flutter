@@ -10,6 +10,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/service/sentences_service.dart'
     as _i3;
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i7;
+import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i13;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i8;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i10;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i11;
@@ -692,7 +693,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
       ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Either<String, void>> setShortcutsForUser({
-    required _i12.Shortcuts? shortcuts,
+    required _i12.ShortcutsModel? shortcuts,
     required String? userId,
   }) =>
       (super.noSuchMethod(
@@ -816,6 +817,15 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
   @override
+  _i4.Future<dynamic> getDefaultPictos(String? languageCode) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDefaultPictos,
+          [languageCode],
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+  @override
   _i4.Future<void> updateUserType({
     required String? id,
     required _i10.UserType? userType,
@@ -832,4 +842,261 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> fetchShortcutsForUser(
+          {required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchShortcutsForUser,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #fetchShortcutsForUser,
+            [],
+            {#userId: userId},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<Map<String, dynamic>?> createPictoGroupData({
+    required String? userId,
+    required String? language,
+    required _i13.BoardDataType? type,
+    required Map<String, dynamic>? data,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createPictoGroupData,
+          [],
+          {
+            #userId: userId,
+            #language: language,
+            #type: type,
+            #data: data,
+          },
+        ),
+        returnValue: _i4.Future<Map<String, dynamic>?>.value(),
+      ) as _i4.Future<Map<String, dynamic>?>);
+  @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> learnPictograms({
+    required String? uid,
+    required String? language,
+    required String? model,
+    required List<Map<String, dynamic>>? tokens,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #learnPictograms,
+          [],
+          {
+            #uid: uid,
+            #language: language,
+            #model: model,
+            #tokens: tokens,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #learnPictograms,
+            [],
+            {
+              #uid: uid,
+              #language: language,
+              #model: model,
+              #tokens: tokens,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<_i2.Either<String, Map<String, dynamic>>> predictPictogram({
+    required String? sentence,
+    required String? uid,
+    required String? language,
+    required String? model,
+    required List<String>? groups,
+    required Map<String, List<String>>? tags,
+    bool? reduced = false,
+    int? limit = 10,
+    int? chunk = 4,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #predictPictogram,
+          [],
+          {
+            #sentence: sentence,
+            #uid: uid,
+            #language: language,
+            #model: model,
+            #groups: groups,
+            #tags: tags,
+            #reduced: reduced,
+            #limit: limit,
+            #chunk: chunk,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #predictPictogram,
+            [],
+            {
+              #sentence: sentence,
+              #uid: uid,
+              #language: language,
+              #model: model,
+              #groups: groups,
+              #tags: tags,
+              #reduced: reduced,
+              #limit: limit,
+              #chunk: chunk,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
+  @override
+  _i4.Future<_i2.Either<String, void>> updateUserLastConnectionTime({
+    required String? userId,
+    required int? time,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserLastConnectionTime,
+          [],
+          {
+            #userId: userId,
+            #time: time,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
+          this,
+          Invocation.method(
+            #updateUserLastConnectionTime,
+            [],
+            {
+              #userId: userId,
+              #time: time,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, void>>);
+  @override
+  _i4.Future<dynamic> fetchUserGroups({
+    required String? languageCode,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchUserGroups,
+          [],
+          {
+            #languageCode: languageCode,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> fetchUserPictos({
+    required String? languageCode,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchUserPictos,
+          [],
+          {
+            #languageCode: languageCode,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<void> updateLanguageSettings({
+    required Map<String, dynamic>? map,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateLanguageSettings,
+          [],
+          {
+            #map: map,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> updateVoiceAndSubtitleSettings({
+    required Map<String, dynamic>? map,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateVoiceAndSubtitleSettings,
+          [],
+          {
+            #map: map,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> updateAccessibilitySettings({
+    required Map<String, dynamic>? map,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateAccessibilitySettings,
+          [],
+          {
+            #map: map,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> updateMainSettings({
+    required Map<String, dynamic>? map,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateMainSettings,
+          [],
+          {
+            #map: map,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<dynamic> fetchUserSettings({required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchUserSettings,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
 }

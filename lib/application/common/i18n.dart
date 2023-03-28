@@ -1,18 +1,47 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart';
 
+@Singleton()
 class I18N extends ChangeNotifier {
   final Map<String, TranslationTree> _languages = {};
 
-  Locale locale;
+  late Locale locale;
   TranslationTree? _currentLanguage;
 
-  I18N(this.locale);
+  @FactoryMethod(preResolve: true)
+  static Future<I18N> start() => I18N().init();
 
   Future<I18N> init() async {
+    final List<Locale> systemLocales = WidgetsBinding.instance.window.locales;
+    final List<String> deviceLanguage = Platform.localeName.split('_');
+    Locale deviceLocale;
+    if (deviceLanguage.length == 2) {
+      deviceLocale = Locale(deviceLanguage[0], deviceLanguage[1]);
+    } else {
+      switch (deviceLanguage[0].toLowerCase()) {
+        case 'en':
+          deviceLocale = const Locale('en', 'US');
+          break;
+        case 'it':
+          deviceLocale = const Locale('it', 'IT');
+          break;
+        case 'pt':
+          deviceLocale = const Locale('pt', 'BR');
+          break;
+        case 'es':
+        default:
+          deviceLocale = const Locale('es', 'AR');
+          break;
+      }
+    }
+
+    locale = deviceLocale;
+
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
     if (_languages.containsKey(languageCode)) {
@@ -20,22 +49,17 @@ class I18N extends ChangeNotifier {
       return this;
     }
 
-    final newLanguage = await loadTranslation(locale);
+    TranslationTree? newLanguage = await loadTranslation(locale);
+    newLanguage ??= await loadTranslation(const Locale("es", "AR"));
 
-    if (newLanguage != null) {
-      _languages.putIfAbsent(languageCode, () => newLanguage);
-      _currentLanguage = newLanguage;
-    }
+    _languages.putIfAbsent(languageCode, () => newLanguage!);
+    _currentLanguage = newLanguage;
 
     return this;
   }
 
   Future<TranslationTree?> loadTranslation(Locale locale) async {
     try {
-      if (locale.languageCode == "es" && locale.countryCode == "US") {
-        locale = const Locale("en", "US");
-      }
-
       final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
       if (_languages.containsKey(languageCode)) {

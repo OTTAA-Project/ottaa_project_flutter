@@ -38,16 +38,14 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
   }
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     final provider = ref.watch(profileProvider);
 
     final user = ref.watch(userNotifier);
 
-    if(user == null) return Container();
+    if (user == null) return Container();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -73,9 +71,9 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                         const SizedBox(
                           width: 16,
                         ),
-                        //TODO Emir this is not working
                         Text(
-                          "profile.hello".trlf({"name": user.settings.data.name}),
+                          "profile.hello"
+                              .trlf({"name": user.settings.data.name}),
                         ),
                       ],
                     ),

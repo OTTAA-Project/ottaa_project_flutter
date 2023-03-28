@@ -6,92 +6,129 @@ import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 part 'shortcuts_model.g.dart';
 
 @HiveType(typeId: HiveTypesIds.shortcutsTypeId)
-class Shortcuts {
+class ShortcutsModel {
   @HiveField(0, defaultValue: false)
   bool favs;
 
   @HiveField(1, defaultValue: false)
-  bool gallery;
+  bool history;
 
   @HiveField(2, defaultValue: false)
-  bool games;
+  bool camera;
 
   @HiveField(3, defaultValue: false)
   bool share;
 
   @HiveField(4, defaultValue: false)
-  bool shuffle;
+  bool games;
 
-  Shortcuts({
+  @HiveField(5, defaultValue: false)
+  bool yes;
+
+  @HiveField(6, defaultValue: false)
+  bool no;
+
+  @HiveField(7, defaultValue: false)
+  bool enable;
+
+  ShortcutsModel({
+    required this.enable,
     required this.favs,
-    required this.gallery,
-    required this.games,
+    required this.history,
+    required this.camera,
     required this.share,
-    required this.shuffle,
+    required this.games,
+    required this.no,
+    required this.yes,
   });
 
-  factory Shortcuts.none() => Shortcuts(
+  factory ShortcutsModel.none() => ShortcutsModel(
+        enable: false,
         favs: false,
-        gallery: false,
-        games: false,
+        history: false,
+        camera: false,
         share: false,
-        shuffle: false,
+        games: false,
+        yes: false,
+        no: false,
       );
-
-  Shortcuts copyWith({
+  factory ShortcutsModel.all() => ShortcutsModel(
+        enable: true,
+        favs: true,
+        history: true,
+        camera: true,
+        share: true,
+        games: true,
+        yes: true,
+        no: true,
+      );
+  ShortcutsModel copyWith({
     bool? favs,
-    bool? gallery,
-    bool? games,
+    bool? history,
+    bool? camera,
     bool? share,
-    bool? shuffle,
+    bool? games,
+    bool? yes,
+    bool? no,
+    bool? enable,
   }) {
-    return Shortcuts(
+    return ShortcutsModel(
+      enable: enable ?? this.enable,
       favs: favs ?? this.favs,
-      gallery: gallery ?? this.gallery,
-      games: games ?? this.games,
+      history: history ?? this.history,
+      camera: camera ?? this.camera,
       share: share ?? this.share,
-      shuffle: shuffle ?? this.shuffle,
+      games: games ?? this.games,
+      yes: yes ?? this.yes,
+      no: no ?? this.no,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'enable': enable,
       'favs': favs,
-      'gallery': gallery,
-      'games': games,
+      'history': history,
+      'camera': camera,
       'share': share,
-      'shuffle': shuffle,
+      'games': games,
+      'yes': yes,
+      'no': no,
     };
   }
 
-  factory Shortcuts.fromMap(Map<String, dynamic> map) {
-    return Shortcuts(
-      favs: map['favs'] as bool,
-      gallery: map['gallery'] as bool,
-      games: map['games'] as bool,
-      share: map['share'] as bool,
-      shuffle: map['shuffle'] as bool,
+  factory ShortcutsModel.fromMap(Map<String, dynamic> map) {
+    print(map);
+    return ShortcutsModel.none().copyWith(
+      enable: map['enable'],
+      favs: map['favs'],
+      history: map['history'],
+      camera: map['camera'],
+      share: map['share'],
+      games: map['games'],
+      yes: map['yes'],
+      no: map['no'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Shortcuts.fromJson(String source) => Shortcuts.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ShortcutsModel.fromJson(String source) => ShortcutsModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'Shortcuts(favs: $favs, gallery: $gallery, games: $games, share: $share, shuffle: $shuffle)';
+    return 'Shortcuts(favs: $favs, history: $history, camera: $camera, share: $share, games: $games)';
   }
 
   @override
-  bool operator ==(covariant Shortcuts other) {
+  bool operator ==(covariant ShortcutsModel other) {
     if (identical(this, other)) return true;
 
-    return other.favs == favs && other.gallery == gallery && other.games == games && other.share == share && other.shuffle == shuffle;
+    return other.favs == favs && other.history == history && other.camera == camera && other.share == share && other.games == games;
   }
 
   @override
   int get hashCode {
-    return favs.hashCode ^ gallery.hashCode ^ games.hashCode ^ share.hashCode ^ shuffle.hashCode;
+    return favs.hashCode ^ history.hashCode ^ camera.hashCode ^ share.hashCode ^ games.hashCode;
   }
 }

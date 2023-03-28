@@ -522,6 +522,23 @@ class MockAboutService extends _i1.Mock implements _i13.AboutService {
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> updateUserLastConnectionTime({
+    required String? userId,
+    required int? time,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserLastConnectionTime,
+          [],
+          {
+            #userId: userId,
+            #time: time,
+          },
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
 
 /// A class which mocks [LocalDatabaseRepository].
@@ -581,6 +598,23 @@ class MockLocalDatabaseRepository extends _i1.Mock
         Invocation.method(
           #deleteUser,
           [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<bool> getIntro() => (super.noSuchMethod(
+        Invocation.method(
+          #getIntro,
+          [],
+        ),
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
+        Invocation.method(
+          #setIntro,
+          [value],
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),

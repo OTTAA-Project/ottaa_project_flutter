@@ -7,7 +7,9 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_shortcut_screen.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -30,7 +32,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
     final provider = ref.read(customiseProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.fetchData();
+      await provider.inIt(userId: provider.userId);
     });
   }
 
@@ -41,10 +43,19 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
-    //todo: using that variable here from the linkProvider
+
+    /// using that variable here from the linkProvider
     final userID = ref.read(linkProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            provider.groupsFetched = false;
+            context.pop();
+          },
+          splashRadius: 24,
+        ),
         title: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -67,18 +78,14 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                 await BasicBottomSheet.show(
                   context,
                   // title: "",
-                  subtitle: index == 1
-                      //TODO: check this if it is OK
-
-                      ? "board.customize.helpText".trl
-                      : "global.back".trl,
+                  subtitle: index == 1 ? "customize.help.boards".trl : "customize.help.shortcut".trl,
                   children: <Widget>[
                     Image.asset(
                       index == 1 ? AppImages.kBoardImageEdit1 : AppImages.kBoardImageEdit2,
                       height: 166,
                     ),
                   ],
-                  okButtonText: "board.customize.okText".trl,
+                  okButtonText: "global.done".trl,
                 );
               },
             ),
@@ -89,10 +96,13 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
             onTap: () async {
               final bool? res = await BasicBottomSheet.show(
                 context,
+                okButtonText: "global.yes".trl,
+                cancelButtonText: "global.cancel".trl,
                 cancelButtonEnabled: true,
                 title: "customize.board.skip".trl,
               );
               if (res != null && res == true) {
+                // provider.uploadData(userId: user!.id);
                 context.push(AppRoutes.customizeWaitScreen);
               }
             },
@@ -151,7 +161,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                       height: 8,
                     ),
                     Text(
-                      index == 1 ? "customize.board.title".trl : "board.shortcut.title".trl,
+                      index == 1 ? "customize.board.title".trl : "customize.shortcut.title".trl,
                       style: textTheme.headline3!.copyWith(fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(
@@ -173,37 +183,58 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                   ],
                 ),
               ),
-            ],
-          ),
-          Positioned(
-            bottom: 16,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: PrimaryButton(
-                onPressed: () async {
-                  if (pageController.page == 0) {
-                    setState(() {
-                      pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-                      index = 2;
-                    });
-                  } else {
-                    await showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (context) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                    );
-                    await provider.uploadData(userId: userID.userId!);
-                    context.push(AppRoutes.customizeWaitScreen);
-                  }
-                },
-                text: "global.next".trl,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.all(24),
+                child: PrimaryButton(
+                  onPressed: () async {
+                    if (pageController.page == 0) {
+                      setState(() {
+                        pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+                        index = 2;
+                      });
+                    } else {
+                      showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
+                      switch (provider.type) {
+                        case CustomiseDataType.user:
+                          await provider.uploadData(userId: provider.userId);
+                          provider.groupsFetched = false;
+                          provider.type = CustomiseDataType.defaultCase;
+                          provider.notify();
+                          context.pop();
+                          context.pop();
+                          break;
+                        case CustomiseDataType.careGiver:
+                          await provider.uploadData(userId: provider.userId);
+                          provider.type = CustomiseDataType.defaultCase;
+                          provider.groupsFetched = false;
+
+                          await ref.read(profileProvider).fetchUserById(provider.userId);
+                          provider.notify();
+                          context.pop();
+                          context.pop();
+                          break;
+                        case CustomiseDataType.defaultCase:
+                        default:
+                          await provider.uploadData(userId: userID.userId!);
+                          context.pop();
+                          context.push(AppRoutes.customizeWaitScreen);
+                          break;
+                      }
+                    }
+                  },
+                  text: "global.next".trl,
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

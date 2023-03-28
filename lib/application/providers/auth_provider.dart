@@ -26,10 +26,11 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> logout() async {
     await _authService.logout();
+    await _localDatabaseRepository.setIntro(false);
     authData.setSignedOut();
     notifyListeners();
 
-    _userNotifier.setUser(null);
+    // _userNotifier.setUser(null);
   }
 
   Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
