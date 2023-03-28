@@ -30,6 +30,7 @@ class UserSettingsProvider extends ChangeNotifier {
 
   final UserSettingRepository _userSettingRepository;
   final TTSRepository _ttsServices;
+  final TTSProvider _ttsProvider;
 
   final UserNotifier _userNotifier;
   final PatientNotifier _patientNotifier;
@@ -46,6 +47,7 @@ class UserSettingsProvider extends ChangeNotifier {
     this._localDatabaseRepository,
     this._profileNotifier,
     this._ttsServices,
+    this._ttsProvider,
   );
 
   bool deleteText = true;
@@ -120,6 +122,7 @@ class UserSettingsProvider extends ChangeNotifier {
     languageSetting.language = languageCode;
     await _i18n.changeLanguage(languageCode);
     print(_i18n.currentLanguage!.locale.toString());
+    await fetchAllVoices();
     notifyListeners();
   }
 
@@ -240,7 +243,7 @@ class UserSettingsProvider extends ChangeNotifier {
     _ttsServices.changeCustomTTs(true);
     _ttsServices.changeTTSVoice(value);
     print(value);
-    _ttsServices.speak('global.test'.trl);
+    _ttsProvider.speak('global.test'.trl);
     notifyListeners();
   }
 
@@ -350,6 +353,7 @@ final userSettingsProvider = ChangeNotifierProvider<UserSettingsProvider>((ref) 
   final TTSRepository _ttsProvider = GetIt.I<TTSRepository>();
 
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+  final tts = ref.watch(ttsProvider);
 
-  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository, _profileNotifier, _ttsProvider);
+  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository, _profileNotifier, _ttsProvider, tts);
 });

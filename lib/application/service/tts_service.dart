@@ -28,11 +28,12 @@ class TTSService extends TTSRepository {
   Future<void> speak(String text) async {
     if (text.isNotEmpty) {
       if (customTTSEnable) {
+        await tts.setVoice({"name": name, "locale": locale});
         language = _i18n.currentLanguage!.locale.toString();
         await tts.setLanguage(language);
+        print(language);
         await tts.setSpeechRate(speechRate);
         await tts.setPitch(pitch);
-        await tts.setVoice({"name": name, "locale": locale});
       }
       await tts.speak(text);
     }
@@ -72,7 +73,6 @@ class TTSService extends TTSRepository {
 
   @override
   Future<void> changeTTSVoice(String voice) async {
-    this.voice = voice;
     voices.forEach((element) {
       if (element.name == voice) {
         locale = element.locale;
