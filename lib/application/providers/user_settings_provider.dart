@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
@@ -72,16 +73,14 @@ class UserSettingsProvider extends ChangeNotifier {
   List<Voices> filteredVoices = [];
   String voiceName = "es-ES-language";
 
-  PatientUserModel get currentUser =>
-      _patientNotifier.state ?? _userNotifier.user.patient;
+  PatientUserModel get currentUser => _patientNotifier.state ?? _userNotifier.user.patient;
 
   void notify() {
     notifyListeners();
   }
 
   Future<dynamic> fetchUserSettings() async {
-    return await _userSettingRepository.fetchUserSettings(
-        userId: currentUser.id);
+    return await _userSettingRepository.fetchUserSettings(userId: currentUser.id);
   }
 
   Future<void> init() async {
@@ -94,21 +93,14 @@ class UserSettingsProvider extends ChangeNotifier {
     final res = await fetchUserSettings();
     if (res.isRight) {
       final data = res.right;
-      accessibilitySetting = data['accessibility'] != null
-          ? AccessibilitySetting.fromJson(jsonEncode(data['accessibility']))
-          : AccessibilitySetting.empty();
-      languageSetting =
-          data['language'] != null && data['language'].runtimeType != String
-              ? LanguageSetting.fromJson(jsonEncode(data['language']))
-              : LanguageSetting.empty(language: data['language']);
+      accessibilitySetting = data['accessibility'] != null ? AccessibilitySetting.fromJson(jsonEncode(data['accessibility'])) : AccessibilitySetting.empty();
+      languageSetting = data['language'] != null && data['language'].runtimeType != String ? LanguageSetting.fromJson(jsonEncode(data['language'])) : LanguageSetting.empty(language: data['language']);
       ttsSetting = data['tts'] != null
           ? TTSSetting.fromJson(jsonEncode(data['tts']))
           : TTSSetting.empty(
               language: languageSetting.language,
             );
-      layoutSetting = data['layout'] != null
-          ? LayoutSetting.fromJson((jsonEncode(data['layout'])))
-          : LayoutSetting.empty();
+      layoutSetting = data['layout'] != null ? LayoutSetting.fromJson((jsonEncode(data['layout']))) : LayoutSetting.empty();
 
       // if (ttsSetting.voiceSetting.voicesSpeed[language]!.name != null) {
       //   voiceRate = ttsSetting.voiceSetting.voicesSpeed[language]!.name;
@@ -144,12 +136,10 @@ class UserSettingsProvider extends ChangeNotifier {
     );
 
     if (_userNotifier.user.isCaregiver) {
-      int patientIndex = _profileNotifier.connectedUsersData
-          .indexWhere((element) => element.id == _patientNotifier.user.id);
+      int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
-        _profileNotifier.connectedUsersData[patientIndex].patientSettings
-            .language = languageSetting;
+        _profileNotifier.connectedUsersData[patientIndex].patientSettings.language = languageSetting;
       }
     } else {
       currentUser.patientSettings.language = languageSetting;
@@ -165,12 +155,10 @@ class UserSettingsProvider extends ChangeNotifier {
     );
 
     if (_userNotifier.user.isCaregiver) {
-      int patientIndex = _profileNotifier.connectedUsersData
-          .indexWhere((element) => element.id == _patientNotifier.user.id);
+      int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
-        _profileNotifier.connectedUsersData[patientIndex].patientSettings.tts =
-            ttsSetting;
+        _profileNotifier.connectedUsersData[patientIndex].patientSettings.tts = ttsSetting;
       }
     } else {
       currentUser.patientSettings.tts = ttsSetting;
@@ -187,12 +175,10 @@ class UserSettingsProvider extends ChangeNotifier {
     );
 
     if (_userNotifier.user.isCaregiver) {
-      int patientIndex = _profileNotifier.connectedUsersData
-          .indexWhere((element) => element.id == _patientNotifier.user.id);
+      int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
-        _profileNotifier.connectedUsersData[patientIndex].patientSettings
-            .accessibility = accessibilitySetting;
+        _profileNotifier.connectedUsersData[patientIndex].patientSettings.accessibility = accessibilitySetting;
       }
     } else {
       currentUser.patientSettings.accessibility = accessibilitySetting;
@@ -209,16 +195,13 @@ class UserSettingsProvider extends ChangeNotifier {
     );
 
     if (_userNotifier.user.isCaregiver) {
-      int patientIndex = _profileNotifier.connectedUsersData
-          .indexWhere((element) => element.id == _patientNotifier.user.id);
+      int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
-        _profileNotifier.connectedUsersData[patientIndex].patientSettings
-            .layout = layoutSetting;
+        _profileNotifier.connectedUsersData[patientIndex].patientSettings.layout = layoutSetting;
       }
     } else {
       currentUser.patientSettings.layout = layoutSetting;
-
       _localDatabaseRepository.setUser(currentUser);
     }
   }
@@ -257,6 +240,7 @@ class UserSettingsProvider extends ChangeNotifier {
     _ttsServices.changeCustomTTs(true);
     _ttsServices.changeTTSVoice(value);
     print(value);
+    _ttsServices.speak('global.test'.trl);
     notifyListeners();
   }
 
@@ -347,7 +331,7 @@ class UserSettingsProvider extends ChangeNotifier {
     filteredVoices = [];
     final s = language.split('_');
     voices.forEach((v) {
-      if (v.name.contains(s[0])) {
+      if (v.name.contains(s[0]) && !v.name.contains('network')) {
         print(v.name);
         filteredVoices.add(v);
       }
@@ -355,27 +339,17 @@ class UserSettingsProvider extends ChangeNotifier {
   }
 }
 
-final userSettingsProvider =
-    ChangeNotifierProvider<UserSettingsProvider>((ref) {
+final userSettingsProvider = ChangeNotifierProvider<UserSettingsProvider>((ref) {
   final i18N = GetIt.I<I18N>();
   final userSettingsService = GetIt.I<UserSettingRepository>();
 
   final UserNotifier userNotifierState = ref.watch(userNotifier.notifier);
-  final PatientNotifier patientNotifierState =
-      ref.watch(patientNotifier.notifier);
+  final PatientNotifier patientNotifierState = ref.watch(patientNotifier.notifier);
 
   final ProfileNotifier _profileNotifier = ref.watch(profileProvider);
   final TTSRepository _ttsProvider = GetIt.I<TTSRepository>();
 
-  final LocalDatabaseRepository localDatabaseRepository =
-      GetIt.I.get<LocalDatabaseRepository>();
+  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
 
-  return UserSettingsProvider(
-      i18N,
-      userSettingsService,
-      userNotifierState,
-      patientNotifierState,
-      localDatabaseRepository,
-      _profileNotifier,
-      _ttsProvider);
+  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository, _profileNotifier, _ttsProvider);
 });

@@ -204,7 +204,8 @@
     "english": "English",
     "italian": "Italiano",
     "french": "French",
-    "portuguese" : "Portuguese"
+    "portuguese" : "Portuguese",
+    "test": "esta es una voz de prueba"
   },
   "onboarding": {
     "start": "Comenzar",
