@@ -127,7 +127,7 @@
       "tabs": "Tabs",
       "grid": "Grid",
       "ottaa_labs": "OTTAA Labs",
-      "labs_text": "Función frases verbales",
+      "labs_text": "Verbal phrases feature",
       "labs_long": "Beta mode\nAllows creating sentences with more complex tenses",
       "one_by_one": "ONE by ONE"
     },
@@ -272,6 +272,6 @@
     }
   },
   "chatgpt": {
-    "prompt": "formar una frase con estas palabras como si hablara un {age} {gender} en {language}, agregando conectores y artículos cuando sea necesario: {pictograms}"
+    "prompt": "I am an {AGE} {SEX} and I need to nlg the following phrase or word '{PHRASE}' once without adding extra words, the result has to be in {LANG}, first person, without extra words and as precise as possible."
   }
 }
