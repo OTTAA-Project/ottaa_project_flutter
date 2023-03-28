@@ -128,13 +128,13 @@
       "grid": "Grid",
       "ottaa_labs": "OTTAA Labs",
       "labs_text": "Función frases verbales",
-      "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas",
+      "labs_long": "Beta mode\nAllows creating sentences with more complex tenses",
       "one_by_one": "ONE by ONE"
     },
     "accessibility": {
       "selection": "Selection",
-      "bar_text": "Tiempo de clickeo (Segundos)",
-      "connected": "Dispositivos conectados",
+      "bar_text": "Clicking time (Seconds)",
+      "connected": "Connected devices",
       "device": "Assistive device",
       "press": "Press&Press",
       "scroll": "Scroll&Press",
@@ -255,8 +255,8 @@
       "switch": "Enable board"
     },
     "help": {
-      "boards": "Los tableros predictivos permiten configurar que grupo de pictogramas se mostrarán en la pantalla del usuario/a final.",
-      "shortcut": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal."
+      "boards": "Predictive boards allows choosing what boards & pictograms will show up to the user.",
+      "shortcut": "Shortcuts are a fast way to access different features for the user on Home Screen."
     },
     "wait": {
       "title": "¡Congratulations!",
