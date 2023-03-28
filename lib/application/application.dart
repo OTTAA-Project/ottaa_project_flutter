@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/router/app_router.dart';
@@ -15,7 +16,7 @@ class Application extends StatefulWidget {
 class _ApplicationState extends State<Application> {
   @override
   void initState() {
-    locator.get<NotificationsService>().onMessageReceived?.onData((data) {
+    GetIt.I<NotificationsService>().onMessageReceived?.onData((data) {
       print(data);
     });
     super.initState();

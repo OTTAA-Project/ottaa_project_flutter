@@ -1,8 +1,12 @@
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/service/notifications_service.dart';
 
+@Singleton(
+  as: NotificationsService,
+)
 class NotificationsServiceImpl implements NotificationsService<RemoteMessage> {
   @override
   StreamSubscription<RemoteMessage>? onMessageOpenedAppSubscription;
