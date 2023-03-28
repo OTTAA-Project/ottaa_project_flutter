@@ -78,18 +78,18 @@ class I18N extends ChangeNotifier {
     var split = languageCode.split("_");
     assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US");
     locale = Locale(split[0].toLowerCase(), split[1].toUpperCase());
-    TranslationTree? newLanguage = _languages[languageCode] ?? await loadTranslation(locale);
-    if (newLanguage == null) {
-      throw Exception("Language not found");
-    }
-    _languages[languageCode] ??= newLanguage;
-    _currentLanguage = _languages[languageCode];
-    notify();
+    changeLanguageFromLocale(locale);
   }
 
   Future<void> changeLanguageFromLocale(Locale locale) async {
     assert(locale.countryCode != null, "Locale must have a country code");
-    changeLanguage("${locale.languageCode.toLowerCase()}_${locale.countryCode?.toUpperCase()}");
+    TranslationTree? newLanguage = _languages[locale.toString()] ?? await loadTranslation(locale);
+    if (newLanguage == null) {
+      throw Exception("Language not found");
+    }
+    _languages[locale.toString()] ??= newLanguage;
+    _currentLanguage = _languages[locale.toString()];
+    notify();
   }
 
   void notify() {

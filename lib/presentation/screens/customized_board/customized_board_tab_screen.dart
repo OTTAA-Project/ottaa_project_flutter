@@ -33,6 +33,15 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
     });
   }
 
+  Future<bool> showSaveChanges() async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text("global.comingsoon".trl),
+      ),
+    ) ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
@@ -41,131 +50,135 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
 
-    /// using that variable here from the linkProvider
     final userID = ref.read(linkProvider);
-    return Scaffold(
-      appBar: OTTAAAppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            provider.groupsFetched = false;
-            context.pop();
-          },
-          splashRadius: 24,
-        ),
-        title: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: Text(
-                "customize.board.appbar".trl,
-                style: textTheme.bodyText2!.copyWith(fontSize: 14),
-                softWrap: true,
-              ),
-            ),
-            const SizedBox(width: 8),
-            GestureDetector(
-              child: Icon(
-                Icons.help_outline_rounded,
-                size: 24,
-                color: colorScheme.onSurface,
-              ),
-              onTap: () async {
-                await BasicBottomSheet.show(
-                  context,
-                  // title: "",
-                  subtitle: "customize.help.boards".trl,
-                  children: <Widget>[
-                    Image.asset(
-                      AppImages.kBoardImageEdit1,
-                      height: 166,
-                    ),
-                  ],
-                  okButtonText: "global.done".trl,
-                );
-              },
-            ),
-          ],
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () async {
-              final bool? res = await BasicBottomSheet.show(
-                context,
-                okButtonText: "global.yes".trl,
-                cancelButtonText: "global.cancel".trl,
-                cancelButtonEnabled: true,
-                title: "customize.board.skip".trl,
-              );
-              if (res != null && res == true) {
-                // provider.uploadData(userId: user!.id);
-                context.push(AppRoutes.customizeWaitScreen);
-              }
+    return WillPopScope(
+      onWillPop: () async {
+        return await showSaveChanges();
+      },
+      child: Scaffold(
+        appBar: OTTAAAppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              provider.groupsFetched = false;
+              context.pop();
             },
-            child: Text(
-              "global.skip".trl,
-              style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
-            ),
+            splashRadius: 24,
           ),
-        ],
-      ),
-      backgroundColor: colorScheme.background,
-      body: Stack(
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
             children: [
-              /// main view is here
-              const Expanded(
-                child: CustomizeBoardScreen(),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.all(24),
-                child: PrimaryButton(
-                  onPressed: () async {
-                    showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (context) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                    );
-                    switch (provider.type) {
-                      case CustomiseDataType.user:
-                        await provider.uploadData(userId: provider.userId);
-                        provider.groupsFetched = false;
-                        provider.type = CustomiseDataType.defaultCase;
-                        provider.notify();
-                        context.pop();
-                        context.pop();
-                        break;
-                      case CustomiseDataType.careGiver:
-                        await provider.uploadData(userId: provider.userId);
-                        provider.type = CustomiseDataType.defaultCase;
-                        provider.groupsFetched = false;
-
-                        await ref.read(profileProvider).fetchUserById(provider.userId);
-                        provider.notify();
-                        context.pop();
-                        context.pop();
-                        break;
-                      case CustomiseDataType.defaultCase:
-                      default:
-                        await provider.uploadData(userId: userID.userId!);
-                        context.pop();
-                        context.push(AppRoutes.customizeWaitScreen);
-                        break;
-                    }
-                  },
-                  text: "global.next".trl,
+              Expanded(
+                child: Text(
+                  "customize.board.appbar".trl,
+                  style: textTheme.bodyText2!.copyWith(fontSize: 14),
+                  softWrap: true,
                 ),
+              ),
+              const SizedBox(width: 8),
+              GestureDetector(
+                child: Icon(
+                  Icons.help_outline_rounded,
+                  size: 24,
+                  color: colorScheme.onSurface,
+                ),
+                onTap: () async {
+                  await BasicBottomSheet.show(
+                    context,
+                    // title: "",
+                    subtitle: "customize.help.boards".trl,
+                    children: <Widget>[
+                      Image.asset(
+                        AppImages.kBoardImageEdit1,
+                        height: 166,
+                      ),
+                    ],
+                    okButtonText: "global.done".trl,
+                  );
+                },
               ),
             ],
           ),
-        ],
+          actions: [
+            GestureDetector(
+              onTap: () async {
+                final bool? res = await BasicBottomSheet.show(
+                  context,
+                  okButtonText: "global.yes".trl,
+                  cancelButtonText: "global.cancel".trl,
+                  cancelButtonEnabled: true,
+                  title: "customize.board.skip".trl,
+                );
+                if (res != null && res == true) {
+                  // provider.uploadData(userId: user!.id);
+                  context.push(AppRoutes.customizeWaitScreen);
+                }
+              },
+              child: Text(
+                "global.skip".trl,
+                style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: colorScheme.background,
+        body: Stack(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                /// main view is here
+                const Expanded(
+                  child: CustomizeBoardScreen(),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.all(24),
+                  child: PrimaryButton(
+                    onPressed: () async {
+                      showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
+                      switch (provider.type) {
+                        case CustomiseDataType.user:
+                          await provider.uploadData(userId: provider.userId);
+                          provider.groupsFetched = false;
+                          provider.type = CustomiseDataType.defaultCase;
+                          provider.notify();
+                          context.pop();
+                          context.pop();
+                          break;
+                        case CustomiseDataType.careGiver:
+                          await provider.uploadData(userId: provider.userId);
+                          provider.type = CustomiseDataType.defaultCase;
+                          provider.groupsFetched = false;
+
+                          await ref.read(profileProvider).fetchUserById(provider.userId);
+                          provider.notify();
+                          context.pop();
+                          context.pop();
+                          break;
+                        case CustomiseDataType.defaultCase:
+                        default:
+                          await provider.uploadData(userId: userID.userId!);
+                          context.pop();
+                          context.push(AppRoutes.customizeWaitScreen);
+                          break;
+                      }
+                    },
+                    text: "global.save_changes".trl,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

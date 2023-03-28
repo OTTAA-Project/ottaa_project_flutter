@@ -121,14 +121,15 @@
     },
     "main_setting": {
       "interaction": "Interacciones",
-      "delete_talking": "Borrar cuando habla",
+      "talk_delete": "Hablar y Borrar",
       "shortcut": "Atajos en el inicio",
       "board_view": "Vista de tableros",
       "tabs": "Por pestañas",
       "grid": "Cuadrícula",
       "ottaa_labs": "Ottaa Labs",
       "labs_text": "Función frases verbales",
-      "labs_long": "Función en modo beta\nPermite generar frases con tiempos verbales más complejos"
+      "labs_long": "Función en modo beta\nPermite generar frases con tiempos verbales más complejos",
+      "one_by_one": "ONE by ONE"
     },
     "accessibility": {
       "selection": "Selección",
@@ -193,7 +194,8 @@
     "voice": "Voz",
     "boy": "Niño",
     "medium": "Mediano",
-    "big": "Grande"
+    "big": "Grande",
+    "comingsoon": "Esta característica va estár disponible muy pronto!"
   },
   "onboarding": {
     "start": "Comenzar",
