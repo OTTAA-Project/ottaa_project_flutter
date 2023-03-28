@@ -126,7 +126,7 @@
       "board_view": "Vista de tableros",
       "tabs": "Por pestañas",
       "grid": "Cuadrícula",
-      "ottaa_labs": "Ottaa Labs",
+      "ottaa_labs": "OTTAA Labs",
       "labs_text": "Función frases verbales",
       "labs_long": "Función en modo beta\nPermite generar frases con tiempos verbales más complejos",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "Desplazar y presionar",
       "sip": "Soplar y aspirar",
       "selection_type": "Tipo de selección",
-      "swept": "Deslizar",
+      "swept": "Barrido",
       "speed": "Velocidad",
       "selection_speed": "Velocidad de selección"
     },
