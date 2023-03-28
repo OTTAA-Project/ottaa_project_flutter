@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:ottaa_project_flutter/application/common/app_images.dart';
 
 class LeftSideIcons extends StatelessWidget {
   const LeftSideIcons({
     Key? key,
     required this.music,
     required this.score,
+    required this.mute,
   }) : super(key: key);
   final void Function()? music, score;
+  final bool mute;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +27,8 @@ class LeftSideIcons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Icon(
-                Icons.volume_up_outlined,
-                color: colorScheme.primary,
-                size: 24,
+              child: Image.asset(
+                AppImages.kGamesTrophy,
               ),
             ),
           ),
@@ -43,7 +44,7 @@ class LeftSideIcons extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Icon(
-                Icons.volume_up_outlined,
+                mute ? Icons.volume_mute_outlined : Icons.volume_up_outlined,
                 color: colorScheme.primary,
                 size: 24,
               ),

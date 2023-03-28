@@ -85,6 +85,7 @@ class WhatsThePictoScreen extends ConsumerWidget {
           LeftSideIcons(
             music: () {},
             score: () {},
+            mute: true,
           ),
         ],
       ),

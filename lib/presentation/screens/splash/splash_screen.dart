@@ -86,11 +86,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               const SizedBox(width: 20),
               Text(
                 "Hello".trl,
-                style: textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold
-                ),
+                style: textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 40, fontWeight: FontWeight.bold),
               ),
             ],
           ),

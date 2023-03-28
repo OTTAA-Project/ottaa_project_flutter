@@ -1710,4 +1710,6 @@ class AppImages {
   static const kGameBackgroundIcon = 'assets/games_images/game_icon.png';
   static const kGameSelectPhoto = 'assets/games_images/game_select_photo.png';
   static const kGameSearch = 'assets/games_images/game_search.png';
+  static const kGamesMark = 'assets/games_images/mark.png';
+  static const kGamesTrophy = 'assets/games_images/trophy.png';
 }
