@@ -70,7 +70,7 @@ Future<void> main() async {
   });
 
   test("should return the available app version", () async {
-    when(mockServerRepository.getAvailableAppVersion("")).thenAnswer((_) async => const Right("1.0.0"));
+    when(mockServerRepository.getAvailableAppVersion(any)).thenAnswer((_) async => const Right("1.0.0"));
 
     String version = await aboutRepository.getAvailableAppVersion();
 

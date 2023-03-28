@@ -80,6 +80,7 @@ void main() {
     });
     test('Is First Time', () async {
       when(mockAboutRepository.isFirstTime()).thenAnswer((realInvocation) async => true);
+      when(mockLocalDatabaseRepository.getIntro()).thenAnswer((realInvocation) async => true);
       expect(await splashProvider.isFirstTime(), true);
     });
 
