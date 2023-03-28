@@ -61,7 +61,7 @@
       "text4": "Salve pictogramas ou frases favoritas, para poder acessá-las mais rapidamente."
     },
     "unlink": "Desvincular",
-    "unlink_account": "Deseja desvincular {name} de suas contas?",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Ajuda",
       "title1": "Perguntas frequentes",
@@ -126,7 +126,7 @@
       "board_view": "Visualização de painéis",
       "tabs": "Por abas",
       "grid": "Grade",
-      "ottaa_labs": "Laboratórios da Ottaa",
+      "ottaa_labs": "OTTAA Labs",
       "labs_text": "Função frases verbais",
       "labs_long": "Função em Modo Beta\nPermite gerar frases com tempos verbais mais complexos",
       "one_by_one": "ONE by ONE"
