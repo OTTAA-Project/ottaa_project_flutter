@@ -61,7 +61,7 @@
       "text4": "پسندیدہ تصویر یا فقرے محفوظ کریں، تاکہ آپ ان تک زیادہ تیزی سے رسائی حاصل کر سکیں۔"
     },
     "unlink": "لنک ختم کریں۔",
-    "unlink_account": "کیا آپ اپنے اکاؤنٹس سے {name} کا لنک ختم کرنا چاہتے ہیں؟",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "مدد",
       "title1": "Preguntas frecuentes",
@@ -126,7 +126,7 @@
       "board_view": "بورڈز دیکھیں",
       "tabs": "ٹیبز کے ذریعے",
       "grid": "گرڈ",
-      "ottaa_labs": "اوٹا لیبز",
+      "ottaa_labs": "OTTAA Labs",
       "labs_text": "فعل فعل کے جملے",
       "labs_long": "بیٹا موڈ میں خصوصیت\n\nآپ کو زیادہ پیچیدہ ادوار کے ساتھ جملے بنانے کی اجازت دیتا ہے۔",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "اسکرول اینڈ پریس",
       "sip": "گھونٹ اور پف",
       "selection_type": "انتخاب کی قسم",
-      "swept": "جھاڑو",
+      "swept": "Barrido",
       "speed": "رفتار",
       "selection_speed": "انتخاب کی رفتار"
     },
@@ -186,7 +186,7 @@
     "general": "جنرل",
     "pictogram": "تصویریں",
     "configuration": "ترتیبات",
-    "user_ottaa": "اوٹا کو بطور استعمال کریں۔{name}",
+    "user_ottaa": "Usar OTTAA como {name}",
     "cancel": "منسوخ",
     "slow": "سست",
     "default": "پہلے سے طے شدہ\n",
