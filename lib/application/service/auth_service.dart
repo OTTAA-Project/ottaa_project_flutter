@@ -63,8 +63,11 @@ class AuthService extends AuthRepository {
 
   @override
   Future<void> logout() async {
-    await _authProvider.signOut();
-    await _googleSignIn.signOut();
+    if (_authProvider.currentUser != null) {
+      await _authProvider.signOut();
+
+      await _googleSignIn.signOut();
+    }
     // await _facebookAuth.logOut(); //TODO!: Comment this line due a [MissingPluginException] error
     await _databaseRepository.deleteUser();
   }

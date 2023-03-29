@@ -188,7 +188,17 @@ class ProfileNotifier extends ChangeNotifier {
     await Future.wait(connectedUsers.right.keys.map((e) async {
       final res = await _profileService.fetchConnectedUserData(userId: e);
       if (res.isRight) {
-        final json = res.right;
+        dynamic json = res.right;
+        Map settingsData = json["settings"];
+
+        if (settingsData["language"].runtimeType == String) {
+          settingsData["language"] = {
+            "language": settingsData["language"] ?? "es_AR",
+            "labs": false,
+          };
+        }
+
+        json["settings"] = settingsData;
 
         connectedUsersData.add(
           PatientUserModel.fromMap(json),
@@ -210,7 +220,6 @@ class ProfileNotifier extends ChangeNotifier {
     final userData = userFetch.right;
 
     int currentIndex = connectedUsersData.indexWhere((element) => element.id == id);
-
 
     connectedUsersData[currentIndex] = PatientUserModel.fromMap(userData);
   }

@@ -1,0 +1,277 @@
+{
+  "profile": {
+    "selection": {
+      "text1": "Qui usarà l'aplicació en aquest dispositiu?",
+      "caregiver_text": "Necessita comunicar-se",
+      "user_text": "Necessita comunicar-se"
+    },
+    "hello": "Hola {name}!",
+    "ottaa": {
+      "tips": "Consells OTTAA"
+    },
+    "mail": "Correu electrònic",
+    "date": "Data de naixement",
+    "faq": {
+      "title": "Preguntes freqüents",
+      "faq0": "Qui pot usar l'aplicació OTTAA?",
+      "faq0Description": "OTTAA està dissenyat per a persones no verbals, és a dir, qualsevol persona que no utilitzi la parla oral per comunicar-se. Les persones que fan servir OTTAA avui en dia van ser diagnosticades amb autisme, paràlisi cerebral, síndrome de Down, esclerosi lateral amiotròfica (ELA), atrofia muscular espinal (AME) o síndrome d'enclaustrament post al accident cerebrovascular (LiS), entre altres afeccions. Al ser una eina de comunicació dinàmica, OTTAA requereix que els seus usuaris posseeixin funcions cognitives de nivell mitjà a alt. No obstant, ens agrada considerar cada cas individualment, així que no dubtis a posar-te en contacte i sol·licitar una avaluació en línia amb el nostre equip.",
+      "faq1": "Com funciona l'aplicació?",
+      "faq1Description": "L'aplicació OTTAA proporciona a l'usuari pictogrames: imatges que representen accions, objectes, sentiments o emocions. L'usuari pot triar els pictogrames que necessita i crear una frase, aquesta es tradueix dels pictogrames a una oració escrita que apareix a la pantalla i que l'aplicació també llegeix en veu alta. Consulteu el nostre canal de Youtube per obtenir una explicació més visual.",
+      "faq2": "En què es diferencia aquesta aplicació d'altres dispositius AAC (comunicació augmentativa i alternativa)?",
+      "faq2Description": "L'aplicació OTTAA és diferent d'altres aplicacions de CAA a causa del seu innovador algorisme predictiu i generador de llenguatge natural, que permet que l'aplicació aprengui del comportament de l'usuari a l'aplicació, la seva edat, sexe, l'hora del dia i la seva ubicació per pre-seleccionar pictograma(s) per al moment comunicacional en què es troben.",
+      "faq3": "Quant costa l'aplicació OTTAA?",
+      "faq3Description": "L'aplicació OTTAA és gratuïta per descarregar i usar. Per crear un producte sostenible que resisteixi el pas del temps, hi ha algunes característiques que requereixen una subscripció per utilitzar-les. No obstant, estem treballant durament per brindar finançament a tothom que ho necessiti.\n\nSi estàs a Argentina, qualsevol ajuda tècnica que necessiti una persona ha d'estar cobert per un assegurança de salut. Comuniqui's amb el nostre equip per obtenir orientació i assistència sobre com obtenir aquesta cobertura.\n\nSi ets de qualsevol altre país de LATAM i vols compartir la teva experiència sobre aquest tema, no dubtis en comunicar-te, la teva contribució podria ajudar a moltes persones.",
+      "faq4": "Quins idiomes són compatibles amb el Projecte OTTAA?",
+      "faq4Description": "Actualment admetem espanyol, anglès, portuguès i francès. Per a espanyol, tenim versions localitzades d'Argentina, Xile, Colòmbia i Espanya. Estem buscant activament contribucions sobre nous idiomes o una millor localització per a les varietats espanyoles. Uneix-te a la nostra comunitat de crowdin per contribuir.",
+      "faq5": "Com puc col·laborar amb el Projecte OTTAA?",
+      "faq5Description": "Els col·laboradors poden ajudar a OTTAA amb el desenvolupament, les proves i/o la traducció. Per llegir més sobre el tema i començar, consulteu la secció Contribuir en el repositori oficial de OTTAA a GitHub."
+    },
+    "caregiver": "Acompanyant",
+    "caregivers_families": "Professionals/Familiars",
+    "user": "Usuari/a",
+    "user_description": "Persona no verbal",
+    "wait": "Si us plau, espera",
+    "setting_exp": "Configurant la teva experiència...",
+    "link_account": "Vincular un compte",
+    "use": {
+      "ottaa": "Utilitzar OTTAA"
+    },
+    "close_profile": "Amagar",
+    "open_profile": "Veure perfil",
+    "no_account": "Mode sense perfil",
+    "new_existant": "Nou/Existente",
+    "what_do": "Què vols fer?",
+    "profile": "Perfil",
+    "linked_accounts": "Comptes vinculats",
+    "name": "Nom",
+    "logout": "Tancar sessió",
+    "last_name": "Cognom",
+    "role": "Rol d'ús",
+    "day": "Dia",
+    "month": "Mes",
+    "year": "Any",
+    "tips": {
+      "title1": "Estadístiques",
+      "title2": "Taulells",
+      "title3": "Historial",
+      "title4": "Favorits",
+      "text1": "Mira les estadístiques del teu pacient/familiar, per veure la seva activitat i com va millorant al llarg dels dies, setmanes i mesos.",
+      "text2": "Amaga els taulells que no utilitza l'usuari, perquè li apareguin els taulells que més utilitza i necessita.",
+      "text3": "Utilitza l'historial per veure les teves frases passades, què vas fer durant el dia i explicar històries.",
+      "text4": "Desa pictogrames o frases favorites, per poder accedir-hi més ràpidament."
+    },
+    "unlink": "Desvincular",
+    "unlink_account": "Voleu desvincular a {name} de les seves comptes?",
+    "help": {
+      "help": "Ajuda",
+      "title1": "Preguntes freqüents",
+      "title2": "Contactar amb suport"
+    },
+    "link": {
+      "title": "Vincular Compte",
+      "mail": {
+        "title": "Introduïu el correu electrònic vinculat a la compte de OTTAA",
+        "input": {
+          "required": "El correu electrònic és requerit",
+          "invalid": "El correu electrònic és invàlid"
+        },
+        "warn": "*S'enviarà un correu de validació amb un codi per enllaçar els perfils.",
+        "contact": "*Assegura't d'estar en contacte amb la persona que posi aquest correu electrònic."
+      },
+      "token": {
+        "title": "Poseu el codi de verificació que va arribar al correu electrònic.",
+        "problem": "Inconvenients per enllaçar les comptes?",
+        "resend": "Reenviar codi",
+        "back": "Introduir un altre correu electrònic",
+        "invalid": "Token invàlid"
+      },
+      "wait": {
+        "title": "Espereu",
+        "subtitle": "Carregant perfil..."
+      },
+      "success": {
+        "title": "Perfil vinculat amb èxit!",
+        "lastTime": "Últ. vegada {date}"
+      },
+      "error": {
+        "link-exist": "Ja estan vinculades",
+        "miss-caregiver": "Error:Caregiver 404",
+        "miss-user": "Error:User 404",
+        "user-no-comp": "Error: User 406",
+        "caregiver-no-comp": "Error: Caregiver 406",
+        "autolink": "Error: Mateixa compte",
+        "auth/user-not-found": "Usuari no trobat",
+        "miss-token": "Falta el Token",
+        "invalid-token": "Token invàlid",
+        "expired-token": "Token vençut"
+      }
+    }
+  },
+  "user": {
+    "main": {
+      "title": "Configura la teva experiència",
+      "subtitle1": "Ús de l'aplicació",
+      "subtitle2": "Llenguatge predictiu"
+    },
+    "settings": {
+      "main_screen": "Pantalla principal",
+      "accessibility": "Accessibilitat",
+      "voice_and_subtitles": "Veu i subtítols",
+      "language": "Llenguatge"
+    },
+    "main_setting": {
+      "interaction": "Interaccions",
+      "talk_delete": "Hablar y Borrar",
+      "shortcut": "Dreceres a la pantalla principal",
+      "board_view": "Vista de taulells",
+      "tabs": "Per pestanyes",
+      "grid": "Grella",
+      "ottaa_labs": "Ottaa Labs",
+      "labs_text": "Funció frases verbals",
+      "labs_long": "Funció en Mode Beta\nPermet generar frases amb temps verbals més complexos",
+      "one_by_one": "ONE by ONE"
+    },
+    "accessibility": {
+      "selection": "Selecció",
+      "bar_text": "Temps de clic (Segons)",
+      "connected": "Dispositius connectats",
+      "device": "Dispositiu d'accessibilitat",
+      "press": "Press&Press",
+      "scroll": "Scroll&Press",
+      "sip": "Sip&puff",
+      "selection_type": "Tipus de selecció",
+      "swept": "Swept",
+      "speed": "Velocitat",
+      "selection_speed": "Velocitat de selecció"
+    },
+    "voice_and_subtitle": {
+      "voice_types": "Tipus de veu",
+      "voice_rate": "Velocitat de veu",
+      "voz1": "Veu 1",
+      "voz2": "Veu 2",
+      "voz3": "Veu 3",
+      "mute": "Silenciar pictogrames",
+      "subtitle": "Subtítols",
+      "show": "Mostrar subtítols",
+      "size": "Mida",
+      "capital": "Majúscules"
+    },
+    "language": {
+      "set": "Llenguatge establert"
+    }
+  },
+  "global": {
+    "hello_world": "Hola Món",
+    "hello": "Hola",
+    "continue": "Continuar",
+    "next": "Següent",
+    "back": "Anterior",
+    "please_enter_text": "Si us plau, introdueixi un text",
+    "done": "Fet",
+    "yes": "Sí",
+    "delete": "Esborrar",
+    "edit": "Editar",
+    "no": "No",
+    "mute": "Silenciar",
+    "important": "Important",
+    "save_changes": "Desar canvis",
+    "send": "Enviar",
+    "skip": "Ometre",
+    "email": "Correu electrònic",
+    "step": "Pas",
+    "share": "Compartir",
+    "support": "Suport",
+    "congrats": "Felicitacions",
+    "settings": "Configuració",
+    "general": "General",
+    "pictogram": "Pictogrames",
+    "configuration": "Configuració",
+    "user_ottaa": "Utilitzar Ottaa com a {name}",
+    "cancel": "Cancel·lar",
+    "slow": "Lenta",
+    "default": "Per defecte",
+    "fast": "Ràpida",
+    "voice": "Veu",
+    "boy": "Noi",
+    "medium": "Mitjana",
+    "big": "Gran",
+    "comingsoon": "Esta característica va estár disponible muy pronto!"
+  },
+  "onboarding": {
+    "start": "Començar",
+    "profile": {
+      "title": "Pantalla de perfils",
+      "subtitle": "Qui utilitzarà OTTAA avui?",
+      "description": "Amb la selecció de perfils podràs utilitzar OTTAA des de qualsevol dispositiu, mantenint els teus pictogrames i estils!"
+    },
+    "home": {
+      "title": "Personalitza la teva pantalla principal",
+      "subtitle": "Accessos directes a la pantalla principal",
+      "description": "Personalitza segons els gustos i necessitats"
+    },
+    "customize": {
+      "title": "Personalitza la teva pantalla principal",
+      "subtitle": "Acompanyem en el procés d'aprenentatge",
+      "description": "Activa o desactiva taulells o pictogrames per modificar la predicció, tu tens el control."
+    },
+    "skip": {
+      "title": "Estàs d'acord en saltar la introducció?"
+    }
+  },
+  "terms": {
+    "button": "Accepto els termes",
+    "text": "Per continuar, necessitem que acceptis els termes i condicions.\nVeure termes"
+  },
+  "loginWait": {
+    "text": "Et donem la benvinguda!\nAl món d'OTTAA"
+  },
+  "login": {
+    "title": "Inicia sessió amb el teu compte",
+    "google": "Continuar amb Google",
+    "facebook": "Continuar amb Facebook",
+    "register": "Encara no tens compte? Registra't aquí",
+    "wait": {
+      "title": "Et donem la benvinguda!",
+      "subtitle": "Al nou món d'OTTAA Project"
+    }
+  },
+  "customize": {
+    "board": {
+      "title": "Quins taulells utilitzarà l'usuari per comunicar-se?",
+      "appbar": "Taulells predictius",
+      "skip": "Ometre la selecció de taulells?",
+      "subtitle": "Veure pictogrames"
+    },
+    "shortcut": {
+      "title": "Selecciona els accessos directes que apareixeran a la pantalla principal.",
+      "appbar": "Accessos directes",
+      "favorites": "Favorits",
+      "history": "Historial",
+      "camera": "Càmera",
+      "games": "Jocs"
+    },
+    "picto": {
+      "title": "Taulell {name}",
+      "switch": "Activar taulell"
+    },
+    "help": {
+      "boards": "Els taulells predictius permeten configurar quin grup de pictogrames es mostraran a la pantalla de l'usuari/a final.",
+      "shortcut": "Els accessos directes són accessos ràpids a diferents funcions perquè l'usuari/a final disposi a la seva pantalla principal."
+    },
+    "wait": {
+      "title": "Felicitats!",
+      "subtitle": "Has configurat l'experiència de {name}",
+      "button": "Anar al panell de perfils"
+    },
+    "skip": "Estàs d'acord en saltar les preferències del perfil?"
+  },
+  "home": {
+    "grid": {
+      "title": "Taulells",
+      "pictos": "Taulell {group}"
+    }
+  },
+  "chatgpt": {
+    "prompt": "formar una frase amb aquestes paraules com si parlés un {age} {gender} en {language}, afegint connectors i articles quan sigui necessari: {pictograms}"
+  }
+}

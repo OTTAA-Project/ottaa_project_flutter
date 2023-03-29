@@ -28,10 +28,16 @@ class VoiceSetting {
     required this.mutePict,
   });
 
-  factory VoiceSetting.empty() {
+  factory VoiceSetting.empty({
+    String? language,
+  }) {
     return VoiceSetting(
-      voicesNames: {},
-      voicesSpeed: {},
+      voicesNames: {
+        language ?? "es_AR": "default2",
+      },
+      voicesSpeed: {
+        language ?? "es_AR": VelocityTypes.mid,
+      },
       mutePict: false,
     );
   }

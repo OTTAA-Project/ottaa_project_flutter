@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/sweep_modes.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
@@ -22,7 +23,15 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
     final colorScheme = Theme.of(context).colorScheme;
     final pictoWords = ref.watch(homeProvider).pictoWords;
     final int? currentWord = ref.watch(homeProvider).selectedWord;
+    final bool showAll = !ref
+        .watch(homeProvider)
+        .patientState
+        .user
+        .patientSettings
+        .layout
+        .oneToOne;
     final scrollCon = ref.watch(homeProvider).scrollController;
+    print(showAll);
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
@@ -40,7 +49,8 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
               itemCount: pictoWords.length + 6,
               controller: scrollCon,
               itemBuilder: (context, index) {
-                Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
+                Picto? pict = pictoWords.firstWhereIndexedOrNull(
+                    (elIndex, element) => elIndex == index);
 
                 if (pict == null) {
                   return Padding(
@@ -49,7 +59,9 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                       width: 64,
                       height: 140,
                       decoration: BoxDecoration(
-                        color: pictoWords.length < pictoWords.length + 6 ? Colors.transparent : Colors.white,
+                        color: pictoWords.length < pictoWords.length + 6
+                            ? Colors.transparent
+                            : Colors.white,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(10),
                         ),
@@ -71,7 +83,10 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                               return Center(
                                 child: CircularProgressIndicator(
                                   color: colorScheme.primary,
-                                  value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
+                                  value: progress.totalSize != null
+                                      ? progress.downloaded /
+                                          progress.totalSize!
+                                      : null,
                                 ),
                               );
                             },
@@ -85,23 +100,16 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                             "assets/img/${pict.text}.webp",
                           ),
                     text: pict.text,
-                    disable: index == currentWord ? false : true,
+                    disable: showAll
+                        ? false
+                        : index == currentWord
+                            ? false
+                            : true,
                   ),
                 );
               },
             ),
           ),
-          const SizedBox(width: 16),
-          const SizedBox(
-            width: 138,
-            height: 80,
-          ),
-          const SizedBox(width: 16),
-          const SizedBox(
-            width: 138,
-            height: 80,
-          ),
-          const SizedBox(width: 24),
         ],
       ),
     );
