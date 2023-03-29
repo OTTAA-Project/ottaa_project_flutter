@@ -192,7 +192,7 @@
     "default": "Predeterminada",
     "fast": "Rápida",
     "voice": "Voz",
-    "boy": "Chico",
+    "small": "Chico",
     "medium": "Mediano",
     "big": "Grande",
     "comingsoon": "Esta característica va estár disponible muy pronto!",
@@ -205,7 +205,7 @@
     "italian": "Italiano",
     "french": "French",
     "portuguese" : "Portuguese",
-    "test": "Esta es la voz que vas a usar en ottaa"
+    "test": "Esta es la voz que vas a usar en otta"
   },
   "onboarding": {
     "start": "Comenzar",
