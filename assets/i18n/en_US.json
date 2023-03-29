@@ -126,7 +126,7 @@
       "board_view": "Board view",
       "tabs": "Tabs",
       "grid": "Grid",
-      "ottaa_labs": "Ottaa Labs",
+      "ottaa_labs": "OTTAA Labs",
       "labs_text": "Verbal phrases feature",
       "labs_long": "Beta mode\nAllows creating sentences with more complex tenses",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "Scroll&Press",
       "sip": "Sip&Puff",
       "selection_type": "Selection method",
-      "swept": "Swept",
+      "swept": "Screen scanning",
       "speed": "Speed",
       "selection_speed": "Selection speed"
     },
@@ -186,7 +186,7 @@
     "general": "General",
     "pictogram": "Pictograms",
     "configuration": "Settings",
-    "user_ottaa": "Usar Ottaa como {name}",
+    "user_ottaa": "Use OTTAA as {name}",
     "cancel": "Cancel",
     "slow": "Slow",
     "default": "Default",
@@ -196,16 +196,16 @@
     "medium": "Medium",
     "big": "Large",
     "comingsoon": "This feature will be available very soon!",
-    "delicate": "delicade",
+    "delicate": "Country",
     "chile": "Chile",
-    "spanish": "Español",
+    "spanish": "Spanish",
     "argentina": "Argentina",
     "colombia": "Colombia",
     "english": "English",
-    "italian": "Italiano",
+    "italian": "Italian",
     "french": "French",
     "portuguese": "Portuguese",
-    "test": "Esta es la voz que vas a usar en ottaa"
+    "test": "This is the voice you are going to use in otta"
   },
   "onboarding": {
     "start": "Get Started",
