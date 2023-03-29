@@ -126,7 +126,7 @@
       "board_view": "بورڈز دیکھیں",
       "tabs": "ٹیبز کے ذریعے",
       "grid": "گرڈ",
-      "ottaa_labs": "OTTAA Labs",
+      "ottaa_labs": "Ottaa Labs",
       "labs_text": "فعل فعل کے جملے",
       "labs_long": "بیٹا موڈ میں خصوصیت\n\nآپ کو زیادہ پیچیدہ ادوار کے ساتھ جملے بنانے کی اجازت دیتا ہے۔",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "اسکرول اینڈ پریس",
       "sip": "گھونٹ اور پف",
       "selection_type": "انتخاب کی قسم",
-      "swept": "Barrido",
+      "swept": "Swept",
       "speed": "رفتار",
       "selection_speed": "انتخاب کی رفتار"
     },
@@ -186,7 +186,7 @@
     "general": "جنرل",
     "pictogram": "تصویریں",
     "configuration": "ترتیبات",
-    "user_ottaa": "Usar OTTAA como {name}",
+    "user_ottaa": "Usar Ottaa como {name}",
     "cancel": "منسوخ",
     "slow": "سست",
     "default": "پہلے سے طے شدہ\n",
@@ -195,7 +195,17 @@
     "boy": "لڑکا",
     "medium": "درمیانہ",
     "big": "بڑا",
-    "comingsoon": "Esta característica va estár disponible muy pronto!"
+    "comingsoon": "Esta característica va estár disponible muy pronto!",
+    "delicate": "delicade",
+    "chile": "Chile",
+    "spanish": "Español",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italiano",
+    "french": "French",
+    "portuguese": "Portuguese",
+    "test": "Esta es la voz que vas a usar en ottaa"
   },
   "onboarding": {
     "start": "شروع کریں",
