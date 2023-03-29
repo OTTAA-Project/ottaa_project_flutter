@@ -141,11 +141,12 @@ class AuthService extends AuthRepository {
         }
 
         userModel.currentToken = DeviceToken(deviceToken: await getDeviceId(), lastUsage: DateTime.now());
-
-        await _serverRepository.updateDevicesId(
-          userId: userModel.id,
-          deviceToken: userModel.currentToken,
-        );
+        if (userModel.currentToken != null) {
+          await _serverRepository.updateDevicesId(
+            userId: userModel.id,
+            deviceToken: userModel.currentToken!,
+          );
+        }
 
         return Right(userModel);
       } on Exception catch (e) {

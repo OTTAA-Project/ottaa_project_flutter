@@ -16,7 +16,7 @@ class Application extends StatefulWidget {
 class _ApplicationState extends State<Application> {
   @override
   void initState() {
-    GetIt.I<NotificationsService>().onMessageReceived?.onData((data) {
+    GetIt.I.get<NotificationsService>().onMessageReceived?.onData((data) {
       print(data);
     });
     super.initState();

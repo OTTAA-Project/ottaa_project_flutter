@@ -6,8 +6,8 @@ import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 abstract class UserModel extends HiveObject {
   UserModel();
 
-  DeviceToken get currentToken;
-  set currentToken(DeviceToken token);
+  DeviceToken? get currentToken;
+  set currentToken(DeviceToken? token);
 
   String get id;
   UserType get type;

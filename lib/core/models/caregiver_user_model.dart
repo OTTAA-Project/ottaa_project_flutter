@@ -36,7 +36,7 @@ class CaregiverUserModel extends UserModel {
 
   @override
   @HiveField(5)
-  late DeviceToken currentToken;
+  DeviceToken? currentToken;
 
   CaregiverUserModel({
     required this.id,

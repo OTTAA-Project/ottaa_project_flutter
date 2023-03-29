@@ -52,7 +52,7 @@ class PatientUserModel extends UserModel {
 
   @override
   @HiveField(7)
-  late DeviceToken currentToken;
+  DeviceToken? currentToken;
 
   PatientUserModel({
     required this.id,

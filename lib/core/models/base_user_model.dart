@@ -30,8 +30,9 @@ class BaseUserModel extends UserModel {
   String email;
 
   @override
-  @HiveField(6)
-  late DeviceToken currentToken;
+  @HiveField(7)
+  DeviceToken? currentToken;
+
   BaseUserModel({
     required this.id,
     required this.settings,
