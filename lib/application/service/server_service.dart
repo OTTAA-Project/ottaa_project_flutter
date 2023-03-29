@@ -377,6 +377,7 @@ class ServerService implements ServerRepository {
       'src': ownEmail,
       'dst': email,
     };
+    print(jsonEncode(body));
     try {
       final res = await http.post(
         uri,

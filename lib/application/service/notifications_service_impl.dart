@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -101,7 +102,7 @@ class NotificationsServiceImpl implements NotificationsService {
 
     await _awesomeNotifications.createNotification(
       content: NotificationContent(
-        id: 10,
+        id: Random().nextInt(1000),
         channelKey: 'basic_channel',
         title: title,
         payload: payload,
