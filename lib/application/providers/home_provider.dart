@@ -320,12 +320,22 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    if (!patientState.user.patientSettings.layout.oneToOne) {
-      notifyListeners();
-      final sentence = pictoWords.map((e) => e.text).join(' ');
-      await _tts.speak(sentence);
-      show = false;
-      notifyListeners();
+    if (patientState.state != null) {
+      if (!patientState.user.patientSettings.layout.oneToOne) {
+        notifyListeners();
+        String? sentence;
+
+        if (patientState.user.patientSettings.language.labs) {
+          sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+          if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
+        }
+
+        sentence ??= pictoWords.map((e) => e.text).join(' ');
+
+        await _tts.speak(sentence);
+        show = false;
+        notifyListeners();
+      }
     } else {
       show = true;
       notifyListeners();

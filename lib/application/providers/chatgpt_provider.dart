@@ -17,7 +17,7 @@ class ChatGPTNotifier extends ChangeNotifier {
   Future<String?> generatePhrase(List<Picto> pictograms) async {
     final user = _patientNotifier.state ?? _userNotifier.user;
 
-    String age = (user.settings.data.birthDate.difference(DateTime.now()).inDays / 365).round().abs().toString();
+    int age = (user.settings.data.birthDate.difference(DateTime.now()).inDays / 365).round().abs();
 
     String gender = user.settings.data.genderPref;
 
@@ -25,11 +25,14 @@ class ChatGPTNotifier extends ChangeNotifier {
 
     int maxTokens = (pictograms.length * 10).round().clamp(300, 500);
 
+    final String lang = user.settings.language.language;
+
     final response = await _chatGPTRepository.getCompletion(
       age: age,
       gender: gender,
       pictograms: pictogramsString,
       maxTokens: maxTokens,
+      language: lang.split('_')[0],
     );
 
     return response.fold(

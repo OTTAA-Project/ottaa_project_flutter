@@ -602,13 +602,18 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         )),
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i4.Future<_i2.Either<String, String>> generatePhraseGPT(
-          {required String? prompt}) =>
+  _i4.Future<_i2.Either<String, String>> generatePhraseGPT({
+    required String? prompt,
+    required int? maxTokens,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #generatePhraseGPT,
           [],
-          {#prompt: prompt},
+          {
+            #prompt: prompt,
+            #maxTokens: maxTokens,
+          },
         ),
         returnValue: _i4.Future<_i2.Either<String, String>>.value(
             _FakeEither_0<String, String>(
@@ -616,7 +621,10 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
           Invocation.method(
             #generatePhraseGPT,
             [],
-            {#prompt: prompt},
+            {
+              #prompt: prompt,
+              #maxTokens: maxTokens,
+            },
           ),
         )),
       ) as _i4.Future<_i2.Either<String, String>>);

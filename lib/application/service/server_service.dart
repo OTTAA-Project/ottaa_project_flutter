@@ -605,7 +605,7 @@ class ServerService implements ServerRepository {
   Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
     try {
       final choice = await _openAIClient.completions.create(
-        model: "text-davinci-001",
+        model: "text-davinci-003",
         prompt: prompt,
         temperature: 0,
         maxTokens: maxTokens,
