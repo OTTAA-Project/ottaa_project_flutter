@@ -1,5 +1,5 @@
 files:
   - source: /assets/i18n/es_AR.json
     translation: /assets/i18n/%locale_with_underscore%.json
-  - source: /assets/languages/pictos_pt.json
-    translation: /assest/%language%/
+  - source: /assets/languages/es_AR.json
+    translation: /assets/languages/%locale_with_underscore%.json

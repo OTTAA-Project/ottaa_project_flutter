@@ -4,11 +4,13 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
@@ -19,6 +21,7 @@ import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/tts_setting.dart';
+import 'package:ottaa_project_flutter/core/models/voices_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:ottaa_project_flutter/core/repositories/user_settings_repository.dart';
 
@@ -26,6 +29,8 @@ class UserSettingsProvider extends ChangeNotifier {
   final I18N _i18n;
 
   final UserSettingRepository _userSettingRepository;
+  final TTSRepository _ttsServices;
+  final TTSProvider _ttsProvider;
 
   final UserNotifier _userNotifier;
   final PatientNotifier _patientNotifier;
@@ -41,6 +46,8 @@ class UserSettingsProvider extends ChangeNotifier {
     this._patientNotifier,
     this._localDatabaseRepository,
     this._profileNotifier,
+    this._ttsServices,
+    this._ttsProvider,
   );
 
   bool deleteText = true;
@@ -64,6 +71,9 @@ class UserSettingsProvider extends ChangeNotifier {
   late LanguageSetting languageSetting;
   late LayoutSetting layoutSetting;
   late TTSSetting ttsSetting;
+  List<Voices> voices = [];
+  List<Voices> filteredVoices = [];
+  String voiceName = "es-ES-language";
 
   PatientUserModel get currentUser => _patientNotifier.state ?? _userNotifier.user.patient;
 
@@ -77,6 +87,7 @@ class UserSettingsProvider extends ChangeNotifier {
 
   Future<void> init() async {
     language = _i18n.currentLanguage!.locale.toString();
+    await fetchAllVoices();
     await initialiseSettings();
   }
 
@@ -110,6 +121,8 @@ class UserSettingsProvider extends ChangeNotifier {
     language = languageCode;
     languageSetting.language = languageCode;
     await _i18n.changeLanguage(languageCode);
+    print(_i18n.currentLanguage!.locale.toString());
+    await fetchAllVoices();
     notifyListeners();
   }
 
@@ -192,21 +205,45 @@ class UserSettingsProvider extends ChangeNotifier {
       }
     } else {
       currentUser.patientSettings.layout = layoutSetting;
-
       _localDatabaseRepository.setUser(currentUser);
     }
   }
 
   void changeVoiceType({required String type}) {
     voiceType = type;
+    changeTTSVoice(value: type);
     ttsSetting.voiceSetting.voicesNames[language] = type;
     notifyListeners();
   }
 
   void changeVoiceSpeed({required VelocityTypes type}) {
+    switch (type) {
+      case VelocityTypes.slow:
+        _ttsServices.changeCustomTTs(true);
+        _ttsServices.changeVoiceSpeed(0.2);
+        break;
+      case VelocityTypes.mid:
+        _ttsServices.changeCustomTTs(false);
+        _ttsServices.changeVoiceSpeed(0.4);
+        break;
+      case VelocityTypes.fast:
+        _ttsServices.changeCustomTTs(true);
+        _ttsServices.changeVoiceSpeed(0.8);
+        break;
+    }
     voiceRate = type.name;
     print(type);
+    print(_i18n.currentLanguage!.locale.toString());
     ttsSetting.voiceSetting.voicesSpeed[language] = type;
+    notifyListeners();
+  }
+
+  void changeTTSVoice({required String value}) {
+    voiceName = value;
+    _ttsServices.changeCustomTTs(true);
+    _ttsServices.changeTTSVoice(value);
+    print(value);
+    _ttsProvider.speak('global.test'.trl);
     notifyListeners();
   }
 
@@ -275,6 +312,11 @@ class UserSettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void changeOneToOne({required bool value}) {
+    layoutSetting.oneToOne = value;
+    notifyListeners();
+  }
+
   changeEnableShortcuts({required bool value}) {
     layoutSetting.shortcuts.enable = value;
     shortcut = value;
@@ -286,6 +328,18 @@ class UserSettingsProvider extends ChangeNotifier {
     boardView = value;
     notifyListeners();
   }
+
+  Future<void> fetchAllVoices() async {
+    voices = await _ttsServices.fetchVoices();
+    filteredVoices = [];
+    final s = language.split('_');
+    voices.forEach((v) {
+      if (v.name.contains(s[0]) && !v.name.contains('network')) {
+        print(v.name);
+        filteredVoices.add(v);
+      }
+    });
+  }
 }
 
 final userSettingsProvider = ChangeNotifierProvider<UserSettingsProvider>((ref) {
@@ -296,15 +350,10 @@ final userSettingsProvider = ChangeNotifierProvider<UserSettingsProvider>((ref) 
   final PatientNotifier patientNotifierState = ref.watch(patientNotifier.notifier);
 
   final ProfileNotifier _profileNotifier = ref.watch(profileProvider);
+  final TTSRepository _ttsProvider = GetIt.I<TTSRepository>();
 
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+  final tts = ref.watch(ttsProvider);
 
-  return UserSettingsProvider(
-    i18N,
-    userSettingsService,
-    userNotifierState,
-    patientNotifierState,
-    localDatabaseRepository,
-    _profileNotifier,
-  );
+  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository, _profileNotifier, _ttsProvider, tts);
 });

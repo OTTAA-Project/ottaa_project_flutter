@@ -2,23 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 
-class ActionsBarUI extends ConsumerStatefulWidget {
-  const ActionsBarUI({super.key});
+class ShortcutsUI extends ConsumerStatefulWidget {
+  const ShortcutsUI({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ActionsBarState();
 }
 
-class _ActionsBarState extends ConsumerState<ActionsBarUI> {
+class _ActionsBarState extends ConsumerState<ShortcutsUI> {
+  Future<void> showComingSoon() async {
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text("global.comingsoon".trl),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final pictos = ref.watch(homeProvider.select((value) => value.suggestedPicts.isEmpty));
+
+    final tts = ref.watch(ttsProvider);
 
     PatientUserModel? patient = ref.watch(patientNotifier);
 
@@ -42,7 +55,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed: pictos ? null : () {},
+                onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardDiceIconSelected,
                   width: 48,
@@ -55,7 +68,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed: pictos ? null : () {},
+                onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardHistoryIconSelected,
                   width: 48,
@@ -68,7 +81,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed: pictos ? null : () {},
+                onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardShareIconSelected,
                   width: 48,
@@ -81,7 +94,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed: pictos ? null : () {},
+                onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardCameraIconSelected,
                   width: 48,
@@ -94,7 +107,7 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed: pictos ? null : () {},
+                onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardFavouriteIconSelected,
                   width: 48,
@@ -107,7 +120,11 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed: pictos ? null : () {},
+                onPressed: pictos
+                    ? null
+                    : () async {
+                        await tts.speak("global.yes".trl);
+                      },
                 child: Image.asset(
                   AppImages.kBoardYesIconSelected,
                   width: 48,
@@ -120,7 +137,11 @@ class _ActionsBarState extends ConsumerState<ActionsBarUI> {
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, 64),
-                onPressed: pictos ? null : () {},
+                onPressed: pictos
+                    ? null
+                    : () async {
+                        await tts.speak("global.no".trl);
+                      },
                 child: Image.asset(
                   AppImages.kBoardNoIconSelected,
                   width: 48,

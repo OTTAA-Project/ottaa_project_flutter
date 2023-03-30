@@ -5,7 +5,7 @@ import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_grid.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_tabs.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/pictos_bar.dart';

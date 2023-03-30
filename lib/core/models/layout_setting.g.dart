@@ -21,19 +21,22 @@ class LayoutSettingAdapter extends TypeAdapter<LayoutSetting> {
           fields[2] == null ? DisplayTypes.grid : fields[2] as DisplayTypes,
       cleanup: fields[0] == null ? false : fields[0] as bool,
       shortcuts: fields[1] as ShortcutsModel,
+      oneToOne: fields[3] == null ? false : fields[3] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, LayoutSetting obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.cleanup)
       ..writeByte(1)
       ..write(obj.shortcuts)
       ..writeByte(2)
-      ..write(obj.display);
+      ..write(obj.display)
+      ..writeByte(3)
+      ..write(obj.oneToOne);
   }
 
   @override
