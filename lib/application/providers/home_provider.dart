@@ -75,7 +75,6 @@ class HomeProvider extends ChangeNotifier {
 
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
-
   // Home Tabs
   String currentTabGroup = "";
   ScrollController groupTabsScrollController = ScrollController();
@@ -343,7 +342,10 @@ class HomeProvider extends ChangeNotifier {
       show = false;
       notifyListeners();
     }
-    await _tts.fetchVoices("es_AR");
+    if (patientState.user.patientSettings.layout.cleanup) {
+      pictoWords.clear();
+      await buildSuggestion();
+    }
   }
 
   void refreshPictograms() {
