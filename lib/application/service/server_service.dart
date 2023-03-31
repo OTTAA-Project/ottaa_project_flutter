@@ -17,6 +17,7 @@ import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
@@ -386,6 +387,7 @@ class ServerService implements ServerRepository {
       'src': ownEmail,
       'dst': email,
     };
+    print(jsonEncode(body));
     try {
       final res = await http.post(
         uri,
@@ -529,6 +531,26 @@ class ServerService implements ServerRepository {
   }
 
   @override
+  Future<void> updateDevicesId({required String userId, required DeviceToken deviceToken}) async {
+    final ref = _database.child("$userId/settings/devices");
+
+    final currentList = (await ref.get()).value;
+
+    final list = List<dynamic>.from((currentList ?? []) as List<dynamic>);
+
+    final existsElement = list.firstWhereOrNull((element) => element["deviceToken"] == deviceToken.deviceToken);
+    final index = list.indexOf(existsElement);
+
+    if (index == -1) {
+      list.add(deviceToken.toMap());
+    } else {
+      existsElement["lastUsage"] = DateTime.now().millisecondsSinceEpoch;
+      list[index] = deviceToken.toMap();
+    }
+
+    await ref.set(list);
+  }
+
   Future<EitherMap> learnPictograms({
     required String uid,
     required String language,

@@ -162,7 +162,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                       onTap: () {
                         provider.changeTextType(type: SizeTypes.small);
                       },
-                      title: 'global.boy'.trl,
+                      title: 'global.small'.trl,
                     ),
                     const SizedBox(
                       width: 16,

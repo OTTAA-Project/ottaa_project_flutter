@@ -61,7 +61,7 @@
       "text4": "Guardá pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
     },
     "unlink": "Desvincular",
-    "unlink_account": "¿Querés desvincular a {name} de sus cuentas?",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Ayuda",
       "title1": "Domande frequenti (FAQ)",
@@ -195,7 +195,17 @@
     "boy": "Chico",
     "medium": "Mediano",
     "big": "Grande",
-    "comingsoon": "Esta característica va estár disponible muy pronto!"
+    "comingsoon": "Esta característica va estár disponible muy pronto!",
+    "delicate": "Pais",
+    "chile": "Chile",
+    "spanish": "Español",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italiano",
+    "french": "Frances",
+    "portuguese": "Portugues",
+    "test": "Esta es la voz que vas a usar en otta"
   },
   "onboarding": {
     "start": "Iniziare",

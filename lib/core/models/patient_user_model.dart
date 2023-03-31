@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/accessibility_setting.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
@@ -48,6 +49,10 @@ class PatientUserModel extends UserModel {
   @override
   @HiveField(6)
   String email;
+
+  @override
+  @HiveField(7)
+  DeviceToken? currentToken;
 
   PatientUserModel({
     required this.id,

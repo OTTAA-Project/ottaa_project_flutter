@@ -2,6 +2,7 @@ import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 
@@ -84,6 +85,7 @@ abstract class ServerRepository {
     required Map<String, dynamic> data,
   });
 
+  Future<void> updateDevicesId({required String userId, required DeviceToken deviceToken});
   Future<EitherMap> learnPictograms({
     required String uid,
     required String language,

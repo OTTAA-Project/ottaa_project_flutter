@@ -127,14 +127,14 @@
       "tabs": "Tabs",
       "grid": "Grid",
       "ottaa_labs": "OTTAA Labs",
-      "labs_text": "Función frases verbales",
-      "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas",
+      "labs_text": "Verbal phrases feature",
+      "labs_long": "Beta mode\nAllows creating sentences with more complex tenses",
       "one_by_one": "ONE by ONE"
     },
     "accessibility": {
       "selection": "Selection",
-      "bar_text": "Tiempo de clickeo (Segundos)",
-      "connected": "Dispositivos conectados",
+      "bar_text": "Clicking time (Seconds)",
+      "connected": "Connected devices",
       "device": "Assistive device",
       "press": "Press&Press",
       "scroll": "Scroll&Press",
@@ -195,7 +195,17 @@
     "boy": "Small",
     "medium": "Medium",
     "big": "Large",
-    "comingsoon": "This feature will be available very soon!"
+    "comingsoon": "This feature will be available very soon!",
+    "delicate": "Country",
+    "chile": "Chile",
+    "spanish": "Spanish",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italian",
+    "french": "French",
+    "portuguese": "Portuguese",
+    "test": "This is the voice you are going to use in otta"
   },
   "onboarding": {
     "start": "Get Started",
@@ -255,8 +265,8 @@
       "switch": "Enable board"
     },
     "help": {
-      "boards": "Los tableros predictivos permiten configurar que grupo de pictogramas se mostrarán en la pantalla del usuario/a final.",
-      "shortcut": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal."
+      "boards": "Predictive boards allows choosing what boards & pictograms will show up to the user.",
+      "shortcut": "Shortcuts are a fast way to access different features for the user on Home Screen."
     },
     "wait": {
       "title": "¡Congratulations!",
@@ -272,6 +282,6 @@
     }
   },
   "chatgpt": {
-    "prompt": "formar una frase con estas palabras como si hablara un {age} {gender} en {language}, agregando conectores y artículos cuando sea necesario: {pictograms}"
+    "prompt": "I am an {AGE} {SEX} and I need to nlg the following phrase or word '{PHRASE}' once without adding extra words, the result has to be in {LANG}, first person, without extra words and as precise as possible."
   }
 }

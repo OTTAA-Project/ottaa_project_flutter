@@ -14,6 +14,7 @@ import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i13;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i8;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i10;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i11;
+import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i14;
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart' as _i5;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i12;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
@@ -191,6 +192,14 @@ class MockAuthRepository extends _i1.Mock implements _i6.AuthRepository {
             #email: email,
             #id: id,
           },
+        ),
+        returnValue: _i4.Future<String>.value(''),
+      ) as _i4.Future<String>);
+  @override
+  _i4.Future<String> getDeviceId() => (super.noSuchMethod(
+        Invocation.method(
+          #getDeviceId,
+          [],
         ),
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
@@ -908,6 +917,23 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<Map<String, dynamic>?>.value(),
       ) as _i4.Future<Map<String, dynamic>?>);
+  @override
+  _i4.Future<void> updateDevicesId({
+    required String? userId,
+    required _i14.DeviceToken? deviceToken,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateDevicesId,
+          [],
+          {
+            #userId: userId,
+            #deviceToken: deviceToken,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> learnPictograms({
     required String? uid,

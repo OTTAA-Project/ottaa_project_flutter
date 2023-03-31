@@ -61,6 +61,8 @@ dependencies:
       ref: master
   rive: ^0.9.1
   collection: ^1.16.0
+  firebase_messaging: ^14.2.1
+  awesome_notifications: ^0.7.4+1
   injectable: ^2.1.0
   firebase_remote_config: ^3.0.15
 

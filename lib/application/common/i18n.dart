@@ -23,16 +23,14 @@ class I18N extends ChangeNotifier {
   static Future<I18N> start() => I18N().init();
 
   Future<I18N> init() async {
-    final List<Locale> systemLocales = WidgetsBinding.instance.window.locales;
     final List<String> deviceLanguage = Platform.localeName.split('_');
-    Locale deviceLocale;
+
     if (deviceLanguage.length == 2) {
-      deviceLocale = Locale(deviceLanguage[0], deviceLanguage[1]);
+      locale = Locale(deviceLanguage[0], deviceLanguage[1]);
     } else {
-      deviceLocale = platformLanguages[deviceLanguage[0]] ?? const Locale("es", "AR");
+      locale = platformLanguages[deviceLanguage[0]] ?? const Locale("es", "AR");
     }
 
-    locale = deviceLocale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 

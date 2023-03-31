@@ -12,6 +12,7 @@ import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
@@ -100,6 +101,8 @@ class HiveDatabase extends LocalDatabaseRepository {
     Hive.registerAdapter(TTSSettingAdapter());
 
     Hive.registerAdapter(VoiceSettingAdapter());
+
+    Hive.registerAdapter(DeviceTokenAdapter());
 
     await Hive.openBox(UserType.user.name);
 

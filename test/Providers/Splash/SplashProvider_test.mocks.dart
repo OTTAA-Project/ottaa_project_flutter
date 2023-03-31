@@ -411,6 +411,14 @@ class MockAuthRepository extends _i1.Mock implements _i11.AuthRepository {
         ),
         returnValue: _i5.Future<String>.value(''),
       ) as _i5.Future<String>);
+  @override
+  _i5.Future<String> getDeviceId() => (super.noSuchMethod(
+        Invocation.method(
+          #getDeviceId,
+          [],
+        ),
+        returnValue: _i5.Future<String>.value(''),
+      ) as _i5.Future<String>);
 }
 
 /// A class which mocks [UserAvatarNotifier].
