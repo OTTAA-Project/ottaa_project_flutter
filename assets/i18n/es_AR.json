@@ -121,14 +121,15 @@
     },
     "main_setting": {
       "interaction": "Interacciones",
-      "delete_talking": "Borrar cuando habla",
+      "talk_delete": "Hablar y Borrar",
       "shortcut": "Atajos en el Home",
       "board_view": "Vista de tableros",
       "tabs": "Por pestañas",
       "grid": "Grilla",
       "ottaa_labs": "Ottaa Labs",
       "labs_text": "Función frases verbales",
-      "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas"
+      "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas",
+      "one_by_one": "ONE by ONE"
     },
     "accessibility": {
       "selection": "Selección",
@@ -193,7 +194,18 @@
     "voice": "Voz",
     "boy": "Chico",
     "medium": "Mediano",
-    "big": "Grande"
+    "big": "Grande",
+    "comingsoon": "Esta característica va estár disponible muy pronto!",
+    "delicate": "delicade",
+    "chile": "Chile",
+    "spanish": "Español",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italiano",
+    "french": "French",
+    "portuguese" : "Portuguese",
+    "test": "Esta es la voz que vas a usar en ottaa"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -268,6 +280,9 @@
       "title": "Tableros",
       "pictos": "Tablero {group}"
     }
+  },
+  "chatgpt": {
+    "prompt": "formar una frase con estas palabras como si hablara un {age} {gender} en {language}, agregando conectores y artículos cuando sea necesario: {pictograms}"
   },
   "game": {
     "play": "Juguemos!",

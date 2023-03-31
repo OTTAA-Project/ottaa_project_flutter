@@ -8,7 +8,9 @@ import 'package:ottaa_project_flutter/application/common/extensions/user_extensi
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
+import 'package:ottaa_project_flutter/core/enums/sweep_modes.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
@@ -73,8 +75,9 @@ class HomeProvider extends ChangeNotifier {
 
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
+
   // Home Tabs
-  late String currentTabGroup;
+  String currentTabGroup = "";
   ScrollController groupTabsScrollController = ScrollController();
   ScrollController pictoTabsScrollController = ScrollController();
 
@@ -97,6 +100,20 @@ class HomeProvider extends ChangeNotifier {
 
     buildSuggestion();
     notifyListeners();
+  }
+
+  void switchToPictograms() {
+    final currentUser = patientState.state ?? userState.state!;
+
+    bool isGrid = currentUser.isPatient && currentUser.patient.patientSettings.layout.display == DisplayTypes.grid;
+
+    if (isGrid) {
+      status = HomeScreenStatus.grid;
+    } else {
+      status = HomeScreenStatus.tabs;
+    }
+
+    notify();
   }
 
   Future<void> fetchMostUsedSentences() async {
@@ -148,9 +165,9 @@ class HomeProvider extends ChangeNotifier {
     List<Group>? groupsData;
 
     if (patientState.state != null) {
-      pictos = patientState.user.pictos[patientState.user.settings.language];
+      pictos = patientState.user.pictos[patientState.user.settings.language.language];
 
-      groupsData = patientState.user.groups[patientState.user.settings.language];
+      groupsData = patientState.user.groups[patientState.user.settings.language.language];
 
       print(patientState.user.groups);
     }
@@ -183,7 +200,7 @@ class HomeProvider extends ChangeNotifier {
         uid: user.id,
         language: user.settings.language.language,
         model: "test",
-        groups: [],
+        groups: user.groups[user.settings.language.language]!.where((element) => element.block).map((e) => e.id).toList(),
         tags: {},
         reduced: true,
         chunk: suggestedQuantity,
@@ -223,9 +240,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   List<Picto> getPictograms() {
-    int currentPage = suggestedPicts.length ~/ suggestedQuantity;
-
-    print("Page: $currentPage");
+    int currentPage = (suggestedPicts.length / suggestedQuantity).round();
 
     if (indexPage > currentPage) {
       indexPage = currentPage;
@@ -237,7 +252,7 @@ class HomeProvider extends ChangeNotifier {
 
     List<Picto> pictos = suggestedPicts.sublist(start, min(suggestedPicts.length, (indexPage * suggestedQuantity) + suggestedQuantity));
 
-    if (pictos.isEmpty) {
+    if (pictos.isEmpty && suggestedPicts.isEmpty) {
       return List.generate(4, (index) {
         return Picto(
             id: "-777",
@@ -250,7 +265,6 @@ class HomeProvider extends ChangeNotifier {
       });
     } else if (pictos.length < suggestedQuantity) {
       int pictosLeft = suggestedQuantity - pictos.length;
-      print("Pictos Left: $pictosLeft");
       pictos.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
     }
 
@@ -302,9 +316,12 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    if (!talkEnabled) {
+    if (!patientState.user.patientSettings.layout.oneToOne) {
+      notifyListeners();
       final sentence = pictoWords.map((e) => e.text).join(' ');
       await _tts.speak(sentence);
+      show = false;
+      notifyListeners();
     } else {
       show = true;
       notifyListeners();
@@ -326,6 +343,7 @@ class HomeProvider extends ChangeNotifier {
       show = false;
       notifyListeners();
     }
+    await _tts.fetchVoices("es_AR");
   }
 
   void refreshPictograms() {
@@ -367,6 +385,13 @@ class HomeProvider extends ChangeNotifier {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );
+  }
+
+  @override
+  void dispose() {
+    patientState.setUser(null);
+
+    super.dispose();
   }
 }
 

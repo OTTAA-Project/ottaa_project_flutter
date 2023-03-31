@@ -9,7 +9,7 @@ import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/actions_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
@@ -28,6 +28,8 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     final colorScheme = Theme.of(context).colorScheme;
 
     final pictos = ref.watch(homeProvider).getPictograms();
+
+    final hasGroups = ref.watch(homeProvider).groups.isNotEmpty;
 
     final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
@@ -59,13 +61,10 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     HomeButton(
-                      onPressed: pictos.isEmpty
+                      onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
-                              final provider = ref.watch(homeProvider);
-
-                              provider.status = HomeScreenStatus.grid;
-                              provider.notify();
+                              ref.watch(homeProvider).switchToPictograms();
                             },
                       size: const Size(64, 64),
                       child: Image.asset(
@@ -73,7 +72,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                       ),
                     ),
                     BaseButton(
-                      onPressed: pictos.isEmpty
+                      onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
                               ref.read(homeProvider).refreshPictograms();
@@ -104,7 +103,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
         SizedBox(
           width: size.width,
           height: 88,
-          child: const ActionsBarUI(),
+          child: const ShortcutsUI(),
         )
       ],
     );
