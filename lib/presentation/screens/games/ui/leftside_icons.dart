@@ -20,7 +20,7 @@ class LeftSideIcons extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: music,
+            onTap: score,
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -29,6 +29,7 @@ class LeftSideIcons extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Image.asset(
                 AppImages.kGamesTrophy,
+                height: 24,
               ),
             ),
           ),

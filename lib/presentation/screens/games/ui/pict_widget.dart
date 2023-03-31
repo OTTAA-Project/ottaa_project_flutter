@@ -27,17 +27,9 @@ class PictWidget extends StatelessWidget {
               width: 100,
               height: 122,
               padding: const EdgeInsets.all(0.5),
-              decoration: BoxDecoration(
-                  border: show
-                      ? Border.all(
-                          color: rightOrWrong ? Colors.green : Colors.red,
-                          width: 4)
-                      : Border.all(color: Colors.transparent),
-                  borderRadius: BorderRadius.circular(16)),
+              decoration: BoxDecoration(border: show ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4) : Border.all(color: Colors.transparent), borderRadius: BorderRadius.circular(16)),
               child: PictoWidget(
-                onTap: () {
-                  print('hello2');
-                },
+                onTap: onTap,
                 image: pict.resource.network != null
                     ? CachedNetworkImage(
                         imageUrl: pict.resource.network!,
@@ -58,25 +50,27 @@ class PictWidget extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            right: 0,
-            top: 0,
-            child: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: rightOrWrong ? Colors.green : Colors.red,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: Icon(
-                  rightOrWrong ? Icons.check : Icons.close,
-                  color: Colors.white,
-                  size: 24,
-                ),
-              ),
-            ),
-          ),
+          show
+              ? Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      color: rightOrWrong ? Colors.green : Colors.red,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        rightOrWrong ? Icons.check : Icons.close,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );

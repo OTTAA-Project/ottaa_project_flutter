@@ -283,6 +283,13 @@
     "find": "Encontrá los tableros que quieras, fácilmente!",
     "game_1_line": "Selecciona el pictograma que escuches",
     "game_2_line": "Selecciona la palabra que corresponde a su pictograma",
-    "game_3_line": "Selecciona una tarjeta y encuentra la pareja del pictograma"
+    "game_3_line": "Selecciona una tarjeta y encuentra la pareja del pictograma",
+    "no": "¡Oh Oh!",
+    "yes": "¡Muy bien!",
+    "score": "Tu puntaje",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "use_time": "Use time",
+    "maximum_streak": "Maximum Streak"
   }
 }

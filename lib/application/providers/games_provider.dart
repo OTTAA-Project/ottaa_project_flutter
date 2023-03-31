@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
@@ -20,17 +21,25 @@ class GamesProvider extends ChangeNotifier {
   Map<String, Group> groups = {};
   List<Picto> selectedPicts = [];
   List<Picto> gamePicts = [];
+  int correctScore = 0;
+  int incorrectScore = 0;
+  String useTime = '';
+  int streak = 0;
+  List<bool> pictoShow = [false, false];
+  int correctPicto = 99;
+  int selectedPicto = 0;
+  bool showText = false;
+  bool mute = false;
 
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
   final PatientNotifier patientState;
+  final TTSProvider _tts;
 
-  GamesProvider(
-      this._groupsService, this._pictogramsService, this.patientState);
+  GamesProvider(this._groupsService, this._pictogramsService, this.patientState, this._tts);
 
   void moveForward() {
-    mainPageController.nextPage(
-        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    mainPageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
     if (mainPageController.page!.toInt() == 1) {
       moversMain = false;
     }
@@ -38,8 +47,7 @@ class GamesProvider extends ChangeNotifier {
   }
 
   void moveBackward() {
-    mainPageController.previousPage(
-        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    mainPageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
     if (mainPageController.page!.toInt() == 1) {
       moversMain = true;
     }
@@ -61,8 +69,7 @@ class GamesProvider extends ChangeNotifier {
   void scrollDown() {
     int currentPosition = gridScrollController.position.pixels.toInt();
 
-    if (currentPosition >= gridScrollController.position.maxScrollExtent)
-      return;
+    if (currentPosition >= gridScrollController.position.maxScrollExtent) return;
 
     gridScrollController.animateTo(
       currentPosition + 96,
@@ -78,18 +85,13 @@ class GamesProvider extends ChangeNotifier {
     if (patientState.state != null) {
       pictos = patientState.user.pictos[patientState.user.settings.language];
 
-      groupsData =
-          patientState.user.groups[patientState.user.settings.language];
+      groupsData = patientState.user.groups[patientState.user.settings.language];
 
       print(patientState.user.groups);
     }
 
-    pictos ??= (await _pictogramsService.getAllPictograms())
-        .where((element) => !element.block)
-        .toList();
-    groupsData ??= (await _groupsService.getAllGroups())
-        .where((element) => !element.block)
-        .toList();
+    pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
+    groupsData ??= (await _groupsService.getAllGroups()).where((element) => !element.block).toList();
 
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
@@ -123,10 +125,42 @@ class GamesProvider extends ChangeNotifier {
         same = false;
       }
     }
-    print("$random1 $random2");
     gamePicts.add(selectedPicts[random1]);
     gamePicts.add(selectedPicts[random2]);
+    correctPicto = Random().nextInt(2);
+    print(correctPicto);
+    notifyListeners();
+  }
 
+  Future<void> checkAnswerWhatThePicto({required int index}) async {
+    //todo: show the text that it is correct
+    pictoShow[index] = !pictoShow[index];
+    showText = !showText;
+    notifyListeners();
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+    //todo: remove the text around
+    pictoShow[index] = !pictoShow[index];
+    showText = !showText;
+    notifyListeners();
+    //todo: create the new question
+    if (correctPicto == index) {
+      correctScore++;
+      await createRandomForGame();
+    } else {
+      if (correctScore == 0) {
+        correctScore = 0;
+      } else {
+        correctScore--;
+      }
+      streak = 0;
+    }
+    notifyListeners();
+  }
+
+  Future<void> speak() async {
+    await _tts.speak(gamePicts[correctPicto].text);
   }
 }
 
@@ -134,5 +168,6 @@ final gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final patientState = ref.watch(patientNotifier.notifier);
-  return GamesProvider(groupsService, pictogramService, patientState);
+  final tts = ref.watch(ttsProvider);
+  return GamesProvider(groupsService, pictogramService, patientState, tts);
 });
