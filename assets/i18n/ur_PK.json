@@ -126,7 +126,7 @@
       "board_view": "بورڈز دیکھیں",
       "tabs": "ٹیبز کے ذریعے",
       "grid": "گرڈ",
-      "ottaa_labs": "OTTAA Labs",
+      "ottaa_labs": "Ottaa Labs",
       "labs_text": "فعل فعل کے جملے",
       "labs_long": "بیٹا موڈ میں خصوصیت\n\nآپ کو زیادہ پیچیدہ ادوار کے ساتھ جملے بنانے کی اجازت دیتا ہے۔",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "اسکرول اینڈ پریس",
       "sip": "گھونٹ اور پف",
       "selection_type": "انتخاب کی قسم",
-      "swept": "Barrido",
+      "swept": "Swept",
       "speed": "رفتار",
       "selection_speed": "انتخاب کی رفتار"
     },
@@ -186,25 +186,25 @@
     "general": "جنرل",
     "pictogram": "تصویریں",
     "configuration": "ترتیبات",
-    "user_ottaa": "Usar OTTAA como {name}",
+    "user_ottaa": "Usar Ottaa como {name}",
     "cancel": "منسوخ",
     "slow": "سست",
     "default": "پہلے سے طے شدہ\n",
     "fast": "تیز",
     "voice": "آواز",
-    "boy": "لڑکا",
+    "small": "Chico",
     "medium": "درمیانہ",
     "big": "بڑا",
     "comingsoon": "Esta característica va estár disponible muy pronto!",
-    "delicate": "Pais",
+    "delicate": "delicade",
     "chile": "Chile",
     "spanish": "Español",
     "argentina": "Argentina",
     "colombia": "Colombia",
     "english": "English",
     "italian": "Italiano",
-    "french": "Frances",
-    "portuguese": "Portugues",
+    "french": "French",
+    "portuguese": "Portuguese",
     "test": "Esta es la voz que vas a usar en otta"
   },
   "onboarding": {
@@ -283,5 +283,17 @@
   },
   "chatgpt": {
     "prompt": "formar una frase con estas palabras como si hablara un {age} {gender} en {language}, agregando conectores y artículos cuando sea necesario: {pictograms}"
+  },
+  "notification": {
+    "code": {
+      "request": {
+        "title": "Verificación de OTTAA Link",
+        "body": "Están intentando vincular tu cuenta con el token <b>{linkToken}</b>"
+      },
+      "confirm": {
+        "title": "Confirmación de OTTAA Link",
+        "body": "Se ha confirmado la vinculación de tu cuenta"
+      }
+    }
   }
 }
