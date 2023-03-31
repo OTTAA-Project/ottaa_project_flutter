@@ -27,13 +27,13 @@ class PatientUserModelAdapter extends TypeAdapter<PatientUserModel> {
       settings: fields[4] as UserSettings,
       type: fields[5] as UserType,
       email: fields[6] as String,
-    );
+    )..currentToken = fields[7] as DeviceToken?;
   }
 
   @override
   void write(BinaryWriter writer, PatientUserModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -47,7 +47,9 @@ class PatientUserModelAdapter extends TypeAdapter<PatientUserModel> {
       ..writeByte(5)
       ..write(obj.type)
       ..writeByte(6)
-      ..write(obj.email);
+      ..write(obj.email)
+      ..writeByte(7)
+      ..write(obj.currentToken);
   }
 
   @override

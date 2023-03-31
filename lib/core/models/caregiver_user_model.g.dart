@@ -22,13 +22,13 @@ class CaregiverUserModelAdapter extends TypeAdapter<CaregiverUserModel> {
       type: fields[2] as UserType,
       users: (fields[3] as Map).cast<String, CaregiverUsers>(),
       email: fields[4] as String,
-    );
+    )..currentToken = fields[5] as DeviceToken?;
   }
 
   @override
   void write(BinaryWriter writer, CaregiverUserModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +38,9 @@ class CaregiverUserModelAdapter extends TypeAdapter<CaregiverUserModel> {
       ..writeByte(3)
       ..write(obj.users)
       ..writeByte(4)
-      ..write(obj.email);
+      ..write(obj.email)
+      ..writeByte(5)
+      ..write(obj.currentToken);
   }
 
   @override
