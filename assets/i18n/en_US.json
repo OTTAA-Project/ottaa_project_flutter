@@ -126,7 +126,7 @@
       "board_view": "Board view",
       "tabs": "Tabs",
       "grid": "Grid",
-      "ottaa_labs": "OTTAA Labs",
+      "ottaa_labs": "Ottaa Labs",
       "labs_text": "Verbal phrases feature",
       "labs_long": "Beta mode\nAllows creating sentences with more complex tenses",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "Scroll&Press",
       "sip": "Sip&Puff",
       "selection_type": "Selection method",
-      "swept": "Screen scanning",
+      "swept": "Swept",
       "speed": "Speed",
       "selection_speed": "Selection speed"
     },
@@ -186,17 +186,17 @@
     "general": "General",
     "pictogram": "Pictograms",
     "configuration": "Settings",
-    "user_ottaa": "Use OTTAA as {name}",
+    "user_ottaa": "Usar Ottaa como {name}",
     "cancel": "Cancel",
     "slow": "Slow",
     "default": "Default",
     "fast": "Fast",
     "voice": "Voice",
-    "boy": "Small",
+    "small": "Chico",
     "medium": "Medium",
     "big": "Large",
     "comingsoon": "This feature will be available very soon!",
-    "delicate": "Country",
+    "delicate": "delicade",
     "chile": "Chile",
     "spanish": "Spanish",
     "argentina": "Argentina",
@@ -283,5 +283,17 @@
   },
   "chatgpt": {
     "prompt": "I am an {AGE} {SEX} and I need to nlg the following phrase or word '{PHRASE}' once without adding extra words, the result has to be in {LANG}, first person, without extra words and as precise as possible."
+  },
+  "notification": {
+    "code": {
+      "request": {
+        "title": "Verificación de OTTAA Link",
+        "body": "Están intentando vincular tu cuenta con el token <b>{linkToken}</b>"
+      },
+      "confirm": {
+        "title": "Confirmación de OTTAA Link",
+        "body": "Se ha confirmado la vinculación de tu cuenta"
+      }
+    }
   }
 }
