@@ -7,8 +7,9 @@ class LeftSideIcons extends StatelessWidget {
     required this.music,
     required this.score,
     required this.mute,
+    required this.hint,
   }) : super(key: key);
-  final void Function()? music, score;
+  final void Function()? music, score,hint;
   final bool mute;
 
   @override
@@ -33,21 +34,35 @@ class LeftSideIcons extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            width: 8,
-          ),
           GestureDetector(
             onTap: music,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Icon(
+                  mute ? Icons.volume_mute_outlined : Icons.volume_up_outlined,
+                  color: colorScheme.primary,
+                  size: 24,
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: hint,
             child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Icon(
-                mute ? Icons.volume_mute_outlined : Icons.volume_up_outlined,
-                color: colorScheme.primary,
-                size: 24,
+              child: Image.asset(
+                AppImages.kGamesMark,
+                height: 24,
               ),
             ),
           ),

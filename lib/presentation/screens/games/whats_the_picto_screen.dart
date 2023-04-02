@@ -24,6 +24,7 @@ class WhatsThePictoScreen extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      //todo: add the hinst right next to the mute.
       body: Stack(
         children: [
           const BackGroundWidget(),
@@ -112,6 +113,9 @@ class WhatsThePictoScreen extends ConsumerWidget {
                 )
               : const SizedBox.shrink(),
           LeftSideIcons(
+            hint: (){
+
+            },
             music: () {
               provider.mute = !provider.mute;
               provider.notifyListeners();
@@ -125,27 +129,6 @@ class WhatsThePictoScreen extends ConsumerWidget {
               );
             },
             mute: provider.mute,
-          ),
-          Positioned(
-            right: 48,
-            bottom: 24,
-            child: GestureDetector(
-              onTap: () {
-                // todo: talk with hector about this one
-              },
-              child: Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Image.asset(
-                  AppImages.kGamesMark,
-                  height: 80,
-                  width: 84,
-                ),
-              ),
-            ),
           ),
         ],
       ),
