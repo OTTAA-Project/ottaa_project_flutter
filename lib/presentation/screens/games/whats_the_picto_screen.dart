@@ -114,7 +114,6 @@ class WhatsThePictoScreen extends ConsumerWidget {
               : const SizedBox.shrink(),
           LeftSideIcons(
             hint: (){
-
             },
             music: () {
               provider.mute = !provider.mute;

@@ -12,7 +12,7 @@ import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 class GamesProvider extends ChangeNotifier {
   int numberOfGroups = 45;
   int completedGroups = 0;
-  bool moversMain = true;
+  int activeGroups = 00;
   int selectedGame = 0;
   int selectedGroupIndex = 0;
   final PageController mainPageController = PageController(initialPage: 0);
@@ -40,17 +40,11 @@ class GamesProvider extends ChangeNotifier {
 
   void moveForward() {
     mainPageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-    if (mainPageController.page!.toInt() == 1) {
-      moversMain = false;
-    }
     notifyListeners();
   }
 
   void moveBackward() {
     mainPageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-    if (mainPageController.page!.toInt() == 1) {
-      moversMain = true;
-    }
     notifyListeners();
   }
 
@@ -93,6 +87,12 @@ class GamesProvider extends ChangeNotifier {
     pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
     groupsData ??= (await _groupsService.getAllGroups()).where((element) => !element.block).toList();
 
+    groupsData.forEach((e) {
+      if (!e.block) {
+        activeGroups++;
+      }
+    });
+
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
 
@@ -134,6 +134,7 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> checkAnswerWhatThePicto({required int index}) async {
     //todo: show the text that it is correct
+    selectedPicto = index;
     pictoShow[index] = !pictoShow[index];
     showText = !showText;
     notifyListeners();
@@ -161,6 +162,10 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> speak() async {
     await _tts.speak(gamePicts[correctPicto].text);
+  }
+
+  Future<void> init() async {
+    await fetchPictograms();
   }
 }
 

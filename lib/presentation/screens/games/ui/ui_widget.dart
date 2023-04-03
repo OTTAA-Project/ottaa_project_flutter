@@ -8,13 +8,11 @@ class UIWidget extends StatelessWidget {
     required this.subtitle,
     required this.headline,
     required this.uiWidget,
-    required this.show,
     required this.backward,
     required this.forward,
   }) : super(key: key);
   final String headline, subtitle;
   final Widget uiWidget;
-  final bool show;
   final void Function()? forward, backward;
 
   @override
@@ -31,48 +29,44 @@ class UIWidget extends StatelessWidget {
         Center(
           child: uiWidget,
         ),
-        !show
-            ? Positioned(
-                bottom: 60,
-                left: 150,
-                child: GestureDetector(
-                  onTap: backward,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.arrow_back_ios_rounded,
-                      size: 20,
-                      color: colorScheme.primary,
-                    ),
-                  ),
-                ),
-              )
-            : const SizedBox.shrink(),
-        show
-            ? Positioned(
-                bottom: 60,
-                right: 150,
-                child: GestureDetector(
-                  onTap: forward,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 20,
-                      color: colorScheme.primary,
-                    ),
-                  ),
-                ),
-              )
-            : const SizedBox.shrink(),
+        Positioned(
+          bottom: 60,
+          left: 150,
+          child: GestureDetector(
+            onTap: backward,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.arrow_back_ios_rounded,
+                size: 20,
+                color: colorScheme.primary,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 60,
+          right: 150,
+          child: GestureDetector(
+            onTap: forward,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 20,
+                color: colorScheme.primary,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

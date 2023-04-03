@@ -16,7 +16,6 @@ class GameScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.read(userNotifier);
     final provider = ref.read(gameProvider);
-    final movers = ref.watch(gameProvider).moversMain;
     return Scaffold(
       body: UIWidget(
         subtitle: 'game.play'.trl,
@@ -28,7 +27,6 @@ class GameScreen extends ConsumerWidget {
         forward: () {
           provider.moveForward();
         },
-        show: movers,
       ),
     );
   }
@@ -37,25 +35,26 @@ class GameScreen extends ConsumerWidget {
 class GameScreenUI extends ConsumerWidget {
   const GameScreenUI({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(gameProvider);
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      width: 260,
+      width: size.width * 0.5,
       child: PageView.builder(
         controller: provider.mainPageController,
         itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: Container(
-                  height: 280,
-                  width: 240,
+                  height: size.height * 0.6,
+                  width: size.width * 0.3,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -81,8 +80,7 @@ class GameScreenUI extends ConsumerWidget {
                           Text(
                             'game.game_sub_$index'.trl,
                             textAlign: TextAlign.center,
-                            style: textTheme.headline3!
-                                .copyWith(fontWeight: FontWeight.w400),
+                            style: textTheme.headline3!.copyWith(fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
@@ -102,16 +100,14 @@ class GameScreenUI extends ConsumerWidget {
               Wrap(
                 children: [
                   Text(
-                    '${'novel'.trl}  ',
+                    '${'game.novel'.trl}  ',
                     style: textTheme.headline4!.copyWith(
                       color: colorScheme.primary,
                     ),
                   ),
                   Text(
-                    '0/45',
-                    style: textTheme.headline4!.copyWith(
-                        color: colorScheme.primary,
-                        fontWeight: FontWeight.w600),
+                    '0 / ${provider.activeGroups}',
+                    style: textTheme.headline4!.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
