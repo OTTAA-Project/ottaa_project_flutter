@@ -192,7 +192,7 @@
     "default": "Default",
     "fast": "Fast",
     "voice": "Voice",
-    "boy": "Small",
+    "small": "Small",
     "medium": "Medium",
     "big": "Large",
     "comingsoon": "This feature will be available very soon!",
@@ -283,5 +283,17 @@
   },
   "chatgpt": {
     "prompt": "I am an {AGE} {SEX} and I need to nlg the following phrase or word '{PHRASE}' once without adding extra words, the result has to be in {LANG}, first person, without extra words and as precise as possible."
+  },
+  "notification": {
+    "code": {
+      "request": {
+        "title": "OTTAA Link verification",
+        "body": "Someone is trying to link your account with token <b>{linkToken}</b>"
+      },
+      "confirm": {
+        "title": "OTTAA Link confirmation",
+        "body": "You have successfully linked your account"
+      }
+    }
   }
 }

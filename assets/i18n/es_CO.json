@@ -1,7 +1,7 @@
 {
   "profile": {
     "selection": {
-      "text1": "Chi utilizzerà l'app su questo dispositivo?",
+      "text1": "¿Quién va a usar la aplicación en este dispositivo?",
       "caregiver_text": "Necesita comunicarse",
       "user_text": "Necesita comunicarse"
     },
@@ -10,9 +10,9 @@
       "tips": "OTTAA tips"
     },
     "mail": "Mail",
-    "date": "Data di nascita",
+    "date": "Fecha de nacimiento",
     "faq": {
-      "title": "Domande frequenti (FAQ)",
+      "title": "Preguntas frecuentes",
       "faq0": "¿Quién puede usar la aplicación OTTAA?",
       "faq0Description": "OTTAA está diseñado para personas no verbales, es decir, cualquier persona que no utilice el habla oral para comunicarse. Las personas que usan OTTAA hoy en día fueron diagnosticadas con autismo, parálisis cerebral, síndrome de Down, esclerosis lateral amiotrófica (ELA), atrofia muscular espinal (AME) o síndrome de enclaustramiento post al accidente cerebrovascular (LiS), entre otras afecciones. Al ser una herramienta de comunicación dinámica, OTTAA requiere que sus usuarios posean funciones cognitivas de nivel medio a alto. Sin embargo, nos gusta considerar cada caso individualmente, así que no dude en ponerte en contacto y solicitar una evaluación en línea con nuestro equipo.",
       "faq1": "¿Cómo funciona la aplicación?",
@@ -47,14 +47,14 @@
     "logout": "Cerrar sesión",
     "last_name": "Apellido",
     "role": "Rol de uso",
-    "day": "Giorno",
-    "month": "Mese",
-    "year": "Anno",
+    "day": "Día",
+    "month": "Mes",
+    "year": "Año",
     "tips": {
-      "title1": "Statistiche",
+      "title1": "Estadísticas",
       "title2": "Tableros",
-      "title3": "Cronolgia",
-      "title4": "Preferiti",
+      "title3": "Historial",
+      "title4": "Favoritos",
       "text1": "Mirá las estadísticas de tu paciente/familiar, para ver sus actividad y como fue mejorando a lo largo de los días, semanas y meses.",
       "text2": "Ocultá los tableros que no use el usuario, para que le aparezcan los tableros que más usa y necesita.",
       "text3": "Usá el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
@@ -64,7 +64,7 @@
     "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Ayuda",
-      "title1": "Domande frequenti (FAQ)",
+      "title1": "Preguntas frecuentes",
       "title2": "Contactar con soporte"
     },
     "link": {
@@ -86,7 +86,7 @@
         "invalid": "Token inválido"
       },
       "wait": {
-        "title": "Aspettare",
+        "title": "Aguarde",
         "subtitle": "Cargando perfil..."
       },
       "success": {
@@ -161,27 +161,27 @@
     }
   },
   "global": {
-    "hello_world": "Ciao Mondo",
-    "hello": "Ciao",
-    "continue": "Procedi",
-    "next": "Avanti",
-    "back": "Indietro",
-    "please_enter_text": "Si prega di inserire un testo.",
-    "done": "Pronto",
-    "yes": "Sì",
-    "delete": "Cancella",
-    "edit": "Modifica",
+    "hello_world": "Hola Mundo",
+    "hello": "Hola",
+    "continue": "Continuar",
+    "next": "Siguiente",
+    "back": "Anterior",
+    "please_enter_text": "Por favor, ingrese un texto",
+    "done": "Listo",
+    "yes": "Sí",
+    "delete": "Borrar",
+    "edit": "Editar",
     "no": "No",
-    "mute": "Silenzia",
+    "mute": "Silenciar",
     "important": "Importante",
-    "save_changes": "Salva le modifiche",
-    "send": "Invia",
-    "skip": "Salta",
-    "email": "Indirizzo e-mail",
+    "save_changes": "Guardar cambios",
+    "send": "Enviar",
+    "skip": "Omitir",
+    "email": "Email",
     "step": "Paso",
-    "share": "Share",
-    "support": "Supporto",
-    "congrats": "Congratulazioni",
+    "share": "Compartir",
+    "support": "Soporte",
+    "congrats": "Felicitaciones",
     "settings": "Configuración",
     "general": "General",
     "pictogram": "Pictogramas",
@@ -208,19 +208,19 @@
     "test": "Esta es la voz que vas a usar en otta"
   },
   "onboarding": {
-    "start": "Iniziare",
+    "start": "Comenzar",
     "profile": {
       "title": "Pantalla de perfiles",
       "subtitle": "¿Quién va a usar OTTAA hoy?",
       "description": "Con la selección de perfiles vas a poder usar OTTAA desde cualquier dispositivo, manteniendo tus pictogramas y estilos!"
     },
     "home": {
-      "title": "Personalizza il tuo Home",
+      "title": "Personaliza tu Home",
       "subtitle": "Atajos en la pantalla principal",
       "description": "Personaliza de acuerdo a los gustos y necesidades"
     },
     "customize": {
-      "title": "Personalizza il tuo Home",
+      "title": "Personaliza tu Home",
       "subtitle": "Acompañamos en el proceso de aprendizaje",
       "description": "Activa o desactiva tableros o pictogramas para modificar la predicción, vos tenes el control."
     },
@@ -229,7 +229,7 @@
     }
   },
   "terms": {
-    "button": "Accetto i termini",
+    "button": "Acepto los términos",
     "text": "Para continuar, necesitamos que aceptes los términos y condiciones.\nVer términos"
   },
   "loginWait": {
@@ -255,8 +255,8 @@
     "shortcut": {
       "title": "Selecciona los atajos que aparecerán en la pantalla principal.",
       "appbar": "Atajos",
-      "favorites": "Preferiti",
-      "history": "Cronolgia",
+      "favorites": "Favoritos",
+      "history": "Historial",
       "camera": "Cámara",
       "games": "Juegos"
     },
