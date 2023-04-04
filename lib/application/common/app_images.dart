@@ -1708,7 +1708,7 @@ class AppImages {
   static const kMainSettingsIcon1 = 'assets/user_settings/main_settings_icon_1.png';
   static const kMainSettingsIcon2 = 'assets/user_settings/main_settings_icon_2.png';
   static const kGameBackgroundIcon = 'assets/games_images/game_icon.png';
-  static const kGameSelectPhoto = 'assets/games_images/game_select_photo.png';
+  static const kGameSelectPhoto = 'assets/games_images/game_select_photo';
   static const kGameSearch = 'assets/games_images/game_search.png';
   static const kGamesMark = 'assets/games_images/mark.png';
   static const kGamesTrophy = 'assets/games_images/trophy.png';

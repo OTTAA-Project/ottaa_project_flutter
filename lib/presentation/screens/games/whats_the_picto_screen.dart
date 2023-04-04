@@ -11,6 +11,7 @@ import 'package:ottaa_project_flutter/presentation/screens/games/ui/leftside_ico
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/pict_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/score_dialouge.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/scroe_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/ui/speak_button.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class WhatsThePictoScreen extends ConsumerWidget {
@@ -32,33 +33,8 @@ class WhatsThePictoScreen extends ConsumerWidget {
             headline: 'game.game_header_${provider.selectedGame}'.trl,
             subtitle: 'game.game_1_line'.trl,
           ),
-          Positioned(
-            right: 48,
-            top: 24,
-            child: SizedBox(
-              width: 84,
-              height: 80,
-              child: BaseButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(colorScheme.primary),
-                  overlayColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
-                  shape: MaterialStateProperty.all(
-                    const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(9)),
-                    ),
-                  ),
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                  elevation: MaterialStateProperty.all(0),
-                ),
-                onPressed: () async => await provider.speak(),
-                child: Image.asset(
-                  AppImages.kOttaaMinimalist,
-                  color: Colors.white,
-                  width: 59,
-                  height: 59,
-                ),
-              ),
-            ),
+          SpeakButton(
+            onTap: () async => await provider.speak(),
           ),
           Center(
             child: Row(
@@ -113,8 +89,7 @@ class WhatsThePictoScreen extends ConsumerWidget {
                 )
               : const SizedBox.shrink(),
           LeftSideIcons(
-            hint: (){
-            },
+            hint: () {},
             music: () {
               provider.mute = !provider.mute;
               provider.notifyListeners();

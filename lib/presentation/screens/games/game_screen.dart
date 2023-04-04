@@ -42,7 +42,7 @@ class GameScreenUI extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      width: size.width * 0.5,
+      width: size.width * 0.6,
       child: PageView.builder(
         controller: provider.mainPageController,
         itemCount: 3,
@@ -51,9 +51,9 @@ class GameScreenUI extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24),
+                padding: const EdgeInsets.only(bottom: 24),
                 child: Container(
-                  height: size.height * 0.6,
+                  height: size.height * 0.7,
                   width: size.width * 0.3,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -66,7 +66,7 @@ class GameScreenUI extends ConsumerWidget {
                       Column(
                         children: [
                           Image.asset(
-                            AppImages.kGameSelectPhoto,
+                            '${AppImages.kGameSelectPhoto}_$index.png',
                             height: 92,
                             fit: BoxFit.fill,
                           ),
