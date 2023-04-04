@@ -156,7 +156,7 @@ class _ProfileSettingsEditScreenState extends ConsumerState<ProfileSettingsEditS
                             provider.notify();
                           },
                           items: List.generate(
-                            80,
+                            100,
                             (index) => (currentYear - index).toString(),
                           ),
                           label: (String item) => Text(
