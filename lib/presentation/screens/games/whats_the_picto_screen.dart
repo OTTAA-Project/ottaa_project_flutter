@@ -42,7 +42,7 @@ class WhatsThePictoScreen extends ConsumerWidget {
               children: [
                 PictWidget(
                   pict: provider.gamePicts[0],
-                  show: provider.pictoShow[0],
+                  show: provider.pictoShowWhatsThePict[0],
                   onTap: () async {
                     showDialog(
                         barrierColor: Colors.transparent,
@@ -61,7 +61,7 @@ class WhatsThePictoScreen extends ConsumerWidget {
                 ),
                 PictWidget(
                   pict: provider.gamePicts[1],
-                  show: provider.pictoShow[1],
+                  show: provider.pictoShowWhatsThePict[1],
                   onTap: () async {
                     showDialog(
                         barrierColor: Colors.transparent,
@@ -88,22 +88,7 @@ class WhatsThePictoScreen extends ConsumerWidget {
                   ),
                 )
               : const SizedBox.shrink(),
-          LeftSideIcons(
-            hint: () {},
-            music: () {
-              provider.mute = !provider.mute;
-              provider.notifyListeners();
-            },
-            score: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return const ScoreDialouge();
-                },
-              );
-            },
-            mute: provider.mute,
-          ),
+          const LeftSideIcons(),
         ],
       ),
     );

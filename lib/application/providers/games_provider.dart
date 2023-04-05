@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
@@ -25,14 +27,19 @@ class GamesProvider extends ChangeNotifier {
   int incorrectScore = 0;
   String useTime = '';
   int streak = 0;
-  List<bool> pictoShow = [false, false];
+  List<bool> pictoShowWhatsThePict = [false, false];
+  List<bool> matchPictoTop = [false, false];
+  List<bool> matchPictoBottom = [false, false];
   int correctPicto = 99;
   int selectedPicto = 0;
   bool showText = false;
   bool mute = false;
 
-  Map<int, int> bottomPositions = {};
-  Map<int, int> topPositions = {};
+  final AudioPlayer backgroundMusicPlayer = AudioPlayer();
+  final AudioPlayer clicksPlayer = AudioPlayer();
+
+  Map<int, Picto> bottomPositions = {};
+  Map<int, Picto> topPositions = {};
 
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
@@ -132,30 +139,30 @@ class GamesProvider extends ChangeNotifier {
     gamePicts.add(selectedPicts[random2]);
 
     /// matchPicto and guessPicto things
-    int p1 = Random().nextInt(selectedPicts.length - 1);
-    int p2 = Random().nextInt(selectedPicts.length - 1);
+    int p1 = Random().nextInt(2);
+    int p2 = Random().nextInt(2);
     same = true;
     while (same) {
       if (random1 == random2) {
-        random2 = Random().nextInt(selectedPicts.length - 1);
+        random2 = Random().nextInt(2);
       } else {
         same = false;
       }
     }
-    topPositions[0] = p1;
-    topPositions[1] = p2;
-    int pD1 = Random().nextInt(selectedPicts.length - 1);
-    int pD2 = Random().nextInt(selectedPicts.length - 1);
+    topPositions[0] = gamePicts[p1];
+    topPositions[1] = gamePicts[p2];
+    int pD1 = Random().nextInt(2);
+    int pD2 = Random().nextInt(2);
     same = true;
     while (same) {
       if (random1 == random2) {
-        random2 = Random().nextInt(selectedPicts.length - 1);
+        random2 = Random().nextInt(2);
       } else {
         same = false;
       }
     }
-    bottomPositions[0] = pD1;
-    bottomPositions[1] = pD2;
+    bottomPositions[0] = gamePicts[pD1];
+    bottomPositions[1] = gamePicts[pD2];
     correctPicto = Random().nextInt(2);
     print(correctPicto);
     notifyListeners();
@@ -164,14 +171,14 @@ class GamesProvider extends ChangeNotifier {
   Future<void> checkAnswerWhatThePicto({required int index}) async {
     //todo: show the text that it is correct
     selectedPicto = index;
-    pictoShow[index] = !pictoShow[index];
+    pictoShowWhatsThePict[index] = !pictoShowWhatsThePict[index];
     showText = !showText;
     notifyListeners();
     await Future.delayed(
       const Duration(seconds: 1),
     );
     //todo: remove the text around
-    pictoShow[index] = !pictoShow[index];
+    pictoShowWhatsThePict[index] = !pictoShowWhatsThePict[index];
     showText = !showText;
     notifyListeners();
     //todo: create the new question
@@ -197,10 +204,37 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> init() async {
     await fetchPictograms();
+    await initializeBackgroundMusic();
   }
 
   void notify() {
     notifyListeners();
+  }
+
+  Future<void> playClickSounds({required String assetName}) async {
+    await clicksPlayer.setAsset('assets/audios/$assetName.mp3');
+    await clicksPlayer.play();
+  }
+
+  Future<void> changeMusic() async {
+    mute = !mute;
+    if (mute) {
+      await backgroundMusicPlayer.pause();
+    } else {
+      await backgroundMusicPlayer.play();
+    }
+  }
+
+  void speakNameWhatsThePicto({required String name}) async {
+    await _tts.speak('game.what'.trlf({'name': name}));
+  }
+
+  Future<void> initializeBackgroundMusic() async {
+    ///check if we can buffer the audios before even loading the properties of the given class
+    // backgroundMusicPlayer.setAudioSource();
+    await backgroundMusicPlayer.setAsset('assets/audios/funckygroove.mp3');
+    await backgroundMusicPlayer.setLoopMode(LoopMode.one);
+    await backgroundMusicPlayer.play();
   }
 }
 

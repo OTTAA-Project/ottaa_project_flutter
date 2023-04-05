@@ -7,7 +7,6 @@ import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_w
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/leftside_icons.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/pict_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/games/ui/score_dialouge.dart';
 
 class MatchPictogramScreen extends ConsumerWidget {
   const MatchPictogramScreen({Key? key}) : super(key: key);
@@ -39,8 +38,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                     Row(
                       children: [
                         PictWidget(
-                          pict: provider.gamePicts[0],
-                          show: provider.pictoShow[0],
+                          pict: provider.topPositions[0]!,
+                          show: provider.matchPictoTop[0],
                           onTap: () async {
                             showDialog(
                                 barrierColor: Colors.transparent,
@@ -55,8 +54,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                           rightOrWrong: provider.correctPicto == 0,
                         ),
                         PictWidget(
-                          pict: provider.gamePicts[1],
-                          show: provider.pictoShow[1],
+                          pict: provider.topPositions[1]!,
+                          show: provider.matchPictoTop[1],
                           onTap: () async {
                             showDialog(
                                 barrierColor: Colors.transparent,
@@ -75,8 +74,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                     Row(
                       children: [
                         PictWidget(
-                          pict: provider.gamePicts[0],
-                          show: provider.pictoShow[0],
+                          pict: provider.bottomPositions[0]!,
+                          show: provider.matchPictoBottom[0],
                           onTap: () async {
                             showDialog(
                                 barrierColor: Colors.transparent,
@@ -90,25 +89,26 @@ class MatchPictogramScreen extends ConsumerWidget {
                           },
                           rightOrWrong: provider.correctPicto == 0,
                           hide: true,
-                          hideText: 'text',
+                          hideText: provider.bottomPositions[0]!.text,
                         ),
                         PictWidget(
-                          pict: provider.gamePicts[0],
-                          show: provider.pictoShow[0],
+                          pict: provider.bottomPositions[1]!,
+                          show: provider.matchPictoBottom[1],
                           onTap: () async {
-                            showDialog(
-                                barrierColor: Colors.transparent,
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (context) {
-                                  return const SizedBox.shrink();
-                                });
-                            await provider.checkAnswerWhatThePicto(index: 0);
-                            context.pop();
+                            // showDialog(
+                            //     barrierColor: Colors.transparent,
+                            //     barrierDismissible: false,
+                            //     context: context,
+                            //     builder: (context) {
+                            //       return const SizedBox.shrink();
+                            //     });
+                            // context.pop();
+                            await provider.createRandomForGame();
+                            print('hello');
                           },
                           rightOrWrong: provider.correctPicto == 0,
                           hide: true,
-                          hideText: 'text',
+                          hideText: provider.bottomPositions[1]!.text,
                         ),
                       ],
                     ),
@@ -117,22 +117,7 @@ class MatchPictogramScreen extends ConsumerWidget {
               ],
             ),
           ),
-          LeftSideIcons(
-            hint: () {},
-            music: () {
-              provider.mute = !provider.mute;
-              provider.notify();
-            },
-            score: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return const ScoreDialouge();
-                },
-              );
-            },
-            mute: provider.mute,
-          ),
+          const LeftSideIcons(),
           Positioned(
             top: size.height * 0.5,
             left: size.width * 0.2,

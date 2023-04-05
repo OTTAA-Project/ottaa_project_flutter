@@ -37,35 +37,38 @@ class PictWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: hide
-                  ? Container(
-                      // width: 100,
-                      // height: 122,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: colorScheme.primary,width: 4),
-                      ),
-                      padding: const EdgeInsets.all(0.5),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox.shrink(),
-                          Center(
-                            child: Image.asset(
-                              AppImages.kGamesMark,
-                              height: 46,
-                              width: 46,
+                  ? GestureDetector(
+                      onTap: onTap,
+                      child: Container(
+                        // width: 100,
+                        // height: 122,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: colorScheme.primary, width: 4),
+                        ),
+                        padding: const EdgeInsets.all(0.5),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox.shrink(),
+                            Center(
+                              child: Image.asset(
+                                AppImages.kGamesMark,
+                                height: 46,
+                                width: 46,
+                              ),
                             ),
-                          ),
-                          hideText == ''
-                              ? const SizedBox.shrink()
-                              : Padding(
-                                  padding: const EdgeInsets.only(bottom: 8),
-                                  child: Text(
-                                    hideText,
+                            hideText == ''
+                                ? const SizedBox.shrink()
+                                : Padding(
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    child: Text(
+                                      hideText,
+                                    ),
                                   ),
-                                ),
-                        ],
+                          ],
+                        ),
                       ),
                     )
                   : PictoWidget(

@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
+import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/ui/score_dialouge.dart';
 
-class LeftSideIcons extends StatelessWidget {
-  const LeftSideIcons({
-    Key? key,
-    required this.music,
-    required this.score,
-    required this.mute,
-    required this.hint,
-  }) : super(key: key);
-  final void Function()? music, score,hint;
-  final bool mute;
+class LeftSideIcons extends ConsumerWidget {
+  const LeftSideIcons({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.watch(gameProvider);
     final colorScheme = Theme.of(context).colorScheme;
     return Positioned(
       bottom: 24,
@@ -21,7 +17,14 @@ class LeftSideIcons extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: score,
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return const ScoreDialouge();
+                },
+              );
+            },
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -35,7 +38,7 @@ class LeftSideIcons extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: music,
+            onTap: () async => provider.changeMusic(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Container(
@@ -45,7 +48,7 @@ class LeftSideIcons extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Icon(
-                  mute ? Icons.volume_mute_outlined : Icons.volume_up_outlined,
+                  provider.mute ? Icons.volume_mute_outlined : Icons.volume_up_outlined,
                   color: colorScheme.primary,
                   size: 24,
                 ),
@@ -53,7 +56,9 @@ class LeftSideIcons extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: hint,
+            onTap: () {
+              //todo: hints here
+            },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
