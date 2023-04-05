@@ -295,5 +295,28 @@
         "body": "Se ha confirmado la vinculación de tu cuenta"
       }
     }
+  },
+  "game": {
+    "play": "Juguemos!",
+    "next": "Jugar",
+    "game_header_0": "¿Cuál es el picto?",
+    "game_header_1": "Unir pictogramas",
+    "game_header_2": "Juego de la Memoria",
+    "game_sub_0": "Responde las preguntas eligiendo el pictograma correcto. Aprende jugando",
+    "game_sub_1": "Uní los pictogramas de manera correcta",
+    "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
+    "group": "Selecciona una categoría para poder jugar",
+    "search": "Buscar Tablero",
+    "find": "Encontrá los tableros que quieras, fácilmente!",
+    "game_1_line": "Selecciona el pictograma que escuches",
+    "game_2_line": "Selecciona la palabra que corresponde a su pictograma",
+    "game_3_line": "Selecciona una tarjeta y encuentra la pareja del pictograma",
+    "no": "¡Oh Oh!",
+    "yes": "¡Muy bien!",
+    "score": "Tu puntaje",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "use_time": "Use time",
+    "maximum_streak": "Maximum Streak"
   }
 }
