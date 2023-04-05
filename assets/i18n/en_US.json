@@ -265,7 +265,7 @@
       "switch": "Enable board"
     },
     "help": {
-      "boards": "Predictive boards allows choosing what boards & pictograms will show up to the user.",
+      "boards": "Predictive boards allow choosing what boards & pictograms will show up to the user.",
       "shortcut": "Shortcuts are a fast way to access different features for the user on Home Screen."
     },
     "wait": {
