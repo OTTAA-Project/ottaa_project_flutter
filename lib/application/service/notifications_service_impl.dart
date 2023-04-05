@@ -10,7 +10,6 @@ import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/core/service/notifications_service.dart';
 
-@mobile
 @Singleton(
   as: NotificationsService,
 )
@@ -30,8 +29,15 @@ class NotificationsServiceImpl implements NotificationsService {
 
   NotificationsServiceImpl(this.i18n);
 
-  @override
+
   @FactoryMethod(preResolve: true)
+  static Future<NotificationsServiceImpl> onInit() async {
+    final service = NotificationsServiceImpl(getIt<I18N>());
+    await service.init();
+    return service;
+  }
+
+  @override
   Future<NotificationsService> init() async {
     NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
       alert: true,
