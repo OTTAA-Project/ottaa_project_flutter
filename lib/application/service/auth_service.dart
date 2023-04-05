@@ -1,6 +1,7 @@
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -249,6 +250,9 @@ class AuthService extends AuthRepository {
 
   @override
   Future<String> getDeviceId() async {
-    return await FirebaseMessaging.instance.getToken() ?? "";
+    return await FirebaseMessaging.instance.getToken(
+          vapidKey: kIsWeb ? "BM1DJoICvUa0DM7SYOJE4aDc_Odtlbq5QKXRgB5XoeHEY7EIIP-39WnCqr-QNmNSDoRJEbNyq6LV7bUE6FoGWVE" : null,
+        ) ??
+        "";
   }
 }

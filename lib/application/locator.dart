@@ -25,5 +25,5 @@ const web = Environment('web');
   throwOnMissingDependencies: true,
 )
 Future<GetIt> configureDependencies() => getIt.init(
-      environment: kIsWeb ? "web" : "mobile",
+      environment: "mobile",
     );
