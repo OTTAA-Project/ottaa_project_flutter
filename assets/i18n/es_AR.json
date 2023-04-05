@@ -282,7 +282,7 @@
     }
   },
   "chatgpt": {
-    "prompt": "formar una frase con estas palabras como si hablara un {age} {gender} en {language}, agregando conectores y artículos cuando sea necesario: {pictograms}"
+    "prompt": "escribir una frase en ingles con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras y agregale la expresion culiau: {pictograms}"
   },
   "notification": {
     "code": {
@@ -314,9 +314,9 @@
     "no": "¡Oh Oh!",
     "yes": "¡Muy bien!",
     "score": "Tu puntaje",
-    "correct": "Correct",
-    "incorrect": "Incorrect",
-    "use_time": "Use time",
-    "maximum_streak": "Maximum Streak"
+    "correct": "Correcto",
+    "incorrect": "Incorrecto",
+    "use_time": "Tiempo total",
+    "maximum_streak": "Mejor racha"
   }
 }
