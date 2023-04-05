@@ -8,8 +8,6 @@ import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widge
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/leftside_icons.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/pict_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/score_dialouge.dart';
-import 'package:ottaa_project_flutter/presentation/screens/games/ui/speak_button.dart';
-import 'package:picto_widget/picto_widget.dart';
 
 class MatchPictogramScreen extends ConsumerWidget {
   const MatchPictogramScreen({Key? key}) : super(key: key);
@@ -18,6 +16,7 @@ class MatchPictogramScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(gameProvider);
     final size = MediaQuery.of(context).size;
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: Stack(
         children: [
@@ -48,31 +47,28 @@ class MatchPictogramScreen extends ConsumerWidget {
                                 barrierDismissible: false,
                                 context: context,
                                 builder: (context) {
-                                  return SizedBox.shrink();
+                                  return const SizedBox.shrink();
                                 });
                             await provider.checkAnswerWhatThePicto(index: 0);
                             context.pop();
                           },
                           rightOrWrong: provider.correctPicto == 0,
                         ),
-                        Container(
-                          color: Colors.pink,
-                          child: PictWidget(
-                            pict: provider.gamePicts[1],
-                            show: provider.pictoShow[1],
-                            onTap: () async {
-                              showDialog(
-                                  barrierColor: Colors.transparent,
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return SizedBox.shrink();
-                                  });
-                              await provider.checkAnswerWhatThePicto(index: 1);
-                              context.pop();
-                            },
-                            rightOrWrong: provider.correctPicto == 1,
-                          ),
+                        PictWidget(
+                          pict: provider.gamePicts[1],
+                          show: provider.pictoShow[1],
+                          onTap: () async {
+                            showDialog(
+                                barrierColor: Colors.transparent,
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return const SizedBox.shrink();
+                                });
+                            await provider.checkAnswerWhatThePicto(index: 1);
+                            context.pop();
+                          },
+                          rightOrWrong: provider.correctPicto == 1,
                         ),
                       ],
                     ),
@@ -87,7 +83,7 @@ class MatchPictogramScreen extends ConsumerWidget {
                                 barrierDismissible: false,
                                 context: context,
                                 builder: (context) {
-                                  return SizedBox.shrink();
+                                  return const SizedBox.shrink();
                                 });
                             await provider.checkAnswerWhatThePicto(index: 0);
                             context.pop();
@@ -105,7 +101,7 @@ class MatchPictogramScreen extends ConsumerWidget {
                                 barrierDismissible: false,
                                 context: context,
                                 builder: (context) {
-                                  return SizedBox.shrink();
+                                  return const SizedBox.shrink();
                                 });
                             await provider.checkAnswerWhatThePicto(index: 0);
                             context.pop();
@@ -125,7 +121,7 @@ class MatchPictogramScreen extends ConsumerWidget {
             hint: () {},
             music: () {
               provider.mute = !provider.mute;
-              provider.notifyListeners();
+              provider.notify();
             },
             score: () {
               showDialog(
@@ -136,6 +132,30 @@ class MatchPictogramScreen extends ConsumerWidget {
               );
             },
             mute: provider.mute,
+          ),
+          Positioned(
+            top: size.height * 0.5,
+            left: size.width * 0.2,
+            child: provider.showText
+                ? provider.selectedPicto == provider.correctPicto
+                    ? Text(
+                        'game.yes'.trl,
+                        style: textTheme.headline1,
+                      )
+                    : const SizedBox.shrink()
+                : const SizedBox.shrink(),
+          ),
+          Positioned(
+            top: size.height * 0.5,
+            right: size.width * 0.2,
+            child: provider.showText
+                ? provider.selectedPicto != provider.correctPicto
+                    ? Text(
+                        'game.no'.trl,
+                        style: textTheme.headline1,
+                      )
+                    : const SizedBox.shrink()
+                : const SizedBox.shrink(),
           ),
         ],
       ),

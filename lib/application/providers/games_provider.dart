@@ -31,6 +31,9 @@ class GamesProvider extends ChangeNotifier {
   bool showText = false;
   bool mute = false;
 
+  Map<int, int> bottomPositions = {};
+  Map<int, int> topPositions = {};
+
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
   final PatientNotifier patientState;
@@ -127,6 +130,32 @@ class GamesProvider extends ChangeNotifier {
     }
     gamePicts.add(selectedPicts[random1]);
     gamePicts.add(selectedPicts[random2]);
+
+    /// matchPicto and guessPicto things
+    int p1 = Random().nextInt(selectedPicts.length - 1);
+    int p2 = Random().nextInt(selectedPicts.length - 1);
+    same = true;
+    while (same) {
+      if (random1 == random2) {
+        random2 = Random().nextInt(selectedPicts.length - 1);
+      } else {
+        same = false;
+      }
+    }
+    topPositions[0] = p1;
+    topPositions[1] = p2;
+    int pD1 = Random().nextInt(selectedPicts.length - 1);
+    int pD2 = Random().nextInt(selectedPicts.length - 1);
+    same = true;
+    while (same) {
+      if (random1 == random2) {
+        random2 = Random().nextInt(selectedPicts.length - 1);
+      } else {
+        same = false;
+      }
+    }
+    bottomPositions[0] = pD1;
+    bottomPositions[1] = pD2;
     correctPicto = Random().nextInt(2);
     print(correctPicto);
     notifyListeners();
@@ -160,12 +189,18 @@ class GamesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
+
   Future<void> speak() async {
     await _tts.speak(gamePicts[correctPicto].text);
   }
 
   Future<void> init() async {
     await fetchPictograms();
+  }
+
+  void notify() {
+    notifyListeners();
   }
 }
 
