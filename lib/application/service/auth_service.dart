@@ -184,7 +184,6 @@ class AuthService extends AuthRepository {
       final User user = userCredential.user!;
       lastName = userCredential.additionalUserInfo!.profile!['family_name'];
       name = userCredential.additionalUserInfo!.profile!['given_name'];
-      print(lastName);
 
       return Right(user);
     } catch (e) {
