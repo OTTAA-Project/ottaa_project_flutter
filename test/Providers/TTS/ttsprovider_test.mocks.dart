@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart'
     as _i3;
 import 'package:ottaa_project_flutter/core/models/voices_model.dart' as _i5;
-import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart'
+import 'package:ottaa_project_flutter/core/repositories/repositories.dart'
     as _i2;
 
 // ignore_for_file: type=lint
@@ -96,6 +96,15 @@ class MockTTSProvider extends _i1.Mock implements _i3.TTSProvider {
         Invocation.method(
           #changeTTSVoice,
           [voice],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> init() => (super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),

@@ -6,7 +6,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
-import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
@@ -14,11 +14,27 @@ import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_ph
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
-class ProfileMainScreenUser extends ConsumerWidget {
+class ProfileMainScreenUser extends ConsumerStatefulWidget {
   const ProfileMainScreenUser({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfileMainScreenUser> createState() => _ProfileMainScreenUserState();
+}
+
+class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+     final _ttsProvider = ref.read(ttsProvider);
+     _ttsProvider.init();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context,) {
     final user = ref.read(userNotifier);
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
