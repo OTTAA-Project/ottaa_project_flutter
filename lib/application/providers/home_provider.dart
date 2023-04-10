@@ -320,23 +320,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    if (patientState.state != null) {
-      if (!patientState.user.patientSettings.layout.oneToOne) {
-        notifyListeners();
-        String? sentence;
-
-        if (patientState.user.patientSettings.language.labs) {
-          sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
-          if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
-        }
-
-        sentence ??= pictoWords.map((e) => e.text).join(' ');
-
-        await _tts.speak(sentence);
-        show = false;
-        notifyListeners();
-      }
-    } else {
+    if (patientState.state == null || patientState.user.patientSettings.layout.oneToOne) {
       show = true;
       notifyListeners();
       for (var i = 0; i < pictoWords.length; i++) {
@@ -356,8 +340,23 @@ class HomeProvider extends ChangeNotifier {
       );
       show = false;
       notifyListeners();
+    } else {
+      notifyListeners();
+      String? sentence;
+
+      if (patientState.user.patientSettings.language.labs) {
+        sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+        if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
+      }
+
+      sentence ??= pictoWords.map((e) => e.text).join(' ');
+
+      await _tts.speak(sentence);
+      show = false;
+      notifyListeners();
     }
-    if (patientState.user.patientSettings.layout.cleanup) {
+
+    if (patientState.state == null || patientState.user.patientSettings.layout.cleanup) {
       pictoWords.clear();
       await buildSuggestion();
     }

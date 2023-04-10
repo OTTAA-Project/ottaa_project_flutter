@@ -191,7 +191,7 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                           provider.status = HomeScreenStatus.pictos;
                           provider.notify();
                         },
-                        size: const Size(40, 40),
+                        // size: const Size(40, 40),
                         child: Image.asset(
                           AppImages.kSearchOrange,
                         ),
@@ -200,7 +200,7 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                     const SizedBox(height: 16),
                     Expanded(
                       child: HomeButton(
-                        size: const Size(40, 40),
+                        // size: const Size(40, 40),
                         onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollUp))(ref.read(homeProvider).gridScrollController, 96),
                         child: Icon(
                           Icons.keyboard_arrow_up,
@@ -212,7 +212,7 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                     const SizedBox(height: 16),
                     Expanded(
                       child: HomeButton(
-                        size: const Size(40, 40),
+                        // size: const Size(40, 40),
                         onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollDown))(ref.read(homeProvider).gridScrollController, 96),
                         child: Icon(
                           Icons.keyboard_arrow_down,

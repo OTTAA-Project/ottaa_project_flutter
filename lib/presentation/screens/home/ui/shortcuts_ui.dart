@@ -44,7 +44,6 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
     ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
 
     return SizedBox(
-      height: 64,
       child: Flex(
         direction: Axis.horizontal,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -54,7 +53,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
-                size: Size(shortCutSize, 64),
+                size: Size(shortCutSize, shortCutSize),
                 onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardDiceIconSelected,
@@ -67,7 +66,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
-                size: Size(shortCutSize, 64),
+                size: Size(shortCutSize, shortCutSize),
                 onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardHistoryIconSelected,
@@ -80,7 +79,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
-                size: Size(shortCutSize, 64),
+                size: Size(shortCutSize, shortCutSize),
                 onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardShareIconSelected,
@@ -93,7 +92,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
-                size: Size(shortCutSize, 64),
+                size: Size(shortCutSize, shortCutSize),
                 onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardCameraIconSelected,
@@ -106,7 +105,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
-                size: Size(shortCutSize, 64),
+                size: Size(shortCutSize, shortCutSize),
                 onPressed: pictos ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardFavouriteIconSelected,
@@ -119,7 +118,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
-                size: Size(shortCutSize, 64),
+                size: Size(shortCutSize, shortCutSize),
                 onPressed: pictos
                     ? null
                     : () async {
@@ -136,7 +135,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
-                size: Size(shortCutSize, 64),
+                size: Size(shortCutSize, shortCutSize),
                 onPressed: pictos
                     ? null
                     : () async {

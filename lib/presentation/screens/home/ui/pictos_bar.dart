@@ -54,41 +54,31 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                     )
                   : buildWidgets(pictos, addPictogram: addPictogram),
               const SizedBox(width: 30),
-              SizedBox(
-                width: 64,
+              Flexible(
+                fit: FlexFit.tight,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     HomeButton(
+                      size: const Size.fromHeight(125),
                       onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
                               ref.watch(homeProvider).switchToPictograms();
                             },
-                      size: const Size(64, 64),
                       child: Image.asset(
                         AppImages.kSearchOrange,
                       ),
                     ),
-                    BaseButton(
+                    const SizedBox(height: 16),
+                    HomeButton(
+                      size: const Size.fromHeight(125),
                       onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
                               ref.read(homeProvider).refreshPictograms();
                             },
-                      style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(const Size(64, 64)),
-                        backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                        overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                        shape: MaterialStateProperty.all(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(9)),
-                          ),
-                        ),
-                        padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                        elevation: MaterialStateProperty.all(0),
-                      ),
                       child: Image.asset(
                         AppImages.kRefreshOrange,
                       ),
@@ -114,11 +104,12 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     required void Function(Picto) addPictogram,
   }) {
     return Flexible(
+      flex: 8,
       fit: FlexFit.loose,
       child: GridView.builder(
-        itemCount: kIsTablet ? 6 : 4,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: kIsTablet ? 6 : 4,
+        itemCount: 4,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
           childAspectRatio: 1,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
@@ -130,7 +121,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
           if (e.id == "-777") {
             return FittedBox(
-              fit: BoxFit.scaleDown,
+              fit: BoxFit.cover,
               child: Container(
                   width: 116,
                   height: 144,
@@ -148,27 +139,30 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
             );
           }
 
-          return PictoWidget(
-            onTap: () {
-              addPictogram(e);
-            },
-            image: e.resource.network != null
-                ? CachedNetworkImage(
-                    imageUrl: e.resource.network!,
-                    fit: BoxFit.fill,
-                    errorWidget: (context, url, error) => Image.asset(
+          return FittedBox(
+            fit: BoxFit.cover,
+            child: PictoWidget(
+              onTap: () {
+                addPictogram(e);
+              },
+              image: e.resource.network != null
+                  ? CachedNetworkImage(
+                      imageUrl: e.resource.network!,
+                      fit: BoxFit.fill,
+                      errorWidget: (context, url, error) => Image.asset(
+                        fit: BoxFit.fill,
+                        "assets/img/${e.text}.webp",
+                      ),
+                    )
+                  : Image.asset(
                       fit: BoxFit.fill,
                       "assets/img/${e.text}.webp",
                     ),
-                  )
-                : Image.asset(
-                    fit: BoxFit.fill,
-                    "assets/img/${e.text}.webp",
-                  ),
-            text: e.text,
-            colorNumber: e.type,
-            width: 116,
-            height: 144,
+              text: e.text,
+              colorNumber: e.type,
+              width: 116,
+              height: 144,
+            ),
           );
         },
       ),

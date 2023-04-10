@@ -59,11 +59,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     switch (status) {
       case HomeScreenStatus.pictos:
         return Flexible(
-          fit: FlexFit.loose,
+          fit: FlexFit.tight,
           flex: 2,
           child: SizedBox(
             width: size.width,
-            height: 312,
             child: const PictosBarUI(),
           ),
         );
@@ -106,10 +105,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 children: [
                   SizedBox(
                     width: size.width,
-                    height: 111,
-                    // child: const WordBarUI(),
+                    height: kIsTablet ? 170 : 111,
                   ),
                   currentHomeStatus(provider.status),
+                  SizedBox(
+                    width: size.width,
+                    height: 50,
+                  ),
                 ],
               ),
             ),
