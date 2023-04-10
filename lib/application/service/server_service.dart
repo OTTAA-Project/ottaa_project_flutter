@@ -355,10 +355,11 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherVoid> setShortcutsForUser({required ShortcutsModel shortcuts, required String userId}) async {
-    final ref = _database.child('$userId/layout/shortcuts/');
+    final ref = _database.child('$userId/settings/layout/shortcuts/');
 
     try {
-      await ref.update(shortcuts.toMap());
+      final data = shortcuts.toMap();
+      await ref.update(data);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -626,12 +627,14 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
     try {
-      final choice = await _openAIClient.completions.create(
-        model: "text-davinci-003",
-        prompt: prompt,
-        temperature: 0,
-        maxTokens: maxTokens,
-      ).data;
+      final choice = await _openAIClient.completions
+          .create(
+            model: "text-davinci-003",
+            prompt: prompt,
+            temperature: 0,
+            maxTokens: maxTokens,
+          )
+          .data;
 
       if (!choice.choices.isNotEmpty) return const Left("No completado");
 

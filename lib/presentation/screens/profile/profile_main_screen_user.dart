@@ -128,8 +128,6 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
             PrimaryButton(
               onPressed: () async {
                 ref.watch(patientNotifier.notifier).setUser(user.patient);
-                final pro = ref.watch(userSettingsProvider);
-                await pro.initialiseSettings();
                 context.push(AppRoutes.home);
               },
               text: '${'profile.use.ottaa'.trl} ${user.settings.data.name}',
