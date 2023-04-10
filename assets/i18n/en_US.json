@@ -126,7 +126,7 @@
       "board_view": "Board view",
       "tabs": "Tabs",
       "grid": "Grid",
-      "ottaa_labs": "OTTAA Labs",
+      "ottaa_labs": "Ottaa Labs",
       "labs_text": "Verbal phrases feature",
       "labs_long": "Beta mode\nAllows creating sentences with more complex tenses",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "Scroll&Press",
       "sip": "Sip&Puff",
       "selection_type": "Selection method",
-      "swept": "Screen scanning",
+      "swept": "Swept",
       "speed": "Speed",
       "selection_speed": "Selection speed"
     },
@@ -186,7 +186,7 @@
     "general": "General",
     "pictogram": "Pictograms",
     "configuration": "Settings",
-    "user_ottaa": "Use OTTAA as {name}",
+    "user_ottaa": "Usar Ottaa como {name}",
     "cancel": "Cancel",
     "slow": "Slow",
     "default": "Default",
@@ -196,7 +196,7 @@
     "medium": "Medium",
     "big": "Large",
     "comingsoon": "This feature will be available very soon!",
-    "delicate": "Country",
+    "delicate": "delicade",
     "chile": "Chile",
     "spanish": "Spanish",
     "argentina": "Argentina",
@@ -265,7 +265,7 @@
       "switch": "Enable board"
     },
     "help": {
-      "boards": "Predictive boards allows choosing what boards & pictograms will show up to the user.",
+      "boards": "Predictive boards allow choosing what boards & pictograms will show up to the user.",
       "shortcut": "Shortcuts are a fast way to access different features for the user on Home Screen."
     },
     "wait": {
@@ -282,7 +282,7 @@
     }
   },
   "chatgpt": {
-    "prompt": "I am an {AGE} {SEX} and I need to nlg the following phrase or word '{PHRASE}' once without adding extra words, the result has to be in {LANG}, first person, without extra words and as precise as possible."
+    "prompt": "escribir una frase en ingles con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras y agregale la expresion culiau: {pictograms}"
   },
   "notification": {
     "code": {
@@ -295,5 +295,28 @@
         "body": "You have successfully linked your account"
       }
     }
+  },
+  "game": {
+    "play": "Juguemos!",
+    "next": "Jugar",
+    "game_header_0": "¿Cuál es el picto?",
+    "game_header_1": "Unir pictogramas",
+    "game_header_2": "Juego de la Memoria",
+    "game_sub_0": "Responde las preguntas eligiendo el pictograma correcto. Aprende jugando",
+    "game_sub_1": "Uní los pictogramas de manera correcta",
+    "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
+    "group": "Selecciona una categoría para poder jugar",
+    "search": "Buscar Tablero",
+    "find": "Encontrá los tableros que quieras, fácilmente!",
+    "game_1_line": "Selecciona el pictograma que escuches",
+    "game_2_line": "Selecciona la palabra que corresponde a su pictograma",
+    "game_3_line": "Selecciona una tarjeta y encuentra la pareja del pictograma",
+    "no": "¡Oh Oh!",
+    "yes": "¡Muy bien!",
+    "score": "Tu puntaje",
+    "correct": "Correcto",
+    "incorrect": "Incorrecto",
+    "use_time": "Tiempo total",
+    "maximum_streak": "Mejor racha"
   }
 }
