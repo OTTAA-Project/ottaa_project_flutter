@@ -39,7 +39,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
 
     int shorcutsCount = patient?.patientSettings.layout.shortcuts.toMap().values.where((element) => element).length ?? 7;
 
-    double shortCutSize = (size.width - (32 * shorcutsCount)) / shorcutsCount;
+    double shortCutSize = ((size.width - (32 * shorcutsCount)) / shorcutsCount);
 
     ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
 

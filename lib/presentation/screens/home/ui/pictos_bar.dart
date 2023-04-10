@@ -61,7 +61,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     HomeButton(
-                      size: const Size.fromHeight(125),
+                      size: Size.fromHeight(kIsTablet ? 125 : 64),
                       onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
@@ -73,7 +73,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                     ),
                     const SizedBox(height: 16),
                     HomeButton(
-                      size: const Size.fromHeight(125),
+                      size: Size.fromHeight(kIsTablet ? 125 : 64),
                       onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
@@ -94,7 +94,11 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
           width: size.width,
           height: 88,
           child: const ShortcutsUI(),
-        )
+        ),
+        SizedBox(
+          width: size.width,
+          height: kIsTablet ? 50 : 10,
+        ),
       ],
     );
   }
@@ -121,10 +125,10 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
           if (e.id == "-777") {
             return FittedBox(
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
               child: Container(
-                  width: 116,
-                  height: 144,
+                  height: 119,
+                  width: 96,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(9),

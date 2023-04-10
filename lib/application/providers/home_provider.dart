@@ -78,6 +78,8 @@ class HomeProvider extends ChangeNotifier {
   int? selectedWord;
   ScrollController scrollController = ScrollController();
 
+  ScrollController overScrollController = ScrollController();
+
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
   // Home Tabs
@@ -323,9 +325,17 @@ class HomeProvider extends ChangeNotifier {
     if (patientState.state == null || patientState.user.patientSettings.layout.oneToOne) {
       show = true;
       notifyListeners();
+      scrollController.jumpTo(0);
+      await Future.delayed(const Duration(milliseconds: 500)); //We have to wait for the render timelapse
+      overScrollController.jumpTo(0);
       for (var i = 0; i < pictoWords.length; i++) {
         selectedWord = i;
         scrollController.animateTo(
+          i == 0 ? 0 : i * 45,
+          duration: const Duration(microseconds: 50),
+          curve: Curves.easeIn,
+        );
+        overScrollController.animateTo(
           i == 0 ? 0 : i * 45,
           duration: const Duration(microseconds: 50),
           curve: Curves.easeIn,
@@ -334,6 +344,11 @@ class HomeProvider extends ChangeNotifier {
         await _tts.speak(pictoWords[i].text);
       }
       scrollController.animateTo(
+        0,
+        duration: const Duration(microseconds: 50),
+        curve: Curves.easeIn,
+      );
+      overScrollController.animateTo(
         0,
         duration: const Duration(microseconds: 50),
         curve: Curves.easeIn,

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +13,7 @@ import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_but
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 import 'package:collection/collection.dart';
+import 'package:universal_io/io.dart';
 
 class WordBarUI extends ConsumerStatefulWidget {
   const WordBarUI({super.key});
@@ -97,7 +99,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
     final status = ref.watch(homeProvider.select((value) => value.status));
     final size = MediaQuery.of(context).size;
 
-    int pictosWord = ((size.width - 500) ~/ 64);
+    int pictosWord = ((size.width - (kIsTablet ? 500 : 200)) ~/ 64);
 
     return SizedBox(
       width: size.width,
@@ -112,10 +114,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
             flex: 2,
             child: Scrollbar(
               controller: scrollCon,
-              interactive: true,
               child: GridView.builder(
-                dragStartBehavior: DragStartBehavior.down,
-
                 scrollDirection: Axis.horizontal,
                 itemCount: pictoWords.length + pictosWord,
                 controller: scrollCon,
@@ -125,7 +124,6 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                   childAspectRatio: 4 / 3,
                   mainAxisSpacing: 16,
                 ),
-                physics: const AlwaysScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
 

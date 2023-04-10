@@ -26,16 +26,19 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
     final pictoWords = ref.watch(homeProvider).pictoWords;
     final int? currentWord = ref.watch(homeProvider).selectedWord;
     final patientNotifierState = ref.watch(patientNotifier);
-    final scrollCon = ref.watch(homeProvider).scrollController;
+    final scrollCon = ref.watch(homeProvider).overScrollController;
 
     final size = MediaQuery.of(context).size;
 
-    int pictosWord = ((size.width - 500) ~/ 64);
+    int pictosWord = ((size.width - (kIsTablet ? 500 : 200)) ~/ 64);
 
     return SizedBox(
       width: size.width,
       height: kIsTablet ? 140 : 80,
-      child: Row(
+      child: Flex(
+        direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
             width: 20,
@@ -45,6 +48,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
           Flexible(
             flex: 2,
             child: GridView.builder(
+              clipBehavior: Clip.antiAlias,
               scrollDirection: Axis.horizontal,
               itemCount: pictoWords.length + pictosWord,
               controller: scrollCon,
@@ -105,6 +109,27 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
               },
             ),
           ),
+          const SizedBox(width: 16),
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: kIsTablet ? 200 : 150,
+            ),
+            child: SizedBox(
+              height: kIsTablet ? 140 : 80,
+              child: Container(),
+            ),
+          ),
+          const SizedBox(width: 16),
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: kIsTablet ? 200 : 150,
+            ),
+            child: SizedBox(
+              height: kIsTablet ? 140 : 80,
+              child: Container(),
+            ),
+          ),
+          const SizedBox(width: 24),
         ],
       ),
     );

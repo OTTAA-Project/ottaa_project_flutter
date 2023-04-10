@@ -108,10 +108,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     height: kIsTablet ? 170 : 111,
                   ),
                   currentHomeStatus(provider.status),
-                  SizedBox(
-                    width: size.width,
-                    height: 50,
-                  ),
                 ],
               ),
             ),
