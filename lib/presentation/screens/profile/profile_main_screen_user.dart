@@ -130,13 +130,6 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                 ref.watch(patientNotifier.notifier).setUser(user.patient);
                 final pro = ref.watch(userSettingsProvider);
                 await pro.initialiseSettings();
-                final userState = ref.watch(patientNotifier);
-                // final newUser = userState.;
-
-                final localDatabase = GetIt.I<LocalDatabaseRepository>();
-                // await localDatabase.setUser(newUser);
-
-                // userState.setUser(newUser);
                 context.push(AppRoutes.home);
               },
               text: '${'profile.use.ottaa'.trl} ${user.settings.data.name}',
