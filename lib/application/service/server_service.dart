@@ -41,8 +41,6 @@ class ServerService implements ServerRepository {
   @override
   Future<void> init() async {
     _dio.options.baseUrl = "https://us-central1-ottaaproject-flutter.cloudfunctions.net";
-
-
   }
 
   @override
@@ -260,7 +258,7 @@ class ServerService implements ServerRepository {
       'UserID': userId,
       'Language': languageCode,
     };
-    final res = await _dio.request(
+    final res = await _dio.post(
       '/onReqFunc',
       data: jsonEncode(body),
       cancelToken: cancelToken,
@@ -279,14 +277,14 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getPictogramsStatistics(String userId, String languageCode, [CancelToken? cancelToken]) async {
-    final uri = Uri.parse('readFile');
+    final uri = Uri.parse('');
     final body = {
       'UserID': userId,
       //todo: add here the language too
       'Language': 'es_AR',
     };
-    final res = await _dio.requestUri(
-      uri,
+    final res = await _dio.post(
+      'readFile',
       data: jsonEncode(body),
       cancelToken: cancelToken,
       options: Options(
@@ -394,15 +392,14 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getEmailToken(String ownEmail, String email, [CancelToken? cancelToken]) async {
-    final uri = Uri.parse('/linkUserRequest');
     final body = {
       'src': ownEmail,
       'dst': email,
     };
     print(jsonEncode(body));
     try {
-      final res = await _dio.requestUri(
-        uri,
+      final res = await _dio.post(
+        '/linkUserRequest',
         data: jsonEncode(body),
         cancelToken: cancelToken,
       );
@@ -427,8 +424,8 @@ class ServerService implements ServerRepository {
       'dst': email,
       'token': token,
     };
-    final res = await _dio.get(
-      "linkUserConfirm",
+    final res = await _dio.post(
+      "/linkUserConfirm",
       data: jsonEncode(body),
       cancelToken: cancelToken,
       options: Options(
@@ -639,7 +636,6 @@ class ServerService implements ServerRepository {
         ),
         cancelToken: cancelToken,
       );
-
 
       return Right(res.data);
     } catch (e) {
