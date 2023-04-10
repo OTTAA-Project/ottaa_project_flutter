@@ -404,7 +404,7 @@ class ServerService implements ServerRepository {
         cancelToken: cancelToken,
       );
 
-      final data = jsonDecode(res.data) as Map<String, dynamic>;
+      final data = res.data as Map<String, dynamic>;
       print(res.statusCode);
       if (res.statusCode == 200) {
         return Right(data);
@@ -433,7 +433,7 @@ class ServerService implements ServerRepository {
       ),
     );
 
-    final data = jsonDecode(res.data) as Map<String, dynamic>;
+    final data = res.data as Map<String, dynamic>;
     if (res.statusCode == 200) {
       return Right(data);
     } else {
