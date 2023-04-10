@@ -530,16 +530,15 @@ class ServerService implements ServerRepository {
     required Map<String, dynamic> data,
     CancelToken? cancelToken,
   }) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/newCustomData');
     final body = {"uid": userId, "lang": language, "type": type.name, "data": data};
     try {
-      final res = await _dio.requestUri(
-        uri,
+      final res = await _dio.post(
+        '/newCustomData',
         data: jsonEncode(body),
         cancelToken: cancelToken,
       );
 
-      return jsonDecode(res.data) as Map<String, dynamic>;
+      return res.data as Map<String, dynamic>;
     } catch (e) {
       return {
         "error": e.toString(),
@@ -576,7 +575,6 @@ class ServerService implements ServerRepository {
     required List<Map<String, dynamic>> tokens,
     CancelToken? cancelToken,
   }) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/speako/users/learn');
 
     final body = {
       "uid": uid,
@@ -586,8 +584,8 @@ class ServerService implements ServerRepository {
     };
 
     try {
-      final res = await _dio.requestUri(
-        uri,
+      final res = await _dio.post(
+        '/speako/users/learn',
         data: jsonEncode(body),
         cancelToken: cancelToken,
       );
