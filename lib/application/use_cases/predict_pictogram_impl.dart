@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/models/picto_predicted.dart';
@@ -19,6 +20,7 @@ class PredictPictogramImpl extends PredictPictogram {
     bool reduced = true,
     int limit = 10,
     int chunk = 4,
+    CancelToken? cancelToken,
   }) async {
     final response = await serverRepository.predictPictogram(
       sentence: sentence,
@@ -27,6 +29,7 @@ class PredictPictogramImpl extends PredictPictogram {
       model: model,
       groups: groups,
       tags: tags,
+      cancelToken: cancelToken
     );
 
     if (response.isLeft) {

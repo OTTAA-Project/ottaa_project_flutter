@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
+import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:openai_client/openai_client.dart' as openai;
 import 'package:openai_client/src/model/openai_chat/openai_chat.dart';
@@ -33,8 +33,17 @@ class ServerService implements ServerRepository {
     ),
   );
 
+  final Dio _dio = Dio();
+
+  @FactoryMethod(preResolve: true)
+  static Future<ServerService> create() async => ServerService()..init();
+
   @override
-  Future<void> init() async {}
+  Future<void> init() async {
+    _dio.options.baseUrl = "https://us-central1-ottaaproject-flutter.cloudfunctions.net";
+
+
+  }
 
   @override
   Future<void> close() async {}
@@ -245,23 +254,23 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getMostUsedSentences(String userId, String languageCode) async {
-    final uri = Uri.parse(
-      'https://us-central1-ottaaproject-flutter.cloudfunctions.net/onReqFunc',
-    );
+  Future<EitherMap> getMostUsedSentences(String userId, String languageCode, [CancelToken? cancelToken]) async {
     //todo: get the language here after talking with Emir
     final body = {
       'UserID': userId,
       'Language': languageCode,
     };
-    final res = await http.post(
-      uri,
-      body: jsonEncode(body),
-      headers: {"Content-Type": "application/json"},
+    final res = await _dio.request(
+      '/onReqFunc',
+      data: jsonEncode(body),
+      cancelToken: cancelToken,
+      options: Options(
+        contentType: 'application/json',
+      ),
     );
 
     if (res.statusCode == 200) {
-      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      final data = jsonDecode(res.data) as Map<String, dynamic>;
       return Right(data);
     } else {
       return Left("an error occurred"); //TODO: Handle the main error
@@ -269,21 +278,24 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
+  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode, [CancelToken? cancelToken]) async {
+    final uri = Uri.parse('readFile');
     final body = {
       'UserID': userId,
       //todo: add here the language too
       'Language': 'es_AR',
     };
-    final res = await http.post(
+    final res = await _dio.requestUri(
       uri,
-      body: jsonEncode(body),
-      headers: {"Content-Type": "application/json"},
+      data: jsonEncode(body),
+      cancelToken: cancelToken,
+      options: Options(
+        headers: {"Content-Type": "application/json"},
+      ),
     );
 
     if (res.statusCode == 200) {
-      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      final data = jsonDecode(res.data) as Map<String, dynamic>;
       return Right(data);
     } else {
       return Left("an error occurred"); //TODO: Handle the main error
@@ -381,26 +393,26 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getEmailToken(String ownEmail, String email) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
+  Future<EitherMap> getEmailToken(String ownEmail, String email, [CancelToken? cancelToken]) async {
+    final uri = Uri.parse('/linkUserRequest');
     final body = {
       'src': ownEmail,
       'dst': email,
     };
     print(jsonEncode(body));
     try {
-      final res = await http.post(
+      final res = await _dio.requestUri(
         uri,
-        body: jsonEncode(body),
-        headers: {"Content-Type": "application/json"},
+        data: jsonEncode(body),
+        cancelToken: cancelToken,
       );
 
-      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      final data = jsonDecode(res.data) as Map<String, dynamic>;
       print(res.statusCode);
       if (res.statusCode == 200) {
         return Right(data);
       } else {
-        return Left(data["code"] ?? res.body); //TODO: Handle the main error
+        return Left(data["code"] ?? res.statusCode.toString()); //TODO: Handle the main error
       }
     } catch (e) {
       print(e);
@@ -409,24 +421,26 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
+  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token, [CancelToken? cancelToken]) async {
     final body = {
       'src': ownEmail,
       'dst': email,
       'token': token,
     };
-    final res = await http.post(
-      uri,
-      body: jsonEncode(body),
-      headers: {"Content-Type": "application/json"},
+    final res = await _dio.get(
+      "linkUserConfirm",
+      data: jsonEncode(body),
+      cancelToken: cancelToken,
+      options: Options(
+        headers: {"Content-Type": "application/json"},
+      ),
     );
 
-    final data = jsonDecode(res.body) as Map<String, dynamic>;
+    final data = jsonDecode(res.data) as Map<String, dynamic>;
     if (res.statusCode == 200) {
       return Right(data);
     } else {
-      return Left(data["code"] ?? res.body); //TODO: Handle the main error
+      return Left(data["code"] ?? res.statusMessage); //TODO: Handle the main error
     }
   }
 
@@ -512,17 +526,23 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<Map<String, dynamic>?> createPictoGroupData({required String userId, required String language, required BoardDataType type, required Map<String, dynamic> data}) async {
+  Future<Map<String, dynamic>?> createPictoGroupData({
+    required String userId,
+    required String language,
+    required BoardDataType type,
+    required Map<String, dynamic> data,
+    CancelToken? cancelToken,
+  }) async {
     final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/newCustomData');
     final body = {"uid": userId, "lang": language, "type": type.name, "data": data};
     try {
-      final res = await http.post(
+      final res = await _dio.requestUri(
         uri,
-        body: jsonEncode(body),
-        headers: {"Content-Type": "application/json"},
+        data: jsonEncode(body),
+        cancelToken: cancelToken,
       );
 
-      return jsonDecode(res.body) as Map<String, dynamic>;
+      return jsonDecode(res.data) as Map<String, dynamic>;
     } catch (e) {
       return {
         "error": e.toString(),
@@ -551,11 +571,13 @@ class ServerService implements ServerRepository {
     await ref.set(list);
   }
 
+  @override
   Future<EitherMap> learnPictograms({
     required String uid,
     required String language,
     required String model,
     required List<Map<String, dynamic>> tokens,
+    CancelToken? cancelToken,
   }) async {
     final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/speako/users/learn');
 
@@ -567,13 +589,13 @@ class ServerService implements ServerRepository {
     };
 
     try {
-      final res = await http.post(
+      final res = await _dio.requestUri(
         uri,
-        body: jsonEncode(body),
-        headers: {"Content-Type": "application/json"},
+        data: jsonEncode(body),
+        cancelToken: cancelToken,
       );
 
-      return Right(jsonDecode(res.body) as Map<String, dynamic>);
+      return Right(jsonDecode(res.data) as Map<String, dynamic>);
     } catch (e) {
       // handle te responde error
       return Left("learn_error");
@@ -591,14 +613,13 @@ class ServerService implements ServerRepository {
     bool reduced = false,
     int limit = 10,
     int chunk = 4,
+    CancelToken? cancelToken,
   }) async {
-    String url = 'https://us-central1-ottaaproject-flutter.cloudfunctions.net/speako/predict';
+    String url = '/speako/predict';
 
     url = "$url?limit=$limit&chunk=$chunk";
 
     if (reduced) url = "$url&reduced";
-
-    final uri = Uri.parse(url);
 
     final body = {
       "sentence": sentence,
@@ -610,13 +631,17 @@ class ServerService implements ServerRepository {
     };
 
     try {
-      final res = await http.post(
-        uri,
-        body: jsonEncode(body),
-        headers: {"Content-Type": "application/json"},
+      final res = await _dio.post(
+        url,
+        data: jsonEncode(body),
+        options: Options(
+          contentType: Headers.jsonContentType,
+        ),
+        cancelToken: cancelToken,
       );
 
-      return Right(jsonDecode(res.body) as Map<String, dynamic>);
+
+      return Right(res.data);
     } catch (e) {
       // handle te responde error
       return Left("learn_error");
@@ -626,12 +651,14 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
     try {
-      final choice = await _openAIClient.completions.create(
-        model: "text-davinci-003",
-        prompt: prompt,
-        temperature: 0,
-        maxTokens: maxTokens,
-      ).data;
+      final choice = await _openAIClient.completions
+          .create(
+            model: "text-davinci-003",
+            prompt: prompt,
+            temperature: 0,
+            maxTokens: maxTokens,
+          )
+          .data;
 
       if (!choice.choices.isNotEmpty) return const Left("No completado");
 
