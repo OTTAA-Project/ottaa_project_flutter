@@ -43,6 +43,7 @@ void main() async {
   //   DeviceOrientation.landscapeLeft,
   // ]);
 
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
     const Injector(
       application: Application(),
