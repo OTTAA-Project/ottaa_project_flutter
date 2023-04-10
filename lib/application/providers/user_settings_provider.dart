@@ -349,11 +349,11 @@ final userSettingsProvider = ChangeNotifierProvider<UserSettingsProvider>((ref) 
   final UserNotifier userNotifierState = ref.watch(userNotifier.notifier);
   final PatientNotifier patientNotifierState = ref.watch(patientNotifier.notifier);
 
-  final ProfileNotifier _profileNotifier = ref.watch(profileProvider);
+  final ProfileNotifier profileNotifier = ref.watch(profileProvider);
   final TTSRepository _ttsProvider = GetIt.I<TTSRepository>();
 
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
   final tts = ref.watch(ttsProvider);
 
-  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository, _profileNotifier, _ttsProvider, tts);
+  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository, profileNotifier, _ttsProvider, tts);
 });

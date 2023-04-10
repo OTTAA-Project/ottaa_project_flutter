@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
@@ -8,8 +9,10 @@ import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dar
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -22,19 +25,19 @@ class ProfileMainScreenUser extends ConsumerStatefulWidget {
 }
 
 class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
-
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-     final _ttsProvider = ref.read(ttsProvider);
-     _ttsProvider.init();
+      final _ttsProvider = ref.read(ttsProvider);
+      _ttsProvider.init();
     });
   }
 
   @override
-  Widget build(BuildContext context,) {
+  Widget build(
+    BuildContext context,
+  ) {
     final user = ref.read(userNotifier);
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
@@ -90,12 +93,11 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                   if (!provider.dataExist) {
                     provider.type = CustomiseDataType.defaultCase;
                     provider.userId = user.id;
-                    context.push(AppRoutes.customizeBoardScreen);
                   } else {
                     provider.type = CustomiseDataType.user;
                     provider.userId = user.id;
-                    context.push(AppRoutes.customizeBoardScreen);
                   }
+                  context.push(AppRoutes.customizeBoardScreen);
                 },
                 focused: false,
                 imageSize: const Size(129, 96),
@@ -124,8 +126,17 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
             ),
             const Spacer(),
             PrimaryButton(
-              onPressed: () {
+              onPressed: () async {
                 ref.watch(patientNotifier.notifier).setUser(user.patient);
+                final pro = ref.watch(userSettingsProvider);
+                await pro.initialiseSettings();
+                final userState = ref.watch(patientNotifier);
+                // final newUser = userState.;
+
+                final localDatabase = GetIt.I<LocalDatabaseRepository>();
+                // await localDatabase.setUser(newUser);
+
+                // userState.setUser(newUser);
                 context.push(AppRoutes.home);
               },
               text: '${'profile.use.ottaa'.trl} ${user.settings.data.name}',
