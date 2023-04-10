@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
+import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/core/service/notifications_service.dart';
 
 @Singleton(
@@ -28,8 +29,15 @@ class NotificationsServiceImpl implements NotificationsService {
 
   NotificationsServiceImpl(this.i18n);
 
-  @override
+
   @FactoryMethod(preResolve: true)
+  static Future<NotificationsServiceImpl> onInit() async {
+    final service = NotificationsServiceImpl(getIt<I18N>());
+    await service.init();
+    return service;
+  }
+
+  @override
   Future<NotificationsService> init() async {
     NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
       alert: true,
@@ -40,6 +48,11 @@ class NotificationsServiceImpl implements NotificationsService {
       provisional: false,
       sound: true,
     );
+
+    FirebaseMessaging.instance.onTokenRefresh.listen((String token) {
+      print('Token refreshed: $token');
+      //TODO: Revisar esto después no ahora como juanma con las notis :,v
+    });
 
     await _awesomeNotifications.initialize(
       'resource://mipmap/ic_launcher',
