@@ -24,7 +24,7 @@ workflows:
           include: true
     scripts:
       - name: Setting up the environment
-        script: |
+        script:
           flutter upgrade
           flutter packages pub get
           flutter config --enable-web
@@ -34,17 +34,17 @@ workflows:
           flutter packages pub run build_runner build --delete-conflicting-outputs
 
       - name: Testing
-        script: |
+        script:
           flutter test
 
       - name: Building
-        script: |
+        script:
           flutter build web --release --web-renderer canvaskit
           cd build/web
           7z a -r ../web.zip ./*
 
       - name: Deploying web
-        script: |
+        script:
           firebase deploy --only hosting:dev-ottaaproject --token "$FIREBASE_TOKEN"
 
     artifacts:
