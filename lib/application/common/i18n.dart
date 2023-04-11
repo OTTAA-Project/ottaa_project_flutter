@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart';
+import 'package:universal_io/io.dart';
 
 @Singleton()
 class I18N extends ChangeNotifier {

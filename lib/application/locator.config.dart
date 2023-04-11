@@ -23,7 +23,7 @@ import 'package:ottaa_project_flutter/application/service/hive_database.dart'
 import 'package:ottaa_project_flutter/application/service/local_storage_service.dart'
     as _i7;
 import 'package:ottaa_project_flutter/application/service/mobile_remote_storage_service.dart'
-    as _i42;
+    as _i43;
 import 'package:ottaa_project_flutter/application/service/notifications_service_impl.dart'
     as _i9;
 import 'package:ottaa_project_flutter/application/service/pictograms_service.dart'
@@ -33,9 +33,9 @@ import 'package:ottaa_project_flutter/application/service/profile_services.dart'
 import 'package:ottaa_project_flutter/application/service/remote_config_service.dart'
     as _i11;
 import 'package:ottaa_project_flutter/application/service/report_service.dart'
-    as _i44;
+    as _i45;
 import 'package:ottaa_project_flutter/application/service/sentences_service.dart'
-    as _i46;
+    as _i47;
 import 'package:ottaa_project_flutter/application/service/server_service.dart'
     as _i13;
 import 'package:ottaa_project_flutter/application/service/tts_service.dart'
@@ -43,7 +43,7 @@ import 'package:ottaa_project_flutter/application/service/tts_service.dart'
 import 'package:ottaa_project_flutter/application/service/user_settings_service.dart'
     as _i17;
 import 'package:ottaa_project_flutter/application/service/web_remote_storage_service.dart'
-    as _i47;
+    as _i42;
 import 'package:ottaa_project_flutter/application/use_cases/create_email_token_impl.dart'
     as _i26;
 import 'package:ottaa_project_flutter/application/use_cases/create_group_impl.dart'
@@ -81,11 +81,11 @@ import 'package:ottaa_project_flutter/core/repositories/remote_config_repository
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart'
     as _i41;
 import 'package:ottaa_project_flutter/core/repositories/report_repository.dart'
-    as _i43;
+    as _i44;
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart'
     as _i24;
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart'
-    as _i45;
+    as _i46;
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
     as _i12;
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart'
@@ -134,8 +134,10 @@ extension GetItInjectableX on _i1.GetIt {
       preResolve: true,
     );
     gh.singleton<_i6.LocalStorageRepository>(_i7.LocalStorageService());
-    gh.singleton<_i8.NotificationsService>(
-        _i9.NotificationsServiceImpl(gh<_i3.I18N>()));
+    await gh.singletonAsync<_i8.NotificationsService>(
+      () => _i9.NotificationsServiceImpl.onInit(),
+      preResolve: true,
+    );
     await gh.singletonAsync<_i10.RemoteConfigRepository>(
       () => _i11.RemoteConfigService.start(),
       preResolve: true,
@@ -171,27 +173,27 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i39.ProfileRepository>(
         _i40.ProfileService(gh<_i12.ServerRepository>()));
     gh.singleton<_i41.RemoteStorageRepository>(
-      _i42.MobileRemoteStorageService(
-        gh<_i20.AuthRepository>(),
-        gh<_i12.ServerRepository>(),
-        gh<_i3.I18N>(),
-      ),
-      registerFor: {_mobile},
-    );
-    gh.singleton<_i43.ReportRepository>(
-        _i44.ReportService(gh<_i12.ServerRepository>()));
-    gh.singleton<_i45.SentencesRepository>(_i46.SentencesService(
-      gh<_i20.AuthRepository>(),
-      gh<_i12.ServerRepository>(),
-    ));
-    gh.factory<_i47.WebRemoteStorageService>(
-      () => _i47.WebRemoteStorageService(
+      _i42.WebRemoteStorageService(
         gh<_i20.AuthRepository>(),
         gh<_i12.ServerRepository>(),
         gh<_i3.I18N>(),
       ),
       registerFor: {_web},
     );
+    gh.singleton<_i41.RemoteStorageRepository>(
+      _i43.MobileRemoteStorageService(
+        gh<_i20.AuthRepository>(),
+        gh<_i12.ServerRepository>(),
+        gh<_i3.I18N>(),
+      ),
+      registerFor: {_mobile},
+    );
+    gh.singleton<_i44.ReportRepository>(
+        _i45.ReportService(gh<_i12.ServerRepository>()));
+    gh.singleton<_i46.SentencesRepository>(_i47.SentencesService(
+      gh<_i20.AuthRepository>(),
+      gh<_i12.ServerRepository>(),
+    ));
     gh.singleton<_i48.AboutRepository>(_i49.AboutService(
       gh<_i20.AuthRepository>(),
       gh<_i24.ServerRepository>(),
