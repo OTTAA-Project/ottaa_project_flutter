@@ -1,0 +1,322 @@
+{
+  "profile": {
+    "selection": {
+      "text1": "اس ڈیوائس پر ایپ کون استعمال کرے گا؟",
+      "caregiver_text": "رابطہ کرنے کی ضرورت",
+      "user_text": "رابطہ کرنے کی ضرورت"
+    },
+    "hello": "ہیلو {name}!",
+    "ottaa": {
+      "tips": "اوٹا تجاویز"
+    },
+    "mail": "Mail",
+    "date": "Fecha de nacimiento",
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "faq0": "OTTAA ایپ کون استعمال کر سکتا ہے؟",
+      "faq0Description": "اوٹا غیر زبانی لوگوں کے لیے ڈیزائن کیا گیا ہے، یعنی کوئی بھی جو بات چیت کے لیے زبانی کلام کا استعمال نہیں کرتا ہے۔ آج اوٹا استعمال کرنے والے لوگوں میں دیگر حالات کے علاوہ آٹزم، دماغی فالج، ڈاؤن سنڈروم، امیوٹروفک لیٹرل سکلیروسیس (ALS)، اسپائنل مسکولر ایٹروفی (SMA) یا پوسٹ اسٹروک لاک ان سنڈروم (LiS) کی تشخیص ہوئی ہے۔ ایک متحرک کمیونیکیشن ٹول ہونے کے ناطے، اوٹا اپنے صارفین سے متوسط ​​سے اعلیٰ سطح کے علمی افعال کے مالک ہونے کا تقاضا کرتا ہے۔ تاہم، ہم ہر معاملے پر انفرادی طور پر غور کرنا چاہتے ہیں، لہذا بلا جھجھک رابطہ کریں اور ہماری ٹیم کے ساتھ آن لائن تشخیص کی درخواست کریں۔",
+      "faq1": "ایپ کیسے کام کرتی ہے؟",
+      "faq1Description": "اوٹا ایپلیکیشن صارف کو پکٹوگرام فراہم کرتی ہے: ایسی تصاویر جو اعمال، اشیاء، احساسات یا جذبات کی نمائندگی کرتی ہیں۔ صارف اپنی ضرورت کے مطابق پکٹوگرامس کا انتخاب کر سکتا ہے اور ایک جملہ بنا سکتا ہے، جس کا تصویری گراف سے ایک تحریری جملے میں ترجمہ کیا جاتا ہے جو اسکرین پر ظاہر ہوتا ہے اور اسے ایپلی کیشن کے ذریعے بلند آواز میں پڑھا بھی جاتا ہے۔ مزید بصری وضاحت کے لیے ہمارا یوٹیوب چینل دیکھیں۔",
+      "faq2": "یہ ایپ دیگر AAC (Augmentative and Alternative Communication) آلات سے کس طرح مختلف ہے؟",
+      "faq2Description": "اوٹا ایپ اپنے اختراعی پیشن گوئی الگورتھم اور قدرتی زبان کے جنریٹر کی وجہ سے دیگر AAC ایپس سے مختلف ہے، جو ایپ کو ایپ میں صارف کے رویے، ان کی عمر، جنس، دن کا وقت، اور مقام کے بارے میں سیکھنے کی اجازت دیتی ہے مواصلت کے اس لمحے کے لیے جس میں وہ ہیں۔",
+      "faq3": "اوٹا ایپ کی قیمت کتنی ہے؟",
+      "faq3Description": "اوٹا ایپ ڈاؤن لوڈ اور استعمال کرنے کے لیے مفت ہے۔ ایک پائیدار پروڈکٹ بنانے کے لیے جو وقت کی کسوٹی پر کھڑی ہو، کچھ خصوصیات ہیں جن کو استعمال کرنے کے لیے سبسکرپشن کی ضرورت ہوتی ہے۔ تاہم، ہم ان تمام لوگوں کو فنڈ فراہم کرنے کے لیے سخت محنت کر رہے ہیں جنہیں اس کی ضرورت ہے۔\n\nاگر آپ ارجنٹائن میں ہیں تو، کسی بھی تکنیکی مدد کی جس کی کسی شخص کو ضرورت ہوتی ہے اسے ہیلتھ انشورنس کے ذریعے کور کیا جانا چاہیے۔ اس کوریج کو کیسے حاصل کیا جائے اس بارے میں رہنمائی اور مدد کے لیے ہماری ٹیم سے رابطہ کریں۔\n\nاگر آپ کسی دوسرے LATAM ملک سے ہیں اور اس موضوع پر اپنے تجربے کا اشتراک کرنا چاہتے ہیں، تو ہم سے رابطہ کرنے میں ہچکچاہٹ محسوس نہ کریں، آپ کا تعاون بہت سے لوگوں کی مدد کر سکتا ہے۔",
+      "faq4": "اوٹا پروجیکٹ کے ذریعے کن زبانوں کی حمایت کی جاتی ہے؟",
+      "faq4Description": "ہم فی الحال ہسپانوی، انگریزی، پرتگالی اور فرانسیسی کو سپورٹ کرتے ہیں۔ ہسپانوی کے لیے، ہمارے پاس ارجنٹائن، چلی، کولمبیا اور اسپین کے لیے مقامی ورژن ہیں۔ ہم فعال طور پر نئی زبانوں میں شراکت یا ہسپانوی اقسام کے لیے بہتر لوکلائزیشن کی تلاش میں ہیں۔ حصہ ڈالنے کے لیے ہماری بھیڑ کمیونٹی میں شامل ہوں۔",
+      "faq5": "میں اوٹا پروجیکٹ کے ساتھ کیسے تعاون کر سکتا ہوں؟",
+      "faq5Description": "تعاون کرنے والے اوٹا کی ترقی، جانچ، اور/یا ترجمہ میں مدد کر سکتے ہیں۔ موضوع کے بارے میں مزید پڑھنے اور شروع کرنے کے لیے، GitHub پر اوٹا کے آفیشل ریپوزٹری پر تعاون کرنے والا سیکشن دیکھیں۔"
+    },
+    "caregiver": "ساتھی",
+    "caregivers_families": "پیشہ ور افراد/خاندان",
+    "user": "صارف/صارفین",
+    "user_description": "غیر زبانی شخص",
+    "wait": "برائے مہربانی انتظار کریں",
+    "setting_exp": "آپ کا تجربہ ترتیب دیا جا رہا ہے...",
+    "link_account": "ایک اکاؤنٹ کو لنک کریں",
+    "use": {
+      "ottaa": "اوٹا استعمال"
+    },
+    "close_profile": "چھپائیں",
+    "open_profile": "پروفائل کا مشاھدہ کریں",
+    "no_account": "غیر پروفائل موڈ",
+    "new_existant": "نیا/موجودہ",
+    "what_do": "آپ کیا کرنا چاہتے ہیں؟",
+    "profile": "پروفائل",
+    "linked_accounts": "منسلک اکاؤنٹس",
+    "name": "نام",
+    "logout": "لاگ آؤٹ",
+    "last_name": "کنیت",
+    "role": "استعمال کا کردار",
+    "day": "دن",
+    "month": "مہینہ",
+    "year": "سال",
+    "tips": {
+      "title1": "اعداد و شمار",
+      "title2": "بورڈز",
+      "title3": "تاریخ(سرگزشت)",
+      "title4": "پسندیدہ",
+      "text1": "اپنے مریض/خاندان کے رکن کے اعدادوشمار دیکھیں، ان کی سرگرمی اور دنوں، ہفتوں اور مہینوں میں اس میں کیسے بہتری آئی ہے۔",
+      "text2": "ان بورڈز کو چھپائیں جو صارف استعمال نہیں کرتا ہے، تاکہ وہ بورڈز جو وہ استعمال کرتا ہے اور جس کی سب سے زیادہ ضرورت ہے وہ ظاہر ہوں۔",
+      "text3": "اپنے ماضی کے جملے دیکھنے کے لیے تاریخ کا استعمال کریں، آپ نے دن میں کیا کیا اور کہانیاں سنائیں۔",
+      "text4": "پسندیدہ تصویر یا فقرے محفوظ کریں، تاکہ آپ ان تک زیادہ تیزی سے رسائی حاصل کر سکیں۔"
+    },
+    "unlink": "لنک ختم کریں۔",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
+    "help": {
+      "help": "مدد",
+      "title1": "Preguntas frecuentes",
+      "title2": "سپورٹ سے رابطہ کریں۔"
+    },
+    "link": {
+      "title": "اکاؤنٹ لنک کریں۔",
+      "mail": {
+        "title": "اوٹا اکاؤنٹ سے منسلک ای میل درج کریں۔",
+        "input": {
+          "required": "ای میل درکار ہے۔",
+          "invalid": "ای میل غلط ہے۔"
+        },
+        "warn": "پروفائلز کو لنک کرنے کے لیے کوڈ کے ساتھ ایک توثیق ای میل بھیجا جائے گا۔",
+        "contact": "یقینی بنائیں کہ آپ اس ای میل کے مالک کے ساتھ رابطے میں ہیں۔"
+      },
+      "token": {
+        "title": "تصدیقی کوڈ درج کریں جو ای میل میں آیا ہے۔",
+        "problem": "اکاؤنٹس کو لنک کرنے میں مشکلات؟",
+        "resend": "کوڈ پھر سے بھیجو",
+        "back": "ایک اور ای میل درج کریں۔",
+        "invalid": "غلط ٹوکن"
+      },
+      "wait": {
+        "title": "انتظار کرو",
+        "subtitle": "پروفائل لوڈ ہو رہا ہے..."
+      },
+      "success": {
+        "title": "پروفائل کامیابی کے ساتھ منسلک ہو گیا!",
+        "lastTime": "آخری وقت{date}"
+      },
+      "error": {
+        "link-exist": "پہلے ہی جڑے ہوئے ہیں۔",
+        "miss-caregiver": "خرابی: دیکھ بھال کرنے والا 404",
+        "miss-user": "خرابی: صارف 404",
+        "user-no-comp": "خرابی: صارف 406",
+        "caregiver-no-comp": "خرابی: دیکھ بھال کرنے والا 406",
+        "autolink": "خرابی: ایک ہی اکاؤنٹ",
+        "auth/user-not-found": "صارف نہیں ملا",
+        "miss-token": "لاپتہ ٹوکن",
+        "invalid-token": "غلط ٹوکن",
+        "expired-token": "ختم شدہ ٹوکن"
+      }
+    }
+  },
+  "user": {
+    "main": {
+      "title": "اپنے تجربے کو ترتیب دیں۔",
+      "subtitle1": "ایپ کا استعمال",
+      "subtitle2": "پیش گوئی کرنے والی زبان"
+    },
+    "settings": {
+      "main_screen": "Pantalla principal",
+      "accessibility": "رسائی",
+      "voice_and_subtitles": "آواز اور سب ٹائٹلز",
+      "language": "زبان"
+    },
+    "main_setting": {
+      "interaction": "تعاملات",
+      "talk_delete": "Hablar y Borrar",
+      "shortcut": "گھر میں شارٹ کٹس",
+      "board_view": "بورڈز دیکھیں",
+      "tabs": "ٹیبز کے ذریعے",
+      "grid": "گرڈ",
+      "ottaa_labs": "Ottaa Labs",
+      "labs_text": "فعل فعل کے جملے",
+      "labs_long": "بیٹا موڈ میں خصوصیت\n\nآپ کو زیادہ پیچیدہ ادوار کے ساتھ جملے بنانے کی اجازت دیتا ہے۔",
+      "one_by_one": "ONE by ONE"
+    },
+    "accessibility": {
+      "selection": "انتخاب",
+      "bar_text": "کلک کرنے کا وقت (سیکنڈز)",
+      "connected": "منسلک آلات",
+      "device": "قابل رسائی آلہ",
+      "press": "دبائیں اور دبائیں",
+      "scroll": "اسکرول اینڈ پریس",
+      "sip": "گھونٹ اور پف",
+      "selection_type": "انتخاب کی قسم",
+      "swept": "Swept",
+      "speed": "رفتار",
+      "selection_speed": "انتخاب کی رفتار"
+    },
+    "voice_and_subtitle": {
+      "voice_types": "آواز کی اقسام",
+      "voice_rate": "آواز کی شرح",
+      "voz1": "آواز 1",
+      "voz2": "آواز 2",
+      "voz3": "آواز 3",
+      "mute": "تصویروں کو خاموش کریں۔",
+      "subtitle": "ذیلی عنوان",
+      "show": "سب ٹائٹلز دکھائیں۔",
+      "size": "سائز",
+      "capital": "بڑے حروف"
+    },
+    "language": {
+      "set": "زبان مقرر کریں"
+    }
+  },
+  "global": {
+    "hello_world": "ہیلو ورلڈ",
+    "hello": "سلام ",
+    "continue": "جاری رکھیں",
+    "next": "اگلا",
+    "back": "سابقہ",
+    "please_enter_text": "براہ کرم ایک متن درج کریں۔",
+    "done": "مکمل",
+    "yes": "ہاں",
+    "delete": "ختم کریں",
+    "edit": "ترمیم",
+    "no": "نہیں",
+    "mute": "خاموش",
+    "important": "اہم",
+    "save_changes": "تبدیلیاں محفوظ کرو",
+    "send": "بھیجیں",
+    "skip": "چھوڑ دو",
+    "email": "ای میل",
+    "step": "اسٹیپ",
+    "share": "دوسروں کو بتائیں",
+    "support": "معاونت",
+    "congrats": "مبارک ہو",
+    "settings": "ترتیبات",
+    "general": "جنرل",
+    "pictogram": "تصویریں",
+    "configuration": "ترتیبات",
+    "user_ottaa": "Usar Ottaa como {name}",
+    "cancel": "منسوخ",
+    "slow": "سست",
+    "default": "پہلے سے طے شدہ\n",
+    "fast": "تیز",
+    "voice": "آواز",
+    "small": "Chico",
+    "medium": "درمیانہ",
+    "big": "بڑا",
+    "comingsoon": "Esta característica va estár disponible muy pronto!",
+    "delicate": "delicade",
+    "chile": "Chile",
+    "spanish": "Español",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italiano",
+    "french": "French",
+    "portuguese": "Portuguese",
+    "test": "Esta es la voz que vas a usar en otta"
+  },
+  "onboarding": {
+    "start": "شروع کریں",
+    "profile": {
+      "title": "پروفائلز کی سکرین",
+      "subtitle": "آج کون اوٹا استعمال کرنے جا رہا ہے؟",
+      "description": "پروفائلز کے انتخاب کے ساتھ آپ اپنے تصویروں اور سٹائل کو مدنظر رکھتے ہوئے کسی بھی ڈیوائس سے اوٹا استعمال کر سکیں گے!"
+    },
+    "home": {
+      "title": "اپنے گھر کو حسب ضرورت بنائیں",
+      "subtitle": "مرکزی اسکرین پر شارٹ کٹس",
+      "description": "ذوق اور ضروریات کے مطابق اپنی مرضی کے مطابق بنائیں"
+    },
+    "customize": {
+      "title": "اپنے گھر کو حسب ضرورت بنائیں",
+      "subtitle": "ہم سیکھنے کے عمل میں ساتھ دیتے ہیں۔",
+      "description": "پیشین گوئی میں ترمیم کرنے کے لیے بورڈز یا تصویروں کو چالو یا غیر فعال کریں، آپ کے کنٹرول میں ہیں۔"
+    },
+    "skip": {
+      "title": "کیا آپ تعارف کو چھوڑنے سے اتفاق کرتے ہیں؟"
+    }
+  },
+  "terms": {
+    "button": "میں شرائط قبول کرتا ہوں۔",
+    "text": "جاری رکھنے کے لیے، ہمیں آپ سے شرائط و ضوابط کو قبول کرنے کی ضرورت ہے۔\n\nشرائط دیکھیں"
+  },
+  "loginWait": {
+    "text": "ہم آپ کو خوش آمدید کہتے ہیں!\n\nOTTAA کی دنیا کے لیے"
+  },
+  "login": {
+    "title": "اپنے اکاؤنٹ سے سائن ان کریں۔",
+    "google": "گوگل کے ساتھ جاری رکھیں",
+    "facebook": "فیس بک کے ساتھ جاری رکھیں",
+    "register": "آپ کے پاس اب بھی اکاؤنٹ نہیں ہے؟ یہاں اندراج کریں",
+    "wait": {
+      "title": "ہم آپ کو خوش آمدید کہتے ہیں!",
+      "subtitle": "OTTAA پروجیکٹ کی نئی دنیا میں"
+    }
+  },
+  "customize": {
+    "board": {
+      "title": "صارف مواصلت کے لیے کون سے بورڈ استعمال کرے گا؟",
+      "appbar": "پیش گوئی کرنے والے بورڈز",
+      "skip": "بورڈز کا انتخاب چھوڑ دیں؟",
+      "subtitle": "تصویریں دیکھیں"
+    },
+    "shortcut": {
+      "title": "مین اسکرین پر ظاہر ہونے والے شارٹ کٹس کو منتخب کریں۔",
+      "appbar": "شارٹ کٹس",
+      "favorites": "پسندیدہ",
+      "history": "تاریخ(سرگزشت)",
+      "camera": "کیمرے",
+      "games": "کھیل"
+    },
+    "picto": {
+      "title": "ادارتی ٹیم{name}",
+      "switch": "ڈیش بورڈ کو چالو کریں۔"
+    },
+    "help": {
+      "boards": "پیش گوئی کرنے والے بورڈز آپ کو یہ ترتیب دینے کی اجازت دیتے ہیں کہ آخر صارف کی سکرین پر تصویری گرام کا کون سا گروپ دکھایا جائے گا۔",
+      "shortcut": "شارٹ کٹس مختلف فنکشنز تک فوری رسائی ہیں جو اختتامی صارف کے لیے ان کی مرکزی اسکرین پر موجود ہیں۔"
+    },
+    "wait": {
+      "title": "مبارک ہو",
+      "subtitle": "{name} کا تجربہ مرتب کریں۔",
+      "button": "پروفائلز پینل پر جائیں۔"
+    },
+    "skip": "کیا آپ پروفائل کی ترجیحات کو چھوڑنے سے اتفاق کرتے ہیں؟"
+  },
+  "home": {
+    "grid": {
+      "title": "بورڈز",
+      "pictos": "Tablero {group}"
+    }
+  },
+  "chatgpt": {
+    "prompt": "escribir una frase en ingles con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras y agregale la expresion culiau: {pictograms}"
+  },
+  "notification": {
+    "code": {
+      "request": {
+        "title": "Verificación de OTTAA Link",
+        "body": "Están intentando vincular tu cuenta con el token <b>{linkToken}</b>"
+      },
+      "confirm": {
+        "title": "Confirmación de OTTAA Link",
+        "body": "Se ha confirmado la vinculación de tu cuenta"
+      }
+    }
+  },
+  "game": {
+    "play": "Juguemos!",
+    "next": "Jugar",
+    "game_header_0": "¿Cuál es el picto?",
+    "game_header_1": "Unir pictogramas",
+    "game_header_2": "Juego de la Memoria",
+    "game_sub_0": "Responde las preguntas eligiendo el pictograma correcto. Aprende jugando",
+    "game_sub_1": "Uní los pictogramas de manera correcta",
+    "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
+    "group": "Selecciona una categoría para poder jugar",
+    "search": "Buscar Tablero",
+    "find": "Encontrá los tableros que quieras, fácilmente!",
+    "game_1_line": "Selecciona el pictograma que escuches",
+    "game_2_line": "Selecciona la palabra que corresponde a su pictograma",
+    "game_3_line": "Selecciona una tarjeta y encuentra la pareja del pictograma",
+    "no": "¡Oh Oh!",
+    "yes": "¡Muy bien!",
+    "score": "Tu puntaje",
+    "correct": "Correcto",
+    "incorrect": "Incorrecto",
+    "use_time": "Tiempo total",
+    "maximum_streak": "Mejor racha"
+  }
+}

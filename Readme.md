@@ -14,11 +14,11 @@ You can be a part of this open-source project and help build life-changing techn
 <img src="/public/images/ottaa_project/usar_ottaa.gif" alt="ottaa_img" width="500"/>
 </p>
 
-Read our [Project's Roadmap](https://github.com/orgs/OTTAA-Project/projects/4/views/1) to learn about what features we are currently working on, what stage they are in, and when we expect to deliver them to you. 
+Read our [Project's Roadmap](https://github.com/orgs/OTTAA-Project/projects/4/views/1) to learn about what features we are currently working on, what stage they are in, and when we expect to deliver them to you.
 
 ## How does it work?
 
-The OTTA app facilitates human communication via pictograms for those who are speech impaired, suggesting to each user the most appropriate pictograms based on preference, need, and environment. Watch this video for a more comprehensive walkthrough. 
+The OTTA app facilitates human communication via pictograms for those who are speech impaired, suggesting to each user the most appropriate pictograms based on preference, need, and environment. Watch this video for a more comprehensive walkthrough.
 
 <p align="center">
 <a href="https://www.youtube.com/watch?v=nQZRzBOWD-c"><img src="https://img.youtube.com/vi/nQZRzBOWD-c/0.jpg" alt="OTTAA The first intelligent communication platform for speech impaired people" width="480" height="360"></a>
@@ -42,9 +42,9 @@ The OTTA app facilitates human communication via pictograms for those who are sp
 
 The OTTAA Project was developed and runs mainly on:
 
-* [Flutter](https://flutter.dev/) 
+* [Flutter](https://flutter.dev/)
 
-* [Firebase](https://firebase.google.com/) 
+* [Firebase](https://firebase.google.com/)
 
 
 The complete list of libraries used and their functions can be found [here](libraries.md).
@@ -71,7 +71,7 @@ The complete list of libraries used and their functions can be found [here](libr
 
 ### API reference
 
- * We are using [Dartdoc](https://pub.dev/packages/dartdoc) to automate the [API reference documentation] (place_holder: link to API reference). For some help getting started with Dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.  
+ * We are using [Dartdoc](https://pub.dev/packages/dartdoc) to automate the [API reference documentation] (place_holder: link to API reference). For some help getting started with Dartdoc, check out [this guide](/dartdoc_automatic_documentation.md) we put together.
 
 ## Contributing
 

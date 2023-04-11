@@ -1,19 +1,22 @@
-import 'package:ottaa_project_flutter/core/models/sentence_statistics_model.dart';
+import 'package:injectable/injectable.dart';
+import 'package:ottaa_project_flutter/core/models/phrases_statistics_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_statistics_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/report_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
+
+@Singleton(as: ReportRepository)
 class ReportService implements ReportRepository {
   final ServerRepository _serverRepository;
 
   ReportService(this._serverRepository);
 
   @override
-  Future<FrasesStatisticsModel?> getMostUsedSentences(String userId, String languageCode) async {
+  Future<PhraseStatisticModel?> getMostUsedSentences(String userId, String languageCode) async {
     final response = await _serverRepository.getMostUsedSentences(userId, languageCode);
 
     if (response.isRight) {
-      return FrasesStatisticsModel.fromJson(response.right);
+      return PhraseStatisticModel.fromJson(response.right);
     }
 
     return null;

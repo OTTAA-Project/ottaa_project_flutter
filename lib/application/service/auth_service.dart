@@ -1,20 +1,34 @@
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
+import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
+import 'package:ottaa_project_flutter/core/models/language_setting.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
+@Singleton(as: AuthRepository)
 class AuthService extends AuthRepository {
   final FirebaseAuth _authProvider = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', "https://www.googleapis.com/auth/user.birthday.read"]);
   final FacebookAuth _facebookAuth = FacebookAuth.instance;
-
+  String lastName = '';
+  String name = '';
   final LocalDatabaseRepository _databaseRepository;
   final ServerRepository _serverRepository;
 
@@ -22,7 +36,7 @@ class AuthService extends AuthRepository {
 
   @override
   Future<Either<String, UserModel>> getCurrentUser() async {
-    UserModel? userDb = _databaseRepository.user;
+    UserModel? userDb = await _databaseRepository.getUser();
     if (userDb == null) {
       return const Left("No user logged");
     }
@@ -51,14 +65,17 @@ class AuthService extends AuthRepository {
 
   @override
   Future<void> logout() async {
-    await _authProvider.signOut();
-    await _googleSignIn.signOut();
+    if (_authProvider.currentUser != null) {
+      await _authProvider.signOut();
+
+      await _googleSignIn.signOut();
+    }
     // await _facebookAuth.logOut(); //TODO!: Comment this line due a [MissingPluginException] error
     await _databaseRepository.deleteUser();
   }
 
   @override
-  Future<Either<String, UserModel>> signIn(SignInType type) async {
+  Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     Either<String, User> result;
 
     switch (type) {
@@ -71,37 +88,74 @@ class AuthService extends AuthRepository {
       case SignInType.apple:
       case SignInType.email:
       default:
-        return const Left(
-            "error_no_implement_auth_method"); //TODO: Implement translate method.
+        return const Left("error_no_implement_auth_method"); //TODO: Implement translate method.
     }
 
     if (result.isRight) {
-      final User user = result.right;
+      try {
+        final User user = result.right;
 
-      ///sometimes the email does not come with the user.email, it is given in the providedData,
+        EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
+        UserModel? userModel;
+        if (userInfo.isLeft) {
+          await signUp();
 
-      EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
-      UserModel? userModel;
-      if (userInfo.isLeft) {
-        await signUp();
+          final nameRetriever = user.displayName ?? user.providerData[0].displayName;
+          final emailRetriever = user.email ?? user.providerData[0].email;
 
-        final nameRetriever =
-            user.displayName ?? user.providerData[0].displayName;
-        final emailRetriever = user.email ?? user.providerData[0].email;
+          userModel = BaseUserModel(
+            id: user.uid,
+            settings: BaseSettingsModel(
+              data: UserData(
+                avatar: AssetsImage(asset: "671", network: user.photoURL),
+                birthDate: DateTime.fromMillisecondsSinceEpoch(0),
+                genderPref: "n/a",
+                lastConnection: DateTime.now(),
+                lastName: lastName,
+                name: name,
+              ),
+              language: LanguageSetting.empty(),
+            ),
+            email: emailRetriever ?? "",
+          );
+        } else {
+          switch (userInfo.right["type"]) {
+            case "caregiver":
+              userModel = CaregiverUserModel.fromMap({
+                ...userInfo.right,
+                "email": user.email ?? user.providerData[0].email,
+              });
+              break;
+            case "user":
+              userModel = PatientUserModel.fromMap({
+                ...userInfo.right,
+                "email": user.email ?? user.providerData[0].email,
+              });
+              break;
+            case "none":
+            default:
+              userModel = BaseUserModel.fromMap({
+                ...userInfo.right,
+                "email": user.email ?? user.providerData[0].email,
+              });
+              break;
+          }
+        }
 
-        userModel = UserModel(
-          id: user.uid,
-          name: nameRetriever ?? "",
-          email: emailRetriever ?? "",
-          photoUrl: user.photoURL ?? "",
-          isFirstTime: true,
-          language: "es",
-        );
-      } else {
-        userModel = UserModel.fromRemote(userInfo.right);
+        userModel.currentToken = DeviceToken(deviceToken: await getDeviceId(), lastUsage: DateTime.now());
+        if (userModel.currentToken != null) {
+          await _serverRepository.updateDevicesId(
+            userId: userModel.id,
+            deviceToken: userModel.currentToken!,
+          );
+        }
+
+        return Right(userModel);
+      } on Exception catch (e) {
+        print(e);
+        await _authProvider.signOut();
+        return Left("Error interno: ${e.toString()}");
       }
-
-      return Right(userModel);
     }
 
     return Left(result.left);
@@ -115,22 +169,22 @@ class AuthService extends AuthRepository {
         return const Left("error_google_sign_in_cancelled");
       }
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential =
-          await _authProvider.signInWithCredential(credential);
+      final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
 
       if (userCredential.user == null) {
         return const Left("error_google_sign_in_cancelled");
       }
 
       final User user = userCredential.user!;
+      lastName = userCredential.additionalUserInfo!.profile!['family_name'];
+      name = userCredential.additionalUserInfo!.profile!['given_name'];
 
       return Right(user);
     } catch (e) {
@@ -145,11 +199,9 @@ class AuthService extends AuthRepository {
       if (result.status == LoginStatus.success) {
         final AccessToken accessToken = result.accessToken!;
 
-        final AuthCredential credential =
-            FacebookAuthProvider.credential(accessToken.token);
+        final AuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
 
-        final UserCredential userCredential =
-            await _authProvider.signInWithCredential(credential);
+        final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
 
         if (userCredential.user == null) {
           return const Left("error_facebook_sign_in_cancelled");
@@ -179,18 +231,31 @@ class AuthService extends AuthRepository {
     final nameRetriever = user.displayName ?? user.providerData[0].displayName;
     final emailRetriever = user.email ?? user.providerData[0].email;
 
-    final userModel = UserModel(
+    final userModel = BaseUserModel(
       id: user.uid,
-      name: nameRetriever ?? "",
+      settings: BaseSettingsModel(
+        data: UserData(
+          avatar: AssetsImage(asset: "671", network: user.photoURL),
+          birthDate: DateTime.fromMillisecondsSinceEpoch(0),
+          genderPref: "n/a",
+          lastConnection: DateTime.now(),
+          lastName: lastName,
+          name: name,
+        ),
+        language: LanguageSetting.empty(),
+      ),
       email: emailRetriever ?? "",
-      photoUrl: user.photoURL ?? "",
-      isFirstTime: true,
-      language: "es",
     );
-
-    await _serverRepository.uploadUserInformation(
-        user.uid, userModel.toRemote());
+    await _serverRepository.uploadUserInformation(user.uid, userModel.toMap());
 
     return const Right(true);
+  }
+
+  @override
+  Future<String> getDeviceId() async {
+    return await FirebaseMessaging.instance.getToken(
+          vapidKey: kIsWeb ? "BM1DJoICvUa0DM7SYOJE4aDc_Odtlbq5QKXRgB5XoeHEY7EIIP-39WnCqr-QNmNSDoRJEbNyq6LV7bUE6FoGWVE" : null,
+        ) ??
+        "";
   }
 }

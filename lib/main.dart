@@ -1,15 +1,16 @@
-import 'dart:async';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:ottaa_project_flutter/application/application.dart';
 import 'package:ottaa_project_flutter/application/injector.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/firebase_options.dart';
 
+//Apr 11v1
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
@@ -19,7 +20,9 @@ void main() async {
     ),
   );
 
-  await Firebase.initializeApp();
+  await dotenv.load();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   if (kIsWeb) {
     // initialiaze the facebook javascript SDK
@@ -31,7 +34,7 @@ void main() async {
     );
   }
 
-  await setupServices();
+  await configureDependencies();
 
   // await SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.landscapeRight,

@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
+import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
+import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
+import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -19,28 +28,34 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     super.initState();
     SplashProvider provider = ref.read(splashProvider);
 
-    final isLogged = ref.read(authNotifier);
+    final auth = ref.read(authNotifier.notifier);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      print(isLogged);
+      await blockPortraitMode();
+
+      setState(() {});
+
+      bool isLogged = await provider.fetchUserInformation();
+      bool isFirstTime = await provider.isFirstTime();
+
       if (isLogged) {
-        bool isFirstTime = await provider.isFirstTime();
-        bool hasPhoto = await provider.checkUserAvatar();
-        bool hasInfo = await provider.fetchUserInformation();
-
+        final user = ref.read(userNotifier);
+        auth.setSignedIn();
+        await I18N.of(context).changeLanguage(user?.settings.language.language ?? "es_AR");
         if (mounted) {
-          if (!hasInfo) {
-            return context.go(AppRoutes.login);
-          }
+          initializeDateFormatting(user?.settings.language.language ?? "es_AR");
           if (isFirstTime) {
-            return context.go(AppRoutes.onboarding, extra: 0);
+            return context.go(AppRoutes.onboarding);
           }
 
-          if (!hasPhoto) {
-            return context.go(AppRoutes.onboarding, extra: 2);
+          if (user!.type == UserType.caregiver) {
+            return context.go(AppRoutes.profileMainScreen);
+          } else {
+            final time = DateTime.now().millisecondsSinceEpoch;
+            provider.updateLastConnectionTime(userId: user.id, time: time);
+            ref.read(patientNotifier.notifier).setUser(user.patient);
+            return context.go(AppRoutes.profileMainScreenUser);
           }
-
-          return context.go(AppRoutes.home);
         }
       }
       if (mounted) return context.go(AppRoutes.login);
@@ -49,19 +64,41 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Image(
-            image: AssetImage('assets/imgs/logo_ottaa.webp'),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const OttaaLoadingAnimation(
+                width: 40,
+                height: 100,
+              ),
+              const SizedBox(width: 20),
+              Text(
+                "Hello".trl,
+                style: textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-          const LinearProgressIndicator(
-            backgroundColor: Colors.grey,
-            color: Colors.deepOrange,
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image(
+              image: const AssetImage(AppImages.kLogoOttaa),
+              width: size.width * 0.5,
+            ),
           ),
-          const SizedBox(height: 10),
-          Text("we_are_preparing_everything".trl)
         ],
       ),
     );

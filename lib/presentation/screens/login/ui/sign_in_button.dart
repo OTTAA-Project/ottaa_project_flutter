@@ -1,61 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/jumping_dots.dart';
+import 'package:ottaa_ui_kit/theme.dart';
+import 'package:ottaa_ui_kit/widgets.dart';
 
 class SignInButton extends ConsumerWidget {
   final SignInType type;
   final String text, logo;
   final ButtonStyle? style;
+  final bool enabled;
 
-  const SignInButton({super.key, required this.type, required this.text, required this.logo, this.style});
+  const SignInButton({
+    super.key,
+    required this.type,
+    required this.text,
+    required this.logo,
+    this.style,
+    this.enabled = true,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loading = ref.watch(loadingProvider);
     final auth = ref.watch(authProvider);
 
+    final colorSchema = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return ElevatedButton(
       style: style ??
           ElevatedButton.styleFrom(
-            fixedSize: const Size.fromHeight(50),
-          ),
-      onPressed: () async {
-        final result = await auth.signIn(type);
-
-        if (result.isLeft) {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(result.left),
+            fixedSize: const Size.fromHeight(48),
+            backgroundColor: kWhiteColor,
+            elevation: 0,
+            shadowColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: const BorderSide(
+                color: Colors.grey,
+                width: 1,
+              ),
             ),
-          );
-        }
-        // ignore: use_build_context_synchronously
-        context.go(AppRoutes.splash);
-      },
+            foregroundColor: Colors.grey,
+          ),
+      onPressed: enabled
+          ? () async {
+              final BuildContext localContext = context;
+
+              final result = await auth.signIn(type);
+
+              if (result.isLeft) {
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(result.left),
+                  ),
+                );
+              }
+
+              if (result.isRight) {
+                // ignore: use_build_context_synchronously
+                await BasicBottomSheet.show(
+                  localContext,
+                  subtitle: "terms.text".trl,
+                  okButtonText: "terms.button".trl,
+                );
+
+                // ignore: use_build_context_synchronously
+                localContext.go(AppRoutes.waitingLogin);
+              }
+            }
+          : null,
       child: Flex(
         direction: Axis.horizontal,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: loading
             ? [
-                const Expanded(
-                  child: JumpingDotsProgressIndicator(),
+                Expanded(
+                  child: JumpingDotsProgressIndicator(
+                    dotColor: colorSchema.primary,
+                  ),
                 ),
               ]
             : [
-                Expanded(
+                Flexible(
                   flex: 1,
                   child: Image.asset(logo, height: 20),
                 ),
-                Expanded(
+                const SizedBox(width: 10),
+                Flexible(
                   flex: 2,
-                  child: Text(text),
+                  child: Text(text, style: textTheme.headline3),
                 )
               ],
       ),
