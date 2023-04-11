@@ -38,7 +38,7 @@ workflows:
           flutter test
 
       - name: Building
-        script:
+        script: |
           flutter build web --release --web-renderer canvaskit
           cd build/web
           7z a -r ../web.zip ./*
