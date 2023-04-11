@@ -101,6 +101,7 @@ unlinked_spec.ds
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 **/ios/Runner/GoogleService-info.plist
+ios/Runner/GoogleService-Info.plist
 **/ios/GoogleService-info.plist
 **/ios/info.plist
 
