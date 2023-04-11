@@ -24,7 +24,7 @@ workflows:
           include: true
     scripts:
       - name: Setting up the environment
-        script:
+        script: |
           flutter upgrade
           flutter packages pub get
           flutter config --enable-web
