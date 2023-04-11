@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/category_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
@@ -20,6 +21,7 @@ class ProfileSettingsScreen extends ConsumerWidget {
     final user = ref.read(userNotifier);
     final auth = ref.read(authProvider);
     final provider = ref.watch(profileProvider);
+    print(user!.type);
     return Scaffold(
       // sorry for doing this, emir helped me in making it better
       appBar: OTTAAAppBar(
@@ -61,7 +63,7 @@ class ProfileSettingsScreen extends ConsumerWidget {
                   icon: AppImages.kProfileSettingsIcon1,
                   text: "profile.profile".trl,
                 ),
-                provider.isUser
+                user!.type.toString() == UserType.user.toString()
                     ? Container()
                     : CategoryWidget(
                         onTap: () =>
@@ -74,7 +76,7 @@ class ProfileSettingsScreen extends ConsumerWidget {
                   icon: AppImages.kProfileSettingsIcon3,
                   text: "profile.help.help".trl,
                 ),
-                provider.isUser
+                user.type.toString() == UserType.user.toString()
                     ? Container()
                     : CategoryWidget(
                         onTap: () =>

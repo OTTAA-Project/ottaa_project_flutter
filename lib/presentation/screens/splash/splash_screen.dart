@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -89,7 +86,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 style: textTheme.titleMedium?.copyWith(
                   color: Theme.of(context).primaryColor,
                   fontSize: 40,
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],

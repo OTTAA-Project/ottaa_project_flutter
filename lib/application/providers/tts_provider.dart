@@ -2,12 +2,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/core/models/voices_model.dart';
-import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 class TTSProvider extends ChangeNotifier {
   final TTSRepository tts;
+  final LocalDatabaseRepository _hiveRepository;
 
-  TTSProvider(this.tts);
+  TTSProvider(this.tts,this._hiveRepository);
 
   Future<void> speak(String text) => tts.speak(text);
 
@@ -23,9 +24,14 @@ class TTSProvider extends ChangeNotifier {
   Future<void> changeTTSVoice(String voice)async{
     tts.changeTTSVoice(voice);
   }
+  Future<void> init()async{
+    //todo: fetch the settings from hive if they are custom or not.
+
+  }
 }
 
 final ttsProvider = ChangeNotifierProvider<TTSProvider>((ref) {
   final tts = GetIt.I<TTSRepository>();
-  return TTSProvider(tts);
+  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+  return TTSProvider(tts,localDatabaseRepository);
 });

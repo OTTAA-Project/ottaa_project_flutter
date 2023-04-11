@@ -25,9 +25,10 @@ import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 @Singleton(as: AuthRepository)
 class AuthService extends AuthRepository {
   final FirebaseAuth _authProvider = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', "https://www.googleapis.com/auth/user.birthday.read"]);
   final FacebookAuth _facebookAuth = FacebookAuth.instance;
-
+  String lastName = '';
+  String name = '';
   final LocalDatabaseRepository _databaseRepository;
   final ServerRepository _serverRepository;
 
@@ -110,8 +111,8 @@ class AuthService extends AuthRepository {
                 birthDate: DateTime.fromMillisecondsSinceEpoch(0),
                 genderPref: "n/a",
                 lastConnection: DateTime.now(),
-                lastName: "",
-                name: nameRetriever ?? "",
+                lastName: lastName,
+                name: name,
               ),
               language: LanguageSetting.empty(),
             ),
@@ -182,6 +183,8 @@ class AuthService extends AuthRepository {
       }
 
       final User user = userCredential.user!;
+      lastName = userCredential.additionalUserInfo!.profile!['family_name'];
+      name = userCredential.additionalUserInfo!.profile!['given_name'];
 
       return Right(user);
     } catch (e) {
@@ -236,8 +239,8 @@ class AuthService extends AuthRepository {
           birthDate: DateTime.fromMillisecondsSinceEpoch(0),
           genderPref: "n/a",
           lastConnection: DateTime.now(),
-          lastName: "",
-          name: nameRetriever ?? "",
+          lastName: lastName,
+          name: name,
         ),
         language: LanguageSetting.empty(),
       ),

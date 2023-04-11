@@ -9,6 +9,12 @@ import 'package:ottaa_project_flutter/presentation/screens/customized_board/cust
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_main_tab_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_wait_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/game_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/match_pictogram_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/memory_game_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/search_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/select_group_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/whats_the_picto_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/link_mail_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/link_success_screen.dart';
@@ -143,8 +149,12 @@ class AppRouter {
           path: AppRoutes.profileHelpScreen,
           builder: (context, state) => const ProfileHelpScreen(),
         ),
-        GoRoute(path: AppRoutes.profileOttaaTips, builder: (context, state) => const ProfileOTTAATipsScreen()),
-        GoRoute(path: AppRoutes.profileLinkedAccountScreen, builder: (context, state) => const ProfileLinkedAccountScreen()),
+        GoRoute(
+            path: AppRoutes.profileOttaaTips,
+            builder: (context, state) => const ProfileOTTAATipsScreen()),
+        GoRoute(
+            path: AppRoutes.profileLinkedAccountScreen,
+            builder: (context, state) => const ProfileLinkedAccountScreen()),
         GoRoute(
           name: "link",
           path: "/link",
@@ -207,6 +217,30 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.mainSettingUser,
           builder: (context, state) => const MainSettingScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.gameScreen,
+          builder: (context, state) => const GameScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.matchPictogramScreen,
+          builder: (context, state) => const MatchPictogramScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.memoryGameScreen,
+          builder: (context, state) => const MemoryGameScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.searchScreen,
+          builder: (context, state) => const SearchScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.whatsThePictoScreen,
+          builder: (context, state) => const WhatsThePictoScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.selectGroupScreen,
+          builder: (context, state) => const SelectGroupScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),
