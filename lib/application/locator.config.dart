@@ -142,7 +142,10 @@ extension GetItInjectableX on _i1.GetIt {
       () => _i11.RemoteConfigService.start(),
       preResolve: true,
     );
-    gh.singleton<_i12.ServerRepository>(_i13.ServerService());
+    await gh.singletonAsync<_i12.ServerRepository>(
+      () => _i13.ServerService.create(),
+      preResolve: true,
+    );
     gh.singleton<_i14.TTSRepository>(_i15.TTSService(gh<_i3.I18N>()));
     gh.singleton<_i16.UserSettingRepository>(
         _i17.UserSettingsService(gh<_i12.ServerRepository>()));

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:math' show min;
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -89,6 +90,8 @@ class HomeProvider extends ChangeNotifier {
   String? currentGridGroup;
   ScrollController gridScrollController = ScrollController();
 
+  final List<CancelToken> _cancelsToken = [];
+
   void setCurrentGroup(String group) {
     currentTabGroup = group;
     pictoTabsScrollController.jumpTo(0);
@@ -156,6 +159,13 @@ class HomeProvider extends ChangeNotifier {
 
   void removeLastPictogram() {
     pictoWords.removeLast();
+    if (pictoWords.isEmpty) {
+      for (var element in _cancelsToken) {
+        element.cancel();
+      }
+
+      _cancelsToken.clear();
+    }
     notify();
     suggestedPicts.clear();
     Picto? lastPicto = pictoWords.lastOrNull;
@@ -198,6 +208,19 @@ class HomeProvider extends ChangeNotifier {
 
     if (patientState.state != null && id != kStarterPictoId) {
       PatientUserModel user = patientState.user;
+      final cancelToken = CancelToken();
+
+      cancelToken.whenCancel.then((value) {
+        _cancelsToken.remove(cancelToken);
+      });
+
+      for (var element in _cancelsToken) {
+        element.cancel();
+      }
+
+      _cancelsToken.clear();
+
+      _cancelsToken.add(cancelToken);
 
       final response = await predictPictogram.call(
         sentence: pictoWords.map((e) => e.text).join(" "),
@@ -208,9 +231,13 @@ class HomeProvider extends ChangeNotifier {
         tags: {},
         reduced: true,
         chunk: suggestedQuantity,
+        cancelToken: cancelToken,
       );
 
+      _cancelsToken.remove(cancelToken);
+
       if (response.isRight) {
+        print(response.right);
         suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
       }
@@ -229,14 +256,6 @@ class HomeProvider extends ChangeNotifier {
       suggestedPicts.addAll(requiredPictos);
       suggestedPicts = suggestedPicts.toSet().toList();
     }
-
-    if (suggestedPicts.length < suggestedQuantity) {
-      int pictosLeft = suggestedQuantity - suggestedPicts.length;
-      print('pictos left $pictosLeft');
-      suggestedPicts.addAll(basicPictograms);
-    }
-
-    print(basicPictograms.length);
 
     suggestedIndex = id;
     // suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
@@ -259,17 +278,31 @@ class HomeProvider extends ChangeNotifier {
     if (pictos.isEmpty && suggestedPicts.isEmpty) {
       return List.generate(4, (index) {
         return Picto(
-            id: "-777",
+          id: "-777",
+          text: "",
+          type: 0,
+          resource: AssetsImage(
+            asset: "",
+            network: null,
+          ),
+        );
+      });
+    } else if (pictos.length < suggestedQuantity) {
+      int pictosLeft = suggestedQuantity - pictos.length;
+      pictos.addAll(
+        List.generate(
+          pictosLeft,
+          (index) => Picto(
+            id: "777",
             text: "",
             type: 0,
             resource: AssetsImage(
               asset: "",
               network: null,
-            ));
-      });
-    } else if (pictos.length < suggestedQuantity) {
-      int pictosLeft = suggestedQuantity - pictos.length;
-      pictos.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
+            ),
+          ),
+        ),
+      );
     }
 
     return pictos;

@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
@@ -128,48 +129,77 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
         itemBuilder: (context, index) {
           final e = pictos[index];
 
-          if (e.id == "-777") {
-            return FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Container(
-                  width: 116,
-                  height: 144,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(9),
-                    border: Border.all(
-                      color: Colors.grey.withOpacity(.12),
-                      width: 1,
+          switch (e.id) {
+            case "-777":
+              return FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Container(
+                    height: 119,
+                    width: 96,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(9),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(.12),
+                        width: 1,
+                      ),
+                    ),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    )),
+              );
+            case "777":
+              return FittedBox(
+                fit: BoxFit.scaleDown,
+                child: GestureDetector(
+                  onTap: () {
+                    //TODO: add pictogram
+                  },
+                  child: Container(
+                    height: 119,
+                    width: 96,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(9),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(.12),
+                        width: 1,
+                      ),
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.add,
+                        size: 33,
+                        color: kOTTAAOrange,
+                      ),
                     ),
                   ),
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  )),
-            );
+                ),
+              );
+            default:
+              return PictoWidget(
+                onTap: () {
+                  addPictogram(e);
+                },
+                image: e.resource.network != null
+                    ? CachedNetworkImage(
+                        imageUrl: e.resource.network!,
+                        fit: BoxFit.fill,
+                        errorWidget: (context, url, error) => Image.asset(
+                          fit: BoxFit.fill,
+                          "assets/img/${e.text}.webp",
+                        ),
+                      )
+                    : Image.asset(
+                        fit: BoxFit.fill,
+                        "assets/img/${e.text}.webp",
+                      ),
+                text: e.text,
+                colorNumber: e.type,
+                width: 116,
+                height: 144,
+              );
           }
-
-          return PictoWidget(
-            onTap: () {
-              addPictogram(e);
-            },
-            image: e.resource.network != null
-                ? CachedNetworkImage(
-                    imageUrl: e.resource.network!,
-                    fit: BoxFit.fill,
-                    errorWidget: (context, url, error) => Image.asset(
-                      fit: BoxFit.fill,
-                      "assets/img/${e.text}.webp",
-                    ),
-                  )
-                : Image.asset(
-                    fit: BoxFit.fill,
-                    "assets/img/${e.text}.webp",
-                  ),
-            text: e.text,
-            colorNumber: e.type,
-            width: 116,
-            height: 144,
-          );
         },
       ),
     );
