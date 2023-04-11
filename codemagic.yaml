@@ -26,6 +26,7 @@ workflows:
     scripts:
       - name: Setting up the environment
         script: |
+          flutter upgrade
           flutter packages pub get
           flutter config --enable-web
           echo $FIREBASE_JSON | base64 --decode > $FCI_BUILD_DIR/firebase.json
