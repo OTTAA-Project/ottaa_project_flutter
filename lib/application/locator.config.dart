@@ -23,7 +23,7 @@ import 'package:ottaa_project_flutter/application/service/hive_database.dart'
 import 'package:ottaa_project_flutter/application/service/local_storage_service.dart'
     as _i7;
 import 'package:ottaa_project_flutter/application/service/mobile_remote_storage_service.dart'
-    as _i43;
+    as _i42;
 import 'package:ottaa_project_flutter/application/service/notifications_service_impl.dart'
     as _i9;
 import 'package:ottaa_project_flutter/application/service/pictograms_service.dart'
@@ -43,7 +43,7 @@ import 'package:ottaa_project_flutter/application/service/tts_service.dart'
 import 'package:ottaa_project_flutter/application/service/user_settings_service.dart'
     as _i17;
 import 'package:ottaa_project_flutter/application/service/web_remote_storage_service.dart'
-    as _i42;
+    as _i43;
 import 'package:ottaa_project_flutter/application/use_cases/create_email_token_impl.dart'
     as _i26;
 import 'package:ottaa_project_flutter/application/use_cases/create_group_impl.dart'
@@ -151,6 +151,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i20.AuthRepository>(_i21.AuthService(
       gh<_i4.LocalDatabaseRepository>(),
       gh<_i12.ServerRepository>(),
+      gh<_i3.I18N>(),
     ));
     gh.singleton<_i22.ChatGPTRepository>(_i23.ChatGPTService(
       gh<_i24.ServerRepository>(),
@@ -173,20 +174,20 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i39.ProfileRepository>(
         _i40.ProfileService(gh<_i12.ServerRepository>()));
     gh.singleton<_i41.RemoteStorageRepository>(
-      _i42.WebRemoteStorageService(
-        gh<_i20.AuthRepository>(),
-        gh<_i12.ServerRepository>(),
-        gh<_i3.I18N>(),
-      ),
-      registerFor: {_web},
-    );
-    gh.singleton<_i41.RemoteStorageRepository>(
-      _i43.MobileRemoteStorageService(
+      _i42.MobileRemoteStorageService(
         gh<_i20.AuthRepository>(),
         gh<_i12.ServerRepository>(),
         gh<_i3.I18N>(),
       ),
       registerFor: {_mobile},
+    );
+    gh.singleton<_i41.RemoteStorageRepository>(
+      _i43.WebRemoteStorageService(
+        gh<_i20.AuthRepository>(),
+        gh<_i12.ServerRepository>(),
+        gh<_i3.I18N>(),
+      ),
+      registerFor: {_web},
     );
     gh.singleton<_i44.ReportRepository>(
         _i45.ReportService(gh<_i12.ServerRepository>()));
