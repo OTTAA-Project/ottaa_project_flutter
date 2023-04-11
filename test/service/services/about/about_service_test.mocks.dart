@@ -7,17 +7,18 @@ import 'dart:async' as _i4;
 
 import 'package:either_dart/either.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i11;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i12;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i9;
-import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i13;
+import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i14;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i5;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i6;
+import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i10;
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart' as _i7;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i8;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
-    as _i12;
+    as _i13;
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
-    as _i10;
+    as _i11;
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
     as _i3;
 
@@ -448,6 +449,33 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
         )),
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
+  _i4.Future<_i2.Either<String, String>> generatePhraseGPT({
+    required String? prompt,
+    required int? maxTokens,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #generatePhraseGPT,
+          [],
+          {
+            #prompt: prompt,
+            #maxTokens: maxTokens,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, String>>.value(
+            _FakeEither_0<String, String>(
+          this,
+          Invocation.method(
+            #generatePhraseGPT,
+            [],
+            {
+              #prompt: prompt,
+              #maxTokens: maxTokens,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, String>>);
+  @override
   _i4.Future<String> uploadUserImage({
     required String? path,
     required String? name,
@@ -728,6 +756,23 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
         returnValue: _i4.Future<Map<String, dynamic>?>.value(),
       ) as _i4.Future<Map<String, dynamic>?>);
   @override
+  _i4.Future<void> updateDevicesId({
+    required String? userId,
+    required _i10.DeviceToken? deviceToken,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateDevicesId,
+          [],
+          {
+            #userId: userId,
+            #deviceToken: deviceToken,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> learnPictograms({
     required String? uid,
     required String? language,
@@ -951,13 +996,13 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i10.LocalDatabaseRepository {
+    implements _i11.LocalDatabaseRepository {
   MockLocalDatabaseRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set user(_i11.UserModel? user) => super.noSuchMethod(
+  set user(_i12.UserModel? user) => super.noSuchMethod(
         Invocation.setter(
           #user,
           user,
@@ -983,7 +1028,7 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<void> setUser(_i11.UserModel? user) => (super.noSuchMethod(
+  _i4.Future<void> setUser(_i12.UserModel? user) => (super.noSuchMethod(
         Invocation.method(
           #setUser,
           [user],
@@ -992,13 +1037,13 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<_i11.UserModel?> getUser() => (super.noSuchMethod(
+  _i4.Future<_i12.UserModel?> getUser() => (super.noSuchMethod(
         Invocation.method(
           #getUser,
           [],
         ),
-        returnValue: _i4.Future<_i11.UserModel?>.value(),
-      ) as _i4.Future<_i11.UserModel?>);
+        returnValue: _i4.Future<_i12.UserModel?>.value(),
+      ) as _i4.Future<_i12.UserModel?>);
   @override
   _i4.Future<void> deleteUser() => (super.noSuchMethod(
         Invocation.method(
@@ -1030,7 +1075,7 @@ class MockLocalDatabaseRepository extends _i1.Mock
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
+class MockAuthRepository extends _i1.Mock implements _i13.AuthRepository {
   MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -1041,8 +1086,8 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
         returnValue: false,
       ) as bool);
   @override
-  _i4.Future<_i2.Either<String, _i11.UserModel>> signIn(
-    _i13.SignInType? type, [
+  _i4.Future<_i2.Either<String, _i12.UserModel>> signIn(
+    _i14.SignInType? type, [
     String? email,
     String? password,
   ]) =>
@@ -1055,8 +1100,8 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
             password,
           ],
         ),
-        returnValue: _i4.Future<_i2.Either<String, _i11.UserModel>>.value(
-            _FakeEither_0<String, _i11.UserModel>(
+        returnValue: _i4.Future<_i2.Either<String, _i12.UserModel>>.value(
+            _FakeEither_0<String, _i12.UserModel>(
           this,
           Invocation.method(
             #signIn,
@@ -1067,7 +1112,7 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
             ],
           ),
         )),
-      ) as _i4.Future<_i2.Either<String, _i11.UserModel>>);
+      ) as _i4.Future<_i2.Either<String, _i12.UserModel>>);
   @override
   _i4.Future<_i2.Either<String, bool>> signUp() => (super.noSuchMethod(
         Invocation.method(
@@ -1084,21 +1129,21 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
         )),
       ) as _i4.Future<_i2.Either<String, bool>>);
   @override
-  _i4.Future<_i2.Either<String, _i11.UserModel>> getCurrentUser() =>
+  _i4.Future<_i2.Either<String, _i12.UserModel>> getCurrentUser() =>
       (super.noSuchMethod(
         Invocation.method(
           #getCurrentUser,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<String, _i11.UserModel>>.value(
-            _FakeEither_0<String, _i11.UserModel>(
+        returnValue: _i4.Future<_i2.Either<String, _i12.UserModel>>.value(
+            _FakeEither_0<String, _i12.UserModel>(
           this,
           Invocation.method(
             #getCurrentUser,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<String, _i11.UserModel>>);
+      ) as _i4.Future<_i2.Either<String, _i12.UserModel>>);
   @override
   _i4.Future<bool> isLoggedIn() => (super.noSuchMethod(
         Invocation.method(
@@ -1129,6 +1174,14 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
             #email: email,
             #id: id,
           },
+        ),
+        returnValue: _i4.Future<String>.value(''),
+      ) as _i4.Future<String>);
+  @override
+  _i4.Future<String> getDeviceId() => (super.noSuchMethod(
+        Invocation.method(
+          #getDeviceId,
+          [],
         ),
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);

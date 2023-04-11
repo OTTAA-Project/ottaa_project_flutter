@@ -291,6 +291,32 @@ class MockAuthService extends _i1.Mock implements _i12.AuthService {
   }
 
   @override
+  String get lastName => (super.noSuchMethod(
+        Invocation.getter(#lastName),
+        returnValue: '',
+      ) as String);
+  @override
+  set lastName(String? _lastName) => super.noSuchMethod(
+        Invocation.setter(
+          #lastName,
+          _lastName,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  String get name => (super.noSuchMethod(
+        Invocation.getter(#name),
+        returnValue: '',
+      ) as String);
+  @override
+  set name(String? _name) => super.noSuchMethod(
+        Invocation.setter(
+          #name,
+          _name,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   bool get isLogged => (super.noSuchMethod(
         Invocation.getter(#isLogged),
         returnValue: false,

@@ -30,7 +30,6 @@ class I18N extends ChangeNotifier {
       locale = platformLanguages[deviceLanguage[0]] ?? const Locale("es", "AR");
     }
 
-
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
     if (_languages.containsKey(languageCode)) {
@@ -86,6 +85,8 @@ class I18N extends ChangeNotifier {
     }
     _languages[locale.toString()] ??= newLanguage;
     _currentLanguage = _languages[locale.toString()];
+    this.locale = locale;
+
     notify();
   }
 

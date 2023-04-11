@@ -10,6 +10,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i9;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i5;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i6;
+import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i10;
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart' as _i7;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i8;
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
@@ -442,6 +443,33 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
         )),
       ) as _i4.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
+  _i4.Future<_i2.Either<String, String>> generatePhraseGPT({
+    required String? prompt,
+    required int? maxTokens,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #generatePhraseGPT,
+          [],
+          {
+            #prompt: prompt,
+            #maxTokens: maxTokens,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, String>>.value(
+            _FakeEither_0<String, String>(
+          this,
+          Invocation.method(
+            #generatePhraseGPT,
+            [],
+            {
+              #prompt: prompt,
+              #maxTokens: maxTokens,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, String>>);
+  @override
   _i4.Future<String> uploadUserImage({
     required String? path,
     required String? name,
@@ -721,6 +749,23 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
         ),
         returnValue: _i4.Future<Map<String, dynamic>?>.value(),
       ) as _i4.Future<Map<String, dynamic>?>);
+  @override
+  _i4.Future<void> updateDevicesId({
+    required String? userId,
+    required _i10.DeviceToken? deviceToken,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateDevicesId,
+          [],
+          {
+            #userId: userId,
+            #deviceToken: deviceToken,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> learnPictograms({
     required String? uid,
