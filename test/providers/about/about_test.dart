@@ -10,6 +10,7 @@ import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 
 import 'about_test.mocks.dart';
@@ -33,7 +34,7 @@ void main() {
           name: "John",
           lastName: "Doe",
         ),
-        language: "es_AR",
+        language: LanguageSetting.empty(),
       ),
       email: "test@mail.com",
     );
@@ -130,7 +131,7 @@ void main() {
           name: "John",
           lastName: "Doe",
         ),
-        language: "es_AR",
+        language: LanguageSetting.empty(),
       ),
       email: "test@mail.com",
     );

@@ -1,4 +1,5 @@
-import 'package:test/test.dart';
+
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
 
 void main(){

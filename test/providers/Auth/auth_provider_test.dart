@@ -11,14 +11,18 @@ import 'package:ottaa_project_flutter/application/service/about_service.dart';
 import 'package:ottaa_project_flutter/application/service/auth_service.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
+import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/language_setting.dart';
+import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import 'auth_provider_test.mocks.dart';
 
-@GenerateMocks([AuthProvider,LoadingNotifier,AuthService,AboutService,LocalDatabaseRepository,AuthNotifier, UserNotifier])
-void main(){
+@GenerateMocks([AuthProvider, LoadingNotifier, AuthService, AboutService, LocalDatabaseRepository, AuthNotifier, UserNotifier])
+void main() {
   late AuthProvider authProvider;
   late MockAuthProvider mockAuthProvider;
   late MockLoadingNotifier mockLoadingNotifier;
@@ -30,29 +34,33 @@ void main(){
   late MockUserNotifier mockUserNotifier;
 
   setUp(() {
-    fakeUser = const UserModel(
+    fakeUser = BaseUserModel(
       id: "0",
-      name: "fake user",
-      email: "fake@mail.com",
-      photoUrl: "https://test.com",
-      avatar: "0",
-      birthdate: 0,
-      gender: "male",
-      isFirstTime: true,
-      language: "es_AR",
+      settings: BaseSettingsModel(
+        data: UserData(
+          avatar: AssetsImage(asset: "test", network: "https://test.com"),
+          birthDate: DateTime(0),
+          genderPref: "n/a",
+          lastConnection: DateTime(0),
+          name: "John",
+          lastName: "Doe",
+        ),
+        language: LanguageSetting.empty(),
+      ),
+      email: "test@mail.com",
     );
     mockAuthProvider = MockAuthProvider();
     mockLoadingNotifier = MockLoadingNotifier();
     mockAuthService = MockAuthService();
     mockAboutService = MockAboutService();
-    mockLocalDatabaseRepository =MockLocalDatabaseRepository();
+    mockLocalDatabaseRepository = MockLocalDatabaseRepository();
     mockAuthNotifier = MockAuthNotifier();
     mockUserNotifier = MockUserNotifier();
     authProvider = AuthProvider(mockLoadingNotifier, mockAuthService, mockAboutService, mockLocalDatabaseRepository, mockAuthNotifier, mockUserNotifier);
   });
   group('auth Provider testing', () {
     test('sign in', () async {
-      when(mockAuthService.runToGetDataFromOtherPlatform(email: fakeUser.email, id: fakeUser.id)).thenAnswer((realInvocation) async=>fakeUser.email);
+      when(mockAuthService.runToGetDataFromOtherPlatform(email: fakeUser.email, id: fakeUser.id)).thenAnswer((realInvocation) async => fakeUser.email);
       when(mockAuthService.signIn(SignInType.email)).thenAnswer((realInvocation) async => Right(fakeUser));
       when(mockLocalDatabaseRepository.setUser(fakeUser)).thenAnswer((realInvocation) async => {});
       when(mockAboutService.getUserInformation()).thenAnswer((realInvocation) async => Right(fakeUser));
@@ -79,7 +87,7 @@ void main(){
       verify(mockLoadingNotifier.hideLoading()).called(1);
     });
 
-    test('log out',() async {
+    test('log out', () async {
       when(mockAuthService.signIn(SignInType.email)).thenAnswer((realInvocation) async => Right(fakeUser));
       when(mockLocalDatabaseRepository.setUser(fakeUser)).thenAnswer((realInvocation) async => {});
       when(mockAboutService.getUserInformation()).thenAnswer((realInvocation) async => Right(fakeUser));
@@ -96,10 +104,7 @@ void main(){
 
       await authProvider.logout();
 
-      expect( false, false);
+      expect(false, false);
     });
-
   });
-
-
 }

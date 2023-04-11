@@ -3,20 +3,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
 
 import 'ttsprovider_test.mocks.dart';
 
-
-@GenerateMocks([TTSProvider,TTSRepository])
-void main(){
+@GenerateMocks([TTSProvider, TTSRepository, LocalDatabaseRepository])
+void main() {
   late MockTTSProvider mockTTSProvider;
   late MockTTSRepository mockTTSRepository;
   late TTSProvider ttsProvider;
-  setUp((){
+  late MockLocalDatabaseRepository mockLocalDatabaseRepository;
+  setUp(() {
     mockTTSRepository = MockTTSRepository();
     mockTTSProvider = MockTTSProvider();
-    ttsProvider = TTSProvider(mockTTSRepository);
+    mockLocalDatabaseRepository = MockLocalDatabaseRepository();
+    ttsProvider = TTSProvider(mockTTSRepository, mockLocalDatabaseRepository);
   });
 
   group('TTS Provider', () {
@@ -25,5 +27,4 @@ void main(){
       verify(ttsProvider.speak('Hello')).called(1);
     });
   });
-
 }

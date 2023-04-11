@@ -72,7 +72,7 @@ class AboutService extends AboutRepository {
 
     if (result.isRight) {
       final user = result.right;
-      return "";
+      return user.email;
       // return user.settings.data.;
     }
 
