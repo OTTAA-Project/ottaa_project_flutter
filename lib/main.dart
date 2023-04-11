@@ -10,7 +10,7 @@ import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/firebase_options.dart';
 
-//Apr 10v1
+//Apr 11v1
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
