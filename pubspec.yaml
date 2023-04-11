@@ -47,18 +47,25 @@ dependencies:
   path_provider: ^2.0.11
   syncfusion_flutter_charts: ^20.3.56
   textfield_datepicker: ^0.1.0
-  sqflite: ^2.2.0+3
   path: ^1.8.2
   cached_network_image: ^3.2.2
   transparent_image: ^2.0.0
+  openai_client:
+    git:
+      url: https://github.com/OTTAA-Project/openai_client.git
+      ref: main
+  flutter_dotenv: ^5.0.2
   ottaa_ui_kit:
     git:
       url: https://github.com/OTTAA-Project/OTTAA_flutter_theme.git
       ref: master
   rive: ^0.9.1
   collection: ^1.16.0
+  firebase_messaging: ^14.2.1
+  awesome_notifications: ^0.7.4+1
   injectable: ^2.1.0
-
+  firebase_remote_config: ^3.0.15
+  universal_io: ^2.2.0
 
 dev_dependencies:
   build_runner: ^2.3.2
@@ -71,15 +78,14 @@ dev_dependencies:
   # custom_lint:
   # riverpod_lint:
 
-
 dependency_overrides:
-  #  firebase_core_platform_interface: 4.5.1
-#  test_api: 0.4.12
-
+  # firebase_core_platform_interface: 4.5.1
+  # test_api: 0.4.12
 
 flutter:
   uses-material-design: true
   assets:
+    - .env
     - assets/imgs/
     - assets/
     - assets/edit/

@@ -1,14 +1,19 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart';
+import 'package:universal_io/io.dart';
 
 @Singleton()
 class I18N extends ChangeNotifier {
   final Map<String, TranslationTree> _languages = {};
+  final platformLanguages = {
+    "es": const Locale("es", "AR"),
+    "en": const Locale("en", "US"),
+    "it": const Locale("it", "IT"),
+    "pt": const Locale("pt", "BR"),
+  };
 
   late Locale locale;
   TranslationTree? _currentLanguage;
@@ -17,30 +22,14 @@ class I18N extends ChangeNotifier {
   static Future<I18N> start() => I18N().init();
 
   Future<I18N> init() async {
-    final List<Locale> systemLocales = WidgetsBinding.instance.window.locales;
     final List<String> deviceLanguage = Platform.localeName.split('_');
-    Locale deviceLocale;
+
     if (deviceLanguage.length == 2) {
-      deviceLocale = Locale(deviceLanguage[0], deviceLanguage[1]);
+      locale = Locale(deviceLanguage[0], deviceLanguage[1]);
     } else {
-      switch (deviceLanguage[0].toLowerCase()) {
-        case 'en':
-          deviceLocale = const Locale('en', 'US');
-          break;
-        case 'it':
-          deviceLocale = const Locale('it', 'IT');
-          break;
-        case 'pt':
-          deviceLocale = const Locale('pt', 'BR');
-          break;
-        case 'es':
-        default:
-          deviceLocale = const Locale('es', 'AR');
-          break;
-      }
+      locale = platformLanguages[deviceLanguage[0]] ?? const Locale("es", "AR");
     }
 
-    locale = deviceLocale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
@@ -86,18 +75,18 @@ class I18N extends ChangeNotifier {
     var split = languageCode.split("_");
     assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US");
     locale = Locale(split[0].toLowerCase(), split[1].toUpperCase());
-    TranslationTree? newLanguage = _languages[languageCode] ?? await loadTranslation(locale);
-    if (newLanguage == null) {
-      throw Exception("Language not found");
-    }
-    _languages[languageCode] ??= newLanguage;
-    _currentLanguage = _languages[languageCode];
-    notify();
+    changeLanguageFromLocale(locale);
   }
 
   Future<void> changeLanguageFromLocale(Locale locale) async {
     assert(locale.countryCode != null, "Locale must have a country code");
-    changeLanguage("${locale.languageCode.toLowerCase()}_${locale.countryCode?.toUpperCase()}");
+    TranslationTree? newLanguage = _languages[locale.toString()] ?? await loadTranslation(locale);
+    if (newLanguage == null) {
+      throw Exception("Language not found");
+    }
+    _languages[locale.toString()] ??= newLanguage;
+    _currentLanguage = _languages[locale.toString()];
+    notify();
   }
 
   void notify() {

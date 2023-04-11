@@ -57,4 +57,6 @@ class HiveTypesIds {
   static const int ttsSettingTypeId = 29;
 
   static const int languageSettingTypeId = 30;
+
+  static const int userDeviceTypeId = 31;
 }

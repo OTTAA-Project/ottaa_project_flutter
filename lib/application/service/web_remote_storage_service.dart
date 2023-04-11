@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
@@ -10,6 +11,7 @@ import 'package:ottaa_project_flutter/core/repositories/remote_storage_repositor
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
 @web
+@Singleton(as: RemoteStorageRepository)
 class WebRemoteStorageService implements RemoteStorageRepository {
   final ServerRepository _serverRepository;
 

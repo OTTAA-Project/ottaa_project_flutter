@@ -61,7 +61,7 @@
       "text4": "Desa pictogrames o frases favorites, per poder accedir-hi més ràpidament."
     },
     "unlink": "Desvincular",
-    "unlink_account": "Voleu desvincular a {name} de les seves comptes?",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Ajuda",
       "title1": "Preguntes freqüents",
@@ -121,14 +121,15 @@
     },
     "main_setting": {
       "interaction": "Interaccions",
-      "delete_talking": "Esborrar quan parla",
+      "talk_delete": "Hablar y Borrar",
       "shortcut": "Dreceres a la pantalla principal",
       "board_view": "Vista de taulells",
       "tabs": "Per pestanyes",
       "grid": "Grella",
       "ottaa_labs": "Ottaa Labs",
       "labs_text": "Funció frases verbals",
-      "labs_long": "Funció en Mode Beta\nPermet generar frases amb temps verbals més complexos"
+      "labs_long": "Funció en Mode Beta\nPermet generar frases amb temps verbals més complexos",
+      "one_by_one": "ONE by ONE"
     },
     "accessibility": {
       "selection": "Selecció",
@@ -185,15 +186,26 @@
     "general": "General",
     "pictogram": "Pictogrames",
     "configuration": "Configuració",
-    "user_ottaa": "Utilitzar Ottaa com a {name}",
+    "user_ottaa": "Usar Ottaa como {name}",
     "cancel": "Cancel·lar",
     "slow": "Lenta",
     "default": "Per defecte",
     "fast": "Ràpida",
     "voice": "Veu",
-    "boy": "Noi",
+    "small": "Chico",
     "medium": "Mitjana",
-    "big": "Gran"
+    "big": "Gran",
+    "comingsoon": "Esta característica va estár disponible muy pronto!",
+    "delicate": "delicade",
+    "chile": "Chile",
+    "spanish": "Español",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italiano",
+    "french": "French",
+    "portuguese": "Portuguese",
+    "test": "Esta es la voz que vas a usar en otta"
   },
   "onboarding": {
     "start": "Començar",
@@ -270,6 +282,41 @@
     }
   },
   "chatgpt": {
-    "prompt": "formar una frase amb aquestes paraules com si parlés un {age} {gender} en {language}, afegint connectors i articles quan sigui necessari: {pictograms}"
+    "prompt": "escribir una frase en ingles con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras y agregale la expresion culiau: {pictograms}"
+  },
+  "notification": {
+    "code": {
+      "request": {
+        "title": "Verificación de OTTAA Link",
+        "body": "Están intentando vincular tu cuenta con el token <b>{linkToken}</b>"
+      },
+      "confirm": {
+        "title": "Confirmación de OTTAA Link",
+        "body": "Se ha confirmado la vinculación de tu cuenta"
+      }
+    }
+  },
+  "game": {
+    "play": "Juguemos!",
+    "next": "Jugar",
+    "game_header_0": "¿Cuál es el picto?",
+    "game_header_1": "Unir pictogramas",
+    "game_header_2": "Juego de la Memoria",
+    "game_sub_0": "Responde las preguntas eligiendo el pictograma correcto. Aprende jugando",
+    "game_sub_1": "Uní los pictogramas de manera correcta",
+    "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
+    "group": "Selecciona una categoría para poder jugar",
+    "search": "Buscar Tablero",
+    "find": "Encontrá los tableros que quieras, fácilmente!",
+    "game_1_line": "Selecciona el pictograma que escuches",
+    "game_2_line": "Selecciona la palabra que corresponde a su pictograma",
+    "game_3_line": "Selecciona una tarjeta y encuentra la pareja del pictograma",
+    "no": "¡Oh Oh!",
+    "yes": "¡Muy bien!",
+    "score": "Tu puntaje",
+    "correct": "Correcto",
+    "incorrect": "Incorrecto",
+    "use_time": "Tiempo total",
+    "maximum_streak": "Mejor racha"
   }
 }

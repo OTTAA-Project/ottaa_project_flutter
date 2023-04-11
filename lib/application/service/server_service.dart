@@ -2,24 +2,36 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:openai_client/openai_client.dart' as openai;
+import 'package:openai_client/src/model/openai_chat/openai_chat.dart';
+
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
-import 'package:http/http.dart' as http;
 
 @Singleton(as: ServerRepository)
 class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   final Reference _storageRef = FirebaseStorage.instance.ref();
+
+  final openai.OpenAIClient _openAIClient = openai.OpenAIClient(
+    configuration: openai.OpenAIConfiguration(
+      apiKey: dotenv.get("openaiToken"),
+    ),
+  );
 
   @override
   Future<void> init() async {}
@@ -343,10 +355,11 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherVoid> setShortcutsForUser({required ShortcutsModel shortcuts, required String userId}) async {
-    final ref = _database.child('$userId/layout/shortcuts/');
+    final ref = _database.child('$userId/settings/layout/shortcuts/');
 
     try {
-      await ref.update(shortcuts.toMap());
+      final data = shortcuts.toMap();
+      await ref.update(data);
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -375,6 +388,7 @@ class ServerService implements ServerRepository {
       'src': ownEmail,
       'dst': email,
     };
+    print(jsonEncode(body));
     try {
       final res = await http.post(
         uri,
@@ -518,6 +532,26 @@ class ServerService implements ServerRepository {
   }
 
   @override
+  Future<void> updateDevicesId({required String userId, required DeviceToken deviceToken}) async {
+    final ref = _database.child("$userId/settings/devices");
+
+    final currentList = (await ref.get()).value;
+
+    final list = List<dynamic>.from((currentList ?? []) as List<dynamic>);
+
+    final existsElement = list.firstWhereOrNull((element) => element["deviceToken"] == deviceToken.deviceToken);
+    final index = list.indexOf(existsElement);
+
+    if (index == -1) {
+      list.add(deviceToken.toMap());
+    } else {
+      existsElement["lastUsage"] = DateTime.now().millisecondsSinceEpoch;
+      list[index] = deviceToken.toMap();
+    }
+
+    await ref.set(list);
+  }
+
   Future<EitherMap> learnPictograms({
     required String uid,
     required String language,
@@ -587,6 +621,26 @@ class ServerService implements ServerRepository {
     } catch (e) {
       // handle te responde error
       return Left("learn_error");
+    }
+  }
+
+  @override
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
+    try {
+      final choice = await _openAIClient.completions
+          .create(
+            model: "text-davinci-003",
+            prompt: prompt,
+            temperature: 0,
+            maxTokens: maxTokens,
+          )
+          .data;
+
+      if (!choice.choices.isNotEmpty) return const Left("No completado");
+
+      return Right(choice.choices.first.text);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 

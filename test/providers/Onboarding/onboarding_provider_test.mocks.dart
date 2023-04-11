@@ -255,6 +255,14 @@ class MockAuthRepository extends _i1.Mock implements _i6.AuthRepository {
         ),
         returnValue: _i7.Future<String>.value(''),
       ) as _i7.Future<String>);
+  @override
+  _i7.Future<String> getDeviceId() => (super.noSuchMethod(
+        Invocation.method(
+          #getDeviceId,
+          [],
+        ),
+        returnValue: _i7.Future<String>.value(''),
+      ) as _i7.Future<String>);
 }
 
 /// A class which mocks [LoadingNotifier].

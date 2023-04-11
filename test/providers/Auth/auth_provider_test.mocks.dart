@@ -387,6 +387,14 @@ class MockAuthService extends _i1.Mock implements _i12.AuthService {
           ),
         )),
       ) as _i6.Future<_i3.Either<String, bool>>);
+  @override
+  _i6.Future<String> getDeviceId() => (super.noSuchMethod(
+        Invocation.method(
+          #getDeviceId,
+          [],
+        ),
+        returnValue: _i6.Future<String>.value(''),
+      ) as _i6.Future<String>);
 }
 
 /// A class which mocks [AboutService].
