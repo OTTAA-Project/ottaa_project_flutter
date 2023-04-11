@@ -43,6 +43,7 @@ class SplashProvider extends ChangeNotifier {
     _userNotifier.setUser(result.right);
     return result.isRight;
   }
+
   Future<void> updateLastConnectionTime({
     required String userId,
     required int time,
@@ -53,6 +54,13 @@ class SplashProvider extends ChangeNotifier {
     );
   }
 
+  Future<bool> hasUser() async {
+    final result = await _auth.getCurrentUser();
+    if (result.isLeft) {
+      return false;
+    }
+    return true;
+  }
 }
 
 final splashProvider = ChangeNotifierProvider<SplashProvider>((ref) {
