@@ -63,11 +63,10 @@ class ProfileSettingsScreen extends ConsumerWidget {
                   icon: AppImages.kProfileSettingsIcon1,
                   text: "profile.profile".trl,
                 ),
-                user!.type.toString() == UserType.user.toString()
+                user.type.toString() == UserType.user.toString()
                     ? Container()
                     : CategoryWidget(
-                        onTap: () =>
-                            context.push(AppRoutes.profileChooserScreenSelected),
+                        onTap: () => context.push(AppRoutes.profileChooserScreenSelected),
                         icon: AppImages.kProfileSettingsIcon2,
                         text: "profile.role".trl,
                       ),
@@ -79,8 +78,7 @@ class ProfileSettingsScreen extends ConsumerWidget {
                 user.type.toString() == UserType.user.toString()
                     ? Container()
                     : CategoryWidget(
-                        onTap: () =>
-                            context.push(AppRoutes.profileLinkedAccountScreen),
+                        onTap: () => context.push(AppRoutes.profileLinkedAccountScreen),
                         icon: AppImages.kProfileSettingsIcon4,
                         text: "profile.linked_accounts".trl,
                       ),
