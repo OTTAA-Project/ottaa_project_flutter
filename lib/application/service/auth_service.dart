@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'dart:async';
@@ -32,7 +33,9 @@ class AuthService extends AuthRepository {
   final LocalDatabaseRepository _databaseRepository;
   final ServerRepository _serverRepository;
 
-  AuthService(this._databaseRepository, this._serverRepository);
+  final I18N _i18n;
+
+  AuthService(this._databaseRepository, this._serverRepository, this._i18n);
 
   @override
   Future<Either<String, UserModel>> getCurrentUser() async {
@@ -114,7 +117,9 @@ class AuthService extends AuthRepository {
                 lastName: lastName,
                 name: name,
               ),
-              language: LanguageSetting.empty(),
+              language: LanguageSetting.empty(
+                language: _i18n.locale.toString(),
+              ),
             ),
             email: emailRetriever ?? "",
           );
@@ -133,8 +138,7 @@ class AuthService extends AuthRepository {
               });
               break;
             case "none":
-            default:
-              userModel = BaseUserModel.fromMap({
+            default:              userModel = BaseUserModel.fromMap({
                 ...userInfo.right,
                 "email": user.email ?? user.providerData[0].email,
               });
@@ -242,7 +246,9 @@ class AuthService extends AuthRepository {
           lastName: lastName,
           name: name,
         ),
-        language: LanguageSetting.empty(),
+        language: LanguageSetting.empty(
+          language: _i18n.locale.toString(),
+        ),
       ),
       email: emailRetriever ?? "",
     );

@@ -5,11 +5,23 @@ import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart';
 import 'package:universal_io/io.dart';
 
+const Map<String, Locale> supportedLocales = {
+  "es_AR": Locale("es", "AR"),
+  "en_US": Locale("en", "US"),
+  "it_IT": Locale("it", "IT"),
+  "pt_BR": Locale("pt", "BR"),
+  "ca_ES": Locale("ca", "ES"),
+  "es_CL": Locale("es", "CL"),
+  "es_CO": Locale("es", "CO"),
+  "es_ES": Locale("es", "ES"),
+  "ur_PK": Locale("ur", "PK"),
+};
+
 @Singleton()
 class I18N extends ChangeNotifier {
   final Map<String, TranslationTree> _languages = {};
   final platformLanguages = {
-    "es": const Locale("es", "AR"),
+    "es": const Locale("es", "CO"),
     "en": const Locale("en", "US"),
     "it": const Locale("it", "IT"),
     "pt": const Locale("pt", "BR"),
@@ -27,10 +39,14 @@ class I18N extends ChangeNotifier {
     if (deviceLanguage.length == 2) {
       locale = Locale(deviceLanguage[0], deviceLanguage[1]);
     } else {
-      locale = platformLanguages[deviceLanguage[0]] ?? const Locale("es", "AR");
+      locale = platformLanguages[deviceLanguage[0]] ?? const Locale("es", "CO");
     }
 
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    String languageCode = "${locale.languageCode}_${locale.countryCode}";
+
+    if (!supportedLocales.containsKey(languageCode)) {
+      languageCode = platformLanguages[locale.languageCode]?.toString() ?? "es_CO";
+    }
 
     if (_languages.containsKey(languageCode)) {
       _currentLanguage = _languages[languageCode]!;
@@ -38,7 +54,7 @@ class I18N extends ChangeNotifier {
     }
 
     TranslationTree? newLanguage = await loadTranslation(locale);
-    newLanguage ??= await loadTranslation(const Locale("es", "AR"));
+    newLanguage ??= await loadTranslation(const Locale("es", "CO"));
 
     _languages.putIfAbsent(languageCode, () => newLanguage!);
     _currentLanguage = newLanguage;
@@ -72,13 +88,14 @@ class I18N extends ChangeNotifier {
 
   Future<void> changeLanguage(String languageCode) async {
     var split = languageCode.split("_");
-    assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US");
-    locale = Locale(split[0].toLowerCase(), split[1].toUpperCase());
+    assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US)");
     changeLanguageFromLocale(locale);
   }
 
   Future<void> changeLanguageFromLocale(Locale locale) async {
     assert(locale.countryCode != null, "Locale must have a country code");
+    if (!supportedLocales.containsKey(locale.toString())) return;
+
     TranslationTree? newLanguage = _languages[locale.toString()] ?? await loadTranslation(locale);
     if (newLanguage == null) {
       throw Exception("Language not found");
@@ -86,7 +103,6 @@ class I18N extends ChangeNotifier {
     _languages[locale.toString()] ??= newLanguage;
     _currentLanguage = _languages[locale.toString()];
     this.locale = locale;
-
     notify();
   }
 
