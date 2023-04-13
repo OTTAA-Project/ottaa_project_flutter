@@ -100,9 +100,11 @@ unlinked_spec.ds
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Runner/GoogleService-info.plist
 **/ios/Runner/GoogleService-Info.plist
 **/ios/GoogleService-info.plist
 **/ios/info.plist
+**/ios/*.plist
 
 # macOS
 **/macos/Flutter/GeneratedPluginRegistrant.swift
