@@ -2,14 +2,13 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
@@ -25,14 +24,19 @@ import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 @Singleton(as: AuthRepository)
 class AuthService extends AuthRepository {
   final FirebaseAuth _authProvider = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', "https://www.googleapis.com/auth/user.birthday.read"]);
-  final FacebookAuth _facebookAuth = FacebookAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+    ],
+  );
   String lastName = '';
   String name = '';
   final LocalDatabaseRepository _databaseRepository;
   final ServerRepository _serverRepository;
 
-  AuthService(this._databaseRepository, this._serverRepository);
+  final I18N _i18n;
+
+  AuthService(this._databaseRepository, this._serverRepository, this._i18n);
 
   @override
   Future<Either<String, UserModel>> getCurrentUser() async {
@@ -82,9 +86,9 @@ class AuthService extends AuthRepository {
       case SignInType.google:
         result = await _signInWithGoogle();
         break;
-      case SignInType.facebook:
-        result = await _signInWithFacebook();
-        break;
+      // case SignInType.facebook:
+      //   result = await _signInWithFacebook();
+      //   break;
       case SignInType.apple:
       case SignInType.email:
       default:
@@ -114,7 +118,9 @@ class AuthService extends AuthRepository {
                 lastName: lastName,
                 name: name,
               ),
-              language: LanguageSetting.empty(),
+              language: LanguageSetting.empty(
+                language: _i18n.locale.toString(),
+              ),
             ),
             email: emailRetriever ?? "",
           );
@@ -133,8 +139,7 @@ class AuthService extends AuthRepository {
               });
               break;
             case "none":
-            default:
-              userModel = BaseUserModel.fromMap({
+            default:              userModel = BaseUserModel.fromMap({
                 ...userInfo.right,
                 "email": user.email ?? user.providerData[0].email,
               });
@@ -192,7 +197,7 @@ class AuthService extends AuthRepository {
     }
   }
 
-  Future<Either<String, User>> _signInWithFacebook() async {
+  /* Future<Either<String, User>> _signInWithFacebook() async {
     try {
       final LoginResult result = await _facebookAuth.login();
 
@@ -215,7 +220,7 @@ class AuthService extends AuthRepository {
     } catch (e) {
       return Left(e.toString());
     }
-  }
+  }*/
 
   @override
   bool get isLogged => _databaseRepository.user != null;
@@ -242,7 +247,9 @@ class AuthService extends AuthRepository {
           lastName: lastName,
           name: name,
         ),
-        language: LanguageSetting.empty(),
+        language: LanguageSetting.empty(
+          language: _i18n.locale.toString(),
+        ),
       ),
       email: emailRetriever ?? "",
     );

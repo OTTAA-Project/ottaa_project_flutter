@@ -154,6 +154,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i20.AuthRepository>(_i21.AuthService(
       gh<_i4.LocalDatabaseRepository>(),
       gh<_i12.ServerRepository>(),
+      gh<_i3.I18N>(),
     ));
     gh.singleton<_i22.ChatGPTRepository>(_i23.ChatGPTService(
       gh<_i24.ServerRepository>(),
