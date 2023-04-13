@@ -22,7 +22,6 @@ dependencies:
   firebase_crashlytics: ^3.0.7
   firebase_database: ^10.0.5
   firebase_storage: ^11.0.5
-  flutter_facebook_auth: ^5.0.6
   flutter_riverpod: ^2.0.2
   flutter_tts: ^3.5.3
   fluttertoast: ^8.1.1
