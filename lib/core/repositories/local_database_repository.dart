@@ -12,4 +12,6 @@ abstract class LocalDatabaseRepository {
   Future<void> deleteUser();
   Future<bool> getIntro();
   Future<void> setIntro([bool? value]);
+  Future<String> getVoice();
+  Future<void> setVoice(String voice);
 }

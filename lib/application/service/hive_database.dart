@@ -1,5 +1,4 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
@@ -112,6 +111,8 @@ class HiveDatabase extends LocalDatabaseRepository {
 
     await Hive.openBox('intro');
 
+    await Hive.openBox('tts');
+
     await getUser();
   }
 
@@ -131,5 +132,16 @@ class HiveDatabase extends LocalDatabaseRepository {
   Future<bool> getIntro() async {
     final res = Hive.box('intro').get('first');
     return res ?? true;
+  }
+
+  @override
+  Future<String> getVoice() async {
+    final res = Hive.box('tts').get('voice');
+    return res ?? '';
+  }
+
+  @override
+  Future<void> setVoice(String voice) async {
+    await Hive.box('tts').put('voice', voice);
   }
 }
