@@ -61,28 +61,75 @@ workflows:
   master-workflow:
     name: master workflow
     max_build_duration: 30
+    integrations:
+      app_store_connect: OTTAAAppStore
     environment:
+      groups:
+        - ottaa-flutter
       flutter: default
       xcode: latest
       cocoapods: default
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.ottaaproject.ottaa
+      vars:
+        APP_ID: 1668864533
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: master
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: '*'
+          include: true
+
     scripts:
+      - name: Set up key.properties
+        script: |
+          echo $FCI_KEYSTORE | base64 --decode > $FCI_KEYSTORE_PATH
+          cat >> "$FCI_BUILD_DIR/android/key.properties" <<EOF
+          storePassword=$FCI_KEYSTORE_PASSWORD
+          keyPassword=$FCI_KEY_PASSWORD
+          keyAlias=$FCI_KEY_ALIAS
+          storeFile=/tmp/keystore.keystore
+          EOF
+
+      - name: Set up local.properties
+        script:
+          echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+
       - name: Setting up the environment
         script:
+          flutter upgrade
           flutter packages pub get
           flutter config --enable-web
           echo $FIREBASE_JSON | base64 --decode > $FCI_BUILD_DIR/firebase.json
           echo $GOOGLE_SERVICES | base64 --decode > $FCI_BUILD_DIR/android/app/google-services.json
+          echo $ENV | base64 --decode > $FCI_BUILD_DIR/.env
           flutter packages pub run build_runner build --delete-conflicting-outputs
 
-      - name: Testing
-        script:
-          flutter test
+      - name: Set up code signing settings on Xcode project
+        script: xcode-project use-profiles
 
-      - name: Building
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+
+      - name: Build Android & Web
         script:
+          flutter build appbundle --release --build-name=1.0.$(($BUILD_NUMBER + 1)) --build-number=$(($BUILD_NUMBER + 1))
           flutter build web --release --web-renderer canvaskit
           cd build/web
           7z a -r ../web.zip ./*
+
+      - name: Build iOS
+        script: |
+          BUILD_NUMBER=$(($(app-store-connect get-latest-app-store-build-number "$APP_ID") + 1))
+          flutter build ipa --release \
+            --build-name=1.0.$BUILD_NUMBER \
+            --build-number=$BUILD_NUMBER
 
       - name: Deploying web
         script:
@@ -95,6 +142,8 @@ workflows:
       - build/web.zip
       - '*.snap'
       - build/windows/**/*.msix
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
       - flutter_drive.log
     publishing:
       email:
