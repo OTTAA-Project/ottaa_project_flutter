@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="facebook_app_id">658779868360186</string>
-    <string name="fb_login_protocol_scheme">fb658779868360186</string>
-    <string name="facebook_client_token">46ff5fd01eb079f52398b232f563cf9b</string>
     <string name="app_name">OTTAA Project</string>
 </resources>
