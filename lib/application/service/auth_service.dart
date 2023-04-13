@@ -23,7 +23,11 @@ import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 @Singleton(as: AuthRepository)
 class AuthService extends AuthRepository {
   final FirebaseAuth _authProvider = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+    ],
+  );
   String lastName = '';
   String name = '';
   final LocalDatabaseRepository _databaseRepository;
@@ -189,7 +193,7 @@ class AuthService extends AuthRepository {
     }
   }
 
- /* Future<Either<String, User>> _signInWithFacebook() async {
+  /* Future<Either<String, User>> _signInWithFacebook() async {
     try {
       final LoginResult result = await _facebookAuth.login();
 
