@@ -35,6 +35,7 @@ class TTSService extends TTSRepository {
         await tts.setSpeechRate(speechRate);
         await tts.setPitch(pitch);
       }
+      await tts.setVoice({"name": name, "locale": locale});
       await tts.speak(text);
     }
   }

@@ -30,7 +30,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final _ttsProvider = ref.read(ttsProvider);
-      _ttsProvider.init();
+      await _ttsProvider.init();
     });
   }
 
