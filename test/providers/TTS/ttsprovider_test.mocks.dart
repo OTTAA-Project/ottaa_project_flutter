@@ -276,4 +276,21 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<String> getVoice() => (super.noSuchMethod(
+        Invocation.method(
+          #getVoice,
+          [],
+        ),
+        returnValue: _i4.Future<String>.value(''),
+      ) as _i4.Future<String>);
+  @override
+  _i4.Future<void> setVoice(String? voice) => (super.noSuchMethod(
+        Invocation.method(
+          #setVoice,
+          [voice],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

@@ -136,12 +136,12 @@ class HiveDatabase extends LocalDatabaseRepository {
 
   @override
   Future<String> getVoice() async {
-    final res = Hive.box('tts').get('voice');
+    final res = Hive.box('tts').get('name');
     return res ?? '';
   }
 
   @override
-  Future<void> setVoice(String voice) async {
-    await Hive.box('tts').put('voice', voice);
+  Future<void> setVoice({required String name}) async {
+    await Hive.box('tts').put('name', name);
   }
 }
