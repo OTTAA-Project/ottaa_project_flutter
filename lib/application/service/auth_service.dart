@@ -234,7 +234,7 @@ class AuthService extends AuthRepository {
     }
 
     final nameRetriever = user.displayName ?? user.providerData[0].displayName;
-    final emailRetriever = user.email ?? user.providerData[0].email;
+    final String emailRetriever = user.email ?? user.providerData[0].email!;
 
     final userModel = BaseUserModel(
       id: user.uid,

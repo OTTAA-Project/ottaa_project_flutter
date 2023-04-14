@@ -69,6 +69,7 @@ class CaregiverUserModel extends UserModel {
       'settings': settings.toMap(),
       'type': type.name,
       'users': users.map((key, value) => MapEntry(key, value.toMap())),
+      'email' : email
     };
   }
 

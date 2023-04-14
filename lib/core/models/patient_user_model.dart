@@ -108,12 +108,13 @@ class PatientUserModel extends UserModel {
       ),
       'settings': settings.toMap(),
       'type': type.name,
+      'email' : email
     };
   }
 
   factory PatientUserModel.fromMap(Map<String, dynamic> map) {
     return PatientUserModel(
-      email: "",
+      email: map['email'],
       id: map['id'] as String,
       groups: map['groups'] != null
           ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
@@ -168,19 +169,19 @@ class PatientUserModel extends UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, groups: $groups, phrases: $phrases, pictos: $pictos, settings: $settings, type: $type)';
+    return 'UserModel(id: $id, groups: $groups, phrases: $phrases, pictos: $pictos, settings: $settings, type: $type, email: $email)';
   }
 
   @override
   bool operator ==(covariant PatientUserModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id && mapEquals(other.groups, groups) && mapEquals(other.phrases, phrases) && mapEquals(other.pictos, pictos) && other.settings == settings && other.type == type;
+    return other.id == id && mapEquals(other.groups, groups) && mapEquals(other.phrases, phrases) && mapEquals(other.pictos, pictos) && other.settings == settings && other.type == type && other.email == email;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ groups.hashCode ^ phrases.hashCode ^ pictos.hashCode ^ settings.hashCode ^ type.hashCode;
+    return id.hashCode ^ groups.hashCode ^ phrases.hashCode ^ pictos.hashCode ^ settings.hashCode ^ type.hashCode ^ email.hashCode;
   }
 
   @override
