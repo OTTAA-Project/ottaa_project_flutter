@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
@@ -9,10 +8,7 @@ import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_w
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/leftside_icons.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/pict_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/games/ui/score_dialouge.dart';
-import 'package:ottaa_project_flutter/presentation/screens/games/ui/scroe_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/speak_button.dart';
-import 'package:ottaa_ui_kit/widgets.dart';
 
 class WhatsThePictoScreen extends ConsumerWidget {
   const WhatsThePictoScreen({Key? key}) : super(key: key);
@@ -25,7 +21,6 @@ class WhatsThePictoScreen extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      //todo: add the hinst right next to the mute.
       body: Stack(
         children: [
           const BackGroundWidget(),
@@ -34,7 +29,7 @@ class WhatsThePictoScreen extends ConsumerWidget {
             subtitle: 'game.game_1_line'.trl,
           ),
           SpeakButton(
-            onTap: () async => await provider.speak(),
+            onTap: () async => provider.speakNameWhatsThePicto(),
           ),
           Center(
             child: Row(

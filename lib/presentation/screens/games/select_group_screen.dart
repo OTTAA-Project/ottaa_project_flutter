@@ -77,6 +77,7 @@ class SelectGroupScreen extends ConsumerWidget {
                     onPressed: () async {
                       provider.selectedGroupIndex = index;
                       await provider.fetchSelectedPictos();
+                       provider.init();
                       switch (provider.selectedGame) {
                         case 0:
                           context.push(AppRoutes.whatsThePictoScreen);

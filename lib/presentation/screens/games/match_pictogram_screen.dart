@@ -117,7 +117,7 @@ class MatchPictogramScreen extends ConsumerWidget {
               ],
             ),
           ),
-          const LeftSideIcons(),
+          LeftSideIcons(),
           Positioned(
             top: size.height * 0.5,
             left: size.width * 0.2,

@@ -198,12 +198,7 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
 
-  Future<void> speak() async {
-    await _tts.speak(gamePicts[correctPicto].text);
-  }
-
   Future<void> init() async {
-    await fetchPictograms();
     await initializeBackgroundMusic();
   }
 
@@ -218,6 +213,7 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> changeMusic() async {
     mute = !mute;
+    notifyListeners();
     if (mute) {
       await backgroundMusicPlayer.pause();
     } else {
@@ -225,8 +221,8 @@ class GamesProvider extends ChangeNotifier {
     }
   }
 
-  void speakNameWhatsThePicto({required String name}) async {
-    await _tts.speak('game.what'.trlf({'name': name}));
+  void speakNameWhatsThePicto() async {
+    await _tts.speak('game.speak_what'.trlf({'name': gamePicts[correctPicto].text}));
   }
 
   Future<void> initializeBackgroundMusic() async {

@@ -9,9 +9,6 @@ import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
-import 'package:ottaa_project_flutter/core/repositories/customise_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 class CustomiseProvider extends ChangeNotifier {
