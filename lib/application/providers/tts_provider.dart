@@ -9,24 +9,18 @@ class TTSProvider extends ChangeNotifier {
   final TTSRepository tts;
   final LocalDatabaseRepository _hiveRepository;
 
-  CancelableOperation? speakOperation;
+  Future<void>? speakOperation;
 
   TTSProvider(this.tts, this._hiveRepository);
 
   Future<void> speak(String text) async {
-    await speakOperation?.cancel();
-    speakOperation = null;
-    await Future.delayed(Duration(milliseconds: 500));
+    if (speakOperation != null) {
+      await speakOperation;
+    }
 
-    speakOperation = CancelableOperation.fromFuture(
-      tts.speak(text),
-      onCancel: () {
-        print('cancelled $text');
-        speakOperation = null;
-      },
-    );
+    speakOperation = tts.speak(text);
 
-    await speakOperation?.value;
+    await speakOperation;
 
     speakOperation = null;
   }
