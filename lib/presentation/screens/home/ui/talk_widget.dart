@@ -89,10 +89,10 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                           ),
                     text: pict.text,
                     disable: (patientNotifierState != null ? patientNotifierState.patientSettings.layout.oneToOne : false)
-                        ? false
-                        : index == currentWord
+                        ? index == currentWord
                             ? false
-                            : true,
+                            : true
+                        : false,
                   ),
                 );
               },

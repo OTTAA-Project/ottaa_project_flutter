@@ -662,10 +662,11 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i6.Future<String>.value(''),
       ) as _i6.Future<String>);
   @override
-  _i6.Future<void> setVoice(String? voice) => (super.noSuchMethod(
+  _i6.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
         Invocation.method(
           #setVoice,
-          [voice],
+          [],
+          {#name: name},
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
