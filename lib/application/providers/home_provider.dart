@@ -227,7 +227,7 @@ class HomeProvider extends ChangeNotifier {
         uid: user.id,
         language: user.settings.language.language,
         model: "test",
-        groups: user.groups[user.settings.language.language]!.where((element) => element.block).map((e) => e.id).toList(),
+        groups: (user.groups[user.settings.language.language] ?? []).where((element) => element.block).map((e) => e.id).toList(),
         tags: {},
         reduced: true,
         chunk: suggestedQuantity,
@@ -353,6 +353,8 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
+    show = true;
+    notifyListeners();
     if (patientState.state != null) {
       if (!patientState.user.patientSettings.layout.oneToOne) {
         notifyListeners();
@@ -364,32 +366,37 @@ class HomeProvider extends ChangeNotifier {
         }
 
         sentence ??= pictoWords.map((e) => e.text).join(' ');
-
         await _tts.speak(sentence);
+
+        for (var i = 0; i < pictoWords.length; i++) {
+          selectedWord = i;
+          await Future.delayed(const Duration(milliseconds: 800));
+          notifyListeners();
+        }
+
         show = false;
         notifyListeners();
+        return;
       }
-    } else {
-      show = true;
-      notifyListeners();
-      for (var i = 0; i < pictoWords.length; i++) {
-        selectedWord = i;
-        scrollController.animateTo(
-          i == 0 ? 0 : i * 45,
-          duration: const Duration(microseconds: 50),
-          curve: Curves.easeIn,
-        );
-        notifyListeners();
-        await _tts.speak(pictoWords[i].text);
-      }
+    }
+    for (var i = 0; i < pictoWords.length; i++) {
+      selectedWord = i;
       scrollController.animateTo(
-        0,
+        i == 0 ? 0 : i * 45,
         duration: const Duration(microseconds: 50),
         curve: Curves.easeIn,
       );
-      show = false;
       notifyListeners();
+      await _tts.speak(pictoWords[i].text);
     }
+    scrollController.animateTo(
+      0,
+      duration: const Duration(microseconds: 50),
+      curve: Curves.easeIn,
+    );
+    show = false;
+    notifyListeners();
+
     if (patientState.user.patientSettings.layout.cleanup) {
       pictoWords.clear();
       await buildSuggestion();
