@@ -73,7 +73,7 @@ class SignInButton extends ConsumerWidget {
                 );
 
                 // ignore: use_build_context_synchronously
-                localContext.go(AppRoutes.waitingLogin);
+                localContext.go(AppRoutes.loginWait);
               }
             }
           : null,

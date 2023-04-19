@@ -62,7 +62,6 @@ class LinkNotifier extends ChangeNotifier {
       final currentUser = await _auth.getCurrentUser();
       if (currentUser.isRight) {
         final email = currentUser.right.email;
-        print(email);
         return await createEmailToken.createEmailToken(email, emailController.text);
       }
     }
@@ -79,7 +78,7 @@ class LinkNotifier extends ChangeNotifier {
     final code = controllers.map((e) => e.text).join();
     final currentUser = await _auth.getCurrentUser();
     if (currentUser.isRight) {
-      final email = currentUser.right.email; //TODO: Check for id
+      final email = currentUser.right.email;
       final result = await verifyEmailToken.verifyEmailToken(
         email,
         emailController.text,

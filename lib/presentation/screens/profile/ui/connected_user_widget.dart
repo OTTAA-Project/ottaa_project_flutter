@@ -97,7 +97,7 @@ class ConnectedUserWidget extends StatelessWidget {
                         ),
                         ProfileUserWidget(
                           title: 'profile.help.help'.trl,
-                          onTap: () => context.push(AppRoutes.profileHelpScreen),
+                          onTap: () => context.push(AppRoutes.userProfileHelp),
                         ),
                         const SizedBox(
                           height: 16,

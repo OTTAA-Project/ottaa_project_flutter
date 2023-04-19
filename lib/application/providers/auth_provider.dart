@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
-import 'package:ottaa_project_flutter/application/router/router_notifier.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
@@ -22,7 +21,6 @@ class AuthProvider extends ChangeNotifier {
   final LocalDatabaseRepository _localDatabaseRepository;
   final AuthNotifier authData;
   final UserNotifier _userNotifier;
-  final GoRouterNotifier _routerNotifier;
 
   AuthProvider(
     this._loadingNotifier,
@@ -31,8 +29,11 @@ class AuthProvider extends ChangeNotifier {
     this._localDatabaseRepository,
     this.authData,
     this._userNotifier,
-    this._routerNotifier,
   );
+
+  Future<bool> isUserLoggedIn() async {
+    return await _authService.isLoggedIn();
+  }
 
   Future<void> logout() async {
     await _authService.logout();
@@ -41,7 +42,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     // _userNotifier.setUser(null);
-    _routerNotifier.setLoggedOut();
   }
 
   Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
@@ -55,11 +55,10 @@ class AuthProvider extends ChangeNotifier {
       final res = await _aboutService.getUserInformation();
       if (res.isRight) {
         final re = await _authService.runToGetDataFromOtherPlatform(email: res.right.email, id: res.right.id);
-        print('here is the result $re');
+        debugPrint('here is the result $re');
       }
       _userNotifier.setUser(result.right);
       authData.setSignedIn();
-      _routerNotifier.setLoggedIn();
     }
 
     _loadingNotifier.hideLoading();
@@ -77,7 +76,6 @@ final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
 
   final AuthNotifier authData = ref.watch(authNotifier.notifier);
   final UserNotifier userState = ref.watch(userNotifier.notifier);
-  final GoRouterNotifier routerNotifier = ref.watch(goRouterNotifierProvider);
 
   return AuthProvider(
     loadingNotifier,
@@ -86,6 +84,5 @@ final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
     localDatabaseRepository,
     authData,
     userState,
-    routerNotifier,
   );
-});
+}, dependencies: [authNotifier, userNotifier]);

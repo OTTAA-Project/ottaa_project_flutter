@@ -6,27 +6,20 @@ import 'package:ottaa_project_flutter/application/common/extensions/user_extensi
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
-import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileNotifier extends ChangeNotifier {
-  final PictogramsRepository _pictogramsService;
   final ProfileRepository _profileService;
   final AboutRepository _aboutService;
-  final AuthRepository _auth;
   final LocalDatabaseRepository _localDatabaseRepository;
   final UserNotifier _userNotifier;
 
   ProfileNotifier(
-    this._pictogramsService,
-    this._auth,
     this._profileService,
     this._localDatabaseRepository,
     this._userNotifier,
@@ -238,16 +231,12 @@ class ProfileNotifier extends ChangeNotifier {
 }
 
 final profileProvider = ChangeNotifierProvider<ProfileNotifier>((ref) {
-  final pictogramService = GetIt.I<PictogramsRepository>();
-  final AuthRepository authService = GetIt.I.get<AuthRepository>();
   final ProfileRepository profileService = GetIt.I.get<ProfileRepository>();
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
   final userNot = ref.read(userNotifier.notifier);
 
   final AboutRepository aboutRepository = GetIt.I.get<AboutRepository>();
   return ProfileNotifier(
-    pictogramService,
-    authService,
     profileService,
     localDatabaseRepository,
     userNot,

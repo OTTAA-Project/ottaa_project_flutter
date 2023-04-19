@@ -87,7 +87,7 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
                       if (result != null) {
                         OTTAANotification.primary(context, text: "profile.link.error.$result".trl);
                       } else {
-                        context.push(AppRoutes.linkTokenScreen);
+                        context.push(AppRoutes.caregiverLinkToken);
                       }
                     }
                   }

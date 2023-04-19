@@ -16,11 +16,6 @@ class LoginWaitingScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _LoginWaitingScreenState();
 }
 
-const Map<UserType, String> _userTypeRoutes = {
-  UserType.caregiver: AppRoutes.profileMainScreen,
-  UserType.user: AppRoutes.profileMainScreenUser,
-  UserType.none: AppRoutes.profileChooserScreen,
-};
 
 class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
   @override
@@ -43,7 +38,7 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
           return localContext.go(AppRoutes.onboarding);
         }
 
-        localContext.go(_userTypeRoutes[user!.type]!);
+        localContext.go(AppRoutes.home);
       }
     });
     super.initState();

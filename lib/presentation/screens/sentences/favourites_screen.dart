@@ -34,7 +34,6 @@ class FavouriteScreen extends ConsumerWidget {
         title: Text('favourite_sentences'.trl),
         actions: [
           GestureDetector(
-            onTap: () => context.push(AppRoutes.addOrRemoveFavouriteSentences),
             child: const Icon(
               Icons.favorite,
             ),
@@ -77,9 +76,6 @@ class FavouriteScreen extends ConsumerWidget {
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
                           GestureDetector(
-                            onTap: () {
-                              context.push(AppRoutes.addOrRemoveFavouriteSentences);
-                            },
                             child: Icon(
                               Icons.edit,
                               size: verticalSize * 0.1,

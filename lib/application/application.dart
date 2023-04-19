@@ -16,6 +16,7 @@ class _ApplicationState extends ConsumerState<Application> {
   @override
   Widget build(BuildContext context) {
     final appRouter = ref.read(goRouterProvider);
+
     return I18nNotifier(
       notifier: getIt.get<I18N>(),
       child: MaterialApp.router(

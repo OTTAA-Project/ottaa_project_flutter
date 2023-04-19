@@ -71,7 +71,7 @@ class _LinkSuccessScreenState extends ConsumerState<LinkSuccessScreen> {
               onPressed: () {
                 final provider = ref.watch(customiseProvider);
                 provider.type = CustomiseDataType.defaultCase;
-                context.push(AppRoutes.customizedBoardScreen);
+                context.push(AppRoutes.userCustomize);
               },
               text: "global.continue".trl,
             ),

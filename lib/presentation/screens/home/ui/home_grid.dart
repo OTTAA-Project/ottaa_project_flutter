@@ -141,7 +141,6 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                           crossAxisCount: 5,
                           childAspectRatio: 1,
                           mainAxisSpacing: 8,
-                          mainAxisExtent: 119,
                         ),
                         controller: ref.read(homeProvider.select((value) => value.gridScrollController)),
                         padding: const EdgeInsets.only(top: 16, bottom: 16),
@@ -149,27 +148,30 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                         itemBuilder: (ctx, index) {
                           Picto picto = ref.watch(homeProvider.select((value) => value.pictograms.values.where((element) => !element.block && value.groups[currentGroup]!.relations.any((group) => group.id == element.id)).toList()))[index];
 
-                          return PictoWidget(
-                            onTap: () {
-                              addPictogram(picto);
-                            },
-                            colorNumber: picto.type,
-                            image: picto.resource.network != null
-                                ? CachedNetworkImage(
-                                    imageUrl: picto.resource.network!,
-                                    fit: BoxFit.fill,
-                                    errorWidget: (context, url, error) => Image.asset(
+                          return FittedBox(
+                            fit: BoxFit.fitHeight,
+                            child: PictoWidget(
+                              onTap: () {
+                                addPictogram(picto);
+                              },
+                              colorNumber: picto.type,
+                              image: picto.resource.network != null
+                                  ? CachedNetworkImage(
+                                      imageUrl: picto.resource.network!,
+                                      fit: BoxFit.fill,
+                                      errorWidget: (context, url, error) => Image.asset(
+                                        fit: BoxFit.fill,
+                                        "assets/img/${picto.text}.webp",
+                                      ),
+                                    )
+                                  : Image.asset(
                                       fit: BoxFit.fill,
                                       "assets/img/${picto.text}.webp",
                                     ),
-                                  )
-                                : Image.asset(
-                                    fit: BoxFit.fill,
-                                    "assets/img/${picto.text}.webp",
-                                  ),
-                            text: picto.text,
-                            width: 116,
-                            height: 144,
+                              text: picto.text,
+                              width: 116,
+                              height: 144,
+                            ),
                           );
                         },
                       ),

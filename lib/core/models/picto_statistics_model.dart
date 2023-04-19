@@ -47,7 +47,7 @@ class PictoComponente {
     required this.edad,
   });
 
-  int id;
+  String id;
   bool esSugerencia;
   @JsonKey(nullable: true,defaultValue: [],name: 'hora')
   List<String> hora;

@@ -536,9 +536,10 @@ class ServerService implements ServerRepository {
 
     final currentList = (await ref.get()).value;
 
-    final list = List<dynamic>.from((currentList ?? []) as List<dynamic>);
+    List list = List<dynamic>.from((currentList ?? []) as List<dynamic>);
 
-    final existsElement = list.firstWhereOrNull((element) => element["deviceToken"] == deviceToken.deviceToken);
+    final existsElement = list.firstWhereOrNull((element) => element != null ? element["deviceToken"] == deviceToken.deviceToken : false);
+
     final index = list.indexOf(existsElement);
 
     if (index == -1) {
@@ -547,6 +548,7 @@ class ServerService implements ServerRepository {
       existsElement["lastUsage"] = DateTime.now().millisecondsSinceEpoch;
       list[index] = deviceToken.toMap();
     }
+    list = list.where((element) => element != null).toList();
 
     await ref.set(list);
   }
@@ -626,12 +628,14 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
     try {
-      final choice = await _openAIClient.completions.create(
-        model: "text-davinci-003",
-        prompt: prompt,
-        temperature: 0,
-        maxTokens: maxTokens,
-      ).data;
+      final choice = await _openAIClient.completions
+          .create(
+            model: "text-davinci-003",
+            prompt: prompt,
+            temperature: 0,
+            maxTokens: maxTokens,
+          )
+          .data;
 
       if (!choice.choices.isNotEmpty) return const Left("No completado");
 

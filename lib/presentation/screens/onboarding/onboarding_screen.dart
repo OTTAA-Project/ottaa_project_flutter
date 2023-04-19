@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/onboarding_provider.dart';
@@ -50,128 +48,132 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
 
     final isLogged = ref.read(authNotifier);
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: OTTAAAppBar(
-        leading: (currentIndex) > 0
-            ? TextButton.icon(
-                onPressed: provider.previousPage,
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                ),
-                label: Text("global.back".trl),
-                style: TextButton.styleFrom(foregroundColor: Colors.grey),
-              )
-            : null,
-        actions: [
-          if ((currentIndex) < 2)
-            TextButton(
-              onPressed: () async {
-                final bool? skip = await BasicBottomSheet.show<bool>(
-                  context,
-                  title: "onboarding.skip.title".trl,
-                  okButtonText: "global.yes".trl,
-                  cancelButtonText: "global.no".trl,
-                  cancelButtonEnabled: true,
-                );
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: OTTAAAppBar(
+            leading: (currentIndex) > 0
+                ? TextButton.icon(
+                    onPressed: provider.previousPage,
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                    ),
+                    label: Text("global.back".trl),
+                    style: TextButton.styleFrom(foregroundColor: Colors.grey),
+                  )
+                : null,
+            actions: [
+              if ((currentIndex) < 2)
+                TextButton(
+                  onPressed: () async {
+                    final bool? skip = await BasicBottomSheet.show<bool>(
+                      context,
+                      title: "onboarding.skip.title".trl,
+                      okButtonText: "global.yes".trl,
+                      cancelButtonText: "global.no".trl,
+                      cancelButtonEnabled: true,
+                    );
 
-                if (skip != null && skip) {
-                  if (mounted) {
-                    await spProvider.setFirstTime();
-                    context.go(isLogged ? AppRoutes.profileChooserScreen : AppRoutes.login);
-                  }
-                }
-              },
-              style: TextButton.styleFrom(foregroundColor: Colors.grey),
-              child: Text("global.skip".trl),
-            ),
-        ],
-      ),
-      body: SafeArea(
-        top: true,
-        left: true,
-        right: true,
-        child: SizedBox.fromSize(
-          size: MediaQuery.of(context).size,
-          child: Flex(
-            direction: Axis.vertical,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                fit: FlexFit.tight,
-                flex: 10,
-                child: PageView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  controller: provider.controller,
-                  children: <Widget>[
-                    OnboardingLayout(
-                      title: "onboarding.profile.title".trl,
-                      subtitle: "onboarding.profile.subtitle".trl,
-                      description: "onboarding.profile.description".trl,
-                      image: AppImages.kOnboardingFirstScreen,
-                    ),
-                    OnboardingLayout(
-                      title: "onboarding.home.title".trl,
-                      subtitle: "onboarding.home.subtitle".trl,
-                      description: "onboarding.home.description".trl,
-                      image: AppImages.kOnboardingSecondScreen,
-                    ),
-                    OnboardingLayout(
-                      title: "onboarding.customize.title".trl,
-                      subtitle: "onboarding.customize.subtitle".trl,
-                      description: "onboarding.customize.description".trl,
-                      image: AppImages.kOnboardingThirdScreen,
-                    )
-                  ],
+                    if (skip != null && skip) {
+                      if (mounted) {
+                        await spProvider.setFirstTime();
+                        context.go(isLogged ? AppRoutes.userProfile : AppRoutes.login);
+                      }
+                    }
+                  },
+                  style: TextButton.styleFrom(foregroundColor: Colors.grey),
+                  child: Text("global.skip".trl),
                 ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Flexible(
-                flex: 1,
-                fit: FlexFit.loose,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    OnboardinPageIndicator(active: currentIndex == 0),
-                    OnboardinPageIndicator(active: currentIndex == 1),
-                    OnboardinPageIndicator(active: currentIndex == 2),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Flexible(
-                flex: 1,
-                fit: FlexFit.loose,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: PrimaryButton(
-                      onPressed: () async {
-                        if (currentIndex == 2) {
-                          await spProvider.setFirstTime();
-                          context.go(isLogged ? AppRoutes.profileChooserScreen : AppRoutes.login);
-                          return;
-                        }
-                        provider.nextPage();
-                      },
-                      text: currentIndex == 2 ? "onboarding.start".trl : "global.next".trl,
-                    ),
-                  ),
-                ),
-              )
             ],
           ),
-        ),
-      ),
+          body: SafeArea(
+            top: true,
+            left: true,
+            right: true,
+            child: SizedBox.fromSize(
+              size: MediaQuery.of(context).size,
+              child: Flex(
+                direction: Axis.vertical,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    fit: FlexFit.tight,
+                    flex: 10,
+                    child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      controller: provider.controller,
+                      children: <Widget>[
+                        OnboardingLayout(
+                          title: "onboarding.profile.title".trl,
+                          subtitle: "onboarding.profile.subtitle".trl,
+                          description: "onboarding.profile.description".trl,
+                          image: AppImages.kOnboardingFirstScreen,
+                        ),
+                        OnboardingLayout(
+                          title: "onboarding.home.title".trl,
+                          subtitle: "onboarding.home.subtitle".trl,
+                          description: "onboarding.home.description".trl,
+                          image: AppImages.kOnboardingSecondScreen,
+                        ),
+                        OnboardingLayout(
+                          title: "onboarding.customize.title".trl,
+                          subtitle: "onboarding.customize.subtitle".trl,
+                          description: "onboarding.customize.description".trl,
+                          image: AppImages.kOnboardingThirdScreen,
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.loose,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        OnboardinPageIndicator(active: currentIndex == 0),
+                        OnboardinPageIndicator(active: currentIndex == 1),
+                        OnboardinPageIndicator(active: currentIndex == 2),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.loose,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: PrimaryButton(
+                          onPressed: () async {
+                            if (currentIndex == 2) {
+                              await spProvider.setFirstTime();
+                              context.go(isLogged ? AppRoutes.home : AppRoutes.login);
+                              return;
+                            }
+                            provider.nextPage();
+                          },
+                          text: currentIndex == 2 ? "onboarding.start".trl : "global.next".trl,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

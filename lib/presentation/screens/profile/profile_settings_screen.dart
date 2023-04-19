@@ -58,7 +58,7 @@ class ProfileSettingsScreen extends ConsumerWidget {
                       height: 32,
                     ),
                     CategoryWidget(
-                      onTap: () => context.push(AppRoutes.profileSettingsEditScreen),
+                      onTap: () => context.push(AppRoutes.userProfileEdit),
                       icon: AppImages.kProfileSettingsIcon1,
                       text: "profile.profile".trl,
                     ),
@@ -66,12 +66,12 @@ class ProfileSettingsScreen extends ConsumerWidget {
                         ? Container()
                         : CategoryWidget(
                             onTap: () =>
-                                context.push(AppRoutes.profileChooserScreenSelected),
+                                context.push(AppRoutes.userProfileRole),
                             icon: AppImages.kProfileSettingsIcon2,
                             text: "profile.role".trl,
                           ),
                     CategoryWidget(
-                      onTap: () => context.push(AppRoutes.profileHelpScreen),
+                      onTap: () => context.push(AppRoutes.userProfileHelp),
                       icon: AppImages.kProfileSettingsIcon3,
                       text: "profile.help.help".trl,
                     ),
@@ -79,12 +79,12 @@ class ProfileSettingsScreen extends ConsumerWidget {
                         ? Container()
                         : CategoryWidget(
                             onTap: () =>
-                                context.push(AppRoutes.profileLinkedAccountScreen),
+                                context.push(AppRoutes.userProfileAccounts),
                             icon: AppImages.kProfileSettingsIcon4,
                             text: "profile.linked_accounts".trl,
                           ),
                     CategoryWidget(
-                      onTap: () => context.push(AppRoutes.profileOttaaTips),
+                      onTap: () => context.push(AppRoutes.userProfileTips),
                       icon: AppImages.kProfileSettingsIcon5,
                       text: "profile.ottaa.tips".trl,
                     ),

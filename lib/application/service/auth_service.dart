@@ -9,7 +9,6 @@ import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
@@ -59,6 +58,23 @@ class AuthService extends AuthRepository {
 
   @override
   Future<bool> isLoggedIn() async {
+    final currentAuthUser = _authProvider.currentUser;
+
+    UserModel? userModel = _databaseRepository.user;
+
+    if (currentAuthUser == null && userModel == null) {
+      return false;
+    }
+
+    if (currentAuthUser != null && userModel == null) {
+      userModel = await buildUserModel(currentAuthUser);
+      if (userModel != null) {
+        await _databaseRepository.setUser(userModel);
+
+        return true;
+      }
+    }
+
     return _databaseRepository.user != null;
   }
 
@@ -73,9 +89,50 @@ class AuthService extends AuthRepository {
     await _databaseRepository.deleteUser();
   }
 
+  Future<UserModel?> buildUserModel(user) async {
+    EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
+    UserModel? userModel;
+    if (userInfo.isLeft) {
+      return null;
+    }
+    switch (userInfo.right["type"]) {
+      case "caregiver":
+        userModel = CaregiverUserModel.fromMap({
+          ...userInfo.right,
+          "email": user.email ?? user.providerData[0].email,
+        });
+        break;
+      case "user":
+        userModel = PatientUserModel.fromMap({
+          ...userInfo.right,
+          "email": user.email ?? user.providerData[0].email,
+        });
+        break;
+      case "none":
+      default:
+        userModel = BaseUserModel.fromMap({
+          ...userInfo.right,
+          "email": user.email ?? user.providerData[0].email,
+        });
+        break;
+    }
+
+    userModel.currentToken = DeviceToken(deviceToken: await getDeviceId(), lastUsage: DateTime.now());
+    if (userModel.currentToken != null) {
+      await _serverRepository.updateDevicesId(
+        userId: userModel.id,
+        deviceToken: userModel.currentToken!,
+      );
+    }
+
+    return userModel;
+  }
+
   @override
   Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     Either<String, User> result;
+
+    if (kIsWeb) await _authProvider.setPersistence(Persistence.LOCAL);
 
     switch (type) {
       case SignInType.google:
@@ -94,9 +151,9 @@ class AuthService extends AuthRepository {
       try {
         final User user = result.right;
 
-        EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
-        UserModel? userModel;
-        if (userInfo.isLeft) {
+        UserModel? userModel = await buildUserModel(user);
+
+        if (userModel == null) {
           await signUp();
 
           final nameRetriever = user.displayName ?? user.providerData[0].displayName;
@@ -116,36 +173,6 @@ class AuthService extends AuthRepository {
               language: LanguageSetting.empty(),
             ),
             email: emailRetriever ?? "",
-          );
-        } else {
-          switch (userInfo.right["type"]) {
-            case "caregiver":
-              userModel = CaregiverUserModel.fromMap({
-                ...userInfo.right,
-                "email": user.email ?? user.providerData[0].email,
-              });
-              break;
-            case "user":
-              userModel = PatientUserModel.fromMap({
-                ...userInfo.right,
-                "email": user.email ?? user.providerData[0].email,
-              });
-              break;
-            case "none":
-            default:
-              userModel = BaseUserModel.fromMap({
-                ...userInfo.right,
-                "email": user.email ?? user.providerData[0].email,
-              });
-              break;
-          }
-        }
-
-        userModel.currentToken = DeviceToken(deviceToken: await getDeviceId(), lastUsage: DateTime.now());
-        if (userModel.currentToken != null) {
-          await _serverRepository.updateDevicesId(
-            userId: userModel.id,
-            deviceToken: userModel.currentToken!,
           );
         }
 

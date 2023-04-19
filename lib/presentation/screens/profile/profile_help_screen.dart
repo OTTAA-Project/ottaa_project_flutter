@@ -37,7 +37,7 @@ class ProfileHelpScreen extends ConsumerWidget {
                 title: "profile.help.title1".trl,
                 subtitle: '',
                 trailingImage: const AssetImage(AppImages.kProfileHelpIcon1),
-                onPressed: () => context.push(AppRoutes.profileFAQScreen),
+                onPressed: () => context.push(AppRoutes.userProfileHelpFaq),
               ),
               const SizedBox(
                 height: 16,

@@ -55,13 +55,13 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
               final customisePro = ref.watch(customiseProvider);
               customisePro.type = CustomiseDataType.careGiver;
               customisePro.userId = provider.connectedUsersData[index].id;
-              context.push(AppRoutes.customizeBoardScreen);
+              context.push(AppRoutes.userCustomizeBoard);
             },
             settingsTap: () {
               ref
                   .read(patientNotifier.notifier)
                   .setUser(provider.connectedUsersData[index].patient);
-              context.push(AppRoutes.settingScreenUser);
+              context.push(AppRoutes.caregiverAccount);
             },
             useOTTAATap: () {
               final user = provider.connectedUsersData[index];

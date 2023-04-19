@@ -121,6 +121,14 @@ class MockSplashProvider extends _i1.Mock implements _i4.SplashProvider {
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
   @override
+  _i5.Future<bool> hasUser() => (super.noSuchMethod(
+        Invocation.method(
+          #hasUser,
+          [],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+  @override
   void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,

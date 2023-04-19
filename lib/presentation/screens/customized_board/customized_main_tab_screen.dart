@@ -1,10 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
@@ -39,7 +37,6 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
-    final user = ref.read(userNotifier);
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
@@ -74,7 +71,6 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                 color: colorScheme.onSurface,
               ),
               onTap: () async {
-                print('yes');
                 await BasicBottomSheet.show(
                   context,
                   // title: "",
@@ -103,7 +99,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
               );
               if (res != null && res == true) {
                 // provider.uploadData(userId: user!.id);
-                context.push(AppRoutes.customizeWaitScreen);
+                context.push(AppRoutes.userCustomizeWait);
               }
             },
             child: Text(
@@ -226,7 +222,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                         default:
                           await provider.uploadData(userId: userID.userId!);
                           context.pop();
-                          context.push(AppRoutes.customizeWaitScreen);
+                          context.push(AppRoutes.userCustomizeWait);
                           break;
                       }
                     }

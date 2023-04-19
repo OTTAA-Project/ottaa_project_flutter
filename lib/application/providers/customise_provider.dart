@@ -9,9 +9,6 @@ import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
-import 'package:ottaa_project_flutter/core/repositories/customise_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 class CustomiseProvider extends ChangeNotifier {
@@ -50,7 +47,7 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset); //TODO: Check this with asim
+    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset);
     selectedGroupName = groups[index].text;
     selectedGroupStatus = groups[index].block;
     fetchDesiredPictos();
@@ -60,7 +57,7 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> setShortcutsForUser({required String userId}) async {
     await _customiseService.setShortcutsForUser(
       shortcuts: ShortcutsModel(
-        enable: true, //TODO: Change this
+        enable: true,
         favs: selectedShortcuts[0],
         history: selectedShortcuts[1],
         camera: selectedShortcuts[2],
@@ -106,7 +103,6 @@ class CustomiseProvider extends ChangeNotifier {
     if (dataExist) {
     } else {
       type = CustomiseDataType.user;
-      print('hi, from here');
       notifyListeners();
     }
   }
@@ -169,8 +165,6 @@ class CustomiseProvider extends ChangeNotifier {
     for (var element in pictograms) {
       pictosMap[element.id.toString()] = i;
     }
-
-    print(pictosMap);
   }
 
   void block({required int index}) async {
@@ -188,7 +182,6 @@ class CustomiseProvider extends ChangeNotifier {
     selectedShortcuts[4] = res.yes;
     selectedShortcuts[5] = res.no;
     selectedShortcuts[6] = res.share;
-    print(res.toString());
     notifyListeners();
   }
 

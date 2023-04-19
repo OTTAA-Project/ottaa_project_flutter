@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:math' show min;
 
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dar
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
-import 'package:ottaa_project_flutter/core/enums/sweep_modes.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
@@ -109,7 +107,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void switchToPictograms() {
-    final currentUser = patientState.state ?? userState.state!;
+    final currentUser = patientState.patient ?? userState.user;
 
     bool isGrid = currentUser.isPatient && currentUser.patient.patientSettings.layout.display == DisplayTypes.grid;
 
@@ -124,7 +122,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> fetchMostUsedSentences() async {
     mostUsedSentences = await _sentencesService.fetchSentences(
-      language: "es_AR", //TODO!: Fetch language code LANG-CODE
+      language: "es_AR",
       type: kMostUsedSentences,
     );
 
@@ -170,12 +168,10 @@ class HomeProvider extends ChangeNotifier {
     List<Picto>? pictos;
     List<Group>? groupsData;
 
-    if (patientState.state != null) {
+    if (patientState.patient != null) {
       pictos = patientState.user.pictos[patientState.user.settings.language.language];
 
       groupsData = patientState.user.groups[patientState.user.settings.language.language];
-
-      print(patientState.user.groups);
     }
 
     pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
@@ -198,8 +194,9 @@ class HomeProvider extends ChangeNotifier {
       notify();
     }
 
-    if (patientState.state != null && id != kStarterPictoId) {
+    if (patientState.patient != null && id != kStarterPictoId) {
       PatientUserModel user = patientState.user;
+
 
       final response = await predictPictogram.call(
         sentence: pictoWords.map((e) => e.text).join(" "),
@@ -233,12 +230,8 @@ class HomeProvider extends ChangeNotifier {
     }
 
     if (suggestedPicts.length < suggestedQuantity) {
-      int pictosLeft = suggestedQuantity - suggestedPicts.length;
-      print('pictos left $pictosLeft');
       suggestedPicts.addAll(basicPictograms);
     }
-
-    print(basicPictograms.length);
 
     suggestedIndex = id;
     // suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
@@ -313,16 +306,16 @@ class HomeProvider extends ChangeNotifier {
           }
         }
       }
-      e.freq = (list[i].value * pesoFrec) + (hora * pesoHora); //TODO: Check this with asim
+      e.freq = (list[i].value * pesoFrec) + (hora * pesoHora);
     }
 
-    requiredPicts.sort((b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
+    requiredPicts.sort((b, a) => a.freq.compareTo(b.freq));
 
     return requiredPicts;
   }
 
   Future<void> speakSentence() async {
-    if (patientState.state == null || patientState.user.patientSettings.layout.oneToOne) {
+    if (patientState.patient == null || patientState.user.patientSettings.layout.oneToOne) {
       show = true;
       notifyListeners();
       scrollController.jumpTo(0);
@@ -371,7 +364,7 @@ class HomeProvider extends ChangeNotifier {
       notifyListeners();
     }
 
-    if (patientState.state == null || patientState.user.patientSettings.layout.cleanup) {
+    if (patientState.patient == null || patientState.user.patientSettings.layout.cleanup) {
       pictoWords.clear();
       await buildSuggestion();
     }
@@ -379,8 +372,6 @@ class HomeProvider extends ChangeNotifier {
 
   void refreshPictograms() {
     int currentPage = suggestedPicts.length ~/ suggestedQuantity;
-
-    print("Page: $currentPage");
 
     indexPage++;
 

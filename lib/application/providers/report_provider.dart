@@ -6,7 +6,6 @@ import 'package:ottaa_project_flutter/core/models/phrases_statistics_model.dart'
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_statistics_model.dart';
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
@@ -89,9 +88,9 @@ class ReportProvider extends ChangeNotifier {
 
   Future<void> makeMostUsedSentencesList() async {
     /// creating a list to add all of the ids
-    List<List<int>> pictosIds = [];
+    List<List<String>> pictosIds = [];
     for (var element in pictoStatisticsModel.mostUsedSentences) {
-      List<int> res = [];
+      List<String> res = [];
       for (var element in element.pictoComponentes) {
         res.add(element.id);
         // print(element.id);
@@ -189,7 +188,7 @@ class ReportProvider extends ChangeNotifier {
     }
     values.sort((a, b) => b.compareTo(a));
     //todo: add here the language too
-    final language = 'es_AR';
+    const language = 'es_AR';
     firstValueProgress = values[0];
     secondValueProgress = values[1];
     thirdValueProgress = values[2];

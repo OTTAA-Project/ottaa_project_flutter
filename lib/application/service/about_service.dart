@@ -13,10 +13,7 @@ import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'dart:async';
 
-import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
-import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -72,7 +69,7 @@ class AboutService extends AboutRepository {
 
     if (result.isRight) {
       final user = result.right;
-      return "";
+      return user.email;
       // return user.settings.data.;
     }
 
@@ -101,7 +98,7 @@ class AboutService extends AboutRepository {
     if (await canLaunchUrl(params)) {
       await launchUrl(params);
     } else {
-      print('Could not launch ${params.toString()}');
+      debugPrint('Could not launch ${params.toString()}');
     }
   }
 

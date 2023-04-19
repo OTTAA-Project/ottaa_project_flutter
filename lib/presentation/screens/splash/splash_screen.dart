@@ -51,14 +51,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             return context.go(AppRoutes.onboarding);
           }
 
-          if (user!.type == UserType.caregiver) {
-            return context.go(AppRoutes.profileMainScreen);
-          } else {
-            final time = DateTime.now().millisecondsSinceEpoch;
-            provider.updateLastConnectionTime(userId: user.id, time: time);
+          final time = DateTime.now().millisecondsSinceEpoch;
+          await provider.updateLastConnectionTime(userId: user!.id, time: time);
+
+          if (user.type == UserType.user) {
             ref.read(patientNotifier.notifier).setUser(user.patient);
-            return context.go(AppRoutes.profileMainScreenUser);
           }
+
+          return context.go(AppRoutes.home);
         }
       }
       if (mounted) return context.go(AppRoutes.login);
@@ -85,12 +85,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               ),
               const SizedBox(width: 20),
               Text(
-                "Hello".trl,
-                style: textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold
-                ),
+                "global.hello".trl,
+                style: textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 40, fontWeight: FontWeight.bold),
               ),
             ],
           ),

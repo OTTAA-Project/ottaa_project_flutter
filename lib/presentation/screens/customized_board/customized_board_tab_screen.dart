@@ -111,7 +111,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
                 );
                 if (res != null && res == true) {
                   // provider.uploadData(userId: user!.id);
-                  context.push(AppRoutes.customizeWaitScreen);
+                  context.push(AppRoutes.userCustomizeWait);
                 }
               },
               child: Text(
@@ -168,7 +168,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
                         default:
                           await provider.uploadData(userId: userID.userId!);
                           context.pop();
-                          context.push(AppRoutes.customizeWaitScreen);
+                          context.push(AppRoutes.userCustomizeWait);
                           break;
                       }
                     },

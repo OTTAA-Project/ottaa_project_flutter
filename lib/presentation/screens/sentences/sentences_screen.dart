@@ -57,7 +57,6 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
           GestureDetector(
             onTap: () {
               fetchFavourites();
-              context.push(AppRoutes.favouriteSentences);
             },
             child: const Icon(Icons.star),
           ),
@@ -100,7 +99,6 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
                           Container(),
                           GestureDetector(
                             onTap: () {
-                              context.push(AppRoutes.searchSentences);
                             },
                             child: Icon(
                               Icons.search,
