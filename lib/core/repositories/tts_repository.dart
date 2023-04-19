@@ -1,6 +1,9 @@
 import 'package:ottaa_project_flutter/core/models/voices_model.dart';
 
 abstract class TTSRepository {
+  get tts;
+  set tts(value);
+
   Future<void> speak(String text);
 
   Future<List<Voices>> fetchVoices();

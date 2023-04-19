@@ -14,15 +14,14 @@ class TTSProvider extends ChangeNotifier {
   TTSProvider(this.tts, this._hiveRepository);
 
   Future<void> speak(String text) async {
-    if (speakOperation != null) {
-      await speakOperation;
-    }
-
     speakOperation = tts.speak(text);
 
-    await speakOperation;
-
-    speakOperation = null;
+    speakOperation?.then(
+      (value) {
+        print('done speaking');
+        speakOperation = null;
+      },
+    );
   }
 
   Future<List<Voices>> fetchVoices(String languageCode) async {

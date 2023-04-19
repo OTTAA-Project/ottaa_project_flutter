@@ -6,7 +6,14 @@ import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
 
 @Singleton(as: TTSRepository)
 class TTSService extends TTSRepository {
-  final tts = FlutterTts();
+  FlutterTts _tts = FlutterTts();
+
+  @override
+  FlutterTts get tts => _tts;
+
+  @override
+  set tts(value) => _tts = value;
+
   final I18N _i18n;
   String language = 'es_AR';
   List<dynamic> availableTTS = [];
@@ -27,6 +34,7 @@ class TTSService extends TTSRepository {
   @override
   Future<void> speak(String text) async {
     if (text.isNotEmpty) {
+      // tts.cancelHandler?.call();
       if (customTTSEnable) {
         await tts.setVoice({"name": name, "locale": locale});
         language = _i18n.currentLanguage!.locale.toString();
@@ -36,6 +44,7 @@ class TTSService extends TTSRepository {
         await tts.setPitch(pitch);
       }
       await tts.speak(text);
+      // await tts.awaitSpeakCompletion(false);
     }
   }
 

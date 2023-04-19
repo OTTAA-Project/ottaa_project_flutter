@@ -139,7 +139,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 onPressed: pictos
                     ? null
                     : () async {
-                        await tts.speak("global.yes".trl);
+                        await tts.speak("si".trl);
                       },
                 child: Image.asset(
                   AppImages.kBoardYesIconSelected,
@@ -156,7 +156,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 onPressed: pictos
                     ? null
                     : () async {
-                        await tts.speak("global.no".trl);
+                        await tts.speak("no".trl);
                       },
                 child: Image.asset(
                   AppImages.kBoardNoIconSelected,
