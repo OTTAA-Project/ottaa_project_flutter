@@ -359,7 +359,7 @@ class HomeProvider extends ChangeNotifier {
       if (!patientState.user.patientSettings.layout.oneToOne) {
         notifyListeners();
         String? sentence;
-
+        scrollController.jumpTo(0);
         if (patientState.user.patientSettings.language.labs) {
           sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
           if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
@@ -368,38 +368,36 @@ class HomeProvider extends ChangeNotifier {
         sentence ??= pictoWords.map((e) => e.text).join(' ');
         await _tts.speak(sentence);
 
-        for (var i = 0; i < pictoWords.length; i++) {
-          selectedWord = i;
-          await Future.delayed(const Duration(milliseconds: 800));
-          notifyListeners();
-        }
-
         show = false;
         notifyListeners();
+        await Future.delayed(const Duration(milliseconds: 400));
+        final d =pictoWords.length > 5 ? (pictoWords.length - 5) * 100 : 100;
+        scrollController.jumpTo(scrollController.offset + d);
         return;
-      }
-    }
-    for (var i = 0; i < pictoWords.length; i++) {
-      selectedWord = i;
-      scrollController.animateTo(
-        i == 0 ? 0 : i * 45,
-        duration: const Duration(microseconds: 50),
-        curve: Curves.easeIn,
-      );
-      notifyListeners();
-      await _tts.speak(pictoWords[i].text);
-    }
-    scrollController.animateTo(
-      0,
-      duration: const Duration(microseconds: 50),
-      curve: Curves.easeIn,
-    );
-    show = false;
-    notifyListeners();
+      } else {
+        for (var i = 0; i < pictoWords.length; i++) {
+          selectedWord = i;
+          scrollController.animateTo(
+            i == 0 ? 0 : i * 45,
+            duration: const Duration(microseconds: 50),
+            curve: Curves.easeIn,
+          );
+          notifyListeners();
+          await _tts.speak(pictoWords[i].text);
+        }
+        // scrollController.animateTo(
+        //   0,
+        //   duration: const Duration(microseconds: 50),
+        //   curve: Curves.easeIn,
+        // );
+        show = false;
+        notifyListeners();
 
-    if (patientState.user.patientSettings.layout.cleanup) {
-      pictoWords.clear();
-      await buildSuggestion();
+        if (patientState.user.patientSettings.layout.cleanup) {
+          pictoWords.clear();
+          await buildSuggestion();
+        }
+      }
     }
   }
 
