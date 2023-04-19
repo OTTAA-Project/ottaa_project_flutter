@@ -45,7 +45,7 @@ class GameScreenUI extends ConsumerWidget {
       width: size.width * 0.6,
       child: PageView.builder(
         controller: provider.mainPageController,
-        itemCount: 3,
+        itemCount: 4,
         itemBuilder: (BuildContext context, int index) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -93,6 +93,7 @@ class GameScreenUI extends ConsumerWidget {
                         },
                         text: 'game.next'.trl,
                       ),
+                      Icon(Icons.folder_copy_outlined)
                     ],
                   ),
                 ),
