@@ -47,11 +47,12 @@ final goRouterProvider = Provider<GoRouter>(
       errorBuilder: (context, state) => const ErrorScreen(),
       initialLocation: "/splash",
       refreshListenable: authState,
+      // redirect: (_, __) => "/login",
       routes: <GoRoute>[
         GoRoute(
           path: "/",
           name: "ottaa",
-          builder: (context, state) => const SizedBox(),
+          builder: (context, state) => Container(),
           routes: [
             GoRoute(
               path: "splash",

@@ -1,6 +1,5 @@
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:either_dart/either.dart';
@@ -21,6 +20,7 @@ import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
+import 'package:universal_io/io.dart';
 
 @Singleton(as: ServerRepository)
 class ServerService implements ServerRepository {
@@ -314,14 +314,10 @@ class ServerService implements ServerRepository {
       contentType: 'image/jpeg',
       customMetadata: {'picked-file-path': path},
     );
-    late String url;
-    if (kIsWeb) {
-      // uploadTask = ref.putData(await file.readAsBytes(), metadata);
-    } else {
-      final uploadTask = await ref.putFile(File(path), metadata);
-      url = await uploadTask.ref.getDownloadURL();
-    }
-    return url;
+
+    var uploadTask = await ref.putFile(File(path), metadata);
+
+    return await uploadTask.ref.getDownloadURL();
   }
 
   @override

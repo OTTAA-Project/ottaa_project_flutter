@@ -1,6 +1,8 @@
-import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_io/io.dart';
 
 class ImageEditWidget extends StatelessWidget {
   const ImageEditWidget({
@@ -34,10 +36,15 @@ class ImageEditWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: imageSelected
-                  ? Image.file(
-                      File(imagePath),
-                      fit: BoxFit.fill,
-                    )
+                  ? (kIsWeb
+                      ? Image.network(
+                          imagePath,
+                          fit: BoxFit.fill,
+                        )
+                      : Image.file(
+                          File(imagePath),
+                          fit: BoxFit.fill,
+                        ))
                   : CachedNetworkImage(
                       imageUrl: imageUrl,
                       fit: BoxFit.fill,

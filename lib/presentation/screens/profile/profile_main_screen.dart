@@ -46,126 +46,135 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
 
     if (user == null) return Container();
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: SizedBox(
+            width: constraints.maxWidth > 800 ? constraints.maxWidth * 0.4 : constraints.maxWidth,
+            child: Center(
+              child: SingleChildScrollView(
+                child: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: () =>
-                              context.push(AppRoutes.caregiverAccount),
-                          child: ProfilePhotoWidget(
-                            image: user.settings.data.avatar.network ?? "",
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () =>
+                                      context.push(AppRoutes.caregiverAccount),
+                                  child: ProfilePhotoWidget(
+                                    image: user.settings.data.avatar.network ?? "",
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                Text(
+                                  "profile.hello"
+                                      .trlf({"name": user.settings.data.name}),
+                                ),
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // context.push(AppRoutes.customizedBoardScreen);
+                              },
+                              child: Image.asset(
+                                AppImages.kNotificationIcon,
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(
-                          width: 16,
+                          height: 32,
                         ),
                         Text(
-                          "profile.hello"
-                              .trlf({"name": user.settings.data.name}),
+                          "profile.what_do".trl,
+                          style: textTheme.displayMedium,
                         ),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // context.push(AppRoutes.customizedBoardScreen);
-                      },
-                      child: Image.asset(
-                        AppImages.kNotificationIcon,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                Text(
-                  "profile.what_do".trl,
-                  style: textTheme.displayMedium,
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                provider.connectedUsersFetched
-                    ? const ConnectedUsersList()
-                    : const SizedBox.shrink(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: ActionCard(
-                    title: "profile.link_account".trl,
-                    subtitle: "profile.new_existant".trl,
-                    trailingImage:
-                        const AssetImage(AppImages.kProfileMainScreenIcon),
-                    imageSize: const Size(94, 96),
-                    focused: provider.isLinkAccountOpen,
-                    onPressed: () {
-                      provider.isLinkAccountOpen = !provider.isLinkAccountOpen;
-                      provider.notify();
-                    },
-                  ),
-                ),
-                //todo: add the trigger here for the container to show and hide
-                AnimatedContainer(
-                  decoration: const BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                  duration: const Duration(milliseconds: 500),
-                  height: provider.isLinkAccountOpen ? 65 : 0,
-                  width: double.maxFinite,
-                  child: SingleChildScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    child: Column(
-                      children: [
-                        // DropDownWidget(
-                        //   onTap: () {},
-                        //   image: AppImages.kProfileAddIcon,
-                        //   text: "profile.crear.nueva.cuenta".trl,
-                        // ),
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-                        // DropDownWidget(
-                        //   onTap: () {},
-                        //   image: AppImages.kProfileAddIcon,
-                        //   text: "profile.crear.nueva.cuenta".trl,
-                        // ),
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-                        DropDownWidget(
-                          onTap: () => context.push(AppRoutes.caregiverLink),
-                          image: AppImages.kProfileLinkIcon,
-                          text: "profile.link_account".trl,
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        provider.connectedUsersFetched
+                            ? const ConnectedUsersList()
+                            : const SizedBox.shrink(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: ActionCard(
+                            title: "profile.link_account".trl,
+                            subtitle: "profile.new_existant".trl,
+                            trailingImage:
+                                const AssetImage(AppImages.kProfileMainScreenIcon),
+                            imageSize: const Size(94, 96),
+                            focused: provider.isLinkAccountOpen,
+                            onPressed: () {
+                              provider.isLinkAccountOpen = !provider.isLinkAccountOpen;
+                              provider.notify();
+                            },
+                          ),
+                        ),
+                        //todo: add the trigger here for the container to show and hide
+                        AnimatedContainer(
+                          decoration: const BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          duration: const Duration(milliseconds: 500),
+                          height: provider.isLinkAccountOpen ? 65 : 0,
+                          width: double.maxFinite,
+                          child: SingleChildScrollView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            child: Column(
+                              children: [
+                                // DropDownWidget(
+                                //   onTap: () {},
+                                //   image: AppImages.kProfileAddIcon,
+                                //   text: "profile.crear.nueva.cuenta".trl,
+                                // ),
+                                // const SizedBox(
+                                //   height: 16,
+                                // ),
+                                // DropDownWidget(
+                                //   onTap: () {},
+                                //   image: AppImages.kProfileAddIcon,
+                                //   text: "profile.crear.nueva.cuenta".trl,
+                                // ),
+                                // const SizedBox(
+                                //   height: 16,
+                                // ),
+                                DropDownWidget(
+                                  onTap: () => context.push(AppRoutes.caregiverLink),
+                                  image: AppImages.kProfileLinkIcon,
+                                  text: "profile.link_account".trl,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        ActionCard(
+                          subtitle: "profile.no_account".trl,
+                          focused: false,
+                          title: "profile.use.ottaa".trl,
+                          trailingImage: const AssetImage(AppImages.kProfileIcon2),
+                          imageSize: const Size(129, 96),
+                          onPressed: () {
+                            context.push(AppRoutes.userTalk);
+                          },
                         ),
                       ],
                     ),
                   ),
                 ),
-                ActionCard(
-                  subtitle: "profile.no_account".trl,
-                  focused: false,
-                  title: "profile.use.ottaa".trl,
-                  trailingImage: const AssetImage(AppImages.kProfileIcon2),
-                  imageSize: const Size(129, 96),
-                  onPressed: () {
-                    context.push(AppRoutes.userTalk);
-                  },
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      }
     );
   }
 }

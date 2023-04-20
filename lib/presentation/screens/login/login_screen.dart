@@ -29,79 +29,84 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    final maxEdge = max(size.width, size.height);
-
     final textTheme = Theme.of(context).textTheme;
 
-    return SafeArea(
-      top: false,
-      child: Scaffold(
-        body: SizedBox.fromSize(
-          size: size,
-          child: Stack(
-            children: [
-              Positioned(
-                right: -maxEdge * 0.2,
-                top: -maxEdge * 0.05,
-                width: maxEdge / 2,
-                height: maxEdge / 2,
-                child: Image.asset(
-                  AppImages.kOttaaTablet,
-                  width: maxEdge / 2,
-                  height: maxEdge / 2,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-              Center(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: kIsTablet ? maxEdge / 2 : maxEdge,
+    return LayoutBuilder(builder: (context, constraints) {
+
+      final maxEdge = max(size.width, size.height);
+
+      return SafeArea(
+        top: false,
+        child: Scaffold(
+          body: Center(
+            child: SizedBox.fromSize(
+              size: size,
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: -maxEdge * 0.2,
+                    top: -maxEdge * 0.05,
+                    width: maxEdge / 2,
+                    height: maxEdge / 2,
+                    child: Image.asset(
+                      AppImages.kOttaaTablet,
+                      width: maxEdge / 2,
+                      height: maxEdge / 2,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "login.title".trl,
-                        style: textTheme.headline2,
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: kIsTablet ? (constraints.maxWidth * 0.4).clamp(200, 800) : maxEdge,
                       ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: SignInButton(
-                          text: "login.google".trl,
-                          logo: AppImages.kGoogleIcon,
-                          type: SignInType.google,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "login.title".trl,
+                            style: textTheme.headline2,
+                          ),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            child: SignInButton(
+                              text: "login.google".trl,
+                              logo: AppImages.kGoogleIcon,
+                              type: SignInType.google,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  // Align(
+                  //   alignment: Alignment.bottomCenter,
+                  //   child: TextButton(
+                  //     onPressed: () {},
+                  //     style: TextButton.styleFrom(
+                  //       padding: const EdgeInsets.symmetric(
+                  //         horizontal: 24,
+                  //         vertical: 16,
+                  //       ),
+                  //       foregroundColor: kBlackColor,
+                  //     ),
+                  //     child: Text(
+                  //       "login.register".trl,
+                  //       textAlign: TextAlign.center,
+                  //       style: textTheme.bodyText1?.copyWith(
+                  //         fontWeight: FontWeight.w600,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
+                ],
               ),
-              // Align(
-              //   alignment: Alignment.bottomCenter,
-              //   child: TextButton(
-              //     onPressed: () {},
-              //     style: TextButton.styleFrom(
-              //       padding: const EdgeInsets.symmetric(
-              //         horizontal: 24,
-              //         vertical: 16,
-              //       ),
-              //       foregroundColor: kBlackColor,
-              //     ),
-              //     child: Text(
-              //       "login.register".trl,
-              //       textAlign: TextAlign.center,
-              //       style: textTheme.bodyText1?.copyWith(
-              //         fontWeight: FontWeight.w600,
-              //       ),
-              //     ),
-              //   ),
-              // )
-            ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

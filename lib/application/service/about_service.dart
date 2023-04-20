@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:either_dart/either.dart';
@@ -15,6 +14,7 @@ import 'dart:async';
 
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:universal_io/io.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @Singleton(
