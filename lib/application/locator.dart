@@ -10,16 +10,12 @@ const web = Environment('web');
 
 const desktop = Environment('desktop');
 
-const bool _kIsDesktop = bool.fromEnvironment('dart.vm.product');
+// const bool _kIsDesktop = bool.fromEnvironment('dart.vm.product');
 
 @InjectableInit(
   preferRelativeImports: false,
   throwOnMissingDependencies: true,
 )
 Future<GetIt> configureDependencies() => getIt.init(
-      environment: _kIsDesktop
-          ? desktop.name
-          : kIsWeb
-              ? web.name
-              : mobile.name,
+      environment: kIsWeb ? web.name : mobile.name,
     );

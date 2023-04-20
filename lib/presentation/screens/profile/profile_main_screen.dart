@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/connected_users_list.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/drop_down_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
@@ -46,135 +47,125 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
 
     if (user == null) return Container();
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: SizedBox(
-            width: constraints.maxWidth > 800 ? constraints.maxWidth * 0.4 : constraints.maxWidth,
-            child: Center(
-              child: SingleChildScrollView(
-                child: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+    return ResponsiveWidget(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Center(
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () =>
-                                      context.push(AppRoutes.caregiverAccount),
-                                  child: ProfilePhotoWidget(
-                                    image: user.settings.data.avatar.network ?? "",
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 16,
-                                ),
-                                Text(
-                                  "profile.hello"
-                                      .trlf({"name": user.settings.data.name}),
-                                ),
-                              ],
-                            ),
                             GestureDetector(
-                              onTap: () {
-                                // context.push(AppRoutes.customizedBoardScreen);
-                              },
-                              child: Image.asset(
-                                AppImages.kNotificationIcon,
+                              onTap: () => context.push(AppRoutes.caregiverAccount),
+                              child: ProfilePhotoWidget(
+                                image: user.settings.data.avatar.network ?? "",
                               ),
+                            ),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            Text(
+                              "profile.hello".trlf({"name": user.settings.data.name}),
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        Text(
-                          "profile.what_do".trl,
-                          style: textTheme.displayMedium,
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        provider.connectedUsersFetched
-                            ? const ConnectedUsersList()
-                            : const SizedBox.shrink(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          child: ActionCard(
-                            title: "profile.link_account".trl,
-                            subtitle: "profile.new_existant".trl,
-                            trailingImage:
-                                const AssetImage(AppImages.kProfileMainScreenIcon),
-                            imageSize: const Size(94, 96),
-                            focused: provider.isLinkAccountOpen,
-                            onPressed: () {
-                              provider.isLinkAccountOpen = !provider.isLinkAccountOpen;
-                              provider.notify();
-                            },
-                          ),
-                        ),
-                        //todo: add the trigger here for the container to show and hide
-                        AnimatedContainer(
-                          decoration: const BoxDecoration(
-                            color: Colors.transparent,
-                          ),
-                          duration: const Duration(milliseconds: 500),
-                          height: provider.isLinkAccountOpen ? 65 : 0,
-                          width: double.maxFinite,
-                          child: SingleChildScrollView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            child: Column(
-                              children: [
-                                // DropDownWidget(
-                                //   onTap: () {},
-                                //   image: AppImages.kProfileAddIcon,
-                                //   text: "profile.crear.nueva.cuenta".trl,
-                                // ),
-                                // const SizedBox(
-                                //   height: 16,
-                                // ),
-                                // DropDownWidget(
-                                //   onTap: () {},
-                                //   image: AppImages.kProfileAddIcon,
-                                //   text: "profile.crear.nueva.cuenta".trl,
-                                // ),
-                                // const SizedBox(
-                                //   height: 16,
-                                // ),
-                                DropDownWidget(
-                                  onTap: () => context.push(AppRoutes.caregiverLink),
-                                  image: AppImages.kProfileLinkIcon,
-                                  text: "profile.link_account".trl,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        ActionCard(
-                          subtitle: "profile.no_account".trl,
-                          focused: false,
-                          title: "profile.use.ottaa".trl,
-                          trailingImage: const AssetImage(AppImages.kProfileIcon2),
-                          imageSize: const Size(129, 96),
-                          onPressed: () {
-                            context.push(AppRoutes.userTalk);
+                        GestureDetector(
+                          onTap: () {
+                            // context.push(AppRoutes.customizedBoardScreen);
                           },
+                          child: Image.asset(
+                            AppImages.kNotificationIcon,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Text(
+                      "profile.what_do".trl,
+                      style: textTheme.displayMedium,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    provider.connectedUsersFetched ? const ConnectedUsersList() : const SizedBox.shrink(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: ActionCard(
+                        title: "profile.link_account".trl,
+                        subtitle: "profile.new_existant".trl,
+                        trailingImage: const AssetImage(AppImages.kProfileMainScreenIcon),
+                        imageSize: const Size(94, 96),
+                        focused: provider.isLinkAccountOpen,
+                        onPressed: () {
+                          provider.isLinkAccountOpen = !provider.isLinkAccountOpen;
+                          provider.notify();
+                        },
+                      ),
+                    ),
+                    //todo: add the trigger here for the container to show and hide
+                    AnimatedContainer(
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      duration: const Duration(milliseconds: 500),
+                      height: provider.isLinkAccountOpen ? 65 : 0,
+                      width: double.maxFinite,
+                      child: SingleChildScrollView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        child: Column(
+                          children: [
+                            // DropDownWidget(
+                            //   onTap: () {},
+                            //   image: AppImages.kProfileAddIcon,
+                            //   text: "profile.crear.nueva.cuenta".trl,
+                            // ),
+                            // const SizedBox(
+                            //   height: 16,
+                            // ),
+                            // DropDownWidget(
+                            //   onTap: () {},
+                            //   image: AppImages.kProfileAddIcon,
+                            //   text: "profile.crear.nueva.cuenta".trl,
+                            // ),
+                            // const SizedBox(
+                            //   height: 16,
+                            // ),
+                            DropDownWidget(
+                              onTap: () => context.push(AppRoutes.caregiverLink),
+                              image: AppImages.kProfileLinkIcon,
+                              text: "profile.link_account".trl,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    ActionCard(
+                      subtitle: "profile.no_account".trl,
+                      focused: false,
+                      title: "profile.use.ottaa".trl,
+                      trailingImage: const AssetImage(AppImages.kProfileIcon2),
+                      imageSize: const Size(129, 96),
+                      onPressed: () {
+                        context.push(AppRoutes.userTalk);
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-        );
-      }
+        ),
+      ),
     );
   }
 }
