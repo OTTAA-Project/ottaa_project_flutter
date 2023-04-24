@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/category_widget.dart';

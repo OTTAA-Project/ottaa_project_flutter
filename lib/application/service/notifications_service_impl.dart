@@ -49,11 +49,6 @@ class NotificationsServiceImpl implements NotificationsService {
       sound: true,
     );
 
-    FirebaseMessaging.instance.onTokenRefresh.listen((String token) {
-      print('Token refreshed: $token');
-      //TODO: Revisar esto después no ahora como juanma con las notis :,v
-    });
-
     await _awesomeNotifications.initialize(
       'resource://mipmap/ic_launcher',
       [

@@ -1,5 +1,6 @@
 import 'dart:math' show min;
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -89,6 +90,8 @@ class HomeProvider extends ChangeNotifier {
   String? currentGridGroup;
   ScrollController gridScrollController = ScrollController();
 
+  final List<CancelToken> _cancelsToken = [];
+
   void setCurrentGroup(String group) {
     currentTabGroup = group;
     pictoTabsScrollController.jumpTo(0);
@@ -156,6 +159,13 @@ class HomeProvider extends ChangeNotifier {
 
   void removeLastPictogram() {
     pictoWords.removeLast();
+    if (pictoWords.isEmpty) {
+      for (var element in _cancelsToken) {
+        element.cancel();
+      }
+
+      _cancelsToken.clear();
+    }
     notify();
     suggestedPicts.clear();
     Picto? lastPicto = pictoWords.lastOrNull;
@@ -196,20 +206,36 @@ class HomeProvider extends ChangeNotifier {
 
     if (patientState.patient != null && id != kStarterPictoId) {
       PatientUserModel user = patientState.user;
+      final cancelToken = CancelToken();
 
+      cancelToken.whenCancel.then((value) {
+        _cancelsToken.remove(cancelToken);
+      });
+
+      for (var element in _cancelsToken) {
+        element.cancel();
+      }
+
+      _cancelsToken.clear();
+
+      _cancelsToken.add(cancelToken);
 
       final response = await predictPictogram.call(
         sentence: pictoWords.map((e) => e.text).join(" "),
         uid: user.id,
         language: user.settings.language.language,
         model: "test",
-        groups: user.groups[user.settings.language.language]!.where((element) => element.block).map((e) => e.id).toList(),
+        groups: (user.groups[user.settings.language.language] ?? []).where((element) => element.block).map((e) => e.id).toList(),
         tags: {},
         reduced: true,
         chunk: suggestedQuantity,
+        cancelToken: cancelToken,
       );
 
+      _cancelsToken.remove(cancelToken);
+
       if (response.isRight) {
+        print(response.right);
         suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
       }
@@ -227,10 +253,6 @@ class HomeProvider extends ChangeNotifier {
       List<Picto> requiredPictos = predictiveAlgorithm(list: recomendedPicts);
       suggestedPicts.addAll(requiredPictos);
       suggestedPicts = suggestedPicts.toSet().toList();
-    }
-
-    if (suggestedPicts.length < suggestedQuantity) {
-      suggestedPicts.addAll(basicPictograms);
     }
 
     suggestedIndex = id;
@@ -254,17 +276,31 @@ class HomeProvider extends ChangeNotifier {
     if (pictos.isEmpty && suggestedPicts.isEmpty) {
       return List.generate(4, (index) {
         return Picto(
-            id: "-777",
+          id: "-777",
+          text: "",
+          type: 0,
+          resource: AssetsImage(
+            asset: "",
+            network: null,
+          ),
+        );
+      });
+    } else if (pictos.length < suggestedQuantity) {
+      int pictosLeft = suggestedQuantity - pictos.length;
+      pictos.addAll(
+        List.generate(
+          pictosLeft,
+          (index) => Picto(
+            id: "777",
             text: "",
             type: 0,
             resource: AssetsImage(
               asset: "",
               network: null,
-            ));
-      });
-    } else if (pictos.length < suggestedQuantity) {
-      int pictosLeft = suggestedQuantity - pictos.length;
-      pictos.addAll(basicPictograms.sublist(0, min(basicPictograms.length, pictosLeft)));
+            ),
+          ),
+        ),
+      );
     }
 
     return pictos;
@@ -315,12 +351,27 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    if (patientState.patient == null || patientState.user.patientSettings.layout.oneToOne) {
-      show = true;
+    show = true;
+    notifyListeners();
+    if (patientState.state != null && !patientState.user.patientSettings.layout.oneToOne) {
       notifyListeners();
+      String? sentence;
       scrollController.jumpTo(0);
-      await Future.delayed(const Duration(milliseconds: 500)); //We have to wait for the render timelapse
-      overScrollController.jumpTo(0);
+      if (patientState.user.patientSettings.language.labs) {
+        sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+        if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
+      }
+
+      sentence ??= pictoWords.map((e) => e.text).join(' ');
+      await _tts.speak(sentence);
+
+      show = false;
+      notifyListeners();
+      await Future.delayed(const Duration(milliseconds: 400));
+      final d = pictoWords.length > 5 ? (pictoWords.length - 5) * 100 : 100;
+      scrollController.jumpTo(scrollController.offset + d);
+      return;
+    } else {
       for (var i = 0; i < pictoWords.length; i++) {
         selectedWord = i;
         scrollController.animateTo(
@@ -328,45 +379,21 @@ class HomeProvider extends ChangeNotifier {
           duration: const Duration(microseconds: 50),
           curve: Curves.easeIn,
         );
-        overScrollController.animateTo(
-          i == 0 ? 0 : i * 45,
-          duration: const Duration(microseconds: 50),
-          curve: Curves.easeIn,
-        );
         notifyListeners();
         await _tts.speak(pictoWords[i].text);
       }
-      scrollController.animateTo(
-        0,
-        duration: const Duration(microseconds: 50),
-        curve: Curves.easeIn,
-      );
-      overScrollController.animateTo(
-        0,
-        duration: const Duration(microseconds: 50),
-        curve: Curves.easeIn,
-      );
+      // scrollController.animateTo(
+      //   0,
+      //   duration: const Duration(microseconds: 50),
+      //   curve: Curves.easeIn,
+      // );
       show = false;
       notifyListeners();
-    } else {
-      notifyListeners();
-      String? sentence;
 
-      if (patientState.user.patientSettings.language.labs) {
-        sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
-        if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
+      if (patientState.user.patientSettings.layout.cleanup) {
+        pictoWords.clear();
+        await buildSuggestion();
       }
-
-      sentence ??= pictoWords.map((e) => e.text).join(' ');
-
-      await _tts.speak(sentence);
-      show = false;
-      notifyListeners();
-    }
-
-    if (patientState.patient == null || patientState.user.patientSettings.layout.cleanup) {
-      pictoWords.clear();
-      await buildSuggestion();
     }
   }
 

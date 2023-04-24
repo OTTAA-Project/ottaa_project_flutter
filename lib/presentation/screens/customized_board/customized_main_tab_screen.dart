@@ -220,7 +220,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                           break;
                         case CustomiseDataType.defaultCase:
                         default:
-                          await provider.uploadData(userId: userID.userId!);
+                          await provider.uploadData(userId: provider.userId);
                           context.pop();
                           context.push(AppRoutes.userCustomizeWait);
                           break;

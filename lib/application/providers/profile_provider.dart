@@ -45,7 +45,7 @@ class ProfileNotifier extends ChangeNotifier {
   bool userSelected = false;
 
   //profile edit screen
-  int day = 0, month = 0, year = 0;
+  int day = 0, month = 0, year = DateTime.now().year;
   String yearForDropDown = "0";
 
   //connected users screen

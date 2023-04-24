@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "ottaaproject-flutter"
-  }
+    "OTTAAFlutter": "ottaaproject-flutter"
+  },
+  "targets": {},
+  "etags": {}
 }

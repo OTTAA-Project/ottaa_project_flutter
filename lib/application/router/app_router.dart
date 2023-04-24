@@ -9,6 +9,12 @@ import 'package:ottaa_project_flutter/presentation/screens/customized_board/cust
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_main_tab_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_wait_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/game_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/match_pictogram_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/memory_game_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/search_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/select_group_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/whats_the_picto_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/link_mail_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/link_success_screen.dart';

@@ -111,6 +111,8 @@ class HiveDatabase extends LocalDatabaseRepository {
 
     await Hive.openBox('intro');
 
+    await Hive.openBox('tts');
+
     await getUser();
   }
 
@@ -130,5 +132,16 @@ class HiveDatabase extends LocalDatabaseRepository {
   Future<bool> getIntro() async {
     final res = Hive.box('intro').get('first');
     return res ?? true;
+  }
+
+  @override
+  Future<String> getVoice() async {
+    final res = Hive.box('tts').get('name');
+    return res ?? '';
+  }
+
+  @override
+  Future<void> setVoice({required String name}) async {
+    await Hive.box('tts').put('name', name);
   }
 }

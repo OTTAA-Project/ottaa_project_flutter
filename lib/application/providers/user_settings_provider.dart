@@ -205,10 +205,11 @@ class UserSettingsProvider extends ChangeNotifier {
     }
   }
 
-  void changeVoiceType({required String type}) {
+  void changeVoiceType({required String type}) async {
     voiceType = type;
     changeTTSVoice(value: type);
     ttsSetting.voiceSetting.voicesNames[language] = type;
+    _localDatabaseRepository.setVoice(name: type);
     notifyListeners();
   }
 
@@ -232,12 +233,17 @@ class UserSettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeTTSVoice({required String value}) {
+  Future<void> changeTTSVoice({required String value}) async {
     voiceName = value;
-    _ttsServices.changeCustomTTs(true);
-    _ttsServices.changeTTSVoice(value);
-    _ttsProvider.speak('global.test'.trl);
+    await _ttsServices.changeCustomTTs(true);
+    await _ttsServices.changeTTSVoice(value);
+    print(value);
+    await _ttsProvider.speak('global.test'.trl);
     notifyListeners();
+  }
+
+  Future<void> saveUserVoiceChoice() async {
+    await _localDatabaseRepository.setVoice(name: 'name');
   }
 
   void changeMute({required bool value}) {

@@ -39,7 +39,6 @@ class _ProfileSettingsEditScreenState extends ConsumerState<ProfileSettingsEditS
     // final colorScheme = Theme.of(context).colorScheme;
     final user = ref.watch(userNotifier);
     return ResponsiveWidget(
-
       child: Scaffold(
         appBar: OTTAAAppBar(
           leading: GestureDetector(
