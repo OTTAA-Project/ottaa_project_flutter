@@ -1,9 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_picto_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_board_tab_screen.dart';
@@ -37,237 +36,260 @@ import 'package:ottaa_project_flutter/presentation/screens/user_settings/voice_a
 import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
-final goRouterProvider = Provider<GoRouter>(
-  (ref) {
-    final authState = ref.read(authProvider);
+final goRouterProvider = Provider<GoRouter>((ref) {
+  final authState = ref.read(authProvider.select((value) => value.isUserLoggedIn));
+  final userState = ref.read(userProvider);
 
-    return GoRouter(
-      debugLogDiagnostics: true,
-      restorationScopeId: "ottaa",
-      errorBuilder: (context, state) => const ErrorScreen(),
-      initialLocation: "/splash",
-      refreshListenable: authState,
-      // redirect: (_, __) => "/login",
-      routes: <GoRoute>[
-        GoRoute(
-          path: "/",
-          name: "ottaa",
-          builder: (context, state) => Container(),
-          routes: [
-            GoRoute(
-              path: "splash",
-              name: "splash",
-              builder: (context, state) => const SplashScreen(),
-            ),
-            GoRoute(
-              path: "onboarding",
-              name: "onboarding",
-              builder: (context, state) {
-                int? pageIndex = state.extra as int?;
+  return GoRouter(
+    debugLogDiagnostics: true,
+    restorationScopeId: "ottaa",
+    errorBuilder: (context, state) => const ErrorScreen(),
+    initialLocation: "/splash",
+    refreshListenable: userState,
+    routes: <GoRoute>[
+      GoRoute(
+        path: "/",
+        name: "ottaa",
+        builder: (context, state) => Container(),
+        routes: [
+          GoRoute(
+            path: "splash",
+            name: "splash",
+            builder: (context, state) => const SplashScreen(),
+          ),
+          GoRoute(
+            path: "onboarding",
+            name: "onboarding",
+            builder: (context, state) {
+              int? pageIndex = state.extra as int?;
 
-                return OnBoardingScreen(defaultIndex: pageIndex ?? 0);
-              },
-            ),
-            GoRoute(
-              path: "login",
-              name: "login",
-              builder: (context, state) => const LoginScreen(),
-              routes: [
-                GoRoute(
-                  path: "waiting",
-                  name: "waiting",
-                  builder: (context, state) => const LoginWaitingScreen(),
-                ),
-              ],
-            ),
-            GoRoute(
-              path: "tutorial",
-              name: "tutorial",
-              builder: (context, state) => const TutorialScreen(),
-            ),
-            GoRoute(
-              path: "home",
-              name: "home",
-              redirect: (_, __) async {
-                bool isLoggedIn = await authState.isUserLoggedIn();
-                final user = ref.read(userNotifier);
-                if (!isLoggedIn) {
-                  return "/login";
-                }
+              return OnBoardingScreen(defaultIndex: pageIndex ?? 0);
+            },
+          ),
+          GoRoute(
+            path: "login",
+            name: "login",
+            builder: (context, state) => const LoginScreen(),
+            routes: [
+              GoRoute(
+                path: "waiting",
+                name: "waiting",
+                builder: (context, state) => const LoginWaitingScreen(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: "tutorial",
+            name: "tutorial",
+            builder: (context, state) => const TutorialScreen(),
+          ),
+          GoRoute(
+            path: "home",
+            name: "home",
+            redirect: (_, __) async {
+              bool isLoggedIn = await authState();
+              final user = userState.user;
+              if (!isLoggedIn) {
+                return "/login";
+              }
 
-                if (user == null) {
-                  return '/splash';
-                }
-                return null;
-              },
-              builder: (context, state) {
-                final user = ref.read(userNotifier);
-                if (user == null) return Container(); //WAiting for the fetching
+              if (user == null) {
+                return '/splash';
+              }
+              return null;
+            },
+            builder: (context, state) {
+              final user = userState.user;
 
-                switch (user.type) {
-                  case UserType.caregiver:
-                    return const ProfileMainScreen();
-                  case UserType.user:
-                    return const ProfileMainScreenUser();
-                  case UserType.none:
-                    return const ProfileChooserScreen();
-                }
-              },
-              routes: [
-                GoRoute(
-                  path: "loading",
-                  name: "loading",
-                  builder: (context, state) => const ProfileWaitingScreen(),
-                ),
-                GoRoute(
-                  path: "profile",
-                  name: "profile",
-                  builder: (context, state) => const ProfileSettingsScreen(),
-                  routes: [
-                    GoRoute(
-                      path: "role",
-                      name: "role",
-                      builder: (context, state) => const ProfileChooserScreenSelected(),
-                    ),
-                    GoRoute(
-                      path: "accounts",
-                      name: "accounts",
-                      builder: (context, state) => const ProfileLinkedAccountScreen(),
-                    ),
-                    GoRoute(
-                      path: "tips",
-                      name: "tips",
-                      builder: (context, state) => const ProfileOTTAATipsScreen(),
-                    ),
-                    GoRoute(
-                      path: "edit",
-                      name: "edit",
-                      builder: (context, state) => const ProfileSettingsEditScreen(),
-                    ),
-                    GoRoute(
-                      path: "help",
-                      name: "help",
-                      builder: (context, state) => const ProfileHelpScreen(),
-                      routes: [
-                        GoRoute(
-                          path: "faq",
-                          name: "faq",
-                          builder: (context, state) => const ProfileFAQScreen(),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                GoRoute(
-                  path: "customize",
-                  name: "customize",
-                  builder: (context, state) => const CustomizedMainTabScreen(),
-                  routes: [
-                    GoRoute(
-                      path: "board",
-                      name: "board",
-                      builder: (context, state) => const CustomizedBoardTabScreen(),
-                    ),
-                    GoRoute(
-                      path: "picto",
-                      name: "picto",
-                      builder: (context, state) => const CustomizePictoScreen(),
-                    ),
-                    GoRoute(
-                      path: "wait",
-                      name: "wait",
-                      builder: (context, state) => const CustomizeWaitScreen(),
-                    ),
-                  ],
-                ),
-                GoRoute(
-                  path: "talk",
-                  name: "talk",
-                  builder: (context, state) => const HomeScreen(),
-                ),
-                if (ref.read(userNotifier)?.type == UserType.caregiver) ...[
+              if (user == null) return Container(); //WAiting for the fetching
+
+              switch (user.type) {
+                case UserType.caregiver:
+                  return const ProfileMainScreen();
+                case UserType.user:
+                  return const ProfileMainScreenUser();
+                case UserType.none:
+                  return const ProfileChooserScreen();
+              }
+            },
+            routes: [
+              GoRoute(
+                path: "loading",
+                name: "loading",
+                builder: (context, state) => const ProfileWaitingScreen(),
+              ),
+              GoRoute(
+                path: "profile",
+                name: "profile",
+                builder: (context, state) => const ProfileSettingsScreen(),
+                routes: [
                   GoRoute(
-                    path: "account",
-                    name: "account",
-                    builder: (context, state) => const SettingScreenUser(),
+                    path: "role",
+                    name: "role",
+                    builder: (context, state) => const ProfileChooserScreenSelected(),
+                  ),
+                  GoRoute(
+                    path: "accounts",
+                    name: "accounts",
+                    builder: (context, state) => const ProfileLinkedAccountScreen(),
+                  ),
+                  GoRoute(
+                    path: "tips",
+                    name: "tips",
+                    builder: (context, state) => const ProfileOTTAATipsScreen(),
+                  ),
+                  GoRoute(
+                    path: "edit",
+                    name: "edit",
+                    builder: (context, state) => const ProfileSettingsEditScreen(),
+                  ),
+                  GoRoute(
+                    path: "help",
+                    name: "help",
+                    builder: (context, state) => const ProfileHelpScreen(),
                     routes: [
                       GoRoute(
-                        path: "layout",
-                        name: "layout",
-                        builder: (context, state) => const MainSettingScreen(),
-                      ),
-                      GoRoute(
-                        path: "accessibility",
-                        name: "accessibility",
-                        builder: (context, state) => const AccessibilityScreen(),
-                      ),
-                      GoRoute(
-                        path: "tts",
-                        name: "tts",
-                        builder: (context, state) => const VoiceAndSubtitleScreen(),
-                      ),
-                      GoRoute(
-                        path: "language",
-                        name: "language",
-                        builder: (context, state) => const LanguageScreen(),
+                        path: "faq",
+                        name: "faq",
+                        builder: (context, state) => const ProfileFAQScreen(),
                       ),
                     ],
                   ),
-                  //TODO*: Use ShellRoute instead of GoRoute
+                ],
+              ),
+              GoRoute(
+                path: "customize",
+                name: "customize",
+                builder: (context, state) => const CustomizedMainTabScreen(),
+                routes: [
                   GoRoute(
-                    name: "link",
-                    path: "link",
-                    builder: (context, state) => const LinkMailScreen(),
-                    routes: [
-                      GoRoute(
-                        path: "token",
-                        builder: (context, state) => const LinkTokenScreen(),
-                      ),
-                      GoRoute(
-                        path: "wait",
-                        builder: (context, state) => const LinkWaitingScreen(),
-                      ),
-                      GoRoute(
-                        path: "success",
-                        builder: (context, state) => const LinkSuccessScreen(),
-                      )
-                    ],
+                    path: "board",
+                    name: "board",
+                    builder: (context, state) => const CustomizedBoardTabScreen(),
                   ),
-                ] else ...[
                   GoRoute(
-                    path: "settings",
-                    name: "settings",
-                    builder: (context, state) => const SettingScreenUser(),
-                    routes: [
-                      GoRoute(
-                        path: "layout",
-                        name: "layout",
-                        builder: (context, state) => const MainSettingScreen(),
-                      ),
-                      GoRoute(
-                        path: "accessibility",
-                        name: "accessibility",
-                        builder: (context, state) => const AccessibilityScreen(),
-                      ),
-                      GoRoute(
-                        path: "tts",
-                        name: "tts",
-                        builder: (context, state) => const VoiceAndSubtitleScreen(),
-                      ),
-                      GoRoute(
-                        path: "language",
-                        name: "language",
-                        builder: (context, state) => const LanguageScreen(),
-                      ),
-                    ],
+                    path: "picto",
+                    name: "picto",
+                    builder: (context, state) => const CustomizePictoScreen(),
                   ),
-                ]
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-  },
-  dependencies: [authProvider, userNotifier],
-);
+                  GoRoute(
+                    path: "wait",
+                    name: "wait",
+                    builder: (context, state) => const CustomizeWaitScreen(),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: "talk",
+                name: "talk",
+                builder: (context, state) => const HomeScreen(),
+              ),
+
+              GoRoute(
+                path: "account",
+                name: "account",
+                redirect: (_, __) {
+                  if (userState.user?.type == UserType.caregiver) {
+                    return null;
+                  }
+
+                  return "/home";
+                },
+                builder: (context, state) => const SettingScreenUser(),
+                routes: [
+                  GoRoute(
+                    path: "layout",
+                    name: "layout",
+                    builder: (context, state) => const MainSettingScreen(),
+                  ),
+                  GoRoute(
+                    path: "accessibility",
+                    name: "accessibility",
+                    builder: (context, state) => const AccessibilityScreen(),
+                  ),
+                  GoRoute(
+                    path: "tts",
+                    name: "tts",
+                    builder: (context, state) => const VoiceAndSubtitleScreen(),
+                  ),
+                  GoRoute(
+                    path: "language",
+                    name: "language",
+                    builder: (context, state) => const LanguageScreen(),
+                  ),
+                ],
+              ),
+              //TODO*: Use ShellRoute instead of GoRoute
+              GoRoute(
+                name: "link",
+                path: "link",
+                redirect: (_, __) {
+                  if (userState.user?.type == UserType.caregiver) {
+                    return null;
+                  }
+
+                  return "/home";
+                },
+                builder: (context, state) => const LinkMailScreen(),
+                routes: [
+                  GoRoute(
+                    path: "token",
+                    builder: (context, state) => const LinkTokenScreen(),
+                  ),
+                  GoRoute(
+                    path: "wait",
+                    builder: (context, state) => const LinkWaitingScreen(),
+                  ),
+                  GoRoute(
+                    path: "success",
+                    builder: (context, state) => const LinkSuccessScreen(),
+                  )
+                ],
+              ),
+
+              GoRoute(
+                path: "settings",
+                name: "settings",
+                redirect: (_, __) {
+                  print(__.location);
+                  if (__.location.startsWith("/home/settings")) {
+                    if (userState.user?.type == UserType.user) {
+                      return null;
+                    }
+
+                    return "/home";
+                  }
+
+                  return null;
+                },
+                builder: (context, state) => const SettingScreenUser(),
+                routes: [
+                  GoRoute(
+                    path: "layout",
+                    name: "layout",
+                    builder: (context, state) => const MainSettingScreen(),
+                  ),
+                  GoRoute(
+                    path: "accessibility",
+                    name: "accessibility",
+                    builder: (context, state) => const AccessibilityScreen(),
+                  ),
+                  GoRoute(
+                    path: "tts",
+                    name: "tts",
+                    builder: (context, state) => const VoiceAndSubtitleScreen(),
+                  ),
+                  GoRoute(
+                    path: "language",
+                    name: "language",
+                    builder: (context, state) => const LanguageScreen(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    ],
+  );
+});

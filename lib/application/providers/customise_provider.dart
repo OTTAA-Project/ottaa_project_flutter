@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
@@ -129,10 +129,10 @@ class CustomiseProvider extends ChangeNotifier {
     await _groupsService.uploadGroups(groups, 'type', languageCode, userId: userId);
     await setShortcutsForUser(userId: userId);
 
-    if (userState.user.type == UserType.user) {
-      final newUser = userState.user.patient;
-      userState.user.patient.groups[languageCode] = groups;
-      userState.user.patient.pictos[languageCode] = pictograms;
+    if (userState.user!.type == UserType.user) {
+      final newUser = userState.user!.patient;
+      userState.user!.patient.groups[languageCode] = groups;
+      userState.user!.patient.pictos[languageCode] = pictograms;
 
       await _localDatabaseRepository.setUser(newUser);
 
@@ -218,6 +218,6 @@ final customiseProvider = ChangeNotifierProvider<CustomiseProvider>((ref) {
 
   final localDatabase = GetIt.I<LocalDatabaseRepository>();
 
-  final userState = ref.watch(userNotifier.notifier);
+  final userState = ref.watch(userProvider);
   return CustomiseProvider(pictogramService, groupService, customiseService, i18N, userState, localDatabase);
 });

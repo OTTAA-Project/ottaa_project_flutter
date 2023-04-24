@@ -7,9 +7,9 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
@@ -74,7 +74,7 @@ class UserSettingsProvider extends ChangeNotifier {
   List<Voices> filteredVoices = [];
   String voiceName = "es-ES-language";
 
-  PatientUserModel get currentUser => _patientNotifier.patient ?? _userNotifier.user.patient;
+  PatientUserModel get currentUser => _patientNotifier.patient ?? _userNotifier.user!.patient;
 
   void notify() {
     notifyListeners();
@@ -136,7 +136,7 @@ class UserSettingsProvider extends ChangeNotifier {
       userId: currentUser.id,
     );
 
-    if (_userNotifier.user.isCaregiver) {
+    if (_userNotifier.user!.isCaregiver) {
       int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
@@ -155,7 +155,7 @@ class UserSettingsProvider extends ChangeNotifier {
       userId: currentUser.id,
     );
 
-    if (_userNotifier.user.isCaregiver) {
+    if (_userNotifier.user!.isCaregiver) {
       int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
@@ -174,7 +174,7 @@ class UserSettingsProvider extends ChangeNotifier {
       userId: currentUser.id,
     );
 
-    if (_userNotifier.user.isCaregiver) {
+    if (_userNotifier.user!.isCaregiver) {
       int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
@@ -193,7 +193,7 @@ class UserSettingsProvider extends ChangeNotifier {
       userId: currentUser.id,
     );
 
-    if (_userNotifier.user.isCaregiver) {
+    if (_userNotifier.user!.isCaregiver) {
       int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
@@ -338,7 +338,7 @@ final userSettingsProvider = ChangeNotifierProvider<UserSettingsProvider>((ref) 
   final i18N = GetIt.I<I18N>();
   final userSettingsService = GetIt.I<UserSettingRepository>();
 
-  final UserNotifier userNotifierState = ref.watch(userNotifier.notifier);
+  final UserNotifier userNotifierState = ref.watch(userProvider);
   final PatientNotifier patientNotifierState = ref.watch(patientNotifier.notifier);
 
   final ProfileNotifier profileNotifier = ref.watch(profileProvider);

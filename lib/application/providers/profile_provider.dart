@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
@@ -63,7 +63,7 @@ class ProfileNotifier extends ChangeNotifier {
   }
 
   Future<void> setDate() async {
-    final date = _userNotifier.user.settings.data.birthDate;
+    final date = _userNotifier.user!.settings.data.birthDate;
     day = date.day;
     month = date.month;
     year = date.year;
@@ -86,6 +86,8 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> settingUpUserType() async {
     final user = _userNotifier.user;
+
+    if (user == null) return;
 
     UserModel? newUser;
 
@@ -121,6 +123,8 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> updateChanges() async {
     final user = _userNotifier.user;
+    if (user == null) return;
+
     if (imageSelected) {
       /// upload the image and fetch its url
       imageUrl = await _profileService.uploadUserImage(
@@ -175,7 +179,7 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> fetchConnectedUsersData() async {
     connectedUsersData = [];
-    final connectedUsers = await _profileService.getConnectedUsers(userId: _userNotifier.user.id);
+    final connectedUsers = await _profileService.getConnectedUsers(userId: _userNotifier.user!.id);
     if (connectedUsers.isLeft) return;
 
     await Future.wait(connectedUsers.right.keys.map((e) async {
@@ -222,8 +226,8 @@ class ProfileNotifier extends ChangeNotifier {
 
     // update the whole list again
     dataFetched = false;
-    _userNotifier.user.caregiver.users.removeWhere((key, value) => key == userId);
-    _localDatabaseRepository.setUser(_userNotifier.user);
+    _userNotifier.user!.caregiver.users.removeWhere((key, value) => key == userId);
+    _localDatabaseRepository.setUser(_userNotifier.user!);
     await fetchConnectedUsersData();
     dataFetched = true;
     notify();
@@ -233,7 +237,7 @@ class ProfileNotifier extends ChangeNotifier {
 final profileProvider = ChangeNotifierProvider<ProfileNotifier>((ref) {
   final ProfileRepository profileService = GetIt.I.get<ProfileRepository>();
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
-  final userNot = ref.read(userNotifier.notifier);
+  final userNot = ref.read(userProvider);
 
   final AboutRepository aboutRepository = GetIt.I.get<AboutRepository>();
   return ProfileNotifier(

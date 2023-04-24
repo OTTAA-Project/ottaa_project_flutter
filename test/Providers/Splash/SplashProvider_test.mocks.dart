@@ -536,7 +536,7 @@ class MockUserAvatarNotifier extends _i1.Mock
 /// A class which mocks [UserNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserNotifier extends _i1.Mock implements _i16.UserNotifier {
+class MockUserNotifier extends _i1.Mock implements _i16.UserStateNotifier {
   MockUserNotifier() {
     _i1.throwOnMissingStub(this);
   }

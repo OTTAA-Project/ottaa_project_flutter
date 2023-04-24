@@ -735,7 +735,7 @@ class MockAuthNotifier extends _i1.Mock implements _i2.AuthNotifier {
 /// A class which mocks [UserNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserNotifier extends _i1.Mock implements _i18.UserNotifier {
+class MockUserNotifier extends _i1.Mock implements _i18.UserStateNotifier {
   MockUserNotifier() {
     _i1.throwOnMissingStub(this);
   }

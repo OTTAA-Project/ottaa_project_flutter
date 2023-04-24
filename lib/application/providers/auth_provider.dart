@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
@@ -62,7 +62,7 @@ class AuthProvider extends ChangeNotifier {
     }
 
     _loadingNotifier.hideLoading();
-    notifyListeners();
+    // notifyListeners();
     return result;
   }
 }
@@ -75,7 +75,7 @@ final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
 
   final AuthNotifier authData = ref.watch(authNotifier.notifier);
-  final UserNotifier userState = ref.watch(userNotifier.notifier);
+  final UserNotifier userState = ref.watch(userProvider);
 
   return AuthProvider(
     loadingNotifier,
@@ -85,4 +85,4 @@ final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
     authData,
     userState,
   );
-}, dependencies: [authNotifier, userNotifier]);
+}, dependencies: [authNotifier, userProvider]);

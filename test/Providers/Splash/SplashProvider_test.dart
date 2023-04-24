@@ -10,7 +10,7 @@ import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'SplashProvider_test.mocks.dart';
 
-@GenerateMocks([SplashProvider,AboutRepository,AuthRepository,UserAvatarNotifier,UserNotifier])
+@GenerateMocks([SplashProvider,AboutRepository,AuthRepository,UserAvatarNotifier,UserStateNotifier])
 void main(){
   late SplashProvider splashProvider;
   late MockAboutRepository mockAboutRepository;

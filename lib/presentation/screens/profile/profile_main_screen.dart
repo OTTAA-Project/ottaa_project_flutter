@@ -64,7 +64,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                         Row(
                           children: [
                             GestureDetector(
-                              onTap: () => context.push(AppRoutes.caregiverAccount),
+                              onTap: () => context.push(AppRoutes.userProfile),
                               child: ProfilePhotoWidget(
                                 image: user.settings.data.avatar.network ?? "",
                               ),

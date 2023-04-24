@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
@@ -68,7 +68,7 @@ final splashProvider = ChangeNotifierProvider<SplashProvider>((ref) {
   final AuthRepository authService = GetIt.I.get<AuthRepository>();
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
   final UserAvatarNotifier avatarNotifier = ref.read(userAvatarNotifier.notifier);
-  final UserNotifier userState = ref.read(userNotifier.notifier);
+  final UserNotifier userState = ref.read(userProvider);
   return SplashProvider(
     aboutService,
     authService,

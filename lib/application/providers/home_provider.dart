@@ -6,9 +6,9 @@ import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
@@ -107,7 +107,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void switchToPictograms() {
-    final currentUser = patientState.patient ?? userState.user;
+    final currentUser = patientState.patient ?? userState.user!;
 
     bool isGrid = currentUser.isPatient && currentUser.patient.patientSettings.layout.display == DisplayTypes.grid;
 
@@ -423,7 +423,7 @@ final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotif
   final sentencesService = GetIt.I<SentencesRepository>();
   final tts = ref.watch(ttsProvider);
   final patientState = ref.watch(patientNotifier.notifier);
-  final userState = ref.watch(userNotifier.notifier);
+  final userState = ref.watch(userProvider);
 
   final predictPictogram = GetIt.I<PredictPictogram>();
   final learnPictogram = GetIt.I<LearnPictogram>();

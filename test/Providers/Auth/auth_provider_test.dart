@@ -17,7 +17,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_provider_test.mocks.dart';
 
-@GenerateMocks([AuthProvider,LoadingNotifier,AuthService,AboutService,LocalDatabaseRepository,AuthNotifier, UserNotifier])
+@GenerateMocks([AuthProvider,LoadingNotifier,AuthService,AboutService,LocalDatabaseRepository,AuthNotifier, UserStateNotifier])
 void main(){
   late AuthProvider authProvider;
   late MockAuthProvider mockAuthProvider;
