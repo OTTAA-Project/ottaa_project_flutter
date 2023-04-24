@@ -33,7 +33,11 @@ class PictWidget extends StatelessWidget {
               height: 122,
               padding: const EdgeInsets.all(0.5),
               decoration: BoxDecoration(
-                border: show ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4) : Border.all(color: Colors.transparent),
+                border: show
+                    ? Border.all(
+                        color: rightOrWrong ? Colors.green : Colors.red,
+                        width: 4)
+                    : Border.all(color: Colors.transparent),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: hide
@@ -43,7 +47,8 @@ class PictWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: colorScheme.primary,width: 4),
+                        border:
+                            Border.all(color: colorScheme.primary, width: 4),
                       ),
                       padding: const EdgeInsets.all(0.5),
                       child: Column(

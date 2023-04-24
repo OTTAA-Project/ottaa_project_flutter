@@ -48,7 +48,8 @@ class CustomizeWaitScreen extends ConsumerWidget {
                 ),
                 Center(
                   child: Text(
-                    "customize.wait.subtitle".trlf({'name': provider.user!.settings.data.name}),
+                    "customize.wait.subtitle"
+                        .trlf({'name': provider.user!.settings.data.name}),
                     style: textTheme.headline3,
                   ),
                 ),

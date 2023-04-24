@@ -10,7 +10,8 @@ class LinkWaitingScreen extends ConsumerStatefulWidget {
   const LinkWaitingScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LinkWaitingScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _LinkWaitingScreenState();
 }
 
 class _LinkWaitingScreenState extends ConsumerState<LinkWaitingScreen> {

@@ -23,14 +23,13 @@ class PredictPictogramImpl extends PredictPictogram {
     CancelToken? cancelToken,
   }) async {
     final response = await serverRepository.predictPictogram(
-      sentence: sentence,
-      uid: uid,
-      language: language,
-      model: model,
-      groups: groups,
-      tags: tags,
-      cancelToken: cancelToken
-    );
+        sentence: sentence,
+        uid: uid,
+        language: language,
+        model: model,
+        groups: groups,
+        tags: tags,
+        cancelToken: cancelToken);
 
     if (response.isLeft) {
       return Left(response.left);
@@ -39,9 +38,12 @@ class PredictPictogramImpl extends PredictPictogram {
     final map = response.right["data"];
 
     if (reduced) {
-      return Right(map.map<PictoPredictedReduced>((e) => PictoPredictedReduced.fromMap(e)).toList());
+      return Right(map
+          .map<PictoPredictedReduced>((e) => PictoPredictedReduced.fromMap(e))
+          .toList());
     }
 
-    return Right(map.map<PictoPredicted>((e) => PictoPredicted.fromMap(e)).toList());
+    return Right(
+        map.map<PictoPredicted>((e) => PictoPredicted.fromMap(e)).toList());
   }
 }

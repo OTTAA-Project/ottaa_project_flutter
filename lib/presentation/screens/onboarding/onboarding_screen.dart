@@ -19,7 +19,8 @@ class OnBoardingScreen extends ConsumerStatefulWidget {
   const OnBoardingScreen({super.key, this.defaultIndex = 0});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _OnBoardingScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _OnBoardingScreenState();
 }
 
 class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
@@ -29,11 +30,13 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      ref.read(onBoardingProvider.select((value) => value.goToPage))(widget.defaultIndex);
+      ref.read(onBoardingProvider.select((value) => value.goToPage))(
+          widget.defaultIndex);
 
       await blockPortraitMode();
 
-      isLogged = await ref.read(authProvider.select((value) => value.isUserLoggedIn()));
+      isLogged = await ref
+          .read(authProvider.select((value) => value.isUserLoggedIn()));
 
       setState(() {});
     });
@@ -49,7 +52,8 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
     final provider = ref.read(onBoardingProvider);
     final spProvider = ref.read(splashProvider);
 
-    final currentIndex = ref.watch(onBoardingProvider.select((value) => value.currentIndex));
+    final currentIndex =
+        ref.watch(onBoardingProvider.select((value) => value.currentIndex));
 
     return LayoutBuilder(
       key: const Key("onboarding_layout_builder"),
@@ -83,7 +87,9 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                     if (skip != null && skip) {
                       if (mounted) {
                         await spProvider.setFirstTime();
-                        context.go(isLogged ? AppRoutes.userProfileRole : AppRoutes.login);
+                        context.go(isLogged
+                            ? AppRoutes.userProfileRole
+                            : AppRoutes.login);
                       }
                     }
                   },
@@ -99,7 +105,9 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
               left: true,
               right: true,
               child: SizedBox.fromSize(
-                size: isMedium ? Size(constraints.maxHeight / 2, constraints.maxHeight) : Size(constraints.maxWidth, constraints.maxHeight),
+                size: isMedium
+                    ? Size(constraints.maxHeight / 2, constraints.maxHeight)
+                    : Size(constraints.maxWidth, constraints.maxHeight),
                 child: Flex(
                   direction: Axis.vertical,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -165,12 +173,16 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                             onPressed: () async {
                               if (currentIndex == 2) {
                                 await spProvider.setFirstTime();
-                                context.go(isLogged ? AppRoutes.home : AppRoutes.login);
+                                context.go(isLogged
+                                    ? AppRoutes.home
+                                    : AppRoutes.login);
                                 return;
                               }
                               provider.nextPage();
                             },
-                            text: currentIndex == 2 ? "onboarding.start".trl : "global.next".trl,
+                            text: currentIndex == 2
+                                ? "onboarding.start".trl
+                                : "global.next".trl,
                           ),
                         ),
                       ),

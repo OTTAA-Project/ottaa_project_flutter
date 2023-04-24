@@ -9,13 +9,19 @@ class OnboardingLayout extends ConsumerStatefulWidget {
 
   final String image;
 
-  const OnboardingLayout({super.key, required this.title, required this.subtitle, required this.description, required this.image});
+  const OnboardingLayout(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.description,
+      required this.image});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _UserInfoStepState();
 }
 
-class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticKeepAliveClientMixin {
+class _UserInfoStepState extends ConsumerState<OnboardingLayout>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);

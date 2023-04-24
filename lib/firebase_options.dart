@@ -73,8 +73,10 @@ class DefaultFirebaseOptions {
     projectId: 'ottaaproject-flutter',
     databaseURL: 'https://ottaaproject-flutter-default-rtdb.firebaseio.com',
     storageBucket: 'ottaaproject-flutter.appspot.com',
-    androidClientId: '873137795353-1ttsko6h874bjq935auokrhk9plshtka.apps.googleusercontent.com',
-    iosClientId: '873137795353-ncjm3kdlieupkddfgklfmd7gindg9pli.apps.googleusercontent.com',
+    androidClientId:
+        '873137795353-1ttsko6h874bjq935auokrhk9plshtka.apps.googleusercontent.com',
+    iosClientId:
+        '873137795353-ncjm3kdlieupkddfgklfmd7gindg9pli.apps.googleusercontent.com',
     iosBundleId: 'com.ottaaproject.flutter',
   );
 }

@@ -38,7 +38,8 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                     ),
                     child: Text(
                       "onboarding.profile.subtitle".trl,
-                      style: textTheme.button!.copyWith(color: colorScheme.onBackground),
+                      style: textTheme.button!
+                          .copyWith(color: colorScheme.onBackground),
                     ),
                   ),
                   ActionCard(

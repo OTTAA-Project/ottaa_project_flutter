@@ -53,7 +53,8 @@ class _OTPWidgetState extends ConsumerState<OTPWidget> {
                     });
 
                     if (!isValid) {
-                      OTTAANotification.secondary(context, text: "profile.link.token.invalid".trl);
+                      OTTAANotification.secondary(context,
+                          text: "profile.link.token.invalid".trl);
                       return;
                     }
                     context.push(AppRoutes.caregiverLinkSuccess);

@@ -74,10 +74,12 @@ class UserData {
 
   factory UserData.fromMap(Map<String, dynamic> map) {
     return UserData(
-      avatar: AssetsImage.fromMap(Map.from(map['avatar'] as Map<dynamic, dynamic>)),
+      avatar:
+          AssetsImage.fromMap(Map.from(map['avatar'] as Map<dynamic, dynamic>)),
       birthDate: DateTime.fromMillisecondsSinceEpoch(map['birthDate'] as int),
       genderPref: map['genderPref'] as String,
-      lastConnection: DateTime.fromMillisecondsSinceEpoch(map['lastConnection'] as int),
+      lastConnection:
+          DateTime.fromMillisecondsSinceEpoch(map['lastConnection'] as int),
       lastName: map['lastName'] as String,
       name: map['name'] as String,
       number: map['number'] as String?,
@@ -86,7 +88,8 @@ class UserData {
 
   String toJson() => json.encode(toMap());
 
-  factory UserData.fromJson(String source) => UserData.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserData.fromJson(String source) =>
+      UserData.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -97,11 +100,23 @@ class UserData {
   bool operator ==(covariant UserData other) {
     if (identical(this, other)) return true;
 
-    return other.avatar == avatar && other.birthDate == birthDate && other.genderPref == genderPref && other.lastConnection == lastConnection && other.lastName == lastName && other.name == name && other.number == number;
+    return other.avatar == avatar &&
+        other.birthDate == birthDate &&
+        other.genderPref == genderPref &&
+        other.lastConnection == lastConnection &&
+        other.lastName == lastName &&
+        other.name == name &&
+        other.number == number;
   }
 
   @override
   int get hashCode {
-    return avatar.hashCode ^ birthDate.hashCode ^ genderPref.hashCode ^ lastConnection.hashCode ^ lastName.hashCode ^ name.hashCode ^ number.hashCode;
+    return avatar.hashCode ^
+        birthDate.hashCode ^
+        genderPref.hashCode ^
+        lastConnection.hashCode ^
+        lastName.hashCode ^
+        name.hashCode ^
+        number.hashCode;
   }
 }

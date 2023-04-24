@@ -45,7 +45,8 @@ class I18N extends ChangeNotifier {
     String languageCode = "${locale.languageCode}_${locale.countryCode}";
 
     if (!supportedLocales.containsKey(languageCode)) {
-      languageCode = platformLanguages[locale.languageCode]?.toString() ?? "es_CO";
+      languageCode =
+          platformLanguages[locale.languageCode]?.toString() ?? "es_CO";
     }
 
     if (_languages.containsKey(languageCode)) {
@@ -70,7 +71,8 @@ class I18N extends ChangeNotifier {
         return _languages[languageCode];
       }
 
-      final languageString = await rootBundle.loadString("assets/i18n/$languageCode.json");
+      final languageString =
+          await rootBundle.loadString("assets/i18n/$languageCode.json");
 
       final languageJson = json.decode(languageString) as Map<String, dynamic>;
 
@@ -88,7 +90,8 @@ class I18N extends ChangeNotifier {
 
   Future<void> changeLanguage(String languageCode) async {
     var split = languageCode.split("_");
-    assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US)");
+    assert(split.length == 2,
+        "Language code must be in the format: languageCode_countryCode (en_US)");
     changeLanguageFromLocale(locale);
   }
 
@@ -96,7 +99,8 @@ class I18N extends ChangeNotifier {
     assert(locale.countryCode != null, "Locale must have a country code");
     if (!supportedLocales.containsKey(locale.toString())) return;
 
-    TranslationTree? newLanguage = _languages[locale.toString()] ?? await loadTranslation(locale);
+    TranslationTree? newLanguage =
+        _languages[locale.toString()] ?? await loadTranslation(locale);
     if (newLanguage == null) {
       throw Exception("Language not found");
     }
@@ -111,7 +115,8 @@ class I18N extends ChangeNotifier {
   }
 
   static I18N of(BuildContext context) {
-    final provider = (context.dependOnInheritedWidgetOfExactType<I18nNotifier>());
+    final provider =
+        (context.dependOnInheritedWidgetOfExactType<I18nNotifier>());
     assert(provider != null, "No I18nNotifier found in context");
 
     final notifier = provider!.notifier;

@@ -101,7 +101,8 @@ class HomeProvider extends ChangeNotifier {
   Future<void> init() async {
     await fetchPictograms();
 
-    basicPictograms = predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
+    basicPictograms =
+        predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
 
     currentTabGroup = groups.keys.first;
 
@@ -112,7 +113,8 @@ class HomeProvider extends ChangeNotifier {
   void switchToPictograms() {
     final currentUser = patientState.patient ?? userState.user!;
 
-    bool isGrid = currentUser.isPatient && currentUser.patient.patientSettings.layout.display == DisplayTypes.grid;
+    bool isGrid = currentUser.isPatient &&
+        currentUser.patient.patientSettings.layout.display == DisplayTypes.grid;
 
     if (isGrid) {
       status = HomeScreenStatus.grid;
@@ -179,13 +181,19 @@ class HomeProvider extends ChangeNotifier {
     List<Group>? groupsData;
 
     if (patientState.patient != null) {
-      pictos = patientState.user.pictos[patientState.user.settings.language.language];
+      pictos = patientState
+          .user.pictos[patientState.user.settings.language.language];
 
-      groupsData = patientState.user.groups[patientState.user.settings.language.language];
+      groupsData = patientState
+          .user.groups[patientState.user.settings.language.language];
     }
 
-    pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
-    groupsData ??= (await _groupsService.getAllGroups()).where((element) => !element.block).toList();
+    pictos ??= (await _pictogramsService.getAllPictograms())
+        .where((element) => !element.block)
+        .toList();
+    groupsData ??= (await _groupsService.getAllGroups())
+        .where((element) => !element.block)
+        .toList();
 
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
@@ -225,7 +233,10 @@ class HomeProvider extends ChangeNotifier {
         uid: user.id,
         language: user.settings.language.language,
         model: "test",
-        groups: (user.groups[user.settings.language.language] ?? []).where((element) => element.block).map((e) => e.id).toList(),
+        groups: (user.groups[user.settings.language.language] ?? [])
+            .where((element) => element.block)
+            .map((e) => e.id)
+            .toList(),
         tags: {},
         reduced: true,
         chunk: suggestedQuantity,
@@ -236,7 +247,8 @@ class HomeProvider extends ChangeNotifier {
 
       if (response.isRight) {
         print(response.right);
-        suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
+        suggestedPicts =
+            response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
       }
     }
@@ -271,7 +283,10 @@ class HomeProvider extends ChangeNotifier {
     }
     int start = indexPage * suggestedQuantity;
 
-    List<Picto> pictos = suggestedPicts.sublist(start, min(suggestedPicts.length, (indexPage * suggestedQuantity) + suggestedQuantity));
+    List<Picto> pictos = suggestedPicts.sublist(
+        start,
+        min(suggestedPicts.length,
+            (indexPage * suggestedQuantity) + suggestedQuantity));
 
     if (pictos.isEmpty && suggestedPicts.isEmpty) {
       return List.generate(4, (index) {
@@ -353,13 +368,15 @@ class HomeProvider extends ChangeNotifier {
   Future<void> speakSentence() async {
     show = true;
     notifyListeners();
-    if (patientState.state != null && !patientState.user.patientSettings.layout.oneToOne) {
+    if (patientState.state != null &&
+        !patientState.user.patientSettings.layout.oneToOne) {
       notifyListeners();
       String? sentence;
       scrollController.jumpTo(0);
       if (patientState.user.patientSettings.language.labs) {
         sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
-        if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
+        if (sentence != null && sentence.startsWith("."))
+          sentence = sentence.replaceFirst(".", "");
       }
 
       sentence ??= pictoWords.map((e) => e.text).join(' ');
@@ -444,7 +461,8 @@ class HomeProvider extends ChangeNotifier {
   }
 }
 
-final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
+final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider =
+    ChangeNotifierProvider.autoDispose<HomeProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final sentencesService = GetIt.I<SentencesRepository>();

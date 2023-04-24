@@ -16,7 +16,8 @@ class LinkNotifier extends ChangeNotifier {
   final GlobalKey<FormState> codeFormKey = GlobalKey<FormState>();
 
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
-  List<TextEditingController> controllers = List.generate(4, (index) => TextEditingController());
+  List<TextEditingController> controllers =
+      List.generate(4, (index) => TextEditingController());
 
   final CreateEmailToken createEmailToken;
   final VerifyEmailToken verifyEmailToken;
@@ -25,7 +26,8 @@ class LinkNotifier extends ChangeNotifier {
 
   final ProfileRepository _profileService;
 
-  LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._profileService, this._auth);
+  LinkNotifier(this.createEmailToken, this.verifyEmailToken,
+      this._profileService, this._auth);
   String? userId;
   UserModel? user;
 
@@ -62,7 +64,8 @@ class LinkNotifier extends ChangeNotifier {
       final currentUser = await _auth.getCurrentUser();
       if (currentUser.isRight) {
         final email = currentUser.right.email;
-        return await createEmailToken.createEmailToken(email, emailController.text);
+        return await createEmailToken.createEmailToken(
+            email, emailController.text);
       }
     }
 
@@ -123,5 +126,6 @@ final linkProvider = ChangeNotifierProvider.autoDispose<LinkNotifier>((ref) {
   final verifyEmailToken = getIt<VerifyEmailToken>();
   final authRepository = getIt<AuthRepository>();
   final profileRepository = getIt<ProfileRepository>();
-  return LinkNotifier(createEmailToken, verifyEmailToken, profileRepository, authRepository);
+  return LinkNotifier(
+      createEmailToken, verifyEmailToken, profileRepository, authRepository);
 });

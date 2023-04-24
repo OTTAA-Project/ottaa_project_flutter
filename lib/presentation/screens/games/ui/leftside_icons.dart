@@ -9,7 +9,7 @@ class LeftSideIcons extends StatelessWidget {
     required this.mute,
     required this.hint,
   }) : super(key: key);
-  final void Function()? music, score,hint;
+  final void Function()? music, score, hint;
   final bool mute;
 
   @override
@@ -43,7 +43,8 @@ class LeftSideIcons extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Icon(
                   mute ? Icons.volume_mute_outlined : Icons.volume_up_outlined,
                   color: colorScheme.primary,

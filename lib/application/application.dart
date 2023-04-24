@@ -24,7 +24,6 @@ class _ApplicationState extends ConsumerState<Application> {
         debugShowCheckedModeBanner: false,
         routerConfig: appRouter,
         theme: kOttaaLightThemeData,
-
       ),
     );
   }

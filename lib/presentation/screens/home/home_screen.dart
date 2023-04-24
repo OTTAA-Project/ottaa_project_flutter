@@ -36,7 +36,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       //We are using size.height because at this time the screen is not rotated
       int pictoCount = kIsTablet ? 6 : 4;
 
-      final setSuggested = ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
+      final setSuggested =
+          ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
 
       setSuggested(pictoCount);
 
@@ -48,7 +49,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void dispose() {
     unblockRotation();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
 
     super.dispose();
   }

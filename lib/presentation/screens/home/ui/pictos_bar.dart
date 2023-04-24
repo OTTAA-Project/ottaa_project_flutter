@@ -32,7 +32,8 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
     final hasGroups = ref.watch(homeProvider).groups.isNotEmpty;
 
-    final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
+    final addPictogram =
+        ref.read(homeProvider.select((value) => value.addPictogram));
 
     print(pictos.length);
     return Flex(

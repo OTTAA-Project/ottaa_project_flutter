@@ -83,7 +83,9 @@ class WhatsThePictoScreen extends ConsumerWidget {
                   top: size.height * 0.8,
                   left: size.width * 0.46,
                   child: Text(
-                    provider.selectedPicto == provider.correctPicto ? 'game.yes'.trl : 'game.no'.trl,
+                    provider.selectedPicto == provider.correctPicto
+                        ? 'game.yes'.trl
+                        : 'game.no'.trl,
                     style: textTheme.headline1,
                   ),
                 )

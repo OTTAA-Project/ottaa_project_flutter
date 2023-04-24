@@ -16,12 +16,15 @@ class CustomizedMainTabScreen extends ConsumerStatefulWidget {
   const CustomizedMainTabScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CustomizedMainTabScreen> createState() => _CustomizedMainTabScreenState();
+  ConsumerState<CustomizedMainTabScreen> createState() =>
+      _CustomizedMainTabScreenState();
 }
 
-class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScreen> {
+class _CustomizedMainTabScreenState
+    extends ConsumerState<CustomizedMainTabScreen> {
   int index = 1;
-  final PageController pageController = PageController(initialPage: 0, keepPage: true);
+  final PageController pageController =
+      PageController(initialPage: 0, keepPage: true);
 
   @override
   void initState() {
@@ -58,7 +61,9 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
           children: [
             Expanded(
               child: Text(
-                index == 1 ? "customize.board.appbar".trl : "customize.shortcut.appbar".trl,
+                index == 1
+                    ? "customize.board.appbar".trl
+                    : "customize.shortcut.appbar".trl,
                 style: textTheme.bodyText2!.copyWith(fontSize: 14),
                 softWrap: true,
               ),
@@ -74,10 +79,14 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                 await BasicBottomSheet.show(
                   context,
                   // title: "",
-                  subtitle: index == 1 ? "customize.help.boards".trl : "customize.help.shortcut".trl,
+                  subtitle: index == 1
+                      ? "customize.help.boards".trl
+                      : "customize.help.shortcut".trl,
                   children: <Widget>[
                     Image.asset(
-                      index == 1 ? AppImages.kBoardImageEdit1 : AppImages.kBoardImageEdit2,
+                      index == 1
+                          ? AppImages.kBoardImageEdit1
+                          : AppImages.kBoardImageEdit2,
                       height: 166,
                     ),
                   ],
@@ -104,7 +113,8 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
             },
             child: Text(
               "global.skip".trl,
-              style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+              style:
+                  textTheme.headline4!.copyWith(color: colorScheme.onSurface),
             ),
           ),
         ],
@@ -128,7 +138,9 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                           height: 12,
                           width: index == 1 ? 32 : 16,
                           decoration: BoxDecoration(
-                            color: index == 1 ? colorScheme.primary : colorScheme.onSurface,
+                            color: index == 1
+                                ? colorScheme.primary
+                                : colorScheme.onSurface,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
@@ -140,7 +152,9 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                           height: 12,
                           width: index == 2 ? 32 : 16,
                           decoration: BoxDecoration(
-                            color: index == 2 ? colorScheme.primary : colorScheme.onSurface,
+                            color: index == 2
+                                ? colorScheme.primary
+                                : colorScheme.onSurface,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
@@ -149,7 +163,8 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                         ),
                         Text(
                           "${"global.step".trl} $index / 2",
-                          style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+                          style: textTheme.headline4!
+                              .copyWith(color: colorScheme.onSurface),
                         ),
                       ],
                     ),
@@ -157,8 +172,11 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                       height: 8,
                     ),
                     Text(
-                      index == 1 ? "customize.board.title".trl : "customize.shortcut.title".trl,
-                      style: textTheme.headline3!.copyWith(fontWeight: FontWeight.w600),
+                      index == 1
+                          ? "customize.board.title".trl
+                          : "customize.shortcut.title".trl,
+                      style: textTheme.headline3!
+                          .copyWith(fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(
                       height: 16,
@@ -186,7 +204,9 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                   onPressed: () async {
                     if (pageController.page == 0) {
                       setState(() {
-                        pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+                        pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeIn);
                         index = 2;
                       });
                     } else {
@@ -213,7 +233,9 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                           provider.type = CustomiseDataType.defaultCase;
                           provider.groupsFetched = false;
 
-                          await ref.read(profileProvider).fetchUserById(provider.userId);
+                          await ref
+                              .read(profileProvider)
+                              .fetchUserById(provider.userId);
                           provider.notify();
                           context.pop();
                           context.pop();

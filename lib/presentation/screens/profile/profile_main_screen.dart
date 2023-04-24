@@ -73,7 +73,8 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                               width: 16,
                             ),
                             Text(
-                              "profile.hello".trlf({"name": user.settings.data.name}),
+                              "profile.hello"
+                                  .trlf({"name": user.settings.data.name}),
                             ),
                           ],
                         ),
@@ -97,17 +98,21 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                     const SizedBox(
                       height: 4,
                     ),
-                    provider.connectedUsersFetched ? const ConnectedUsersList() : const SizedBox.shrink(),
+                    provider.connectedUsersFetched
+                        ? const ConnectedUsersList()
+                        : const SizedBox.shrink(),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: ActionCard(
                         title: "profile.link_account".trl,
                         subtitle: "profile.new_existant".trl,
-                        trailingImage: const AssetImage(AppImages.kProfileMainScreenIcon),
+                        trailingImage:
+                            const AssetImage(AppImages.kProfileMainScreenIcon),
                         imageSize: const Size(94, 96),
                         focused: provider.isLinkAccountOpen,
                         onPressed: () {
-                          provider.isLinkAccountOpen = !provider.isLinkAccountOpen;
+                          provider.isLinkAccountOpen =
+                              !provider.isLinkAccountOpen;
                           provider.notify();
                         },
                       ),
@@ -141,7 +146,8 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                             //   height: 16,
                             // ),
                             DropDownWidget(
-                              onTap: () => context.push(AppRoutes.caregiverLink),
+                              onTap: () =>
+                                  context.push(AppRoutes.caregiverLink),
                               image: AppImages.kProfileLinkIcon,
                               text: "profile.link_account".trl,
                             ),

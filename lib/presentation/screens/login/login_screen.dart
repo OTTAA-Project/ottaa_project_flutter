@@ -32,7 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final textTheme = Theme.of(context).textTheme;
 
     return LayoutBuilder(builder: (context, constraints) {
-
       final maxEdge = max(size.width, size.height);
 
       return SafeArea(
@@ -58,7 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: kIsTablet ? (constraints.maxWidth * 0.4).clamp(200, 800) : maxEdge,
+                        maxWidth: kIsTablet
+                            ? (constraints.maxWidth * 0.4).clamp(200, 800)
+                            : maxEdge,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

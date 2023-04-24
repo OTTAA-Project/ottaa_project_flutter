@@ -7,7 +7,8 @@ import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 abstract class AuthRepository {
   bool get isLogged;
 
-  Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]);
+  Future<Either<String, UserModel>> signIn(SignInType type,
+      [String? email, String? password]);
 
   Future<Either<String, bool>> signUp();
 

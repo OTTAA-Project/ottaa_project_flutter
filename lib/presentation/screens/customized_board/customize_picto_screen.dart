@@ -14,7 +14,8 @@ class CustomizePictoScreen extends ConsumerStatefulWidget {
   const CustomizePictoScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CustomizePictoScreen> createState() => _CustomizePictoScreenState();
+  ConsumerState<CustomizePictoScreen> createState() =>
+      _CustomizePictoScreenState();
 }
 
 class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
@@ -32,7 +33,8 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
           children: [
             Expanded(
               child: AutoSizeText(
-                "customize.picto.title".trlf({"name": provider.selectedGroupName}),
+                "customize.picto.title"
+                    .trlf({"name": provider.selectedGroupName}),
                 style: textTheme.headline3,
               ),
             ),
@@ -65,7 +67,8 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
             },
             child: Text(
               "global.skip".trl,
-              style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+              style:
+                  textTheme.headline4!.copyWith(color: colorScheme.onSurface),
             ),
           ),
         ],
@@ -80,9 +83,11 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
                   height: 32,
                 ),
                 BoardWidget(
-                  title: "customize.picto.title".trlf({"name": provider.selectedGroupName}),
+                  title: "customize.picto.title"
+                      .trlf({"name": provider.selectedGroupName}),
                   //todo: this one is a placeholder for now
-                  image: CachedNetworkImageProvider(provider.selectedGroupImage),
+                  image:
+                      CachedNetworkImageProvider(provider.selectedGroupImage),
                   customizeOnTap: () {
                     print('customize on tap');
                   },

@@ -13,10 +13,12 @@ class ProfileSettingsEditScreen extends ConsumerStatefulWidget {
   const ProfileSettingsEditScreen({super.key});
 
   @override
-  ConsumerState<ProfileSettingsEditScreen> createState() => _ProfileSettingsEditScreenState();
+  ConsumerState<ProfileSettingsEditScreen> createState() =>
+      _ProfileSettingsEditScreenState();
 }
 
-class _ProfileSettingsEditScreenState extends ConsumerState<ProfileSettingsEditScreen> {
+class _ProfileSettingsEditScreenState
+    extends ConsumerState<ProfileSettingsEditScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -73,11 +75,16 @@ class _ProfileSettingsEditScreenState extends ConsumerState<ProfileSettingsEditS
                   children: [
                     Center(
                       child: ImageEditWidget(
-                        cameraOnTap: () => provider.pickImage(cameraOrGallery: true),
-                        galleryOnTap: () => provider.pickImage(cameraOrGallery: false),
-                        imagePath: provider.profileEditImage != null ? provider.profileEditImage!.path : "",
+                        cameraOnTap: () =>
+                            provider.pickImage(cameraOrGallery: true),
+                        galleryOnTap: () =>
+                            provider.pickImage(cameraOrGallery: false),
+                        imagePath: provider.profileEditImage != null
+                            ? provider.profileEditImage!.path
+                            : "",
                         imageSelected: provider.imageSelected,
-                        imageUrl: user?.settings.data.avatar.network ?? AppImages.kTestImage,
+                        imageUrl: user?.settings.data.avatar.network ??
+                            AppImages.kTestImage,
                       ),
                     ),
                     const SizedBox(

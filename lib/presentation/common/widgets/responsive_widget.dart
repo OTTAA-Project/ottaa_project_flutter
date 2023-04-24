@@ -10,38 +10,37 @@ class ResponsiveWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (context, orientation) {
-        return LayoutBuilder(
-          builder: (context, constraints) {
-            int maxSide = max(constraints.maxWidth, constraints.maxHeight).toInt();
+    return OrientationBuilder(builder: (context, orientation) {
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          int maxSide =
+              max(constraints.maxWidth, constraints.maxHeight).toInt();
 
-            if (constraints.maxWidth > 1000) {
-              switch (child.runtimeType) {
-                case Scaffold:
-                  return DecoratedBox(
-                    decoration: const BoxDecoration(
-                      color: Color(kGray),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: maxSide * 0.2),
-                      child: child,
-                    ),
-                  );
-                default:
-                  return Center(
-                    child: SizedBox(
-                      width: maxSide * 0.4,
-                      child: child,
-                    ),
-                  );
-              }
-            } else {
-              return child;
+          if (constraints.maxWidth > 1000) {
+            switch (child.runtimeType) {
+              case Scaffold:
+                return DecoratedBox(
+                  decoration: const BoxDecoration(
+                    color: Color(kGray),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: maxSide * 0.2),
+                    child: child,
+                  ),
+                );
+              default:
+                return Center(
+                  child: SizedBox(
+                    width: maxSide * 0.4,
+                    child: child,
+                  ),
+                );
             }
-          },
-        );
-      }
-    );
+          } else {
+            return child;
+          }
+        },
+      );
+    });
   }
 }

@@ -7,7 +7,7 @@ class UserNotifier extends ChangeNotifier {
 
   UserModel? get user => _userModel;
 
-  set user (UserModel? userModel) {
+  set user(UserModel? userModel) {
     _userModel = userModel;
   }
 

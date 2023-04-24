@@ -14,7 +14,8 @@ abstract class LearnPictogram {
   /// [language] is the language of the sentence, [model] is the model to use
   ///
   Future<Either<String, String>> call({
-    @Deprecated("You should use tokens instead of this") required String sentence,
+    @Deprecated("You should use tokens instead of this")
+        required String sentence,
     required String uid,
     required String language,
     required String model,

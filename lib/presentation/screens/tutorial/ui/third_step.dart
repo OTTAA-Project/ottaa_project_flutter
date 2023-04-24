@@ -38,7 +38,8 @@ class ThirdStep extends StatelessWidget {
                 child: FittedBox(
                   child: Text(
                     "Access_thousands_of_pictograms".trl,
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -62,14 +63,18 @@ class ThirdStep extends StatelessWidget {
               SimpleButton(
                 text: "Previous".trl,
                 leading: Icons.chevron_left,
-                onTap: () => controller.animateToPage(1, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
+                onTap: () => controller.animateToPage(1,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut),
                 backgroundColor: Colors.white,
                 fontColor: Colors.grey,
               ),
               SimpleButton(
                 text: "Next".trl,
                 trailing: Icons.chevron_right,
-                onTap: () => controller.animateToPage(3, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
+                onTap: () => controller.animateToPage(3,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut),
                 backgroundColor: Colors.white,
                 fontColor: kOTTAAOrangeNew,
               ),

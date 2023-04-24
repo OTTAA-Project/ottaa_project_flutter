@@ -41,7 +41,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       if (isLogged) {
         final user = ref.read(userNotifier);
         auth.setSignedIn();
-        await I18N.of(context).changeLanguage(user?.settings.language.language ?? "es_AR");
+        await I18N
+            .of(context)
+            .changeLanguage(user?.settings.language.language ?? "es_AR");
         if (mounted) {
           initializeDateFormatting(user?.settings.language.language ?? "es_AR");
           if (isFirstTime) {
@@ -83,7 +85,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               const SizedBox(width: 20),
               Text(
                 "global.hello".trl,
-                style: textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 40, fontWeight: FontWeight.bold),
+                style: textTheme.titleMedium?.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),

@@ -8,5 +8,4 @@ abstract class RemoteConfigRepository {
   Future<bool?> getBool(String key);
 
   Future<double?> getDouble(String key);
-
 }

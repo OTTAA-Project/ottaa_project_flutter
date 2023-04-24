@@ -11,7 +11,8 @@ class ProfileWaitingScreen extends ConsumerStatefulWidget {
   const ProfileWaitingScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ProfileWaitingScreen> createState() => _ProfileWaitingScreenState();
+  ConsumerState<ProfileWaitingScreen> createState() =>
+      _ProfileWaitingScreenState();
 }
 
 class _ProfileWaitingScreenState extends ConsumerState<ProfileWaitingScreen> {

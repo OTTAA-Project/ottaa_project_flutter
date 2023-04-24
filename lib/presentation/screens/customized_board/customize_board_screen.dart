@@ -11,7 +11,8 @@ class CustomizeBoardScreen extends ConsumerStatefulWidget {
   const CustomizeBoardScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CustomizeBoardScreen> createState() => _CustomizeBoardScreenState();
+  ConsumerState<CustomizeBoardScreen> createState() =>
+      _CustomizeBoardScreenState();
 }
 
 class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
@@ -35,7 +36,8 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
                   ),
                   status: !provider.groups[index].block,
                   onChange: (bool a) {
-                    provider.groups[index].block = !provider.groups[index].block;
+                    provider.groups[index].block =
+                        !provider.groups[index].block;
                     provider.notify();
                   },
                   onPressed: () async {

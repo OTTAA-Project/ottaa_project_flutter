@@ -12,12 +12,16 @@ class ChatGPTNotifier extends ChangeNotifier {
   final PatientNotifier _patientNotifier;
   final ChatGPTRepository _chatGPTRepository;
 
-  ChatGPTNotifier(this._userNotifier, this._patientNotifier, this._chatGPTRepository);
+  ChatGPTNotifier(
+      this._userNotifier, this._patientNotifier, this._chatGPTRepository);
 
   Future<String?> generatePhrase(List<Picto> pictograms) async {
     final user = _patientNotifier.patient ?? _userNotifier.user!.patient;
 
-    int age = (user.settings.data.birthDate.difference(DateTime.now()).inDays / 365).round().abs();
+    int age =
+        (user.settings.data.birthDate.difference(DateTime.now()).inDays / 365)
+            .round()
+            .abs();
 
     String gender = user.settings.data.genderPref;
 

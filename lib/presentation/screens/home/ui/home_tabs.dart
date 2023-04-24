@@ -31,13 +31,27 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
     final size = MediaQuery.of(context).size;
     final colorScheme = Theme.of(context).colorScheme;
 
-    final groups = ref.watch(homeProvider).groups.values.where((element) => !element.block).toList();
+    final groups = ref
+        .watch(homeProvider)
+        .groups
+        .values
+        .where((element) => !element.block)
+        .toList();
 
-    final currentGroup = ref.watch(homeProvider).groups[ref.watch(homeProvider).currentTabGroup];
+    final currentGroup =
+        ref.watch(homeProvider).groups[ref.watch(homeProvider).currentTabGroup];
 
-    final pictos = ref.watch(homeProvider).pictograms.values.where((element) => !element.block && currentGroup!.relations.any((group) => group.id == element.id)).toList();
+    final pictos = ref
+        .watch(homeProvider)
+        .pictograms
+        .values
+        .where((element) =>
+            !element.block &&
+            currentGroup!.relations.any((group) => group.id == element.id))
+        .toList();
 
-    final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
+    final addPictogram =
+        ref.read(homeProvider.select((value) => value.addPictogram));
 
     return Flex(
       direction: Axis.vertical,
@@ -59,7 +73,8 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                   onPressed: groups.isEmpty
                       ? null
                       : () {
-                          final controller = ref.read(homeProvider.select((value) => value.groupTabsScrollController));
+                          final controller = ref.read(homeProvider.select(
+                              (value) => value.groupTabsScrollController));
 
                           double offset = (controller.offset - 168);
 
@@ -86,7 +101,8 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                 child: SizedBox(
                   height: 48,
                   child: ListView.separated(
-                    controller: ref.read(homeProvider.select((value) => value.groupTabsScrollController)),
+                    controller: ref.read(homeProvider
+                        .select((value) => value.groupTabsScrollController)),
                     scrollDirection: Axis.horizontal,
                     itemCount: groups.length,
                     separatorBuilder: (ctx, index) => const SizedBox(
@@ -96,11 +112,15 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                     itemBuilder: (ctx, index) {
                       Group group = groups.elementAt(index);
 
-                      bool isCurrent = ref.watch(homeProvider).currentTabGroup == group.id;
+                      bool isCurrent =
+                          ref.watch(homeProvider).currentTabGroup == group.id;
 
                       return GestureDetector(
                         onTap: () {
-                          ref.read(homeProvider.select((value) => value.setCurrentGroup)).call(group.id);
+                          ref
+                              .read(homeProvider
+                                  .select((value) => value.setCurrentGroup))
+                              .call(group.id);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -109,7 +129,8 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                           ),
                           height: 48,
                           width: 150,
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -130,7 +151,8 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                                   maxLines: 2,
                                   minFontSize: 8,
                                   style: TextStyle(
-                                    color: !isCurrent ? kBlackColor : Colors.white,
+                                    color:
+                                        !isCurrent ? kBlackColor : Colors.white,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -151,7 +173,8 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                   onPressed: groups.isEmpty
                       ? null
                       : () {
-                          final controller = ref.read(homeProvider.select((value) => value.groupTabsScrollController));
+                          final controller = ref.read(homeProvider.select(
+                              (value) => value.groupTabsScrollController));
 
                           double offset = controller.offset + 168;
                           if (offset > controller.position.maxScrollExtent) {
@@ -190,7 +213,8 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                     childAspectRatio: 1,
                     mainAxisExtent: 144,
                   ),
-                  controller: ref.read(homeProvider.select((value) => value.pictoTabsScrollController)),
+                  controller: ref.read(homeProvider
+                      .select((value) => value.pictoTabsScrollController)),
                   padding: const EdgeInsets.only(top: 16, bottom: 16),
                   itemCount: pictos.length,
                   itemBuilder: (ctx, index) {
@@ -246,10 +270,19 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                     const SizedBox(height: 16),
                     Expanded(
                       child: HomeButton(
-                        onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollUp))(ref.read(homeProvider).pictoTabsScrollController, 144),
+                        onPressed: groups.isEmpty
+                            ? null
+                            : () => ref.read(homeProvider
+                                    .select((value) => value.scrollUp))(
+                                ref
+                                    .read(homeProvider)
+                                    .pictoTabsScrollController,
+                                144),
                         child: Icon(
                           Icons.keyboard_arrow_up,
-                          color: groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary,
+                          color: groups.isEmpty
+                              ? colorScheme.primary.withOpacity(.12)
+                              : colorScheme.primary,
                           size: 30,
                         ),
                       ),
@@ -257,10 +290,19 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                     const SizedBox(height: 16),
                     Expanded(
                       child: HomeButton(
-                        onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollDown))(ref.read(homeProvider).pictoTabsScrollController, 144),
+                        onPressed: groups.isEmpty
+                            ? null
+                            : () => ref.read(homeProvider
+                                    .select((value) => value.scrollDown))(
+                                ref
+                                    .read(homeProvider)
+                                    .pictoTabsScrollController,
+                                144),
                         child: Icon(
                           Icons.keyboard_arrow_down,
-                          color: groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary,
+                          color: groups.isEmpty
+                              ? colorScheme.primary.withOpacity(.12)
+                              : colorScheme.primary,
                           size: 30,
                         ),
                       ),

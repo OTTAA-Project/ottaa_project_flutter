@@ -43,7 +43,8 @@ import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_
 import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
-  final authState = ref.read(authProvider.select((value) => value.isUserLoggedIn));
+  final authState =
+      ref.read(authProvider.select((value) => value.isUserLoggedIn));
   final userState = ref.read(userProvider);
 
   return GoRouter(
@@ -132,12 +133,14 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: "role",
                     name: "role",
-                    builder: (context, state) => const ProfileChooserScreenSelected(),
+                    builder: (context, state) =>
+                        const ProfileChooserScreenSelected(),
                   ),
                   GoRoute(
                     path: "accounts",
                     name: "accounts",
-                    builder: (context, state) => const ProfileLinkedAccountScreen(),
+                    builder: (context, state) =>
+                        const ProfileLinkedAccountScreen(),
                   ),
                   GoRoute(
                     path: "tips",
@@ -147,7 +150,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: "edit",
                     name: "edit",
-                    builder: (context, state) => const ProfileSettingsEditScreen(),
+                    builder: (context, state) =>
+                        const ProfileSettingsEditScreen(),
                   ),
                   GoRoute(
                     path: "help",
@@ -171,7 +175,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: "board",
                     name: "board",
-                    builder: (context, state) => const CustomizedBoardTabScreen(),
+                    builder: (context, state) =>
+                        const CustomizedBoardTabScreen(),
                   ),
                   GoRoute(
                     path: "picto",

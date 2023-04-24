@@ -39,12 +39,16 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
 
     final speak = ref.read(sentencesProvider.select((prov) => prov.speak));
 
-    final showCircular = ref.watch(sentencesProvider.select((prov) => prov.showCircular));
+    final showCircular =
+        ref.watch(sentencesProvider.select((prov) => prov.showCircular));
 
-    var sentencesIndex = ref.read(sentencesProvider.select((prov) => prov.sentencesIndex));
-    final changeSentencesIndex = ref.read(sentencesProvider.select((prov) => prov.changeSelectedIndexFav));
+    var sentencesIndex =
+        ref.read(sentencesProvider.select((prov) => prov.sentencesIndex));
+    final changeSentencesIndex = ref
+        .read(sentencesProvider.select((prov) => prov.changeSelectedIndexFav));
 
-    final fetchFavourites = ref.read(sentencesProvider.select((prov) => prov.fetchFavourites));
+    final fetchFavourites =
+        ref.read(sentencesProvider.select((prov) => prov.fetchFavourites));
 
     return Scaffold(
       appBar: AppBar(
@@ -98,8 +102,7 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
                           GestureDetector(
-                            onTap: () {
-                            },
+                            onTap: () {},
                             child: Icon(
                               Icons.search,
                               size: verticalSize * 0.1,
@@ -120,16 +123,20 @@ class _SentencesPageState extends ConsumerState<SentencesScreen> {
               bottom: verticalSize * 0.17,
               child: Container(
                 height: verticalSize * 0.8,
-                padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                padding:
+                    EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                   child: Center(
                     child: FadeInDown(
-                      controller: (controller) => ref.read(sentencesProvider.select((prov) => prov.setAnimationController))(controller),
+                      controller: (controller) => ref.read(sentencesProvider
+                              .select((prov) => prov.setAnimationController))(
+                          controller),
                       from: 30,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,

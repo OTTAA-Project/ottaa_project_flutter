@@ -49,19 +49,27 @@ class _SettingScreenUserState extends ConsumerState<SettingScreenUser> {
           children: [
             ProfileUserWidget(
               title: 'user.settings.main_screen'.trl,
-              onTap: () => context.push(user!.isCaregiver ? AppRoutes.caregiverAccountLayout : AppRoutes.patientSettingsLayout),
+              onTap: () => context.push(user!.isCaregiver
+                  ? AppRoutes.caregiverAccountLayout
+                  : AppRoutes.patientSettingsLayout),
             ),
             ProfileUserWidget(
               title: 'user.settings.accessibility'.trl,
-              onTap: () => context.push(user!.isCaregiver ? AppRoutes.caregiverAccountAccessibility : AppRoutes.patientSettingsAccessibilty),
+              onTap: () => context.push(user!.isCaregiver
+                  ? AppRoutes.caregiverAccountAccessibility
+                  : AppRoutes.patientSettingsAccessibilty),
             ),
             ProfileUserWidget(
               title: 'user.settings.voice_and_subtitles'.trl,
-              onTap: () => context.push(user!.isCaregiver ? AppRoutes.caregiverAccountTTS: AppRoutes.patientSettingsTTS),
+              onTap: () => context.push(user!.isCaregiver
+                  ? AppRoutes.caregiverAccountTTS
+                  : AppRoutes.patientSettingsTTS),
             ),
             ProfileUserWidget(
               title: 'user.settings.language'.trl,
-              onTap: () => context.push(user!.isCaregiver ? AppRoutes.caregiverAccountLanguage : AppRoutes.patientSettingsLanguage),
+              onTap: () => context.push(user!.isCaregiver
+                  ? AppRoutes.caregiverAccountLanguage
+                  : AppRoutes.patientSettingsLanguage),
             ),
           ],
         ),

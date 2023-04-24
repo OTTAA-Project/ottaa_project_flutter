@@ -32,9 +32,15 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
     final size = MediaQuery.of(context).size;
     final colorScheme = Theme.of(context).colorScheme;
 
-    final groups = ref.watch(homeProvider).groups.values.where((element) => !element.block).toList();
+    final groups = ref
+        .watch(homeProvider)
+        .groups
+        .values
+        .where((element) => !element.block)
+        .toList();
 
-    final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
+    final addPictogram =
+        ref.read(homeProvider.select((value) => value.addPictogram));
 
     String? currentGroup = ref.watch(homeProvider).currentGridGroup;
 
@@ -69,15 +75,18 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                 flex: 8,
                 child: currentGroup == null
                     ? GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 16,
                           childAspectRatio: 1,
                           mainAxisExtent: 96,
                         ),
-                        controller: ref.watch(homeProvider.select((value) => value.gridScrollController)),
-                        padding: const EdgeInsets.only(top: 16, bottom: 16, right: 32),
+                        controller: ref.watch(homeProvider
+                            .select((value) => value.gridScrollController)),
+                        padding: const EdgeInsets.only(
+                            top: 16, bottom: 16, right: 32),
                         itemCount: groups.length,
                         itemBuilder: (ctx, index) {
                           Group group = groups[index];
@@ -85,20 +94,26 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                           return ElevatedButton(
                             style: ButtonStyle(
                               fixedSize: MaterialStateProperty.all(size),
-                              backgroundColor: MaterialStateProperty.all(Colors.white),
-                              foregroundColor: MaterialStateProperty.all(kBlackColor),
-                              iconColor: MaterialStateProperty.all(colorScheme.secondary),
-                              overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              foregroundColor:
+                                  MaterialStateProperty.all(kBlackColor),
+                              iconColor: MaterialStateProperty.all(
+                                  colorScheme.secondary),
+                              overlayColor: MaterialStateProperty.all(
+                                  colorScheme.primary.withOpacity(0.1)),
                               shape: MaterialStateProperty.all(
                                 const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
                                 ),
                               ),
                               // padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
                               elevation: MaterialStateProperty.all(0),
                             ),
                             onPressed: () {
-                              ref.read(homeProvider).currentGridGroup = group.id;
+                              ref.read(homeProvider).currentGridGroup =
+                                  group.id;
                               ref.read(homeProvider).notify();
                             },
                             child: Row(
@@ -109,7 +124,8 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                                       ? CachedNetworkImage(
                                           imageUrl: group.resource.network!,
                                           fit: BoxFit.fill,
-                                          errorWidget: (context, url, error) => Image.asset(
+                                          errorWidget: (context, url, error) =>
+                                              Image.asset(
                                             fit: BoxFit.fill,
                                             "assets/img/${group.text}.webp",
                                           ),
@@ -121,7 +137,8 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                                    padding: const EdgeInsets.only(
+                                        left: 16, right: 16, top: 16),
                                     child: Align(
                                       alignment: Alignment.topRight,
                                       child: AutoSizeText(
@@ -137,16 +154,32 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                         },
                       )
                     : GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 5,
                           childAspectRatio: 1,
                           mainAxisSpacing: 8,
                         ),
-                        controller: ref.read(homeProvider.select((value) => value.gridScrollController)),
+                        controller: ref.read(homeProvider
+                            .select((value) => value.gridScrollController)),
                         padding: const EdgeInsets.only(top: 16, bottom: 16),
-                        itemCount: ref.watch(homeProvider.select((value) => value.pictograms.values.where((element) => !element.block && value.groups[currentGroup]!.relations.any((group) => group.id == element.id)).toList())).length,
+                        itemCount: ref
+                            .watch(homeProvider.select((value) => value
+                                .pictograms.values
+                                .where((element) =>
+                                    !element.block &&
+                                    value.groups[currentGroup]!.relations
+                                        .any((group) => group.id == element.id))
+                                .toList()))
+                            .length,
                         itemBuilder: (ctx, index) {
-                          Picto picto = ref.watch(homeProvider.select((value) => value.pictograms.values.where((element) => !element.block && value.groups[currentGroup]!.relations.any((group) => group.id == element.id)).toList()))[index];
+                          Picto picto = ref.watch(homeProvider.select((value) =>
+                              value.pictograms.values
+                                  .where((element) =>
+                                      !element.block &&
+                                      value.groups[currentGroup]!.relations.any(
+                                          (group) => group.id == element.id))
+                                  .toList()))[index];
 
                           return FittedBox(
                             fit: BoxFit.fitHeight,
@@ -159,7 +192,8 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                                   ? CachedNetworkImage(
                                       imageUrl: picto.resource.network!,
                                       fit: BoxFit.fill,
-                                      errorWidget: (context, url, error) => Image.asset(
+                                      errorWidget: (context, url, error) =>
+                                          Image.asset(
                                         fit: BoxFit.fill,
                                         "assets/img/${picto.text}.webp",
                                       ),
@@ -203,10 +237,17 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                     Expanded(
                       child: HomeButton(
                         // size: const Size(40, 40),
-                        onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollUp))(ref.read(homeProvider).gridScrollController, 96),
+                        onPressed: groups.isEmpty
+                            ? null
+                            : () => ref.read(homeProvider
+                                    .select((value) => value.scrollUp))(
+                                ref.read(homeProvider).gridScrollController,
+                                96),
                         child: Icon(
                           Icons.keyboard_arrow_up,
-                          color: groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary,
+                          color: groups.isEmpty
+                              ? colorScheme.primary.withOpacity(.12)
+                              : colorScheme.primary,
                           size: 30,
                         ),
                       ),
@@ -215,10 +256,17 @@ class _GroupsHomeUi extends ConsumerState<HomeGridUI> {
                     Expanded(
                       child: HomeButton(
                         // size: const Size(40, 40),
-                        onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollDown))(ref.read(homeProvider).gridScrollController, 96),
+                        onPressed: groups.isEmpty
+                            ? null
+                            : () => ref.read(homeProvider
+                                    .select((value) => value.scrollDown))(
+                                ref.read(homeProvider).gridScrollController,
+                                96),
                         child: Icon(
                           Icons.keyboard_arrow_down,
-                          color: groups.isEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary,
+                          color: groups.isEmpty
+                              ? colorScheme.primary.withOpacity(.12)
+                              : colorScheme.primary,
                           size: 30,
                         ),
                       ),

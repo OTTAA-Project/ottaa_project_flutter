@@ -16,7 +16,8 @@ class UserStateNotifier extends StateNotifier<UserModel?> {
   }
 }
 
-final userNotifier = StateNotifierProvider<UserStateNotifier, UserModel?>((ref) {
+final userNotifier =
+    StateNotifierProvider<UserStateNotifier, UserModel?>((ref) {
   final userState = ref.watch(userProvider);
   return UserStateNotifier(userState);
 });

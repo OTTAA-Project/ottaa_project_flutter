@@ -59,6 +59,7 @@ class TTSProvider extends ChangeNotifier {
 
 final ttsProvider = ChangeNotifierProvider<TTSProvider>((ref) {
   final tts = GetIt.I<TTSRepository>();
-  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
+  final LocalDatabaseRepository localDatabaseRepository =
+      GetIt.I.get<LocalDatabaseRepository>();
   return TTSProvider(tts, localDatabaseRepository);
 });

@@ -173,7 +173,8 @@ class AccessibilityScreen extends ConsumerWidget {
                     TabWidget(
                       title: 'user.accessibility.selection'.trl,
                       image: AppImages.kAccessibilityIcon1,
-                      selected: provider.accessibilitySetting.sweepMode == SweepModes.elements
+                      selected: provider.accessibilitySetting.sweepMode ==
+                              SweepModes.elements
                           ? true
                           : false,
                       onTap: () {
@@ -183,7 +184,8 @@ class AccessibilityScreen extends ConsumerWidget {
                     TabWidget(
                       title: 'user.accessibility.swept'.trl,
                       image: AppImages.kAccessibilityIcon2,
-                      selected: provider.accessibilitySetting.sweepMode == SweepModes.sweep
+                      selected: provider.accessibilitySetting.sweepMode ==
+                              SweepModes.sweep
                           ? true
                           : false,
                       onTap: () {
@@ -209,10 +211,10 @@ class AccessibilityScreen extends ConsumerWidget {
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ChooserWidget(
-                      selected:
-                          provider.accessibilitySetting.sweepSpeed == VelocityTypes.slow
-                              ? true
-                              : false,
+                      selected: provider.accessibilitySetting.sweepSpeed ==
+                              VelocityTypes.slow
+                          ? true
+                          : false,
                       onTap: () {
                         provider.changeAccessibilitySpeed(
                             speed: VelocityTypes.slow);

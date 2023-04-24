@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class ImageAvatar extends StatelessWidget {
   final int imageId;
   final void Function(int) onTap;
-  const ImageAvatar({Key? key, required this.imageId, required this.onTap}) : super(key: key);
+  const ImageAvatar({Key? key, required this.imageId, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

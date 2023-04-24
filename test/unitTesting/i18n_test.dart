@@ -27,7 +27,8 @@ void main() async {
     test('It should load the translations of en_US.json', () async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      final translation = await language.loadTranslation(const Locale('en', 'US'));
+      final translation =
+          await language.loadTranslation(const Locale('en', 'US'));
 
       expect(translation?.locale, const Locale('en', 'US'));
     });

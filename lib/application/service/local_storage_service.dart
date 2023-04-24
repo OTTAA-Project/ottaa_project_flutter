@@ -92,11 +92,14 @@ class LocalStorageService extends LocalStorageRepository {
         file = await _gruposFile;
     }
     final response = await file.readAsString();
-    return (jsonDecode(response) as List).map((e) => Group.fromJson(e)).toList();
+    return (jsonDecode(response) as List)
+        .map((e) => Group.fromJson(e))
+        .toList();
   }
 
   @override
-  Future<void> writePictoToFile({required String data, required String language}) async {
+  Future<void> writePictoToFile(
+      {required String data, required String language}) async {
     // final file = await _pictoFile;
     late File file;
     switch (language) {
@@ -139,6 +142,8 @@ class LocalStorageService extends LocalStorageRepository {
         file = await _pictoFile;
     }
     final response = await file.readAsString();
-    return (jsonDecode(response) as List).map((e) => Picto.fromJson(e)).toList();
+    return (jsonDecode(response) as List)
+        .map((e) => Picto.fromJson(e))
+        .toList();
   }
 }

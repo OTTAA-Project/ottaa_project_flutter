@@ -1,4 +1,3 @@
-
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/foundation.dart';
@@ -39,7 +38,8 @@ class AboutService extends AboutRepository {
   Future<String> getAvailableAppVersion() async {
     final platform = Platform.isAndroid ? "android" : "ios";
 
-    final Either<String, String> result = await _serverRepository.getAvailableAppVersion(platform);
+    final Either<String, String> result =
+        await _serverRepository.getAvailableAppVersion(platform);
 
     return result.fold((l) => l, (r) => r);
   }
@@ -84,17 +84,28 @@ class AboutService extends AboutRepository {
       return UserPayment.free;
     }
 
-    return (result.right as PatientUserModel).patientSettings.payment.payment ? UserPayment.premium : UserPayment.free;
+    return (result.right as PatientUserModel).patientSettings.payment.payment
+        ? UserPayment.premium
+        : UserPayment.free;
   }
 
   @override
   Future<void> sendSupportEmail() async {
-    final data = await Future.wait([getEmail(), getAppVersion(), getAvailableAppVersion(), getDeviceName()]);
+    final data = await Future.wait([
+      getEmail(),
+      getAppVersion(),
+      getAvailableAppVersion(),
+      getDeviceName()
+    ]);
     final userType = await getUserType();
-    final Uri params = Uri(scheme: 'mailto', path: 'support@ottaaproject.com', queryParameters: {
-      'subject': 'Support',
-      'body': '''Account: ${data[0]},\nAccount Type: ${userType.name},\nCurrent OTTAA Installed: ${data[1]}\nCurrent OTTAA Version: ${data[3]}\nDevice Name: ${data[4]}''',
-    });
+    final Uri params = Uri(
+        scheme: 'mailto',
+        path: 'support@ottaaproject.com',
+        queryParameters: {
+          'subject': 'Support',
+          'body':
+              '''Account: ${data[0]},\nAccount Type: ${userType.name},\nCurrent OTTAA Installed: ${data[1]}\nCurrent OTTAA Version: ${data[3]}\nDevice Name: ${data[4]}''',
+        });
     if (await canLaunchUrl(params)) {
       await launchUrl(params);
     } else {
@@ -121,7 +132,10 @@ class AboutService extends AboutRepository {
 
     final UserModel user = userResult.right;
 
-    await _serverRepository.uploadUserPicture(user.id, user.settings.data.avatar.copyWith(asset: image.asset, network: image.network));
+    await _serverRepository.uploadUserPicture(
+        user.id,
+        user.settings.data.avatar
+            .copyWith(asset: image.asset, network: image.network));
   }
 
   @override
@@ -196,7 +210,8 @@ class AboutService extends AboutRepository {
   }
 
   @override
-  Future<void> updateUserType({required String id, required UserType userType}) async {
+  Future<void> updateUserType(
+      {required String id, required UserType userType}) async {
     await _serverRepository.updateUserType(id: id, userType: userType);
   }
 

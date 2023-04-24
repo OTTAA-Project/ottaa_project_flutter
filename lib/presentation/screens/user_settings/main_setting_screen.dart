@@ -108,7 +108,8 @@ class MainSettingScreen extends ConsumerWidget {
                     TabWidget(
                       title: 'user.main_setting.tabs'.trl,
                       image: AppImages.kMainSettingsIcon1,
-                      selected: provider.layoutSetting.display == DisplayTypes.tab,
+                      selected:
+                          provider.layoutSetting.display == DisplayTypes.tab,
                       onTap: () {
                         provider.changeTablet(value: DisplayTypes.tab);
                       },
@@ -116,7 +117,8 @@ class MainSettingScreen extends ConsumerWidget {
                     TabWidget(
                       title: 'user.main_setting.grid'.trl,
                       image: AppImages.kMainSettingsIcon2,
-                      selected: provider.layoutSetting.display == DisplayTypes.grid,
+                      selected:
+                          provider.layoutSetting.display == DisplayTypes.grid,
                       onTap: () {
                         provider.changeTablet(value: DisplayTypes.grid);
                       },

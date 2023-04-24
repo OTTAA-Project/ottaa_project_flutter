@@ -9,10 +9,12 @@ class ProfileLinkedAccountScreen extends ConsumerStatefulWidget {
   const ProfileLinkedAccountScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ProfileLinkedAccountScreen();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _ProfileLinkedAccountScreen();
 }
 
-class _ProfileLinkedAccountScreen extends ConsumerState<ProfileLinkedAccountScreen> {
+class _ProfileLinkedAccountScreen
+    extends ConsumerState<ProfileLinkedAccountScreen> {
   @override
   void initState() {
     final provider = ref.read(profileProvider);
@@ -53,32 +55,40 @@ class _ProfileLinkedAccountScreen extends ConsumerState<ProfileLinkedAccountScre
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.only(bottom: 16),
                           child: ProfileCard(
-                            title: provider.connectedUsersData[index].settings.data.name,
+                            title: provider
+                                .connectedUsersData[index].settings.data.name,
                             subtitle: "profile.user".trl,
                             actions: GestureDetector(
                               onTap: () async {
-                                final bool? cancel = await BasicBottomSheet.show(
+                                final bool? cancel =
+                                    await BasicBottomSheet.show(
                                   context,
                                   okButtonEnabled: true,
-                                  title: "profile.unlink_account".trlf({"name": provider.connectedUsersData[index].settings.data.name}),
+                                  title: "profile.unlink_account".trlf({
+                                    "name": provider.connectedUsersData[index]
+                                        .settings.data.name
+                                  }),
                                   okButtonText: "global.yes".trl,
                                   cancelButtonText: "global.cancel".trl,
                                   cancelButtonEnabled: true,
                                 );
                                 if (cancel != null && cancel) {
                                   await provider.removeCurrentUser(
-                                    userId: provider.connectedUsersData[index].id,
+                                    userId:
+                                        provider.connectedUsersData[index].id,
                                     careGiverId: user!.id,
                                   );
                                 }
                               },
                               child: Text(
                                 'profile.unlink'.trl,
-                                style: textTheme.subtitle1!.copyWith(color: colorScheme.primary),
+                                style: textTheme.subtitle1!
+                                    .copyWith(color: colorScheme.primary),
                               ),
                             ),
                             leadingImage: NetworkImage(
-                              provider.connectedUsersData[index].settings.data.avatar.network!,
+                              provider.connectedUsersData[index].settings.data
+                                  .avatar.network!,
                             ),
                           ),
                         ),

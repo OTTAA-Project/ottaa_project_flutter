@@ -12,7 +12,8 @@ class AboutProvider extends ChangeNotifier {
 
   Future<String> getAppVersion() => aboutService.getAppVersion();
 
-  Future<String> getAvailableAppVersion() => aboutService.getAvailableAppVersion();
+  Future<String> getAvailableAppVersion() =>
+      aboutService.getAvailableAppVersion();
 
   Future<String> getDeviceName() => aboutService.getDeviceName();
 
@@ -24,7 +25,9 @@ class AboutProvider extends ChangeNotifier {
 
   Future<void> sendSupportEmail() => aboutService.sendSupportEmail();
 
-  Future<void> uploadProfilePicture(String network, String asset) => aboutService.uploadProfilePicture(AssetsImage(asset: asset, network: network));
+  Future<void> uploadProfilePicture(String network, String asset) =>
+      aboutService
+          .uploadProfilePicture(AssetsImage(asset: asset, network: network));
 
   Future<void> uploadUserInformation() => aboutService.uploadUserInformation();
 }

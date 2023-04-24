@@ -78,7 +78,8 @@ class ProfileSettingsScreen extends ConsumerWidget {
                   provider.isUser
                       ? Container()
                       : CategoryWidget(
-                          onTap: () => context.push(AppRoutes.userProfileAccounts),
+                          onTap: () =>
+                              context.push(AppRoutes.userProfileAccounts),
                           icon: AppImages.kProfileSettingsIcon4,
                           text: "profile.linked_accounts".trl,
                         ),

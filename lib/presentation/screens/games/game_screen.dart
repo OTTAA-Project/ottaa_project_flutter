@@ -80,7 +80,8 @@ class GameScreenUI extends ConsumerWidget {
                           Text(
                             'game.game_sub_$index'.trl,
                             textAlign: TextAlign.center,
-                            style: textTheme.headline3!.copyWith(fontWeight: FontWeight.w400),
+                            style: textTheme.headline3!
+                                .copyWith(fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
@@ -89,7 +90,7 @@ class GameScreenUI extends ConsumerWidget {
                         width: false,
                         onTap: () {
                           provider.selectedGame = index;
-                          context.push(AppRoutes.selectGroupScreen);
+                          // context.push(AppRoutes.selectGroupScreen);
                         },
                         text: 'game.next'.trl,
                       ),
@@ -107,7 +108,9 @@ class GameScreenUI extends ConsumerWidget {
                   ),
                   Text(
                     '0 / ${provider.activeGroups}',
-                    style: textTheme.headline4!.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+                    style: textTheme.headline4!.copyWith(
+                        color: colorScheme.primary,
+                        fontWeight: FontWeight.w600),
                   ),
                 ],
               ),

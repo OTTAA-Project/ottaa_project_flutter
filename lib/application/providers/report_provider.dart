@@ -65,7 +65,8 @@ class ReportProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictoStatisticsData() async {
-    final pictosResponse = await _reportService.getPictogramsStatistics(uid, "es_AR"); //TODO: Connect to service
+    final pictosResponse = await _reportService.getPictogramsStatistics(
+        uid, "es_AR"); //TODO: Connect to service
 
     if (pictosResponse == null) return;
 
@@ -76,7 +77,8 @@ class ReportProvider extends ChangeNotifier {
 
   Future<void> fetchMostUsedSentences() async {
     // print(res.body);
-    final sentencesResponse = await _reportService.getMostUsedSentences(uid, "es_AR"); //TODO: Connect to service
+    final sentencesResponse = await _reportService.getMostUsedSentences(
+        uid, "es_AR"); //TODO: Connect to service
 
     if (sentencesResponse == null) return;
 
@@ -165,7 +167,10 @@ class ReportProvider extends ChangeNotifier {
       last7DaysUsage = last7DaysUsage + value;
     });
     double score = 0;
-    score = (last7DaysUsage * a) + (frasesStatisticsModel.frases7Days * b) + (averagePictoFrase * c) + (usedGrupos * d);
+    score = (last7DaysUsage * a) +
+        (frasesStatisticsModel.frases7Days * b) +
+        (averagePictoFrase * c) +
+        (usedGrupos * d);
     scoreProfile = score;
     String val = score.toString();
     val = val.substring(1);

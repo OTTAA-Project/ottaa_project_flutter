@@ -8,8 +8,15 @@ class CreateGroupDataImpl extends CreateGroupData {
   const CreateGroupDataImpl(super.serverService);
 
   @override
-  Future<String?> createGroupData({required Group group, required String userId, required String lang}) async {
-    final response = await serverService.createPictoGroupData(userId: userId, language: lang, type: BoardDataType.groups, data: group.toMap());
+  Future<String?> createGroupData(
+      {required Group group,
+      required String userId,
+      required String lang}) async {
+    final response = await serverService.createPictoGroupData(
+        userId: userId,
+        language: lang,
+        type: BoardDataType.groups,
+        data: group.toMap());
 
     if (response != null) {
       return response["data"]["dataId"] ?? response["code"];

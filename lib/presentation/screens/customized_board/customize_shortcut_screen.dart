@@ -17,7 +17,6 @@ class CustomizeShortcutScreen extends ConsumerStatefulWidget {
 
 class _CustomizeShortcutScreenState
     extends ConsumerState<CustomizeShortcutScreen> {
-
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
@@ -33,7 +32,8 @@ class _CustomizeShortcutScreenState
                 ShortcutWidget(
                   onTap: () {
                     setState(() {
-                      provider.selectedShortcuts[0] = !provider.selectedShortcuts[0];
+                      provider.selectedShortcuts[0] =
+                          !provider.selectedShortcuts[0];
                     });
                   },
                   heading: "customize.shortcut.favorites".trl,
@@ -44,7 +44,8 @@ class _CustomizeShortcutScreenState
                 ShortcutWidget(
                   onTap: () {
                     setState(() {
-                      provider.selectedShortcuts[1] = !provider.selectedShortcuts[1];
+                      provider.selectedShortcuts[1] =
+                          !provider.selectedShortcuts[1];
                     });
                   },
                   heading: "customize.shortcut.history".trl,
@@ -54,10 +55,9 @@ class _CustomizeShortcutScreenState
                 ),
                 ShortcutWidget(
                   onTap: () {
-                    provider.selectedShortcuts[2] = !provider.selectedShortcuts[2];
-                    setState(() {
-
-                    });
+                    provider.selectedShortcuts[2] =
+                        !provider.selectedShortcuts[2];
+                    setState(() {});
                   },
                   heading: "customize.shortcut.camera".trl,
                   image2: AppImages.kBoardCameraIconSelected,
@@ -73,10 +73,9 @@ class _CustomizeShortcutScreenState
                 children: [
                   ShortcutWidget(
                     onTap: () {
-                      provider.selectedShortcuts[3] = !provider.selectedShortcuts[3];
-                      setState(() {
-
-                      });
+                      provider.selectedShortcuts[3] =
+                          !provider.selectedShortcuts[3];
+                      setState(() {});
                     },
                     heading: "customize.shortcut.games".trl,
                     image: AppImages.kBoardDiceIcon,
@@ -85,10 +84,9 @@ class _CustomizeShortcutScreenState
                   ),
                   ShortcutWidget(
                     onTap: () {
-                      provider.selectedShortcuts[4] = !provider.selectedShortcuts[4];
-                      setState(() {
-
-                      });
+                      provider.selectedShortcuts[4] =
+                          !provider.selectedShortcuts[4];
+                      setState(() {});
                     },
                     heading: "global.yes".trl,
                     image: AppImages.kBoardYesIcon,
@@ -97,10 +95,9 @@ class _CustomizeShortcutScreenState
                   ),
                   ShortcutWidget(
                     onTap: () {
-                      provider.selectedShortcuts[5] = !provider.selectedShortcuts[5];
-                      setState(() {
-
-                      });
+                      provider.selectedShortcuts[5] =
+                          !provider.selectedShortcuts[5];
+                      setState(() {});
                     },
                     heading: "global.no".trl,
                     image: AppImages.kBoardNoIcon,
@@ -115,10 +112,9 @@ class _CustomizeShortcutScreenState
               children: [
                 ShortcutWidget(
                   onTap: () {
-                    provider.selectedShortcuts[6] = !provider.selectedShortcuts[6];
-                    setState(() {
-
-                    });
+                    provider.selectedShortcuts[6] =
+                        !provider.selectedShortcuts[6];
+                    setState(() {});
                   },
                   heading: "global.share".trl,
                   image: AppImages.kBoardShareIcon,

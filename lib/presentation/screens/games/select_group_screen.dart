@@ -79,13 +79,13 @@ class SelectGroupScreen extends ConsumerWidget {
                       await provider.fetchSelectedPictos();
                       switch (provider.selectedGame) {
                         case 0:
-                          context.push(AppRoutes.whatsThePictoScreen);
+                          // context.push(AppRoutes.whatsThePictoScreen);
                           break;
                         case 1:
-                          context.push(AppRoutes.matchPictogramScreen);
+                          // context.push(AppRoutes.matchPictogramScreen);
                           break;
                         case 2:
-                          context.push(AppRoutes.memoryGameScreen);
+                          // context.push(AppRoutes.memoryGameScreen);
                           break;
                       }
                     },
@@ -133,7 +133,7 @@ class SelectGroupScreen extends ConsumerWidget {
             top: size.height * 0.3,
             child: GestureDetector(
               onTap: () {
-                context.push(AppRoutes.searchScreen);
+                // context.push(AppRoutes.searchScreen);
               },
               child: Container(
                 padding: const EdgeInsets.all(8),

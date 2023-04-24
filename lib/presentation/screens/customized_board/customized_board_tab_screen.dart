@@ -18,10 +18,12 @@ class CustomizedBoardTabScreen extends ConsumerStatefulWidget {
   const CustomizedBoardTabScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CustomizedBoardTabScreen> createState() => _CustomizedMainTabScreenState();
+  ConsumerState<CustomizedBoardTabScreen> createState() =>
+      _CustomizedMainTabScreenState();
 }
 
-class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScreen> {
+class _CustomizedMainTabScreenState
+    extends ConsumerState<CustomizedBoardTabScreen> {
   @override
   void initState() {
     super.initState();
@@ -35,11 +37,12 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
 
   Future<bool> showSaveChanges() async {
     return await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Text("global.comingsoon".trl),
-      ),
-    ) ?? false;
+          context: context,
+          builder: (context) => AlertDialog(
+            content: Text("global.comingsoon".trl),
+          ),
+        ) ??
+        false;
   }
 
   @override
@@ -116,7 +119,8 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
               },
               child: Text(
                 "global.skip".trl,
-                style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+                style:
+                    textTheme.headline4!.copyWith(color: colorScheme.onSurface),
               ),
             ),
           ],
@@ -159,7 +163,9 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
                           provider.type = CustomiseDataType.defaultCase;
                           provider.groupsFetched = false;
 
-                          await ref.read(profileProvider).fetchUserById(provider.userId);
+                          await ref
+                              .read(profileProvider)
+                              .fetchUserById(provider.userId);
                           provider.notify();
                           context.pop();
                           context.pop();

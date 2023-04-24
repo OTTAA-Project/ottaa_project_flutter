@@ -37,7 +37,13 @@ Future<void> main() async {
     mockServerRepository = MockServerRepository();
     mockLocalDatabaseRepository = MockLocalDatabaseRepository();
     mockAuthRepository = MockAuthRepository();
-    PackageInfo.setMockInitialValues(appName: "ottaa", packageName: "com.ottaa", version: "1.0.0", buildNumber: "1", buildSignature: "sig", installerStore: "store");
+    PackageInfo.setMockInitialValues(
+        appName: "ottaa",
+        packageName: "com.ottaa",
+        version: "1.0.0",
+        buildNumber: "1",
+        buildSignature: "sig",
+        installerStore: "store");
 
     fakeUser = BaseUserModel(
       id: "0",
@@ -70,7 +76,8 @@ Future<void> main() async {
   });
 
   test("should return the available app version", () async {
-    when(mockServerRepository.getAvailableAppVersion(any)).thenAnswer((_) async => const Right("1.0.0"));
+    when(mockServerRepository.getAvailableAppVersion(any))
+        .thenAnswer((_) async => const Right("1.0.0"));
 
     String version = await aboutRepository.getAvailableAppVersion();
 
@@ -84,7 +91,8 @@ Future<void> main() async {
   });
 
   test("should return the current user email", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((_) async => Right(fakeUser));
 
     String email = await aboutRepository.getEmail();
 
@@ -92,7 +100,8 @@ Future<void> main() async {
   });
 
   test("should return the user payment type", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((_) async => Right(fakeUser));
 
     UserPayment userType = await aboutRepository.getUserType();
 
@@ -102,8 +111,10 @@ Future<void> main() async {
   //TODO: Send email test u.u
 
   test("should return the current profile picture", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
-    when(mockServerRepository.getUserProfilePicture(fakeUser.id)).thenAnswer((realInvocation) async => const Right("671"));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((_) async => Right(fakeUser));
+    when(mockServerRepository.getUserProfilePicture(fakeUser.id))
+        .thenAnswer((realInvocation) async => const Right("671"));
 
     String profilePicture = await aboutRepository.getProfilePicture();
 
@@ -111,26 +122,33 @@ Future<void> main() async {
   });
 
   test("should upload profile picture", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((_) async => Right(fakeUser));
 
-    when(mockServerRepository.uploadUserPicture(fakeUser.id, AssetsImage(asset: "9", network: ""))).thenAnswer((realInvocation) async {
+    when(mockServerRepository.uploadUserPicture(
+            fakeUser.id, AssetsImage(asset: "9", network: "")))
+        .thenAnswer((realInvocation) async {
       fakeUser.settings.data = fakeUser.settings.data.copyWith(
         avatar: realInvocation.positionalArguments[1] as AssetsImage,
       );
       return const Right("9");
     });
 
-    await aboutRepository.uploadProfilePicture(AssetsImage(asset: "9", network: ""));
+    await aboutRepository
+        .uploadProfilePicture(AssetsImage(asset: "9", network: ""));
 
     expect(fakeUser.settings.data.avatar, AssetsImage(asset: "9", network: ""));
   });
 
   test("should return the current user information", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((_) async => Right(fakeUser));
 
-    when(mockServerRepository.getUserInformation(any)).thenAnswer((_) async => Right(fakeUser.toMap()));
+    when(mockServerRepository.getUserInformation(any))
+        .thenAnswer((_) async => Right(fakeUser.toMap()));
 
-    when(mockLocalDatabaseRepository.setUser(any)).thenAnswer((realInvocation) async => {});
+    when(mockLocalDatabaseRepository.setUser(any))
+        .thenAnswer((realInvocation) async => {});
 
     final user = await aboutRepository.getUserInformation();
 
@@ -140,10 +158,13 @@ Future<void> main() async {
   test("should upload user information", () async {
     CaregiverUserModel? userInformation;
 
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((_) async => Right(fakeUser));
 
-    when(mockServerRepository.uploadUserInformation(any, any)).thenAnswer((realInvocation) async {
-      userInformation = CaregiverUserModel.fromMap(realInvocation.positionalArguments[1] as dynamic);
+    when(mockServerRepository.uploadUserInformation(any, any))
+        .thenAnswer((realInvocation) async {
+      userInformation = CaregiverUserModel.fromMap(
+          realInvocation.positionalArguments[1] as dynamic);
       return const Right("9");
     });
 
@@ -153,20 +174,23 @@ Future<void> main() async {
   });
 
   test("should return if current user has avatar", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((_) async => Right(fakeUser));
     bool exists = await aboutRepository.isCurrentUserAvatarExist();
     expect(exists, true);
   });
 
   test("should return if user is first time", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((_) async => Right(fakeUser));
     bool exists = await aboutRepository.isFirstTime();
     expect(exists, true);
   });
 
   test("should update the user type", () async {
     UserType oldUserType = UserType.caregiver;
-    when(mockServerRepository.updateUserType(id: "", userType: UserType.user)).thenAnswer((realInvocation) async {
+    when(mockServerRepository.updateUserType(id: "", userType: UserType.user))
+        .thenAnswer((realInvocation) async {
       oldUserType = realInvocation.namedArguments[#userType];
     });
 
@@ -177,7 +201,8 @@ Future<void> main() async {
 
   test("sould update the last user connection time", () async {
     DateTime? lastConnection;
-    when(mockServerRepository.updateUserLastConnectionTime(userId: "", time: 0)).thenAnswer((realInvocation) async {
+    when(mockServerRepository.updateUserLastConnectionTime(userId: "", time: 0))
+        .thenAnswer((realInvocation) async {
       lastConnection = DateTime(realInvocation.namedArguments[#time]);
 
       return const Right("");

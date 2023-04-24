@@ -52,7 +52,8 @@ class ProfileHelpScreen extends ConsumerWidget {
                     title: 'global.support'.trl,
                     children: [
                       GestureDetector(
-                        onTap: () async => await mailProvider.sendSupportEmail(),
+                        onTap: () async =>
+                            await mailProvider.sendSupportEmail(),
                         child: Wrap(
                           alignment: WrapAlignment.center,
                           children: [

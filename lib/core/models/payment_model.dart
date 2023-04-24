@@ -58,18 +58,23 @@ class Payment {
 
   String toJson() => json.encode(toMap());
 
-  factory Payment.fromJson(String source) => Payment.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Payment.fromJson(String source) =>
+      Payment.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'Payment(payment: $payment, paymentDate: $paymentDate, paymentExpire: $paymentExpire)';
+  String toString() =>
+      'Payment(payment: $payment, paymentDate: $paymentDate, paymentExpire: $paymentExpire)';
 
   @override
   bool operator ==(covariant Payment other) {
     if (identical(this, other)) return true;
 
-    return other.payment == payment && other.paymentDate == paymentDate && other.paymentExpire == paymentExpire;
+    return other.payment == payment &&
+        other.paymentDate == paymentDate &&
+        other.paymentExpire == paymentExpire;
   }
 
   @override
-  int get hashCode => payment.hashCode ^ paymentDate.hashCode ^ paymentExpire.hashCode;
+  int get hashCode =>
+      payment.hashCode ^ paymentDate.hashCode ^ paymentExpire.hashCode;
 }

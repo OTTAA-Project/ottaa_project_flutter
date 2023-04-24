@@ -103,7 +103,8 @@ class SentencesProvider extends ChangeNotifier {
     showCircular = false;
   }
 
-  void setAnimationController(AnimationController anim) => sentenceAnimationController = anim;
+  void setAnimationController(AnimationController anim) =>
+      sentenceAnimationController = anim;
 
   Future<void> saveFavourite() async {
     // List<SentenceModel> toBeSaved = [];
@@ -287,7 +288,8 @@ class SentencesProvider extends ChangeNotifier {
       for (int i = 0; i <= 9; i++) {
         _sentencePicts = [];
         for (var pictoComponente in favouriteSentences[i].sequence) {
-          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+          _sentencePicts
+              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         favouritePicts.add(_sentencePicts);
       }
@@ -295,7 +297,8 @@ class SentencesProvider extends ChangeNotifier {
       for (var sentence in favouriteSentences) {
         _sentencePicts = [];
         for (var pictoComponente in sentence.sequence) {
-          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+          _sentencePicts
+              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         favouritePicts.add(_sentencePicts);
       }
