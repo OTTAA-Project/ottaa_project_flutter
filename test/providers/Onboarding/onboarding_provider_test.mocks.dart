@@ -240,22 +240,6 @@ class MockAuthRepository extends _i1.Mock implements _i6.AuthRepository {
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
   @override
-  _i7.Future<String> runToGetDataFromOtherPlatform({
-    required String? email,
-    required String? id,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #runToGetDataFromOtherPlatform,
-          [],
-          {
-            #email: email,
-            #id: id,
-          },
-        ),
-        returnValue: _i7.Future<String>.value(''),
-      ) as _i7.Future<String>);
-  @override
   _i7.Future<String> getDeviceId() => (super.noSuchMethod(
         Invocation.method(
           #getDeviceId,

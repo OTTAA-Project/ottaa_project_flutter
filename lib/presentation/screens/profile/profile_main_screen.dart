@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
@@ -28,7 +29,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
   void initState() {
     super.initState();
     final provider = ref.read(profileProvider);
-    final user = ref.read(userNotifier);
+    final user = ref.read(userProvider.select((value) => value.user));
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await provider.setDate();
       if (user!.type == UserType.caregiver) {
@@ -43,7 +44,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
     final colorScheme = Theme.of(context).colorScheme;
     final provider = ref.watch(profileProvider);
 
-    final user = ref.watch(userNotifier);
+    final user = ref.watch(userProvider.select((value) => value.user));
 
     if (user == null) return Container();
 

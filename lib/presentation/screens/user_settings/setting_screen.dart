@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_user_widget.dart';
@@ -36,7 +37,7 @@ class _SettingScreenUserState extends ConsumerState<SettingScreenUser> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.read(userNotifier);
+    final user = ref.read(userProvider.select((value) => value.user));
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text(

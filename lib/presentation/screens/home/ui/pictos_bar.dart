@@ -1,18 +1,13 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
-import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 
 class PictosBarUI extends ConsumerStatefulWidget {
@@ -32,10 +27,8 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
     final hasGroups = ref.watch(homeProvider).groups.isNotEmpty;
 
-    final addPictogram =
-        ref.read(homeProvider.select((value) => value.addPictogram));
+    final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
-    print(pictos.length);
     return Flex(
       direction: Axis.vertical,
       children: [
@@ -128,10 +121,10 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
           switch (e.id) {
             case "-777":
               return FittedBox(
-                fit: BoxFit.scaleDown,
+                fit: BoxFit.cover,
                 child: Container(
-                    height: 119,
-                    width: 96,
+                    width: 116,
+                    height: 144,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(9),
@@ -146,14 +139,14 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
               );
             case "777":
               return FittedBox(
-                fit: BoxFit.scaleDown,
+                fit: BoxFit.cover,
                 child: GestureDetector(
                   onTap: () {
                     //TODO: add pictogram
                   },
                   child: Container(
-                    height: 119,
-                    width: 96,
+                    width: 116,
+                    height: 144,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(9),

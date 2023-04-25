@@ -22,15 +22,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_provider_test.mocks.dart';
 
-@GenerateMocks([
-  AuthProvider,
-  LoadingNotifier,
-  AuthService,
-  AboutService,
-  LocalDatabaseRepository,
-  AuthNotifier,
-  UserNotifier
-])
+@GenerateMocks([AuthProvider, LoadingNotifier, AuthService, AboutService, LocalDatabaseRepository, AuthNotifier, UserNotifier])
 void main() {
   late AuthProvider authProvider;
   late MockAuthProvider mockAuthProvider;
@@ -65,25 +57,14 @@ void main() {
     mockLocalDatabaseRepository = MockLocalDatabaseRepository();
     mockAuthNotifier = MockAuthNotifier();
     mockUserNotifier = MockUserNotifier();
-    authProvider = AuthProvider(
-        mockLoadingNotifier,
-        mockAuthService,
-        mockAboutService,
-        mockLocalDatabaseRepository,
-        mockAuthNotifier,
-        mockUserNotifier);
+    authProvider = AuthProvider(mockLoadingNotifier, mockAuthService, mockAboutService, mockLocalDatabaseRepository, mockAuthNotifier, mockUserNotifier);
   });
   group('auth Provider testing', () {
     test('sign in', () async {
-      when(mockAuthService.runToGetDataFromOtherPlatform(
-              email: fakeUser.email, id: fakeUser.id))
-          .thenAnswer((realInvocation) async => fakeUser.email);
-      when(mockAuthService.signIn(SignInType.email))
-          .thenAnswer((realInvocation) async => Right(fakeUser));
-      when(mockLocalDatabaseRepository.setUser(fakeUser))
-          .thenAnswer((realInvocation) async => {});
-      when(mockAboutService.getUserInformation())
-          .thenAnswer((realInvocation) async => Right(fakeUser));
+      // when(mockAuthService.runToGetDataFromOtherPlatform(email: fakeUser.email, id: fakeUser.id)).thenAnswer((realInvocation) async => fakeUser.email);
+      when(mockAuthService.signIn(SignInType.email)).thenAnswer((realInvocation) async => Right(fakeUser));
+      when(mockLocalDatabaseRepository.setUser(fakeUser)).thenAnswer((realInvocation) async => {});
+      when(mockAboutService.getUserInformation()).thenAnswer((realInvocation) async => Right(fakeUser));
       when(mockAuthNotifier.setSignedIn()).thenAnswer((realInvocation) {
         mockAuthNotifier.state = true;
       });
@@ -108,12 +89,9 @@ void main() {
     });
 
     test('log out', () async {
-      when(mockAuthService.signIn(SignInType.email))
-          .thenAnswer((realInvocation) async => Right(fakeUser));
-      when(mockLocalDatabaseRepository.setUser(fakeUser))
-          .thenAnswer((realInvocation) async => {});
-      when(mockAboutService.getUserInformation())
-          .thenAnswer((realInvocation) async => Right(fakeUser));
+      when(mockAuthService.signIn(SignInType.email)).thenAnswer((realInvocation) async => Right(fakeUser));
+      when(mockLocalDatabaseRepository.setUser(fakeUser)).thenAnswer((realInvocation) async => {});
+      when(mockAboutService.getUserInformation()).thenAnswer((realInvocation) async => Right(fakeUser));
       when(mockAuthNotifier.setSignedIn()).thenAnswer((realInvocation) {
         mockAuthNotifier.state = true;
       });

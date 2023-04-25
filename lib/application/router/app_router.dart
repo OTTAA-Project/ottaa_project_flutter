@@ -43,12 +43,11 @@ import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_
 import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
-  final authState =
-      ref.read(authProvider.select((value) => value.isUserLoggedIn));
-  final userState = ref.read(userProvider);
+  final authState = ref.read(authProvider.select((value) => value.isUserLoggedIn));
+  final userState = ref.watch(userProvider);
 
   return GoRouter(
-    debugLogDiagnostics: true,
+    debugLogDiagnostics: false,
     restorationScopeId: "ottaa",
     errorBuilder: (context, state) => const ErrorScreen(),
     initialLocation: "/splash",
@@ -133,14 +132,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: "role",
                     name: "role",
-                    builder: (context, state) =>
-                        const ProfileChooserScreenSelected(),
+                    builder: (context, state) => const ProfileChooserScreenSelected(),
                   ),
                   GoRoute(
                     path: "accounts",
                     name: "accounts",
-                    builder: (context, state) =>
-                        const ProfileLinkedAccountScreen(),
+                    builder: (context, state) => const ProfileLinkedAccountScreen(),
                   ),
                   GoRoute(
                     path: "tips",
@@ -150,8 +147,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: "edit",
                     name: "edit",
-                    builder: (context, state) =>
-                        const ProfileSettingsEditScreen(),
+                    builder: (context, state) => const ProfileSettingsEditScreen(),
                   ),
                   GoRoute(
                     path: "help",
@@ -175,8 +171,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: "board",
                     name: "board",
-                    builder: (context, state) =>
-                        const CustomizedBoardTabScreen(),
+                    builder: (context, state) => const CustomizedBoardTabScreen(),
                   ),
                   GoRoute(
                     path: "picto",
@@ -210,22 +205,18 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 routes: [
                   GoRoute(
                     path: "layout",
-                    name: "layout",
                     builder: (context, state) => const MainSettingScreen(),
                   ),
                   GoRoute(
                     path: "accessibility",
-                    name: "accessibility",
                     builder: (context, state) => const AccessibilityScreen(),
                   ),
                   GoRoute(
                     path: "tts",
-                    name: "tts",
                     builder: (context, state) => const VoiceAndSubtitleScreen(),
                   ),
                   GoRoute(
                     path: "language",
-                    name: "language",
                     builder: (context, state) => const LanguageScreen(),
                   ),
                 ],
@@ -261,9 +252,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: "settings",
                 name: "settings",
-                redirect: (_, __) {
-                  print(__.location);
-                  if (__.location.startsWith("/home/settings")) {
+                redirect: (context, state) {
+                  print(state.location);
+                  if (state.location.startsWith("/home/settings")) {
                     if (userState.user?.type == UserType.user) {
                       return null;
                     }
@@ -277,22 +268,18 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 routes: [
                   GoRoute(
                     path: "layout",
-                    name: "layout",
                     builder: (context, state) => const MainSettingScreen(),
                   ),
                   GoRoute(
                     path: "accessibility",
-                    name: "accessibility",
                     builder: (context, state) => const AccessibilityScreen(),
                   ),
                   GoRoute(
                     path: "tts",
-                    name: "tts",
                     builder: (context, state) => const VoiceAndSubtitleScreen(),
                   ),
                   GoRoute(
                     path: "language",
-                    name: "language",
                     builder: (context, state) => const LanguageScreen(),
                   ),
                 ],

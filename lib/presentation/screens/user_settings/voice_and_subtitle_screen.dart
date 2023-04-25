@@ -64,21 +64,19 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                 SizedBox(
                   height: 30,
                   child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: provider.filteredVoices.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 16),
-                          child: ChooserWidget(
-                            selected: provider.ttsSetting.voiceSetting
-                                    .voicesNames[provider.language] ==
-                                provider.filteredVoices[index].name,
-                            title: '${'global.voice'.trl} ${index + 1}',
-                            onTap: () => provider.changeVoiceType(
-                                type: provider.filteredVoices[index].name),
-                          ),
-                        );
-                      }),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: provider.filteredVoices.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 16),
+                        child: ChooserWidget(
+                          selected: provider.ttsSetting.voiceSetting.voicesNames[provider.language] == provider.filteredVoices[index].name,
+                          title: '${'global.voice'.trl} ${index + 1}',
+                          onTap: () => provider.changeVoiceType(type: provider.filteredVoices[index].name),
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 32,
@@ -93,12 +91,9 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                 Row(
                   children: [
                     ChooserWidget(
-                      selected: provider.voiceRate == VelocityTypes.slow.name
-                          ? true
-                          : false,
+                      selected: provider.voiceRate == VelocityTypes.slow.name ? true : false,
                       onTap: () {
-                        print(provider.ttsSetting.voiceSetting
-                            .voicesSpeed[provider.language]!.name);
+                        print(provider.ttsSetting.voiceSetting.voicesSpeed[provider.language]!.name);
                         provider.changeVoiceSpeed(type: VelocityTypes.slow);
                         provider.notify();
                       },
@@ -107,9 +102,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: ChooserWidget(
-                        selected: provider.voiceRate == VelocityTypes.mid.name
-                            ? true
-                            : false,
+                        selected: provider.voiceRate == VelocityTypes.mid.name ? true : false,
                         onTap: () {
                           provider.changeVoiceSpeed(type: VelocityTypes.mid);
                         },
@@ -117,9 +110,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                       ),
                     ),
                     ChooserWidget(
-                      selected: provider.voiceRate == VelocityTypes.fast.name
-                          ? true
-                          : false,
+                      selected: provider.voiceRate == VelocityTypes.fast.name ? true : false,
                       onTap: () {
                         provider.changeVoiceSpeed(type: VelocityTypes.fast);
                       },
@@ -168,10 +159,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ChooserWidget(
-                      selected: provider.ttsSetting.subtitlesSetting.size ==
-                              SizeTypes.small
-                          ? true
-                          : false,
+                      selected: provider.ttsSetting.subtitlesSetting.size == SizeTypes.small ? true : false,
                       onTap: () {
                         provider.changeTextType(type: SizeTypes.small);
                       },
@@ -181,10 +169,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                       width: 16,
                     ),
                     ChooserWidget(
-                      selected: provider.ttsSetting.subtitlesSetting.size ==
-                              SizeTypes.mid
-                          ? true
-                          : false,
+                      selected: provider.ttsSetting.subtitlesSetting.size == SizeTypes.mid ? true : false,
                       onTap: () {
                         provider.changeTextType(type: SizeTypes.mid);
                       },
@@ -194,10 +179,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                       width: 16,
                     ),
                     ChooserWidget(
-                      selected: provider.ttsSetting.subtitlesSetting.size ==
-                              SizeTypes.big
-                          ? true
-                          : false,
+                      selected: provider.ttsSetting.subtitlesSetting.size == SizeTypes.big ? true : false,
                       onTap: () {
                         provider.changeTextType(type: SizeTypes.big);
                       },

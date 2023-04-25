@@ -34,7 +34,7 @@ class MobileRemoteStorageService implements RemoteStorageRepository {
     if (result.isLeft) return "";
 
     final UserModel auth = result.right;
-    final locale = _i18n.locale;
+    final locale = _i18n.currentLocale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 

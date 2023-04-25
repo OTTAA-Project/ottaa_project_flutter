@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileLinkedAccountScreen extends ConsumerStatefulWidget {
@@ -30,7 +31,7 @@ class _ProfileLinkedAccountScreen
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     final provider = ref.watch(profileProvider);
-    final user = ref.read(userNotifier);
+    final user = ref.read(userProvider.select((value) => value.user));
     print(provider.dataFetched);
     return Scaffold(
       appBar: OTTAAAppBar(

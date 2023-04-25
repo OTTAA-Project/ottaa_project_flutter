@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
@@ -18,12 +19,10 @@ class CustomizedBoardTabScreen extends ConsumerStatefulWidget {
   const CustomizedBoardTabScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CustomizedBoardTabScreen> createState() =>
-      _CustomizedMainTabScreenState();
+  ConsumerState<CustomizedBoardTabScreen> createState() => _CustomizedMainTabScreenState();
 }
 
-class _CustomizedMainTabScreenState
-    extends ConsumerState<CustomizedBoardTabScreen> {
+class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScreen> {
   @override
   void initState() {
     super.initState();
@@ -48,7 +47,7 @@ class _CustomizedMainTabScreenState
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
-    final user = ref.read(userNotifier);
+    final user = ref.read(userProvider.select((value) => value.user));
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
@@ -119,8 +118,7 @@ class _CustomizedMainTabScreenState
               },
               child: Text(
                 "global.skip".trl,
-                style:
-                    textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+                style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
               ),
             ),
           ],
@@ -163,16 +161,14 @@ class _CustomizedMainTabScreenState
                           provider.type = CustomiseDataType.defaultCase;
                           provider.groupsFetched = false;
 
-                          await ref
-                              .read(profileProvider)
-                              .fetchUserById(provider.userId);
+                          await ref.read(profileProvider).fetchUserById(provider.userId);
                           provider.notify();
                           context.pop();
                           context.pop();
                           break;
                         case CustomiseDataType.defaultCase:
                         default:
-                          await provider.uploadData(userId: userID.userId!);
+                          await provider.uploadData(userId: userID.userId ?? provider.userId);
                           context.pop();
                           context.push(AppRoutes.userCustomizeWait);
                           break;

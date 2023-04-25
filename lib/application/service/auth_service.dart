@@ -46,19 +46,6 @@ class AuthService extends AuthRepository {
     return Right(userDb);
   }
 
-  @override
-  Future<String> runToGetDataFromOtherPlatform({
-    required String email,
-    required String id,
-  }) async {
-    final uri = Uri.parse(
-      'https://us-central1-ottaaproject-flutter.cloudfunctions.net/getOldUserDataHttp?email=$email&uid=$id',
-    );
-    final res = await http.get(
-      uri,
-    );
-    return res.body;
-  }
 
   @override
   Future<bool> isLoggedIn() async {
@@ -121,8 +108,7 @@ class AuthService extends AuthRepository {
         break;
     }
 
-    userModel.currentToken = DeviceToken(
-        deviceToken: await getDeviceId(), lastUsage: DateTime.now());
+    userModel.currentToken = DeviceToken(deviceToken: await getDeviceId(), lastUsage: DateTime.now());
     if (userModel.currentToken != null) {
       await _serverRepository.updateDevicesId(
         userId: userModel.id,
@@ -134,8 +120,7 @@ class AuthService extends AuthRepository {
   }
 
   @override
-  Future<Either<String, UserModel>> signIn(SignInType type,
-      [String? email, String? password]) async {
+  Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     Either<String, User> result;
 
     if (kIsWeb) await _authProvider.setPersistence(Persistence.LOCAL);
@@ -150,8 +135,7 @@ class AuthService extends AuthRepository {
       case SignInType.apple:
       case SignInType.email:
       default:
-        return const Left(
-            "error_no_implement_auth_method"); //TODO: Implement translate method.
+        return const Left("error_no_implement_auth_method"); //TODO: Implement translate method.
     }
 
     if (result.isRight) {
@@ -163,8 +147,7 @@ class AuthService extends AuthRepository {
         if (userModel == null) {
           await signUp();
 
-          final nameRetriever =
-              user.displayName ?? user.providerData[0].displayName;
+          final nameRetriever = user.displayName ?? user.providerData[0].displayName;
           final emailRetriever = user.email ?? user.providerData[0].email;
 
           userModel = BaseUserModel(
@@ -179,7 +162,7 @@ class AuthService extends AuthRepository {
                 name: name,
               ),
               language: LanguageSetting.empty(
-                language: _i18n.locale.toString(),
+                language: _i18n.currentLocale.toString(),
               ),
             ),
             email: emailRetriever ?? "",
@@ -205,16 +188,14 @@ class AuthService extends AuthRepository {
         return const Left("error_google_sign_in_cancelled");
       }
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential =
-          await _authProvider.signInWithCredential(credential);
+      final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
 
       if (userCredential.user == null) {
         return const Left("error_google_sign_in_cancelled");
@@ -281,7 +262,7 @@ class AuthService extends AuthRepository {
           name: name,
         ),
         language: LanguageSetting.empty(
-          language: _i18n.locale.toString(),
+          language: _i18n.currentLocale.toString(),
         ),
       ),
       email: emailRetriever,
@@ -294,9 +275,7 @@ class AuthService extends AuthRepository {
   @override
   Future<String> getDeviceId() async {
     return await FirebaseMessaging.instance.getToken(
-          vapidKey: kIsWeb
-              ? "BM1DJoICvUa0DM7SYOJE4aDc_Odtlbq5QKXRgB5XoeHEY7EIIP-39WnCqr-QNmNSDoRJEbNyq6LV7bUE6FoGWVE"
-              : null,
+          vapidKey: kIsWeb ? "BM1DJoICvUa0DM7SYOJE4aDc_Odtlbq5QKXRgB5XoeHEY7EIIP-39WnCqr-QNmNSDoRJEbNyq6LV7bUE6FoGWVE" : null,
         ) ??
         "";
   }

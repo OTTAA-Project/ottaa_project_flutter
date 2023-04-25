@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/image_edit_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -24,7 +25,7 @@ class _ProfileSettingsEditScreenState
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final provider = ref.read(profileProvider);
       provider.setDate();
-      final user = ref.read(userNotifier);
+      final user = ref.read(userProvider.select((value) => value.user));
       final data = user!.settings.data;
       provider.profileEditNameController.text = data.name;
       provider.profileEditSurnameController.text = data.lastName;
@@ -39,7 +40,7 @@ class _ProfileSettingsEditScreenState
     final provider = ref.watch(profileProvider);
     final textTheme = Theme.of(context).textTheme;
     // final colorScheme = Theme.of(context).colorScheme;
-    final user = ref.watch(userNotifier);
+    final user = ref.watch(userProvider.select((value) => value.user));
     return ResponsiveWidget(
       child: Scaffold(
         appBar: OTTAAAppBar(

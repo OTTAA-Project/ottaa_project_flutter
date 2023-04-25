@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +13,7 @@ import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
@@ -39,11 +42,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       bool isFirstTime = await provider.isFirstTime();
 
       if (isLogged) {
-        final user = ref.read(userNotifier);
+        final user = ref.read(userProvider.select((value) => value.user));
         auth.setSignedIn();
-        await I18N
-            .of(context)
-            .changeLanguage(user?.settings.language.language ?? "es_AR");
+        await I18N.of(context).changeLanguage(user?.settings.language.language ?? "es_AR");
+        log(user?.settings.language.language ?? "NO LNG");
         if (mounted) {
           initializeDateFormatting(user?.settings.language.language ?? "es_AR");
           if (isFirstTime) {
@@ -85,10 +87,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               const SizedBox(width: 20),
               Text(
                 "global.hello".trl,
-                style: textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold),
+                style: textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 40, fontWeight: FontWeight.bold),
               ),
             ],
           ),
