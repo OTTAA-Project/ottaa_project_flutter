@@ -93,7 +93,6 @@ class GameScreenUI extends ConsumerWidget {
                         },
                         text: 'game.next'.trl,
                       ),
-                      Icon(Icons.folder_copy_outlined)
                     ],
                   ),
                 ),

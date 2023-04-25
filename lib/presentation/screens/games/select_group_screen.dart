@@ -21,13 +21,9 @@ class SelectGroupScreen extends ConsumerWidget {
     final size = MediaQuery.of(context).size;
     final user = ref.read(userNotifier);
     final colorScheme = Theme.of(context).colorScheme;
-    final groups = ref
-        .watch(homeProvider)
-        .groups
-        .values
-        .where((element) => !element.block)
-        .toList();
+    final groups = ref.watch(homeProvider).groups.values.where((element) => !element.block).toList();
     final provider = ref.watch(gameProvider);
+    final color = groups.last.freq;
     return Scaffold(
       body: Stack(
         children: [
@@ -50,8 +46,7 @@ class SelectGroupScreen extends ConsumerWidget {
                   childAspectRatio: 1,
                   mainAxisExtent: 96,
                 ),
-                controller: ref.watch(
-                    gameProvider.select((value) => value.gridScrollController)),
+                controller: ref.watch(gameProvider.select((value) => value.gridScrollController)),
                 padding: const EdgeInsets.only(top: 16, bottom: 16, right: 32),
                 itemCount: groups.length,
                 itemBuilder: (ctx, index) {
@@ -62,10 +57,8 @@ class SelectGroupScreen extends ConsumerWidget {
                       fixedSize: MaterialStateProperty.all(size),
                       backgroundColor: MaterialStateProperty.all(Colors.white),
                       foregroundColor: MaterialStateProperty.all(kBlackColor),
-                      iconColor:
-                          MaterialStateProperty.all(colorScheme.secondary),
-                      overlayColor: MaterialStateProperty.all(
-                          colorScheme.primary.withOpacity(0.1)),
+                      iconColor: MaterialStateProperty.all(colorScheme.secondary),
+                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
                       shape: MaterialStateProperty.all(
                         const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -77,7 +70,7 @@ class SelectGroupScreen extends ConsumerWidget {
                     onPressed: () async {
                       provider.selectedGroupIndex = index;
                       await provider.fetchSelectedPictos();
-                       provider.init();
+                      provider.init();
                       switch (provider.selectedGame) {
                         case 0:
                           context.push(AppRoutes.whatsThePictoScreen);
@@ -98,8 +91,7 @@ class SelectGroupScreen extends ConsumerWidget {
                               ? CachedNetworkImage(
                                   imageUrl: group.resource.network!,
                                   fit: BoxFit.fill,
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset(
+                                  errorWidget: (context, url, error) => Image.asset(
                                     fit: BoxFit.fill,
                                     "assets/img/${group.text}.webp",
                                   ),
@@ -111,8 +103,7 @@ class SelectGroupScreen extends ConsumerWidget {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 16, right: 16, top: 16),
+                            padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
                             child: Align(
                               alignment: Alignment.topRight,
                               child: AutoSizeText(
