@@ -114,11 +114,10 @@ class PatientUserModel extends UserModel {
 
   factory PatientUserModel.fromMap(Map<String, dynamic> map) {
     return PatientUserModel(
-      email: map['email'],
+      email: "",
       id: map['id'] as String,
       groups: map['groups'] != null
-          ? Map<String, List<Group>>.from(
-              (map['groups'] as Map<dynamic, dynamic>).map((key, value) {
+          ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Group>>(
                 key.toString(),
                 Map.from(value as dynamic)
@@ -131,8 +130,7 @@ class PatientUserModel extends UserModel {
             }))
           : <String, List<Group>>{},
       phrases: map['phrases'] != null && map['phrases'].isNotEmpty
-          ? Map<String, List<Phrase>>.from(
-              (map['phrases'] as Map<dynamic, dynamic>).map((key, value) {
+          ? Map<String, List<Phrase>>.from((map['phrases'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Phrase>>(
                 key.toString(),
                 Map.from(value as dynamic)
@@ -145,8 +143,7 @@ class PatientUserModel extends UserModel {
             }))
           : <String, List<Phrase>>{},
       pictos: map['pictos'] != null && map['pictos'].isNotEmpty
-          ? Map<String, List<Picto>>.from(
-              (map['pictos'] as Map<dynamic, dynamic>).map((key, value) {
+          ? Map<String, List<Picto>>.from((map['pictos'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Picto>>(
                 key.toString(),
                 Map.from(value as dynamic)
@@ -158,10 +155,10 @@ class PatientUserModel extends UserModel {
               );
             }))
           : <String, List<Picto>>{},
-      settings: PatientSettings.fromMap(
-          Map.from(map['settings'] as Map<dynamic, dynamic>)),
-      type: UserType.values
-          .firstWhere((element) => element.name == map['type'] as String),
+      settings: PatientSettings.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
+      type: UserType.values.firstWhere((element) => element.name == map['type'] as String),
+    ).copyWith(
+      email: map['email'],
     );
   }
 
@@ -181,29 +178,16 @@ class PatientUserModel extends UserModel {
   bool operator ==(covariant PatientUserModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
-        mapEquals(other.groups, groups) &&
-        mapEquals(other.phrases, phrases) &&
-        mapEquals(other.pictos, pictos) &&
-        other.settings == settings &&
-        other.type == type &&
-        other.email == email;
+    return other.id == id && mapEquals(other.groups, groups) && mapEquals(other.phrases, phrases) && mapEquals(other.pictos, pictos) && other.settings == settings && other.type == type && other.email == email;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        groups.hashCode ^
-        phrases.hashCode ^
-        pictos.hashCode ^
-        settings.hashCode ^
-        type.hashCode ^
-        email.hashCode;
+    return id.hashCode ^ groups.hashCode ^ phrases.hashCode ^ pictos.hashCode ^ settings.hashCode ^ type.hashCode ^ email.hashCode;
   }
 
   @override
-  UserModel fromJson(Map<String, dynamic> json) =>
-      PatientUserModel.fromMap(json);
+  UserModel fromJson(Map<String, dynamic> json) => PatientUserModel.fromMap(json);
 }
 
 @HiveType(typeId: HiveTypesIds.patientSettingsTypeId)
@@ -252,31 +236,17 @@ class PatientSettings extends UserSettings {
   factory PatientSettings.fromMap(Map<String, dynamic> map) {
     return PatientSettings(
       data: UserData.fromMap(Map.from(map['data'] as Map<dynamic, dynamic>)),
-      payment: map['payment'] != null
-          ? Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>))
-          : Payment.none(),
-      layout: map['layout'] != null
-          ? LayoutSetting.fromMap(
-              Map.from(map['layout'] as Map<dynamic, dynamic>))
-          : LayoutSetting.empty(),
-      accessibility: map['accessibility'] != null
-          ? AccessibilitySetting.fromMap(
-              Map.from(map['accessibility'] as Map<dynamic, dynamic>))
-          : AccessibilitySetting.empty(),
-      language: map['language'] != null
-          ? LanguageSetting.fromMap(
-              Map.from(map['language'] as Map<dynamic, dynamic>))
-          : LanguageSetting.empty(),
-      tts: map['tts'] != null
-          ? TTSSetting.fromMap(Map.from(map['tts'] as Map<dynamic, dynamic>))
-          : TTSSetting.empty(),
+      payment: map['payment'] != null ? Payment.fromMap(Map.from(map['payment'] as Map<dynamic, dynamic>)) : Payment.none(),
+      layout: map['layout'] != null ? LayoutSetting.fromMap(Map.from(map['layout'] as Map<dynamic, dynamic>)) : LayoutSetting.empty(),
+      accessibility: map['accessibility'] != null ? AccessibilitySetting.fromMap(Map.from(map['accessibility'] as Map<dynamic, dynamic>)) : AccessibilitySetting.empty(),
+      language: map['language'] != null ? LanguageSetting.fromMap(Map.from(map['language'] as Map<dynamic, dynamic>)) : LanguageSetting.empty(),
+      tts: map['tts'] != null ? TTSSetting.fromMap(Map.from(map['tts'] as Map<dynamic, dynamic>)) : TTSSetting.empty(),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PatientSettings.fromJson(String source) =>
-      PatientSettings.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory PatientSettings.fromJson(String source) => PatientSettings.fromMap(json.decode(source) as Map<String, dynamic>);
 
   PatientSettings copyWith({
     UserData? data,
@@ -306,23 +276,11 @@ class PatientSettings extends UserSettings {
   bool operator ==(covariant PatientSettings other) {
     if (identical(this, other)) return true;
 
-    return other.data == data &&
-        other.language == language &&
-        other.payment == payment &&
-        other.layout == layout &&
-        other.accessibility == accessibility &&
-        other.tts == tts &&
-        other.language == language;
+    return other.data == data && other.language == language && other.payment == payment && other.layout == layout && other.accessibility == accessibility && other.tts == tts && other.language == language;
   }
 
   @override
   int get hashCode {
-    return data.hashCode ^
-        language.hashCode ^
-        payment.hashCode ^
-        layout.hashCode ^
-        accessibility.hashCode ^
-        tts.hashCode ^
-        language.hashCode;
+    return data.hashCode ^ language.hashCode ^ payment.hashCode ^ layout.hashCode ^ accessibility.hashCode ^ tts.hashCode ^ language.hashCode;
   }
 }
