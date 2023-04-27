@@ -23,7 +23,6 @@ class SelectGroupScreen extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final groups = ref.watch(homeProvider).groups.values.where((element) => !element.block).toList();
     final provider = ref.watch(gameProvider);
-    final color = groups.last.freq;
     return Scaffold(
       body: Stack(
         children: [

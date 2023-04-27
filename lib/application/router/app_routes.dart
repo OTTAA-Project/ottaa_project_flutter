@@ -45,5 +45,7 @@ class AppRoutes {
   static const matchPictogramScreen = "/match_pictogram_screen";
   static const memoryGameScreen = "/memory_game_screen";
   static const searchScreen = "/search_screen";
+  static const chatGPTGame = "/chat_gpt_game";
   static const whatsThePictoScreen = "/whats_the_picto_screen";
+  static const selectBoardPicto = "/select_board_picto";
 }

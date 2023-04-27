@@ -89,7 +89,11 @@ class GameScreenUI extends ConsumerWidget {
                         width: false,
                         onTap: () {
                           provider.selectedGame = index;
-                          context.push(AppRoutes.selectGroupScreen);
+                          if (index == 3) {
+                            context.push(AppRoutes.chatGPTGame);
+                          } else {
+                            context.push(AppRoutes.selectGroupScreen);
+                          }
                         },
                         text: 'game.next'.trl,
                       ),

@@ -1712,4 +1712,5 @@ class AppImages {
   static const kGameSearch = 'assets/games_images/game_search.png';
   static const kGamesMark = 'assets/games_images/mark.png';
   static const kGamesTrophy = 'assets/games_images/trophy.png';
+  static const kAddIcon = 'assets/games_images/icon_add.png';
 }

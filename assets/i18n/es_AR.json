@@ -205,7 +205,8 @@
     "italian": "Italiano",
     "french": "French",
     "portuguese": "Portuguese",
-    "test": "Esta es la voz que vas a usar en ottaa"
+    "test": "Esta es la voz que vas a usar en ottaa",
+    "add": "agregar"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -301,7 +302,7 @@
     "game_1_line": "Selecciona el pictograma que escuches",
     "game_2_line": "Selecciona la palabra que corresponde a su pictograma",
     "game_3_line": "Selecciona una tarjeta y encuentra la pareja del pictograma",
-    "game_4_line": "Selecciona una tarjeta y encuentra la pareja del pictograma",
+    "game_4_line": "Agrega hasta 4 pictogramas y crea tu propia historia",
     "no": "¡Oh Oh!",
     "yes": "¡Muy bien!",
     "score": "Tu puntaje",
@@ -309,6 +310,7 @@
     "incorrect": "Incorrect",
     "use_time": "Use time",
     "maximum_streak": "Maximum Streak",
-    "speak_what": "What's the picto {name}"
+    "speak_what": "What's the picto {name}",
+    "gptbtn":"Crear historia"
   }
 }

@@ -23,6 +23,7 @@ class GamesProvider extends ChangeNotifier {
   Map<String, Group> groups = {};
   List<Picto> selectedPicts = [];
   List<Picto> gamePicts = [];
+  List<Picto> chatGptPictos = [];
   int correctScore = 0;
   int incorrectScore = 0;
   String useTime = '';
@@ -34,6 +35,15 @@ class GamesProvider extends ChangeNotifier {
   int selectedPicto = 0;
   bool showText = false;
   bool mute = false;
+  bool btnText = false;
+  int sentencePhase = 0;
+  List<String> nounBoards = ['APLbz00sRZDNGyGzioXMz', 'DDrKGBCRqNeAy4LgKfN4J', 'alr_Y_ZidZDqQJQCRiqoE', 'lyr-m9k0Q6-rffFFBwPEk'];
+  List<String> modifierBoards = ['--PHmDIFeKHvulVxNtBgk', '5kfboTpsoH8RSFvA9ruE1', 'TMO8t_1hMaHiyh1SUwaFH'];
+  List<String> actionBoards = ['L6pHIipM3ocu3wYlMuo2y'];
+  List<String> placeBoards = ['H6zmHfH-5XVtpy1RJ1ci7', 'kBVGvu0NygXFUWTFxcQJe'];
+  List<String> gptBoards = [];
+  bool boardOrPicto = true;
+  List<Picto> gptPictos = [];
 
   final AudioPlayer backgroundMusicPlayer = AudioPlayer();
   final AudioPlayer clicksPlayer = AudioPlayer();
@@ -123,6 +133,20 @@ class GamesProvider extends ChangeNotifier {
     await createRandomForGame();
   }
 
+  Future<void> fetchGptPictos({required String id}) async {
+    List<Picto> picts = [];
+    final gro = groups[id];
+    for (var e in gro!.relations) {
+      picts.add(
+        pictograms[e.id]!,
+      );
+    }
+    chatGptPictos.clear();
+    chatGptPictos.addAll(picts);
+    // print(picts.toString());
+    notifyListeners();
+  }
+
   Future<void> createRandomForGame() async {
     gamePicts.clear();
     bool same = true;
@@ -167,6 +191,13 @@ class GamesProvider extends ChangeNotifier {
     print(correctPicto);
     notifyListeners();
   }
+
+  // Future<void> fetchBoardsForType({required List<String> ids}) async {
+  //   gptBoards.clear();
+  //   ids.forEach((element) {
+  //     print(groups[element]!.text);
+  //   });
+  // }
 
   Future<void> checkAnswerWhatThePicto({required int index}) async {
     //todo: show the text that it is correct
