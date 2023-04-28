@@ -628,4 +628,24 @@ class ServerService implements ServerRepository {
     }
     return const Left("no_data_found");
   }
+
+  @override
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
+    try {
+      final choice = await _openAIClient.completions
+          .create(
+        model: "text-davinci-003",
+        prompt: prompt,
+        temperature: 0,
+        maxTokens: maxTokens,
+      )
+          .data;
+
+      if (!choice.choices.isNotEmpty) return const Left("No completado");
+
+      return Right(choice.choices.first.text);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }
