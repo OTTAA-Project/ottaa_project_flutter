@@ -58,6 +58,10 @@ dependencies:
   rive: ^0.9.1
   collection: ^1.16.0
   injectable: ^2.1.0
+  openai_client:
+    git:
+      url: https://github.com/OTTAA-Project/openai_client.git
+      ref: main
 
 
 dev_dependencies:
