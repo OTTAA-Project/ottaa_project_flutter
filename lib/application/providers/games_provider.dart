@@ -38,6 +38,7 @@ class GamesProvider extends ChangeNotifier {
   bool mute = false;
   bool btnText = false;
   int sentencePhase = 0;
+  String generatedStory = '';
   List<String> nounBoards = ['APLbz00sRZDNGyGzioXMz', 'DDrKGBCRqNeAy4LgKfN4J', 'alr_Y_ZidZDqQJQCRiqoE', 'lyr-m9k0Q6-rffFFBwPEk'];
   List<String> modifierBoards = ['--PHmDIFeKHvulVxNtBgk', '5kfboTpsoH8RSFvA9ruE1', 'TMO8t_1hMaHiyh1SUwaFH'];
   List<String> actionBoards = ['L6pHIipM3ocu3wYlMuo2y'];
@@ -269,8 +270,18 @@ class GamesProvider extends ChangeNotifier {
   Future<void> createStory() async {
     final String prompt = 'game.prompt'.trl;
     final finalPrompt = '$prompt ${gptPictos[0].text}, ${gptPictos[1].text}, ${gptPictos[2].text}, ${gptPictos[3].text}.';
-    print(finalPrompt);
-    await _chatGPTServices.getStory(prompt: prompt);
+    final res = await _chatGPTServices.getStory(prompt: prompt);
+    if (res.isRight) {
+      generatedStory = res.right;
+    }
+  }
+
+  Future<void> speakStory() async {
+    _tts.speak(generatedStory);
+  }
+  Future<void> resetStoryGame()async{
+    gptPictos.clear();
+    sentencePhase=0;
   }
 }
 

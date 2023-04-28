@@ -57,13 +57,6 @@ class ChatGPTService extends ChatGPTRepository {
     String? remotePrompt = await remoteConfigService.getString("ChatGPTPromt");
 
     final response = await serverService.generatePhraseGPT(prompt: prompt, maxTokens: maxTokens, temperature: 0.7);
-    if (response.isLeft) {
-      print(response.left);
-    }
-    if (response.isRight) {
-      print(response.right);
-    }
-
     return response.fold(
       (l) => Left(l),
       (r) => Right(r),

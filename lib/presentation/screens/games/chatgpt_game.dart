@@ -52,14 +52,19 @@ class ChatgptGame extends ConsumerWidget {
             bottom: provider.btnText ? 24 : 48,
             child: provider.gptPictos.length == 4
                 ? SimpleButton(
-                    onTap: () {
+                    onTap: () async {
                       /// goto teh screen where you are showing the sentence
-                   if(provider.gptPictos.length == 4){
-                     provider.createStory();
-                   }
-                   print(provider.gptPictos.length);
-                   print('yes');
-                      // context.push(AppRoutes.showCreatedStory);
+                      if (provider.gptPictos.length == 4) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                        await provider.createStory();
+                        context.push(AppRoutes.showCreatedStory);
+                      }
                     },
                     text: 'game.gptbtn'.trl,
                   )
