@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:ottaa_project_flutter/application/application.dart';
 import 'package:ottaa_project_flutter/application/injector.dart';
@@ -17,6 +18,7 @@ void main() async {
       statusBarIconBrightness: Brightness.light,
     ),
   );
+  await dotenv.load();
 
   await Firebase.initializeApp();
 

@@ -27,7 +27,6 @@ class ServerService implements ServerRepository {
     ),
   );
 
-
   @override
   Future<void> init() async {}
 
@@ -637,15 +636,15 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens, double temperature = 0}) async {
     try {
       final choice = await _openAIClient.completions
           .create(
-        model: "text-davinci-003",
-        prompt: prompt,
-        temperature: 0,
-        maxTokens: maxTokens,
-      )
+            model: "text-davinci-003",
+            prompt: prompt,
+            temperature: temperature,
+            maxTokens: maxTokens,
+          )
           .data;
 
       if (!choice.choices.isNotEmpty) return const Left("No completado");

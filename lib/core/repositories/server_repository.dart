@@ -117,5 +117,5 @@ abstract class ServerRepository {
 
   Future<dynamic> fetchUserSettings({required String userId});
 
-  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens});
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens,double temperature});
 }

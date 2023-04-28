@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dar
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
+import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 class GamesProvider extends ChangeNotifier {
@@ -55,8 +56,9 @@ class GamesProvider extends ChangeNotifier {
   final GroupsRepository _groupsService;
   final PatientNotifier patientState;
   final TTSProvider _tts;
+  final ChatGPTRepository _chatGPTServices;
 
-  GamesProvider(this._groupsService, this._pictogramsService, this.patientState, this._tts);
+  GamesProvider(this._groupsService, this._pictogramsService, this.patientState, this._tts, this._chatGPTServices);
 
   void moveForward() {
     mainPageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
@@ -263,6 +265,13 @@ class GamesProvider extends ChangeNotifier {
     await backgroundMusicPlayer.setLoopMode(LoopMode.one);
     await backgroundMusicPlayer.play();
   }
+
+  Future<void> createStory() async {
+    final String prompt = 'game.prompt'.trl;
+    final finalPrompt = '$prompt ${gptPictos[0].text}, ${gptPictos[1].text}, ${gptPictos[2].text}, ${gptPictos[3].text}.';
+    print(finalPrompt);
+    await _chatGPTServices.getStory(prompt: prompt);
+  }
 }
 
 final gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
@@ -270,5 +279,6 @@ final gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
   final groupsService = GetIt.I<GroupsRepository>();
   final patientState = ref.watch(patientNotifier.notifier);
   final tts = ref.watch(ttsProvider);
-  return GamesProvider(groupsService, pictogramService, patientState, tts);
+  final chatGpt = GetIt.I<ChatGPTRepository>();
+  return GamesProvider(groupsService, pictogramService, patientState, tts, chatGpt);
 });

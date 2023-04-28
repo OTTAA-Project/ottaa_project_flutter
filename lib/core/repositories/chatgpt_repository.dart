@@ -10,4 +10,9 @@ abstract class ChatGPTRepository {
     required String language,
     int maxTokens = 500,
   });
+
+  Future<Either<String, String>> getStory({
+    required String prompt,
+    int maxTokens = 1000,
+  });
 }

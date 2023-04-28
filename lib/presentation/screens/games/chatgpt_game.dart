@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/new_simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
@@ -45,13 +47,19 @@ class ChatgptGame extends ConsumerWidget {
               ),
             ),
           ),
-           Positioned(
+          Positioned(
             right: provider.btnText ? 24 : 48,
             bottom: provider.btnText ? 24 : 48,
             child: provider.gptPictos.length == 4
                 ? SimpleButton(
                     onTap: () {
                       /// goto teh screen where you are showing the sentence
+                   if(provider.gptPictos.length == 4){
+                     provider.createStory();
+                   }
+                   print(provider.gptPictos.length);
+                   print('yes');
+                      // context.push(AppRoutes.showCreatedStory);
                     },
                     text: 'game.gptbtn'.trl,
                   )
