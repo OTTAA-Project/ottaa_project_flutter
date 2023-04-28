@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_user_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -38,41 +39,43 @@ class _SettingScreenUserState extends ConsumerState<SettingScreenUser> {
   @override
   Widget build(BuildContext context) {
     final user = ref.read(userProvider.select((value) => value.user));
-    return Scaffold(
-      appBar: OTTAAAppBar(
-        title: Text(
-          'global.settings'.trl,
+    return ResponsiveWidget(
+      child: Scaffold(
+        appBar: OTTAAAppBar(
+          title: Text(
+            'global.settings'.trl,
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            ProfileUserWidget(
-              title: 'user.settings.main_screen'.trl,
-              onTap: () => context.push(user!.isCaregiver
-                  ? AppRoutes.caregiverAccountLayout
-                  : AppRoutes.patientSettingsLayout),
-            ),
-            ProfileUserWidget(
-              title: 'user.settings.accessibility'.trl,
-              onTap: () => context.push(user!.isCaregiver
-                  ? AppRoutes.caregiverAccountAccessibility
-                  : AppRoutes.patientSettingsAccessibilty),
-            ),
-            ProfileUserWidget(
-              title: 'user.settings.voice_and_subtitles'.trl,
-              onTap: () => context.push(user!.isCaregiver
-                  ? AppRoutes.caregiverAccountTTS
-                  : AppRoutes.patientSettingsTTS),
-            ),
-            ProfileUserWidget(
-              title: 'user.settings.language'.trl,
-              onTap: () => context.push(user!.isCaregiver
-                  ? AppRoutes.caregiverAccountLanguage
-                  : AppRoutes.patientSettingsLanguage),
-            ),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              ProfileUserWidget(
+                title: 'user.settings.main_screen'.trl,
+                onTap: () => context.push(user!.isCaregiver
+                    ? AppRoutes.caregiverAccountLayout
+                    : AppRoutes.patientSettingsLayout),
+              ),
+              ProfileUserWidget(
+                title: 'user.settings.accessibility'.trl,
+                onTap: () => context.push(user!.isCaregiver
+                    ? AppRoutes.caregiverAccountAccessibility
+                    : AppRoutes.patientSettingsAccessibilty),
+              ),
+              ProfileUserWidget(
+                title: 'user.settings.voice_and_subtitles'.trl,
+                onTap: () => context.push(user!.isCaregiver
+                    ? AppRoutes.caregiverAccountTTS
+                    : AppRoutes.patientSettingsTTS),
+              ),
+              ProfileUserWidget(
+                title: 'user.settings.language'.trl,
+                onTap: () => context.push(user!.isCaregiver
+                    ? AppRoutes.caregiverAccountLanguage
+                    : AppRoutes.patientSettingsLanguage),
+              ),
+            ],
+          ),
         ),
       ),
     );

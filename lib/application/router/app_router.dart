@@ -253,12 +253,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 path: "settings",
                 name: "settings",
                 redirect: (context, state) {
-                  print(state.location);
-                  if (state.location.startsWith("/home/settings")) {
-                    if (userState.user?.type == UserType.user) {
-                      return null;
-                    }
-
+                  if (state.location.startsWith("/home/settings") && userState.user?.type == UserType.caregiver) {
                     return "/home";
                   }
 
@@ -284,6 +279,27 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   ),
                 ],
               ),
+
+              GoRoute(
+                path: "games",
+                name: "games",
+                builder: (_, __) => const GameScreen(),
+                routes: [
+                  GoRoute(path: 'groups', builder: (_, __) => const SelectGroupScreen(), routes: [GoRoute(path: 'search', builder: (_, __) => const SearchScreen())]),
+                  GoRoute(
+                    path: 'match',
+                    builder: (_, __) => const MatchPictogramScreen(),
+                  ),
+                  GoRoute(
+                    path: 'memory',
+                    builder: (_, __) => const MemoryGameScreen(),
+                  ),
+                  GoRoute(
+                    path: 'wtp',
+                    builder: (_, __) => const WhatsThePictoScreen(),
+                  ),
+                ],
+              )
             ],
           ),
         ],

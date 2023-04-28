@@ -13,8 +13,7 @@ class ResponsiveWidget extends StatelessWidget {
     return OrientationBuilder(builder: (context, orientation) {
       return LayoutBuilder(
         builder: (context, constraints) {
-          int maxSide =
-              max(constraints.maxWidth, constraints.maxHeight).toInt();
+          int maxSide = max(constraints.maxWidth, constraints.maxHeight).toInt();
 
           if (constraints.maxWidth > 1000) {
             switch (child.runtimeType) {
@@ -29,7 +28,8 @@ class ResponsiveWidget extends StatelessWidget {
                   ),
                 );
               default:
-                return Center(
+                return Align(
+                  alignment: Alignment.topCenter,
                   child: SizedBox(
                     width: maxSide * 0.4,
                     child: child,

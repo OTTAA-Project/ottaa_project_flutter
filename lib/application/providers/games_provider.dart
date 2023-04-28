@@ -36,18 +36,15 @@ class GamesProvider extends ChangeNotifier {
   final PatientNotifier patientState;
   final TTSProvider _tts;
 
-  GamesProvider(this._groupsService, this._pictogramsService, this.patientState,
-      this._tts);
+  GamesProvider(this._groupsService, this._pictogramsService, this.patientState, this._tts);
 
   void moveForward() {
-    mainPageController.nextPage(
-        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    mainPageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
     notifyListeners();
   }
 
   void moveBackward() {
-    mainPageController.previousPage(
-        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    mainPageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
     notifyListeners();
   }
 
@@ -84,18 +81,13 @@ class GamesProvider extends ChangeNotifier {
     if (patientState.state != null) {
       pictos = patientState.user.pictos[patientState.user.settings.language];
 
-      groupsData =
-          patientState.user.groups[patientState.user.settings.language];
+      groupsData = patientState.user.groups[patientState.user.settings.language];
 
       print(patientState.user.groups);
     }
 
-    pictos ??= (await _pictogramsService.getAllPictograms())
-        .where((element) => !element.block)
-        .toList();
-    groupsData ??= (await _groupsService.getAllGroups())
-        .where((element) => !element.block)
-        .toList();
+    pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
+    groupsData ??= (await _groupsService.getAllGroups()).where((element) => !element.block).toList();
 
     for (var e in groupsData) {
       if (!e.block) {

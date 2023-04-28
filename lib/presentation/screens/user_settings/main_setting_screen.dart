@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/divider_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/shortcut_view.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/switch_widget.dart';
@@ -24,109 +25,111 @@ class MainSettingScreen extends ConsumerWidget {
         provider.updateMainSettings();
         return true;
       },
-      child: Scaffold(
-        appBar: OTTAAAppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () async {
-              provider.updateMainSettings();
-              context.pop();
-            },
-            splashRadius: 24,
+      child: ResponsiveWidget(
+        child: Scaffold(
+          appBar: OTTAAAppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () async {
+                provider.updateMainSettings();
+                context.pop();
+              },
+              splashRadius: 24,
+            ),
+            title: Text(
+              'user.settings.main_screen'.trl,
+              style: textTheme.headline3,
+            ),
           ),
-          title: Text(
-            'user.settings.main_screen'.trl,
-            style: textTheme.headline3,
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'user.main_setting.interaction'.trl,
-                  style: textTheme.headline2!.copyWith(
-                    color: colorScheme.primary,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                SwitchWidget(
-                  onChanged: (value) {
-                    provider.changeDeleteText(value: value);
-                  },
-                  title: 'user.main_setting.talk_delete'.trl,
-                  value: provider.layoutSetting.cleanup,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                SwitchWidget(
-                  onChanged: (value) {
-                    provider.changeOneToOne(value: value);
-                  },
-                  title: 'user.main_setting.one_by_one'.trl,
-                  value: provider.layoutSetting.oneToOne,
-                ),
-                const DividerWidget(),
-                Text(
-                  'customize.shortcut.appbar'.trl,
-                  style: textTheme.headline2!.copyWith(
-                    color: colorScheme.primary,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                SwitchWidget(
-                  onChanged: (value) {
-                    provider.changeEnableShortcuts(value: value);
-                  },
-                  title: 'user.main_setting.shortcut'.trl,
-                  value: provider.layoutSetting.shortcuts.enable,
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                const ShortcutView(),
-                const DividerWidget(),
-                Text(
-                  'user.main_setting.board_view'.trl,
-                  style: textTheme.headline2!.copyWith(
-                    color: colorScheme.primary,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TabWidget(
-                      title: 'user.main_setting.tabs'.trl,
-                      image: AppImages.kMainSettingsIcon1,
-                      selected:
-                          provider.layoutSetting.display == DisplayTypes.tab,
-                      onTap: () {
-                        provider.changeTablet(value: DisplayTypes.tab);
-                      },
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'user.main_setting.interaction'.trl,
+                    style: textTheme.headline2!.copyWith(
+                      color: colorScheme.primary,
                     ),
-                    TabWidget(
-                      title: 'user.main_setting.grid'.trl,
-                      image: AppImages.kMainSettingsIcon2,
-                      selected:
-                          provider.layoutSetting.display == DisplayTypes.grid,
-                      onTap: () {
-                        provider.changeTablet(value: DisplayTypes.grid);
-                      },
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  SwitchWidget(
+                    onChanged: (value) {
+                      provider.changeDeleteText(value: value);
+                    },
+                    title: 'user.main_setting.talk_delete'.trl,
+                    value: provider.layoutSetting.cleanup,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  SwitchWidget(
+                    onChanged: (value) {
+                      provider.changeOneToOne(value: value);
+                    },
+                    title: 'user.main_setting.one_by_one'.trl,
+                    value: provider.layoutSetting.oneToOne,
+                  ),
+                  const DividerWidget(),
+                  Text(
+                    'customize.shortcut.appbar'.trl,
+                    style: textTheme.headline2!.copyWith(
+                      color: colorScheme.primary,
                     ),
-                  ],
-                ),
-                const DividerWidget(),
-              ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  SwitchWidget(
+                    onChanged: (value) {
+                      provider.changeEnableShortcuts(value: value);
+                    },
+                    title: 'user.main_setting.shortcut'.trl,
+                    value: provider.layoutSetting.shortcuts.enable,
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  const ShortcutView(),
+                  const DividerWidget(),
+                  Text(
+                    'user.main_setting.board_view'.trl,
+                    style: textTheme.headline2!.copyWith(
+                      color: colorScheme.primary,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TabWidget(
+                        title: 'user.main_setting.tabs'.trl,
+                        image: AppImages.kMainSettingsIcon1,
+                        selected:
+                            provider.layoutSetting.display == DisplayTypes.tab,
+                        onTap: () {
+                          provider.changeTablet(value: DisplayTypes.tab);
+                        },
+                      ),
+                      TabWidget(
+                        title: 'user.main_setting.grid'.trl,
+                        image: AppImages.kMainSettingsIcon2,
+                        selected:
+                            provider.layoutSetting.display == DisplayTypes.grid,
+                        onTap: () {
+                          provider.changeTablet(value: DisplayTypes.grid);
+                        },
+                      ),
+                    ],
+                  ),
+                  const DividerWidget(),
+                ],
+              ),
             ),
           ),
         ),
