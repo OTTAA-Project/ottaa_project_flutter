@@ -1,7 +1,8 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:openai_client/openai_client.dart' as openai;
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -20,6 +21,12 @@ import 'package:http/http.dart' as http;
 class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   final Reference _storageRef = FirebaseStorage.instance.ref();
+  final openai.OpenAIClient _openAIClient = openai.OpenAIClient(
+    configuration: openai.OpenAIConfiguration(
+      apiKey: dotenv.get("openaiToken"),
+    ),
+  );
+
 
   @override
   Future<void> init() async {}

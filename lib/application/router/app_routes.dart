@@ -48,4 +48,5 @@ class AppRoutes {
   static const chatGPTGame = "/chat_gpt_game";
   static const whatsThePictoScreen = "/whats_the_picto_screen";
   static const selectBoardPicto = "/select_board_picto";
+  static const showCreatedStory = "/show_created_story";
 }

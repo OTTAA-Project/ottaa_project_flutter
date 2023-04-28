@@ -1099,4 +1099,31 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<_i2.Either<String, String>> generatePhraseGPT({
+    required String? prompt,
+    required int? maxTokens,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #generatePhraseGPT,
+          [],
+          {
+            #prompt: prompt,
+            #maxTokens: maxTokens,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, String>>.value(
+            _FakeEither_0<String, String>(
+          this,
+          Invocation.method(
+            #generatePhraseGPT,
+            [],
+            {
+              #prompt: prompt,
+              #maxTokens: maxTokens,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, String>>);
 }

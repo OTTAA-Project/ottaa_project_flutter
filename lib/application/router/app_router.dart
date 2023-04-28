@@ -16,6 +16,7 @@ import 'package:ottaa_project_flutter/presentation/screens/games/memory_game_scr
 import 'package:ottaa_project_flutter/presentation/screens/games/search_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/select_group_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/select_board_and_picto.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/ui/show_created_story.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/whats_the_picto_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/link_mail_screen.dart';
@@ -247,6 +248,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.selectBoardPicto,
           builder: (context, state) => const SelectBoardAndPicto(),
+        ),
+        GoRoute(
+          path: AppRoutes.showCreatedStory,
+          builder: (context, state) => const ShowCreatedStory(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),
