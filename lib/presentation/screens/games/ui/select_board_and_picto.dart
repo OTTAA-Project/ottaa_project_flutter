@@ -24,6 +24,7 @@ class SelectBoardAndPicto extends ConsumerWidget {
     final user = ref.read(userNotifier);
     final colorScheme = Theme.of(context).colorScheme;
     final groups = provider.gptBoards.map((e) => provider.groups[e]).toList();
+    print(provider.gptBoards.length);
     return Scaffold(
       body: Stack(
         children: [

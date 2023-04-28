@@ -34,10 +34,10 @@ class PictoSelectWidget extends ConsumerWidget {
             return PictoWidget(
               onTap: () {
                 provider.gptPictos.add(provider.chatGptPictos[index]);
-               provider.boardOrPicto = !provider.boardOrPicto;
-               provider.sentencePhase++;
-               provider.notify();
-               context.pop();
+                provider.boardOrPicto = !provider.boardOrPicto;
+                provider.sentencePhase++;
+                provider.notify();
+                context.pop();
               },
               image: provider.chatGptPictos[index].resource.network != null
                   ? CachedNetworkImage(

@@ -312,6 +312,6 @@
     "maximum_streak": "Maximum Streak",
     "speak_what": "What's the picto {name}",
     "gptbtn":"Crear historia",
-    "prompt" : "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras. "
+    "prompt" : "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:"
   }
 }

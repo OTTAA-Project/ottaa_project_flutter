@@ -60,11 +60,13 @@ class SentenceWidget extends ConsumerWidget {
                   : PictoWidget(
                       image: Image.asset(AppImages.kAddIcon),
                       onTap: () async {
+                        print(provider.sentencePhase);
                         switch (provider.sentencePhase) {
                           ///using the same screen with different values
                           case 0:
                             provider.gptBoards.clear();
-                            provider.gptBoards = provider.nounBoards;
+                            provider.gptBoards.addAll(provider.nounBoards);
+                            print(provider.nounBoards.last);
                             provider.notify();
                             break;
                           case 1:

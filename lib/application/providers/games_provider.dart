@@ -39,10 +39,10 @@ class GamesProvider extends ChangeNotifier {
   bool btnText = false;
   int sentencePhase = 0;
   String generatedStory = '';
-  List<String> nounBoards = ['APLbz00sRZDNGyGzioXMz', 'DDrKGBCRqNeAy4LgKfN4J', 'alr_Y_ZidZDqQJQCRiqoE', 'lyr-m9k0Q6-rffFFBwPEk'];
-  List<String> modifierBoards = ['--PHmDIFeKHvulVxNtBgk', '5kfboTpsoH8RSFvA9ruE1', 'TMO8t_1hMaHiyh1SUwaFH'];
-  List<String> actionBoards = ['L6pHIipM3ocu3wYlMuo2y'];
-  List<String> placeBoards = ['H6zmHfH-5XVtpy1RJ1ci7', 'kBVGvu0NygXFUWTFxcQJe'];
+  final List<String> nounBoards = ['APLbz00sRZDNGyGzioXMz', 'DDrKGBCRqNeAy4LgKfN4J', 'alr_Y_ZidZDqQJQCRiqoE', 'lyr-m9k0Q6-rffFFBwPEk'];
+  final List<String> modifierBoards = ['--PHmDIFeKHvulVxNtBgk', '5kfboTpsoH8RSFvA9ruE1', 'TMO8t_1hMaHiyh1SUwaFH'];
+  final List<String> actionBoards = ['L6pHIipM3ocu3wYlMuo2y'];
+  final List<String> placeBoards = ['H6zmHfH-5XVtpy1RJ1ci7', 'kBVGvu0NygXFUWTFxcQJe'];
   List<String> gptBoards = [];
   bool boardOrPicto = true;
   List<Picto> gptPictos = [];
@@ -270,18 +270,22 @@ class GamesProvider extends ChangeNotifier {
   Future<void> createStory() async {
     final String prompt = 'game.prompt'.trl;
     final finalPrompt = '$prompt ${gptPictos[0].text}, ${gptPictos[1].text}, ${gptPictos[2].text}, ${gptPictos[3].text}.';
-    final res = await _chatGPTServices.getStory(prompt: prompt);
+    final res = await _chatGPTServices.getStory(prompt: finalPrompt);
     if (res.isRight) {
       generatedStory = res.right;
     }
+    notifyListeners();
   }
 
   Future<void> speakStory() async {
     _tts.speak(generatedStory);
   }
-  Future<void> resetStoryGame()async{
+
+  Future<void> resetStoryGame() async {
     gptPictos.clear();
-    sentencePhase=0;
+    gptBoards = [];
+    sentencePhase = 0;
+    notifyListeners();
   }
 }
 
