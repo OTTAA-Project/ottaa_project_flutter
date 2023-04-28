@@ -278,6 +278,9 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> speakStory() async {
+    if (backgroundMusicPlayer.playing) {
+      backgroundMusicPlayer.pause();
+    }
     _tts.speak(generatedStory);
   }
 
@@ -286,6 +289,10 @@ class GamesProvider extends ChangeNotifier {
     gptBoards = [];
     sentencePhase = 0;
     notifyListeners();
+  }
+
+  Future<void> stopTTS() async {
+    await _tts.ttsStop();
   }
 }
 

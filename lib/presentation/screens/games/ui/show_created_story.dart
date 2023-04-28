@@ -31,7 +31,7 @@ class ShowCreatedStory extends ConsumerWidget {
                   headline: 'profile.hello'.trlf({'name': user!.settings.data.name}),
                   subtitle: 'game.game_4_line'.trl,
                   simple: false,
-                  onTap: (){
+                  onTap: () {
                     ///reset the whole game
                     provider.resetStoryGame();
                     context.pop();
@@ -69,6 +69,26 @@ class ShowCreatedStory extends ConsumerWidget {
                   image: AppImages.kOttaa,
                   orange: true,
                 ),
+                const SizedBox(
+                  width: 24,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    provider.stopTTS();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.stop,
+                      color: colorScheme.primary,
+                      size: 44,
+                    ),
+                  ),
+                )
               ],
             ),
           ),

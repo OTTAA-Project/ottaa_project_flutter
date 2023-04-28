@@ -81,4 +81,11 @@ class TTSService extends TTSRepository {
       }
     });
   }
+  Future<void> pause()async{
+    await tts.pause();
+  }
+  @override
+  Future<void> ttsStop()async{
+    await tts.stop();
+  }
 }
