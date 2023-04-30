@@ -13,7 +13,7 @@ class HeaderWidget extends StatelessWidget {
   final String headline, subtitle;
   final bool? bold;
   final bool simple;
-  void Function()? onTap=(){};
+  void Function()? onTap = () {};
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,10 @@ class HeaderWidget extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    onTap!();
+                    if (onTap == null) {
+                    } else {
+                      onTap!();
+                    }
                     context.pop();
                   },
                   child: Card(

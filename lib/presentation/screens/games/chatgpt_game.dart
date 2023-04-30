@@ -30,6 +30,9 @@ class ChatgptGame extends ConsumerWidget {
           HeaderWidget(
             headline: 'profile.hello'.trlf({'name': user!.settings.data.name}),
             subtitle: 'game.game_4_line'.trl,
+            onTap: () {
+              provider.resetStoryGame();
+            },
           ),
           const SentenceWidget(),
           Positioned(
