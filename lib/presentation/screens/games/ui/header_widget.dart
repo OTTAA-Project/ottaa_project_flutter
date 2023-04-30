@@ -26,7 +26,10 @@ class HeaderWidget extends StatelessWidget {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () => context.pop(),
+                  onTap: () {
+                    onTap!();
+                    context.pop();
+                  },
                   child: Card(
                     child: Container(
                       padding: const EdgeInsets.all(14),

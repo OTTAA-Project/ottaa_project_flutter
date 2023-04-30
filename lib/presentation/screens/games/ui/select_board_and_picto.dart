@@ -2,8 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
@@ -18,12 +20,13 @@ class SelectBoardAndPicto extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(gameProvider);
+    final game = ref.watch(gameProvider);
+    final provider = ref.watch(chatGPTProvider);
     final size = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
     final user = ref.read(userNotifier);
     final colorScheme = Theme.of(context).colorScheme;
-    final groups = provider.gptBoards.map((e) => provider.groups[e]).toList();
+    final groups = provider.gptBoards.map((e) => game.groups[e]).toList();
     print(provider.gptBoards.length);
     return Scaffold(
       body: Stack(
@@ -32,6 +35,11 @@ class SelectBoardAndPicto extends ConsumerWidget {
           HeaderWidget(
             headline: 'profile.hello'.trlf({'name': user!.settings.data.name}),
             subtitle: 'game.game_4_line'.trl,
+            onTap: () {
+              if (provider.sentencePhase < provider.chatGptPictos.length) {
+                provider.boardOrPicto = true;
+              }
+            },
           ),
           provider.boardOrPicto ? const BoardWidget() : const PictoSelectWidget(),
           Positioned(
@@ -61,7 +69,7 @@ class SelectBoardAndPicto extends ConsumerWidget {
             top: size.height * 0.5,
             child: GestureDetector(
               onTap: () {
-                provider.scrollUp();
+                provider.boardOrPicto ? provider.scrollUpBoards() : provider.scrollUpPictos();
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
@@ -82,7 +90,7 @@ class SelectBoardAndPicto extends ConsumerWidget {
             top: size.height * 0.7,
             child: GestureDetector(
               onTap: () {
-                provider.scrollDown();
+                provider.boardOrPicto ? provider.scrollDownBoards() : provider.scrollDownPictos();
               },
               child: Container(
                 padding: const EdgeInsets.all(8),

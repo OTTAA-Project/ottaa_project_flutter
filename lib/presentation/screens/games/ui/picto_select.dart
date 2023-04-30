@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:picto_widget/picto_widget.dart';
 
@@ -11,7 +12,7 @@ class PictoSelectWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final provider = ref.watch(gameProvider);
+    final provider = ref.watch(chatGPTProvider);
     final colorScheme = Theme.of(context).colorScheme;
     return Positioned(
       bottom: 72,
@@ -27,7 +28,7 @@ class PictoSelectWidget extends ConsumerWidget {
             childAspectRatio: 1,
             mainAxisExtent: 150,
           ),
-          controller: ref.watch(gameProvider.select((value) => value.gridScrollController)),
+          controller: ref.watch(chatGPTProvider.select((value) => value.pictoScrollController)),
           padding: const EdgeInsets.only(top: 16, bottom: 16, right: 32),
           itemCount: provider.chatGptPictos.length,
           itemBuilder: (ctx, index) {

@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_w
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/leftside_icons.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/pict_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/ui/shaker_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/speak_button.dart';
 
 class WhatsThePictoScreen extends ConsumerWidget {
@@ -35,21 +36,24 @@ class WhatsThePictoScreen extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PictWidget(
-                  pict: provider.gamePicts[0],
-                  show: provider.pictoShowWhatsThePict[0],
-                  onTap: () async {
-                    showDialog(
-                        barrierColor: Colors.transparent,
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) {
-                          return SizedBox.shrink();
-                        });
-                    await provider.checkAnswerWhatThePicto(index: 0);
-                    context.pop();
-                  },
-                  rightOrWrong: provider.correctPicto == 0,
+                ShakeError(
+
+                  child: PictWidget(
+                    pict: provider.gamePicts[0],
+                    show: provider.pictoShowWhatsThePict[0],
+                    onTap: () async {
+                      showDialog(
+                          barrierColor: Colors.transparent,
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) {
+                            return SizedBox.shrink();
+                          });
+                      await provider.checkAnswerWhatThePicto(index: 0);
+                      context.pop();
+                    },
+                    rightOrWrong: provider.correctPicto == 0,
+                  ),
                 ),
                 const SizedBox(
                   width: 24,
