@@ -73,10 +73,16 @@ class LeftSideIcons extends ConsumerWidget {
                 color: provider.hintsBtn ? colorScheme.primary : Colors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Image.asset(
-                AppImages.kGamesMark,
-                height: 24,
-              ),
+              child: provider.hintsBtn
+                  ? Icon(
+                      Icons.help,
+                      color: Colors.white,
+                      size: 24,
+                    )
+                  : Image.asset(
+                      AppImages.kGamesMark,
+                      height: 24,
+                    ),
             ),
           ),
         ],
