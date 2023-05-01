@@ -180,7 +180,9 @@ class WhatsThePictoScreen extends ConsumerWidget {
                   ),
                 )
               : const SizedBox.shrink(),
-          const LeftSideIcons(),
+          const LeftSideIcons(
+            hints: true,
+          ),
         ],
       ),
     );

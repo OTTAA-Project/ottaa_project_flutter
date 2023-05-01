@@ -5,7 +5,11 @@ import 'package:ottaa_project_flutter/application/providers/games_provider.dart'
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/score_dialouge.dart';
 
 class LeftSideIcons extends ConsumerWidget {
-  const LeftSideIcons({Key? key}) : super(key: key);
+  const LeftSideIcons({
+    Key? key,
+    this.hints = false,
+  }) : super(key: key);
+  final bool hints;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,35 +60,37 @@ class LeftSideIcons extends ConsumerWidget {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              if (provider.hintsBtn) {
-                provider.hintsBtn = !provider.hintsBtn;
-                provider.cancelHints();
-              } else {
-                provider.hintsBtn = !provider.hintsBtn;
-                provider.showHints();
-              }
-              provider.notify();
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                color: provider.hintsBtn ? colorScheme.primary : Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: provider.hintsBtn
-                  ? Icon(
-                      Icons.help,
-                      color: Colors.white,
-                      size: 24,
-                    )
-                  : Image.asset(
-                      AppImages.kGamesMark,
-                      height: 24,
+          hints
+              ? GestureDetector(
+                  onTap: () {
+                    if (provider.hintsBtn) {
+                      provider.hintsBtn = !provider.hintsBtn;
+                      provider.cancelHints();
+                    } else {
+                      provider.hintsBtn = !provider.hintsBtn;
+                      provider.showHints();
+                    }
+                    provider.notify();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: provider.hintsBtn ? colorScheme.primary : Colors.white,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-            ),
-          ),
+                    child: provider.hintsBtn
+                        ? const Icon(
+                            Icons.help,
+                            color: Colors.white,
+                            size: 24,
+                          )
+                        : Image.asset(
+                            AppImages.kGamesMark,
+                            height: 24,
+                          ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );
