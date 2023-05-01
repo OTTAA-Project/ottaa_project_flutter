@@ -40,12 +40,13 @@ class WhatsThePictoProvider extends ChangeNotifier {
     //todo: create the new question
     if (_gamesProvider.correctPictoWTP == index) {
       _gamesProvider.correctScore++;
+      _gamesProvider.streak++;
       await _gamesProvider.createRandomForGameWTP();
     } else {
       if (_gamesProvider.correctScore == 0) {
         _gamesProvider.correctScore = 0;
       } else {
-        _gamesProvider.correctScore--;
+        _gamesProvider.incorrectScore++;
       }
       _gamesProvider.streak = 0;
     }

@@ -33,6 +33,7 @@ class GamesProvider extends ChangeNotifier {
   bool mute = false;
   List<Picto> gamePictsWTP = [];
   int correctPictoWTP = 99;
+  bool hintsEnabled = false;
 
   final AudioPlayer backgroundMusicPlayer = AudioPlayer();
   final AudioPlayer clicksPlayer = AudioPlayer();
@@ -194,7 +195,6 @@ class GamesProvider extends ChangeNotifier {
     ///check if we can buffer the audios before even loading the properties of the given class
     // backgroundMusicPlayer.setAudioSource();
     if (mute) {
-
     } else {
       await backgroundMusicPlayer.setAsset('assets/audios/funckygroove.mp3');
       await backgroundMusicPlayer.setLoopMode(LoopMode.one);
