@@ -58,7 +58,13 @@ class LeftSideIcons extends ConsumerWidget {
           ),
           GestureDetector(
             onTap: () {
-              provider.hintsBtn = !provider.hintsBtn;
+              if (provider.hintsBtn) {
+                provider.hintsBtn = !provider.hintsBtn;
+                provider.cancelHints();
+              } else {
+                provider.hintsBtn = !provider.hintsBtn;
+                provider.showHints();
+              }
               provider.notify();
             },
             child: Container(

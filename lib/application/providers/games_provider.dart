@@ -161,18 +161,26 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> init() async {
     await initializeBackgroundMusic();
-    if (hintsBtn) {}
+    if (hintsBtn) {
+      showHints();
+    }
   }
 
   Future<void> showHints() async {
-    Timer.periodic(const Duration(seconds: 8), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 8), (timer) {
       Timer(const Duration(seconds: 2), () {
         hintsEnabled = true;
+        print('yes1');
         notify();
       });
+      print('yes2');
       hintsEnabled = false;
       notify();
     });
+  }
+
+  Future<void> cancelHints() async {
+    timer.cancel();
   }
 
   void notify() {
