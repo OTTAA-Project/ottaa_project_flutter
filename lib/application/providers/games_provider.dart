@@ -181,6 +181,8 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> cancelHints() async {
     timer.cancel();
+    timer.cancel();
+    hintsEnabled = false;
   }
 
   void notify() {

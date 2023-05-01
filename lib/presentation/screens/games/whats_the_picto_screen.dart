@@ -32,6 +32,9 @@ class WhatsThePictoScreen extends ConsumerWidget {
             subtitle: 'game.game_1_line'.trl,
             onTap: () {
               game.backgroundMusicPlayer.pause();
+              if (game.hintsBtn) {
+                game.cancelHints();
+              }
             },
           ),
           SpeakButton(
