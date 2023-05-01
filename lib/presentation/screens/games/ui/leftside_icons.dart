@@ -58,12 +58,13 @@ class LeftSideIcons extends ConsumerWidget {
           ),
           GestureDetector(
             onTap: () {
-              //todo: hints here
+              provider.hintsBtn = !provider.hintsBtn;
+              provider.notify();
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: provider.hintsBtn ? colorScheme.primary : Colors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Image.asset(

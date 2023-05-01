@@ -70,7 +70,7 @@ class SelectGroupScreen extends ConsumerWidget {
                     onPressed: () async {
                       provider.selectedGroupIndex = index;
                       await provider.fetchSelectedPictos();
-                      await provider.init();
+                      provider.init();
 
                       switch (provider.selectedGame) {
                         case 0:

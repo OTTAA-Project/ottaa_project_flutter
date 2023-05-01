@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -33,7 +34,12 @@ class GamesProvider extends ChangeNotifier {
   bool mute = false;
   List<Picto> gamePictsWTP = [];
   int correctPictoWTP = 99;
+  bool hintsBtn = false;
+  late Timer timer;
   bool hintsEnabled = false;
+
+  /// 0 == 2 pictos, 1 == 3 pictos, 2 == 4 pictos
+  int difficultyLevel = 0;
 
   final AudioPlayer backgroundMusicPlayer = AudioPlayer();
   final AudioPlayer clicksPlayer = AudioPlayer();
@@ -51,37 +57,22 @@ class GamesProvider extends ChangeNotifier {
   Future<void> createRandomForGameWTP() async {
     print('u was called');
     gamePictsWTP.clear();
-    bool same = true;
-    int random1 = Random().nextInt(selectedPicts.length - 1);
-    int random2 = Random().nextInt(selectedPicts.length - 1);
-    while (same) {
-      if (random1 == random2) {
-        random2 = Random().nextInt(selectedPicts.length - 1);
-      } else {
-        same = false;
+    List<int> numbers = [];
+    Random random = Random();
+    while (numbers.length < difficultyLevel + 2) {
+      print('hi');
+      int num = random.nextInt(selectedPicts.length - 1);
+      if (!numbers.contains(num)) {
+        numbers.add(num);
+        print(numbers.length);
       }
     }
-    gamePictsWTP.add(selectedPicts[random1]);
-    gamePictsWTP.add(selectedPicts[random2]);
+    print('herer');
+    for (var element in numbers) {
+      gamePictsWTP.add(selectedPicts[element]);
+    }
 
-    /// matchPicto and guessPicto things
-    same = true;
-    while (same) {
-      if (random1 == random2) {
-        random2 = Random().nextInt(2);
-      } else {
-        same = false;
-      }
-    }
-    same = true;
-    while (same) {
-      if (random1 == random2) {
-        random2 = Random().nextInt(2);
-      } else {
-        same = false;
-      }
-    }
-    correctPictoWTP = Random().nextInt(2);
+    correctPictoWTP = Random().nextInt(difficultyLevel + 2);
     print(correctPictoWTP);
     notifyListeners();
   }
@@ -170,6 +161,18 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> init() async {
     await initializeBackgroundMusic();
+    if (hintsBtn) {}
+  }
+
+  Future<void> showHints() async {
+    Timer.periodic(const Duration(seconds: 8), (timer) {
+      Timer(const Duration(seconds: 2), () {
+        hintsEnabled = true;
+        notify();
+      });
+      hintsEnabled = false;
+      notify();
+    });
   }
 
   void notify() {

@@ -18,7 +18,7 @@ class WhatsThePictoProvider extends ChangeNotifier {
   final GamesProvider _gamesProvider;
   final TTSProvider _tts;
 
-  List<bool> pictoShowWhatsThePict = [false, false];
+  List<bool> pictoShowWhatsThePict = [false, false, false, false];
   int selectedPicto = 0;
 
   ScrollController boardScrollController = ScrollController();
@@ -30,6 +30,12 @@ class WhatsThePictoProvider extends ChangeNotifier {
     pictoShowWhatsThePict[index] = !pictoShowWhatsThePict[index];
     showText = !showText;
     notifyListeners();
+
+    if (_gamesProvider.correctPictoWTP == index) {
+      await _gamesProvider.playClickSounds(assetName: 'yay');
+    } else {
+      await _gamesProvider.playClickSounds(assetName: 'ohoh');
+    }
     await Future.delayed(
       const Duration(seconds: 1),
     );
@@ -40,6 +46,12 @@ class WhatsThePictoProvider extends ChangeNotifier {
     //todo: create the new question
     if (_gamesProvider.correctPictoWTP == index) {
       _gamesProvider.correctScore++;
+      if (_gamesProvider.correctScore == 10) {
+        _gamesProvider.difficultyLevel++;
+      }
+      if (_gamesProvider.correctScore == 20) {
+        _gamesProvider.difficultyLevel++;
+      }
       _gamesProvider.streak++;
       await _gamesProvider.createRandomForGameWTP();
     } else {
@@ -48,8 +60,16 @@ class WhatsThePictoProvider extends ChangeNotifier {
       } else {
         _gamesProvider.incorrectScore++;
       }
+      if (_gamesProvider.correctScore == 9) {
+        _gamesProvider.difficultyLevel--;
+      }
+      if (_gamesProvider.correctScore == 19) {
+        _gamesProvider.difficultyLevel--;
+      }
       _gamesProvider.streak = 0;
     }
+    _gamesProvider.clicksPlayer.stop();
+
     // notifyListeners();
   }
 
