@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/whats_the_picto_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
@@ -69,9 +70,11 @@ class SelectGroupScreen extends ConsumerWidget {
                     onPressed: () async {
                       provider.selectedGroupIndex = index;
                       await provider.fetchSelectedPictos();
-                      provider.init();
+                      await provider.init();
+
                       switch (provider.selectedGame) {
                         case 0:
+                          await provider.createRandomForGameWTP();
                           context.push(AppRoutes.whatsThePictoScreen);
                           break;
                         case 1:

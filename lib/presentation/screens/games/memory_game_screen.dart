@@ -20,109 +20,109 @@ class MemoryGameScreen extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        children: [
-          const BackGroundWidget(),
-          HeaderWidget(
-            headline: 'game.game_header_${provider.selectedGame}'.trl,
-            subtitle: 'game.game_3_line'.trl,
-          ),
-          Positioned(
-            bottom: size.height * 0.1,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        PictWidget(
-                          pict: provider.topPositions[0]!,
-                          show: provider.matchPictoTop[0],
-                          onTap: () async {
-                            showDialog(
-                                barrierColor: Colors.transparent,
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (context) {
-                                  return const SizedBox.shrink();
-                                });
-                            await provider.checkAnswerWhatThePicto(index: 0);
-                            context.pop();
-                          },
-                          rightOrWrong: provider.correctPicto == 0,
-                        ),
-                        PictWidget(
-                          pict: provider.topPositions[1]!,
-                          show: provider.matchPictoTop[1],
-                          onTap: () async {
-                            showDialog(
-                                barrierColor: Colors.transparent,
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (context) {
-                                  return const SizedBox.shrink();
-                                });
-                            await provider.checkAnswerWhatThePicto(index: 1);
-                            context.pop();
-                          },
-                          rightOrWrong: provider.correctPicto == 1,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        PictWidget(
-                          pict: provider.bottomPositions[0]!,
-                          show: provider.matchPictoBottom[0],
-                          onTap: () async {
-                            showDialog(
-                                barrierColor: Colors.transparent,
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (context) {
-                                  return const SizedBox.shrink();
-                                });
-                            await provider.checkAnswerWhatThePicto(index: 0);
-                            context.pop();
-                          },
-                          rightOrWrong: provider.correctPicto == 0,
-                          hide: true,
-                          hideText: provider.bottomPositions[0]!.text,
-                        ),
-                        PictWidget(
-                          pict: provider.bottomPositions[1]!,
-                          show: provider.matchPictoBottom[1],
-                          onTap: () async {
-                            // showDialog(
-                            //     barrierColor: Colors.transparent,
-                            //     barrierDismissible: false,
-                            //     context: context,
-                            //     builder: (context) {
-                            //       return const SizedBox.shrink();
-                            //     });
-                            // context.pop();
-                            await provider.createRandomForGame();
-                            print('hello');
-                          },
-                          rightOrWrong: provider.correctPicto == 0,
-                          hide: true,
-                          hideText: provider.bottomPositions[1]!.text,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const LeftSideIcons(),
-        ],
-      ),
+      // body: Stack(
+      //   children: [
+      //     const BackGroundWidget(),
+      //     HeaderWidget(
+      //       headline: 'game.game_header_${provider.selectedGame}'.trl,
+      //       subtitle: 'game.game_3_line'.trl,
+      //     ),
+      //     Positioned(
+      //       bottom: size.height * 0.1,
+      //       left: 0,
+      //       right: 0,
+      //       child: Row(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           Column(
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             children: [
+      //               Row(
+      //                 children: [
+      //                   PictWidget(
+      //                     pict: provider.topPositions[0]!,
+      //                     show: provider.matchPictoTop[0],
+      //                     onTap: () async {
+      //                       showDialog(
+      //                           barrierColor: Colors.transparent,
+      //                           barrierDismissible: false,
+      //                           context: context,
+      //                           builder: (context) {
+      //                             return const SizedBox.shrink();
+      //                           });
+      //                       await provider.checkAnswerWhatThePicto(index: 0);
+      //                       context.pop();
+      //                     },
+      //                     rightOrWrong: provider.correctPicto == 0,
+      //                   ),
+      //                   PictWidget(
+      //                     pict: provider.topPositions[1]!,
+      //                     show: provider.matchPictoTop[1],
+      //                     onTap: () async {
+      //                       showDialog(
+      //                           barrierColor: Colors.transparent,
+      //                           barrierDismissible: false,
+      //                           context: context,
+      //                           builder: (context) {
+      //                             return const SizedBox.shrink();
+      //                           });
+      //                       await provider.checkAnswerWhatThePicto(index: 1);
+      //                       context.pop();
+      //                     },
+      //                     rightOrWrong: provider.correctPicto == 1,
+      //                   ),
+      //                 ],
+      //               ),
+      //               Row(
+      //                 children: [
+      //                   PictWidget(
+      //                     pict: provider.bottomPositions[0]!,
+      //                     show: provider.matchPictoBottom[0],
+      //                     onTap: () async {
+      //                       showDialog(
+      //                           barrierColor: Colors.transparent,
+      //                           barrierDismissible: false,
+      //                           context: context,
+      //                           builder: (context) {
+      //                             return const SizedBox.shrink();
+      //                           });
+      //                       await provider.checkAnswerWhatThePicto(index: 0);
+      //                       context.pop();
+      //                     },
+      //                     rightOrWrong: provider.correctPicto == 0,
+      //                     hide: true,
+      //                     hideText: provider.bottomPositions[0]!.text,
+      //                   ),
+      //                   PictWidget(
+      //                     pict: provider.bottomPositions[1]!,
+      //                     show: provider.matchPictoBottom[1],
+      //                     onTap: () async {
+      //                       // showDialog(
+      //                       //     barrierColor: Colors.transparent,
+      //                       //     barrierDismissible: false,
+      //                       //     context: context,
+      //                       //     builder: (context) {
+      //                       //       return const SizedBox.shrink();
+      //                       //     });
+      //                       // context.pop();
+      //                       await provider.createRandomForGame();
+      //                       print('hello');
+      //                     },
+      //                     rightOrWrong: provider.correctPicto == 0,
+      //                     hide: true,
+      //                     hideText: provider.bottomPositions[1]!.text,
+      //                   ),
+      //                 ],
+      //               ),
+      //             ],
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //     const LeftSideIcons(),
+      //   ],
+      // ),
     );
   }
 }

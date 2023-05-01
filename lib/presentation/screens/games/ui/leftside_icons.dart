@@ -9,7 +9,8 @@ class LeftSideIcons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(gameProvider);
+    final provider = ref.read(gameProvider);
+    final mute = ref.watch(gameProvider).mute;
     final colorScheme = Theme.of(context).colorScheme;
     return Positioned(
       bottom: 24,
@@ -38,7 +39,7 @@ class LeftSideIcons extends ConsumerWidget {
             ),
           ),
           GestureDetector(
-            onTap: () async => provider.changeMusic(),
+            onTap: () async => await provider.changeMusic(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Container(
@@ -48,7 +49,7 @@ class LeftSideIcons extends ConsumerWidget {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Icon(
-                  provider.mute ? Icons.volume_mute_outlined : Icons.volume_up_outlined,
+                  mute ? Icons.volume_mute_outlined : Icons.volume_up_outlined,
                   color: colorScheme.primary,
                   size: 24,
                 ),
