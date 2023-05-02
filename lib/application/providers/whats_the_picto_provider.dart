@@ -48,9 +48,11 @@ class WhatsThePictoProvider extends ChangeNotifier {
       _gamesProvider.correctScore++;
       if (_gamesProvider.correctScore == 10) {
         _gamesProvider.difficultyLevel++;
+        notifyListeners();
       }
       if (_gamesProvider.correctScore == 20) {
         _gamesProvider.difficultyLevel++;
+        notifyListeners();
       }
       _gamesProvider.streak++;
       await _gamesProvider.createRandomForGameWTP();
@@ -109,7 +111,7 @@ class WhatsThePictoProvider extends ChangeNotifier {
   }
 }
 
-final whatsThePictoProvider = ChangeNotifierProvider.autoDispose((ref) {
+final whatsThePictoProvider = ChangeNotifierProvider<WhatsThePictoProvider>((ref) {
   final userState = ref.watch(userNotifier.notifier);
   final patientState = ref.watch(patientNotifier.notifier);
   final chatGPTRepository = GetIt.I<ChatGPTRepository>();
