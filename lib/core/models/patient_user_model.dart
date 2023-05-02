@@ -213,10 +213,11 @@ class PatientSettings extends UserSettings {
     required this.tts,
   });
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'data': data.toMap(),
-      'language': language,
+      'language': language.toMap(),
       'payment': payment.toMap(),
       'layout': layout.toMap(),
     };

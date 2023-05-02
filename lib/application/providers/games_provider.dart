@@ -156,11 +156,11 @@ class GamesProvider extends ChangeNotifier {
   Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
 
   Future<void> init() async {
-    gameTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      useTime + 1;
-      notifyListeners();
-    });
-    await initializeBackgroundMusic();
+    // gameTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+    //   useTime + 1;
+    //   notifyListeners();
+    // });
+    // await initializeBackgroundMusic();
     if (hintsBtn) {
       showHints();
     }
