@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
@@ -63,8 +64,9 @@ class PictWidget extends StatelessWidget {
                                 ? const SizedBox.shrink()
                                 : Padding(
                                     padding: const EdgeInsets.only(bottom: 8),
-                                    child: Text(
+                                    child: AutoSizeText(
                                       hideText,
+                                      maxLines: 1,
                                     ),
                                   ),
                           ],

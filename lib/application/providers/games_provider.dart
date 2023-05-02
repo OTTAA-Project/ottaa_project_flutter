@@ -29,10 +29,11 @@ class GamesProvider extends ChangeNotifier {
   List<Picto> selectedPicts = [];
   int useTime = 00;
   int streak = 0;
-  List<bool> matchPictoTop = [false, false];
-  List<bool> matchPictoBottom = [false, false];
+  List<bool> matchPictoTop = List.filled(4, false);
+  List<bool> matchPictoBottom = List.filled(4, false);
   bool mute = false;
   List<Picto> gamePictsWTP = [];
+  List<Picto> gamePictsMP = [];
   int correctPictoWTP = 99;
   bool hintsBtn = false;
   late Timer hintTimer, gameTimer;
@@ -44,8 +45,8 @@ class GamesProvider extends ChangeNotifier {
   final AudioPlayer backgroundMusicPlayer = AudioPlayer();
   final AudioPlayer clicksPlayer = AudioPlayer();
 
-  Map<int, Picto> bottomPositions = {};
-  Map<int, Picto> topPositions = {};
+  Map<int, Picto> bottomPositionsMP = {};
+  Map<int, Picto> topPositionsMP = {};
 
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
@@ -70,6 +71,42 @@ class GamesProvider extends ChangeNotifier {
 
     correctPictoWTP = Random().nextInt(difficultyLevel + 2);
     print(correctPictoWTP);
+    notifyListeners();
+  }
+
+  Future<void> createRandomForGameMP() async {
+    topPositionsMP.clear();
+    bottomPositionsMP.clear();
+    List<int> topNumbers = [];
+    List<int> bottomNumbers = [];
+
+    Random random = Random();
+    while (topNumbers.length < difficultyLevel + 2) {
+      int num = random.nextInt(selectedPicts.length - 1);
+      if (!topNumbers.contains(num)) {
+        topNumbers.add(num);
+      }
+    }
+    print('ye1');
+    while (bottomNumbers.length < difficultyLevel + 2) {
+      int num = random.nextInt(topNumbers.length);
+      if (!bottomNumbers.contains(num)) {
+        bottomNumbers.add(num);
+      }
+    }
+    print('ye2');
+    int i = 0;
+    for (var element in topNumbers) {
+      topPositionsMP[i] = selectedPicts[element];
+      i++;
+    }
+    i = 0;
+    print('ye3');
+    for (var element in bottomNumbers) {
+      bottomPositionsMP[i] = topPositionsMP[element]!;
+      i++;
+    }
+    print('ye4');
     notifyListeners();
   }
 
