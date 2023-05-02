@@ -193,9 +193,8 @@ class GamesProvider extends ChangeNotifier {
   Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
 
   Future<void> init() async {
-    gameTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      useTime + 1;
-      notifyListeners();
+    gameTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      useTime = useTime + 1;
     });
     await initializeBackgroundMusic();
     if (hintsBtn) {

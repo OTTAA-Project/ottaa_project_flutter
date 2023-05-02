@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
-import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
-import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart';
 
 class MatchPictogramProvider extends ChangeNotifier {
-  final UserNotifier _userNotifier;
-  final PatientNotifier _patientNotifier;
-  final ChatGPTRepository _chatGPTRepository;
   final GamesProvider _gamesProvider;
   final TTSProvider _tts;
   List<Picto> upperPictos = [];
@@ -24,21 +17,47 @@ class MatchPictogramProvider extends ChangeNotifier {
     if (pick1 == 99) {
       pick1 = index;
       show[pick1] = true;
-      return;
     } else {
+      show[pick2] = true;
       pick2 = index;
-      if()
+      bool match = false;
+
+      ///check if both matches or not
+
+      if (match) {
+        _gamesProvider.playClickSounds(assetName: 'yay');
+      } else {
+        show[pick1] = false;
+        show[pick2] = false;
+        _gamesProvider.playClickSounds(assetName: 'ohoh');
+      }
+
+      ///kind of act as a reset for whole thing
+      pick1 = 99;
+      pick2 = 99;
+    }
+    notifyListeners();
+  }
+
+  void getValuesFromPosition({required int pos}) async {
+    switch (pos) {
+      case 0:
+
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      case 7:
     }
   }
 
-  MatchPictogramProvider(this._userNotifier, this._patientNotifier, this._chatGPTRepository, this._gamesProvider, this._tts);
+  MatchPictogramProvider(this._gamesProvider, this._tts);
 }
 
-final matchPictogramProvider = ChangeNotifierProvider.autoDispose((ref) {
-  final userState = ref.watch(userNotifier.notifier);
-  final patientState = ref.watch(patientNotifier.notifier);
-  final chatGPTRepository = GetIt.I<ChatGPTRepository>();
+final matchPictogramProvider = ChangeNotifierProvider<MatchPictogramProvider>((ref) {
   final gamesProvider = ref.watch(gameProvider);
   final tts = ref.watch(ttsProvider);
-  return MatchPictogramProvider(userState, patientState, chatGPTRepository, gamesProvider, tts);
+  return MatchPictogramProvider(gamesProvider, tts);
 });

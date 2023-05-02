@@ -18,18 +18,20 @@ class MatchPictogramScreen extends ConsumerWidget {
     final provider = ref.watch(gameProvider);
     final mpProvider = ref.watch(matchPictogramProvider);
     final size = MediaQuery.of(context).size;
-    final game = ref.watch(gameProvider);
+    // final game = ref.watch(gameProvider);
     final textTheme = Theme.of(context).textTheme;
+    print(mpProvider.pick1);
+    print(mpProvider.show[0]);
     return Scaffold(
       body: Stack(
         children: [
           const BackGroundWidget(),
           HeaderWidget(
-            headline: 'game.game_header_${game.selectedGame}'.trl,
+            headline: 'game.game_header_${provider.selectedGame}'.trl,
             subtitle: 'game.game_2_line'.trl,
             onTap: () {
-              game.backgroundMusicPlayer.pause();
-              game.gameTimer.cancel();
+              provider.backgroundMusicPlayer.pause();
+              provider.gameTimer.cancel();
             },
           ),
           Positioned(
@@ -59,6 +61,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                                       });
                                   await mpProvider.checkAnswerMatchPicto(index: 0);
                                   context.pop();
+                                  // print(mpProvider.pick1);
+                                  // print(mpProvider.show[0]);
                                 }
                               : () {},
                           rightOrWrong: provider.matchPictoTop[0],
