@@ -71,10 +71,11 @@ class SelectGroupScreen extends ConsumerWidget {
                       provider.selectedGroupIndex = index;
                       await provider.fetchSelectedPictos();
                       provider.init();
-
+                      final wtpProvider = ref.read(whatsThePictoProvider);
                       switch (provider.selectedGame) {
                         case 0:
                           await provider.createRandomForGameWTP();
+                          wtpProvider.speakNameWhatsThePicto();
                           context.push(AppRoutes.whatsThePictoScreen);
                           break;
                         case 1:

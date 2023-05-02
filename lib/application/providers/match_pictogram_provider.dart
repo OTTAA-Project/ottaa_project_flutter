@@ -18,8 +18,8 @@ class MatchPictogramProvider extends ChangeNotifier {
       pick1 = index;
       show[pick1] = true;
     } else {
-      show[pick2] = true;
       pick2 = index;
+      show[pick2] = true;
       bool match = false;
 
       ///check if both matches or not
