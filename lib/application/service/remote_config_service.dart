@@ -20,7 +20,7 @@ class RemoteConfigService extends RemoteConfigRepository {
       minimumFetchInterval: const Duration(seconds: 10),
     ));
 
-    // await _remoteConfig.fetchAndActivate();
+    await _remoteConfig.fetchAndActivate();
 
     return this;
   }
