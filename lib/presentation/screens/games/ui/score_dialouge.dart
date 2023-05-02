@@ -36,7 +36,7 @@ class ScoreDialouge extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ScoreWidget(
-                number: provider.useTime,
+                number: '${provider.useTime/60} m ${provider.useTime/60}s',
                 title: 'game.use_time'.trl,
               ),
             ),

@@ -27,7 +27,7 @@ class GamesProvider extends ChangeNotifier {
   int correctScore = 0;
   int incorrectScore = 0;
   List<Picto> selectedPicts = [];
-  String useTime = '';
+  int useTime = 00;
   int streak = 0;
   List<bool> matchPictoTop = [false, false];
   List<bool> matchPictoBottom = [false, false];
@@ -35,7 +35,7 @@ class GamesProvider extends ChangeNotifier {
   List<Picto> gamePictsWTP = [];
   int correctPictoWTP = 99;
   bool hintsBtn = false;
-  late Timer timer;
+  late Timer hintTimer, gameTimer;
   bool hintsEnabled = false;
 
   /// 0 == 2 pictos, 1 == 3 pictos, 2 == 4 pictos
@@ -55,19 +55,15 @@ class GamesProvider extends ChangeNotifier {
   GamesProvider(this._groupsService, this._pictogramsService, this.patientState, this._tts);
 
   Future<void> createRandomForGameWTP() async {
-    print('u was called');
     gamePictsWTP.clear();
     List<int> numbers = [];
     Random random = Random();
     while (numbers.length < difficultyLevel + 2) {
-      print('hi');
       int num = random.nextInt(selectedPicts.length - 1);
       if (!numbers.contains(num)) {
         numbers.add(num);
-        print(numbers.length);
       }
     }
-    print('herer');
     for (var element in numbers) {
       gamePictsWTP.add(selectedPicts[element]);
     }
@@ -160,6 +156,10 @@ class GamesProvider extends ChangeNotifier {
   Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
 
   Future<void> init() async {
+    gameTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      useTime + 1;
+      notifyListeners();
+    });
     await initializeBackgroundMusic();
     if (hintsBtn) {
       showHints();
@@ -167,7 +167,7 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> showHints() async {
-    timer = Timer.periodic(const Duration(seconds: 8), (timer) {
+    hintTimer = Timer.periodic(const Duration(seconds: 8), (timer) {
       Timer(const Duration(seconds: 2), () {
         hintsEnabled = true;
         print('yes1');
@@ -180,8 +180,8 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> cancelHints() async {
-    timer.cancel();
-    timer.cancel();
+    hintTimer.cancel();
+    hintTimer.cancel();
     hintsEnabled = false;
   }
 
