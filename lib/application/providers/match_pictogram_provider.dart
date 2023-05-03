@@ -52,6 +52,7 @@ class MatchPictogramProvider extends ChangeNotifier {
         pick1 = 99;
         pick2 = 99;
         showResult = false;
+        print(_gamesProvider.difficultyLevel);
         await Future.delayed(const Duration(seconds: 1));
         notifyListeners();
         await Future.delayed(const Duration(seconds: 1));

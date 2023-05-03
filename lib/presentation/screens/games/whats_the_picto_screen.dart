@@ -107,40 +107,47 @@ class WhatsThePictoScreen extends ConsumerWidget {
 
                 ///third
                 game.difficultyLevel == 1
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                        child: ShakeAnimatedWidget(
-                          enabled: game.hintsEnabled
-                              ? game.correctPictoWTP == 2
-                                  ? true
-                                  : false
-                              : false,
-                          duration: const Duration(milliseconds: 400),
-                          shakeAngle: Rotation.deg(z: 4),
-                          curve: Curves.linear,
-                          child: PictWidget(
-                            pict: game.gamePictsWTP[2],
-                            show: provider.pictoShowWhatsThePict[2],
-                            onTap: () async {
-                              print('hey hey hey ');
-                              print(game.difficultyLevel);
-                              showDialog(
-                                  barrierColor: Colors.transparent,
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return SizedBox.shrink();
-                                  });
-                              await provider.checkAnswerWhatThePicto(index: 2);
-                              context.pop();
-                            },
-                            rightOrWrong: game.correctPictoWTP == 2,
-                          ),
+                    ? const SizedBox(
+                        width: 24,
+                      )
+                    : const SizedBox.shrink(),
+                game.difficultyLevel == 1
+                    ? ShakeAnimatedWidget(
+                        enabled: game.hintsEnabled
+                            ? game.correctPictoWTP == 2
+                                ? true
+                                : false
+                            : false,
+                        duration: const Duration(milliseconds: 400),
+                        shakeAngle: Rotation.deg(z: 4),
+                        curve: Curves.linear,
+                        child: PictWidget(
+                          pict: game.gamePictsWTP[2],
+                          show: provider.pictoShowWhatsThePict[2],
+                          onTap: () async {
+                            print('hey hey hey ');
+                            print(game.difficultyLevel);
+                            showDialog(
+                                barrierColor: Colors.transparent,
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return SizedBox.shrink();
+                                });
+                            await provider.checkAnswerWhatThePicto(index: 2);
+                            context.pop();
+                          },
+                          rightOrWrong: game.correctPictoWTP == 2,
                         ),
                       )
                     : const SizedBox.shrink(),
 
                 ///forth
+                game.difficultyLevel == 2
+                    ? const SizedBox(
+                        width: 24,
+                      )
+                    : const SizedBox.shrink(),
                 game.difficultyLevel == 2
                     ? ShakeAnimatedWidget(
                         enabled: game.hintsEnabled
