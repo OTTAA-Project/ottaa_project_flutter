@@ -36,9 +36,6 @@ class WhatsThePictoProvider extends ChangeNotifier {
     } else {
       await _gamesProvider.playClickSounds(assetName: 'ohoh');
     }
-    await Future.delayed(
-      const Duration(seconds: 1),
-    );
     //todo: remove the text around
     pictoShowWhatsThePict[index] = !pictoShowWhatsThePict[index];
     showText = !showText;

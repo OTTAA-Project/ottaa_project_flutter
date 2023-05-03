@@ -230,7 +230,6 @@ class GamesProvider extends ChangeNotifier {
   Future<void> playClickSounds({required String assetName}) async {
     await clicksPlayer.setAsset('assets/audios/$assetName.mp3');
     await clicksPlayer.play();
-
   }
 
   Future<void> changeMusic() async {

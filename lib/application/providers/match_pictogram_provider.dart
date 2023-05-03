@@ -52,10 +52,7 @@ class MatchPictogramProvider extends ChangeNotifier {
         pick1 = 99;
         pick2 = 99;
         showResult = false;
-        print(_gamesProvider.difficultyLevel);
-        await Future.delayed(const Duration(seconds: 1));
         notifyListeners();
-        await Future.delayed(const Duration(seconds: 1));
         if (correctCounter == _gamesProvider.difficultyLevel + 2) {
           if (_gamesProvider.correctScore >= 10 && _gamesProvider.difficultyLevel < 1) {
             _gamesProvider.difficultyLevel++;
@@ -82,7 +79,6 @@ class MatchPictogramProvider extends ChangeNotifier {
         notifyListeners();
         _gamesProvider.incorrectScore++;
         await _gamesProvider.playClickSounds(assetName: 'ohoh');
-        await Future.delayed(const Duration(seconds: 1));
         if (_gamesProvider.correctScore == 9) {
           _gamesProvider.difficultyLevel--;
         }
