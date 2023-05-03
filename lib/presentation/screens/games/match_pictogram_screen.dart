@@ -34,20 +34,43 @@ class MatchPictogramScreen extends ConsumerWidget {
             bottom: size.height * 0.1,
             left: 0,
             right: 0,
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        MPPictoWidget(
-                          pict: provider.topPositionsMP[0]!,
-                          hideFlag: mpProvider.hideFlags[0],
-                          showCorrectOrWrongFlag: mpProvider.show[0],
-                          onTap: !mpProvider.show[0]
+                SizedBox(
+                  width: size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MPPictoWidget(
+                        pict: provider.topPositionsMP[0]!,
+                        hideFlag: mpProvider.hideFlags[0],
+                        showCorrectOrWrongFlag: mpProvider.show[0],
+                        onTap: !mpProvider.show[0]
+                            ? () async {
+                                showDialog(
+                                    barrierColor: Colors.transparent,
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return const SizedBox.shrink();
+                                    });
+                                await mpProvider.checkAnswerMatchPicto(index: 0, picto: provider.topPositionsMP[0]!);
+                                context.pop();
+                                // print(mpProvider.pick1);
+                                // print(mpProvider.show[0]);
+                              }
+                            : () {},
+                        rightOrWrong: mpProvider.rightOrWrong[0],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: MPPictoWidget(
+                          pict: provider.topPositionsMP[1]!,
+                          showCorrectOrWrongFlag: mpProvider.show[1],
+                          hideFlag: mpProvider.hideFlags[1],
+                          onTap: !mpProvider.show[1]
                               ? () async {
                                   showDialog(
                                       barrierColor: Colors.transparent,
@@ -56,66 +79,21 @@ class MatchPictogramScreen extends ConsumerWidget {
                                       builder: (context) {
                                         return const SizedBox.shrink();
                                       });
-                                  await mpProvider.checkAnswerMatchPicto(index: 0, picto: provider.topPositionsMP[0]!);
+                                  await mpProvider.checkAnswerMatchPicto(index: 1, picto: provider.topPositionsMP[1]!);
                                   context.pop();
-                                  // print(mpProvider.pick1);
-                                  // print(mpProvider.show[0]);
                                 }
                               : () {},
-                          rightOrWrong: mpProvider.rightOrWrong[0],
+                          rightOrWrong: mpProvider.rightOrWrong[1],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: MPPictoWidget(
-                            pict: provider.topPositionsMP[1]!,
-                            showCorrectOrWrongFlag: mpProvider.show[1],
-                            hideFlag: mpProvider.hideFlags[1],
-                            onTap: !mpProvider.show[1]
-                                ? () async {
-                                    showDialog(
-                                        barrierColor: Colors.transparent,
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (context) {
-                                          return const SizedBox.shrink();
-                                        });
-                                    await mpProvider.checkAnswerMatchPicto(index: 1, picto: provider.topPositionsMP[1]!);
-                                    context.pop();
-                                  }
-                                : () {},
-                            rightOrWrong: mpProvider.rightOrWrong[1],
-                          ),
-                        ),
-                        provider.difficultyLevel >= 1
-                            ? Padding(
-                                padding: const EdgeInsets.only(right: 24),
-                                child: MPPictoWidget(
-                                  pict: provider.topPositionsMP[2]!,
-                                  showCorrectOrWrongFlag: mpProvider.show[4],
-                                  hideFlag: mpProvider.hideFlags[4],
-                                  onTap: !mpProvider.show[4]
-                                      ? () async {
-                                          showDialog(
-                                              barrierColor: Colors.transparent,
-                                              barrierDismissible: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return const SizedBox.shrink();
-                                              });
-                                          await mpProvider.checkAnswerMatchPicto(index: 4, picto: provider.topPositionsMP[2]!);
-                                          context.pop();
-                                        }
-                                      : () {},
-                                  rightOrWrong: mpProvider.rightOrWrong[4],
-                                ),
-                              )
-                            : const SizedBox.shrink(),
-                        provider.difficultyLevel == 2
-                            ? MPPictoWidget(
-                                pict: provider.topPositionsMP[3]!,
-                                showCorrectOrWrongFlag: mpProvider.show[6],
-                                hideFlag: mpProvider.hideFlags[6],
-                                onTap: !mpProvider.show[6]
+                      ),
+                      provider.difficultyLevel >= 1
+                          ? Padding(
+                              padding: const EdgeInsets.only(right: 24),
+                              child: MPPictoWidget(
+                                pict: provider.topPositionsMP[2]!,
+                                showCorrectOrWrongFlag: mpProvider.show[4],
+                                hideFlag: mpProvider.hideFlags[4],
+                                onTap: !mpProvider.show[4]
                                     ? () async {
                                         showDialog(
                                             barrierColor: Colors.transparent,
@@ -124,24 +102,73 @@ class MatchPictogramScreen extends ConsumerWidget {
                                             builder: (context) {
                                               return const SizedBox.shrink();
                                             });
-                                        await mpProvider.checkAnswerMatchPicto(index: 6, picto: provider.topPositionsMP[3]!);
+                                        await mpProvider.checkAnswerMatchPicto(index: 4, picto: provider.topPositionsMP[2]!);
                                         context.pop();
                                       }
                                     : () {},
-                                rightOrWrong: mpProvider.rightOrWrong[6],
-                              )
-                            : const SizedBox.shrink(),
-                      ],
-                    ),
+                                rightOrWrong: mpProvider.rightOrWrong[4],
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                      provider.difficultyLevel == 2
+                          ? MPPictoWidget(
+                              pict: provider.topPositionsMP[3]!,
+                              showCorrectOrWrongFlag: mpProvider.show[6],
+                              hideFlag: mpProvider.hideFlags[6],
+                              onTap: !mpProvider.show[6]
+                                  ? () async {
+                                      showDialog(
+                                          barrierColor: Colors.transparent,
+                                          barrierDismissible: false,
+                                          context: context,
+                                          builder: (context) {
+                                            return const SizedBox.shrink();
+                                          });
+                                      await mpProvider.checkAnswerMatchPicto(index: 6, picto: provider.topPositionsMP[3]!);
+                                      context.pop();
+                                    }
+                                  : () {},
+                              rightOrWrong: mpProvider.rightOrWrong[6],
+                            )
+                          : const SizedBox.shrink(),
+                    ],
+                  ),
+                ),
 
-                    ///bottom
-                    Row(
-                      children: [
-                        MPPictoWidget(
-                          pict: provider.bottomPositionsMP[0]!,
-                          showCorrectOrWrongFlag: mpProvider.show[2],
-                          hideFlag: mpProvider.hideFlags[2],
-                          onTap: !mpProvider.show[2]
+                ///bottom
+                SizedBox(
+                  width: size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MPPictoWidget(
+                        pict: provider.bottomPositionsMP[0]!,
+                        showCorrectOrWrongFlag: mpProvider.show[2],
+                        hideFlag: mpProvider.hideFlags[2],
+                        onTap: !mpProvider.show[2]
+                            ? () async {
+                                showDialog(
+                                    barrierColor: Colors.transparent,
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return const SizedBox.shrink();
+                                    });
+                                await mpProvider.checkAnswerMatchPicto(index: 2, picto: provider.bottomPositionsMP[0]!);
+                                context.pop();
+                              }
+                            : () {},
+                        rightOrWrong: mpProvider.rightOrWrong[2],
+                        hideWidgetEnabled: true,
+                        hideText: provider.bottomPositionsMP[0]!.text,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: MPPictoWidget(
+                          pict: provider.bottomPositionsMP[1]!,
+                          showCorrectOrWrongFlag: mpProvider.show[3],
+                          hideFlag: mpProvider.hideFlags[3],
+                          onTap: !mpProvider.show[3]
                               ? () async {
                                   showDialog(
                                       barrierColor: Colors.transparent,
@@ -150,70 +177,23 @@ class MatchPictogramScreen extends ConsumerWidget {
                                       builder: (context) {
                                         return const SizedBox.shrink();
                                       });
-                                  await mpProvider.checkAnswerMatchPicto(index: 2, picto: provider.bottomPositionsMP[0]!);
+                                  await mpProvider.checkAnswerMatchPicto(index: 3, picto: provider.bottomPositionsMP[1]!);
                                   context.pop();
                                 }
                               : () {},
-                          rightOrWrong: mpProvider.rightOrWrong[2],
+                          rightOrWrong: mpProvider.rightOrWrong[3],
                           hideWidgetEnabled: true,
-                          hideText: provider.bottomPositionsMP[0]!.text,
+                          hideText: provider.bottomPositionsMP[1]!.text,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: MPPictoWidget(
-                            pict: provider.bottomPositionsMP[1]!,
-                            showCorrectOrWrongFlag: mpProvider.show[3],
-                            hideFlag: mpProvider.hideFlags[3],
-                            onTap: !mpProvider.show[3]
-                                ? () async {
-                                    showDialog(
-                                        barrierColor: Colors.transparent,
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (context) {
-                                          return const SizedBox.shrink();
-                                        });
-                                    await mpProvider.checkAnswerMatchPicto(index: 3, picto: provider.bottomPositionsMP[1]!);
-                                    context.pop();
-                                  }
-                                : () {},
-                            rightOrWrong: mpProvider.rightOrWrong[3],
-                            hideWidgetEnabled: true,
-                            hideText: provider.bottomPositionsMP[1]!.text,
-                          ),
-                        ),
-                        provider.difficultyLevel >= 1
-                            ? Padding(
-                                padding: const EdgeInsets.only(right: 24),
-                                child: MPPictoWidget(
-                                  pict: provider.bottomPositionsMP[2]!,
-                                  showCorrectOrWrongFlag: mpProvider.show[5],
-                                  hideFlag: mpProvider.hideFlags[5],
-                                  onTap: !mpProvider.show[5]
-                                      ? () async {
-                                          showDialog(
-                                              barrierColor: Colors.transparent,
-                                              barrierDismissible: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return const SizedBox.shrink();
-                                              });
-                                          await mpProvider.checkAnswerMatchPicto(index: 5, picto: provider.bottomPositionsMP[2]!);
-                                          context.pop();
-                                        }
-                                      : () {},
-                                  rightOrWrong: mpProvider.rightOrWrong[5],
-                                  hideWidgetEnabled: true,
-                                  hideText: provider.bottomPositionsMP[2]!.text,
-                                ),
-                              )
-                            : const SizedBox.shrink(),
-                        provider.difficultyLevel == 2
-                            ? MPPictoWidget(
-                                pict: provider.bottomPositionsMP[3]!,
-                                showCorrectOrWrongFlag: mpProvider.show[7],
-                                hideFlag: mpProvider.hideFlags[7],
-                                onTap: !mpProvider.show[7]
+                      ),
+                      provider.difficultyLevel >= 1
+                          ? Padding(
+                              padding: const EdgeInsets.only(right: 24),
+                              child: MPPictoWidget(
+                                pict: provider.bottomPositionsMP[2]!,
+                                showCorrectOrWrongFlag: mpProvider.show[5],
+                                hideFlag: mpProvider.hideFlags[5],
+                                onTap: !mpProvider.show[5]
                                     ? () async {
                                         showDialog(
                                             barrierColor: Colors.transparent,
@@ -222,18 +202,41 @@ class MatchPictogramScreen extends ConsumerWidget {
                                             builder: (context) {
                                               return const SizedBox.shrink();
                                             });
-                                        await mpProvider.checkAnswerMatchPicto(index: 7, picto: provider.bottomPositionsMP[3]!);
+                                        await mpProvider.checkAnswerMatchPicto(index: 5, picto: provider.bottomPositionsMP[2]!);
                                         context.pop();
                                       }
                                     : () {},
-                                rightOrWrong: mpProvider.rightOrWrong[7],
+                                rightOrWrong: mpProvider.rightOrWrong[5],
                                 hideWidgetEnabled: true,
-                                hideText: provider.bottomPositionsMP[3]!.text,
-                              )
-                            : const SizedBox.shrink(),
-                      ],
-                    ),
-                  ],
+                                hideText: provider.bottomPositionsMP[2]!.text,
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                      provider.difficultyLevel == 2
+                          ? MPPictoWidget(
+                              pict: provider.bottomPositionsMP[3]!,
+                              showCorrectOrWrongFlag: mpProvider.show[7],
+                              hideFlag: mpProvider.hideFlags[7],
+                              onTap: !mpProvider.show[7]
+                                  ? () async {
+                                      showDialog(
+                                          barrierColor: Colors.transparent,
+                                          barrierDismissible: false,
+                                          context: context,
+                                          builder: (context) {
+                                            return const SizedBox.shrink();
+                                          });
+                                      await mpProvider.checkAnswerMatchPicto(index: 7, picto: provider.bottomPositionsMP[3]!);
+                                      context.pop();
+                                    }
+                                  : () {},
+                              rightOrWrong: mpProvider.rightOrWrong[7],
+                              hideWidgetEnabled: true,
+                              hideText: provider.bottomPositionsMP[3]!.text,
+                            )
+                          : const SizedBox.shrink(),
+                    ],
+                  ),
                 ),
               ],
             ),

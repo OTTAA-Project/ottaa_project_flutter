@@ -31,6 +31,7 @@ class TTSService extends TTSRepository {
         await tts.setVoice({"name": name, "locale": locale});
         language = _i18n.currentLanguage!.locale.toString();
         await tts.setLanguage(language);
+        await tts.setVolume(1.0);
         print(language);
         await tts.setSpeechRate(speechRate);
         await tts.setPitch(pitch);
