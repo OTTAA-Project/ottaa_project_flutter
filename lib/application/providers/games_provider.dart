@@ -79,7 +79,6 @@ class GamesProvider extends ChangeNotifier {
     bottomPositionsMP.clear();
     List<int> topNumbers = [];
     List<int> bottomNumbers = [];
-
     Random random = Random();
     while (topNumbers.length < difficultyLevel + 2) {
       int num = random.nextInt(selectedPicts.length - 1);
@@ -87,26 +86,22 @@ class GamesProvider extends ChangeNotifier {
         topNumbers.add(num);
       }
     }
-    print('ye1');
     while (bottomNumbers.length < difficultyLevel + 2) {
       int num = random.nextInt(topNumbers.length);
       if (!bottomNumbers.contains(num)) {
         bottomNumbers.add(num);
       }
     }
-    print('ye2');
     int i = 0;
     for (var element in topNumbers) {
       topPositionsMP[i] = selectedPicts[element];
       i++;
     }
     i = 0;
-    print('ye3');
     for (var element in bottomNumbers) {
       bottomPositionsMP[i] = topPositionsMP[element]!;
       i++;
     }
-    print('ye4');
     notifyListeners();
   }
 
@@ -206,10 +201,8 @@ class GamesProvider extends ChangeNotifier {
     hintTimer = Timer.periodic(const Duration(seconds: 8), (timer) {
       Timer(const Duration(seconds: 2), () {
         hintsEnabled = true;
-        print('yes1');
         notify();
       });
-      print('yes2');
       hintsEnabled = false;
       notify();
     });
