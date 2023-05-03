@@ -86,7 +86,7 @@ class MatchPictogramScreen extends ConsumerWidget {
                             rightOrWrong: mpProvider.rightOrWrong[1],
                           ),
                         ),
-                        provider.difficultyLevel == 1
+                        provider.difficultyLevel >= 1
                             ? Padding(
                                 padding: const EdgeInsets.only(right: 24),
                                 child: MPPictoWidget(
@@ -182,7 +182,7 @@ class MatchPictogramScreen extends ConsumerWidget {
                             hideText: provider.bottomPositionsMP[1]!.text,
                           ),
                         ),
-                        provider.difficultyLevel == 1
+                        provider.difficultyLevel >= 1
                             ? Padding(
                                 padding: const EdgeInsets.only(right: 24),
                                 child: MPPictoWidget(
