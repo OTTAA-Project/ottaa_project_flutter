@@ -106,7 +106,7 @@ class WhatsThePictoScreen extends ConsumerWidget {
                 ),
 
                 ///third
-                game.difficultyLevel == 1
+                game.difficultyLevel >= 1
                     ? const SizedBox(
                         width: 24,
                       )
