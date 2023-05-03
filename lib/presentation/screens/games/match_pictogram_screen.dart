@@ -124,7 +124,7 @@ class MatchPictogramScreen extends ConsumerWidget {
                                             builder: (context) {
                                               return const SizedBox.shrink();
                                             });
-                                        await mpProvider.checkAnswerMatchPicto(index: 5, picto: provider.topPositionsMP[3]!);
+                                        await mpProvider.checkAnswerMatchPicto(index: 6, picto: provider.topPositionsMP[3]!);
                                         context.pop();
                                       }
                                     : () {},
@@ -198,7 +198,7 @@ class MatchPictogramScreen extends ConsumerWidget {
                                               builder: (context) {
                                                 return const SizedBox.shrink();
                                               });
-                                          await mpProvider.checkAnswerMatchPicto(index: 6, picto: provider.bottomPositionsMP[2]!);
+                                          await mpProvider.checkAnswerMatchPicto(index: 5, picto: provider.bottomPositionsMP[2]!);
                                           context.pop();
                                         }
                                       : () {},
