@@ -18,8 +18,6 @@ class MatchPictogramScreen extends ConsumerWidget {
     final mpProvider = ref.watch(matchPictogramProvider);
     final size = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
-    print(mpProvider.pick1);
-    print(mpProvider.show[0]);
     return Scaffold(
       body: Stack(
         children: [
@@ -29,7 +27,7 @@ class MatchPictogramScreen extends ConsumerWidget {
             subtitle: 'game.game_2_line'.trl,
             onTap: () {
               provider.backgroundMusicPlayer.pause();
-              provider.gameTimer.cancel();
+              provider.resetScore();
             },
           ),
           Positioned(
@@ -47,7 +45,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                       children: [
                         MPPictoWidget(
                           pict: provider.topPositionsMP[0]!,
-                          show: mpProvider.show[0],
+                          hideFlag: mpProvider.hideFlags[0],
+                          showCorrectOrWrongFlag: mpProvider.show[0],
                           onTap: !mpProvider.show[0]
                               ? () async {
                                   showDialog(
@@ -63,13 +62,14 @@ class MatchPictogramScreen extends ConsumerWidget {
                                   // print(mpProvider.show[0]);
                                 }
                               : () {},
-                          rightOrWrong: provider.matchPictoTop[0],
+                          rightOrWrong: mpProvider.rightOrWrong[0],
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
                           child: MPPictoWidget(
                             pict: provider.topPositionsMP[1]!,
-                            show: mpProvider.show[1],
+                            showCorrectOrWrongFlag: mpProvider.show[1],
+                            hideFlag: mpProvider.hideFlags[1],
                             onTap: !mpProvider.show[1]
                                 ? () async {
                                     showDialog(
@@ -83,7 +83,7 @@ class MatchPictogramScreen extends ConsumerWidget {
                                     context.pop();
                                   }
                                 : () {},
-                            rightOrWrong: provider.matchPictoTop[1],
+                            rightOrWrong: mpProvider.rightOrWrong[1],
                           ),
                         ),
                         provider.difficultyLevel == 1
@@ -91,7 +91,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                                 padding: const EdgeInsets.only(right: 24),
                                 child: MPPictoWidget(
                                   pict: provider.topPositionsMP[2]!,
-                                  show: mpProvider.show[4],
+                                  showCorrectOrWrongFlag: mpProvider.show[4],
+                                  hideFlag: mpProvider.hideFlags[4],
                                   onTap: !mpProvider.show[4]
                                       ? () async {
                                           showDialog(
@@ -105,15 +106,16 @@ class MatchPictogramScreen extends ConsumerWidget {
                                           context.pop();
                                         }
                                       : () {},
-                                  rightOrWrong: provider.matchPictoTop[3],
+                                  rightOrWrong: mpProvider.rightOrWrong[4],
                                 ),
                               )
                             : const SizedBox.shrink(),
                         provider.difficultyLevel == 2
                             ? MPPictoWidget(
                                 pict: provider.topPositionsMP[3]!,
-                                show: mpProvider.show[5],
-                                onTap: !mpProvider.show[5]
+                                showCorrectOrWrongFlag: mpProvider.show[6],
+                                hideFlag: mpProvider.hideFlags[6],
+                                onTap: !mpProvider.show[6]
                                     ? () async {
                                         showDialog(
                                             barrierColor: Colors.transparent,
@@ -126,7 +128,7 @@ class MatchPictogramScreen extends ConsumerWidget {
                                         context.pop();
                                       }
                                     : () {},
-                                rightOrWrong: provider.matchPictoTop[3],
+                                rightOrWrong: mpProvider.rightOrWrong[6],
                               )
                             : const SizedBox.shrink(),
                       ],
@@ -137,7 +139,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                       children: [
                         MPPictoWidget(
                           pict: provider.bottomPositionsMP[0]!,
-                          show: mpProvider.show[2],
+                          showCorrectOrWrongFlag: mpProvider.show[2],
+                          hideFlag: mpProvider.hideFlags[2],
                           onTap: !mpProvider.show[2]
                               ? () async {
                                   showDialog(
@@ -151,15 +154,16 @@ class MatchPictogramScreen extends ConsumerWidget {
                                   context.pop();
                                 }
                               : () {},
-                          rightOrWrong: provider.matchPictoBottom[0],
-                          hide: true,
+                          rightOrWrong: mpProvider.rightOrWrong[2],
+                          hideWidgetEnabled: true,
                           hideText: provider.bottomPositionsMP[0]!.text,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
                           child: MPPictoWidget(
                             pict: provider.bottomPositionsMP[1]!,
-                            show: mpProvider.show[3],
+                            showCorrectOrWrongFlag: mpProvider.show[3],
+                            hideFlag: mpProvider.hideFlags[3],
                             onTap: !mpProvider.show[3]
                                 ? () async {
                                     showDialog(
@@ -173,8 +177,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                                     context.pop();
                                   }
                                 : () {},
-                            rightOrWrong: provider.matchPictoBottom[1],
-                            hide: true,
+                            rightOrWrong: mpProvider.rightOrWrong[3],
+                            hideWidgetEnabled: true,
                             hideText: provider.bottomPositionsMP[1]!.text,
                           ),
                         ),
@@ -183,8 +187,9 @@ class MatchPictogramScreen extends ConsumerWidget {
                                 padding: const EdgeInsets.only(right: 24),
                                 child: MPPictoWidget(
                                   pict: provider.bottomPositionsMP[2]!,
-                                  show: mpProvider.show[6],
-                                  onTap: !mpProvider.show[6]
+                                  showCorrectOrWrongFlag: mpProvider.show[5],
+                                  hideFlag: mpProvider.hideFlags[5],
+                                  onTap: !mpProvider.show[5]
                                       ? () async {
                                           showDialog(
                                               barrierColor: Colors.transparent,
@@ -197,8 +202,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                                           context.pop();
                                         }
                                       : () {},
-                                  rightOrWrong: provider.matchPictoBottom[2],
-                                  hide: true,
+                                  rightOrWrong: mpProvider.rightOrWrong[5],
+                                  hideWidgetEnabled: true,
                                   hideText: provider.bottomPositionsMP[2]!.text,
                                 ),
                               )
@@ -206,7 +211,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                         provider.difficultyLevel == 2
                             ? MPPictoWidget(
                                 pict: provider.bottomPositionsMP[3]!,
-                                show: mpProvider.show[7],
+                                showCorrectOrWrongFlag: mpProvider.show[7],
+                                hideFlag: mpProvider.hideFlags[7],
                                 onTap: !mpProvider.show[7]
                                     ? () async {
                                         showDialog(
@@ -220,8 +226,8 @@ class MatchPictogramScreen extends ConsumerWidget {
                                         context.pop();
                                       }
                                     : () {},
-                                rightOrWrong: provider.matchPictoBottom[3],
-                                hide: true,
+                                rightOrWrong: mpProvider.rightOrWrong[7],
+                                hideWidgetEnabled: true,
                                 hideText: provider.bottomPositionsMP[3]!.text,
                               )
                             : const SizedBox.shrink(),

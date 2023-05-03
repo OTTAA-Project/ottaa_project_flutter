@@ -12,12 +12,12 @@ class PictWidget extends StatelessWidget {
     required this.onTap,
     required this.rightOrWrong,
     required this.show,
-    this.hide = false,
+    this.hideWidgetEnabled = false,
     this.hideText = '',
   }) : super(key: key);
   final Picto pict;
   final void Function() onTap;
-  final bool rightOrWrong, show, hide;
+  final bool rightOrWrong, show, hideWidgetEnabled;
   final String hideText;
 
   @override
@@ -37,7 +37,7 @@ class PictWidget extends StatelessWidget {
                 border: show ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4) : Border.all(color: Colors.transparent),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: hide
+              child: hideWidgetEnabled
                   ? GestureDetector(
                       onTap: onTap,
                       child: Container(

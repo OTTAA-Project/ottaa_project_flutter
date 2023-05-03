@@ -11,13 +11,14 @@ class MPPictoWidget extends StatelessWidget {
     required this.pict,
     required this.onTap,
     required this.rightOrWrong,
-    required this.show,
-    this.hide = false,
+    required this.showCorrectOrWrongFlag,
+    this.hideWidgetEnabled = false,
     this.hideText = '',
+    this.hideFlag = true,
   }) : super(key: key);
   final Picto pict;
   final void Function() onTap;
-  final bool rightOrWrong, show, hide;
+  final bool rightOrWrong, showCorrectOrWrongFlag, hideWidgetEnabled, hideFlag;
   final String hideText;
 
   @override
@@ -34,10 +35,14 @@ class MPPictoWidget extends StatelessWidget {
               height: 122,
               padding: const EdgeInsets.all(0.5),
               decoration: BoxDecoration(
-                border: show ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4) : Border.all(color: Colors.transparent),
+                border: hideFlag
+                    ? Border.all(color: Colors.transparent)
+                    : showCorrectOrWrongFlag
+                        ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4)
+                        : Border.all(color: Colors.transparent),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: hide
+              child: hideWidgetEnabled
                   ? GestureDetector(
                       onTap: onTap,
                       child: Container(
@@ -88,34 +93,36 @@ class MPPictoWidget extends StatelessWidget {
                               fit: BoxFit.fill,
                               "assets/img/${pict.text}.webp",
                             ),
-                      text: pict.text,
+                      text: '',
                       colorNumber: pict.type,
                       width: 96,
                       height: 119,
                     ),
             ),
           ),
-          show
-              ? Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: rightOrWrong ? Colors.green : Colors.red,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        rightOrWrong ? Icons.check : Icons.close,
-                        color: Colors.white,
-                        size: 24,
+          hideFlag
+              ? const SizedBox.shrink()
+              : showCorrectOrWrongFlag
+                  ? Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: rightOrWrong ? Colors.green : Colors.red,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            rightOrWrong ? Icons.check : Icons.close,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                )
-              : const SizedBox.shrink(),
+                    )
+                  : const SizedBox.shrink(),
         ],
       ),
     );

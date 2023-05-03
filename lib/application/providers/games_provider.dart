@@ -74,6 +74,15 @@ class GamesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  resetScore(){
+    incorrectScore == 0;
+    correctScore = 0;
+    gameTimer.cancel();
+    useTime=0;
+    streak=0;
+    difficultyLevel=0;
+  }
+
   Future<void> createRandomForGameMP() async {
     topPositionsMP.clear();
     bottomPositionsMP.clear();
