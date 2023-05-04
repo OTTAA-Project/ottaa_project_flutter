@@ -26,7 +26,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
     final pictoWords = ref.watch(homeProvider).pictoWords;
     final int? currentWord = ref.watch(homeProvider).selectedWord;
     final patientNotifierState = ref.watch(patientNotifier);
-    final scrollCon = ref.watch(homeProvider).overScrollController;
+    final scrollCon = ref.watch(homeProvider).scrollController;
 
     final size = MediaQuery.of(context).size;
 
@@ -59,8 +59,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                 mainAxisSpacing: 16,
               ),
               itemBuilder: (context, index) {
-                Picto? pict = pictoWords.firstWhereIndexedOrNull(
-                    (elIndex, element) => elIndex == index);
+                Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
 
                 if (pict == null) {
                   return FittedBox(
@@ -87,9 +86,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                             return Center(
                               child: CircularProgressIndicator(
                                 color: colorScheme.primary,
-                                value: progress.totalSize != null
-                                    ? progress.downloaded / progress.totalSize!
-                                    : null,
+                                value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
                               ),
                             );
                           },
@@ -103,13 +100,11 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                           "assets/img/${pict.text}.webp",
                         ),
                   text: pict.text,
-                  disable: (patientNotifierState != null
-                          ? patientNotifierState.patientSettings.layout.oneToOne
-                          : false)
-                      ? false
-                      : index == currentWord
+                  disable: (patientNotifierState != null ? patientNotifierState.patientSettings.layout.oneToOne : false)
+                      ? index == currentWord
                           ? false
-                          : true,
+                          : true
+                      : false,
                 );
               },
             ),
