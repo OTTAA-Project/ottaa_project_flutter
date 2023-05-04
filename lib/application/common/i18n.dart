@@ -76,9 +76,12 @@ class I18N extends ChangeNotifier {
 
   Future<void> changeLanguage(String languageCode) async {
     var split = languageCode.split("_");
-    assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US");
-    locale = Locale(split[0].toLowerCase(), split[1].toUpperCase());
-    changeLanguageFromLocale(locale);
+    assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US)");
+    Locale locale = Locale(split[0], split[1]);
+    await changeLanguageFromLocale(locale);
+    print(languageCode);
+    print(locale);
+    notify();
   }
 
   Future<void> changeLanguageFromLocale(Locale locale) async {

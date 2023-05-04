@@ -63,12 +63,6 @@ class WhatsThePictoScreen extends ConsumerWidget {
                       show: provider.pictoShowWhatsThePict[0],
                       onTap: () async {
                         await provider.checkAnswerWhatThePicto(index: 0);
-                        print('here are');
-                        print(game.gamePictsWTP[0].text);
-                        print(game.gamePictsWTP[1].text);
-                        print(game.gamePictsWTP[2].text);
-                        print(game.gamePictsWTP[3].text);
-                        print(game.difficultyLevel);
                       },
                       rightOrWrong: game.correctPictoWTP == 0,
                     ),

@@ -101,6 +101,15 @@ class MockTTSProvider extends _i1.Mock implements _i3.TTSProvider {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
+  _i4.Future<void> ttsStop() => (super.noSuchMethod(
+        Invocation.method(
+          #ttsStop,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
   void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
@@ -182,6 +191,15 @@ class MockTTSRepository extends _i1.Mock implements _i2.TTSRepository {
         Invocation.method(
           #changeTTSVoice,
           [voice],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> ttsStop() => (super.noSuchMethod(
+        Invocation.method(
+          #ttsStop,
+          [],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
