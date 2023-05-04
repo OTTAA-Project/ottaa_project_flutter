@@ -26,10 +26,7 @@ class _ProfileWaitingScreenState extends ConsumerState<ProfileWaitingScreen> {
     //todo: or we can use this callback
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await provider.settingUpUserType();
-      await Future.delayed(
-        const Duration(seconds: 2),
-        () => context.replace(AppRoutes.home),
-      );
+      context.replace(AppRoutes.home);
     });
   }
 

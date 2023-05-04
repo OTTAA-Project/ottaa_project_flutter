@@ -17,12 +17,10 @@ class LinkWaitingScreen extends ConsumerStatefulWidget {
 class _LinkWaitingScreenState extends ConsumerState<LinkWaitingScreen> {
   @override
   void initState() {
-    LinkNotifier provider = ref.read(linkProvider);
 
     final localContext = context;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.userSuccessLinkAccount();
       await Future.delayed(const Duration(seconds: 3));
 
       localContext.go(AppRoutes.caregiverLinkSuccess);

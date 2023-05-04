@@ -23,8 +23,7 @@ class ProfileMainScreenUser extends ConsumerStatefulWidget {
   const ProfileMainScreenUser({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ProfileMainScreenUser> createState() =>
-      _ProfileMainScreenUserState();
+  ConsumerState<ProfileMainScreenUser> createState() => _ProfileMainScreenUserState();
 }
 
 class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
@@ -38,9 +37,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
   }
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     final user = ref.read(userProvider.select((value) => value.user));
     final textTheme = Theme.of(context).textTheme;
     return ResponsiveWidget(
@@ -74,8 +71,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: ActionCard(
-                  title:
-                      '${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}',
+                  title: '${'profile.tips.title2'.trl} / ${'global.pictogram'.trl}',
                   subtitle: 'user.main.subtitle2'.trl,
                   trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
                   onPressed: () async {
@@ -91,13 +87,10 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                     );
 
                     /// checking if the user has its data or not
-                    provider.dataExist =
-                        await provider.dataExistOrNot(userId: user.id);
+                    provider.dataExist = await provider.dataExistOrNot(userId: user.id);
                     context.pop();
                     provider.notify();
-                    provider.type = provider.dataExist
-                        ? CustomiseDataType.user
-                        : CustomiseDataType.defaultCase;
+                    provider.type = provider.dataExist ? CustomiseDataType.user : CustomiseDataType.defaultCase;
 
                     context.push(AppRoutes.userCustomizeBoard);
                   },

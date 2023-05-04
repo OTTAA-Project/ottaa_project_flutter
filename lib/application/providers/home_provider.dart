@@ -225,7 +225,7 @@ class HomeProvider extends ChangeNotifier {
         uid: user.id,
         language: user.settings.language.language,
         model: "test",
-        groups: (user.groups[user.settings.language.language] ?? []).where((element) => element.block).map((e) => e.id).toList(),
+        groups: (user.groups[user.settings.language.language] ?? []).where((element) => !element.block).map((e) => e.id).toList(),
         tags: {},
         reduced: true,
         chunk: suggestedQuantity,
@@ -391,7 +391,7 @@ class HomeProvider extends ChangeNotifier {
       show = false;
       notifyListeners();
 
-      if (patientState.user.patientSettings.layout.cleanup) {
+      if (patientState.state != null && patientState.user.patientSettings.layout.cleanup) {
         pictoWords.clear();
         await buildSuggestion();
       }

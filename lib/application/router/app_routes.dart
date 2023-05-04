@@ -3,7 +3,7 @@ class AppRoutes {
   /// General Routes
   ///
 
-  static const splash = "/splash";
+  static const splash = "/";
   static const login = "/login";
   static const loginWait = "/login/waiting";
   static const home = "/home";

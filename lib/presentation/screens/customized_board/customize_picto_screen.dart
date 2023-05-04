@@ -60,17 +60,6 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
               ),
             ],
           ),
-          actions: [
-            GestureDetector(
-              onTap: () {
-                context.pop();
-              },
-              child: Text(
-                "global.skip".trl,
-                style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
-              ),
-            ),
-          ],
         ),
         body: Column(
           children: [

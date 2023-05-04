@@ -40,8 +40,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<void> init() async {
-    _dio.options.baseUrl =
-        "https://us-central1-ottaaproject-flutter.cloudfunctions.net";
+    _dio.options.baseUrl = "https://us-central1-ottaaproject-flutter.cloudfunctions.net";
   }
 
   @override
@@ -72,8 +71,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherListMap> getAllPictograms(
-      String userId, String languageCode) async {
+  Future<EitherListMap> getAllPictograms(String userId, String languageCode) async {
     //Fetch new data from server
     final ref = _database.child('$userId/pictos/$languageCode');
     final res = await ref.get();
@@ -101,8 +99,7 @@ class ServerService implements ServerRepository {
 
     final userValue = await userRef.get();
 
-    if (!userValue.exists || userValue.value == null)
-      return const Left("no_data_found");
+    if (!userValue.exists || userValue.value == null) return const Left("no_data_found");
 
     final dynamic user = userValue.value as dynamic;
 
@@ -133,18 +130,13 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<List<Phrase>> getUserSentences(String userId,
-      {required String language,
-      required String type,
-      bool isFavorite = false}) async {
+  Future<List<Phrase>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false}) async {
     final refNew = _database.child('$userId/Frases/$language/$type');
     final resNew = await refNew.get();
     if (resNew.exists && resNew.value != null) {
       final encode = jsonEncode(resNew.value);
       // print('returned from bew');
-      return (jsonDecode(encode) as List)
-          .map((e) => Phrase.fromJson(e))
-          .toList();
+      return (jsonDecode(encode) as List).map((e) => Phrase.fromJson(e)).toList();
       // print('returned from bew');
       // return Right(jsonDecode(data));
     }
@@ -160,8 +152,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> updateGroup(String userId, String language, int index,
-      {required Map<String, dynamic> data}) async {
+  Future<EitherVoid> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data}) async {
     final ref = _database.child('$userId/Grupos/$language/$index');
 
     try {
@@ -173,8 +164,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> updatePictogram(String userId, String language, int index,
-      {required Map<String, dynamic> data}) async {
+  Future<EitherVoid> updatePictogram(String userId, String language, int index, {required Map<String, dynamic> data}) async {
     final ref = _database.child('$userId/Pictos/$language/$index');
 
     try {
@@ -201,12 +191,16 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadGroups(String userId, String language,
-      {required List<Map<String, dynamic>> data}) async {
+  Future<EitherVoid> uploadGroups(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/groups/$language');
     try {
       final mapData = Map.fromIterables(data.map((e) => e["id"]), data);
-      await ref.set(mapData);
+      bool hasGroups = (await _database.child('$userId/groups').get()).exists;
+      if (!hasGroups) {
+        await _database.child('$userId/groups').set({language: mapData});
+      } else {
+        await ref.set(mapData);
+      }
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -214,8 +208,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadPictograms(String userId, String language,
-      {required List<Map<String, dynamic>> data}) async {
+  Future<EitherVoid> uploadPictograms(String userId, String language, {required List<Map<String, dynamic>> data}) async {
     final ref = _database.child('$userId/pictos/$language');
 
     try {
@@ -228,8 +221,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadUserInformation(
-      String userId, Map<String, dynamic> data) async {
+  Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data) async {
     final ref = _database.child(userId);
 
     try {
@@ -253,8 +245,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherVoid> uploadUserSentences(String userId, String language,
-      String type, List<Map<String, dynamic>> data) async {
+  Future<EitherVoid> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data) async {
     final ref = _database.child('$userId/Frases/$language/$type');
 
     try {
@@ -266,8 +257,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getMostUsedSentences(String userId, String languageCode,
-      [CancelToken? cancelToken]) async {
+  Future<EitherMap> getMostUsedSentences(String userId, String languageCode, [CancelToken? cancelToken]) async {
     //todo: get the language here after talking with Emir
     final body = {
       'UserID': userId,
@@ -291,8 +281,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode,
-      [CancelToken? cancelToken]) async {
+  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode, [CancelToken? cancelToken]) async {
     final uri = Uri.parse('');
     final body = {
       'UserID': userId,
@@ -348,8 +337,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> getConnectedUsers({required String userId}) async {
-    final ref =
-        _database.child('$userId/users'); //TODO: Change this to the real path
+    final ref = _database.child('$userId/users'); //TODO: Change this to the real path
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
@@ -372,14 +360,12 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> removeCurrentUser(
-      {required String userId, required String careGiverId}) async {
+  Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
     await _database.child('$careGiverId/users/$userId').remove();
   }
 
   @override
-  Future<EitherVoid> setShortcutsForUser(
-      {required ShortcutsModel shortcuts, required String userId}) async {
+  Future<EitherVoid> setShortcutsForUser({required ShortcutsModel shortcuts, required String userId}) async {
     final ref = _database.child('$userId/settings/layout/shortcuts/');
 
     try {
@@ -407,13 +393,12 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getEmailToken(String ownEmail, String email,
-      [CancelToken? cancelToken]) async {
+  Future<EitherMap> getEmailToken(String ownEmail, String email, [CancelToken? cancelToken]) async {
     final body = {
       'src': ownEmail,
       'dst': email,
     };
-    print(jsonEncode(body));
+
     try {
       final res = await _dio.post(
         '/linkUserRequest',
@@ -426,8 +411,7 @@ class ServerService implements ServerRepository {
       if (res.statusCode == 200) {
         return Right(data);
       } else {
-        return Left(data["code"] ??
-            res.statusCode.toString()); //TODO: Handle the main error
+        return Left(data["code"] ?? res.statusCode.toString()); //TODO: Handle the main error
       }
     } catch (e) {
       print(e);
@@ -436,9 +420,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> verifyEmailToken(
-      String ownEmail, String email, String token,
-      [CancelToken? cancelToken]) async {
+  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token, [CancelToken? cancelToken]) async {
     final body = {
       'src': ownEmail,
       'dst': email,
@@ -457,8 +439,7 @@ class ServerService implements ServerRepository {
     if (res.statusCode == 200) {
       return Right(data);
     } else {
-      return Left(
-          data["code"] ?? res.statusMessage); //TODO: Handle the main error
+      return Left(data["code"] ?? res.statusMessage); //TODO: Handle the main error
     }
   }
 
@@ -501,8 +482,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<dynamic> fetchUserGroups(
-      {required String languageCode, required String userId}) async {
+  Future<dynamic> fetchUserGroups({required String languageCode, required String userId}) async {
     final ref = _database.child('$userId/groups/$languageCode');
     final DataSnapshot res = await ref.get();
 
@@ -526,8 +506,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<dynamic> fetchUserPictos(
-      {required String languageCode, required String userId}) async {
+  Future<dynamic> fetchUserPictos({required String languageCode, required String userId}) async {
     final ref = _database.child('$userId/pictos/$languageCode');
     final res = await ref.get();
 
@@ -539,8 +518,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> updateUserType(
-      {required String id, required UserType userType}) async {
+  Future<void> updateUserType({required String id, required UserType userType}) async {
     final ref = _database.child("$id/type");
 
     await ref.set(userType.name);
@@ -554,12 +532,7 @@ class ServerService implements ServerRepository {
     required Map<String, dynamic> data,
     CancelToken? cancelToken,
   }) async {
-    final body = {
-      "uid": userId,
-      "lang": language,
-      "type": type.name,
-      "data": data
-    };
+    final body = {"uid": userId, "lang": language, "type": type.name, "data": data};
     try {
       final res = await _dio.post(
         '/newCustomData',
@@ -576,17 +549,14 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> updateDevicesId(
-      {required String userId, required DeviceToken deviceToken}) async {
+  Future<void> updateDevicesId({required String userId, required DeviceToken deviceToken}) async {
     final ref = _database.child("$userId/settings/devices");
 
     final currentList = (await ref.get()).value;
 
     List list = List<dynamic>.from((currentList ?? []) as List<dynamic>);
 
-    final existsElement = list.firstWhereOrNull((element) => element != null
-        ? element["deviceToken"] == deviceToken.deviceToken
-        : false);
+    final existsElement = list.firstWhereOrNull((element) => element != null ? element["deviceToken"] == deviceToken.deviceToken : false);
 
     final index = list.indexOf(existsElement);
 
@@ -649,6 +619,8 @@ class ServerService implements ServerRepository {
 
     if (reduced) url = "$url&reduced";
 
+    print(reduced);
+
     final body = {
       "sentence": sentence,
       "uid": uid,
@@ -676,8 +648,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherString> generatePhraseGPT(
-      {required String prompt, required int maxTokens}) async {
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
     try {
       final choice = await _openAIClient.completions
           .create(
@@ -697,32 +668,28 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<void> updateLanguageSettings(
-      {required Map<String, dynamic> map, required String userId}) async {
+  Future<void> updateLanguageSettings({required Map<String, dynamic> map, required String userId}) async {
     final ref = _database.child("$userId/settings/language/");
 
     ref.set(map);
   }
 
   @override
-  Future<void> updateVoiceAndSubtitleSettings(
-      {required Map<String, dynamic> map, required String userId}) async {
+  Future<void> updateVoiceAndSubtitleSettings({required Map<String, dynamic> map, required String userId}) async {
     final ref = _database.child("$userId/settings/tts/");
 
     ref.update(map);
   }
 
   @override
-  Future<void> updateAccessibilitySettings(
-      {required Map<String, dynamic> map, required String userId}) async {
+  Future<void> updateAccessibilitySettings({required Map<String, dynamic> map, required String userId}) async {
     final ref = _database.child("$userId/settings/accessibility/");
 
     ref.update(map);
   }
 
   @override
-  Future<void> updateMainSettings(
-      {required Map<String, dynamic> map, required String userId}) async {
+  Future<void> updateMainSettings({required Map<String, dynamic> map, required String userId}) async {
     final ref = _database.child("$userId/settings/layout/");
 
     ref.update(map);

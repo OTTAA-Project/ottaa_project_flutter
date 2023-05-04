@@ -89,7 +89,6 @@ class CustomiseProvider extends ChangeNotifier {
         break;
       case CustomiseDataType.defaultCase:
         await fetchDefaultCaseValues();
-        await fetchDefaultCaseValues();
         break;
     }
   }
@@ -111,9 +110,6 @@ class CustomiseProvider extends ChangeNotifier {
     await fetchShortcutsForUser(userId: userId);
     await fetchUserGroups(userId: userId);
     groupsFetched = true;
-
-    await fetchUserGroups(userId: userId);
-
     notifyListeners();
 
     await fetchUserPictos(userId: userId);
@@ -186,10 +182,8 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> fetchUserGroups({required String userId}) async {
-    final locale = _i18n.currentLocale;
 
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    final res = await _customiseService.fetchUserGroups(languageCode: languageCode, userId: userId);
+    final res = await _customiseService.fetchUserGroups(languageCode: _i18n.currentLocale.toString(), userId: userId);
     groups = res;
     notify();
   }
@@ -206,6 +200,7 @@ class CustomiseProvider extends ChangeNotifier {
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
     final bool = _customiseService.valuesExistOrNot(languageCode: languageCode, userId: userId);
+    this.userId = userId;
     return bool;
   }
 }

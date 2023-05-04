@@ -125,6 +125,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                 child: Container(
                     width: 116,
                     height: 144,
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(9),
@@ -145,8 +146,8 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                     //TODO: add pictogram
                   },
                   child: Container(
-                    width: 116,
-                    height: 144,
+                    height: 119,
+                    width: 96,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(9),
@@ -187,8 +188,6 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                         ),
                   text: e.text,
                   colorNumber: e.type,
-                  width: 116,
-                  height: 144,
                 ),
               );
           }

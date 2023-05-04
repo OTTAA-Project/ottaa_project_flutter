@@ -11,12 +11,10 @@ class CustomizeShortcutScreen extends ConsumerStatefulWidget {
   const CustomizeShortcutScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CustomizeShortcutScreen> createState() =>
-      _CustomizeShortcutScreenState();
+  ConsumerState<CustomizeShortcutScreen> createState() => _CustomizeShortcutScreenState();
 }
 
-class _CustomizeShortcutScreenState
-    extends ConsumerState<CustomizeShortcutScreen> {
+class _CustomizeShortcutScreenState extends ConsumerState<CustomizeShortcutScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
@@ -32,8 +30,7 @@ class _CustomizeShortcutScreenState
                 ShortcutWidget(
                   onTap: () {
                     setState(() {
-                      provider.selectedShortcuts[0] =
-                          !provider.selectedShortcuts[0];
+                      provider.selectedShortcuts[0] = !provider.selectedShortcuts[0];
                     });
                   },
                   heading: "customize.shortcut.favorites".trl,
@@ -44,8 +41,7 @@ class _CustomizeShortcutScreenState
                 ShortcutWidget(
                   onTap: () {
                     setState(() {
-                      provider.selectedShortcuts[1] =
-                          !provider.selectedShortcuts[1];
+                      provider.selectedShortcuts[1] = !provider.selectedShortcuts[1];
                     });
                   },
                   heading: "customize.shortcut.history".trl,
@@ -55,8 +51,7 @@ class _CustomizeShortcutScreenState
                 ),
                 ShortcutWidget(
                   onTap: () {
-                    provider.selectedShortcuts[2] =
-                        !provider.selectedShortcuts[2];
+                    provider.selectedShortcuts[2] = !provider.selectedShortcuts[2];
                     setState(() {});
                   },
                   heading: "customize.shortcut.camera".trl,
@@ -73,8 +68,7 @@ class _CustomizeShortcutScreenState
                 children: [
                   ShortcutWidget(
                     onTap: () {
-                      provider.selectedShortcuts[3] =
-                          !provider.selectedShortcuts[3];
+                      provider.selectedShortcuts[3] = !provider.selectedShortcuts[3];
                       setState(() {});
                     },
                     heading: "customize.shortcut.games".trl,
@@ -84,8 +78,7 @@ class _CustomizeShortcutScreenState
                   ),
                   ShortcutWidget(
                     onTap: () {
-                      provider.selectedShortcuts[4] =
-                          !provider.selectedShortcuts[4];
+                      provider.selectedShortcuts[4] = !provider.selectedShortcuts[4];
                       setState(() {});
                     },
                     heading: "global.yes".trl,
@@ -95,8 +88,7 @@ class _CustomizeShortcutScreenState
                   ),
                   ShortcutWidget(
                     onTap: () {
-                      provider.selectedShortcuts[5] =
-                          !provider.selectedShortcuts[5];
+                      provider.selectedShortcuts[5] = !provider.selectedShortcuts[5];
                       setState(() {});
                     },
                     heading: "global.no".trl,
@@ -112,8 +104,7 @@ class _CustomizeShortcutScreenState
               children: [
                 ShortcutWidget(
                   onTap: () {
-                    provider.selectedShortcuts[6] =
-                        !provider.selectedShortcuts[6];
+                    provider.selectedShortcuts[6] = !provider.selectedShortcuts[6];
                     setState(() {});
                   },
                   heading: "global.share".trl,

@@ -49,7 +49,7 @@ class DefaultFirebaseOptions {
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCO20tKmBuKOlOstr5X0WHJdATfAxlfma0',
     appId: '1:873137795353:web:40e956cef39481653d9588',
-    messagingSenderId: '873137795353',
+    messagingSenderId: '873137795353',    
     projectId: 'ottaaproject-flutter',
     authDomain: 'ottaaproject-flutter.firebaseapp.com',
     databaseURL: 'https://ottaaproject-flutter-default-rtdb.firebaseio.com',
@@ -68,15 +68,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCYbal1US11FCM16wQcEpri4azayyS0u2s',
-    appId: '1:873137795353:ios:9cb71efb7106906d3d9588',
+    appId: '1:873137795353:ios:f625d933dd6c58e33d9588',
     messagingSenderId: '873137795353',
     projectId: 'ottaaproject-flutter',
     databaseURL: 'https://ottaaproject-flutter-default-rtdb.firebaseio.com',
     storageBucket: 'ottaaproject-flutter.appspot.com',
-    androidClientId:
-        '873137795353-1ttsko6h874bjq935auokrhk9plshtka.apps.googleusercontent.com',
-    iosClientId:
-        '873137795353-ncjm3kdlieupkddfgklfmd7gindg9pli.apps.googleusercontent.com',
-    iosBundleId: 'com.ottaaproject.flutter',
+    androidClientId: '873137795353-1ttsko6h874bjq935auokrhk9plshtka.apps.googleusercontent.com',
+    iosClientId: '873137795353-8nf0s1bmivtavhh51h7genlc0aqu1rea.apps.googleusercontent.com',
+    iosBundleId: 'com.ottaaproject.ottaa',
   );
 }

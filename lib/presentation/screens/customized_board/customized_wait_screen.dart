@@ -48,8 +48,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
                 ),
                 Center(
                   child: Text(
-                    "customize.wait.subtitle"
-                        .trlf({'name': provider.user!.settings.data.name}),
+                    "customize.wait.subtitle".trlf({'name': provider.user!.settings.data.name}),
                     style: textTheme.headline3,
                   ),
                 ),
@@ -58,9 +57,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
               child: PrimaryButton(
-                onPressed: () async {
-                  context.go(AppRoutes.home);
-                },
+                onPressed: () => context.go(AppRoutes.home),
                 text: "customize.wait.button".trl,
               ),
             ),
