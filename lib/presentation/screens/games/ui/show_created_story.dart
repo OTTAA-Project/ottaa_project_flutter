@@ -32,6 +32,7 @@ class ShowCreatedStory extends ConsumerWidget {
                   onTap: () {
                     ///reset the whole game
                     provider.resetStoryGame();
+                    provider.stopTTS();
                     context.pop();
                     context.pop();
                   },

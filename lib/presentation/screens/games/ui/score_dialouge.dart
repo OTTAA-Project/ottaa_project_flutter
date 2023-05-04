@@ -10,6 +10,7 @@ class ScoreDialouge extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(gameProvider);
+    final time = ref.watch(gameProvider).useTime;
     return Center(
       child: AlertDialog(
         shape: const RoundedRectangleBorder(
@@ -36,7 +37,7 @@ class ScoreDialouge extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ScoreWidget(
-                number: '${provider.useTime/60} m ${provider.useTime/60}s',
+                number: '${provider.useTime~/60} m ${provider.useTime%60} s',
                 title: 'game.use_time'.trl,
               ),
             ),

@@ -29,10 +29,11 @@ class GamesProvider extends ChangeNotifier {
   List<Picto> selectedPicts = [];
   int useTime = 00;
   int streak = 0;
-  List<bool> matchPictoTop = [false, false];
-  List<bool> matchPictoBottom = [false, false];
+  List<bool> matchPictoTop = List.filled(4, false);
+  List<bool> matchPictoBottom = List.filled(4, false);
   bool mute = false;
   List<Picto> gamePictsWTP = [];
+  List<Picto> gamePictsMP = [];
   int correctPictoWTP = 99;
   bool hintsBtn = false;
   late Timer hintTimer, gameTimer;
@@ -44,8 +45,8 @@ class GamesProvider extends ChangeNotifier {
   final AudioPlayer backgroundMusicPlayer = AudioPlayer();
   final AudioPlayer clicksPlayer = AudioPlayer();
 
-  Map<int, Picto> bottomPositions = {};
-  Map<int, Picto> topPositions = {};
+  Map<int, Picto> bottomPositionsMP = {};
+  Map<int, Picto> topPositionsMP = {};
 
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
@@ -70,6 +71,46 @@ class GamesProvider extends ChangeNotifier {
 
     correctPictoWTP = Random().nextInt(difficultyLevel + 2);
     print(correctPictoWTP);
+    notifyListeners();
+  }
+
+  resetScore(){
+    incorrectScore == 0;
+    correctScore = 0;
+    gameTimer.cancel();
+    useTime=0;
+    streak=0;
+    difficultyLevel=0;
+  }
+
+  Future<void> createRandomForGameMP() async {
+    topPositionsMP.clear();
+    bottomPositionsMP.clear();
+    List<int> topNumbers = [];
+    List<int> bottomNumbers = [];
+    Random random = Random();
+    while (topNumbers.length < difficultyLevel + 2) {
+      int num = random.nextInt(selectedPicts.length - 1);
+      if (!topNumbers.contains(num)) {
+        topNumbers.add(num);
+      }
+    }
+    while (bottomNumbers.length < difficultyLevel + 2) {
+      int num = random.nextInt(topNumbers.length);
+      if (!bottomNumbers.contains(num)) {
+        bottomNumbers.add(num);
+      }
+    }
+    int i = 0;
+    for (var element in topNumbers) {
+      topPositionsMP[i] = selectedPicts[element];
+      i++;
+    }
+    i = 0;
+    for (var element in bottomNumbers) {
+      bottomPositionsMP[i] = topPositionsMP[element]!;
+      i++;
+    }
     notifyListeners();
   }
 
@@ -156,11 +197,10 @@ class GamesProvider extends ChangeNotifier {
   Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
 
   Future<void> init() async {
-    // gameTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-    //   useTime + 1;
-    //   notifyListeners();
-    // });
-    // await initializeBackgroundMusic();
+    gameTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      useTime = useTime + 1;
+    });
+    await initializeBackgroundMusic();
     if (hintsBtn) {
       showHints();
     }
@@ -170,10 +210,8 @@ class GamesProvider extends ChangeNotifier {
     hintTimer = Timer.periodic(const Duration(seconds: 8), (timer) {
       Timer(const Duration(seconds: 2), () {
         hintsEnabled = true;
-        print('yes1');
         notify();
       });
-      print('yes2');
       hintsEnabled = false;
       notify();
     });
@@ -211,6 +249,7 @@ class GamesProvider extends ChangeNotifier {
     } else {
       await backgroundMusicPlayer.setAsset('assets/audios/funckygroove.mp3');
       await backgroundMusicPlayer.setLoopMode(LoopMode.one);
+      await backgroundMusicPlayer.setVolume(0.2);
       await backgroundMusicPlayer.play();
     }
   }

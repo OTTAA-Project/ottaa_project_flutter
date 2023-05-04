@@ -5,32 +5,38 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:picto_widget/picto_widget.dart';
 
-class PictWidget extends StatelessWidget {
-  const PictWidget({
+class MPPictoWidget extends StatelessWidget {
+  const MPPictoWidget({
     Key? key,
     required this.pict,
     required this.onTap,
     required this.rightOrWrong,
-    required this.show,
+    required this.showCorrectOrWrongFlag,
     this.hideWidgetEnabled = false,
     this.hideText = '',
+    this.hideFlag = true,
   }) : super(key: key);
   final Picto pict;
   final void Function() onTap;
-  final bool rightOrWrong, show, hideWidgetEnabled;
+  final bool rightOrWrong, showCorrectOrWrongFlag, hideWidgetEnabled, hideFlag;
   final String hideText;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
     return Stack(
       children: [
         Container(
-          // width: 140,
-          // height: 140,
+          // width: 180,
+          // height: 180,
           padding: const EdgeInsets.all(0.5),
           decoration: BoxDecoration(
-            border: show ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4) : Border.all(color: Colors.transparent),
+            border: hideFlag
+                ? Border.all(color: Colors.transparent)
+                : showCorrectOrWrongFlag
+                    ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4)
+                    : Border.all(color: Colors.transparent),
             borderRadius: BorderRadius.circular(16),
           ),
           child: hideWidgetEnabled
@@ -86,31 +92,33 @@ class PictWidget extends StatelessWidget {
                           fit: BoxFit.fill,
                           "assets/img/${pict.text}.webp",
                         ),
-                  text: pict.text,
+                  text: '',
                   colorNumber: pict.type,
                 ),
         ),
-        show
-            ? Positioned(
-                right: 0,
-                top: 0,
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    color: rightOrWrong ? Colors.green : Colors.red,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: Icon(
-                      rightOrWrong ? Icons.check : Icons.close,
-                      color: Colors.white,
-                      size: 24,
+        hideFlag
+            ? const SizedBox.shrink()
+            : showCorrectOrWrongFlag
+                ? Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: rightOrWrong ? Colors.green : Colors.red,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          rightOrWrong ? Icons.check : Icons.close,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              )
-            : const SizedBox.shrink(),
+                  )
+                : const SizedBox.shrink(),
       ],
     );
   }
