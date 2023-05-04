@@ -7,7 +7,11 @@ class PictogramWidget extends StatelessWidget {
   final VoidCallback onTap;
   final String language;
 
-  const PictogramWidget({super.key, required this.pictogam, required this.onTap, this.language = 'es'});
+  const PictogramWidget(
+      {super.key,
+      required this.pictogam,
+      required this.onTap,
+      this.language = 'es'});
 
   @override
   Widget build(BuildContext context) {

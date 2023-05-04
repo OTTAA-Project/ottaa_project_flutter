@@ -3,30 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileNotifier extends ChangeNotifier {
-  final PictogramsRepository _pictogramsService;
   final ProfileRepository _profileService;
   final AboutRepository _aboutService;
-  final AuthRepository _auth;
   final LocalDatabaseRepository _localDatabaseRepository;
   final UserNotifier _userNotifier;
 
   ProfileNotifier(
-    this._pictogramsService,
-    this._auth,
     this._profileService,
     this._localDatabaseRepository,
     this._userNotifier,
@@ -70,7 +64,7 @@ class ProfileNotifier extends ChangeNotifier {
   }
 
   Future<void> setDate() async {
-    final date = _userNotifier.user.settings.data.birthDate;
+    final date = _userNotifier.user!.settings.data.birthDate;
     day = date.day;
     month = date.month;
     year = date.year;
@@ -93,6 +87,8 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> settingUpUserType() async {
     final user = _userNotifier.user;
+
+    if (user == null) return;
 
     UserModel? newUser;
 
@@ -118,7 +114,9 @@ class ProfileNotifier extends ChangeNotifier {
 
     //Update the user type at the realtime database
     await _aboutService.updateUserType(id: user.id, userType: (newUser ?? user).type);
-    if (newUser != null) await _profileService.updateUser(data: newUser.toMap(), userId: user.id);
+    if (newUser != null) {
+      await _profileService.updateUser(data: newUser.toMap(), userId: user.id);
+    }
 
     await _localDatabaseRepository.setUser(newUser ?? user);
     _userNotifier.setUser(newUser ?? user);
@@ -128,6 +126,8 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> updateChanges() async {
     final user = _userNotifier.user;
+    if (user == null) return;
+
     if (imageSelected) {
       /// upload the image and fetch its url
       imageUrl = await _profileService.uploadUserImage(
@@ -182,7 +182,7 @@ class ProfileNotifier extends ChangeNotifier {
 
   Future<void> fetchConnectedUsersData() async {
     connectedUsersData = [];
-    final connectedUsers = await _profileService.getConnectedUsers(userId: _userNotifier.user.id);
+    final connectedUsers = await _profileService.getConnectedUsers(userId: _userNotifier.user!.id);
     if (connectedUsers.isLeft) return;
 
     await Future.wait(connectedUsers.right.keys.map((e) async {
@@ -212,16 +212,26 @@ class ProfileNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchUserById(String id) async {
+  Future<UserModel?> fetchUserById(String id) async {
     final userFetch = await _profileService.getProfileById(id: id);
 
-    if (userFetch.isLeft) return;
+    if (userFetch.isLeft) return null;
 
     final userData = userFetch.right;
 
     int currentIndex = connectedUsersData.indexWhere((element) => element.id == id);
 
-    connectedUsersData[currentIndex] = PatientUserModel.fromMap(userData);
+    PatientUserModel model = PatientUserModel.fromMap(userData);
+
+    if (currentIndex == -1) {
+      connectedUsersData.add(model);
+    } else {
+      connectedUsersData[currentIndex] = model;
+    }
+
+    notify();
+
+    return model;
   }
 
   Future<void> removeCurrentUser({required String userId, required String careGiverId}) async {
@@ -229,8 +239,8 @@ class ProfileNotifier extends ChangeNotifier {
 
     // update the whole list again
     dataFetched = false;
-    _userNotifier.user.caregiver.users.removeWhere((key, value) => key == userId);
-    _localDatabaseRepository.setUser(_userNotifier.user);
+    _userNotifier.user!.caregiver.users.removeWhere((key, value) => key == userId);
+    _localDatabaseRepository.setUser(_userNotifier.user!);
     await fetchConnectedUsersData();
     dataFetched = true;
     notify();
@@ -238,16 +248,12 @@ class ProfileNotifier extends ChangeNotifier {
 }
 
 final profileProvider = ChangeNotifierProvider<ProfileNotifier>((ref) {
-  final pictogramService = GetIt.I<PictogramsRepository>();
-  final AuthRepository authService = GetIt.I.get<AuthRepository>();
   final ProfileRepository profileService = GetIt.I.get<ProfileRepository>();
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
-  final userNot = ref.read(userNotifier.notifier);
+  final userNot = ref.read(userProvider);
 
   final AboutRepository aboutRepository = GetIt.I.get<AboutRepository>();
   return ProfileNotifier(
-    pictogramService,
-    authService,
     profileService,
     localDatabaseRepository,
     userNot,

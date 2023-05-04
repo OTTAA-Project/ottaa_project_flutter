@@ -18,6 +18,7 @@ dependencies:
   either_dart: ^0.3.0
   firebase_analytics: ^10.0.5
   firebase_auth: ^4.1.2
+  firebase_auth_web: ^5.3.2
   firebase_core: ^2.2.0
   firebase_crashlytics: ^3.0.7
   firebase_database: ^10.0.5

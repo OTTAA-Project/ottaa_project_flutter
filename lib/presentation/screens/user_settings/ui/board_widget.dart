@@ -6,8 +6,6 @@ class BoardWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
-
-    );
+    return Row();
   }
 }

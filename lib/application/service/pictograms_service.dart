@@ -9,7 +9,6 @@ import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.da
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
-
 @Singleton(as: PictogramsRepository)
 class PictogramsService extends PictogramsRepository {
   final AuthRepository _authService;

@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/ui_widget.dart';
@@ -14,7 +15,7 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userNotifier);
+    final user = ref.read(userProvider.select((value) => value.user));
     final provider = ref.read(gameProvider);
     return Scaffold(
       body: UIWidget(
@@ -80,7 +81,8 @@ class GameScreenUI extends ConsumerWidget {
                           Text(
                             'game.game_sub_$index'.trl,
                             textAlign: TextAlign.center,
-                            style: textTheme.headline3!.copyWith(fontWeight: FontWeight.w400),
+                            style: textTheme.headline3!
+                                .copyWith(fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
@@ -89,7 +91,7 @@ class GameScreenUI extends ConsumerWidget {
                         width: false,
                         onTap: () {
                           provider.selectedGame = index;
-                          context.push(AppRoutes.selectGroupScreen);
+                          // context.push(AppRoutes.selectGroupScreen);
                         },
                         text: 'game.next'.trl,
                       ),
@@ -107,7 +109,9 @@ class GameScreenUI extends ConsumerWidget {
                   ),
                   Text(
                     '0 / ${provider.activeGroups}',
-                    style: textTheme.headline4!.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+                    style: textTheme.headline4!.copyWith(
+                        color: colorScheme.primary,
+                        fontWeight: FontWeight.w600),
                   ),
                 ],
               ),

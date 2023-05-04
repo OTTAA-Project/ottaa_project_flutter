@@ -11,7 +11,8 @@ class ListPictosWidget extends ConsumerWidget {
   final EdgeInsets? padding;
   final Color? backgrounColor;
 
-  const ListPictosWidget({super.key, this.width, this.height, this.padding, this.backgrounColor});
+  const ListPictosWidget(
+      {super.key, this.width, this.height, this.padding, this.backgrounColor});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,15 +29,22 @@ class ListPictosWidget extends ConsumerWidget {
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: provider.favouriteOrNotPicts[provider.selectedIndexFavSelection].length + 1,
+          itemCount: provider
+                  .favouriteOrNotPicts[provider.selectedIndexFavSelection]
+                  .length +
+              1,
           itemBuilder: (BuildContext context, int index) {
             final Picto speakPict = Picto(
               id: "0",
               type: 6,
               resource: AssetsImage(asset: "logo_ottaa_dev", network: null),
             );
-            if (provider.favouriteOrNotPicts[provider.selectedIndexFavSelection].length > index) {
-              final Picto pict = provider.favouriteOrNotPicts[provider.selectedIndexFavSelection][index];
+            if (provider.favouriteOrNotPicts[provider.selectedIndexFavSelection]
+                    .length >
+                index) {
+              final Picto pict = provider
+                      .favouriteOrNotPicts[provider.selectedIndexFavSelection]
+                  [index];
               return Container(
                 margin: const EdgeInsets.all(10),
                 child: MiniPicto(

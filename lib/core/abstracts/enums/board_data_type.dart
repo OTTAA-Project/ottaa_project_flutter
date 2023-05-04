@@ -1,5 +1,1 @@
-enum BoardDataType {
-  pictos,
-  groups,
-  phrases
-}
+enum BoardDataType { pictos, groups, phrases }

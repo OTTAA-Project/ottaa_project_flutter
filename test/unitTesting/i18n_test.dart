@@ -13,12 +13,12 @@ void main() async {
   group('I18N Coverage', () {
     test('set Language', () async {
       language.changeLanguage('es_AR');
-      print(language.locale);
-      expect(language.locale.languageCode, 'en');
+      print(language.currentLocale);
+      expect(language.currentLocale.languageCode, 'en');
     });
     test('set Language by Locale', () {
       language.changeLanguageFromLocale(const Locale('en', 'US'));
-      expect(language.locale.languageCode, 'en');
+      expect(language.currentLocale.languageCode, 'en');
     });
     test('null testing', () async {
       var result = await language.loadTranslation(const Locale('es', 'PT'));
@@ -27,7 +27,8 @@ void main() async {
     test('It should load the translations of en_US.json', () async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      final translation = await language.loadTranslation(const Locale('en', 'US'));
+      final translation =
+          await language.loadTranslation(const Locale('en', 'US'));
 
       expect(translation?.locale, const Locale('en', 'US'));
     });

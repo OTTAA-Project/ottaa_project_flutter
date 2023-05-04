@@ -8,7 +8,6 @@ import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'dart:async';
-import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
@@ -24,7 +23,9 @@ import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 @Singleton(as: AuthRepository)
 class AuthService extends AuthRepository {
   final FirebaseAuth _authProvider = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email',]);
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
+    'email',
+  ]);
   String lastName = '';
   String name = '';
   final LocalDatabaseRepository _databaseRepository;
@@ -44,22 +45,26 @@ class AuthService extends AuthRepository {
     return Right(userDb);
   }
 
-  @override
-  Future<String> runToGetDataFromOtherPlatform({
-    required String email,
-    required String id,
-  }) async {
-    final uri = Uri.parse(
-      'https://us-central1-ottaaproject-flutter.cloudfunctions.net/getOldUserDataHttp?email=$email&uid=$id',
-    );
-    final res = await http.get(
-      uri,
-    );
-    return res.body;
-  }
 
   @override
   Future<bool> isLoggedIn() async {
+    final currentAuthUser = _authProvider.currentUser;
+
+    UserModel? userModel = _databaseRepository.user;
+
+    if (currentAuthUser == null && userModel == null) {
+      return false;
+    }
+
+    if (currentAuthUser != null && userModel == null) {
+      userModel = await buildUserModel(currentAuthUser);
+      if (userModel != null) {
+        await _databaseRepository.setUser(userModel);
+
+        return true;
+      }
+    }
+
     return _databaseRepository.user != null;
   }
 
@@ -74,9 +79,50 @@ class AuthService extends AuthRepository {
     await _databaseRepository.deleteUser();
   }
 
+  Future<UserModel?> buildUserModel(user) async {
+    EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
+    UserModel? userModel;
+    if (userInfo.isLeft) {
+      return null;
+    }
+    switch (userInfo.right["type"]) {
+      case "caregiver":
+        userModel = CaregiverUserModel.fromMap({
+          ...userInfo.right,
+          "email": user.email ?? user.providerData[0].email,
+        });
+        break;
+      case "user":
+        userModel = PatientUserModel.fromMap({
+          ...userInfo.right,
+          "email": user.email ?? user.providerData[0].email,
+        });
+        break;
+      case "none":
+      default:
+        userModel = BaseUserModel.fromMap({
+          ...userInfo.right,
+          "email": user.email ?? user.providerData[0].email,
+        });
+        break;
+    }
+
+    userModel.currentToken = DeviceToken(deviceToken: await getDeviceId(), lastUsage: DateTime.now());
+    if (userModel.currentToken != null) {
+      await _serverRepository.updateDevicesId(
+        userId: userModel.id,
+        deviceToken: userModel.currentToken!,
+      );
+    }
+
+    return userModel;
+  }
+
   @override
   Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     Either<String, User> result;
+
+    if (kIsWeb) await _authProvider.setPersistence(Persistence.LOCAL);
 
     switch (type) {
       case SignInType.google:
@@ -95,9 +141,9 @@ class AuthService extends AuthRepository {
       try {
         final User user = result.right;
 
-        EitherMap userInfo = await _serverRepository.getUserInformation(user.uid);
-        UserModel? userModel;
-        if (userInfo.isLeft) {
+        UserModel? userModel = await buildUserModel(user);
+
+        if (userModel == null) {
           await signUp();
 
           final nameRetriever = user.displayName ?? user.providerData[0].displayName;
@@ -115,39 +161,10 @@ class AuthService extends AuthRepository {
                 name: name,
               ),
               language: LanguageSetting.empty(
-                language: _i18n.locale.toString(),
+                language: _i18n.currentLocale.toString(),
               ),
             ),
             email: emailRetriever ?? "",
-          );
-        } else {
-          switch (userInfo.right["type"]) {
-            case "caregiver":
-              userModel = CaregiverUserModel.fromMap({
-                ...userInfo.right,
-                "email": user.email ?? user.providerData[0].email,
-              });
-              break;
-            case "user":
-              userModel = PatientUserModel.fromMap({
-                ...userInfo.right,
-                "email": user.email ?? user.providerData[0].email,
-              });
-              break;
-            case "none":
-            default:              userModel = BaseUserModel.fromMap({
-                ...userInfo.right,
-                "email": user.email ?? user.providerData[0].email,
-              });
-              break;
-          }
-        }
-
-        userModel.currentToken = DeviceToken(deviceToken: await getDeviceId(), lastUsage: DateTime.now());
-        if (userModel.currentToken != null) {
-          await _serverRepository.updateDevicesId(
-            userId: userModel.id,
-            deviceToken: userModel.currentToken!,
           );
         }
 
@@ -244,10 +261,10 @@ class AuthService extends AuthRepository {
           name: name,
         ),
         language: LanguageSetting.empty(
-          language: _i18n.locale.toString(),
+          language: _i18n.currentLocale.toString(),
         ),
       ),
-      email: emailRetriever ?? "",
+      email: emailRetriever,
     );
     await _serverRepository.uploadUserInformation(user.uid, userModel.toMap());
 

@@ -113,7 +113,8 @@ class ShortcutsModel {
 
   String toJson() => json.encode(toMap());
 
-  factory ShortcutsModel.fromJson(String source) => ShortcutsModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ShortcutsModel.fromJson(String source) =>
+      ShortcutsModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -124,11 +125,19 @@ class ShortcutsModel {
   bool operator ==(covariant ShortcutsModel other) {
     if (identical(this, other)) return true;
 
-    return other.favs == favs && other.history == history && other.camera == camera && other.share == share && other.games == games;
+    return other.favs == favs &&
+        other.history == history &&
+        other.camera == camera &&
+        other.share == share &&
+        other.games == games;
   }
 
   @override
   int get hashCode {
-    return favs.hashCode ^ history.hashCode ^ camera.hashCode ^ share.hashCode ^ games.hashCode;
+    return favs.hashCode ^
+        history.hashCode ^
+        camera.hashCode ^
+        share.hashCode ^
+        games.hashCode;
   }
 }

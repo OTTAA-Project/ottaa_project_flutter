@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
@@ -19,7 +20,7 @@ class SelectGroupScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final user = ref.read(userNotifier);
+    final user = ref.read(userProvider.select((value) => value.user));
     final colorScheme = Theme.of(context).colorScheme;
     final groups = ref
         .watch(homeProvider)
@@ -79,13 +80,13 @@ class SelectGroupScreen extends ConsumerWidget {
                       await provider.fetchSelectedPictos();
                       switch (provider.selectedGame) {
                         case 0:
-                          context.push(AppRoutes.whatsThePictoScreen);
+                          // context.push(AppRoutes.whatsThePictoScreen);
                           break;
                         case 1:
-                          context.push(AppRoutes.matchPictogramScreen);
+                          // context.push(AppRoutes.matchPictogramScreen);
                           break;
                         case 2:
-                          context.push(AppRoutes.memoryGameScreen);
+                          // context.push(AppRoutes.memoryGameScreen);
                           break;
                       }
                     },
@@ -133,7 +134,7 @@ class SelectGroupScreen extends ConsumerWidget {
             top: size.height * 0.3,
             child: GestureDetector(
               onTap: () {
-                context.push(AppRoutes.searchScreen);
+                // context.push(AppRoutes.searchScreen);
               },
               child: Container(
                 padding: const EdgeInsets.all(8),

@@ -63,7 +63,9 @@ class GamesProvider extends ChangeNotifier {
   void scrollDown() {
     int currentPosition = gridScrollController.position.pixels.toInt();
 
-    if (currentPosition >= gridScrollController.position.maxScrollExtent) return;
+    if (currentPosition >= gridScrollController.position.maxScrollExtent) {
+      return;
+    }
 
     gridScrollController.animateTo(
       currentPosition + 96,
@@ -87,11 +89,11 @@ class GamesProvider extends ChangeNotifier {
     pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
     groupsData ??= (await _groupsService.getAllGroups()).where((element) => !element.block).toList();
 
-    groupsData.forEach((e) {
+    for (var e in groupsData) {
       if (!e.block) {
         activeGroups++;
       }
-    });
+    }
 
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);

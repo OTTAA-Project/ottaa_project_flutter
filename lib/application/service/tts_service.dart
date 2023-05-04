@@ -16,7 +16,7 @@ class TTSService extends TTSRepository {
 
   bool customTTSEnable = false;
 
-  double speechRate = 0.4;
+  double speechRate = .8;
   double pitch = 1.0;
   List<Voices> voices = [];
 
@@ -31,7 +31,7 @@ class TTSService extends TTSRepository {
         await tts.setVoice({"name": name, "locale": locale});
         language = _i18n.currentLanguage!.locale.toString();
         await tts.setLanguage(language);
-        print(language);
+        print(speechRate);
         await tts.setSpeechRate(speechRate);
         await tts.setPitch(pitch);
       }
@@ -59,12 +59,8 @@ class TTSService extends TTSRepository {
   @override
   Future<List<Voices>> fetchVoices() async {
     final voices = await tts.getVoices;
-    List<Voices> list = [];
-    voices.forEach((element) {
-      final ans = Voices.fromJson(Map.from(element));
-      list.add(ans);
-    });
-    return list;
+
+    return voices.map<Voices>((e) => Voices.fromJson(Map.from(e))).toList();
   }
 
   @override

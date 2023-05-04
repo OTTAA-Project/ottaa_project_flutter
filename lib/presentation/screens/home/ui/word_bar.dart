@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
+import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
@@ -10,6 +13,7 @@ import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_but
 import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 import 'package:collection/collection.dart';
+import 'package:universal_io/io.dart';
 
 class WordBarUI extends ConsumerStatefulWidget {
   const WordBarUI({super.key});
@@ -63,7 +67,10 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                   if (status == HomeScreenStatus.tabs) {
                     ref.read(homeProvider).status = HomeScreenStatus.pictos;
                   } else {
-                    ref.read(homeProvider).currentGridGroup != null ? ref.read(homeProvider).currentGridGroup = null : ref.read(homeProvider).status = HomeScreenStatus.pictos;
+                    ref.read(homeProvider).currentGridGroup != null
+                        ? ref.read(homeProvider).currentGridGroup = null
+                        : ref.read(homeProvider).status =
+                            HomeScreenStatus.pictos;
                   }
                   ref.read(homeProvider).notify();
                 },
@@ -90,40 +97,55 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
     final pictosIsEmpty = pictoWords.isEmpty;
     final scrollCon = ref.watch(homeProvider).scrollController;
 
-    final removeLastPictogram = ref.read(homeProvider.select((value) => value.removeLastPictogram));
+    final removeLastPictogram =
+        ref.read(homeProvider.select((value) => value.removeLastPictogram));
 
     final status = ref.watch(homeProvider.select((value) => value.status));
+    final size = MediaQuery.of(context).size;
+
+    int pictosWord = ((size.width - (kIsTablet ? 500 : 200)) ~/ 64);
+
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Row(
+      width: size.width,
+      height: kIsTablet ? 140 : 80,
+      child: Flex(
+        direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           buildExitButton(status: status),
-          SizedBox(
-            height: 80,
-            width: 445,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: pictoWords.length + 6,
+          Flexible(
+            flex: 2,
+            child: Scrollbar(
               controller: scrollCon,
-              itemBuilder: (context, index) {
-                Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
+              child: GridView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: pictoWords.length + pictosWord,
+                controller: scrollCon,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  crossAxisSpacing: 16,
+                  childAspectRatio: 4 / 3,
+                  mainAxisSpacing: 16,
+                ),
+                itemBuilder: (context, index) {
+                  Picto? pict = pictoWords.firstWhereIndexedOrNull(
+                      (elIndex, element) => elIndex == index);
 
-                if (pict == null) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: Container(
-                      width: 64,
-                      height: 140,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                  if (pict == null) {
+                    return FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Container(
+                        height: 119,
+                        width: 96,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
                       ),
-                    ),
-                  );
-                }
-                return Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: PictoWidget(
+                    );
+                  }
+                  return PictoWidget(
                     width: 64,
                     height: 140,
                     onTap: () {},
@@ -136,7 +158,10 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                               return Center(
                                 child: CircularProgressIndicator(
                                   color: colorScheme.primary,
-                                  value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
+                                  value: progress.totalSize != null
+                                      ? progress.downloaded /
+                                          progress.totalSize!
+                                      : null,
                                 ),
                               );
                             },
@@ -151,19 +176,25 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                           ),
                     text: pict.text,
                     disable: show && selectedWord == index ? true : false,
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
           const SizedBox(width: 16),
-          Expanded(
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: kIsTablet ? 200 : 150,
+            ),
             child: SizedBox(
-              height: 80,
-              child: BaseButton(
+              height: kIsTablet ? 140 : 80,
+              child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(pictosIsEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                  overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+                  backgroundColor: MaterialStateProperty.all(pictosIsEmpty
+                      ? Colors.grey.withOpacity(.12)
+                      : Colors.white),
+                  overlayColor: MaterialStateProperty.all(
+                      colorScheme.primary.withOpacity(0.1)),
                   shape: MaterialStateProperty.all(
                     const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(9)),
@@ -173,22 +204,28 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                   elevation: MaterialStateProperty.all(0),
                 ),
                 onPressed: pictosIsEmpty ? null : removeLastPictogram,
-                child: Image.asset(
-                  pictosIsEmpty ? AppImages.kDelete : AppImages.kDeleteOrange,
-                  width: 59,
-                  height: 59,
+                child: Center(
+                  child: Image.asset(
+                    pictosIsEmpty ? AppImages.kDelete : AppImages.kDeleteOrange,
+                  ),
                 ),
               ),
             ),
           ),
           const SizedBox(width: 16),
-          Expanded(
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: kIsTablet ? 200 : 150,
+            ),
             child: SizedBox(
-              height: 80,
-              child: BaseButton(
+              height: kIsTablet ? 140 : 80,
+              child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(pictosIsEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
-                  overlayColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
+                  backgroundColor: MaterialStateProperty.all(pictosIsEmpty
+                      ? colorScheme.primary.withOpacity(.12)
+                      : colorScheme.primary),
+                  overlayColor:
+                      MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
                   shape: MaterialStateProperty.all(
                     const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(9)),
@@ -200,11 +237,11 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                 onPressed: () async {
                   await ref.read(homeProvider.notifier).speakSentence();
                 },
-                child: Image.asset(
-                  AppImages.kOttaaMinimalist,
-                  color: Colors.white,
-                  width: 59,
-                  height: 59,
+                child: Center(
+                  child: Image.asset(
+                    AppImages.kOttaaMinimalist,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

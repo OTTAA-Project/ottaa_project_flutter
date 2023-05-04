@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
+import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/sweep_modes.dart';
@@ -26,78 +27,109 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
     final int? currentWord = ref.watch(homeProvider).selectedWord;
     final patientNotifierState = ref.watch(patientNotifier);
     final scrollCon = ref.watch(homeProvider).scrollController;
+
+    final size = MediaQuery.of(context).size;
+
+    int pictosWord = ((size.width - (kIsTablet ? 500 : 200)) ~/ 64);
+
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Row(
+      width: size.width,
+      height: kIsTablet ? 140 : 80,
+      child: Flex(
+        direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
             width: 20,
             height: 80,
           ),
           const SizedBox(width: 32),
-          SizedBox(
-            height: 80,
-            width: 445,
-            child: ListView.builder(
+          Flexible(
+            flex: 2,
+            child: GridView.builder(
+              clipBehavior: Clip.antiAlias,
               scrollDirection: Axis.horizontal,
-              itemCount: pictoWords.length + 6,
+              itemCount: pictoWords.length + pictosWord,
               controller: scrollCon,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                crossAxisSpacing: 16,
+                childAspectRatio: 4 / 3,
+                mainAxisSpacing: 16,
+              ),
               itemBuilder: (context, index) {
                 Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
 
                 if (pict == null) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 16),
+                  return FittedBox(
+                    fit: BoxFit.scaleDown,
                     child: Container(
-                      width: 64,
-                      height: 140,
-                      decoration: BoxDecoration(
-                        color: pictoWords.length < pictoWords.length + 6 ? Colors.transparent : Colors.white,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(10),
-                        ),
+                      height: 119,
+                      width: 96,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
                       ),
                     ),
                   );
                 }
-                return Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: PictoWidget(
-                    width: 64,
-                    height: 140,
-                    onTap: () {},
-                    image: pict.resource.network != null
-                        ? CachedNetworkImage(
-                            imageUrl: pict.resource.network!,
-                            fit: BoxFit.fill,
-                            progressIndicatorBuilder: (context, url, progress) {
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  color: colorScheme.primary,
-                                  value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
-                                ),
-                              );
-                            },
-                            errorWidget: (context, url, error) => Image.asset(
-                              fit: BoxFit.fill,
-                              "assets/img/${pict.text}.webp",
-                            ),
-                          )
-                        : Image.asset(
+                return PictoWidget(
+                  width: 64,
+                  height: 140,
+                  onTap: () {},
+                  colorNumber: pict.type,
+                  image: pict.resource.network != null
+                      ? CachedNetworkImage(
+                          imageUrl: pict.resource.network!,
+                          fit: BoxFit.fill,
+                          progressIndicatorBuilder: (context, url, progress) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: colorScheme.primary,
+                                value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
+                              ),
+                            );
+                          },
+                          errorWidget: (context, url, error) => Image.asset(
                             fit: BoxFit.fill,
                             "assets/img/${pict.text}.webp",
                           ),
-                    text: pict.text,
-                    disable: (patientNotifierState != null ? patientNotifierState.patientSettings.layout.oneToOne : false)
-                        ? index == currentWord
-                            ? false
-                            : true
-                        : false,
-                  ),
+                        )
+                      : Image.asset(
+                          fit: BoxFit.fill,
+                          "assets/img/${pict.text}.webp",
+                        ),
+                  text: pict.text,
+                  disable: (patientNotifierState != null ? patientNotifierState.patientSettings.layout.oneToOne : false)
+                      ? index == currentWord
+                          ? false
+                          : true
+                      : false,
                 );
               },
             ),
           ),
+          const SizedBox(width: 16),
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: kIsTablet ? 200 : 150,
+            ),
+            child: SizedBox(
+              height: kIsTablet ? 140 : 80,
+              child: Container(),
+            ),
+          ),
+          const SizedBox(width: 16),
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: kIsTablet ? 200 : 150,
+            ),
+            child: SizedBox(
+              height: kIsTablet ? 140 : 80,
+              child: Container(),
+            ),
+          ),
+          const SizedBox(width: 24),
         ],
       ),
     );

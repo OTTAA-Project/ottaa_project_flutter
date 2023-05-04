@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:math' show min;
 
 import 'package:dio/dio.dart';
@@ -8,12 +7,11 @@ import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/constants.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
-import 'package:ottaa_project_flutter/core/enums/sweep_modes.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
@@ -62,7 +60,7 @@ class HomeProvider extends ChangeNotifier {
   Map<String, Picto> pictograms = {};
   Map<String, Group> groups = {};
 
-  List<Picto> suggestedPicts = [];
+  List<Picto>? suggestedPicts;
 
   List<Picto> pictoWords = [];
 
@@ -78,6 +76,7 @@ class HomeProvider extends ChangeNotifier {
   bool show = false;
   int? selectedWord;
   ScrollController scrollController = ScrollController();
+
 
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
@@ -105,12 +104,12 @@ class HomeProvider extends ChangeNotifier {
 
     currentTabGroup = groups.keys.first;
 
-    buildSuggestion();
+    await buildSuggestion();
     notifyListeners();
   }
 
   void switchToPictograms() {
-    final currentUser = patientState.state ?? userState.state!;
+    final currentUser = patientState.patient ?? userState.user!;
 
     bool isGrid = currentUser.isPatient && currentUser.patient.patientSettings.layout.display == DisplayTypes.grid;
 
@@ -125,7 +124,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> fetchMostUsedSentences() async {
     mostUsedSentences = await _sentencesService.fetchSentences(
-      language: "es_AR", //TODO!: Fetch language code LANG-CODE
+      language: "es_AR",
       type: kMostUsedSentences,
     );
 
@@ -147,7 +146,7 @@ class HomeProvider extends ChangeNotifier {
 
   void addPictogram(Picto picto) {
     pictoWords.add(picto);
-    suggestedPicts.clear();
+    suggestedPicts = null;
 
     if (pictoWords.length > 5) {
       scrollController.jumpTo(scrollController.offset + 100);
@@ -167,7 +166,7 @@ class HomeProvider extends ChangeNotifier {
       _cancelsToken.clear();
     }
     notify();
-    suggestedPicts.clear();
+    suggestedPicts = null;
     Picto? lastPicto = pictoWords.lastOrNull;
 
     buildSuggestion(lastPicto?.id);
@@ -178,12 +177,10 @@ class HomeProvider extends ChangeNotifier {
     List<Picto>? pictos;
     List<Group>? groupsData;
 
-    if (patientState.state != null) {
+    if (patientState.patient != null) {
       pictos = patientState.user.pictos[patientState.user.settings.language.language];
 
       groupsData = patientState.user.groups[patientState.user.settings.language.language];
-
-      print(patientState.user.groups);
     }
 
     pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
@@ -196,17 +193,9 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> buildSuggestion([String? id]) async {
-    id ??= kStarterPictoId;
-
     indexPage = 0;
 
-    if (id == kStarterPictoId) {
-      suggestedPicts.clear();
-      suggestedPicts.addAll(basicPictograms);
-      notify();
-    }
-
-    if (patientState.state != null && id != kStarterPictoId) {
+    if (patientState.patient != null) {
       PatientUserModel user = patientState.user;
       final cancelToken = CancelToken();
 
@@ -222,13 +211,29 @@ class HomeProvider extends ChangeNotifier {
 
       _cancelsToken.add(cancelToken);
 
+      String hour = "";
+
+      int time = DateTime.now().hour;
+
+      if (time >= 5 && time <= 11) {
+        hour = 'MANANA';
+      } else if (time > 11 && time <= 14) {
+        hour = 'MEDIODIA';
+      } else if (time > 14 && time < 20) {
+        hour = 'TARDE';
+      } else {
+        hour = 'NOCHE';
+      }
+
       final response = await predictPictogram.call(
         sentence: pictoWords.map((e) => e.text).join(" "),
         uid: user.id,
         language: user.settings.language.language,
         model: "test",
-        groups: (user.groups[user.settings.language.language] ?? []).where((element) => element.block).map((e) => e.id).toList(),
-        tags: {},
+        groups: (user.groups[user.settings.language.language] ?? []).where((element) => !element.block).map((e) => e.id).toList(),
+        tags: {
+          "HORA": [hour]
+        },
         reduced: true,
         chunk: suggestedQuantity,
         cancelToken: cancelToken,
@@ -237,10 +242,17 @@ class HomeProvider extends ChangeNotifier {
       _cancelsToken.remove(cancelToken);
 
       if (response.isRight) {
-        print(response.right);
         suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
+        return;
       }
+    }
+    id ??= kStarterPictoId;
+
+    if (id == kStarterPictoId) {
+      suggestedPicts = [];
+      suggestedPicts!.addAll(basicPictograms);
+      notify();
     }
 
     if (id == kStarterPictoId) return;
@@ -253,29 +265,19 @@ class HomeProvider extends ChangeNotifier {
       final List<PictoRelation> recomendedPicts = pict.relations.toList();
       recomendedPicts.sortBy<num>((element) => element.value);
       List<Picto> requiredPictos = predictiveAlgorithm(list: recomendedPicts);
-      suggestedPicts.addAll(requiredPictos);
-      suggestedPicts = suggestedPicts.toSet().toList();
+      suggestedPicts ??= [];
+      suggestedPicts!.addAll(requiredPictos);
+      suggestedPicts = suggestedPicts!.toSet().toList();
     }
 
     suggestedIndex = id;
+
     // suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
     return notifyListeners();
   }
 
   List<Picto> getPictograms() {
-    int currentPage = (suggestedPicts.length / suggestedQuantity).round();
-
-    if (indexPage > currentPage) {
-      indexPage = currentPage;
-    }
-    if (indexPage < 0) {
-      indexPage = 0;
-    }
-    int start = indexPage * suggestedQuantity;
-
-    List<Picto> pictos = suggestedPicts.sublist(start, min(suggestedPicts.length, (indexPage * suggestedQuantity) + suggestedQuantity));
-
-    if (pictos.isEmpty && suggestedPicts.isEmpty) {
+    if (suggestedPicts == null) {
       return List.generate(4, (index) {
         return Picto(
           id: "-777",
@@ -287,7 +289,20 @@ class HomeProvider extends ChangeNotifier {
           ),
         );
       });
-    } else if (pictos.length < suggestedQuantity) {
+    }
+
+    int currentPage = (suggestedPicts!.length / suggestedQuantity).round();
+
+    if (indexPage > currentPage) {
+      indexPage = currentPage;
+    }
+    if (indexPage < 0) {
+      indexPage = 0;
+    }
+    int start = indexPage * suggestedQuantity;
+    List<Picto> pictos = suggestedPicts!.sublist(start, min(suggestedPicts!.length, (indexPage * suggestedQuantity) + suggestedQuantity));
+
+    if (pictos.length < suggestedQuantity) {
       int pictosLeft = suggestedQuantity - pictos.length;
       pictos.addAll(
         List.generate(
@@ -344,10 +359,10 @@ class HomeProvider extends ChangeNotifier {
           }
         }
       }
-      e.freq = (list[i].value * pesoFrec) + (hora * pesoHora); //TODO: Check this with asim
+      e.freq = (list[i].value * pesoFrec) + (hora * pesoHora);
     }
 
-    requiredPicts.sort((b, a) => a.freq.compareTo(b.freq)); //TODO: Check this with assim too
+    requiredPicts.sort((b, a) => a.freq.compareTo(b.freq));
 
     return requiredPicts;
   }
@@ -355,56 +370,47 @@ class HomeProvider extends ChangeNotifier {
   Future<void> speakSentence() async {
     show = true;
     notifyListeners();
-    if (patientState.state != null) {
-      if (!patientState.user.patientSettings.layout.oneToOne) {
-        notifyListeners();
-        String? sentence;
-        scrollController.jumpTo(0);
-        if (patientState.user.patientSettings.language.labs) {
-          sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
-          if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
-        }
+    if (patientState.state != null && !patientState.user.patientSettings.layout.oneToOne) {
+      notifyListeners();
+      String? sentence;
+      scrollController.jumpTo(0);
+      if (patientState.user.patientSettings.language.labs) {
+        sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+        if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
+      }
 
-        sentence ??= pictoWords.map((e) => e.text).join(' ');
-        await _tts.speak(sentence);
+      sentence ??= pictoWords.map((e) => e.text).join(' ');
+      await _tts.speak(sentence);
 
-        show = false;
+      show = false;
+      notifyListeners();
+      return;
+    } else {
+      for (var i = 0; i < pictoWords.length; i++) {
+        selectedWord = i;
+        scrollController.animateTo(
+          i == 0 ? 0 : i * 45,
+          duration: const Duration(microseconds: 50),
+          curve: Curves.easeIn,
+        );
         notifyListeners();
-        await Future.delayed(const Duration(milliseconds: 400));
-        final d =pictoWords.length > 5 ? (pictoWords.length - 5) * 100 : 100;
-        scrollController.jumpTo(scrollController.offset + d);
-        return;
-      } else {
-        for (var i = 0; i < pictoWords.length; i++) {
-          selectedWord = i;
-          scrollController.animateTo(
-            i == 0 ? 0 : i * 45,
-            duration: const Duration(microseconds: 50),
-            curve: Curves.easeIn,
-          );
-          notifyListeners();
-          await _tts.speak(pictoWords[i].text);
-        }
-        // scrollController.animateTo(
-        //   0,
-        //   duration: const Duration(microseconds: 50),
-        //   curve: Curves.easeIn,
-        // );
-        show = false;
-        notifyListeners();
+        await _tts.speak(pictoWords[i].text);
+      }
 
-        if (patientState.user.patientSettings.layout.cleanup) {
-          pictoWords.clear();
-          await buildSuggestion();
-        }
+      show = false;
+      notifyListeners();
+
+      if (patientState.state != null && patientState.user.patientSettings.layout.cleanup) {
+        pictoWords.clear();
+        await buildSuggestion();
       }
     }
   }
 
   void refreshPictograms() {
-    int currentPage = suggestedPicts.length ~/ suggestedQuantity;
+    if (suggestedPicts == null) return;
 
-    print("Page: $currentPage");
+    int currentPage = suggestedPicts!.length ~/ suggestedQuantity;
 
     indexPage++;
 
@@ -456,7 +462,7 @@ final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotif
   final sentencesService = GetIt.I<SentencesRepository>();
   final tts = ref.watch(ttsProvider);
   final patientState = ref.watch(patientNotifier.notifier);
-  final userState = ref.watch(userNotifier.notifier);
+  final userState = ref.watch(userProvider);
 
   final predictPictogram = GetIt.I<PredictPictogram>();
   final learnPictogram = GetIt.I<LearnPictogram>();

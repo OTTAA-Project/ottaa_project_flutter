@@ -41,7 +41,8 @@ void main() {
 
     mockAuthRepository = MockAuthRepository();
     mockServerRepository = MockServerRepository();
-    sentencesService = SentencesService(mockAuthRepository, mockServerRepository);
+    sentencesService =
+        SentencesService(mockAuthRepository, mockServerRepository);
   });
   /*
   group('Sentences Service Testing', () {

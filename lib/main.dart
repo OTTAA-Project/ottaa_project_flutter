@@ -25,9 +25,7 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  if (kIsWeb) {
-
-  }
+  if (kIsWeb) {}
 
   await configureDependencies();
 

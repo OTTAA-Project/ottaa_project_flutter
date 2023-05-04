@@ -22,7 +22,18 @@ class OTTAATextInput extends StatefulWidget {
 
   final TextInputType? keyboardType;
 
-  const OTTAATextInput({super.key, this.hintText, this.labelText, this.controller, this.isPassword = false, this.onChanged, this.validator, this.onTap, this.isReadOnly = false, this.enabled = true, this.keyboardType});
+  const OTTAATextInput(
+      {super.key,
+      this.hintText,
+      this.labelText,
+      this.controller,
+      this.isPassword = false,
+      this.onChanged,
+      this.validator,
+      this.onTap,
+      this.isReadOnly = false,
+      this.enabled = true,
+      this.keyboardType});
 
   @override
   State<OTTAATextInput> createState() => _OTTAATextInputState();

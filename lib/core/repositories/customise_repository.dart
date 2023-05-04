@@ -12,12 +12,9 @@ abstract class CustomiseRepository {
 
   Future<ShortcutsModel> fetchShortcutsForUser({required String userId});
 
-  Future<List<Group>> fetchUserGroups(
-      {required String languageCode, required String userId});
+  Future<List<Group>> fetchUserGroups({required String languageCode, required String userId});
 
-  Future<List<Picto>> fetchUserPictos(
-      {required String languageCode, required String userId});
+  Future<List<Picto>> fetchUserPictos({required String languageCode, required String userId});
 
-  Future<bool> valuesExistOrNot(
-      {required String languageCode, required String userId});
+  Future<bool> valuesExistOrNot({required String languageCode, required String userId});
 }

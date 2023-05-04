@@ -5,7 +5,6 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
-import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileChooserScreen extends ConsumerWidget {
@@ -69,7 +68,9 @@ class ProfileChooserScreen extends ConsumerWidget {
               ),
               PrimaryButton(
                 //todo: add the proper way for handling the waiting screen, hector said is should be their for 4 seconds at least
-                onPressed: (provider.isCaregiver || provider.isUser) ? () => context.push(AppRoutes.profileWaitingScreen) : null,
+                onPressed: (provider.isCaregiver || provider.isUser)
+                    ? () => context.push(AppRoutes.userWait)
+                    : null,
                 text: "global.continue".trl,
               ),
             ],

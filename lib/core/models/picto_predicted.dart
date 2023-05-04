@@ -49,5 +49,6 @@ class PictoPredicted extends PictoPredictedReduced {
   @override
   String toJson() => json.encode(toMap());
 
-  factory PictoPredicted.fromJson(String source) => PictoPredicted.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory PictoPredicted.fromJson(String source) =>
+      PictoPredicted.fromMap(json.decode(source) as Map<String, dynamic>);
 }

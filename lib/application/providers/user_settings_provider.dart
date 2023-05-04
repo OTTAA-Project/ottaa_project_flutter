@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -8,9 +7,9 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
@@ -75,7 +74,7 @@ class UserSettingsProvider extends ChangeNotifier {
   List<Voices> filteredVoices = [];
   String voiceName = "es-ES-language";
 
-  PatientUserModel get currentUser => _patientNotifier.state ?? _userNotifier.user.patient;
+  PatientUserModel get currentUser => _patientNotifier.patient ?? _userNotifier.user!.patient;
 
   void notify() {
     notifyListeners();
@@ -121,7 +120,6 @@ class UserSettingsProvider extends ChangeNotifier {
     language = languageCode;
     languageSetting.language = languageCode;
     await _i18n.changeLanguage(languageCode);
-    print(_i18n.currentLanguage!.locale.toString());
     await fetchAllVoices();
     notifyListeners();
   }
@@ -138,7 +136,7 @@ class UserSettingsProvider extends ChangeNotifier {
       userId: currentUser.id,
     );
 
-    if (_userNotifier.user.isCaregiver) {
+    if (_userNotifier.user!.isCaregiver) {
       int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
@@ -157,7 +155,7 @@ class UserSettingsProvider extends ChangeNotifier {
       userId: currentUser.id,
     );
 
-    if (_userNotifier.user.isCaregiver) {
+    if (_userNotifier.user!.isCaregiver) {
       int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
@@ -171,13 +169,12 @@ class UserSettingsProvider extends ChangeNotifier {
   }
 
   Future<void> updateAccessibilitySettings() async {
-    print(accessibilitySetting.toMap());
     _userSettingRepository.updateAccessibilitySettings(
       map: accessibilitySetting.toMap(),
       userId: currentUser.id,
     );
 
-    if (_userNotifier.user.isCaregiver) {
+    if (_userNotifier.user!.isCaregiver) {
       int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
@@ -191,13 +188,12 @@ class UserSettingsProvider extends ChangeNotifier {
   }
 
   Future<void> updateMainSettings() async {
-    print(layoutSetting.toMap());
     _userSettingRepository.updateMainSettings(
       map: layoutSetting.toMap(),
       userId: currentUser.id,
     );
 
-    if (_userNotifier.user.isCaregiver) {
+    if (_userNotifier.user!.isCaregiver) {
       int patientIndex = _profileNotifier.connectedUsersData.indexWhere((element) => element.id == _patientNotifier.user.id);
 
       if (patientIndex != -1) {
@@ -225,16 +221,14 @@ class UserSettingsProvider extends ChangeNotifier {
         break;
       case VelocityTypes.mid:
         _ttsServices.changeCustomTTs(false);
-        _ttsServices.changeVoiceSpeed(0.4);
+        _ttsServices.changeVoiceSpeed(.8);
         break;
       case VelocityTypes.fast:
         _ttsServices.changeCustomTTs(true);
-        _ttsServices.changeVoiceSpeed(0.8);
+        _ttsServices.changeVoiceSpeed(1);
         break;
     }
     voiceRate = type.name;
-    print(type);
-    print(_i18n.currentLanguage!.locale.toString());
     ttsSetting.voiceSetting.voicesSpeed[language] = type;
     notifyListeners();
   }
@@ -337,13 +331,13 @@ class UserSettingsProvider extends ChangeNotifier {
   Future<void> fetchAllVoices() async {
     voices = await _ttsServices.fetchVoices();
     filteredVoices = [];
-    final s = language.split('_');
-    voices.forEach((v) {
-      if (v.name.contains(s[0]) && !v.name.contains('network')) {
-        print(v.name);
-        filteredVoices.add(v);
+    final splittedLanguage = language.split('_');
+
+    for (var voice in voices) {
+      if ((voice.locale.startsWith(splittedLanguage[0]) || (voice.locale.startsWith(splittedLanguage[0]) && voice.locale.endsWith(splittedLanguage[1]))) && !voice.name.contains('network')) {
+        filteredVoices.add(voice);
       }
-    });
+    }
   }
 }
 
@@ -351,14 +345,14 @@ final userSettingsProvider = ChangeNotifierProvider<UserSettingsProvider>((ref) 
   final i18N = GetIt.I<I18N>();
   final userSettingsService = GetIt.I<UserSettingRepository>();
 
-  final UserNotifier userNotifierState = ref.watch(userNotifier.notifier);
+  final UserNotifier userNotifierState = ref.watch(userProvider);
   final PatientNotifier patientNotifierState = ref.watch(patientNotifier.notifier);
 
   final ProfileNotifier profileNotifier = ref.watch(profileProvider);
-  final TTSRepository _ttsProvider = GetIt.I<TTSRepository>();
+  final TTSRepository ttsNotifier = GetIt.I<TTSRepository>();
 
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
   final tts = ref.watch(ttsProvider);
 
-  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository, profileNotifier, _ttsProvider, tts);
+  return UserSettingsProvider(i18N, userSettingsService, userNotifierState, patientNotifierState, localDatabaseRepository, profileNotifier, ttsNotifier, tts);
 });

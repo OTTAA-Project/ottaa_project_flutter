@@ -25,14 +25,14 @@ class _HeaderWavePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final lapiz = new Paint();
+    final lapiz = Paint();
 
     // Propiedades
     lapiz.color = this.color; //Color(0xff615AAB);
     lapiz.style = PaintingStyle.fill; // .fill .stroke
     lapiz.strokeWidth = 20;
 
-    final path = new Path();
+    final path = Path();
 
     // Dibujar con el path y el lapiz
     // path.moveTo(0, size.height);
@@ -45,8 +45,10 @@ class _HeaderWavePainter extends CustomPainter {
 
     path.moveTo(0, 0);
     path.lineTo(size.width * 0.5, 0);
-    path.quadraticBezierTo(size.width * 0.5, size.height * 0.3, size.width * 0.45, size.height * 0.5);
-    path.quadraticBezierTo(size.width * 0.4, size.height * 0.75, size.width * 0.45, size.height);
+    path.quadraticBezierTo(size.width * 0.5, size.height * 0.3,
+        size.width * 0.45, size.height * 0.5);
+    path.quadraticBezierTo(
+        size.width * 0.4, size.height * 0.75, size.width * 0.45, size.height);
     path.lineTo(0, size.height);
     canvas.drawPath(path, lapiz);
   }

@@ -28,5 +28,4 @@ extension User on UserModel {
   BaseUserModel get base {
     return this as BaseUserModel;
   }
-
 }

@@ -1,4 +1,4 @@
- import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
 abstract class CreateEmailToken {
   final ServerRepository serverService;

@@ -29,7 +29,8 @@ class PredictPictogramImpl extends PredictPictogram {
       model: model,
       groups: groups,
       tags: tags,
-      cancelToken: cancelToken
+      cancelToken: cancelToken,
+      reduced: reduced,
     );
 
     if (response.isLeft) {

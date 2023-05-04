@@ -1,21 +1,16 @@
-import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
-import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/resource_image.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/theme.dart';
-import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 
 class HomeTabsUI extends ConsumerStatefulWidget {
@@ -238,7 +233,6 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                           provider.status = HomeScreenStatus.pictos;
                           provider.notify();
                         },
-                        size: const Size(40, 40),
                         child: Image.asset(
                           AppImages.kSearchOrange,
                         ),
@@ -247,7 +241,6 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                     const SizedBox(height: 16),
                     Expanded(
                       child: HomeButton(
-                        size: const Size(40, 40),
                         onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollUp))(ref.read(homeProvider).pictoTabsScrollController, 144),
                         child: Icon(
                           Icons.keyboard_arrow_up,
@@ -259,7 +252,6 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                     const SizedBox(height: 16),
                     Expanded(
                       child: HomeButton(
-                        size: const Size(40, 40),
                         onPressed: groups.isEmpty ? null : () => ref.read(homeProvider.select((value) => value.scrollDown))(ref.read(homeProvider).pictoTabsScrollController, 144),
                         child: Icon(
                           Icons.keyboard_arrow_down,

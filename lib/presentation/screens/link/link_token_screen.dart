@@ -12,7 +12,8 @@ class LinkTokenScreen extends ConsumerStatefulWidget {
   const LinkTokenScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LinkTokenScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _LinkTokenScreenState();
 }
 
 class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
