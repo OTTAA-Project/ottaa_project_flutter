@@ -58,8 +58,6 @@ class MatchPictogramScreen extends ConsumerWidget {
                                     });
                                 await mpProvider.checkAnswerMatchPicto(index: 0, picto: provider.topPositionsMP[0]!);
                                 context.pop();
-                                // print(mpProvider.pick1);
-                                // print(mpProvider.show[0]);
                               }
                             : () {},
                         rightOrWrong: mpProvider.rightOrWrong[0],
@@ -133,6 +131,9 @@ class MatchPictogramScreen extends ConsumerWidget {
                           : const SizedBox.shrink(),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: size.height * 0.05,
                 ),
 
                 ///bottom
