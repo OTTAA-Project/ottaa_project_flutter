@@ -95,6 +95,16 @@ class Picto {
       text: map['text'],
       freq: map['freq'] != null ? (map['freq'] as num).toDouble() : 0,
       type: (map['type'] as num).toInt(),
+      tags: map['tags'] != null
+          ? Map<String, List<String>>.from(
+              (map['tags'] as Map).map(
+                (k, v) => MapEntry(
+                  k as String,
+                  List<String>.from((v as List).map((e) => e as String)),
+                ),
+              ),
+            )
+          : <String, List<String>>{},
     );
   }
 

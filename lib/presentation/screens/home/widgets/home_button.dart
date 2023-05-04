@@ -29,16 +29,10 @@ class HomeButton extends StatelessWidget {
       // minimumSize: MaterialStateProperty.all(size),
       // maximumSize: MaterialStateProperty.all(size),
 
-      backgroundColor: MaterialStateProperty.all(
-          disabled ? Colors.grey.withOpacity(.12) : Colors.white),
-      foregroundColor: MaterialStateProperty.all(disabled
-          ? colorScheme.primary.withOpacity(.12)
-          : colorScheme.primary),
-      iconColor: MaterialStateProperty.all(disabled
-          ? colorScheme.primary.withOpacity(.12)
-          : colorScheme.primary),
-      overlayColor:
-          MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
+      backgroundColor: MaterialStateProperty.all(disabled ? Colors.grey.withOpacity(.12) : Colors.white),
+      foregroundColor: MaterialStateProperty.all(disabled ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
+      iconColor: MaterialStateProperty.all(disabled ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
+      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
       shape: MaterialStateProperty.all(
         const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(9)),

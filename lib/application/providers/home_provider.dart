@@ -77,7 +77,6 @@ class HomeProvider extends ChangeNotifier {
   int? selectedWord;
   ScrollController scrollController = ScrollController();
 
-  ScrollController overScrollController = ScrollController();
 
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
@@ -105,7 +104,7 @@ class HomeProvider extends ChangeNotifier {
 
     currentTabGroup = groups.keys.first;
 
-    buildSuggestion();
+    await buildSuggestion();
     notifyListeners();
   }
 
@@ -194,17 +193,9 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> buildSuggestion([String? id]) async {
-    id ??= kStarterPictoId;
-
     indexPage = 0;
 
-    if (id == kStarterPictoId) {
-      suggestedPicts = [];
-      suggestedPicts!.addAll(basicPictograms);
-      notify();
-    }
-
-    if (patientState.patient != null && id != kStarterPictoId) {
+    if (patientState.patient != null) {
       PatientUserModel user = patientState.user;
       final cancelToken = CancelToken();
 
@@ -220,13 +211,29 @@ class HomeProvider extends ChangeNotifier {
 
       _cancelsToken.add(cancelToken);
 
+      String hour = "";
+
+      int time = DateTime.now().hour;
+
+      if (time >= 5 && time <= 11) {
+        hour = 'MANANA';
+      } else if (time > 11 && time <= 14) {
+        hour = 'MEDIODIA';
+      } else if (time > 14 && time < 20) {
+        hour = 'TARDE';
+      } else {
+        hour = 'NOCHE';
+      }
+
       final response = await predictPictogram.call(
         sentence: pictoWords.map((e) => e.text).join(" "),
         uid: user.id,
         language: user.settings.language.language,
         model: "test",
         groups: (user.groups[user.settings.language.language] ?? []).where((element) => !element.block).map((e) => e.id).toList(),
-        tags: {},
+        tags: {
+          "HORA": [hour]
+        },
         reduced: true,
         chunk: suggestedQuantity,
         cancelToken: cancelToken,
@@ -237,7 +244,15 @@ class HomeProvider extends ChangeNotifier {
       if (response.isRight) {
         suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
+        return;
       }
+    }
+    id ??= kStarterPictoId;
+
+    if (id == kStarterPictoId) {
+      suggestedPicts = [];
+      suggestedPicts!.addAll(basicPictograms);
+      notify();
     }
 
     if (id == kStarterPictoId) return;
@@ -256,6 +271,7 @@ class HomeProvider extends ChangeNotifier {
     }
 
     suggestedIndex = id;
+
     // suggestedPicts = suggestedPicts.sublist(0, min(suggestedPicts.length, suggestedQuantity));
     return notifyListeners();
   }
@@ -368,9 +384,6 @@ class HomeProvider extends ChangeNotifier {
 
       show = false;
       notifyListeners();
-      await Future.delayed(const Duration(milliseconds: 400));
-      final d = pictoWords.length > 5 ? (pictoWords.length - 5) * 100 : 100;
-      scrollController.jumpTo(scrollController.offset + d);
       return;
     } else {
       for (var i = 0; i < pictoWords.length; i++) {
@@ -383,11 +396,7 @@ class HomeProvider extends ChangeNotifier {
         notifyListeners();
         await _tts.speak(pictoWords[i].text);
       }
-      // scrollController.animateTo(
-      //   0,
-      //   duration: const Duration(microseconds: 50),
-      //   curve: Curves.easeIn,
-      // );
+
       show = false;
       notifyListeners();
 

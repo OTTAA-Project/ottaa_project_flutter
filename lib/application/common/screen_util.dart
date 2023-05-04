@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 bool get kIsTablet {
-  var mediaQueryData =
-      MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  var mediaQueryData = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
   final size = (mediaQueryData.size);
 
-  final diagonal =
-      sqrt((size.width * size.width) + (size.height * size.height));
+  final diagonal = sqrt((size.width * size.width) + (size.height * size.height));
 
-  return diagonal >= 1100.0;
+  return diagonal >= 1800.0;
 }
 
 Future<void> blockPortraitMode() async {

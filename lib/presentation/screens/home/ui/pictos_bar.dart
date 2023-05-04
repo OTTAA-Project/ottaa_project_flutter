@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,12 +31,16 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
     final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
+    final maxWidth = max(size.width, size.height);
+    final maxHeight = min(size.width, size.height);
+
+    final aspectRatio = maxWidth / maxHeight;
     return Flex(
       direction: Axis.vertical,
       children: [
         Flexible(
           fit: FlexFit.tight,
-          flex: 1,
+          flex: 8,
           child: Flex(
             direction: Axis.horizontal,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,9 +91,8 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
             ],
           ),
         ),
-        SizedBox(
-          width: size.width,
-          height: 88,
+        Flexible(
+          flex: aspectRatio.round(),
           child: const ShortcutsUI(),
         ),
         SizedBox(
@@ -102,14 +107,21 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     List<Picto> pictos, {
     required void Function(Picto) addPictogram,
   }) {
+    final size = MediaQuery.of(context).size;
+
+    final maxWidth = max(size.width, size.height);
+    final maxHeight = min(size.width, size.height);
+
+    final aspectRatio = maxWidth / maxHeight;
+
     return Flexible(
       flex: 8,
       fit: FlexFit.loose,
       child: GridView.builder(
         itemCount: 4,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
-          childAspectRatio: 1,
+          childAspectRatio: aspectRatio,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
         ),

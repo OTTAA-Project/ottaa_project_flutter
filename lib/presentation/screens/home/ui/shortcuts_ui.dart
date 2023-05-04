@@ -44,121 +44,120 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
     int shorcutsCount = patient?.patientSettings.layout.shortcuts.toMap().values.where((element) => element).length ?? 7;
 
     double shortCutSize = ((size.width - (32 * shorcutsCount)) / shorcutsCount);
+    double iconSize = (shortCutSize / 2).clamp(20, 38);
 
     ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
 
-    return SizedBox(
-      child: Flex(
-        direction: Axis.horizontal,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          if (patient == null || shortcuts.games)
-            Flexible(
-              fit: FlexFit.loose,
-              child: HomeButton(
-                size: Size(shortCutSize, shortCutSize),
-                onPressed: pictos == null
-                    ? null
-                    : () {
-                        provider.fetchPictograms();
-                        // context.push(AppRoutes.gameScreen);
-                      },
-                child: Image.asset(
-                  AppImages.kBoardDiceIconSelected,
-                  width: 48,
-                  height: 48,
-                ),
+    return Flex(
+      direction: Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        if (patient == null || shortcuts.games)
+          Flexible(
+            fit: FlexFit.loose,
+            child: HomeButton(
+              size: Size(shortCutSize, shortCutSize),
+              onPressed: pictos == null
+                  ? null
+                  : () {
+                      provider.fetchPictograms();
+                      // context.push(AppRoutes.gameScreen);
+                    },
+              child: Image.asset(
+                AppImages.kBoardDiceIconSelected,
+                width: iconSize,
+                height: iconSize,
               ),
             ),
-          if (patient == null || shortcuts.history)
-            Flexible(
-              fit: FlexFit.loose,
-              child: HomeButton(
-                size: Size(shortCutSize, shortCutSize),
-                onPressed: pictos == null ? null : showComingSoon,
-                child: Image.asset(
-                  AppImages.kBoardHistoryIconSelected,
-                  width: 48,
-                  height: 48,
-                ),
+          ),
+        if (patient == null || shortcuts.history)
+          Flexible(
+            fit: FlexFit.loose,
+            child: HomeButton(
+              size: Size(shortCutSize, shortCutSize),
+              onPressed: pictos == null ? null : showComingSoon,
+              child: Image.asset(
+                AppImages.kBoardHistoryIconSelected,
+                width: iconSize,
+                height: iconSize,
               ),
             ),
-          if (patient == null || shortcuts.share)
-            Flexible(
-              fit: FlexFit.loose,
-              child: HomeButton(
-                size: Size(shortCutSize, shortCutSize),
-                onPressed: pictos == null ? null : showComingSoon,
-                child: Image.asset(
-                  AppImages.kBoardShareIconSelected,
-                  width: 48,
-                  height: 48,
-                ),
+          ),
+        if (patient == null || shortcuts.share)
+          Flexible(
+            fit: FlexFit.loose,
+            child: HomeButton(
+              size: Size(shortCutSize, shortCutSize),
+              onPressed: pictos == null ? null : showComingSoon,
+              child: Image.asset(
+                AppImages.kBoardShareIconSelected,
+                width: iconSize,
+                height: iconSize,
               ),
             ),
-          if (patient == null || shortcuts.camera)
-            Flexible(
-              fit: FlexFit.loose,
-              child: HomeButton(
-                size: Size(shortCutSize, shortCutSize),
-                onPressed: pictos == null ? null : showComingSoon,
-                child: Image.asset(
-                  AppImages.kBoardCameraIconSelected,
-                  width: 48,
-                  height: 48,
-                ),
+          ),
+        if (patient == null || shortcuts.camera)
+          Flexible(
+            fit: FlexFit.loose,
+            child: HomeButton(
+              size: Size(shortCutSize, shortCutSize),
+              onPressed: pictos == null ? null : showComingSoon,
+              child: Image.asset(
+                AppImages.kBoardCameraIconSelected,
+                width: iconSize,
+                height: iconSize,
               ),
             ),
-          if (patient == null || shortcuts.favs)
-            Flexible(
-              fit: FlexFit.loose,
-              child: HomeButton(
-                size: Size(shortCutSize, shortCutSize),
-                onPressed: pictos == null ? null : showComingSoon,
-                child: Image.asset(
-                  AppImages.kBoardFavouriteIconSelected,
-                  width: 48,
-                  height: 48,
-                ),
+          ),
+        if (patient == null || shortcuts.favs)
+          Flexible(
+            fit: FlexFit.loose,
+            child: HomeButton(
+              size: Size(shortCutSize, shortCutSize),
+              onPressed: pictos == null ? null : showComingSoon,
+              child: Image.asset(
+                AppImages.kBoardFavouriteIconSelected,
+                width: iconSize,
+                height: iconSize,
               ),
             ),
-          if (patient == null || shortcuts.yes)
-            Flexible(
-              fit: FlexFit.loose,
-              child: HomeButton(
-                size: Size(shortCutSize, shortCutSize),
-                onPressed: pictos == null
-                    ? null
-                    : () async {
-                        await tts.speak("global.yes".trl);
-                      },
-                child: Image.asset(
-                  AppImages.kBoardYesIconSelected,
-                  width: 48,
-                  height: 48,
-                ),
+          ),
+        if (patient == null || shortcuts.yes)
+          Flexible(
+            fit: FlexFit.loose,
+            child: HomeButton(
+              size: Size(shortCutSize, shortCutSize),
+              onPressed: pictos == null
+                  ? null
+                  : () async {
+                      await tts.speak("global.yes".trl);
+                    },
+              child: Image.asset(
+                AppImages.kBoardYesIconSelected,
+                width: iconSize,
+                height: iconSize,
               ),
             ),
-          if (patient == null || shortcuts.no)
-            Flexible(
-              fit: FlexFit.loose,
-              child: HomeButton(
-                size: Size(shortCutSize, shortCutSize),
-                onPressed: pictos == null
-                    ? null
-                    : () async {
-                        await tts.speak("global.no".trl);
-                      },
-                child: Image.asset(
-                  AppImages.kBoardNoIconSelected,
-                  width: 48,
-                  height: 48,
-                ),
+          ),
+        if (patient == null || shortcuts.no)
+          Flexible(
+            fit: FlexFit.loose,
+            child: HomeButton(
+              size: Size(shortCutSize, shortCutSize),
+              onPressed: pictos == null
+                  ? null
+                  : () async {
+                      await tts.speak("global.no".trl);
+                    },
+              child: Image.asset(
+                AppImages.kBoardNoIconSelected,
+                width: iconSize,
+                height: iconSize,
               ),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 }
