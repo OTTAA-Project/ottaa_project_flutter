@@ -23,146 +23,144 @@ class WhatsThePictoScreen extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Stack(
-        children: [
-          const BackGroundWidget(),
-          HeaderWidget(
-            headline: 'game.game_header_${game.selectedGame}'.trl,
-            subtitle: 'game.game_1_line'.trl,
-            onTap: () {
-              game.backgroundMusicPlayer.pause();
-              game.resetScore();
-              game.gameTimer.cancel();
-              if (game.hintsBtn) {
-                game.cancelHints();
-              }
-            },
-          ),
-          SpeakButton(
-            onTap: () async => provider.speakNameWhatsThePicto(),
-          ),
-          Container(
-            height: size.height,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ///first
-                  ShakeAnimatedWidget(
-                    enabled: game.hintsEnabled
-                        ? game.correctPictoWTP == 0
-                            ? true
-                            : false
-                        : false,
-                    duration: const Duration(milliseconds: 400),
-                    shakeAngle: Rotation.deg(z: 4),
-                    curve: Curves.linear,
-                    child: PictWidget(
-                      pict: game.gamePictsWTP[0],
-                      show: provider.pictoShowWhatsThePict[0],
-                      onTap: () async {
-                        await provider.checkAnswerWhatThePicto(index: 0);
-                      },
-                      rightOrWrong: game.correctPictoWTP == 0,
-                    ),
+    return Stack(
+      children: [
+        const BackGroundWidget(),
+        HeaderWidget(
+          headline: 'game.game_header_${game.selectedGame}'.trl,
+          subtitle: 'game.game_1_line'.trl,
+          onTap: () {
+            game.backgroundMusicPlayer.pause();
+            game.resetScore();
+            game.gameTimer.cancel();
+            if (game.hintsBtn) {
+              game.cancelHints();
+            }
+          },
+        ),
+        SpeakButton(
+          onTap: () async => provider.speakNameWhatsThePicto(),
+        ),
+        Container(
+          height: size.height,
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ///first
+                ShakeAnimatedWidget(
+                  enabled: game.hintsEnabled
+                      ? game.correctPictoWTP == 0
+                          ? true
+                          : false
+                      : false,
+                  duration: const Duration(milliseconds: 400),
+                  shakeAngle: Rotation.deg(z: 4),
+                  curve: Curves.linear,
+                  child: PictWidget(
+                    pict: game.gamePictsWTP[0],
+                    show: provider.pictoShowWhatsThePict[0],
+                    onTap: () async {
+                      await provider.checkAnswerWhatThePicto(index: 0);
+                    },
+                    rightOrWrong: game.correctPictoWTP == 0,
                   ),
-                  const SizedBox(
-                    width: 24,
+                ),
+                const SizedBox(
+                  width: 24,
+                ),
+
+                ///second
+                ShakeAnimatedWidget(
+                  enabled: game.hintsEnabled
+                      ? game.correctPictoWTP == 1
+                          ? true
+                          : false
+                      : false,
+                  duration: const Duration(milliseconds: 400),
+                  shakeAngle: Rotation.deg(z: 4),
+                  curve: Curves.linear,
+                  child: PictWidget(
+                    pict: game.gamePictsWTP[1],
+                    show: provider.pictoShowWhatsThePict[1],
+                    onTap: () async {
+                      await provider.checkAnswerWhatThePicto(index: 1);
+                    },
+                    rightOrWrong: game.correctPictoWTP == 1,
                   ),
+                ),
 
-                  ///second
-                  ShakeAnimatedWidget(
-                    enabled: game.hintsEnabled
-                        ? game.correctPictoWTP == 1
-                            ? true
-                            : false
-                        : false,
-                    duration: const Duration(milliseconds: 400),
-                    shakeAngle: Rotation.deg(z: 4),
-                    curve: Curves.linear,
-                    child: PictWidget(
-                      pict: game.gamePictsWTP[1],
-                      show: provider.pictoShowWhatsThePict[1],
-                      onTap: () async {
-                        await provider.checkAnswerWhatThePicto(index: 1);
-                      },
-                      rightOrWrong: game.correctPictoWTP == 1,
-                    ),
-                  ),
+                ///third
+                game.difficultyLevel >= 1
+                    ? const SizedBox(
+                        width: 24,
+                      )
+                    : const SizedBox.shrink(),
+                game.difficultyLevel >= 1
+                    ? ShakeAnimatedWidget(
+                        enabled: game.hintsEnabled
+                            ? game.correctPictoWTP == 2
+                                ? true
+                                : false
+                            : false,
+                        duration: const Duration(milliseconds: 400),
+                        shakeAngle: Rotation.deg(z: 4),
+                        curve: Curves.linear,
+                        child: PictWidget(
+                          pict: game.gamePictsWTP[2],
+                          show: provider.pictoShowWhatsThePict[2],
+                          onTap: () async {
+                            await provider.checkAnswerWhatThePicto(index: 2);
+                          },
+                          rightOrWrong: game.correctPictoWTP == 2,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
 
-                  ///third
-                  game.difficultyLevel >= 1
-                      ? const SizedBox(
-                          width: 24,
-                        )
-                      : const SizedBox.shrink(),
-                  game.difficultyLevel >= 1
-                      ? ShakeAnimatedWidget(
-                          enabled: game.hintsEnabled
-                              ? game.correctPictoWTP == 2
-                                  ? true
-                                  : false
-                              : false,
-                          duration: const Duration(milliseconds: 400),
-                          shakeAngle: Rotation.deg(z: 4),
-                          curve: Curves.linear,
-                          child: PictWidget(
-                            pict: game.gamePictsWTP[2],
-                            show: provider.pictoShowWhatsThePict[2],
-                            onTap: () async {
-                              await provider.checkAnswerWhatThePicto(index: 2);
-                            },
-                            rightOrWrong: game.correctPictoWTP == 2,
-                          ),
-                        )
-                      : const SizedBox.shrink(),
-
-                  ///forth
-                  game.difficultyLevel >= 2
-                      ? const SizedBox(
-                          width: 24,
-                        )
-                      : const SizedBox.shrink(),
-                  game.difficultyLevel >= 2
-                      ? ShakeAnimatedWidget(
-                          enabled: game.hintsEnabled
-                              ? game.correctPictoWTP == 3
-                                  ? true
-                                  : false
-                              : false,
-                          duration: const Duration(milliseconds: 400),
-                          shakeAngle: Rotation.deg(z: 4),
-                          curve: Curves.linear,
-                          child: PictWidget(
-                            pict: game.gamePictsWTP[3],
-                            show: provider.pictoShowWhatsThePict[3],
-                            onTap: () async {
-                              await provider.checkAnswerWhatThePicto(index: 3);
-                            },
-                            rightOrWrong: game.correctPictoWTP == 3,
-                          ),
-                        )
-                      : const SizedBox.shrink(),
-                ],
-              ),
+                ///forth
+                game.difficultyLevel >= 2
+                    ? const SizedBox(
+                        width: 24,
+                      )
+                    : const SizedBox.shrink(),
+                game.difficultyLevel >= 2
+                    ? ShakeAnimatedWidget(
+                        enabled: game.hintsEnabled
+                            ? game.correctPictoWTP == 3
+                                ? true
+                                : false
+                            : false,
+                        duration: const Duration(milliseconds: 400),
+                        shakeAngle: Rotation.deg(z: 4),
+                        curve: Curves.linear,
+                        child: PictWidget(
+                          pict: game.gamePictsWTP[3],
+                          show: provider.pictoShowWhatsThePict[3],
+                          onTap: () async {
+                            await provider.checkAnswerWhatThePicto(index: 3);
+                          },
+                          rightOrWrong: game.correctPictoWTP == 3,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ],
             ),
           ),
-          provider.showText
-              ? Positioned(
-                  top: size.height * 0.8,
-                  left: size.width * 0.46,
-                  child: Text(
-                    provider.selectedPicto == game.correctPictoWTP ? 'game.yes'.trl : 'game.no'.trl,
-                    style: textTheme.headline1,
-                  ),
-                )
-              : const SizedBox.shrink(),
-          const LeftSideIcons(
-            hints: true,
-          ),
-        ],
-      ),
+        ),
+        provider.showText
+            ? Positioned(
+                top: size.height * 0.8,
+                left: size.width * 0.46,
+                child: Text(
+                  provider.selectedPicto == game.correctPictoWTP ? 'game.yes'.trl : 'game.no'.trl,
+                  style: textTheme.headline1,
+                ),
+              )
+            : const SizedBox.shrink(),
+        const LeftSideIcons(
+          hints: true,
+        ),
+      ],
     );
   }
 }

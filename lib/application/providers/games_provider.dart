@@ -31,7 +31,7 @@ class GamesProvider extends ChangeNotifier {
   int streak = 0;
   List<bool> matchPictoTop = List.filled(4, false);
   List<bool> matchPictoBottom = List.filled(4, false);
-  bool mute = false;
+  bool isMute = false;
   List<Picto> gamePictsWTP = [];
   List<Picto> gamePictsMP = [];
   int correctPictoWTP = 99;
@@ -233,9 +233,9 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> changeMusic() async {
-    mute = !mute;
+    isMute = !isMute;
     notifyListeners();
-    if (mute) {
+    if (isMute) {
       await backgroundMusicPlayer.pause();
     } else {
       await backgroundMusicPlayer.play();
@@ -245,7 +245,7 @@ class GamesProvider extends ChangeNotifier {
   Future<void> initializeBackgroundMusic() async {
     ///check if we can buffer the audios before even loading the properties of the given class
     // backgroundMusicPlayer.setAudioSource();
-    if (mute) {
+    if (isMute) {
     } else {
       await backgroundMusicPlayer.setAsset('assets/audios/funckygroove.mp3');
       await backgroundMusicPlayer.setLoopMode(LoopMode.one);

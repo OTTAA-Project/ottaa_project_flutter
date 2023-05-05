@@ -49,4 +49,5 @@ class AppRoutes {
   static const whatsThePictoScreen = "/whats_the_picto_screen";
   static const selectBoardPicto = "/select_board_picto";
   static const showCreatedStory = "/show_created_story";
+  static const gamePlayScreen = "/game_play_screen";
 }
