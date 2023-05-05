@@ -405,6 +405,7 @@ class HomeProvider extends ChangeNotifier {
       if (patientState.state != null && patientState.user.patientSettings.layout.cleanup) {
         pictoWords.clear();
         await buildSuggestion();
+        notify();
       }
     }
   }

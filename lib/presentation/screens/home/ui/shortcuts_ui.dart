@@ -134,8 +134,14 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                   : () async {
                       showDialog(
                           context: context,
+                          barrierDismissible: false,
                           builder: (context) {
-                            return Container();
+                            return WillPopScope(
+                              onWillPop: () async {
+                                return false;
+                              },
+                              child: const SizedBox(),
+                            );
                           });
                       await homeProv.speakYes();
                       context.pop();
@@ -157,8 +163,14 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                   : () async {
                       showDialog(
                           context: context,
+                          barrierDismissible: false,
                           builder: (context) {
-                            return Container();
+                            return WillPopScope(
+                              onWillPop: () async {
+                                return false;
+                              },
+                              child: const SizedBox(),
+                            );
                           });
                       await homeProv.speakNo();
                       context.pop();
