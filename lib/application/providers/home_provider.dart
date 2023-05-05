@@ -78,7 +78,6 @@ class HomeProvider extends ChangeNotifier {
   int? selectedWord;
   ScrollController scrollController = ScrollController();
 
-
   HomeScreenStatus status = HomeScreenStatus.pictos;
 
   // Home Tabs
@@ -372,6 +371,7 @@ class HomeProvider extends ChangeNotifier {
   Future<void> speakSentence() async {
     show = true;
     notifyListeners();
+
     if (patientState.state != null && !patientState.user.patientSettings.layout.oneToOne) {
       notifyListeners();
       String? sentence;
@@ -386,7 +386,6 @@ class HomeProvider extends ChangeNotifier {
 
       show = false;
       notifyListeners();
-      return;
     } else {
       for (var i = 0; i < pictoWords.length; i++) {
         selectedWord = i;
@@ -398,15 +397,15 @@ class HomeProvider extends ChangeNotifier {
         notifyListeners();
         await _tts.speak(pictoWords[i].text);
       }
+    }
 
-      show = false;
-      notifyListeners();
+    show = false;
+    notifyListeners();
 
-      if (patientState.state != null && patientState.user.patientSettings.layout.cleanup) {
-        pictoWords.clear();
-        await buildSuggestion();
-        notify();
-      }
+    if (patientState.state != null && patientState.user.patientSettings.layout.cleanup) {
+      pictoWords.clear();
+      await buildSuggestion();
+      notify();
     }
   }
 
@@ -455,7 +454,7 @@ class HomeProvider extends ChangeNotifier {
     await _tts.speak("global.yes".trl);
   }
 
-    Future<void> speakNo() async {
+  Future<void> speakNo() async {
     await _tts.speak("global.no".trl);
   }
 

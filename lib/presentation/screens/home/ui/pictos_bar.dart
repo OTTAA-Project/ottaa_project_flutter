@@ -39,13 +39,16 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     print(aspectRatio);
     return Flex(
       direction: Axis.vertical,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Flexible(
-          fit: FlexFit.tight,
-          flex: 8,
+          flex: 2,
+          fit: FlexFit.loose,
           child: Flex(
             direction: Axis.horizontal,
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(width: 30),
               pictos.isEmpty
@@ -89,18 +92,22 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                   ],
                 ),
               ),
-              const SizedBox(width: 24),
+              const SizedBox(width: 10),
             ],
           ),
         ),
-        Flexible(
-          flex: (size.flipped.aspectRatio > 1.5 ? 1 : 2).toInt(),
-          child: const ShortcutsUI(),
+        const Flexible(
+          flex: 1,
+          fit: FlexFit.tight,
+          child: Align(
+            alignment: Alignment.center,
+            child: ShortcutsUI(),
+          ),
         ),
-        SizedBox(
-          width: size.width,
-          height: kIsTablet ? 50 : 10,
-        ),
+        // SizedBox(
+        //   width: size.width,
+        //   height: (size.flipped.aspectRatio > 1.5 ? 1 : 2),
+        // )
       ],
     );
   }
