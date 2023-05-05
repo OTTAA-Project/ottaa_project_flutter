@@ -119,7 +119,9 @@ class UserSettingsProvider extends ChangeNotifier {
   Future<void> changeLanguage({required String languageCode}) async {
     language = languageCode;
     languageSetting.language = languageCode;
-    await _i18n.changeLanguage(languageCode);
+    if (_userNotifier.user?.isPatient ?? false) {
+      await _i18n.changeLanguage(languageCode);
+    }
     await fetchAllVoices();
     notifyListeners();
   }

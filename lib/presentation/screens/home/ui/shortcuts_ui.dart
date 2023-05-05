@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
@@ -44,7 +45,9 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
     int shorcutsCount = patient?.patientSettings.layout.shortcuts.toMap().values.where((element) => element).length ?? 7;
 
     double shortCutSize = ((size.width - (32 * shorcutsCount)) / shorcutsCount);
-    double iconSize = (shortCutSize / 2).clamp(20, 38);
+    double iconSize = (shortCutSize * .5).clamp(kIsTablet ? 80 : 30, kIsTablet ? 90 : 38);
+
+    print((shortCutSize * .5));
 
     ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
 

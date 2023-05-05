@@ -51,7 +51,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     debugLogDiagnostics: kDebugMode,
     restorationScopeId: "ottaa",
     errorBuilder: (context, state) => const ErrorScreen(),
-    initialLocation: "/",
+    initialLocation: "/onboarding",
     // refreshListenable: userState,
     routes: <GoRoute>[
       GoRoute(

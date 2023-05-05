@@ -19,7 +19,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await unblockRotation();
+      if(kIsTablet) {
+        await blockLandscapeMode();
+      }else{
+        await unblockRotation();
+      }
       setState(() {});
     });
     super.initState();
@@ -34,8 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return LayoutBuilder(builder: (context, constraints) {
       final maxEdge = max(size.width, size.height);
 
-      return SafeArea(
-        top: false,
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Scaffold(
           body: Center(
             child: SizedBox.fromSize(

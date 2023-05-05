@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,19 +10,13 @@ class OnboardingLayout extends ConsumerStatefulWidget {
 
   final String image;
 
-  const OnboardingLayout(
-      {super.key,
-      required this.title,
-      required this.subtitle,
-      required this.description,
-      required this.image});
+  const OnboardingLayout({super.key, required this.title, required this.subtitle, required this.description, required this.image});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _UserInfoStepState();
 }
 
-class _UserInfoStepState extends ConsumerState<OnboardingLayout>
-    with AutomaticKeepAliveClientMixin {
+class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -74,11 +69,11 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout>
           ),
           const SizedBox(height: 30),
           Flexible(
-            flex: 1,
+            flex: 2,
             fit: FlexFit.loose,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
+              child: AutoSizeText(
                 widget.description,
                 textAlign: TextAlign.center,
                 style: textTheme.headline3,

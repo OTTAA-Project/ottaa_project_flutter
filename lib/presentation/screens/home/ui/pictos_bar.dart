@@ -35,6 +35,8 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     final maxHeight = min(size.width, size.height);
 
     final aspectRatio = maxWidth / maxHeight;
+
+    print(aspectRatio);
     return Flex(
       direction: Axis.vertical,
       children: [
@@ -92,7 +94,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
           ),
         ),
         Flexible(
-          flex: aspectRatio.round(),
+          flex: (size.flipped.aspectRatio > 1.5 ? 1 : 2).toInt(),
           child: const ShortcutsUI(),
         ),
         SizedBox(
@@ -115,7 +117,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     final aspectRatio = maxWidth / maxHeight;
 
     return Flexible(
-      flex: 8,
+      flex: 5,
       fit: FlexFit.loose,
       child: GridView.builder(
         itemCount: 4,
