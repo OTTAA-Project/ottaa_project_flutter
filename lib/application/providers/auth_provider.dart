@@ -46,21 +46,25 @@ class AuthProvider extends ChangeNotifier {
 
   Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     _loadingNotifier.showLoading();
+    try {
+      Either<String, UserModel> result = await _authService.signIn(type, email, password);
 
-    Either<String, UserModel> result = await _authService.signIn(type, email, password);
+      if (result.isRight) {
+        await _localDatabaseRepository.setUser(result.right);
+        //todo: talk with Emir about this and resolve it
+        await _aboutService.getUserInformation();
 
-    if (result.isRight) {
-      await _localDatabaseRepository.setUser(result.right);
-      //todo: talk with Emir about this and resolve it
-      await _aboutService.getUserInformation();
+        _userNotifier.setUser(result.right);
+        authData.setSignedIn();
+      }
 
-      _userNotifier.setUser(result.right);
-      authData.setSignedIn();
+      // notifyListeners();
+      return result;
+    } catch (e) {
+      return Left(e.toString());
+    } finally {
+      _loadingNotifier.hideLoading();
     }
-
-    _loadingNotifier.hideLoading();
-    // notifyListeners();
-    return result;
   }
 }
 

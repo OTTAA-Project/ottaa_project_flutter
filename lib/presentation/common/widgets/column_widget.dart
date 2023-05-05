@@ -7,8 +7,7 @@ class ColumnWidget extends StatelessWidget {
   final List<Widget> children;
   final ColumnType columnType;
 
-  const ColumnWidget(
-      {super.key, required this.children, required this.columnType});
+  const ColumnWidget({super.key, required this.children, required this.columnType});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +22,8 @@ class ColumnWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: kOTTAAOrangeNew,
         borderRadius: BorderRadius.only(
-          topRight: columnType == ColumnType.left
-              ? const Radius.circular(16)
-              : Radius.zero,
-          topLeft: columnType == ColumnType.right
-              ? const Radius.circular(16)
-              : Radius.zero,
+          topRight: columnType == ColumnType.left ? const Radius.circular(16) : Radius.zero,
+          topLeft: columnType == ColumnType.right ? const Radius.circular(16) : Radius.zero,
         ),
       ),
       child: Column(

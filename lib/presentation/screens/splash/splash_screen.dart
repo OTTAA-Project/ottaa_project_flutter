@@ -34,7 +34,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final auth = ref.read(authNotifier.notifier);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await blockPortraitMode();
+      if (kIsTablet) {
+        await blockLandscapeMode();
+      } else {
+        await unblockRotation();
+      }
 
       setState(() {});
 

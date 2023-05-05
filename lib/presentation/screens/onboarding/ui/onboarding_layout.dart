@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -78,7 +79,7 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout>
             fit: FlexFit.loose,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
+              child: AutoSizeText(
                 widget.description,
                 textAlign: TextAlign.center,
                 style: textTheme.headline3,

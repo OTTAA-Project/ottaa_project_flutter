@@ -9,7 +9,7 @@ bool get kIsTablet {
 
   final diagonal = sqrt((size.width * size.width) + (size.height * size.height));
 
-  return diagonal >= 1800.0;
+  return diagonal >= 1000.0;
 }
 
 Future<void> blockPortraitMode() async {
