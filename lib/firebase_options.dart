@@ -49,7 +49,7 @@ class DefaultFirebaseOptions {
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCO20tKmBuKOlOstr5X0WHJdATfAxlfma0',
     appId: '1:873137795353:web:40e956cef39481653d9588',
-    messagingSenderId: '873137795353',    
+    messagingSenderId: '873137795353',
     projectId: 'ottaaproject-flutter',
     authDomain: 'ottaaproject-flutter.firebaseapp.com',
     databaseURL: 'https://ottaaproject-flutter-default-rtdb.firebaseio.com',
