@@ -36,7 +36,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
     final pictos = ref.watch(homeProvider.select((value) => value.suggestedPicts));
     final provider = ref.read(gameProvider);
 
-    final tts = ref.watch(ttsProvider);
+    final homeProv = ref.read(homeProvider);
 
     PatientUserModel? patient = ref.watch(patientNotifier);
 
@@ -46,8 +46,6 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
 
     double shortCutSize = ((size.width - (32 * shorcutsCount)) / shorcutsCount);
     double iconSize = (shortCutSize * .5).clamp(kIsTablet ? 80 : 30, kIsTablet ? 90 : 38);
-
-    print((shortCutSize * .5));
 
     ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
 
@@ -134,7 +132,13 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
               onPressed: pictos == null
                   ? null
                   : () async {
-                      await tts.speak("global.yes".trl);
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Container();
+                          });
+                      await homeProv.speakYes();
+                      context.pop();
                     },
               child: Image.asset(
                 AppImages.kBoardYesIconSelected,
@@ -151,7 +155,13 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
               onPressed: pictos == null
                   ? null
                   : () async {
-                      await tts.speak("global.no".trl);
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Container();
+                          });
+                      await homeProv.speakNo();
+                      context.pop();
                     },
               child: Image.asset(
                 AppImages.kBoardNoIconSelected,
