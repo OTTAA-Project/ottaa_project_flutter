@@ -10,6 +10,7 @@ import 'package:ottaa_project_flutter/presentation/screens/customized_board/cust
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_wait_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/chatgpt_game.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/game_play_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/game_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/match_pictogram_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/memory_game_screen.dart';
@@ -252,6 +253,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.showCreatedStory,
           builder: (context, state) => const ShowCreatedStory(),
+        ),
+        GoRoute(
+          path: AppRoutes.gamePlayScreen,
+          builder: (context, state) => const GamePlayScreen(),
         ),
       ],
       errorBuilder: (context, state) => const ErrorScreen(),

@@ -28,9 +28,9 @@ class MPPictoWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          // width: 180,
-          // height: 180,
-          padding: const EdgeInsets.all(0.5),
+          width: 100,
+          height: 122,
+          // padding: const EdgeInsets.all(0.5),
           decoration: BoxDecoration(
             border: hideFlag
                 ? Border.all(color: Colors.transparent)
@@ -75,25 +75,26 @@ class MPPictoWidget extends StatelessWidget {
                     ),
                   ),
                 )
-              : PictoWidget(
-                  width: 100,
-                  height: 122,
-                  onTap: onTap,
-                  image: pict.resource.network != null
-                      ? CachedNetworkImage(
-                          imageUrl: pict.resource.network!,
-                          fit: BoxFit.fill,
-                          errorWidget: (context, url, error) => Image.asset(
+              : FittedBox(
+                  fit: BoxFit.fill,
+                  child: PictoWidget(
+                    onTap: onTap,
+                    image: pict.resource.network != null
+                        ? CachedNetworkImage(
+                            imageUrl: pict.resource.network!,
+                            fit: BoxFit.fill,
+                            errorWidget: (context, url, error) => Image.asset(
+                              fit: BoxFit.fill,
+                              "assets/img/${pict.text}.webp",
+                            ),
+                          )
+                        : Image.asset(
                             fit: BoxFit.fill,
                             "assets/img/${pict.text}.webp",
                           ),
-                        )
-                      : Image.asset(
-                          fit: BoxFit.fill,
-                          "assets/img/${pict.text}.webp",
-                        ),
-                  text: '',
-                  colorNumber: pict.type,
+                    text: '',
+                    colorNumber: pict.type,
+                  ),
                 ),
         ),
         hideFlag

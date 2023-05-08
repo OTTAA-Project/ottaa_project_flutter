@@ -14,7 +14,7 @@ class LeftSideIcons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(gameProvider);
-    final mute = ref.watch(gameProvider).mute;
+    final mute = ref.watch(gameProvider).isMute;
     final colorScheme = Theme.of(context).colorScheme;
     return Positioned(
       bottom: 24,

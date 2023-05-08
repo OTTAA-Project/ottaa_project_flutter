@@ -76,14 +76,14 @@ class SelectGroupScreen extends ConsumerWidget {
                         case 0:
                           await provider.createRandomForGameWTP();
                           wtpProvider.speakNameWhatsThePicto();
-                          context.push(AppRoutes.whatsThePictoScreen);
+                          context.push(AppRoutes.gamePlayScreen);
                           break;
                         case 1:
                           await provider.createRandomForGameMP();
-                          context.push(AppRoutes.matchPictogramScreen);
+                          context.push(AppRoutes.gamePlayScreen);
                           break;
                         case 2:
-                          context.push(AppRoutes.memoryGameScreen);
+                          context.push(AppRoutes.gamePlayScreen);
                           break;
                       }
                     },
