@@ -127,7 +127,9 @@ class ChatGPTNotifier extends ChangeNotifier {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );
-  }void scrollUpPictos() {
+  }
+
+  void scrollUpPictos() {
     int currentPosition = pictoScrollController.position.pixels.toInt();
 
     if (currentPosition == 0) return;
@@ -150,7 +152,6 @@ class ChatGPTNotifier extends ChangeNotifier {
       curve: Curves.easeOut,
     );
   }
-
 }
 
 final chatGPTProvider = ChangeNotifierProvider<ChatGPTNotifier>((ref) {
