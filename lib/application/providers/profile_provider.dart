@@ -5,8 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
-import 'package:ottaa_project_flutter/core/enums/user_types.dart';
-import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
@@ -96,18 +94,8 @@ class ProfileNotifier extends ChangeNotifier {
 
     UserModel? newUser;
 
-    if (isCaregiver) {
-      newUser = CaregiverUserModel.fromMap({
-        ...user.toMap(),
-        "type": UserType.caregiver.name,
-        "email": user.email,
-      });
-    } else if (isUser) {
-      newUser = PatientUserModel.fromMap({
-        ...user.toMap(),
-        "type": UserType.user.name,
-        "email": user.email,
-      });
+    if (isCaregiver || isUser) {
+      newUser = user;
     } else {
       if (user is CaregiverUserModel) {
         isCaregiver = true;

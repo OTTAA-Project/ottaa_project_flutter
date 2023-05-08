@@ -12,6 +12,10 @@ class MemoryGameNotifier extends ChangeNotifier {
 
   List<int> openedPictos = [];
 
+  List<int> matchedPictos = [];
+
+  bool? isRight;
+
   MemoryGameNotifier(this._gamesProvider);
 
   void createRandomPictos() {
@@ -35,9 +39,9 @@ class MemoryGameNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void openPicto(int index, AnimationController controller) {
+  void openPicto(int index) {
     Picto picto = pictos[index];
-    print(openedPictos);
+    print(index);
 
     if (openedPictos.length >= 2) {
       //TODO: There should not happen
@@ -46,18 +50,53 @@ class MemoryGameNotifier extends ChangeNotifier {
       notifyListeners();
       return;
     }
+
     if (openedPictos.contains(index)) {
       return;
     }
-    openedPictos.add(index);
 
-    controller.forward(from: 1);
+    openedPictos.add(index);
 
     if (openedPictos.length == 2) {
       //Check for game!
+      bool isRightPictos = pictos[openedPictos[0]].id == pictos[openedPictos[1]].id;
+
+      isRight = isRightPictos;
+
+      _gamesProvider.playClickSounds(assetName: isRightPictos ? "yay" : "ohoh");
+      if (isRightPictos) {
+        matchedPictos.addAll(openedPictos);
+      }
+      Future.delayed(const Duration(seconds: 2), () {
+        if (isRightPictos) {
+          _gamesProvider.correctScore++;
+          _gamesProvider.streak++;
+
+          if (_gamesProvider.correctScore >= 10 && _gamesProvider.difficultyLevel < 1) {
+            _gamesProvider.difficultyLevel++;
+          } else if (_gamesProvider.correctScore >= 20 && _gamesProvider.difficultyLevel < 2) {
+            _gamesProvider.difficultyLevel++;
+          }
+        } else {
+          if (_gamesProvider.streak == 0) {
+            _gamesProvider.incorrectScore++;
+          } else {
+            _gamesProvider.streak = 0;
+          }
+        }
+        isRight = null;
+        openedPictos.clear();
+        notifyListeners();
+      });
     }
 
     notifyListeners();
+  }
+
+  void clear() {
+    pictos.clear();
+    openedPictos.clear();
+    isRight = null;
   }
 }
 

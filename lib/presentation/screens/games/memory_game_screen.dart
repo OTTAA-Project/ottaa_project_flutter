@@ -1,18 +1,14 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/memory_game_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/games/ui/leftside_icons.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/memory_picto_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/games/ui/pict_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/speak_button.dart';
-import 'package:ottaa_project_flutter/presentation/screens/games/ui/ui_widget.dart';
 
 class MemoryGameScreen extends ConsumerStatefulWidget {
   const MemoryGameScreen({super.key});
@@ -22,12 +18,19 @@ class MemoryGameScreen extends ConsumerStatefulWidget {
 }
 
 class _MemoryGameState extends ConsumerState<MemoryGameScreen> {
+  late final MemoryGameNotifier __gameNot = ref.read(memoryGameProvider);
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.read(memoryGameProvider).createRandomPictos();
+      __gameNot.createRandomPictos();
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    __gameNot.clear();
+    super.dispose();
   }
 
   @override
@@ -60,26 +63,60 @@ class _MemoryGameState extends ConsumerState<MemoryGameScreen> {
           SpeakButton(
             onTap: () async => {},
           ),
-          Center(
-            child: GridView(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: game.difficultyLevel + 2,
-                childAspectRatio: 1,
-                mainAxisSpacing: 0,
-                crossAxisSpacing: 0,
-                mainAxisExtent: 140,
-              ),
-              children: memoryGame.pictos.mapIndexed((i, e) {
-                return MemoryPictoWidget(
-                  picto: e,
-                  show: memoryGame.openedPictos.contains(i),
-                  onTap: (controller) {
-                     memoryGame.openPicto(i, controller);
-                  },
-                );
-              }).toList(),
-            ),
-          ),
+          memoryGame.pictos.isNotEmpty
+              ? Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: size.height * 0.03,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: memoryGame.pictos.sublist(0, memoryGame.pictos.length - (game.difficultyLevel + 2)).mapIndexed((i, e) {
+                          return MemoryPictoWidget(
+                            isSelected: memoryGame.openedPictos.contains(i),
+                            isVisible: memoryGame.matchedPictos.contains(i),
+                            picto: e,
+                            isRight: memoryGame.isRight,
+                            onTap: () {
+                              memoryGame.openPicto(i);
+                            },
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: memoryGame.pictos.sublist(((game.difficultyLevel + 2))).mapIndexed((i, e) {
+                          return MemoryPictoWidget(
+                            picto: e,
+                            isRight: memoryGame.isRight,
+                            isVisible: memoryGame.matchedPictos.contains((i + (game.difficultyLevel + 2))),
+                            isSelected: memoryGame.openedPictos.contains((i + (game.difficultyLevel + 2))),
+                            onTap: () {
+                              memoryGame.openPicto((i + (game.difficultyLevel + 2)));
+                            },
+                          );
+                        }).toList(),
+                      )
+                    ],
+                  ),
+                )
+              : Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: size.height * 0.03,
+                  child: CircularProgressIndicator(
+                    color: colorScheme.primary,
+                  ),
+                ),
         ],
       ),
     );
