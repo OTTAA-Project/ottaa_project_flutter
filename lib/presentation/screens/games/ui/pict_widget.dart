@@ -26,8 +26,8 @@ class PictWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          // width: 140,
-          // height: 140,
+          width: 120,
+          height: 140,
           padding: const EdgeInsets.all(0.5),
           decoration: BoxDecoration(
             border: show ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4) : Border.all(color: Colors.transparent),
@@ -69,25 +69,26 @@ class PictWidget extends StatelessWidget {
                     ),
                   ),
                 )
-              : PictoWidget(
-                  width: 100,
-                  height: 122,
-                  onTap: onTap,
-                  image: pict.resource.network != null
-                      ? CachedNetworkImage(
-                          imageUrl: pict.resource.network!,
-                          fit: BoxFit.fill,
-                          errorWidget: (context, url, error) => Image.asset(
+              : FittedBox(
+                  fit: BoxFit.fill,
+                  child: PictoWidget(
+                    onTap: onTap,
+                    image: pict.resource.network != null
+                        ? CachedNetworkImage(
+                            imageUrl: pict.resource.network!,
+                            fit: BoxFit.fill,
+                            errorWidget: (context, url, error) => Image.asset(
+                              fit: BoxFit.fill,
+                              "assets/img/${pict.text}.webp",
+                            ),
+                          )
+                        : Image.asset(
                             fit: BoxFit.fill,
                             "assets/img/${pict.text}.webp",
                           ),
-                        )
-                      : Image.asset(
-                          fit: BoxFit.fill,
-                          "assets/img/${pict.text}.webp",
-                        ),
-                  text: pict.text,
-                  colorNumber: pict.type,
+                    text: pict.text,
+                    colorNumber: pict.type,
+                  ),
                 ),
         ),
         show
