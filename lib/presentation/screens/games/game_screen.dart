@@ -48,12 +48,13 @@ class GameScreenUI extends ConsumerWidget {
         itemCount: 4,
         itemBuilder: (BuildContext context, int index) {
           return Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 24),
                 child: Container(
-                  height: size.height * 0.7,
+                  // height: size.height * 0.7,
                   width: size.width * 0.3,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -84,18 +85,21 @@ class GameScreenUI extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      SimpleButton(
-                        /// niceu emir chan
-                        width: false,
-                        onTap: () {
-                          provider.selectedGame = index;
-                          if (index == 3) {
-                            context.push(AppRoutes.chatGPTGame);
-                          } else {
-                            context.push(AppRoutes.selectGroupScreen);
-                          }
-                        },
-                        text: 'game.next'.trl,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24),
+                        child: SimpleButton(
+                          /// niceu emir chan
+                          width: false,
+                          onTap: () {
+                            provider.selectedGame = index;
+                            if (index == 3) {
+                              context.push(AppRoutes.chatGPTGame);
+                            } else {
+                              context.push(AppRoutes.selectGroupScreen);
+                            }
+                          },
+                          text: 'game.next'.trl,
+                        ),
                       ),
                     ],
                   ),
@@ -105,13 +109,13 @@ class GameScreenUI extends ConsumerWidget {
                 children: [
                   Text(
                     '${'game.novel'.trl}  ',
-                    style: textTheme.headline4!.copyWith(
+                    style: textTheme.headline3!.copyWith(
                       color: colorScheme.primary,
                     ),
                   ),
                   Text(
                     '0 / ${provider.activeGroups}',
-                    style: textTheme.headline4!.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+                    style: textTheme.headline3!.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),

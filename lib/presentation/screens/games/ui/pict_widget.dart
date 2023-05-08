@@ -23,11 +23,12 @@ class PictWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
     return Stack(
       children: [
         Container(
-          width: 120,
-          height: 140,
+          width: size.height * 0.2,
+          height: size.height *0.25,
           padding: const EdgeInsets.all(0.5),
           decoration: BoxDecoration(
             border: show ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4) : Border.all(color: Colors.transparent),

@@ -32,8 +32,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> with WidgetsBin
       case AppLifecycleState.resumed:
         print("app in resumed");
         if (provider.isMute) {
-
-        }else{
+        } else {
           provider.backgroundMusicPlayer.play();
         }
         break;

@@ -28,23 +28,23 @@ class MPPictoWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: 100,
-          height: 122,
-          // padding: const EdgeInsets.all(0.5),
+          width: size.height * 0.2,
+          height: size.height *0.25,
+          padding: const EdgeInsets.all(0.5),
           decoration: BoxDecoration(
             border: hideFlag
                 ? Border.all(color: Colors.transparent)
                 : showCorrectOrWrongFlag
                     ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4)
                     : Border.all(color: Colors.transparent),
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(24),
           ),
           child: hideWidgetEnabled
               ? GestureDetector(
                   onTap: onTap,
                   child: Container(
-                    width: 100,
-                    height: 122,
+                    width: size.height * 0.2,
+                    height: size.height *0.25,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),

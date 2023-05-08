@@ -216,7 +216,7 @@ class PatientSettings extends UserSettings {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'data': data.toMap(),
-      'language': language,
+      'language': language.toMap(),
       'payment': payment.toMap(),
       'layout': layout.toMap(),
     };

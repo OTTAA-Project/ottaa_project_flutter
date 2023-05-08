@@ -33,7 +33,7 @@ class SelectGroupScreen extends ConsumerWidget {
             subtitle: 'game.group'.trl,
           ),
           Positioned(
-            bottom: 72,
+            bottom: size.height *0.2,
             left: 24,
             child: SizedBox(
               height: size.height * 0.6,

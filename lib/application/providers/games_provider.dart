@@ -1,17 +1,13 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
-import 'package:ottaa_project_flutter/application/providers/whats_the_picto_provider.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
-import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 class GamesProvider extends ChangeNotifier {
@@ -40,7 +36,7 @@ class GamesProvider extends ChangeNotifier {
   bool hintsEnabled = false;
 
   /// 0 == 2 pictos, 1 == 3 pictos, 2 == 4 pictos
-  int difficultyLevel = 0;
+  int difficultyLevel = 1;
 
   final AudioPlayer backgroundMusicPlayer = AudioPlayer();
   final AudioPlayer clicksPlayer = AudioPlayer();
