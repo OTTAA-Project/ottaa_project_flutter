@@ -16,8 +16,6 @@ class TTSProvider extends ChangeNotifier {
   Future<void> speak(String text) async {
     await speakOperation?.cancel();
     speakOperation = null;
-    await Future.delayed(Duration(milliseconds: 500));
-
     speakOperation = CancelableOperation.fromFuture(
       tts.speak(text),
       onCancel: () {

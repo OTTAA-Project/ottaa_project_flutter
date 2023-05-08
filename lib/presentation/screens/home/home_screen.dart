@@ -30,11 +30,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       blockLandscapeMode();
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
-      final size = MediaQuery.of(context).size;
-      int pictoSize = 116;
-
       //We are using size.height because at this time the screen is not rotated
-      int pictoCount = kIsTablet ? 6 : 4;
+      int pictoCount = 4;
 
       final setSuggested = ref.read(homeProvider.select((value) => value.setSuggedtedQuantity));
 
@@ -112,7 +109,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
             const Positioned(
-              top: 20,
+              top: 10,
               child: WordBarUI(),
             ),
             if (provider.show) ...[
@@ -122,7 +119,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
               const Positioned(
-                top: 20,
+                top: 10,
                 child: TalkWidget(),
               ),
             ],

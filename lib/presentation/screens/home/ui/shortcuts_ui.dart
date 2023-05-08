@@ -49,11 +49,15 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
 
     ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
 
-    return SizedBox(
-      height: 48,
-      child: Row(
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: 100,
+      ),
+      child: Flex(
+        direction: Axis.horizontal,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
           if (patient == null || shortcuts.games)
             Flexible(

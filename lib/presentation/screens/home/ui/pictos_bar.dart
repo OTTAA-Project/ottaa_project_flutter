@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
@@ -31,20 +32,13 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
     final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
-    final maxWidth = max(size.width, size.height);
-    final maxHeight = min(size.width, size.height);
-
-    final aspectRatio = maxWidth / maxHeight;
-
-    print(aspectRatio);
     return Flex(
       direction: Axis.vertical,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Flexible(
-          flex: 2,
-          fit: FlexFit.loose,
+        Expanded(
+          flex: kIsWeb ? 8 : 2,
           child: Flex(
             direction: Axis.horizontal,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,7 +61,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     HomeButton(
-                      size: Size.fromHeight(kIsTablet ? 125 : 64),
+                      size: Size.fromHeight((kIsTablet || kIsWeb) ? 125 : 64),
                       onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
@@ -79,7 +73,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                     ),
                     const SizedBox(height: 16),
                     HomeButton(
-                      size: Size.fromHeight(kIsTablet ? 125 : 64),
+                      size: Size.fromHeight((kIsTablet || kIsWeb) ? 125 : 64),
                       onPressed: pictos.isEmpty && !hasGroups
                           ? null
                           : () {
@@ -96,18 +90,16 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
             ],
           ),
         ),
+        const SizedBox(height: 30),
         const Flexible(
           flex: 1,
-          fit: FlexFit.tight,
+          fit: FlexFit.loose,
           child: Align(
             alignment: Alignment.center,
             child: ShortcutsUI(),
           ),
         ),
-        // SizedBox(
-        //   width: size.width,
-        //   height: (size.flipped.aspectRatio > 1.5 ? 1 : 2),
-        // )
+        const SizedBox(height: 10),
       ],
     );
   }
@@ -121,7 +113,6 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     final maxWidth = max(size.width, size.height);
     final maxHeight = min(size.width, size.height);
 
-    final aspectRatio = maxWidth / maxHeight;
 
     return Flexible(
       flex: 5,
@@ -130,9 +121,9 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
         itemCount: 4,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
-          childAspectRatio: aspectRatio,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
+          childAspectRatio: 1
         ),
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
