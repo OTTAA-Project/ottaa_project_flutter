@@ -36,7 +36,7 @@ class GamesProvider extends ChangeNotifier {
   bool hintsEnabled = false;
 
   /// 0 == 2 pictos, 1 == 3 pictos, 2 == 4 pictos
-  int difficultyLevel = 1;
+  int difficultyLevel = 0;
 
   final AudioPlayer backgroundMusicPlayer = AudioPlayer();
   final AudioPlayer clicksPlayer = AudioPlayer();
