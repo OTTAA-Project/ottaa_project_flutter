@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -171,11 +172,11 @@ class GamesProvider extends ChangeNotifier {
     pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
     groupsData ??= (await _groupsService.getAllGroups()).where((element) => !element.block).toList();
 
-    groupsData.forEach((e) {
+    for (var e in groupsData) {
       if (!e.block) {
         activeGroups++;
       }
-    });
+    }
 
     pictograms = Map.fromIterables(pictos.map((e) => e.id), pictos);
     groups = Map.fromIterables(groupsData.map((e) => e.id), groupsData);
@@ -229,7 +230,7 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> changeMusic({required bool mute}) async {
-    if (!mute) {
+    if (mute) {
       await backgroundMusicPlayer.pause();
     } else {
       await backgroundMusicPlayer.play();

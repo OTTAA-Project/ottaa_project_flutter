@@ -21,8 +21,8 @@ class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-    final provider = ref.read(gameProvider);
-    mute = provider.isMute;
+      final provider = ref.read(gameProvider);
+      mute = provider.isMute;
     });
     super.initState();
   }
@@ -62,10 +62,11 @@ class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
           ),
           GestureDetector(
             onTap: () async {
-              mute = !mute;
-              provider.isMute = mute;
-              await provider.changeMusic(mute: mute);
-              setState(() {});
+              setState(() {
+                mute = !mute;
+                provider.isMute = mute;
+                provider.changeMusic(mute: mute);
+              });
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
