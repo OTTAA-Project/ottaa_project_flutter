@@ -4,7 +4,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/score_dialouge.dart';
 
-class LeftSideIcons extends ConsumerWidget {
+class LeftSideIcons extends ConsumerStatefulWidget {
   const LeftSideIcons({
     Key? key,
     this.hints = false,
@@ -12,7 +12,14 @@ class LeftSideIcons extends ConsumerWidget {
   final bool hints;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LeftSideIcons> createState() => _LeftSideIconsState();
+}
+
+class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
     final provider = ref.read(gameProvider);
     final mute = ref.watch(gameProvider).isMute;
     final colorScheme = Theme.of(context).colorScheme;
@@ -43,7 +50,11 @@ class LeftSideIcons extends ConsumerWidget {
             ),
           ),
           GestureDetector(
-            onTap: () async => await provider.changeMusic(),
+            onTap: () async {
+              provider.isMute = !mute;
+              setState(() {});
+              await provider.changeMusic(mute: mute);
+            },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Container(
@@ -60,7 +71,7 @@ class LeftSideIcons extends ConsumerWidget {
               ),
             ),
           ),
-          hints
+          widget.hints
               ? GestureDetector(
                   onTap: () {
                     if (provider.hintsBtn) {

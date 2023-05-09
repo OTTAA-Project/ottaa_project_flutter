@@ -228,10 +228,8 @@ class GamesProvider extends ChangeNotifier {
     await clicksPlayer.play();
   }
 
-  Future<void> changeMusic() async {
-    isMute = !isMute;
-    notifyListeners();
-    if (isMute) {
+  Future<void> changeMusic({required bool mute}) async {
+    if (mute) {
       await backgroundMusicPlayer.pause();
     } else {
       await backgroundMusicPlayer.play();
