@@ -69,7 +69,7 @@ class _MemoryGameState extends ConsumerState<MemoryGameScreen> {
               ? Positioned(
                   left: 0,
                   right: 0,
-                  bottom: size.height * 0.03,
+                  bottom: size.height * 0.2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
