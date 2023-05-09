@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
@@ -91,7 +92,6 @@ class I18N extends ChangeNotifier {
     assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US)");
     Locale locale = Locale(split[0], split[1]);
     await changeLanguageFromLocale(locale);
-
     notify();
   }
 

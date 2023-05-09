@@ -1,19 +1,15 @@
-import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 import 'package:openai_client/openai_client.dart' as openai;
-import 'package:openai_client/src/model/openai_chat/openai_chat.dart';
-
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
-import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/devices_token.dart';
@@ -26,7 +22,6 @@ import 'package:universal_io/io.dart';
 class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   final Reference _storageRef = FirebaseStorage.instance.ref();
-
   final openai.OpenAIClient _openAIClient = openai.OpenAIClient(
     configuration: openai.OpenAIConfiguration(
       apiKey: dotenv.get("openaiToken"),
@@ -276,7 +271,7 @@ class ServerService implements ServerRepository {
       final data = jsonDecode(res.data) as Map<String, dynamic>;
       return Right(data);
     } else {
-      return Left("an error occurred"); //TODO: Handle the main error
+      return const Left("an error occurred"); //TODO: Handle the main error
     }
   }
 
@@ -301,7 +296,7 @@ class ServerService implements ServerRepository {
       final data = jsonDecode(res.data) as Map<String, dynamic>;
       return Right(data);
     } else {
-      return Left("an error occurred"); //TODO: Handle the main error
+      return const Left("an error occurred"); //TODO: Handle the main error
     }
   }
 
@@ -349,7 +344,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> fetchConnectedUserData({required String userId}) async {
-    final ref = _database.child('$userId'); //TODO: Change to real path
+    final ref = _database.child(userId); //TODO: Change to real path
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
@@ -596,7 +591,7 @@ class ServerService implements ServerRepository {
       return Right(jsonDecode(res.data) as Map<String, dynamic>);
     } catch (e) {
       // handle te responde error
-      return Left("learn_error");
+      return const Left("learn_error");
     }
   }
 
@@ -643,18 +638,18 @@ class ServerService implements ServerRepository {
       return Right(res.data);
     } catch (e) {
       // handle te responde error
-      return Left("learn_error");
+      return const Left("learn_error");
     }
   }
 
   @override
-  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens, double temperature = 0}) async {
     try {
       final choice = await _openAIClient.completions
           .create(
             model: "text-davinci-003",
             prompt: prompt,
-            temperature: 0,
+            temperature: temperature,
             maxTokens: maxTokens,
           )
           .data;

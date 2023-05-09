@@ -18,6 +18,7 @@ class UIWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
     return Stack(
       children: [
         const BackGroundWidget(),
@@ -30,8 +31,8 @@ class UIWidget extends StatelessWidget {
           child: uiWidget,
         ),
         Positioned(
-          bottom: 60,
-          left: 150,
+          bottom: size.height * 0.2,
+          left: size.width * 0.13,
           child: GestureDetector(
             onTap: backward,
             child: Container(
@@ -42,15 +43,15 @@ class UIWidget extends StatelessWidget {
               ),
               child: Icon(
                 Icons.arrow_back_ios_rounded,
-                size: 20,
+                size: size.height*0.03,
                 color: colorScheme.primary,
               ),
             ),
           ),
         ),
         Positioned(
-          bottom: 60,
-          right: 150,
+          bottom: size.height * 0.2,
+          right: size.width * 0.13,
           child: GestureDetector(
             onTap: forward,
             child: Container(
@@ -61,7 +62,7 @@ class UIWidget extends StatelessWidget {
               ),
               child: Icon(
                 Icons.arrow_forward_ios_rounded,
-                size: 20,
+                size: size.height*0.03,
                 color: colorScheme.primary,
               ),
             ),
