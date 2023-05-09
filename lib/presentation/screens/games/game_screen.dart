@@ -16,17 +16,23 @@ class GameScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.read(userNotifier);
     final provider = ref.read(gameProvider);
-    return Scaffold(
-      body: UIWidget(
-        subtitle: 'game.play'.trl,
-        headline: 'profile.hello'.trlf({'name': user!.settings.data.name}),
-        uiWidget: const GameScreenUI(),
-        backward: () {
-          provider.moveBackward();
-        },
-        forward: () {
-          provider.moveForward();
-        },
+    return SafeArea(
+      top: false,
+      left: false,
+      child: Scaffold(
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        body: UIWidget(
+          headline: 'profile.hello'.trlf({'name': user!.settings.data.name}),
+          subtitle: 'game.play'.trl,
+          uiWidget: const GameScreenUI(),
+          backward: () {
+            provider.moveBackward();
+          },
+          forward: () {
+            provider.moveForward();
+          },
+        ),
       ),
     );
   }

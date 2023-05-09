@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-
 import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
@@ -213,6 +212,7 @@ class PatientSettings extends UserSettings {
     required this.tts,
   });
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'data': data.toMap(),

@@ -8,8 +8,8 @@ import 'package:ottaa_project_flutter/application/application.dart';
 import 'package:ottaa_project_flutter/application/injector.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
+import 'package:ottaa_project_flutter/firebase_options.dart';
 
-//March 20v1
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
@@ -20,8 +20,9 @@ void main() async {
   );
   await dotenv.load();
 
-  await Firebase.initializeApp();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   if (kIsWeb) {
     // initialiaze the facebook javascript SDK
     await FacebookAuth.i.webAndDesktopInitialize(
