@@ -4,8 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
-import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/chat_gpt_game_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:picto_widget/picto_widget.dart';
 
@@ -14,9 +13,8 @@ class SentenceWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(chatGPTProvider);
+    final provider = ref.watch(chatGptGameProvider);
     final size = MediaQuery.of(context).size;
-    final textTheme = Theme.of(context).textTheme;
     return Center(
       child: SizedBox(
         width: size.width,

@@ -244,7 +244,7 @@ class AppRouter {
         ),
         GoRoute(
           path: AppRoutes.chatGPTGame,
-          builder: (context, state) => const ChatgptGame(),
+          builder: (context, state) => const ChatGptGame(),
         ),
         GoRoute(
           path: AppRoutes.selectBoardPicto,

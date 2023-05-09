@@ -1,19 +1,13 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
-import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/chat_gpt_game_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
-import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
-import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/board_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/picto_select.dart';
-import 'package:ottaa_ui_kit/theme.dart';
 
 class SelectBoardAndPicto extends ConsumerWidget {
   const SelectBoardAndPicto({Key? key}) : super(key: key);
@@ -21,7 +15,7 @@ class SelectBoardAndPicto extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final game = ref.watch(gameProvider);
-    final provider = ref.watch(chatGPTProvider);
+    final provider = ref.watch(chatGptGameProvider);
     final size = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
     final user = ref.read(userNotifier);

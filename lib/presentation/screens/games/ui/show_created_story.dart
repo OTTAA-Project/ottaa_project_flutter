@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
-import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/chat_gpt_game_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/storyWidget.dart';
@@ -14,7 +14,7 @@ class ShowCreatedStory extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(chatGPTProvider);
+    final provider = ref.watch(chatGptGameProvider);
     final colorScheme = Theme.of(context).colorScheme;
     final user = ref.read(userNotifier);
     return Scaffold(
