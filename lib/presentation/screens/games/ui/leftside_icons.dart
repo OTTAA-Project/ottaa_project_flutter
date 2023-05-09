@@ -16,12 +16,23 @@ class LeftSideIcons extends ConsumerStatefulWidget {
 }
 
 class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
+  bool mute = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    final provider = ref.read(gameProvider);
+    mute = provider.isMute;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(
     BuildContext context,
   ) {
     final provider = ref.read(gameProvider);
-    final mute = ref.watch(gameProvider).isMute;
+    print(mute);
     final colorScheme = Theme.of(context).colorScheme;
     return Positioned(
       bottom: 24,
@@ -51,8 +62,9 @@ class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
           ),
           GestureDetector(
             onTap: () async {
+              mute = !mute;
+              provider.isMute = mute;
               await provider.changeMusic(mute: mute);
-              provider.isMute = !mute;
               setState(() {});
             },
             child: Padding(
