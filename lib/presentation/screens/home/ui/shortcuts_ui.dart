@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
-import 'package:ottaa_project_flutter/application/router/app_routes.dart';
-import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
@@ -49,23 +46,22 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
 
     ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
 
-    return SizedBox(
-      height: 48,
-      child: Row(
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxHeight: 100,
+      ),
+      child: Flex(
+        direction: Axis.horizontal,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
           if (patient == null || shortcuts.games)
             Flexible(
               fit: FlexFit.loose,
               child: HomeButton(
                 size: Size(shortCutSize, shortCutSize),
-                onPressed: pictos == null
-                    ? null
-                    : () {
-                        provider.fetchPictograms();
-                        // context.push(AppRoutes.gameScreen);
-                      },
+                onPressed: pictos == null ? null : showComingSoon,
                 child: Image.asset(
                   AppImages.kBoardDiceIconSelected,
                   width: iconSize,

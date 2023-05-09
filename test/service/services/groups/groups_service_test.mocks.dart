@@ -619,6 +619,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   _i4.Future<_i2.Either<String, String>> generatePhraseGPT({
     required String? prompt,
     required int? maxTokens,
+    double? temperature = 0.0,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -627,6 +628,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
           {
             #prompt: prompt,
             #maxTokens: maxTokens,
+            #temperature: temperature,
           },
         ),
         returnValue: _i4.Future<_i2.Either<String, String>>.value(
@@ -638,6 +640,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             {
               #prompt: prompt,
               #maxTokens: maxTokens,
+              #temperature: temperature,
             },
           ),
         )),

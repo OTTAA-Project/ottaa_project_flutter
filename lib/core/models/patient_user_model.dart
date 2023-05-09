@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-
 import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
@@ -120,8 +119,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Group>>(
                 key.toString(),
-                Map.from(value as dynamic)
-                    .values
+                (value is List ? value as dynamic : Map.from(value as dynamic).values)
                     .map<Group>(
                       (e) => Group.fromMap(Map.from(e as dynamic)),
                     )
@@ -133,8 +131,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Phrase>>.from((map['phrases'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Phrase>>(
                 key.toString(),
-                Map.from(value as dynamic)
-                    .values
+                (value is List ? value : Map.from(value as dynamic).values)
                     .map<Phrase>(
                       (e) => Phrase.fromMap(Map.from(e as dynamic)),
                     )
@@ -146,8 +143,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Picto>>.from((map['pictos'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Picto>>(
                 key.toString(),
-                Map.from(value as dynamic)
-                    .values
+                (value is List ? value : Map.from(value as dynamic).values)
                     .map<Picto>(
                       (e) => Picto.fromMap(Map.from(e as dynamic)),
                     )

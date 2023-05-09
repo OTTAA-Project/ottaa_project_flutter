@@ -67,10 +67,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                   if (status == HomeScreenStatus.tabs) {
                     ref.read(homeProvider).status = HomeScreenStatus.pictos;
                   } else {
-                    ref.read(homeProvider).currentGridGroup != null
-                        ? ref.read(homeProvider).currentGridGroup = null
-                        : ref.read(homeProvider).status =
-                            HomeScreenStatus.pictos;
+                    ref.read(homeProvider).currentGridGroup != null ? ref.read(homeProvider).currentGridGroup = null : ref.read(homeProvider).status = HomeScreenStatus.pictos;
                   }
                   ref.read(homeProvider).notify();
                 },
@@ -97,14 +94,13 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
     final pictosIsEmpty = pictoWords.isEmpty;
     final scrollCon = ref.watch(homeProvider).scrollController;
 
-    final removeLastPictogram =
-        ref.read(homeProvider.select((value) => value.removeLastPictogram));
+    final removeLastPictogram = ref.read(homeProvider.select((value) => value.removeLastPictogram));
 
     final status = ref.watch(homeProvider.select((value) => value.status));
     final size = MediaQuery.of(context).size;
 
     int pictosWord = ((size.width - (kIsTablet ? 500 : 200)) ~/ 64);
-
+    print(kIsTablet);
     return SizedBox(
       width: size.width,
       height: kIsTablet ? 140 : 80,
@@ -129,8 +125,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                   mainAxisSpacing: 16,
                 ),
                 itemBuilder: (context, index) {
-                  Picto? pict = pictoWords.firstWhereIndexedOrNull(
-                      (elIndex, element) => elIndex == index);
+                  Picto? pict = pictoWords.firstWhereIndexedOrNull((elIndex, element) => elIndex == index);
 
                   if (pict == null) {
                     return FittedBox(
@@ -158,10 +153,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                               return Center(
                                 child: CircularProgressIndicator(
                                   color: colorScheme.primary,
-                                  value: progress.totalSize != null
-                                      ? progress.downloaded /
-                                          progress.totalSize!
-                                      : null,
+                                  value: progress.totalSize != null ? progress.downloaded / progress.totalSize! : null,
                                 ),
                               );
                             },
@@ -190,11 +182,8 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
               height: kIsTablet ? 140 : 80,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(pictosIsEmpty
-                      ? Colors.grey.withOpacity(.12)
-                      : Colors.white),
-                  overlayColor: MaterialStateProperty.all(
-                      colorScheme.primary.withOpacity(0.1)),
+                  backgroundColor: MaterialStateProperty.all(pictosIsEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
+                  overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
                   shape: MaterialStateProperty.all(
                     const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(9)),
@@ -221,11 +210,8 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
               height: kIsTablet ? 140 : 80,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(pictosIsEmpty
-                      ? colorScheme.primary.withOpacity(.12)
-                      : colorScheme.primary),
-                  overlayColor:
-                      MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
+                  backgroundColor: MaterialStateProperty.all(pictosIsEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
+                  overlayColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
                   shape: MaterialStateProperty.all(
                     const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(9)),

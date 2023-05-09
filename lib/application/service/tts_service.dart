@@ -31,7 +31,7 @@ class TTSService extends TTSRepository {
         await tts.setVoice({"name": name, "locale": locale});
         language = _i18n.currentLanguage!.locale.toString();
         await tts.setLanguage(language);
-        print(speechRate);
+        await tts.setVolume(1.0);
         await tts.setSpeechRate(speechRate);
         await tts.setPitch(pitch);
       }
@@ -70,12 +70,19 @@ class TTSService extends TTSRepository {
 
   @override
   Future<void> changeTTSVoice(String voice) async {
-    voices.forEach((element) {
+    for (var element in voices) {
       if (element.name == voice) {
         locale = element.locale;
         name = element.name;
         print("here: ${element.name} == $voice");
       }
-    });
+    }
+  }
+  Future<void> pause()async{
+    await tts.pause();
+  }
+  @override
+  Future<void> ttsStop()async{
+    await tts.stop();
   }
 }

@@ -2,13 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
-import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/application/providers/whats_the_picto_provider.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
@@ -22,12 +20,7 @@ class SelectGroupScreen extends ConsumerWidget {
     final size = MediaQuery.of(context).size;
     final user = ref.read(userProvider.select((value) => value.user));
     final colorScheme = Theme.of(context).colorScheme;
-    final groups = ref
-        .watch(homeProvider)
-        .groups
-        .values
-        .where((element) => !element.block)
-        .toList();
+    final groups = ref.watch(homeProvider).groups.values.where((element) => !element.block).toList();
     final provider = ref.watch(gameProvider);
     return Scaffold(
       body: Stack(
@@ -38,7 +31,7 @@ class SelectGroupScreen extends ConsumerWidget {
             subtitle: 'game.group'.trl,
           ),
           Positioned(
-            bottom: 72,
+            bottom: size.height *0.2,
             left: 24,
             child: SizedBox(
               height: size.height * 0.6,
@@ -51,8 +44,7 @@ class SelectGroupScreen extends ConsumerWidget {
                   childAspectRatio: 1,
                   mainAxisExtent: 96,
                 ),
-                controller: ref.watch(
-                    gameProvider.select((value) => value.gridScrollController)),
+                controller: ref.watch(gameProvider.select((value) => value.gridScrollController)),
                 padding: const EdgeInsets.only(top: 16, bottom: 16, right: 32),
                 itemCount: groups.length,
                 itemBuilder: (ctx, index) {
@@ -63,10 +55,8 @@ class SelectGroupScreen extends ConsumerWidget {
                       fixedSize: MaterialStateProperty.all(size),
                       backgroundColor: MaterialStateProperty.all(Colors.white),
                       foregroundColor: MaterialStateProperty.all(kBlackColor),
-                      iconColor:
-                          MaterialStateProperty.all(colorScheme.secondary),
-                      overlayColor: MaterialStateProperty.all(
-                          colorScheme.primary.withOpacity(0.1)),
+                      iconColor: MaterialStateProperty.all(colorScheme.secondary),
+                      overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
                       shape: MaterialStateProperty.all(
                         const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -78,15 +68,20 @@ class SelectGroupScreen extends ConsumerWidget {
                     onPressed: () async {
                       provider.selectedGroupIndex = index;
                       await provider.fetchSelectedPictos();
+                      provider.init();
+                      final wtpProvider = ref.read(whatsThePictoProvider);
                       switch (provider.selectedGame) {
                         case 0:
-                          // context.push(AppRoutes.whatsThePictoScreen);
+                          await provider.createRandomForGameWTP();
+                          wtpProvider.speakNameWhatsThePicto();
+                          // context.push(AppRoutes.gamePlayScreen);
                           break;
                         case 1:
-                          // context.push(AppRoutes.matchPictogramScreen);
+                          await provider.createRandomForGameMP();
+                          // context.push(AppRoutes.gamePlayScreen);
                           break;
                         case 2:
-                          // context.push(AppRoutes.memoryGameScreen);
+                          // context.push(AppRoutes.gamePlayScreen);
                           break;
                       }
                     },
@@ -98,8 +93,7 @@ class SelectGroupScreen extends ConsumerWidget {
                               ? CachedNetworkImage(
                                   imageUrl: group.resource.network!,
                                   fit: BoxFit.fill,
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset(
+                                  errorWidget: (context, url, error) => Image.asset(
                                     fit: BoxFit.fill,
                                     "assets/img/${group.text}.webp",
                                   ),
@@ -111,8 +105,7 @@ class SelectGroupScreen extends ConsumerWidget {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 16, right: 16, top: 16),
+                            padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
                             child: Align(
                               alignment: Alignment.topRight,
                               child: AutoSizeText(

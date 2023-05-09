@@ -34,10 +34,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final auth = ref.read(authNotifier.notifier);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+
       if (kIsTablet) {
         await blockLandscapeMode();
       } else {
-        await unblockRotation();
+        await blockPortraitMode();
       }
 
       setState(() {});
@@ -100,7 +101,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Image(
               image: const AssetImage(AppImages.kLogoOttaa),
-              width: size.width * 0.5,
+              width: (size.width * 0.5).clamp(200, 400)
             ),
           ),
         ],
