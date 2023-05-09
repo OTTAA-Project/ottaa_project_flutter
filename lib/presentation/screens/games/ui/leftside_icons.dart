@@ -51,9 +51,9 @@ class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
           ),
           GestureDetector(
             onTap: () async {
+              await provider.changeMusic(mute: mute);
               provider.isMute = !mute;
               setState(() {});
-              await provider.changeMusic(mute: mute);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
