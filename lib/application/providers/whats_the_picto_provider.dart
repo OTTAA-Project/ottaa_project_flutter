@@ -1,20 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
-import 'package:ottaa_project_flutter/core/models/picto_model.dart';
-import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart';
 
 class WhatsThePictoProvider extends ChangeNotifier {
-  final UserNotifier _userNotifier;
-  final PatientNotifier _patientNotifier;
-  final ChatGPTRepository _chatGPTRepository;
   final GamesProvider _gamesProvider;
   final TTSProvider _tts;
 
@@ -69,7 +59,7 @@ class WhatsThePictoProvider extends ChangeNotifier {
     // notifyListeners();
   }
 
-  WhatsThePictoProvider(this._userNotifier, this._patientNotifier, this._chatGPTRepository, this._gamesProvider, this._tts);
+  WhatsThePictoProvider(this._gamesProvider, this._tts);
 
   void speakNameWhatsThePicto() async {
     await _tts.speak('game.speak_what'.trlf({'name': _gamesProvider.gamePictsWTP[_gamesProvider.correctPictoWTP].text}));
@@ -105,10 +95,7 @@ class WhatsThePictoProvider extends ChangeNotifier {
 }
 
 final whatsThePictoProvider = ChangeNotifierProvider<WhatsThePictoProvider>((ref) {
-  final userState = ref.watch(userNotifier.notifier);
-  final patientState = ref.watch(patientNotifier.notifier);
-  final chatGPTRepository = GetIt.I<ChatGPTRepository>();
   final gamesProvider = ref.watch(gameProvider);
   final tts = ref.watch(ttsProvider);
-  return WhatsThePictoProvider(userState, patientState, chatGPTRepository, gamesProvider, tts);
+  return WhatsThePictoProvider(gamesProvider, tts);
 });

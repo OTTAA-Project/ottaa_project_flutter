@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/providers/games_provider.dart'
 import 'package:ottaa_project_flutter/application/providers/memory_game_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/ui/leftside_icons.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/memory_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/speak_button.dart';
 
@@ -19,6 +20,7 @@ class MemoryGameScreen extends ConsumerStatefulWidget {
 
 class _MemoryGameState extends ConsumerState<MemoryGameScreen> {
   late final MemoryGameNotifier __gameNot = ref.read(memoryGameProvider);
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -117,6 +119,7 @@ class _MemoryGameState extends ConsumerState<MemoryGameScreen> {
                     color: colorScheme.primary,
                   ),
                 ),
+          const LeftSideIcons(),
         ],
       ),
     );
