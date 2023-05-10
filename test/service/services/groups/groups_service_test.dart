@@ -21,7 +21,7 @@ import 'groups_service_test.mocks.dart';
   RemoteStorageRepository,
   ServerRepository,
 ])
-void main() {
+Future<void> main() async{
   late MockAuthRepository mockAuthRepository;
   late MockRemoteStorageRepository mockRemoteStorageRepository;
   late MockServerRepository mockServerRepository;
