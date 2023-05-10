@@ -8,15 +8,15 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/common/screen_util.dart';
+import 'package:ottaa_project_flutter/application/common/screen_helpers.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -34,8 +34,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final auth = ref.read(authNotifier.notifier);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-
-      if (kIsTablet) {
+      DeviceScreenType deviceScreenType = getDeviceType(MediaQuery.of(context).size);
+      if (deviceScreenType != DeviceScreenType.mobile) {
         await blockLandscapeMode();
       } else {
         await blockPortraitMode();
@@ -99,10 +99,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           const Spacer(),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image(
-              image: const AssetImage(AppImages.kLogoOttaa),
-              width: (size.width * 0.5).clamp(200, 400)
-            ),
+            child: Image(image: const AssetImage(AppImages.kLogoOttaa), width: (size.width * 0.5).clamp(200, 400)),
           ),
         ],
       ),

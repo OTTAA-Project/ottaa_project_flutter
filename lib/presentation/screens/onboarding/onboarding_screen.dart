@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/common/screen_util.dart';
-import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
+import 'package:ottaa_project_flutter/application/common/screen_helpers.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/onboarding_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
@@ -12,6 +11,7 @@ import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/ui/onboarding_layout.dart';
 import 'package:ottaa_project_flutter/presentation/screens/onboarding/ui/onboarding_page_indicator.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class OnBoardingScreen extends ConsumerStatefulWidget {
   final int defaultIndex;
@@ -31,7 +31,8 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       ref.read(onBoardingProvider.select((value) => value.goToPage))(widget.defaultIndex);
       isLogged = await ref.read(authProvider.select((value) => value.isUserLoggedIn()));
-      if (kIsTablet) {
+      DeviceScreenType deviceScreenType = getDeviceType(MediaQuery.of(context).size);
+      if (deviceScreenType != DeviceScreenType.mobile) {
         await blockLandscapeMode();
       } else {
         await unblockRotation();

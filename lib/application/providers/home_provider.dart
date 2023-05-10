@@ -1,5 +1,6 @@
 import 'dart:math' show min;
 
+import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +22,6 @@ import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
-import 'package:collection/collection.dart';
 import 'package:ottaa_project_flutter/core/use_cases/learn_pictogram.dart';
 import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
@@ -377,8 +377,8 @@ class HomeProvider extends ChangeNotifier {
       String? sentence;
       scrollController.jumpTo(0);
       if (patientState.user.patientSettings.language.labs) {
-        sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
-        if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
+        // sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+        // if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
       }
 
       sentence ??= pictoWords.map((e) => e.text).join(' ');

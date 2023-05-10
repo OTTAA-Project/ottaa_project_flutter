@@ -5,13 +5,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
-import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:picto_widget/picto_widget.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class PictosBarUI extends ConsumerStatefulWidget {
   const PictosBarUI({super.key});
@@ -23,85 +23,84 @@ class PictosBarUI extends ConsumerStatefulWidget {
 class _PictosBarState extends ConsumerState<PictosBarUI> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final colorScheme = Theme.of(context).colorScheme;
-
     final pictos = ref.watch(homeProvider).getPictograms();
 
     final hasGroups = ref.watch(homeProvider).groups.isNotEmpty;
 
     final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
-    return Flex(
-      direction: Axis.vertical,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          flex: kIsWeb ? 8 : 2,
-          child: Flex(
-            direction: Axis.horizontal,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(width: 30),
-              pictos.isEmpty
-                  ? const Flexible(
-                      fit: FlexFit.tight,
-                      child: Center(
-                        child: CircularProgressIndicator(),
+    return ResponsiveBuilder(builder: (context, sizingInformation) {
+      return Flex(
+        direction: Axis.vertical,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: kIsWeb ? 8 : 2,
+            child: Flex(
+              direction: Axis.horizontal,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(width: 30),
+                pictos.isEmpty
+                    ? const Flexible(
+                        fit: FlexFit.tight,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : buildWidgets(pictos, addPictogram: addPictogram),
+                const SizedBox(width: 30),
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      HomeButton(
+                        size: Size.fromHeight((!sizingInformation.isMobile) ? 125 : 64),
+                        onPressed: pictos.isEmpty && !hasGroups
+                            ? null
+                            : () {
+                                ref.watch(homeProvider).switchToPictograms();
+                              },
+                        child: Image.asset(
+                          AppImages.kSearchOrange,
+                        ),
                       ),
-                    )
-                  : buildWidgets(pictos, addPictogram: addPictogram),
-              const SizedBox(width: 30),
-              Flexible(
-                fit: FlexFit.tight,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    HomeButton(
-                      size: Size.fromHeight((kIsTablet || kIsWeb) ? 125 : 64),
-                      onPressed: pictos.isEmpty && !hasGroups
-                          ? null
-                          : () {
-                              ref.watch(homeProvider).switchToPictograms();
-                            },
-                      child: Image.asset(
-                        AppImages.kSearchOrange,
+                      const SizedBox(height: 16),
+                      HomeButton(
+                        size: Size.fromHeight((!sizingInformation.isMobile) ? 125 : 64),
+                        onPressed: pictos.isEmpty && !hasGroups
+                            ? null
+                            : () {
+                                ref.read(homeProvider).refreshPictograms();
+                              },
+                        child: Image.asset(
+                          AppImages.kRefreshOrange,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    HomeButton(
-                      size: Size.fromHeight((kIsTablet || kIsWeb) ? 125 : 64),
-                      onPressed: pictos.isEmpty && !hasGroups
-                          ? null
-                          : () {
-                              ref.read(homeProvider).refreshPictograms();
-                            },
-                      child: Image.asset(
-                        AppImages.kRefreshOrange,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: 10),
-            ],
+                const SizedBox(width: 10),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: 30),
-        const Flexible(
-          flex: 1,
-          fit: FlexFit.loose,
-          child: Align(
-            alignment: Alignment.center,
-            child: ShortcutsUI(),
+          const SizedBox(height: 30),
+          const Flexible(
+            flex: 1,
+            fit: FlexFit.loose,
+            child: Align(
+              alignment: Alignment.center,
+              child: ShortcutsUI(),
+            ),
           ),
-        ),
-        const SizedBox(height: 10),
-      ],
-    );
+          const SizedBox(height: 10),
+        ],
+      );
+    });
   }
 
   Flexible buildWidgets(
@@ -113,18 +112,12 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
     final maxWidth = max(size.width, size.height);
     final maxHeight = min(size.width, size.height);
 
-
     return Flexible(
       flex: 5,
       fit: FlexFit.loose,
       child: GridView.builder(
         itemCount: 4,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          childAspectRatio: 1
-        ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 1),
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {

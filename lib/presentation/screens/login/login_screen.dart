@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/common/screen_util.dart';
+import 'package:ottaa_project_flutter/application/common/screen_helpers.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/ui/sign_in_button.dart';
-import 'package:ottaa_ui_kit/theme.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,9 +19,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      if(kIsTablet) {
+      DeviceScreenType deviceScreenType = getDeviceType(MediaQuery.of(context).size);
+      if (deviceScreenType == DeviceScreenType.tablet) {
         await blockLandscapeMode();
-      }else{
+      } else {
         await unblockRotation();
       }
       setState(() {});
@@ -59,9 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Center(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                      maxWidth: kIsTablet
-                          ? (constraints.maxWidth * 0.4).clamp(200, 800)
-                          : maxEdge,
+                      maxWidth: getDeviceType(MediaQuery.of(context).size) != DeviceScreenType.mobile ? (constraints.maxWidth * 0.4).clamp(200, 800) : maxEdge,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text(
                           "login.title".trl,
-                          style: textTheme.headline2,
+                          style: textTheme.displayMedium,
                         ),
                         const SizedBox(height: 20),
                         Padding(

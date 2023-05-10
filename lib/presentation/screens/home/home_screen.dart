@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ottaa_project_flutter/application/common/screen_util.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/common/screen_helpers.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_grid.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/home_tabs.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/pictos_bar.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/talk_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/word_bar.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_mobile.dart';
+import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_tablet.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -90,40 +89,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return true; //TODO: Ask for pop :)
       },
       child: Scaffold(
-        body: Stack(
-          fit: StackFit.expand,
-          children: [
-            SizedBox.fromSize(
-              size: size,
-              child: Flex(
-                direction: Axis.vertical,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: size.width,
-                    height: kIsTablet ? 170 : 111,
-                  ),
-                  currentHomeStatus(provider.status),
-                ],
-              ),
-            ),
-            const Positioned(
-              top: 10,
-              child: WordBarUI(),
-            ),
-            if (provider.show) ...[
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.black54,
-                ),
-              ),
-              const Positioned(
-                top: 10,
-                child: TalkWidget(),
-              ),
-            ],
-          ],
+        body: ResponsiveBuilder(
+          builder: (context, sizingInformation) {
+            switch (sizingInformation.deviceScreenType) {
+              case DeviceScreenType.desktop:
+              case DeviceScreenType.tablet:
+                return  HomeTabletLayout(
+                  child: currentHomeStatus(provider.status),
+                );
+              default:
+                return HomeMobileLayout(
+                  child: currentHomeStatus(provider.status),
+                );
+            }
+          },
         ),
       ),
     );
