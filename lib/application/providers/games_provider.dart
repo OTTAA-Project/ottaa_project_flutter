@@ -16,7 +16,7 @@ class GamesProvider extends ChangeNotifier {
   int completedGroups = 0;
   int activeGroups = 00;
   int selectedGame = 0;
-  int selectedGroupIndex = 0;
+  String selectedGroupName = '';
   final PageController mainPageController = PageController(initialPage: 0);
   ScrollController gridScrollController = ScrollController();
   Map<String, Picto> pictograms = {};
@@ -33,7 +33,7 @@ class GamesProvider extends ChangeNotifier {
   List<Picto> gamePictsMP = [];
   int correctPictoWTP = 99;
   bool hintsBtn = false;
-  late Timer hintTimer1,hintTimer2, gameTimer;
+  late Timer hintTimer1, hintTimer2, gameTimer;
   bool hintsEnabled = false;
 
   /// 0 == 2 pictos, 1 == 3 pictos, 2 == 4 pictos
@@ -71,13 +71,13 @@ class GamesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  resetScore(){
+  resetScore() {
     incorrectScore == 0;
     correctScore = 0;
     gameTimer.cancel();
-    useTime=0;
-    streak=0;
-    difficultyLevel=0;
+    useTime = 0;
+    streak = 0;
+    difficultyLevel = 0;
   }
 
   Future<void> createRandomForGameMP() async {
@@ -114,7 +114,15 @@ class GamesProvider extends ChangeNotifier {
   Future<void> fetchSelectedPictos() async {
     List<Picto> picts = [];
     final gro = groups.values.where((element) => !element.block).toList();
-    for (var e in gro[selectedGroupIndex].relations) {
+    int i = 0;
+    int selectedGroup = 0;
+    for (var e in gro) {
+      if (e.text == selectedGroupName) {
+        selectedGroup = i;
+      }
+      i++;
+    }
+    for (var e in gro[selectedGroup].relations) {
       picts.add(
         pictograms[e.id]!,
       );
@@ -191,7 +199,6 @@ class GamesProvider extends ChangeNotifier {
   //   });
   // }
 
-
   Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
 
   Future<void> init() async {
@@ -206,7 +213,7 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> showHints() async {
     hintTimer1 = Timer.periodic(const Duration(seconds: 4), (timer) {
-      hintTimer2= Timer(const Duration(seconds: 2), () {
+      hintTimer2 = Timer(const Duration(seconds: 2), () {
         hintsEnabled = true;
         notify();
       });

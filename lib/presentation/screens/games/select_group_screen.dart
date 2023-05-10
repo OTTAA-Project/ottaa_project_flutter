@@ -68,7 +68,7 @@ class SelectGroupScreen extends ConsumerWidget {
                       elevation: MaterialStateProperty.all(0),
                     ),
                     onPressed: () async {
-                      provider.selectedGroupIndex = index;
+                      provider.selectedGroupName = group.text;
                       await provider.fetchSelectedPictos();
                       provider.init();
                       final wtpProvider = ref.read(whatsThePictoProvider);
