@@ -22,8 +22,6 @@ class MatchPictogramProvider extends ChangeNotifier {
   bool trueOrFalse = false;
 
   Future<void> checkAnswerMatchPicto({required int index, required Picto picto}) async {
-    int pos1 = 00;
-    int pos2 = 00;
     _tts.speak(picto.text);
     if (pick1 == 99) {
       pick1 = index;
@@ -60,13 +58,13 @@ class MatchPictogramProvider extends ChangeNotifier {
           if (_gamesProvider.correctScore >= 20 && _gamesProvider.difficultyLevel < 2) {
             _gamesProvider.difficultyLevel++;
           }
+          await Future.delayed(const Duration(milliseconds: 1500));
           correctCounter = 0;
           hideFlags = List.filled(8, true, growable: true);
           rightOrWrong = List.filled(8, true, growable: true);
           show = List.filled(8, false, growable: true);
           pick1 = 99;
           pick2 = 99;
-          await Future.delayed(const Duration(seconds: 1));
           await _gamesProvider.createRandomForGameMP();
         }
       } else {
