@@ -4,7 +4,6 @@ import 'package:ottaa_project_flutter/core/models/picto_statistics_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/report_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
-
 @Singleton(as: ReportRepository)
 class ReportService implements ReportRepository {
   final ServerRepository _serverRepository;
