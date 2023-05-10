@@ -29,17 +29,14 @@ class WhatsThePictoProvider extends ChangeNotifier {
     //todo: remove the text around
     pictoShowWhatsThePict[index] = !pictoShowWhatsThePict[index];
     showText = !showText;
-    notifyListeners();
     //todo: create the new question
     if (_gamesProvider.correctPictoWTP == index) {
       _gamesProvider.correctScore++;
       if (_gamesProvider.correctScore == 10) {
         _gamesProvider.difficultyLevel++;
-        notifyListeners();
       }
       if (_gamesProvider.correctScore == 20) {
         _gamesProvider.difficultyLevel++;
-        notifyListeners();
       }
       _gamesProvider.streak++;
       await _gamesProvider.createRandomForGameWTP();

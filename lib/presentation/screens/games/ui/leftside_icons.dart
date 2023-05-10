@@ -31,7 +31,8 @@ class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
   Widget build(
     BuildContext context,
   ) {
-    final provider = ref.watch(gameProvider);
+    final provider = ref.read(gameProvider);
+    bool hints = ref.watch(gameProvider).hintsBtn;
     print(mute);
     final colorScheme = Theme.of(context).colorScheme;
     return Positioned(
@@ -86,22 +87,23 @@ class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
           ),
           widget.hints
               ? GestureDetector(
-                  onTap: () {
-                    if (provider.hintsBtn) {
+                  onTap: () async{
+                    if (hints) {
                       provider.hintsBtn = !provider.hintsBtn;
-                      provider.cancelHints();
+                      await provider.cancelHints();
                     } else {
                       provider.hintsBtn = !provider.hintsBtn;
-                      provider.showHints();
+                      await provider.showHints();
                     }
+                    provider.notify();
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
-                      color: provider.hintsBtn ? colorScheme.primary : Colors.white,
+                      color: hints ? colorScheme.primary : Colors.white,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: provider.hintsBtn
+                    child: hints
                         ? const Icon(
                             Icons.help,
                             color: Colors.white,

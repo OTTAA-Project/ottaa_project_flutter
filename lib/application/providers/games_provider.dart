@@ -21,7 +21,7 @@ class GamesProvider extends ChangeNotifier {
   ScrollController gridScrollController = ScrollController();
   Map<String, Picto> pictograms = {};
   Map<String, Group> groups = {};
-  int correctScore = 0;
+  int correctScore = 8;
   int incorrectScore = 0;
   List<Picto> selectedPicts = [];
   int useTime = 00;
@@ -191,6 +191,7 @@ class GamesProvider extends ChangeNotifier {
   //   });
   // }
 
+
   Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
 
   Future<void> init() async {
@@ -212,14 +213,15 @@ class GamesProvider extends ChangeNotifier {
       hintsEnabled = false;
       notify();
     });
-    notifyListeners();
   }
 
   Future<void> cancelHints() async {
     hintTimer1.cancel();
+    hintTimer1.cancel();
+    hintTimer2.cancel();
     hintTimer2.cancel();
     hintsEnabled = false;
-    notifyListeners();
+    // notifyListeners();
   }
 
   void notify() {
@@ -249,6 +251,14 @@ class GamesProvider extends ChangeNotifier {
       await backgroundMusicPlayer.setVolume(0.2);
       await backgroundMusicPlayer.play();
     }
+  }
+
+  @override
+  void dispose() {
+    hintTimer1.cancel();
+    hintTimer2.cancel();
+    print('disposed');
+    super.dispose();
   }
 }
 
