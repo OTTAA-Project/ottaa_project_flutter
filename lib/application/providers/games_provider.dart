@@ -33,7 +33,7 @@ class GamesProvider extends ChangeNotifier {
   List<Picto> gamePictsMP = [];
   int correctPictoWTP = 99;
   bool hintsBtn = false;
-  late Timer hintTimer, gameTimer;
+  late Timer hintTimer1,hintTimer2, gameTimer;
   bool hintsEnabled = false;
 
   /// 0 == 2 pictos, 1 == 3 pictos, 2 == 4 pictos
@@ -204,20 +204,22 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> showHints() async {
-    hintTimer = Timer.periodic(const Duration(seconds: 8), (timer) {
-      Timer(const Duration(seconds: 2), () {
+    hintTimer1 = Timer.periodic(const Duration(seconds: 4), (timer) {
+      hintTimer2= Timer(const Duration(seconds: 2), () {
         hintsEnabled = true;
         notify();
       });
       hintsEnabled = false;
       notify();
     });
+    notifyListeners();
   }
 
   Future<void> cancelHints() async {
-    hintTimer.cancel();
-    hintTimer.cancel();
+    hintTimer1.cancel();
+    hintTimer2.cancel();
     hintsEnabled = false;
+    notifyListeners();
   }
 
   void notify() {
@@ -255,7 +257,5 @@ final gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
   final groupsService = GetIt.I<GroupsRepository>();
   final patientState = ref.watch(patientNotifier.notifier);
   final tts = ref.watch(ttsProvider);
-  // final chatGpt = GetIt.I<ChatGPTRepository>();
-  // final whatsThePictoController = ref.watch(whatsThePictoProvider);
   return GamesProvider(groupsService, pictogramService, patientState, tts);
 });

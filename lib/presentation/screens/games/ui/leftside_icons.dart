@@ -31,7 +31,7 @@ class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
   Widget build(
     BuildContext context,
   ) {
-    final provider = ref.read(gameProvider);
+    final provider = ref.watch(gameProvider);
     print(mute);
     final colorScheme = Theme.of(context).colorScheme;
     return Positioned(
@@ -94,7 +94,6 @@ class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
                       provider.hintsBtn = !provider.hintsBtn;
                       provider.showHints();
                     }
-                    provider.notify();
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
