@@ -21,7 +21,7 @@ class GamesProvider extends ChangeNotifier {
   ScrollController gridScrollController = ScrollController();
   Map<String, Picto> pictograms = {};
   Map<String, Group> groups = {};
-  int correctScore = 8;
+  int correctScore = 0;
   int incorrectScore = 0;
   List<Picto> selectedPicts = [];
   int useTime = 00;
