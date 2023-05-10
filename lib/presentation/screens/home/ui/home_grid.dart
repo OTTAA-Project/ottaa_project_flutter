@@ -1,22 +1,16 @@
-import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/resource_image.dart';
-import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:ottaa_ui_kit/theme.dart';
-import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
 
 class HomeGridUI extends ConsumerStatefulWidget {
