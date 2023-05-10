@@ -63,10 +63,13 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 child: HomeButton(
                   size: Size(shortCutSize, shortCutSize),
                   onPressed: pictos == null ? null : showComingSoon,
-                  child: Image.asset(
-                    AppImages.kBoardDiceIconSelected,
-                    width: iconSize,
-                    height: iconSize,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      AppImages.kBoardDiceIconSelected,
+                      width: iconSize,
+                      height: iconSize,
+                    ),
                   ),
                 ),
               ),
@@ -76,10 +79,13 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 child: HomeButton(
                   size: Size(shortCutSize, shortCutSize),
                   onPressed: pictos == null ? null : showComingSoon,
-                  child: Image.asset(
-                    AppImages.kBoardHistoryIconSelected,
-                    width: iconSize,
-                    height: iconSize,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      AppImages.kBoardHistoryIconSelected,
+                      width: iconSize,
+                      height: iconSize,
+                    ),
                   ),
                 ),
               ),
@@ -89,10 +95,13 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 child: HomeButton(
                   size: Size(shortCutSize, shortCutSize),
                   onPressed: pictos == null ? null : showComingSoon,
-                  child: Image.asset(
-                    AppImages.kBoardShareIconSelected,
-                    width: iconSize,
-                    height: iconSize,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      AppImages.kBoardShareIconSelected,
+                      width: iconSize,
+                      height: iconSize,
+                    ),
                   ),
                 ),
               ),
@@ -102,10 +111,13 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 child: HomeButton(
                   size: Size(shortCutSize, shortCutSize),
                   onPressed: pictos == null ? null : showComingSoon,
-                  child: Image.asset(
-                    AppImages.kBoardCameraIconSelected,
-                    width: iconSize,
-                    height: iconSize,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      AppImages.kBoardCameraIconSelected,
+                      width: iconSize,
+                      height: iconSize,
+                    ),
                   ),
                 ),
               ),
@@ -115,10 +127,13 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 child: HomeButton(
                   size: Size(shortCutSize, shortCutSize),
                   onPressed: pictos == null ? null : showComingSoon,
-                  child: Image.asset(
-                    AppImages.kBoardFavouriteIconSelected,
-                    width: iconSize,
-                    height: iconSize,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      AppImages.kBoardFavouriteIconSelected,
+                      width: iconSize,
+                      height: iconSize,
+                    ),
                   ),
                 ),
               ),
@@ -144,10 +159,13 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                           await homeProv.speakYes();
                           context.pop();
                         },
-                  child: Image.asset(
-                    AppImages.kBoardYesIconSelected,
-                    width: iconSize,
-                    height: iconSize,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      AppImages.kBoardYesIconSelected,
+                      width: iconSize,
+                      height: iconSize,
+                    ),
                   ),
                 ),
               ),
@@ -173,10 +191,13 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                           await homeProv.speakNo();
                           context.pop();
                         },
-                  child: Image.asset(
-                    AppImages.kBoardNoIconSelected,
-                    width: iconSize,
-                    height: iconSize,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      AppImages.kBoardNoIconSelected,
+                      width: iconSize,
+                      height: iconSize,
+                    ),
                   ),
                 ),
               ),
