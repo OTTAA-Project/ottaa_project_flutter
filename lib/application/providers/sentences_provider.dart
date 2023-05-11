@@ -130,46 +130,46 @@ class SentencesProvider extends ChangeNotifier {
     final language = 'es_AR';
     switch (language) {
       case "es_AR":
-        sentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kMostUsedSentences,
-        );
+        // sentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kMostUsedSentences,
+        // );
         // if (res.isRight) {
         //   sentences = res.right;
         // }
         break;
       case "en-US":
-        sentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kMostUsedSentences,
-        );
+        // sentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kMostUsedSentences,
+        // );
         // if (res.isRight) {
         //   sentences = res.right;
         // }
         break;
       case "fr-FR":
-        sentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kMostUsedSentences,
-        );
+        // sentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kMostUsedSentences,
+        // );
         // if (res.isRight) {
         //   sentences = res.right;
         // }
         break;
       case "pt-BR":
-        sentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kMostUsedSentences,
-        );
+        // sentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kMostUsedSentences,
+        // );
         // if (res.isRight) {
         //   sentences = res.right;
         // }
         break;
       default:
-        sentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kMostUsedSentences,
-        );
+        // sentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kMostUsedSentences,
+        // );
         // if (res.isRight) {
         //   sentences = res.right;
         // }
@@ -232,52 +232,52 @@ class SentencesProvider extends ChangeNotifier {
     final language = 'es_AR';
     switch (language) {
       case "es_AR":
-        favouriteSentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kFavouriteSentences,
-          isFavorite: true,
-        );
+        // favouriteSentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kFavouriteSentences,
+        //   isFavorite: true,
+        // );
         // if (res.isRight) {
         //   favouriteSentences = res.right;
         // }
 
         break;
       case "en-US":
-        favouriteSentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kFavouriteSentences,
-          isFavorite: true,
-        );
+        // favouriteSentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kFavouriteSentences,
+        //   isFavorite: true,
+        // );
         // if (res.isRight) {
         //   favouriteSentences = res.right;
         // }
         break;
       case "fr-FR":
-        favouriteSentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kFavouriteSentences,
-          isFavorite: true,
-        );
+        // favouriteSentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kFavouriteSentences,
+        //   isFavorite: true,
+        // );
         // if (res.isRight) {
         //   favouriteSentences = res.right;
         // }
         break;
       case "pt-BR":
-        favouriteSentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kFavouriteSentences,
-          isFavorite: true,
-        );
+        // favouriteSentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kFavouriteSentences,
+        //   isFavorite: true,
+        // );
         // if (res.isRight) {
         //   favouriteSentences = res.right;
         // }
         break;
       default:
-        favouriteSentences = await sentenceService.fetchSentences(
-          language: language,
-          type: kFavouriteSentences,
-          isFavorite: true,
-        );
+        // favouriteSentences = await sentenceService.fetchSentences(
+        //   language: language,
+        //   type: kFavouriteSentences,
+        //   isFavorite: true,
+        // );
         // if (res.isRight) {
         //   favouriteSentences = res.right;
         // }
