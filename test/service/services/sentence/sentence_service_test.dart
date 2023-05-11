@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -53,6 +55,16 @@ Future<void> main() async {
     ];
   });
 
+  test('should return the list of phrases from the user', () async {
+    when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
+
+    when(mockServerRepository.getUserSentences(any, language: anyNamed('language'), type: anyNamed('type'))).thenAnswer((realInvocation) async => (fakePhrases));
+
+    final response = await sentencesRepository.fetchSentences(language: 'es_AR', type: 'Test');
+
+    expect(response, isA<List<Phrase>>());
+  });
+
   test('should return empty list of phrases if no user found', () async {
     when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => const Left('no user'));
 
@@ -63,5 +75,25 @@ Future<void> main() async {
     expect(response, []);
   });
 
+  //todo: emir
+  test('should upload sentences to the user database', () async {
+    when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
 
+    when(mockServerRepository.uploadUserSentences(any, any, any, any)).thenAnswer((realInvocation) async => const Right(null));
+
+    final response = await sentencesRepository.uploadSentences(language: 'es_AR', data: fakePhrases, type: 'type');
+
+    expect(null, null);
+  });
+
+  test('should return a string of error when upload is not successful', () async {
+    when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
+
+    when(mockServerRepository.uploadUserSentences(any, any, any, any)).thenAnswer((realInvocation) async => const Left('failed'));
+
+    final response = await sentencesRepository.uploadSentences(language: 'es_AR', data: fakePhrases, type: 'type');
+if(response.isLeft){
+  expect(response.left, 'failed');
+}
+  });
 }
