@@ -52,7 +52,7 @@ class MockSentencesService extends _i1.Mock implements _i3.SentencesService {
   }
 
   @override
-  _i4.Future<List<_i5.Phrase>> fetchSentences({
+  _i4.Future<_i2.Either<String, List<_i5.Phrase>>> fetchSentences({
     required String? language,
     required String? type,
     bool? isFavorite = false,
@@ -67,10 +67,22 @@ class MockSentencesService extends _i1.Mock implements _i3.SentencesService {
             #isFavorite: isFavorite,
           },
         ),
-        returnValue: _i4.Future<List<_i5.Phrase>>.value(<_i5.Phrase>[]),
-      ) as _i4.Future<List<_i5.Phrase>>);
+        returnValue: _i4.Future<_i2.Either<String, List<_i5.Phrase>>>.value(
+            _FakeEither_0<String, List<_i5.Phrase>>(
+          this,
+          Invocation.method(
+            #fetchSentences,
+            [],
+            {
+              #language: language,
+              #type: type,
+              #isFavorite: isFavorite,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, List<_i5.Phrase>>>);
   @override
-  _i4.Future<void> uploadSentences({
+  _i4.Future<_i2.Either<String, void>> uploadSentences({
     required String? language,
     required List<_i5.Phrase>? data,
     required String? type,
@@ -85,9 +97,20 @@ class MockSentencesService extends _i1.Mock implements _i3.SentencesService {
             #type: type,
           },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
+          this,
+          Invocation.method(
+            #uploadSentences,
+            [],
+            {
+              #language: language,
+              #data: data,
+              #type: type,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, void>>);
 }
 
 /// A class which mocks [AuthRepository].
