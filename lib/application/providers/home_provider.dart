@@ -121,14 +121,16 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> fetchMostUsedSentences() async {
-    mostUsedSentences = await _sentencesService.fetchSentences(
+    final res =  await _sentencesService.fetchSentences(
       language: "es_AR", //TODO!: Fetch language code LANG-CODE
       type: kMostUsedSentences,
     );
+    if(res.isRight){
+      mostUsedSentences = res.right;
+    }else{
+      mostUsedSentences = [];
+    }
 
-    // if (result.isRight) {
-    //   mostUsedSentences = result.right;
-    // }
 
     notifyListeners();
   }

@@ -53,13 +53,15 @@ Future<void> main() async {
     ];
   });
 
-  test('should return the list of phrases from the user', () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
+  test('should return empty list of phrases if no user found', () async {
+    when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => const Left('no user'));
 
-    when(mockServerRepository.getUserSentences(any, language: anyNamed('language'), type: anyNamed('type'))).thenAnswer((realInvocation) async => (fakePhrases));
+    when(mockServerRepository.getUserSentences(any, language: anyNamed('language'), type: anyNamed('type'))).thenAnswer((realInvocation) async => ([]));
 
     final response = await sentencesRepository.fetchSentences(language: 'es_AR', type: 'Test');
 
-    expect(response, isA<List<Phrase>>());
+    expect(response, []);
   });
+
+
 }
