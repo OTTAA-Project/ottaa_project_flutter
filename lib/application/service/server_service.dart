@@ -574,6 +574,8 @@ class ServerService implements ServerRepository {
       "tokens": tokens,
     };
 
+    print(tokens);
+
     try {
       final res = await _dio.post(
         '/speako/users/learn',
@@ -582,7 +584,12 @@ class ServerService implements ServerRepository {
       );
 
       return Right(jsonDecode(res.data) as Map<String, dynamic>);
+    }  on DioError catch(e) {
+      // handle te responde error
+      print(e.response);
+      return Left("Server error");
     } catch (e) {
+      print(e);
       // handle te responde error
       return Left("learn_error");
     }
@@ -636,8 +643,6 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
     try {
-      print(prompt);
-
       final response = await functions.httpsCallable("openai").call<Map<String, dynamic>>({
         "model": "text-davinci-003",
         "prompt": prompt,
@@ -648,9 +653,6 @@ class ServerService implements ServerRepository {
       if (response.data == null || response.data["choices"] == null || response.data["choices"][0] == null) {
         return const Left("no_data_found");
       }
-      print(response.data);
-
-      print(response.data["choices"][0]["text"].toString());
       return Right(response.data["choices"][0]["text"].toString());
     } catch (e) {
       return Left(e.toString());
