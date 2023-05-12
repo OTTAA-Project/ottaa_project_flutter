@@ -14,6 +14,7 @@ void main() {
   late MockTTSRepository mockTTSRepository;
   late TTSProvider ttsProvider;
   late MockLocalDatabaseRepository mockLocalDatabaseRepository;
+
   setUp(() {
     mockTTSRepository = MockTTSRepository();
     mockTTSProvider = MockTTSProvider();

@@ -62,7 +62,7 @@ Future<void> main() async {
 
     final response = await sentencesRepository.fetchSentences(language: 'es_AR', type: 'Test');
 
-    expect(response, isA<List<Phrase>>());
+    expect(response.right, isA<List<Phrase>>());
   });
 
   test('should return empty list of phrases if no user found', () async {
@@ -72,18 +72,40 @@ Future<void> main() async {
 
     final response = await sentencesRepository.fetchSentences(language: 'es_AR', type: 'Test');
 
-    expect(response, []);
+    expect(response.left, isA<String>());
   });
 
   //todo: emir
-  test('should upload sentences to the user database', () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
+  group("Check user phrases uploading", () {
+    test('should upload sentences to the user database', () async {
+      List<Map<String, dynamic>> phrasesDB = [];
 
-    when(mockServerRepository.uploadUserSentences(any, any, any, any)).thenAnswer((realInvocation) async => const Right(null));
+      when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
 
-    final response = await sentencesRepository.uploadSentences(language: 'es_AR', data: fakePhrases, type: 'type');
+      when(mockServerRepository.uploadUserSentences(any, any, any, any)).thenAnswer((realInvocation) async {
+        phrasesDB.addAll(realInvocation.positionalArguments.last);
+        return const Right(null);
+      });
 
-    expect(null, null);
+      await sentencesRepository.uploadSentences(language: 'es_AR', data: fakePhrases, type: 'type');
+
+      expect(phrasesDB, fakePhrases.map((e) => e.toMap()));
+    });
+
+    test('should return right when user upload senteces', () async {
+      List<Map<String, dynamic>> phrasesDB = [];
+
+      when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
+
+      when(mockServerRepository.uploadUserSentences(any, any, any, any)).thenAnswer((realInvocation) async {
+        phrasesDB.addAll(realInvocation.positionalArguments.last);
+        return const Right(null);
+      });
+
+      final response = await sentencesRepository.uploadSentences(language: 'es_AR', data: fakePhrases, type: 'type');
+
+      expect(response.isRight, true);
+    });
   });
 
   test('should return a string of error when upload is not successful', () async {
@@ -92,8 +114,8 @@ Future<void> main() async {
     when(mockServerRepository.uploadUserSentences(any, any, any, any)).thenAnswer((realInvocation) async => const Left('failed'));
 
     final response = await sentencesRepository.uploadSentences(language: 'es_AR', data: fakePhrases, type: 'type');
-if(response.isLeft){
-  expect(response.left, 'failed');
-}
+    if (response.isLeft) {
+      expect(response.left, 'failed');
+    }
   });
 }

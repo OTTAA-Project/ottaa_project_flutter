@@ -16,7 +16,7 @@ class I18N extends ChangeNotifier {
   };
 
   late Locale locale;
-  TranslationTree? _currentLanguage;
+  TranslationTree? currentLanguage;
 
   @FactoryMethod(preResolve: true)
   static Future<I18N> start() => I18N().init();
@@ -33,7 +33,7 @@ class I18N extends ChangeNotifier {
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
     if (_languages.containsKey(languageCode)) {
-      _currentLanguage = _languages[languageCode]!;
+      currentLanguage = _languages[languageCode]!;
       return this;
     }
 
@@ -41,7 +41,7 @@ class I18N extends ChangeNotifier {
     newLanguage ??= await loadTranslation(const Locale("es", "AR"));
 
     _languages.putIfAbsent(languageCode, () => newLanguage!);
-    _currentLanguage = newLanguage;
+    currentLanguage = newLanguage;
 
     return this;
   }
@@ -68,8 +68,6 @@ class I18N extends ChangeNotifier {
     }
   }
 
-  TranslationTree? get currentLanguage => _currentLanguage;
-
   Future<void> changeLanguage(String languageCode) async {
     var split = languageCode.split("_");
     assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US");
@@ -84,7 +82,7 @@ class I18N extends ChangeNotifier {
       throw Exception("Language not found");
     }
     _languages[locale.toString()] ??= newLanguage;
-    _currentLanguage = _languages[locale.toString()];
+    currentLanguage = _languages[locale.toString()];
     this.locale = locale;
 
     notify();
