@@ -108,7 +108,7 @@ class PatientUserModel extends UserModel {
       ),
       'settings': settings.toMap(),
       'type': type.name,
-      'email' : email
+      'email': email
     };
   }
 
@@ -120,8 +120,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Group>>(
                 key.toString(),
-                Map.from(value as dynamic)
-                    .values
+                (value is List ? value : Map.from(value as dynamic).values)
                     .map<Group>(
                       (e) => Group.fromMap(Map.from(e as dynamic)),
                     )
@@ -133,8 +132,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Phrase>>.from((map['phrases'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Phrase>>(
                 key.toString(),
-                Map.from(value as dynamic)
-                    .values
+                (value is List ? value : Map.from(value as dynamic).values)
                     .map<Phrase>(
                       (e) => Phrase.fromMap(Map.from(e as dynamic)),
                     )
@@ -146,8 +144,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Picto>>.from((map['pictos'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Picto>>(
                 key.toString(),
-                Map.from(value as dynamic)
-                    .values
+                (value is List ? value : Map.from(value as dynamic).values)
                     .map<Picto>(
                       (e) => Picto.fromMap(Map.from(e as dynamic)),
                     )
@@ -222,7 +219,7 @@ class PatientSettings extends UserSettings {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'data': data.toMap(),
-      'language': language,
+      'language': language.toMap(),
       'payment': payment.toMap(),
       'layout': layout.toMap(),
     };
