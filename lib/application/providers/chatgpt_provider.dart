@@ -29,7 +29,7 @@ class ChatGPTNotifier extends ChangeNotifier {
 
     final response = await _chatGPTRepository.getCompletion(
       age: age,
-      gender: "hombre",
+      gender: gender,
       pictograms: pictogramsString,
       maxTokens: maxTokens,
       language: lang.split('_')[0],
