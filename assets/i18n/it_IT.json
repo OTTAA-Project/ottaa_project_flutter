@@ -205,7 +205,8 @@
     "italian": "Italiano",
     "french": "French",
     "portuguese": "Portuguese",
-    "test": "Esta es la voz que vas a usar en otta"
+    "test": "Esta es la voz que vas a usar en ottaa",
+    "add": "Agregar"
   },
   "onboarding": {
     "start": "Iniziare",
@@ -302,21 +303,26 @@
     "game_header_0": "¿Cuál es el picto?",
     "game_header_1": "Unir pictogramas",
     "game_header_2": "Juego de la Memoria",
+    "game_header_3": "Armá una historia",
     "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprende jugando",
     "game_sub_1": "Uní los pictogramas de manera correcta",
     "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
+    "game_sub_3": "Elegí los pictogramas que más te gusten, y con la ayuda de Chat GPT, crearás una historia.",
     "group": "Seleccioná una categoría para poder jugar",
     "search": "Buscar Tablero",
     "find": "Encontrá los tableros que quieras, fácilmente!",
     "game_1_line": "Seleccioná el pictograma que escuches",
     "game_2_line": "Seleccioná la palabra que corresponde a su pictograma",
     "game_3_line": "Seleccioná una tarjeta y encontrá la pareja del pictograma",
+    "game_4_line": "Agregá hasta 4 pictogramas y creá tu propia historia",
     "no": "¡Oh Oh!",
     "yes": "¡Muy bien!",
-    "score": "Tu puntaje",
     "correct": "Correcto",
     "incorrect": "Incorrecto",
     "use_time": "Tiempo total",
-    "maximum_streak": "Mejor racha"
+    "maximum_streak": "Mejor racha",
+    "speak_what": "¿Cual es el picto {name}?",
+    "gptbtn": "Crear historia",
+    "prompt": "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:"
   }
 }
