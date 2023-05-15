@@ -125,7 +125,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                   ref.watch(patientNotifier.notifier).setUser(user.patient);
                   context.push(AppRoutes.userTalk);
                 },
-                text: '${'profile.use.ottaa'.trl} ${user.settings.data.name}',
+                text: '${'global.user_ottaa'.trl} ${user.settings.data.name}',
               ),
               const SizedBox(
                 height: 24,
