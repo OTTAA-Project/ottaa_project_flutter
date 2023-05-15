@@ -68,7 +68,7 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              "login.wait.subtitle",
+              "login.wait.subtitle".trl,
               style: textTheme.headline3,
             ),
           ],

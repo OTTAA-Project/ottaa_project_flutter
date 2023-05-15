@@ -126,3 +126,5 @@ app.*.symbols
 /lib/app/data/models/pict_model.g.dart
 /lib/app/data/models/search_model.g.dart
 ios/firebase_app_id_file.json
+/lib/firebase_options.dart
+ios/Runner/GoogleService-Info.plist
