@@ -32,8 +32,7 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
 
   @override
   Widget build(BuildContext context) {
-    final pictos =
-        ref.watch(homeProvider.select((value) => value.suggestedPicts.isEmpty));
+    final pictos = ref.watch(homeProvider.select((value) => value.suggestedPicts.isEmpty));
     final provider = ref.read(gameProvider);
 
     final tts = ref.watch(ttsProvider);
@@ -42,17 +41,11 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
 
     final size = MediaQuery.of(context).size;
 
-    int shorcutsCount = patient?.patientSettings.layout.shortcuts
-            .toMap()
-            .values
-            .where((element) => element)
-            .length ??
-        7;
+    int shorcutsCount = patient?.patientSettings.layout.shortcuts.toMap().values.where((element) => element).length ?? 7;
 
     double shortCutSize = (size.width - (32 * shorcutsCount)) / shorcutsCount;
 
-    ShortcutsModel shortcuts =
-        patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
+    ShortcutsModel shortcuts = patient?.patientSettings.layout.shortcuts ?? ShortcutsModel.all();
 
     return SizedBox(
       height: 64,
@@ -139,7 +132,20 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 onPressed: pictos
                     ? null
                     : () async {
-                        await tts.speak("si".trl);
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) {
+                            return WillPopScope(
+                              onWillPop: () async {
+                                return false;
+                              },
+                              child: const SizedBox(),
+                            );
+                          },
+                        );
+                        await tts.speak("global.yes".trl);
+                        context.pop();
                       },
                 child: Image.asset(
                   AppImages.kBoardYesIconSelected,
@@ -156,7 +162,20 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 onPressed: pictos
                     ? null
                     : () async {
-                        await tts.speak("no".trl);
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) {
+                            return WillPopScope(
+                              onWillPop: () async {
+                                return false;
+                              },
+                              child: const SizedBox(),
+                            );
+                          },
+                        );
+                        await tts.speak("global.no".trl);
+                        context.pop();
                       },
                 child: Image.asset(
                   AppImages.kBoardNoIconSelected,
