@@ -27,5 +27,6 @@ class LearnToken {
 
   String toJson() => json.encode(toMap());
 
-  factory LearnToken.fromJson(String source) => LearnToken.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory LearnToken.fromJson(String source) =>
+      LearnToken.fromMap(json.decode(source) as Map<String, dynamic>);
 }

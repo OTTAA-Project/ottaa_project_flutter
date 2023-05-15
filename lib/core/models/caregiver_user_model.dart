@@ -69,14 +69,15 @@ class CaregiverUserModel extends UserModel {
       'settings': settings.toMap(),
       'type': type.name,
       'users': users.map((key, value) => MapEntry(key, value.toMap())),
-      'email' : email
+      'email': email
     };
   }
 
   factory CaregiverUserModel.fromMap(Map<String, dynamic> map) {
     return CaregiverUserModel(
       id: map['id'] as String,
-      settings: BaseSettingsModel.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
+      settings: BaseSettingsModel.fromMap(
+          Map.from(map['settings'] as Map<dynamic, dynamic>)),
       type: UserType.caregiver,
       users: (map['users']) != null
           ? Map.from((map['users'] as Map<dynamic, dynamic>).map(
@@ -91,7 +92,8 @@ class CaregiverUserModel extends UserModel {
     );
   }
 
-  factory CaregiverUserModel.fromJson(String source) => CaregiverUserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CaregiverUserModel.fromJson(String source) =>
+      CaregiverUserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -102,16 +104,25 @@ class CaregiverUserModel extends UserModel {
   bool operator ==(covariant CaregiverUserModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id && other.settings == settings && other.type == type && mapEquals(other.users, users) && other.email == email;
+    return other.id == id &&
+        other.settings == settings &&
+        other.type == type &&
+        mapEquals(other.users, users) &&
+        other.email == email;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ settings.hashCode ^ type.hashCode ^ users.hashCode ^ email.hashCode;
+    return id.hashCode ^
+        settings.hashCode ^
+        type.hashCode ^
+        users.hashCode ^
+        email.hashCode;
   }
 
   @override
-  UserModel fromJson(Map<String, dynamic> json) => CaregiverUserModel.fromMap(json);
+  UserModel fromJson(Map<String, dynamic> json) =>
+      CaregiverUserModel.fromMap(json);
 
   @override
   String toJson() => json.encode(toMap());
@@ -155,7 +166,8 @@ class CaregiverUsers {
 
   String toJson() => json.encode(toMap());
 
-  factory CaregiverUsers.fromJson(String source) => CaregiverUsers.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CaregiverUsers.fromJson(String source) =>
+      CaregiverUsers.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'CaregiverUsers(alias: $alias)';

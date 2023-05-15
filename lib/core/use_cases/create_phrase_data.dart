@@ -7,5 +7,6 @@ abstract class CreatePhraseData {
 
   const CreatePhraseData(this.serverService);
 
-  Future<String?> createPhraseData({required Phrase phrase, required String userId, required String lang});
+  Future<String?> createPhraseData(
+      {required Phrase phrase, required String userId, required String lang});
 }

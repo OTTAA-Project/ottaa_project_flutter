@@ -11,13 +11,10 @@ class CustomizeShortcutScreen extends ConsumerStatefulWidget {
   const CustomizeShortcutScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CustomizeShortcutScreen> createState() =>
-      _CustomizeShortcutScreenState();
+  ConsumerState<CustomizeShortcutScreen> createState() => _CustomizeShortcutScreenState();
 }
 
-class _CustomizeShortcutScreenState
-    extends ConsumerState<CustomizeShortcutScreen> {
-
+class _CustomizeShortcutScreenState extends ConsumerState<CustomizeShortcutScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
@@ -55,9 +52,7 @@ class _CustomizeShortcutScreenState
                 ShortcutWidget(
                   onTap: () {
                     provider.selectedShortcuts[2] = !provider.selectedShortcuts[2];
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                   heading: "customize.shortcut.camera".trl,
                   image2: AppImages.kBoardCameraIconSelected,
@@ -74,9 +69,7 @@ class _CustomizeShortcutScreenState
                   ShortcutWidget(
                     onTap: () {
                       provider.selectedShortcuts[3] = !provider.selectedShortcuts[3];
-                      setState(() {
-
-                      });
+                      setState(() {});
                     },
                     heading: "customize.shortcut.games".trl,
                     image: AppImages.kBoardDiceIcon,
@@ -86,9 +79,7 @@ class _CustomizeShortcutScreenState
                   ShortcutWidget(
                     onTap: () {
                       provider.selectedShortcuts[4] = !provider.selectedShortcuts[4];
-                      setState(() {
-
-                      });
+                      setState(() {});
                     },
                     heading: "global.yes".trl,
                     image: AppImages.kBoardYesIcon,
@@ -98,9 +89,7 @@ class _CustomizeShortcutScreenState
                   ShortcutWidget(
                     onTap: () {
                       provider.selectedShortcuts[5] = !provider.selectedShortcuts[5];
-                      setState(() {
-
-                      });
+                      setState(() {});
                     },
                     heading: "global.no".trl,
                     image: AppImages.kBoardNoIcon,
@@ -116,9 +105,7 @@ class _CustomizeShortcutScreenState
                 ShortcutWidget(
                   onTap: () {
                     provider.selectedShortcuts[6] = !provider.selectedShortcuts[6];
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                   heading: "global.share".trl,
                   image: AppImages.kBoardShareIcon,

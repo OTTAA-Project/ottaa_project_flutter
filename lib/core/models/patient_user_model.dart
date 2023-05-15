@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-
 import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
@@ -114,7 +113,7 @@ class PatientUserModel extends UserModel {
 
   factory PatientUserModel.fromMap(Map<String, dynamic> map) {
     return PatientUserModel(
-      email: map['email'],
+      email: "",
       id: map['id'] as String,
       groups: map['groups'] != null
           ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
@@ -154,6 +153,8 @@ class PatientUserModel extends UserModel {
           : <String, List<Picto>>{},
       settings: PatientSettings.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
       type: UserType.values.firstWhere((element) => element.name == map['type'] as String),
+    ).copyWith(
+      email: map['email'],
     );
   }
 
@@ -216,6 +217,7 @@ class PatientSettings extends UserSettings {
     required this.tts,
   });
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'data': data.toMap(),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:collection/collection.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
+import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
@@ -25,7 +26,10 @@ class LinkNotifier extends ChangeNotifier {
 
   final ProfileRepository _profileService;
 
-  LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._profileService, this._auth);
+  final ProfileNotifier _profileNotifier;
+
+  LinkNotifier(this.createEmailToken, this.verifyEmailToken, this._profileService, this._auth, this._profileNotifier);
+
   String? userId;
   UserModel? user;
 
@@ -62,7 +66,6 @@ class LinkNotifier extends ChangeNotifier {
       final currentUser = await _auth.getCurrentUser();
       if (currentUser.isRight) {
         final email = currentUser.right.email;
-        print(email);
         return await createEmailToken.createEmailToken(email, emailController.text);
       }
     }
@@ -79,7 +82,7 @@ class LinkNotifier extends ChangeNotifier {
     final code = controllers.map((e) => e.text).join();
     final currentUser = await _auth.getCurrentUser();
     if (currentUser.isRight) {
-      final email = currentUser.right.email; //TODO: Check for id
+      final email = currentUser.right.email;
       final result = await verifyEmailToken.verifyEmailToken(
         email,
         emailController.text,
@@ -92,21 +95,12 @@ class LinkNotifier extends ChangeNotifier {
 
       userId = result.right;
 
+      user = await _profileNotifier.fetchUserById(userId!);
+
       return null;
     }
 
     return "Error";
-  }
-
-  Future<void> userSuccessLinkAccount() async {
-    final res = await _profileService.getProfileById(id: userId!);
-    if (res.isLeft) {
-      return;
-    }
-
-    user = BaseUserModel.fromMap(res.right);
-
-    notifyListeners();
   }
 
   void reset() {
@@ -124,5 +118,5 @@ final linkProvider = ChangeNotifierProvider.autoDispose<LinkNotifier>((ref) {
   final verifyEmailToken = getIt<VerifyEmailToken>();
   final authRepository = getIt<AuthRepository>();
   final profileRepository = getIt<ProfileRepository>();
-  return LinkNotifier(createEmailToken, verifyEmailToken, profileRepository, authRepository);
+  return LinkNotifier(createEmailToken, verifyEmailToken, profileRepository, authRepository, ref.read(profileProvider));
 });

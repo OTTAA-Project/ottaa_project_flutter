@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
@@ -13,14 +14,9 @@ class LoginWaitingScreen extends ConsumerStatefulWidget {
   const LoginWaitingScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginWaitingScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _LoginWaitingScreenState();
 }
-
-const Map<UserType, String> _userTypeRoutes = {
-  UserType.caregiver: AppRoutes.profileMainScreen,
-  UserType.user: AppRoutes.profileMainScreenUser,
-  UserType.none: AppRoutes.profileChooserScreen,
-};
 
 class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
   @override
@@ -34,16 +30,17 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
 
       bool isFirstTime = await provider.isFirstTime();
 
-      final user = ref.read(userNotifier);
+      final user = ref.read(userProvider.select((value) => value.user));
 
-      await I18N.of(context).changeLanguage(user?.settings.language.language ?? "en_US");
+      await I18N
+          .of(context)
+          .changeLanguage(user?.settings.language.language ?? "en_US");
       if (mounted) {
-
         if (isFirstTime) {
           return localContext.go(AppRoutes.onboarding);
         }
 
-        localContext.go(_userTypeRoutes[user!.type]!);
+        localContext.go(AppRoutes.home);
       }
     });
     super.initState();
@@ -71,7 +68,7 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              "login.wait.subtitle",
+              "login.wait.subtitle".trl,
               style: textTheme.headline3,
             ),
           ],

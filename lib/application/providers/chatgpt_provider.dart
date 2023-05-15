@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart';
-import 'dart:math' as math;
 
 class ChatGPTNotifier extends ChangeNotifier {
   final UserNotifier _userNotifier;
@@ -15,7 +15,7 @@ class ChatGPTNotifier extends ChangeNotifier {
   ChatGPTNotifier(this._userNotifier, this._patientNotifier, this._chatGPTRepository);
 
   Future<String?> generatePhrase(List<Picto> pictograms) async {
-    final user = _patientNotifier.state ?? _userNotifier.user;
+    final user = _patientNotifier.patient ?? _userNotifier.user!.patient;
 
     int age = (user.settings.data.birthDate.difference(DateTime.now()).inDays / 365).round().abs();
 
@@ -40,12 +40,15 @@ class ChatGPTNotifier extends ChangeNotifier {
       (r) => r,
     );
   }
+
+  void notify() {
+    notifyListeners();
+  }
 }
 
 final chatGPTProvider = ChangeNotifierProvider<ChatGPTNotifier>((ref) {
-  final userState = ref.watch(userNotifier.notifier);
+  final userState = ref.watch(userProvider);
   final patientState = ref.watch(patientNotifier.notifier);
   final chatGPTRepository = GetIt.I<ChatGPTRepository>();
-
   return ChatGPTNotifier(userState, patientState, chatGPTRepository);
 });

@@ -68,7 +68,11 @@ class VoiceSetting {
     return VoiceSetting(
       voicesNames: Map.from(map['name'] as dynamic),
       voicesSpeed: Map.from(map['speed'] as dynamic).map((key, value) {
-        return MapEntry(key, VelocityTypes.values.firstWhere((element) => element.name == value.toString(), orElse: () => VelocityTypes.mid));
+        return MapEntry(
+            key,
+            VelocityTypes.values.firstWhere(
+                (element) => element.name == value.toString(),
+                orElse: () => VelocityTypes.mid));
       }),
       mutePict: map['mutePict'] as bool,
     );
@@ -76,18 +80,23 @@ class VoiceSetting {
 
   String toJson() => json.encode(toMap());
 
-  factory VoiceSetting.fromJson(String source) => VoiceSetting.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory VoiceSetting.fromJson(String source) =>
+      VoiceSetting.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'VoiceAccessibilitySetting(name: $voicesNames, speed: $voicesSpeed, mutePict: $mutePict)';
+  String toString() =>
+      'VoiceAccessibilitySetting(name: $voicesNames, speed: $voicesSpeed, mutePict: $mutePict)';
 
   @override
   bool operator ==(covariant VoiceSetting other) {
     if (identical(this, other)) return true;
 
-    return other.voicesNames == voicesNames && other.voicesSpeed == voicesSpeed && other.mutePict == mutePict;
+    return other.voicesNames == voicesNames &&
+        other.voicesSpeed == voicesSpeed &&
+        other.mutePict == mutePict;
   }
 
   @override
-  int get hashCode => voicesNames.hashCode ^ voicesSpeed.hashCode ^ mutePict.hashCode;
+  int get hashCode =>
+      voicesNames.hashCode ^ voicesSpeed.hashCode ^ mutePict.hashCode;
 }

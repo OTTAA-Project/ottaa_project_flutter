@@ -44,6 +44,7 @@ class HiveDatabase extends LocalDatabaseRepository {
     await Hive.box('none').clear();
   }
 
+
   @override
   Future<UserModel?> getUser() async {
     UserModel? user;
@@ -118,9 +119,22 @@ class HiveDatabase extends LocalDatabaseRepository {
 
   @override
   Future<void> setUser(UserModel user) async {
-    await Hive.box(user.type.name).put(user.type.name, user);
-    user = await Hive.box(user.type.name).get(user.type.name);
+    Box box = (await secureBox(user.type.name));
+    box.put(user.type.name, user);
+    user = box.get(user.type.name);
     this.user = user;
+  }
+
+  Future<Box<T>> secureBox<T>(String boxName) async {
+    Box<T> box;
+
+    if (Hive.isBoxOpen(boxName)) {
+      box = Hive.box(boxName);
+    } else {
+      box = await Hive.openBox(boxName);
+    }
+
+    return box;
   }
 
   @override

@@ -6,5 +6,6 @@ abstract class CreateGroupData {
 
   const CreateGroupData(this.serverService);
 
-  Future<String?> createGroupData({required Group group, required String userId, required String lang});
+  Future<String?> createGroupData(
+      {required Group group, required String userId, required String lang});
 }

@@ -43,16 +43,20 @@ class NotificationModel {
 
   String toJson() => json.encode(toMap());
 
-  factory NotificationModel.fromJson(String source) => NotificationModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory NotificationModel.fromJson(String source) =>
+      NotificationModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'NotificationModel(title: $title, body: $body, data: $data)';
+  String toString() =>
+      'NotificationModel(title: $title, body: $body, data: $data)';
 
   @override
   bool operator ==(covariant NotificationModel other) {
     if (identical(this, other)) return true;
 
-    return other.title == title && other.body == body && mapEquals(other.data, data);
+    return other.title == title &&
+        other.body == body &&
+        mapEquals(other.data, data);
   }
 
   @override

@@ -37,7 +37,8 @@ class SecondStep extends StatelessWidget {
                 child: FittedBox(
                   child: Text(
                     "Talk_to_the_world".trl,
-                    style: const TextStyle(color: kOTTAAOrangeNew, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        color: kOTTAAOrangeNew, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -61,7 +62,9 @@ class SecondStep extends StatelessWidget {
               SimpleButton(
                 text: "Previous".trl,
                 leading: Icons.chevron_left,
-                onTap: () => controller.animateToPage(0, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
+                onTap: () => controller.animateToPage(0,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut),
                 backgroundColor: Colors.white,
                 fontColor: Colors.grey,
               ),

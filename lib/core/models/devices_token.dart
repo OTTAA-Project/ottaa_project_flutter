@@ -43,10 +43,12 @@ class DeviceToken {
 
   String toJson() => json.encode(toMap());
 
-  factory DeviceToken.fromJson(String source) => DeviceToken.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory DeviceToken.fromJson(String source) =>
+      DeviceToken.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'DeviceToken(deviceToken: $deviceToken, lastUsage: $lastUsage)';
+  String toString() =>
+      'DeviceToken(deviceToken: $deviceToken, lastUsage: $lastUsage)';
 
   @override
   bool operator ==(covariant DeviceToken other) {

@@ -53,11 +53,11 @@ class _OTPWidgetState extends ConsumerState<OTPWidget> {
                     });
 
                     if (!isValid) {
-                      //TODO Emir check that this is OK
-                      OTTAANotification.secondary(context, text: "profile.link.token.invalid".trl);
+                      OTTAANotification.secondary(context,
+                          text: "profile.link.token.invalid".trl);
                       return;
                     }
-                    context.push(AppRoutes.linkWaitScreen);
+                    context.push(AppRoutes.caregiverLinkSuccess);
                   }
                 },
               ),

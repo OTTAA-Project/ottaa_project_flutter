@@ -135,22 +135,6 @@ class MockAuthRepository extends _i1.Mock implements _i3.AuthRepository {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<String> runToGetDataFromOtherPlatform({
-    required String? email,
-    required String? id,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #runToGetDataFromOtherPlatform,
-          [],
-          {
-            #email: email,
-            #id: id,
-          },
-        ),
-        returnValue: _i4.Future<String>.value(''),
-      ) as _i4.Future<String>);
-  @override
   _i4.Future<String> getDeviceId() => (super.noSuchMethod(
         Invocation.method(
           #getDeviceId,
@@ -635,6 +619,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   _i4.Future<_i2.Either<String, String>> generatePhraseGPT({
     required String? prompt,
     required int? maxTokens,
+    double? temperature = 0.0,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -643,6 +628,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
           {
             #prompt: prompt,
             #maxTokens: maxTokens,
+            #temperature: temperature,
           },
         ),
         returnValue: _i4.Future<_i2.Either<String, String>>.value(
@@ -654,6 +640,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             {
               #prompt: prompt,
               #maxTokens: maxTokens,
+              #temperature: temperature,
             },
           ),
         )),
