@@ -64,8 +64,7 @@ Future<void> main() async {
     );
   });
 
-  //todo: emir it is saying something about the fold in the chatGPTServices
-  test('should return a sentence if the user call for a sentence ', () async {
+  test('should return a sentence if the user call for a sentence', () async {
     when(mockUserNotifier.user).thenReturn(fakeUser);
 
     when(mockChatGPTRepository.getCompletion(
@@ -73,11 +72,11 @@ Future<void> main() async {
       gender: anyNamed('gender'),
       pictograms: anyNamed('pictograms'),
       language: anyNamed('language'),
-      maxTokens: 000,
+      maxTokens: anyNamed('maxTokens'),
     )).thenAnswer((realInvocation) async => const Right('This is a sentence'));
 
     final response = await chatGPTNotifier.generatePhrase(fakePictos);
-
-    expect(response, isA<String>());
+    print(response);
+    expect(response, 'This is a sentence');
   });
 }

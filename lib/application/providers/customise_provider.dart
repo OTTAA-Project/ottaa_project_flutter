@@ -53,14 +53,14 @@ class CustomiseProvider extends ChangeNotifier {
     selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset); //TODO: Check this with asim
     selectedGroupName = groups[index].text;
     selectedGroupStatus = groups[index].block;
-    fetchDesiredPictos();
     notifyListeners();
   }
 
   Future<void> setShortcutsForUser({required String userId}) async {
     await _customiseService.setShortcutsForUser(
       shortcuts: ShortcutsModel(
-        enable: true, //TODO: Change this
+        enable: true,
+        //TODO: Change this
         favs: selectedShortcuts[0],
         history: selectedShortcuts[1],
         camera: selectedShortcuts[2],
