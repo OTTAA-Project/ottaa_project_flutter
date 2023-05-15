@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/service/service.dart';
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
@@ -37,7 +34,14 @@ Future<void> main() async {
     mockServerRepository = MockServerRepository();
     mockLocalDatabaseRepository = MockLocalDatabaseRepository();
     mockAuthRepository = MockAuthRepository();
-    PackageInfo.setMockInitialValues(appName: "ottaa", packageName: "com.ottaa", version: "1.0.0", buildNumber: "1", buildSignature: "sig", installerStore: "store");
+    PackageInfo.setMockInitialValues(
+      appName: "ottaa",
+      packageName: "com.ottaa",
+      version: "1.0.0",
+      buildNumber: "1",
+      buildSignature: "sig",
+      installerStore: "store",
+    );
 
     fakeUser = BaseUserModel(
       id: "0",

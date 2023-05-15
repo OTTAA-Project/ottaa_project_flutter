@@ -12,4 +12,5 @@ abstract class TTSRepository {
 
   Future<void> changeCustomTTs(bool value);
   Future<void> changeTTSVoice(String voice);
+  Future<void> ttsStop();
 }

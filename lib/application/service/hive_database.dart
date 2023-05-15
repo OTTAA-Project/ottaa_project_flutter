@@ -1,5 +1,4 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
@@ -44,6 +43,7 @@ class HiveDatabase extends LocalDatabaseRepository {
     await Hive.box('caregiver').clear();
     await Hive.box('none').clear();
   }
+
 
   @override
   Future<UserModel?> getUser() async {
@@ -112,14 +112,29 @@ class HiveDatabase extends LocalDatabaseRepository {
 
     await Hive.openBox('intro');
 
+    await Hive.openBox('tts');
+
     await getUser();
   }
 
   @override
   Future<void> setUser(UserModel user) async {
-    await Hive.box(user.type.name).put(user.type.name, user);
-    user = await Hive.box(user.type.name).get(user.type.name);
+    Box box = (await secureBox(user.type.name));
+    box.put(user.type.name, user);
+    user = box.get(user.type.name);
     this.user = user;
+  }
+
+  Future<Box<T>> secureBox<T>(String boxName) async {
+    Box<T> box;
+
+    if (Hive.isBoxOpen(boxName)) {
+      box = Hive.box(boxName);
+    } else {
+      box = await Hive.openBox(boxName);
+    }
+
+    return box;
   }
 
   @override
@@ -131,5 +146,16 @@ class HiveDatabase extends LocalDatabaseRepository {
   Future<bool> getIntro() async {
     final res = Hive.box('intro').get('first');
     return res ?? true;
+  }
+
+  @override
+  Future<String> getVoice() async {
+    final res = Hive.box('tts').get('name');
+    return res ?? '';
+  }
+
+  @override
+  Future<void> setVoice({required String name}) async {
+    await Hive.box('tts').put('name', name);
   }
 }

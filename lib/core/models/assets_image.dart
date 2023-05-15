@@ -46,7 +46,8 @@ class AssetsImage {
 
   String toJson() => json.encode(toMap());
 
-  factory AssetsImage.fromJson(String source) => AssetsImage.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory AssetsImage.fromJson(String source) =>
+      AssetsImage.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'AssetsImage(asset: $asset, network: $network)';

@@ -7,7 +7,12 @@ class TokenInput extends StatelessWidget {
   final int tokenId;
   final void Function(int id, String value)? onChanged;
 
-  const TokenInput({super.key, required this.tokenId, required this.controller, this.node, this.onChanged});
+  const TokenInput(
+      {super.key,
+      required this.tokenId,
+      required this.controller,
+      this.node,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {

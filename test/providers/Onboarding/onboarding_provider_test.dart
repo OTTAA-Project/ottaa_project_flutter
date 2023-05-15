@@ -18,7 +18,14 @@ import 'package:ottaa_project_flutter/core/repositories/local_database_repositor
 
 import 'onboarding_provider_test.mocks.dart';
 
-@GenerateMocks([OnBoardingNotifier, AuthRepository, LoadingNotifier, AboutRepository, UserAvatarNotifier, LocalDatabaseRepository])
+@GenerateMocks([
+  OnBoardingNotifier,
+  AuthRepository,
+  LoadingNotifier,
+  AboutRepository,
+  UserAvatarNotifier,
+  LocalDatabaseRepository
+])
 void main() {
   late OnBoardingNotifier onBoardingNotifier;
   late MockAuthRepository mockAuthRepository;
@@ -56,22 +63,30 @@ void main() {
   });
   group('Onboarding Notifier', () {
     test('Update User Avatar', () async {
-      when(mockAuthRepository.signIn(SignInType.email)).thenAnswer((realInvocation) async => Right(fakeUser));
-      when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
-      when(mockUserAvatarNotifier.getAvatar()).thenAnswer((realInvocation) => '730.png');
+      when(mockAuthRepository.signIn(SignInType.email))
+          .thenAnswer((realInvocation) async => Right(fakeUser));
+      when(mockAuthRepository.getCurrentUser())
+          .thenAnswer((realInvocation) async => Right(fakeUser));
+      when(mockUserAvatarNotifier.getAvatar())
+          .thenAnswer((realInvocation) => '730.png');
       // await onBoardingNotifier.updateUserAvatar();
     });
     test('Update User Avatar fail user', () async {
-      when(mockAuthRepository.signIn(SignInType.email)).thenAnswer((realInvocation) async => Right(fakeUser));
-      when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Left("ERROR"));
-      when(mockUserAvatarNotifier.getAvatar()).thenAnswer((realInvocation) => '730.png');
+      when(mockAuthRepository.signIn(SignInType.email))
+          .thenAnswer((realInvocation) async => Right(fakeUser));
+      when(mockAuthRepository.getCurrentUser())
+          .thenAnswer((realInvocation) async => Left("ERROR"));
+      when(mockUserAvatarNotifier.getAvatar())
+          .thenAnswer((realInvocation) => '730.png');
       // await onBoardingNotifier.updateUserAvatar();
     });
     test('Change User Avatar ', () async {
       // when(mockAuthRepository.signIn(SignInType.email)).thenAnswer((realInvocation) async => Right(fakeUser));
       //when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Left(fakeUser.name));
-      when(mockUserAvatarNotifier.changeAvatar(2)).thenAnswer((realInvocation) => {});
-      when(mockUserAvatarNotifier.getAvatar()).thenAnswer((realInvocation) => '730.png');
+      when(mockUserAvatarNotifier.changeAvatar(2))
+          .thenAnswer((realInvocation) => {});
+      when(mockUserAvatarNotifier.getAvatar())
+          .thenAnswer((realInvocation) => '730.png');
       // onBoardingNotifier.changeAvatar(2);
       expect(mockUserAvatarNotifier.getAvatar(), '730.png');
     });

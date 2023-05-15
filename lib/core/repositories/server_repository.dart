@@ -49,7 +49,7 @@ abstract class ServerRepository {
 
   Future<EitherMap> getMostUsedSentences(String userId, String languageCode, [CancelToken? cancelToken]);
 
-  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens});
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens, double temperature = 0});
 
   Future<String> uploadUserImage({required String path, required String name, required String userId});
 
@@ -124,4 +124,5 @@ abstract class ServerRepository {
   Future<void> updateMainSettings({required Map<String, dynamic> map, required String userId});
 
   Future<dynamic> fetchUserSettings({required String userId});
+
 }

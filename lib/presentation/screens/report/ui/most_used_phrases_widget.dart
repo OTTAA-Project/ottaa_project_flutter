@@ -56,14 +56,18 @@ class MostUsedPhrasesWidget extends ConsumerWidget {
                         provider.loadingMostUsedSentences
                             ? Expanded(
                                 child: ListView.builder(
-                                  itemCount: provider.mostUsedSentences[indexMain].length,
+                                  itemCount: provider
+                                      .mostUsedSentences[indexMain].length,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, indexSecond) {
                                     return Container(
-                                      padding: EdgeInsets.only(left: verticalSize * 0.01),
+                                      padding: EdgeInsets.only(
+                                          left: verticalSize * 0.01),
                                       height: verticalSize * 0.15,
                                       width: verticalSize * 0.15,
-                                      child: Image.network(provider.mostUsedSentences[indexMain][indexSecond]),
+                                      child: Image.network(
+                                          provider.mostUsedSentences[indexMain]
+                                              [indexSecond]),
                                     );
                                   },
                                 ),
@@ -78,7 +82,8 @@ class MostUsedPhrasesWidget extends ConsumerWidget {
                         Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
-                            padding: EdgeInsets.only(right: verticalSize * 0.03),
+                            padding:
+                                EdgeInsets.only(right: verticalSize * 0.03),
                             child: Image.asset(
                               AppImages.kOttaaDrawerLogo,
                               height: verticalSize * 0.05,

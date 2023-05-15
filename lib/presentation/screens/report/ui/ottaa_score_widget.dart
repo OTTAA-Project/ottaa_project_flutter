@@ -123,7 +123,8 @@ class OTTAAScoreWidget extends StatelessWidget {
                   ),
                   Text(
                     scoreText,
-                    style: TextStyle(color: Colors.black, fontSize: verticalSize * 0.018),
+                    style: TextStyle(
+                        color: Colors.black, fontSize: verticalSize * 0.018),
                     textAlign: TextAlign.center,
                   ),
                 ],

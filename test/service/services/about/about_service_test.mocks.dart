@@ -459,6 +459,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
   _i4.Future<_i2.Either<String, String>> generatePhraseGPT({
     required String? prompt,
     required int? maxTokens,
+    double? temperature = 0.0,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -467,6 +468,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
           {
             #prompt: prompt,
             #maxTokens: maxTokens,
+            #temperature: temperature,
           },
         ),
         returnValue: _i4.Future<_i2.Either<String, String>>.value(
@@ -478,6 +480,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
             {
               #prompt: prompt,
               #maxTokens: maxTokens,
+              #temperature: temperature,
             },
           ),
         )),
@@ -1091,6 +1094,24 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<String> getVoice() => (super.noSuchMethod(
+        Invocation.method(
+          #getVoice,
+          [],
+        ),
+        returnValue: _i4.Future<String>.value(''),
+      ) as _i4.Future<String>);
+  @override
+  _i4.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
+        Invocation.method(
+          #setVoice,
+          [],
+          {#name: name},
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
 
 /// A class which mocks [AuthRepository].
@@ -1182,22 +1203,6 @@ class MockAuthRepository extends _i1.Mock implements _i14.AuthRepository {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
-  @override
-  _i4.Future<String> runToGetDataFromOtherPlatform({
-    required String? email,
-    required String? id,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #runToGetDataFromOtherPlatform,
-          [],
-          {
-            #email: email,
-            #id: id,
-          },
-        ),
-        returnValue: _i4.Future<String>.value(''),
-      ) as _i4.Future<String>);
   @override
   _i4.Future<String> getDeviceId() => (super.noSuchMethod(
         Invocation.method(
