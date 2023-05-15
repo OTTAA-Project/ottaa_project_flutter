@@ -9,7 +9,7 @@ workflows:
       groups:
         - ottaa-flutter
 
-      flutter: 3.3.2
+      flutter: 3.7.11
       xcode: latest
       cocoapods: default
     triggering:
