@@ -206,7 +206,7 @@
     "french": "French",
     "portuguese": "Portuguese",
     "test": "Esta es la voz que vas a usar en ottaa",
-    "add": "agregar"
+    "add": "Agregar"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -321,7 +321,7 @@
     "incorrect": "Incorrecto",
     "use_time": "Tiempo total",
     "maximum_streak": "Mejor racha",
-    "speak_what": "cual es el picto {name}",
+    "speak_what": "¿Cual es el picto {name}?",
     "gptbtn": "Crear historia",
     "prompt": "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:"
   }
