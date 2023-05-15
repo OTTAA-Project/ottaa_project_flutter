@@ -119,7 +119,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Group>>(
                 key.toString(),
-                (value is List ? value as dynamic : Map.from(value as dynamic).values)
+                (value is List ? value : Map.from(value as dynamic).values)
                     .map<Group>(
                       (e) => Group.fromMap(Map.from(e as dynamic)),
                     )

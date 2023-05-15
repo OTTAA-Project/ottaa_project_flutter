@@ -2,6 +2,7 @@ import 'dart:math' show min;
 
 import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -16,6 +17,7 @@ import 'package:ottaa_project_flutter/core/enums/display_types.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
+import 'package:ottaa_project_flutter/core/models/learn_token.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
@@ -371,14 +373,22 @@ class HomeProvider extends ChangeNotifier {
   Future<void> speakSentence() async {
     show = true;
     notifyListeners();
+    if (patientState.state != null) {
+      learnPictogram.call(
+        uid: patientState.user.id,
+        language: patientState.user.patientSettings.language.language,
+        model: "", //TODO: Change to the current model later uwu
+        tokens: pictoWords.map((e) => LearnToken(name: e.text, id: e.id)).toList(),
+      );
+    }
 
     if (patientState.state != null && !patientState.user.patientSettings.layout.oneToOne) {
       notifyListeners();
       String? sentence;
       scrollController.jumpTo(0);
       if (patientState.user.patientSettings.language.labs) {
-        // sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
-        // if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
+        sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+        if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
       }
 
       sentence ??= pictoWords.map((e) => e.text).join(' ');
@@ -397,6 +407,8 @@ class HomeProvider extends ChangeNotifier {
         notifyListeners();
         await _tts.speak(pictoWords[i].text);
       }
+      show = false;
+      notifyListeners();
     }
 
     show = false;

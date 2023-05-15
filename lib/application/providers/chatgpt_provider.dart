@@ -23,7 +23,7 @@ class ChatGPTNotifier extends ChangeNotifier {
 
     String pictogramsString = pictograms.map((e) => e.text).join(", ");
 
-    int maxTokens = (pictograms.length * 10).round().clamp(300, 500);
+    int maxTokens = (pictograms.length * 10).round().clamp(300, 5100);
 
     final String lang = user.settings.language.language;
 

@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
-import 'package:openai_client/openai_client.dart' as openai;
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
@@ -22,11 +22,7 @@ import 'package:universal_io/io.dart';
 class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   final Reference _storageRef = FirebaseStorage.instance.ref();
-  final openai.OpenAIClient _openAIClient = openai.OpenAIClient(
-    configuration: openai.OpenAIConfiguration(
-      apiKey: dotenv.get("openaiToken"),
-    ),
-  );
+  final functions = FirebaseFunctions.instance;
 
   final Dio _dio = Dio();
 
@@ -581,6 +577,8 @@ class ServerService implements ServerRepository {
       "tokens": tokens,
     };
 
+    print(tokens);
+
     try {
       final res = await _dio.post(
         '/speako/users/learn',
@@ -589,7 +587,12 @@ class ServerService implements ServerRepository {
       );
 
       return Right(jsonDecode(res.data) as Map<String, dynamic>);
+    }  on DioError catch(e) {
+      // handle te responde error
+      print(e.response);
+      return Left("Server error");
     } catch (e) {
+      print(e);
       // handle te responde error
       return const Left("learn_error");
     }
@@ -645,18 +648,17 @@ class ServerService implements ServerRepository {
   @override
   Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens, double temperature = 0}) async {
     try {
-      final choice = await _openAIClient.completions
-          .create(
-            model: "text-davinci-003",
-            prompt: prompt,
-            temperature: temperature,
-            maxTokens: maxTokens,
-          )
-          .data;
+      final response = await functions.httpsCallable("openai").call<Map<String, dynamic>>({
+        "model": "text-davinci-003",
+        "prompt": prompt,
+        "temperature": temperature,
+        "max_tokens": maxTokens,
+      });
 
-      if (!choice.choices.isNotEmpty) return const Left("No completado");
-
-      return Right(choice.choices.first.text);
+      if (response.data["choices"] == null || response.data["choices"][0] == null) {
+        return const Left("no_data_found");
+      }
+      return Right(response.data["choices"][0]["text"].toString());
     } catch (e) {
       return Left(e.toString());
     }
