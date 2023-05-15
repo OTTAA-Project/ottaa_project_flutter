@@ -75,11 +75,11 @@
           "required": "O e-mail é obrigatório",
           "invalid": "O e-mail é inválido"
         },
-        "warn": "*Um e-mail de validação com um código para vincular os perfis será enviado.",
-        "contact": "*Certifique-se de estar em contato com a pessoa que possui este e-mail."
+        "warn": "*Se enviará una notificación con un código para enlazar los perfiles.",
+        "contact": "*Asegurate de estar en contacto con la persona que posea esta cuenta en un dispositivo."
       },
       "token": {
-        "title": "Insira o código de verificação que chegou ao e-mail.",
+        "title": "Coloque el código de verificación que llegó como notificación a otro dispositivo.",
         "problem": "Problemas para vincular as contas?",
         "resend": "Reenviar código",
         "back": "Inserir outro e-mail",
@@ -196,7 +196,7 @@
     "medium": "Médio",
     "big": "Grande",
     "comingsoon": "Esta característica va estár disponible muy pronto!",
-    "delicate": "delicade",
+    "delicate": "Región",
     "chile": "Chile",
     "spanish": "Español",
     "argentina": "Argentina",
@@ -217,12 +217,12 @@
     "home": {
       "title": "Personalize sua tela inicial",
       "subtitle": "Atalhos na tela principal",
-      "description": "Personalize de acordo com suas preferências e necessidades."
+      "description": "Personalizá de acuerdo a tus gustos y necesidades"
     },
     "customize": {
-      "title": "Personalize sua tela inicial",
+      "title": "Personalizá tu Home",
       "subtitle": "Auxiliamos no processo de aprendizagem",
-      "description": "Ative ou desative placas ou pictogramas para modificar a predição. Você tem o controle."
+      "description": "Activá o desactivá tableros o pictogramas para modificar la predicción, vos tenés el control."
     },
     "skip": {
       "title": "Você concorda em pular a introdução?"
@@ -253,7 +253,7 @@
       "subtitle": "Ver pictogramas"
     },
     "shortcut": {
-      "title": "Selecione os atalhos que aparecerão na tela principal.",
+      "title": "Seleccioná los atajos que aparecerán en la pantalla principal.",
       "appbar": "Atalhos",
       "favorites": "Favoritos",
       "history": "Histórico",
@@ -302,15 +302,15 @@
     "game_header_0": "¿Cuál es el picto?",
     "game_header_1": "Unir pictogramas",
     "game_header_2": "Juego de la Memoria",
-    "game_sub_0": "Responde las preguntas eligiendo el pictograma correcto. Aprende jugando",
+    "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprende jugando",
     "game_sub_1": "Uní los pictogramas de manera correcta",
     "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
-    "group": "Selecciona una categoría para poder jugar",
+    "group": "Seleccioná una categoría para poder jugar",
     "search": "Buscar Tablero",
     "find": "Encontrá los tableros que quieras, fácilmente!",
-    "game_1_line": "Selecciona el pictograma que escuches",
-    "game_2_line": "Selecciona la palabra que corresponde a su pictograma",
-    "game_3_line": "Selecciona una tarjeta y encuentra la pareja del pictograma",
+    "game_1_line": "Seleccioná el pictograma que escuches",
+    "game_2_line": "Seleccioná la palabra que corresponde a su pictograma",
+    "game_3_line": "Seleccioná una tarjeta y encontrá la pareja del pictograma",
     "no": "¡Oh Oh!",
     "yes": "¡Muy bien!",
     "score": "Tu puntaje",
