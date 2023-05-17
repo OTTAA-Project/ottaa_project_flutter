@@ -12,7 +12,10 @@ class SentencesService implements SentencesRepository {
   SentencesService(this._auth, this._serverRepository);
 
   @override
-  Future<List<Phrase>> fetchSentences({required String language, required String type, bool isFavorite = false}) async {
+  Future<List<Phrase>> fetchSentences(
+      {required String language,
+      required String type,
+      bool isFavorite = false}) async {
     final authResult = await _auth.getCurrentUser();
 
     if (authResult.isLeft) return [];
@@ -27,7 +30,10 @@ class SentencesService implements SentencesRepository {
   }
 
   @override
-  Future<void> uploadSentences({required String language, required List<Phrase> data, required String type}) async {
+  Future<void> uploadSentences(
+      {required String language,
+      required List<Phrase> data,
+      required String type}) async {
     final authResult = await _auth.getCurrentUser();
 
     if (authResult.isLeft) return;

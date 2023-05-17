@@ -18,7 +18,8 @@ class SpeakButton extends StatelessWidget {
         child: BaseButton(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(colorScheme.primary),
-            overlayColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
+            overlayColor:
+                MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
             shape: MaterialStateProperty.all(
               const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(9)),

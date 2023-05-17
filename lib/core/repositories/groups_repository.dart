@@ -6,9 +6,11 @@ abstract class GroupsRepository {
 
   Future<List<Group>> getDefaultGroups();
 
-  Future<void> uploadGroups(List<Group> data, String type, String language, {String? userId});
+  Future<void> uploadGroups(List<Group> data, String type, String language,
+      {String? userId});
 
-  Future<void> updateGroups(Group data, String type, String language, int index);
+  Future<void> updateGroups(
+      Group data, String type, String language, int index);
 
   Future<List<Group>> getGroups(BasicSearch search);
 }

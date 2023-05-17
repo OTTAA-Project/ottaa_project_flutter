@@ -75,11 +75,11 @@
           "required": "Email is required",
           "invalid": "Invalid email"
         },
-        "warn": "*We will show a token on the device screen to link accounts.",
-        "contact": "*Be sure you are in contact with the person using this email."
+        "warn": "*Se enviará una notificación con un código para enlazar los perfiles.",
+        "contact": "*Asegurate de estar en contacto con la persona que posea esta cuenta en un dispositivo."
       },
       "token": {
-        "title": "Enter the verification token that was sent to that email.",
+        "title": "Coloque el código de verificación que llegó como notificación a otro dispositivo.",
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email",
@@ -126,21 +126,21 @@
       "board_view": "Board view",
       "tabs": "Tabs",
       "grid": "Grid",
-      "ottaa_labs": "OTTAA Labs",
-      "labs_text": "Función frases verbales",
-      "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas",
+      "ottaa_labs": "Ottaa Labs",
+      "labs_text": "Verbal phrases feature",
+      "labs_long": "Beta mode\nAllows creating sentences with more complex tenses",
       "one_by_one": "ONE by ONE"
     },
     "accessibility": {
       "selection": "Selection",
-      "bar_text": "Tiempo de clickeo (Segundos)",
-      "connected": "Dispositivos conectados",
+      "bar_text": "Clicking time (Seconds)",
+      "connected": "Connected devices",
       "device": "Assistive device",
       "press": "Press&Press",
       "scroll": "Scroll&Press",
       "sip": "Sip&Puff",
       "selection_type": "Selection method",
-      "swept": "Screen scanning",
+      "swept": "Swept",
       "speed": "Speed",
       "selection_speed": "Selection speed"
     },
@@ -186,16 +186,26 @@
     "general": "General",
     "pictogram": "Pictograms",
     "configuration": "Settings",
-    "user_ottaa": "Use OTTAA as {name}",
+    "user_ottaa": "Usar Ottaa como {name}",
     "cancel": "Cancel",
     "slow": "Slow",
     "default": "Default",
     "fast": "Fast",
     "voice": "Voice",
-    "boy": "Small",
+    "small": "Small",
     "medium": "Medium",
     "big": "Large",
-    "comingsoon": "This feature will be available very soon!"
+    "comingsoon": "This feature will be available very soon!",
+    "delicate": "Región",
+    "chile": "Chile",
+    "spanish": "Spanish",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italian",
+    "french": "French",
+    "portuguese": "Portuguese",
+    "test": "This is the voice you are going to use in otta"
   },
   "onboarding": {
     "start": "Get Started",
@@ -207,12 +217,12 @@
     "home": {
       "title": "Customize your Home",
       "subtitle": "Shortcuts on main screen",
-      "description": "Customize according to your tastes and needs"
+      "description": "Personalizá de acuerdo a tus gustos y necesidades"
     },
     "customize": {
-      "title": "Customize your Home",
+      "title": "Personalizá tu Home",
       "subtitle": "We guide you in the learning process",
-      "description": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
+      "description": "Activá o desactivá tableros o pictogramas para modificar la predicción, vos tenés el control."
     },
     "skip": {
       "title": "Do you really want to skip the tutorial?"
@@ -243,7 +253,7 @@
       "subtitle": "See pictograms"
     },
     "shortcut": {
-      "title": "Choose the shortcuts to use on Home screen.",
+      "title": "Seleccioná los atajos que aparecerán en la pantalla principal.",
       "appbar": "Shortcuts",
       "favorites": "Favorites",
       "history": "History",
@@ -255,8 +265,8 @@
       "switch": "Enable board"
     },
     "help": {
-      "boards": "Los tableros predictivos permiten configurar que grupo de pictogramas se mostrarán en la pantalla del usuario/a final.",
-      "shortcut": "Los atajos son accesos rápidos a distintas funciones para que el/la usuario/a final disponga en su pantalla principal."
+      "boards": "Predictive boards allow choosing what boards & pictograms will show up to the user.",
+      "shortcut": "Shortcuts are a fast way to access different features for the user on Home Screen."
     },
     "wait": {
       "title": "¡Congratulations!",
@@ -272,6 +282,41 @@
     }
   },
   "chatgpt": {
-    "prompt": "formar una frase con estas palabras como si hablara un {age} {gender} en {language}, agregando conectores y artículos cuando sea necesario: {pictograms}"
+    "prompt": "escribir una frase en ingles con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras y agregale la expresion culiau: {pictograms}"
+  },
+  "notification": {
+    "code": {
+      "request": {
+        "title": "OTTAA Link verification",
+        "body": "Someone is trying to link your account with token <b>{linkToken}</b>"
+      },
+      "confirm": {
+        "title": "OTTAA Link confirmation",
+        "body": "You have successfully linked your account"
+      }
+    }
+  },
+  "game": {
+    "play": "Juguemos!",
+    "next": "Jugar",
+    "game_header_0": "¿Cuál es el picto?",
+    "game_header_1": "Unir pictogramas",
+    "game_header_2": "Juego de la Memoria",
+    "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprende jugando",
+    "game_sub_1": "Uní los pictogramas de manera correcta",
+    "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
+    "group": "Seleccioná una categoría para poder jugar",
+    "search": "Buscar Tablero",
+    "find": "Encontrá los tableros que quieras, fácilmente!",
+    "game_1_line": "Seleccioná el pictograma que escuches",
+    "game_2_line": "Seleccioná la palabra que corresponde a su pictograma",
+    "game_3_line": "Seleccioná una tarjeta y encontrá la pareja del pictograma",
+    "no": "¡Oh Oh!",
+    "yes": "¡Muy bien!",
+    "score": "Tu puntaje",
+    "correct": "Correcto",
+    "incorrect": "Incorrecto",
+    "use_time": "Tiempo total",
+    "maximum_streak": "Mejor racha"
   }
 }

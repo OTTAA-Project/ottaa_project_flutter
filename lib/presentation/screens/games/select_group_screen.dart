@@ -2,13 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/whats_the_picto_provider.dart';
-import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
@@ -20,7 +18,7 @@ class SelectGroupScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final user = ref.read(userNotifier);
+    final user = ref.read(userProvider.select((value) => value.user));
     final colorScheme = Theme.of(context).colorScheme;
     final groups = ref.watch(homeProvider).groups.values.where((element) => !element.block).toList();
     final provider = ref.watch(gameProvider);
@@ -76,14 +74,14 @@ class SelectGroupScreen extends ConsumerWidget {
                         case 0:
                           await provider.createRandomForGameWTP();
                           wtpProvider.speakNameWhatsThePicto();
-                          context.push(AppRoutes.gamePlayScreen);
+                          // context.push(AppRoutes.gamePlayScreen);
                           break;
                         case 1:
                           await provider.createRandomForGameMP();
-                          context.push(AppRoutes.gamePlayScreen);
+                          // context.push(AppRoutes.gamePlayScreen);
                           break;
                         case 2:
-                          context.push(AppRoutes.gamePlayScreen);
+                          // context.push(AppRoutes.gamePlayScreen);
                           break;
                       }
                     },
@@ -129,7 +127,7 @@ class SelectGroupScreen extends ConsumerWidget {
             top: size.height * 0.3,
             child: GestureDetector(
               onTap: () {
-                context.push(AppRoutes.searchScreen);
+                // context.push(AppRoutes.searchScreen);
               },
               child: Container(
                 padding: const EdgeInsets.all(8),

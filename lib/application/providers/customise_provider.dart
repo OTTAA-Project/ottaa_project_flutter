@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
@@ -47,7 +47,7 @@ class CustomiseProvider extends ChangeNotifier {
 
   Future<void> setGroupData({required int index}) async {
     selectedGroup = index;
-    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset); //TODO: Check this with asim
+    selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset);
     selectedGroupName = groups[index].text;
     selectedGroupStatus = groups[index].block;
     fetchDesiredPictos();
@@ -57,7 +57,7 @@ class CustomiseProvider extends ChangeNotifier {
   Future<void> setShortcutsForUser({required String userId}) async {
     await _customiseService.setShortcutsForUser(
       shortcuts: ShortcutsModel(
-        enable: true, //TODO: Change this
+        enable: true,
         favs: selectedShortcuts[0],
         history: selectedShortcuts[1],
         camera: selectedShortcuts[2],
@@ -89,7 +89,6 @@ class CustomiseProvider extends ChangeNotifier {
         break;
       case CustomiseDataType.defaultCase:
         await fetchDefaultCaseValues();
-        await fetchDefaultCaseValues();
         break;
     }
   }
@@ -103,7 +102,6 @@ class CustomiseProvider extends ChangeNotifier {
     if (dataExist) {
     } else {
       type = CustomiseDataType.user;
-      print('hi, from here');
       notifyListeners();
     }
   }
@@ -112,9 +110,6 @@ class CustomiseProvider extends ChangeNotifier {
     await fetchShortcutsForUser(userId: userId);
     await fetchUserGroups(userId: userId);
     groupsFetched = true;
-
-    await fetchUserGroups(userId: userId);
-
     notifyListeners();
 
     await fetchUserPictos(userId: userId);
@@ -122,7 +117,7 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> uploadData({required String userId}) async {
-    final locale = _i18n.locale;
+    final locale = _i18n.currentLocale;
 
     final languageCode = locale.toString();
 
@@ -130,10 +125,10 @@ class CustomiseProvider extends ChangeNotifier {
     await _groupsService.uploadGroups(groups, 'type', languageCode, userId: userId);
     await setShortcutsForUser(userId: userId);
 
-    if (userState.user.type == UserType.user) {
-      final newUser = userState.user.patient;
-      userState.user.patient.groups[languageCode] = groups;
-      userState.user.patient.pictos[languageCode] = pictograms;
+    if (userState.user!.type == UserType.user) {
+      final newUser = userState.user!.patient;
+      userState.user!.patient.groups[languageCode] = groups;
+      userState.user!.patient.pictos[languageCode] = pictograms;
 
       await _localDatabaseRepository.setUser(newUser);
 
@@ -146,7 +141,7 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> getDefaultGroups() async {
-    final locale = _i18n.locale;
+    final locale = _i18n.currentLocale;
 
     final languageCode = locale.toString();
 
@@ -155,7 +150,7 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> getDefaultPictos() async {
-    final locale = _i18n.locale;
+    final locale = _i18n.currentLocale;
 
     final languageCode = locale.toString();
     pictograms = await _customiseService.fetchDefaultPictos(languageCode: languageCode);
@@ -166,8 +161,6 @@ class CustomiseProvider extends ChangeNotifier {
     for (var element in pictograms) {
       pictosMap[element.id.toString()] = i;
     }
-
-    print(pictosMap);
   }
 
   void block({required int index}) async {
@@ -185,31 +178,29 @@ class CustomiseProvider extends ChangeNotifier {
     selectedShortcuts[4] = res.yes;
     selectedShortcuts[5] = res.no;
     selectedShortcuts[6] = res.share;
-    print(res.toString());
     notifyListeners();
   }
 
   Future<void> fetchUserGroups({required String userId}) async {
-    final locale = _i18n.locale;
 
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    final res = await _customiseService.fetchUserGroups(languageCode: languageCode, userId: userId);
+    final res = await _customiseService.fetchUserGroups(languageCode: _i18n.currentLocale.toString(), userId: userId);
     groups = res;
     notify();
   }
 
   Future<void> fetchUserPictos({required String userId}) async {
-    final locale = _i18n.locale;
+    final locale = _i18n.currentLocale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
     pictograms = await _customiseService.fetchUserPictos(languageCode: languageCode, userId: userId);
   }
 
   Future<bool> dataExistOrNot({required String userId}) async {
-    final locale = _i18n.locale;
+    final locale = _i18n.currentLocale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
     final bool = _customiseService.valuesExistOrNot(languageCode: languageCode, userId: userId);
+    this.userId = userId;
     return bool;
   }
 }
@@ -222,6 +213,6 @@ final customiseProvider = ChangeNotifierProvider<CustomiseProvider>((ref) {
 
   final localDatabase = GetIt.I<LocalDatabaseRepository>();
 
-  final userState = ref.watch(userNotifier.notifier);
+  final userState = ref.watch(userProvider);
   return CustomiseProvider(pictogramService, groupService, customiseService, i18N, userState, localDatabase);
 });

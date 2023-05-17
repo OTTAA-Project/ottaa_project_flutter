@@ -67,10 +67,12 @@ class SubtitlesSetting {
 
   String toJson() => json.encode(toMap());
 
-  factory SubtitlesSetting.fromJson(String source) => SubtitlesSetting.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory SubtitlesSetting.fromJson(String source) =>
+      SubtitlesSetting.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'SubtitlesSetting(show: $show, size: $size, caps: $caps)';
+  String toString() =>
+      'SubtitlesSetting(show: $show, size: $size, caps: $caps)';
 
   @override
   bool operator ==(covariant SubtitlesSetting other) {

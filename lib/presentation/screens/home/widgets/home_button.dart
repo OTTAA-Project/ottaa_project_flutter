@@ -1,10 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:ottaa_ui_kit/widgets.dart';
 
 class HomeButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget child;
-  final Size? size;
+  final Size size;
 
   final ButtonStyle Function(ButtonStyle)? buildTheme;
 
@@ -13,7 +14,7 @@ class HomeButton extends StatelessWidget {
     this.onPressed,
     required this.child,
     this.buildTheme,
-    this.size,
+    this.size = const Size(125, 125),
   });
 
   @override
@@ -23,7 +24,10 @@ class HomeButton extends StatelessWidget {
     bool disabled = onPressed == null;
 
     final defaultTheme = ButtonStyle(
-      fixedSize: MaterialStateProperty.all(size),
+      // fixedSize: MaterialStateProperty.all(size),
+      // minimumSize: MaterialStateProperty.all(size),
+      // maximumSize: MaterialStateProperty.all(size),
+
       backgroundColor: MaterialStateProperty.all(disabled ? Colors.grey.withOpacity(.12) : Colors.white),
       foregroundColor: MaterialStateProperty.all(disabled ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
       iconColor: MaterialStateProperty.all(disabled ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),
@@ -37,14 +41,17 @@ class HomeButton extends StatelessWidget {
       elevation: MaterialStateProperty.all(0),
     );
 
-    return BaseButton(
-      onPressed: onPressed,
-      style: buildTheme != null
-          ? buildTheme!(
-              defaultTheme,
-            )
-          : defaultTheme,
-      child: child,
+    return SizedBox.square(
+      dimension: min(size.width, size.height),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: buildTheme != null
+            ? buildTheme!(
+                defaultTheme,
+              )
+            : defaultTheme,
+        child: child,
+      ),
     );
   }
 }

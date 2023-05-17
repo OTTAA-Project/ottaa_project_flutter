@@ -10,7 +10,7 @@ class LearnPictogramImpl extends LearnPictogram {
 
   @override
   Future<EitherString> call({
-    @Deprecated("You should use tokens instead of this") String sentence = "",
+    @Deprecated("You should use tokens instead of this") String? sentence = "",
     required String uid,
     required String language,
     required String model,

@@ -21,13 +21,13 @@ class BaseUserModelAdapter extends TypeAdapter<BaseUserModel> {
       settings: fields[3] as UserSettings,
       email: fields[6] as String,
       type: fields[5] as UserType,
-    );
+    )..currentToken = fields[7] as DeviceToken?;
   }
 
   @override
   void write(BinaryWriter writer, BaseUserModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(3)
@@ -35,7 +35,9 @@ class BaseUserModelAdapter extends TypeAdapter<BaseUserModel> {
       ..writeByte(5)
       ..write(obj.type)
       ..writeByte(6)
-      ..write(obj.email);
+      ..write(obj.email)
+      ..writeByte(7)
+      ..write(obj.currentToken);
   }
 
   @override

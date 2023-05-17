@@ -5,6 +5,8 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chat_gpt_game_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/storyWidget.dart';
@@ -16,7 +18,8 @@ class ShowCreatedStory extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(chatGptGameProvider);
     final colorScheme = Theme.of(context).colorScheme;
-    final user = ref.read(userNotifier);
+
+    final user = ref.read(userProvider.select((value) => value.user!));
     return Scaffold(
       body: Stack(
         children: [
@@ -26,13 +29,13 @@ class ShowCreatedStory extends ConsumerWidget {
             child: Column(
               children: [
                 HeaderWidget(
-                  headline: 'profile.hello'.trlf({'name': user!.settings.data.name}),
+                  headline: 'profile.hello'.trlf({'name': user.settings.data.name}),
                   subtitle: 'game.game_4_line'.trl,
                   simple: false,
                   onTap: () {
                     ///reset the whole game
-                    provider.resetStoryGame();
-                    provider.stopTTS();
+                    // provider.resetStoryGame();
+                    // provider.stopTTS();
                     context.pop();
                     context.pop();
                   },
@@ -63,7 +66,7 @@ class ShowCreatedStory extends ConsumerWidget {
                 ),
                 StoryButton(
                   onTap: () {
-                    provider.speakStory();
+                    // provider.speakStory();
                   },
                   image: AppImages.kOttaa,
                   orange: true,
@@ -73,7 +76,7 @@ class ShowCreatedStory extends ConsumerWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    provider.stopTTS();
+                    // provider.stopTTS();
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

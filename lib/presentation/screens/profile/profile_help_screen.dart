@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/providers/about_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileHelpScreen extends ConsumerWidget {
@@ -16,87 +17,90 @@ class ProfileHelpScreen extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final provider = ref.watch(profileProvider);
     final mailProvider = ref.read(aboutProvider);
-    return Scaffold(
-      appBar: OTTAAAppBar(
-        title: Text(
-          "profile.help.help".trl,
-          style: textTheme.headline3,
-        ),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 16,
+    return ResponsiveWidget(
+      child: Scaffold(
+        appBar: OTTAAAppBar(
+          title: Text(
+            "profile.help.help".trl,
+            style: textTheme.headline3,
           ),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ActionCard(
-                title: "profile.help.title1".trl,
-                subtitle: '',
-                trailingImage: const AssetImage(AppImages.kProfileHelpIcon1),
-                onPressed: () => context.push(AppRoutes.profileFAQScreen),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              ActionCard(
-                title: "profile.help.title2".trl,
-                subtitle: '',
-                trailingImage: const AssetImage(AppImages.kProfileHelpIcon2),
-                onPressed: () async {
-                  bool? wantsCall = await BasicBottomSheet.show(
-                    context,
-                    title: 'global.support'.trl,
-                    children: [
-                      GestureDetector(
-                        onTap: () async => await mailProvider.sendSupportEmail(),
-                        child: Wrap(
-                          alignment: WrapAlignment.center,
-                          children: [
-                            Text("Mail:", style: textTheme.headline3),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            GestureDetector(
-                              child: Text(
-                                "support@ottaaproject.com",
-                                style: textTheme.headline3?.copyWith(
-                                  decoration: TextDecoration.underline,
-                                ),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24,
+              vertical: 16,
+            ),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ActionCard(
+                  title: "profile.help.title1".trl,
+                  subtitle: '',
+                  trailingImage: const AssetImage(AppImages.kProfileHelpIcon1),
+                  onPressed: () => context.push(AppRoutes.userProfileHelpFaq),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                ActionCard(
+                  title: "profile.help.title2".trl,
+                  subtitle: '',
+                  trailingImage: const AssetImage(AppImages.kProfileHelpIcon2),
+                  onPressed: () async {
+                    bool? wantsCall = await BasicBottomSheet.show(
+                      context,
+                      title: 'global.support'.trl,
+                      children: [
+                        GestureDetector(
+                          onTap: () async =>
+                              await mailProvider.sendSupportEmail(),
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            children: [
+                              Text("Mail:", style: textTheme.headline3),
+                              const SizedBox(
+                                width: 4,
                               ),
-                            )
-                          ],
+                              GestureDetector(
+                                child: Text(
+                                  "support@ottaaproject.com",
+                                  style: textTheme.headline3?.copyWith(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      Text(
-                        "¿Desea comunicarse por teléfono con soporte técnico?",
-                        textAlign: TextAlign.center,
-                        style: textTheme.headline3?.copyWith(
-                          fontWeight: FontWeight.bold,
+                        const SizedBox(
+                          height: 32,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                    ],
-                    okButtonText: "Llamar",
-                    cancelButtonText: "Cancelar",
-                    cancelButtonEnabled: true,
-                  );
+                        Text(
+                          "¿Desea comunicarse por teléfono con soporte técnico?",
+                          textAlign: TextAlign.center,
+                          style: textTheme.headline3?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                      okButtonText: "Llamar",
+                      cancelButtonText: "Cancelar",
+                      cancelButtonEnabled: true,
+                    );
 
-                  if (wantsCall == true) {
-                    await provider.openDialer();
-                  }
-                },
-                imageSize: const Size(129, 96),
-              ),
-            ],
+                    if (wantsCall == true) {
+                      await provider.openDialer();
+                    }
+                  },
+                  imageSize: const Size(129, 96),
+                ),
+              ],
+            ),
           ),
         ),
       ),

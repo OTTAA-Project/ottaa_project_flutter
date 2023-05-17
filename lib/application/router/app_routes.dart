@@ -1,53 +1,62 @@
 class AppRoutes {
-  static const splash = "/splash";
+  ///
+  /// General Routes
+  ///
+
+  static const splash = "/";
   static const login = "/login";
+  static const loginWait = "/login/waiting";
   static const home = "/home";
-  static const sentences = "/sentences";
-  static const settings = "/settings";
-  static const settingslang = "/settings_lang";
-  static const settingsvoice = "/settings_voice";
+
   static const onboarding = "/onboarding";
-  static const tutorial = "/tutorial";
-  static const report = "/report";
-  static const profileChooserScreen = "/profile_chooser_screen";
-  static const profileMainScreen = "/profile_main_screen";
-  static const profileSettingsScreen = "/profile_settings_screen";
-  static const profileWaitingScreen = "/profile_waiting_screen";
-  static const favouriteSentences = "/favourite_sentences";
-  static const addOrRemoveFavouriteSentences = "/add_or_remove_favourite_sentences";
-  static const searchSentences = "/search_sentences";
-  static const profileSettingsEditScreen = "/profile_settings_edit_screen";
-  static const profileChooserScreenSelected = "/profile_chooser_screen_selected";
-  static const profileFAQScreen = "/profile_faq_screen";
-  static const profileHelpScreen = "/profile_help_screen";
-  static const customizedBoardScreen = "/customized_board_screen";
-  static const customizeBoardScreen = "/customize_board_screen";
-  static const customizeWaitScreen = "/customized_wait_screen";
-  static const profileLinkedAccountScreen = "/profile_linked_account_screen";
-  static const customizePictoScreen = "/customized_picto_screen";
 
-  static const linkMailScreen = "/link/email";
-  static const linkTokenScreen = "/link/token";
-  static const linkWaitScreen = "/link/wait";
-  static const linkSuccessScreen = "/link/success";
-  static const waitingLogin = "/login/waiting";
+  ///
+  /// User General Routes
+  ///
 
-  static const profileOttaaTips = "/profile_ottaa_tips_screen";
-  static const profileMainScreenUser = "/profile_main_screen_user";
+  static const userWait = "/home/loading";
+  static const userProfile = "/home/profile";
+  static const userProfileRole = "/home/profile/role";
+  static const userProfileAccounts = "/home/profile/accounts";
+  static const userProfileTips = "/home/profile/tips";
+  static const userProfileEdit = "/home/profile/edit";
+  static const userProfileHelp = "/home/profile/help";
+  static const userProfileHelpFaq = "/home/profile/help/faq";
+  static const userCustomize = "/home/customize";
+  static const userCustomizeBoard = "/home/customize/board";
+  static const userCustomizePicto = "/home/customize/picto";
+  static const userCustomizeWait = "/home/customize/wait";
+  static const userTalk = "/home/talk";
 
-  static const settingScreenUser = "/setting_screen_user";
-  static const mainSettingUser = "/main_setting_screen_user";
-  static const accessibilityScreenUser = "/accessibility_screen_user";
-  static const voiceAndSubtitleScreenUser = "/voice_and_subtitle_screen_user";
-  static const languageScreenUser = "/language_screen_user";
-  static const gameScreen = "/game_screen";
-  static const selectGroupScreen = "/select_group_screen";
-  static const matchPictogramScreen = "/match_pictogram_screen";
-  static const memoryGameScreen = "/memory_game_screen";
-  static const searchScreen = "/search_screen";
-  static const chatGPTGame = "/chat_gpt_game";
-  static const whatsThePictoScreen = "/whats_the_picto_screen";
-  static const selectBoardPicto = "/select_board_picto";
-  static const showCreatedStory = "/show_created_story";
-  static const gamePlayScreen = "/game_play_screen";
+  ///
+  /// User Caregiver Routes
+  ///
+  static const caregiverAccount = "/home/account";
+  static const caregiverAccountLayout = "/home/account/layout";
+  static const caregiverAccountAccessibility = "/home/account/accessibility";
+  static const caregiverAccountTTS = "/home/account/tts";
+  static const caregiverAccountLanguage = "/home/account/language";
+  static const caregiverLink = "/home/link";
+  static const caregiverLinkToken = "/home/link/token";
+  static const caregiverLinkWait = "/home/link/wait";
+  static const caregiverLinkSuccess = "/home/link/success";
+
+  ///
+  /// User Patient routes
+  ///
+  static const patientSettings = "/home/settings";
+  static const patientSettingsLayout = "/home/settings/layout";
+  static const patientSettingsAccessibilty = "/home/settings/accessibility";
+  static const patientSettingsTTS = "/home/settings/tts";
+  static const patientSettingsLanguage = "/home/settings/language";
+
+  static const patientGame = "/home/games";
+  static const patientGameGroupSelection = "/home/games/groups";
+  static const patientGameSearchGroup = "/home/games/groups/search";
+  static const patiengMatchPictogramGame = "/home/games/match";
+  static const patientMemoryGame = "/home/games/memory";
+  static const patientWhatsThePictoGame = "/home/games/wtp";
+  static const patientHistoryGame = "/home/games/history";
+  static const patientHistorySelectPicto = "/home/games/history/pictos";
+  static const patientHistoryReview = "/home/games/history/review";
 }

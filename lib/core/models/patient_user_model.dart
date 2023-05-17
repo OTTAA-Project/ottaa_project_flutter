@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/accessibility_setting.dart';
+import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
@@ -47,6 +48,10 @@ class PatientUserModel extends UserModel {
   @override
   @HiveField(6)
   String email;
+
+  @override
+  @HiveField(7)
+  DeviceToken? currentToken;
 
   PatientUserModel({
     required this.id,
@@ -102,6 +107,7 @@ class PatientUserModel extends UserModel {
       ),
       'settings': settings.toMap(),
       'type': type.name,
+      'email': email
     };
   }
 
@@ -147,6 +153,8 @@ class PatientUserModel extends UserModel {
           : <String, List<Picto>>{},
       settings: PatientSettings.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
       type: UserType.values.firstWhere((element) => element.name == map['type'] as String),
+    ).copyWith(
+      email: map['email'],
     );
   }
 
@@ -159,19 +167,19 @@ class PatientUserModel extends UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, groups: $groups, phrases: $phrases, pictos: $pictos, settings: $settings, type: $type)';
+    return 'UserModel(id: $id, groups: $groups, phrases: $phrases, pictos: $pictos, settings: $settings, type: $type, email: $email)';
   }
 
   @override
   bool operator ==(covariant PatientUserModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id && mapEquals(other.groups, groups) && mapEquals(other.phrases, phrases) && mapEquals(other.pictos, pictos) && other.settings == settings && other.type == type;
+    return other.id == id && mapEquals(other.groups, groups) && mapEquals(other.phrases, phrases) && mapEquals(other.pictos, pictos) && other.settings == settings && other.type == type && other.email == email;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ groups.hashCode ^ phrases.hashCode ^ pictos.hashCode ^ settings.hashCode ^ type.hashCode;
+    return id.hashCode ^ groups.hashCode ^ phrases.hashCode ^ pictos.hashCode ^ settings.hashCode ^ type.hashCode ^ email.hashCode;
   }
 
   @override

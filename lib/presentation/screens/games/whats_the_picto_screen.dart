@@ -1,9 +1,7 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/whats_the_picto_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
@@ -19,8 +17,6 @@ class WhatsThePictoScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(whatsThePictoProvider);
     final game = ref.read(gameProvider);
-    final user = ref.read(userNotifier);
-    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
     return Stack(
@@ -39,9 +35,9 @@ class WhatsThePictoScreen extends ConsumerWidget {
           },
         ),
         SpeakButton(
-          onTap: () async => provider.speakNameWhatsThePicto(),
+          onTap: () async => {},
         ),
-        Container(
+        SizedBox(
           height: size.height,
           child: Center(
             child: Row(
@@ -153,7 +149,7 @@ class WhatsThePictoScreen extends ConsumerWidget {
                 left: size.width * 0.46,
                 child: Text(
                   provider.selectedPicto == game.correctPictoWTP ? 'game.yes'.trl : 'game.no'.trl,
-                  style: textTheme.headline1,
+                  style: textTheme.displayLarge,
                 ),
               )
             : const SizedBox.shrink(),

@@ -76,7 +76,8 @@ class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Icon(
                   mute ? Icons.volume_mute_outlined : Icons.volume_up_outlined,
                   color: colorScheme.primary,

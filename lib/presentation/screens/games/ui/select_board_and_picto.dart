@@ -4,6 +4,9 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chat_gpt_game_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/board_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
@@ -18,24 +21,24 @@ class SelectBoardAndPicto extends ConsumerWidget {
     final provider = ref.watch(chatGptGameProvider);
     final size = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
-    final user = ref.read(userNotifier);
+
+    final user = ref.read(userProvider.select((value) => value.user!));
     final colorScheme = Theme.of(context).colorScheme;
-    final groups = provider.gptBoards.map((e) => game.groups[e]).toList();
-    print(provider.gptBoards.length);
+    final groups = [];
     return Scaffold(
       body: Stack(
         children: [
           const BackGroundWidget(),
           HeaderWidget(
-            headline: 'profile.hello'.trlf({'name': user!.settings.data.name}),
+            headline: 'profile.hello'.trlf({'name': user.settings.data.name}),
             subtitle: 'game.game_4_line'.trl,
             onTap: () {
-              if (provider.sentencePhase < provider.chatGptPictos.length) {
-                provider.boardOrPicto = true;
-              }
+              // if (provider.sentencePhase < provider.chatGptPictos.length) {
+              //   provider.boardOrPicto = true;
+              // }
             },
           ),
-          provider.boardOrPicto ? const BoardWidget() : const PictoSelectWidget(),
+          true ? const BoardWidget() : const PictoSelectWidget(), //TODO!: FIX ALL GPT PROVIDER
           Positioned(
             right: 24,
             top: size.height * 0.3,
@@ -63,7 +66,7 @@ class SelectBoardAndPicto extends ConsumerWidget {
             top: size.height * 0.5,
             child: GestureDetector(
               onTap: () {
-                provider.boardOrPicto ? provider.scrollUpBoards() : provider.scrollUpPictos();
+                // provider.boardOrPicto ? provider.scrollUpBoards() : provider.scrollUpPictos();
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
@@ -84,7 +87,7 @@ class SelectBoardAndPicto extends ConsumerWidget {
             top: size.height * 0.7,
             child: GestureDetector(
               onTap: () {
-                provider.boardOrPicto ? provider.scrollDownBoards() : provider.scrollDownPictos();
+                // provider.boardOrPicto ? provider.scrollDownBoards() : provider.scrollDownPictos();
               },
               child: Container(
                 padding: const EdgeInsets.all(8),

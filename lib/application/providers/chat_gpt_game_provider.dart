@@ -84,7 +84,7 @@ class ChatGptGameProvider extends ChangeNotifier {
   Future<void> createStory() async {
     final String prompt = 'game.prompt'.trl;
     final finalPrompt = '$prompt ${gptPictos[0].text}, ${gptPictos[1].text}, ${gptPictos[2].text}, ${gptPictos[3].text}.';
-    final res = await _chatGPTServices.getStory(prompt: finalPrompt);
+    final res = await _chatGPTServices.getGPTStory(prompt: prompt);
     if (res.isRight) {
       generatedStory = res.right;
     }

@@ -16,7 +16,7 @@ class BoardWidget extends ConsumerWidget {
     final provider = ref.watch(chatGptGameProvider);
     final game = ref.watch(gameProvider);
     final colorScheme = Theme.of(context).colorScheme;
-    final groups = provider.gptBoards.map((e) => game.groups[e]).toList();
+    final groups = []; //TODO!: FIX THAT
     final size = MediaQuery.of(context).size;
     return Positioned(
       bottom: 72,
@@ -32,7 +32,7 @@ class BoardWidget extends ConsumerWidget {
             childAspectRatio: 1,
             mainAxisExtent: 96,
           ),
-          controller: ref.watch(chatGptGameProvider.select((value) => value.boardScrollController)),
+          // controller: ref.watch(chatGPTProvider.select((value) => value.boardScrollController)),
           padding: const EdgeInsets.only(top: 16, bottom: 16, right: 32),
           itemCount: groups.length,
           itemBuilder: (ctx, index) {
@@ -54,8 +54,7 @@ class BoardWidget extends ConsumerWidget {
                 elevation: MaterialStateProperty.all(0),
               ),
               onPressed: () async {
-                await provider.fetchGptPictos(id: group.id);
-                provider.boardOrPicto = false;
+
                 provider.notify();
               },
               child: Row(

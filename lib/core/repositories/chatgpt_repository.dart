@@ -11,7 +11,7 @@ abstract class ChatGPTRepository {
     int maxTokens = 500,
   });
 
-  Future<Either<String, String>> getStory({
+  Future<Either<String, String>> getGPTStory({
     required String prompt,
     int maxTokens = 1000,
   });

@@ -8,7 +8,8 @@ class VerifyEmailTokenImpl extends VerifyEmailToken {
   const VerifyEmailTokenImpl(super.serverService);
 
   @override
-  Future<Either<String, String>> verifyEmailToken(String ownEmail, String email, String token) async {
+  Future<Either<String, String>> verifyEmailToken(
+      String ownEmail, String email, String token) async {
     final result = await serverService.verifyEmailToken(ownEmail, email, token);
 
     if (result.isLeft) {

@@ -61,7 +61,7 @@
       "text4": "Desa pictogrames o frases favorites, per poder accedir-hi més ràpidament."
     },
     "unlink": "Desvincular",
-    "unlink_account": "Voleu desvincular a {name} de les seves comptes?",
+    "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
       "help": "Ajuda",
       "title1": "Preguntes freqüents",
@@ -75,11 +75,11 @@
           "required": "El correu electrònic és requerit",
           "invalid": "El correu electrònic és invàlid"
         },
-        "warn": "*S'enviarà un correu de validació amb un codi per enllaçar els perfils.",
-        "contact": "*Assegura't d'estar en contacte amb la persona que posi aquest correu electrònic."
+        "warn": "*Se enviará una notificación con un código para enlazar los perfiles.",
+        "contact": "*Asegurate de estar en contacto con la persona que posea esta cuenta en un dispositivo."
       },
       "token": {
-        "title": "Poseu el codi de verificació que va arribar al correu electrònic.",
+        "title": "Coloque el código de verificación que llegó como notificación a otro dispositivo.",
         "problem": "Inconvenients per enllaçar les comptes?",
         "resend": "Reenviar codi",
         "back": "Introduir un altre correu electrònic",
@@ -186,16 +186,26 @@
     "general": "General",
     "pictogram": "Pictogrames",
     "configuration": "Configuració",
-    "user_ottaa": "Utilitzar Ottaa com a {name}",
+    "user_ottaa": "Usar Ottaa como {name}",
     "cancel": "Cancel·lar",
     "slow": "Lenta",
     "default": "Per defecte",
     "fast": "Ràpida",
     "voice": "Veu",
-    "boy": "Noi",
+    "small": "Chico",
     "medium": "Mitjana",
     "big": "Gran",
-    "comingsoon": "Esta característica va estár disponible muy pronto!"
+    "comingsoon": "Esta característica va estár disponible muy pronto!",
+    "delicate": "Región",
+    "chile": "Chile",
+    "spanish": "Español",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italiano",
+    "french": "French",
+    "portuguese": "Portuguese",
+    "test": "Esta es la voz que vas a usar en otta"
   },
   "onboarding": {
     "start": "Començar",
@@ -207,12 +217,12 @@
     "home": {
       "title": "Personalitza la teva pantalla principal",
       "subtitle": "Accessos directes a la pantalla principal",
-      "description": "Personalitza segons els gustos i necessitats"
+      "description": "Personalizá de acuerdo a tus gustos y necesidades"
     },
     "customize": {
-      "title": "Personalitza la teva pantalla principal",
+      "title": "Personalizá tu Home",
       "subtitle": "Acompanyem en el procés d'aprenentatge",
-      "description": "Activa o desactiva taulells o pictogrames per modificar la predicció, tu tens el control."
+      "description": "Activá o desactivá tableros o pictogramas para modificar la predicción, vos tenés el control."
     },
     "skip": {
       "title": "Estàs d'acord en saltar la introducció?"
@@ -243,7 +253,7 @@
       "subtitle": "Veure pictogrames"
     },
     "shortcut": {
-      "title": "Selecciona els accessos directes que apareixeran a la pantalla principal.",
+      "title": "Seleccioná los atajos que aparecerán en la pantalla principal.",
       "appbar": "Accessos directes",
       "favorites": "Favorits",
       "history": "Historial",
@@ -272,6 +282,41 @@
     }
   },
   "chatgpt": {
-    "prompt": "formar una frase amb aquestes paraules com si parlés un {age} {gender} en {language}, afegint connectors i articles quan sigui necessari: {pictograms}"
+    "prompt": "escribir una frase en ingles con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras y agregale la expresion culiau: {pictograms}"
+  },
+  "notification": {
+    "code": {
+      "request": {
+        "title": "Verificación de OTTAA Link",
+        "body": "Están intentando vincular tu cuenta con el token <b>{linkToken}</b>"
+      },
+      "confirm": {
+        "title": "Confirmación de OTTAA Link",
+        "body": "Se ha confirmado la vinculación de tu cuenta"
+      }
+    }
+  },
+  "game": {
+    "play": "Juguemos!",
+    "next": "Jugar",
+    "game_header_0": "¿Cuál es el picto?",
+    "game_header_1": "Unir pictogramas",
+    "game_header_2": "Juego de la Memoria",
+    "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprende jugando",
+    "game_sub_1": "Uní los pictogramas de manera correcta",
+    "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
+    "group": "Seleccioná una categoría para poder jugar",
+    "search": "Buscar Tablero",
+    "find": "Encontrá los tableros que quieras, fácilmente!",
+    "game_1_line": "Seleccioná el pictograma que escuches",
+    "game_2_line": "Seleccioná la palabra que corresponde a su pictograma",
+    "game_3_line": "Seleccioná una tarjeta y encontrá la pareja del pictograma",
+    "no": "¡Oh Oh!",
+    "yes": "¡Muy bien!",
+    "score": "Tu puntaje",
+    "correct": "Correcto",
+    "incorrect": "Incorrecto",
+    "use_time": "Tiempo total",
+    "maximum_streak": "Mejor racha"
   }
 }

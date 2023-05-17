@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/jumping_dots.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignInButton extends ConsumerWidget {
   final SignInType type;
@@ -68,12 +69,26 @@ class SignInButton extends ConsumerWidget {
                 // ignore: use_build_context_synchronously
                 await BasicBottomSheet.show(
                   localContext,
-                  subtitle: "terms.text".trl,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        await launchUrl(
+                          mode: LaunchMode.externalApplication,
+                          Uri.parse("https://ottaa-project.github.io/docs/Community/privacypolicy/"),
+                        );
+                      },
+                      child: Text(
+                        "terms.text".trl,
+                        textAlign: TextAlign.center,
+                        style: textTheme.bodyText2!,
+                      ),
+                    )
+                  ],
                   okButtonText: "terms.button".trl,
                 );
 
                 // ignore: use_build_context_synchronously
-                localContext.go(AppRoutes.waitingLogin);
+                localContext.go(AppRoutes.loginWait);
               }
             }
           : null,

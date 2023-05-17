@@ -156,7 +156,9 @@ class GamesProvider extends ChangeNotifier {
   void scrollDown() {
     int currentPosition = gridScrollController.position.pixels.toInt();
 
-    if (currentPosition >= gridScrollController.position.maxScrollExtent) return;
+    if (currentPosition >= gridScrollController.position.maxScrollExtent) {
+      return;
+    }
 
     gridScrollController.animateTo(
       currentPosition + 96,

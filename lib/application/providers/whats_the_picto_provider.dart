@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
+import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart';
 
 class WhatsThePictoProvider extends ChangeNotifier {
   final GamesProvider _gamesProvider;
@@ -92,6 +98,9 @@ class WhatsThePictoProvider extends ChangeNotifier {
 }
 
 final whatsThePictoProvider = ChangeNotifierProvider<WhatsThePictoProvider>((ref) {
+  final userState = ref.watch(userProvider.notifier);
+  final patientState = ref.watch(patientNotifier.notifier);
+  final chatGPTRepository = GetIt.I<ChatGPTRepository>();
   final gamesProvider = ref.watch(gameProvider);
   final tts = ref.watch(ttsProvider);
   return WhatsThePictoProvider(gamesProvider, tts);

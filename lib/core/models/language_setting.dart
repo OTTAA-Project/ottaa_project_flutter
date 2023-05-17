@@ -19,7 +19,7 @@ class LanguageSetting {
     required this.labs,
   });
 
-  factory  LanguageSetting.empty({String? language, bool? labs}) {
+  factory LanguageSetting.empty({String? language, bool? labs}) {
     return LanguageSetting(
       language: language ?? 'es_AR',
       labs: labs ?? false,
@@ -52,7 +52,8 @@ class LanguageSetting {
 
   String toJson() => json.encode(toMap());
 
-  factory LanguageSetting.fromJson(String source) => LanguageSetting.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory LanguageSetting.fromJson(String source) =>
+      LanguageSetting.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'LanguageSetting(language: $language, labs: $labs)';
