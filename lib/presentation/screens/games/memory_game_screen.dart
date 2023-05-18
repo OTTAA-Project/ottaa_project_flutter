@@ -76,6 +76,7 @@ class _MemoryGameState extends ConsumerState<MemoryGameScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: memoryGame.pictos.sublist(0, memoryGame.pictos.length - (game.difficultyLevel + 2)).mapIndexed((pictoId, e) {
                           return MemoryPictoWidget(
                             isSelected: memoryGame.openedPictos.contains(pictoId),
@@ -97,6 +98,7 @@ class _MemoryGameState extends ConsumerState<MemoryGameScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: memoryGame.pictos.sublist(((game.difficultyLevel + 2))).mapIndexed((i, e) {
                           int pictoId = (i + (game.difficultyLevel + 2));
 

@@ -93,10 +93,10 @@ class MemoryGameNotifier extends ChangeNotifier {
         rightPictos.clear();
         openedPictos.clear();
 
+        notifyListeners();
         if (matchedPictos.length == pictos.length) {
           createRandomPictos();
         }
-        notifyListeners();
       });
     }
 
