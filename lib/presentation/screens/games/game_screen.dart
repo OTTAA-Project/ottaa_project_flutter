@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/ui_widget.dart';
 
@@ -85,8 +87,7 @@ class GameScreenUI extends ConsumerWidget {
                           Text(
                             'game.game_sub_$index'.trl,
                             textAlign: TextAlign.center,
-                            style: textTheme.displaySmall!
-                                .copyWith(fontWeight: FontWeight.w400),
+                            style: textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
@@ -97,10 +98,11 @@ class GameScreenUI extends ConsumerWidget {
                           width: false,
                           onTap: () {
                             provider.selectedGame = index;
+
                             if (index == 3) {
-                              // context.push(AppRoutes.chatGPTGame);
+                              context.push(AppRoutes.patientStoryGame);
                             } else {
-                              // context.push(AppRoutes.selectGroupScreen);
+                              context.push(AppRoutes.patientGameGroupSelection);
                             }
                           },
                           text: 'game.next'.trl,

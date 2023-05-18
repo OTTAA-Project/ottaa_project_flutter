@@ -54,20 +54,24 @@ class CustomiseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setShortcutsForUser({required String userId}) async {
+  Future<ShortcutsModel> setShortcutsForUser({required String userId}) async {
+    ShortcutsModel model = ShortcutsModel(
+      enable: true,
+      favs: selectedShortcuts[0],
+      history: selectedShortcuts[1],
+      camera: selectedShortcuts[2],
+      games: selectedShortcuts[3],
+      yes: selectedShortcuts[4],
+      no: selectedShortcuts[5],
+      share: selectedShortcuts[6],
+    );
+
     await _customiseService.setShortcutsForUser(
-      shortcuts: ShortcutsModel(
-        enable: true,
-        favs: selectedShortcuts[0],
-        history: selectedShortcuts[1],
-        camera: selectedShortcuts[2],
-        games: selectedShortcuts[3],
-        yes: selectedShortcuts[4],
-        no: selectedShortcuts[5],
-        share: selectedShortcuts[6],
-      ),
+      shortcuts: model,
       userId: userId,
     );
+
+    return model;
   }
 
   Future<void> fetchDesiredPictos() async {
@@ -116,22 +120,27 @@ class CustomiseProvider extends ChangeNotifier {
     await createMapForPictos();
   }
 
-  Future<void> uploadData({required String userId}) async {
+  Future<void> uploadData({required String userId, required bool savePictograms, required bool saveGroups, required bool saveShortcuts}) async {
     final locale = _i18n.currentLocale;
 
     final languageCode = locale.toString();
 
-    await _pictogramsService.uploadPictograms(pictograms, languageCode, userId: userId);
-    await _groupsService.uploadGroups(groups, 'type', languageCode, userId: userId);
-    await setShortcutsForUser(userId: userId);
+    if (savePictograms) await _pictogramsService.uploadPictograms(pictograms, languageCode, userId: userId);
+    if (saveGroups) await _groupsService.uploadGroups(groups, 'type', languageCode, userId: userId);
+
+    ShortcutsModel? shortcutsModel;
+
+    if (saveShortcuts) shortcutsModel = await setShortcutsForUser(userId: userId);
 
     if (userState.user!.type == UserType.user) {
       final newUser = userState.user!.patient;
-      userState.user!.patient.groups[languageCode] = groups;
-      userState.user!.patient.pictos[languageCode] = pictograms;
+      newUser.groups[languageCode] = groups;
+      newUser.pictos[languageCode] = pictograms;
+      if (saveShortcuts && shortcutsModel != null) {
+        newUser.patientSettings.layout.shortcuts = shortcutsModel;
+      }
 
       await _localDatabaseRepository.setUser(newUser);
-
       userState.setUser(newUser);
     }
   }
@@ -182,7 +191,6 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> fetchUserGroups({required String userId}) async {
-
     final res = await _customiseService.fetchUserGroups(languageCode: _i18n.currentLocale.toString(), userId: userId);
     groups = res;
     notify();

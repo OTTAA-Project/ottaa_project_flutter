@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/ui/memory_picto_widget.dart';
 
 class MemoryGameNotifier extends ChangeNotifier {
   final GamesProvider _gamesProvider;
@@ -11,10 +13,10 @@ class MemoryGameNotifier extends ChangeNotifier {
   List<Picto> pictos = [];
 
   List<int> openedPictos = [];
-
   List<int> matchedPictos = [];
+  List<int> rightPictos = [];
 
-  bool? isRight;
+  List<AnimationController> controllers = [];
 
   MemoryGameNotifier(this._gamesProvider);
 
@@ -36,37 +38,38 @@ class MemoryGameNotifier extends ChangeNotifier {
 
     pictos.shuffle(random);
 
+    openedPictos.clear();
+    matchedPictos.clear();
+    rightPictos.clear();
     notifyListeners();
   }
 
-  void openPicto(int index) {
-    Picto picto = pictos[index];
-    print(index);
+  void addAnimationController(AnimationController controller, int index) {
+    controllers.add(controller);
+  }
 
-    if (openedPictos.length >= 2) {
-      //TODO: There should not happen
-      print("XDD");
-      openedPictos.clear();
+  void openPicto(int index) async {
+    if (matchedPictos.contains(index) || openedPictos.length == 2 || openedPictos.contains(index)) return;
+
+    if (openedPictos.length > 2) {
       notifyListeners();
       return;
     }
 
-    if (openedPictos.contains(index)) {
-      return;
-    }
 
     openedPictos.add(index);
+    controllers[index].reverse();
 
     if (openedPictos.length == 2) {
-      //Check for game!
       bool isRightPictos = pictos[openedPictos[0]].id == pictos[openedPictos[1]].id;
 
-      isRight = isRightPictos;
+      await _gamesProvider.playClickSounds(assetName: isRightPictos ? "yay" : "ohoh");
 
-      _gamesProvider.playClickSounds(assetName: isRightPictos ? "yay" : "ohoh");
       if (isRightPictos) {
+        rightPictos.addAll(openedPictos);
         matchedPictos.addAll(openedPictos);
       }
+
       Future.delayed(const Duration(seconds: 2), () {
         if (isRightPictos) {
           _gamesProvider.correctScore++;
@@ -83,9 +86,16 @@ class MemoryGameNotifier extends ChangeNotifier {
           } else {
             _gamesProvider.streak = 0;
           }
+          controllers[openedPictos[0]].reverse();
+          controllers[openedPictos[1]].reverse();
         }
-        isRight = null;
+
+        rightPictos.clear();
         openedPictos.clear();
+
+        if (matchedPictos.length == pictos.length) {
+          createRandomPictos();
+        }
         notifyListeners();
       });
     }
@@ -96,7 +106,9 @@ class MemoryGameNotifier extends ChangeNotifier {
   void clear() {
     pictos.clear();
     openedPictos.clear();
-    isRight = null;
+    rightPictos.clear();
+    matchedPictos.clear();
+    controllers.clear();
   }
 }
 

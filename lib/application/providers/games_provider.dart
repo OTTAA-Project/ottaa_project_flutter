@@ -168,6 +168,8 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictograms() async {
+    if (pictograms.isNotEmpty && groups.isNotEmpty) return;
+    
     List<Picto>? pictos;
     List<Group>? groupsData;
 
@@ -175,8 +177,6 @@ class GamesProvider extends ChangeNotifier {
       pictos = patientState.user.pictos[patientState.user.settings.language];
 
       groupsData = patientState.user.groups[patientState.user.settings.language];
-
-      print(patientState.user.groups);
     }
 
     pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();

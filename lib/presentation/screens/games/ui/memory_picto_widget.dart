@@ -9,11 +9,21 @@ class MemoryPictoWidget extends StatefulWidget {
 
   final void Function() onTap;
 
+  final void Function(AnimationController) onBuild;
+
   final bool isSelected;
   final bool isVisible;
   final bool? isRight;
 
-  const MemoryPictoWidget({super.key, required this.picto, required this.isSelected, this.isVisible = false, this.isRight, required this.onTap});
+  const MemoryPictoWidget({
+    super.key,
+    required this.picto,
+    required this.isSelected,
+    this.isVisible = false,
+    this.isRight,
+    required this.onTap,
+    required this.onBuild,
+  });
 
   @override
   State<MemoryPictoWidget> createState() => _MemoryPictoWidgetState();
@@ -26,28 +36,16 @@ class _MemoryPictoWidgetState extends State<MemoryPictoWidget> with SingleTicker
 
   @override
   void initState() {
+    widget.onBuild(_controller);
     _controller.forward();
-
     super.initState();
   }
 
   @override
   void dispose() {
+    _controller.reverse();
     _controller.dispose();
     super.dispose();
-  }
-
-  void flipPicto() {
-    if (widget.isRight == null && widget.isSelected) return;
-
-    TickerFuture tickerFuture;
-    if (widget.isSelected) {
-      tickerFuture = _controller.forward();
-    } else {
-      tickerFuture = _controller.reverse();
-    }
-
-    tickerFuture.then((value) => widget.onTap());
   }
 
   @override
@@ -85,7 +83,9 @@ class _MemoryPictoWidgetState extends State<MemoryPictoWidget> with SingleTicker
             (widget.isSelected || widget.isVisible)
                 ? Center(
                     child: PictoWidget(
-                      onTap: flipPicto,
+                      onTap: () {
+                        //TODO: Maybe should talk the picto
+                      },
                       image: widget.picto.resource.network != null
                           ? CachedNetworkImage(
                               imageUrl: widget.picto.resource.network!,
@@ -106,7 +106,7 @@ class _MemoryPictoWidgetState extends State<MemoryPictoWidget> with SingleTicker
                     ),
                   )
                 : GestureDetector(
-                    onTap: flipPicto,
+                    onTap: widget.onTap,
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: Container(

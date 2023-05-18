@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
+import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -63,7 +64,11 @@ class _ActionsBarState extends ConsumerState<ShortcutsUI> {
                 fit: FlexFit.loose,
                 child: HomeButton(
                   size: Size(shortCutSize, shortCutSize),
-                  onPressed: pictos == null ? null : () => context.go(AppRoutes.patientGame),
+                  onPressed: () async {
+                    await LoadingModal.show(context, future: ref.read(gameProvider).fetchPictograms);
+
+                    context.push(AppRoutes.patientGame);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
