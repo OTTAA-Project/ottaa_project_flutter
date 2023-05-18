@@ -46,6 +46,7 @@ Future<void> main() async {
   late List<Phrase> fakePhrases;
 
   late List<Picto> fakePictos;
+  late Map<String, Picto> fakePictosMap;
 
   late UserModel fakeUser;
 
@@ -67,14 +68,39 @@ Future<void> main() async {
       Phrase(date: DateTime.now(), id: '22', sequence: [Sequence(id: '22')], tags: {})
     ];
     fakePictos = [
-      Picto(id: '0', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork')),
-      Picto(id: '1', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork')),
-      Picto(id: '2', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork')),
-      Picto(id: '3', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork')),
-      Picto(id: '4', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork')),
-      Picto(id: '5', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork')),
-      Picto(id: '6', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork')),
+      Picto(id: '0', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+        'hour': ['MANANA']
+      }),
+      Picto(id: '1', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+        'hour': ['MEDIODIA', 'TARDE']
+      }),
+      Picto(id: '2', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {'hour': []}),
+      Picto(id: '3', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+        'hour': ['NOCHE']
+      }),
+      Picto(id: '4', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+        'hour': ['MANANA', 'TARDE', 'NOCHE']
+      }),
+      Picto(id: '5', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+        'hour': ['MANANA', 'TARDE', 'NOCHE']
+      }),
     ];
+
+    fakePictosMap = {
+      '0': Picto(id: '0', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+        'hour': ['MANANA']
+      }),
+      '1': Picto(id: '1', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+        'hour': ['MEDIODIA', 'TARDE']
+      }),
+      '2': Picto(id: '2', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {'hour': []}),
+      '3': Picto(id: '3', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+        'hour': ['NOCHE']
+      }),
+      '4': Picto(id: '4', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+        'hour': ['MANANA', 'TARDE', 'NOCHE']
+      }),
+    };
     fakeUser = BaseUserModel(
       id: "0",
       settings: BaseSettingsModel(
@@ -91,9 +117,9 @@ Future<void> main() async {
       email: "test@mail.com",
     );
     fakeGroups = [
-      Group(id: '00', relations: [GroupRelation(id: '00', value: 00), GroupRelation(id: '01', value: 00)], text: 'test1', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 00),
-      Group(id: '01', relations: [GroupRelation(id: '', value: 00)], text: 'test2', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 01),
-      Group(id: '02', relations: [GroupRelation(id: '', value: 00)], text: 'test3', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 03),
+      Group(id: '0', relations: [GroupRelation(id: '0', value: 0), GroupRelation(id: '1', value: 0)], text: 'test1', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 00),
+      Group(id: '1', relations: [GroupRelation(id: '1', value: 0)], text: 'test2', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 01),
+      Group(id: '2', relations: [GroupRelation(id: '2', value: 0)], text: 'test3', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 03),
     ];
     mockPatientNotifier.state = PatientUserModel(id: '00', groups: {}, phrases: {}, pictos: {}, settings: fakeUser.settings, email: 'test@test.com');
     mockUserNotifier.setUser(fakeUser);
@@ -189,81 +215,159 @@ Future<void> main() async {
   });
 
   test('predictiveAlgorithm returns the correct list of Picto objects', () {
-    final pictograms = {
-      1: Picto(id: 1, tags: {
-        'hour': ['MANANA']
-      }),
-      2: Picto(id: 2, tags: {
-        'hour': ['MEDIODIA', 'TARDE']
-      }),
-      3: Picto(id: 3, tags: {}),
-      4: Picto(id: 4, tags: {
-        'hour': ['NOCHE']
-      }),
-    };
     final list = [
-      PictoRelation(id: 1, value: 0.8),
-      PictoRelation(id: 2, value: 0.5),
-      PictoRelation(id: 3, value: 0.3),
-      PictoRelation(id: 4, value: 0.2),
+      const PictoRelation(id: '0', value: 0.8),
+      const PictoRelation(id: '1', value: 0.5),
+      const PictoRelation(id: '2', value: 0.3),
+      const PictoRelation(id: '3', value: 0.2),
     ];
-
-    final result = predictiveAlgorithm(list: list, pictograms: pictograms);
+    homeProvider.pictograms = fakePictosMap;
+    final result = homeProvider.predictiveAlgorithm(list: list);
 
     expect(result, hasLength(4));
-    expect(result[0].id, equals(1));
-    expect(result[1].id, equals(2));
-    expect(result[2].id, equals(3));
-    expect(result[3].id, equals(4));
+    expect(result[0].id, equals('1'));
+    expect(result[1].id, equals('0'));
+    expect(result[2].id, equals('2'));
+    expect(result[3].id, equals('3'));
   });
-  /* group('removeLastPictogram', () {
-    test('should remove last pictogram and update suggestions', () {
-      homeProvider.addPictogram(fakePictos[0]);
-      homeProvider.addPictogram(fakePictos[1]);
-      homeProvider.addPictogram(fakePictos[2]);
 
-      homeProvider.removeLastPictogram();
+  test('refreshPictograms updates the indexPage and notifies listeners', () {
+    homeProvider.suggestedPicts = fakePictos;
+    homeProvider.suggestedQuantity = 2;
 
-      expect(homeProvider.pictoWords.length, 2);
-      expect(homeProvider.pictoWords, [fakePictos[0], fakePictos[1]]);
-      expect(homeProvider.suggestedPicts.isNotEmpty, isTrue);
+    homeProvider.refreshPictograms();
+
+    expect(homeProvider.indexPage, equals(1));
+
+    homeProvider.refreshPictograms();
+
+    expect(homeProvider.indexPage, equals(2));
+
+    homeProvider.indexPage = -1;
+    homeProvider.refreshPictograms();
+
+    expect(homeProvider.indexPage, equals(0));
+
+    expect(() => homeProvider.notify(), isA<void>());
+  });
+
+  group('test scroll up function of the provider', () {
+    testWidgets('scrollUp scrolls the controller up by the specified amount', (WidgetTester tester) async {
+      final controller = ScrollController(initialScrollOffset: 100.0);
+      const amount = 50.0;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ListView.builder(
+              controller: controller,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Item $index'),
+                );
+              },
+            ),
+          ),
+        ),
+      );
+
+      expect(controller.position.pixels, equals(100.0));
+
+      homeProvider.scrollUp(controller, amount);
+
+      await tester.pumpAndSettle();
+
+      expect(controller.position.pixels, equals(0));
     });
 
-    test('should clear suggestions and update with previous picto id', () {
-      homeProvider.addPictogram(fakePictos[0]);
-      homeProvider.addPictogram(fakePictos[0]);
-      homeProvider.addPictogram(fakePictos[0]);
+    testWidgets('scrollUp does not scroll the controller when currentPosition is 0', (WidgetTester tester) async {
+      final controller = ScrollController(initialScrollOffset: 0.0);
+      const amount = 50.0;
 
-      homeProvider.removeLastPictogram();
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ListView.builder(
+              controller: controller,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Item $index'),
+                );
+              },
+            ),
+          ),
+        ),
+      );
 
-      expect(homeProvider.pictoWords.length, 2);
-      expect(homeProvider.pictoWords, [fakePictos[0], fakePictos[1]]);
-      expect(homeProvider.suggestedPicts.isNotEmpty, isTrue);
-      expect(homeProvider.suggestedPicts, contains(fakePictos[0].id));
+      expect(controller.position.pixels, equals(0.0));
+
+      homeProvider.scrollUp(controller, amount);
+
+      await tester.pumpAndSettle();
+
+      expect(controller.position.pixels, equals(0.0));
     });
-  });*/
+  });
 
-  /*group('addPictogram', () {
-    test('should add picto and clear suggestions', () async {
-      homeProvider.addPictogram(fakePictos[0]);
+  group('test scroll down function of the provider', () {
+    testWidgets('scrollDown scrolls the controller up by the specified amount', (WidgetTester tester) async {
+      final controller = ScrollController(initialScrollOffset: 100.0);
+      const amount = 50.0;
 
-      expect(homeProvider.pictoWords.length, 1);
-      expect(homeProvider.pictoWords.first, fakePictos[0]);
-      expect(homeProvider.suggestedPicts, isEmpty);
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ListView.builder(
+              controller: controller,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Item $index'),
+                );
+              },
+            ),
+          ),
+        ),
+      );
+
+      expect(controller.position.pixels, equals(100.0));
+
+      homeProvider.scrollUp(controller, amount);
+
+      await tester.pumpAndSettle();
+
+      expect(controller.position.pixels, equals(0));
     });
 
-    test('should build suggestions and scroll if more than 5 pictos', () async {
-      homeProvider.addPictogram(fakePictos[0]);
-      homeProvider.addPictogram(fakePictos[1]);
-      homeProvider.addPictogram(fakePictos[2]);
-      homeProvider.addPictogram(fakePictos[3]);
-      homeProvider.addPictogram(fakePictos[4]);
-      homeProvider.addPictogram(fakePictos[5]);
+    testWidgets('scrollDown does not scroll the controller when currentPosition is 0', (WidgetTester tester) async {
+      final controller = ScrollController(initialScrollOffset: 0.0);
+      const amount = 50.0;
 
-      expect(homeProvider.pictoWords.length, 6);
-      expect(homeProvider.pictoWords.last, fakePictos[5]);
-      expect(homeProvider.suggestedPicts.isNotEmpty, isTrue);
-      expect(homeProvider.scrollController.offset, greaterThan(0.0));
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ListView.builder(
+              controller: controller,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Item $index'),
+                );
+              },
+            ),
+          ),
+        ),
+      );
+
+      expect(controller.position.pixels, equals(0.0));
+
+      homeProvider.scrollDown(controller, amount);
+
+      await tester.pumpAndSettle();
+
+      expect(controller.position.pixels, equals(0.0));
     });
-  });*/
+  });
 }
