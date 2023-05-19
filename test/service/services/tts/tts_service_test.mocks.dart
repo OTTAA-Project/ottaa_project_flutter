@@ -46,19 +46,20 @@ class _FakeI18N_1 extends _i1.SmartFake implements _i3.I18N {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockI18N extends _i1.Mock implements _i3.I18N {
-  MockI18N() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   Map<String, _i2.Locale> get platformLanguages => (super.noSuchMethod(
         Invocation.getter(#platformLanguages),
         returnValue: <String, _i2.Locale>{},
+        returnValueForMissingStub: <String, _i2.Locale>{},
       ) as Map<String, _i2.Locale>);
   @override
   _i2.Locale get currentLocale => (super.noSuchMethod(
         Invocation.getter(#currentLocale),
         returnValue: _FakeLocale_0(
+          this,
+          Invocation.getter(#currentLocale),
+        ),
+        returnValueForMissingStub: _FakeLocale_0(
           this,
           Invocation.getter(#currentLocale),
         ),
@@ -75,6 +76,7 @@ class MockI18N extends _i1.Mock implements _i3.I18N {
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
         returnValue: false,
+        returnValueForMissingStub: false,
       ) as bool);
   @override
   _i4.Future<_i3.I18N> init() => (super.noSuchMethod(
@@ -83,6 +85,13 @@ class MockI18N extends _i1.Mock implements _i3.I18N {
           [],
         ),
         returnValue: _i4.Future<_i3.I18N>.value(_FakeI18N_1(
+          this,
+          Invocation.method(
+            #init,
+            [],
+          ),
+        )),
+        returnValueForMissingStub: _i4.Future<_i3.I18N>.value(_FakeI18N_1(
           this,
           Invocation.method(
             #init,
@@ -98,6 +107,7 @@ class MockI18N extends _i1.Mock implements _i3.I18N {
           [locale],
         ),
         returnValue: _i4.Future<_i5.TranslationTree?>.value(),
+        returnValueForMissingStub: _i4.Future<_i5.TranslationTree?>.value(),
       ) as _i4.Future<_i5.TranslationTree?>);
   @override
   _i4.Future<void> changeLanguage(String? languageCode) => (super.noSuchMethod(

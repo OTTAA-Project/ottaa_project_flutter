@@ -10,7 +10,7 @@ import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 import 'tts_service_test.mocks.dart';
 
-@GenerateMocks([I18N])
+@GenerateNiceMocks([MockSpec<I18N>()])
 void main() {
   late MockI18N mockI18N;
   late TTSRepository ttsRepository;
@@ -51,12 +51,12 @@ void main() {
     // );
     WidgetsFlutterBinding.ensureInitialized();
     mockI18N = MockI18N();
-    await mockI18N.init();
     ttsRepository = TTSService(mockI18N);
   });
 
   group('TTS Service', () {
     test('Speak tts service', () async {
+      when(mockI18N.currentLocale).thenReturn(const Locale("en_US"));
       await ttsRepository.speak('Hello');
       verify(ttsRepository.speak('Hello')).called(1);
     });
