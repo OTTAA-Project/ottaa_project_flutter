@@ -11,6 +11,7 @@ import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dar
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
@@ -123,6 +124,7 @@ Future<void> main() async {
     ];
     mockPatientNotifier.state = PatientUserModel(id: '00', groups: {}, phrases: {}, pictos: {}, settings: fakeUser.settings, email: 'test@test.com');
     mockUserNotifier.setUser(fakeUser);
+    mockUserNotifier.state = fakeUser;
     homeProvider = HomeProvider(mockPictogramsRepository, mockGroupsRepository, mockSentencesRepository, mockTTSProvider, mockPatientNotifier, mockPredictPictogram, mockLearnPictogram, mockUserNotifier, mockChatGPTNotifier);
   });
 
@@ -370,4 +372,38 @@ Future<void> main() async {
       expect(controller.position.pixels, equals(0.0));
     });
   });
+
+  test('getPictograms returns the correct list of pictograms', () {
+    // Set up initial state
+    homeProvider.suggestedPicts = [
+      Picto(id: "1", text: "Picto 1", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "2", text: "Picto 2", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "3", text: "Picto 3", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "4", text: "Picto 4", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "5", text: "Picto 5", type: 0, resource: AssetsImage(asset: "", network: null)),
+    ];
+
+    basicPictograms = [
+      Picto(id: "101", text: "Basic Picto 1", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "102", text: "Basic Picto 2", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "103", text: "Basic Picto 3", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "104", text: "Basic Picto 4", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "105", text: "Basic Picto 5", type: 0, resource: AssetsImage(asset: "", network: null)),
+    ];
+
+    homeProvider.suggestedQuantity = 3;
+    homeProvider.indexPage = 1;
+
+    // Call the method
+    final result = homeProvider.getPictograms();
+
+    // Check the expected list of pictograms
+    expect(result, [
+      Picto(id: "4", text: "Picto 4", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "5", text: "Picto 5", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "101", text: "Basic Picto 1", type: 0, resource: AssetsImage(asset: "", network: null)),
+    ]);
+  });
+
+  //todo: emir these are left init, switchToPictograms, addPictogram, removeLastPictogram, buildSuggestion,
 }
