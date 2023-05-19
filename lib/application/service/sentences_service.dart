@@ -20,7 +20,7 @@ class SentencesService implements SentencesRepository {
 
     final user = authResult.right;
 
-    final response =  await _serverRepository.getUserSentences(
+    final response = await _serverRepository.getUserSentences(
       user.id,
       language: language,
       type: type,

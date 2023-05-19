@@ -181,7 +181,6 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> fetchUserGroups({required String userId}) async {
-
     final res = await _customiseService.fetchUserGroups(languageCode: _i18n.currentLocale.toString(), userId: userId);
     groups = res;
     notify();
