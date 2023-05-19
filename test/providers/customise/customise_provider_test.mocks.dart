@@ -3,19 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i8;
+import 'dart:async' as _i7;
 import 'dart:ui' as _i2;
 
 import 'package:either_dart/src/either.dart' as _i4;
-import 'package:flutter_riverpod/flutter_riverpod.dart' as _i17;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/common/i18n.dart' as _i3;
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart'
-    as _i7;
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart'
+    as _i6;
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart'
     as _i16;
 import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart' as _i14;
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i6;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i9;
 import 'package:ottaa_project_flutter/core/models/group_model.dart' as _i11;
 import 'package:ottaa_project_flutter/core/models/picto_model.dart' as _i12;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i5;
@@ -24,10 +23,9 @@ import 'package:ottaa_project_flutter/core/repositories/customise_repository.dar
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart'
     as _i13;
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
-    as _i9;
+    as _i8;
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart'
     as _i15;
-import 'package:state_notifier/state_notifier.dart' as _i18;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -81,16 +79,6 @@ class _FakeShortcutsModel_3 extends _i1.SmartFake
         );
 }
 
-class _FakeUserModel_4 extends _i1.SmartFake implements _i6.UserModel {
-  _FakeUserModel_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [I18N].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -105,23 +93,23 @@ class MockI18N extends _i1.Mock implements _i3.I18N {
         returnValue: <String, _i2.Locale>{},
       ) as Map<String, _i2.Locale>);
   @override
-  _i2.Locale get locale => (super.noSuchMethod(
-        Invocation.getter(#locale),
+  _i2.Locale get currentLocale => (super.noSuchMethod(
+        Invocation.getter(#currentLocale),
         returnValue: _FakeLocale_0(
           this,
-          Invocation.getter(#locale),
+          Invocation.getter(#currentLocale),
         ),
       ) as _i2.Locale);
   @override
-  set locale(_i2.Locale? _locale) => super.noSuchMethod(
+  set currentLocale(_i2.Locale? _currentLocale) => super.noSuchMethod(
         Invocation.setter(
-          #locale,
-          _locale,
+          #currentLocale,
+          _currentLocale,
         ),
         returnValueForMissingStub: null,
       );
   @override
-  set currentLanguage(_i7.TranslationTree? _currentLanguage) =>
+  set currentLanguage(_i6.TranslationTree? _currentLanguage) =>
       super.noSuchMethod(
         Invocation.setter(
           #currentLanguage,
@@ -135,47 +123,47 @@ class MockI18N extends _i1.Mock implements _i3.I18N {
         returnValue: false,
       ) as bool);
   @override
-  _i8.Future<_i3.I18N> init() => (super.noSuchMethod(
+  _i7.Future<_i3.I18N> init() => (super.noSuchMethod(
         Invocation.method(
           #init,
           [],
         ),
-        returnValue: _i8.Future<_i3.I18N>.value(_FakeI18N_1(
+        returnValue: _i7.Future<_i3.I18N>.value(_FakeI18N_1(
           this,
           Invocation.method(
             #init,
             [],
           ),
         )),
-      ) as _i8.Future<_i3.I18N>);
+      ) as _i7.Future<_i3.I18N>);
   @override
-  _i8.Future<_i7.TranslationTree?> loadTranslation(_i2.Locale? locale) =>
+  _i7.Future<_i6.TranslationTree?> loadTranslation(_i2.Locale? locale) =>
       (super.noSuchMethod(
         Invocation.method(
           #loadTranslation,
           [locale],
         ),
-        returnValue: _i8.Future<_i7.TranslationTree?>.value(),
-      ) as _i8.Future<_i7.TranslationTree?>);
+        returnValue: _i7.Future<_i6.TranslationTree?>.value(),
+      ) as _i7.Future<_i6.TranslationTree?>);
   @override
-  _i8.Future<void> changeLanguage(String? languageCode) => (super.noSuchMethod(
+  _i7.Future<void> changeLanguage(String? languageCode) => (super.noSuchMethod(
         Invocation.method(
           #changeLanguage,
           [languageCode],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i8.Future<void> changeLanguageFromLocale(_i2.Locale? locale) =>
+  _i7.Future<void> changeLanguageFromLocale(_i2.Locale? locale) =>
       (super.noSuchMethod(
         Invocation.method(
           #changeLanguageFromLocale,
           [locale],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
   void notify() => super.noSuchMethod(
         Invocation.method(
@@ -222,13 +210,13 @@ class MockI18N extends _i1.Mock implements _i3.I18N {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i9.LocalDatabaseRepository {
+    implements _i8.LocalDatabaseRepository {
   MockLocalDatabaseRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set user(_i6.UserModel? user) => super.noSuchMethod(
+  set user(_i9.UserModel? user) => super.noSuchMethod(
         Invocation.setter(
           #user,
           user,
@@ -236,66 +224,84 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i8.Future<void> init() => (super.noSuchMethod(
+  _i7.Future<void> init() => (super.noSuchMethod(
         Invocation.method(
           #init,
           [],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i8.Future<void> close() => (super.noSuchMethod(
+  _i7.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i8.Future<void> setUser(_i6.UserModel? user) => (super.noSuchMethod(
+  _i7.Future<void> setUser(_i9.UserModel? user) => (super.noSuchMethod(
         Invocation.method(
           #setUser,
           [user],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i8.Future<_i6.UserModel?> getUser() => (super.noSuchMethod(
+  _i7.Future<_i9.UserModel?> getUser() => (super.noSuchMethod(
         Invocation.method(
           #getUser,
           [],
         ),
-        returnValue: _i8.Future<_i6.UserModel?>.value(),
-      ) as _i8.Future<_i6.UserModel?>);
+        returnValue: _i7.Future<_i9.UserModel?>.value(),
+      ) as _i7.Future<_i9.UserModel?>);
   @override
-  _i8.Future<void> deleteUser() => (super.noSuchMethod(
+  _i7.Future<void> deleteUser() => (super.noSuchMethod(
         Invocation.method(
           #deleteUser,
           [],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i8.Future<bool> getIntro() => (super.noSuchMethod(
+  _i7.Future<bool> getIntro() => (super.noSuchMethod(
         Invocation.method(
           #getIntro,
           [],
         ),
-        returnValue: _i8.Future<bool>.value(false),
-      ) as _i8.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
   @override
-  _i8.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
+  _i7.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
         Invocation.method(
           #setIntro,
           [value],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<String> getVoice() => (super.noSuchMethod(
+        Invocation.method(
+          #getVoice,
+          [],
+        ),
+        returnValue: _i7.Future<String>.value(''),
+      ) as _i7.Future<String>);
+  @override
+  _i7.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
+        Invocation.method(
+          #setVoice,
+          [],
+          {#name: name},
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [CustomiseRepository].
@@ -308,7 +314,7 @@ class MockCustomiseRepository extends _i1.Mock
   }
 
   @override
-  _i8.Future<_i4.Either<String, void>> setShortcutsForUser({
+  _i7.Future<_i4.Either<String, void>> setShortcutsForUser({
     required _i5.ShortcutsModel? shortcuts,
     required String? userId,
   }) =>
@@ -321,7 +327,7 @@ class MockCustomiseRepository extends _i1.Mock
             #userId: userId,
           },
         ),
-        returnValue: _i8.Future<_i4.Either<String, void>>.value(
+        returnValue: _i7.Future<_i4.Either<String, void>>.value(
             _FakeEither_2<String, void>(
           this,
           Invocation.method(
@@ -333,9 +339,9 @@ class MockCustomiseRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i8.Future<_i4.Either<String, void>>);
+      ) as _i7.Future<_i4.Either<String, void>>);
   @override
-  _i8.Future<List<_i11.Group>> fetchDefaultGroups(
+  _i7.Future<List<_i11.Group>> fetchDefaultGroups(
           {required String? languageCode}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -343,10 +349,10 @@ class MockCustomiseRepository extends _i1.Mock
           [],
           {#languageCode: languageCode},
         ),
-        returnValue: _i8.Future<List<_i11.Group>>.value(<_i11.Group>[]),
-      ) as _i8.Future<List<_i11.Group>>);
+        returnValue: _i7.Future<List<_i11.Group>>.value(<_i11.Group>[]),
+      ) as _i7.Future<List<_i11.Group>>);
   @override
-  _i8.Future<List<_i12.Picto>> fetchDefaultPictos(
+  _i7.Future<List<_i12.Picto>> fetchDefaultPictos(
           {required String? languageCode}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -354,10 +360,10 @@ class MockCustomiseRepository extends _i1.Mock
           [],
           {#languageCode: languageCode},
         ),
-        returnValue: _i8.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
-      ) as _i8.Future<List<_i12.Picto>>);
+        returnValue: _i7.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
+      ) as _i7.Future<List<_i12.Picto>>);
   @override
-  _i8.Future<_i5.ShortcutsModel> fetchShortcutsForUser(
+  _i7.Future<_i5.ShortcutsModel> fetchShortcutsForUser(
           {required String? userId}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -365,7 +371,7 @@ class MockCustomiseRepository extends _i1.Mock
           [],
           {#userId: userId},
         ),
-        returnValue: _i8.Future<_i5.ShortcutsModel>.value(_FakeShortcutsModel_3(
+        returnValue: _i7.Future<_i5.ShortcutsModel>.value(_FakeShortcutsModel_3(
           this,
           Invocation.method(
             #fetchShortcutsForUser,
@@ -373,9 +379,9 @@ class MockCustomiseRepository extends _i1.Mock
             {#userId: userId},
           ),
         )),
-      ) as _i8.Future<_i5.ShortcutsModel>);
+      ) as _i7.Future<_i5.ShortcutsModel>);
   @override
-  _i8.Future<List<_i11.Group>> fetchUserGroups({
+  _i7.Future<List<_i11.Group>> fetchUserGroups({
     required String? languageCode,
     required String? userId,
   }) =>
@@ -388,10 +394,10 @@ class MockCustomiseRepository extends _i1.Mock
             #userId: userId,
           },
         ),
-        returnValue: _i8.Future<List<_i11.Group>>.value(<_i11.Group>[]),
-      ) as _i8.Future<List<_i11.Group>>);
+        returnValue: _i7.Future<List<_i11.Group>>.value(<_i11.Group>[]),
+      ) as _i7.Future<List<_i11.Group>>);
   @override
-  _i8.Future<List<_i12.Picto>> fetchUserPictos({
+  _i7.Future<List<_i12.Picto>> fetchUserPictos({
     required String? languageCode,
     required String? userId,
   }) =>
@@ -404,10 +410,10 @@ class MockCustomiseRepository extends _i1.Mock
             #userId: userId,
           },
         ),
-        returnValue: _i8.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
-      ) as _i8.Future<List<_i12.Picto>>);
+        returnValue: _i7.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
+      ) as _i7.Future<List<_i12.Picto>>);
   @override
-  _i8.Future<bool> valuesExistOrNot({
+  _i7.Future<bool> valuesExistOrNot({
     required String? languageCode,
     required String? userId,
   }) =>
@@ -420,8 +426,8 @@ class MockCustomiseRepository extends _i1.Mock
             #userId: userId,
           },
         ),
-        returnValue: _i8.Future<bool>.value(false),
-      ) as _i8.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 }
 
 /// A class which mocks [GroupsRepository].
@@ -433,25 +439,25 @@ class MockGroupsRepository extends _i1.Mock implements _i13.GroupsRepository {
   }
 
   @override
-  _i8.Future<List<_i11.Group>> getAllGroups({bool? defaultGroups = false}) =>
+  _i7.Future<List<_i11.Group>> getAllGroups({bool? defaultGroups = false}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllGroups,
           [],
           {#defaultGroups: defaultGroups},
         ),
-        returnValue: _i8.Future<List<_i11.Group>>.value(<_i11.Group>[]),
-      ) as _i8.Future<List<_i11.Group>>);
+        returnValue: _i7.Future<List<_i11.Group>>.value(<_i11.Group>[]),
+      ) as _i7.Future<List<_i11.Group>>);
   @override
-  _i8.Future<List<_i11.Group>> getDefaultGroups() => (super.noSuchMethod(
+  _i7.Future<List<_i11.Group>> getDefaultGroups() => (super.noSuchMethod(
         Invocation.method(
           #getDefaultGroups,
           [],
         ),
-        returnValue: _i8.Future<List<_i11.Group>>.value(<_i11.Group>[]),
-      ) as _i8.Future<List<_i11.Group>>);
+        returnValue: _i7.Future<List<_i11.Group>>.value(<_i11.Group>[]),
+      ) as _i7.Future<List<_i11.Group>>);
   @override
-  _i8.Future<void> uploadGroups(
+  _i7.Future<void> uploadGroups(
     List<_i11.Group>? data,
     String? type,
     String? language, {
@@ -467,11 +473,11 @@ class MockGroupsRepository extends _i1.Mock implements _i13.GroupsRepository {
           ],
           {#userId: userId},
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i8.Future<void> updateGroups(
+  _i7.Future<void> updateGroups(
     _i11.Group? data,
     String? type,
     String? language,
@@ -487,18 +493,18 @@ class MockGroupsRepository extends _i1.Mock implements _i13.GroupsRepository {
             index,
           ],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i8.Future<List<_i11.Group>> getGroups(_i14.BasicSearch? search) =>
+  _i7.Future<List<_i11.Group>> getGroups(_i14.BasicSearch? search) =>
       (super.noSuchMethod(
         Invocation.method(
           #getGroups,
           [search],
         ),
-        returnValue: _i8.Future<List<_i11.Group>>.value(<_i11.Group>[]),
-      ) as _i8.Future<List<_i11.Group>>);
+        returnValue: _i7.Future<List<_i11.Group>>.value(<_i11.Group>[]),
+      ) as _i7.Future<List<_i11.Group>>);
 }
 
 /// A class which mocks [PictogramsRepository].
@@ -511,15 +517,15 @@ class MockPictogramsRepository extends _i1.Mock
   }
 
   @override
-  _i8.Future<List<_i12.Picto>> getAllPictograms() => (super.noSuchMethod(
+  _i7.Future<List<_i12.Picto>> getAllPictograms() => (super.noSuchMethod(
         Invocation.method(
           #getAllPictograms,
           [],
         ),
-        returnValue: _i8.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
-      ) as _i8.Future<List<_i12.Picto>>);
+        returnValue: _i7.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
+      ) as _i7.Future<List<_i12.Picto>>);
   @override
-  _i8.Future<void> uploadPictograms(
+  _i7.Future<void> uploadPictograms(
     List<_i12.Picto>? data,
     String? language, {
     String? userId,
@@ -533,11 +539,11 @@ class MockPictogramsRepository extends _i1.Mock
           ],
           {#userId: userId},
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i8.Future<void> updatePictogram(
+  _i7.Future<void> updatePictogram(
     _i12.Picto? pictogram,
     String? language,
     int? index,
@@ -551,18 +557,18 @@ class MockPictogramsRepository extends _i1.Mock
             index,
           ],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i8.Future<List<_i12.Picto>> getPictograms(_i14.BasicSearch? search) =>
+  _i7.Future<List<_i12.Picto>> getPictograms(_i14.BasicSearch? search) =>
       (super.noSuchMethod(
         Invocation.method(
           #getPictograms,
           [search],
         ),
-        returnValue: _i8.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
-      ) as _i8.Future<List<_i12.Picto>>);
+        returnValue: _i7.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
+      ) as _i7.Future<List<_i12.Picto>>);
 }
 
 /// A class which mocks [UserNotifier].
@@ -574,36 +580,10 @@ class MockUserNotifier extends _i1.Mock implements _i16.UserNotifier {
   }
 
   @override
-  _i6.UserModel get user => (super.noSuchMethod(
-        Invocation.getter(#user),
-        returnValue: _FakeUserModel_4(
-          this,
-          Invocation.getter(#user),
-        ),
-      ) as _i6.UserModel);
-  @override
-  set onError(_i17.ErrorListener? _onError) => super.noSuchMethod(
+  set user(_i9.UserModel? userModel) => super.noSuchMethod(
         Invocation.setter(
-          #onError,
-          _onError,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  bool get mounted => (super.noSuchMethod(
-        Invocation.getter(#mounted),
-        returnValue: false,
-      ) as bool);
-  @override
-  _i8.Stream<_i6.UserModel?> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i8.Stream<_i6.UserModel?>.empty(),
-      ) as _i8.Stream<_i6.UserModel?>);
-  @override
-  set state(_i6.UserModel? value) => super.noSuchMethod(
-        Invocation.setter(
-          #state,
-          value,
+          #user,
+          userModel,
         ),
         returnValueForMissingStub: null,
       );
@@ -613,45 +593,49 @@ class MockUserNotifier extends _i1.Mock implements _i16.UserNotifier {
         returnValue: false,
       ) as bool);
   @override
-  void setUser(_i6.UserModel? user) => super.noSuchMethod(
+  void setUser(_i9.UserModel? userModel) => super.noSuchMethod(
         Invocation.method(
           #setUser,
-          [user],
+          [userModel],
         ),
         returnValueForMissingStub: null,
       );
   @override
-  bool updateShouldNotify(
-    _i6.UserModel? old,
-    _i6.UserModel? current,
-  ) =>
-      (super.noSuchMethod(
+  void clearUser() => super.noSuchMethod(
         Invocation.method(
-          #updateShouldNotify,
-          [
-            old,
-            current,
-          ],
+          #clearUser,
+          [],
         ),
-        returnValue: false,
-      ) as bool);
+        returnValueForMissingStub: null,
+      );
   @override
-  _i17.RemoveListener addListener(
-    _i18.Listener<_i6.UserModel?>? listener, {
-    bool? fireImmediately = true,
-  }) =>
-      (super.noSuchMethod(
+  void addListener(_i2.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
-          {#fireImmediately: fireImmediately},
         ),
-        returnValue: () {},
-      ) as _i17.RemoveListener);
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(_i2.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   void dispose() => super.noSuchMethod(
         Invocation.method(
           #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
           [],
         ),
         returnValueForMissingStub: null,

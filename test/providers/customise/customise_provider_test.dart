@@ -7,6 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
@@ -125,7 +126,7 @@ Future<void> main() async {
     final expectedGroups = fakeGroups;
     const mockLocale = Locale('es_AR');
 
-    when(mockI18N.locale).thenReturn(mockLocale);
+    when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.fetchDefaultGroups(languageCode: anyNamed('languageCode'))).thenAnswer((_) async => expectedGroups);
 
     await customiseProvider.getDefaultGroups();
@@ -138,7 +139,7 @@ Future<void> main() async {
     final expectedPictos = fakePictos;
     const mockLocale = Locale('es_AR');
 
-    when(mockI18N.locale).thenReturn(mockLocale);
+    when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.fetchDefaultPictos(languageCode: anyNamed('languageCode'))).thenAnswer((_) async => expectedPictos);
 
     await customiseProvider.getDefaultPictos();
@@ -206,7 +207,7 @@ Future<void> main() async {
     final expectedGroups = fakeGroups;
     const mockLocale = Locale('es_AR');
 
-    when(mockI18N.locale).thenReturn(mockLocale);
+    when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.fetchUserGroups(languageCode: anyNamed('languageCode'), userId: anyNamed('userId'))).thenAnswer((_) async => expectedGroups);
 
     await customiseProvider.fetchUserGroups(userId: 'mockUserId');
@@ -218,7 +219,7 @@ Future<void> main() async {
     final expectedPictos = fakePictos;
     const mockLocale = Locale('es_AR');
 
-    when(mockI18N.locale).thenReturn(mockLocale);
+    when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.fetchUserPictos(languageCode: anyNamed('languageCode'), userId: anyNamed('userId'))).thenAnswer((_) async => expectedPictos);
 
     await customiseProvider.fetchUserPictos(userId: 'mockUserId');
@@ -231,7 +232,7 @@ Future<void> main() async {
     final mockLocale = Locale('en');
     final mockUserId = 'mockUserId';
 
-    when(mockI18N.locale).thenReturn(mockLocale);
+    when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.valuesExistOrNot(
       languageCode: anyNamed('languageCode'),
       userId: anyNamed('userId'),

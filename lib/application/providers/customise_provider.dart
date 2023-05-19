@@ -57,7 +57,6 @@ class CustomiseProvider extends ChangeNotifier {
     await _customiseService.setShortcutsForUser(
       shortcuts: ShortcutsModel(
         enable: true,
-
         favs: selectedShortcuts[0],
         history: selectedShortcuts[1],
         camera: selectedShortcuts[2],
@@ -182,7 +181,6 @@ class CustomiseProvider extends ChangeNotifier {
   }
 
   Future<void> fetchUserGroups({required String userId}) async {
-
     final res = await _customiseService.fetchUserGroups(languageCode: _i18n.currentLocale.toString(), userId: userId);
     groups = res;
     notify();
