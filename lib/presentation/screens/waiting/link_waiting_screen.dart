@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
-import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
 
@@ -11,21 +10,20 @@ class LinkWaitingScreen extends ConsumerStatefulWidget {
   const LinkWaitingScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LinkWaitingScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _LinkWaitingScreenState();
 }
 
 class _LinkWaitingScreenState extends ConsumerState<LinkWaitingScreen> {
   @override
   void initState() {
-    LinkNotifier provider = ref.read(linkProvider);
 
     final localContext = context;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.userSuccessLinkAccount();
       await Future.delayed(const Duration(seconds: 3));
 
-      localContext.go(AppRoutes.linkSuccessScreen);
+      localContext.go(AppRoutes.caregiverLinkSuccess);
     });
     super.initState();
   }

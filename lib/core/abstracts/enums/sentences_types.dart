@@ -1,0 +1,4 @@
+enum SentencesTypes {
+  favouriteFrases,
+  mostUsedFrases,
+}

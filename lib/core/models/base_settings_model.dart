@@ -44,13 +44,16 @@ class BaseSettingsModel extends UserSettings {
   factory BaseSettingsModel.fromMap(Map<String, dynamic> map) {
     return BaseSettingsModel(
       data: UserData.fromMap(Map.from(map['data'] as dynamic)),
-      language: map['language'] == null ? LanguageSetting.empty() : LanguageSetting.fromMap(Map.from(map['language'] as dynamic)),
+      language: map['language'] == null
+          ? LanguageSetting.empty()
+          : LanguageSetting.fromMap(Map.from(map['language'] as dynamic)),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory BaseSettingsModel.fromJson(String source) => BaseSettingsModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory BaseSettingsModel.fromJson(String source) =>
+      BaseSettingsModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'CaregiverSettings(data: $data, language: $language)';

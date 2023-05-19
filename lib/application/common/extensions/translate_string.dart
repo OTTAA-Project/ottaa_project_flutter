@@ -15,7 +15,7 @@ extension TranslateString on String {
   String trlf([Map<String, dynamic>? args]) {
     final translation = trl;
 
-    if(args == null) {
+    if (args == null) {
       return translation;
     }
 
@@ -30,6 +30,5 @@ extension TranslateString on String {
     });
 
     return result;
-
   }
 }

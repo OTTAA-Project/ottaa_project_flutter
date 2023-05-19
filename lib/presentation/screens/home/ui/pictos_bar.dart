@@ -1,18 +1,17 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
-import 'package:ottaa_project_flutter/application/common/screen_util.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
-import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
+import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/shortcuts_ui.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/widgets/home_button.dart';
-import 'package:ottaa_ui_kit/widgets.dart';
 import 'package:picto_widget/picto_widget.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class PictosBarUI extends ConsumerStatefulWidget {
   const PictosBarUI({super.key});
@@ -24,152 +23,179 @@ class PictosBarUI extends ConsumerStatefulWidget {
 class _PictosBarState extends ConsumerState<PictosBarUI> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final colorScheme = Theme.of(context).colorScheme;
-
     final pictos = ref.watch(homeProvider).getPictograms();
 
     final hasGroups = ref.watch(homeProvider).groups.isNotEmpty;
 
     final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
-    print(pictos.length);
-    return Flex(
-      direction: Axis.vertical,
-      children: [
-        Flexible(
-          fit: FlexFit.tight,
-          flex: 1,
-          child: Flex(
-            direction: Axis.horizontal,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(width: 30),
-              pictos.isEmpty
-                  ? const Flexible(
-                      fit: FlexFit.tight,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : buildWidgets(pictos, addPictogram: addPictogram),
-              const SizedBox(width: 30),
-              SizedBox(
-                width: 64,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    HomeButton(
-                      onPressed: pictos.isEmpty && !hasGroups
-                          ? null
-                          : () {
-                              ref.watch(homeProvider).switchToPictograms();
-                            },
-                      size: const Size(64, 64),
-                      child: Image.asset(
-                        AppImages.kSearchOrange,
-                      ),
-                    ),
-                    BaseButton(
-                      onPressed: pictos.isEmpty && !hasGroups
-                          ? null
-                          : () {
-                              ref.read(homeProvider).refreshPictograms();
-                            },
-                      style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(const Size(64, 64)),
-                        backgroundColor: MaterialStateProperty.all(pictos.isEmpty ? Colors.grey.withOpacity(.12) : Colors.white),
-                        overlayColor: MaterialStateProperty.all(colorScheme.primary.withOpacity(0.1)),
-                        shape: MaterialStateProperty.all(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(9)),
-                          ),
+    return ResponsiveBuilder(builder: (context, sizingInformation) {
+      return Flex(
+        direction: Axis.vertical,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: kIsWeb ? 8 : 2,
+            child: Flex(
+              direction: Axis.horizontal,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(width: 30),
+                pictos.isEmpty
+                    ? const Flexible(
+                        fit: FlexFit.tight,
+                        child: Center(
+                          child: CircularProgressIndicator(),
                         ),
-                        padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                        elevation: MaterialStateProperty.all(0),
+                      )
+                    : buildWidgets(pictos, addPictogram: addPictogram),
+                const SizedBox(width: 30),
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      HomeButton(
+                        size: Size.fromHeight((!sizingInformation.isMobile) ? 125 : 64),
+                        onPressed: pictos.isEmpty && !hasGroups
+                            ? null
+                            : () {
+                                ref.watch(homeProvider).switchToPictograms();
+                              },
+                        child: Image.asset(
+                          AppImages.kSearchOrange,
+                        ),
                       ),
-                      child: Image.asset(
-                        AppImages.kRefreshOrange,
+                      const SizedBox(height: 16),
+                      HomeButton(
+                        size: Size.fromHeight((!sizingInformation.isMobile) ? 125 : 64),
+                        onPressed: pictos.isEmpty && !hasGroups
+                            ? null
+                            : () {
+                                ref.read(homeProvider).refreshPictograms();
+                              },
+                        child: Image.asset(
+                          AppImages.kRefreshOrange,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: 24),
-            ],
+                const SizedBox(width: 10),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          width: size.width,
-          height: 88,
-          child: const ShortcutsUI(),
-        )
-      ],
-    );
+          const SizedBox(height: 30),
+          const Flexible(
+            flex: 1,
+            fit: FlexFit.loose,
+            child: Align(
+              alignment: Alignment.center,
+              child: ShortcutsUI(),
+            ),
+          ),
+          const SizedBox(height: 10),
+        ],
+      );
+    });
   }
 
   Flexible buildWidgets(
     List<Picto> pictos, {
     required void Function(Picto) addPictogram,
   }) {
+    final size = MediaQuery.of(context).size;
+
+    final maxWidth = max(size.width, size.height);
+    final maxHeight = min(size.width, size.height);
+
     return Flexible(
+      flex: 5,
       fit: FlexFit.loose,
       child: GridView.builder(
-        itemCount: kIsTablet ? 6 : 4,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: kIsTablet ? 6 : 4,
-          childAspectRatio: 1,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-        ),
+        itemCount: 4,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 1),
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           final e = pictos[index];
 
-          if (e.id == "-777") {
-            return FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Container(
-                  width: 116,
-                  height: 144,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(9),
-                    border: Border.all(
-                      color: Colors.grey.withOpacity(.12),
-                      width: 1,
+          switch (e.id) {
+            case "-777":
+              return FittedBox(
+                fit: BoxFit.cover,
+                child: Container(
+                    width: 116,
+                    height: 144,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(9),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(.12),
+                        width: 1,
+                      ),
+                    ),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    )),
+              );
+            case "777":
+              return FittedBox(
+                fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    //TODO: add pictogram
+                  },
+                  child: Container(
+                    height: 119,
+                    width: 96,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(9),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(.12),
+                        width: 1,
+                      ),
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.add,
+                        size: 33,
+                        color: kOTTAAOrange,
+                      ),
                     ),
                   ),
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  )),
-            );
+                ),
+              );
+            default:
+              return FittedBox(
+                fit: BoxFit.cover,
+                child: PictoWidget(
+                  onTap: () {
+                    addPictogram(e);
+                  },
+                  image: e.resource.network != null
+                      ? CachedNetworkImage(
+                          imageUrl: e.resource.network!,
+                          fit: BoxFit.fill,
+                          errorWidget: (context, url, error) => Image.asset(
+                            fit: BoxFit.fill,
+                            "assets/img/${e.text}.webp",
+                          ),
+                        )
+                      : Image.asset(
+                          fit: BoxFit.fill,
+                          "assets/img/${e.text}.webp",
+                        ),
+                  text: e.text,
+                  colorNumber: e.type,
+                ),
+              );
           }
-
-          return PictoWidget(
-            onTap: () {
-              addPictogram(e);
-            },
-            image: e.resource.network != null
-                ? CachedNetworkImage(
-                    imageUrl: e.resource.network!,
-                    fit: BoxFit.fill,
-                    errorWidget: (context, url, error) => Image.asset(
-                      fit: BoxFit.fill,
-                      "assets/img/${e.text}.webp",
-                    ),
-                  )
-                : Image.asset(
-                    fit: BoxFit.fill,
-                    "assets/img/${e.text}.webp",
-                  ),
-            text: e.text,
-            colorNumber: e.type,
-            width: 116,
-            height: 144,
-          );
         },
       ),
     );

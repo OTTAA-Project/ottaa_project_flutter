@@ -1,7 +1,6 @@
-
 import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart';
 
-void main(){
+void main() {
   var userNotifier = UserAvatarNotifier();
   // group('User Avatar Notifier Coverage',(){
   //   test('Change Avatar', (){

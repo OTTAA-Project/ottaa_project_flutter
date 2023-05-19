@@ -50,13 +50,13 @@ class GroupsService extends GroupsRepository {
     if (result.isLeft) return;
 
     List<Map<String, dynamic>> jsonData = List.empty(growable: true);
-    print(data.length);
+
     for (var e in data) {
       jsonData.add(e.toMap());
     }
 
     final UserModel auth = result.right;
-    final res = await _serverRepository.uploadGroups(userId ?? auth.id, language, data: jsonData);
+    await _serverRepository.uploadGroups(userId ?? auth.id, language, data: jsonData);
   }
 
   @override

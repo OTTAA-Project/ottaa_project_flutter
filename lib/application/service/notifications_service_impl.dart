@@ -14,7 +14,8 @@ import 'package:ottaa_project_flutter/core/service/notifications_service.dart';
   as: NotificationsService,
 )
 class NotificationsServiceImpl implements NotificationsService {
-  late final AwesomeNotifications _awesomeNotifications = AwesomeNotifications();
+  late final AwesomeNotifications _awesomeNotifications =
+      AwesomeNotifications();
 
   @override
   StreamSubscription<dynamic>? onMessageOpenedAppSubscription;
@@ -29,7 +30,6 @@ class NotificationsServiceImpl implements NotificationsService {
 
   NotificationsServiceImpl(this.i18n);
 
-
   @FactoryMethod(preResolve: true)
   static Future<NotificationsServiceImpl> onInit(I18N i18n) async {
     final service = NotificationsServiceImpl(i18n);
@@ -39,7 +39,8 @@ class NotificationsServiceImpl implements NotificationsService {
 
   @override
   Future<NotificationsService> init() async {
-    NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+    NotificationSettings settings =
+        await FirebaseMessaging.instance.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -48,11 +49,6 @@ class NotificationsServiceImpl implements NotificationsService {
       provisional: false,
       sound: true,
     );
-
-    FirebaseMessaging.instance.onTokenRefresh.listen((String token) {
-      print('Token refreshed: $token');
-      //TODO: Revisar esto después no ahora como juanma con las notis :,v
-    });
 
     await _awesomeNotifications.initialize(
       'resource://mipmap/ic_launcher',
@@ -75,20 +71,24 @@ class NotificationsServiceImpl implements NotificationsService {
     await onMessageOpenedAppSubscription?.cancel();
     await onMessageReceived?.cancel();
 
-    onMessageSubscription = FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    onMessageSubscription =
+        FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print(message);
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');
       if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification?.title}  ${message.notification?.body}');
+        print(
+            'Message also contained a notification: ${message.notification?.title}  ${message.notification?.body}');
         await showNotification(
           title: message.notification!.title ?? "",
           description: message.notification!.body ?? "",
-          payload: message.data.map((key, value) => MapEntry(key, value.toString())),
+          payload:
+              message.data.map((key, value) => MapEntry(key, value.toString())),
         );
       }
     });
-    onMessageOpenedAppSubscription = FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+    onMessageOpenedAppSubscription = FirebaseMessaging.onMessageOpenedApp
+        .listen((RemoteMessage message) async {
       print(message);
       print('A new onMessageOpenedApp event was published!');
       print('Message data: ${message.data}');

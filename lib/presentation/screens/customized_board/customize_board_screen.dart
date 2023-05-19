@@ -23,7 +23,7 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
             padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
             shrinkWrap: true,
             itemCount: provider.groups.length,
-            itemBuilder: (context, index) => Container(
+            itemBuilder: (context, index) => SizedBox(
               width: MediaQuery.of(context).size.width - 48,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16),
@@ -41,7 +41,7 @@ class _CustomizeBoardScreenState extends ConsumerState<CustomizeBoardScreen> {
                   onPressed: () async {
                     await provider.setGroupData(index: index);
                     await provider.fetchDesiredPictos();
-                    context.push(AppRoutes.customizePictoScreen);
+                    context.push(AppRoutes.userCustomizePicto);
                   },
                 ),
               ),

@@ -51,7 +51,8 @@ void main() {
   });
 
   test("should return the available app version", () async {
-    when(mockAboutService.getAvailableAppVersion()).thenAnswer((_) async => "1.0.0");
+    when(mockAboutService.getAvailableAppVersion())
+        .thenAnswer((_) async => "1.0.0");
 
     expect(await aboutProvider.getAvailableAppVersion(), "1.0.0");
     verify(mockAboutService.getAvailableAppVersion()).called(1);
@@ -73,7 +74,8 @@ void main() {
   });
 
   test("should return the user profile picture", () async {
-    when(mockAboutService.getProfilePicture()).thenAnswer((_) async => "https://test.com");
+    when(mockAboutService.getProfilePicture())
+        .thenAnswer((_) async => "https://test.com");
 
     expect(await aboutProvider.getProfilePicture(), "https://test.com");
 
@@ -81,14 +83,17 @@ void main() {
   });
 
   test("should return the user information", () async {
-    when(mockAboutService.getUserInformation()).thenAnswer((_) async => Right(fakeUser));
+    when(mockAboutService.getUserInformation())
+        .thenAnswer((_) async => Right(fakeUser));
     expect((await mockAboutService.getUserInformation()).isRight, true);
 
-    expect((await mockAboutService.getUserInformation()).right, isA<UserModel>());
+    expect(
+        (await mockAboutService.getUserInformation()).right, isA<UserModel>());
   });
 
   test("should return free user type", () async {
-    when(mockAboutService.getUserType()).thenAnswer((_) async => UserPayment.free);
+    when(mockAboutService.getUserType())
+        .thenAnswer((_) async => UserPayment.free);
 
     expect(await aboutProvider.getUserType(), UserPayment.free);
 
@@ -96,7 +101,8 @@ void main() {
   });
 
   test("should return premium user type", () async {
-    when(mockAboutService.getUserType()).thenAnswer((_) async => UserPayment.premium);
+    when(mockAboutService.getUserType())
+        .thenAnswer((_) async => UserPayment.premium);
 
     expect(await aboutProvider.getUserType(), UserPayment.premium);
 
@@ -104,7 +110,8 @@ void main() {
   });
 
   test("should return if the user avatar exist", () async {
-    when(mockAboutService.getProfilePicture()).thenAnswer((_) async => fakeUser.settings.data.avatar.network!);
+    when(mockAboutService.getProfilePicture())
+        .thenAnswer((_) async => fakeUser.settings.data.avatar.network!);
 
     expect(await aboutProvider.getProfilePicture(), "https://test.com");
 

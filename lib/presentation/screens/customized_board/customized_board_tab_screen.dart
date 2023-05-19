@@ -8,8 +8,10 @@ import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
+import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_shortcut_screen.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -33,28 +35,16 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
     });
   }
 
-  Future<bool> showSaveChanges() async {
-    return await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Text("global.comingsoon".trl),
-      ),
-    ) ?? false;
-  }
-
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(customiseProvider);
-    final user = ref.read(userNotifier);
+    final user = ref.read(userProvider.select((value) => value.user));
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
 
     final userID = ref.read(linkProvider);
-    return WillPopScope(
-      onWillPop: () async {
-        return await showSaveChanges();
-      },
+    return ResponsiveWidget(
       child: Scaffold(
         appBar: OTTAAAppBar(
           leading: IconButton(
@@ -99,27 +89,6 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
               ),
             ],
           ),
-          actions: [
-            GestureDetector(
-              onTap: () async {
-                final bool? res = await BasicBottomSheet.show(
-                  context,
-                  okButtonText: "global.yes".trl,
-                  cancelButtonText: "global.cancel".trl,
-                  cancelButtonEnabled: true,
-                  title: "customize.board.skip".trl,
-                );
-                if (res != null && res == true) {
-                  // provider.uploadData(userId: user!.id);
-                  context.push(AppRoutes.customizeWaitScreen);
-                }
-              },
-              child: Text(
-                "global.skip".trl,
-                style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
-              ),
-            ),
-          ],
         ),
         backgroundColor: colorScheme.background,
         body: Stack(
@@ -147,12 +116,12 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
                       );
                       switch (provider.type) {
                         case CustomiseDataType.user:
-                          await provider.uploadData(userId: provider.userId);
+                          await provider.uploadData(userId: user!.id);
                           provider.groupsFetched = false;
                           provider.type = CustomiseDataType.defaultCase;
-                          provider.notify();
+
                           context.pop();
-                          context.pop();
+                          context.go(AppRoutes.home);
                           break;
                         case CustomiseDataType.careGiver:
                           await provider.uploadData(userId: provider.userId);
@@ -160,15 +129,15 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
                           provider.groupsFetched = false;
 
                           await ref.read(profileProvider).fetchUserById(provider.userId);
-                          provider.notify();
+                          // provider.notify();
                           context.pop();
-                          context.pop();
+                          context.go(AppRoutes.home);
                           break;
                         case CustomiseDataType.defaultCase:
                         default:
-                          await provider.uploadData(userId: userID.userId!);
+                          await provider.uploadData(userId: userID.userId ?? provider.userId);
                           context.pop();
-                          context.push(AppRoutes.customizeWaitScreen);
+                          context.go(AppRoutes.userCustomizeWait);
                           break;
                       }
                     },

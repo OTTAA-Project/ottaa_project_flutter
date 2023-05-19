@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ottaa_project_flutter/application/router/app_routes.dart';
-import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
-import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
+import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_picto_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_board_tab_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_main_tab_screen.dart';
@@ -32,11 +33,6 @@ import 'package:ottaa_project_flutter/presentation/screens/profile/profile_ottaa
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_edit_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/profile_settings_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_waiting_screen.dart';
-import 'package:ottaa_project_flutter/presentation/screens/report/report_screen.dart';
-import 'package:ottaa_project_flutter/presentation/screens/sentences/add_or_remove%20_favourites_screen.dart';
-import 'package:ottaa_project_flutter/presentation/screens/sentences/favourites_screen.dart';
-import 'package:ottaa_project_flutter/presentation/screens/sentences/sentences_screen.dart';
-import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/search_sentence.dart';
 import 'package:ottaa_project_flutter/presentation/screens/splash/splash_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/tutorial/tutorial_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/accessibility_screen.dart';
@@ -47,204 +43,260 @@ import 'package:ottaa_project_flutter/presentation/screens/user_settings/voice_a
 import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
-final AppRouter appRouterSingleton = AppRouter();
+final goRouterProvider = Provider<GoRouter>((ref) {
+  final authState = ref.read(authProvider.select((value) => value.isUserLoggedIn));
+  final userState = ref.watch(userProvider);
 
-class AppRouter {
-  String get initialAppResolver {
-    //if (!authService.isLogged) {
-    //  return AppRoutes.login;
-    //}
-    //todo: talk with emir about it
-    //if (authService.isLogged) {
-    //  return AppRoutes.home;
-    //}
+  return GoRouter(
+    debugLogDiagnostics: kDebugMode,
+    restorationScopeId: "ottaa",
+    errorBuilder: (context, state) => const ErrorScreen(),
+    initialLocation: "/",
+    // refreshListenable: userState,
+    routes: <GoRoute>[
+      GoRoute(
+        path: "/",
+        name: "ottaa",
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: "/onboarding",
+        name: "onboarding",
+        builder: (context, state) {
+          int? pageIndex = state.extra as int?;
 
-    return AppRoutes.splash;
-  }
+          return OnBoardingScreen(defaultIndex: pageIndex ?? 0);
+        },
+      ),
+      GoRoute(
+        path: "/login",
+        name: "login",
+        builder: (context, state) => const LoginScreen(),
+        routes: [
+          GoRoute(
+            path: "waiting",
+            name: "waiting",
+            builder: (context, state) => const LoginWaitingScreen(),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: "/tutorial",
+        name: "tutorial",
+        builder: (context, state) => const TutorialScreen(),
+      ),
+      GoRoute(
+        path: "/home",
+        name: "home",
+        redirect: (_, __) async {
+          bool isLoggedIn = await authState();
+          final user = userState.user;
+          if (!isLoggedIn) {
+            return "/login";
+          }
 
-  late final GoRouter router;
+          if (user == null) {
+            return '/';
+          }
+          return null;
+        },
+        builder: (context, state) {
+          final user = userState.user;
 
-  AppRouter() {
-    router = GoRouter(
-      routes: <GoRoute>[
-        GoRoute(
-          path: AppRoutes.splash,
-          builder: (context, state) => const SplashScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.onboarding,
-          builder: (context, state) {
-            int? pageIndex = state.extra as int?;
+          if (user == null) return Container(); //WAiting for the fetching
 
-            return OnBoardingScreen(defaultIndex: pageIndex ?? 0);
-          },
-        ),
-        GoRoute(
-          path: AppRoutes.login,
-          builder: (context, state) => const LoginScreen(),
-          routes: [
-            GoRoute(
-              path: "waiting",
-              builder: (context, state) => const LoginWaitingScreen(),
-            ),
-          ],
-        ),
-        GoRoute(
-          path: AppRoutes.home,
-          builder: (context, state) => const HomeScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.tutorial,
-          builder: (context, state) => const TutorialScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.report,
-          builder: (context, state) => const ReportScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.sentences,
-          builder: (context, state) => const SentencesScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.favouriteSentences,
-          builder: (context, state) => const FavouriteScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.addOrRemoveFavouriteSentences,
-          builder: (context, state) => const AddOrRemoveFavouriteScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.searchSentences,
-          builder: (context, state) => const SearchSentenceScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.profileWaitingScreen,
-          builder: (context, state) => const ProfileWaitingScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.profileMainScreen,
-          builder: (context, state) => const ProfileMainScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.profileSettingsScreen,
-          builder: (context, state) => const ProfileSettingsScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.profileChooserScreen,
-          builder: (context, state) => const ProfileChooserScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.profileSettingsEditScreen,
-          builder: (context, state) => const ProfileSettingsEditScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.profileChooserScreenSelected,
-          builder: (context, state) => const ProfileChooserScreenSelected(),
-        ),
-        GoRoute(
-          path: AppRoutes.profileFAQScreen,
-          builder: (context, state) => const ProfileFAQScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.profileHelpScreen,
-          builder: (context, state) => const ProfileHelpScreen(),
-        ),
-        GoRoute(
-            path: AppRoutes.profileOttaaTips,
-            builder: (context, state) => const ProfileOTTAATipsScreen()),
-        GoRoute(
-            path: AppRoutes.profileLinkedAccountScreen,
-            builder: (context, state) => const ProfileLinkedAccountScreen()),
-        GoRoute(
-          name: "link",
-          path: "/link",
-          builder: (context, state) => const SizedBox(),
-          routes: [
-            GoRoute(
-              path: "email",
-              builder: (context, state) => const LinkMailScreen(),
-            ),
-            GoRoute(
-              path: "token",
-              builder: (context, state) => const LinkTokenScreen(),
-            ),
-            GoRoute(
-              path: "wait",
-              builder: (context, state) => const LinkWaitingScreen(),
-            ),
-            GoRoute(
-              path: "success",
-              builder: (context, state) => const LinkSuccessScreen(),
-            )
-          ],
-        ),
-        GoRoute(
-          path: AppRoutes.customizedBoardScreen,
-          builder: (context, state) => const CustomizedMainTabScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.customizeBoardScreen,
-          builder: (context, state) => const CustomizedBoardTabScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.customizeWaitScreen,
-          builder: (context, state) => const CustomizeWaitScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.customizePictoScreen,
-          builder: (context, state) => const CustomizePictoScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.profileMainScreenUser,
-          builder: (context, state) => const ProfileMainScreenUser(),
-        ),
-        GoRoute(
-          path: AppRoutes.settingScreenUser,
-          builder: (context, state) => const SettingScreenUser(),
-        ),
-        GoRoute(
-          path: AppRoutes.accessibilityScreenUser,
-          builder: (context, state) => const AccessibilityScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.voiceAndSubtitleScreenUser,
-          builder: (context, state) => const VoiceAndSubtitleScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.languageScreenUser,
-          builder: (context, state) => const LanguageScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.mainSettingUser,
-          builder: (context, state) => const MainSettingScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.gameScreen,
-          builder: (context, state) => const GameScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.matchPictogramScreen,
-          builder: (context, state) => const MatchPictogramScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.memoryGameScreen,
-          builder: (context, state) => const MemoryGameScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.searchScreen,
-          builder: (context, state) => const SearchScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.whatsThePictoScreen,
-          builder: (context, state) => const WhatsThePictoScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.selectGroupScreen,
-          builder: (context, state) => const SelectGroupScreen(),
-        ),
-      ],
-      errorBuilder: (context, state) => const ErrorScreen(),
-      initialLocation: initialAppResolver,
-    );
-  }
-}
+          switch (user.type) {
+            case UserType.caregiver:
+              return const ProfileMainScreen();
+            case UserType.user:
+              return const ProfileMainScreenUser();
+            case UserType.none:
+              return const ProfileChooserScreen();
+          }
+        },
+        routes: [
+          GoRoute(
+            path: "loading",
+            name: "loading",
+            builder: (context, state) => const ProfileWaitingScreen(),
+          ),
+          GoRoute(
+            path: "profile",
+            name: "profile",
+            builder: (context, state) => const ProfileSettingsScreen(),
+            routes: [
+              GoRoute(
+                path: "role",
+                name: "role",
+                builder: (context, state) => const ProfileChooserScreenSelected(),
+              ),
+              GoRoute(
+                path: "accounts",
+                name: "accounts",
+                builder: (context, state) => const ProfileLinkedAccountScreen(),
+              ),
+              GoRoute(
+                path: "tips",
+                name: "tips",
+                builder: (context, state) => const ProfileOTTAATipsScreen(),
+              ),
+              GoRoute(
+                path: "edit",
+                name: "edit",
+                builder: (context, state) => const ProfileSettingsEditScreen(),
+              ),
+              GoRoute(
+                path: "help",
+                name: "help",
+                builder: (context, state) => const ProfileHelpScreen(),
+                routes: [
+                  GoRoute(
+                    path: "faq",
+                    name: "faq",
+                    builder: (context, state) => const ProfileFAQScreen(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          GoRoute(
+            path: "customize",
+            name: "customize",
+            builder: (context, state) => const CustomizedMainTabScreen(),
+            routes: [
+              GoRoute(
+                path: "board",
+                name: "board",
+                builder: (context, state) => const CustomizedBoardTabScreen(),
+              ),
+              GoRoute(
+                path: "picto",
+                name: "picto",
+                builder: (context, state) => const CustomizePictoScreen(),
+              ),
+              GoRoute(
+                path: "wait",
+                name: "wait",
+                builder: (context, state) => const CustomizeWaitScreen(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: "talk",
+            name: "talk",
+            builder: (context, state) => const HomeScreen(),
+          ),
+
+          GoRoute(
+            path: "account",
+            name: "account",
+            redirect: (_, __) {
+              if (userState.user?.type == UserType.caregiver) {
+                return null;
+              }
+
+              return "/home";
+            },
+            builder: (context, state) => const SettingScreenUser(),
+            routes: [
+              GoRoute(
+                path: "layout",
+                builder: (context, state) => const MainSettingScreen(),
+              ),
+              GoRoute(
+                path: "accessibility",
+                builder: (context, state) => const AccessibilityScreen(),
+              ),
+              GoRoute(
+                path: "tts",
+                builder: (context, state) => const VoiceAndSubtitleScreen(),
+              ),
+              GoRoute(
+                path: "language",
+                builder: (context, state) => const LanguageScreen(),
+              ),
+            ],
+          ),
+          //TODO*: Use ShellRoute instead of GoRoute
+          GoRoute(
+            path: "link",
+            redirect: (_, __) {
+              if (userState.user?.type == UserType.caregiver) {
+                return null;
+              }
+
+              return "/home";
+            },
+            builder: (context, state) => const LinkMailScreen(),
+            routes: [
+              GoRoute(
+                path: "token",
+                builder: (context, state) => const LinkTokenScreen(),
+              ),
+              GoRoute(
+                path: "wait",
+                builder: (context, state) => const LinkWaitingScreen(),
+              ),
+              GoRoute(
+                path: "success",
+                builder: (context, state) => const LinkSuccessScreen(),
+              )
+            ],
+          ),
+
+          GoRoute(
+            path: "settings",
+            name: "settings",
+            redirect: (context, state) {
+              if (state.location.startsWith("/home/settings") && userState.user?.type == UserType.caregiver) {
+                return "/home";
+              }
+
+              return null;
+            },
+            builder: (context, state) => const SettingScreenUser(),
+            routes: [
+              GoRoute(
+                path: "layout",
+                builder: (context, state) => const MainSettingScreen(),
+              ),
+              GoRoute(
+                path: "accessibility",
+                builder: (context, state) => const AccessibilityScreen(),
+              ),
+              GoRoute(
+                path: "tts",
+                builder: (context, state) => const VoiceAndSubtitleScreen(),
+              ),
+              GoRoute(
+                path: "language",
+                builder: (context, state) => const LanguageScreen(),
+              ),
+            ],
+          ),
+
+          GoRoute(
+            path: "games",
+            name: "games",
+            builder: (_, __) => const GameScreen(),
+            routes: [
+              GoRoute(path: 'groups', builder: (_, __) => const SelectGroupScreen(), routes: [GoRoute(path: 'search', builder: (_, __) => const SearchScreen())]),
+              GoRoute(
+                path: 'match',
+                builder: (_, __) => const MatchPictogramScreen(),
+              ),
+              GoRoute(
+                path: 'memory',
+                builder: (_, __) => const MemoryGameScreen(),
+              ),
+              GoRoute(
+                path: 'wtp',
+                builder: (_, __) => const WhatsThePictoScreen(),
+              ),
+            ],
+          )
+        ],
+      ),
+    ],
+  );
+});

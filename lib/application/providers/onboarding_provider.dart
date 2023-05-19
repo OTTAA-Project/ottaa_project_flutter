@@ -46,6 +46,7 @@ class OnBoardingNotifier extends ChangeNotifier {
   }
 }
 
-final onBoardingProvider = ChangeNotifierProvider.autoDispose<OnBoardingNotifier>((ref) {
+final onBoardingProvider =
+    ChangeNotifierProvider.autoDispose<OnBoardingNotifier>((ref) {
   return OnBoardingNotifier();
 });

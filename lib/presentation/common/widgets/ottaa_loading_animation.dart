@@ -12,18 +12,16 @@ class OttaaLoadingAnimation extends StatelessWidget {
     return SizedBox(
       width: width ?? 100,
       height: height ?? 100,
-      child: const RiveAnimation.asset(
-        'assets/rive/loading_ottaa.riv',
-        fit: BoxFit.contain,
-        alignment: Alignment.center,
-        placeHolder: SizedBox(
-          width: 100,
-          height: 100,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        )
-      ),
+      child: const RiveAnimation.asset('assets/rive/loading_ottaa.riv',
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+          placeHolder: SizedBox(
+            width: 100,
+            height: 100,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )),
     );
   }
 }

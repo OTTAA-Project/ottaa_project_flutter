@@ -3,35 +3,41 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/core/models/voices_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
+import 'package:async/async.dart';
 
 class TTSProvider extends ChangeNotifier {
   final TTSRepository tts;
   final LocalDatabaseRepository _hiveRepository;
 
-  TTSProvider(this.tts,this._hiveRepository);
+  Future<void>? speakOperation;
 
-  Future<void> speak(String text) => tts.speak(text);
+  TTSProvider(this.tts, this._hiveRepository);
 
-  Future<List<Voices>> fetchVoices(String languageCode)async {
+  Future<void> speak(String text) async => tts.speak(text);
+
+  Future<List<Voices>> fetchVoices(String languageCode) async {
     return await tts.fetchVoices();
   }
-  Future<void> changeVoiceSpeed(double speed)async {
+
+  Future<void> changeVoiceSpeed(double speed) async {
     tts.changeVoiceSpeed(speed);
   }
-  Future<void> changeCustomTTs(bool value)async{
+
+  Future<void> changeCustomTTs(bool value) async {
     tts.changeCustomTTs(value);
   }
-  Future<void> changeTTSVoice(String voice)async{
+
+  Future<void> changeTTSVoice(String voice) async {
     tts.changeTTSVoice(voice);
   }
-  Future<void> init()async{
-    //todo: fetch the settings from hive if they are custom or not.
 
+  Future<void> init() async {
+    //todo: fetch the settings from hive if they are custom or not.
   }
 }
 
 final ttsProvider = ChangeNotifierProvider<TTSProvider>((ref) {
   final tts = GetIt.I<TTSRepository>();
   final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
-  return TTSProvider(tts,localDatabaseRepository);
+  return TTSProvider(tts, localDatabaseRepository);
 });

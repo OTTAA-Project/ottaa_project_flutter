@@ -84,7 +84,8 @@ class AccessibilitySetting {
 
   String toJson() => json.encode(toMap());
 
-  factory AccessibilitySetting.fromJson(String source) => AccessibilitySetting.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory AccessibilitySetting.fromJson(String source) =>
+      AccessibilitySetting.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -95,11 +96,17 @@ class AccessibilitySetting {
   bool operator ==(covariant AccessibilitySetting other) {
     if (identical(this, other)) return true;
 
-    return other.device == device && other.sweepMode == sweepMode && other.sweepSpeed == sweepSpeed && other.clickTime == clickTime;
+    return other.device == device &&
+        other.sweepMode == sweepMode &&
+        other.sweepSpeed == sweepSpeed &&
+        other.clickTime == clickTime;
   }
 
   @override
   int get hashCode {
-    return device.hashCode ^ sweepMode.hashCode ^ sweepSpeed.hashCode ^ clickTime.hashCode;
+    return device.hashCode ^
+        sweepMode.hashCode ^
+        sweepSpeed.hashCode ^
+        clickTime.hashCode;
   }
 }

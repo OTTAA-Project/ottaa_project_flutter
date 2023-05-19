@@ -123,7 +123,9 @@ void main() {
   // });
 }
 
-class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
+class FakePathProviderPlatform extends Fake
+    with MockPlatformInterfaceMixin
+    implements PathProviderPlatform {
   @override
   Future<String?> getTemporaryPath() async {
     return kTemporaryPath;
@@ -167,7 +169,9 @@ class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin impl
   }
 }
 
-class AllNullFakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
+class AllNullFakePathProviderPlatform extends Fake
+    with MockPlatformInterfaceMixin
+    implements PathProviderPlatform {
   @override
   Future<String?> getTemporaryPath() async {
     return null;

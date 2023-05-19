@@ -77,7 +77,8 @@ Future<void> main() async{
   });
 
   test("Should return all groups", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((realInvocation) async => Right(fakeUser));
 
     when(mockRemoteStorageRepository.readRemoteFile(
       path: "groups",
@@ -90,7 +91,8 @@ Future<void> main() async{
   });
 
   test("Should return empty list", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
+    when(mockAuthRepository.getCurrentUser())
+        .thenAnswer((realInvocation) async => Right(fakeUser));
 
     when(mockRemoteStorageRepository.readRemoteFile(
       path: "groups",

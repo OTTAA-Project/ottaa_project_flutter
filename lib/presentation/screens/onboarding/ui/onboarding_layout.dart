@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -68,11 +69,11 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
           ),
           const SizedBox(height: 30),
           Flexible(
-            flex: 1,
+            flex: 2,
             fit: FlexFit.loose,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
+              child: AutoSizeText(
                 widget.description,
                 textAlign: TextAlign.center,
                 style: textTheme.headline3,

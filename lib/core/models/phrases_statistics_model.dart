@@ -19,7 +19,8 @@ class PhraseStatisticModel {
   @JsonKey(name: 'frecLast7days')
   Map<String, int> frecLast7Days;
 
-  factory PhraseStatisticModel.fromJson(Map<String, dynamic> json) => _$PhraseStatisticModelFromJson(json);
+  factory PhraseStatisticModel.fromJson(Map<String, dynamic> json) =>
+      _$PhraseStatisticModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$PhraseStatisticModelToJson(this);
 }

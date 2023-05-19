@@ -6,16 +6,17 @@
 import 'dart:async' as _i4;
 import 'dart:typed_data' as _i8;
 
+import 'package:dio/dio.dart' as _i13;
 import 'package:either_dart/either.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i5;
-import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i14;
+import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i15;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i6;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i10;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i11;
-import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i15;
+import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i16;
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart' as _i12;
-import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i13;
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i14;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
     as _i3;
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart'
@@ -133,22 +134,6 @@ class MockAuthRepository extends _i1.Mock implements _i3.AuthRepository {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
-  @override
-  _i4.Future<String> runToGetDataFromOtherPlatform({
-    required String? email,
-    required String? id,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #runToGetDataFromOtherPlatform,
-          [],
-          {
-            #email: email,
-            #id: id,
-          },
-        ),
-        returnValue: _i4.Future<String>.value(''),
-      ) as _i4.Future<String>);
   @override
   _i4.Future<String> getDeviceId() => (super.noSuchMethod(
         Invocation.method(
@@ -577,14 +562,16 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   @override
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> getPictogramsStatistics(
     String? userId,
-    String? languageCode,
-  ) =>
+    String? languageCode, [
+    _i13.CancelToken? cancelToken,
+  ]) =>
       (super.noSuchMethod(
         Invocation.method(
           #getPictogramsStatistics,
           [
             userId,
             languageCode,
+            cancelToken,
           ],
         ),
         returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
@@ -595,6 +582,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             [
               userId,
               languageCode,
+              cancelToken,
             ],
           ),
         )),
@@ -602,14 +590,16 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   @override
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> getMostUsedSentences(
     String? userId,
-    String? languageCode,
-  ) =>
+    String? languageCode, [
+    _i13.CancelToken? cancelToken,
+  ]) =>
       (super.noSuchMethod(
         Invocation.method(
           #getMostUsedSentences,
           [
             userId,
             languageCode,
+            cancelToken,
           ],
         ),
         returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
@@ -620,6 +610,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             [
               userId,
               languageCode,
+              cancelToken,
             ],
           ),
         )),
@@ -628,6 +619,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   _i4.Future<_i2.Either<String, String>> generatePhraseGPT({
     required String? prompt,
     required int? maxTokens,
+    double? temperature = 0.0,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -636,6 +628,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
           {
             #prompt: prompt,
             #maxTokens: maxTokens,
+            #temperature: temperature,
           },
         ),
         returnValue: _i4.Future<_i2.Either<String, String>>.value(
@@ -647,6 +640,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             {
               #prompt: prompt,
               #maxTokens: maxTokens,
+              #temperature: temperature,
             },
           ),
         )),
@@ -743,7 +737,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
       ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Either<String, void>> setShortcutsForUser({
-    required _i13.ShortcutsModel? shortcuts,
+    required _i14.ShortcutsModel? shortcuts,
     required String? userId,
   }) =>
       (super.noSuchMethod(
@@ -788,14 +782,16 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   @override
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> getEmailToken(
     String? ownEmail,
-    String? email,
-  ) =>
+    String? email, [
+    _i13.CancelToken? cancelToken,
+  ]) =>
       (super.noSuchMethod(
         Invocation.method(
           #getEmailToken,
           [
             ownEmail,
             email,
+            cancelToken,
           ],
         ),
         returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
@@ -806,6 +802,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             [
               ownEmail,
               email,
+              cancelToken,
             ],
           ),
         )),
@@ -814,8 +811,9 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> verifyEmailToken(
     String? ownEmail,
     String? email,
-    String? token,
-  ) =>
+    String? token, [
+    _i13.CancelToken? cancelToken,
+  ]) =>
       (super.noSuchMethod(
         Invocation.method(
           #verifyEmailToken,
@@ -823,6 +821,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             ownEmail,
             email,
             token,
+            cancelToken,
           ],
         ),
         returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
@@ -834,6 +833,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
               ownEmail,
               email,
               token,
+              cancelToken,
             ],
           ),
         )),
@@ -915,8 +915,9 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   _i4.Future<Map<String, dynamic>?> createPictoGroupData({
     required String? userId,
     required String? language,
-    required _i14.BoardDataType? type,
+    required _i15.BoardDataType? type,
     required Map<String, dynamic>? data,
+    _i13.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -927,6 +928,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             #language: language,
             #type: type,
             #data: data,
+            #cancelToken: cancelToken,
           },
         ),
         returnValue: _i4.Future<Map<String, dynamic>?>.value(),
@@ -934,7 +936,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   @override
   _i4.Future<void> updateDevicesId({
     required String? userId,
-    required _i15.DeviceToken? deviceToken,
+    required _i16.DeviceToken? deviceToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -954,6 +956,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
     required String? language,
     required String? model,
     required List<Map<String, dynamic>>? tokens,
+    _i13.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -964,6 +967,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             #language: language,
             #model: model,
             #tokens: tokens,
+            #cancelToken: cancelToken,
           },
         ),
         returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
@@ -977,6 +981,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
               #language: language,
               #model: model,
               #tokens: tokens,
+              #cancelToken: cancelToken,
             },
           ),
         )),
@@ -992,6 +997,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
     bool? reduced = false,
     int? limit = 10,
     int? chunk = 4,
+    _i13.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1007,6 +1013,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             #reduced: reduced,
             #limit: limit,
             #chunk: chunk,
+            #cancelToken: cancelToken,
           },
         ),
         returnValue: _i4.Future<_i2.Either<String, Map<String, dynamic>>>.value(
@@ -1025,6 +1032,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
               #reduced: reduced,
               #limit: limit,
               #chunk: chunk,
+              #cancelToken: cancelToken,
             },
           ),
         )),

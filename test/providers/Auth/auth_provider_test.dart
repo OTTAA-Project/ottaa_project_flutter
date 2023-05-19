@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/service/about_service.dart';
 import 'package:ottaa_project_flutter/application/service/auth_service.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
@@ -60,7 +61,7 @@ void main() {
   });
   group('auth Provider testing', () {
     test('sign in', () async {
-      when(mockAuthService.runToGetDataFromOtherPlatform(email: fakeUser.email, id: fakeUser.id)).thenAnswer((realInvocation) async => fakeUser.email);
+      // when(mockAuthService.runToGetDataFromOtherPlatform(email: fakeUser.email, id: fakeUser.id)).thenAnswer((realInvocation) async => fakeUser.email);
       when(mockAuthService.signIn(SignInType.email)).thenAnswer((realInvocation) async => Right(fakeUser));
       when(mockLocalDatabaseRepository.setUser(fakeUser)).thenAnswer((realInvocation) async => {});
       when(mockAboutService.getUserInformation()).thenAnswer((realInvocation) async => Right(fakeUser));

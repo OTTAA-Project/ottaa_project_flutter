@@ -61,13 +61,15 @@ class Phrase {
           (x) => Sequence.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      tags: Map<String, List<String>>.from((map['tags'] as Map<String, List<String>>)),
+      tags: Map<String, List<String>>.from(
+          (map['tags'] as Map<String, List<String>>)),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Phrase.fromJson(String source) => Phrase.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Phrase.fromJson(String source) =>
+      Phrase.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -78,7 +80,10 @@ class Phrase {
   bool operator ==(covariant Phrase other) {
     if (identical(this, other)) return true;
 
-    return other.date == date && other.id == id && listEquals(other.sequence, sequence) && mapEquals(other.tags, tags);
+    return other.date == date &&
+        other.id == id &&
+        listEquals(other.sequence, sequence) &&
+        mapEquals(other.tags, tags);
   }
 
   @override
@@ -118,7 +123,8 @@ class Sequence {
 
   String toJson() => json.encode(toMap());
 
-  factory Sequence.fromJson(String source) => Sequence.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Sequence.fromJson(String source) =>
+      Sequence.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'Sequence(id: $id)';
