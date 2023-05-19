@@ -3,21 +3,22 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
+import 'dart:async' as _i6;
+import 'dart:ui' as _i10;
 
-import 'package:either_dart/either.dart' as _i4;
-import 'package:flutter_riverpod/flutter_riverpod.dart' as _i6;
+import 'package:either_dart/either.dart' as _i3;
+import 'package:flutter_riverpod/flutter_riverpod.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart'
-    as _i5;
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart'
-    as _i9;
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i3;
+    as _i4;
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart'
+    as _i8;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i9;
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart'
     as _i2;
 import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart'
-    as _i10;
-import 'package:state_notifier/state_notifier.dart' as _i8;
+    as _i11;
+import 'package:state_notifier/state_notifier.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -41,18 +42,8 @@ class _FakePatientUserModel_0 extends _i1.SmartFake
         );
 }
 
-class _FakeUserModel_1 extends _i1.SmartFake implements _i3.UserModel {
-  _FakeUserModel_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeEither_2<L, R> extends _i1.SmartFake implements _i4.Either<L, R> {
-  _FakeEither_2(
+class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
+  _FakeEither_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -64,7 +55,7 @@ class _FakeEither_2<L, R> extends _i1.SmartFake implements _i4.Either<L, R> {
 /// A class which mocks [PatientNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPatientNotifier extends _i1.Mock implements _i5.PatientNotifier {
+class MockPatientNotifier extends _i1.Mock implements _i4.PatientNotifier {
   @override
   _i2.PatientUserModel get user => (super.noSuchMethod(
         Invocation.getter(#user),
@@ -78,7 +69,7 @@ class MockPatientNotifier extends _i1.Mock implements _i5.PatientNotifier {
         ),
       ) as _i2.PatientUserModel);
   @override
-  set onError(_i6.ErrorListener? _onError) => super.noSuchMethod(
+  set onError(_i5.ErrorListener? _onError) => super.noSuchMethod(
         Invocation.setter(
           #onError,
           _onError,
@@ -92,11 +83,11 @@ class MockPatientNotifier extends _i1.Mock implements _i5.PatientNotifier {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i7.Stream<_i2.PatientUserModel?> get stream => (super.noSuchMethod(
+  _i6.Stream<_i2.PatientUserModel?> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i7.Stream<_i2.PatientUserModel?>.empty(),
-        returnValueForMissingStub: _i7.Stream<_i2.PatientUserModel?>.empty(),
-      ) as _i7.Stream<_i2.PatientUserModel?>);
+        returnValue: _i6.Stream<_i2.PatientUserModel?>.empty(),
+        returnValueForMissingStub: _i6.Stream<_i2.PatientUserModel?>.empty(),
+      ) as _i6.Stream<_i2.PatientUserModel?>);
   @override
   set state(_i2.PatientUserModel? value) => super.noSuchMethod(
         Invocation.setter(
@@ -136,8 +127,8 @@ class MockPatientNotifier extends _i1.Mock implements _i5.PatientNotifier {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i6.RemoveListener addListener(
-    _i8.Listener<_i2.PatientUserModel?>? listener, {
+  _i5.RemoveListener addListener(
+    _i7.Listener<_i2.PatientUserModel?>? listener, {
     bool? fireImmediately = true,
   }) =>
       (super.noSuchMethod(
@@ -148,7 +139,7 @@ class MockPatientNotifier extends _i1.Mock implements _i5.PatientNotifier {
         ),
         returnValue: () {},
         returnValueForMissingStub: () {},
-      ) as _i6.RemoveListener);
+      ) as _i5.RemoveListener);
   @override
   void dispose() => super.noSuchMethod(
         Invocation.method(
@@ -162,44 +153,12 @@ class MockPatientNotifier extends _i1.Mock implements _i5.PatientNotifier {
 /// A class which mocks [UserNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserNotifier extends _i1.Mock implements _i9.UserNotifier {
+class MockUserNotifier extends _i1.Mock implements _i8.UserNotifier {
   @override
-  _i3.UserModel get user => (super.noSuchMethod(
-        Invocation.getter(#user),
-        returnValue: _FakeUserModel_1(
-          this,
-          Invocation.getter(#user),
-        ),
-        returnValueForMissingStub: _FakeUserModel_1(
-          this,
-          Invocation.getter(#user),
-        ),
-      ) as _i3.UserModel);
-  @override
-  set onError(_i6.ErrorListener? _onError) => super.noSuchMethod(
+  set user(_i9.UserModel? userModel) => super.noSuchMethod(
         Invocation.setter(
-          #onError,
-          _onError,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  bool get mounted => (super.noSuchMethod(
-        Invocation.getter(#mounted),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  _i7.Stream<_i3.UserModel?> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i7.Stream<_i3.UserModel?>.empty(),
-        returnValueForMissingStub: _i7.Stream<_i3.UserModel?>.empty(),
-      ) as _i7.Stream<_i3.UserModel?>);
-  @override
-  set state(_i3.UserModel? value) => super.noSuchMethod(
-        Invocation.setter(
-          #state,
-          value,
+          #user,
+          userModel,
         ),
         returnValueForMissingStub: null,
       );
@@ -210,47 +169,49 @@ class MockUserNotifier extends _i1.Mock implements _i9.UserNotifier {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  void setUser(_i3.UserModel? user) => super.noSuchMethod(
+  void setUser(_i9.UserModel? userModel) => super.noSuchMethod(
         Invocation.method(
           #setUser,
-          [user],
+          [userModel],
         ),
         returnValueForMissingStub: null,
       );
   @override
-  bool updateShouldNotify(
-    _i3.UserModel? old,
-    _i3.UserModel? current,
-  ) =>
-      (super.noSuchMethod(
+  void clearUser() => super.noSuchMethod(
         Invocation.method(
-          #updateShouldNotify,
-          [
-            old,
-            current,
-          ],
+          #clearUser,
+          [],
         ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+        returnValueForMissingStub: null,
+      );
   @override
-  _i6.RemoveListener addListener(
-    _i8.Listener<_i3.UserModel?>? listener, {
-    bool? fireImmediately = true,
-  }) =>
-      (super.noSuchMethod(
+  void addListener(_i10.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
-          {#fireImmediately: fireImmediately},
         ),
-        returnValue: () {},
-        returnValueForMissingStub: () {},
-      ) as _i6.RemoveListener);
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(_i10.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   void dispose() => super.noSuchMethod(
         Invocation.method(
           #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
           [],
         ),
         returnValueForMissingStub: null,
@@ -260,9 +221,9 @@ class MockUserNotifier extends _i1.Mock implements _i9.UserNotifier {
 /// A class which mocks [ChatGPTRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockChatGPTRepository extends _i1.Mock implements _i10.ChatGPTRepository {
+class MockChatGPTRepository extends _i1.Mock implements _i11.ChatGPTRepository {
   @override
-  _i7.Future<_i4.Either<String, String>> getCompletion({
+  _i6.Future<_i3.Either<String, String>> getCompletion({
     required int? age,
     required String? gender,
     required String? pictograms,
@@ -281,8 +242,8 @@ class MockChatGPTRepository extends _i1.Mock implements _i10.ChatGPTRepository {
             #maxTokens: maxTokens,
           },
         ),
-        returnValue: _i7.Future<_i4.Either<String, String>>.value(
-            _FakeEither_2<String, String>(
+        returnValue: _i6.Future<_i3.Either<String, String>>.value(
+            _FakeEither_1<String, String>(
           this,
           Invocation.method(
             #getCompletion,
@@ -296,8 +257,8 @@ class MockChatGPTRepository extends _i1.Mock implements _i10.ChatGPTRepository {
             },
           ),
         )),
-        returnValueForMissingStub: _i7.Future<_i4.Either<String, String>>.value(
-            _FakeEither_2<String, String>(
+        returnValueForMissingStub: _i6.Future<_i3.Either<String, String>>.value(
+            _FakeEither_1<String, String>(
           this,
           Invocation.method(
             #getCompletion,
@@ -311,5 +272,44 @@ class MockChatGPTRepository extends _i1.Mock implements _i10.ChatGPTRepository {
             },
           ),
         )),
-      ) as _i7.Future<_i4.Either<String, String>>);
+      ) as _i6.Future<_i3.Either<String, String>>);
+  @override
+  _i6.Future<_i3.Either<String, String>> getGPTStory({
+    required String? prompt,
+    int? maxTokens = 1000,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getGPTStory,
+          [],
+          {
+            #prompt: prompt,
+            #maxTokens: maxTokens,
+          },
+        ),
+        returnValue: _i6.Future<_i3.Either<String, String>>.value(
+            _FakeEither_1<String, String>(
+          this,
+          Invocation.method(
+            #getGPTStory,
+            [],
+            {
+              #prompt: prompt,
+              #maxTokens: maxTokens,
+            },
+          ),
+        )),
+        returnValueForMissingStub: _i6.Future<_i3.Either<String, String>>.value(
+            _FakeEither_1<String, String>(
+          this,
+          Invocation.method(
+            #getGPTStory,
+            [],
+            {
+              #prompt: prompt,
+              #maxTokens: maxTokens,
+            },
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<String, String>>);
 }

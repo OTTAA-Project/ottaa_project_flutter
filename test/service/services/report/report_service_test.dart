@@ -30,13 +30,13 @@ Future<void> main() async {
     MostUsedSentence(
       frec: 00,
       pictoComponentes: [
-        PictoComponente(id: 00, esSugerencia: false, hora: ['test'], sexo: ['test'], edad: ['test']),
+        PictoComponente(id: '00', esSugerencia: false, hora: ['test'], sexo: ['test'], edad: ['test']),
       ],
     ),
     MostUsedSentence(
       frec: 11,
       pictoComponentes: [
-        PictoComponente(id: 11, esSugerencia: false, hora: ['test'], sexo: ['test'], edad: ['test']),
+        PictoComponente(id: '11', esSugerencia: false, hora: ['test'], sexo: ['test'], edad: ['test']),
       ],
     ),
   ], pictoUsagePerGroup: [

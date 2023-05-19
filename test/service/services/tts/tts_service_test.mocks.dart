@@ -53,22 +53,22 @@ class MockI18N extends _i1.Mock implements _i3.I18N {
         returnValueForMissingStub: <String, _i2.Locale>{},
       ) as Map<String, _i2.Locale>);
   @override
-  _i2.Locale get locale => (super.noSuchMethod(
-        Invocation.getter(#locale),
+  _i2.Locale get currentLocale => (super.noSuchMethod(
+        Invocation.getter(#currentLocale),
         returnValue: _FakeLocale_0(
           this,
-          Invocation.getter(#locale),
+          Invocation.getter(#currentLocale),
         ),
         returnValueForMissingStub: _FakeLocale_0(
           this,
-          Invocation.getter(#locale),
+          Invocation.getter(#currentLocale),
         ),
       ) as _i2.Locale);
   @override
-  set locale(_i2.Locale? _locale) => super.noSuchMethod(
+  set currentLocale(_i2.Locale? _currentLocale) => super.noSuchMethod(
         Invocation.setter(
-          #locale,
-          _locale,
+          #currentLocale,
+          _currentLocale,
         ),
         returnValueForMissingStub: null,
       );
