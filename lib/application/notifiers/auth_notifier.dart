@@ -16,7 +16,6 @@ class AuthNotifier extends StateNotifier<bool> {
   void setSignedOut() {
     state = false;
   }
-
 }
 
 final authNotifier = StateNotifierProvider<AuthNotifier, bool>((ref) {

@@ -6,5 +6,6 @@ abstract class CreatePictoData {
 
   const CreatePictoData(this.serverService);
 
-  Future<String?> createPictoData({required Picto picto, required String userId, required String lang});
+  Future<String?> createPictoData(
+      {required Picto picto, required String userId, required String lang});
 }

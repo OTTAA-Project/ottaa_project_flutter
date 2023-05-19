@@ -11,7 +11,6 @@ import 'ttsprovider_test.mocks.dart';
 
 @GenerateMocks([TTSProvider, TTSRepository, LocalDatabaseRepository])
 void main() {
-  late MockTTSProvider mockTTSProvider;
   late MockTTSRepository mockTTSRepository;
   late TTSProvider ttsProvider;
   late MockLocalDatabaseRepository mockLocalDatabaseRepository;
@@ -19,7 +18,6 @@ void main() {
 
   setUp(() {
     mockTTSRepository = MockTTSRepository();
-    mockTTSProvider = MockTTSProvider();
     mockLocalDatabaseRepository = MockLocalDatabaseRepository();
     fakeVoices = [
       Voices(name: 'Test1', locale: 'es_AR'),

@@ -75,11 +75,11 @@
           "required": "Email is required",
           "invalid": "Invalid email"
         },
-        "warn": "*We will show a token on the device screen to link accounts.",
-        "contact": "*Be sure you are in contact with the person using this email."
+        "warn": "*Se enviará una notificación con un código para enlazar los perfiles.",
+        "contact": "*Asegurate de estar en contacto con la persona que posea esta cuenta en un dispositivo."
       },
       "token": {
-        "title": "Enter the verification token that was sent to that email.",
+        "title": "Coloque el código de verificación que llegó como notificación a otro dispositivo.",
         "problem": "Having trouble linking accounts?",
         "resend": "Resend code",
         "back": "Please enter another email",
@@ -196,7 +196,7 @@
     "medium": "Medium",
     "big": "Large",
     "comingsoon": "This feature will be available very soon!",
-    "delicate": "delicade",
+    "delicate": "Región",
     "chile": "Chile",
     "spanish": "Spanish",
     "argentina": "Argentina",
@@ -217,12 +217,12 @@
     "home": {
       "title": "Customize your Home",
       "subtitle": "Shortcuts on main screen",
-      "description": "Customize according to your tastes and needs"
+      "description": "Personalizá de acuerdo a tus gustos y necesidades"
     },
     "customize": {
-      "title": "Customize your Home",
+      "title": "Personalizá tu Home",
       "subtitle": "We guide you in the learning process",
-      "description": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
+      "description": "Activá o desactivá tableros o pictogramas para modificar la predicción, vos tenés el control."
     },
     "skip": {
       "title": "Do you really want to skip the tutorial?"
@@ -253,7 +253,7 @@
       "subtitle": "See pictograms"
     },
     "shortcut": {
-      "title": "Choose the shortcuts to use on Home screen.",
+      "title": "Seleccioná los atajos que aparecerán en la pantalla principal.",
       "appbar": "Shortcuts",
       "favorites": "Favorites",
       "history": "History",
@@ -302,15 +302,15 @@
     "game_header_0": "¿Cuál es el picto?",
     "game_header_1": "Unir pictogramas",
     "game_header_2": "Juego de la Memoria",
-    "game_sub_0": "Responde las preguntas eligiendo el pictograma correcto. Aprende jugando",
+    "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprende jugando",
     "game_sub_1": "Uní los pictogramas de manera correcta",
     "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
-    "group": "Selecciona una categoría para poder jugar",
+    "group": "Seleccioná una categoría para poder jugar",
     "search": "Buscar Tablero",
     "find": "Encontrá los tableros que quieras, fácilmente!",
-    "game_1_line": "Selecciona el pictograma que escuches",
-    "game_2_line": "Selecciona la palabra que corresponde a su pictograma",
-    "game_3_line": "Selecciona una tarjeta y encuentra la pareja del pictograma",
+    "game_1_line": "Seleccioná el pictograma que escuches",
+    "game_2_line": "Seleccioná la palabra que corresponde a su pictograma",
+    "game_3_line": "Seleccioná una tarjeta y encontrá la pareja del pictograma",
     "no": "¡Oh Oh!",
     "yes": "¡Muy bien!",
     "score": "Tu puntaje",

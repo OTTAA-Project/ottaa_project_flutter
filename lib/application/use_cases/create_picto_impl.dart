@@ -8,8 +8,15 @@ class CreatePictoDataImpl extends CreatePictoData {
   const CreatePictoDataImpl(super.serverService);
 
   @override
-  Future<String?> createPictoData({required Picto picto, required String userId, required String lang}) async {
-    final response = await serverService.createPictoGroupData(userId: userId, language: lang, type: BoardDataType.pictos, data: picto.toMap());
+  Future<String?> createPictoData(
+      {required Picto picto,
+      required String userId,
+      required String lang}) async {
+    final response = await serverService.createPictoGroupData(
+        userId: userId,
+        language: lang,
+        type: BoardDataType.pictos,
+        data: picto.toMap());
 
     if (response != null) {
       return response["data"]["dataId"] ?? response["code"];

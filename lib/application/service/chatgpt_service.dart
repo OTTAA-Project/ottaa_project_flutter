@@ -48,4 +48,18 @@ class ChatGPTService extends ChatGPTRepository {
       (r) => Right(r),
     );
   }
+
+  @override
+  Future<Either<String, String>> getGPTStory({
+    required String prompt,
+    int maxTokens = 1000,
+  }) async {
+    String? remotePrompt = await remoteConfigService.getString("ChatGPTPromt");
+
+    final response = await serverService.generatePhraseGPT(prompt: prompt, maxTokens: maxTokens, temperature: 0.7);
+    return response.fold(
+      (l) => Left(l),
+      (r) => Right(r),
+    );
+  }
 }

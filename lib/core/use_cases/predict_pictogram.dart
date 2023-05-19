@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/models/picto_predicted_reduced.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
@@ -23,5 +24,6 @@ abstract class PredictPictogram {
     bool reduced = false,
     int limit = 10,
     int chunk = 4,
+    CancelToken? cancelToken,
   });
 }

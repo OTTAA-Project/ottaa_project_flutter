@@ -8,8 +8,15 @@ class CreatePhraseDataImpl extends CreatePhraseData {
   const CreatePhraseDataImpl(super.serverService);
 
   @override
-  Future<String?> createPhraseData({required Phrase phrase, required String userId, required String lang}) async {
-    final response = await serverService.createPictoGroupData(userId: userId, language: lang, type: BoardDataType.phrases, data: phrase.toMap());
+  Future<String?> createPhraseData(
+      {required Phrase phrase,
+      required String userId,
+      required String lang}) async {
+    final response = await serverService.createPictoGroupData(
+        userId: userId,
+        language: lang,
+        type: BoardDataType.phrases,
+        data: phrase.toMap());
 
     if (response != null) {
       return response["data"]["dataId"] ?? response["code"];

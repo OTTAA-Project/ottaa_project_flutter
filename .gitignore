@@ -101,8 +101,10 @@ unlinked_spec.ds
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 **/ios/Runner/GoogleService-info.plist
+**/ios/Runner/GoogleService-Info.plist
 **/ios/GoogleService-info.plist
 **/ios/info.plist
+**/ios/*.plist
 
 # macOS
 **/macos/Flutter/GeneratedPluginRegistrant.swift
@@ -123,3 +125,6 @@ app.*.symbols
 /lib/app/data/models/grupos_model.g.dart
 /lib/app/data/models/pict_model.g.dart
 /lib/app/data/models/search_model.g.dart
+ios/firebase_app_id_file.json
+/lib/firebase_options.dart
+ios/Runner/GoogleService-Info.plist

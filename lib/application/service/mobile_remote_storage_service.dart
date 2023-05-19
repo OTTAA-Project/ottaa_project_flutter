@@ -17,7 +17,8 @@ class MobileRemoteStorageService implements RemoteStorageRepository {
   final ServerRepository _serverRepository;
   final I18N _i18n;
 
-  MobileRemoteStorageService(this._authService, this._serverRepository, this._i18n);
+  MobileRemoteStorageService(
+      this._authService, this._serverRepository, this._i18n);
 
   @override
   Future<void> deleteFile(String path, String fileName) {
@@ -26,20 +27,22 @@ class MobileRemoteStorageService implements RemoteStorageRepository {
   }
 
   @override
-  Future<String> readRemoteFile({required String path, required String fileName}) async {
+  Future<String> readRemoteFile(
+      {required String path, required String fileName}) async {
     final result = await _authService.getCurrentUser();
 
     if (result.isLeft) return "";
 
     final UserModel auth = result.right;
-    final locale = _i18n.locale;
+    final locale = _i18n.currentLocale;
 
     final languageCode = "${locale.languageCode}_${locale.countryCode}";
 
     EitherListMap? fetchedData;
 
     if (path == "Pictos") {
-      fetchedData = await _serverRepository.getAllPictograms(auth.id, languageCode);
+      fetchedData =
+          await _serverRepository.getAllPictograms(auth.id, languageCode);
     } else if (path == "Grupos") {
       fetchedData = await _serverRepository.getAllGroups(auth.id, languageCode);
     }
@@ -54,9 +57,11 @@ class MobileRemoteStorageService implements RemoteStorageRepository {
   }
 
   @override
-  Future<String> uploadFile(String path, String fileName, Uint8List file) async {
+  Future<String> uploadFile(
+      String path, String fileName, Uint8List file) async {
     Reference ref = FirebaseStorage.instance.ref().child(path).child(fileName);
-    final UploadTask uploadTask = ref.putData(file, SettableMetadata(contentType: 'image/png'));
+    final UploadTask uploadTask =
+        ref.putData(file, SettableMetadata(contentType: 'image/png'));
     final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
     return await taskSnapshot.ref.getDownloadURL();
   }

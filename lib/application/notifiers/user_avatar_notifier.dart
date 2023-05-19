@@ -12,6 +12,7 @@ class UserAvatarNotifier extends StateNotifier<int> {
   }
 }
 
-final userAvatarNotifier = StateNotifierProvider<UserAvatarNotifier, int>((ref) {
+final userAvatarNotifier =
+    StateNotifierProvider<UserAvatarNotifier, int>((ref) {
   return UserAvatarNotifier();
 });

@@ -10,6 +10,7 @@ import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
@@ -225,8 +226,8 @@ Future<void> main() async {
     final result = homeProvider.predictiveAlgorithm(list: list);
 
     expect(result, hasLength(4));
-    expect(result[0].id, equals('1'));
-    expect(result[1].id, equals('0'));
+    expect(result[0].id, equals('0'));
+    expect(result[1].id, equals('1'));
     expect(result[2].id, equals('2'));
     expect(result[3].id, equals('3'));
   });

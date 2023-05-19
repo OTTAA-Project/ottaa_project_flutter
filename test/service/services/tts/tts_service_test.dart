@@ -10,12 +10,11 @@ import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 import 'tts_service_test.mocks.dart';
 
-// @GenerateMocks([I18N])
-@GenerateNiceMocks([MockSpec<I18N>()])
+@GenerateMocks([I18N])
 void main() {
   late MockI18N mockI18N;
   late TTSRepository ttsRepository;
-  setUp(() {
+  setUp(() async {
     // MethodChannel methodChannel = const MethodChannel('flutter_tts');
     // TestDefaultBinaryMessengerBinding.instance!.defaultBinaryMessenger.setMockMethodCallHandler(
     //   methodChannel,
@@ -52,8 +51,7 @@ void main() {
     // );
     WidgetsFlutterBinding.ensureInitialized();
     mockI18N = MockI18N();
-    mockI18N.currentLanguage = (TranslationTree(const Locale("en_US")));
-
+    await mockI18N.init();
     ttsRepository = TTSService(mockI18N);
   });
 
@@ -61,6 +59,27 @@ void main() {
     test('Speak tts service', () async {
       await ttsRepository.speak('Hello');
       verify(ttsRepository.speak('Hello')).called(1);
+    });
+
+    test('Fetch voices tts service', () async {
+      when(mockI18N.currentLocale).thenReturn(const Locale("en_US"));
+      await ttsRepository.fetchVoices();
+      verify(ttsRepository.fetchVoices()).called(1);
+    });
+
+    test('Change voice speed tts service', () async {
+      await ttsRepository.changeVoiceSpeed(0.5);
+      verify(ttsRepository.changeVoiceSpeed(0.5)).called(1);
+    });
+
+    test('Change custom tts tts service', () async {
+      await ttsRepository.changeCustomTTs(true);
+      verify(ttsRepository.changeCustomTTs(true)).called(1);
+    });
+
+    test('Change tts voice tts service', () async {
+      await ttsRepository.changeTTSVoice('en-US');
+      verify(ttsRepository.changeTTSVoice('en-US')).called(1);
     });
   });
 }

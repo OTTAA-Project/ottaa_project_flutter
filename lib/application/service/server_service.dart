@@ -1,40 +1,38 @@
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
+import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
-import 'package:openai_client/openai_client.dart' as openai;
-import 'package:openai_client/src/model/openai_chat/openai_chat.dart';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
-import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
+import 'package:universal_io/io.dart';
 
 @Singleton(as: ServerRepository)
 class ServerService implements ServerRepository {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   final Reference _storageRef = FirebaseStorage.instance.ref();
+  final functions = FirebaseFunctions.instance;
 
-  final openai.OpenAIClient _openAIClient = openai.OpenAIClient(
-    configuration: openai.OpenAIConfiguration(
-      apiKey: dotenv.get("openaiToken"),
-    ),
-  );
+  final Dio _dio = Dio();
+
+  @FactoryMethod(preResolve: true)
+  static Future<ServerService> create() async => ServerService()..init();
 
   @override
-  Future<void> init() async {}
+  Future<void> init() async {
+    _dio.options.baseUrl = "https://us-central1-ottaaproject-flutter.cloudfunctions.net";
+  }
 
   @override
   Future<void> close() async {}
@@ -188,7 +186,12 @@ class ServerService implements ServerRepository {
     final ref = _database.child('$userId/groups/$language');
     try {
       final mapData = Map.fromIterables(data.map((e) => e["id"]), data);
-      await ref.set(mapData);
+      bool hasGroups = (await _database.child('$userId/groups').get()).exists;
+      if (!hasGroups) {
+        await _database.child('$userId/groups').set({language: mapData});
+      } else {
+        await ref.set(mapData);
+      }
       return const Right(null);
     } catch (e) {
       return Left(e.toString());
@@ -245,48 +248,51 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getMostUsedSentences(String userId, String languageCode) async {
-    final uri = Uri.parse(
-      'https://us-central1-ottaaproject-flutter.cloudfunctions.net/onReqFunc',
-    );
+  Future<EitherMap> getMostUsedSentences(String userId, String languageCode, [CancelToken? cancelToken]) async {
     //todo: get the language here after talking with Emir
     final body = {
       'UserID': userId,
       'Language': languageCode,
     };
-    final res = await http.post(
-      uri,
-      body: jsonEncode(body),
-      headers: {"Content-Type": "application/json"},
+    final res = await _dio.post(
+      '/onReqFunc',
+      data: jsonEncode(body),
+      cancelToken: cancelToken,
+      options: Options(
+        contentType: 'application/json',
+      ),
     );
 
     if (res.statusCode == 200) {
-      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      final data = jsonDecode(res.data) as Map<String, dynamic>;
       return Right(data);
     } else {
-      return Left("an error occurred"); //TODO: Handle the main error
+      return const Left("an error occurred"); //TODO: Handle the main error
     }
   }
 
   @override
-  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/readFile');
+  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode, [CancelToken? cancelToken]) async {
+    final uri = Uri.parse('');
     final body = {
       'UserID': userId,
       //todo: add here the language too
       'Language': 'es_AR',
     };
-    final res = await http.post(
-      uri,
-      body: jsonEncode(body),
-      headers: {"Content-Type": "application/json"},
+    final res = await _dio.post(
+      'readFile',
+      data: jsonEncode(body),
+      cancelToken: cancelToken,
+      options: Options(
+        headers: {"Content-Type": "application/json"},
+      ),
     );
 
     if (res.statusCode == 200) {
-      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      final data = jsonDecode(res.data) as Map<String, dynamic>;
       return Right(data);
     } else {
-      return Left("an error occurred"); //TODO: Handle the main error
+      return const Left("an error occurred"); //TODO: Handle the main error
     }
   }
 
@@ -314,14 +320,10 @@ class ServerService implements ServerRepository {
       contentType: 'image/jpeg',
       customMetadata: {'picked-file-path': path},
     );
-    late String url;
-    if (kIsWeb) {
-      // uploadTask = ref.putData(await file.readAsBytes(), metadata);
-    } else {
-      final uploadTask = await ref.putFile(File(path), metadata);
-      url = await uploadTask.ref.getDownloadURL();
-    }
-    return url;
+
+    var uploadTask = await ref.putFile(File(path), metadata);
+
+    return await uploadTask.ref.getDownloadURL();
   }
 
   @override
@@ -338,7 +340,7 @@ class ServerService implements ServerRepository {
 
   @override
   Future<EitherMap> fetchConnectedUserData({required String userId}) async {
-    final ref = _database.child('$userId'); //TODO: Change to real path
+    final ref = _database.child(userId); //TODO: Change to real path
     final res = await ref.get();
 
     if (res.exists && res.value != null) {
@@ -382,26 +384,25 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> getEmailToken(String ownEmail, String email) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserRequest');
+  Future<EitherMap> getEmailToken(String ownEmail, String email, [CancelToken? cancelToken]) async {
     final body = {
       'src': ownEmail,
       'dst': email,
     };
-    print(jsonEncode(body));
+
     try {
-      final res = await http.post(
-        uri,
-        body: jsonEncode(body),
-        headers: {"Content-Type": "application/json"},
+      final res = await _dio.post(
+        '/linkUserRequest',
+        data: jsonEncode(body),
+        cancelToken: cancelToken,
       );
 
-      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      final data = res.data as Map<String, dynamic>;
       print(res.statusCode);
       if (res.statusCode == 200) {
         return Right(data);
       } else {
-        return Left(data["code"] ?? res.body); //TODO: Handle the main error
+        return Left(data["code"] ?? res.statusCode.toString()); //TODO: Handle the main error
       }
     } catch (e) {
       print(e);
@@ -410,24 +411,26 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/linkUserConfirm');
+  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token, [CancelToken? cancelToken]) async {
     final body = {
       'src': ownEmail,
       'dst': email,
       'token': token,
     };
-    final res = await http.post(
-      uri,
-      body: jsonEncode(body),
-      headers: {"Content-Type": "application/json"},
+    final res = await _dio.post(
+      "/linkUserConfirm",
+      data: jsonEncode(body),
+      cancelToken: cancelToken,
+      options: Options(
+        headers: {"Content-Type": "application/json"},
+      ),
     );
 
-    final data = jsonDecode(res.body) as Map<String, dynamic>;
+    final data = res.data as Map<String, dynamic>;
     if (res.statusCode == 200) {
       return Right(data);
     } else {
-      return Left(data["code"] ?? res.body); //TODO: Handle the main error
+      return Left(data["code"] ?? res.statusMessage); //TODO: Handle the main error
     }
   }
 
@@ -513,17 +516,22 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<Map<String, dynamic>?> createPictoGroupData({required String userId, required String language, required BoardDataType type, required Map<String, dynamic> data}) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/newCustomData');
+  Future<Map<String, dynamic>?> createPictoGroupData({
+    required String userId,
+    required String language,
+    required BoardDataType type,
+    required Map<String, dynamic> data,
+    CancelToken? cancelToken,
+  }) async {
     final body = {"uid": userId, "lang": language, "type": type.name, "data": data};
     try {
-      final res = await http.post(
-        uri,
-        body: jsonEncode(body),
-        headers: {"Content-Type": "application/json"},
+      final res = await _dio.post(
+        '/newCustomData',
+        data: jsonEncode(body),
+        cancelToken: cancelToken,
       );
 
-      return jsonDecode(res.body) as Map<String, dynamic>;
+      return res.data as Map<String, dynamic>;
     } catch (e) {
       return {
         "error": e.toString(),
@@ -537,9 +545,10 @@ class ServerService implements ServerRepository {
 
     final currentList = (await ref.get()).value;
 
-    final list = List<dynamic>.from((currentList ?? []) as List<dynamic>);
+    List list = List<dynamic>.from((currentList ?? []) as List<dynamic>);
 
-    final existsElement = list.firstWhereOrNull((element) => element["deviceToken"] == deviceToken.deviceToken);
+    final existsElement = list.firstWhereOrNull((element) => element != null ? element["deviceToken"] == deviceToken.deviceToken : false);
+
     final index = list.indexOf(existsElement);
 
     if (index == -1) {
@@ -548,18 +557,19 @@ class ServerService implements ServerRepository {
       existsElement["lastUsage"] = DateTime.now().millisecondsSinceEpoch;
       list[index] = deviceToken.toMap();
     }
+    list = list.where((element) => element != null).toList();
 
     await ref.set(list);
   }
 
+  @override
   Future<EitherMap> learnPictograms({
     required String uid,
     required String language,
     required String model,
     required List<Map<String, dynamic>> tokens,
+    CancelToken? cancelToken,
   }) async {
-    final uri = Uri.parse('https://us-central1-ottaaproject-flutter.cloudfunctions.net/speako/users/learn');
-
     final body = {
       "uid": uid,
       "language": language,
@@ -567,17 +577,24 @@ class ServerService implements ServerRepository {
       "tokens": tokens,
     };
 
+    print(tokens);
+
     try {
-      final res = await http.post(
-        uri,
-        body: jsonEncode(body),
-        headers: {"Content-Type": "application/json"},
+      final res = await _dio.post(
+        '/speako/users/learn',
+        data: jsonEncode(body),
+        cancelToken: cancelToken,
       );
 
-      return Right(jsonDecode(res.body) as Map<String, dynamic>);
-    } catch (e) {
+      return Right(jsonDecode(res.data) as Map<String, dynamic>);
+    }  on DioError catch(e) {
       // handle te responde error
-      return Left("learn_error");
+      print(e.response);
+      return Left("Server error");
+    } catch (e) {
+      print(e);
+      // handle te responde error
+      return const Left("learn_error");
     }
   }
 
@@ -592,14 +609,15 @@ class ServerService implements ServerRepository {
     bool reduced = false,
     int limit = 10,
     int chunk = 4,
+    CancelToken? cancelToken,
   }) async {
-    String url = 'https://us-central1-ottaaproject-flutter.cloudfunctions.net/speako/predict';
+    String url = '/speako/predict';
 
     url = "$url?limit=$limit&chunk=$chunk";
 
     if (reduced) url = "$url&reduced";
 
-    final uri = Uri.parse(url);
+    print(reduced);
 
     final body = {
       "sentence": sentence,
@@ -611,34 +629,36 @@ class ServerService implements ServerRepository {
     };
 
     try {
-      final res = await http.post(
-        uri,
-        body: jsonEncode(body),
-        headers: {"Content-Type": "application/json"},
+      final res = await _dio.post(
+        url,
+        data: jsonEncode(body),
+        options: Options(
+          contentType: Headers.jsonContentType,
+        ),
+        cancelToken: cancelToken,
       );
 
-      return Right(jsonDecode(res.body) as Map<String, dynamic>);
+      return Right(res.data);
     } catch (e) {
       // handle te responde error
-      return Left("learn_error");
+      return const Left("learn_error");
     }
   }
 
   @override
-  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens}) async {
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens, double temperature = 0}) async {
     try {
-      final choice = await _openAIClient.completions
-          .create(
-            model: "text-davinci-003",
-            prompt: prompt,
-            temperature: 0,
-            maxTokens: maxTokens,
-          )
-          .data;
+      final response = await functions.httpsCallable("openai").call<Map<String, dynamic>>({
+        "model": "text-davinci-003",
+        "prompt": prompt,
+        "temperature": temperature,
+        "max_tokens": maxTokens,
+      });
 
-      if (!choice.choices.isNotEmpty) return const Left("No completado");
-
-      return Right(choice.choices.first.text);
+      if (response.data["choices"] == null || response.data["choices"][0] == null) {
+        return const Left("no_data_found");
+      }
+      return Right(response.data["choices"][0]["text"].toString());
     } catch (e) {
       return Left(e.toString());
     }

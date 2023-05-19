@@ -6,7 +6,14 @@ import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
 
 @Singleton(as: TTSRepository)
 class TTSService extends TTSRepository {
-  final tts = FlutterTts();
+  FlutterTts _tts = FlutterTts();
+
+  @override
+  FlutterTts get tts => _tts;
+
+  @override
+  set tts(value) => _tts = value;
+
   final I18N _i18n;
   String language = 'es_AR';
   List<dynamic> availableTTS = [];
@@ -16,7 +23,7 @@ class TTSService extends TTSRepository {
 
   bool customTTSEnable = false;
 
-  double speechRate = 0.4;
+  double speechRate = .8;
   double pitch = 1.0;
   List<Voices> voices = [];
 
@@ -27,20 +34,23 @@ class TTSService extends TTSRepository {
   @override
   Future<void> speak(String text) async {
     if (text.isNotEmpty) {
+      // tts.cancelHandler?.call();
       if (customTTSEnable) {
         await tts.setVoice({"name": name, "locale": locale});
-        language = _i18n.currentLanguage!.locale.toString();
+        language = _i18n.currentLocale.toString();
         await tts.setLanguage(language);
-        print(language);
+        await tts.setVolume(1.0);
         await tts.setSpeechRate(speechRate);
         await tts.setPitch(pitch);
       }
+      await tts.setVoice({"name": name, "locale": locale});
       await tts.speak(text);
+      // await tts.awaitSpeakCompletion(false);
     }
   }
 
   Future<void> initTTS() async {
-    language = _i18n.currentLanguage!.locale.toString();
+    language = _i18n.currentLocale.toString();
     voices = await fetchVoices();
     await tts.setPitch(pitch);
     await tts.setSpeechRate(speechRate);
@@ -58,12 +68,8 @@ class TTSService extends TTSRepository {
   @override
   Future<List<Voices>> fetchVoices() async {
     final voices = await tts.getVoices;
-    List<Voices> list = [];
-    voices.forEach((element) {
-      final ans = Voices.fromJson(Map.from(element));
-      list.add(ans);
-    });
-    return list;
+
+    return voices.map<Voices>((e) => Voices.fromJson(Map.from(e))).toList();
   }
 
   @override
@@ -73,12 +79,21 @@ class TTSService extends TTSRepository {
 
   @override
   Future<void> changeTTSVoice(String voice) async {
-    voices.forEach((element) {
+    for (var element in voices) {
       if (element.name == voice) {
         locale = element.locale;
         name = element.name;
         print("here: ${element.name} == $voice");
       }
-    });
+    }
+  }
+
+  Future<void> pause() async {
+    await tts.pause();
+  }
+
+  @override
+  Future<void> ttsStop() async {
+    await tts.stop();
   }
 }

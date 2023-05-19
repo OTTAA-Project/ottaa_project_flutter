@@ -103,7 +103,8 @@ class SentencesProvider extends ChangeNotifier {
     showCircular = false;
   }
 
-  void setAnimationController(AnimationController anim) => sentenceAnimationController = anim;
+  void setAnimationController(AnimationController anim) =>
+      sentenceAnimationController = anim;
 
   Future<void> saveFavourite() async {
     // List<SentenceModel> toBeSaved = [];
@@ -127,7 +128,7 @@ class SentencesProvider extends ChangeNotifier {
   Future<void> _loadSentences() async {
     _picts = await _pictogramsService.getAllPictograms();
     //todo: add the language here
-    final language = 'es_AR';
+    const language = 'es_AR';
     switch (language) {
       case "es_AR":
         // sentences = await sentenceService.fetchSentences(
@@ -189,13 +190,13 @@ class SentencesProvider extends ChangeNotifier {
         _sentencesPicts.add(_sentencePicts);
       }
     } else {
-      for (var sentence in sentences) {
-        _sentencePicts = [];
-        // for (var pictoComponente in sentence.complejidad.pictosComponentes) {
-        //   _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
-        // }
-        _sentencesPicts.add(_sentencePicts);
-      }
+      // for (var sentence in sentences) {
+      //   _sentencePicts = [];
+      //   // for (var pictoComponente in sentence.complejidad.pictosComponentes) {
+      //   //   _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+      //   // }
+      //   _sentencesPicts.add(_sentencePicts);
+      // }
     }
     notifyListeners();
   }
@@ -224,12 +225,11 @@ class SentencesProvider extends ChangeNotifier {
       }
       favouriteOrNotPicts.add(_sentencePicts);
     }
-    print('the size is this: ${favouriteOrNotPicts.length}');
   }
 
   Future<void> fetchFavourites() async {
     //todo:
-    final language = 'es_AR';
+    const language = 'es_AR';
     switch (language) {
       case "es_AR":
         // favouriteSentences = await sentenceService.fetchSentences(
@@ -288,7 +288,8 @@ class SentencesProvider extends ChangeNotifier {
       for (int i = 0; i <= 9; i++) {
         _sentencePicts = [];
         for (var pictoComponente in favouriteSentences[i].sequence) {
-          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+          _sentencePicts
+              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         favouritePicts.add(_sentencePicts);
       }
@@ -296,7 +297,8 @@ class SentencesProvider extends ChangeNotifier {
       for (var sentence in favouriteSentences) {
         _sentencePicts = [];
         for (var pictoComponente in sentence.sequence) {
-          _sentencePicts.add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
+          _sentencePicts
+              .add(_picts.firstWhere((pict) => pict.id == pictoComponente.id));
         }
         favouritePicts.add(_sentencePicts);
       }
@@ -308,13 +310,12 @@ class SentencesProvider extends ChangeNotifier {
       String voiceText = "";
       for (var pict in _sentencesPicts[_sentencesIndex]) {
         //todo: add the language here too
-        final language = 'es_AR'; //FUCK THE POLICE!!!
+        // const language = 'es_AR'; //FUCK THE POLICE!!!
         voiceText += ' ${pict.text}';
       }
 
       await _tts.speak(voiceText);
       // print(sentencesForSearch[_sentencesIndex].sentence);
-      print(_sentencesIndex);
     }
   }
 
@@ -329,7 +330,6 @@ class SentencesProvider extends ChangeNotifier {
       }
 
       await _tts.speak(voiceText);
-      print(voiceText);
       notifyListeners();
       // print(favouriteOrNotPicts[this._selectedIndexFavSelection]);
       // print(favouriteOrNotPicts[this._sel);
@@ -347,7 +347,6 @@ class SentencesProvider extends ChangeNotifier {
       }
 
       await _tts.speak(voiceText);
-      print(voiceText);
       notifyListeners();
       // print(favouriteOrNotPicts[this._selectedIndexFavSelection]);
       // print(favouriteOrNotPicts[this._sel);
@@ -388,37 +387,37 @@ class SentencesProvider extends ChangeNotifier {
   }
 
   Future<void> createListForSearching() async {
-    int i = 0;
-    for (var e1 in _sentencesPicts) {
-      String sentence = '';
-      // for (var e2 in e1) {
-      //   //todo: add the language here
-      //   switch ('es_AR') {
-      //     // case "es":
-      //     //   sentence += ' ' + e2.texto.es;
-      //     //   break;
-      //     case "es_AR":
-      //       sentence += ' ${e2.texto.es}';
-      //       break;
-      //     case "en-US":
-      //       sentence += ' ${e2.texto.en}';
-      //       break;
-      //     case "fr-FR":
-      //       sentence += ' ${e2.texto.fr}';
-      //       break;
-      //     case "pt-BR":
-      //       sentence += ' ${e2.texto.pt}';
-      //       break;
-      //     default:
-      //       sentence += ' ${e2.texto.es}';
-      //   }
-      // }
+    // int i = 0;
+    // for (var e1 in _sentencesPicts) {
+    //   String sentence = '';
+    //   // for (var e2 in e1) {
+    //   //   //todo: add the language here
+    //   //   switch ('es_AR') {
+    //   //     // case "es":
+    //   //     //   sentence += ' ' + e2.texto.es;
+    //   //     //   break;
+    //   //     case "es_AR":
+    //   //       sentence += ' ${e2.texto.es}';
+    //   //       break;
+    //   //     case "en-US":
+    //   //       sentence += ' ${e2.texto.en}';
+    //   //       break;
+    //   //     case "fr-FR":
+    //   //       sentence += ' ${e2.texto.fr}';
+    //   //       break;
+    //   //     case "pt-BR":
+    //   //       sentence += ' ${e2.texto.pt}';
+    //   //       break;
+    //   //     default:
+    //   //       sentence += ' ${e2.texto.es}';
+    //   //   }
+    //   // }
 
-      // sentencesForSearch.add(
-      //   SearchIndexedSentences(sentence: sentence, index: i),
-      // );
-      i++;
-    }
+    //   // sentencesForSearch.add(
+    //   //   SearchIndexedSentences(sentence: sentence, index: i),
+    //   // );
+    //   i++;
+    // }
     // for (var element in sentencesForSearch) {
     //   print(element.sentence);
     // }
@@ -452,7 +451,6 @@ class SentencesProvider extends ChangeNotifier {
       searchIndex--;
     }
     notifyListeners();
-    print(searchIndex);
   }
 
   void incrementOne() {

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
@@ -44,11 +45,11 @@ abstract class ServerRepository {
 
   Future<EitherVoid> updateGroup(String userId, String language, int index, {required Map<String, dynamic> data});
 
-  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode);
+  Future<EitherMap> getPictogramsStatistics(String userId, String languageCode, [CancelToken? cancelToken]);
 
-  Future<EitherMap> getMostUsedSentences(String userId, String languageCode);
+  Future<EitherMap> getMostUsedSentences(String userId, String languageCode, [CancelToken? cancelToken]);
 
-  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens});
+  Future<EitherString> generatePhraseGPT({required String prompt, required int maxTokens, double temperature = 0});
 
   Future<String> uploadUserImage({required String path, required String name, required String userId});
 
@@ -64,9 +65,9 @@ abstract class ServerRepository {
 
   Future<void> updateUserData({required Map<String, dynamic> data, required String userId});
 
-  Future<EitherMap> getEmailToken(String ownEmail, String email);
+  Future<EitherMap> getEmailToken(String ownEmail, String email, [CancelToken? cancelToken]);
 
-  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token);
+  Future<EitherMap> verifyEmailToken(String ownEmail, String email, String token, [CancelToken? cancelToken]);
 
   Future<EitherMap> getProfileById({required String id});
 
@@ -83,6 +84,7 @@ abstract class ServerRepository {
     required String language,
     required BoardDataType type,
     required Map<String, dynamic> data,
+    CancelToken? cancelToken,
   });
 
   Future<void> updateDevicesId({required String userId, required DeviceToken deviceToken});
@@ -91,6 +93,7 @@ abstract class ServerRepository {
     required String language,
     required String model,
     required List<Map<String, dynamic>> tokens,
+    CancelToken? cancelToken,
   });
 
   Future<EitherMap> predictPictogram({
@@ -103,6 +106,7 @@ abstract class ServerRepository {
     bool reduced = false,
     int limit = 10,
     int chunk = 4,
+    CancelToken? cancelToken,
   });
 
   Future<EitherVoid> updateUserLastConnectionTime({required String userId, required int time});
@@ -120,4 +124,5 @@ abstract class ServerRepository {
   Future<void> updateMainSettings({required Map<String, dynamic> map, required String userId});
 
   Future<dynamic> fetchUserSettings({required String userId});
+
 }

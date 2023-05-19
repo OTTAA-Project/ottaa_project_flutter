@@ -27,5 +27,7 @@ class PictoPredictedReduced {
 
   String toJson() => json.encode(toMap());
 
-  factory PictoPredictedReduced.fromJson(String source) => PictoPredictedReduced.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory PictoPredictedReduced.fromJson(String source) =>
+      PictoPredictedReduced.fromMap(
+          json.decode(source) as Map<String, dynamic>);
 }

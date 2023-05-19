@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-
 import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
@@ -108,6 +107,7 @@ class PatientUserModel extends UserModel {
       ),
       'settings': settings.toMap(),
       'type': type.name,
+      'email': email
     };
   }
 
@@ -119,8 +119,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Group>>.from((map['groups'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Group>>(
                 key.toString(),
-                Map.from(value as dynamic)
-                    .values
+                (value is List ? value : Map.from(value as dynamic).values)
                     .map<Group>(
                       (e) => Group.fromMap(Map.from(e as dynamic)),
                     )
@@ -132,8 +131,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Phrase>>.from((map['phrases'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Phrase>>(
                 key.toString(),
-                Map.from(value as dynamic)
-                    .values
+                (value is List ? value : Map.from(value as dynamic).values)
                     .map<Phrase>(
                       (e) => Phrase.fromMap(Map.from(e as dynamic)),
                     )
@@ -145,8 +143,7 @@ class PatientUserModel extends UserModel {
           ? Map<String, List<Picto>>.from((map['pictos'] as Map<dynamic, dynamic>).map((key, value) {
               return MapEntry<String, List<Picto>>(
                 key.toString(),
-                Map.from(value as dynamic)
-                    .values
+                (value is List ? value : Map.from(value as dynamic).values)
                     .map<Picto>(
                       (e) => Picto.fromMap(Map.from(e as dynamic)),
                     )
@@ -156,6 +153,8 @@ class PatientUserModel extends UserModel {
           : <String, List<Picto>>{},
       settings: PatientSettings.fromMap(Map.from(map['settings'] as Map<dynamic, dynamic>)),
       type: UserType.values.firstWhere((element) => element.name == map['type'] as String),
+    ).copyWith(
+      email: map['email'],
     );
   }
 
@@ -168,19 +167,19 @@ class PatientUserModel extends UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, groups: $groups, phrases: $phrases, pictos: $pictos, settings: $settings, type: $type)';
+    return 'UserModel(id: $id, groups: $groups, phrases: $phrases, pictos: $pictos, settings: $settings, type: $type, email: $email)';
   }
 
   @override
   bool operator ==(covariant PatientUserModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id && mapEquals(other.groups, groups) && mapEquals(other.phrases, phrases) && mapEquals(other.pictos, pictos) && other.settings == settings && other.type == type;
+    return other.id == id && mapEquals(other.groups, groups) && mapEquals(other.phrases, phrases) && mapEquals(other.pictos, pictos) && other.settings == settings && other.type == type && other.email == email;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ groups.hashCode ^ phrases.hashCode ^ pictos.hashCode ^ settings.hashCode ^ type.hashCode;
+    return id.hashCode ^ groups.hashCode ^ phrases.hashCode ^ pictos.hashCode ^ settings.hashCode ^ type.hashCode ^ email.hashCode;
   }
 
   @override
@@ -218,10 +217,11 @@ class PatientSettings extends UserSettings {
     required this.tts,
   });
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'data': data.toMap(),
-      'language': language,
+      'language': language.toMap(),
       'payment': payment.toMap(),
       'layout': layout.toMap(),
     };

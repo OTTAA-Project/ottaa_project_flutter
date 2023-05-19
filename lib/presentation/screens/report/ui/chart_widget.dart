@@ -38,15 +38,18 @@ class ChartWidget extends ConsumerWidget {
                   dataSource: provider.chartModel,
                   xValueMapper: (ChartModel developerSeries, _) {
                     // return '12';
-                    final date = DateTime.fromMillisecondsSinceEpoch(developerSeries.year);
+                    final date = DateTime.fromMillisecondsSinceEpoch(
+                        developerSeries.year);
                     // print(_);
                     return date.day;
                   },
-                  yValueMapper: (ChartModel developerSeries, _) => developerSeries.count,
+                  yValueMapper: (ChartModel developerSeries, _) =>
+                      developerSeries.count,
                 ),
               ],
               primaryXAxis: ch.NumericAxis(
-                labelFormat: '{value} ${DateFormat.MMMM().format(DateTime.now()).toString().substring(0, 3)} ${DateTime.now().year}',
+                labelFormat:
+                    '{value} ${DateFormat.MMMM().format(DateTime.now()).toString().substring(0, 3)} ${DateTime.now().year}',
                 edgeLabelPlacement: EdgeLabelPlacement.shift,
                 // decimalPlaces: 0,
                 // desiredIntervals: 6,

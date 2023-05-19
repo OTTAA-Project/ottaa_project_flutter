@@ -12,8 +12,12 @@ class PatientNotifier extends StateNotifier<PatientUserModel?> {
     return state!;
   }
 
+  PatientUserModel? get patient {
+    return state;
+  }
 }
 
-final patientNotifier = StateNotifierProvider<PatientNotifier, PatientUserModel?>((ref) {
+final patientNotifier =
+    StateNotifierProvider<PatientNotifier, PatientUserModel?>((ref) {
   return PatientNotifier();
 });

@@ -5,6 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
@@ -14,6 +15,7 @@ import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
+
 import 'SplashProvider_test.mocks.dart';
 
 @GenerateMocks([
@@ -66,27 +68,35 @@ void main() {
   });
   group('Splash Provider Testing', () {
     test('Check User Avatar true', () async {
-      when(mockAboutRepository.isCurrentUserAvatarExist()).thenAnswer((realInvocation) async => true);
+      when(mockAboutRepository.isCurrentUserAvatarExist())
+          .thenAnswer((realInvocation) async => true);
       expect(await splashProvider.checkUserAvatar(), true);
     });
     test('Check User Avatar false', () async {
-      when(mockAboutRepository.isCurrentUserAvatarExist()).thenAnswer((realInvocation) async => false);
+      when(mockAboutRepository.isCurrentUserAvatarExist())
+          .thenAnswer((realInvocation) async => false);
       expect(await splashProvider.checkUserAvatar(), false);
     });
     test('Fetch user information', () async {
-      when(mockAboutRepository.getUserInformation()).thenAnswer((realInvocation) async => Right(fakeUser));
-      when(mockUserAvatarNotifier.changeAvatar(615)).thenAnswer((realInvocation) async => true);
+      when(mockAboutRepository.getUserInformation())
+          .thenAnswer((realInvocation) async => Right(fakeUser));
+      when(mockUserAvatarNotifier.changeAvatar(615))
+          .thenAnswer((realInvocation) async => true);
       expect(await splashProvider.fetchUserInformation(), true);
     });
     test('Is First Time', () async {
-      when(mockAboutRepository.isFirstTime()).thenAnswer((realInvocation) async => true);
-      when(mockLocalDatabaseRepository.getIntro()).thenAnswer((realInvocation) async => true);
+      when(mockAboutRepository.isFirstTime())
+          .thenAnswer((realInvocation) async => true);
+      when(mockLocalDatabaseRepository.getIntro())
+          .thenAnswer((realInvocation) async => true);
       expect(await splashProvider.isFirstTime(), true);
     });
 
     test('UnFetch user information id', () async {
-      when(mockAboutRepository.getUserInformation()).thenAnswer((realInvocation) async => Left(fakeUser.id));
-      when(mockUserAvatarNotifier.changeAvatar(615)).thenAnswer((realInvocation) async => false);
+      when(mockAboutRepository.getUserInformation())
+          .thenAnswer((realInvocation) async => Left(fakeUser.id));
+      when(mockUserAvatarNotifier.changeAvatar(615))
+          .thenAnswer((realInvocation) async => false);
       expect(await splashProvider.fetchUserInformation(), false);
     });
   });

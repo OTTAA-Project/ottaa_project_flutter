@@ -4,10 +4,8 @@ include: package:flutter_lints/flutter.yaml
 #   plugins:
 #     - custom_lint
 
-
 linter:
   rules:
-
-
+    use_build_context_synchronously: false
 # custom_lint:
 #   rules:
