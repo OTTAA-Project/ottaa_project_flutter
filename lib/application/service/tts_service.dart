@@ -11,32 +11,45 @@ class TTSService extends TTSRepository {
   @override
   FlutterTts get tts => _tts;
 
-  @override
-  set tts(value) => _tts = value;
-
   final I18N _i18n;
+
+  @override
   String language = 'es_AR';
+  @override
   List<dynamic> availableTTS = [];
+
+  @override
   String voice = '';
+  @override
   String name = '';
+  @override
   String locale = '';
 
+  @override
   bool customTTSEnable = false;
 
+  @override
   double speechRate = .8;
+  @override
   double pitch = 1.0;
+
   List<Voices> voices = [];
 
-  TTSService(this._i18n) {
+  TTSService(this._i18n, {FlutterTts? tts}) {
+    if (tts != null) {
+      _tts = tts;
+    }
     initTTS();
   }
+
+  @FactoryMethod()
+  factory TTSService.create(I18N i18n) => TTSService(i18n);
 
   @override
   Future<void> speak(String text) async {
     if (text.isNotEmpty) {
       // tts.cancelHandler?.call();
       if (customTTSEnable) {
-        await tts.setVoice({"name": name, "locale": locale});
         language = _i18n.currentLocale.toString();
         await tts.setLanguage(language);
         await tts.setVolume(1.0);
@@ -88,9 +101,6 @@ class TTSService extends TTSRepository {
     }
   }
 
-  Future<void> pause() async {
-    await tts.pause();
-  }
 
   @override
   Future<void> ttsStop() async {

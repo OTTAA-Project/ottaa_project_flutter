@@ -53,7 +53,7 @@ class TranslationTree {
     TranslationTreeNode currentNode = root;
 
     for (final section in sections) {
-      if (!currentNode.children!.containsKey(section)) {
+      if (currentNode.children == null || currentNode.children!.isEmpty || !currentNode.children!.containsKey(section)) {
         return null;
       }
 

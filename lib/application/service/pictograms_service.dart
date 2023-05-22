@@ -15,8 +15,7 @@ class PictogramsService extends PictogramsRepository {
   final RemoteStorageRepository _remoteStorageService;
   final ServerRepository _serverRepository;
 
-  PictogramsService(
-      this._authService, this._serverRepository, this._remoteStorageService);
+  PictogramsService(this._authService, this._serverRepository, this._remoteStorageService);
 
   @override
   Future<List<Picto>> getAllPictograms() async {
@@ -24,8 +23,7 @@ class PictogramsService extends PictogramsRepository {
       const Duration(seconds: kIsWeb ? 2 : 1),
     );
 
-    final String data = await _remoteStorageService.readRemoteFile(
-        path: "Pictos", fileName: 'assets/pictos.json');
+    final String data = await _remoteStorageService.readRemoteFile(path: "Pictos", fileName: 'assets/pictos.json');
 
     final List<dynamic> json = jsonDecode(data);
     final List<Picto> pictograms = json.map((e) => Picto.fromMap(e)).toList();
@@ -34,14 +32,12 @@ class PictogramsService extends PictogramsRepository {
   }
 
   @override
-  Future<List<Picto>> getPictograms(BasicSearch search) {
-    // TODO: implement getPictograms
-    throw UnimplementedError();
+  Future<List<Picto>> getPictograms(BasicSearch search) async {
+    return [];
   }
 
   @override
-  Future<void> uploadPictograms(List<Picto> data, String language,
-      {String? userId}) async {
+  Future<void> uploadPictograms(List<Picto> data, String language, {String? userId}) async {
     List<Map<String, dynamic>> jsonData = List.empty(growable: true);
     for (var e in data) {
       jsonData.add(e.toMap());
@@ -57,8 +53,7 @@ class PictogramsService extends PictogramsRepository {
   }
 
   @override
-  Future<void> updatePictogram(
-      Picto pictogram, String language, int index) async {
+  Future<void> updatePictogram(Picto pictogram, String language, int index) async {
     final relactions = pictogram.relations.map((e) => e.toJson()).toList();
 
     final result = await _authService.getCurrentUser();
@@ -66,22 +61,5 @@ class PictogramsService extends PictogramsRepository {
     if (result.isLeft) return;
 
     final String id = result.right.id;
-
-    // await _serverRepository.updatePictogram(id, language, index, data: {
-    //   'id': pictogram.id,
-    //   'texto': pictogram.texto.toJson(),
-    //   'tipo': pictogram.tipo,
-    //   'imagen': pictogram.imagen.toJson(),
-    //   'relacion': relactions,
-    //   'agenda': pictogram.agenda,
-    //   'gps': pictogram.gps,
-    //   'hora': pictogram.hora,
-    //   'edad': pictogram.edad,
-    //   'sexo': pictogram.sexo,
-    //   'esSugerencia': pictogram.esSugerencia,
-    //   'horario': pictogram.horario,
-    //   'ubicacion': pictogram.ubicacion,
-    //   'score': pictogram.score,
-    // });
   }
 }

@@ -161,9 +161,105 @@ class MockTTSRepository extends _i1.Mock implements _i2.TTSRepository {
   }
 
   @override
-  set tts(dynamic value) => super.noSuchMethod(
+  bool get customTTSEnable => (super.noSuchMethod(
+        Invocation.getter(#customTTSEnable),
+        returnValue: false,
+      ) as bool);
+  @override
+  set customTTSEnable(bool? value) => super.noSuchMethod(
         Invocation.setter(
-          #tts,
+          #customTTSEnable,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  String get language => (super.noSuchMethod(
+        Invocation.getter(#language),
+        returnValue: '',
+      ) as String);
+  @override
+  set language(String? value) => super.noSuchMethod(
+        Invocation.setter(
+          #language,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  List<dynamic> get availableTTS => (super.noSuchMethod(
+        Invocation.getter(#availableTTS),
+        returnValue: <dynamic>[],
+      ) as List<dynamic>);
+  @override
+  set availableTTS(List<dynamic>? value) => super.noSuchMethod(
+        Invocation.setter(
+          #availableTTS,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  String get voice => (super.noSuchMethod(
+        Invocation.getter(#voice),
+        returnValue: '',
+      ) as String);
+  @override
+  set voice(String? value) => super.noSuchMethod(
+        Invocation.setter(
+          #voice,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  String get name => (super.noSuchMethod(
+        Invocation.getter(#name),
+        returnValue: '',
+      ) as String);
+  @override
+  set name(String? value) => super.noSuchMethod(
+        Invocation.setter(
+          #name,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  String get locale => (super.noSuchMethod(
+        Invocation.getter(#locale),
+        returnValue: '',
+      ) as String);
+  @override
+  set locale(String? value) => super.noSuchMethod(
+        Invocation.setter(
+          #locale,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  double get speechRate => (super.noSuchMethod(
+        Invocation.getter(#speechRate),
+        returnValue: 0.0,
+      ) as double);
+  @override
+  set speechRate(double? value) => super.noSuchMethod(
+        Invocation.setter(
+          #speechRate,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  double get pitch => (super.noSuchMethod(
+        Invocation.getter(#pitch),
+        returnValue: 0.0,
+      ) as double);
+  @override
+  set pitch(double? value) => super.noSuchMethod(
+        Invocation.setter(
+          #pitch,
           value,
         ),
         returnValueForMissingStub: null,

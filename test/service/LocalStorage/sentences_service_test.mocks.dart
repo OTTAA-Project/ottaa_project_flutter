@@ -222,24 +222,6 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
   }
 
   @override
-  _i4.Future<void> init() => (super.noSuchMethod(
-        Invocation.method(
-          #init,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
   _i4.Future<_i2.Either<String, String>> getAvailableAppVersion(
           String? platform) =>
       (super.noSuchMethod(
@@ -349,7 +331,7 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         )),
       ) as _i4.Future<_i2.Either<String, void>>);
   @override
-  _i4.Future<List<_i5.Phrase>> getUserSentences(
+  _i4.Future<List<Map<String, dynamic>>> getUserSentences(
     String? userId, {
     required String? language,
     required String? type,
@@ -365,8 +347,9 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
             #isFavorite: isFavorite,
           },
         ),
-        returnValue: _i4.Future<List<_i5.Phrase>>.value(<_i5.Phrase>[]),
-      ) as _i4.Future<List<_i5.Phrase>>);
+        returnValue: _i4.Future<List<Map<String, dynamic>>>.value(
+            <Map<String, dynamic>>[]),
+      ) as _i4.Future<List<Map<String, dynamic>>>);
   @override
   _i4.Future<_i2.Either<String, void>> uploadUserSentences(
     String? userId,

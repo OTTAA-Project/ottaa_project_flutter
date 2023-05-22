@@ -401,7 +401,7 @@ Future<void> main() async {
     expect(result, [
       Picto(id: "4", text: "Picto 4", type: 0, resource: AssetsImage(asset: "", network: null)),
       Picto(id: "5", text: "Picto 5", type: 0, resource: AssetsImage(asset: "", network: null)),
-      Picto(id: "101", text: "Basic Picto 1", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "777", text: "", type: 0, resource: AssetsImage(asset: "", network: null)),
     ]);
   });
 

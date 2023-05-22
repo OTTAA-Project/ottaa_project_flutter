@@ -5,21 +5,20 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:dio/dio.dart' as _i8;
+import 'package:dio/dio.dart' as _i7;
 import 'package:either_dart/either.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i13;
-import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i10;
-import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i15;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i12;
+import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i9;
+import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i14;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i5;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i6;
-import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i11;
-import 'package:ottaa_project_flutter/core/models/phrase_model.dart' as _i7;
-import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i9;
+import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i10;
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i8;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
-    as _i14;
+    as _i13;
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
-    as _i12;
+    as _i11;
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
     as _i3;
 
@@ -52,24 +51,6 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
     _i1.throwOnMissingStub(this);
   }
 
-  @override
-  _i4.Future<void> init() => (super.noSuchMethod(
-        Invocation.method(
-          #init,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Either<String, String>> getAvailableAppVersion(
           String? platform) =>
@@ -180,7 +161,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
         )),
       ) as _i4.Future<_i2.Either<String, void>>);
   @override
-  _i4.Future<List<_i7.Phrase>> getUserSentences(
+  _i4.Future<List<Map<String, dynamic>>> getUserSentences(
     String? userId, {
     required String? language,
     required String? type,
@@ -196,8 +177,9 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
             #isFavorite: isFavorite,
           },
         ),
-        returnValue: _i4.Future<List<_i7.Phrase>>.value(<_i7.Phrase>[]),
-      ) as _i4.Future<List<_i7.Phrase>>);
+        returnValue: _i4.Future<List<Map<String, dynamic>>>.value(
+            <Map<String, dynamic>>[]),
+      ) as _i4.Future<List<Map<String, dynamic>>>);
   @override
   _i4.Future<_i2.Either<String, void>> uploadUserSentences(
     String? userId,
@@ -403,7 +385,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> getPictogramsStatistics(
     String? userId,
     String? languageCode, [
-    _i8.CancelToken? cancelToken,
+    _i7.CancelToken? cancelToken,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -431,7 +413,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> getMostUsedSentences(
     String? userId,
     String? languageCode, [
-    _i8.CancelToken? cancelToken,
+    _i7.CancelToken? cancelToken,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -577,7 +559,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
       ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Either<String, void>> setShortcutsForUser({
-    required _i9.ShortcutsModel? shortcuts,
+    required _i8.ShortcutsModel? shortcuts,
     required String? userId,
   }) =>
       (super.noSuchMethod(
@@ -623,7 +605,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
   _i4.Future<_i2.Either<String, Map<String, dynamic>>> getEmailToken(
     String? ownEmail,
     String? email, [
-    _i8.CancelToken? cancelToken,
+    _i7.CancelToken? cancelToken,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -652,7 +634,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
     String? ownEmail,
     String? email,
     String? token, [
-    _i8.CancelToken? cancelToken,
+    _i7.CancelToken? cancelToken,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -755,9 +737,9 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
   _i4.Future<Map<String, dynamic>?> createPictoGroupData({
     required String? userId,
     required String? language,
-    required _i10.BoardDataType? type,
+    required _i9.BoardDataType? type,
     required Map<String, dynamic>? data,
-    _i8.CancelToken? cancelToken,
+    _i7.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -776,7 +758,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
   @override
   _i4.Future<void> updateDevicesId({
     required String? userId,
-    required _i11.DeviceToken? deviceToken,
+    required _i10.DeviceToken? deviceToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -796,7 +778,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
     required String? language,
     required String? model,
     required List<Map<String, dynamic>>? tokens,
-    _i8.CancelToken? cancelToken,
+    _i7.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -837,7 +819,7 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
     bool? reduced = false,
     int? limit = 10,
     int? chunk = 4,
-    _i8.CancelToken? cancelToken,
+    _i7.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1020,13 +1002,13 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i12.LocalDatabaseRepository {
+    implements _i11.LocalDatabaseRepository {
   MockLocalDatabaseRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set user(_i13.UserModel? user) => super.noSuchMethod(
+  set user(_i12.UserModel? user) => super.noSuchMethod(
         Invocation.setter(
           #user,
           user,
@@ -1052,7 +1034,7 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<void> setUser(_i13.UserModel? user) => (super.noSuchMethod(
+  _i4.Future<void> setUser(_i12.UserModel? user) => (super.noSuchMethod(
         Invocation.method(
           #setUser,
           [user],
@@ -1061,13 +1043,13 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<_i13.UserModel?> getUser() => (super.noSuchMethod(
+  _i4.Future<_i12.UserModel?> getUser() => (super.noSuchMethod(
         Invocation.method(
           #getUser,
           [],
         ),
-        returnValue: _i4.Future<_i13.UserModel?>.value(),
-      ) as _i4.Future<_i13.UserModel?>);
+        returnValue: _i4.Future<_i12.UserModel?>.value(),
+      ) as _i4.Future<_i12.UserModel?>);
   @override
   _i4.Future<void> deleteUser() => (super.noSuchMethod(
         Invocation.method(
@@ -1117,7 +1099,7 @@ class MockLocalDatabaseRepository extends _i1.Mock
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i14.AuthRepository {
+class MockAuthRepository extends _i1.Mock implements _i13.AuthRepository {
   MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -1128,8 +1110,8 @@ class MockAuthRepository extends _i1.Mock implements _i14.AuthRepository {
         returnValue: false,
       ) as bool);
   @override
-  _i4.Future<_i2.Either<String, _i13.UserModel>> signIn(
-    _i15.SignInType? type, [
+  _i4.Future<_i2.Either<String, _i12.UserModel>> signIn(
+    _i14.SignInType? type, [
     String? email,
     String? password,
   ]) =>
@@ -1142,8 +1124,8 @@ class MockAuthRepository extends _i1.Mock implements _i14.AuthRepository {
             password,
           ],
         ),
-        returnValue: _i4.Future<_i2.Either<String, _i13.UserModel>>.value(
-            _FakeEither_0<String, _i13.UserModel>(
+        returnValue: _i4.Future<_i2.Either<String, _i12.UserModel>>.value(
+            _FakeEither_0<String, _i12.UserModel>(
           this,
           Invocation.method(
             #signIn,
@@ -1154,7 +1136,7 @@ class MockAuthRepository extends _i1.Mock implements _i14.AuthRepository {
             ],
           ),
         )),
-      ) as _i4.Future<_i2.Either<String, _i13.UserModel>>);
+      ) as _i4.Future<_i2.Either<String, _i12.UserModel>>);
   @override
   _i4.Future<_i2.Either<String, bool>> signUp() => (super.noSuchMethod(
         Invocation.method(
@@ -1171,21 +1153,21 @@ class MockAuthRepository extends _i1.Mock implements _i14.AuthRepository {
         )),
       ) as _i4.Future<_i2.Either<String, bool>>);
   @override
-  _i4.Future<_i2.Either<String, _i13.UserModel>> getCurrentUser() =>
+  _i4.Future<_i2.Either<String, _i12.UserModel>> getCurrentUser() =>
       (super.noSuchMethod(
         Invocation.method(
           #getCurrentUser,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<String, _i13.UserModel>>.value(
-            _FakeEither_0<String, _i13.UserModel>(
+        returnValue: _i4.Future<_i2.Either<String, _i12.UserModel>>.value(
+            _FakeEither_0<String, _i12.UserModel>(
           this,
           Invocation.method(
             #getCurrentUser,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<String, _i13.UserModel>>);
+      ) as _i4.Future<_i2.Either<String, _i12.UserModel>>);
   @override
   _i4.Future<bool> isLoggedIn() => (super.noSuchMethod(
         Invocation.method(

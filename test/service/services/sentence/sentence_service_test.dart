@@ -58,7 +58,7 @@ Future<void> main() async {
   test('should return the list of phrases from the user', () async {
     when(mockAuthRepository.getCurrentUser()).thenAnswer((realInvocation) async => Right(fakeUser));
 
-    when(mockServerRepository.getUserSentences(any, language: anyNamed('language'), type: anyNamed('type'))).thenAnswer((realInvocation) async => (fakePhrases));
+    when(mockServerRepository.getUserSentences(any, language: anyNamed('language'), type: anyNamed('type'))).thenAnswer((realInvocation) async => (fakePhrases.map((e) => e.toMap()).toList()));
 
     final response = await sentencesRepository.fetchSentences(language: 'es_AR', type: 'Test');
 

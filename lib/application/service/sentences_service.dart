@@ -13,7 +13,7 @@ class SentencesService implements SentencesRepository {
   SentencesService(this._auth, this._serverRepository);
 
   @override
-  Future<Either<String,List<Phrase>>> fetchSentences({required String language, required String type, bool isFavorite = false}) async {
+  Future<Either<String, List<Phrase>>> fetchSentences({required String language, required String type, bool isFavorite = false}) async {
     final authResult = await _auth.getCurrentUser();
 
     if (authResult.isLeft) return const Left('no data');
@@ -25,7 +25,11 @@ class SentencesService implements SentencesRepository {
       language: language,
       type: type,
     );
-    return Right(response);
+
+    if (response.isEmpty) return const Left('no data');
+    List<Phrase> data = response.map((e) => Phrase.fromMap(e)).toList();
+
+    return Right(data);
   }
 
   @override
