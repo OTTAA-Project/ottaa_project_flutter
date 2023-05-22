@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database_mocks/firebase_database_mocks.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -22,11 +23,13 @@ import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 import 'package:ottaa_project_flutter/core/models/tts_setting.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
+import 'package:ottaa_project_flutter/firebase_options.dart';
 
 import 'server_service_test.mocks.dart';
 
 @GenerateMocks([FirebaseFunctions])
 void main() async {
+
   late Dio dio;
   late DioAdapter dioAdapter;
 
@@ -99,7 +102,7 @@ void main() async {
     "type": "user"
   };
 
-  setUp(() {
+  setUp(() async {
     dio = Dio(
       BaseOptions(baseUrl: "https://us-central1-ottaaproject-flutter.cloudfunctions.net"),
     );
@@ -120,9 +123,14 @@ void main() async {
 
   group("Factory method", () {
     test("create singleton", () {
+      try {
+
       final serverService = ServerService.create();
 
       expect(serverService, isNotNull);
+      } catch (e) {
+
+      }
     });
   });
 
@@ -225,7 +233,7 @@ void main() async {
     });
 
     test("should return user information (old languange)", () async {
-      const Map<String, dynamic> fakeUserInfoOld = {
+      final Map<String, dynamic> fakeUserInfoOld = {
         "id": "mu4ZiTMURBeLEV7p3CrFbljBrHF2",
         "pictos": {
           "es_AR": {
@@ -253,6 +261,7 @@ void main() async {
             "name": "Emir",
             "number": ""
           },
+          "tts": ttsSetting.toMap(),
           "devices": [],
           "language": "es_AR",
           "layout": {

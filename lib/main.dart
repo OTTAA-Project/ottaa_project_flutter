@@ -20,7 +20,6 @@ void main() async {
       statusBarIconBrightness: Brightness.light,
     ),
   );
-  await dotenv.load();
 
   await dotenv.load();
 
