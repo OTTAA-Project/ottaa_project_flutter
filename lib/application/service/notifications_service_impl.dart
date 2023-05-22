@@ -31,8 +31,8 @@ class NotificationsServiceImpl implements NotificationsService {
   NotificationsServiceImpl(this.i18n);
 
   @FactoryMethod(preResolve: true)
-  static Future<NotificationsServiceImpl> onInit() async {
-    final service = NotificationsServiceImpl(getIt<I18N>());
+  static Future<NotificationsServiceImpl> onInit(I18N i18n) async {
+    final service = NotificationsServiceImpl(i18n);
     await service.init();
     return service;
   }

@@ -12,7 +12,6 @@ import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
-import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 import 'groups_service_test.mocks.dart';
@@ -22,7 +21,7 @@ import 'groups_service_test.mocks.dart';
   RemoteStorageRepository,
   ServerRepository,
 ])
-void main() {
+Future<void> main() async{
   late MockAuthRepository mockAuthRepository;
   late MockRemoteStorageRepository mockRemoteStorageRepository;
   late MockServerRepository mockServerRepository;

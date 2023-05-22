@@ -50,7 +50,6 @@ class CustomiseProvider extends ChangeNotifier {
     selectedGroupImage = (groups[index].resource.network ?? groups[index].resource.asset);
     selectedGroupName = groups[index].text;
     selectedGroupStatus = groups[index].block;
-    fetchDesiredPictos();
     notifyListeners();
   }
 

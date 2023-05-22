@@ -1,3 +1,4 @@
+import 'package:either_dart/either.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
@@ -12,31 +13,26 @@ class SentencesService implements SentencesRepository {
   SentencesService(this._auth, this._serverRepository);
 
   @override
-  Future<List<Phrase>> fetchSentences(
-      {required String language,
-      required String type,
-      bool isFavorite = false}) async {
+  Future<Either<String, List<Phrase>>> fetchSentences({required String language, required String type, bool isFavorite = false}) async {
     final authResult = await _auth.getCurrentUser();
 
-    if (authResult.isLeft) return [];
+    if (authResult.isLeft) return const Left('no data');
 
     final user = authResult.right;
 
-    return await _serverRepository.getUserSentences(
+    final response = await _serverRepository.getUserSentences(
       user.id,
       language: language,
       type: type,
     );
+    return Right(response);
   }
 
   @override
-  Future<void> uploadSentences(
-      {required String language,
-      required List<Phrase> data,
-      required String type}) async {
+  Future<EitherVoid> uploadSentences({required String language, required List<Phrase> data, required String type}) async {
     final authResult = await _auth.getCurrentUser();
 
-    if (authResult.isLeft) return;
+    if (authResult.isLeft) return const Left("no user");
 
     final user = authResult.right;
 
@@ -46,5 +42,6 @@ class SentencesService implements SentencesRepository {
     }
 
     _serverRepository.uploadUserSentences(user.id, language, type, jsonData);
+    return const Right(null);
   }
 }
