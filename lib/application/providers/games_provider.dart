@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
@@ -47,9 +46,8 @@ class GamesProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
   final PatientNotifier patientState;
-  final TTSProvider _tts;
 
-  GamesProvider(this._groupsService, this._pictogramsService, this.patientState, this._tts);
+  GamesProvider(this._groupsService, this._pictogramsService, this.patientState);
 
   Future<void> createRandomForGameWTP() async {
     gamePictsWTP.clear();
@@ -70,13 +68,13 @@ class GamesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  resetScore(){
+  resetScore() {
     incorrectScore == 0;
     correctScore = 0;
     gameTimer.cancel();
-    useTime=0;
-    streak=0;
-    difficultyLevel=0;
+    useTime = 0;
+    streak = 0;
+    difficultyLevel = 0;
   }
 
   Future<void> createRandomForGameMP() async {
@@ -257,8 +255,8 @@ final gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final patientState = ref.watch(patientNotifier.notifier);
-  final tts = ref.watch(ttsProvider);
+  // final tts = ref.watch(ttsProvider);
   // final chatGpt = GetIt.I<ChatGPTRepository>();
   // final whatsThePictoController = ref.watch(whatsThePictoProvider);
-  return GamesProvider(groupsService, pictogramService, patientState, tts);
+  return GamesProvider(groupsService, pictogramService, patientState);
 });
