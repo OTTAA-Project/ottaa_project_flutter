@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -14,7 +15,7 @@ class GamesProvider extends ChangeNotifier {
   int completedGroups = 0;
   int activeGroups = 00;
   int selectedGame = 0;
-  int selectedGroupIndex = 0;
+  String selectedGroupName = '';
   final PageController mainPageController = PageController(initialPage: 0);
   ScrollController gridScrollController = ScrollController();
   Map<String, Picto> pictograms = {};
@@ -31,7 +32,7 @@ class GamesProvider extends ChangeNotifier {
   List<Picto> gamePictsMP = [];
   int correctPictoWTP = 99;
   bool hintsBtn = false;
-  late Timer hintTimer, gameTimer;
+  late Timer hintTimer1, hintTimer2, gameTimer;
   bool hintsEnabled = false;
 
   /// 0 == 2 pictos, 1 == 3 pictos, 2 == 4 pictos
@@ -111,7 +112,15 @@ class GamesProvider extends ChangeNotifier {
   Future<void> fetchSelectedPictos() async {
     List<Picto> picts = [];
     final gro = groups.values.where((element) => !element.block).toList();
-    for (var e in gro[selectedGroupIndex].relations) {
+    int i = 0;
+    int selectedGroup = 0;
+    for (var e in gro) {
+      if (e.text == selectedGroupName) {
+        selectedGroup = i;
+      }
+      i++;
+    }
+    for (var e in gro[selectedGroup].relations) {
       picts.add(
         pictograms[e.id]!,
       );
@@ -157,6 +166,8 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictograms() async {
+    if (pictograms.isNotEmpty && groups.isNotEmpty) return;
+
     List<Picto>? pictos;
     List<Group>? groupsData;
 
@@ -164,8 +175,6 @@ class GamesProvider extends ChangeNotifier {
       pictos = patientState.user.pictos[patientState.user.settings.language];
 
       groupsData = patientState.user.groups[patientState.user.settings.language];
-
-      print(patientState.user.groups);
     }
 
     pictos ??= (await _pictogramsService.getAllPictograms()).where((element) => !element.block).toList();
@@ -203,8 +212,8 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> showHints() async {
-    hintTimer = Timer.periodic(const Duration(seconds: 8), (timer) {
-      Timer(const Duration(seconds: 2), () {
+    hintTimer1 = Timer.periodic(const Duration(seconds: 4), (timer) {
+      hintTimer2 = Timer(const Duration(seconds: 2), () {
         hintsEnabled = true;
         notify();
       });
@@ -214,9 +223,12 @@ class GamesProvider extends ChangeNotifier {
   }
 
   Future<void> cancelHints() async {
-    hintTimer.cancel();
-    hintTimer.cancel();
+    hintTimer1.cancel();
+    hintTimer1.cancel();
+    hintTimer2.cancel();
+    hintTimer2.cancel();
     hintsEnabled = false;
+    // notifyListeners();
   }
 
   void notify() {
@@ -228,10 +240,8 @@ class GamesProvider extends ChangeNotifier {
     await clicksPlayer.play();
   }
 
-  Future<void> changeMusic() async {
-    isMute = !isMute;
-    notifyListeners();
-    if (isMute) {
+  Future<void> changeMusic({required bool mute}) async {
+    if (mute) {
       await backgroundMusicPlayer.pause();
     } else {
       await backgroundMusicPlayer.play();
@@ -249,6 +259,14 @@ class GamesProvider extends ChangeNotifier {
       await backgroundMusicPlayer.play();
     }
   }
+
+  @override
+  void dispose() {
+    hintTimer1.cancel();
+    hintTimer2.cancel();
+    print('disposed');
+    super.dispose();
+  }
 }
 
 final gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
@@ -256,7 +274,5 @@ final gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
   final groupsService = GetIt.I<GroupsRepository>();
   final patientState = ref.watch(patientNotifier.notifier);
   // final tts = ref.watch(ttsProvider);
-  // final chatGpt = GetIt.I<ChatGPTRepository>();
-  // final whatsThePictoController = ref.watch(whatsThePictoProvider);
   return GamesProvider(groupsService, pictogramService, patientState);
 });

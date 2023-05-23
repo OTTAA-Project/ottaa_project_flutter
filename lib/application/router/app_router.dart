@@ -10,6 +10,7 @@ import 'package:ottaa_project_flutter/presentation/screens/customized_board/cust
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_main_tab_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_wait_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/chatgpt_game.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/game_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/match_pictogram_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/memory_game_screen.dart';
@@ -43,15 +44,19 @@ import 'package:ottaa_project_flutter/presentation/screens/user_settings/voice_a
 import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
+final appRouterNavigator = StateProvider<GlobalKey<NavigatorState>>((ref) => GlobalKey<NavigatorState>());
+
 final goRouterProvider = Provider<GoRouter>((ref) {
+  final navigatorKey = ref.watch(appRouterNavigator);
   final authState = ref.read(authProvider.select((value) => value.isUserLoggedIn));
   final userState = ref.watch(userProvider);
 
   return GoRouter(
+    navigatorKey: navigatorKey,
     debugLogDiagnostics: kDebugMode,
-    restorationScopeId: "ottaa",
     errorBuilder: (context, state) => const ErrorScreen(),
     initialLocation: "/",
+    restorationScopeId: "root",
     // refreshListenable: userState,
     routes: <GoRoute>[
       GoRoute(
@@ -280,10 +285,18 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             name: "games",
             builder: (_, __) => const GameScreen(),
             routes: [
-              GoRoute(path: 'groups', builder: (_, __) => const SelectGroupScreen(), routes: [GoRoute(path: 'search', builder: (_, __) => const SearchScreen())]),
+              GoRoute(
+                path: 'groups',
+                builder: (_, __) => const SelectGroupScreen(),
+                routes: [GoRoute(path: 'search', builder: (_, __) => const SearchScreen())],
+              ),
               GoRoute(
                 path: 'match',
                 builder: (_, __) => const MatchPictogramScreen(),
+              ),
+              GoRoute(
+                path: 'story',
+                builder: (_, __) => const ChatGptGame(),
               ),
               GoRoute(
                 path: 'memory',

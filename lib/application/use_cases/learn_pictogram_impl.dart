@@ -27,6 +27,6 @@ class LearnPictogramImpl extends LearnPictogram {
 
     final data = response.right;
 
-    return Right(data["success"]);
+    return Right(data["time"]);
   }
 }
