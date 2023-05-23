@@ -586,7 +586,7 @@ class ServerService implements ServerRepository {
         cancelToken: cancelToken,
       );
 
-      return Right(jsonDecode(res.data) as Map<String, dynamic>);
+      return Right(res.data);
     }  on DioError catch(e) {
       // handle te responde error
       print(e.response);

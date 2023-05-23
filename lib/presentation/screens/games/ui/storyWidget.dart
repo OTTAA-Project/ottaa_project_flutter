@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ottaa_project_flutter/application/providers/chat_gpt_game_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:picto_widget/picto_widget.dart';
 
 class StoryWidget extends ConsumerWidget {
   const StoryWidget({Key? key}) : super(key: key);

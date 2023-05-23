@@ -92,18 +92,12 @@ class ProfileNotifier extends ChangeNotifier {
 
     UserModel? newUser;
 
-    if (isCaregiver) {
-      newUser = CaregiverUserModel.fromMap({
-        ...user.toMap(),
-        "type": UserType.caregiver.name,
-        "email": user.email,
-      });
-    } else if (isUser) {
-      newUser = PatientUserModel.fromMap({
-        ...user.toMap(),
-        "type": UserType.user.name,
-        "email": user.email,
-      });
+    if (isCaregiver || isUser) {
+      if (isCaregiver) {
+        newUser = CaregiverUserModel.fromMap(user.toMap()).copyWith(type: UserType.caregiver);
+      } else {
+        newUser = PatientUserModel.fromMap(user.toMap()).copyWith(type: UserType.user);
+      }
     } else {
       if (user is CaregiverUserModel) {
         isCaregiver = true;

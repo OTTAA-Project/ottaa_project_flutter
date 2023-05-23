@@ -116,7 +116,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
                       );
                       switch (provider.type) {
                         case CustomiseDataType.user:
-                          await provider.uploadData(userId: user!.id);
+                          await provider.uploadData(userId: user!.id, saveGroups: true, savePictograms: true, saveShortcuts: false);
                           provider.groupsFetched = false;
                           provider.type = CustomiseDataType.defaultCase;
 
@@ -124,7 +124,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
                           context.go(AppRoutes.home);
                           break;
                         case CustomiseDataType.careGiver:
-                          await provider.uploadData(userId: provider.userId);
+                          await provider.uploadData(userId: user!.id, saveGroups: true, savePictograms: true, saveShortcuts: false);
                           provider.type = CustomiseDataType.defaultCase;
                           provider.groupsFetched = false;
 
@@ -135,7 +135,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
                           break;
                         case CustomiseDataType.defaultCase:
                         default:
-                          await provider.uploadData(userId: userID.userId ?? provider.userId);
+                          await provider.uploadData(userId: user!.id, saveGroups: true, savePictograms: true, saveShortcuts: false);
                           context.pop();
                           context.go(AppRoutes.userCustomizeWait);
                           break;

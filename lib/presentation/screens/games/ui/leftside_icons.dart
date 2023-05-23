@@ -4,7 +4,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/score_dialouge.dart';
 
-class LeftSideIcons extends ConsumerWidget {
+class LeftSideIcons extends ConsumerStatefulWidget {
   const LeftSideIcons({
     Key? key,
     this.hints = false,
@@ -12,9 +12,28 @@ class LeftSideIcons extends ConsumerWidget {
   final bool hints;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LeftSideIcons> createState() => _LeftSideIconsState();
+}
+
+class _LeftSideIconsState extends ConsumerState<LeftSideIcons> {
+  bool mute = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      final provider = ref.read(gameProvider);
+      mute = provider.isMute;
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
     final provider = ref.read(gameProvider);
-    final mute = ref.watch(gameProvider).isMute;
+    bool hints = ref.watch(gameProvider).hintsBtn;
+    print(mute);
     final colorScheme = Theme.of(context).colorScheme;
     return Positioned(
       bottom: 24,
@@ -43,7 +62,13 @@ class LeftSideIcons extends ConsumerWidget {
             ),
           ),
           GestureDetector(
-            onTap: () async => await provider.changeMusic(),
+            onTap: () async {
+              setState(() {
+                mute = !mute;
+                provider.isMute = mute;
+                provider.changeMusic(mute: mute);
+              });
+            },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Container(
@@ -61,25 +86,25 @@ class LeftSideIcons extends ConsumerWidget {
               ),
             ),
           ),
-          hints
+          widget.hints
               ? GestureDetector(
-                  onTap: () {
-                    if (provider.hintsBtn) {
+                  onTap: () async{
+                    if (hints) {
                       provider.hintsBtn = !provider.hintsBtn;
-                      provider.cancelHints();
+                      await provider.cancelHints();
                     } else {
                       provider.hintsBtn = !provider.hintsBtn;
-                      provider.showHints();
+                      await provider.showHints();
                     }
                     provider.notify();
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
-                      color: provider.hintsBtn ? colorScheme.primary : Colors.white,
+                      color: hints ? colorScheme.primary : Colors.white,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: provider.hintsBtn
+                    child: hints
                         ? const Icon(
                             Icons.help,
                             color: Colors.white,

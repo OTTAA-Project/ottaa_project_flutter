@@ -2,11 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/whats_the_picto_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
@@ -31,7 +33,7 @@ class SelectGroupScreen extends ConsumerWidget {
             subtitle: 'game.group'.trl,
           ),
           Positioned(
-            bottom: size.height *0.2,
+            bottom: size.height * 0.2,
             left: 24,
             child: SizedBox(
               height: size.height * 0.6,
@@ -66,7 +68,7 @@ class SelectGroupScreen extends ConsumerWidget {
                       elevation: MaterialStateProperty.all(0),
                     ),
                     onPressed: () async {
-                      provider.selectedGroupIndex = index;
+                      provider.selectedGroupName = group.text;
                       await provider.fetchSelectedPictos();
                       provider.init();
                       final wtpProvider = ref.read(whatsThePictoProvider);
@@ -74,14 +76,16 @@ class SelectGroupScreen extends ConsumerWidget {
                         case 0:
                           await provider.createRandomForGameWTP();
                           wtpProvider.speakNameWhatsThePicto();
-                          // context.push(AppRoutes.gamePlayScreen);
+                          context.push(AppRoutes.patientWhatsThePictoGame);
                           break;
                         case 1:
                           await provider.createRandomForGameMP();
-                          // context.push(AppRoutes.gamePlayScreen);
+                          context.push(AppRoutes.patienMatchPictogramGame);
+
                           break;
                         case 2:
-                          // context.push(AppRoutes.gamePlayScreen);
+                          context.push(AppRoutes.patientMemoryGame);
+
                           break;
                       }
                     },
