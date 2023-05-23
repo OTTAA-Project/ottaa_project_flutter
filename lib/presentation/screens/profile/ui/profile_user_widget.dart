@@ -22,7 +22,7 @@ class ProfileUserWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Text(
               title,
-              style: textTheme.headline3,
+              style: textTheme.displaySmall,
             ),
           ),
           Divider(

@@ -38,7 +38,7 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
             fit: FlexFit.loose,
             child: Text(
               widget.title,
-              style: textTheme.headline3,
+              style: textTheme.displaySmall,
             ),
           ),
           const SizedBox(height: 20),
@@ -51,7 +51,7 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
                 widget.subtitle,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.visible,
-                style: textTheme.headline1?.copyWith(
+                style: textTheme.displayLarge?.copyWith(
                   color: colorScheme.primary,
                 ),
               ),
@@ -76,7 +76,7 @@ class _UserInfoStepState extends ConsumerState<OnboardingLayout> with AutomaticK
               child: AutoSizeText(
                 widget.description,
                 textAlign: TextAlign.center,
-                style: textTheme.headline3,
+                style: textTheme.displaySmall,
                 overflow: TextOverflow.visible,
               ),
             ),

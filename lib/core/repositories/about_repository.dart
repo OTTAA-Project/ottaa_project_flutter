@@ -5,7 +5,6 @@ import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
-import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 abstract class AboutRepository {
   Future<String> getEmail();

@@ -27,11 +27,11 @@ class ChooserWidget extends StatelessWidget {
         child: Text(
           title,
           style: selected
-              ? textTheme.caption!.copyWith(
+              ? textTheme.bodySmall!.copyWith(
                   color: colorScheme.onPrimary,
                   fontWeight: FontWeight.w600,
                 )
-              : textTheme.caption!.copyWith(
+              : textTheme.bodySmall!.copyWith(
                   color: kDarkenGrayColor,
                 ),
         ),

@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -50,8 +49,8 @@ Future<void> main() async {
     sentencesRepository = SentencesService(mockAuthRepository, mockServerRepository);
 
     fakePhrases = [
-      Phrase(date: DateTime.now(), id: '00', sequence: [Sequence(id: '22')], tags: {}),
-      Phrase(date: DateTime.now(), id: '22', sequence: [Sequence(id: '22')], tags: {})
+      Phrase(date: DateTime.now(), id: '00', sequence: [const Sequence(id: '22')], tags: {}),
+      Phrase(date: DateTime.now(), id: '22', sequence: [const Sequence(id: '22')], tags: {})
     ];
   });
 

@@ -8,7 +8,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
@@ -590,7 +589,7 @@ class ServerService implements ServerRepository {
     }  on DioError catch(e) {
       // handle te responde error
       print(e.response);
-      return Left("Server error");
+      return const Left("Server error");
     } catch (e) {
       print(e);
       // handle te responde error

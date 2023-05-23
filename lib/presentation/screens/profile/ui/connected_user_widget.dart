@@ -55,7 +55,7 @@ class ConnectedUserWidget extends StatelessWidget {
                     show
                         ? 'profile.close_profile'.trl
                         : 'profile.open_profile'.trl,
-                    style: textTheme.subtitle1,
+                    style: textTheme.titleMedium,
                   ),
                   Icon(
                     show

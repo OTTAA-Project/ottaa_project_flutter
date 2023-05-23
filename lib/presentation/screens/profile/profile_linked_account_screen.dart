@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
@@ -39,7 +38,7 @@ class _ProfileLinkedAccountScreen
         appBar: OTTAAAppBar(
           title: Text(
             "profile.linked_accounts".trl,
-            style: textTheme.headline3,
+            style: textTheme.displaySmall,
           ),
         ),
         body: SafeArea(
@@ -85,7 +84,7 @@ class _ProfileLinkedAccountScreen
                                 },
                                 child: Text(
                                   'profile.unlink'.trl,
-                                  style: textTheme.subtitle1!
+                                  style: textTheme.titleMedium!
                                       .copyWith(color: colorScheme.primary),
                                 ),
                               ),

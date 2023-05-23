@@ -34,7 +34,7 @@ class ProfileChooserScreen extends ConsumerWidget {
                     ),
                     child: Text(
                       'profile.selection.text1'.trl,
-                      style: textTheme.headline2,
+                      style: textTheme.displayMedium,
                     ),
                   ),
                   ActionCard(

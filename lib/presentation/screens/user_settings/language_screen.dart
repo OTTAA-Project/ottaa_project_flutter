@@ -34,7 +34,7 @@ class LanguageScreen extends ConsumerWidget {
             ),
             title: Text(
               'user.settings.language'.trl,
-              style: textTheme.headline3,
+              style: textTheme.displaySmall,
             ),
           ),
           body: Padding(
@@ -44,7 +44,7 @@ class LanguageScreen extends ConsumerWidget {
               children: [
                 Text(
                   'user.settings.language'.trl,
-                  style: textTheme.headline2!.copyWith(
+                  style: textTheme.displayMedium!.copyWith(
                     color: colorScheme.primary,
                   ),
                 ),
@@ -53,7 +53,7 @@ class LanguageScreen extends ConsumerWidget {
                 ),
                 Text(
                   'user.language.set'.trl,
-                  style: textTheme.headline3,
+                  style: textTheme.displaySmall,
                 ),
                 const SizedBox(
                   height: 16,
@@ -102,7 +102,7 @@ class LanguageScreen extends ConsumerWidget {
                           ),
                           Text(
                             'global.delicate'.trl,
-                            style: textTheme.headline3,
+                            style: textTheme.displaySmall,
                           ),
                           const SizedBox(
                             height: 16,
@@ -149,7 +149,7 @@ class LanguageScreen extends ConsumerWidget {
                 ),
                 Text(
                   'user.main_setting.ottaa_labs'.trl,
-                  style: textTheme.headline2!.copyWith(
+                  style: textTheme.displayMedium!.copyWith(
                     color: colorScheme.primary,
                   ),
                 ),
@@ -162,7 +162,7 @@ class LanguageScreen extends ConsumerWidget {
                 ),
                 Text(
                   'user.main_setting.labs_long'.trl,
-                  style: textTheme.headline2!.copyWith(fontSize: 14),
+                  style: textTheme.displayMedium!.copyWith(fontSize: 14),
                 ),
                 const SizedBox(
                   height: 24,

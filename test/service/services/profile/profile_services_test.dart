@@ -1,13 +1,8 @@
-import 'dart:ffi';
-
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/service/profile_services.dart';
-import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
-import 'package:ottaa_project_flutter/core/models/language_setting.dart';
-import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 import 'profile_services_test.mocks.dart';
@@ -34,12 +29,16 @@ Future<void> main() async {
   });
 
   test('should update user Settings', () async {
-//todo: emir here
-    when(mockServerRepository.updateUserSettings(data: anyNamed('data'), userId: anyNamed('userId'))).thenAnswer((realInvocation) async => null);
+    Map<String, dynamic> oldData = {"name": "rben"};
+    Map<String, dynamic> newData = {"name": "ruben"};
 
-    final response = await profileRepository.updateUserSettings(data: {}, userId: 'TestUserId');
+    when(mockServerRepository.updateUserSettings(data: anyNamed('data'), userId: anyNamed('userId'))).thenAnswer((realInvocation) async {
+      oldData = realInvocation.namedArguments[#data];
+    });
 
-    expect(null, null);
+    await profileRepository.updateUserSettings(data: newData, userId: 'TestUserId');
+
+    expect(oldData, newData);
   });
 
   test('should return a link to the user image after uploading it', () async {
@@ -82,13 +81,17 @@ Future<void> main() async {
     expect(response.left, 'no user');
   });
 
-  //todo: emir here too
   test('should remove the connected user from the caregiver list of users', () async {
-    when(mockServerRepository.removeCurrentUser(userId: anyNamed('userId'), careGiverId: anyNamed('careGiverId'))).thenAnswer((realInvocation) async => null);
+    List connectedData = ["testUserid"];
 
-    final response = await profileRepository.removeCurrentUser(userId: 'testUserid', careGiverId: 'testCareGiverId');
+    when(mockServerRepository.removeCurrentUser(userId: anyNamed('userId'), careGiverId: anyNamed('careGiverId'))).thenAnswer((realInvocation) async {
+      connectedData.remove(realInvocation.namedArguments[#userId]);
+    });
 
-    expect(null, null);
+    await profileRepository.removeCurrentUser(userId: 'testUserid', careGiverId: 'testCareGiverId');
+
+    expect(connectedData, equals([]));
+    expect(connectedData.length, 0);
   });
 
   test('should return a user from the given id of the patient', () async {
@@ -107,12 +110,17 @@ Future<void> main() async {
     expect(response.left, 'No User');
   });
 
-//todo: emir
-  test('should return a String from the give id of the patient if no data is found', () async {
-    when(mockServerRepository.uploadUserInformation(any, any)).thenAnswer((realInvocation) async => const Left('No User'));
+  test('should update user information', () async {
+    Map<String, dynamic> oldData = {};
+    Map<String, dynamic> newData = {"name": "emir"};
 
-    final response = await profileRepository.updateUser(data: {}, userId: 'TestUserId');
+    when(mockServerRepository.uploadUserInformation(any, any)).thenAnswer((realInvocation) async {
+      oldData = realInvocation.positionalArguments[1];
+      return const Right(null);
+    });
 
-    expect(null, null);
+    await profileRepository.updateUser(data: newData, userId: 'TestUserId');
+
+    expect(oldData, newData);
   });
 }

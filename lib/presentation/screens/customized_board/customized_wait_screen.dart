@@ -38,7 +38,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
                 Center(
                   child: Text(
                     "global.congrats".trl,
-                    style: textTheme.button!.copyWith(
+                    style: textTheme.labelLarge!.copyWith(
                       color: colorScheme.onBackground,
                     ),
                   ),
@@ -49,7 +49,7 @@ class CustomizeWaitScreen extends ConsumerWidget {
                 Center(
                   child: Text(
                     "customize.wait.subtitle".trlf({'name': provider.user!.settings.data.name}),
-                    style: textTheme.headline3,
+                    style: textTheme.displaySmall,
                   ),
                 ),
               ],

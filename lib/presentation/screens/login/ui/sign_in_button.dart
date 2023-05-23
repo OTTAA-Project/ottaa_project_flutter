@@ -80,7 +80,7 @@ class SignInButton extends ConsumerWidget {
                       child: Text(
                         "terms.text".trl,
                         textAlign: TextAlign.center,
-                        style: textTheme.bodyText2!,
+                        style: textTheme.bodyMedium!,
                       ),
                     )
                   ],
@@ -112,7 +112,7 @@ class SignInButton extends ConsumerWidget {
                 const SizedBox(width: 10),
                 Flexible(
                   flex: 2,
-                  child: Text(text, style: textTheme.headline3),
+                  child: Text(text, style: textTheme.displaySmall),
                 )
               ],
       ),

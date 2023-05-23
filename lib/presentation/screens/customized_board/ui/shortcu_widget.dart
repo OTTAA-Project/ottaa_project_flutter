@@ -22,7 +22,7 @@ class ShortcutWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: SizedBox(
         width: 80,
         child: Column(
           children: [
@@ -47,8 +47,8 @@ class ShortcutWidget extends StatelessWidget {
             Text(
               heading,
               style: selected
-                  ? textTheme.headline3
-                  : textTheme.headline3!.copyWith(color: kDarkenGrayColor),
+                  ? textTheme.displaySmall
+                  : textTheme.displaySmall!.copyWith(color: kDarkenGrayColor),
               textAlign: TextAlign.center,
               maxLines: 3,
             ),

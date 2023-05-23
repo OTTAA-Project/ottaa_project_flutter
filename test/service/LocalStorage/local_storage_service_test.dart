@@ -1,15 +1,7 @@
-import 'dart:ffi';
-import 'dart:io';
-import 'dart:typed_data';
+// ignore_for_file: depend_on_referenced_packages
 
-import 'package:either_dart/src/either.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:ottaa_project_flutter/application/service/local_storage_service.dart';
 
-import 'package:path_provider/path_provider.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -23,7 +15,6 @@ const String kExternalStoragePath = 'externalStoragePath';
 const String kAssetsPath = './';
 
 void main() {
-  LocalStorageService localStorageService = LocalStorageService();
   setUpAll(() {
     PathProviderPlatform.instance = FakePathProviderPlatform();
     TestWidgetsFlutterBinding.ensureInitialized();

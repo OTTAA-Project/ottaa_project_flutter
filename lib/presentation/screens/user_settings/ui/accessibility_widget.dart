@@ -43,7 +43,7 @@ class AccessibilityWidget extends StatelessWidget {
           ),
           Text(
             title,
-            style: textTheme.headline3,
+            style: textTheme.displaySmall,
           ),
         ],
       ),

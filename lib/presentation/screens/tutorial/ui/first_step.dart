@@ -21,7 +21,7 @@ class FirstStep extends StatelessWidget {
           Expanded(
             child: Container(),
           ),
-          Container(
+          SizedBox(
             height: verticalSize * 0.45,
             width: horizontalSize * 0.20,
             child: Image.asset(
@@ -33,7 +33,7 @@ class FirstStep extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.all(20),
-                height: horizontalSize * 0.05, // TODO WIDTH
+                height: horizontalSize * 0.05,
                 child: FittedBox(
                   child: Text(
                     "Create_your_phrase".trl,

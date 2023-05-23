@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/ui/background_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/games/ui/header_widget.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -53,7 +52,7 @@ class SearchScreen extends StatelessWidget {
                 ),
                 Text(
                   'game.search'.trl,
-                  style: textTheme.headline3,
+                  style: textTheme.displaySmall,
                 ),
               ],
             ),

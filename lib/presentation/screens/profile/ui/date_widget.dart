@@ -33,7 +33,7 @@ class DateWidget extends StatelessWidget {
             Text(
               text,
             ),
-            Icon(
+            const Icon(
               Icons.keyboard_arrow_down_sharp,
             ),
           ],

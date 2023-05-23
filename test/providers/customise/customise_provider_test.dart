@@ -5,20 +5,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
-import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
-import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
-import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
-import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
-import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
-import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 
 import 'customise_provider_test.mocks.dart';
 
@@ -34,35 +27,35 @@ Future<void> main() async {
 
   late List<Group> fakeGroups;
   late List<Picto> fakePictos;
-  late BaseUserModel fakeUser;
+  // late BaseUserModel fakeUser;
 
   setUp(() {
     mockI18N = MockI18N();
-    fakeUser = BaseUserModel(
-      id: "0",
-      settings: BaseSettingsModel(
-        data: UserData(
-          avatar: AssetsImage(asset: "test", network: "https://test.com"),
-          birthDate: DateTime(0),
-          genderPref: "n/a",
-          lastConnection: DateTime(0),
-          name: "John",
-          lastName: "Doe",
-        ),
-        language: LanguageSetting.empty(),
-      ),
-      email: "test@mail.com",
-      type: UserType.caregiver,
-    );
+    // fakeUser = BaseUserModel(
+    //   id: "0",
+    //   settings: BaseSettingsModel(
+    //     data: UserData(
+    //       avatar: AssetsImage(asset: "test", network: "https://test.com"),
+    //       birthDate: DateTime(0),
+    //       genderPref: "n/a",
+    //       lastConnection: DateTime(0),
+    //       name: "John",
+    //       lastName: "Doe",
+    //     ),
+    //     language: LanguageSetting.empty(),
+    //   ),
+    //   email: "test@mail.com",
+    //   type: UserType.caregiver,
+    // );
     mockLocalDatabaseRepository = MockLocalDatabaseRepository();
     mockCustomiseRepository = MockCustomiseRepository();
     mockGroupsRepository = MockGroupsRepository();
     mockUserNotifier = MockUserNotifier();
     mockPictogramsRepository = MockPictogramsRepository();
     fakeGroups = [
-      Group(id: '00', relations: [GroupRelation(id: '00', value: 00), GroupRelation(id: '01', value: 00)], text: 'test1', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 00),
-      Group(id: '01', relations: [GroupRelation(id: '', value: 00)], text: 'test2', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 01),
-      Group(id: '02', relations: [GroupRelation(id: '', value: 00)], text: 'test3', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 03),
+      Group(id: '00', relations: [const GroupRelation(id: '00', value: 00), const GroupRelation(id: '01', value: 00)], text: 'test1', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 00),
+      Group(id: '01', relations: [const GroupRelation(id: '', value: 00)], text: 'test2', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 01),
+      Group(id: '02', relations: [const GroupRelation(id: '', value: 00)], text: 'test3', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 03),
     ];
     fakePictos = [
       Picto(id: '00', type: 0, resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), block: true),
@@ -85,7 +78,6 @@ Future<void> main() async {
     expect(provider.selectedGroupImage, equals(fakeGroups[index].resource.network));
     expect(provider.selectedGroupName, equals(fakeGroups[index].text));
     expect(provider.selectedGroupStatus, equals(fakeGroups[index].block));
-    expect(provider.hasListeners, isFalse);
   });
 
   test('should upload the shortcuts for the user', () async {
@@ -228,9 +220,9 @@ Future<void> main() async {
   });
 
   test('should return true if values exist, false otherwise', () async {
-    final expectedValue = true;
-    final mockLocale = Locale('en');
-    final mockUserId = 'mockUserId';
+    const expectedValue = true;
+    const mockLocale = Locale('en');
+    const mockUserId = 'mockUserId';
 
     when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.valuesExistOrNot(

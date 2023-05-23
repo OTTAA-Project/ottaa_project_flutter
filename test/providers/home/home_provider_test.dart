@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +5,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
-import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
@@ -66,8 +63,8 @@ Future<void> main() async {
     mockPredictPictogram = MockPredictPictogram();
 
     fakePhrases = [
-      Phrase(date: DateTime.now(), id: '00', sequence: [Sequence(id: '22')], tags: {}),
-      Phrase(date: DateTime.now(), id: '22', sequence: [Sequence(id: '22')], tags: {})
+      Phrase(date: DateTime.now(), id: '00', sequence: [const Sequence(id: '22')], tags: {}),
+      Phrase(date: DateTime.now(), id: '22', sequence: [const Sequence(id: '22')], tags: {})
     ];
     fakePictos = [
       Picto(id: '0', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
@@ -119,9 +116,9 @@ Future<void> main() async {
       email: "test@mail.com",
     );
     fakeGroups = [
-      Group(id: '0', relations: [GroupRelation(id: '0', value: 0), GroupRelation(id: '1', value: 0)], text: 'test1', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 00),
-      Group(id: '1', relations: [GroupRelation(id: '1', value: 0)], text: 'test2', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 01),
-      Group(id: '2', relations: [GroupRelation(id: '2', value: 0)], text: 'test3', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 03),
+      Group(id: '0', relations: [const GroupRelation(id: '0', value: 0), const GroupRelation(id: '1', value: 0)], text: 'test1', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 00),
+      Group(id: '1', relations: [const GroupRelation(id: '1', value: 0)], text: 'test2', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 01),
+      Group(id: '2', relations: [const GroupRelation(id: '2', value: 0)], text: 'test3', resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), freq: 03),
     ];
     mockPatientNotifier.state = PatientUserModel(id: '00', groups: {}, phrases: {}, pictos: {}, settings: fakeUser.settings, email: 'test@test.com');
     mockUserNotifier.setUser(fakeUser);

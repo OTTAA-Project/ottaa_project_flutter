@@ -22,7 +22,7 @@ class ProfileHelpScreen extends ConsumerWidget {
         appBar: OTTAAAppBar(
           title: Text(
             "profile.help.help".trl,
-            style: textTheme.headline3,
+            style: textTheme.displaySmall,
           ),
         ),
         body: SafeArea(
@@ -59,14 +59,14 @@ class ProfileHelpScreen extends ConsumerWidget {
                           child: Wrap(
                             alignment: WrapAlignment.center,
                             children: [
-                              Text("Mail:", style: textTheme.headline3),
+                              Text("Mail:", style: textTheme.displaySmall),
                               const SizedBox(
                                 width: 4,
                               ),
                               GestureDetector(
                                 child: Text(
                                   "support@ottaaproject.com",
-                                  style: textTheme.headline3?.copyWith(
+                                  style: textTheme.displaySmall?.copyWith(
                                     decoration: TextDecoration.underline,
                                   ),
                                 ),
@@ -80,7 +80,7 @@ class ProfileHelpScreen extends ConsumerWidget {
                         Text(
                           "¿Desea comunicarse por teléfono con soporte técnico?",
                           textAlign: TextAlign.center,
-                          style: textTheme.headline3?.copyWith(
+                          style: textTheme.displaySmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),

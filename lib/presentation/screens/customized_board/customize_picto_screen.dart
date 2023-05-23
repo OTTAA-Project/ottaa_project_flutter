@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
@@ -35,7 +34,7 @@ class _CustomizePictoScreenState extends ConsumerState<CustomizePictoScreen> {
               Expanded(
                 child: AutoSizeText(
                   "customize.picto.title".trlf({"name": provider.selectedGroupName}),
-                  style: textTheme.headline3,
+                  style: textTheme.displaySmall,
                 ),
               ),
               IconButton(

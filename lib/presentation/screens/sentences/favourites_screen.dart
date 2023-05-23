@@ -3,9 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
-import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/list_pictos_widget.dart';
 
@@ -51,7 +49,7 @@ class FavouriteScreen extends ConsumerWidget {
         color: Colors.black,
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               child: Column(
                 children: [
                   Expanded(

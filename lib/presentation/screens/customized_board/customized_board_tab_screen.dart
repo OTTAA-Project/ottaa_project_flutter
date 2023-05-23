@@ -1,10 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
@@ -13,7 +11,6 @@ import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_board_screen.dart';
-import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_shortcut_screen.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class CustomizedBoardTabScreen extends ConsumerStatefulWidget {
@@ -61,7 +58,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedBoardTabScre
               Expanded(
                 child: Text(
                   "customize.board.appbar".trl,
-                  style: textTheme.bodyText2!.copyWith(fontSize: 14),
+                  style: textTheme.bodyMedium!.copyWith(fontSize: 14),
                   softWrap: true,
                 ),
               ),

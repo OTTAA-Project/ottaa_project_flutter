@@ -121,7 +121,7 @@ Future<void> main() async {
       fakeUser.settings.data = fakeUser.settings.data.copyWith(
         avatar: realInvocation.positionalArguments[1] as AssetsImage,
       );
-      return const Right("9");
+      return const Right(null);
     });
 
     await aboutRepository.uploadProfilePicture(AssetsImage(asset: "9", network: ""));
@@ -148,7 +148,7 @@ Future<void> main() async {
 
     when(mockServerRepository.uploadUserInformation(any, any)).thenAnswer((realInvocation) async {
       userInformation = CaregiverUserModel.fromMap(realInvocation.positionalArguments[1] as dynamic);
-      return const Right("9");
+      return const Right(null);
     });
 
     await aboutRepository.uploadUserInformation();
@@ -184,7 +184,7 @@ Future<void> main() async {
     when(mockServerRepository.updateUserLastConnectionTime(userId: "", time: 0)).thenAnswer((realInvocation) async {
       lastConnection = DateTime(realInvocation.namedArguments[#time]);
 
-      return const Right("");
+      return const Right(null);
     });
 
     await aboutRepository.updateUserLastConnectionTime(userId: "", time: 0);

@@ -21,7 +21,7 @@ class SecondStep extends StatelessWidget {
           Expanded(
             child: Container(),
           ),
-          Container(
+          SizedBox(
             height: verticalSize * 0.45,
             width: horizontalSize * 0.3,
             child: Image.asset(

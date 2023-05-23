@@ -24,10 +24,10 @@ class NewTextWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(16.0)),
           borderSide: BorderSide(color: Colors.black, width: 1),
         ),
-        hintStyle: textTheme.headline3!.copyWith(color: colorScheme.onSurface),
+        hintStyle: textTheme.displaySmall!.copyWith(color: colorScheme.onSurface),
         contentPadding: const EdgeInsets.only(left: 16),
       ),
-      style: textTheme.headline3,
+      style: textTheme.displaySmall,
     );
   }
 }

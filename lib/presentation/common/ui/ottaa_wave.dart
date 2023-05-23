@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class OTTAAWave extends StatelessWidget {
   final Color color;
   final Color bgColor;
-  const OTTAAWave({required this.color, this.bgColor = Colors.white});
+  const OTTAAWave({super.key, required this.color, this.bgColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class OTTAAWave extends StatelessWidget {
       height: double.infinity,
       width: double.infinity,
       child: CustomPaint(
-        painter: _HeaderWavePainter(this.color),
+        painter: _HeaderWavePainter(color),
       ),
     );
   }
@@ -28,7 +28,7 @@ class _HeaderWavePainter extends CustomPainter {
     final lapiz = Paint();
 
     // Propiedades
-    lapiz.color = this.color; //Color(0xff615AAB);
+    lapiz.color = color; //Color(0xff615AAB);
     lapiz.style = PaintingStyle.fill; // .fill .stroke
     lapiz.strokeWidth = 20;
 

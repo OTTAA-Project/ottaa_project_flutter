@@ -15,24 +15,17 @@ class AddOrRemoveFavouriteScreen extends ConsumerWidget {
     double verticalSize = MediaQuery.of(context).size.height;
     double horizontalSize = MediaQuery.of(context).size.width;
     // final provider = ref.read(sentencesProvider);
-    final speak =
-        ref.read(sentencesProvider.select((prov) => prov.speakFavOrNot));
-    final showCircular =
-        ref.watch(sentencesProvider.select((prov) => prov.showCircular));
+    final speak = ref.read(sentencesProvider.select((prov) => prov.speakFavOrNot));
+    final showCircular = ref.watch(sentencesProvider.select((prov) => prov.showCircular));
 
-    var selectedIndexFavSelection = ref.read(
-        sentencesProvider.select((prov) => prov.selectedIndexFavSelection));
-    final changeSentencesIndex = ref.read(sentencesProvider
-        .select((prov) => prov.changeSelectedIndexFavSelection));
+    var selectedIndexFavSelection = ref.read(sentencesProvider.select((prov) => prov.selectedIndexFavSelection));
+    final changeSentencesIndex = ref.read(sentencesProvider.select((prov) => prov.changeSelectedIndexFavSelection));
 
-    final saveFavourite =
-        ref.read(sentencesProvider.select((prov) => prov.saveFavourite));
+    final saveFavourite = ref.read(sentencesProvider.select((prov) => prov.saveFavourite));
 
-    final favouriteOrNotPicts =
-        ref.read(sentencesProvider.select((prov) => prov.favouriteOrNotPicts));
+    final favouriteOrNotPicts = ref.read(sentencesProvider.select((prov) => prov.favouriteOrNotPicts));
 
-    final sentences =
-        ref.read(sentencesProvider.select((prov) => prov.sentences));
+    // final sentences = ref.read(sentencesProvider.select((prov) => prov.sentences));
 
     return Scaffold(
       appBar: AppBar(
@@ -122,8 +115,7 @@ class AddOrRemoveFavouriteScreen extends ConsumerWidget {
               child: Container(
                 height: verticalSize * 0.5,
                 width: horizontalSize * 0.8,
-                padding:
-                    EdgeInsets.symmetric(horizontal: horizontalSize * 0.12),
+                padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.12),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -135,8 +127,7 @@ class AddOrRemoveFavouriteScreen extends ConsumerWidget {
                               height: verticalSize / 2.5,
                               width: horizontalSize * 0.78,
                               // backgrounColor: sentences[selectedIndexFavSelection].favouriteOrNot ? Colors.blue : Colors.transparent, TODO: Change this to uncomment code :/
-                              padding: EdgeInsets.symmetric(
-                                  vertical: verticalSize * 0.05),
+                              padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
                             )
                           : Container()
                     ],

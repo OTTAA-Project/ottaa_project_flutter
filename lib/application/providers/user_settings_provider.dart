@@ -22,7 +22,6 @@ import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/tts_setting.dart';
 import 'package:ottaa_project_flutter/core/models/voices_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
-import 'package:ottaa_project_flutter/core/repositories/user_settings_repository.dart';
 
 class UserSettingsProvider extends ChangeNotifier {
   final I18N _i18n;

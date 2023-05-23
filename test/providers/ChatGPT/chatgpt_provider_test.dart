@@ -3,11 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
-import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
@@ -77,7 +74,7 @@ Future<void> main() async {
     )).thenAnswer((realInvocation) async => const Right('This is a sentence'));
 
     final response = await chatGPTNotifier.generatePhrase(fakePictos);
-    print(response);
+
     expect(response, 'This is a sentence');
   });
 }

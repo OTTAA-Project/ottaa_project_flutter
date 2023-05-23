@@ -27,13 +27,13 @@ import 'onboarding_provider_test.mocks.dart';
   LocalDatabaseRepository
 ])
 void main() {
-  late OnBoardingNotifier onBoardingNotifier;
+  // late OnBoardingNotifier onBoardingNotifier;
   late MockAuthRepository mockAuthRepository;
-  late MockLoadingNotifier mockLoadingNotifier;
-  late MockAboutRepository mockAboutRepository;
+  // late MockLoadingNotifier mockLoadingNotifier;
+  // late MockAboutRepository mockAboutRepository;
   late MockUserAvatarNotifier mockUserAvatarNotifier;
-  late MockLocalDatabaseRepository mockLocalDatabaseRepository;
-  late MockOnBoardingNotifier mockOnBoardingNotifier;
+  // late MockLocalDatabaseRepository mockLocalDatabaseRepository;
+  // late MockOnBoardingNotifier mockOnBoardingNotifier;
   late UserModel fakeUser;
 
   setUp(() {
@@ -53,13 +53,13 @@ void main() {
       email: "test@mail.com",
     );
     mockAuthRepository = MockAuthRepository();
-    mockLoadingNotifier = MockLoadingNotifier();
-    mockAboutRepository = MockAboutRepository();
+    // mockLoadingNotifier = MockLoadingNotifier();
+    // mockAboutRepository = MockAboutRepository();
     mockUserAvatarNotifier = MockUserAvatarNotifier();
-    mockLocalDatabaseRepository = MockLocalDatabaseRepository();
-    mockLoadingNotifier = MockLoadingNotifier();
-    mockOnBoardingNotifier = MockOnBoardingNotifier();
-    onBoardingNotifier = OnBoardingNotifier();
+    // mockLocalDatabaseRepository = MockLocalDatabaseRepository();
+    // mockLoadingNotifier = MockLoadingNotifier();
+    // mockOnBoardingNotifier = MockOnBoardingNotifier();
+    // onBoardingNotifier = OnBoardingNotifier();
   });
   group('Onboarding Notifier', () {
     test('Update User Avatar', () async {
@@ -75,7 +75,7 @@ void main() {
       when(mockAuthRepository.signIn(SignInType.email))
           .thenAnswer((realInvocation) async => Right(fakeUser));
       when(mockAuthRepository.getCurrentUser())
-          .thenAnswer((realInvocation) async => Left("ERROR"));
+          .thenAnswer((realInvocation) async => const Left("ERROR"));
       when(mockUserAvatarNotifier.getAvatar())
           .thenAnswer((realInvocation) => '730.png');
       // await onBoardingNotifier.updateUserAvatar();

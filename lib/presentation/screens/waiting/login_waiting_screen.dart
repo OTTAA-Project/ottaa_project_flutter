@@ -3,11 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
-import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_loading_animation.dart';
 
 class LoginWaitingScreen extends ConsumerStatefulWidget {
@@ -64,12 +62,12 @@ class _LoginWaitingScreenState extends ConsumerState<LoginWaitingScreen> {
             const SizedBox(height: 40),
             Text(
               "login.wait.title".trl,
-              style: textTheme.headline2,
+              style: textTheme.displayMedium,
             ),
             const SizedBox(height: 10),
             Text(
               "login.wait.subtitle".trl,
-              style: textTheme.headline3,
+              style: textTheme.displaySmall,
             ),
           ],
         ),

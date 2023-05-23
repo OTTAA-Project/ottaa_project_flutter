@@ -23,7 +23,7 @@ class _ProfileFAQScreenState extends State<ProfileFAQScreen> {
         appBar: OTTAAAppBar(
           title: Text(
             "profile.faq.title".trl,
-            style: textTheme.headline3,
+            style: textTheme.displaySmall,
           ),
         ),
         body: Padding(
@@ -48,7 +48,7 @@ class _ProfileFAQScreenState extends State<ProfileFAQScreen> {
                           padding: const EdgeInsets.only(left: 24),
                           child: Text(
                             item.headerValue,
-                            style: textTheme.subtitle2!
+                            style: textTheme.titleSmall!
                                 .copyWith(fontWeight: FontWeight.w600),
                             textAlign: TextAlign.start,
                           ),
@@ -70,7 +70,7 @@ class _ProfileFAQScreenState extends State<ProfileFAQScreen> {
                             vertical: 16, horizontal: 24),
                         child: Text(
                           item.expandedValue,
-                          style: textTheme.subtitle1,
+                          style: textTheme.titleMedium,
                         ),
                       ),
                     ],

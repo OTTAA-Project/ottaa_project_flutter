@@ -40,7 +40,7 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
               Text(
                 "profile.link.mail.title".trl,
                 textAlign: TextAlign.center,
-                style: textTheme.headline2,
+                style: textTheme.displayMedium,
               ),
               const SizedBox(height: 24),
               Form(
@@ -65,13 +65,13 @@ class _LinkMailScreenState extends ConsumerState<LinkMailScreen> {
               Text(
                 "profile.link.mail.contact".trl,
                 textAlign: TextAlign.center,
-                style: textTheme.bodyText2,
+                style: textTheme.bodyMedium,
               ),
               const SizedBox(height: 16),
               Text(
                 "profile.link.mail.warn".trl,
                 textAlign: TextAlign.center,
-                style: textTheme.bodyText2,
+                style: textTheme.bodyMedium,
               ),
               const Spacer(),
               PrimaryButton(

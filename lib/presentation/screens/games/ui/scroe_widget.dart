@@ -23,11 +23,11 @@ class ScoreWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: textTheme.headline3!.copyWith(fontWeight: FontWeight.w600),
+            style: textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w600),
           ),
           Text(
             number,
-            style: textTheme.headline3!.copyWith(fontWeight: FontWeight.w600),
+            style: textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w600),
           ),
         ],
       ),

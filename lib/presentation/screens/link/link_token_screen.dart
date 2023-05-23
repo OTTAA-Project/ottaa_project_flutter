@@ -4,7 +4,6 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/providers/link_provider.dart';
 import 'package:ottaa_project_flutter/presentation/common/ui/loading_modal.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/ui/otp_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/link/ui/token_input.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -41,7 +40,7 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
               Text(
                 "profile.link.token.title".trl,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
               const SizedBox(height: 24),
               const OTPWidget(),
@@ -49,7 +48,7 @@ class _LinkTokenScreenState extends ConsumerState<LinkTokenScreen> {
               Text(
                 "profile.link.token.problem".trl,
                 textAlign: TextAlign.center,
-                style: textTheme.bodyText2,
+                style: textTheme.bodyMedium,
               ),
               const SizedBox(height: 16),
               SecondaryButton(

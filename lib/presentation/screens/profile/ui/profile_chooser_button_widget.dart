@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 
 class ProfileChooserButtonWidget extends StatelessWidget {
@@ -18,7 +17,6 @@ class ProfileChooserButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -49,14 +47,14 @@ class ProfileChooserButtonWidget extends StatelessWidget {
                   ),
                   Text(
                     heading,
-                    style: textTheme.subtitle2,
+                    style: textTheme.titleSmall,
                   ),
                   const SizedBox(
                     height: 4,
                   ),
                   Text(
                     subtitle,
-                    style: textTheme.subtitle1,
+                    style: textTheme.titleMedium,
                     maxLines: 2,
                   ),
                 ],

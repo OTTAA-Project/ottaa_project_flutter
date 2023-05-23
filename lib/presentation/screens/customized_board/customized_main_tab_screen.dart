@@ -62,7 +62,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                 Expanded(
                   child: Text(
                     index == 1 ? "customize.board.appbar".trl : "customize.shortcut.appbar".trl,
-                    style: textTheme.bodyText2!.copyWith(fontSize: 14),
+                    style: textTheme.bodyMedium!.copyWith(fontSize: 14),
                     softWrap: true,
                   ),
                 ),
@@ -107,7 +107,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                 },
                 child: Text(
                   "global.skip".trl,
-                  style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+                  style: textTheme.headlineMedium!.copyWith(color: colorScheme.onSurface),
                 ),
               ),
             ],
@@ -152,7 +152,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                             ),
                             Text(
                               "${"global.step".trl} $index / 2",
-                              style: textTheme.headline4!.copyWith(color: colorScheme.onSurface),
+                              style: textTheme.headlineMedium!.copyWith(color: colorScheme.onSurface),
                             ),
                           ],
                         ),
@@ -161,7 +161,7 @@ class _CustomizedMainTabScreenState extends ConsumerState<CustomizedMainTabScree
                         ),
                         Text(
                           index == 1 ? "customize.board.title".trl : "customize.shortcut.title".trl,
-                          style: textTheme.headline3!.copyWith(fontWeight: FontWeight.w600),
+                          style: textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(
                           height: 16,

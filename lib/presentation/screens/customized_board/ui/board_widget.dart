@@ -47,7 +47,7 @@ class BoardWidget extends StatelessWidget {
                   ),
                   Text(
                     title.length >= 21 ? '${title.substring(0, 21)}...' : title,
-                    style: textTheme.subtitle2!.copyWith(
+                    style: textTheme.titleSmall!.copyWith(
                         // overflow: TextOverflow.ellipsis,
                         ),
                     overflow: TextOverflow.ellipsis,
@@ -91,7 +91,7 @@ class BoardWidget extends StatelessWidget {
             children: [
               Text(
                 "customize.picto.switch".trl,
-                style: textTheme.subtitle2,
+                style: textTheme.titleSmall,
               ),
               OTTAASwitch(
                 value: status,

@@ -6,7 +6,6 @@ import 'package:ottaa_project_flutter/application/providers/user_settings_provid
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
 import 'package:ottaa_project_flutter/core/enums/velocity_types.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/profile/ui/drop_down_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/chooser_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/divider_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/ui/switch_widget.dart';
@@ -38,7 +37,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
             ),
             title: Text(
               'user.settings.voice_and_subtitles'.trl,
-              style: textTheme.headline3,
+              style: textTheme.displaySmall,
             ),
           ),
           body: Padding(
@@ -49,7 +48,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                 children: [
                   Text(
                     'global.voice'.trl,
-                    style: textTheme.headline2!.copyWith(
+                    style: textTheme.displayMedium!.copyWith(
                       color: colorScheme.primary,
                     ),
                   ),
@@ -58,7 +57,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                   ),
                   Text(
                     'user.voice_and_subtitle.voice_types'.trl,
-                    style: textTheme.headline3,
+                    style: textTheme.displaySmall,
                   ),
                   const SizedBox(
                     height: 24,
@@ -85,7 +84,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                   ),
                   Text(
                     'user.voice_and_subtitle.voice_rate'.trl,
-                    style: textTheme.headline3,
+                    style: textTheme.displaySmall,
                   ),
                   const SizedBox(
                     height: 24,
@@ -95,7 +94,6 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                       ChooserWidget(
                         selected: provider.voiceRate == VelocityTypes.slow.name ? true : false,
                         onTap: () {
-                          print(provider.ttsSetting.voiceSetting.voicesSpeed[provider.language]!.name);
                           provider.changeVoiceSpeed(type: VelocityTypes.slow);
                           provider.notify();
                         },
@@ -133,7 +131,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                   const DividerWidget(),
                   Text(
                     'user.voice_and_subtitle.subtitle'.trl,
-                    style: textTheme.headline2!.copyWith(
+                    style: textTheme.displayMedium!.copyWith(
                       color: colorScheme.primary,
                     ),
                   ),
@@ -152,7 +150,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                   ),
                   Text(
                     "user.voice_and_subtitle.size".trl,
-                    style: textTheme.headline3,
+                    style: textTheme.displaySmall,
                   ),
                   const SizedBox(
                     height: 24,

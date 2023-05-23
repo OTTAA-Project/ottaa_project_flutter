@@ -2,10 +2,8 @@ import 'package:either_dart/src/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/notifiers/auth_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/service/about_service.dart';
@@ -18,14 +16,13 @@ import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_provider_test.mocks.dart';
 
 @GenerateMocks([AuthProvider, LoadingNotifier, AuthService, AboutService, LocalDatabaseRepository, AuthNotifier, UserNotifier])
 void main() {
   late AuthProvider authProvider;
-  late MockAuthProvider mockAuthProvider;
+  // late MockAuthProvider mockAuthProvider;
   late MockLoadingNotifier mockLoadingNotifier;
   late MockAuthService mockAuthService;
   late MockAboutService mockAboutService;
@@ -50,7 +47,7 @@ void main() {
       ),
       email: "test@mail.com",
     );
-    mockAuthProvider = MockAuthProvider();
+    // mockAuthProvider = MockAuthProvider();
     mockLoadingNotifier = MockLoadingNotifier();
     mockAuthService = MockAuthService();
     mockAboutService = MockAboutService();

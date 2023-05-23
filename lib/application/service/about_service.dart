@@ -57,7 +57,7 @@ class AboutService extends AboutRepository {
       return androidInfo.model;
     } else if (Platform.isIOS) {
       IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.utsname.machine!;
+      return iosDeviceInfo.utsname.machine??"IOS";
     }
 
     return 'Unknown';

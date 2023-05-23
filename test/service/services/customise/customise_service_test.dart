@@ -69,7 +69,7 @@ void main() {
     when(mockServerRepository.setShortcutsForUser(shortcuts: ShortcutsModel.none(), userId: "")).thenAnswer((realInvocation) async {
       shortcuts = realInvocation.namedArguments[#shortcuts];
 
-      return const Right("");
+      return const Right(null);
     });
 
     await customiseService.setShortcutsForUser(shortcuts: ShortcutsModel.none(), userId: "");

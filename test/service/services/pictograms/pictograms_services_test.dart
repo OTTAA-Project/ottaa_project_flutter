@@ -2,12 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/service/pictograms_service.dart';
-import 'package:ottaa_project_flutter/core/enums/user_types.dart';
-import 'package:ottaa_project_flutter/core/models/assets_image.dart';
-import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
-import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
-import 'package:ottaa_project_flutter/core/models/language_setting.dart';
-import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 import 'pictograms_services_test.mocks.dart';
@@ -62,22 +56,22 @@ Future<void> main() async{
   ]
   """;
 
-  BaseUserModel fakeUser = BaseUserModel(
-    id: "0",
-    settings: BaseSettingsModel(
-      data: UserData(
-        avatar: AssetsImage(asset: "test", network: "https://test.com"),
-        birthDate: DateTime(0),
-        genderPref: "n/a",
-        lastConnection: DateTime(0),
-        name: "John",
-        lastName: "Doe",
-      ),
-      language: LanguageSetting.empty(),
-    ),
-    email: "test@mail.com",
-    type: UserType.caregiver,
-  );
+  // BaseUserModel fakeUser = BaseUserModel(
+  //   id: "0",
+  //   settings: BaseSettingsModel(
+  //     data: UserData(
+  //       avatar: AssetsImage(asset: "test", network: "https://test.com"),
+  //       birthDate: DateTime(0),
+  //       genderPref: "n/a",
+  //       lastConnection: DateTime(0),
+  //       name: "John",
+  //       lastName: "Doe",
+  //     ),
+  //     language: LanguageSetting.empty(),
+  //   ),
+  //   email: "test@mail.com",
+  //   type: UserType.caregiver,
+  // );
 
   setUp(() async {
     mockAuthRepository = MockAuthRepository();

@@ -26,7 +26,11 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+    // namespace "com.ottaaproject.flutter"
     compileSdkVersion 33
+
+    ndkVersion "25.1.8937393"
+
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'

@@ -38,7 +38,7 @@ class MainSettingScreen extends ConsumerWidget {
             ),
             title: Text(
               'user.settings.main_screen'.trl,
-              style: textTheme.headline3,
+              style: textTheme.displaySmall,
             ),
           ),
           body: Padding(
@@ -49,7 +49,7 @@ class MainSettingScreen extends ConsumerWidget {
                 children: [
                   Text(
                     'user.main_setting.interaction'.trl,
-                    style: textTheme.headline2!.copyWith(
+                    style: textTheme.displayMedium!.copyWith(
                       color: colorScheme.primary,
                     ),
                   ),
@@ -76,7 +76,7 @@ class MainSettingScreen extends ConsumerWidget {
                   const DividerWidget(),
                   Text(
                     'customize.shortcut.appbar'.trl,
-                    style: textTheme.headline2!.copyWith(
+                    style: textTheme.displayMedium!.copyWith(
                       color: colorScheme.primary,
                     ),
                   ),
@@ -97,7 +97,7 @@ class MainSettingScreen extends ConsumerWidget {
                   const DividerWidget(),
                   Text(
                     'user.main_setting.board_view'.trl,
-                    style: textTheme.headline2!.copyWith(
+                    style: textTheme.displayMedium!.copyWith(
                       color: colorScheme.primary,
                     ),
                   ),

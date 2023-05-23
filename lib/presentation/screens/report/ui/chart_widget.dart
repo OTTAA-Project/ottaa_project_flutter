@@ -13,7 +13,6 @@ class ChartWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final horizontalSize = MediaQuery.of(context).size.width;
     final verticalSize = MediaQuery.of(context).size.height;
     final provider = ref.watch(reportProvider);
     return Container(

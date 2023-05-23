@@ -8,7 +8,7 @@ class MiniPicto extends StatelessWidget {
   final VoidCallback onTap;
   final bool localImg;
 
-  const MiniPicto({
+  const MiniPicto({super.key, 
     required this.pict,
     required this.onTap,
     required this.localImg,

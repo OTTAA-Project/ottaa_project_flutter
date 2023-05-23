@@ -22,8 +22,6 @@ void main() async {
   );
   await dotenv.load();
 
-  await dotenv.load();
-
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   if (kIsWeb) {}
@@ -31,6 +29,7 @@ void main() async {
   await configureDependencies();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+// ignore: missing_provider_scope
   runApp(
     const Injector(
       application: Application(),

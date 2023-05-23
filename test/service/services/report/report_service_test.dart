@@ -4,7 +4,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/service/report_service.dart';
 import 'package:ottaa_project_flutter/core/models/phrases_statistics_model.dart';
-import 'package:ottaa_project_flutter/core/models/picto_statistics_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 import 'report_service_test.mocks.dart';
@@ -26,26 +25,26 @@ Future<void> main() async {
       '4': 0012,
     },
   );
-  PictoStatisticsModel pictoStatisticsModel = PictoStatisticsModel(mostUsedSentences: [
-    MostUsedSentence(
-      frec: 00,
-      pictoComponentes: [
-        PictoComponente(id: '00', esSugerencia: false, hora: ['test'], sexo: ['test'], edad: ['test']),
-      ],
-    ),
-    MostUsedSentence(
-      frec: 11,
-      pictoComponentes: [
-        PictoComponente(id: '11', esSugerencia: false, hora: ['test'], sexo: ['test'], edad: ['test']),
-      ],
-    ),
-  ], pictoUsagePerGroup: [
-    PictoUsagePerGroup(
-      groupId: 00,
-      percentage: 00,
-      name: Name(en: '', es: '', fr: '', pt: ''),
-    )
-  ]);
+  // PictoStatisticsModel pictoStatisticsModel = PictoStatisticsModel(mostUsedSentences: [
+  //   MostUsedSentence(
+  //     frec: 00,
+  //     pictoComponentes: [
+  //       PictoComponente(id: '00', esSugerencia: false, hora: ['test'], sexo: ['test'], edad: ['test']),
+  //     ],
+  //   ),
+  //   MostUsedSentence(
+  //     frec: 11,
+  //     pictoComponentes: [
+  //       PictoComponente(id: '11', esSugerencia: false, hora: ['test'], sexo: ['test'], edad: ['test']),
+  //     ],
+  //   ),
+  // ], pictoUsagePerGroup: [
+  //   PictoUsagePerGroup(
+  //     groupId: 00,
+  //     percentage: 00,
+  //     name: Name(en: '', es: '', fr: '', pt: ''),
+  //   )
+  // ]);
 
   late ReportRepository reportRepository;
   setUp(() {

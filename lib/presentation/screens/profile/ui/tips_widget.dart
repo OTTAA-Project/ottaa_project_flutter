@@ -37,7 +37,7 @@ class TipsWidget extends StatelessWidget {
             ),
             Text(
               title,
-              style: textTheme.headline2,
+              style: textTheme.displayMedium,
             ),
           ],
         ),
@@ -47,7 +47,7 @@ class TipsWidget extends StatelessWidget {
         Text(
           subtitle,
           maxLines: 3,
-          style: textTheme.headline4,
+          style: textTheme.headlineMedium,
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 16),

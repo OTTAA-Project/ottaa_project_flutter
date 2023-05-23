@@ -21,7 +21,7 @@ class ThirdStep extends StatelessWidget {
           Expanded(
             child: Container(),
           ),
-          Container(
+          SizedBox(
             height: verticalSize * 0.45,
             child: FittedBox(
               child: Image.asset(

@@ -4,7 +4,6 @@ import 'package:collection/collection.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
-import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart';
 import 'package:ottaa_project_flutter/core/use_cases/create_email_token.dart';

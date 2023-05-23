@@ -20,7 +20,7 @@ class SwitchWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: textTheme.headline3,
+          style: textTheme.displaySmall,
         ),
         OTTAASwitch(value: value, onChanged: onChanged),
       ],

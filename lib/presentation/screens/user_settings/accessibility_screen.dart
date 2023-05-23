@@ -42,7 +42,7 @@ class AccessibilityScreen extends ConsumerWidget {
             ),
             title: Text(
               'user.settings.accessibility'.trl,
-              style: textTheme.headline3,
+              style: textTheme.displaySmall,
             ),
           ),
           body: Padding(
@@ -54,14 +54,14 @@ class AccessibilityScreen extends ConsumerWidget {
                   Text(
                     'user.accessibility.selection'.trl,
                     style:
-                        textTheme.headline2!.copyWith(color: colorScheme.primary),
+                        textTheme.displayMedium!.copyWith(color: colorScheme.primary),
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   Text(
                     'user.accessibility.bar_text'.trl,
-                    style: textTheme.headline3,
+                    style: textTheme.displaySmall,
                   ),
                   const SizedBox(
                     height: 32,
@@ -93,7 +93,7 @@ class AccessibilityScreen extends ConsumerWidget {
                   Text(
                     'user.accessibility.connected'.trl,
                     style:
-                        textTheme.headline2!.copyWith(color: colorScheme.primary),
+                        textTheme.displayMedium!.copyWith(color: colorScheme.primary),
                   ),
                   SwitchWidget(
                     onChanged: (value) {
@@ -164,7 +164,7 @@ class AccessibilityScreen extends ConsumerWidget {
                   Text(
                     'user.accessibility.selection_type'.trl,
                     style:
-                        textTheme.headline2!.copyWith(color: colorScheme.primary),
+                        textTheme.displayMedium!.copyWith(color: colorScheme.primary),
                   ),
                   const SizedBox(
                     height: 8,
@@ -200,13 +200,13 @@ class AccessibilityScreen extends ConsumerWidget {
                   Text(
                     'user.accessibility.speed'.trl,
                     style:
-                        textTheme.headline2!.copyWith(color: colorScheme.primary),
+                        textTheme.displayMedium!.copyWith(color: colorScheme.primary),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Text(
                       'user.accessibility.selection_speed'.trl,
-                      style: textTheme.headline3,
+                      style: textTheme.displaySmall,
                     ),
                   ),
                   Row(

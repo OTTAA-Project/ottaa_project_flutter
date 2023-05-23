@@ -249,7 +249,7 @@ class MatchPictogramScreen extends ConsumerWidget {
               ? mpProvider.trueOrFalse
                   ? Text(
                       'game.yes'.trl,
-                      style: textTheme.headline1,
+                      style: textTheme.displayLarge,
                     )
                   : const SizedBox.shrink()
               : const SizedBox.shrink(),
@@ -261,7 +261,7 @@ class MatchPictogramScreen extends ConsumerWidget {
               ? !mpProvider.trueOrFalse
                   ? Text(
                       'game.no'.trl,
-                      style: textTheme.headline1,
+                      style: textTheme.displayLarge,
                     )
                   : const SizedBox.shrink()
               : const SizedBox.shrink(),

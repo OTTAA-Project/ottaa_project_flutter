@@ -5,7 +5,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:ottaa_project_flutter/core/abstracts/hive_type_ids.dart';
 import 'package:ottaa_project_flutter/core/enums/size_types.dart';
-import 'package:ottaa_project_flutter/core/enums/velocity_types.dart';
 
 part 'subtitles_setting.g.dart';
 

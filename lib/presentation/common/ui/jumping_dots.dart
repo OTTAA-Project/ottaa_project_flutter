@@ -4,17 +4,13 @@ class JumpingDotsProgressIndicator extends StatefulWidget {
   final int numberOfDots;
   final Color dotColor;
 
-  const JumpingDotsProgressIndicator(
-      {Key? key, this.numberOfDots = 3, this.dotColor = Colors.white})
-      : super(key: key);
+  const JumpingDotsProgressIndicator({Key? key, this.numberOfDots = 3, this.dotColor = Colors.white}) : super(key: key);
 
   @override
-  JumpingDotsProgressIndicatorState createState() =>
-      JumpingDotsProgressIndicatorState();
+  JumpingDotsProgressIndicatorState createState() => JumpingDotsProgressIndicatorState();
 }
 
-class JumpingDotsProgressIndicatorState
-    extends State<JumpingDotsProgressIndicator> with TickerProviderStateMixin {
+class JumpingDotsProgressIndicatorState extends State<JumpingDotsProgressIndicator> with TickerProviderStateMixin {
   List<AnimationController> _animationControllers = [];
 
   final List<Animation<double>> _animations = [];
@@ -39,14 +35,12 @@ class JumpingDotsProgressIndicatorState
     _animationControllers = List.generate(
       widget.numberOfDots,
       (index) {
-        return AnimationController(
-            vsync: this, duration: Duration(milliseconds: animationDuration));
+        return AnimationController(vsync: this, duration: Duration(milliseconds: animationDuration));
       },
     ).toList();
 
     for (int i = 0; i < widget.numberOfDots; i++) {
-      _animations.add(
-          Tween<double>(begin: 0, end: -10).animate(_animationControllers[i]));
+      _animations.add(Tween<double>(begin: 0, end: -10).animate(_animationControllers[i]));
     }
 
     for (int i = 0; i < widget.numberOfDots; i++) {
@@ -57,8 +51,7 @@ class JumpingDotsProgressIndicatorState
             _animationControllers[i + 1].forward();
           }
         }
-        if (i == widget.numberOfDots - 1 &&
-            status == AnimationStatus.dismissed) {
+        if (i == widget.numberOfDots - 1 && status == AnimationStatus.dismissed) {
           _animationControllers[0].forward();
         }
       });
@@ -84,8 +77,7 @@ class JumpingDotsProgressIndicatorState
                   child: Transform.translate(
                     offset: Offset(0, _animations[index].value),
                     child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: widget.dotColor),
+                      decoration: BoxDecoration(shape: BoxShape.circle, color: widget.dotColor),
                       height: 10,
                       width: 10,
                     ),

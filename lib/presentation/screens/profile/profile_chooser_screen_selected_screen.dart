@@ -5,7 +5,6 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
-import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_chooser_button_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class ProfileChooserScreenSelected extends ConsumerWidget {
@@ -40,7 +39,7 @@ class ProfileChooserScreenSelected extends ConsumerWidget {
                       ),
                       child: Text(
                         "onboarding.profile.subtitle".trl,
-                        style: textTheme.button!
+                        style: textTheme.labelLarge!
                             .copyWith(color: colorScheme.onBackground),
                       ),
                     ),

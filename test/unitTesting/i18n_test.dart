@@ -13,7 +13,6 @@ void main() async {
   group('I18N Coverage', () {
     test('set Language', () async {
       language.changeLanguage('es_AR');
-      print(language.currentLocale);
       expect(language.currentLocale.languageCode, 'en');
     });
     test('set Language by Locale', () {

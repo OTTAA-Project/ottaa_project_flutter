@@ -23,7 +23,7 @@ class TabWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: textTheme.headline3,
+            style: textTheme.displaySmall,
           ),
           const SizedBox(
             height: 16,

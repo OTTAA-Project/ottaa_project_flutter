@@ -48,7 +48,7 @@ class ListPictosWidget extends ConsumerWidget {
               return Container(
                 margin: const EdgeInsets.all(10),
                 child: MiniPicto(
-                  localImg: pict.resource.asset != null,
+                  localImg: pict.resource.asset.isEmpty,
                   pict: pict,
                   onTap: () {
                     // provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot = !provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot;
@@ -61,7 +61,7 @@ class ListPictosWidget extends ConsumerWidget {
               return Container(
                 margin: const EdgeInsets.all(10),
                 child: MiniPicto(
-                  localImg: speakPict.resource.asset != null,
+                  localImg: speakPict.resource.asset.isEmpty,
                   pict: speakPict,
                   onTap: () {
                     // provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot = !provider.sentences[provider.selectedIndexFavSelection].favouriteOrNot;

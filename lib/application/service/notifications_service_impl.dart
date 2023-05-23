@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/core/service/notifications_service.dart';
 
 @Singleton(

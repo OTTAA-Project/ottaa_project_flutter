@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class AnimatedDialog {
   static Future<T?> animate<T>(BuildContext context, Widget builder) {
-    final theme = Theme.of(context);
     return showGeneralDialog<T>(
       barrierColor: Colors.black.withOpacity(0.5),
       context: context,

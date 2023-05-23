@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
-import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
-import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -31,8 +27,8 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final _ttsProvider = ref.read(ttsProvider);
-      await _ttsProvider.init();
+      final ttsNotifier = ref.read(ttsProvider);
+      await ttsNotifier.init();
     });
   }
 
@@ -53,7 +49,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
             padding: const EdgeInsets.only(left: 24),
             child: Text(
               'profile.hello'.trlf({'name': user!.settings.data.name}),
-              style: textTheme.headline3,
+              style: textTheme.displaySmall,
             ),
           ),
         ),
@@ -64,7 +60,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
             children: [
               Text(
                 'user.main.title'.trl,
-                style: textTheme.button!.copyWith(
+                style: textTheme.labelLarge!.copyWith(
                   color: kPrimaryTextColor,
                 ),
               ),

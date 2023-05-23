@@ -56,15 +56,15 @@ class HeaderWidget extends StatelessWidget {
                   children: [
                     Text(
                       headline,
-                      style: textTheme.headline3,
+                      style: textTheme.displaySmall,
                     ),
                     Text(
                       subtitle,
                       style: bold!
-                          ? textTheme.headline3!.copyWith(
+                          ? textTheme.displaySmall!.copyWith(
                               fontWeight: FontWeight.w600,
                             )
-                          : textTheme.headline3!.copyWith(
+                          : textTheme.displaySmall!.copyWith(
                               color: colorScheme.primary,
                             ),
                     ),
@@ -100,15 +100,15 @@ class HeaderWidget extends StatelessWidget {
                 children: [
                   Text(
                     headline,
-                    style: textTheme.headline3,
+                    style: textTheme.displaySmall,
                   ),
                   Text(
                     subtitle,
                     style: bold!
-                        ? textTheme.headline3!.copyWith(
+                        ? textTheme.displaySmall!.copyWith(
                             fontWeight: FontWeight.w600,
                           )
-                        : textTheme.headline3!.copyWith(
+                        : textTheme.displaySmall!.copyWith(
                             color: colorScheme.primary,
                           ),
                   ),
