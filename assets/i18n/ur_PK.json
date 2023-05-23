@@ -79,7 +79,7 @@
         "contact": "*Asegurate de estar en contacto con la persona que posea esta cuenta en un dispositivo."
       },
       "token": {
-        "title": "Coloque el código de verificación que llegó como notificación a otro dispositivo.",
+        "title": "Colocá el código de verificación que llegó como notificación a otro dispositivo.",
         "problem": "اکاؤنٹس کو لنک کرنے میں مشکلات؟",
         "resend": "کوڈ پھر سے بھیجو",
         "back": "ایک اور ای میل درج کریں۔",
@@ -186,7 +186,7 @@
     "general": "جنرل",
     "pictogram": "تصویریں",
     "configuration": "ترتیبات",
-    "user_ottaa": "Usar Ottaa como",
+    "user_ottaa": "Usar OTTAA como",
     "cancel": "منسوخ",
     "slow": "سست",
     "default": "پہلے سے طے شدہ\n",
@@ -304,7 +304,7 @@
     "game_header_1": "Unir pictogramas",
     "game_header_2": "Juego de la Memoria",
     "game_header_3": "Armá una historia",
-    "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprende jugando",
+    "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprendé jugando",
     "game_sub_1": "Uní los pictogramas de manera correcta",
     "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
     "game_sub_3": "Elegí los pictogramas que más te gusten, y con la ayuda de Chat GPT, crearás una historia.",
