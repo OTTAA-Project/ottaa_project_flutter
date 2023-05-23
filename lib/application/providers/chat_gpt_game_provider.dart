@@ -13,10 +13,10 @@ class ChatGptGameProvider extends ChangeNotifier {
   int sentencePhase = 0;
   List<Picto> gptPictos = [];
 
-  Future<void> createStory() async {
-    final String prompt = 'game.prompt'.trl;
+  Future<void> createStory({required String prompt}) async {
+    // final String prompt = 'game.prompt'.trl;
     final finalPrompt = '$prompt ${gptPictos[0].text}, ${gptPictos[1].text}, ${gptPictos[2].text}, ${gptPictos[3].text}.';
-    final res = await _chatGPTServices.getGPTStory(prompt: prompt);
+    final res = await _chatGPTServices.getGPTStory(prompt: finalPrompt);
     if (res.isRight) {
       generatedStory = res.right;
     }
@@ -26,12 +26,12 @@ class ChatGptGameProvider extends ChangeNotifier {
     // _tts.speak(generatedStory);
   }
 
-  Future<void> resetStoryGame() async {
+  void resetStoryGame() {
     gptPictos.clear();
     sentencePhase = 0;
   }
 
-  ChatGptGameProvider(this._gameProvider,this._chatGPTServices);
+  ChatGptGameProvider(this._gameProvider, this._chatGPTServices);
 }
 
 final chatGptGameProvider = ChangeNotifierProvider.autoDispose((ref) {
