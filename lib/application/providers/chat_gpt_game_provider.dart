@@ -25,8 +25,6 @@ class ChatGptGameProvider extends ChangeNotifier {
   final List<String> actionBoards = ['L6pHIipM3ocu3wYlMuo2y'];
   final List<String> placeBoards = ['H6zmHfH-5XVtpy1RJ1ci7', 'kBVGvu0NygXFUWTFxcQJe'];
 
-
-
   ChatGptGameProvider(this._chatGPTServices, this._gamesProvider, this._tts);
 
   void scrollUpBoards() {

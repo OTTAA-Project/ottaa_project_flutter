@@ -154,15 +154,15 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  int get selectedGroupIndex => (super.noSuchMethod(
-        Invocation.getter(#selectedGroupIndex),
-        returnValue: 0,
-      ) as int);
+  String get selectedGroupName => (super.noSuchMethod(
+        Invocation.getter(#selectedGroupName),
+        returnValue: '',
+      ) as String);
   @override
-  set selectedGroupIndex(int? _selectedGroupIndex) => super.noSuchMethod(
+  set selectedGroupName(String? _selectedGroupName) => super.noSuchMethod(
         Invocation.setter(
-          #selectedGroupIndex,
-          _selectedGroupIndex,
+          #selectedGroupName,
+          _selectedGroupName,
         ),
         returnValueForMissingStub: null,
       );
@@ -374,18 +374,34 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  _i3.Timer get hintTimer => (super.noSuchMethod(
-        Invocation.getter(#hintTimer),
+  _i3.Timer get hintTimer1 => (super.noSuchMethod(
+        Invocation.getter(#hintTimer1),
         returnValue: _FakeTimer_2(
           this,
-          Invocation.getter(#hintTimer),
+          Invocation.getter(#hintTimer1),
         ),
       ) as _i3.Timer);
   @override
-  set hintTimer(_i3.Timer? _hintTimer) => super.noSuchMethod(
+  set hintTimer1(_i3.Timer? _hintTimer1) => super.noSuchMethod(
         Invocation.setter(
-          #hintTimer,
-          _hintTimer,
+          #hintTimer1,
+          _hintTimer1,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i3.Timer get hintTimer2 => (super.noSuchMethod(
+        Invocation.getter(#hintTimer2),
+        returnValue: _FakeTimer_2(
+          this,
+          Invocation.getter(#hintTimer2),
+        ),
+      ) as _i3.Timer);
+  @override
+  set hintTimer2(_i3.Timer? _hintTimer2) => super.noSuchMethod(
+        Invocation.setter(
+          #hintTimer2,
+          _hintTimer2,
         ),
         returnValueForMissingStub: null,
       );
@@ -620,10 +636,11 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
-  _i3.Future<void> changeMusic() => (super.noSuchMethod(
+  _i3.Future<void> changeMusic({required bool? mute}) => (super.noSuchMethod(
         Invocation.method(
           #changeMusic,
           [],
+          {#mute: mute},
         ),
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
@@ -638,6 +655,14 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   void addListener(_i10.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
@@ -650,14 +675,6 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         Invocation.method(
           #removeListener,
           [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
         ),
         returnValueForMissingStub: null,
       );

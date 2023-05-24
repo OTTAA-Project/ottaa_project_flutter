@@ -38,14 +38,12 @@ Future<void> main() async {
 
   group('changeMusic mute or play it', () {
     test('should play the music when isMute is true', () async {
-      gamesProvider.isMute = true;
-      await gamesProvider.changeMusic();
+      await gamesProvider.changeMusic(mute: true);
       expect(gamesProvider.backgroundMusicPlayer.playing, true);
     });
 
     test('should not play the music when isMute is false', () async {
-      gamesProvider.isMute = false;
-      await gamesProvider.changeMusic();
+      await gamesProvider.changeMusic(mute: false);
       expect(gamesProvider.backgroundMusicPlayer.playing, false);
     });
   });
