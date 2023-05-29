@@ -7,11 +7,10 @@ import 'package:async/async.dart';
 
 class TTSProvider extends ChangeNotifier {
   final TTSRepository tts;
-  final LocalDatabaseRepository _hiveRepository;
 
   Future<void>? speakOperation;
 
-  TTSProvider(this.tts, this._hiveRepository);
+  TTSProvider(this.tts);
 
   Future<void> speak(String text) async => tts.speak(text);
 
@@ -27,6 +26,8 @@ class TTSProvider extends ChangeNotifier {
     tts.changeCustomTTs(value);
   }
 
+  Future<void> ttsStop() => tts.ttsStop();
+
   Future<void> changeTTSVoice(String voice) async {
     tts.changeTTSVoice(voice);
   }
@@ -38,6 +39,5 @@ class TTSProvider extends ChangeNotifier {
 
 final ttsProvider = ChangeNotifierProvider<TTSProvider>((ref) {
   final tts = GetIt.I<TTSRepository>();
-  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
-  return TTSProvider(tts, localDatabaseRepository);
+  return TTSProvider(tts);
 });

@@ -53,10 +53,10 @@ class AppRoutes {
   static const patientGame = "/home/games";
   static const patientGameGroupSelection = "/home/games/groups";
   static const patientGameSearchGroup = "/home/games/groups/search";
-  static const patiengMatchPictogramGame = "/home/games/match";
+  static const patienMatchPictogramGame = "/home/games/match";
   static const patientMemoryGame = "/home/games/memory";
   static const patientWhatsThePictoGame = "/home/games/wtp";
-  static const patientHistoryGame = "/home/games/history";
+  static const patientStoryGame = "/home/games/story";
   static const patientHistorySelectPicto = "/home/games/history/pictos";
   static const patientHistoryReview = "/home/games/history/review";
 }

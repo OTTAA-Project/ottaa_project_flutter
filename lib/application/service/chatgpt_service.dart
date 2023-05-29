@@ -1,8 +1,6 @@
 import 'package:either_dart/either.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/remote_config_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 
 @Singleton(as: ChatGPTRepository)
