@@ -9,22 +9,20 @@ import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
 
 import 'ttsprovider_test.mocks.dart';
 
-@GenerateMocks([TTSProvider, TTSRepository, LocalDatabaseRepository])
+@GenerateMocks([TTSRepository])
 void main() {
   late MockTTSRepository mockTTSRepository;
   late TTSProvider ttsProvider;
-  late MockLocalDatabaseRepository mockLocalDatabaseRepository;
   late List<Voices> fakeVoices;
 
   setUp(() {
     mockTTSRepository = MockTTSRepository();
-    mockLocalDatabaseRepository = MockLocalDatabaseRepository();
     fakeVoices = [
       Voices(name: 'Test1', locale: 'es_AR'),
       Voices(name: 'Test2', locale: 'es_AR'),
       Voices(name: 'Test2', locale: 'es_AR'),
     ];
-    ttsProvider = TTSProvider(mockTTSRepository, mockLocalDatabaseRepository);
+    ttsProvider = TTSProvider(mockTTSRepository);
   });
 
   group('TTS Provider', () {

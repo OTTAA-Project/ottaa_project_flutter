@@ -4,7 +4,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
-import 'dart:ui' as _i10;
+import 'dart:ui' as _i11;
 
 import 'package:either_dart/either.dart' as _i6;
 import 'package:flutter/material.dart' as _i2;
@@ -13,11 +13,14 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart'
     as _i5;
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart'
-    as _i7;
-import 'package:ottaa_project_flutter/core/models/group_model.dart' as _i9;
-import 'package:ottaa_project_flutter/core/models/picto_model.dart' as _i8;
+    as _i8;
+import 'package:ottaa_project_flutter/application/providers/tts_provider.dart'
+    as _i12;
+import 'package:ottaa_project_flutter/core/models/group_model.dart' as _i10;
+import 'package:ottaa_project_flutter/core/models/picto_model.dart' as _i9;
+import 'package:ottaa_project_flutter/core/models/voices_model.dart' as _i13;
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart'
-    as _i11;
+    as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -93,10 +96,20 @@ class _FakeEither_5<L, R> extends _i1.SmartFake implements _i6.Either<L, R> {
         );
 }
 
+class _FakeTTSRepository_6 extends _i1.SmartFake implements _i7.TTSRepository {
+  _FakeTTSRepository_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [GamesProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
+class MockGamesProvider extends _i1.Mock implements _i8.GamesProvider {
   MockGamesProvider() {
     _i1.throwOnMissingStub(this);
   }
@@ -192,12 +205,12 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  Map<String, _i8.Picto> get pictograms => (super.noSuchMethod(
+  Map<String, _i9.Picto> get pictograms => (super.noSuchMethod(
         Invocation.getter(#pictograms),
-        returnValue: <String, _i8.Picto>{},
-      ) as Map<String, _i8.Picto>);
+        returnValue: <String, _i9.Picto>{},
+      ) as Map<String, _i9.Picto>);
   @override
-  set pictograms(Map<String, _i8.Picto>? _pictograms) => super.noSuchMethod(
+  set pictograms(Map<String, _i9.Picto>? _pictograms) => super.noSuchMethod(
         Invocation.setter(
           #pictograms,
           _pictograms,
@@ -205,12 +218,12 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  Map<String, _i9.Group> get groups => (super.noSuchMethod(
+  Map<String, _i10.Group> get groups => (super.noSuchMethod(
         Invocation.getter(#groups),
-        returnValue: <String, _i9.Group>{},
-      ) as Map<String, _i9.Group>);
+        returnValue: <String, _i10.Group>{},
+      ) as Map<String, _i10.Group>);
   @override
-  set groups(Map<String, _i9.Group>? _groups) => super.noSuchMethod(
+  set groups(Map<String, _i10.Group>? _groups) => super.noSuchMethod(
         Invocation.setter(
           #groups,
           _groups,
@@ -244,12 +257,12 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  List<_i8.Picto> get selectedPicts => (super.noSuchMethod(
+  List<_i9.Picto> get selectedPicts => (super.noSuchMethod(
         Invocation.getter(#selectedPicts),
-        returnValue: <_i8.Picto>[],
-      ) as List<_i8.Picto>);
+        returnValue: <_i9.Picto>[],
+      ) as List<_i9.Picto>);
   @override
-  set selectedPicts(List<_i8.Picto>? _selectedPicts) => super.noSuchMethod(
+  set selectedPicts(List<_i9.Picto>? _selectedPicts) => super.noSuchMethod(
         Invocation.setter(
           #selectedPicts,
           _selectedPicts,
@@ -322,12 +335,12 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  List<_i8.Picto> get gamePictsWTP => (super.noSuchMethod(
+  List<_i9.Picto> get gamePictsWTP => (super.noSuchMethod(
         Invocation.getter(#gamePictsWTP),
-        returnValue: <_i8.Picto>[],
-      ) as List<_i8.Picto>);
+        returnValue: <_i9.Picto>[],
+      ) as List<_i9.Picto>);
   @override
-  set gamePictsWTP(List<_i8.Picto>? _gamePictsWTP) => super.noSuchMethod(
+  set gamePictsWTP(List<_i9.Picto>? _gamePictsWTP) => super.noSuchMethod(
         Invocation.setter(
           #gamePictsWTP,
           _gamePictsWTP,
@@ -335,12 +348,12 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  List<_i8.Picto> get gamePictsMP => (super.noSuchMethod(
+  List<_i9.Picto> get gamePictsMP => (super.noSuchMethod(
         Invocation.getter(#gamePictsMP),
-        returnValue: <_i8.Picto>[],
-      ) as List<_i8.Picto>);
+        returnValue: <_i9.Picto>[],
+      ) as List<_i9.Picto>);
   @override
-  set gamePictsMP(List<_i8.Picto>? _gamePictsMP) => super.noSuchMethod(
+  set gamePictsMP(List<_i9.Picto>? _gamePictsMP) => super.noSuchMethod(
         Invocation.setter(
           #gamePictsMP,
           _gamePictsMP,
@@ -464,12 +477,12 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         ),
       ) as _i4.AudioPlayer);
   @override
-  Map<int, _i8.Picto> get bottomPositionsMP => (super.noSuchMethod(
+  Map<int, _i9.Picto> get bottomPositionsMP => (super.noSuchMethod(
         Invocation.getter(#bottomPositionsMP),
-        returnValue: <int, _i8.Picto>{},
-      ) as Map<int, _i8.Picto>);
+        returnValue: <int, _i9.Picto>{},
+      ) as Map<int, _i9.Picto>);
   @override
-  set bottomPositionsMP(Map<int, _i8.Picto>? _bottomPositionsMP) =>
+  set bottomPositionsMP(Map<int, _i9.Picto>? _bottomPositionsMP) =>
       super.noSuchMethod(
         Invocation.setter(
           #bottomPositionsMP,
@@ -478,12 +491,12 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  Map<int, _i8.Picto> get topPositionsMP => (super.noSuchMethod(
+  Map<int, _i9.Picto> get topPositionsMP => (super.noSuchMethod(
         Invocation.getter(#topPositionsMP),
-        returnValue: <int, _i8.Picto>{},
-      ) as Map<int, _i8.Picto>);
+        returnValue: <int, _i9.Picto>{},
+      ) as Map<int, _i9.Picto>);
   @override
-  set topPositionsMP(Map<int, _i8.Picto>? _topPositionsMP) =>
+  set topPositionsMP(Map<int, _i9.Picto>? _topPositionsMP) =>
       super.noSuchMethod(
         Invocation.setter(
           #topPositionsMP,
@@ -663,7 +676,7 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  void addListener(_i10.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i11.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -671,7 +684,7 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
         returnValueForMissingStub: null,
       );
   @override
-  void removeListener(_i10.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
@@ -691,7 +704,7 @@ class MockGamesProvider extends _i1.Mock implements _i7.GamesProvider {
 /// A class which mocks [ChatGPTRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockChatGPTRepository extends _i1.Mock implements _i11.ChatGPTRepository {
+class MockChatGPTRepository extends _i1.Mock implements _i7.ChatGPTRepository {
   MockChatGPTRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -759,4 +772,130 @@ class MockChatGPTRepository extends _i1.Mock implements _i11.ChatGPTRepository {
           ),
         )),
       ) as _i3.Future<_i6.Either<String, String>>);
+}
+
+/// A class which mocks [TTSProvider].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTTSProvider extends _i1.Mock implements _i12.TTSProvider {
+  MockTTSProvider() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i7.TTSRepository get tts => (super.noSuchMethod(
+        Invocation.getter(#tts),
+        returnValue: _FakeTTSRepository_6(
+          this,
+          Invocation.getter(#tts),
+        ),
+      ) as _i7.TTSRepository);
+  @override
+  set speakOperation(_i3.Future<void>? _speakOperation) => super.noSuchMethod(
+        Invocation.setter(
+          #speakOperation,
+          _speakOperation,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+      ) as bool);
+  @override
+  _i3.Future<void> speak(String? text) => (super.noSuchMethod(
+        Invocation.method(
+          #speak,
+          [text],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<List<_i13.Voices>> fetchVoices(String? languageCode) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchVoices,
+          [languageCode],
+        ),
+        returnValue: _i3.Future<List<_i13.Voices>>.value(<_i13.Voices>[]),
+      ) as _i3.Future<List<_i13.Voices>>);
+  @override
+  _i3.Future<void> changeVoiceSpeed(double? speed) => (super.noSuchMethod(
+        Invocation.method(
+          #changeVoiceSpeed,
+          [speed],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> changeCustomTTs(bool? value) => (super.noSuchMethod(
+        Invocation.method(
+          #changeCustomTTs,
+          [value],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> ttsStop() => (super.noSuchMethod(
+        Invocation.method(
+          #ttsStop,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> changeTTSVoice(String? voice) => (super.noSuchMethod(
+        Invocation.method(
+          #changeTTSVoice,
+          [voice],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> init() => (super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  void addListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

@@ -4,15 +4,17 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/providers/chat_gpt_game_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'chat_gpt_game_provider_test.mocks.dart';
 
-@GenerateMocks([GamesProvider, ChatGPTRepository])
+@GenerateMocks([GamesProvider, ChatGPTRepository, TTSProvider])
 Future<void> main() async {
   late MockGamesProvider mockGamesProvider;
   late MockChatGPTRepository mockChatGPTRepository;
+  late MockTTSProvider mockTTSProvider;
 
   late ChatGptGameProvider chatGptGameProvider;
 
@@ -21,6 +23,7 @@ Future<void> main() async {
   setUp(() {
     mockChatGPTRepository = MockChatGPTRepository();
     mockGamesProvider = MockGamesProvider();
+    mockTTSProvider = MockTTSProvider();
 
     fakePictos = fakePictos = [
       Picto(id: '0', type: 0, resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), block: true, text: 'one'),
@@ -29,7 +32,7 @@ Future<void> main() async {
       Picto(id: '3', type: 2, resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), block: true, text: 'four'),
     ];
 
-    chatGptGameProvider = ChatGptGameProvider(mockGamesProvider, mockChatGPTRepository);
+    chatGptGameProvider = ChatGptGameProvider(mockChatGPTRepository, mockGamesProvider, mockTTSProvider);
   });
 
   group('create the story for the chat gpt game', () {
