@@ -13,33 +13,33 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:ottaa_project_flutter/application/common/i18n.dart' as _i3;
 import 'package:ottaa_project_flutter/application/service/about_service.dart'
-    as _i48;
+    as _i47;
 import 'package:ottaa_project_flutter/application/service/auth_service.dart'
     as _i21;
 import 'package:ottaa_project_flutter/application/service/chatgpt_service.dart'
     as _i23;
 import 'package:ottaa_project_flutter/application/service/customise_service.dart'
-    as _i34;
+    as _i33;
 import 'package:ottaa_project_flutter/application/service/groups_service.dart'
-    as _i50;
+    as _i49;
 import 'package:ottaa_project_flutter/application/service/hive_database.dart'
     as _i5;
 import 'package:ottaa_project_flutter/application/service/local_storage_service.dart'
     as _i7;
 import 'package:ottaa_project_flutter/application/service/mobile_remote_storage_service.dart'
-    as _i42;
+    as _i41;
 import 'package:ottaa_project_flutter/application/service/notifications_service_impl.dart'
     as _i9;
 import 'package:ottaa_project_flutter/application/service/pictograms_service.dart'
-    as _i52;
+    as _i51;
 import 'package:ottaa_project_flutter/application/service/profile_services.dart'
-    as _i40;
+    as _i39;
 import 'package:ottaa_project_flutter/application/service/remote_config_service.dart'
     as _i11;
 import 'package:ottaa_project_flutter/application/service/report_service.dart'
-    as _i45;
+    as _i44;
 import 'package:ottaa_project_flutter/application/service/sentences_service.dart'
-    as _i47;
+    as _i46;
 import 'package:ottaa_project_flutter/application/service/server_service.dart'
     as _i13;
 import 'package:ottaa_project_flutter/application/service/tts_service.dart'
@@ -47,47 +47,45 @@ import 'package:ottaa_project_flutter/application/service/tts_service.dart'
 import 'package:ottaa_project_flutter/application/service/user_settings_service.dart'
     as _i17;
 import 'package:ottaa_project_flutter/application/service/web_remote_storage_service.dart'
-    as _i43;
+    as _i42;
 import 'package:ottaa_project_flutter/application/use_cases/create_email_token_impl.dart'
-    as _i26;
+    as _i25;
 import 'package:ottaa_project_flutter/application/use_cases/create_group_impl.dart'
-    as _i28;
+    as _i27;
 import 'package:ottaa_project_flutter/application/use_cases/create_phrase_impl.dart'
-    as _i30;
+    as _i29;
 import 'package:ottaa_project_flutter/application/use_cases/create_picto_impl.dart'
-    as _i32;
+    as _i31;
 import 'package:ottaa_project_flutter/application/use_cases/learn_pictogram_impl.dart'
-    as _i36;
+    as _i35;
 import 'package:ottaa_project_flutter/application/use_cases/predict_pictogram_impl.dart'
-    as _i38;
+    as _i37;
 import 'package:ottaa_project_flutter/application/use_cases/verify_email_token_impl.dart'
     as _i19;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
     as _i20;
-import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart'
-    as _i22;
 import 'package:ottaa_project_flutter/core/repositories/customise_repository.dart'
-    as _i33;
+    as _i32;
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart'
-    as _i49;
+    as _i48;
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
     as _i4;
 import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart'
     as _i6;
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart'
-    as _i51;
+    as _i50;
 import 'package:ottaa_project_flutter/core/repositories/profile_repository.dart'
-    as _i39;
+    as _i38;
 import 'package:ottaa_project_flutter/core/repositories/remote_config_repository.dart'
     as _i10;
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart'
-    as _i41;
+    as _i40;
 import 'package:ottaa_project_flutter/core/repositories/report_repository.dart'
-    as _i44;
+    as _i43;
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart'
-    as _i24;
+    as _i22;
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart'
-    as _i46;
+    as _i45;
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
     as _i12;
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart'
@@ -97,17 +95,17 @@ import 'package:ottaa_project_flutter/core/repositories/user_settings_repository
 import 'package:ottaa_project_flutter/core/service/notifications_service.dart'
     as _i8;
 import 'package:ottaa_project_flutter/core/use_cases/create_email_token.dart'
-    as _i25;
+    as _i24;
 import 'package:ottaa_project_flutter/core/use_cases/create_group_data.dart'
-    as _i27;
+    as _i26;
 import 'package:ottaa_project_flutter/core/use_cases/create_phrase_data.dart'
-    as _i29;
+    as _i28;
 import 'package:ottaa_project_flutter/core/use_cases/create_picto_data.dart'
-    as _i31;
+    as _i30;
 import 'package:ottaa_project_flutter/core/use_cases/learn_pictogram.dart'
-    as _i35;
+    as _i34;
 import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart'
-    as _i37;
+    as _i36;
 import 'package:ottaa_project_flutter/core/use_cases/verify_email_token.dart'
     as _i18;
 
@@ -157,61 +155,61 @@ extension GetItInjectableX on _i1.GetIt {
       gh<_i3.I18N>(),
     ));
     gh.singleton<_i22.ChatGPTRepository>(_i23.ChatGPTService(
-      gh<_i24.ServerRepository>(),
-      gh<_i10.RemoteConfigRepository>(),
+      gh<_i22.ServerRepository>(),
+      gh<_i22.RemoteConfigRepository>(),
     ));
-    gh.singleton<_i25.CreateEmailToken>(
-        _i26.CreateEmailTokenImpl(gh<_i12.ServerRepository>()));
-    gh.singleton<_i27.CreateGroupData>(
-        _i28.CreateGroupDataImpl(gh<_i12.ServerRepository>()));
-    gh.singleton<_i29.CreatePhraseData>(
-        _i30.CreatePhraseDataImpl(gh<_i12.ServerRepository>()));
-    gh.singleton<_i31.CreatePictoData>(
-        _i32.CreatePictoDataImpl(gh<_i12.ServerRepository>()));
-    gh.singleton<_i33.CustomiseRepository>(
-        _i34.CustomiseService(gh<_i12.ServerRepository>()));
-    gh.singleton<_i35.LearnPictogram>(
-        _i36.LearnPictogramImpl(serverRepository: gh<_i24.ServerRepository>()));
-    gh.singleton<_i37.PredictPictogram>(_i38.PredictPictogramImpl(
-        serverRepository: gh<_i24.ServerRepository>()));
-    gh.singleton<_i39.ProfileRepository>(
-        _i40.ProfileService(gh<_i12.ServerRepository>()));
-    gh.singleton<_i41.RemoteStorageRepository>(
-      _i42.MobileRemoteStorageService(
+    gh.singleton<_i24.CreateEmailToken>(
+        _i25.CreateEmailTokenImpl(gh<_i12.ServerRepository>()));
+    gh.singleton<_i26.CreateGroupData>(
+        _i27.CreateGroupDataImpl(gh<_i12.ServerRepository>()));
+    gh.singleton<_i28.CreatePhraseData>(
+        _i29.CreatePhraseDataImpl(gh<_i12.ServerRepository>()));
+    gh.singleton<_i30.CreatePictoData>(
+        _i31.CreatePictoDataImpl(gh<_i12.ServerRepository>()));
+    gh.singleton<_i32.CustomiseRepository>(
+        _i33.CustomiseService(gh<_i12.ServerRepository>()));
+    gh.singleton<_i34.LearnPictogram>(
+        _i35.LearnPictogramImpl(serverRepository: gh<_i22.ServerRepository>()));
+    gh.singleton<_i36.PredictPictogram>(_i37.PredictPictogramImpl(
+        serverRepository: gh<_i22.ServerRepository>()));
+    gh.singleton<_i38.ProfileRepository>(
+        _i39.ProfileService(gh<_i12.ServerRepository>()));
+    gh.singleton<_i40.RemoteStorageRepository>(
+      _i41.MobileRemoteStorageService(
         gh<_i20.AuthRepository>(),
         gh<_i12.ServerRepository>(),
         gh<_i3.I18N>(),
       ),
       registerFor: {_mobile},
     );
-    gh.singleton<_i41.RemoteStorageRepository>(
-      _i43.WebRemoteStorageService(
+    gh.singleton<_i40.RemoteStorageRepository>(
+      _i42.WebRemoteStorageService(
         gh<_i20.AuthRepository>(),
         gh<_i12.ServerRepository>(),
         gh<_i3.I18N>(),
       ),
       registerFor: {_web},
     );
-    gh.singleton<_i44.ReportRepository>(
-        _i45.ReportService(gh<_i12.ServerRepository>()));
-    gh.singleton<_i46.SentencesRepository>(_i47.SentencesService(
+    gh.singleton<_i43.ReportRepository>(
+        _i44.ReportService(gh<_i12.ServerRepository>()));
+    gh.singleton<_i45.SentencesRepository>(_i46.SentencesService(
       gh<_i20.AuthRepository>(),
       gh<_i12.ServerRepository>(),
     ));
-    gh.singleton<_i24.AboutRepository>(_i48.AboutService(
-      gh<_i24.AuthRepository>(),
-      gh<_i24.ServerRepository>(),
-      gh<_i24.LocalDatabaseRepository>(),
+    gh.singleton<_i22.AboutRepository>(_i47.AboutService(
+      gh<_i22.AuthRepository>(),
+      gh<_i22.ServerRepository>(),
+      gh<_i22.LocalDatabaseRepository>(),
     ));
-    gh.singleton<_i49.GroupsRepository>(_i50.GroupsService(
+    gh.singleton<_i48.GroupsRepository>(_i49.GroupsService(
       gh<_i20.AuthRepository>(),
-      gh<_i41.RemoteStorageRepository>(),
+      gh<_i40.RemoteStorageRepository>(),
       gh<_i12.ServerRepository>(),
     ));
-    gh.singleton<_i51.PictogramsRepository>(_i52.PictogramsService(
+    gh.singleton<_i50.PictogramsRepository>(_i51.PictogramsService(
       gh<_i20.AuthRepository>(),
       gh<_i12.ServerRepository>(),
-      gh<_i41.RemoteStorageRepository>(),
+      gh<_i40.RemoteStorageRepository>(),
     ));
     return this;
   }
