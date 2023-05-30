@@ -25,16 +25,22 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
   }
 
   Widget buildExitButton({required HomeScreenStatus status}) {
+    final provider = ref.watch(homeProvider);
     final colorScheme = Theme.of(context).colorScheme;
-
     switch (status) {
       case HomeScreenStatus.pictos:
         return Row(
           children: [
             GestureDetector(
               onTap: () {
-                //TODO: Show back dialog :)
-                context.pop();
+                provider.isExit = true;
+                provider.isLongClick = false;
+                provider.notify();
+              },
+              onLongPress: () {
+                provider.isExit = true;
+                provider.isLongClick = true;
+                provider.notify();
               },
               child: Container(
                 width: 20,
@@ -86,7 +92,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
     final colorScheme = Theme.of(context).colorScheme;
     final pictoWords = ref.watch(homeProvider).pictoWords;
     final int? selectedWord = ref.watch(homeProvider).selectedWord;
-    final show = ref.watch(homeProvider).show;
+    final show = ref.watch(homeProvider).isSpeakWidget;
 
     final pictosIsEmpty = pictoWords.isEmpty;
     final scrollCon = ref.watch(homeProvider).scrollController;

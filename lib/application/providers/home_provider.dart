@@ -76,7 +76,9 @@ class HomeProvider extends ChangeNotifier {
   bool confirmExit = false;
 
   bool talkEnabled = true;
-  bool show = false;
+  bool isSpeakWidget = false;
+  bool isExit = false;
+  bool isLongClick = false;
   int? selectedWord;
   ScrollController scrollController = ScrollController();
 
@@ -372,7 +374,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    show = true;
+    isSpeakWidget = true;
     notifyListeners();
     if (patientState.state != null) {
       learnPictogram.call(
@@ -395,7 +397,7 @@ class HomeProvider extends ChangeNotifier {
       sentence ??= pictoWords.map((e) => e.text).join(' ');
       await _tts.speak(sentence);
 
-      show = false;
+      isSpeakWidget = false;
       notifyListeners();
     } else {
       for (var i = 0; i < pictoWords.length; i++) {
@@ -408,11 +410,11 @@ class HomeProvider extends ChangeNotifier {
         notifyListeners();
         await _tts.speak(pictoWords[i].text);
       }
-      show = false;
+      isSpeakWidget = false;
       notifyListeners();
     }
 
-    show = false;
+    isSpeakWidget = false;
     notifyListeners();
 
     if (patientState.state != null && patientState.user.patientSettings.layout.cleanup) {
