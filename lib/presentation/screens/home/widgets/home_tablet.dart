@@ -19,7 +19,7 @@ class _HomeTabletState extends ConsumerState<HomeTabletLayout> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final provider = ref.watch(homeProvider);
-
+    final colorScheme = Theme.of(context).colorScheme;
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -62,6 +62,22 @@ class _HomeTabletState extends ConsumerState<HomeTabletLayout> {
           Center(
             child: ExitWidget(isLongClick: provider.isLongClick),
           ),
+          provider.isLongClick
+              ? Positioned(
+                  top: 10,
+                  child: Container(
+                    width: 20,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: colorScheme.primary,
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(16),
+                        bottomRight: Radius.circular(16),
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ],
       ],
     );
