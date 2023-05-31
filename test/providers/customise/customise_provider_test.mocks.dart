@@ -569,6 +569,17 @@ class MockPictogramsRepository extends _i1.Mock
         ),
         returnValue: _i7.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
       ) as _i7.Future<List<_i12.Picto>>);
+  @override
+  _i7.Future<Map<String, String>> loadTranslations(
+          {required String? language}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loadTranslations,
+          [],
+          {#language: language},
+        ),
+        returnValue: _i7.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i7.Future<Map<String, String>>);
 }
 
 /// A class which mocks [UserNotifier].

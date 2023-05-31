@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
@@ -14,9 +15,9 @@ class PictogramsService extends PictogramsRepository {
   final AuthRepository _authService;
   final RemoteStorageRepository _remoteStorageService;
   final ServerRepository _serverRepository;
+  final LocalStorageRepository _localStorageServices;
 
-  PictogramsService(
-      this._authService, this._serverRepository, this._remoteStorageService);
+  PictogramsService(this._authService, this._serverRepository, this._remoteStorageService, this._localStorageServices);
 
   @override
   Future<List<Picto>> getAllPictograms() async {
@@ -24,8 +25,7 @@ class PictogramsService extends PictogramsRepository {
       const Duration(seconds: kIsWeb ? 2 : 1),
     );
 
-    final String data = await _remoteStorageService.readRemoteFile(
-        path: "Pictos", fileName: 'assets/pictos.json');
+    final String data = await _remoteStorageService.readRemoteFile(path: "Pictos", fileName: 'assets/pictos.json');
 
     final List<dynamic> json = jsonDecode(data);
     final List<Picto> pictograms = json.map((e) => Picto.fromMap(e)).toList();
@@ -40,8 +40,7 @@ class PictogramsService extends PictogramsRepository {
   }
 
   @override
-  Future<void> uploadPictograms(List<Picto> data, String language,
-      {String? userId}) async {
+  Future<void> uploadPictograms(List<Picto> data, String language, {String? userId}) async {
     List<Map<String, dynamic>> jsonData = List.empty(growable: true);
     for (var e in data) {
       jsonData.add(e.toMap());
@@ -57,8 +56,7 @@ class PictogramsService extends PictogramsRepository {
   }
 
   @override
-  Future<void> updatePictogram(
-      Picto pictogram, String language, int index) async {
+  Future<void> updatePictogram(Picto pictogram, String language, int index) async {
     final relactions = pictogram.relations.map((e) => e.toJson()).toList();
 
     final result = await _authService.getCurrentUser();
@@ -83,5 +81,13 @@ class PictogramsService extends PictogramsRepository {
     //   'ubicacion': pictogram.ubicacion,
     //   'score': pictogram.score,
     // });
+  }
+
+  @override
+  Future<Map<String, String>> loadTranslations({required String language}) async {
+    final pictosTranslations = await _localStorageServices.readPictosFromLocal(locale: language);
+    return pictosTranslations.map((key, value) {
+      return MapEntry(key, value["text"]);
+    });
   }
 }
