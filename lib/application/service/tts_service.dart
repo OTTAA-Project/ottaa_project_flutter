@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
@@ -23,7 +25,7 @@ class TTSService extends TTSRepository {
 
   bool customTTSEnable = false;
 
-  double speechRate = .8;
+  double speechRate = Platform.isIOS ? .5 : .8;
   double pitch = 1.0;
   List<Voices> voices = [];
 
@@ -87,11 +89,13 @@ class TTSService extends TTSRepository {
       }
     }
   }
-  Future<void> pause()async{
+
+  Future<void> pause() async {
     await tts.pause();
   }
+
   @override
-  Future<void> ttsStop()async{
+  Future<void> ttsStop() async {
     await tts.stop();
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -219,15 +220,15 @@ class UserSettingsProvider extends ChangeNotifier {
     switch (type) {
       case VelocityTypes.slow:
         _ttsServices.changeCustomTTs(true);
-        _ttsServices.changeVoiceSpeed(0.2);
+        _ttsServices.changeVoiceSpeed(Platform.isIOS ? 0.3 : 1.0);
         break;
       case VelocityTypes.mid:
         _ttsServices.changeCustomTTs(false);
-        _ttsServices.changeVoiceSpeed(.8);
+        _ttsServices.changeVoiceSpeed(Platform.isIOS ? 0.5 : .8);
         break;
       case VelocityTypes.fast:
         _ttsServices.changeCustomTTs(true);
-        _ttsServices.changeVoiceSpeed(1);
+        _ttsServices.changeVoiceSpeed(Platform.isIOS ? 0.65 : 1.0);
         break;
     }
     voiceRate = type.name;
