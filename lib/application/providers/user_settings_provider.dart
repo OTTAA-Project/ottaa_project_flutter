@@ -208,9 +208,9 @@ class UserSettingsProvider extends ChangeNotifier {
     }
   }
 
-  void changeVoiceType({required String type}) async {
+  Future<void> changeVoiceType({required String type}) async {
     voiceType = type;
-    changeTTSVoice(value: type);
+    await changeTTSVoice(value: type);
     ttsSetting.voiceSetting.voicesNames[language] = type;
     _localDatabaseRepository.setVoice(name: type);
     notifyListeners();

@@ -37,9 +37,12 @@ class TTSService extends TTSRepository {
   Future<void> speak(String text) async {
     if (text.isNotEmpty) {
       // tts.cancelHandler?.call();
+      language = _i18n.currentLanguage!.locale.toString();
+      final split = language.split('_');
+      language = '${split[0]}-${split[1]}';
       if (customTTSEnable) {
         await tts.setVoice({"name": name, "locale": locale});
-        language = _i18n.currentLanguage!.locale.toString();
+
         await tts.setLanguage(language);
         await tts.setVolume(1.0);
         await tts.setSpeechRate(speechRate);
@@ -52,13 +55,27 @@ class TTSService extends TTSRepository {
   }
 
   Future<void> initTTS() async {
+    if (Platform.isIOS) {
+      await tts.setIosAudioCategory(
+        IosTextToSpeechAudioCategory.ambient,
+        [
+          IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+          IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+          IosTextToSpeechAudioCategoryOptions.mixWithOthers,
+        ],
+        IosTextToSpeechAudioMode.voicePrompt,
+      );
+    }
     language = _i18n.currentLanguage!.locale.toString();
+    final split = language.split('_');
+    language = '${split[0]}-${split[1]}';
     voices = await fetchVoices();
     await tts.setPitch(pitch);
     await tts.setSpeechRate(speechRate);
     await tts.setVolume(1.0);
     await tts.setLanguage(language);
     await tts.awaitSpeakCompletion(true);
+    await tts.awaitSynthCompletion(true);
     availableTTS = await tts.getLanguages;
   }
 
@@ -85,7 +102,9 @@ class TTSService extends TTSRepository {
       if (element.name == voice) {
         locale = element.locale;
         name = element.name;
-        print("here: ${element.name} == $voice");
+        print("here: ${element.name} == $voice, ");
+        print(language);
+        print(element.locale);
       }
     }
   }

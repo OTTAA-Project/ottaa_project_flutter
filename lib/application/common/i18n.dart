@@ -88,6 +88,18 @@ class I18N extends ChangeNotifier {
   }
 
   Future<void> changeLanguage(String languageCode) async {
+    if (languageCode == 'en_US') {
+      final languageString = await rootBundle.loadString("assets/i18n/$languageCode.json");
+      final languageJson = json.decode(languageString) as Map<String, dynamic>;
+      Locale locale = const Locale('en', 'US');
+      final newLanguage = TranslationTree(locale);
+      newLanguage.addTranslations(languageJson);
+      _languages[locale.toString()] = newLanguage;
+      currentLanguage = _languages[locale.toString()];
+      currentLocale = locale;
+      notify();
+      return;
+    }
     var split = languageCode.split("_");
     assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US)");
     Locale locale = Locale(split[0], split[1]);
