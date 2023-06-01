@@ -124,6 +124,17 @@ class UserSettingsProvider extends ChangeNotifier {
       await _i18n.changeLanguage(languageCode);
     }
     await fetchAllVoices();
+    await changeLanguageWithoutTTSSPeaking(name: filteredVoices.first.name);
+    notifyListeners();
+  }
+
+  Future<void> changeLanguageWithoutTTSSPeaking({required String name}) async {
+    voiceType = name;
+    voiceName = name;
+    await _ttsServices.changeCustomTTs(true);
+    await _ttsServices.changeTTSVoice(name);
+    ttsSetting.voiceSetting.voicesNames[language] = name;
+    _localDatabaseRepository.setVoice(name: name);
     notifyListeners();
   }
 
