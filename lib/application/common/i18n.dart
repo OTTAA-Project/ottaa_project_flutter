@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
@@ -73,7 +74,8 @@ class I18N extends ChangeNotifier {
 
       final languageString = await rootBundle.loadString("assets/i18n/$languageCode.json");
 
-      final languageJson = json.decode(languageString) as Map<String, dynamic>;
+      //We execute this in a compute function to avoid blocking the UI thread
+      final languageJson = await compute(json.decode, languageString) as Map<String, dynamic>;
 
       final newLanguage = TranslationTree(locale);
 

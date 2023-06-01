@@ -91,6 +91,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final pictoWords = ref.watch(homeProvider).pictoWords;
+    final translations = ref.watch(homeProvider.select((value) => value.pictosTranslations));
     final int? selectedWord = ref.watch(homeProvider).selectedWord;
     final show = ref.watch(homeProvider).isSpeakWidget;
 
@@ -171,7 +172,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                                 fit: BoxFit.fill,
                                 "assets/img/${pict.text}.webp",
                               ),
-                        text: pict.text,
+                        text: translations[pict.id] ?? pict.text,
                         disable: show && selectedWord == index ? true : false,
                       );
                     },

@@ -95,6 +95,8 @@ class HomeProvider extends ChangeNotifier {
 
   final List<CancelToken> _cancelsToken = [];
 
+  final Map<String, String> pictosTranslations = {};
+
   void setCurrentGroup(String group) {
     currentTabGroup = group;
     pictoTabsScrollController.jumpTo(0);
@@ -103,6 +105,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> init() async {
     await fetchPictograms();
+    await loadTranslations();
 
     basicPictograms = predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
 
@@ -110,6 +113,14 @@ class HomeProvider extends ChangeNotifier {
 
     await buildSuggestion();
     notifyListeners();
+  }
+
+  Future<void> loadTranslations() async {
+    pictosTranslations.clear();
+    final translations = await _pictogramsService.loadTranslations(language: userState.user!.settings.language.language);
+
+    pictosTranslations.addAll(translations);
+    notify();
   }
 
   void switchToPictograms() {
@@ -394,7 +405,7 @@ class HomeProvider extends ChangeNotifier {
         if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
       }
 
-      sentence ??= pictoWords.map((e) => e.text).join(' ');
+      sentence ??= pictoWords.map((e) => pictosTranslations[e.id] ?? e.text).join(' ');
       await _tts.speak(sentence);
 
       isSpeakWidget = false;
@@ -408,7 +419,8 @@ class HomeProvider extends ChangeNotifier {
           curve: Curves.easeIn,
         );
         notifyListeners();
-        await _tts.speak(pictoWords[i].text);
+        final e = pictoWords[i];
+        await _tts.speak(pictosTranslations[e.id] ?? e.text);
       }
       isSpeakWidget = false;
       notifyListeners();
