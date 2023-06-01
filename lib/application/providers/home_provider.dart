@@ -392,7 +392,7 @@ class HomeProvider extends ChangeNotifier {
         uid: patientState.user.id,
         language: patientState.user.patientSettings.language.language,
         model: "", //TODO: Change to the current model later uwu
-        tokens: pictoWords.map((e) => LearnToken(name: e.text, id: e.id)).toList(),
+        tokens: pictoWords.map((e) => LearnToken(name: pictosTranslations[e.id] ?? e.text, id: e.id)).toList(),
       );
     }
 
@@ -401,7 +401,11 @@ class HomeProvider extends ChangeNotifier {
       String? sentence;
       scrollController.jumpTo(0);
       if (patientState.user.patientSettings.language.labs) {
-        sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+        sentence = await _chatGPTNotifier.generatePhrase(pictoWords
+            .map((e) => e.copyWith(
+                  text: pictosTranslations[e.id] ?? e.text,
+                ))
+            .toList());
         if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
       }
 
