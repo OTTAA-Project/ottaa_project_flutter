@@ -70,6 +70,7 @@ class LongClickWidget extends ConsumerWidget {
             onTap: () async {
               provider.isExit = false;
               if (provider.isLongClickCheck) {
+                provider.isExitLong = true;
                 await provider.setLongClickEnabled(isLongClick: true);
               }
               provider.notify();
