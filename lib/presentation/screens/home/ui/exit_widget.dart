@@ -32,7 +32,7 @@ class LongClickWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.read(homeProvider);
+    final provider = ref.watch(homeProvider);
     final textTheme = Theme.of(context).textTheme;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -67,8 +67,11 @@ class LongClickWidget extends ConsumerWidget {
           padding: const EdgeInsets.only(top: 16),
           child: SimpleButton(
             width: false,
-            onTap: () {
+            onTap: () async {
               provider.isExit = false;
+              if (provider.isLongClickCheck) {
+                await provider.setLongClickEnabled(isLongClick: true);
+              }
               provider.notify();
               context.pop();
             },
@@ -78,9 +81,10 @@ class LongClickWidget extends ConsumerWidget {
         Row(
           children: [
             Checkbox(
-              value: false,
+              value: provider.isLongClickCheck,
               onChanged: (value) {
-                print(value);
+                provider.isLongClickCheck = value!;
+                provider.notify();
               },
             ),
             const SizedBox(

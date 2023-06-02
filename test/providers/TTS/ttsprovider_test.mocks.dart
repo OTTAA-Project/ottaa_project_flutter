@@ -9,7 +9,6 @@ import 'dart:ui' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart'
     as _i3;
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i7;
 import 'package:ottaa_project_flutter/core/models/voices_model.dart' as _i5;
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart'
     as _i2;
@@ -226,104 +225,6 @@ class MockTTSRepository extends _i1.Mock implements _i2.TTSRepository {
         Invocation.method(
           #ttsStop,
           [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-}
-
-/// A class which mocks [LocalDatabaseRepository].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i2.LocalDatabaseRepository {
-  MockLocalDatabaseRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  set user(_i7.UserModel? user) => super.noSuchMethod(
-        Invocation.setter(
-          #user,
-          user,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i4.Future<void> init() => (super.noSuchMethod(
-        Invocation.method(
-          #init,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> setUser(_i7.UserModel? user) => (super.noSuchMethod(
-        Invocation.method(
-          #setUser,
-          [user],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<_i7.UserModel?> getUser() => (super.noSuchMethod(
-        Invocation.method(
-          #getUser,
-          [],
-        ),
-        returnValue: _i4.Future<_i7.UserModel?>.value(),
-      ) as _i4.Future<_i7.UserModel?>);
-  @override
-  _i4.Future<void> deleteUser() => (super.noSuchMethod(
-        Invocation.method(
-          #deleteUser,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<bool> getIntro() => (super.noSuchMethod(
-        Invocation.method(
-          #getIntro,
-          [],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
-  @override
-  _i4.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
-        Invocation.method(
-          #setIntro,
-          [value],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<String> getVoice() => (super.noSuchMethod(
-        Invocation.method(
-          #getVoice,
-          [],
-        ),
-        returnValue: _i4.Future<String>.value(''),
-      ) as _i4.Future<String>);
-  @override
-  _i4.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
-        Invocation.method(
-          #setVoice,
-          [],
-          {#name: name},
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),

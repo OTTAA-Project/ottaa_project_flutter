@@ -23,6 +23,7 @@ import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 import 'package:ottaa_project_flutter/core/use_cases/learn_pictogram.dart';
@@ -30,7 +31,7 @@ import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
 import 'home_provider_test.mocks.dart';
 
-@GenerateMocks([TTSProvider, SentencesRepository, GroupsRepository, PictogramsRepository, PredictPictogram, LearnPictogram, ChatGPTNotifier])
+@GenerateMocks([TTSProvider, SentencesRepository, GroupsRepository, PictogramsRepository, PredictPictogram, LearnPictogram, ChatGPTNotifier, LocalDatabaseRepository])
 @GenerateNiceMocks([MockSpec<PatientNotifier>(), MockSpec<UserNotifier>()])
 Future<void> main() async {
   late MockTTSProvider mockTTSProvider;
@@ -42,6 +43,7 @@ Future<void> main() async {
   late MockChatGPTNotifier mockChatGPTNotifier;
   late MockLearnPictogram mockLearnPictogram;
   late MockPredictPictogram mockPredictPictogram;
+  late MockLocalDatabaseRepository mockLocalDatabaseRepository;
 
   late HomeProvider homeProvider;
 
@@ -64,6 +66,7 @@ Future<void> main() async {
     mockChatGPTNotifier = MockChatGPTNotifier();
     mockLearnPictogram = MockLearnPictogram();
     mockPredictPictogram = MockPredictPictogram();
+    mockLocalDatabaseRepository = MockLocalDatabaseRepository();
 
     fakePhrases = [
       Phrase(date: DateTime.now(), id: '00', sequence: [Sequence(id: '22')], tags: {}),
@@ -125,7 +128,7 @@ Future<void> main() async {
     ];
     mockPatientNotifier.state = PatientUserModel(id: '00', groups: {}, phrases: {}, pictos: {}, settings: fakeUser.settings, email: 'test@test.com');
     mockUserNotifier.setUser(fakeUser);
-    homeProvider = HomeProvider(mockPictogramsRepository, mockGroupsRepository, mockSentencesRepository, mockTTSProvider, mockPatientNotifier, mockPredictPictogram, mockLearnPictogram, mockUserNotifier, mockChatGPTNotifier);
+    homeProvider = HomeProvider(mockPictogramsRepository, mockGroupsRepository, mockSentencesRepository, mockTTSProvider, mockPatientNotifier, mockPredictPictogram, mockLearnPictogram, mockUserNotifier, mockChatGPTNotifier, mockLocalDatabaseRepository);
   });
 
   testWidgets('should update currentTabGroup and trigger notifyListeners', (WidgetTester tester) async {

@@ -38,9 +38,13 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                 provider.notify();
               },
               onLongPress: () {
-                provider.isExit = true;
-                provider.isLongClick = true;
-                provider.notify();
+                if (provider.isExitLong) {
+                  context.pop();
+                } else {
+                  provider.isExit = true;
+                  provider.isLongClick = true;
+                  provider.notify();
+                }
               },
               child: Container(
                 width: 20,
