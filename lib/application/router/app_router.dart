@@ -297,6 +297,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'story',
                 builder: (_, __) => const ChatGptGame(),
+                routes: [GoRoute(path: 'show',builder: ()=>const )],
               ),
               GoRoute(
                 path: 'memory',

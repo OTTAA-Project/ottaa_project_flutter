@@ -34,8 +34,8 @@ class ShowCreatedStory extends ConsumerWidget {
                   simple: false,
                   onTap: () {
                     ///reset the whole game
-                    // provider.resetStoryGame();
-                    // provider.stopTTS();
+                    provider.resetStoryGame();
+                    provider.stopTTS();
                     context.pop();
                     context.pop();
                   },
@@ -66,7 +66,7 @@ class ShowCreatedStory extends ConsumerWidget {
                 ),
                 StoryButton(
                   onTap: () {
-                    // provider.speakStory();
+                    provider.speakStory();
                   },
                   image: AppImages.kOttaa,
                   orange: true,
@@ -76,7 +76,7 @@ class ShowCreatedStory extends ConsumerWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // provider.stopTTS();
+                    provider.stopTTS();
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
