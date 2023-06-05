@@ -53,5 +53,10 @@ void main() {
       await ttsProvider.changeTTSVoice('test');
       verify(ttsProvider.changeTTSVoice('test')).called(1);
     });
+
+    test('should stop tts while speaking', () async {
+      await ttsProvider.ttsStop();
+      verify(ttsProvider.ttsStop()).called(1);
+    });
   });
 }
