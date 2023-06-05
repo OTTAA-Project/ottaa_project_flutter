@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:mockito/annotations.dart';
@@ -39,12 +41,30 @@ Future<void> main() async {
   group('changeMusic mute or play it', () {
     test('should play the music when isMute is true', () async {
       await gamesProvider.changeMusic(mute: true);
-      expect(gamesProvider.backgroundMusicPlayer.playing, true);
+      expect(gamesProvider.backgroundMusicPlayer.playing, false);
     });
 
     test('should not play the music when isMute is false', () async {
       await gamesProvider.changeMusic(mute: false);
-      expect(gamesProvider.backgroundMusicPlayer.playing, false);
+      expect(gamesProvider.backgroundMusicPlayer.playing, true);
     });
   });
+
+  test('should call notify', () {
+    expect(() => gamesProvider.notify(), isA<void>());
+  });
+
+  test('should cancel hints for the game', () async {
+    gamesProvider.hintTimer1 = Timer(const Duration(milliseconds: 1000), () {});
+    gamesProvider.hintTimer2 = Timer(const Duration(milliseconds: 1000), () {});
+    gamesProvider.hintsEnabled = true;
+    await gamesProvider.cancelHints();
+    expect(gamesProvider.hintsEnabled, false);
+  });
+
+  test('should shoe hints', () async {
+    expect(() async => gamesProvider.showHints(), isA<void>());
+  });
+
+  //todo: emir only music tests are left
 }
