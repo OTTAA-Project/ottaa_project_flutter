@@ -3,15 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
-import 'dart:ui' as _i6;
+import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:ottaa_project_flutter/application/providers/tts_provider.dart'
-    as _i3;
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i7;
-import 'package:ottaa_project_flutter/core/models/voices_model.dart' as _i5;
-import 'package:ottaa_project_flutter/core/repositories/repositories.dart'
+import 'package:ottaa_project_flutter/core/models/voices_model.dart' as _i4;
+import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart'
     as _i2;
 
 // ignore_for_file: type=lint
@@ -24,142 +20,6 @@ import 'package:ottaa_project_flutter/core/repositories/repositories.dart'
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
-
-class _FakeTTSRepository_0 extends _i1.SmartFake implements _i2.TTSRepository {
-  _FakeTTSRepository_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-/// A class which mocks [TTSProvider].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockTTSProvider extends _i1.Mock implements _i3.TTSProvider {
-  MockTTSProvider() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i2.TTSRepository get tts => (super.noSuchMethod(
-        Invocation.getter(#tts),
-        returnValue: _FakeTTSRepository_0(
-          this,
-          Invocation.getter(#tts),
-        ),
-      ) as _i2.TTSRepository);
-  @override
-  set speakOperation(_i4.Future<void>? _speakOperation) => super.noSuchMethod(
-        Invocation.setter(
-          #speakOperation,
-          _speakOperation,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
-        returnValue: false,
-      ) as bool);
-  @override
-  _i4.Future<void> speak(String? text) => (super.noSuchMethod(
-        Invocation.method(
-          #speak,
-          [text],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<List<_i5.Voices>> fetchVoices(String? languageCode) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchVoices,
-          [languageCode],
-        ),
-        returnValue: _i4.Future<List<_i5.Voices>>.value(<_i5.Voices>[]),
-      ) as _i4.Future<List<_i5.Voices>>);
-  @override
-  _i4.Future<void> changeVoiceSpeed(double? speed) => (super.noSuchMethod(
-        Invocation.method(
-          #changeVoiceSpeed,
-          [speed],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> changeCustomTTs(bool? value) => (super.noSuchMethod(
-        Invocation.method(
-          #changeCustomTTs,
-          [value],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> ttsStop() => (super.noSuchMethod(
-        Invocation.method(
-          #ttsStop,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> changeTTSVoice(String? voice) => (super.noSuchMethod(
-        Invocation.method(
-          #changeTTSVoice,
-          [voice],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> init() => (super.noSuchMethod(
-        Invocation.method(
-          #init,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #addListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #removeListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void notifyListeners() => super.noSuchMethod(
-        Invocation.method(
-          #notifyListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-}
 
 /// A class which mocks [TTSRepository].
 ///
@@ -178,154 +38,56 @@ class MockTTSRepository extends _i1.Mock implements _i2.TTSRepository {
         returnValueForMissingStub: null,
       );
   @override
-  _i4.Future<void> speak(String? text) => (super.noSuchMethod(
+  _i3.Future<void> speak(String? text) => (super.noSuchMethod(
         Invocation.method(
           #speak,
           [text],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
   @override
-  _i4.Future<List<_i5.Voices>> fetchVoices() => (super.noSuchMethod(
+  _i3.Future<List<_i4.Voices>> fetchVoices() => (super.noSuchMethod(
         Invocation.method(
           #fetchVoices,
           [],
         ),
-        returnValue: _i4.Future<List<_i5.Voices>>.value(<_i5.Voices>[]),
-      ) as _i4.Future<List<_i5.Voices>>);
+        returnValue: _i3.Future<List<_i4.Voices>>.value(<_i4.Voices>[]),
+      ) as _i3.Future<List<_i4.Voices>>);
   @override
-  _i4.Future<void> changeVoiceSpeed(double? speed) => (super.noSuchMethod(
+  _i3.Future<void> changeVoiceSpeed(double? speed) => (super.noSuchMethod(
         Invocation.method(
           #changeVoiceSpeed,
           [speed],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
   @override
-  _i4.Future<void> changeCustomTTs(bool? value) => (super.noSuchMethod(
+  _i3.Future<void> changeCustomTTs(bool? value) => (super.noSuchMethod(
         Invocation.method(
           #changeCustomTTs,
           [value],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
   @override
-  _i4.Future<void> changeTTSVoice(String? voice) => (super.noSuchMethod(
+  _i3.Future<void> changeTTSVoice(String? voice) => (super.noSuchMethod(
         Invocation.method(
           #changeTTSVoice,
           [voice],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
   @override
-  _i4.Future<void> ttsStop() => (super.noSuchMethod(
+  _i3.Future<void> ttsStop() => (super.noSuchMethod(
         Invocation.method(
           #ttsStop,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-}
-
-/// A class which mocks [LocalDatabaseRepository].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i2.LocalDatabaseRepository {
-  MockLocalDatabaseRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  set user(_i7.UserModel? user) => super.noSuchMethod(
-        Invocation.setter(
-          #user,
-          user,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i4.Future<void> init() => (super.noSuchMethod(
-        Invocation.method(
-          #init,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> setUser(_i7.UserModel? user) => (super.noSuchMethod(
-        Invocation.method(
-          #setUser,
-          [user],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<_i7.UserModel?> getUser() => (super.noSuchMethod(
-        Invocation.method(
-          #getUser,
-          [],
-        ),
-        returnValue: _i4.Future<_i7.UserModel?>.value(),
-      ) as _i4.Future<_i7.UserModel?>);
-  @override
-  _i4.Future<void> deleteUser() => (super.noSuchMethod(
-        Invocation.method(
-          #deleteUser,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<bool> getIntro() => (super.noSuchMethod(
-        Invocation.method(
-          #getIntro,
-          [],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
-  @override
-  _i4.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
-        Invocation.method(
-          #setIntro,
-          [value],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<String> getVoice() => (super.noSuchMethod(
-        Invocation.method(
-          #getVoice,
-          [],
-        ),
-        returnValue: _i4.Future<String>.value(''),
-      ) as _i4.Future<String>);
-  @override
-  _i4.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
-        Invocation.method(
-          #setVoice,
-          [],
-          {#name: name},
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
 }
