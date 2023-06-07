@@ -29,7 +29,7 @@ class ChatGptGame extends ConsumerWidget {
             headline: 'profile.hello'.trlf({'name': user.settings.data.name}),
             subtitle: 'game.game_4_line'.trl,
             onTap: () {
-              // provider.resetStoryGame();
+              provider.resetStoryGame();
             },
           ),
           const SentenceWidget(),

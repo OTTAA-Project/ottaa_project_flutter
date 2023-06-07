@@ -15,7 +15,7 @@ class ChatGptGameProvider extends ChangeNotifier {
   final GamesProvider _gamesProvider;
   final TTSProvider _tts;
   List<String> gptBoards = [];
-  bool boardOrPicto = true;
+  bool isBoard = true;
   ScrollController boardScrollController = ScrollController();
   ScrollController pictoScrollController = ScrollController();
   List<Picto> chatGptPictos = [];
@@ -24,8 +24,6 @@ class ChatGptGameProvider extends ChangeNotifier {
   final List<String> modifierBoards = ['--PHmDIFeKHvulVxNtBgk', '5kfboTpsoH8RSFvA9ruE1', 'TMO8t_1hMaHiyh1SUwaFH'];
   final List<String> actionBoards = ['L6pHIipM3ocu3wYlMuo2y'];
   final List<String> placeBoards = ['H6zmHfH-5XVtpy1RJ1ci7', 'kBVGvu0NygXFUWTFxcQJe'];
-
-
 
   ChatGptGameProvider(this._chatGPTServices, this._gamesProvider, this._tts);
 
@@ -84,7 +82,7 @@ class ChatGptGameProvider extends ChangeNotifier {
   Future<void> createStory() async {
     final String prompt = 'game.prompt'.trl;
     final finalPrompt = '$prompt ${gptPictos[0].text}, ${gptPictos[1].text}, ${gptPictos[2].text}, ${gptPictos[3].text}.';
-    final res = await _chatGPTServices.getGPTStory(prompt: prompt);
+    final res = await _chatGPTServices.getGPTStory(prompt: finalPrompt);
     if (res.isRight) {
       generatedStory = res.right;
     }
@@ -101,8 +99,6 @@ class ChatGptGameProvider extends ChangeNotifier {
     }
     chatGptPictos.clear();
     chatGptPictos.addAll(picts);
-    // print(picts.toString());
-    notifyListeners();
   }
 
   Future<void> speakStory() async {

@@ -58,6 +58,7 @@ class AppRoutes {
   static const patientWhatsThePictoGame = "/home/games/wtp";
   static const patientStoryGame = "/home/games/story";
   static const patientShowStory = "/home/games/story/show";
+  static const selectBoardPicto = "/home/games/story/selectBoard";
   static const patientHistorySelectPicto = "/home/games/history/pictos";
   static const patientHistoryReview = "/home/games/history/review";
 }

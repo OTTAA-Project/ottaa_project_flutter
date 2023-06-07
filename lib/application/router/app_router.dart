@@ -16,6 +16,9 @@ import 'package:ottaa_project_flutter/presentation/screens/games/match_pictogram
 import 'package:ottaa_project_flutter/presentation/screens/games/memory_game_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/search_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/select_group_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/ui/board_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/ui/select_board_and_picto.dart';
+import 'package:ottaa_project_flutter/presentation/screens/games/ui/show_created_story.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/whats_the_picto_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/home_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/link/link_mail_screen.dart';
@@ -297,7 +300,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'story',
                 builder: (_, __) => const ChatGptGame(),
-                routes: [GoRoute(path: 'show',builder: ()=>const )],
+                routes: [
+                  GoRoute(path: 'show', builder: (_, __) => const ShowCreatedStory()),
+                  GoRoute(path: 'selectBoard', builder: (_, __) => const SelectBoardAndPicto()),
+                ],
               ),
               GoRoute(
                 path: 'memory',
