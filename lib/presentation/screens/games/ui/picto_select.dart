@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -26,34 +27,33 @@ class PictoSelectWidget extends ConsumerWidget {
             childAspectRatio: 1,
             mainAxisExtent: 150,
           ),
-          // controller: ref.watch(chatGPTProvider.select((value) => value.pictoScrollController)),
+          controller: ref.watch(chatGptGameProvider.select((value) => value.pictoScrollController)),
           padding: const EdgeInsets.only(top: 16, bottom: 16, right: 32),
-          itemCount: [].length, //TODO!: FIX THAT
+          itemCount: provider.chatGptPictos.length,
           itemBuilder: (ctx, index) {
             return PictoWidget(
               onTap: () {
-                // provider.gptPictos.add(provider.chatGptPictos[index]);
-                // provider.boardOrPicto = !provider.boardOrPicto;
-                // provider.sentencePhase++;
-                //TODO!: FIX THAT
+                provider.gptPictos.add(provider.chatGptPictos[index]);
+                provider.isBoard = !provider.isBoard;
+                provider.sentencePhase++;
                 provider.notify();
                 context.pop();
               },
-              // image: provider.chatGptPictos[index].resource.network != null
-              //     ? CachedNetworkImage(
-              //         imageUrl: provider.chatGptPictos[index].resource.network!,
-              //         fit: BoxFit.fill,
-              //         errorWidget: (context, url, error) => Image.asset(
-              //           fit: BoxFit.fill,
-              //           "assets/img/${provider.chatGptPictos[index].text}.webp",
-              //         ),
-              //       )
-              //     : Image.asset(
-              //         fit: BoxFit.fill,
-              //         "assets/img/${provider.chatGptPictos[index].text}.webp",
-              //       ),
-              // text: provider.chatGptPictos[index].text,
-              // colorNumber: provider.chatGptPictos[index].type,
+              image: provider.chatGptPictos[index].resource.network != null
+                  ? CachedNetworkImage(
+                      imageUrl: provider.chatGptPictos[index].resource.network!,
+                      fit: BoxFit.fill,
+                      errorWidget: (context, url, error) => Image.asset(
+                        fit: BoxFit.fill,
+                        "assets/img/${provider.chatGptPictos[index].text}.webp",
+                      ),
+                    )
+                  : Image.asset(
+                      fit: BoxFit.fill,
+                      "assets/img/${provider.chatGptPictos[index].text}.webp",
+                    ),
+              text: provider.chatGptPictos[index].text,
+              colorNumber: provider.chatGptPictos[index].type,
               width: 96,
               height: 119,
             );

@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone allows you to record custom voices &amp; sounds.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photos &amp; Images allows you to create customized pictograms.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -29,7 +33,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>add the key here for the app</string>
+				<string></string>
 			</array>
 		</dict>
 	</array>
