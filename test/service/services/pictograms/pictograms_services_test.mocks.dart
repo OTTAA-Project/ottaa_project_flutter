@@ -15,10 +15,14 @@ import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i6;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i10;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i11;
 import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i16;
+import 'package:ottaa_project_flutter/core/models/group_model.dart' as _i18;
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart' as _i12;
+import 'package:ottaa_project_flutter/core/models/picto_model.dart' as _i19;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i14;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
     as _i3;
+import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart'
+    as _i17;
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart'
     as _i7;
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
@@ -1174,4 +1178,82 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
+}
+
+/// A class which mocks [LocalStorageRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocalStorageRepository extends _i1.Mock
+    implements _i17.LocalStorageRepository {
+  MockLocalStorageRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<void> writeGruposToFile({
+    required String? data,
+    required String? language,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeGruposToFile,
+          [],
+          {
+            #data: data,
+            #language: language,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<List<_i18.Group>> readGruposFromFile(
+          {required String? language}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #readGruposFromFile,
+          [],
+          {#language: language},
+        ),
+        returnValue: _i4.Future<List<_i18.Group>>.value(<_i18.Group>[]),
+      ) as _i4.Future<List<_i18.Group>>);
+  @override
+  _i4.Future<void> writePictoToFile({
+    required String? data,
+    required String? language,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writePictoToFile,
+          [],
+          {
+            #data: data,
+            #language: language,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<List<_i19.Picto>> readPictoFromFile({required String? language}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #readPictoFromFile,
+          [],
+          {#language: language},
+        ),
+        returnValue: _i4.Future<List<_i19.Picto>>.value(<_i19.Picto>[]),
+      ) as _i4.Future<List<_i19.Picto>>);
+  @override
+  _i4.Future<Map<String, dynamic>> readPictosFromLocal(
+          {required String? locale}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #readPictosFromLocal,
+          [],
+          {#locale: locale},
+        ),
+        returnValue:
+            _i4.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i4.Future<Map<String, dynamic>>);
 }

@@ -16,11 +16,13 @@ import 'pictograms_services_test.mocks.dart';
   AuthRepository,
   RemoteStorageRepository,
   ServerRepository,
+  LocalStorageRepository,
 ])
-Future<void> main() async{
+Future<void> main() async {
   late MockAuthRepository mockAuthRepository;
   late MockRemoteStorageRepository mockRemoteStorageRepository;
   late MockServerRepository mockServerRepository;
+  late MockLocalStorageRepository mockLocalDatabaseRepository;
 
   late PictogramsService pictogramsService;
 
@@ -83,11 +85,13 @@ Future<void> main() async{
     mockAuthRepository = MockAuthRepository();
     mockRemoteStorageRepository = MockRemoteStorageRepository();
     mockServerRepository = MockServerRepository();
+    mockLocalDatabaseRepository = MockLocalStorageRepository();
 
     pictogramsService = PictogramsService(
       mockAuthRepository,
       mockServerRepository,
       mockRemoteStorageRepository,
+      mockLocalDatabaseRepository,
     );
   });
 
