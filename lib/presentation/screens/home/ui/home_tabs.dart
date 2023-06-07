@@ -34,6 +34,8 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
 
     final addPictogram = ref.read(homeProvider.select((value) => value.addPictogram));
 
+    final translations = ref.watch(homeProvider.select((value) => value.pictosTranslations));
+
     return Flex(
       direction: Axis.vertical,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,7 +212,7 @@ class _GroupsHomeUi extends ConsumerState<HomeTabsUI> {
                                 fit: BoxFit.fill,
                                 "assets/img/${picto.text}.webp",
                               ),
-                        text: picto.text,
+                        text: translations[picto.id] ?? picto.text,
                         width: 116,
                         height: 144,
                       ),

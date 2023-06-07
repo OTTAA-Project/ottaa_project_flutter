@@ -24,7 +24,7 @@ dependencies:
   firebase_database: ^10.0.5
   firebase_storage: ^11.0.5
   flutter_riverpod: ^2.0.2
-  flutter_tts: ^3.5.3
+  flutter_tts: ^3.7.0
   fluttertoast: ^8.1.1
   get_it: ^7.2.0
   go_router: ^5.0.5
@@ -49,7 +49,6 @@ dependencies:
   path: ^1.8.2
   cached_network_image: ^3.2.2
   transparent_image: ^2.0.0
-  flutter_dotenv: ^5.0.2
   ottaa_ui_kit:
     git:
       url: https://github.com/OTTAA-Project/OTTAA_flutter_theme.git
@@ -80,13 +79,12 @@ dev_dependencies:
   # riverpod_lint:
 
 dependency_overrides:
-  # firebase_core_platform_interface: 4.5.1
-  # test_api: 0.4.12
+# firebase_core_platform_interface: 4.5.1
+# test_api: 0.4.12
 
 flutter:
   uses-material-design: true
   assets:
-    - .env
     - assets/imgs/
     - assets/
     - assets/edit/

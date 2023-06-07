@@ -86,7 +86,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        return true; //TODO: Ask for pop :)
+        return false;
       },
       child: Scaffold(
         body: ResponsiveBuilder(
@@ -94,7 +94,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             switch (sizingInformation.deviceScreenType) {
               case DeviceScreenType.desktop:
               case DeviceScreenType.tablet:
-                return  HomeTabletLayout(
+                return HomeTabletLayout(
                   child: currentHomeStatus(provider.status),
                 );
               default:
