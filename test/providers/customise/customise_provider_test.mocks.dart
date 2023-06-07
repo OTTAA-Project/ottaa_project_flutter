@@ -293,6 +293,25 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i7.Future<String>.value(''),
       ) as _i7.Future<String>);
   @override
+  _i7.Future<bool> getLongClick() => (super.noSuchMethod(
+        Invocation.method(
+          #getLongClick,
+          [],
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+  @override
+  _i7.Future<void> setLongClick({required bool? isLongClick}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setLongClick,
+          [],
+          {#isLongClick: isLongClick},
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
   _i7.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
         Invocation.method(
           #setVoice,
@@ -569,6 +588,17 @@ class MockPictogramsRepository extends _i1.Mock
         ),
         returnValue: _i7.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
       ) as _i7.Future<List<_i12.Picto>>);
+  @override
+  _i7.Future<Map<String, String>> loadTranslations(
+          {required String? language}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loadTranslations,
+          [],
+          {#language: language},
+        ),
+        returnValue: _i7.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i7.Future<Map<String, String>>);
 }
 
 /// A class which mocks [UserNotifier].

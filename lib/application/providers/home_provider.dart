@@ -1,8 +1,6 @@
 import 'dart:math' show min;
-
 import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
-import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -21,9 +19,7 @@ import 'package:ottaa_project_flutter/core/models/learn_token.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
-import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:ottaa_project_flutter/core/use_cases/learn_pictogram.dart';
 import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
@@ -37,6 +33,7 @@ class HomeProvider extends ChangeNotifier {
   final SentencesRepository _sentencesService;
   final PatientNotifier patientState;
   final UserNotifier userState;
+  final LocalDatabaseRepository _hiveRepository;
 
   final TTSProvider _tts;
 
@@ -55,6 +52,7 @@ class HomeProvider extends ChangeNotifier {
     this.learnPictogram,
     this.userState,
     this._chatGPTNotifier,
+    this._hiveRepository,
   );
 
   List<Phrase> mostUsedSentences = [];
@@ -76,8 +74,12 @@ class HomeProvider extends ChangeNotifier {
   bool confirmExit = false;
 
   bool talkEnabled = true;
-  bool show = false;
+  bool isSpeakWidget = false;
+  bool isExit = false;
+  bool isLongClick = false;
   int? selectedWord;
+  bool isExitLong = false;
+  bool isLongClickCheck = false;
   ScrollController scrollController = ScrollController();
 
   HomeScreenStatus status = HomeScreenStatus.pictos;
@@ -93,21 +95,40 @@ class HomeProvider extends ChangeNotifier {
 
   final List<CancelToken> _cancelsToken = [];
 
+  final Map<String, String> pictosTranslations = {};
+
   void setCurrentGroup(String group) {
     currentTabGroup = group;
     pictoTabsScrollController.jumpTo(0);
     notifyListeners();
   }
 
+  Future<bool> isLongClickEnabled() async {
+    return await _hiveRepository.getLongClick();
+  }
+
+  Future<void> setLongClickEnabled({required bool isLongClick}) async {
+    await _hiveRepository.setLongClick(isLongClick: isLongClick);
+  }
+
   Future<void> init() async {
     await fetchPictograms();
+    await loadTranslations();
 
     basicPictograms = predictiveAlgorithm(list: pictograms[kStarterPictoId]!.relations);
 
     currentTabGroup = groups.keys.first;
-
+    isExitLong = await isLongClickEnabled();
     await buildSuggestion();
     notifyListeners();
+  }
+
+  Future<void> loadTranslations() async {
+    pictosTranslations.clear();
+    final translations = await _pictogramsService.loadTranslations(language: userState.user!.settings.language.language);
+
+    pictosTranslations.addAll(translations);
+    notify();
   }
 
   void switchToPictograms() {
@@ -372,14 +393,14 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> speakSentence() async {
-    show = true;
+    isSpeakWidget = true;
     notifyListeners();
     if (patientState.state != null) {
       learnPictogram.call(
         uid: patientState.user.id,
         language: patientState.user.patientSettings.language.language,
         model: "", //TODO: Change to the current model later uwu
-        tokens: pictoWords.map((e) => LearnToken(name: e.text, id: e.id)).toList(),
+        tokens: pictoWords.map((e) => LearnToken(name: pictosTranslations[e.id] ?? e.text, id: e.id)).toList(),
       );
     }
 
@@ -388,14 +409,18 @@ class HomeProvider extends ChangeNotifier {
       String? sentence;
       scrollController.jumpTo(0);
       if (patientState.user.patientSettings.language.labs) {
-        sentence = await _chatGPTNotifier.generatePhrase(pictoWords);
+        sentence = await _chatGPTNotifier.generatePhrase(pictoWords
+            .map((e) => e.copyWith(
+                  text: pictosTranslations[e.id] ?? e.text,
+                ))
+            .toList());
         if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
       }
 
-      sentence ??= pictoWords.map((e) => e.text).join(' ');
+      sentence ??= pictoWords.map((e) => pictosTranslations[e.id] ?? e.text).join(' ');
       await _tts.speak(sentence);
 
-      show = false;
+      isSpeakWidget = false;
       notifyListeners();
     } else {
       for (var i = 0; i < pictoWords.length; i++) {
@@ -406,13 +431,14 @@ class HomeProvider extends ChangeNotifier {
           curve: Curves.easeIn,
         );
         notifyListeners();
-        await _tts.speak(pictoWords[i].text);
+        final e = pictoWords[i];
+        await _tts.speak(pictosTranslations[e.id] ?? e.text);
       }
-      show = false;
+      isSpeakWidget = false;
       notifyListeners();
     }
 
-    show = false;
+    isSpeakWidget = false;
     notifyListeners();
 
     if (patientState.state != null && patientState.user.patientSettings.layout.cleanup) {
@@ -489,18 +515,8 @@ final AutoDisposeChangeNotifierProvider<HomeProvider> homeProvider = ChangeNotif
 
   final predictPictogram = GetIt.I<PredictPictogram>();
   final learnPictogram = GetIt.I<LearnPictogram>();
-
+  final hiveService = GetIt.I<LocalDatabaseRepository>();
   final chatGptNotifier = ref.watch(chatGPTProvider.notifier);
 
-  return HomeProvider(
-    pictogramService,
-    groupsService,
-    sentencesService,
-    tts,
-    patientState,
-    predictPictogram,
-    learnPictogram,
-    userState,
-    chatGptNotifier,
-  );
+  return HomeProvider(pictogramService, groupsService, sentencesService, tts, patientState, predictPictogram, learnPictogram, userState, chatGptNotifier, hiveService);
 });

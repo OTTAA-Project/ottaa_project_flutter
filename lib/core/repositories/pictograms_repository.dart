@@ -9,4 +9,6 @@ abstract class PictogramsRepository {
   Future<void> updatePictogram(Picto pictogram, String language, int index);
 
   Future<List<Picto>> getPictograms(BasicSearch search);
+
+  Future<Map<String, String>> loadTranslations({required String language});
 }

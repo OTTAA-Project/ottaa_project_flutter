@@ -15,7 +15,7 @@ class ChatGptGameProvider extends ChangeNotifier {
   final GamesProvider _gamesProvider;
   final TTSProvider _tts;
   List<String> gptBoards = [];
-  bool boardOrPicto = true;
+  bool isBoard = true;
   ScrollController boardScrollController = ScrollController();
   ScrollController pictoScrollController = ScrollController();
   List<Picto> chatGptPictos = [];
@@ -99,8 +99,6 @@ class ChatGptGameProvider extends ChangeNotifier {
     }
     chatGptPictos.clear();
     chatGptPictos.addAll(picts);
-    // print(picts.toString());
-    notifyListeners();
   }
 
   Future<void> speakStory() async {
