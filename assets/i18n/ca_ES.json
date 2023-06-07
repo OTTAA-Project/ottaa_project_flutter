@@ -79,7 +79,7 @@
         "contact": "*Asegurate de estar en contacto con la persona que posea esta cuenta en un dispositivo."
       },
       "token": {
-        "title": "Colocá el código de verificación que llegó como notificación a otro dispositivo.",
+        "title": "Coloque el código de verificación que llegó como notificación a otro dispositivo.",
         "problem": "Inconvenients per enllaçar les comptes?",
         "resend": "Reenviar codi",
         "back": "Introduir un altre correu electrònic",
@@ -186,7 +186,7 @@
     "general": "General",
     "pictogram": "Pictogrames",
     "configuration": "Configuració",
-    "user_ottaa": "Usar OTTAA como",
+    "user_ottaa": "Usar Ottaa como",
     "cancel": "Cancel·lar",
     "slow": "Lenta",
     "default": "Per defecte",
@@ -206,7 +206,8 @@
     "french": "French",
     "portuguese": "Portuguese",
     "test": "Esta es la voz que vas a usar en ottaa",
-    "add": "Agregar"
+    "add": "Agregar",
+    "confirm": "Confirmar"
   },
   "onboarding": {
     "start": "Començar",
@@ -304,7 +305,7 @@
     "game_header_1": "Unir pictogramas",
     "game_header_2": "Juego de la Memoria",
     "game_header_3": "Armá una historia",
-    "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprendé jugando",
+    "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprende jugando",
     "game_sub_1": "Uní los pictogramas de manera correcta",
     "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
     "game_sub_3": "Elegí los pictogramas que más te gusten, y con la ayuda de Chat GPT, crearás una historia.",
@@ -324,5 +325,16 @@
     "speak_what": "¿Cual es el picto {name}?",
     "gptbtn": "Crear historia",
     "prompt": "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:"
+  },
+  "exit": {
+    "long": {
+      "headline": "¿Deseas volver a la pantalla de perfiles?",
+      "body": "Mantén presionado el botón resaltado para volver",
+      "check": "No volver a mostrar este mensaje",
+      "btn": "De acuerdo"
+    },
+    "short": {
+      "headline": " ¿Confima que deseas volver a la pantalla de perfiles?"
+    }
   }
 }
