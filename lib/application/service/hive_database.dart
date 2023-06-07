@@ -44,7 +44,6 @@ class HiveDatabase extends LocalDatabaseRepository {
     await Hive.box('none').clear();
   }
 
-
   @override
   Future<UserModel?> getUser() async {
     UserModel? user;
@@ -114,6 +113,8 @@ class HiveDatabase extends LocalDatabaseRepository {
 
     await Hive.openBox('tts');
 
+    await Hive.openBox('longClick');
+
     await getUser();
   }
 
@@ -157,5 +158,16 @@ class HiveDatabase extends LocalDatabaseRepository {
   @override
   Future<void> setVoice({required String name}) async {
     await Hive.box('tts').put('name', name);
+  }
+
+  @override
+  Future<void> setLongClick({required bool isLongClick}) async {
+    await Hive.box('longClick').put('isLongClick', isLongClick);
+  }
+
+  @override
+  Future<bool> getLongClick() async {
+    final res = Hive.box('longClick').get('isLongClick');
+    return res ?? false;
   }
 }

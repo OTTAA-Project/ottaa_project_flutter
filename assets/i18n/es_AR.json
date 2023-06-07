@@ -206,7 +206,8 @@
     "french": "French",
     "portuguese": "Portuguese",
     "test": "Esta es la voz que vas a usar en ottaa",
-    "add": "Agregar"
+    "add": "Agregar",
+    "confirm": "Confirmar"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -324,5 +325,16 @@
     "speak_what": "¿Cual es el picto {name}?",
     "gptbtn": "Crear historia",
     "prompt": "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:"
+  },
+  "exit": {
+    "long": {
+      "headline": "¿Deseas volver a la pantalla de perfiles?",
+      "body": "Mantén presionado el botón resaltado para volver",
+      "check": "No volver a mostrar este mensaje",
+      "btn": "De acuerdo"
+    },
+    "short": {
+      "headline": " ¿Confima que deseas volver a la pantalla de perfiles?"
+    }
   }
 }

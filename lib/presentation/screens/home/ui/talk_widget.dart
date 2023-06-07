@@ -23,6 +23,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
     final int? currentWord = ref.watch(homeProvider).selectedWord;
     final patientNotifierState = ref.watch(patientNotifier);
     final scrollCon = ref.watch(homeProvider).scrollController;
+    final translations = ref.watch(homeProvider.select((value) => value.pictosTranslations));
 
     final size = MediaQuery.of(context).size;
 
@@ -96,7 +97,7 @@ class _TalkWidgetState extends ConsumerState<TalkWidget> {
                               fit: BoxFit.fill,
                               "assets/img/${pict.text}.webp",
                             ),
-                      text: pict.text,
+                      text: translations[pict.id] ?? pict.text,
                       disable: (patientNotifierState != null ? patientNotifierState.patientSettings.layout.oneToOne : false)
                           ? index == currentWord
                               ? false

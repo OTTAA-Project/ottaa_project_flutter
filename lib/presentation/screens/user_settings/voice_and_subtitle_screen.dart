@@ -74,7 +74,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                           child: ChooserWidget(
                             selected: provider.ttsSetting.voiceSetting.voicesNames[provider.language] == provider.filteredVoices[index].name,
                             title: '${'global.voice'.trl} ${index + 1}',
-                            onTap: () => provider.changeVoiceType(type: provider.filteredVoices[index].name),
+                            onTap: () async => await provider.changeVoiceType(type: provider.filteredVoices[index].name),
                           ),
                         );
                       },
