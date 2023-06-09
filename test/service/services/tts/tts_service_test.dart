@@ -58,7 +58,7 @@ void main() {
         }
       },
     );
-    WidgetsFlutterBinding.ensureInitialized();
+  
     mockI18N = MockI18N();
     mockFlutterTts = MockFlutterTts();
     when(mockFlutterTts.getVoices).thenAnswer(
