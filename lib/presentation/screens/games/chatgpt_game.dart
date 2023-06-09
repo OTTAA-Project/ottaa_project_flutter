@@ -65,7 +65,11 @@ class ChatGptGame extends ConsumerWidget {
                           ),
                         );
                         await provider.createStory();
-                        context.push(AppRoutes.patientShowStory);
+                        if (provider.isStoryFetched) {
+                          context.push(AppRoutes.patientShowStory);
+                        } else {
+                          context.pop();
+                        }
                       }
                     },
                     text: 'game.gptbtn'.trl,
