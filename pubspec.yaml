@@ -66,6 +66,7 @@ dependencies:
   cloud_functions: ^4.3.0
   animated_widgets: ^1.1.0
   responsive_builder: ^0.6.4
+  flutter_colorpicker: ^1.0.3
 
 dev_dependencies:
   build_runner: ^2.3.2
