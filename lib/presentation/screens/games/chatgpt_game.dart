@@ -64,7 +64,7 @@ class ChatGptGame extends ConsumerWidget {
                             child: CircularProgressIndicator(),
                           ),
                         );
-                        await provider.createStory();
+                        await provider.createStory(prompt: 'game.prompt'.trl);
                         context.push(AppRoutes.patientShowStory);
                       }
                     },
