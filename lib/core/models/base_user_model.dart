@@ -44,17 +44,14 @@ class BaseUserModel extends UserModel {
   UserModel fromJson(Map<String, dynamic> json) => BaseUserModel(
         id: json['id'],
         settings: BaseSettingsModel.fromMap(json['settings']),
-        type: UserType.values
-            .firstWhere((element) => element.name == json['type']),
+        type: UserType.values.firstWhere((element) => element.name == json['type']),
         email: json['email'] ?? "",
       );
 
   factory BaseUserModel.fromMap(Map<String, dynamic> json) => BaseUserModel(
         id: json['id'],
-        settings: BaseSettingsModel.fromMap(
-            Map.from(json['settings'] as Map<dynamic, dynamic>)),
-        type: UserType.values
-            .firstWhere((element) => element.name == json['type']),
+        settings: BaseSettingsModel.fromMap(Map.from(json['settings'] as Map<dynamic, dynamic>)),
+        type: UserType.values.firstWhere((element) => element.name == json['type']),
         email: json['email'] ?? "",
       );
 
@@ -69,12 +66,17 @@ class BaseUserModel extends UserModel {
         'email': email,
       };
 
-  UserModel copyWith(other) {
+  UserModel copyWith({
+    String? id,
+    UserSettings? settings,
+    UserType? type,
+    String? email,
+  }) {
     return BaseUserModel(
-      id: other.id ?? id,
-      settings: other.settings ?? settings,
-      type: other.type ?? type,
-      email: other.email ?? email,
+      id: id ?? this.id,
+      settings: settings ?? this.settings,
+      type: type ?? this.type,
+      email: email ?? this.email,
     );
   }
 }

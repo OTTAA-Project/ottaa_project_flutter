@@ -111,6 +111,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
 
     final maxWidth = max(size.width, size.height);
     final maxHeight = min(size.width, size.height);
+    final translations = ref.watch(homeProvider.select((value) => value.pictosTranslations));
 
     return Flexible(
       flex: 5,
@@ -191,7 +192,7 @@ class _PictosBarState extends ConsumerState<PictosBarUI> {
                           fit: BoxFit.fill,
                           "assets/img/${e.text}.webp",
                         ),
-                  text: e.text,
+                  text: translations[e.id] ?? e.text,
                   colorNumber: e.type,
                 ),
               );

@@ -396,6 +396,16 @@ class MockFlutterTts extends _i1.Mock implements _i4.FlutterTts {
         returnValueForMissingStub: _i5.Future<dynamic>.value(),
       ) as _i5.Future<dynamic>);
   @override
+  _i5.Future<dynamic> autoStopSharedSession(bool? autoStop) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #autoStopSharedSession,
+          [autoStop],
+        ),
+        returnValue: _i5.Future<dynamic>.value(),
+        returnValueForMissingStub: _i5.Future<dynamic>.value(),
+      ) as _i5.Future<dynamic>);
+  @override
   _i5.Future<dynamic> setIosAudioCategory(
     _i4.IosTextToSpeechAudioCategory? category,
     List<_i4.IosTextToSpeechAudioCategoryOptions>? options, [

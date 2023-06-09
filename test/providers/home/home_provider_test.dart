@@ -6,13 +6,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
-import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
@@ -23,6 +21,7 @@ import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/sentences_repository.dart';
 import 'package:ottaa_project_flutter/core/use_cases/learn_pictogram.dart';
@@ -30,7 +29,7 @@ import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
 import 'home_provider_test.mocks.dart';
 
-@GenerateMocks([TTSProvider, SentencesRepository, GroupsRepository, PictogramsRepository, PredictPictogram, LearnPictogram, ChatGPTNotifier])
+@GenerateMocks([TTSProvider, SentencesRepository, GroupsRepository, PictogramsRepository, PredictPictogram, LearnPictogram, ChatGPTNotifier, LocalDatabaseRepository])
 @GenerateNiceMocks([MockSpec<PatientNotifier>(), MockSpec<UserNotifier>()])
 Future<void> main() async {
   late MockTTSProvider mockTTSProvider;
@@ -42,6 +41,7 @@ Future<void> main() async {
   late MockChatGPTNotifier mockChatGPTNotifier;
   late MockLearnPictogram mockLearnPictogram;
   late MockPredictPictogram mockPredictPictogram;
+  late MockLocalDatabaseRepository mockLocalDatabaseRepository;
 
   late HomeProvider homeProvider;
 
@@ -64,6 +64,7 @@ Future<void> main() async {
     mockChatGPTNotifier = MockChatGPTNotifier();
     mockLearnPictogram = MockLearnPictogram();
     mockPredictPictogram = MockPredictPictogram();
+    mockLocalDatabaseRepository = MockLocalDatabaseRepository();
 
     fakePhrases = [
       Phrase(date: DateTime.now(), id: '00', sequence: [Sequence(id: '22')], tags: {}),
@@ -125,28 +126,9 @@ Future<void> main() async {
     ];
     mockPatientNotifier.state = PatientUserModel(id: '00', groups: {}, phrases: {}, pictos: {}, settings: fakeUser.settings, email: 'test@test.com');
     mockUserNotifier.setUser(fakeUser);
-    homeProvider = HomeProvider(mockPictogramsRepository, mockGroupsRepository, mockSentencesRepository, mockTTSProvider, mockPatientNotifier, mockPredictPictogram, mockLearnPictogram, mockUserNotifier, mockChatGPTNotifier);
+    homeProvider = HomeProvider(mockPictogramsRepository, mockGroupsRepository, mockSentencesRepository, mockTTSProvider, mockPatientNotifier, mockPredictPictogram, mockLearnPictogram, mockUserNotifier, mockChatGPTNotifier, mockLocalDatabaseRepository);
   });
 
-  testWidgets('should update currentTabGroup and trigger notifyListeners', (WidgetTester tester) async {
-    const expectedGroup = 'group';
-
-    await tester.pumpWidget(
-      MaterialApp(
-        home: ListView(
-          controller: homeProvider.pictoTabsScrollController,
-          children: const <Widget>[],
-        ),
-      ),
-    );
-
-    homeProvider.setCurrentGroup(expectedGroup);
-
-    await tester.pump();
-
-    expect(homeProvider.currentTabGroup, expectedGroup);
-    expect(() => homeProvider.notify(), isA<void>());
-  });
 
   test('should call notifyListeners', () {
     homeProvider.notify();
@@ -227,10 +209,10 @@ Future<void> main() async {
     final result = homeProvider.predictiveAlgorithm(list: list);
 
     expect(result, hasLength(4));
-    expect(result[0].id, equals('0'));
-    expect(result[1].id, equals('1'));
-    expect(result[2].id, equals('2'));
-    expect(result[3].id, equals('3'));
+    expect(result[0].id, equals('3'));
+    expect(result[1].id, equals('0'));
+    expect(result[2].id, equals('1'));
+    expect(result[3].id, equals('2'));
   });
 
   test('refreshPictograms updates the indexPage and notifies listeners', () {

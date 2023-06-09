@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
@@ -14,8 +15,9 @@ class PictogramsService extends PictogramsRepository {
   final AuthRepository _authService;
   final RemoteStorageRepository _remoteStorageService;
   final ServerRepository _serverRepository;
+  final LocalStorageRepository _localStorageServices;
 
-  PictogramsService(this._authService, this._serverRepository, this._remoteStorageService);
+  PictogramsService(this._authService, this._serverRepository, this._remoteStorageService, this._localStorageServices);
 
   @override
   Future<List<Picto>> getAllPictograms() async {
@@ -61,5 +63,13 @@ class PictogramsService extends PictogramsRepository {
     if (result.isLeft) return;
 
     final String id = result.right.id;
+  }
+
+  @override
+  Future<Map<String, String>> loadTranslations({required String language}) async {
+    final pictosTranslations = await _localStorageServices.readPictosFromLocal(locale: language);
+    return pictosTranslations.map((key, value) {
+      return MapEntry(key, value["text"]);
+    });
   }
 }

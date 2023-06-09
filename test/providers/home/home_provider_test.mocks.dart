@@ -8,18 +8,18 @@ import 'dart:ui' as _i8;
 
 import 'package:dio/dio.dart' as _i15;
 import 'package:either_dart/either.dart' as _i3;
-import 'package:flutter_riverpod/flutter_riverpod.dart' as _i20;
+import 'package:flutter_riverpod/flutter_riverpod.dart' as _i21;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart'
-    as _i19;
+    as _i20;
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart'
     as _i18;
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart'
     as _i5;
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart'
-    as _i22;
+    as _i23;
 import 'package:ottaa_project_flutter/core/abstracts/basic_search.dart' as _i11;
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i23;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i19;
 import 'package:ottaa_project_flutter/core/models/group_model.dart' as _i10;
 import 'package:ottaa_project_flutter/core/models/learn_token.dart' as _i17;
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart'
@@ -35,7 +35,7 @@ import 'package:ottaa_project_flutter/core/use_cases/learn_pictogram.dart'
     as _i16;
 import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart'
     as _i13;
-import 'package:state_notifier/state_notifier.dart' as _i21;
+import 'package:state_notifier/state_notifier.dart' as _i22;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -426,6 +426,17 @@ class MockPictogramsRepository extends _i1.Mock
         ),
         returnValue: _i6.Future<List<_i12.Picto>>.value(<_i12.Picto>[]),
       ) as _i6.Future<List<_i12.Picto>>);
+  @override
+  _i6.Future<Map<String, String>> loadTranslations(
+          {required String? language}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loadTranslations,
+          [],
+          {#language: language},
+        ),
+        returnValue: _i6.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i6.Future<Map<String, String>>);
 }
 
 /// A class which mocks [PredictPictogram].
@@ -634,10 +645,127 @@ class MockChatGPTNotifier extends _i1.Mock implements _i18.ChatGPTNotifier {
       );
 }
 
+/// A class which mocks [LocalDatabaseRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocalDatabaseRepository extends _i1.Mock
+    implements _i2.LocalDatabaseRepository {
+  MockLocalDatabaseRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  set user(_i19.UserModel? user) => super.noSuchMethod(
+        Invocation.setter(
+          #user,
+          user,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i6.Future<void> init() => (super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> setUser(_i19.UserModel? user) => (super.noSuchMethod(
+        Invocation.method(
+          #setUser,
+          [user],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<_i19.UserModel?> getUser() => (super.noSuchMethod(
+        Invocation.method(
+          #getUser,
+          [],
+        ),
+        returnValue: _i6.Future<_i19.UserModel?>.value(),
+      ) as _i6.Future<_i19.UserModel?>);
+  @override
+  _i6.Future<void> deleteUser() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteUser,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<bool> getIntro() => (super.noSuchMethod(
+        Invocation.method(
+          #getIntro,
+          [],
+        ),
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
+        Invocation.method(
+          #setIntro,
+          [value],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<String> getVoice() => (super.noSuchMethod(
+        Invocation.method(
+          #getVoice,
+          [],
+        ),
+        returnValue: _i6.Future<String>.value(''),
+      ) as _i6.Future<String>);
+  @override
+  _i6.Future<bool> getLongClick() => (super.noSuchMethod(
+        Invocation.method(
+          #getLongClick,
+          [],
+        ),
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> setLongClick({required bool? isLongClick}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setLongClick,
+          [],
+          {#isLongClick: isLongClick},
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
+        Invocation.method(
+          #setVoice,
+          [],
+          {#name: name},
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+}
+
 /// A class which mocks [PatientNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPatientNotifier extends _i1.Mock implements _i19.PatientNotifier {
+class MockPatientNotifier extends _i1.Mock implements _i20.PatientNotifier {
   @override
   _i4.PatientUserModel get user => (super.noSuchMethod(
         Invocation.getter(#user),
@@ -651,7 +779,7 @@ class MockPatientNotifier extends _i1.Mock implements _i19.PatientNotifier {
         ),
       ) as _i4.PatientUserModel);
   @override
-  set onError(_i20.ErrorListener? _onError) => super.noSuchMethod(
+  set onError(_i21.ErrorListener? _onError) => super.noSuchMethod(
         Invocation.setter(
           #onError,
           _onError,
@@ -709,8 +837,8 @@ class MockPatientNotifier extends _i1.Mock implements _i19.PatientNotifier {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i20.RemoveListener addListener(
-    _i21.Listener<_i4.PatientUserModel?>? listener, {
+  _i21.RemoveListener addListener(
+    _i22.Listener<_i4.PatientUserModel?>? listener, {
     bool? fireImmediately = true,
   }) =>
       (super.noSuchMethod(
@@ -721,7 +849,7 @@ class MockPatientNotifier extends _i1.Mock implements _i19.PatientNotifier {
         ),
         returnValue: () {},
         returnValueForMissingStub: () {},
-      ) as _i20.RemoveListener);
+      ) as _i21.RemoveListener);
   @override
   void dispose() => super.noSuchMethod(
         Invocation.method(
@@ -735,9 +863,9 @@ class MockPatientNotifier extends _i1.Mock implements _i19.PatientNotifier {
 /// A class which mocks [UserNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserNotifier extends _i1.Mock implements _i22.UserNotifier {
+class MockUserNotifier extends _i1.Mock implements _i23.UserNotifier {
   @override
-  set user(_i23.UserModel? userModel) => super.noSuchMethod(
+  set user(_i19.UserModel? userModel) => super.noSuchMethod(
         Invocation.setter(
           #user,
           userModel,
@@ -751,7 +879,7 @@ class MockUserNotifier extends _i1.Mock implements _i22.UserNotifier {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  void setUser(_i23.UserModel? userModel) => super.noSuchMethod(
+  void setUser(_i19.UserModel? userModel) => super.noSuchMethod(
         Invocation.method(
           #setUser,
           [userModel],

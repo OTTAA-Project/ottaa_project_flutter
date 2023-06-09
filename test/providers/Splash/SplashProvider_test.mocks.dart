@@ -667,6 +667,25 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
   @override
+  _i4.Future<bool> getLongClick() => (super.noSuchMethod(
+        Invocation.method(
+          #getLongClick,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<void> setLongClick({required bool? isLongClick}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setLongClick,
+          [],
+          {#isLongClick: isLongClick},
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
   _i4.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
         Invocation.method(
           #setVoice,

@@ -207,6 +207,7 @@ extension GetItInjectableX on _i1.GetIt {
       gh<_i20.AuthRepository>(),
       gh<_i12.ServerRepository>(),
       gh<_i40.RemoteStorageRepository>(),
+      gh<_i6.LocalStorageRepository>(),
     ));
     return this;
   }

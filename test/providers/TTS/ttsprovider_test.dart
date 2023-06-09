@@ -9,7 +9,7 @@ import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
 
 import 'ttsprovider_test.mocks.dart';
 
-@GenerateMocks([TTSRepository])
+@GenerateMocks([TTSProvider, TTSRepository])
 void main() {
   late MockTTSRepository mockTTSRepository;
   late TTSProvider ttsProvider;

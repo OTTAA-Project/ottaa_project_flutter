@@ -26,7 +26,7 @@ void main() {
   LocalStorageService localStorageService = LocalStorageService();
   setUpAll(() {
     PathProviderPlatform.instance = FakePathProviderPlatform();
-    TestWidgetsFlutterBinding.ensureInitialized();
+    // TestWidgetsFlutterBinding.ensureInitialized();
     // expose path_provider
   });
   // group('Test Local Storage Service ', () {

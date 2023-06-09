@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
@@ -24,15 +25,26 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
   }
 
   Widget buildExitButton({required HomeScreenStatus status}) {
+    final provider = ref.watch(homeProvider);
     final colorScheme = Theme.of(context).colorScheme;
-
     switch (status) {
       case HomeScreenStatus.pictos:
         return Row(
           children: [
             GestureDetector(
-              onLongPressEnd: (details) {
-                //TODO: Show back dialog :)
+              onTap: () {
+                provider.isExit = true;
+                provider.isLongClick = false;
+                provider.notify();
+              },
+              onLongPress: () {
+                if (provider.isExitLong) {
+                  context.pop();
+                } else {
+                  provider.isExit = true;
+                  provider.isLongClick = true;
+                  provider.notify();
+                }
               },
               child: Container(
                 width: 20,
@@ -83,8 +95,9 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final pictoWords = ref.watch(homeProvider).pictoWords;
+    final translations = ref.watch(homeProvider.select((value) => value.pictosTranslations));
     final int? selectedWord = ref.watch(homeProvider).selectedWord;
-    final show = ref.watch(homeProvider).show;
+    final show = ref.watch(homeProvider).isSpeakWidget;
 
     final pictosIsEmpty = pictoWords.isEmpty;
     final scrollCon = ref.watch(homeProvider).scrollController;
@@ -163,7 +176,7 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
                                 fit: BoxFit.fill,
                                 "assets/img/${pict.text}.webp",
                               ),
-                        text: pict.text,
+                        text: translations[pict.id] ?? pict.text,
                         disable: show && selectedWord == index ? true : false,
                       );
                     },
@@ -201,10 +214,10 @@ class _WordBarUIState extends ConsumerState<WordBarUI> {
               const SizedBox(width: 16),
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: !sizingInformation.isMobile  ? 200 : 150,
+                  maxWidth: !sizingInformation.isMobile ? 200 : 150,
                 ),
                 child: SizedBox(
-                  height: !sizingInformation.isMobile  ? 140 : 80,
+                  height: !sizingInformation.isMobile ? 140 : 80,
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(pictosIsEmpty ? colorScheme.primary.withOpacity(.12) : colorScheme.primary),

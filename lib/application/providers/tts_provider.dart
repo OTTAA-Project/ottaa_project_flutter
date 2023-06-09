@@ -29,7 +29,7 @@ class TTSProvider extends ChangeNotifier {
   Future<void> ttsStop() => tts.ttsStop();
 
   Future<void> changeTTSVoice(String voice) async {
-    tts.changeTTSVoice(voice);
+    await tts.changeTTSVoice(voice);
   }
 
   Future<void> init() async {

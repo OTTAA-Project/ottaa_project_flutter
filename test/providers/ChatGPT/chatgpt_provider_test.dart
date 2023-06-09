@@ -1,7 +1,9 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
@@ -24,7 +26,12 @@ import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart'
 
 import 'chatgpt_provider_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<PatientNotifier>(), MockSpec<UserNotifier>(), MockSpec<ChatGPTRepository>()])
+@GenerateNiceMocks([
+  MockSpec<PatientNotifier>(),
+  MockSpec<UserNotifier>(),
+  MockSpec<ChatGPTRepository>(),
+  MockSpec<I18N>(),
+])
 Future<void> main() async {
   late MockUserNotifier mockUserNotifier;
   late MockPatientNotifier mockPatientNotifier;
@@ -74,6 +81,9 @@ Future<void> main() async {
       mockPatientNotifier,
       mockChatGPTRepository,
     );
+    MockI18N mockI18N = MockI18N();
+
+    GetIt.I.registerSingleton<I18N>(mockI18N);
   });
 
   test('should return a sentence if the user call for a sentence', () async {

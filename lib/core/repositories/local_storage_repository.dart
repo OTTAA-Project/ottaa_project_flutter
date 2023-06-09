@@ -11,8 +11,8 @@ abstract class LocalStorageRepository {
     required String language,
   });
 
-  Future<void> writePictoToFile(
-      {required String data, required String language});
+  Future<void> writePictoToFile({required String data, required String language});
 
   Future<List<Picto>> readPictoFromFile({required String language});
+  Future<Map<String, dynamic>> readPictosFromLocal({required String locale});
 }

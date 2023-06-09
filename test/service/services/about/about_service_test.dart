@@ -1,3 +1,4 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -10,6 +11,7 @@ import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -87,12 +89,22 @@ Future<void> main() async {
     expect(deviceName, "Unknown");
   });
 
-  test("should return the current user email", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
+  group("should return the user email", () {
+    test("with right response", () async {
+      when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
 
-    String email = await aboutRepository.getEmail();
+      String email = await aboutRepository.getEmail();
 
-    expect(email, fakeUser.email);
+      expect(email, fakeUser.email);
+    });
+
+    test("with left response", () async {
+      when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Left("No Email"));
+
+      String email = await aboutRepository.getEmail();
+
+      expect(email, "No Email");
+    });
   });
 
   test("should return the user payment type", () async {
@@ -129,16 +141,44 @@ Future<void> main() async {
     expect(fakeUser.settings.data.avatar, AssetsImage(asset: "9", network: ""));
   });
 
-  test("should return the current user information", () async {
-    when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
+  group("hould return the current user information", () {
+    test("as a caregiver", () async {
+      when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(fakeUser));
 
-    when(mockServerRepository.getUserInformation(any)).thenAnswer((_) async => Right(fakeUser.toMap()));
+      when(mockServerRepository.getUserInformation(any)).thenAnswer((_) async => Right(fakeUser.toMap()));
 
-    when(mockLocalDatabaseRepository.setUser(any)).thenAnswer((realInvocation) async => {});
+      when(mockLocalDatabaseRepository.setUser(any)).thenAnswer((realInvocation) async => {});
 
-    final user = await aboutRepository.getUserInformation();
+      final user = await aboutRepository.getUserInformation();
 
-    expect(user.right, isA<CaregiverUserModel>());
+      expect(user.right, isA<CaregiverUserModel>());
+    });
+
+    test("as a user", () async {
+      final userInfo = fakeUser.copyWith(type: UserType.user);
+      when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(userInfo));
+
+      when(mockServerRepository.getUserInformation(any)).thenAnswer((_) async => Right(userInfo.toMap()));
+
+      when(mockLocalDatabaseRepository.setUser(any)).thenAnswer((realInvocation) async => {});
+
+      final user = await aboutRepository.getUserInformation();
+
+      expect(user.right, isA<PatientUserModel>());
+    });
+
+    test("as a none", () async {
+      final userInfo = fakeUser.copyWith(type: UserType.none);
+      when(mockAuthRepository.getCurrentUser()).thenAnswer((_) async => Right(userInfo));
+
+      when(mockServerRepository.getUserInformation(any)).thenAnswer((_) async => Right(userInfo.toMap()));
+
+      when(mockLocalDatabaseRepository.setUser(any)).thenAnswer((realInvocation) async => {});
+
+      final user = await aboutRepository.getUserInformation();
+
+      expect(user.right, isA<BaseUserModel>());
+    });
   });
 
   test("should upload user information", () async {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
@@ -75,7 +76,8 @@ class I18N extends ChangeNotifier {
 
       final languageString = await rootBundle.loadString("assets/i18n/$languageCode.json");
 
-      final languageJson = json.decode(languageString) as Map<String, dynamic>;
+      //We execute this in a compute function to avoid blocking the UI thread
+      final languageJson = await compute(json.decode, languageString) as Map<String, dynamic>;
 
       final newLanguage = TranslationTree(locale);
 
@@ -88,6 +90,18 @@ class I18N extends ChangeNotifier {
   }
 
   Future<void> changeLanguage(String languageCode) async {
+    if (languageCode == 'en_US') {
+      final languageString = await rootBundle.loadString("assets/i18n/$languageCode.json");
+      final languageJson = json.decode(languageString) as Map<String, dynamic>;
+      Locale locale = const Locale('en', 'US');
+      final newLanguage = TranslationTree(locale);
+      newLanguage.addTranslations(languageJson);
+      _languages[locale.toString()] = newLanguage;
+      _currentLanguage = _languages[locale.toString()];
+      currentLocale = locale;
+      notify();
+      return;
+    }
     var split = languageCode.split("_");
     assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US)");
     Locale locale = Locale(split[0], split[1]);
@@ -113,15 +127,7 @@ class I18N extends ChangeNotifier {
     notifyListeners();
   }
 
-  static I18N of(BuildContext context) {
-    final provider = (context.dependOnInheritedWidgetOfExactType<I18nNotifier>());
-    assert(provider != null, "No I18nNotifier found in context");
-
-    final notifier = provider!.notifier;
-    assert(notifier != null, "No I18N found in context");
-
-    return notifier!;
-  }
+  static I18N of(BuildContext context) => (context.dependOnInheritedWidgetOfExactType<I18nNotifier>())!.notifier!;
 }
 
 class I18nNotifier extends InheritedNotifier<I18N> {

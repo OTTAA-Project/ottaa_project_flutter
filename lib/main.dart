@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ottaa_project_flutter/application/application.dart';
 import 'package:ottaa_project_flutter/application/injector.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
@@ -20,8 +19,6 @@ void main() async {
       statusBarIconBrightness: Brightness.light,
     ),
   );
-
-  await dotenv.load();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 

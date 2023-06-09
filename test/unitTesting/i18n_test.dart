@@ -32,8 +32,8 @@ void main() async {
 
       expect(translation?.locale, const Locale('en', 'US'));
     });
-    test('translation to english', () {
-      language.changeLanguage('en_US');
+    test('translation to english', () async {
+      await language.changeLanguage('en_US');
       expect(language.currentLanguage?.translate("global.hello"), 'Hello');
     });
   });

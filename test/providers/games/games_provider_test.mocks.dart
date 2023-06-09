@@ -104,6 +104,17 @@ class MockPictogramsRepository extends _i1.Mock
         ),
         returnValue: _i4.Future<List<_i5.Picto>>.value(<_i5.Picto>[]),
       ) as _i4.Future<List<_i5.Picto>>);
+  @override
+  _i4.Future<Map<String, String>> loadTranslations(
+          {required String? language}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loadTranslations,
+          [],
+          {#language: language},
+        ),
+        returnValue: _i4.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i4.Future<Map<String, String>>);
 }
 
 /// A class which mocks [GroupsRepository].

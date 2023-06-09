@@ -21,5 +21,9 @@ abstract class LocalDatabaseRepository {
 
   Future<String> getVoice();
 
+  Future<bool> getLongClick();
+
+  Future<void> setLongClick({required bool isLongClick});
+
   Future<void> setVoice({required String name});
 }

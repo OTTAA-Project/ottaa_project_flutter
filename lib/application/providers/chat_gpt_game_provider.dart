@@ -15,7 +15,7 @@ class ChatGptGameProvider extends ChangeNotifier {
   final GamesProvider _gamesProvider;
   final TTSProvider _tts;
   List<String> gptBoards = [];
-  bool boardOrPicto = true;
+  bool isBoard = true;
   ScrollController boardScrollController = ScrollController();
   ScrollController pictoScrollController = ScrollController();
   List<Picto> chatGptPictos = [];
@@ -79,8 +79,8 @@ class ChatGptGameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> createStory({required String prompt}) async {
-    // final String prompt = 'game.prompt'.trl;
+  Future<void> createStory() async {
+    final String prompt = 'game.prompt'.trl;
     final finalPrompt = '$prompt ${gptPictos[0].text}, ${gptPictos[1].text}, ${gptPictos[2].text}, ${gptPictos[3].text}.';
     final res = await _chatGPTServices.getGPTStory(prompt: finalPrompt);
     if (res.isRight) {
@@ -88,6 +88,7 @@ class ChatGptGameProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
 
   Future<void> fetchGptPictos({required String id}) async {
     List<Picto> picts = [];
@@ -99,8 +100,6 @@ class ChatGptGameProvider extends ChangeNotifier {
     }
     chatGptPictos.clear();
     chatGptPictos.addAll(picts);
-    // print(picts.toString());
-    notifyListeners();
   }
 
   Future<void> speakStory() async {
