@@ -9,7 +9,7 @@ import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
 
 import 'ttsprovider_test.mocks.dart';
 
-@GenerateMocks([TTSProvider, TTSRepository])
+@GenerateMocks([TTSRepository])
 void main() {
   late MockTTSRepository mockTTSRepository;
   late TTSProvider ttsProvider;
@@ -52,6 +52,11 @@ void main() {
     test('should change tts voice', () async {
       await ttsProvider.changeTTSVoice('test');
       verify(ttsProvider.changeTTSVoice('test')).called(1);
+    });
+
+    test('should stop tts while speaking', () async {
+      await ttsProvider.ttsStop();
+      verify(ttsProvider.ttsStop()).called(1);
     });
   });
 }

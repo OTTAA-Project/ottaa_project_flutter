@@ -386,5 +386,25 @@ Future<void> main() async {
     ]);
   });
 
+  group('should return true or false based upon the locally storedvalues', () {
+    test('isLongClickEnabled should return a true', () async {
+      when(mockLocalDatabaseRepository.getLongClick()).thenAnswer((realInvocation) async => true);
+
+      final response = await homeProvider.isLongClickEnabled();
+      expect(response, true);
+    });
+
+    test('isLongClickEnabled should return a false', () async {
+      when(mockLocalDatabaseRepository.getLongClick()).thenAnswer((realInvocation) async => false);
+
+      final response = await homeProvider.isLongClickEnabled();
+      expect(response, false);
+    });
+  });
+
+  test('setLongClickEnabled should set the value into the local storage', () async {
+    expect(() async => await homeProvider.setLongClickEnabled(isLongClick: true), isA<void>());
+  });
+
   //todo: emir these are left init, switchToPictograms, addPictogram, removeLastPictogram, buildSuggestion,
 }

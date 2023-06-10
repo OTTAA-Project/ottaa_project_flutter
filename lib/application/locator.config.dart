@@ -27,7 +27,7 @@ import 'package:ottaa_project_flutter/application/service/hive_database.dart'
 import 'package:ottaa_project_flutter/application/service/local_storage_service.dart'
     as _i7;
 import 'package:ottaa_project_flutter/application/service/mobile_remote_storage_service.dart'
-    as _i42;
+    as _i41;
 import 'package:ottaa_project_flutter/application/service/notifications_service_impl.dart'
     as _i9;
 import 'package:ottaa_project_flutter/application/service/pictograms_service.dart'
@@ -47,7 +47,7 @@ import 'package:ottaa_project_flutter/application/service/tts_service.dart'
 import 'package:ottaa_project_flutter/application/service/user_settings_service.dart'
     as _i17;
 import 'package:ottaa_project_flutter/application/service/web_remote_storage_service.dart'
-    as _i41;
+    as _i42;
 import 'package:ottaa_project_flutter/application/use_cases/create_email_token_impl.dart'
     as _i25;
 import 'package:ottaa_project_flutter/application/use_cases/create_group_impl.dart'
@@ -172,20 +172,20 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i38.ProfileRepository>(
         _i39.ProfileService(gh<_i12.ServerRepository>()));
     gh.singleton<_i40.RemoteStorageRepository>(
-      _i41.WebRemoteStorageService(
-        gh<_i20.AuthRepository>(),
-        gh<_i12.ServerRepository>(),
-        gh<_i3.I18N>(),
-      ),
-      registerFor: {_web},
-    );
-    gh.singleton<_i40.RemoteStorageRepository>(
-      _i42.MobileRemoteStorageService(
+      _i41.MobileRemoteStorageService(
         gh<_i20.AuthRepository>(),
         gh<_i12.ServerRepository>(),
         gh<_i3.I18N>(),
       ),
       registerFor: {_mobile},
+    );
+    gh.singleton<_i40.RemoteStorageRepository>(
+      _i42.WebRemoteStorageService(
+        gh<_i20.AuthRepository>(),
+        gh<_i12.ServerRepository>(),
+        gh<_i3.I18N>(),
+      ),
+      registerFor: {_web},
     );
     gh.singleton<_i43.ReportRepository>(
         _i44.ReportService(gh<_i12.ServerRepository>()));

@@ -88,7 +88,7 @@ Future<void> main() async {
 
   test('should return a sentence if the user call for a sentence', () async {
     when(mockUserNotifier.user).thenReturn(fakeUser);
-
+//todo: emir can you look at this
     when(mockChatGPTRepository.getCompletion(
       age: anyNamed('age'),
       gender: anyNamed('gender'),

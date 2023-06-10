@@ -22,7 +22,7 @@ Future<void> main() async {
   late MockAuthRepository mockAuthRepository;
   late MockRemoteStorageRepository mockRemoteStorageRepository;
   late MockServerRepository mockServerRepository;
-  late MockLocalStorageRepository mockLocalStorageRepository;
+  late MockLocalStorageRepository mockLocalDatabaseRepository;
 
   late PictogramsService pictogramsService;
 
@@ -85,13 +85,13 @@ Future<void> main() async {
     mockAuthRepository = MockAuthRepository();
     mockRemoteStorageRepository = MockRemoteStorageRepository();
     mockServerRepository = MockServerRepository();
-    mockLocalStorageRepository = MockLocalStorageRepository();
+    mockLocalDatabaseRepository = MockLocalStorageRepository();
 
     pictogramsService = PictogramsService(
       mockAuthRepository,
       mockServerRepository,
       mockRemoteStorageRepository,
-      mockLocalStorageRepository,
+      mockLocalDatabaseRepository,
     );
   });
 

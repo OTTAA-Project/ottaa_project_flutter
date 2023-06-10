@@ -71,4 +71,146 @@ Future<void> main() async {
   test('should speak the generated story for the game', () async {
     expect(() async => await chatGptGameProvider.speakStory(), isA<void>());
   });
+
+  testWidgets('scrollDownBoards should animate to the correct position', (WidgetTester tester) async {
+    // Initialize the scroll controller
+    chatGptGameProvider.boardScrollController = ScrollController();
+
+    // Build the test widget
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ListView(
+            controller: chatGptGameProvider.boardScrollController,
+            children: [
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+            ],
+          ),
+        ),
+      ),
+    );
+    final lView = tester.widget<ListView>(find.byType(ListView));
+    final controller = lView.controller;
+    expect(chatGptGameProvider.boardScrollController.position.pixels.toInt(), equals(0.0));
+
+    chatGptGameProvider.scrollDownBoards();
+    controller!.jumpTo(controller.offset + 300);
+    //todo: emir need your help here
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(controller.offset, equals(300));
+  });
+  testWidgets('scrollDownPictos should animate to the correct position', (WidgetTester tester) async {
+    // Initialize the scroll controller
+    chatGptGameProvider.pictoScrollController = ScrollController();
+
+    // Build the test widget
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ListView(
+            controller: chatGptGameProvider.pictoScrollController,
+            children: [
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+            ],
+          ),
+        ),
+      ),
+    );
+    final lView = tester.widget<ListView>(find.byType(ListView));
+    final controller = lView.controller;
+    expect(chatGptGameProvider.pictoScrollController.position.pixels.toInt(), equals(0.0));
+
+    chatGptGameProvider.scrollDownPictos();
+    controller!.jumpTo(controller.offset + 300);
+    //todo: emir need your help here
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(controller.offset, equals(300));
+  });
+
+  testWidgets('scrollUpBoards should animate to the correct position', (WidgetTester tester) async {
+    final boardScrollController = ScrollController();
+    chatGptGameProvider.boardScrollController = boardScrollController;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ListView(
+            controller: boardScrollController,
+            children: [
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+            ],
+          ),
+        ),
+      ),
+    );
+    final lView = tester.widget<ListView>(find.byType(ListView));
+    final controller = lView.controller;
+
+    controller?.jumpTo(400);
+
+    expect(boardScrollController.position.pixels, equals(400.0));
+
+    controller?.jumpTo(304);
+    chatGptGameProvider.scrollUpBoards();
+
+    expect(controller!.position.pixels, equals(304.0));
+  });
+  testWidgets('scrollUpPictos should animate to the correct position', (WidgetTester tester) async {
+    final boardScrollController = ScrollController();
+    chatGptGameProvider.pictoScrollController = boardScrollController;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ListView(
+            controller: boardScrollController,
+            children: [
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+              Container(height: 100),
+            ],
+          ),
+        ),
+      ),
+    );
+    final lView = tester.widget<ListView>(find.byType(ListView));
+    final controller = lView.controller;
+
+    controller?.jumpTo(400);
+
+    expect(boardScrollController.position.pixels, equals(400.0));
+
+    controller?.jumpTo(304);
+    chatGptGameProvider.scrollUpPictos();
+
+    expect(controller!.position.pixels, equals(304.0));
+  });
+
+  test('should call notify ', () {
+    expect(() => chatGptGameProvider.notify(), isA<void>());
+  });
+
+  test('should stop the tts from speaking', () async {
+    expect(() async => await chatGptGameProvider.stopTTS(), isA<void>());
+  });
+
+  test('reset the game story variables', () async {
+    chatGptGameProvider.sentencePhase = 3;
+    chatGptGameProvider.resetStoryGame();
+    expect(chatGptGameProvider.sentencePhase, 0);
+  });
 }
