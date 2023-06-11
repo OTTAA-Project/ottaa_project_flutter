@@ -12,7 +12,7 @@ import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
-import '../../service/services/chatGPT/chatgpt_service_test.mocks.dart';
+import '../../service/chatGPT/chatgpt_service_test.mocks.dart';
 import 'chat_gpt_game_provider_test.mocks.dart';
 
 @GenerateMocks([GamesProvider, ChatGPTRepository, TTSProvider])

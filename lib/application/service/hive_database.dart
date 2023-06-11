@@ -135,7 +135,7 @@ class HiveDatabase extends LocalDatabaseRepository {
   Future<Box<T>> secureBox<T>(String boxName) async {
     Box<T> box;
 
-    if (Hive.isBoxOpen(boxName)) {
+    if (iHive.isBoxOpen(boxName)) {
       box = iHive.box(boxName);
     } else {
       box = await iHive.openBox(boxName);

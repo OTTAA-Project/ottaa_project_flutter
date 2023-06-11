@@ -61,8 +61,6 @@ class PictogramsService extends PictogramsRepository {
     final result = await _authService.getCurrentUser();
 
     if (result.isLeft) return;
-
-    final String id = result.right.id;
   }
 
   @override

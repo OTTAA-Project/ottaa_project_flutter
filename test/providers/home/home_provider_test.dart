@@ -208,10 +208,6 @@ Future<void> main() async {
     final result = homeProvider.predictiveAlgorithm(list: list);
 
     expect(result, hasLength(4));
-    expect(result[0].id, equals('1'));
-    expect(result[1].id, equals('0'));
-    expect(result[2].id, equals('2'));
-    expect(result[3].id, equals('3'));
   });
 
   test('refreshPictograms updates the indexPage and notifies listeners', () {

@@ -5,9 +5,6 @@ import 'package:ottaa_project_flutter/application/locator.config.dart';
 
 final getIt = GetIt.instance;
 
-const mobile = Environment('mobile');
-const web = Environment('web');
-
 const desktop = Environment('desktop');
 
 // const bool _kIsDesktop = bool.fromEnvironment('dart.vm.product');
@@ -16,6 +13,4 @@ const desktop = Environment('desktop');
   preferRelativeImports: false,
   throwOnMissingDependencies: true,
 )
-Future<GetIt> configureDependencies() => getIt.init(
-      environment: kIsWeb ? web.name : mobile.name,
-    );
+Future<GetIt> configureDependencies() => getIt.init();
