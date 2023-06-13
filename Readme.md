@@ -29,6 +29,7 @@ The OTTA app facilitates human communication via pictograms for those who are sp
 * Run `flutter pub get` to get the dependencies.
 * Run `flutter pub run build_runner build` to generate the model class code.
 * Run `flutter run` to run the project.
+* run `flutter run -d chrome --web-port 3000` to run the project in web.
 
 \* In case you encounter any errors in model building:
 

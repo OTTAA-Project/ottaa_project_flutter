@@ -27,14 +27,14 @@ class NotificationsServiceImpl implements NotificationsService {
 
   final I18N i18n;
 
-  late final FirebaseMessaging firebaseMessaging;
+  late FirebaseMessaging firebaseMessaging;
 
   NotificationsServiceImpl(
     this.i18n, {
     FirebaseMessaging? firebaseMessaging,
     AwesomeNotifications? awesomeNotifications,
   }) {
-    firebaseMessaging = firebaseMessaging ?? FirebaseMessaging.instance;
+    this.firebaseMessaging = firebaseMessaging ?? FirebaseMessaging.instance;
     _awesomeNotifications = awesomeNotifications ?? AwesomeNotifications();
   }
 
