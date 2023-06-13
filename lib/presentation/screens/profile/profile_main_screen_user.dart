@@ -7,7 +7,6 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';

@@ -1,11 +1,12 @@
 import 'package:either_dart/either.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
@@ -41,6 +42,12 @@ Future<void> main() async {
 
   late PatientUserModel fakeUser;
   late List<Picto> fakePictos;
+
+  setUpAll(() {
+    MockI18N mockI18N = MockI18N();
+
+    GetIt.I.registerSingleton<I18N>(mockI18N);
+  });
 
   setUp(() {
     mockUserNotifier = MockUserNotifier();
@@ -81,24 +88,62 @@ Future<void> main() async {
       mockPatientNotifier,
       mockChatGPTRepository,
     );
-    MockI18N mockI18N = MockI18N();
+  });
+  test("should return chatGPTProvider", () {
+    GetIt.I.registerSingleton<ChatGPTRepository>(mockChatGPTRepository);
 
-    GetIt.I.registerSingleton<I18N>(mockI18N);
+    final container = ProviderContainer(
+      overrides: [
+        userProvider.overrideWith((ref) => mockUserNotifier),
+      ],
+    );
+
+    final refGptProvider = container.read(chatGPTProvider);
+
+    expect(refGptProvider, isA<ChatGPTNotifier>());
+    expect(chatGPTProvider, isA<ChangeNotifierProvider<ChatGPTNotifier>>());
+  });
+  group("generate phrase", () {
+    test('should return a sentence', () async {
+      when(mockUserNotifier.user).thenReturn(fakeUser);
+      when(mockChatGPTRepository.getCompletion(
+        age: anyNamed('age'),
+        gender: anyNamed('gender'),
+        pictograms: anyNamed('pictograms'),
+        language: anyNamed('language'),
+        maxTokens: anyNamed('maxTokens'),
+      )).thenAnswer((realInvocation) async => const Right('This is a sentence'));
+
+      final response = await chatGPTNotifier.generatePhrase(fakePictos);
+      print(response);
+      expect(response, 'This is a sentence');
+    });
+
+    test('should return left error', () async {
+      when(mockUserNotifier.user).thenReturn(fakeUser);
+      when(mockChatGPTRepository.getCompletion(
+        age: anyNamed('age'),
+        gender: anyNamed('gender'),
+        pictograms: anyNamed('pictograms'),
+        language: anyNamed('language'),
+        maxTokens: anyNamed('maxTokens'),
+      )).thenAnswer((realInvocation) async => const Left("OpenAI Exception"));
+
+      final response = await chatGPTNotifier.generatePhrase(fakePictos);
+      print(response);
+      expect(response, 'OpenAI Exception');
+    });
   });
 
-  test('should return a sentence if the user call for a sentence', () async {
-    when(mockUserNotifier.user).thenReturn(fakeUser);
-//todo: emir can you look at this
-    when(mockChatGPTRepository.getCompletion(
-      age: anyNamed('age'),
-      gender: anyNamed('gender'),
-      pictograms: anyNamed('pictograms'),
-      language: anyNamed('language'),
-      maxTokens: anyNamed('maxTokens'),
-    )).thenAnswer((realInvocation) async => const Right('This is a sentence'));
+  test("should notify listeners", () {
+    int value = 0;
 
-    final response = await chatGPTNotifier.generatePhrase(fakePictos);
-    print(response);
-    expect(response, 'This is a sentence');
+    chatGPTNotifier.addListener(() {
+      value++;
+    });
+
+    chatGPTNotifier.notify();
+
+    expect(value, 1);
   });
 }

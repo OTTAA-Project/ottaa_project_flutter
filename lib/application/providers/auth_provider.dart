@@ -56,6 +56,8 @@ class AuthProvider extends ChangeNotifier {
 
         _userNotifier.setUser(result.right);
         authData.setSignedIn();
+      }else {
+        throw Exception(result.left);
       }
 
       // notifyListeners();
@@ -68,7 +70,7 @@ class AuthProvider extends ChangeNotifier {
   }
 }
 
-final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
+final ChangeNotifierProvider<AuthProvider> authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
   final loadingNotifier = ref.watch(loadingProvider.notifier);
 
   final AuthRepository authService = GetIt.I.get<AuthRepository>();
@@ -86,4 +88,4 @@ final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
     authData,
     userState,
   );
-}, dependencies: [authNotifier, userProvider]);
+});

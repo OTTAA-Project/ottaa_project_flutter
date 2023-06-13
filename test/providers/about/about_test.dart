@@ -1,5 +1,7 @@
 import 'package:either_dart/src/either.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/providers/about_provider.dart';
@@ -12,12 +14,14 @@ import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
+import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 
 import 'about_test.mocks.dart';
 
 @GenerateMocks([AboutService])
 void main() {
-  late AboutProvider aboutProvider;
+  late AboutProvider cAboutProvider;
   late MockAboutService mockAboutService;
 
   late UserModel fakeUser;
@@ -40,80 +44,86 @@ void main() {
     );
 
     mockAboutService = MockAboutService();
-    aboutProvider = AboutProvider(mockAboutService);
+    cAboutProvider = AboutProvider(mockAboutService);
+  });
+
+  test("should return about provider", () {
+    GetIt.I.registerSingleton<AboutRepository>(mockAboutService);
+
+    final container = ProviderContainer();
+
+    addTearDown(container.dispose);
+
+    final pumpProvider = container.read(aboutProvider);
+
+    expect(pumpProvider, isA<AboutProvider>());
+    expect(aboutProvider, isA<ChangeNotifierProvider<AboutProvider>>());
   });
 
   test("should return the app version", () async {
     when(mockAboutService.getAppVersion()).thenAnswer((_) async => "1.0.0");
 
-    expect(await aboutProvider.getAppVersion(), "1.0.0");
+    expect(await cAboutProvider.getAppVersion(), "1.0.0");
     verify(mockAboutService.getAppVersion()).called(1);
   });
 
   test("should return the available app version", () async {
-    when(mockAboutService.getAvailableAppVersion())
-        .thenAnswer((_) async => "1.0.0");
+    when(mockAboutService.getAvailableAppVersion()).thenAnswer((_) async => "1.0.0");
 
-    expect(await aboutProvider.getAvailableAppVersion(), "1.0.0");
+    expect(await cAboutProvider.getAvailableAppVersion(), "1.0.0");
     verify(mockAboutService.getAvailableAppVersion()).called(1);
   });
 
   test("should return the device name", () async {
     when(mockAboutService.getDeviceName()).thenAnswer((_) async => "iPhone 12");
 
-    expect(await aboutProvider.getDeviceName(), "iPhone 12");
+    expect(await cAboutProvider.getDeviceName(), "iPhone 12");
     verify(mockAboutService.getDeviceName()).called(1);
   });
 
   test("should return the user email", () async {
     when(mockAboutService.getEmail()).thenAnswer((_) async => "test@mail.com");
 
-    expect(await aboutProvider.getEmail(), "test@mail.com");
+    expect(await cAboutProvider.getEmail(), "test@mail.com");
 
     verify(mockAboutService.getEmail()).called(1);
   });
 
   test("should return the user profile picture", () async {
-    when(mockAboutService.getProfilePicture())
-        .thenAnswer((_) async => "https://test.com");
+    when(mockAboutService.getProfilePicture()).thenAnswer((_) async => "https://test.com");
 
-    expect(await aboutProvider.getProfilePicture(), "https://test.com");
+    expect(await cAboutProvider.getProfilePicture(), "https://test.com");
 
     verify(mockAboutService.getProfilePicture()).called(1);
   });
 
   test("should return the user information", () async {
-    when(mockAboutService.getUserInformation())
-        .thenAnswer((_) async => Right(fakeUser));
+    when(mockAboutService.getUserInformation()).thenAnswer((_) async => Right(fakeUser));
     expect((await mockAboutService.getUserInformation()).isRight, true);
 
-    expect(
-        (await mockAboutService.getUserInformation()).right, isA<UserModel>());
+    expect((await mockAboutService.getUserInformation()).right, isA<UserModel>());
   });
 
   test("should return free user type", () async {
-    when(mockAboutService.getUserType())
-        .thenAnswer((_) async => UserPayment.free);
+    when(mockAboutService.getUserType()).thenAnswer((_) async => UserPayment.free);
 
-    expect(await aboutProvider.getUserType(), UserPayment.free);
+    expect(await cAboutProvider.getUserType(), UserPayment.free);
 
     verify(mockAboutService.getUserType()).called(1);
   });
 
   test("should return premium user type", () async {
-    when(mockAboutService.getUserType())
-        .thenAnswer((_) async => UserPayment.premium);
+    when(mockAboutService.getUserType()).thenAnswer((_) async => UserPayment.premium);
 
-    expect(await aboutProvider.getUserType(), UserPayment.premium);
+    expect(await cAboutProvider.getUserType(), UserPayment.premium);
 
     verify(mockAboutService.getUserType()).called(1);
   });
 
   test("should return if the user avatar exist", () async {
-    when(mockAboutService.getProfilePicture())
-        .thenAnswer((_) async => fakeUser.settings.data.avatar.network!);
+    when(mockAboutService.getProfilePicture()).thenAnswer((_) async => fakeUser.settings.data.avatar.network!);
 
-    expect(await aboutProvider.getProfilePicture(), "https://test.com");
+    expect(await cAboutProvider.getProfilePicture(), "https://test.com");
 
     verify(mockAboutService.getProfilePicture()).called(1);
   });
@@ -145,7 +155,7 @@ void main() {
     when(mockAboutService.uploadUserInformation()).thenAnswer((_) async {
       fakeUser = fakeUser2;
     });
-    await aboutProvider.uploadUserInformation();
+    await cAboutProvider.uploadUserInformation();
 
     verify(mockAboutService.uploadUserInformation()).called(1);
 
@@ -153,14 +163,21 @@ void main() {
   });
 
   test("should upload the user profile picture", () async {
-    // when(mockAboutService.uploadProfilePicture("https://test3.com")).thenAnswer((_) async => fakeUser = fakeUser.copyWith(photoUrl: "https://test3.com"));
-    // await aboutProvider.uploadProfilePicture("https://test3.com");
-    // expect(fakeUser.photoUrl, "https://test3.com");
+    when(mockAboutService.uploadProfilePicture(any)).thenAnswer((_) async => {});
+    await cAboutProvider.uploadProfilePicture("", "");
+
+    verify(mockAboutService.uploadProfilePicture(any)).called(1);
   });
 
   test("should send a support email", () async {
     when(mockAboutService.sendSupportEmail()).thenAnswer((_) async => true);
-    await aboutProvider.sendSupportEmail();
+    await cAboutProvider.sendSupportEmail();
     verify(mockAboutService.sendSupportEmail()).called(1);
+  });
+
+  test("should upload user information", () async {
+    when(mockAboutService.uploadUserInformation()).thenAnswer((_) async => fakeUser);
+    await cAboutProvider.uploadUserInformation();
+    verify(mockAboutService.uploadUserInformation()).called(1);
   });
 }
