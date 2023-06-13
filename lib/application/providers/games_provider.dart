@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
@@ -48,9 +47,8 @@ class GamesProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
   final PatientNotifier patientState;
-  final TTSProvider _tts;
 
-  GamesProvider(this._groupsService, this._pictogramsService, this.patientState, this._tts);
+  GamesProvider(this._groupsService, this._pictogramsService, this.patientState);
 
   Future<void> createRandomForGameWTP() async {
     gamePictsWTP.clear();
@@ -169,7 +167,7 @@ class GamesProvider extends ChangeNotifier {
 
   Future<void> fetchPictograms() async {
     if (pictograms.isNotEmpty && groups.isNotEmpty) return;
-    
+
     List<Picto>? pictos;
     List<Group>? groupsData;
 
@@ -275,6 +273,6 @@ final gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final patientState = ref.watch(patientNotifier.notifier);
-  final tts = ref.watch(ttsProvider);
-  return GamesProvider(groupsService, pictogramService, patientState, tts);
+  // final tts = ref.watch(ttsProvider);
+  return GamesProvider(groupsService, pictogramService, patientState);
 });

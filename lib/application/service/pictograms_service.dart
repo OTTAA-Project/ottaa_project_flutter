@@ -34,9 +34,8 @@ class PictogramsService extends PictogramsRepository {
   }
 
   @override
-  Future<List<Picto>> getPictograms(BasicSearch search) {
-    // TODO: implement getPictograms
-    throw UnimplementedError();
+  Future<List<Picto>> getPictograms(BasicSearch search) async {
+    return [];
   }
 
   @override
@@ -62,25 +61,6 @@ class PictogramsService extends PictogramsRepository {
     final result = await _authService.getCurrentUser();
 
     if (result.isLeft) return;
-
-    final String id = result.right.id;
-
-    // await _serverRepository.updatePictogram(id, language, index, data: {
-    //   'id': pictogram.id,
-    //   'texto': pictogram.texto.toJson(),
-    //   'tipo': pictogram.tipo,
-    //   'imagen': pictogram.imagen.toJson(),
-    //   'relacion': relactions,
-    //   'agenda': pictogram.agenda,
-    //   'gps': pictogram.gps,
-    //   'hora': pictogram.hora,
-    //   'edad': pictogram.edad,
-    //   'sexo': pictogram.sexo,
-    //   'esSugerencia': pictogram.esSugerencia,
-    //   'horario': pictogram.horario,
-    //   'ubicacion': pictogram.ubicacion,
-    //   'score': pictogram.score,
-    // });
   }
 
   @override

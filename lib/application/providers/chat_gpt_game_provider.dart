@@ -89,6 +89,7 @@ class ChatGptGameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   Future<void> fetchGptPictos({required String id}) async {
     List<Picto> picts = [];
     final gro = _gamesProvider.groups[id];
@@ -108,7 +109,7 @@ class ChatGptGameProvider extends ChangeNotifier {
     _tts.speak(generatedStory);
   }
 
-  Future<void> resetStoryGame() async {
+  void resetStoryGame() {
     gptPictos.clear();
     gptBoards = [];
     sentencePhase = 0;

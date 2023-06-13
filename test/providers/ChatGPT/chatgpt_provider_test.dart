@@ -1,7 +1,9 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
@@ -9,18 +11,27 @@ import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_settings.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/accessibility_setting.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
+import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
 import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/payment_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
+import 'package:ottaa_project_flutter/core/models/tts_setting.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/chatgpt_repository.dart';
 
 import 'chatgpt_provider_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<PatientNotifier>(), MockSpec<UserNotifier>(), MockSpec<ChatGPTRepository>()])
+@GenerateNiceMocks([
+  MockSpec<PatientNotifier>(),
+  MockSpec<UserNotifier>(),
+  MockSpec<ChatGPTRepository>(),
+  MockSpec<I18N>(),
+])
 Future<void> main() async {
   late MockUserNotifier mockUserNotifier;
   late MockPatientNotifier mockPatientNotifier;
@@ -28,16 +39,20 @@ Future<void> main() async {
 
   late ChatGPTNotifier chatGPTNotifier;
 
-  late BaseUserModel fakeUser;
+  late PatientUserModel fakeUser;
   late List<Picto> fakePictos;
 
   setUp(() {
     mockUserNotifier = MockUserNotifier();
     mockPatientNotifier = MockPatientNotifier();
     mockChatGPTRepository = MockChatGPTRepository();
-    fakeUser = BaseUserModel(
+    fakeUser = PatientUserModel(
       id: "0",
-      settings: BaseSettingsModel(
+      settings: PatientSettings(
+        accessibility: AccessibilitySetting.empty(),
+        layout: LayoutSetting.empty(),
+        payment: Payment.none(),
+        tts: TTSSetting.empty(),
         data: UserData(
           avatar: AssetsImage(asset: "test", network: "https://test.com"),
           birthDate: DateTime(2017, 9, 7, 17, 30),
@@ -50,8 +65,11 @@ Future<void> main() async {
       ),
       email: "test@mail.com",
       type: UserType.caregiver,
+      groups: {},
+      phrases: {},
+      pictos: {},
     );
-    mockPatientNotifier.state = PatientUserModel(id: '00', groups: {}, phrases: {}, pictos: {}, settings: fakeUser.settings, email: 'test@test.com');
+    mockPatientNotifier.state = fakeUser;
     mockUserNotifier.setUser(fakeUser);
     fakePictos = [
       Picto(id: 'test1', type: 00, resource: AssetsImage(asset: 'fakeAssets', network: 'fakeNetwork')),
@@ -63,11 +81,14 @@ Future<void> main() async {
       mockPatientNotifier,
       mockChatGPTRepository,
     );
+    MockI18N mockI18N = MockI18N();
+
+    GetIt.I.registerSingleton<I18N>(mockI18N);
   });
 
   test('should return a sentence if the user call for a sentence', () async {
     when(mockUserNotifier.user).thenReturn(fakeUser);
-
+//todo: emir can you look at this
     when(mockChatGPTRepository.getCompletion(
       age: anyNamed('age'),
       gender: anyNamed('gender'),

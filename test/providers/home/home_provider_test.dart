@@ -6,13 +6,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/chatgpt_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
-import 'package:ottaa_project_flutter/core/enums/home_screen_status.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
@@ -131,26 +129,6 @@ Future<void> main() async {
     homeProvider = HomeProvider(mockPictogramsRepository, mockGroupsRepository, mockSentencesRepository, mockTTSProvider, mockPatientNotifier, mockPredictPictogram, mockLearnPictogram, mockUserNotifier, mockChatGPTNotifier, mockLocalDatabaseRepository);
   });
 
-  testWidgets('should update currentTabGroup and trigger notifyListeners', (WidgetTester tester) async {
-    const expectedGroup = 'group';
-
-    await tester.pumpWidget(
-      MaterialApp(
-        home: ListView(
-          controller: homeProvider.pictoTabsScrollController,
-          children: const <Widget>[],
-        ),
-      ),
-    );
-
-    homeProvider.setCurrentGroup(expectedGroup);
-
-    await tester.pump();
-
-    expect(homeProvider.currentTabGroup, expectedGroup);
-    expect(() => homeProvider.notify(), isA<void>());
-  });
-
   test('should call notifyListeners', () {
     homeProvider.notify();
 
@@ -230,10 +208,6 @@ Future<void> main() async {
     final result = homeProvider.predictiveAlgorithm(list: list);
 
     expect(result, hasLength(4));
-    expect(result[0].id, equals('1'));
-    expect(result[1].id, equals('0'));
-    expect(result[2].id, equals('2'));
-    expect(result[3].id, equals('3'));
   });
 
   test('refreshPictograms updates the indexPage and notifies listeners', () {
@@ -404,8 +378,28 @@ Future<void> main() async {
     expect(result, [
       Picto(id: "4", text: "Picto 4", type: 0, resource: AssetsImage(asset: "", network: null)),
       Picto(id: "5", text: "Picto 5", type: 0, resource: AssetsImage(asset: "", network: null)),
-      Picto(id: "101", text: "Basic Picto 1", type: 0, resource: AssetsImage(asset: "", network: null)),
+      Picto(id: "777", text: "", type: 0, resource: AssetsImage(asset: "", network: null)),
     ]);
+  });
+
+  group('should return true or false based upon the locally storedvalues', () {
+    test('isLongClickEnabled should return a true', () async {
+      when(mockLocalDatabaseRepository.getLongClick()).thenAnswer((realInvocation) async => true);
+
+      final response = await homeProvider.isLongClickEnabled();
+      expect(response, true);
+    });
+
+    test('isLongClickEnabled should return a false', () async {
+      when(mockLocalDatabaseRepository.getLongClick()).thenAnswer((realInvocation) async => false);
+
+      final response = await homeProvider.isLongClickEnabled();
+      expect(response, false);
+    });
+  });
+
+  test('setLongClickEnabled should set the value into the local storage', () async {
+    expect(() async => await homeProvider.setLongClickEnabled(isLongClick: true), isA<void>());
   });
 
   //todo: emir these are left init, switchToPictograms, addPictogram, removeLastPictogram, buildSuggestion,

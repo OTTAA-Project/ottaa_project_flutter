@@ -41,7 +41,7 @@ class CaregiverUserModel extends UserModel {
   CaregiverUserModel({
     required this.id,
     required this.settings,
-    this.type = UserType.none,
+    this.type = UserType.caregiver,
     required this.users,
     required this.email,
   });

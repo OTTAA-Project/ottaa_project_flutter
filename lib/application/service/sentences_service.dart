@@ -25,7 +25,11 @@ class SentencesService implements SentencesRepository {
       language: language,
       type: type,
     );
-    return Right(response);
+
+    if (response.isEmpty) return const Left('no data');
+    List<Phrase> data = response.map((e) => Phrase.fromMap(e)).toList();
+
+    return Right(data);
   }
 
   @override

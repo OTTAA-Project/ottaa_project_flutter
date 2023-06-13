@@ -6,12 +6,18 @@ import 'package:ottaa_project_flutter/core/repositories/remote_config_repository
   as: RemoteConfigRepository,
 )
 class RemoteConfigService extends RemoteConfigRepository {
-  final _remoteConfig = FirebaseRemoteConfig.instance;
+  late final FirebaseRemoteConfig _remoteConfig;
 
   @FactoryMethod(
     preResolve: true,
   )
   static Future<RemoteConfigRepository> start() => RemoteConfigService().init();
+
+  RemoteConfigService({
+    FirebaseRemoteConfig? remoteConfig,
+  }) {
+    _remoteConfig = remoteConfig ?? FirebaseRemoteConfig.instance;
+  }
 
   @override
   Future<RemoteConfigRepository> init() async {

@@ -217,6 +217,17 @@ class PatientSettings extends UserSettings {
     required this.tts,
   });
 
+  factory PatientSettings.empty(UserData userData) {
+    return PatientSettings(
+      data: userData,
+      language: LanguageSetting.empty(),
+      payment: Payment.none(),
+      layout: LayoutSetting.empty(),
+      accessibility: AccessibilitySetting.empty(),
+      tts: TTSSetting.empty(),
+    );
+  }
+
   @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
