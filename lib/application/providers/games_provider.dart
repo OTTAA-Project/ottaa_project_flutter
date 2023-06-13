@@ -38,8 +38,8 @@ class GamesProvider extends ChangeNotifier {
   /// 0 == 2 pictos, 1 == 3 pictos, 2 == 4 pictos
   int difficultyLevel = 0;
 
-  final AudioPlayer backgroundMusicPlayer = AudioPlayer();
-  final AudioPlayer clicksPlayer = AudioPlayer();
+  late final AudioPlayer backgroundMusicPlayer;
+  late final AudioPlayer clicksPlayer;
 
   Map<int, Picto> bottomPositionsMP = {};
   Map<int, Picto> topPositionsMP = {};
@@ -48,16 +48,25 @@ class GamesProvider extends ChangeNotifier {
   final GroupsRepository _groupsService;
   final PatientNotifier patientState;
 
-  GamesProvider(this._groupsService, this._pictogramsService, this.patientState);
+  GamesProvider(
+    this._groupsService,
+    this._pictogramsService,
+    this.patientState, {
+    AudioPlayer? backgroundMusicPlayer,
+    AudioPlayer? clicksPlayer,
+  }) {
+    this.backgroundMusicPlayer = backgroundMusicPlayer ?? AudioPlayer();
+    this.clicksPlayer = clicksPlayer ?? AudioPlayer();
+  }
 
   Future<void> createRandomForGameWTP() async {
     gamePictsWTP.clear();
     List<int> numbers = [];
     Random random = Random();
     while (numbers.length < difficultyLevel + 2) {
-      int num = random.nextInt(selectedPicts.length - 1);
-      if (!numbers.contains(num)) {
-        numbers.add(num);
+      int randomNum = random.nextInt(selectedPicts.length - 1);
+      if (!numbers.contains(randomNum)) {
+        numbers.add(randomNum);
       }
     }
     for (var element in numbers) {
@@ -65,12 +74,12 @@ class GamesProvider extends ChangeNotifier {
     }
 
     correctPictoWTP = Random().nextInt(difficultyLevel + 2);
-    print(correctPictoWTP);
+
     notifyListeners();
   }
 
   resetScore() {
-    incorrectScore == 0;
+    incorrectScore = 0;
     correctScore = 0;
     gameTimer.cancel();
     useTime = 0;
@@ -154,7 +163,7 @@ class GamesProvider extends ChangeNotifier {
   void scrollDown() {
     int currentPosition = gridScrollController.position.pixels.toInt();
 
-    if (currentPosition >= gridScrollController.position.maxScrollExtent) {
+    if (currentPosition >= gridScrollController.position.maxScrollExtent + 96) {
       return;
     }
 
@@ -192,14 +201,7 @@ class GamesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<void> fetchBoardsForType({required List<String> ids}) async {
-  //   gptBoards.clear();
-  //   ids.forEach((element) {
-  //     print(groups[element]!.text);
-  //   });
-  // }
-
-  Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
+  // Future<void> checkAnswerMatchPicto({required bool upper, required int index}) async {}
 
   Future<void> init() async {
     gameTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -251,8 +253,7 @@ class GamesProvider extends ChangeNotifier {
   Future<void> initializeBackgroundMusic() async {
     ///check if we can buffer the audios before even loading the properties of the given class
     // backgroundMusicPlayer.setAudioSource();
-    if (isMute) {
-    } else {
+    if (!isMute) {
       await backgroundMusicPlayer.setAsset('assets/audios/funckygroove.mp3');
       await backgroundMusicPlayer.setLoopMode(LoopMode.one);
       await backgroundMusicPlayer.setVolume(0.2);
@@ -264,12 +265,11 @@ class GamesProvider extends ChangeNotifier {
   void dispose() {
     hintTimer1.cancel();
     hintTimer2.cancel();
-    print('disposed');
     super.dispose();
   }
 }
 
-final gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
+final ChangeNotifierProvider<GamesProvider> gameProvider = ChangeNotifierProvider<GamesProvider>((ref) {
   final pictogramService = GetIt.I<PictogramsRepository>();
   final groupsService = GetIt.I<GroupsRepository>();
   final patientState = ref.watch(patientNotifier.notifier);

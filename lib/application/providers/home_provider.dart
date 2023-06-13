@@ -25,9 +25,9 @@ import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
 const String kStarterPictoId = "FWy18PiX2jLwZQF6-oNZR";
 
-List<Picto> basicPictograms = [];
-
 class HomeProvider extends ChangeNotifier {
+  List<Picto> basicPictograms = [];
+
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
   final SentencesRepository _sentencesService;
@@ -321,6 +321,7 @@ class HomeProvider extends ChangeNotifier {
     if (indexPage > currentPage) {
       indexPage = currentPage;
     }
+
     if (indexPage < 0) {
       indexPage = 0;
     }
@@ -480,7 +481,7 @@ class HomeProvider extends ChangeNotifier {
   void scrollDown(ScrollController controller, double amount) {
     int currentPosition = controller.position.pixels.toInt();
 
-    if (currentPosition >= controller.position.maxScrollExtent) return;
+    if (currentPosition >= controller.position.maxScrollExtent + amount) return;
 
     controller.animateTo(
       currentPosition + amount,

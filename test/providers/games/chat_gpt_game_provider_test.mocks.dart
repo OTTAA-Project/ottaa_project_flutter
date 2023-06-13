@@ -6,6 +6,7 @@
 import 'dart:async' as _i3;
 import 'dart:ui' as _i11;
 
+import 'package:audio_session/audio_session.dart' as _i14;
 import 'package:either_dart/either.dart' as _i6;
 import 'package:flutter/material.dart' as _i2;
 import 'package:just_audio/just_audio.dart' as _i4;
@@ -98,6 +99,36 @@ class _FakeEither_5<L, R> extends _i1.SmartFake implements _i6.Either<L, R> {
 
 class _FakeTTSRepository_6 extends _i1.SmartFake implements _i7.TTSRepository {
   _FakeTTSRepository_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakePlaybackEvent_7 extends _i1.SmartFake implements _i4.PlaybackEvent {
+  _FakePlaybackEvent_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDuration_8 extends _i1.SmartFake implements Duration {
+  _FakeDuration_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakePlayerState_9 extends _i1.SmartFake implements _i4.PlayerState {
+  _FakePlayerState_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -898,4 +929,505 @@ class MockTTSProvider extends _i1.Mock implements _i12.TTSProvider {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [AudioPlayer].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAudioPlayer extends _i1.Mock implements _i4.AudioPlayer {
+  MockAudioPlayer() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.PlaybackEvent get playbackEvent => (super.noSuchMethod(
+        Invocation.getter(#playbackEvent),
+        returnValue: _FakePlaybackEvent_7(
+          this,
+          Invocation.getter(#playbackEvent),
+        ),
+      ) as _i4.PlaybackEvent);
+  @override
+  _i3.Stream<_i4.PlaybackEvent> get playbackEventStream => (super.noSuchMethod(
+        Invocation.getter(#playbackEventStream),
+        returnValue: _i3.Stream<_i4.PlaybackEvent>.empty(),
+      ) as _i3.Stream<_i4.PlaybackEvent>);
+  @override
+  _i3.Stream<Duration?> get durationStream => (super.noSuchMethod(
+        Invocation.getter(#durationStream),
+        returnValue: _i3.Stream<Duration?>.empty(),
+      ) as _i3.Stream<Duration?>);
+  @override
+  _i4.ProcessingState get processingState => (super.noSuchMethod(
+        Invocation.getter(#processingState),
+        returnValue: _i4.ProcessingState.idle,
+      ) as _i4.ProcessingState);
+  @override
+  _i3.Stream<_i4.ProcessingState> get processingStateStream =>
+      (super.noSuchMethod(
+        Invocation.getter(#processingStateStream),
+        returnValue: _i3.Stream<_i4.ProcessingState>.empty(),
+      ) as _i3.Stream<_i4.ProcessingState>);
+  @override
+  bool get playing => (super.noSuchMethod(
+        Invocation.getter(#playing),
+        returnValue: false,
+      ) as bool);
+  @override
+  _i3.Stream<bool> get playingStream => (super.noSuchMethod(
+        Invocation.getter(#playingStream),
+        returnValue: _i3.Stream<bool>.empty(),
+      ) as _i3.Stream<bool>);
+  @override
+  double get volume => (super.noSuchMethod(
+        Invocation.getter(#volume),
+        returnValue: 0.0,
+      ) as double);
+  @override
+  _i3.Stream<double> get volumeStream => (super.noSuchMethod(
+        Invocation.getter(#volumeStream),
+        returnValue: _i3.Stream<double>.empty(),
+      ) as _i3.Stream<double>);
+  @override
+  double get speed => (super.noSuchMethod(
+        Invocation.getter(#speed),
+        returnValue: 0.0,
+      ) as double);
+  @override
+  _i3.Stream<double> get speedStream => (super.noSuchMethod(
+        Invocation.getter(#speedStream),
+        returnValue: _i3.Stream<double>.empty(),
+      ) as _i3.Stream<double>);
+  @override
+  double get pitch => (super.noSuchMethod(
+        Invocation.getter(#pitch),
+        returnValue: 0.0,
+      ) as double);
+  @override
+  _i3.Stream<double> get pitchStream => (super.noSuchMethod(
+        Invocation.getter(#pitchStream),
+        returnValue: _i3.Stream<double>.empty(),
+      ) as _i3.Stream<double>);
+  @override
+  bool get skipSilenceEnabled => (super.noSuchMethod(
+        Invocation.getter(#skipSilenceEnabled),
+        returnValue: false,
+      ) as bool);
+  @override
+  _i3.Stream<bool> get skipSilenceEnabledStream => (super.noSuchMethod(
+        Invocation.getter(#skipSilenceEnabledStream),
+        returnValue: _i3.Stream<bool>.empty(),
+      ) as _i3.Stream<bool>);
+  @override
+  Duration get bufferedPosition => (super.noSuchMethod(
+        Invocation.getter(#bufferedPosition),
+        returnValue: _FakeDuration_8(
+          this,
+          Invocation.getter(#bufferedPosition),
+        ),
+      ) as Duration);
+  @override
+  _i3.Stream<Duration> get bufferedPositionStream => (super.noSuchMethod(
+        Invocation.getter(#bufferedPositionStream),
+        returnValue: _i3.Stream<Duration>.empty(),
+      ) as _i3.Stream<Duration>);
+  @override
+  _i3.Stream<_i4.IcyMetadata?> get icyMetadataStream => (super.noSuchMethod(
+        Invocation.getter(#icyMetadataStream),
+        returnValue: _i3.Stream<_i4.IcyMetadata?>.empty(),
+      ) as _i3.Stream<_i4.IcyMetadata?>);
+  @override
+  _i4.PlayerState get playerState => (super.noSuchMethod(
+        Invocation.getter(#playerState),
+        returnValue: _FakePlayerState_9(
+          this,
+          Invocation.getter(#playerState),
+        ),
+      ) as _i4.PlayerState);
+  @override
+  _i3.Stream<_i4.PlayerState> get playerStateStream => (super.noSuchMethod(
+        Invocation.getter(#playerStateStream),
+        returnValue: _i3.Stream<_i4.PlayerState>.empty(),
+      ) as _i3.Stream<_i4.PlayerState>);
+  @override
+  _i3.Stream<List<_i4.IndexedAudioSource>?> get sequenceStream =>
+      (super.noSuchMethod(
+        Invocation.getter(#sequenceStream),
+        returnValue: _i3.Stream<List<_i4.IndexedAudioSource>?>.empty(),
+      ) as _i3.Stream<List<_i4.IndexedAudioSource>?>);
+  @override
+  _i3.Stream<List<int>?> get shuffleIndicesStream => (super.noSuchMethod(
+        Invocation.getter(#shuffleIndicesStream),
+        returnValue: _i3.Stream<List<int>?>.empty(),
+      ) as _i3.Stream<List<int>?>);
+  @override
+  _i3.Stream<int?> get currentIndexStream => (super.noSuchMethod(
+        Invocation.getter(#currentIndexStream),
+        returnValue: _i3.Stream<int?>.empty(),
+      ) as _i3.Stream<int?>);
+  @override
+  _i3.Stream<_i4.SequenceState?> get sequenceStateStream => (super.noSuchMethod(
+        Invocation.getter(#sequenceStateStream),
+        returnValue: _i3.Stream<_i4.SequenceState?>.empty(),
+      ) as _i3.Stream<_i4.SequenceState?>);
+  @override
+  bool get hasNext => (super.noSuchMethod(
+        Invocation.getter(#hasNext),
+        returnValue: false,
+      ) as bool);
+  @override
+  bool get hasPrevious => (super.noSuchMethod(
+        Invocation.getter(#hasPrevious),
+        returnValue: false,
+      ) as bool);
+  @override
+  _i4.LoopMode get loopMode => (super.noSuchMethod(
+        Invocation.getter(#loopMode),
+        returnValue: _i4.LoopMode.off,
+      ) as _i4.LoopMode);
+  @override
+  _i3.Stream<_i4.LoopMode> get loopModeStream => (super.noSuchMethod(
+        Invocation.getter(#loopModeStream),
+        returnValue: _i3.Stream<_i4.LoopMode>.empty(),
+      ) as _i3.Stream<_i4.LoopMode>);
+  @override
+  bool get shuffleModeEnabled => (super.noSuchMethod(
+        Invocation.getter(#shuffleModeEnabled),
+        returnValue: false,
+      ) as bool);
+  @override
+  _i3.Stream<bool> get shuffleModeEnabledStream => (super.noSuchMethod(
+        Invocation.getter(#shuffleModeEnabledStream),
+        returnValue: _i3.Stream<bool>.empty(),
+      ) as _i3.Stream<bool>);
+  @override
+  _i3.Stream<int?> get androidAudioSessionIdStream => (super.noSuchMethod(
+        Invocation.getter(#androidAudioSessionIdStream),
+        returnValue: _i3.Stream<int?>.empty(),
+      ) as _i3.Stream<int?>);
+  @override
+  _i3.Stream<_i4.PositionDiscontinuity> get positionDiscontinuityStream =>
+      (super.noSuchMethod(
+        Invocation.getter(#positionDiscontinuityStream),
+        returnValue: _i3.Stream<_i4.PositionDiscontinuity>.empty(),
+      ) as _i3.Stream<_i4.PositionDiscontinuity>);
+  @override
+  bool get automaticallyWaitsToMinimizeStalling => (super.noSuchMethod(
+        Invocation.getter(#automaticallyWaitsToMinimizeStalling),
+        returnValue: false,
+      ) as bool);
+  @override
+  bool get canUseNetworkResourcesForLiveStreamingWhilePaused =>
+      (super.noSuchMethod(
+        Invocation.getter(#canUseNetworkResourcesForLiveStreamingWhilePaused),
+        returnValue: false,
+      ) as bool);
+  @override
+  double get preferredPeakBitRate => (super.noSuchMethod(
+        Invocation.getter(#preferredPeakBitRate),
+        returnValue: 0.0,
+      ) as double);
+  @override
+  Duration get position => (super.noSuchMethod(
+        Invocation.getter(#position),
+        returnValue: _FakeDuration_8(
+          this,
+          Invocation.getter(#position),
+        ),
+      ) as Duration);
+  @override
+  _i3.Stream<Duration> get positionStream => (super.noSuchMethod(
+        Invocation.getter(#positionStream),
+        returnValue: _i3.Stream<Duration>.empty(),
+      ) as _i3.Stream<Duration>);
+  @override
+  _i3.Stream<Duration> createPositionStream({
+    int? steps = 800,
+    Duration? minPeriod = const Duration(milliseconds: 200),
+    Duration? maxPeriod = const Duration(milliseconds: 200),
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createPositionStream,
+          [],
+          {
+            #steps: steps,
+            #minPeriod: minPeriod,
+            #maxPeriod: maxPeriod,
+          },
+        ),
+        returnValue: _i3.Stream<Duration>.empty(),
+      ) as _i3.Stream<Duration>);
+  @override
+  _i3.Future<Duration?> setUrl(
+    String? url, {
+    Map<String, String>? headers,
+    Duration? initialPosition,
+    bool? preload = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setUrl,
+          [url],
+          {
+            #headers: headers,
+            #initialPosition: initialPosition,
+            #preload: preload,
+          },
+        ),
+        returnValue: _i3.Future<Duration?>.value(),
+      ) as _i3.Future<Duration?>);
+  @override
+  _i3.Future<Duration?> setFilePath(
+    String? filePath, {
+    Duration? initialPosition,
+    bool? preload = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setFilePath,
+          [filePath],
+          {
+            #initialPosition: initialPosition,
+            #preload: preload,
+          },
+        ),
+        returnValue: _i3.Future<Duration?>.value(),
+      ) as _i3.Future<Duration?>);
+  @override
+  _i3.Future<Duration?> setAsset(
+    String? assetPath, {
+    String? package,
+    bool? preload = true,
+    Duration? initialPosition,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setAsset,
+          [assetPath],
+          {
+            #package: package,
+            #preload: preload,
+            #initialPosition: initialPosition,
+          },
+        ),
+        returnValue: _i3.Future<Duration?>.value(),
+      ) as _i3.Future<Duration?>);
+  @override
+  _i3.Future<Duration?> setAudioSource(
+    _i4.AudioSource? source, {
+    bool? preload = true,
+    int? initialIndex,
+    Duration? initialPosition,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setAudioSource,
+          [source],
+          {
+            #preload: preload,
+            #initialIndex: initialIndex,
+            #initialPosition: initialPosition,
+          },
+        ),
+        returnValue: _i3.Future<Duration?>.value(),
+      ) as _i3.Future<Duration?>);
+  @override
+  _i3.Future<Duration?> load() => (super.noSuchMethod(
+        Invocation.method(
+          #load,
+          [],
+        ),
+        returnValue: _i3.Future<Duration?>.value(),
+      ) as _i3.Future<Duration?>);
+  @override
+  _i3.Future<Duration?> setClip({
+    Duration? start,
+    Duration? end,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setClip,
+          [],
+          {
+            #start: start,
+            #end: end,
+          },
+        ),
+        returnValue: _i3.Future<Duration?>.value(),
+      ) as _i3.Future<Duration?>);
+  @override
+  _i3.Future<void> play() => (super.noSuchMethod(
+        Invocation.method(
+          #play,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> pause() => (super.noSuchMethod(
+        Invocation.method(
+          #pause,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> stop() => (super.noSuchMethod(
+        Invocation.method(
+          #stop,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setVolume(double? volume) => (super.noSuchMethod(
+        Invocation.method(
+          #setVolume,
+          [volume],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setSkipSilenceEnabled(bool? enabled) => (super.noSuchMethod(
+        Invocation.method(
+          #setSkipSilenceEnabled,
+          [enabled],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setSpeed(double? speed) => (super.noSuchMethod(
+        Invocation.method(
+          #setSpeed,
+          [speed],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setPitch(double? pitch) => (super.noSuchMethod(
+        Invocation.method(
+          #setPitch,
+          [pitch],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setLoopMode(_i4.LoopMode? mode) => (super.noSuchMethod(
+        Invocation.method(
+          #setLoopMode,
+          [mode],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setShuffleModeEnabled(bool? enabled) => (super.noSuchMethod(
+        Invocation.method(
+          #setShuffleModeEnabled,
+          [enabled],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> shuffle() => (super.noSuchMethod(
+        Invocation.method(
+          #shuffle,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setAutomaticallyWaitsToMinimizeStalling(
+          bool? automaticallyWaitsToMinimizeStalling) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setAutomaticallyWaitsToMinimizeStalling,
+          [automaticallyWaitsToMinimizeStalling],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setCanUseNetworkResourcesForLiveStreamingWhilePaused(
+          bool? canUseNetworkResourcesForLiveStreamingWhilePaused) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setCanUseNetworkResourcesForLiveStreamingWhilePaused,
+          [canUseNetworkResourcesForLiveStreamingWhilePaused],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setPreferredPeakBitRate(double? preferredPeakBitRate) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setPreferredPeakBitRate,
+          [preferredPeakBitRate],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> seek(
+    Duration? position, {
+    int? index,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #seek,
+          [position],
+          {#index: index},
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> seekToNext() => (super.noSuchMethod(
+        Invocation.method(
+          #seekToNext,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> seekToPrevious() => (super.noSuchMethod(
+        Invocation.method(
+          #seekToPrevious,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setAndroidAudioAttributes(
+          _i14.AndroidAudioAttributes? audioAttributes) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setAndroidAudioAttributes,
+          [audioAttributes],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
 }

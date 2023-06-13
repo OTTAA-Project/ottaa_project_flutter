@@ -102,8 +102,7 @@ class CustomiseProvider extends ChangeNotifier {
     notifyListeners();
     await getDefaultPictos();
     await createMapForPictos();
-    if (dataExist) {
-    } else {
+    if (!dataExist) {
       type = CustomiseDataType.user;
       notifyListeners();
     }

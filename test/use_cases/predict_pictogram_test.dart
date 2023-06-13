@@ -82,7 +82,7 @@ void main() {
         model: "model",
         groups: [],
         tags: {},
-        reduced: true,
+        reduced: false,
       );
 
       expect(result.right, hasLength(1));

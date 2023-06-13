@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
@@ -10,14 +9,12 @@ import 'package:ottaa_project_flutter/core/repositories/local_database_repositor
 class SplashProvider extends ChangeNotifier {
   final AboutRepository _aboutRepository;
   final AuthRepository _auth;
-  final UserAvatarNotifier _avatarNotifier;
   final UserNotifier _userNotifier;
   final LocalDatabaseRepository _hiveRepository;
 
   SplashProvider(
     this._aboutRepository,
     this._auth,
-    this._avatarNotifier,
     this._userNotifier,
     this._hiveRepository,
   );
@@ -39,8 +36,7 @@ class SplashProvider extends ChangeNotifier {
       await _auth.logout();
       return false;
     }
-    _avatarNotifier.changeAvatar(
-        int.tryParse(result.right.settings.data.avatar.asset) ?? 615);
+    // _avatarNotifier.changeAvatar(int.tryParse(result.right.settings.data.avatar.asset) ?? 615);
     _userNotifier.setUser(result.right);
     return result.isRight;
   }
@@ -67,15 +63,11 @@ class SplashProvider extends ChangeNotifier {
 final splashProvider = ChangeNotifierProvider<SplashProvider>((ref) {
   final AboutRepository aboutService = GetIt.I.get<AboutRepository>();
   final AuthRepository authService = GetIt.I.get<AuthRepository>();
-  final LocalDatabaseRepository localDatabaseRepository =
-      GetIt.I.get<LocalDatabaseRepository>();
-  final UserAvatarNotifier avatarNotifier =
-      ref.read(userAvatarNotifier.notifier);
+  final LocalDatabaseRepository localDatabaseRepository = GetIt.I.get<LocalDatabaseRepository>();
   final UserNotifier userState = ref.read(userProvider);
   return SplashProvider(
     aboutService,
     authService,
-    avatarNotifier,
     userState,
     localDatabaseRepository,
   );

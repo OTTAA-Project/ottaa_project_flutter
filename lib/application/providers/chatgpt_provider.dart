@@ -36,7 +36,7 @@ class ChatGPTNotifier extends ChangeNotifier {
     );
 
     return response.fold(
-      (l) => null,
+      (l) => l,
       (r) => r,
     );
   }
@@ -46,9 +46,10 @@ class ChatGPTNotifier extends ChangeNotifier {
   }
 }
 
-final chatGPTProvider = ChangeNotifierProvider<ChatGPTNotifier>((ref) {
+final ChangeNotifierProvider<ChatGPTNotifier> chatGPTProvider = ChangeNotifierProvider<ChatGPTNotifier>((ref) {
+  final chatGPTRepository = GetIt.I.get<ChatGPTRepository>();
+
   final userState = ref.watch(userProvider);
   final patientState = ref.watch(patientNotifier.notifier);
-  final chatGPTRepository = GetIt.I<ChatGPTRepository>();
   return ChatGPTNotifier(userState, patientState, chatGPTRepository);
 });
