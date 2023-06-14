@@ -207,7 +207,9 @@
     "portuguese": "Portuguese",
     "test": "Esta es la voz que vas a usar en ottaa",
     "add": "Agregar",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "gallery": "galería",
+    "arasaac": "ARASAAC"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -336,5 +338,9 @@
     "short": {
       "headline": " ¿Confima que deseas volver a la pantalla de perfiles?"
     }
+  },
+  "create": {
+    "heading": "Crear pictograma",
+    "image_selection": "Elije la imagen que represente al pictograma\n"
   }
 }

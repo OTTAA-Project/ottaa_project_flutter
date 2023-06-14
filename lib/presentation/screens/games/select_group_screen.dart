@@ -80,7 +80,7 @@ class SelectGroupScreen extends ConsumerWidget {
                           break;
                         case 1:
                           await provider.createRandomForGameMP();
-                          context.push(AppRoutes.patienMatchPictogramGame);
+                          context.push(AppRoutes.patientMatchPictogramGame);
 
                           break;
                         case 2:

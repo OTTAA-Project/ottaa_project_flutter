@@ -103,7 +103,9 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                 title: 'profile.tips.title1'.trl,
                 subtitle: 'user.main.subtitle1'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileUserIcon2),
-                onPressed: () {},
+                onPressed: () {
+                  context.push(AppRoutes.patientCreatePicto);
+                },
                 focused: false,
                 imageSize: const Size(129, 96),
               ),
