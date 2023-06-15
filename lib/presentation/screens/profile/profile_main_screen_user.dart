@@ -8,6 +8,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
@@ -103,7 +104,19 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                 title: 'profile.tips.title1'.trl,
                 subtitle: 'user.main.subtitle1'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileUserIcon2),
-                onPressed: () {
+                onPressed: () async {
+                  final provider = ref.read(createPictoProvider);
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  );
+                  await provider.init(userId: user.id);
+                  context.pop();
                   context.push(AppRoutes.patientCreatePicto);
                 },
                 focused: false,
