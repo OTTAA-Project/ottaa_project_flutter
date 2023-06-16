@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'dart:convert';
 
 import 'package:ottaa_project_flutter/core/models/picto_predicted_reduced.dart';

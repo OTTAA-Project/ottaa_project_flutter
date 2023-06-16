@@ -500,6 +500,15 @@ class MockGamesProvider extends _i1.Mock implements _i8.GamesProvider {
         ),
       ) as _i4.AudioPlayer);
   @override
+  set backgroundMusicPlayer(_i4.AudioPlayer? _backgroundMusicPlayer) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #backgroundMusicPlayer,
+          _backgroundMusicPlayer,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   _i4.AudioPlayer get clicksPlayer => (super.noSuchMethod(
         Invocation.getter(#clicksPlayer),
         returnValue: _FakeAudioPlayer_3(
@@ -507,6 +516,14 @@ class MockGamesProvider extends _i1.Mock implements _i8.GamesProvider {
           Invocation.getter(#clicksPlayer),
         ),
       ) as _i4.AudioPlayer);
+  @override
+  set clicksPlayer(_i4.AudioPlayer? _clicksPlayer) => super.noSuchMethod(
+        Invocation.setter(
+          #clicksPlayer,
+          _clicksPlayer,
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   Map<int, _i9.Picto> get bottomPositionsMP => (super.noSuchMethod(
         Invocation.getter(#bottomPositionsMP),
@@ -612,23 +629,6 @@ class MockGamesProvider extends _i1.Mock implements _i8.GamesProvider {
         Invocation.method(
           #fetchPictograms,
           [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
-  @override
-  _i3.Future<void> checkAnswerMatchPicto({
-    required bool? upper,
-    required int? index,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #checkAnswerMatchPicto,
-          [],
-          {
-            #upper: upper,
-            #index: index,
-          },
         ),
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),

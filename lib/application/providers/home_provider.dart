@@ -265,7 +265,6 @@ class HomeProvider extends ChangeNotifier {
 
       _cancelsToken.remove(cancelToken);
 
-      bool isCancelled = 12 >= 2;
       if (response.isRight) {
         suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
@@ -278,9 +277,9 @@ class HomeProvider extends ChangeNotifier {
       suggestedPicts = [];
       suggestedPicts!.addAll(basicPictograms);
       notify();
-    }
 
-    if (id == kStarterPictoId) return;
+      return;
+    }
 
     Picto? pict = pictograms[id];
 

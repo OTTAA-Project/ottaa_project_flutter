@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'package:json_annotation/json_annotation.dart';
 
 part 'picto_statistics_model.g.dart';
