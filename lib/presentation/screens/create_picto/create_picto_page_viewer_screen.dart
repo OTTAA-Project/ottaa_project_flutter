@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_board_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_color_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/create_pictogram_initial_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/ui/page_viewer_indicator_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -23,6 +24,7 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
         return true;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: OTTAAAppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
@@ -51,9 +53,10 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: provider.controller,
-                  children: [
-                    const ChooseBoardScreen(),
-                    const CreatePictogramInitialScreen(),
+                  children: const [
+                    ChooseBoardScreen(),
+                    CreatePictogramInitialScreen(),
+                    ChooseColorScreen(),
                   ],
                 ),
               ),

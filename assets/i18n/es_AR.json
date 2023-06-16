@@ -209,7 +209,8 @@
     "add": "Agregar",
     "confirm": "Confirmar",
     "gallery": "galería",
-    "arasaac": "ARASAAC"
+    "arasaac": "ARASAAC",
+    "text": "Texto"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -341,6 +342,7 @@
   },
   "create": {
     "heading": "Crear pictograma",
-    "image_selection": "Elije la imagen que represente al pictograma\n"
+    "image_selection": "Elije la imagen que represente al pictograma",
+    "choose_color": "Elije el color"
   }
 }
