@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'dart:convert';
 
 class PictoPredictedReduced {

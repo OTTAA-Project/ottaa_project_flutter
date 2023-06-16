@@ -140,3 +140,9 @@ flutter:
     - family: OTTAAProjectCustomIcon
       fonts:
         - asset: assets/custom_icons/Ottaa_project_custom_icons.ttf
+
+test_coverage:
+  exclude:
+    - lib/core/**
+  ignore:
+    - lib/core/**

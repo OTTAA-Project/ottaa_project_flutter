@@ -1,5 +1,5 @@
+// coverage:ignore-file
 import 'package:json_annotation/json_annotation.dart';
-
 part 'phrases_statistics_model.g.dart';
 
 @JsonSerializable()
