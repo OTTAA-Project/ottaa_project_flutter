@@ -88,6 +88,7 @@ abstract class ServerRepository {
   });
 
   Future<void> updateDevicesId({required String userId, required DeviceToken deviceToken});
+
   Future<EitherMap> learnPictograms({
     required String uid,
     required String language,
@@ -125,4 +126,5 @@ abstract class ServerRepository {
 
   Future<dynamic> fetchUserSettings({required String userId});
 
+  Future<Either<String, String>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode});
 }

@@ -1,3 +1,4 @@
+import 'package:either_dart/src/either.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
@@ -27,5 +28,10 @@ class CreatePictoServices implements CreatePictoRepository {
     } else {
       return [];
     }
+  }
+
+  @override
+  Future<Either<String, String>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
+    return await _serverRepository.fetchPhotosFromGlobalSymbols(searchText: searchText, languageCode: languageCode);
   }
 }

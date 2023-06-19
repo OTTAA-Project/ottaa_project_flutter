@@ -14,6 +14,49 @@ import 'package:ottaa_project_flutter/core/repositories/local_database_repositor
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 
 class CreatePictoProvider extends ChangeNotifier {
+  final Map<int, int> dataSetMapId = {
+    0: 0,
+    1: 17,
+    2: 84,
+    3: 14,
+    4: 13,
+    5: 82,
+    6: 83,
+    7: 81,
+    8: 66,
+    9: 95,
+    10: 75,
+    11: 16,
+    12: 67,
+    13: 74,
+    14: 86,
+    15: 88,
+    16: 15,
+    17: 97,
+    18: 76,
+  };
+
+  final Map<int, String> dataSetMapStrings = {
+    0: 'All',
+    17: 'ARASAAC',
+    84: 'Gumeil',
+    14: 'Jellow',
+    13: 'mulberry',
+    82: 'OCHA Humanitarian Icons',
+    83: 'OpenMoji',
+    81: 'Sclera Symbols',
+    66: 'Srbija Simboli',
+    95: 'Typical Bulgarian Symbols',
+    75: 'Adam Urdu Symbols',
+    16: 'Blissymbolics',
+    67: 'Cma Gora',
+    74: 'Hrvatski simboli za PK',
+    86: 'Mulberry Plus',
+    88: 'Otsmin Turkish',
+    15: 'Tawasol',
+    97: 'Typical Bulgarian Symbols SVG',
+    76: 'DoeDY',
+  };
   final CreatePictoRepository _createPictoServices;
   final GroupsRepository _groupsService;
   final LocalDatabaseRepository _localDatabaseRepository;
@@ -132,30 +175,12 @@ class CreatePictoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-//todo: arsaac images fetching and showing api
-/*Future<List<SearchModel>> fetchPhotoFromGlobalSymbols({required String text}) async {
-    final String languageFormat = lang == 'en' ? '639-3' : '639-1';
-    final language = lang == 'en' ? 'eng' : 'es';
-    url = 'https://globalsymbols.com/api/v1/labels/search?query=${text.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
-    var urlF = Uri.parse(url);
-    http.Response response = await http.get(
-      urlF,
-      headers: {"Accept": "application/json"},
+  Future<void> fetchPhotoFromGlobalSymbols({required String text}) async {
+    final res = await _createPictoServices.fetchPhotosFromGlobalSymbols(
+      searchText: 'hola',
+      languageCode: _i18n.currentLocale.languageCode,
     );
-    // print(url);
-    if (response.statusCode == 200) {
-      // var data = jsonDecode(response.body);
-      // print(data['symbols'][0]['name']);
-      final res = (jsonDecode(response.body) as List).map((e) => SearchModel.fromJson(e)).toList();
-      // SearchModel searchModel = SearchModel.fromJson(jsonDecode(response.body));
-      // print(searchModel.itemCount);
-      // print(searchModel.symbols[0].name);
-      // print(jsonDecode(response.body));
-      return res;
-    } else {
-      throw 'error';
-    }
-  }*/
+  }
 }
 
 final createPictoProvider = ChangeNotifierProvider<CreatePictoProvider>((ref) {

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/providers/auth_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_arsaac_photo_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/create_picto_page_viewer_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customize_picto_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_board_tab_screen.dart';
@@ -319,7 +320,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: 'createPicto',
             builder: (_, __) => const CreatePictoPageViewerScreen(),
-            routes: [],
+            routes: [
+              GoRoute(
+                path: 'arsaac',
+                builder: (_, __) => const ChooseArsaacPhotoScreen(),
+              ),
+            ],
           ),
         ],
       ),

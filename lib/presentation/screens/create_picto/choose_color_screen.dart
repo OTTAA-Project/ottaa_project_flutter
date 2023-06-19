@@ -25,7 +25,7 @@ class ChooseColorScreen extends ConsumerWidget {
           ),
         ),
         Text(
-          'color'.trl,
+          'global.color'.trl,
           style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(
@@ -36,5 +36,14 @@ class ChooseColorScreen extends ConsumerWidget {
         ),
       ],
     );
+  }
+}
+
+class ColorWidget extends ConsumerWidget {
+  const ColorWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container();
   }
 }

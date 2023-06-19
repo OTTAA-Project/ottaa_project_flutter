@@ -7,7 +7,7 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
@@ -700,5 +700,31 @@ class ServerService implements ServerRepository {
       return Right(Map.from(res.value as Map<dynamic, dynamic>));
     }
     return const Left("no_data_found");
+  }
+
+  @override
+  Future<Either<String, String>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
+    final String languageFormat = languageCode == 'en_US' ? '639-3' : '639-1';
+    final language = languageCode == 'en_US' ? 'eng' : 'es';
+    String url = 'https://globalsymbols.com/api/v1/labels/search?query=${searchText.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
+    var urlF = Uri.parse(url);
+    http.Response response = await http.get(
+      urlF,
+      headers: {"Accept": "application/json"},
+    );
+    // print(url);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print(data.toString());
+      // print(data['symbols'][0]['name']);
+      // final res = (jsonDecode(response.body) as List).map((e) => SearchModel.fromJson(e)).toList();
+      // SearchModel searchModel = SearchModel.fromJson(jsonDecode(response.body));
+      // print(searchModel.itemCount);
+      // print(searchModel.symbols[0].name);
+      // print(jsonDecode(response.body));
+      return const Right('res');
+    } else {
+      return const Left('Error While loading');
+    }
   }
 }

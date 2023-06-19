@@ -63,4 +63,6 @@ class AppRoutes {
   static const patientHistoryReview = "/home/games/history/review";
 
   static const patientCreatePicto = "/home/createPicto";
+
+  static const arsaac = "/home/createPicto/arsaac";
 }

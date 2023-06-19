@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/ui/text_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/widgets/image_widget.dart';
@@ -48,7 +49,8 @@ class CreatePictogramInitialScreen extends ConsumerWidget {
                               image: AppImages.kArsacImage,
                               text: 'global.arasaac'.trl,
                               onTap: () {
-                                //todo: do the arsaac from here
+                                context.pop();
+                                context.push(AppRoutes.arsaac);
                               },
                             ),
                             Padding(
@@ -90,8 +92,6 @@ class CreatePictogramInitialScreen extends ConsumerWidget {
             ],
           ),
         ),
-
-        ///todo: add here for name length check
         if (provider.nameController.text.length >= 2) ...[
           SimpleButton(
             width: false,
