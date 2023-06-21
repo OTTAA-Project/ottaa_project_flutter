@@ -16,64 +16,66 @@ class ChooseColorScreen extends ConsumerWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'create.choose_color'.trl,
-              style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 32),
-              child: ImageWidget(
-                onTap: () {},
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'create.choose_color'.trl,
+                style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
               ),
-            ),
-            Text(
-              'global.color'.trl,
-              style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Wrap(
-              direction: Axis.horizontal,
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                ColorWidget(
-                  color: Colors.green,
-                  text: 'global.actions'.trl,
-                  number: 3,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 32),
+                child: ImageWidget(
+                  onTap: () {},
                 ),
-                ColorWidget(
-                  color: Colors.yellow,
-                  text: 'global.people'.trl,
-                  number: 1,
-                ),
-                ColorWidget(
-                  color: Colors.black,
-                  text: 'global.miscellaneous'.trl,
-                  number: 6,
-                ),
-                ColorWidget(
-                  color: Colors.purple,
-                  text: 'user.main_setting.interaction'.trl,
-                  number: 5,
-                ),
-                ColorWidget(
-                  color: colorScheme.primary,
-                  text: 'global.noun'.trl,
-                  number: 2,
-                ),
-                ColorWidget(
-                  color: Colors.blue,
-                  text: 'global.adjective'.trl,
-                  number: 4,
-                ),
-              ],
-            ),
-          ],
+              ),
+              Text(
+                'global.color'.trl,
+                style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Wrap(
+                direction: Axis.horizontal,
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  ColorWidget(
+                    color: Colors.green,
+                    text: 'global.actions'.trl,
+                    number: 3,
+                  ),
+                  ColorWidget(
+                    color: Colors.yellow,
+                    text: 'global.people'.trl,
+                    number: 1,
+                  ),
+                  ColorWidget(
+                    color: Colors.black,
+                    text: 'global.miscellaneous'.trl,
+                    number: 6,
+                  ),
+                  ColorWidget(
+                    color: Colors.purple,
+                    text: 'user.main_setting.interaction'.trl,
+                    number: 5,
+                  ),
+                  ColorWidget(
+                    color: colorScheme.primary,
+                    text: 'global.noun'.trl,
+                    number: 2,
+                  ),
+                  ColorWidget(
+                    color: Colors.blue,
+                    text: 'global.adjective'.trl,
+                    number: 4,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         SimpleButton(
           width: false,
@@ -81,6 +83,9 @@ class ChooseColorScreen extends ConsumerWidget {
             provider.nextPage();
           },
           text: 'global.continue'.trl,
+        ),
+        const SizedBox(
+          height: 16,
         ),
       ],
     );

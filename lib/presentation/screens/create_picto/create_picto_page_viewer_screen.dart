@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_b
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_color_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_picto_day_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/create_pictogram_initial_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/create_picto/picto_final_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/ui/page_viewer_indicator_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -59,6 +60,7 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
                     CreatePictogramInitialScreen(),
                     ChooseColorScreen(),
                     ChoosePictoDayScreen(),
+                    PictoFinalScreen(),
                   ],
                 ),
               ),

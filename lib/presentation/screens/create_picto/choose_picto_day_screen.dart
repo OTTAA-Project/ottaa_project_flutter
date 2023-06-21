@@ -80,17 +80,26 @@ class ChoosePictoDayScreen extends ConsumerWidget {
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                 child: Text(
-                  'global.add_new'.trl,
+                  '+ ${'global.add_new'.trl}',
                   style: textTheme.bodySmall,
                 ),
               ),
             ),
           ),
           SimpleButton(
+            width: false,
             onTap: () {
+              for (var element in provider.daysToUsePicto) {
+                provider.daysString = '${provider.daysString}, $element';
+              }
+              provider.notify();
               provider.nextPage();
+              print(provider.daysString);
             },
             text: 'global.continue'.trl,
+          ),
+          const SizedBox(
+            height: 16,
           ),
         ],
       ),

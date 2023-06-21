@@ -76,6 +76,7 @@ class CreatePictoProvider extends ChangeNotifier {
   bool isArsaacSearched = false;
   List<String> daysToUsePicto = [];
   String timeForPicto = '';
+  String daysString = '';
 
   /// 6 is the default color for black and Miscellaneous
   int borderColor = 6;
@@ -196,6 +197,8 @@ class CreatePictoProvider extends ChangeNotifier {
     isArsaacSearched = true;
     notifyListeners();
   }
+
+  Future<void> savePictogram() async {}
 }
 
 final createPictoProvider = ChangeNotifierProvider<CreatePictoProvider>((ref) {
