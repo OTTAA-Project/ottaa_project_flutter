@@ -1,5 +1,6 @@
 import 'package:either_dart/src/either.dart';
 import 'package:injectable/injectable.dart';
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/create_picto_repository.dart';
@@ -31,7 +32,7 @@ class CreatePictoServices implements CreatePictoRepository {
   }
 
   @override
-  Future<Either<String, String>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
+  Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
     return await _serverRepository.fetchPhotosFromGlobalSymbols(searchText: searchText, languageCode: languageCode);
   }
 }

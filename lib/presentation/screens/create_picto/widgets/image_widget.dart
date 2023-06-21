@@ -28,7 +28,11 @@ class ImageWidget extends ConsumerWidget {
           fit: BoxFit.fill,
           child: PictoWidget(
             colorNumber: provider.borderColor,
-            image: provider.isImageSelected ? Image.file(File(provider.imageForPicto.path)) : Image.asset(AppImages.kAddIcon),
+            image: provider.isImageSelected
+                ? provider.imageUrlForPicto.isNotEmpty
+                    ? Image.network(provider.imageUrlForPicto)
+                    : Image.file(File(provider.imageForPicto.path))
+                : Image.asset(AppImages.kAddIcon),
             onTap: onTap,
             text: provider.nameController.text.isEmpty ? 'global.add'.trl : provider.nameController.text,
           ),

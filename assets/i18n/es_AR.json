@@ -211,7 +211,26 @@
     "gallery": "galería",
     "arasaac": "ARASAAC",
     "text": "Texto",
-    "color": "Color"
+    "color": "Color",
+    "search": "Buscar",
+    "actions": "Acciones",
+    "people": "Personas",
+    "miscellaneous": "Miscelaneas",
+    "noun": "Sustantivos",
+    "adjective": "Adjetivos",
+    "predictive": "Predictivo",
+    "sunday": "Domingo",
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
+    "tomorrow": "Mañana",
+    "noon": "Mediodía",
+    "late": "Tarde",
+    "evening": "Noche",
+    "add_new": "Agregar nuevo"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -344,6 +363,10 @@
   "create": {
     "heading": "Crear pictograma",
     "image_selection": "Elije la imagen que represente al pictograma",
-    "choose_color": "Elije el color"
+    "choose_color": "Elije el color",
+    "search_arsaac": "Buscar Arsaac",
+    "time_headline": "Selecciona los horarios que más se adecuen a sus actividades",
+    "time_sub1": "¿Qué días de la semana es cuando más lo utiliza?",
+    "schedule": "¿En qué horario?"
   }
 }

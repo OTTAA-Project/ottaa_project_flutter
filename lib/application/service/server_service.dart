@@ -10,6 +10,7 @@ import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
@@ -703,7 +704,7 @@ class ServerService implements ServerRepository {
   }
 
   @override
-  Future<Either<String, String>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
+  Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
     final String languageFormat = languageCode == 'en_US' ? '639-3' : '639-1';
     final language = languageCode == 'en_US' ? 'eng' : 'es';
     String url = 'https://globalsymbols.com/api/v1/labels/search?query=${searchText.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
@@ -716,13 +717,17 @@ class ServerService implements ServerRepository {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       print(data.toString());
+      final List<ArsaacDataModel> res = (jsonDecode(response.body) as List).map((e) => ArsaacDataModel.fromJson(e)).toList();
+      print(res.length);
+      print(res.last.text);
+      print(res.first.text);
       // print(data['symbols'][0]['name']);
       // final res = (jsonDecode(response.body) as List).map((e) => SearchModel.fromJson(e)).toList();
       // SearchModel searchModel = SearchModel.fromJson(jsonDecode(response.body));
       // print(searchModel.itemCount);
       // print(searchModel.symbols[0].name);
       // print(jsonDecode(response.body));
-      return const Right('res');
+      return Right(res);
     } else {
       return const Left('Error While loading');
     }

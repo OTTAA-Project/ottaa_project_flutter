@@ -25,11 +25,14 @@ class PageViewerIndicatorWidget extends ConsumerWidget {
         Indicator(
           isOn: index == 3 ? true : false,
         ),
+        Indicator(
+          isOn: index == 4 ? true : false,
+        ),
         const SizedBox(
           width: 8,
         ),
         Text(
-          '${'global.step'.trl} ${index + 1} / 4',
+          '${'global.step'.trl} ${index + 1} / 5',
           style: textTheme.bodySmall!.copyWith(
             color: Colors.grey,
           ),

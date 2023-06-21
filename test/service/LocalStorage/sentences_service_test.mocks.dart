@@ -1183,4 +1183,31 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<_i2.Either<String, String>> fetchPhotosFromGlobalSymbols({
+    required String? searchText,
+    required String? languageCode,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchPhotosFromGlobalSymbols,
+          [],
+          {
+            #searchText: searchText,
+            #languageCode: languageCode,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, String>>.value(
+            _FakeEither_0<String, String>(
+          this,
+          Invocation.method(
+            #fetchPhotosFromGlobalSymbols,
+            [],
+            {
+              #searchText: searchText,
+              #languageCode: languageCode,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, String>>);
 }

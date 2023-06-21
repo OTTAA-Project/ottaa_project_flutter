@@ -7,6 +7,7 @@ import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/service/create_picto_services.dart';
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/create_picto_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
@@ -71,13 +72,19 @@ class CreatePictoProvider extends ChangeNotifier {
   bool isImageSelected = false;
   String selectedBoardName = '';
   bool isBoardFetched = false;
+  List<ArsaacDataModel> searchedData = [];
+  bool isArsaacSearched = false;
+  List<String> daysToUsePicto = [];
+  String timeForPicto = '';
 
   /// 6 is the default color for black and Miscellaneous
   int borderColor = 6;
   List<Group> boards = [];
   late XFile imageForPicto;
+  String imageUrlForPicto = '';
   final ImagePicker _imagePicker = ImagePicker();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController arsaacController = TextEditingController();
 
   CreatePictoProvider(
     this._createPictoServices,
@@ -176,10 +183,18 @@ class CreatePictoProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPhotoFromGlobalSymbols({required String text}) async {
+    isArsaacSearched = false;
     final res = await _createPictoServices.fetchPhotosFromGlobalSymbols(
       searchText: 'hola',
       languageCode: _i18n.currentLocale.languageCode,
     );
+    if (res.isRight) {
+      searchedData = res.right;
+    } else {
+      searchedData = [];
+    }
+    isArsaacSearched = true;
+    notifyListeners();
   }
 }
 
