@@ -77,7 +77,22 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                   subtitle: 'user.main.subtitle2'.trl,
                   trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
                   onPressed: () async {
-                    final provider = ref.watch(customiseProvider);
+                    final provider = ref.read(createPictoProvider);
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                    );
+                    await provider.init(userId: user.id);
+                    provider.selectedType = 'home.grid.title'.trl;
+                    context.pop();
+                    context.push(AppRoutes.patientViewBoardsAndPictos);
+                    //todo: talk with team about this one
+                    /* final provider = ref.watch(customiseProvider);
                     showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -94,7 +109,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                     provider.notify();
                     provider.type = provider.dataExist ? CustomiseDataType.user : CustomiseDataType.defaultCase;
 
-                    context.push(AppRoutes.userCustomizeBoard);
+                    context.push(AppRoutes.userCustomizeBoard);*/
                   },
                   focused: false,
                   imageSize: const Size(129, 96),
@@ -105,7 +120,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                 subtitle: 'user.main.subtitle1'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileUserIcon2),
                 onPressed: () async {
-                  final provider = ref.read(createPictoProvider);
+                  /*final provider = ref.read(createPictoProvider);
                   showDialog(
                     context: context,
                     barrierDismissible: false,
@@ -117,7 +132,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                   );
                   await provider.init(userId: user.id);
                   context.pop();
-                  context.push(AppRoutes.patientCreatePicto);
+                  context.push(AppRoutes.patientViewBoardsAndPictos);*/
                 },
                 focused: false,
                 imageSize: const Size(129, 96),

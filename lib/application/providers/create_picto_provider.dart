@@ -9,6 +9,7 @@ import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/service/create_picto_services.dart';
 import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/create_picto_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
@@ -77,10 +78,14 @@ class CreatePictoProvider extends ChangeNotifier {
   List<String> daysToUsePicto = [];
   String timeForPicto = '';
   String daysString = '';
+  String selectedType = '';
+  String selectedAlphabet = 'A';
 
   /// 6 is the default color for black and Miscellaneous
   int borderColor = 6;
   List<Group> boards = [];
+  List<Picto> pictograms = [];
+  List<Picto> filteredPictograms = [];
   late XFile imageForPicto;
   String imageUrlForPicto = '';
   final ImagePicker _imagePicker = ImagePicker();
@@ -101,6 +106,8 @@ class CreatePictoProvider extends ChangeNotifier {
 
   Future<void> init({required String userId}) async {
     await fetchUserGroups(userId: userId);
+    await fetchUserPictos(userId: userId);
+    await filterPictosForView();
   }
 
   Future<bool> captureImageFromCamera() async {
@@ -179,6 +186,13 @@ class CreatePictoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> fetchUserPictos({required String userId}) async {
+    final locale = _i18n.currentLocale;
+
+    final languageCode = "${locale.languageCode}_${locale.countryCode}";
+    pictograms = await _createPictoServices.fetchUserPictos(languageCode: languageCode, userId: userId);
+  }
+
   void notify() {
     notifyListeners();
   }
@@ -199,6 +213,30 @@ class CreatePictoProvider extends ChangeNotifier {
   }
 
   Future<void> savePictogram() async {}
+
+  Future<void> filterPictosForView() async {
+    print(pictograms.length);
+    filteredPictograms.clear();
+    for (var pict in pictograms) {
+      if (pict.text.toUpperCase().startsWith(
+            selectedAlphabet.toUpperCase(),
+          )) {
+        filteredPictograms.add(pict);
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> hideCurrentPicto({required String id, required int index}) async {
+    int i = -1;
+    final res = pictograms.firstWhere((element) {
+      i++;
+      return element.id == id;
+    });
+    pictograms[i].block = true;
+    filteredPictograms[index].block = true;
+    notifyListeners();
+  }
 }
 
 final createPictoProvider = ChangeNotifierProvider<CreatePictoProvider>((ref) {

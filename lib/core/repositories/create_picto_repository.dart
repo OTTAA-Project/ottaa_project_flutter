@@ -6,5 +6,7 @@ import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 abstract class CreatePictoRepository {
   Future<List<Group>> fetchUserGroups({required String languageCode, required String userId});
 
+  Future<List<Picto>> fetchUserPictos({required String languageCode, required String userId});
+
   Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode});
 }

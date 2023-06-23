@@ -230,7 +230,8 @@
     "noon": "Mediodía",
     "late": "Tarde",
     "evening": "Noche",
-    "add_new": "Agregar nuevo"
+    "add_new": "Agregar nuevo",
+    "disguise": "Ocultar"
   },
   "onboarding": {
     "start": "Comenzar",
@@ -368,6 +369,8 @@
     "time_headline": "Selecciona los horarios que más se adecuen a sus actividades",
     "time_sub1": "¿Qué días de la semana es cuando más lo utiliza?",
     "schedule": "¿En qué horario?",
-    "save": "Guardar pictograma"
+    "save": "Guardar pictograma",
+    "created_by_me": "Creados por mi",
+    "new_board": "Nuevo tablero"
   }
 }

@@ -46,6 +46,7 @@ import 'package:ottaa_project_flutter/presentation/screens/user_settings/languag
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/main_setting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/setting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/voice_and_subtitle_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/view_board/boards_pictogram_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
@@ -318,12 +319,18 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
           GoRoute(
-            path: 'createPicto',
-            builder: (_, __) => const CreatePictoPageViewerScreen(),
+            path: 'viewBoardsAndPictos',
+            builder: (_, __) => const BoardsPictogramScreen(),
             routes: [
               GoRoute(
-                path: 'arsaac',
-                builder: (_, __) => const ChooseArsaacPhotoScreen(),
+                path: 'createPicto',
+                builder: (_, __) => const CreatePictoPageViewerScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'arsaac',
+                    builder: (_, __) => const ChooseArsaacPhotoScreen(),
+                  ),
+                ],
               ),
             ],
           ),

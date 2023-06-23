@@ -62,7 +62,8 @@ class AppRoutes {
   static const patientHistorySelectPicto = "/home/games/history/pictos";
   static const patientHistoryReview = "/home/games/history/review";
 
-  static const patientCreatePicto = "/home/createPicto";
+  static const patientCreatePicto = "/home/viewBoardsAndPictos/createPicto";
+  static const patientViewBoardsAndPictos = "/home/viewBoardsAndPictos";
 
-  static const arsaac = "/home/createPicto/arsaac";
+  static const arsaac = "/home/viewBoardsAndPictos/createPicto/arsaac";
 }

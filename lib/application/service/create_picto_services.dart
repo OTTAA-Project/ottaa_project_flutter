@@ -35,4 +35,23 @@ class CreatePictoServices implements CreatePictoRepository {
   Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
     return await _serverRepository.fetchPhotosFromGlobalSymbols(searchText: searchText, languageCode: languageCode);
   }
+
+  @override
+  Future<List<Picto>> fetchUserPictos({required String languageCode, required String userId}) async {
+    final res = await _serverRepository.fetchUserPictos(languageCode: languageCode, userId: userId);
+    if (res.isRight) {
+      final json = res.right;
+      final List<Picto> pictos = json.keys.map<Picto>((e) {
+        final data = Map.from(json[e] as Map<dynamic, dynamic>);
+        return Picto.fromMap({
+          "id": e,
+          ...data,
+        });
+      }).toList();
+
+      return pictos;
+    } else {
+      return [];
+    }
+  }
 }
