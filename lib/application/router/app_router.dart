@@ -11,6 +11,7 @@ import 'package:ottaa_project_flutter/presentation/screens/customized_board/cust
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_board_tab_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_main_tab_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/customized_board/customized_wait_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/edit/edit_picto_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/error/error_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/chatgpt_game.dart';
 import 'package:ottaa_project_flutter/presentation/screens/games/game_screen.dart';
@@ -322,6 +323,16 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             path: 'viewBoardsAndPictos',
             builder: (_, __) => const BoardsPictogramScreen(),
             routes: [
+              GoRoute(
+                path: 'editPicto',
+                builder: (_, __) => const EditPictoScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'arsaac',
+                    builder: (_, __) => const ChooseArsaacPhotoScreen(),
+                  ),
+                ],
+              ),
               GoRoute(
                 path: 'createPicto',
                 builder: (_, __) => const CreatePictoPageViewerScreen(),

@@ -57,7 +57,7 @@ class PictogramScreen extends ConsumerWidget {
                           onTap: () => context.pop(),
                           child: Container(
                             color: Colors.transparent,
-                            height: MediaQuery.of(context).size.height * 0.8,
+                            height: MediaQuery.of(context).size.height * 0.75,
                             width: MediaQuery.of(context).size.width,
                           ),
                         ),
@@ -76,7 +76,8 @@ class PictogramScreen extends ConsumerWidget {
                           text: 'global.edit'.trl,
                           icon: Icons.edit,
                           onTap: () {
-                            //todo: edit the current picto
+                            provider.setForPictoEdit(pict: provider.filteredPictograms[index]);
+                            context.push(AppRoutes.patientEditPicto);
                           },
                         ),
                       ],

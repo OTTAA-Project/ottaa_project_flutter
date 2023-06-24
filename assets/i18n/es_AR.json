@@ -231,7 +231,8 @@
     "late": "Tarde",
     "evening": "Noche",
     "add_new": "Agregar nuevo",
-    "disguise": "Ocultar"
+    "disguise": "Ocultar",
+    "save": "Guardar"
   },
   "onboarding": {
     "start": "Comenzar",

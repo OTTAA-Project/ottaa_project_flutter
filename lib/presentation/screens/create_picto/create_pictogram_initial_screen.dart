@@ -50,7 +50,7 @@ class CreatePictogramInitialScreen extends ConsumerWidget {
                               text: 'global.arasaac'.trl,
                               onTap: () {
                                 context.pop();
-                                context.push(AppRoutes.arsaac);
+                                context.push(AppRoutes.patientCreatePictoarsaac);
                               },
                             ),
                             Padding(

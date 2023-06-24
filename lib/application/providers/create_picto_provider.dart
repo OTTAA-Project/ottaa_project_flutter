@@ -80,6 +80,7 @@ class CreatePictoProvider extends ChangeNotifier {
   String daysString = '';
   String selectedType = '';
   String selectedAlphabet = 'A';
+  String selectedPictoForEditId = '';
 
   /// 6 is the default color for black and Miscellaneous
   int borderColor = 6;
@@ -233,8 +234,17 @@ class CreatePictoProvider extends ChangeNotifier {
       i++;
       return element.id == id;
     });
-    pictograms[i].block = true;
-    filteredPictograms[index].block = true;
+    pictograms[i].block = !pictograms[i].block;
+    filteredPictograms[index].block = !filteredPictograms[index].block;
+    notifyListeners();
+  }
+
+  Future<void> setForPictoEdit({required Picto pict}) async {
+    selectedPictoForEditId = pict.id;
+    borderColor = pict.type;
+    imageUrlForPicto = pict.resource.network!;
+    nameController.text = pict.text;
+    isImageSelected = true;
     notifyListeners();
   }
 }
