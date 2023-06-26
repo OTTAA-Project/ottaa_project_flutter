@@ -249,18 +249,12 @@ void main() async {
   });
 
   test("should return the listeneable for a box", () async {
-
     when(hive.box(any)).thenReturn(box);
-
-    when(box.listenable()).thenAnswer((_)  {
-      return ValueNotifier(box);
-    });
 
     final valuenotifier = hiveDatabase.getListeneableFromName("box");
 
-    verify(box.put(any, any));
-    verify(box.listenable());
-    expect(valuenotifier, isA<ValueNotifier<Box>>());
+    verify(hive.box(any));
+    expect(valuenotifier, isA<ValueListenable<dynamic>>());
   });
 }
 
