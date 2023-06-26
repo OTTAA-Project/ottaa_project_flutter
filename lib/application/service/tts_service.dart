@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/core/models/voices_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/tts_repository.dart';
+import 'package:universal_io/io.dart';
 
 @Singleton(as: TTSRepository)
 class TTSService extends TTSRepository {
@@ -13,36 +12,49 @@ class TTSService extends TTSRepository {
   @override
   FlutterTts get tts => _tts;
 
-  @override
-  set tts(value) => _tts = value;
-
   final I18N _i18n;
+
+  @override
   String language = 'es_AR';
+  @override
   List<dynamic> availableTTS = [];
+
+  @override
   String voice = '';
+  @override
   String name = '';
+  @override
   String locale = '';
 
+  @override
   bool customTTSEnable = false;
 
+  @override
   double speechRate = Platform.isIOS ? .5 : .8;
+  @override
   double pitch = 1.0;
+
   List<Voices> voices = [];
 
-  TTSService(this._i18n) {
+  TTSService(this._i18n, {FlutterTts? tts}) {
+    if (tts != null) {
+      _tts = tts;
+    }
     initTTS();
   }
+
+  @FactoryMethod()
+  factory TTSService.create(I18N i18n) => TTSService(i18n);
 
   @override
   Future<void> speak(String text) async {
     if (text.isNotEmpty) {
       // tts.cancelHandler?.call();
-      language = _i18n.currentLanguage!.locale.toString();
+      language = _i18n.currentLocale.toString();
       final split = language.split('_');
       language = '${split[0]}-${split[1]}';
       if (customTTSEnable) {
-        await tts.setVoice({"name": name, "locale": locale});
-
+        language = _i18n.currentLocale.toString();
         await tts.setLanguage(language);
         await tts.setVolume(1.0);
         await tts.setSpeechRate(speechRate);
@@ -66,7 +78,7 @@ class TTSService extends TTSRepository {
         IosTextToSpeechAudioMode.voicePrompt,
       );
     }
-    language = _i18n.currentLanguage!.locale.toString();
+    language = _i18n.currentLocale.toString();
     final split = language.split('_');
     language = '${split[0]}-${split[1]}';
     voices = await fetchVoices();

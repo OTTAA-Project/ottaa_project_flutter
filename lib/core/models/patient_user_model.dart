@@ -1,3 +1,4 @@
+// coverage:ignore-file
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
@@ -216,6 +217,17 @@ class PatientSettings extends UserSettings {
     required this.accessibility,
     required this.tts,
   });
+
+  factory PatientSettings.empty(UserData userData) {
+    return PatientSettings(
+      data: userData,
+      language: LanguageSetting.empty(),
+      payment: Payment.none(),
+      layout: LayoutSetting.empty(),
+      accessibility: AccessibilitySetting.empty(),
+      tts: TTSSetting.empty(),
+    );
+  }
 
   @override
   Map<String, dynamic> toMap() {

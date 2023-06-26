@@ -31,7 +31,6 @@ workflows:
           echo $FIREBASE_JSON | base64 --decode > $FCI_BUILD_DIR/firebase.json
           echo $GOOGLE_SERVICES | base64 --decode > $FCI_BUILD_DIR/android/app/google-services.json
           echo $ENV | base64 --decode > $FCI_BUILD_DIR/.env
-          flutter packages pub run build_runner build --delete-conflicting-outputs
 
       - name: Testing
         script:

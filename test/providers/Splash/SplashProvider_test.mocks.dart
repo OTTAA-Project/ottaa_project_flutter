@@ -7,14 +7,11 @@ import 'dart:async' as _i4;
 import 'dart:ui' as _i5;
 
 import 'package:either_dart/either.dart' as _i2;
-import 'package:flutter_riverpod/flutter_riverpod.dart' as _i14;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart'
-    as _i13;
 import 'package:ottaa_project_flutter/application/providers/splash_provider.dart'
     as _i3;
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart'
-    as _i16;
+    as _i13;
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i9;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i12;
 import 'package:ottaa_project_flutter/core/enums/user_payment.dart' as _i7;
@@ -25,8 +22,7 @@ import 'package:ottaa_project_flutter/core/repositories/about_repository.dart'
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
     as _i11;
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
-    as _i17;
-import 'package:state_notifier/state_notifier.dart' as _i15;
+    as _i14;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -405,114 +401,10 @@ class MockAuthRepository extends _i1.Mock implements _i11.AuthRepository {
       ) as _i4.Future<String>);
 }
 
-/// A class which mocks [UserAvatarNotifier].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockUserAvatarNotifier extends _i1.Mock
-    implements _i13.UserAvatarNotifier {
-  MockUserAvatarNotifier() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  set onError(_i14.ErrorListener? _onError) => super.noSuchMethod(
-        Invocation.setter(
-          #onError,
-          _onError,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  bool get mounted => (super.noSuchMethod(
-        Invocation.getter(#mounted),
-        returnValue: false,
-      ) as bool);
-  @override
-  _i4.Stream<int> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i4.Stream<int>.empty(),
-      ) as _i4.Stream<int>);
-  @override
-  int get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: 0,
-      ) as int);
-  @override
-  set state(int? value) => super.noSuchMethod(
-        Invocation.setter(
-          #state,
-          value,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  int get debugState => (super.noSuchMethod(
-        Invocation.getter(#debugState),
-        returnValue: 0,
-      ) as int);
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
-        returnValue: false,
-      ) as bool);
-  @override
-  void changeAvatar(int? imageId) => super.noSuchMethod(
-        Invocation.method(
-          #changeAvatar,
-          [imageId],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  String getAvatar() => (super.noSuchMethod(
-        Invocation.method(
-          #getAvatar,
-          [],
-        ),
-        returnValue: '',
-      ) as String);
-  @override
-  bool updateShouldNotify(
-    int? old,
-    int? current,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updateShouldNotify,
-          [
-            old,
-            current,
-          ],
-        ),
-        returnValue: false,
-      ) as bool);
-  @override
-  _i14.RemoveListener addListener(
-    _i15.Listener<int>? listener, {
-    bool? fireImmediately = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addListener,
-          [listener],
-          {#fireImmediately: fireImmediately},
-        ),
-        returnValue: () {},
-      ) as _i14.RemoveListener);
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-}
-
 /// A class which mocks [UserNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserNotifier extends _i1.Mock implements _i16.UserNotifier {
+class MockUserNotifier extends _i1.Mock implements _i13.UserNotifier {
   MockUserNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -584,7 +476,7 @@ class MockUserNotifier extends _i1.Mock implements _i16.UserNotifier {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i17.LocalDatabaseRepository {
+    implements _i14.LocalDatabaseRepository {
   MockLocalDatabaseRepository() {
     _i1.throwOnMissingStub(this);
   }

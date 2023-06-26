@@ -1,3 +1,4 @@
+// coverage:ignore-file
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
@@ -41,7 +42,7 @@ class CaregiverUserModel extends UserModel {
   CaregiverUserModel({
     required this.id,
     required this.settings,
-    this.type = UserType.none,
+    this.type = UserType.caregiver,
     required this.users,
     required this.email,
   });

@@ -1,0 +1,6 @@
+appId: com.ottaaproject.flutter
+---
+- launchApp
+- tapOn: "Login with Google"
+- assertVisible: "I accept the terms"
+- tapOn: "I accept the terms"

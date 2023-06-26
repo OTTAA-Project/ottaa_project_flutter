@@ -1,21 +1,29 @@
 import 'dart:ui';
 
 import 'package:either_dart/either.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
+
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/accessibility_setting.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/base_settings_model.dart';
 import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/language_setting.dart';
+import 'package:ottaa_project_flutter/core/models/layout_setting.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/payment_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
+import 'package:ottaa_project_flutter/core/models/tts_setting.dart';
 import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
@@ -30,17 +38,24 @@ Future<void> main() async {
   late MockGroupsRepository mockGroupsRepository;
   late MockPictogramsRepository mockPictogramsRepository;
   late MockUserNotifier mockUserNotifier;
-  late CustomiseProvider customiseProvider;
+  late CustomiseProvider customiseNotifier;
 
   late List<Group> fakeGroups;
   late List<Picto> fakePictos;
-  late BaseUserModel fakeUser;
+  late UserModel fakeUser;
 
   setUp(() {
     mockI18N = MockI18N();
-    fakeUser = BaseUserModel(
+    fakeUser = PatientUserModel(
       id: "0",
-      settings: BaseSettingsModel(
+      groups: {},
+      phrases: {},
+      pictos: {},
+      settings: PatientSettings(
+        payment: Payment.none(),
+        accessibility: AccessibilitySetting.empty(),
+        layout: LayoutSetting.empty(),
+        tts: TTSSetting.empty(),
         data: UserData(
           avatar: AssetsImage(asset: "test", network: "https://test.com"),
           birthDate: DateTime(0),
@@ -52,7 +67,7 @@ Future<void> main() async {
         language: LanguageSetting.empty(),
       ),
       email: "test@mail.com",
-      type: UserType.caregiver,
+      type: UserType.user,
     );
     mockLocalDatabaseRepository = MockLocalDatabaseRepository();
     mockCustomiseRepository = MockCustomiseRepository();
@@ -70,16 +85,16 @@ Future<void> main() async {
       Picto(id: '02', type: 2, resource: AssetsImage(asset: 'testAsset', network: 'testNetwork'), block: true),
     ];
 
-    customiseProvider = CustomiseProvider(mockPictogramsRepository, mockGroupsRepository, mockCustomiseRepository, mockI18N, mockUserNotifier, mockLocalDatabaseRepository);
-    customiseProvider.groups = fakeGroups;
+    customiseNotifier = CustomiseProvider(mockPictogramsRepository, mockGroupsRepository, mockCustomiseRepository, mockI18N, mockUserNotifier, mockLocalDatabaseRepository);
+    customiseNotifier.groups = fakeGroups;
   });
 
   test('should set group data on to the screen', () async {
     const index = 1;
 
-    final provider = customiseProvider;
+    final provider = customiseNotifier;
 
-    await customiseProvider.setGroupData(index: index);
+    await customiseNotifier.setGroupData(index: index);
 
     expect(provider.selectedGroup, equals(index));
     expect(provider.selectedGroupImage, equals(fakeGroups[index].resource.network));
@@ -91,11 +106,13 @@ Future<void> main() async {
   test('should upload the shortcuts for the user', () async {
     when(mockCustomiseRepository.setShortcutsForUser(shortcuts: anyNamed('shortcuts'), userId: anyNamed('userId'))).thenAnswer((realInvocation) async => const Right(null));
 
-    expect(() async => await customiseProvider.setShortcutsForUser(userId: 'testID'), isA<void>());
+    await customiseNotifier.setShortcutsForUser(userId: 'testID');
+
+    verify(mockCustomiseRepository.setShortcutsForUser(shortcuts: anyNamed('shortcuts'), userId: anyNamed('userId')));
   });
 
   test('should change the ', () async {
-    final provider = customiseProvider;
+    final provider = customiseNotifier;
     provider.groups = fakeGroups;
     provider.pictograms = fakePictos;
     provider.selectedGroup = 00;
@@ -110,7 +127,7 @@ Future<void> main() async {
   test('should populate the pictosMap correctly', () async {
     final pictograms = fakePictos;
 
-    final provider = customiseProvider;
+    final provider = customiseNotifier;
 
     provider.pictograms = pictograms;
 
@@ -129,9 +146,9 @@ Future<void> main() async {
     when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.fetchDefaultGroups(languageCode: anyNamed('languageCode'))).thenAnswer((_) async => expectedGroups);
 
-    await customiseProvider.getDefaultGroups();
+    await customiseNotifier.getDefaultGroups();
 
-    expect(customiseProvider.groups, expectedGroups);
+    expect(customiseNotifier.groups, expectedGroups);
     verify(mockCustomiseRepository.fetchDefaultGroups(languageCode: mockLocale.toString())).called(1);
   });
 
@@ -142,9 +159,9 @@ Future<void> main() async {
     when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.fetchDefaultPictos(languageCode: anyNamed('languageCode'))).thenAnswer((_) async => expectedPictos);
 
-    await customiseProvider.getDefaultPictos();
+    await customiseNotifier.getDefaultPictos();
 
-    expect(customiseProvider.pictograms, expectedPictos);
+    expect(customiseNotifier.pictograms, expectedPictos);
     verify(mockCustomiseRepository.fetchDefaultPictos(languageCode: mockLocale.toString())).called(1);
   });
 
@@ -157,28 +174,28 @@ Future<void> main() async {
       '02': 01,
       '03': 02,
     };
-    customiseProvider.selectedGruposPicts = selectedGruposPicts;
-    customiseProvider.pictograms = pictograms;
-    customiseProvider.pictosMap = pictosMap;
+    customiseNotifier.selectedGruposPicts = selectedGruposPicts;
+    customiseNotifier.pictograms = pictograms;
+    customiseNotifier.pictosMap = pictosMap;
 
     const index = 1;
 
-    customiseProvider.block(index: index);
+    customiseNotifier.block(index: index);
 
-    expect(customiseProvider.selectedGruposPicts[index].block, true);
-    expect(customiseProvider.pictograms[customiseProvider.pictosMap[customiseProvider.selectedGruposPicts[index].id]!].block, false);
+    expect(customiseNotifier.selectedGruposPicts[index].block, true);
+    expect(customiseNotifier.pictograms[customiseNotifier.pictosMap[customiseNotifier.selectedGruposPicts[index].id]!].block, false);
   });
 
   test('fetchShortcutsForUser should populate selectedShortcuts correctly', () async {
-    customiseProvider.selectedShortcuts = List.generate(8, (index) => false);
-    final expectedFavourite = customiseProvider.selectedShortcuts[0];
-    final expectedHistory = customiseProvider.selectedShortcuts[1];
-    final expectedCamera = customiseProvider.selectedShortcuts[2];
-    final expectedGames = customiseProvider.selectedShortcuts[3];
-    final expectedYes = customiseProvider.selectedShortcuts[4];
-    final expectedNo = customiseProvider.selectedShortcuts[5];
-    final expectedShare = customiseProvider.selectedShortcuts[6];
-    final expectedEnabled = customiseProvider.selectedShortcuts[7];
+    customiseNotifier.selectedShortcuts = List.generate(8, (index) => false);
+    final expectedFavourite = customiseNotifier.selectedShortcuts[0];
+    final expectedHistory = customiseNotifier.selectedShortcuts[1];
+    final expectedCamera = customiseNotifier.selectedShortcuts[2];
+    final expectedGames = customiseNotifier.selectedShortcuts[3];
+    final expectedYes = customiseNotifier.selectedShortcuts[4];
+    final expectedNo = customiseNotifier.selectedShortcuts[5];
+    final expectedShare = customiseNotifier.selectedShortcuts[6];
+    final expectedEnabled = customiseNotifier.selectedShortcuts[7];
     final expectedResponse = ShortcutsModel(
       favs: expectedFavourite,
       history: expectedHistory,
@@ -192,15 +209,15 @@ Future<void> main() async {
 
     when(mockCustomiseRepository.fetchShortcutsForUser(userId: anyNamed('userId'))).thenAnswer((realInvocation) async => expectedResponse);
 
-    await customiseProvider.fetchShortcutsForUser(userId: 'mockUserId');
+    await customiseNotifier.fetchShortcutsForUser(userId: 'mockUserId');
 
-    expect(customiseProvider.selectedShortcuts[0], expectedFavourite);
-    expect(customiseProvider.selectedShortcuts[1], expectedHistory);
-    expect(customiseProvider.selectedShortcuts[2], expectedCamera);
-    expect(customiseProvider.selectedShortcuts[3], expectedGames);
-    expect(customiseProvider.selectedShortcuts[4], expectedYes);
-    expect(customiseProvider.selectedShortcuts[5], expectedNo);
-    expect(customiseProvider.selectedShortcuts[6], expectedShare);
+    expect(customiseNotifier.selectedShortcuts[0], expectedFavourite);
+    expect(customiseNotifier.selectedShortcuts[1], expectedHistory);
+    expect(customiseNotifier.selectedShortcuts[2], expectedCamera);
+    expect(customiseNotifier.selectedShortcuts[3], expectedGames);
+    expect(customiseNotifier.selectedShortcuts[4], expectedYes);
+    expect(customiseNotifier.selectedShortcuts[5], expectedNo);
+    expect(customiseNotifier.selectedShortcuts[6], expectedShare);
   });
 
   test('should fetch and assign user groups', () async {
@@ -210,9 +227,9 @@ Future<void> main() async {
     when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.fetchUserGroups(languageCode: anyNamed('languageCode'), userId: anyNamed('userId'))).thenAnswer((_) async => expectedGroups);
 
-    await customiseProvider.fetchUserGroups(userId: 'mockUserId');
+    await customiseNotifier.fetchUserGroups(userId: 'mockUserId');
 
-    expect(customiseProvider.groups, expectedGroups);
+    expect(customiseNotifier.groups, expectedGroups);
   });
 
   test('should fetch and assign user pictos', () async {
@@ -222,9 +239,9 @@ Future<void> main() async {
     when(mockI18N.currentLocale).thenReturn(mockLocale);
     when(mockCustomiseRepository.fetchUserPictos(languageCode: anyNamed('languageCode'), userId: anyNamed('userId'))).thenAnswer((_) async => expectedPictos);
 
-    await customiseProvider.fetchUserPictos(userId: 'mockUserId');
+    await customiseNotifier.fetchUserPictos(userId: 'mockUserId');
 
-    expect(customiseProvider.pictograms, expectedPictos);
+    expect(customiseNotifier.pictograms, expectedPictos);
   });
 
   test('should return true if values exist, false otherwise', () async {
@@ -238,7 +255,7 @@ Future<void> main() async {
       userId: anyNamed('userId'),
     )).thenAnswer((_) async => expectedValue);
 
-    final result = await customiseProvider.dataExistOrNot(userId: mockUserId);
+    final result = await customiseNotifier.dataExistOrNot(userId: mockUserId);
 
     expect(result, expectedValue);
     verify(mockCustomiseRepository.valuesExistOrNot(
@@ -248,45 +265,109 @@ Future<void> main() async {
   });
 
   test('should call notifyListeners', () {
-    customiseProvider.notify();
+    customiseNotifier.notify();
 
-    expect(() => customiseProvider.notify(), isA<void>());
+    expect(() => customiseNotifier.notify(), isA<void>());
   });
 
-  /*test('should upload data and update user', () async {
-    final mockLocale = const Locale('es_Ar');
+  group("init", () {
+    test("should init with user or caregiver", () async {
+      when(mockCustomiseRepository.fetchShortcutsForUser(userId: anyNamed("userId"))).thenAnswer((realInvocation) async {
+        return ShortcutsModel.all();
+      });
 
-    when(mockI18N.locale).thenReturn(mockLocale);
+      when(mockCustomiseRepository.fetchUserGroups(languageCode: anyNamed("languageCode"), userId: anyNamed("userId"))).thenAnswer((realInvocation) async {
+        return fakeGroups;
+      });
+
+      when(mockCustomiseRepository.fetchUserPictos(languageCode: anyNamed("languageCode"), userId: anyNamed("userId"))).thenAnswer((realInvocation) async {
+        return fakePictos;
+      });
+
+      when(mockI18N.currentLocale).thenReturn(const Locale("en", "US"));
+
+      customiseNotifier.type = CustomiseDataType.user;
+      await customiseNotifier.inIt(userId: "mockUserId");
+
+      verify(mockCustomiseRepository.fetchShortcutsForUser(userId: "mockUserId")).called(1);
+      verify(mockCustomiseRepository.fetchUserGroups(languageCode: "en_US", userId: "mockUserId")).called(1);
+      verify(mockCustomiseRepository.fetchUserPictos(languageCode: "en_US", userId: "mockUserId")).called(1);
+    });
+
+    test("should init with default case", () async {
+      when(mockI18N.currentLocale).thenReturn(const Locale("en", "US"));
+
+      when(mockCustomiseRepository.fetchDefaultGroups(languageCode: anyNamed("languageCode"))).thenAnswer((realInvocation) async {
+        return fakeGroups;
+      });
+
+      when(mockCustomiseRepository.fetchDefaultPictos(languageCode: anyNamed("languageCode"))).thenAnswer((realInvocation) async {
+        return fakePictos;
+      });
+
+      await customiseNotifier.inIt(userId: "mockUserId");
+
+      expect(customiseNotifier.pictosMap.length, greaterThan(1));
+      verify(mockCustomiseRepository.fetchDefaultGroups(languageCode: "en_US")).called(1);
+      verify(mockCustomiseRepository.fetchDefaultPictos(languageCode: "en_US")).called(1);
+    });
+
+    test("should init with default case", () async {
+      when(mockI18N.currentLocale).thenReturn(const Locale("en", "US"));
+
+      when(mockCustomiseRepository.fetchDefaultGroups(languageCode: anyNamed("languageCode"))).thenAnswer((realInvocation) async {
+        return fakeGroups;
+      });
+
+      when(mockCustomiseRepository.fetchDefaultPictos(languageCode: anyNamed("languageCode"))).thenAnswer((realInvocation) async {
+        return fakePictos;
+      });
+
+      customiseNotifier.dataExist = false;
+
+      await customiseNotifier.inIt(userId: "mockUserId");
+
+      expect(customiseNotifier.pictosMap.length, greaterThan(1));
+      verify(mockCustomiseRepository.fetchDefaultGroups(languageCode: "en_US")).called(1);
+      verify(mockCustomiseRepository.fetchDefaultPictos(languageCode: "en_US")).called(1);
+    });
+  });
+
+  test("should upload data", () async {
+    when(mockI18N.currentLocale).thenReturn(const Locale("en", "US"));
+
+    when(mockPictogramsRepository.uploadPictograms(any, any, userId: anyNamed("userId"))).thenAnswer((realInvocation) async {});
+    when(mockGroupsRepository.uploadGroups(any, any, any, userId: anyNamed("userId"))).thenAnswer((realInvocation) async {});
+
+    when(mockCustomiseRepository.setShortcutsForUser(shortcuts: anyNamed("shortcuts"), userId: anyNamed("userId"))).thenAnswer((realInvocation) async => Right(null));
+
+    when(mockLocalDatabaseRepository.setUser(any)).thenAnswer((realInvocation) async {});
+
+    when(mockUserNotifier.setUser(any)).thenAnswer((realInvocation) {});
+
     when(mockUserNotifier.user).thenReturn(fakeUser);
-    when(mockUserNotifier.setUser(any)).thenReturn(null);
-    when(mockPictogramsRepository.uploadPictograms(any, any, userId: anyNamed('userId'))).thenAnswer((_) => Future.value());
-    when(mockGroupsRepository.uploadGroups(any, any, any, userId: anyNamed('userId'))).thenAnswer((_) => Future.value());
-    when(mockLocalDatabaseRepository.setUser(any)).thenAnswer((_) => Future.value());
 
-    // Act
-    await customiseProvider.uploadData(userId: 'mockUserId');
+    await customiseNotifier.uploadData(userId: "", savePictograms: true, saveGroups: true, saveShortcuts: true);
 
-    // Assert
-    verify(mockPictogramsRepository.uploadPictograms(any, mockLocale.toString(), userId: 'mockUserId')).called(1);
-    verify(mockGroupsRepository.uploadGroups(any, 'type', mockLocale.toString(), userId: 'mockUserId')).called(1);
+    verify(mockPictogramsRepository.uploadPictograms(any, any, userId: anyNamed("userId"))).called(1);
+    verify(mockGroupsRepository.uploadGroups(any, any, any, userId: anyNamed("userId"))).called(1);
+    verify(mockCustomiseRepository.setShortcutsForUser(shortcuts: anyNamed("shortcuts"), userId: anyNamed("userId"))).called(1);
     verify(mockLocalDatabaseRepository.setUser(any)).called(1);
     verify(mockUserNotifier.setUser(any)).called(1);
-  });*/
 
-  //todo: emir i am leaving init,fetchDefaultCaseValues,fetchUserCaseValues, and uploadData to you
+    expect(customiseNotifier.dataExist, true);
+  });
 
-  // test('should initialise the values for the provider', () async {
-  //   // Arrange
-  //   final provider = customiseProvider;
-  //   provider.type = CustomiseDataType.careGiver;
-  //
-  //   final mockFetchUserCaseValues = MockFunction<void>(userId: 'mockUserId');
-  //   myClass.fetchUserCaseValues = mockFetchUserCaseValues;
-  //
-  //   // Act
-  //   await myClass.inIt(userId: 'mockUserId');
-  //
-  //   // Assert
-  //   verify(mockFetchUserCaseValues('mockUserId')).called(1);
-  // });
+  test("Should return customise Provider", () {
+    GetIt.I.registerSingleton<CustomiseRepository>(mockCustomiseRepository);
+    GetIt.I.registerSingleton<PictogramsRepository>(mockPictogramsRepository);
+    GetIt.I.registerSingleton<GroupsRepository>(mockGroupsRepository);
+    GetIt.I.registerSingleton<LocalDatabaseRepository>(mockLocalDatabaseRepository);
+    GetIt.I.registerSingleton<I18N>(mockI18N);
+    final container = ProviderContainer();
+
+    final refProvider = container.read(customiseProvider);
+
+    expect(refProvider, isA<CustomiseProvider>());
+  });
 }

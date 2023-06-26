@@ -249,29 +249,44 @@ class CreatePictoProvider extends ChangeNotifier {
   }
 
   Future<String> getPictoUrl() async {
-    if (userIdByCareGiver.isEmpty) {
-      if (imageUrlForPicto.isNotEmpty) {
-        return imageUrlForPicto;
-      } else {
-        return _createPictoServices.uploadOtherImages(
-          imagePath: imageForPicto.path,
-          directoryPath: 'images/${userState.user!.id}/pictos',
-          name: imageForPicto.name,
-          userId: userState.user!.id,
-        );
-      }
+    final userId = userIdByCareGiver.isEmpty ? userState.user!.id : userIdByCareGiver;
+
+    String pictoPath = "images/$userId/pictos";
+
+    if (imageUrlForPicto.isNotEmpty) {
+      return imageUrlForPicto;
     } else {
-      if (imageUrlForPicto.isNotEmpty) {
-        return imageUrlForPicto;
-      } else {
-        return _createPictoServices.uploadOtherImages(
-          imagePath: imageForPicto.path,
-          directoryPath: 'images/$userIdByCareGiver/pictos',
-          name: imageForPicto.name,
-          userId: userIdByCareGiver,
-        );
-      }
+      return _createPictoServices.uploadOtherImages(
+        imagePath: imageForPicto.path,
+        directoryPath: pictoPath,
+        name: imageForPicto.name,
+        userId: userId,
+      );
     }
+    // Asim, please stop of repeat yourself :c
+    // if (userIdByCareGiver.isEmpty) {
+    //   if (imageUrlForPicto.isNotEmpty) {
+    //     return imageUrlForPicto;
+    //   } else {
+    //     return _createPictoServices.uploadOtherImages(
+    //       imagePath: imageForPicto.path,
+    //       directoryPath: 'images/${userState.user!.id}/pictos',
+    //       name: imageForPicto.name,
+    //       userId: userState.user!.id,
+    //     );
+    //   }
+    // } else {
+    //   if (imageUrlForPicto.isNotEmpty) {
+    //     return imageUrlForPicto;
+    //   } else {
+    //     return _createPictoServices.uploadOtherImages(
+    //       imagePath: imageForPicto.path,
+    //       directoryPath: 'images/$userIdByCareGiver/pictos',
+    //       name: imageForPicto.name,
+    //       userId: userIdByCareGiver,
+    //     );
+    //   }
+    // }
   }
 
   Future<void> filterPictosForView() async {

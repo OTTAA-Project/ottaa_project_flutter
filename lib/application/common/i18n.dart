@@ -30,7 +30,9 @@ class I18N extends ChangeNotifier {
   };
 
   late Locale currentLocale;
-  TranslationTree? currentLanguage;
+  TranslationTree? _currentLanguage;
+
+  TranslationTree? get currentLanguage => _currentLanguage;
 
   @FactoryMethod(preResolve: true)
   static Future<I18N> start() => I18N().init();
@@ -51,7 +53,7 @@ class I18N extends ChangeNotifier {
     }
 
     if (_languages.containsKey(languageCode)) {
-      currentLanguage = _languages[languageCode]!;
+      _currentLanguage = _languages[languageCode]!;
       return this;
     }
 
@@ -59,7 +61,7 @@ class I18N extends ChangeNotifier {
     newLanguage ??= await loadTranslation(const Locale("es", "CO"));
 
     _languages.putIfAbsent(languageCode, () => newLanguage!);
-    currentLanguage = newLanguage;
+    _currentLanguage = newLanguage;
 
     return this;
   }
@@ -95,7 +97,7 @@ class I18N extends ChangeNotifier {
       final newLanguage = TranslationTree(locale);
       newLanguage.addTranslations(languageJson);
       _languages[locale.toString()] = newLanguage;
-      currentLanguage = _languages[locale.toString()];
+      _currentLanguage = _languages[locale.toString()];
       currentLocale = locale;
       notify();
       return;
@@ -116,7 +118,7 @@ class I18N extends ChangeNotifier {
       throw Exception("Language not found");
     }
     _languages[locale.toString()] ??= newLanguage;
-    currentLanguage = _languages[locale.toString()];
+    _currentLanguage = _languages[locale.toString()];
     currentLocale = locale;
     notify();
   }
@@ -125,15 +127,7 @@ class I18N extends ChangeNotifier {
     notifyListeners();
   }
 
-  static I18N of(BuildContext context) {
-    final provider = (context.dependOnInheritedWidgetOfExactType<I18nNotifier>());
-    assert(provider != null, "No I18nNotifier found in context");
-
-    final notifier = provider!.notifier;
-    assert(notifier != null, "No I18N found in context");
-
-    return notifier!;
-  }
+  static I18N of(BuildContext context) => (context.dependOnInheritedWidgetOfExactType<I18nNotifier>())!.notifier!;
 }
 
 class I18nNotifier extends InheritedNotifier<I18N> {

@@ -22,10 +22,9 @@ import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
 
 @Singleton(as: AuthRepository)
 class AuthService extends AuthRepository {
-  final FirebaseAuth _authProvider = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
-    'email',
-  ]);
+  late final FirebaseAuth _authProvider;
+  late final GoogleSignIn _googleSignIn;
+  late final FirebaseMessaging _firebaseMessaging;
   String lastName = '';
   String name = '';
   final LocalDatabaseRepository _databaseRepository;
@@ -33,7 +32,26 @@ class AuthService extends AuthRepository {
 
   final I18N _i18n;
 
-  AuthService(this._databaseRepository, this._serverRepository, this._i18n);
+  AuthService(
+    this._databaseRepository,
+    this._serverRepository,
+    this._i18n, {
+    FirebaseAuth? firebaseAuth,
+    GoogleSignIn? googleSignIn,
+    FirebaseMessaging? firebaseMessaging,
+  }) {
+    _authProvider = firebaseAuth ?? FirebaseAuth.instance;
+    _googleSignIn = googleSignIn ??
+        GoogleSignIn(scopes: [
+          'email',
+        ]);
+    _firebaseMessaging = firebaseMessaging ?? FirebaseMessaging.instance;
+  }
+
+  @factoryMethod
+  factory AuthService.from(LocalDatabaseRepository databaseRepository, ServerRepository serverRepository, I18N i18n) {
+    return AuthService(databaseRepository, serverRepository, i18n);
+  }
 
   @override
   Future<Either<String, UserModel>> getCurrentUser() async {
@@ -44,7 +62,6 @@ class AuthService extends AuthRepository {
 
     return Right(userDb);
   }
-
 
   @override
   Future<bool> isLoggedIn() async {
@@ -72,8 +89,6 @@ class AuthService extends AuthRepository {
   Future<void> logout() async {
     if (_authProvider.currentUser != null) {
       await _authProvider.signOut();
-
-      await _googleSignIn.signOut();
     }
     // await _facebookAuth.logOut(); //TODO!: Comment this line due a [MissingPluginException] error
     await _databaseRepository.deleteUser();
@@ -122,17 +137,10 @@ class AuthService extends AuthRepository {
   Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     Either<String, User> result;
 
-    if (kIsWeb) await _authProvider.setPersistence(Persistence.LOCAL);
-
     switch (type) {
       case SignInType.google:
         result = await _signInWithGoogle();
         break;
-      // case SignInType.facebook:
-      //   result = await _signInWithFacebook();
-      //   break;
-      case SignInType.apple:
-      case SignInType.email:
       default:
         return const Left("error_no_implement_auth_method"); //TODO: Implement translate method.
     }
@@ -170,7 +178,6 @@ class AuthService extends AuthRepository {
 
         return Right(userModel);
       } on Exception catch (e) {
-        print(e);
         await _authProvider.signOut();
         return Left("Error interno: ${e.toString()}");
       }
@@ -201,8 +208,8 @@ class AuthService extends AuthRepository {
       }
 
       final User user = userCredential.user!;
-      lastName = userCredential.additionalUserInfo!.profile!['family_name'];
-      name = userCredential.additionalUserInfo!.profile!['given_name'];
+      // lastName = userCredential.additionalUserInfo?.profile?['family_name'] ?? "";
+      // name = userCredential.additionalUserInfo?.profile?['given_name'] ?? "";
 
       return Right(user);
     } catch (e) {
@@ -273,7 +280,7 @@ class AuthService extends AuthRepository {
 
   @override
   Future<String> getDeviceId() async {
-    return await FirebaseMessaging.instance.getToken(
+    return await _firebaseMessaging.getToken(
           vapidKey: kIsWeb ? "BM1DJoICvUa0DM7SYOJE4aDc_Odtlbq5QKXRgB5XoeHEY7EIIP-39WnCqr-QNmNSDoRJEbNyq6LV7bUE6FoGWVE" : null,
         ) ??
         "";

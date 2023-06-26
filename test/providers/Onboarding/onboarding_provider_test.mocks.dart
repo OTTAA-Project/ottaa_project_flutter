@@ -12,8 +12,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart'
     as _i10;
-import 'package:ottaa_project_flutter/application/notifiers/user_avatar_notifier.dart'
-    as _i16;
 import 'package:ottaa_project_flutter/application/providers/onboarding_provider.dart'
     as _i4;
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i8;
@@ -518,110 +516,6 @@ class MockAboutRepository extends _i1.Mock implements _i6.AboutRepository {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
-}
-
-/// A class which mocks [UserAvatarNotifier].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockUserAvatarNotifier extends _i1.Mock
-    implements _i16.UserAvatarNotifier {
-  MockUserAvatarNotifier() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  set onError(_i11.ErrorListener? _onError) => super.noSuchMethod(
-        Invocation.setter(
-          #onError,
-          _onError,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  bool get mounted => (super.noSuchMethod(
-        Invocation.getter(#mounted),
-        returnValue: false,
-      ) as bool);
-  @override
-  _i7.Stream<int> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i7.Stream<int>.empty(),
-      ) as _i7.Stream<int>);
-  @override
-  int get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: 0,
-      ) as int);
-  @override
-  set state(int? value) => super.noSuchMethod(
-        Invocation.setter(
-          #state,
-          value,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  int get debugState => (super.noSuchMethod(
-        Invocation.getter(#debugState),
-        returnValue: 0,
-      ) as int);
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
-        returnValue: false,
-      ) as bool);
-  @override
-  void changeAvatar(int? imageId) => super.noSuchMethod(
-        Invocation.method(
-          #changeAvatar,
-          [imageId],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  String getAvatar() => (super.noSuchMethod(
-        Invocation.method(
-          #getAvatar,
-          [],
-        ),
-        returnValue: '',
-      ) as String);
-  @override
-  bool updateShouldNotify(
-    int? old,
-    int? current,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updateShouldNotify,
-          [
-            old,
-            current,
-          ],
-        ),
-        returnValue: false,
-      ) as bool);
-  @override
-  _i11.RemoveListener addListener(
-    _i12.Listener<int>? listener, {
-    bool? fireImmediately = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addListener,
-          [listener],
-          {#fireImmediately: fireImmediately},
-        ),
-        returnValue: () {},
-      ) as _i11.RemoveListener);
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }
 
 /// A class which mocks [LocalDatabaseRepository].

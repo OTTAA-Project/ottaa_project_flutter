@@ -42,7 +42,7 @@ class ChatGptGameProvider extends ChangeNotifier {
   void scrollDownBoards() {
     int currentPosition = boardScrollController.position.pixels.toInt();
 
-    if (currentPosition >= boardScrollController.position.maxScrollExtent) return;
+    if (currentPosition >= boardScrollController.position.maxScrollExtent + 96) return;
 
     boardScrollController.animateTo(
       currentPosition + 96,
@@ -66,7 +66,7 @@ class ChatGptGameProvider extends ChangeNotifier {
   void scrollDownPictos() {
     int currentPosition = pictoScrollController.position.pixels.toInt();
 
-    if (currentPosition >= pictoScrollController.position.maxScrollExtent) return;
+    if (currentPosition >= (pictoScrollController.position.maxScrollExtent + 96)) return;
 
     pictoScrollController.animateTo(
       currentPosition + 96,
@@ -108,7 +108,7 @@ class ChatGptGameProvider extends ChangeNotifier {
     _tts.speak(generatedStory);
   }
 
-  Future<void> resetStoryGame() async {
+  void resetStoryGame() {
     gptPictos.clear();
     gptBoards = [];
     sentencePhase = 0;

@@ -5,7 +5,6 @@ import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/devices_token.dart';
-import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
 
 typedef EitherVoid = Either<String, void>;
@@ -14,9 +13,6 @@ typedef EitherListMap = Either<String, List<Map<String, dynamic>>>;
 typedef EitherMap = Either<String, Map<String, dynamic>>;
 
 abstract class ServerRepository {
-  Future<void> init();
-
-  Future<void> close();
 
   Future<EitherString> getAvailableAppVersion(String platform);
 
@@ -30,7 +26,7 @@ abstract class ServerRepository {
 
   Future<EitherVoid> uploadUserInformation(String userId, Map<String, dynamic> data);
 
-  Future<List<Phrase>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false});
+  Future<List<Map<String, dynamic>>> getUserSentences(String userId, {required String language, required String type, bool isFavorite = false});
 
   Future<EitherVoid> uploadUserSentences(String userId, String language, String type, List<Map<String, dynamic>> data);
 

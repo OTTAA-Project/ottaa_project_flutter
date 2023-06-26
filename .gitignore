@@ -122,9 +122,6 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
-/lib/app/data/models/grupos_model.g.dart
-/lib/app/data/models/pict_model.g.dart
-/lib/app/data/models/search_model.g.dart
 ios/firebase_app_id_file.json
 /lib/firebase_options.dart
 ios/Runner/GoogleService-Info.plist

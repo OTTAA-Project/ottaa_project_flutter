@@ -25,9 +25,9 @@ import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
 const String kStarterPictoId = "FWy18PiX2jLwZQF6-oNZR";
 
-List<Picto> basicPictograms = [];
-
 class HomeProvider extends ChangeNotifier {
+  List<Picto> basicPictograms = [];
+
   final PictogramsRepository _pictogramsService;
   final GroupsRepository _groupsService;
   final SentencesRepository _sentencesService;
@@ -147,7 +147,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> fetchMostUsedSentences() async {
     final res = await _sentencesService.fetchSentences(
-      language: "es_AR",
+      language: "es_AR", //TODO!: Fetch language code LANG-CODE
       type: kMostUsedSentences,
     );
     if (res.isRight) {
@@ -265,7 +265,6 @@ class HomeProvider extends ChangeNotifier {
 
       _cancelsToken.remove(cancelToken);
 
-      bool isCancelled = 12 >= 2;
       if (response.isRight) {
         suggestedPicts = response.right.map((e) => pictograms[e.id["local"]]!).toList();
         notifyListeners();
@@ -278,9 +277,9 @@ class HomeProvider extends ChangeNotifier {
       suggestedPicts = [];
       suggestedPicts!.addAll(basicPictograms);
       notify();
-    }
 
-    if (id == kStarterPictoId) return;
+      return;
+    }
 
     Picto? pict = pictograms[id];
 
@@ -321,6 +320,7 @@ class HomeProvider extends ChangeNotifier {
     if (indexPage > currentPage) {
       indexPage = currentPage;
     }
+
     if (indexPage < 0) {
       indexPage = 0;
     }
@@ -480,7 +480,7 @@ class HomeProvider extends ChangeNotifier {
   void scrollDown(ScrollController controller, double amount) {
     int currentPosition = controller.position.pixels.toInt();
 
-    if (currentPosition >= controller.position.maxScrollExtent) return;
+    if (currentPosition >= controller.position.maxScrollExtent + amount) return;
 
     controller.animateTo(
       currentPosition + amount,

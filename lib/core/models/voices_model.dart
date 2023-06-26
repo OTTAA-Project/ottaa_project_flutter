@@ -1,7 +1,7 @@
 // To parse this JSON data, do
 //
 //     final voices = voicesFromJson(jsonString);
-
+// coverage:ignore-file
 import 'dart:convert';
 
 List<Voices> voicesFromJson(String str) =>

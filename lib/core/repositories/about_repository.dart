@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'dart:async';
 
 import 'package:either_dart/either.dart';

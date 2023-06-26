@@ -29,30 +29,36 @@ import 'package:ottaa_project_flutter/core/repositories/local_database_repositor
 
 @Singleton(as: LocalDatabaseRepository)
 class HiveDatabase extends LocalDatabaseRepository {
+  late final HiveInterface iHive;
+
+  HiveDatabase({HiveInterface? hive}) {
+    iHive = hive ?? Hive;
+  }
+
   @override
   UserModel? user;
 
   @override
   Future<void> close() async {
-    await Hive.close();
+    await iHive.close();
   }
 
   @override
   Future<void> deleteUser() async {
-    await Hive.box('user').clear();
-    await Hive.box('caregiver').clear();
-    await Hive.box('none').clear();
+    await iHive.box('user').clear();
+    await iHive.box('caregiver').clear();
+    await iHive.box('none').clear();
   }
 
   @override
   Future<UserModel?> getUser() async {
     UserModel? user;
 
-    user ??= Hive.box(UserType.user.name).get(UserType.user.name);
+    user ??= iHive.box(UserType.user.name).get(UserType.user.name);
 
-    user ??= Hive.box(UserType.caregiver.name).get(UserType.caregiver.name);
+    user ??= iHive.box(UserType.caregiver.name).get(UserType.caregiver.name);
 
-    user ??= Hive.box(UserType.none.name).get(UserType.none.name);
+    user ??= iHive.box(UserType.none.name).get(UserType.none.name);
 
     return this.user ?? user;
   }
@@ -67,53 +73,53 @@ class HiveDatabase extends LocalDatabaseRepository {
 
   @override
   Future<void> init() async {
-    await Hive.initFlutter();
+    await iHive.initFlutter();
 
-    Hive.registerAdapter(PatientUserModelAdapter());
-    Hive.registerAdapter(BaseSettingsModelAdapter());
-    Hive.registerAdapter(UserDataAdapter());
-    Hive.registerAdapter(AssetsImageAdapter());
-    Hive.registerAdapter(PhraseAdapter());
-    Hive.registerAdapter(PaymentAdapter());
-    Hive.registerAdapter(ShortcutsModelAdapter());
-    Hive.registerAdapter(PictoAdapter());
-    Hive.registerAdapter(PictoRelationAdapter());
-    Hive.registerAdapter(SequenceAdapter());
+    iHive.registerAdapter(PatientUserModelAdapter());
+    iHive.registerAdapter(BaseSettingsModelAdapter());
+    iHive.registerAdapter(UserDataAdapter());
+    iHive.registerAdapter(AssetsImageAdapter());
+    iHive.registerAdapter(PhraseAdapter());
+    iHive.registerAdapter(PaymentAdapter());
+    iHive.registerAdapter(ShortcutsModelAdapter());
+    iHive.registerAdapter(PictoAdapter());
+    iHive.registerAdapter(PictoRelationAdapter());
+    iHive.registerAdapter(SequenceAdapter());
     // Hive.registerAdapter(TagsAdapter());
-    Hive.registerAdapter(GroupAdapter());
-    Hive.registerAdapter(GroupRelationAdapter());
-    Hive.registerAdapter(CaregiverUserModelAdapter());
-    Hive.registerAdapter(PatientSettingsAdapter());
-    Hive.registerAdapter(CaregiverUsersAdapter());
-    Hive.registerAdapter(BaseUserModelAdapter());
-    Hive.registerAdapter(UserTypeAdapter());
-    Hive.registerAdapter(DevicesAccessibilityAdapter());
-    Hive.registerAdapter(DisplayTypesAdapter());
-    Hive.registerAdapter(SizeTypesAdapter());
-    Hive.registerAdapter(SweepModesAdapter());
-    Hive.registerAdapter(VelocityTypesAdapter());
+    iHive.registerAdapter(GroupAdapter());
+    iHive.registerAdapter(GroupRelationAdapter());
+    iHive.registerAdapter(CaregiverUserModelAdapter());
+    iHive.registerAdapter(PatientSettingsAdapter());
+    iHive.registerAdapter(CaregiverUsersAdapter());
+    iHive.registerAdapter(BaseUserModelAdapter());
+    iHive.registerAdapter(UserTypeAdapter());
+    iHive.registerAdapter(DevicesAccessibilityAdapter());
+    iHive.registerAdapter(DisplayTypesAdapter());
+    iHive.registerAdapter(SizeTypesAdapter());
+    iHive.registerAdapter(SweepModesAdapter());
+    iHive.registerAdapter(VelocityTypesAdapter());
 
-    Hive.registerAdapter(AccessibilitySettingAdapter());
-    Hive.registerAdapter(LanguageSettingAdapter());
-    Hive.registerAdapter(LayoutSettingAdapter());
-    Hive.registerAdapter(SubtitlesSettingAdapter());
-    Hive.registerAdapter(TTSSettingAdapter());
+    iHive.registerAdapter(AccessibilitySettingAdapter());
+    iHive.registerAdapter(LanguageSettingAdapter());
+    iHive.registerAdapter(LayoutSettingAdapter());
+    iHive.registerAdapter(SubtitlesSettingAdapter());
+    iHive.registerAdapter(TTSSettingAdapter());
 
-    Hive.registerAdapter(VoiceSettingAdapter());
+    iHive.registerAdapter(VoiceSettingAdapter());
 
-    Hive.registerAdapter(DeviceTokenAdapter());
+    iHive.registerAdapter(DeviceTokenAdapter());
 
-    await Hive.openBox(UserType.user.name);
+    await iHive.openBox(UserType.user.name);
 
-    await Hive.openBox(UserType.caregiver.name);
+    await iHive.openBox(UserType.caregiver.name);
 
-    await Hive.openBox(UserType.none.name);
+    await iHive.openBox(UserType.none.name);
 
-    await Hive.openBox('intro');
+    await iHive.openBox('intro');
 
-    await Hive.openBox('tts');
+    await iHive.openBox('tts');
 
-    await Hive.openBox('longClick');
+    await iHive.openBox('longClick');
 
     await getUser();
   }
@@ -121,7 +127,7 @@ class HiveDatabase extends LocalDatabaseRepository {
   @override
   Future<void> setUser(UserModel user) async {
     Box box = (await secureBox(user.type.name));
-    box.put(user.type.name, user);
+    await box.put(user.type.name, user);
     user = box.get(user.type.name);
     this.user = user;
   }
@@ -129,10 +135,10 @@ class HiveDatabase extends LocalDatabaseRepository {
   Future<Box<T>> secureBox<T>(String boxName) async {
     Box<T> box;
 
-    if (Hive.isBoxOpen(boxName)) {
-      box = Hive.box(boxName);
+    if (iHive.isBoxOpen(boxName)) {
+      box = iHive.box(boxName);
     } else {
-      box = await Hive.openBox(boxName);
+      box = await iHive.openBox(boxName);
     }
 
     return box;
@@ -140,34 +146,34 @@ class HiveDatabase extends LocalDatabaseRepository {
 
   @override
   Future<void> setIntro([bool? value]) async {
-    await Hive.box('intro').put('first', value ?? true);
+    await iHive.box('intro').put('first', value ?? true);
   }
 
   @override
   Future<bool> getIntro() async {
-    final res = Hive.box('intro').get('first');
+    final res = iHive.box('intro').get('first');
     return res ?? true;
   }
 
   @override
   Future<String> getVoice() async {
-    final res = Hive.box('tts').get('name');
+    final res = iHive.box('tts').get('name');
     return res ?? '';
   }
 
   @override
   Future<void> setVoice({required String name}) async {
-    await Hive.box('tts').put('name', name);
+    await iHive.box('tts').put('name', name);
   }
 
   @override
   Future<void> setLongClick({required bool isLongClick}) async {
-    await Hive.box('longClick').put('isLongClick', isLongClick);
+    await iHive.box('longClick').put('isLongClick', isLongClick);
   }
 
   @override
   Future<bool> getLongClick() async {
-    final res = Hive.box('longClick').get('isLongClick');
+    final res = iHive.box('longClick').get('isLongClick');
     return res ?? false;
   }
 }

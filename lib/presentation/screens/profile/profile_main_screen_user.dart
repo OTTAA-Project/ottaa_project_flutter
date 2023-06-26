@@ -7,8 +7,6 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
-import 'package:ottaa_project_flutter/application/notifiers/user_notifier.dart';
-import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
@@ -20,6 +18,8 @@ import 'package:ottaa_project_flutter/core/repositories/local_database_repositor
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
+
+import '../../../application/providers/create_picto_provider.dart';
 
 class ProfileMainScreenUser extends ConsumerStatefulWidget {
   const ProfileMainScreenUser({Key? key}) : super(key: key);
