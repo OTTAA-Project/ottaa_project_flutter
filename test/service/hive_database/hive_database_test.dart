@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
@@ -245,6 +246,21 @@ void main() async {
 
     verify(box.put(any, any));
     expect(longClick, true);
+  });
+
+  test("should return the listeneable for a box", () async {
+
+    when(hive.box(any)).thenReturn(box);
+
+    when(box.listenable()).thenAnswer((_)  {
+      return ValueNotifier(box);
+    });
+
+    final valuenotifier = hiveDatabase.getListeneableFromName("box");
+
+    verify(box.put(any, any));
+    verify(box.listenable());
+    expect(valuenotifier, isA<ValueNotifier<Box>>());
   });
 }
 
