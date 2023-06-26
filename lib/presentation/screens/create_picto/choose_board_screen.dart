@@ -13,7 +13,7 @@ class ChooseBoardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(createPictoProvider);
-    final isSelected = ref.watch(createPictoProvider).selectedBoardName;
+    final isSelected = ref.watch(createPictoProvider).selectedBoardID;
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
@@ -26,7 +26,7 @@ class ChooseBoardScreen extends ConsumerWidget {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: Container(
-                        decoration: provider.selectedBoardName == provider.boards[index].text
+                        decoration: provider.selectedBoardID == index
                             ? BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(color: colorScheme.primary, width: 2),
@@ -39,7 +39,7 @@ class ChooseBoardScreen extends ConsumerWidget {
                             provider.boards[index].resource.network!,
                           ),
                           onPressed: () async {
-                            provider.selectedBoardName = provider.boards[index].text;
+                            provider.selectedBoardID = index;
                             provider.notify();
                           },
                         ),
@@ -54,11 +54,11 @@ class ChooseBoardScreen extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: SimpleButton(
-            onTap: provider.selectedBoardName.isEmpty ? () {} : () => provider.nextPage(),
+            onTap: provider.selectedBoardID == -1 ? () {} : () => provider.nextPage(),
             width: false,
             text: 'global.next'.trl,
-            backgroundColor: isSelected.isNotEmpty ? colorScheme.primary : colorScheme.background,
-            fontColor: isSelected.isNotEmpty ? Colors.white : Colors.grey,
+            backgroundColor: isSelected == -1 ? colorScheme.background : colorScheme.primary,
+            fontColor: isSelected == -1 ? Colors.grey : Colors.white,
           ),
         ),
       ],

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/service/create_picto_services.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
@@ -14,6 +16,8 @@ import 'package:ottaa_project_flutter/core/repositories/create_picto_repository.
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
+
+import '../../core/models/assets_image.dart';
 
 class CreatePictoProvider extends ChangeNotifier {
   final Map<int, int> dataSetMapId = {
@@ -71,7 +75,7 @@ class CreatePictoProvider extends ChangeNotifier {
 
   int currentIndex = 0;
   bool isImageSelected = false;
-  String selectedBoardName = '';
+  int selectedBoardID = -1;
   bool isBoardFetched = false;
   List<ArsaacDataModel> searchedData = [];
   bool isArsaacSearched = false;
@@ -81,6 +85,7 @@ class CreatePictoProvider extends ChangeNotifier {
   String selectedType = '';
   String selectedAlphabet = 'A';
   String selectedPictoForEditId = '';
+  String userIdByCareGiver = '';
 
   /// 6 is the default color for black and Miscellaneous
   int borderColor = 6;
@@ -201,7 +206,7 @@ class CreatePictoProvider extends ChangeNotifier {
   Future<void> fetchPhotoFromGlobalSymbols({required String text}) async {
     isArsaacSearched = false;
     final res = await _createPictoServices.fetchPhotosFromGlobalSymbols(
-      searchText: 'hola',
+      searchText: text,
       languageCode: _i18n.currentLocale.languageCode,
     );
     if (res.isRight) {
@@ -213,7 +218,61 @@ class CreatePictoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> savePictogram() async {}
+  Future<void> saveAndUploadPictogram() async {
+    final url = await getPictoUrl();
+    Picto pict = Picto(
+      id: '$userIdByCareGiver-${pictograms.length.toString()}',
+      type: borderColor,
+      resource: AssetsImage(asset: '', network: url),
+      tags: {
+        "WEEKDAY": [
+          'sundat',
+          'monday',
+        ],
+        "HORA": [timeForPicto],
+      },
+      text: nameController.text,
+    );
+    pictograms.add(pict);
+    boards[selectedBoardID].relations.add(
+          GroupRelation(id: pictograms.length.toString(), value: 0),
+        );
+    await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString());
+    if (userState.user!.type == UserType.user) {
+      //todo: emir can you check this
+      final newUser = userState.user!.patient;
+      newUser.pictos[_i18n.currentLocale.toString()] = pictograms;
+      newUser.groups[_i18n.currentLocale.toString()] = boards;
+      await _localDatabaseRepository.setUser(newUser);
+      userState.setUser(newUser);
+    }
+  }
+
+  Future<String> getPictoUrl() async {
+    if (userIdByCareGiver.isEmpty) {
+      if (imageUrlForPicto.isNotEmpty) {
+        return imageUrlForPicto;
+      } else {
+        return _createPictoServices.uploadOtherImages(
+          imagePath: imageForPicto.path,
+          directoryPath: 'images/${userState.user!.id}/pictos',
+          name: imageForPicto.name,
+          userId: userState.user!.id,
+        );
+      }
+    } else {
+      if (imageUrlForPicto.isNotEmpty) {
+        return imageUrlForPicto;
+      } else {
+        return _createPictoServices.uploadOtherImages(
+          imagePath: imageForPicto.path,
+          directoryPath: 'images/$userIdByCareGiver/pictos',
+          name: imageForPicto.name,
+          userId: userIdByCareGiver,
+        );
+      }
+    }
+  }
 
   Future<void> filterPictosForView() async {
     print(pictograms.length);

@@ -21,7 +21,7 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
     return WillPopScope(
       onWillPop: () async {
         //todo: make it into a proper function inside the provider
-        provider.selectedBoardName = '';
+        provider.selectedBoardID = -1;
         context.pop();
         return true;
       },
@@ -32,7 +32,7 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
               //todo: make it into a proper function inside the provider
-              provider.selectedBoardName = '';
+              provider.selectedBoardID = -1;
               context.pop();
             },
             splashRadius: 24,

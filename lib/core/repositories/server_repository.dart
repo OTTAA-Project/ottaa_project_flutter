@@ -128,4 +128,6 @@ abstract class ServerRepository {
   Future<dynamic> fetchUserSettings({required String userId});
 
   Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode});
+
+  Future<String> uploadOtherImages({required String imagePath, required String directoryPath, required String name, required String userId});
 }

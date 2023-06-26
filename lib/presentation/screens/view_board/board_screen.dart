@@ -53,7 +53,7 @@ class BoardScreen extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: Container(
-              decoration: provider.selectedBoardName == provider.boards[index].text
+              decoration: provider.selectedBoardID == index
                   ? BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: colorScheme.primary, width: 2),

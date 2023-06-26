@@ -54,4 +54,19 @@ class CreatePictoServices implements CreatePictoRepository {
       return [];
     }
   }
+
+  @override
+  Future<String> uploadOtherImages({
+    required String imagePath,
+    required String directoryPath,
+    required String name,
+    required String userId,
+  }) async {
+    return await _serverRepository.uploadOtherImages(
+      imagePath: imagePath,
+      directoryPath: directoryPath,
+      name: name,
+      userId: userId,
+    );
+  }
 }

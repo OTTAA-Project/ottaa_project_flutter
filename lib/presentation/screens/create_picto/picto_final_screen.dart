@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
@@ -60,7 +61,14 @@ class PictoFinalScreen extends ConsumerWidget {
           child: SimpleButton(
             width: false,
             onTap: () async {
-              provider.savePictogram();
+              showDialog(
+                  context: context,
+                  builder: (context) => const Center(
+                        child: CircularProgressIndicator(),
+                      ));
+              await provider.saveAndUploadPictogram();
+              context.pop();
+              context.pop();
             },
             text: 'create.save'.trl,
           ),

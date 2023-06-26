@@ -327,6 +327,24 @@ class ServerService implements ServerRepository {
   }
 
   @override
+  Future<String> uploadOtherImages({
+    required String imagePath,
+    required String directoryPath,
+    required String name,
+    required String userId,
+  }) async {
+    Reference ref = _storageRef.child(directoryPath).child('$name.jpg');
+    final metadata = SettableMetadata(
+      contentType: 'image/jpeg',
+      customMetadata: {'picked-file-path': imagePath},
+    );
+
+    var uploadTask = await ref.putFile(File(imagePath), metadata);
+
+    return await uploadTask.ref.getDownloadURL();
+  }
+
+  @override
   Future<EitherMap> getConnectedUsers({required String userId}) async {
     final ref = _database.child('$userId/users'); //TODO: Change this to the real path
     final res = await ref.get();
