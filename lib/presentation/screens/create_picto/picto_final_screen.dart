@@ -37,22 +37,6 @@ class PictoFinalScreen extends ConsumerWidget {
                 padding: EdgeInsets.symmetric(vertical: 16),
                 child: TimeWidget(),
               ),
-              GestureDetector(
-                onTap: () {
-                  //todo: talk with hector again
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                  child: Text(
-                    '+ ${'global.add_new'.trl}',
-                    style: textTheme.bodySmall,
-                  ),
-                ),
-              ),
             ],
           ),
         ),
@@ -62,10 +46,11 @@ class PictoFinalScreen extends ConsumerWidget {
             width: false,
             onTap: () async {
               showDialog(
-                  context: context,
-                  builder: (context) => const Center(
-                        child: CircularProgressIndicator(),
-                      ));
+                context: context,
+                builder: (context) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
               await provider.saveAndUploadPictogram();
               context.pop();
               context.pop();
@@ -99,7 +84,7 @@ class TimeWidget extends ConsumerWidget {
             height: 4,
           ),
           Text(
-            provider.timeForPicto,
+            provider.timeString,
             style: textTheme.bodySmall,
           ),
         ],

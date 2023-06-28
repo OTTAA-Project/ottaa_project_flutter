@@ -4,20 +4,17 @@ import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
-import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
-import 'package:ottaa_project_flutter/application/service/create_picto_services.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/create_picto_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
-
-import '../../core/models/assets_image.dart';
 
 class CreatePictoProvider extends ChangeNotifier {
   final Map<int, int> dataSetMapId = {
@@ -80,8 +77,9 @@ class CreatePictoProvider extends ChangeNotifier {
   List<ArsaacDataModel> searchedData = [];
   bool isArsaacSearched = false;
   List<String> daysToUsePicto = [];
-  String timeForPicto = '';
+  List<String> timeForPicto = [];
   String daysString = '';
+  String timeString = '';
   String selectedType = '';
   String selectedAlphabet = 'A';
   String selectedPictoForEditId = '';
@@ -225,11 +223,8 @@ class CreatePictoProvider extends ChangeNotifier {
       type: borderColor,
       resource: AssetsImage(asset: '', network: url),
       tags: {
-        "WEEKDAY": [
-          'sundat',
-          'monday',
-        ],
-        "HORA": [timeForPicto],
+        "WEEKDAY": daysToUsePicto,
+        "HORA": timeForPicto,
       },
       text: nameController.text,
     );
@@ -238,6 +233,7 @@ class CreatePictoProvider extends ChangeNotifier {
           GroupRelation(id: pictograms.length.toString(), value: 0),
         );
     await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString());
+
     if (userState.user!.type == UserType.user) {
       //todo: emir can you check this
       final newUser = userState.user!.patient;

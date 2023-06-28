@@ -331,34 +331,35 @@ class AppRouter {
                 ),
               ],
             ),
-          GoRoute(
-            path: 'viewBoardsAndPictos',
-            builder: (_, __) => const BoardsPictogramScreen(),
-            routes: [
-              GoRoute(
-                path: 'editPicto',
-                builder: (_, __) => const EditPictoScreen(),
-                routes: [
-                  GoRoute(
-                    path: 'arsaac',
-                    builder: (_, __) => const ChooseArsaacPhotoScreen(),
-                  ),
-                ],
-              ),
-              GoRoute(
-                path: 'createPicto',
-                builder: (_, __) => const CreatePictoPageViewerScreen(),
-                routes: [
-                  GoRoute(
-                    path: 'arsaac',
-                    builder: (_, __) => const ChooseArsaacPhotoScreen(),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    ],
-  );
-}}
+            GoRoute(
+              path: 'viewBoardsAndPictos',
+              builder: (_, __) => const BoardsPictogramScreen(),
+              routes: [
+                GoRoute(
+                  path: 'editPicto',
+                  builder: (_, __) => const EditPictoScreen(),
+                  routes: [
+                    GoRoute(
+                      path: 'arsaac',
+                      builder: (_, __) => const ChooseArsaacPhotoScreen(),
+                    ),
+                  ],
+                ),
+                GoRoute(
+                  path: 'createPicto',
+                  builder: (_, __) => const CreatePictoPageViewerScreen(),
+                  routes: [
+                    GoRoute(
+                      path: 'arsaac',
+                      builder: (_, __) => const ChooseArsaacPhotoScreen(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}

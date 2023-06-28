@@ -69,37 +69,28 @@ class ChoosePictoDayScreen extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
-            child: GestureDetector(
+            child: SimpleButton(
+              width: false,
               onTap: () {
-                //todo: talk with hector again
+                for (var element in provider.daysToUsePicto) {
+                  if (provider.daysString.isEmpty) {
+                    provider.daysString = '${provider.daysString} ';
+                  } else {
+                    provider.daysString = '${provider.daysString}, $element ';
+                  }
+                }
+                for (var element in provider.timeForPicto) {
+                  if (provider.timeString.isEmpty) {
+                    provider.timeString = '${provider.timeString} ';
+                  } else {
+                    provider.timeString = '${provider.timeString}, $element ';
+                  }
+                }
+                provider.notify();
+                provider.nextPage();
               },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                child: Text(
-                  '+ ${'global.add_new'.trl}',
-                  style: textTheme.bodySmall,
-                ),
-              ),
+              text: 'global.continue'.trl,
             ),
-          ),
-          SimpleButton(
-            width: false,
-            onTap: () {
-              for (var element in provider.daysToUsePicto) {
-                provider.daysString = '${provider.daysString}, $element';
-              }
-              provider.notify();
-              provider.nextPage();
-              print(provider.daysString);
-            },
-            text: 'global.continue'.trl,
-          ),
-          const SizedBox(
-            height: 16,
           ),
         ],
       ),
@@ -159,18 +150,22 @@ class TimeWidget extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: () {
-        provider.timeForPicto = text;
+        if (provider.timeForPicto.contains(text)) {
+          provider.timeForPicto.remove(text);
+        } else {
+          provider.timeForPicto.add(text);
+        }
         provider.notify();
       },
       child: Container(
         decoration: BoxDecoration(
-          color: provider.timeForPicto == text ? colorScheme.primary : Colors.white,
+          color: provider.timeForPicto.contains(text) ? colorScheme.primary : Colors.white,
           borderRadius: BorderRadius.circular(8),
         ),
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         child: Text(
           text,
-          style: textTheme.bodySmall!.copyWith(color: provider.timeForPicto == text ? Colors.white : Colors.grey),
+          style: textTheme.bodySmall!.copyWith(color: provider.timeForPicto.contains(text) ? Colors.white : Colors.grey),
         ),
       ),
     );
