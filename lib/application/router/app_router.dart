@@ -72,7 +72,7 @@ class AppRouter {
       errorBuilder: (context, state) => const ErrorScreen(),
       initialLocation: "/",
       restorationScopeId: "root",
-      refreshListenable: user != null ? databaseRepository.getListeneableFromName(user.type.name) : null,
+      // refreshListenable: user != null ? databaseRepository.getListeneableFromName(user.type.name) : null,
       routes: <GoRoute>[
         GoRoute(
           path: "/",
@@ -240,7 +240,8 @@ class AppRouter {
             //TODO*: Use ShellRoute instead of GoRoute
             GoRoute(
               path: "link",
-              redirect: (_, __) {
+              redirect: (_, __) async {
+                final user = await databaseRepository.getUser();
                 if (user?.type == UserType.caregiver) {
                   return null;
                 }
@@ -267,7 +268,9 @@ class AppRouter {
             GoRoute(
               path: "settings",
               name: "settings",
-              redirect: (context, state) {
+              redirect: (context, state) async {
+                final user = await databaseRepository.getUser();
+
                 if (state.location.startsWith("/home/settings") && user?.type == UserType.caregiver) {
                   return "/home";
                 }
@@ -303,7 +306,12 @@ class AppRouter {
                 GoRoute(
                   path: 'groups',
                   builder: (_, __) => const SelectGroupScreen(),
-                  routes: [GoRoute(path: 'search', builder: (_, __) => const SearchScreen())],
+                  routes: [
+                    GoRoute(
+                      path: 'search',
+                      builder: (_, __) => const SearchScreen(),
+                    ),
+                  ],
                 ),
                 GoRoute(
                   path: 'match',
@@ -313,8 +321,14 @@ class AppRouter {
                   path: 'story',
                   builder: (_, __) => const ChatGptGame(),
                   routes: [
-                    GoRoute(path: 'show', builder: (_, __) => const ShowCreatedStory()),
-                    GoRoute(path: 'selectBoard', builder: (_, __) => const SelectBoardAndPicto()),
+                    GoRoute(
+                      path: 'show',
+                      builder: (_, __) => const ShowCreatedStory(),
+                    ),
+                    GoRoute(
+                      path: 'selectBoard',
+                      builder: (_, __) => const SelectBoardAndPicto(),
+                    ),
                   ],
                 ),
                 GoRoute(
