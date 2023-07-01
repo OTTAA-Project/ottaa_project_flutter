@@ -5,6 +5,7 @@ import 'package:ottaa_project_flutter/application/locator.dart';
 import 'package:ottaa_project_flutter/application/router/app_router.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 
+final appRouter = AppRouter.instance.buildRouter();
 class Application extends ConsumerStatefulWidget {
   const Application({super.key});
 
@@ -24,7 +25,7 @@ class _ApplicationState extends ConsumerState<Application> {
       child: MaterialApp.router(
         title: "OTTAA Project",
         debugShowCheckedModeBanner: false,
-        routerConfig: AppRouter.instance.buildRouter(),
+        routerConfig: appRouter,
         theme: kOttaaLightThemeData,
         restorationScopeId: 'root',
       ),

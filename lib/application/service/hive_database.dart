@@ -61,7 +61,9 @@ class HiveDatabase extends LocalDatabaseRepository {
 
     user ??= iHive.box(UserType.none.name).get(UserType.none.name);
 
-    return this.user ?? user;
+    this.user = user;
+
+    return this.user;
   }
 
   @FactoryMethod(preResolve: true)

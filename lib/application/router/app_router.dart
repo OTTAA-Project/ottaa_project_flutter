@@ -233,7 +233,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           //TODO*: Use ShellRoute instead of GoRoute
           GoRoute(
             path: "link",
-            redirect: (_, __) {
+            redirect: (_, __) async {
+                final user = await databaseRepository.getUser();
               if (userState.user?.type == UserType.caregiver) {
                 return null;
               }
@@ -260,7 +261,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: "settings",
             name: "settings",
-            redirect: (context, state) {
+            redirect: (context, state) async {
+                final user = await databaseRepository.getUser();
+
               if (state.location.startsWith("/home/settings") && userState.user?.type == UserType.caregiver) {
                 return "/home";
               }
@@ -296,9 +299,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'groups',
                 builder: (_, __) => const SelectGroupScreen(),
-                routes: [GoRoute(path: 'search', builder: (_, __) => const SearchScreen())],
+                routes: [GoRoute(path: 'search', builder: (_, __) => const SearchScreen(),
               ),
-              GoRoute(
+              ],
+                ),GoRoute(
                 path: 'match',
                 builder: (_, __) => const MatchPictogramScreen(),
               ),
@@ -306,8 +310,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 path: 'story',
                 builder: (_, __) => const ChatGptGame(),
                 routes: [
-                  GoRoute(path: 'show', builder: (_, __) => const ShowCreatedStory()),
-                  GoRoute(path: 'selectBoard', builder: (_, __) => const SelectBoardAndPicto()),
+                  GoRoute(path: 'show', builder: (_, __) => const ShowCreatedStory(),
+                  ),
+                    GoRoute(
+                      path: 'selectBoard',
+                      builder: (_, __) => const SelectBoardAndPicto(),),
                 ],
               ),
               GoRoute(
