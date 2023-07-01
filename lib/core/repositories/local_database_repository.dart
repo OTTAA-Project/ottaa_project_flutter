@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
 
 abstract class LocalDatabaseRepository {
@@ -27,6 +26,4 @@ abstract class LocalDatabaseRepository {
   Future<void> setLongClick({required bool isLongClick});
 
   Future<void> setVoice({required String name});
-
-  ValueListenable<dynamic> getListeneableFromName(String name);
 }

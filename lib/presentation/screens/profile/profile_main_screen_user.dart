@@ -11,6 +11,7 @@ import 'package:ottaa_project_flutter/application/providers/customise_provider.d
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
@@ -78,6 +79,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                   trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
                   onPressed: () async {
                     final provider = ref.read(createPictoProvider);
+                    final provider1 = ref.read(viewBoardProvider);
                     showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -88,6 +90,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                       },
                     );
                     await provider.init(userId: user.id);
+                    await provider1.init(userId: user.id);
                     provider.selectedType = 'home.grid.title'.trl;
                     context.pop();
                     context.push(AppRoutes.patientViewBoardsAndPictos);

@@ -49,6 +49,7 @@ import 'package:ottaa_project_flutter/presentation/screens/user_settings/main_se
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/setting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/voice_and_subtitle_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/view_board/boards_pictogram_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/view_board/search_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
@@ -234,7 +235,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: "link",
             redirect: (_, __) async {
-                final user = await databaseRepository.getUser();
+              final user = await databaseRepository.getUser();
               if (userState.user?.type == UserType.caregiver) {
                 return null;
               }
@@ -262,7 +263,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             path: "settings",
             name: "settings",
             redirect: (context, state) async {
-                final user = await databaseRepository.getUser();
+              final user = await databaseRepository.getUser();
 
               if (state.location.startsWith("/home/settings") && userState.user?.type == UserType.caregiver) {
                 return "/home";
@@ -299,10 +300,14 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'groups',
                 builder: (_, __) => const SelectGroupScreen(),
-                routes: [GoRoute(path: 'search', builder: (_, __) => const SearchScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'search',
+                    builder: (_, __) => const SearchScreen(),
+                  ),
+                ],
               ),
-              ],
-                ),GoRoute(
+              GoRoute(
                 path: 'match',
                 builder: (_, __) => const MatchPictogramScreen(),
               ),
@@ -310,11 +315,14 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 path: 'story',
                 builder: (_, __) => const ChatGptGame(),
                 routes: [
-                  GoRoute(path: 'show', builder: (_, __) => const ShowCreatedStory(),
+                  GoRoute(
+                    path: 'show',
+                    builder: (_, __) => const ShowCreatedStory(),
                   ),
-                    GoRoute(
-                      path: 'selectBoard',
-                      builder: (_, __) => const SelectBoardAndPicto(),),
+                  GoRoute(
+                    path: 'selectBoard',
+                    builder: (_, __) => const SelectBoardAndPicto(),
+                  ),
                 ],
               ),
               GoRoute(
@@ -331,6 +339,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             path: 'viewBoardsAndPictos',
             builder: (_, __) => const BoardsPictogramScreen(),
             routes: [
+              GoRoute(
+                path: 'search',
+                builder: (_, __) => const SearchDataScreen(),
+              ),
               GoRoute(
                 path: 'editPicto',
                 builder: (_, __) => const EditPictoScreen(),

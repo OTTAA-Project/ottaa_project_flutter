@@ -2,9 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
+import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/view_board/board_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/view_board/pictogram_screen.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -60,15 +63,17 @@ class BoardsPictogramScreen extends ConsumerWidget {
           children: [
             SizedBox(
               width: size.width,
-              child: TextFormField(
-                enabled: false,
+              child: GestureDetector(
                 onTap: () {
-                  //todo: lead to the search page
+                  context.push(AppRoutes.patientSearch);
                 },
-                decoration: InputDecoration(
-                  hintText: 'global.search'.trl,
-                  suffixIcon: const Icon(
-                    Icons.search,
+                child: TextFormField(
+                  enabled: false,
+                  decoration: InputDecoration(
+                    hintText: 'global.search'.trl,
+                    suffixIcon: const Icon(
+                      Icons.search,
+                    ),
                   ),
                 ),
               ),
