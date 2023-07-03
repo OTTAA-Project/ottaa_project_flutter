@@ -65,6 +65,7 @@ class ChooseArsaacPhotoScreen extends ConsumerWidget {
                         child: PictoWidget(
                           onTap: () {
                             provider.isImageSelected = true;
+                            provider.isUrl = true;
                             provider.imageUrlForPicto = provider.searchedData[index].picto.imageUrl;
                             provider.notify();
                             context.pop();

@@ -1720,4 +1720,6 @@ class AppImages {
   static const kArsacImage = 'assets/edit/arsac_image.png';
   static const kCameraIcon = 'assets/edit/camera_icon.png';
   static const kGalleryIcon = 'assets/edit/gallery_icon.png';
+  static const kSearchPhoto = 'assets/edit/search_data.png';
+  static const kBoardSelectImage = 'assets/edit/board_select_image.png';
 }

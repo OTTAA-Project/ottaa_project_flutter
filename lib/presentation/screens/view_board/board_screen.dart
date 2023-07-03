@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
@@ -13,18 +13,18 @@ class BoardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(createPictoProvider);
+    final provider = ref.watch(viewBoardProvider);
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Expanded(
       child: ListView.builder(
-        itemCount: provider.boards.length,
+        itemCount: provider.boards.length + 1,
         padding: const EdgeInsets.only(bottom: 16),
         itemBuilder: (context, index) {
-          if (index == provider.boards.length - 1) {
+          if (index == provider.boards.length) {
             return GestureDetector(
               onTap: () {
-                //todo: add the new board from here
+                context.push(AppRoutes.patientCreateBoard);
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -66,7 +66,11 @@ class BoardScreen extends ConsumerWidget {
                   provider.boards[index].resource.network!,
                 ),
                 status: !provider.boards[index].block,
-                onPressed: () async {},
+                onPressed: () async {
+                  provider.selectedBoardID = index;
+                  await provider.fetchDesiredPictos();
+                  context.push(AppRoutes.patientShowPictos);
+                },
                 onChange: (bool a) {
                   provider.boards[index].block = !provider.boards[index].block;
                   provider.notify();

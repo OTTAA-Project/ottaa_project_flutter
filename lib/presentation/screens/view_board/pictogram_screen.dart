@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
 import 'package:picto_widget/picto_widget.dart';
@@ -13,19 +14,19 @@ class PictogramScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(createPictoProvider);
+    final provider = ref.watch(viewBoardProvider);
     return Expanded(
       child: GridView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         shrinkWrap: true,
-        itemCount: provider.filteredPictograms.length,
+        itemCount: provider.filteredPictos.length + 1,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
         ),
         itemBuilder: (context, index) {
-          if (provider.filteredPictograms.length - 1 == index) {
+          if (provider.filteredPictos.length == index) {
             return FittedBox(
               fit: BoxFit.contain,
               child: PictoWidget(
@@ -65,7 +66,7 @@ class PictogramScreen extends ConsumerWidget {
                           text: 'global.disguise'.trl,
                           icon: Icons.hide_source_rounded,
                           onTap: () {
-                            provider.hideCurrentPicto(id: provider.filteredPictograms[index].id, index: index);
+                            provider.hideCurrentPicto(id: provider.filteredPictos[index].id, index: index);
                             context.pop();
                           },
                         ),
@@ -76,7 +77,8 @@ class PictogramScreen extends ConsumerWidget {
                           text: 'global.edit'.trl,
                           icon: Icons.edit,
                           onTap: () {
-                            provider.setForPictoEdit(pict: provider.filteredPictograms[index]);
+                            final provider1 = ref.read(createPictoProvider);
+                            provider1.setForPictoEdit(pict: provider.filteredPictos[index]);
                             context.push(AppRoutes.patientEditPicto);
                           },
                         ),
@@ -85,10 +87,10 @@ class PictogramScreen extends ConsumerWidget {
                   },
                 );
               },
-              imageUrl: provider.filteredPictograms[index].resource.network,
-              text: provider.filteredPictograms[index].text,
-              colorNumber: provider.filteredPictograms[index].type,
-              disable: provider.filteredPictograms[index].block,
+              imageUrl: provider.filteredPictos[index].resource.network,
+              text: provider.filteredPictos[index].text,
+              colorNumber: provider.filteredPictos[index].type,
+              disable: provider.filteredPictos[index].block,
             ),
           );
         },

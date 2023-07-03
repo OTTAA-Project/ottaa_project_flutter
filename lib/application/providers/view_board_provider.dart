@@ -18,6 +18,8 @@ class ViewBoardProvider extends ChangeNotifier {
 
   String userID = '';
   bool isUser = true;
+  String selectedAlphabet = 'A';
+  bool isSearching = false;
   bool isDataFetched = false;
   int selectedBoardID = -1;
   List<Group> boards = [];
@@ -29,6 +31,7 @@ class ViewBoardProvider extends ChangeNotifier {
   Future<void> init({required String userId}) async {
     await fetchUserGroups(userId: userId);
     await fetchUserPictos(userId: userId);
+    await filterPictosForView();
   }
 
   Future<void> fetchDesiredPictos() async {
@@ -42,7 +45,32 @@ class ViewBoardProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> filterPictosForView() async {
+    print(pictograms.length);
+    filteredPictos.clear();
+    for (var pict in pictograms) {
+      if (pict.text.toUpperCase().startsWith(
+            selectedAlphabet.toUpperCase(),
+          )) {
+        filteredPictos.add(pict);
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> hideCurrentPicto({required String id, required int index}) async {
+    int i = -1;
+    final res = pictograms.firstWhere((element) {
+      i++;
+      return element.id == id;
+    });
+    pictograms[i].block = !pictograms[i].block;
+    filteredPictos[index].block = filteredPictos[index].block;
+    notifyListeners();
+  }
+
   Future<void> searchForMatchingData({required String text}) async {
+    isSearching = true;
     isDataFetched = false;
     filteredPictos.clear();
     filteredBoards.clear();
@@ -73,6 +101,10 @@ class ViewBoardProvider extends ChangeNotifier {
   Future<void> fetchUserPictos({required String userId}) async {
     final locale = _i18n.currentLocale;
     pictograms = await _createPictoServices.fetchUserPictos(languageCode: _i18n.currentLocale.toString(), userId: userId);
+  }
+
+  void notify() {
+    notifyListeners();
   }
 }
 

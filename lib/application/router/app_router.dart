@@ -50,7 +50,9 @@ import 'package:ottaa_project_flutter/presentation/screens/user_settings/main_se
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/setting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/user_settings/voice_and_subtitle_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/view_board/boards_pictogram_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/view_board/create_board_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/view_board/search_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/view_board/show_pictos_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/link_waiting_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/waiting/login_waiting_screen.dart';
 
@@ -667,6 +669,14 @@ class AppRouter {
                 GoRoute(
                   path: 'search',
                   builder: (_, __) => const SearchDataScreen(),
+                ),
+                GoRoute(
+                  path: 'createBoard',
+                  builder: (_, __) => const CreateBoardScreen(),
+                ),
+                GoRoute(
+                  path: 'showPictos',
+                  builder: (_, __) => const ShowPictosScreen(),
                 ),
                 GoRoute(
                   path: 'editPicto',

@@ -97,6 +97,7 @@ class BoardsPictogramScreen extends ConsumerWidget {
                     ),
                     ChooserWidget(
                       text: 'create.created_by_me'.trl,
+                      isDisabled: true,
                     ),
                   ],
                 ),
@@ -133,8 +134,10 @@ class ChooserWidget extends ConsumerWidget {
   const ChooserWidget({
     super.key,
     required this.text,
+    this.isDisabled = false,
   });
 
+  final bool isDisabled;
   final String text;
 
   @override
@@ -143,10 +146,12 @@ class ChooserWidget extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final provider = ref.watch(createPictoProvider);
     return GestureDetector(
-      onTap: () {
-        provider.selectedType = text;
-        provider.notify();
-      },
+      onTap: isDisabled
+          ? () {}
+          : () {
+              provider.selectedType = text;
+              provider.notify();
+            },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         decoration: BoxDecoration(
@@ -174,7 +179,7 @@ class AlphabetWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    final provider = ref.watch(createPictoProvider);
+    final provider = ref.watch(viewBoardProvider);
     return GestureDetector(
       onTap: () async {
         provider.selectedAlphabet = text;

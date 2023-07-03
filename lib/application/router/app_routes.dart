@@ -68,5 +68,7 @@ class AppRoutes {
   static const patientCreatePictoarsaac = "/home/viewBoardsAndPictos/createPicto/arsaac";
   static const patientEditPicto = "/home/viewBoardsAndPictos/editPicto";
   static const patientSearch = "/home/viewBoardsAndPictos/search";
+  static const patientShowPictos = "/home/viewBoardsAndPictos/showPictos";
+  static const patientCreateBoard = "/home/viewBoardsAndPictos/createBoard";
   static const patientEditPictoarsaac = "/home/viewBoardsAndPictos/editPicto/arsaac";
 }

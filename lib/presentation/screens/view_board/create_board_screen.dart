@@ -1,4 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,47 +8,33 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
-import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_color_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_picto_day_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/create_pictogram_initial_screen.dart';
-import 'package:ottaa_project_flutter/presentation/screens/create_picto/widgets/image_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
-class EditPictoScreen extends ConsumerWidget {
-  const EditPictoScreen({super.key});
+class CreateBoardScreen extends ConsumerWidget {
+  const CreateBoardScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.watch(createPictoProvider);
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    final provider = ref.watch(createPictoProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
-        title: Text('headline here'.trl),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              //todo: add the delete implementation
-              //todo: add the check for the tags in the pictos
-            },
-            child: const Icon(
-              Icons.delete_outline_rounded,
-              size: 24,
-            ),
-          ),
-        ],
+        title: Text(
+          'create.create_new_board'.trl,
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 32),
-                child: ImageWidget(
-                  onTap: () {},
-                ),
+              const BoardWidget(),
+              const SizedBox(
+                height: 24,
               ),
               Text(
                 'global.image'.trl,
@@ -74,6 +61,7 @@ class EditPictoScreen extends ConsumerWidget {
                       onTap: () async {
                         final res = await provider.captureImageFromCamera();
                         if (res) {
+                          provider.isUrl = false;
                           provider.notify();
                         }
                       },
@@ -85,6 +73,7 @@ class EditPictoScreen extends ConsumerWidget {
                     onTap: () async {
                       final res = await provider.captureImageFromGallery();
                       if (res) {
+                        provider.isUrl = false;
                         provider.notify();
                       }
                     },
@@ -138,50 +127,6 @@ class EditPictoScreen extends ConsumerWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text(
-                  'global.color'.trl,
-                  style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
-                ),
-              ),
-              Wrap(
-                direction: Axis.horizontal,
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  ColorWidget(
-                    color: Colors.green,
-                    text: 'global.actions'.trl,
-                    number: 3,
-                  ),
-                  ColorWidget(
-                    color: Colors.yellow,
-                    text: 'global.people'.trl,
-                    number: 1,
-                  ),
-                  ColorWidget(
-                    color: Colors.black,
-                    text: 'global.miscellaneous'.trl,
-                    number: 6,
-                  ),
-                  ColorWidget(
-                    color: Colors.purple,
-                    text: 'user.main_setting.interaction'.trl,
-                    number: 5,
-                  ),
-                  ColorWidget(
-                    color: colorScheme.primary,
-                    text: 'global.noun'.trl,
-                    number: 2,
-                  ),
-                  ColorWidget(
-                    color: Colors.blue,
-                    text: 'global.adjective'.trl,
-                    number: 4,
-                  ),
-                ],
-              ),
-              Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: Text(
                   'global.predictive'.trl,
@@ -227,29 +172,14 @@ class EditPictoScreen extends ConsumerWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text(
-                  'global.saved_in'.trl,
-                  style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
-                ),
-              ),
-              PictogramCard(
-                onPressed: () {
-                  //todo: ask from hector
-                },
-                title: provider.boards[provider.selectedBoardID].text,
-                actionText: '${'global.edit'.trl} ${'global.location'.trl}',
-                pictogram: CachedNetworkImageProvider(provider.boards[provider.selectedBoardID].resource.network!),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
                 child: SimpleButton(
                   onTap: () async {
-                    showDialog(
-                        context: context,
-                        builder: (context) => const Center(
-                              child: CircularProgressIndicator(),
-                            ));
-                    await provider.saveChangesInPicto(id: provider.selectedPictoForEditId);
+                    showDialog(context: context, builder: (context) => const Center(child: CircularProgressIndicator()));
+                    if (provider.isEditBoard) {
+                      await provider.saveChangesInBoard();
+                    } else {
+                      await provider.saveAndUploadGroup();
+                    }
                     context.pop();
                     context.pop();
                   },
@@ -260,6 +190,55 @@ class EditPictoScreen extends ConsumerWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class BoardWidget extends ConsumerWidget {
+  const BoardWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.watch(createPictoProvider);
+    final textTheme = Theme.of(context).textTheme;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          provider.isImageSelected
+              ? provider.isUrl
+                  ? Image.network(
+                      provider.imageUrlForPicto,
+                      height: 90,
+                      width: 90,
+                    )
+                  : Image.file(
+                      File(
+                        provider.imageForPicto.path,
+                      ),
+                      height: 90,
+                      width: 90,
+                    )
+              : Image.asset(
+                  AppImages.kBoardSelectImage,
+                  height: 90,
+                  width: 90,
+                ),
+          Text(
+            provider.nameController.text.isEmpty ? 'create.board_name'.trl : provider.nameController.text,
+            style: textTheme.bodyMedium!.copyWith(
+              color: provider.nameController.text.isEmpty ? Colors.grey : Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }

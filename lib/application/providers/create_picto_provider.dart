@@ -76,12 +76,13 @@ class CreatePictoProvider extends ChangeNotifier {
   bool isBoardFetched = false;
   List<ArsaacDataModel> searchedData = [];
   bool isArsaacSearched = false;
+  bool isEditBoard = false;
+  bool isUrl = false;
   List<String> daysToUsePicto = [];
   List<String> timeForPicto = [];
   String daysString = '';
   String timeString = '';
   String selectedType = '';
-  String selectedAlphabet = 'A';
   String selectedPictoForEditId = '';
   String userIdByCareGiver = '';
 
@@ -90,7 +91,7 @@ class CreatePictoProvider extends ChangeNotifier {
   List<Group> boards = [];
   List<Picto> pictograms = [];
   List<Picto> filteredPictograms = [];
-  late XFile imageForPicto;
+  XFile imageForPicto = XFile('');
   String imageUrlForPicto = '';
   final ImagePicker _imagePicker = ImagePicker();
   final TextEditingController nameController = TextEditingController();
@@ -111,13 +112,12 @@ class CreatePictoProvider extends ChangeNotifier {
   Future<void> init({required String userId}) async {
     await fetchUserGroups(userId: userId);
     await fetchUserPictos(userId: userId);
-    await filterPictosForView();
   }
 
   Future<bool> captureImageFromCamera() async {
     final image = await _imagePicker.pickImage(
       source: ImageSource.camera,
-      preferredCameraDevice: CameraDevice.front,
+      preferredCameraDevice: CameraDevice.rear,
       maxHeight: 300,
       maxWidth: 300,
     );
@@ -217,7 +217,7 @@ class CreatePictoProvider extends ChangeNotifier {
   }
 
   Future<void> saveAndUploadPictogram() async {
-    final url = await getPictoUrl();
+    final url = await getImageUrl();
     Picto pict = Picto(
       id: '$userIdByCareGiver-${pictograms.length.toString()}',
       type: borderColor,
@@ -240,11 +240,86 @@ class CreatePictoProvider extends ChangeNotifier {
       newUser.pictos[_i18n.currentLocale.toString()] = pictograms;
       newUser.groups[_i18n.currentLocale.toString()] = boards;
       await _localDatabaseRepository.setUser(newUser);
-      userState.setUser(newUser);
     }
   }
 
-  Future<String> getPictoUrl() async {
+  Future<void> saveAndUploadGroup() async {
+    final url = await getImageUrl();
+    Group group = Group(
+      id: '$userIdByCareGiver-${boards.length.toString()}',
+      block: false,
+      resource: AssetsImage(asset: '', network: url),
+      text: nameController.text,
+      relations: [],
+      freq: 0,
+    );
+    boards.add(group);
+    await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString());
+
+    if (userState.user!.type == UserType.user) {
+      final newUser = userState.user!.patient;
+      newUser.groups[_i18n.currentLocale.toString()] = boards;
+      userState.user!.patient.groups[_i18n.currentLocale.toString()] = boards;
+      await _localDatabaseRepository.setUser(newUser);
+    }
+  }
+
+  Future<void> saveChangesInPicto({required String id}) async {
+    final url = await getImageUrl();
+    int index = -1;
+    final res = pictograms.firstWhere((element) {
+      index++;
+      return element.id == id;
+    });
+    pictograms[index].tags["WEEKDAY"] = daysToUsePicto;
+    pictograms[index].tags["HORA"] = timeForPicto;
+    Picto pict = Picto(
+      id: id,
+      type: borderColor,
+      resource: AssetsImage(asset: pictograms[index].resource.asset, network: url),
+      tags: pictograms[index].tags,
+      text: nameController.text,
+      freq: pictograms[index].freq,
+    );
+
+    pictograms[index] = pict;
+    await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString());
+
+    if (userState.user!.type == UserType.user) {
+      //todo: emir can you check this
+      final newUser = userState.user!.patient;
+      newUser.pictos[_i18n.currentLocale.toString()] = pictograms;
+      await _localDatabaseRepository.setUser(newUser);
+    }
+  }
+
+  Future<void> saveChangesInBoard() async {
+    final url = await getImageUrl();
+    final oldBoard = boards[selectedBoardID];
+    Group newBoard = Group(
+      id: oldBoard.id,
+      relations: oldBoard.relations,
+      text: nameController.text,
+      resource: AssetsImage(
+        asset: oldBoard.resource.asset,
+        network: url,
+      ),
+      freq: oldBoard.freq,
+      block: oldBoard.block,
+    );
+    boards[selectedBoardID] = newBoard;
+    await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString());
+
+    if (userState.user!.type == UserType.user) {
+      final newUser = userState.user!.patient;
+      newUser.groups[_i18n.currentLocale.toString()] = boards;
+      userState.user!.patient.groups[_i18n.currentLocale.toString()] = boards;
+      await _localDatabaseRepository.setUser(newUser);
+    }
+    isEditBoard = false;
+  }
+
+  Future<String> getImageUrl() async {
     final userId = userIdByCareGiver.isEmpty ? userState.user!.id : userIdByCareGiver;
 
     String pictoPath = "images/$userId/pictos";
@@ -285,20 +360,7 @@ class CreatePictoProvider extends ChangeNotifier {
     // }
   }
 
-  Future<void> filterPictosForView() async {
-    print(pictograms.length);
-    filteredPictograms.clear();
-    for (var pict in pictograms) {
-      if (pict.text.toUpperCase().startsWith(
-            selectedAlphabet.toUpperCase(),
-          )) {
-        filteredPictograms.add(pict);
-      }
-    }
-    notifyListeners();
-  }
-
-  Future<void> hideCurrentPicto({required String id, required int index}) async {
+  /* Future<void> hideCurrentPicto({required String id, required int index}) async {
     int i = -1;
     final res = pictograms.firstWhere((element) {
       i++;
@@ -307,15 +369,46 @@ class CreatePictoProvider extends ChangeNotifier {
     pictograms[i].block = !pictograms[i].block;
     filteredPictograms[index].block = !filteredPictograms[index].block;
     notifyListeners();
-  }
+  }*/
 
   Future<void> setForPictoEdit({required Picto pict}) async {
+    daysToUsePicto.clear();
+    timeForPicto.clear();
     selectedPictoForEditId = pict.id;
     borderColor = pict.type;
     imageUrlForPicto = pict.resource.network!;
     nameController.text = pict.text;
     isImageSelected = true;
+    if (pict.tags.containsKey('WEEKDAY')) {
+      daysToUsePicto = pict.tags['WEEKDAY']!;
+    }
+    if (pict.tags.containsKey('HORA')) {
+      timeForPicto = pict.tags['HORA']!;
+    }
+    await searchBoard(id: pict.id);
     notifyListeners();
+  }
+
+  Future<void> setForBoardEdit({required int index}) async {
+    selectedBoardID = index;
+    final board = boards[index];
+    isImageSelected = true;
+    isUrl = true;
+    isEditBoard = true;
+    imageUrlForPicto = board.resource.network!;
+    nameController.text = board.text;
+  }
+
+  Future<void> searchBoard({required String id}) async {
+    int boardIndex = -1;
+    for (var board in boards) {
+      boardIndex++;
+      for (var relation in board.relations) {
+        if (relation.id == id) {
+          selectedBoardID = boardIndex;
+        }
+      }
+    }
   }
 }
 
