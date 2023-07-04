@@ -18,7 +18,6 @@ class PictogramScreen extends ConsumerWidget {
     return Expanded(
       child: GridView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        shrinkWrap: true,
         itemCount: provider.filteredPictos.length + 1,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,

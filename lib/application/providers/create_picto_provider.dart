@@ -246,6 +246,8 @@ class CreatePictoProvider extends ChangeNotifier {
     );
     pictograms.add(pict);
     _viewBoardProvider.pictograms.add(pict);
+    _viewBoardProvider.filteredPictos.add(pict);
+    notifyListeners();
     boards[selectedBoardID].relations.add(
           GroupRelation(id: pictograms.length.toString(), value: 0),
         );
