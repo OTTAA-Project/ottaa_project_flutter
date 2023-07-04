@@ -180,6 +180,8 @@ class CreateBoardScreen extends ConsumerWidget {
                     } else {
                       await provider.saveAndUploadGroup();
                     }
+                    provider.notify();
+                    provider.notify();
                     context.pop();
                     context.pop();
                   },

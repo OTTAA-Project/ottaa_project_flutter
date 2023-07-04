@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
@@ -23,7 +24,9 @@ class BoardScreen extends ConsumerWidget {
         itemBuilder: (context, index) {
           if (index == provider.boards.length) {
             return GestureDetector(
-              onTap: () {
+              onTap: () async {
+                final pro = ref.read(createPictoProvider);
+                pro.init(userId: provider.userID);
                 context.push(AppRoutes.patientCreateBoard);
               },
               child: Container(

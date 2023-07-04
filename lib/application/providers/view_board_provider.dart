@@ -27,6 +27,7 @@ class ViewBoardProvider extends ChangeNotifier {
   List<Picto> selectedBoardPicts = [];
   List<Picto> filteredPictos = [];
   List<Group> filteredBoards = [];
+  String selectedType = '';
 
   Future<void> init({required String userId}) async {
     await fetchUserGroups(userId: userId);
@@ -94,13 +95,21 @@ class ViewBoardProvider extends ChangeNotifier {
 
   Future<void> fetchUserGroups({required String userId}) async {
     final res = await _createPictoServices.fetchUserGroups(languageCode: _i18n.currentLocale.toString(), userId: userId);
-    boards = res;
+    if (res.isEmpty) {
+      final res = await _createPictoServices.fetchDefaultGroups(languageCode: _i18n.currentLocale.toString());
+      boards = res;
+    } else {
+      boards = res;
+    }
     notifyListeners();
   }
 
   Future<void> fetchUserPictos({required String userId}) async {
     final locale = _i18n.currentLocale;
     pictograms = await _createPictoServices.fetchUserPictos(languageCode: _i18n.currentLocale.toString(), userId: userId);
+    if (pictograms.isEmpty) {
+      pictograms = await _createPictoServices.fetchDefaultPictos(languageCode: _i18n.currentLocale.toString());
+    }
   }
 
   void notify() {

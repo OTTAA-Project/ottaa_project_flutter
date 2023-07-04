@@ -56,6 +56,45 @@ class CreatePictoServices implements CreatePictoRepository {
   }
 
   @override
+  Future<List<Group>> fetchDefaultGroups({required String languageCode}) async {
+    final res = await _serverRepository.getDefaultGroups(languageCode);
+    if (res.isRight) {
+      final json = res.right;
+      final List<Group> groups = json.keys.map<Group>((e) {
+        final data = Map.from(json[e] as Map<dynamic, dynamic>);
+        return Group.fromMap({
+          "id": e,
+          ...data,
+        });
+      }).toList();
+
+      return groups;
+    } else {
+      return [];
+    }
+  }
+
+  @override
+  Future<List<Picto>> fetchDefaultPictos({required String languageCode}) async {
+    final res = await _serverRepository.getDefaultPictos(languageCode);
+
+    if (res.isRight) {
+      final json = res.right;
+      final List<Picto> pictos = json.keys.map<Picto>((e) {
+        final data = Map.from(json[e] as Map<dynamic, dynamic>);
+        return Picto.fromMap({
+          "id": e,
+          ...data,
+        });
+      }).toList();
+
+      return pictos;
+    } else {
+      return [];
+    }
+  }
+
+  @override
   Future<String> uploadOtherImages({
     required String imagePath,
     required String directoryPath,

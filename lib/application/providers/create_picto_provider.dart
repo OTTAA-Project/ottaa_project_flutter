@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/application/common/extensions/user_extensi
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
@@ -67,6 +68,7 @@ class CreatePictoProvider extends ChangeNotifier {
   final PictogramsRepository _pictogramsService;
   final UserNotifier userState;
   final TTSProvider _ttsProvider;
+  final ViewBoardProvider _viewBoardProvider;
 
   final PageController controller = PageController(initialPage: 0);
 
@@ -82,7 +84,6 @@ class CreatePictoProvider extends ChangeNotifier {
   List<String> timeForPicto = [];
   String daysString = '';
   String timeString = '';
-  String selectedType = '';
   String selectedPictoForEditId = '';
   String userIdByCareGiver = '';
 
@@ -105,6 +106,7 @@ class CreatePictoProvider extends ChangeNotifier {
     this.userState,
     this._localDatabaseRepository,
     this._ttsProvider,
+    this._viewBoardProvider,
   ) {
     controller.addListener(setIndex);
   }
@@ -185,16 +187,21 @@ class CreatePictoProvider extends ChangeNotifier {
 
   Future<void> fetchUserGroups({required String userId}) async {
     final res = await _createPictoServices.fetchUserGroups(languageCode: _i18n.currentLocale.toString(), userId: userId);
-    boards = res;
+    if (res.isEmpty) {
+      final res = await _createPictoServices.fetchDefaultGroups(languageCode: _i18n.currentLocale.toString());
+      boards = res;
+    } else {
+      boards = res;
+    }
     isBoardFetched = true;
     notifyListeners();
   }
 
   Future<void> fetchUserPictos({required String userId}) async {
-    final locale = _i18n.currentLocale;
-
-    final languageCode = "${locale.languageCode}_${locale.countryCode}";
-    pictograms = await _createPictoServices.fetchUserPictos(languageCode: languageCode, userId: userId);
+    pictograms = await _createPictoServices.fetchUserPictos(languageCode: _i18n.currentLocale.toString(), userId: userId);
+    if (pictograms.isEmpty) {
+      pictograms = await _createPictoServices.fetchDefaultPictos(languageCode: _i18n.currentLocale.toString());
+    }
   }
 
   void notify() {
@@ -229,6 +236,7 @@ class CreatePictoProvider extends ChangeNotifier {
       text: nameController.text,
     );
     pictograms.add(pict);
+    _viewBoardProvider.pictograms.add(pict);
     boards[selectedBoardID].relations.add(
           GroupRelation(id: pictograms.length.toString(), value: 0),
         );
@@ -254,6 +262,7 @@ class CreatePictoProvider extends ChangeNotifier {
       freq: 0,
     );
     boards.add(group);
+    _viewBoardProvider.boards.add(group);
     await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString());
 
     if (userState.user!.type == UserType.user) {
@@ -283,6 +292,7 @@ class CreatePictoProvider extends ChangeNotifier {
     );
 
     pictograms[index] = pict;
+    _viewBoardProvider.pictograms[index] = pict;
     await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString());
 
     if (userState.user!.type == UserType.user) {
@@ -308,6 +318,7 @@ class CreatePictoProvider extends ChangeNotifier {
       block: oldBoard.block,
     );
     boards[selectedBoardID] = newBoard;
+    _viewBoardProvider.boards[selectedBoardID] = newBoard;
     await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString());
 
     if (userState.user!.type == UserType.user) {
@@ -418,8 +429,9 @@ final createPictoProvider = ChangeNotifierProvider<CreatePictoProvider>((ref) {
   final groupService = GetIt.I<GroupsRepository>();
   final i18N = GetIt.I<I18N>();
   final tts = ref.watch(ttsProvider);
+  final viewBoard = ref.watch(viewBoardProvider);
   final localDatabase = GetIt.I<LocalDatabaseRepository>();
 
   final userState = ref.watch(userProvider);
-  return CreatePictoProvider(createPictoServices, i18N, groupService, pictogramService, userState, localDatabase, tts);
+  return CreatePictoProvider(createPictoServices, i18N, groupService, pictogramService, userState, localDatabase, tts, viewBoard);
 });

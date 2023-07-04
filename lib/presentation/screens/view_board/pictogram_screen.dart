@@ -30,7 +30,9 @@ class PictogramScreen extends ConsumerWidget {
             return FittedBox(
               fit: BoxFit.contain,
               child: PictoWidget(
-                onTap: () {
+                onTap: () async {
+                  final pro = ref.read(createPictoProvider);
+                  pro.init(userId: provider.userID);
                   context.push(AppRoutes.patientCreatePicto);
                 },
                 image: Image.asset(
@@ -46,7 +48,7 @@ class PictogramScreen extends ConsumerWidget {
               onTap: () {
                 //todo: ask from hector
               },
-              onLongPress: () {
+              onLongPress: () async {
                 showDialog(
                   context: context,
                   builder: (context) {
@@ -76,9 +78,10 @@ class PictogramScreen extends ConsumerWidget {
                         DialogButton(
                           text: 'global.edit'.trl,
                           icon: Icons.edit,
-                          onTap: () {
-                            final provider1 = ref.read(createPictoProvider);
-                            provider1.setForPictoEdit(pict: provider.filteredPictos[index]);
+                          onTap: () async {
+                            final pro = ref.read(createPictoProvider);
+                            await pro.init(userId: provider.userID);
+                            await pro.setForPictoEdit(pict: provider.filteredPictos[index]);
                             context.push(AppRoutes.patientEditPicto);
                           },
                         ),

@@ -11,4 +11,8 @@ abstract class CreatePictoRepository {
   Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode});
 
   Future<String> uploadOtherImages({required String imagePath, required String directoryPath, required String name, required String userId});
+
+  Future<List<Group>> fetchDefaultGroups({required String languageCode});
+
+  Future<List<Picto>> fetchDefaultPictos({required String languageCode});
 }

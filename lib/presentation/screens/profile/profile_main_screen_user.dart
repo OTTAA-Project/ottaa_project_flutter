@@ -78,8 +78,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                   subtitle: 'user.main.subtitle2'.trl,
                   trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
                   onPressed: () async {
-                    final provider = ref.read(createPictoProvider);
-                    final provider1 = ref.read(viewBoardProvider);
+                    final provider = ref.read(viewBoardProvider);
                     showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -90,8 +89,8 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                       },
                     );
                     await provider.init(userId: user.id);
-                    await provider1.init(userId: user.id);
                     provider.selectedType = 'home.grid.title'.trl;
+                    provider.notify();
                     context.pop();
                     context.push(AppRoutes.patientViewBoardsAndPictos);
                     //todo: talk with team about this one

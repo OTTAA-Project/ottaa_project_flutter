@@ -250,6 +250,7 @@ class EditPictoScreen extends ConsumerWidget {
                               child: CircularProgressIndicator(),
                             ));
                     await provider.saveChangesInPicto(id: provider.selectedPictoForEditId);
+                    provider.notify();
                     context.pop();
                     context.pop();
                   },

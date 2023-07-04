@@ -1,11 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
-import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/view_board/board_screen.dart';
@@ -19,7 +16,7 @@ class BoardsPictogramScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    final provider = ref.watch(createPictoProvider);
+    final provider = ref.watch(viewBoardProvider);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: OTTAAAppBar(
@@ -144,7 +141,7 @@ class ChooserWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    final provider = ref.watch(createPictoProvider);
+    final provider = ref.watch(viewBoardProvider);
     return GestureDetector(
       onTap: isDisabled
           ? () {}
