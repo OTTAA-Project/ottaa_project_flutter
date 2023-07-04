@@ -18,74 +18,72 @@ class BoardScreen extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Expanded(
-      child: ListView(
-        children: [
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: provider.boards.length,
-            padding: const EdgeInsets.only(bottom: 16),
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Container(
-                  decoration: provider.selectedBoardID == index
-                      ? BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: colorScheme.primary, width: 2),
-                        )
-                      : const BoxDecoration(),
-                  child: PictogramCard(
-                    title: provider.boards[index].text,
-                    actionText: "customize.board.subtitle".trl,
-                    pictogram: CachedNetworkImageProvider(
-                      provider.boards[index].resource.network!,
-                    ),
-                    status: !provider.boards[index].block,
-                    onPressed: () async {
-                      provider.selectedBoardID = index;
-                      await provider.fetchDesiredPictos();
-                      context.push(AppRoutes.patientShowPictos);
-                    },
-                    onChange: (bool a) {
-                      provider.boards[index].block = !provider.boards[index].block;
-                      provider.notify();
-                    },
-                  ),
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: provider.boards.length + 1,
+        padding: const EdgeInsets.only(bottom: 16),
+        itemBuilder: (context, index) {
+          if (provider.boards.length == index) {
+            return GestureDetector(
+              onTap: () async {
+                final pro = ref.read(createPictoProvider);
+                pro.init(userId: provider.userID);
+                pro.resetCreateBoardScreen();
+                context.push(AppRoutes.patientCreateBoard);
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              );
-            },
-          ),
-          GestureDetector(
-            onTap: () async {
-              final pro = ref.read(createPictoProvider);
-              pro.init(userId: provider.userID);
-              pro.resetCreateBoardScreen();
-              context.push(AppRoutes.patientCreateBoard);
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      AppImages.kAddIcon,
+                      height: 80,
+                      width: 80,
+                    ),
+                    Text(
+                      'create.new_board'.trl,
+                      style: textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    AppImages.kAddIcon,
-                    height: 80,
-                    width: 80,
-                  ),
-                  Text(
-                    'create.new_board'.trl,
-                    style: textTheme.bodyMedium,
-                  ),
-                ],
+            );
+          }
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Container(
+              decoration: provider.selectedBoardID == index
+                  ? BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: colorScheme.primary, width: 2),
+                    )
+                  : const BoxDecoration(),
+              child: PictogramCard(
+                title: provider.boards[index].text,
+                actionText: "customize.board.subtitle".trl,
+                pictogram: CachedNetworkImageProvider(
+                  provider.boards[index].resource.network!,
+                ),
+                status: !provider.boards[index].block,
+                onPressed: () async {
+                  provider.selectedBoardID = index;
+                  await provider.fetchDesiredPictos();
+                  context.push(AppRoutes.patientShowPictos);
+                },
+                onChange: (bool a) {
+                  provider.boards[index].block = !provider.boards[index].block;
+                  provider.notify();
+                },
               ),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

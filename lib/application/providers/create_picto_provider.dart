@@ -279,6 +279,7 @@ class CreatePictoProvider extends ChangeNotifier {
     );
     boards.add(group);
     _viewBoardProvider.boards.add(group);
+    _viewBoardProvider.notify();
     await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString(), userId: userID);
 
     if (userState.user!.type == UserType.user) {
