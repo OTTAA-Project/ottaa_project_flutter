@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
+import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
+import 'package:ottaa_project_flutter/core/enums/user_types.dart';
 import 'package:ottaa_project_flutter/core/models/group_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/create_picto_repository.dart';
@@ -11,10 +14,11 @@ class ViewBoardProvider extends ChangeNotifier {
   final GroupsRepository _groupsService;
   final LocalDatabaseRepository _localDatabaseRepository;
   final I18N _i18n;
+  final UserNotifier userState;
   final PictogramsRepository _pictogramsService;
   final CreatePictoRepository _createPictoServices;
 
-  ViewBoardProvider(this._i18n, this._groupsService, this._pictogramsService, this._localDatabaseRepository, this._createPictoServices);
+  ViewBoardProvider(this._i18n, this._groupsService, this._pictogramsService, this._localDatabaseRepository, this._createPictoServices, this.userState);
 
   String userID = '';
   bool isUser = true;
@@ -33,6 +37,8 @@ class ViewBoardProvider extends ChangeNotifier {
     await fetchUserGroups(userId: userId);
     await fetchUserPictos(userId: userId);
     await filterPictosForView();
+    userID = userId;
+    notifyListeners();
   }
 
   Future<void> fetchDesiredPictos() async {
@@ -47,12 +53,9 @@ class ViewBoardProvider extends ChangeNotifier {
   }
 
   Future<void> filterPictosForView() async {
-    print(pictograms.length);
     filteredPictos.clear();
     for (var pict in pictograms) {
-      if (pict.text.toUpperCase().startsWith(
-            selectedAlphabet.toUpperCase(),
-          )) {
+      if (pict.text.toUpperCase().startsWith(selectedAlphabet.toUpperCase())) {
         filteredPictos.add(pict);
       }
     }
@@ -105,15 +108,38 @@ class ViewBoardProvider extends ChangeNotifier {
   }
 
   Future<void> fetchUserPictos({required String userId}) async {
-    final locale = _i18n.currentLocale;
-    pictograms = await _createPictoServices.fetchUserPictos(languageCode: _i18n.currentLocale.toString(), userId: userId);
+    final locale = _i18n.currentLocale.toString();
+    pictograms = await _createPictoServices.fetchUserPictos(languageCode: locale, userId: userId);
     if (pictograms.isEmpty) {
-      pictograms = await _createPictoServices.fetchDefaultPictos(languageCode: _i18n.currentLocale.toString());
+      pictograms = await _createPictoServices.fetchDefaultPictos(languageCode: locale);
     }
   }
 
   void notify() {
     notifyListeners();
+  }
+
+  Future<void> uploadGroups() async {
+    await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString(), userId: userID);
+
+    if (userState.user!.type == UserType.user) {
+      final newUser = userState.user!.patient;
+      newUser.groups[_i18n.currentLocale.toString()] = boards;
+      userState.user!.patient.groups[_i18n.currentLocale.toString()] = boards;
+      await _localDatabaseRepository.setUser(newUser);
+    }
+  }
+
+  Future<void> uploadPictos() async {
+    await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString(), userId: userID);
+
+    if (userState.user!.type == UserType.user) {
+      //todo: emir can you check this
+      final newUser = userState.user!.patient;
+      newUser.pictos[_i18n.currentLocale.toString()] = pictograms;
+      newUser.groups[_i18n.currentLocale.toString()] = boards;
+      await _localDatabaseRepository.setUser(newUser);
+    }
   }
 }
 
@@ -123,5 +149,6 @@ final viewBoardProvider = ChangeNotifierProvider<ViewBoardProvider>((ref) {
   final i18N = GetIt.I<I18N>();
   final CreatePictoRepository createPictoServices = GetIt.I.get<CreatePictoRepository>();
   final localDatabase = GetIt.I<LocalDatabaseRepository>();
-  return ViewBoardProvider(i18N, groupService, pictogramService, localDatabase, createPictoServices);
+  final userState = ref.watch(userProvider);
+  return ViewBoardProvider(i18N, groupService, pictogramService, localDatabase, createPictoServices, userState);
 });

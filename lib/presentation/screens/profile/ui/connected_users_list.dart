@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
 import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/user_extension.dart';
@@ -9,6 +10,7 @@ import 'package:ottaa_project_flutter/application/common/time_helper.dart';
 import 'package:ottaa_project_flutter/application/notifiers/patient_notifier.dart';
 import 'package:ottaa_project_flutter/application/providers/customise_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/profile_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
@@ -60,6 +62,22 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
               final user = provider.connectedUsersData[index];
               ref.watch(patientNotifier.notifier).setUser(user.patient);
               context.push(AppRoutes.userTalk);
+            },
+            boardsAndPictosOnTap: () async {
+              final pro = ref.read(viewBoardProvider);
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              );
+              pro.selectedType = 'home.grid.title'.trl;
+              await pro.init(userId: provider.connectedUsersData[index].id);
+              context.pop();
+              context.push(AppRoutes.patientViewBoardsAndPictos);
             },
           ),
         );

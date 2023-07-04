@@ -228,7 +228,7 @@ class CreatePictoProvider extends ChangeNotifier {
   Future<void> saveAndUploadPictogram() async {
     final url = await getImageUrl();
     Picto pict = Picto(
-      id: '$userIdByCareGiver-${pictograms.length.toString()}',
+      id: '$userID-${pictograms.length.toString()}',
       type: borderColor,
       resource: AssetsImage(asset: '', network: url),
       tags: {
@@ -242,7 +242,7 @@ class CreatePictoProvider extends ChangeNotifier {
     boards[selectedBoardID].relations.add(
           GroupRelation(id: pictograms.length.toString(), value: 0),
         );
-    await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString());
+    await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString(), userId: userID);
 
     if (userState.user!.type == UserType.user) {
       //todo: emir can you check this
@@ -256,7 +256,7 @@ class CreatePictoProvider extends ChangeNotifier {
   Future<void> saveAndUploadGroup() async {
     final url = await getImageUrl();
     Group group = Group(
-      id: '$userIdByCareGiver-${boards.length.toString()}',
+      id: '$userID-${boards.length.toString()}',
       block: false,
       resource: AssetsImage(asset: '', network: url),
       text: nameController.text,
@@ -265,7 +265,7 @@ class CreatePictoProvider extends ChangeNotifier {
     );
     boards.add(group);
     _viewBoardProvider.boards.add(group);
-    await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString());
+    await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString(), userId: userID);
 
     if (userState.user!.type == UserType.user) {
       final newUser = userState.user!.patient;
@@ -295,7 +295,7 @@ class CreatePictoProvider extends ChangeNotifier {
 
     pictograms[index] = pict;
     _viewBoardProvider.pictograms[index] = pict;
-    await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString());
+    await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString(), userId: userID);
 
     if (userState.user!.type == UserType.user) {
       //todo: emir can you check this
@@ -321,7 +321,7 @@ class CreatePictoProvider extends ChangeNotifier {
     );
     boards[selectedBoardID] = newBoard;
     _viewBoardProvider.boards[selectedBoardID] = newBoard;
-    await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString());
+    await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString(), userId: userID);
 
     if (userState.user!.type == UserType.user) {
       final newUser = userState.user!.patient;
