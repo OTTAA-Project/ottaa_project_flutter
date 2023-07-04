@@ -233,9 +233,10 @@ class CreatePictoProvider extends ChangeNotifier {
   }
 
   Future<void> saveAndUploadPictogram() async {
+    final id = '$userID-${pictograms.length.toString()}';
     final url = await getImageUrl();
     Picto pict = Picto(
-      id: '$userID-${pictograms.length.toString()}',
+      id: id,
       type: borderColor,
       resource: AssetsImage(asset: '', network: url),
       tags: {
@@ -247,11 +248,15 @@ class CreatePictoProvider extends ChangeNotifier {
     pictograms.add(pict);
     _viewBoardProvider.pictograms.add(pict);
     _viewBoardProvider.filteredPictos.add(pict);
+    _viewBoardProvider.boards[selectedBoardID].relations.add(
+      GroupRelation(id: id, value: 0),
+    );
     _viewBoardProvider.notify();
     boards[selectedBoardID].relations.add(
-          GroupRelation(id: pictograms.length.toString(), value: 0),
+          GroupRelation(id: id, value: 0),
         );
     await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString(), userId: userID);
+    await _groupsService.uploadGroups(boards, _i18n.currentLocale.toString(), 'type', userId: userID);
 
     if (userState.user!.type == UserType.user) {
       //todo: emir can you check this
