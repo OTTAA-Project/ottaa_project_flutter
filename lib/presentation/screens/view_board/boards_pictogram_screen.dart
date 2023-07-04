@@ -18,109 +18,125 @@ class BoardsPictogramScreen extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final provider = ref.watch(viewBoardProvider);
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: OTTAAAppBar(
-        title: Flex(
-          direction: Axis.horizontal,
-          children: [
-            Expanded(
-              child: AutoSizeText(
-                'customize.board.appbar'.trl,
+    return WillPopScope(
+      onWillPop: () async {
+        provider.uploadGroups();
+        provider.uploadPictos();
+        return true;
+      },
+      child: Scaffold(
+        appBar: OTTAAAppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () async {
+              provider.uploadGroups();
+              provider.uploadPictos();
+              context.pop();
+            },
+            splashRadius: 24,
+          ),
+          title: Flex(
+            direction: Axis.horizontal,
+            children: [
+              Expanded(
+                child: AutoSizeText(
+                  'customize.board.appbar'.trl,
+                ),
               ),
+              const SizedBox(
+                width: 8,
+              ),
+              const Icon(
+                Icons.help_outline_sharp,
+                color: Colors.grey,
+                size: 24,
+              ),
+            ],
+          ),
+          actions: [
+            Icon(
+              Icons.star_border,
+              color: colorScheme.primary,
+              size: 24,
             ),
             const SizedBox(
-              width: 8,
+              width: 16,
             ),
-            const Icon(
-              Icons.help_outline_sharp,
-              color: Colors.grey,
+            Icon(
+              Icons.history,
+              color: colorScheme.primary,
               size: 24,
             ),
           ],
         ),
-        actions: [
-          Icon(
-            Icons.star_border,
-            color: colorScheme.primary,
-            size: 24,
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          Icon(
-            Icons.history,
-            color: colorScheme.primary,
-            size: 24,
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            SizedBox(
-              width: size.width,
-              child: GestureDetector(
-                onTap: () {
-                  context.push(AppRoutes.patientSearch);
-                },
-                child: TextFormField(
-                  enabled: false,
-                  decoration: InputDecoration(
-                    hintText: 'global.search'.trl,
-                    suffixIcon: const Icon(
-                      Icons.search,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              SizedBox(
+                width: size.width,
+                child: GestureDetector(
+                  onTap: () {
+                    context.push(AppRoutes.patientSearch);
+                  },
+                  child: TextFormField(
+                    enabled: false,
+                    decoration: InputDecoration(
+                      hintText: 'global.search'.trl,
+                      suffixIcon: const Icon(
+                        Icons.search,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: SizedBox(
-                width: size.width,
-                height: 35,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    ChooserWidget(
-                      text: 'home.grid.title'.trl,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: ChooserWidget(
-                        text: 'global.pictogram'.trl,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24),
+                child: SizedBox(
+                  width: size.width,
+                  height: 35,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      ChooserWidget(
+                        text: 'home.grid.title'.trl,
                       ),
-                    ),
-                    ChooserWidget(
-                      text: 'create.created_by_me'.trl,
-                      isDisabled: true,
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: ChooserWidget(
+                          text: 'global.pictogram'.trl,
+                        ),
+                      ),
+                      ChooserWidget(
+                        text: 'create.created_by_me'.trl,
+                        isDisabled: true,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            provider.selectedType == 'global.pictogram'.trl
-                ? Padding(
-                    padding: const EdgeInsets.only(bottom: 32),
-                    child: SizedBox(
-                      width: size.width,
-                      height: 35,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 26,
-                        itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: AlphabetWidget(
-                            text: String.fromCharCode(65 + index),
+              provider.selectedType == 'global.pictogram'.trl
+                  ? Padding(
+                      padding: const EdgeInsets.only(bottom: 32),
+                      child: SizedBox(
+                        width: size.width,
+                        height: 35,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 26,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: AlphabetWidget(
+                              text: String.fromCharCode(65 + index),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-            provider.selectedType == 'home.grid.title'.trl ? const BoardScreen() : const PictogramScreen()
-          ],
+                    )
+                  : const SizedBox.shrink(),
+              provider.selectedType == 'home.grid.title'.trl ? const BoardScreen() : const PictogramScreen()
+            ],
+          ),
         ),
       ),
     );

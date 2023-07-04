@@ -148,6 +148,13 @@ class CreatePictoProvider extends ChangeNotifier {
     }
   }
 
+  void resetCreateBoardScreen() {
+    isImageSelected = false;
+    nameController.text = '';
+    timeForPicto.clear();
+    daysToUsePicto.clear();
+  }
+
   Future<void> speakWord() async {
     await _ttsProvider.speak(nameController.text);
   }

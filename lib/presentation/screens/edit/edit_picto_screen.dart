@@ -11,6 +11,8 @@ import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_color_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_picto_day_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/create_pictogram_initial_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/create_picto/ui/day_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/create_picto/ui/time_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/widgets/image_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 

@@ -10,6 +10,8 @@ import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_picto_day_screen.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/create_pictogram_initial_screen.dart';
+import 'package:ottaa_project_flutter/presentation/screens/create_picto/ui/day_widget.dart';
+import 'package:ottaa_project_flutter/presentation/screens/create_picto/ui/time_widget.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
 
 class CreateBoardScreen extends ConsumerWidget {
