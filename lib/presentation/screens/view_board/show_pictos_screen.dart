@@ -69,9 +69,11 @@ class ShowPictosScreen extends ConsumerWidget {
                     title: provider.boards[provider.selectedBoardID].text,
                     image: CachedNetworkImageProvider(provider.boards[provider.selectedBoardID].resource.network!),
                     customizeOnTap: () async {
+                      showDialog(context: context, builder: (context) => const Center(child: CircularProgressIndicator()));
                       final pro = ref.read(createPictoProvider);
-                      pro.init(userId: provider.userID);
-                      pro.setForBoardEdit(index: provider.selectedBoardID);
+                      await pro.init(userId: provider.userID);
+                      await pro.setForBoardEdit(index: provider.selectedBoardID);
+                      context.pop();
                       context.push(AppRoutes.patientCreateBoard);
                     },
                     deleteOnTap: () async {

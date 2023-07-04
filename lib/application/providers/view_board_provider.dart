@@ -30,6 +30,7 @@ class ViewBoardProvider extends ChangeNotifier {
   List<Picto> pictograms = [];
   List<Picto> selectedBoardPicts = [];
   List<Picto> filteredPictos = [];
+  List<Picto> filteredSearchPictos = [];
   List<Group> filteredBoards = [];
   String selectedType = '';
 
@@ -76,13 +77,13 @@ class ViewBoardProvider extends ChangeNotifier {
   Future<void> searchForMatchingData({required String text}) async {
     isSearching = true;
     isDataFetched = false;
-    filteredPictos.clear();
+    filteredSearchPictos.clear();
     filteredBoards.clear();
     for (var pict in pictograms) {
       if (pict.text.toUpperCase().contains(
             text.toUpperCase(),
           )) {
-        filteredPictos.add(pict);
+        filteredSearchPictos.add(pict);
       }
     }
     for (var board in boards) {
@@ -91,7 +92,7 @@ class ViewBoardProvider extends ChangeNotifier {
       }
     }
     isDataFetched = true;
-    print(filteredPictos.length);
+    print(filteredSearchPictos.length);
     print(filteredBoards.length);
     notifyListeners();
   }

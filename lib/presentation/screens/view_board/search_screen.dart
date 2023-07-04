@@ -31,119 +31,123 @@ class SearchDataScreen extends ConsumerWidget {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              TextFormField(
-                onChanged: (value) {
-                  if (value.length >= 3) {
-                    //todo: search and show the pictos and boards
-                    provider.searchForMatchingData(text: value);
-                  }
-                  if (value.isEmpty) {
-                    provider.isSearching = false;
-                    provider.notify();
-                  }
-                },
-                decoration: InputDecoration(
-                  suffixIcon: GestureDetector(
-                    onTap: () async {},
-                    child: const Icon(
-                      Icons.search,
-                      color: Colors.black,
+              SizedBox(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: TextFormField(
+                  onChanged: (value) {
+                    if (value.length >= 3) {
+                      //todo: search and show the pictos and boards
+                      provider.searchForMatchingData(text: value);
+                    }
+                    if (value.isEmpty) {
+                      provider.isSearching = false;
+                      provider.notify();
+                    }
+                  },
+                  decoration: InputDecoration(
+                    suffixIcon: GestureDetector(
+                      onTap: () async {},
+                      child: const Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
                     ),
+                    hintText: 'global.search'.trl,
                   ),
-                  hintText: 'global.search'.trl,
                 ),
               ),
               provider.isSearching
                   ? provider.isDataFetched
-                      ? Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 16),
-                                child: Text(
-                                  'home.grid.title'.trl,
-                                  style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
-                                ),
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Text(
+                                'home.grid.title'.trl,
+                                style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              ListView.builder(
-                                itemCount: provider.filteredBoards.length,
-                                shrinkWrap: true,
-                                padding: const EdgeInsets.only(bottom: 16),
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(bottom: 16),
-                                    child: PictogramCard(
-                                      title: provider.filteredBoards[index].text,
-                                      actionText: "customize.board.subtitle".trl,
-                                      pictogram: CachedNetworkImageProvider(
-                                        provider.filteredBoards[index].resource.network!,
-                                      ),
-                                      status: !provider.filteredBoards[index].block,
-                                      onPressed: () async {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) => const Center(
-                                                  child: CircularProgressIndicator(),
-                                                ));
-                                        final pro = ref.read(createPictoProvider);
-                                        await pro.init(userId: provider.userID);
-                                        int i = -1;
-                                        final res = provider.boards.firstWhere((element) {
-                                          i++;
-                                          return element.id == provider.filteredBoards[index].id;
-                                        });
-                                        await pro.setForBoardEdit(index: i);
-                                        context.pop();
-                                        context.push(AppRoutes.patientCreateBoard);
-                                      },
-                                      onChange: (bool a) {},
+                            ),
+                            ListView.builder(
+                              itemCount: provider.filteredBoards.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: const EdgeInsets.only(bottom: 16),
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: PictogramCard(
+                                    title: provider.filteredBoards[index].text,
+                                    actionText: "customize.board.subtitle".trl,
+                                    pictogram: CachedNetworkImageProvider(
+                                      provider.filteredBoards[index].resource.network!,
                                     ),
-                                  );
-                                },
+                                    status: !provider.filteredBoards[index].block,
+                                    onPressed: () async {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => const Center(
+                                                child: CircularProgressIndicator(),
+                                              ));
+                                      final pro = ref.read(createPictoProvider);
+                                      await pro.init(userId: provider.userID);
+                                      int i = -1;
+                                      final res = provider.boards.firstWhere((element) {
+                                        i++;
+                                        return element.id == provider.filteredBoards[index].id;
+                                      });
+                                      await pro.setForBoardEdit(index: i);
+                                      context.pop();
+                                      context.push(AppRoutes.patientCreateBoard);
+                                    },
+                                    onChange: (bool a) {},
+                                  ),
+                                );
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Text(
+                                'global.pictogram'.trl,
+                                style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 16),
-                                child: Text(
-                                  'global.pictogram'.trl,
-                                  style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
-                                ),
+                            ),
+                            GridView.builder(
+                              padding: const EdgeInsets.symmetric(horizontal: 24),
+                              itemCount: provider.filteredSearchPictos.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12,
                               ),
-                              GridView.builder(
-                                padding: const EdgeInsets.symmetric(horizontal: 24),
-                                shrinkWrap: true,
-                                itemCount: provider.filteredPictos.length,
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing: 12,
-                                  mainAxisSpacing: 12,
-                                ),
-                                itemBuilder: (context, index) {
-                                  return FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: PictoWidget(
-                                      onTap: () async {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) => const Center(
-                                                  child: CircularProgressIndicator(),
-                                                ));
-                                        final pro = ref.read(createPictoProvider);
-                                        await pro.init(userId: provider.userID);
-                                        await pro.setForPictoEdit(pict: provider.filteredPictos[index]);
-                                        context.pop();
-                                        context.push(AppRoutes.patientEditPicto);
-                                      },
-                                      imageUrl: provider.filteredPictos[index].resource.network,
-                                      text: provider.filteredPictos[index].text,
-                                      colorNumber: provider.filteredPictos[index].type,
-                                      disable: provider.filteredPictos[index].block,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
+                              itemBuilder: (context, index) {
+                                return FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: PictoWidget(
+                                    onTap: () async {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => const Center(
+                                                child: CircularProgressIndicator(),
+                                              ));
+                                      final pro = ref.read(createPictoProvider);
+                                      await pro.init(userId: provider.userID);
+                                      await pro.setForPictoEdit(pict: provider.filteredSearchPictos[index]);
+                                      context.pop();
+                                      context.push(AppRoutes.patientEditPicto);
+                                    },
+                                    imageUrl: provider.filteredSearchPictos[index].resource.network,
+                                    text: provider.filteredSearchPictos[index].text,
+                                    colorNumber: provider.filteredSearchPictos[index].type,
+                                    disable: provider.filteredSearchPictos[index].block,
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
                         )
                       : const Expanded(
                           child: Center(
