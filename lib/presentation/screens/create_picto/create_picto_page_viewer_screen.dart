@@ -20,10 +20,13 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     return WillPopScope(
       onWillPop: () async {
-        //todo: make it into a proper function inside the provider
-        provider.selectedBoardID = -1;
-        context.pop();
-        return true;
+        if (provider.controller.page != 0) {
+          provider.previousPage();
+          return false;
+        } else {
+          context.pop();
+          return true;
+        }
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -31,9 +34,11 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-              //todo: make it into a proper function inside the provider
-              provider.selectedBoardID = -1;
-              context.pop();
+              if (provider.controller.page != 0) {
+                provider.previousPage();
+              } else {
+                context.pop();
+              }
             },
             splashRadius: 24,
           ),
