@@ -247,7 +247,7 @@ class CreatePictoProvider extends ChangeNotifier {
     pictograms.add(pict);
     _viewBoardProvider.pictograms.add(pict);
     _viewBoardProvider.filteredPictos.add(pict);
-    notifyListeners();
+    _viewBoardProvider.notify();
     boards[selectedBoardID].relations.add(
           GroupRelation(id: pictograms.length.toString(), value: 0),
         );
@@ -304,6 +304,7 @@ class CreatePictoProvider extends ChangeNotifier {
 
     pictograms[index] = pict;
     _viewBoardProvider.pictograms[index] = pict;
+    _viewBoardProvider.notify();
     await _pictogramsService.uploadPictograms(pictograms, _i18n.currentLocale.toString(), userId: userID);
 
     if (userState.user!.type == UserType.user) {
@@ -330,6 +331,7 @@ class CreatePictoProvider extends ChangeNotifier {
     );
     boards[selectedBoardID] = newBoard;
     _viewBoardProvider.boards[selectedBoardID] = newBoard;
+    _viewBoardProvider.notify();
     await _groupsService.uploadGroups(boards, 'type', _i18n.currentLocale.toString(), userId: userID);
 
     if (userState.user!.type == UserType.user) {

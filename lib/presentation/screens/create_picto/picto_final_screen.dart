@@ -52,7 +52,6 @@ class PictoFinalScreen extends ConsumerWidget {
                 ),
               );
               await provider.saveAndUploadPictogram();
-              provider.notify();
               context.pop();
               context.pop();
             },
