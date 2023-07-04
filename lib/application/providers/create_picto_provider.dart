@@ -74,6 +74,7 @@ class CreatePictoProvider extends ChangeNotifier {
 
   int currentIndex = 0;
   bool isImageSelected = false;
+  String userID = '';
   int selectedBoardID = -1;
   bool isBoardFetched = false;
   List<ArsaacDataModel> searchedData = [];
@@ -112,6 +113,7 @@ class CreatePictoProvider extends ChangeNotifier {
   }
 
   Future<void> init({required String userId}) async {
+    userID = userId;
     await fetchUserGroups(userId: userId);
     await fetchUserPictos(userId: userId);
   }

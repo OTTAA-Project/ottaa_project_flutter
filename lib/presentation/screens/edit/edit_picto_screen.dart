@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/simple_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/create_picto/choose_color_screen.dart';
@@ -23,7 +24,7 @@ class EditPictoScreen extends ConsumerWidget {
     final provider = ref.watch(createPictoProvider);
     return Scaffold(
       appBar: OTTAAAppBar(
-        title: Text('headline here'.trl),
+        title: Text('create.edit_picto'.trl),
         actions: [
           GestureDetector(
             onTap: () {
@@ -232,27 +233,26 @@ class EditPictoScreen extends ConsumerWidget {
                   style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
-              PictogramCard(
-                onPressed: () {
-                  //todo: ask from hector
-                },
-                title: provider.boards[provider.selectedBoardID].text,
-                actionText: '${'global.edit'.trl} ${'global.location'.trl}',
-                pictogram: CachedNetworkImageProvider(provider.boards[provider.selectedBoardID].resource.network!),
-              ),
+              provider.selectedBoardID == -1
+                  ? const SizedBox.shrink()
+                  : PictogramCard(
+                      onPressed: () {
+                        //todo: ask from hector
+                      },
+                      title: provider.boards[provider.selectedBoardID].text,
+                      actionText: '${'global.edit'.trl} ${'global.location'.trl}',
+                      pictogram: CachedNetworkImageProvider(provider.boards[provider.selectedBoardID].resource.network!),
+                    ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: SimpleButton(
                   onTap: () async {
-                    showDialog(
-                        context: context,
-                        builder: (context) => const Center(
-                              child: CircularProgressIndicator(),
-                            ));
+                    final pro = ref.read(viewBoardProvider);
+                    showDialog(context: context, builder: (context) => const Center(child: CircularProgressIndicator()));
                     await provider.saveChangesInPicto(id: provider.selectedPictoForEditId);
-                    provider.notify();
                     context.pop();
                     context.pop();
+                    pro.filterPictosForView();
                   },
                   text: 'global.save'.trl,
                   width: false,
