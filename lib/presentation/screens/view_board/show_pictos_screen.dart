@@ -74,8 +74,12 @@ class ShowPictosScreen extends ConsumerWidget {
                       pro.setForBoardEdit(index: provider.selectedBoardID);
                       context.push(AppRoutes.patientCreateBoard);
                     },
-                    deleteOnTap: () {
-                      //todo: talk to hector
+                    deleteOnTap: () async {
+                      showDialog(context: context, builder: (context) => const Center(child: CircularProgressIndicator()));
+                      await provider.deleteBoard();
+                      context.pop();
+                      context.pop();
+                      provider.notify();
                     },
                     onChanged: (bool a) {
                       provider.boards[provider.selectedBoardID].block = !a;

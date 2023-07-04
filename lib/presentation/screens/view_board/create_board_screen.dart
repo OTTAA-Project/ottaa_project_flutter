@@ -23,6 +23,7 @@ class CreateBoardScreen extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: OTTAAAppBar(
         title: Text(
           'create.create_new_board'.trl,

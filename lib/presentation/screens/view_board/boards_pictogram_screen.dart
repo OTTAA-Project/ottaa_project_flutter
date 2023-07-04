@@ -22,6 +22,7 @@ class BoardsPictogramScreen extends ConsumerWidget {
       onWillPop: () async {
         provider.uploadGroups();
         provider.uploadPictos();
+        provider.selectedBoardID = -1;
         return true;
       },
       child: Scaffold(
@@ -31,6 +32,7 @@ class BoardsPictogramScreen extends ConsumerWidget {
             onPressed: () async {
               provider.uploadGroups();
               provider.uploadPictos();
+              provider.selectedBoardID = -1;
               context.pop();
             },
             splashRadius: 24,

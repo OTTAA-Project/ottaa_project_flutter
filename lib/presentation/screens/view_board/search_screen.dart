@@ -80,7 +80,23 @@ class SearchDataScreen extends ConsumerWidget {
                                         provider.filteredBoards[index].resource.network!,
                                       ),
                                       status: !provider.filteredBoards[index].block,
-                                      onPressed: () async {},
+                                      onPressed: () async {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => const Center(
+                                                  child: CircularProgressIndicator(),
+                                                ));
+                                        final pro = ref.read(createPictoProvider);
+                                        await pro.init(userId: provider.userID);
+                                        int i = -1;
+                                        final res = provider.boards.firstWhere((element) {
+                                          i++;
+                                          return element.id == provider.filteredBoards[index].id;
+                                        });
+                                        await pro.setForBoardEdit(index: i);
+                                        context.pop();
+                                        context.push(AppRoutes.patientCreateBoard);
+                                      },
                                       onChange: (bool a) {},
                                     ),
                                   );
@@ -107,8 +123,15 @@ class SearchDataScreen extends ConsumerWidget {
                                     fit: BoxFit.contain,
                                     child: PictoWidget(
                                       onTap: () async {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => const Center(
+                                                  child: CircularProgressIndicator(),
+                                                ));
                                         final pro = ref.read(createPictoProvider);
+                                        await pro.init(userId: provider.userID);
                                         await pro.setForPictoEdit(pict: provider.filteredPictos[index]);
+                                        context.pop();
                                         context.push(AppRoutes.patientEditPicto);
                                       },
                                       imageUrl: provider.filteredPictos[index].resource.network,

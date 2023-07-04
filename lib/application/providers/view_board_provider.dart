@@ -141,6 +141,11 @@ class ViewBoardProvider extends ChangeNotifier {
       await _localDatabaseRepository.setUser(newUser);
     }
   }
+
+  Future<void> deleteBoard() async {
+    boards.removeAt(selectedBoardID);
+    await uploadGroups();
+  }
 }
 
 final viewBoardProvider = ChangeNotifierProvider<ViewBoardProvider>((ref) {
