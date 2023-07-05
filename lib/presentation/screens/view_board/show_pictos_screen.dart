@@ -99,25 +99,43 @@ class ShowPictosScreen extends ConsumerWidget {
               child: GridView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 shrinkWrap: true,
-                itemCount: provider.selectedBoardPicts.length,
+                itemCount: provider.filteredPictos.length + 1,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
                 ),
-                itemBuilder: (context, index) => FittedBox(
-                  fit: BoxFit.contain,
-                  child: PictoWidget(
-                    onTap: () {
-                      provider.selectedBoardPicts[index].block = !provider.selectedBoardPicts[index].block;
-                      provider.notify();
-                    },
-                    imageUrl: provider.selectedBoardPicts[index].resource.network,
-                    text: provider.selectedBoardPicts[index].text,
-                    colorNumber: provider.selectedBoardPicts[index].type,
-                    disable: provider.selectedBoardPicts[index].block,
-                  ),
-                ),
+                itemBuilder: (context, index) {
+                  if (provider.filteredPictos.length == index) {
+                    return FittedBox(
+                      fit: BoxFit.contain,
+                      child: PictoWidget(
+                        onTap: () async {
+                          final pro = ref.read(createPictoProvider);
+                          await pro.init(userId: provider.userID);
+                          context.push(AppRoutes.patientCreatePicto);
+                        },
+                        image: Image.asset(
+                          AppImages.kAddIcon,
+                        ),
+                        text: 'global.add'.trl,
+                      ),
+                    );
+                  }
+                  return FittedBox(
+                    fit: BoxFit.contain,
+                    child: PictoWidget(
+                      onTap: () {
+                        provider.filteredPictos[index].block = !provider.filteredPictos[index].block;
+                        provider.notify();
+                      },
+                      imageUrl: provider.filteredPictos[index].resource.network,
+                      text: provider.filteredPictos[index].text,
+                      colorNumber: provider.filteredPictos[index].type,
+                      disable: provider.filteredPictos[index].block,
+                    ),
+                  );
+                },
               ),
             ),
           ],

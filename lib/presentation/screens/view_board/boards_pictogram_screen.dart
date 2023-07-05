@@ -165,6 +165,7 @@ class ChooserWidget extends ConsumerWidget {
           ? () {}
           : () {
               provider.selectedType = text;
+              provider.filterPictosForView();
               provider.notify();
             },
       child: Container(

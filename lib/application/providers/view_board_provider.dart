@@ -28,7 +28,6 @@ class ViewBoardProvider extends ChangeNotifier {
   int selectedBoardID = -1;
   List<Group> boards = [];
   List<Picto> pictograms = [];
-  List<Picto> selectedBoardPicts = [];
   List<Picto> filteredPictos = [];
   List<Picto> filteredSearchPictos = [];
   List<Group> filteredBoards = [];
@@ -43,11 +42,11 @@ class ViewBoardProvider extends ChangeNotifier {
   }
 
   Future<void> fetchDesiredPictos() async {
-    selectedBoardPicts = [];
+    filteredPictos = [];
     for (int i = 0; i < boards[selectedBoardID].relations.length; i++) {
       for (var e in pictograms) {
         if (e.id == boards[selectedBoardID].relations[i].id) {
-          selectedBoardPicts.add(e);
+          filteredPictos.add(e);
         }
       }
     }
