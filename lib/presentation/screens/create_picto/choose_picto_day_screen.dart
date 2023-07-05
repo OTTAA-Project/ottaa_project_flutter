@@ -14,91 +14,93 @@ class ChoosePictoDayScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(createPictoProvider);
     final textTheme = Theme.of(context).textTheme;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'create.time_headline'.trl,
-              style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 32),
-              child: ImageWidget(
-                onTap: () {},
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'create.time_headline'.trl,
+                style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
               ),
-            ),
-            Text(
-              'global.predictive'.trl,
-              style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 8),
-              child: Text(
-                'create.time_sub1'.trl,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 32),
+                child: ImageWidget(
+                  onTap: () {},
+                ),
               ),
-            ),
-            Wrap(
-              direction: Axis.horizontal,
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                DayWidget(text: 'global.sunday'.trl),
-                DayWidget(text: 'global.monday'.trl),
-                DayWidget(text: 'global.tuesday'.trl),
-                DayWidget(text: 'global.wednesday'.trl),
-                DayWidget(text: 'global.thursday'.trl),
-                DayWidget(text: 'global.friday'.trl),
-                DayWidget(text: 'global.saturday'.trl),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 8),
-              child: Text(
-                'create.schedule'.trl,
+              Text(
+                'global.predictive'.trl,
+                style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
               ),
-            ),
-            Wrap(
-              direction: Axis.horizontal,
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                TimeWidget(text: 'global.tomorrow'.trl),
-                TimeWidget(text: 'global.noon'.trl),
-                TimeWidget(text: 'global.late'.trl),
-                TimeWidget(text: 'global.evening'.trl),
-              ],
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: SimpleButton(
-            width: false,
-            onTap: () {
-              for (var element in provider.daysToUsePicto) {
-                if (provider.daysString.isEmpty) {
-                  provider.daysString = '$element ';
-                } else {
-                  provider.daysString = '${provider.daysString}, $element ';
-                }
-              }
-              for (var element in provider.timeForPicto) {
-                if (provider.timeString.isEmpty) {
-                  provider.timeString = '$element ';
-                } else {
-                  provider.timeString = '${provider.timeString}, $element ';
-                }
-              }
-              provider.notify();
-              provider.nextPage();
-            },
-            text: 'global.continue'.trl,
+              Padding(
+                padding: const EdgeInsets.only(top: 16, bottom: 8),
+                child: Text(
+                  'create.time_sub1'.trl,
+                ),
+              ),
+              Wrap(
+                direction: Axis.horizontal,
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  DayWidget(text: 'global.sunday'.trl),
+                  DayWidget(text: 'global.monday'.trl),
+                  DayWidget(text: 'global.tuesday'.trl),
+                  DayWidget(text: 'global.wednesday'.trl),
+                  DayWidget(text: 'global.thursday'.trl),
+                  DayWidget(text: 'global.friday'.trl),
+                  DayWidget(text: 'global.saturday'.trl),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16, bottom: 8),
+                child: Text(
+                  'create.schedule'.trl,
+                ),
+              ),
+              Wrap(
+                direction: Axis.horizontal,
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  TimeWidget(text: 'global.tomorrow'.trl),
+                  TimeWidget(text: 'global.noon'.trl),
+                  TimeWidget(text: 'global.late'.trl),
+                  TimeWidget(text: 'global.evening'.trl),
+                ],
+              ),
+            ],
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: SimpleButton(
+              width: false,
+              onTap: () {
+                for (var element in provider.daysToUsePicto) {
+                  if (provider.daysString.isEmpty) {
+                    provider.daysString = '$element ';
+                  } else {
+                    provider.daysString = '${provider.daysString}, $element ';
+                  }
+                }
+                for (var element in provider.timeForPicto) {
+                  if (provider.timeString.isEmpty) {
+                    provider.timeString = '$element ';
+                  } else {
+                    provider.timeString = '${provider.timeString}, $element ';
+                  }
+                }
+                provider.notify();
+                provider.nextPage();
+              },
+              text: 'global.continue'.trl,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
