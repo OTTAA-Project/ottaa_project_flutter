@@ -235,15 +235,25 @@ class EditPictoScreen extends ConsumerWidget {
                   style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
-              provider.selectedBoardID == -1
+              provider.pictoInBoards.isEmpty
                   ? const SizedBox.shrink()
-                  : PictogramCard(
-                      onPressed: () {
-                        //todo: ask from hector
-                      },
-                      title: provider.boards[provider.selectedBoardID].text,
-                      actionText: '${'global.edit'.trl} ${'global.location'.trl}',
-                      pictogram: CachedNetworkImageProvider(provider.boards[provider.selectedBoardID].resource.network!),
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...provider.pictoInBoards
+                            .map((e) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 8),
+                                  child: PictogramCard(
+                                    onPressed: () {
+                                      //todo: ask from hector
+                                    },
+                                    title: provider.boards[e].text,
+                                    actionText: '${'global.edit'.trl} ${'global.location'.trl}',
+                                    pictogram: CachedNetworkImageProvider(provider.boards[e].resource.network!),
+                                  ),
+                                ))
+                            .toList()
+                      ],
                     ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),

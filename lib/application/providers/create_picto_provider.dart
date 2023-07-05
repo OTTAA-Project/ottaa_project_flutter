@@ -87,6 +87,7 @@ class CreatePictoProvider extends ChangeNotifier {
   String timeString = '';
   String selectedPictoForEditId = '';
   String userIdByCareGiver = '';
+  List<int> pictoInBoards = [];
 
   /// 6 is the default color for black and Miscellaneous
   int borderColor = 6;
@@ -430,12 +431,13 @@ class CreatePictoProvider extends ChangeNotifier {
   }
 
   Future<void> searchBoard({required String id}) async {
+    pictoInBoards.clear();
     int boardIndex = -1;
     for (var board in boards) {
       boardIndex++;
       for (var relation in board.relations) {
         if (relation.id == id) {
-          selectedBoardID = boardIndex;
+          pictoInBoards.add(boardIndex);
         }
       }
     }
