@@ -25,6 +25,29 @@ class ChooseArsaacPhotoScreen extends ConsumerWidget {
         child: Column(
           children: [
             TextFormField(
+              controller: provider.arsaacController,
+              onSaved: (value) async {
+                showDialog(
+                  context: context,
+                  builder: (context) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+                await provider.fetchPhotoFromGlobalSymbols(text: provider.arsaacController.text);
+                provider.searchedData.removeWhere((e) => e.picto.imageUrl.contains('.svg'));
+                context.pop();
+              },
+              onFieldSubmitted: (value) async {
+                showDialog(
+                  context: context,
+                  builder: (context) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+                await provider.fetchPhotoFromGlobalSymbols(text: provider.arsaacController.text);
+                provider.searchedData.removeWhere((e) => e.picto.imageUrl.contains('.svg'));
+                context.pop();
+              },
               decoration: InputDecoration(
                 suffixIcon: GestureDetector(
                   onTap: () async {

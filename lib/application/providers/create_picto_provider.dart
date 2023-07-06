@@ -220,6 +220,7 @@ class CreatePictoProvider extends ChangeNotifier {
 
   Future<void> fetchPhotoFromGlobalSymbols({required String text}) async {
     isArsaacSearched = false;
+    searchedData.clear();
     final res = await _createPictoServices.fetchPhotosFromGlobalSymbols(
       searchText: text,
       languageCode: _i18n.currentLocale.languageCode,

@@ -659,7 +659,7 @@ class ServerService implements ServerRepository {
         queryParameters: {
           "limit": limit,
           "chunk": chunk,
-          if(reduced) "reduced": true,
+          if (reduced) "reduced": true,
         },
         options: Options(
           contentType: Headers.jsonContentType,
@@ -733,12 +733,10 @@ class ServerService implements ServerRepository {
 
   @override
   Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
-    final String languageFormat = languageCode == 'en_US' ? '639-3' : '639-1';
-    final language = languageCode == 'en_US' ? 'eng' : 'es';
-    String url = 'https://globalsymbols.com/api/v1/labels/search?query=${searchText.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
-    var urlF = Uri.parse(url);
+    final String languageFormat = languageCode == 'en' ? '639-3' : '639-1';
+    String url = 'https://globalsymbols.com/api/v1/labels/search?query=${searchText.replaceAll(' ', '+')}&language=$languageCode&language_iso_format=$languageFormat&limit=60';
     http.Response response = await http.get(
-      urlF,
+      Uri.parse(url),
       headers: {"Accept": "application/json"},
     );
     // print(url);
