@@ -49,21 +49,11 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
             timeText: provider.connectedUsersData[index].settings.data.lastConnection.timezonedDate.timeString,
             show: provider.connectedUsersProfileDataExpanded[index],
             customiseTap: () async {
-              final customisePro = ref.watch(customiseProvider);
-              customisePro.type = CustomiseDataType.careGiver;
-              customisePro.userId = provider.connectedUsersData[index].id;
-              context.push(AppRoutes.userCustomizeBoard);
-            },
-            settingsTap: () {
-              ref.read(patientNotifier.notifier).setUser(provider.connectedUsersData[index].patient);
-              context.push(AppRoutes.caregiverAccount);
-            },
-            useOTTAATap: () {
-              final user = provider.connectedUsersData[index];
-              ref.watch(patientNotifier.notifier).setUser(user.patient);
-              context.push(AppRoutes.userTalk);
-            },
-            boardsAndPictosOnTap: () async {
+              //todo: discuss with hector
+              // final customisePro = ref.watch(customiseProvider);
+              // customisePro.type = CustomiseDataType.careGiver;
+              // customisePro.userId = provider.connectedUsersData[index].id;
+              // context.push(AppRoutes.userCustomizeBoard);
               final pro = ref.read(viewBoardProvider);
               showDialog(
                 context: context,
@@ -79,6 +69,16 @@ class _ConnectedUsersListState extends ConsumerState<ConnectedUsersList> {
               context.pop();
               context.push(AppRoutes.patientViewBoardsAndPictos);
             },
+            settingsTap: () {
+              ref.read(patientNotifier.notifier).setUser(provider.connectedUsersData[index].patient);
+              context.push(AppRoutes.caregiverAccount);
+            },
+            useOTTAATap: () {
+              final user = provider.connectedUsersData[index];
+              ref.watch(patientNotifier.notifier).setUser(user.patient);
+              context.push(AppRoutes.userTalk);
+            },
+            boardsAndPictosOnTap: () async {},
           ),
         );
       },
