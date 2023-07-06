@@ -270,7 +270,7 @@ class CreatePictoProvider extends ChangeNotifier {
   }
 
   Future<void> saveAndUploadGroup() async {
-    final url = await getImageUrl();
+    final url = await getImageUrl(isPicto: false);
     Group group = Group(
       id: '$userID-${boards.length.toString()}',
       block: false,
@@ -324,7 +324,7 @@ class CreatePictoProvider extends ChangeNotifier {
   }
 
   Future<void> saveChangesInBoard() async {
-    final url = await getImageUrl();
+    final url = await getImageUrl(isPicto: false);
     final oldBoard = boards[selectedBoardID];
     Group newBoard = Group(
       id: oldBoard.id,
@@ -351,20 +351,20 @@ class CreatePictoProvider extends ChangeNotifier {
     isEditBoard = false;
   }
 
-  Future<String> getImageUrl() async {
+  Future<String> getImageUrl({bool isPicto = true}) async {
     final userId = userIdByCareGiver.isEmpty ? userState.user!.id : userIdByCareGiver;
 
-    String pictoPath = "images/$userId/pictos";
+    String pictoPath = isPicto ? "images/$userId/pictos" : "images/$userId/boards";
 
-    if (imageUrlForPicto.isNotEmpty) {
-      return imageUrlForPicto;
-    } else {
-      return _createPictoServices.uploadOtherImages(
+    if (imageForPicto.path.isNotEmpty) {
+      return await _createPictoServices.uploadOtherImages(
         imagePath: imageForPicto.path,
         directoryPath: pictoPath,
         name: imageForPicto.name,
         userId: userId,
       );
+    } else {
+      return imageUrlForPicto;
     }
     // Asim, please stop of repeat yourself :c
     // if (userIdByCareGiver.isEmpty) {
