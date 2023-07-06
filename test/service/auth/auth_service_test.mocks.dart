@@ -3,32 +3,31 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i10;
-import 'dart:ui' as _i4;
+import 'dart:async' as _i9;
+import 'dart:ui' as _i3;
 
-import 'package:dio/dio.dart' as _i14;
-import 'package:either_dart/either.dart' as _i3;
-import 'package:firebase_core/firebase_core.dart' as _i6;
-import 'package:firebase_messaging/firebase_messaging.dart' as _i20;
+import 'package:dio/dio.dart' as _i13;
+import 'package:either_dart/either.dart' as _i2;
+import 'package:firebase_core/firebase_core.dart' as _i5;
+import 'package:firebase_messaging/firebase_messaging.dart' as _i19;
 import 'package:firebase_messaging_platform_interface/firebase_messaging_platform_interface.dart'
-    as _i7;
-import 'package:flutter/foundation.dart' as _i2;
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:ottaa_project_flutter/application/common/i18n.dart' as _i5;
+import 'package:ottaa_project_flutter/application/common/i18n.dart' as _i4;
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart'
-    as _i19;
-import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i9;
-import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i16;
-import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i12;
-import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart'
     as _i18;
-import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i13;
-import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i17;
-import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i15;
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i8;
+import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i15;
+import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i11;
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart'
+    as _i17;
+import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i12;
+import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i16;
+import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i14;
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart'
-    as _i8;
+    as _i7;
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
-    as _i11;
+    as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -41,9 +40,8 @@ import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeValueListenable_0<T> extends _i1.SmartFake
-    implements _i2.ValueListenable<T> {
-  _FakeValueListenable_0(
+class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
+  _FakeEither_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -52,8 +50,8 @@ class _FakeValueListenable_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
-  _FakeEither_1(
+class _FakeLocale_1 extends _i1.SmartFake implements _i3.Locale {
+  _FakeLocale_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -62,8 +60,8 @@ class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
         );
 }
 
-class _FakeLocale_2 extends _i1.SmartFake implements _i4.Locale {
-  _FakeLocale_2(
+class _FakeI18N_2 extends _i1.SmartFake implements _i4.I18N {
+  _FakeI18N_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -72,8 +70,8 @@ class _FakeLocale_2 extends _i1.SmartFake implements _i4.Locale {
         );
 }
 
-class _FakeI18N_3 extends _i1.SmartFake implements _i5.I18N {
-  _FakeI18N_3(
+class _FakeFirebaseApp_3 extends _i1.SmartFake implements _i5.FirebaseApp {
+  _FakeFirebaseApp_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -82,19 +80,9 @@ class _FakeI18N_3 extends _i1.SmartFake implements _i5.I18N {
         );
 }
 
-class _FakeFirebaseApp_4 extends _i1.SmartFake implements _i6.FirebaseApp {
-  _FakeFirebaseApp_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeNotificationSettings_5 extends _i1.SmartFake
-    implements _i7.NotificationSettings {
-  _FakeNotificationSettings_5(
+class _FakeNotificationSettings_4 extends _i1.SmartFake
+    implements _i6.NotificationSettings {
+  _FakeNotificationSettings_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -107,13 +95,13 @@ class _FakeNotificationSettings_5 extends _i1.SmartFake
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalDatabaseRepository extends _i1.Mock
-    implements _i8.LocalDatabaseRepository {
+    implements _i7.LocalDatabaseRepository {
   MockLocalDatabaseRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set user(_i9.UserModel? user) => super.noSuchMethod(
+  set user(_i8.UserModel? user) => super.noSuchMethod(
         Invocation.setter(
           #user,
           user,
@@ -121,174 +109,159 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i10.Future<void> init() => (super.noSuchMethod(
+  _i9.Future<void> init() => (super.noSuchMethod(
         Invocation.method(
           #init,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> close() => (super.noSuchMethod(
+  _i9.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> setUser(_i9.UserModel? user) => (super.noSuchMethod(
+  _i9.Future<void> setUser(_i8.UserModel? user) => (super.noSuchMethod(
         Invocation.method(
           #setUser,
           [user],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<_i9.UserModel?> getUser() => (super.noSuchMethod(
+  _i9.Future<_i8.UserModel?> getUser() => (super.noSuchMethod(
         Invocation.method(
           #getUser,
           [],
         ),
-        returnValue: _i10.Future<_i9.UserModel?>.value(),
-      ) as _i10.Future<_i9.UserModel?>);
+        returnValue: _i9.Future<_i8.UserModel?>.value(),
+      ) as _i9.Future<_i8.UserModel?>);
   @override
-  _i10.Future<void> deleteUser() => (super.noSuchMethod(
+  _i9.Future<void> deleteUser() => (super.noSuchMethod(
         Invocation.method(
           #deleteUser,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<bool> getIntro() => (super.noSuchMethod(
+  _i9.Future<bool> getIntro() => (super.noSuchMethod(
         Invocation.method(
           #getIntro,
           [],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
-  _i10.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
+  _i9.Future<void> setIntro([bool? value]) => (super.noSuchMethod(
         Invocation.method(
           #setIntro,
           [value],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<String> getVoice() => (super.noSuchMethod(
+  _i9.Future<String> getVoice() => (super.noSuchMethod(
         Invocation.method(
           #getVoice,
           [],
         ),
-        returnValue: _i10.Future<String>.value(''),
-      ) as _i10.Future<String>);
+        returnValue: _i9.Future<String>.value(''),
+      ) as _i9.Future<String>);
   @override
-  _i10.Future<bool> getLongClick() => (super.noSuchMethod(
+  _i9.Future<bool> getLongClick() => (super.noSuchMethod(
         Invocation.method(
           #getLongClick,
           [],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
-  _i10.Future<void> setLongClick({required bool? isLongClick}) =>
+  _i9.Future<void> setLongClick({required bool? isLongClick}) =>
       (super.noSuchMethod(
         Invocation.method(
           #setLongClick,
           [],
           {#isLongClick: isLongClick},
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
+  _i9.Future<void> setVoice({required String? name}) => (super.noSuchMethod(
         Invocation.method(
           #setVoice,
           [],
           {#name: name},
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-  @override
-  _i2.ValueListenable<dynamic> getListeneableFromName(String? name) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getListeneableFromName,
-          [name],
-        ),
-        returnValue: _FakeValueListenable_0<dynamic>(
-          this,
-          Invocation.method(
-            #getListeneableFromName,
-            [name],
-          ),
-        ),
-      ) as _i2.ValueListenable<dynamic>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }
 
 /// A class which mocks [ServerRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
+class MockServerRepository extends _i1.Mock implements _i10.ServerRepository {
   MockServerRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i10.Future<_i3.Either<String, String>> getAvailableAppVersion(
+  _i9.Future<_i2.Either<String, String>> getAvailableAppVersion(
           String? platform) =>
       (super.noSuchMethod(
         Invocation.method(
           #getAvailableAppVersion,
           [platform],
         ),
-        returnValue: _i10.Future<_i3.Either<String, String>>.value(
-            _FakeEither_1<String, String>(
+        returnValue: _i9.Future<_i2.Either<String, String>>.value(
+            _FakeEither_0<String, String>(
           this,
           Invocation.method(
             #getAvailableAppVersion,
             [platform],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, String>>);
+      ) as _i9.Future<_i2.Either<String, String>>);
   @override
-  _i10.Future<_i12.UserType> getUserType(String? userId) => (super.noSuchMethod(
+  _i9.Future<_i11.UserType> getUserType(String? userId) => (super.noSuchMethod(
         Invocation.method(
           #getUserType,
           [userId],
         ),
-        returnValue: _i10.Future<_i12.UserType>.value(_i12.UserType.caregiver),
-      ) as _i10.Future<_i12.UserType>);
+        returnValue: _i9.Future<_i11.UserType>.value(_i11.UserType.caregiver),
+      ) as _i9.Future<_i11.UserType>);
   @override
-  _i10.Future<_i3.Either<String, String>> getUserProfilePicture(
+  _i9.Future<_i2.Either<String, String>> getUserProfilePicture(
           String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserProfilePicture,
           [userId],
         ),
-        returnValue: _i10.Future<_i3.Either<String, String>>.value(
-            _FakeEither_1<String, String>(
+        returnValue: _i9.Future<_i2.Either<String, String>>.value(
+            _FakeEither_0<String, String>(
           this,
           Invocation.method(
             #getUserProfilePicture,
             [userId],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, String>>);
+      ) as _i9.Future<_i2.Either<String, String>>);
   @override
-  _i10.Future<_i3.Either<String, void>> uploadUserPicture(
+  _i9.Future<_i2.Either<String, void>> uploadUserPicture(
     String? userId,
-    _i13.AssetsImage? image,
+    _i12.AssetsImage? image,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -298,8 +271,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             image,
           ],
         ),
-        returnValue: _i10.Future<_i3.Either<String, void>>.value(
-            _FakeEither_1<String, void>(
+        returnValue: _i9.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
           this,
           Invocation.method(
             #uploadUserPicture,
@@ -309,27 +282,26 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, void>>);
+      ) as _i9.Future<_i2.Either<String, void>>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> getUserInformation(
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> getUserInformation(
           String? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserInformation,
           [id],
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #getUserInformation,
             [id],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<_i3.Either<String, void>> uploadUserInformation(
+  _i9.Future<_i2.Either<String, void>> uploadUserInformation(
     String? userId,
     Map<String, dynamic>? data,
   ) =>
@@ -341,8 +313,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             data,
           ],
         ),
-        returnValue: _i10.Future<_i3.Either<String, void>>.value(
-            _FakeEither_1<String, void>(
+        returnValue: _i9.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
           this,
           Invocation.method(
             #uploadUserInformation,
@@ -352,9 +324,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, void>>);
+      ) as _i9.Future<_i2.Either<String, void>>);
   @override
-  _i10.Future<List<Map<String, dynamic>>> getUserSentences(
+  _i9.Future<List<Map<String, dynamic>>> getUserSentences(
     String? userId, {
     required String? language,
     required String? type,
@@ -370,11 +342,11 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #isFavorite: isFavorite,
           },
         ),
-        returnValue: _i10.Future<List<Map<String, dynamic>>>.value(
+        returnValue: _i9.Future<List<Map<String, dynamic>>>.value(
             <Map<String, dynamic>>[]),
-      ) as _i10.Future<List<Map<String, dynamic>>>);
+      ) as _i9.Future<List<Map<String, dynamic>>>);
   @override
-  _i10.Future<_i3.Either<String, void>> uploadUserSentences(
+  _i9.Future<_i2.Either<String, void>> uploadUserSentences(
     String? userId,
     String? language,
     String? type,
@@ -390,8 +362,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             data,
           ],
         ),
-        returnValue: _i10.Future<_i3.Either<String, void>>.value(
-            _FakeEither_1<String, void>(
+        returnValue: _i9.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
           this,
           Invocation.method(
             #uploadUserSentences,
@@ -403,9 +375,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, void>>);
+      ) as _i9.Future<_i2.Either<String, void>>);
   @override
-  _i10.Future<_i3.Either<String, List<Map<String, dynamic>>>> getAllPictograms(
+  _i9.Future<_i2.Either<String, List<Map<String, dynamic>>>> getAllPictograms(
     String? userId,
     String? languageCode,
   ) =>
@@ -418,8 +390,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           ],
         ),
         returnValue:
-            _i10.Future<_i3.Either<String, List<Map<String, dynamic>>>>.value(
-                _FakeEither_1<String, List<Map<String, dynamic>>>(
+            _i9.Future<_i2.Either<String, List<Map<String, dynamic>>>>.value(
+                _FakeEither_0<String, List<Map<String, dynamic>>>(
           this,
           Invocation.method(
             #getAllPictograms,
@@ -429,9 +401,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, List<Map<String, dynamic>>>>);
+      ) as _i9.Future<_i2.Either<String, List<Map<String, dynamic>>>>);
   @override
-  _i10.Future<_i3.Either<String, void>> uploadPictograms(
+  _i9.Future<_i2.Either<String, void>> uploadPictograms(
     String? userId,
     String? language, {
     required List<Map<String, dynamic>>? data,
@@ -445,8 +417,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           ],
           {#data: data},
         ),
-        returnValue: _i10.Future<_i3.Either<String, void>>.value(
-            _FakeEither_1<String, void>(
+        returnValue: _i9.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
           this,
           Invocation.method(
             #uploadPictograms,
@@ -457,9 +429,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             {#data: data},
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, void>>);
+      ) as _i9.Future<_i2.Either<String, void>>);
   @override
-  _i10.Future<_i3.Either<String, void>> updatePictogram(
+  _i9.Future<_i2.Either<String, void>> updatePictogram(
     String? userId,
     String? language,
     int? index, {
@@ -475,8 +447,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           ],
           {#data: data},
         ),
-        returnValue: _i10.Future<_i3.Either<String, void>>.value(
-            _FakeEither_1<String, void>(
+        returnValue: _i9.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
           this,
           Invocation.method(
             #updatePictogram,
@@ -488,9 +460,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             {#data: data},
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, void>>);
+      ) as _i9.Future<_i2.Either<String, void>>);
   @override
-  _i10.Future<_i3.Either<String, List<Map<String, dynamic>>>> getAllGroups(
+  _i9.Future<_i2.Either<String, List<Map<String, dynamic>>>> getAllGroups(
     String? userId,
     String? languageCode,
   ) =>
@@ -503,8 +475,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           ],
         ),
         returnValue:
-            _i10.Future<_i3.Either<String, List<Map<String, dynamic>>>>.value(
-                _FakeEither_1<String, List<Map<String, dynamic>>>(
+            _i9.Future<_i2.Either<String, List<Map<String, dynamic>>>>.value(
+                _FakeEither_0<String, List<Map<String, dynamic>>>(
           this,
           Invocation.method(
             #getAllGroups,
@@ -514,9 +486,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, List<Map<String, dynamic>>>>);
+      ) as _i9.Future<_i2.Either<String, List<Map<String, dynamic>>>>);
   @override
-  _i10.Future<_i3.Either<String, void>> uploadGroups(
+  _i9.Future<_i2.Either<String, void>> uploadGroups(
     String? userId,
     String? language, {
     required List<Map<String, dynamic>>? data,
@@ -530,8 +502,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           ],
           {#data: data},
         ),
-        returnValue: _i10.Future<_i3.Either<String, void>>.value(
-            _FakeEither_1<String, void>(
+        returnValue: _i9.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
           this,
           Invocation.method(
             #uploadGroups,
@@ -542,9 +514,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             {#data: data},
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, void>>);
+      ) as _i9.Future<_i2.Either<String, void>>);
   @override
-  _i10.Future<_i3.Either<String, void>> updateGroup(
+  _i9.Future<_i2.Either<String, void>> updateGroup(
     String? userId,
     String? language,
     int? index, {
@@ -560,8 +532,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           ],
           {#data: data},
         ),
-        returnValue: _i10.Future<_i3.Either<String, void>>.value(
-            _FakeEither_1<String, void>(
+        returnValue: _i9.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
           this,
           Invocation.method(
             #updateGroup,
@@ -573,12 +545,12 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             {#data: data},
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, void>>);
+      ) as _i9.Future<_i2.Either<String, void>>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> getPictogramsStatistics(
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> getPictogramsStatistics(
     String? userId,
     String? languageCode, [
-    _i14.CancelToken? cancelToken,
+    _i13.CancelToken? cancelToken,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -589,9 +561,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             cancelToken,
           ],
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #getPictogramsStatistics,
@@ -602,12 +573,12 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> getMostUsedSentences(
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> getMostUsedSentences(
     String? userId,
     String? languageCode, [
-    _i14.CancelToken? cancelToken,
+    _i13.CancelToken? cancelToken,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -618,9 +589,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             cancelToken,
           ],
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #getMostUsedSentences,
@@ -631,9 +601,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<_i3.Either<String, String>> generatePhraseGPT({
+  _i9.Future<_i2.Either<String, String>> generatePhraseGPT({
     required String? prompt,
     required int? maxTokens,
     double? temperature = 0.0,
@@ -648,8 +618,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #temperature: temperature,
           },
         ),
-        returnValue: _i10.Future<_i3.Either<String, String>>.value(
-            _FakeEither_1<String, String>(
+        returnValue: _i9.Future<_i2.Either<String, String>>.value(
+            _FakeEither_0<String, String>(
           this,
           Invocation.method(
             #generatePhraseGPT,
@@ -661,9 +631,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             },
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, String>>);
+      ) as _i9.Future<_i2.Either<String, String>>);
   @override
-  _i10.Future<String> uploadUserImage({
+  _i9.Future<String> uploadUserImage({
     required String? path,
     required String? name,
     required String? userId,
@@ -678,10 +648,10 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<String>.value(''),
-      ) as _i10.Future<String>);
+        returnValue: _i9.Future<String>.value(''),
+      ) as _i9.Future<String>);
   @override
-  _i10.Future<void> updateUserSettings({
+  _i9.Future<void> updateUserSettings({
     required Map<String, dynamic>? data,
     required String? userId,
   }) =>
@@ -694,11 +664,11 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> getConnectedUsers(
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> getConnectedUsers(
           {required String? userId}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -706,9 +676,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           [],
           {#userId: userId},
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #getConnectedUsers,
@@ -716,9 +685,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             {#userId: userId},
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> fetchConnectedUserData(
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> fetchConnectedUserData(
           {required String? userId}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -726,9 +695,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           [],
           {#userId: userId},
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #fetchConnectedUserData,
@@ -736,9 +704,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             {#userId: userId},
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<void> removeCurrentUser({
+  _i9.Future<void> removeCurrentUser({
     required String? userId,
     required String? careGiverId,
   }) =>
@@ -751,12 +719,12 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #careGiverId: careGiverId,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<_i3.Either<String, void>> setShortcutsForUser({
-    required _i15.ShortcutsModel? shortcuts,
+  _i9.Future<_i2.Either<String, void>> setShortcutsForUser({
+    required _i14.ShortcutsModel? shortcuts,
     required String? userId,
   }) =>
       (super.noSuchMethod(
@@ -768,8 +736,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<_i3.Either<String, void>>.value(
-            _FakeEither_1<String, void>(
+        returnValue: _i9.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
           this,
           Invocation.method(
             #setShortcutsForUser,
@@ -780,9 +748,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             },
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, void>>);
+      ) as _i9.Future<_i2.Either<String, void>>);
   @override
-  _i10.Future<void> updateUserData({
+  _i9.Future<void> updateUserData({
     required Map<String, dynamic>? data,
     required String? userId,
   }) =>
@@ -795,14 +763,14 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> getEmailToken(
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> getEmailToken(
     String? ownEmail,
     String? email, [
-    _i14.CancelToken? cancelToken,
+    _i13.CancelToken? cancelToken,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -813,9 +781,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             cancelToken,
           ],
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #getEmailToken,
@@ -826,13 +793,13 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> verifyEmailToken(
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> verifyEmailToken(
     String? ownEmail,
     String? email,
     String? token, [
-    _i14.CancelToken? cancelToken,
+    _i13.CancelToken? cancelToken,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -844,9 +811,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             cancelToken,
           ],
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #verifyEmailToken,
@@ -858,9 +824,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> getProfileById(
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> getProfileById(
           {required String? id}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -868,9 +834,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           [],
           {#id: id},
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #getProfileById,
@@ -878,29 +843,29 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             {#id: id},
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<dynamic> getDefaultGroups(String? languageCode) =>
+  _i9.Future<dynamic> getDefaultGroups(String? languageCode) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDefaultGroups,
           [languageCode],
         ),
-        returnValue: _i10.Future<dynamic>.value(),
-      ) as _i10.Future<dynamic>);
+        returnValue: _i9.Future<dynamic>.value(),
+      ) as _i9.Future<dynamic>);
   @override
-  _i10.Future<dynamic> getDefaultPictos(String? languageCode) =>
+  _i9.Future<dynamic> getDefaultPictos(String? languageCode) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDefaultPictos,
           [languageCode],
         ),
-        returnValue: _i10.Future<dynamic>.value(),
-      ) as _i10.Future<dynamic>);
+        returnValue: _i9.Future<dynamic>.value(),
+      ) as _i9.Future<dynamic>);
   @override
-  _i10.Future<void> updateUserType({
+  _i9.Future<void> updateUserType({
     required String? id,
-    required _i12.UserType? userType,
+    required _i11.UserType? userType,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -911,11 +876,11 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userType: userType,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> fetchShortcutsForUser(
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> fetchShortcutsForUser(
           {required String? userId}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -923,9 +888,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
           [],
           {#userId: userId},
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #fetchShortcutsForUser,
@@ -933,14 +897,14 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             {#userId: userId},
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<Map<String, dynamic>?> createPictoGroupData({
+  _i9.Future<Map<String, dynamic>?> createPictoGroupData({
     required String? userId,
     required String? language,
-    required _i16.BoardDataType? type,
+    required _i15.BoardDataType? type,
     required Map<String, dynamic>? data,
-    _i14.CancelToken? cancelToken,
+    _i13.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -954,12 +918,12 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #cancelToken: cancelToken,
           },
         ),
-        returnValue: _i10.Future<Map<String, dynamic>?>.value(),
-      ) as _i10.Future<Map<String, dynamic>?>);
+        returnValue: _i9.Future<Map<String, dynamic>?>.value(),
+      ) as _i9.Future<Map<String, dynamic>?>);
   @override
-  _i10.Future<void> updateDevicesId({
+  _i9.Future<void> updateDevicesId({
     required String? userId,
-    required _i17.DeviceToken? deviceToken,
+    required _i16.DeviceToken? deviceToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -970,16 +934,16 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #deviceToken: deviceToken,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> learnPictograms({
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> learnPictograms({
     required String? uid,
     required String? language,
     required String? model,
     required List<Map<String, dynamic>>? tokens,
-    _i14.CancelToken? cancelToken,
+    _i13.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -993,9 +957,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #cancelToken: cancelToken,
           },
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #learnPictograms,
@@ -1009,9 +972,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             },
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<_i3.Either<String, Map<String, dynamic>>> predictPictogram({
+  _i9.Future<_i2.Either<String, Map<String, dynamic>>> predictPictogram({
     required String? sentence,
     required String? uid,
     required String? language,
@@ -1021,7 +984,7 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
     bool? reduced = false,
     int? limit = 10,
     int? chunk = 4,
-    _i14.CancelToken? cancelToken,
+    _i13.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1040,9 +1003,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #cancelToken: cancelToken,
           },
         ),
-        returnValue:
-            _i10.Future<_i3.Either<String, Map<String, dynamic>>>.value(
-                _FakeEither_1<String, Map<String, dynamic>>(
+        returnValue: _i9.Future<_i2.Either<String, Map<String, dynamic>>>.value(
+            _FakeEither_0<String, Map<String, dynamic>>(
           this,
           Invocation.method(
             #predictPictogram,
@@ -1061,9 +1023,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             },
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, Map<String, dynamic>>>);
+      ) as _i9.Future<_i2.Either<String, Map<String, dynamic>>>);
   @override
-  _i10.Future<_i3.Either<String, void>> updateUserLastConnectionTime({
+  _i9.Future<_i2.Either<String, void>> updateUserLastConnectionTime({
     required String? userId,
     required int? time,
   }) =>
@@ -1076,8 +1038,8 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #time: time,
           },
         ),
-        returnValue: _i10.Future<_i3.Either<String, void>>.value(
-            _FakeEither_1<String, void>(
+        returnValue: _i9.Future<_i2.Either<String, void>>.value(
+            _FakeEither_0<String, void>(
           this,
           Invocation.method(
             #updateUserLastConnectionTime,
@@ -1088,9 +1050,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             },
           ),
         )),
-      ) as _i10.Future<_i3.Either<String, void>>);
+      ) as _i9.Future<_i2.Either<String, void>>);
   @override
-  _i10.Future<dynamic> fetchUserGroups({
+  _i9.Future<dynamic> fetchUserGroups({
     required String? languageCode,
     required String? userId,
   }) =>
@@ -1103,10 +1065,10 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<dynamic>.value(),
-      ) as _i10.Future<dynamic>);
+        returnValue: _i9.Future<dynamic>.value(),
+      ) as _i9.Future<dynamic>);
   @override
-  _i10.Future<dynamic> fetchUserPictos({
+  _i9.Future<dynamic> fetchUserPictos({
     required String? languageCode,
     required String? userId,
   }) =>
@@ -1119,10 +1081,10 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<dynamic>.value(),
-      ) as _i10.Future<dynamic>);
+        returnValue: _i9.Future<dynamic>.value(),
+      ) as _i9.Future<dynamic>);
   @override
-  _i10.Future<void> updateLanguageSettings({
+  _i9.Future<void> updateLanguageSettings({
     required Map<String, dynamic>? map,
     required String? userId,
   }) =>
@@ -1135,11 +1097,11 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> updateVoiceAndSubtitleSettings({
+  _i9.Future<void> updateVoiceAndSubtitleSettings({
     required Map<String, dynamic>? map,
     required String? userId,
   }) =>
@@ -1152,11 +1114,11 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> updateAccessibilitySettings({
+  _i9.Future<void> updateAccessibilitySettings({
     required Map<String, dynamic>? map,
     required String? userId,
   }) =>
@@ -1169,11 +1131,11 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> updateMainSettings({
+  _i9.Future<void> updateMainSettings({
     required Map<String, dynamic>? map,
     required String? userId,
   }) =>
@@ -1186,21 +1148,21 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<dynamic> fetchUserSettings({required String? userId}) =>
+  _i9.Future<dynamic> fetchUserSettings({required String? userId}) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUserSettings,
           [],
           {#userId: userId},
         ),
-        returnValue: _i10.Future<dynamic>.value(),
-      ) as _i10.Future<dynamic>);
+        returnValue: _i9.Future<dynamic>.value(),
+      ) as _i9.Future<dynamic>);
   @override
-  _i10.Future<_i3.Either<String, List<_i18.ArsaacDataModel>>>
+  _i9.Future<_i2.Either<String, List<_i17.ArsaacDataModel>>>
       fetchPhotosFromGlobalSymbols({
     required String? searchText,
     required String? languageCode,
@@ -1214,9 +1176,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
                 #languageCode: languageCode,
               },
             ),
-            returnValue: _i10.Future<
-                    _i3.Either<String, List<_i18.ArsaacDataModel>>>.value(
-                _FakeEither_1<String, List<_i18.ArsaacDataModel>>(
+            returnValue: _i9.Future<
+                    _i2.Either<String, List<_i17.ArsaacDataModel>>>.value(
+                _FakeEither_0<String, List<_i17.ArsaacDataModel>>(
               this,
               Invocation.method(
                 #fetchPhotosFromGlobalSymbols,
@@ -1227,9 +1189,9 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
                 },
               ),
             )),
-          ) as _i10.Future<_i3.Either<String, List<_i18.ArsaacDataModel>>>);
+          ) as _i9.Future<_i2.Either<String, List<_i17.ArsaacDataModel>>>);
   @override
-  _i10.Future<String> uploadOtherImages({
+  _i9.Future<String> uploadOtherImages({
     required String? imagePath,
     required String? directoryPath,
     required String? name,
@@ -1246,33 +1208,33 @@ class MockServerRepository extends _i1.Mock implements _i11.ServerRepository {
             #userId: userId,
           },
         ),
-        returnValue: _i10.Future<String>.value(''),
-      ) as _i10.Future<String>);
+        returnValue: _i9.Future<String>.value(''),
+      ) as _i9.Future<String>);
 }
 
 /// A class which mocks [I18N].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockI18N extends _i1.Mock implements _i5.I18N {
+class MockI18N extends _i1.Mock implements _i4.I18N {
   MockI18N() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  Map<String, _i4.Locale> get platformLanguages => (super.noSuchMethod(
+  Map<String, _i3.Locale> get platformLanguages => (super.noSuchMethod(
         Invocation.getter(#platformLanguages),
-        returnValue: <String, _i4.Locale>{},
-      ) as Map<String, _i4.Locale>);
+        returnValue: <String, _i3.Locale>{},
+      ) as Map<String, _i3.Locale>);
   @override
-  _i4.Locale get currentLocale => (super.noSuchMethod(
+  _i3.Locale get currentLocale => (super.noSuchMethod(
         Invocation.getter(#currentLocale),
-        returnValue: _FakeLocale_2(
+        returnValue: _FakeLocale_1(
           this,
           Invocation.getter(#currentLocale),
         ),
-      ) as _i4.Locale);
+      ) as _i3.Locale);
   @override
-  set currentLocale(_i4.Locale? _currentLocale) => super.noSuchMethod(
+  set currentLocale(_i3.Locale? _currentLocale) => super.noSuchMethod(
         Invocation.setter(
           #currentLocale,
           _currentLocale,
@@ -1285,47 +1247,47 @@ class MockI18N extends _i1.Mock implements _i5.I18N {
         returnValue: false,
       ) as bool);
   @override
-  _i10.Future<_i5.I18N> init() => (super.noSuchMethod(
+  _i9.Future<_i4.I18N> init() => (super.noSuchMethod(
         Invocation.method(
           #init,
           [],
         ),
-        returnValue: _i10.Future<_i5.I18N>.value(_FakeI18N_3(
+        returnValue: _i9.Future<_i4.I18N>.value(_FakeI18N_2(
           this,
           Invocation.method(
             #init,
             [],
           ),
         )),
-      ) as _i10.Future<_i5.I18N>);
+      ) as _i9.Future<_i4.I18N>);
   @override
-  _i10.Future<_i19.TranslationTree?> loadTranslation(_i4.Locale? locale) =>
+  _i9.Future<_i18.TranslationTree?> loadTranslation(_i3.Locale? locale) =>
       (super.noSuchMethod(
         Invocation.method(
           #loadTranslation,
           [locale],
         ),
-        returnValue: _i10.Future<_i19.TranslationTree?>.value(),
-      ) as _i10.Future<_i19.TranslationTree?>);
+        returnValue: _i9.Future<_i18.TranslationTree?>.value(),
+      ) as _i9.Future<_i18.TranslationTree?>);
   @override
-  _i10.Future<void> changeLanguage(String? languageCode) => (super.noSuchMethod(
+  _i9.Future<void> changeLanguage(String? languageCode) => (super.noSuchMethod(
         Invocation.method(
           #changeLanguage,
           [languageCode],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> changeLanguageFromLocale(_i4.Locale? locale) =>
+  _i9.Future<void> changeLanguageFromLocale(_i3.Locale? locale) =>
       (super.noSuchMethod(
         Invocation.method(
           #changeLanguageFromLocale,
           [locale],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
   void notify() => super.noSuchMethod(
         Invocation.method(
@@ -1335,7 +1297,7 @@ class MockI18N extends _i1.Mock implements _i5.I18N {
         returnValueForMissingStub: null,
       );
   @override
-  void addListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i3.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -1343,7 +1305,7 @@ class MockI18N extends _i1.Mock implements _i5.I18N {
         returnValueForMissingStub: null,
       );
   @override
-  void removeListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i3.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
@@ -1371,21 +1333,21 @@ class MockI18N extends _i1.Mock implements _i5.I18N {
 /// A class which mocks [FirebaseMessaging].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFirebaseMessaging extends _i1.Mock implements _i20.FirebaseMessaging {
+class MockFirebaseMessaging extends _i1.Mock implements _i19.FirebaseMessaging {
   MockFirebaseMessaging() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.FirebaseApp get app => (super.noSuchMethod(
+  _i5.FirebaseApp get app => (super.noSuchMethod(
         Invocation.getter(#app),
-        returnValue: _FakeFirebaseApp_4(
+        returnValue: _FakeFirebaseApp_3(
           this,
           Invocation.getter(#app),
         ),
-      ) as _i6.FirebaseApp);
+      ) as _i5.FirebaseApp);
   @override
-  set app(_i6.FirebaseApp? _app) => super.noSuchMethod(
+  set app(_i5.FirebaseApp? _app) => super.noSuchMethod(
         Invocation.setter(
           #app,
           _app,
@@ -1398,75 +1360,75 @@ class MockFirebaseMessaging extends _i1.Mock implements _i20.FirebaseMessaging {
         returnValue: false,
       ) as bool);
   @override
-  _i10.Stream<String> get onTokenRefresh => (super.noSuchMethod(
+  _i9.Stream<String> get onTokenRefresh => (super.noSuchMethod(
         Invocation.getter(#onTokenRefresh),
-        returnValue: _i10.Stream<String>.empty(),
-      ) as _i10.Stream<String>);
+        returnValue: _i9.Stream<String>.empty(),
+      ) as _i9.Stream<String>);
   @override
   Map<dynamic, dynamic> get pluginConstants => (super.noSuchMethod(
         Invocation.getter(#pluginConstants),
         returnValue: <dynamic, dynamic>{},
       ) as Map<dynamic, dynamic>);
   @override
-  _i10.Future<_i7.RemoteMessage?> getInitialMessage() => (super.noSuchMethod(
+  _i9.Future<_i6.RemoteMessage?> getInitialMessage() => (super.noSuchMethod(
         Invocation.method(
           #getInitialMessage,
           [],
         ),
-        returnValue: _i10.Future<_i7.RemoteMessage?>.value(),
-      ) as _i10.Future<_i7.RemoteMessage?>);
+        returnValue: _i9.Future<_i6.RemoteMessage?>.value(),
+      ) as _i9.Future<_i6.RemoteMessage?>);
   @override
-  _i10.Future<void> deleteToken() => (super.noSuchMethod(
+  _i9.Future<void> deleteToken() => (super.noSuchMethod(
         Invocation.method(
           #deleteToken,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<String?> getAPNSToken() => (super.noSuchMethod(
+  _i9.Future<String?> getAPNSToken() => (super.noSuchMethod(
         Invocation.method(
           #getAPNSToken,
           [],
         ),
-        returnValue: _i10.Future<String?>.value(),
-      ) as _i10.Future<String?>);
+        returnValue: _i9.Future<String?>.value(),
+      ) as _i9.Future<String?>);
   @override
-  _i10.Future<String?> getToken({String? vapidKey}) => (super.noSuchMethod(
+  _i9.Future<String?> getToken({String? vapidKey}) => (super.noSuchMethod(
         Invocation.method(
           #getToken,
           [],
           {#vapidKey: vapidKey},
         ),
-        returnValue: _i10.Future<String?>.value(),
-      ) as _i10.Future<String?>);
+        returnValue: _i9.Future<String?>.value(),
+      ) as _i9.Future<String?>);
   @override
-  _i10.Future<bool> isSupported() => (super.noSuchMethod(
+  _i9.Future<bool> isSupported() => (super.noSuchMethod(
         Invocation.method(
           #isSupported,
           [],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
-  _i10.Future<_i7.NotificationSettings> getNotificationSettings() =>
+  _i9.Future<_i6.NotificationSettings> getNotificationSettings() =>
       (super.noSuchMethod(
         Invocation.method(
           #getNotificationSettings,
           [],
         ),
-        returnValue: _i10.Future<_i7.NotificationSettings>.value(
-            _FakeNotificationSettings_5(
+        returnValue: _i9.Future<_i6.NotificationSettings>.value(
+            _FakeNotificationSettings_4(
           this,
           Invocation.method(
             #getNotificationSettings,
             [],
           ),
         )),
-      ) as _i10.Future<_i7.NotificationSettings>);
+      ) as _i9.Future<_i6.NotificationSettings>);
   @override
-  _i10.Future<_i7.NotificationSettings> requestPermission({
+  _i9.Future<_i6.NotificationSettings> requestPermission({
     bool? alert = true,
     bool? announcement = false,
     bool? badge = true,
@@ -1489,8 +1451,8 @@ class MockFirebaseMessaging extends _i1.Mock implements _i20.FirebaseMessaging {
             #sound: sound,
           },
         ),
-        returnValue: _i10.Future<_i7.NotificationSettings>.value(
-            _FakeNotificationSettings_5(
+        returnValue: _i9.Future<_i6.NotificationSettings>.value(
+            _FakeNotificationSettings_4(
           this,
           Invocation.method(
             #requestPermission,
@@ -1506,9 +1468,9 @@ class MockFirebaseMessaging extends _i1.Mock implements _i20.FirebaseMessaging {
             },
           ),
         )),
-      ) as _i10.Future<_i7.NotificationSettings>);
+      ) as _i9.Future<_i6.NotificationSettings>);
   @override
-  _i10.Future<void> sendMessage({
+  _i9.Future<void> sendMessage({
     String? to,
     Map<String, String>? data,
     String? collapseKey,
@@ -1529,30 +1491,30 @@ class MockFirebaseMessaging extends _i1.Mock implements _i20.FirebaseMessaging {
             #ttl: ttl,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> setAutoInitEnabled(bool? enabled) => (super.noSuchMethod(
+  _i9.Future<void> setAutoInitEnabled(bool? enabled) => (super.noSuchMethod(
         Invocation.method(
           #setAutoInitEnabled,
           [enabled],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> setDeliveryMetricsExportToBigQuery(bool? enabled) =>
+  _i9.Future<void> setDeliveryMetricsExportToBigQuery(bool? enabled) =>
       (super.noSuchMethod(
         Invocation.method(
           #setDeliveryMetricsExportToBigQuery,
           [enabled],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> setForegroundNotificationPresentationOptions({
+  _i9.Future<void> setForegroundNotificationPresentationOptions({
     bool? alert = false,
     bool? badge = false,
     bool? sound = false,
@@ -1567,25 +1529,25 @@ class MockFirebaseMessaging extends _i1.Mock implements _i20.FirebaseMessaging {
             #sound: sound,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> subscribeToTopic(String? topic) => (super.noSuchMethod(
+  _i9.Future<void> subscribeToTopic(String? topic) => (super.noSuchMethod(
         Invocation.method(
           #subscribeToTopic,
           [topic],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> unsubscribeFromTopic(String? topic) => (super.noSuchMethod(
+  _i9.Future<void> unsubscribeFromTopic(String? topic) => (super.noSuchMethod(
         Invocation.method(
           #unsubscribeFromTopic,
           [topic],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }
