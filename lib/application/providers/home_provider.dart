@@ -23,7 +23,7 @@ import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:ottaa_project_flutter/core/use_cases/learn_pictogram.dart';
 import 'package:ottaa_project_flutter/core/use_cases/predict_pictogram.dart';
 
-const String kStarterPictoId = "FWy18PiX2jLwZQF6-oNZR";
+const String kStarterPictoId = "_hqTU9A7I3RFDVrcIEK-L";
 
 class HomeProvider extends ChangeNotifier {
   List<Picto> basicPictograms = [];
