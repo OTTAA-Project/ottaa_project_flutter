@@ -409,11 +409,8 @@ class HomeProvider extends ChangeNotifier {
       String? sentence;
       scrollController.jumpTo(0);
       if (patientState.user.patientSettings.language.labs) {
-        sentence = await _chatGPTNotifier.generatePhrase(pictoWords
-            .map((e) => e.copyWith(
-                  text: pictosTranslations[e.id] ?? e.text,
-                ))
-            .toList());
+        final picts = pictoWords.map((e) => e.copyWith(text: pictosTranslations[e.id] ?? e.text)).toList();
+        sentence = await _chatGPTNotifier.generatePhrase(picts);
         if (sentence != null && sentence.startsWith(".")) sentence = sentence.replaceFirst(".", "");
       }
 
