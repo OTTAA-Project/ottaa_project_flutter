@@ -733,8 +733,9 @@ class ServerService implements ServerRepository {
 
   @override
   Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
-    final String languageFormat = languageCode == 'en' ? '639-3' : '639-1';
-    String url = 'https://globalsymbols.com/api/v1/labels/search?query=${searchText.replaceAll(' ', '+')}&language=$languageCode&language_iso_format=$languageFormat&limit=60';
+    String languageFormat = languageCode == 'en' ? '639-3' : '639-1';
+    String language = languageCode == 'en' ? 'eng' : languageCode;
+    String url = 'https://globalsymbols.com/api/v1/labels/search?query=${searchText.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
     http.Response response = await http.get(
       Uri.parse(url),
       headers: {"Accept": "application/json"},
