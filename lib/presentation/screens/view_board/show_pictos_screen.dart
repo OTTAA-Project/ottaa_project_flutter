@@ -66,7 +66,7 @@ class ShowPictosScreen extends ConsumerWidget {
                     height: 32,
                   ),
                   BoardWidget(
-                    title: provider.boards[provider.selectedBoardID].text,
+                    title: provider.boards[provider.selectedBoardID].text.toUpperCase(),
                     image: CachedNetworkImageProvider(provider.boards[provider.selectedBoardID].resource.network!),
                     customizeOnTap: () async {
                       showDialog(context: context, builder: (context) => const Center(child: CircularProgressIndicator()));

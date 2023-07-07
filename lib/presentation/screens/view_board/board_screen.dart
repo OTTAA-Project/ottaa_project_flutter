@@ -65,7 +65,7 @@ class BoardScreen extends ConsumerWidget {
                     )
                   : const BoxDecoration(),
               child: PictogramCard(
-                title: provider.boards[index].text,
+                title: provider.boards[index].text.toUpperCase(),
                 actionText: "customize.board.subtitle".trl,
                 pictogram: CachedNetworkImageProvider(
                   provider.boards[index].resource.network!,
