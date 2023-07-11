@@ -20,6 +20,7 @@ class ChatGptGameProvider extends ChangeNotifier {
   ScrollController pictoScrollController = ScrollController();
   List<Picto> chatGptPictos = [];
   bool btnText = false;
+  bool isStoryFetched = false;
   final List<String> nounBoards = ['APLbz00sRZDNGyGzioXMz', 'DDrKGBCRqNeAy4LgKfN4J', 'alr_Y_ZidZDqQJQCRiqoE', 'lyr-m9k0Q6-rffFFBwPEk'];
   final List<String> modifierBoards = ['--PHmDIFeKHvulVxNtBgk', '5kfboTpsoH8RSFvA9ruE1', 'TMO8t_1hMaHiyh1SUwaFH'];
   final List<String> actionBoards = ['L6pHIipM3ocu3wYlMuo2y'];
@@ -84,7 +85,10 @@ class ChatGptGameProvider extends ChangeNotifier {
     final finalPrompt = '$prompt ${gptPictos[0].text}, ${gptPictos[1].text}, ${gptPictos[2].text}, ${gptPictos[3].text}.';
     final res = await _chatGPTServices.getGPTStory(prompt: finalPrompt);
     if (res.isRight) {
+      isStoryFetched = true;
       generatedStory = res.right;
+    } else {
+      isStoryFetched = false;
     }
     notifyListeners();
   }
