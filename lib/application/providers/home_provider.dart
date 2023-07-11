@@ -418,6 +418,8 @@ class HomeProvider extends ChangeNotifier {
 
       sentence ??= pictoWords.map((e) => pictosTranslations[e.id] ?? e.text).join(' ');
       subtitleText = sentence;
+      subtitleText = subtitleText.replaceAll('\n', '');
+      notifyListeners();
       await _tts.speak(sentence);
 
       isSpeakWidget = false;

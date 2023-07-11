@@ -68,11 +68,13 @@ class _HomeMobileState extends ConsumerState<HomeMobileLayout> {
                       ),
                       child: Text(
                         provider.patientState.user.patientSettings.tts.subtitlesSetting.caps ? provider.subtitleText.toUpperCase() : provider.subtitleText,
-                        style: provider.patientState.user.patientSettings.tts.subtitlesSetting.size == SizeTypes.small
-                            ? textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w700, color: Colors.white)
-                            : provider.patientState.user.patientSettings.tts.subtitlesSetting.size == SizeTypes.mid
-                                ? textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w700, color: Colors.white)
-                                : textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700, color: Colors.white),
+                        style: provider.patientState.user.patientSettings.tts.subtitlesSetting.size.name == SizeTypes.small.name
+                            ? textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w700, color: Colors.white, fontSize: 14)
+                            : provider.patientState.user.patientSettings.tts.subtitlesSetting.size.name == SizeTypes.mid.name
+                                ? textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w700, color: Colors.white, fontSize: 20)
+                                : textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700, color: Colors.white, fontSize: 26),
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
