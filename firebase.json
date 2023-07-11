@@ -1,6 +1,7 @@
 {
-  "hosting":[
-    {   "site":"ottaaproject-flutter",
+  "hosting": [
+    {
+      "site": "ottaaproject-flutter",
       "public": "build/web",
       "ignore": [
         "firebase.json",
@@ -14,7 +15,8 @@
         }
       ]
     },
-    {   "site":"dev-ottaaproject",
+    {
+      "site": "dev-ottaaproject",
       "public": "build/web",
       "ignore": [
         "firebase.json",
@@ -29,5 +31,4 @@
       ]
     }
   ]
-
 }
