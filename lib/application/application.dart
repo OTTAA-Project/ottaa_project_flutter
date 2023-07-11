@@ -6,6 +6,7 @@ import 'package:ottaa_project_flutter/application/router/app_router.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 
 final appRouter = AppRouter.instance.buildRouter();
+
 class Application extends ConsumerStatefulWidget {
   const Application({super.key});
 
@@ -14,12 +15,8 @@ class Application extends ConsumerStatefulWidget {
 }
 
 class _ApplicationState extends ConsumerState<Application> {
-
-
-
   @override
   Widget build(BuildContext context) {
-
     return I18nNotifier(
       notifier: getIt.get<I18N>(),
       child: MaterialApp.router(

@@ -11,6 +11,7 @@ import 'package:ottaa_project_flutter/application/providers/customise_provider.d
 import 'package:ottaa_project_flutter/application/providers/tts_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_settings_provider.dart';
+import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/core/enums/customise_data_type.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/responsive_widget.dart';
@@ -18,6 +19,8 @@ import 'package:ottaa_project_flutter/core/repositories/local_database_repositor
 import 'package:ottaa_project_flutter/presentation/screens/profile/ui/profile_photo_widget.dart';
 import 'package:ottaa_ui_kit/theme.dart';
 import 'package:ottaa_ui_kit/widgets.dart';
+
+import '../../../application/providers/create_picto_provider.dart';
 
 class ProfileMainScreenUser extends ConsumerStatefulWidget {
   const ProfileMainScreenUser({Key? key}) : super(key: key);
@@ -75,7 +78,23 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                   subtitle: 'user.main.subtitle2'.trl,
                   trailingImage: const AssetImage(AppImages.kProfileUserIcon1),
                   onPressed: () async {
-                    final provider = ref.watch(customiseProvider);
+                    final provider = ref.read(viewBoardProvider);
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                    );
+                    await provider.init(userId: user.id);
+                    provider.selectedType = 'home.grid.title'.trl;
+                    provider.notify();
+                    context.pop();
+                    context.push(AppRoutes.patientViewBoardsAndPictos);
+                    //todo: talk with team about this one
+                    /* final provider = ref.watch(customiseProvider);
                     showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -92,7 +111,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                     provider.notify();
                     provider.type = provider.dataExist ? CustomiseDataType.user : CustomiseDataType.defaultCase;
 
-                    context.push(AppRoutes.userCustomizeBoard);
+                    context.push(AppRoutes.userCustomizeBoard);*/
                   },
                   focused: false,
                   imageSize: const Size(129, 96),
@@ -102,7 +121,21 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
                 title: 'profile.tips.title1'.trl,
                 subtitle: 'user.main.subtitle1'.trl,
                 trailingImage: const AssetImage(AppImages.kProfileUserIcon2),
-                onPressed: () {},
+                onPressed: () async {
+                  /*final provider = ref.read(createPictoProvider);
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  );
+                  await provider.init(userId: user.id);
+                  context.pop();
+                  context.push(AppRoutes.patientViewBoardsAndPictos);*/
+                },
                 focused: false,
                 imageSize: const Size(129, 96),
               ),

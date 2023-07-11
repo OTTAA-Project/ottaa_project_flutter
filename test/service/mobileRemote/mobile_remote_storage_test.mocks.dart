@@ -4,20 +4,22 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
-import 'dart:typed_data' as _i18;
+import 'dart:typed_data' as _i19;
 import 'dart:ui' as _i3;
 
 import 'package:dio/dio.dart' as _i12;
 import 'package:either_dart/either.dart' as _i2;
-import 'package:flutter/material.dart' as _i17;
+import 'package:flutter/material.dart' as _i18;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/common/i18n.dart' as _i4;
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart'
-    as _i16;
+    as _i17;
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i7;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i14;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i8;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i10;
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart'
+    as _i16;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i11;
 import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i15;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i13;
@@ -1140,6 +1142,55 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i5.Future<dynamic>.value(),
       ) as _i5.Future<dynamic>);
+  @override
+  _i5.Future<_i2.Either<String, List<_i16.ArsaacDataModel>>>
+      fetchPhotosFromGlobalSymbols({
+    required String? searchText,
+    required String? languageCode,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #fetchPhotosFromGlobalSymbols,
+              [],
+              {
+                #searchText: searchText,
+                #languageCode: languageCode,
+              },
+            ),
+            returnValue: _i5.Future<
+                    _i2.Either<String, List<_i16.ArsaacDataModel>>>.value(
+                _FakeEither_0<String, List<_i16.ArsaacDataModel>>(
+              this,
+              Invocation.method(
+                #fetchPhotosFromGlobalSymbols,
+                [],
+                {
+                  #searchText: searchText,
+                  #languageCode: languageCode,
+                },
+              ),
+            )),
+          ) as _i5.Future<_i2.Either<String, List<_i16.ArsaacDataModel>>>);
+  @override
+  _i5.Future<String> uploadOtherImages({
+    required String? imagePath,
+    required String? directoryPath,
+    required String? name,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadOtherImages,
+          [],
+          {
+            #imagePath: imagePath,
+            #directoryPath: directoryPath,
+            #name: name,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i5.Future<String>.value(''),
+      ) as _i5.Future<String>);
 }
 
 /// A class which mocks [I18N].
@@ -1191,14 +1242,14 @@ class MockI18N extends _i1.Mock implements _i4.I18N {
         )),
       ) as _i5.Future<_i4.I18N>);
   @override
-  _i5.Future<_i16.TranslationTree?> loadTranslation(_i3.Locale? locale) =>
+  _i5.Future<_i17.TranslationTree?> loadTranslation(_i3.Locale? locale) =>
       (super.noSuchMethod(
         Invocation.method(
           #loadTranslation,
           [locale],
         ),
-        returnValue: _i5.Future<_i16.TranslationTree?>.value(),
-      ) as _i5.Future<_i16.TranslationTree?>);
+        returnValue: _i5.Future<_i17.TranslationTree?>.value(),
+      ) as _i5.Future<_i17.TranslationTree?>);
   @override
   _i5.Future<void> changeLanguage(String? languageCode) => (super.noSuchMethod(
         Invocation.method(
@@ -1263,19 +1314,19 @@ class MockI18N extends _i1.Mock implements _i4.I18N {
 /// A class which mocks [AssetBundle].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAssetBundle extends _i1.Mock implements _i17.AssetBundle {
+class MockAssetBundle extends _i1.Mock implements _i18.AssetBundle {
   MockAssetBundle() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i18.ByteData> load(String? key) => (super.noSuchMethod(
+  _i5.Future<_i19.ByteData> load(String? key) => (super.noSuchMethod(
         Invocation.method(
           #load,
           [key],
         ),
-        returnValue: _i5.Future<_i18.ByteData>.value(_i18.ByteData(0)),
-      ) as _i5.Future<_i18.ByteData>);
+        returnValue: _i5.Future<_i19.ByteData>.value(_i19.ByteData(0)),
+      ) as _i5.Future<_i19.ByteData>);
   @override
   _i5.Future<_i3.ImmutableBuffer> loadBuffer(String? key) =>
       (super.noSuchMethod(

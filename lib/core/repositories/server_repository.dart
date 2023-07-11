@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart';
@@ -84,6 +85,7 @@ abstract class ServerRepository {
   });
 
   Future<void> updateDevicesId({required String userId, required DeviceToken deviceToken});
+
   Future<EitherMap> learnPictograms({
     required String uid,
     required String language,
@@ -121,4 +123,7 @@ abstract class ServerRepository {
 
   Future<dynamic> fetchUserSettings({required String userId});
 
+  Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode});
+
+  Future<String> uploadOtherImages({required String imagePath, required String directoryPath, required String name, required String userId});
 }

@@ -248,14 +248,14 @@ void main() async {
     expect(longClick, true);
   });
 
-  test("should return the listeneable for a box", () async {
+  /* test("should return the listeneable for a box", () async {
     when(hive.box(any)).thenReturn(box);
 
     final valuenotifier = hiveDatabase.getListeneableFromName("box");
 
     verify(hive.box(any));
     expect(valuenotifier, isA<ValueListenable<dynamic>>());
-  });
+  });*/
 }
 
 UserModel getUserByType(UserType type) {

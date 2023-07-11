@@ -13,13 +13,15 @@ import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i5;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i14;
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart' as _i6;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i10;
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart'
+    as _i16;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i11;
 import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i15;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i13;
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart'
     as _i3;
 import 'package:ottaa_project_flutter/core/repositories/local_storage_repository.dart'
-    as _i16;
+    as _i17;
 import 'package:ottaa_project_flutter/core/repositories/remote_storage_repository.dart'
     as _i7;
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart'
@@ -1158,13 +1160,62 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<_i2.Either<String, List<_i16.ArsaacDataModel>>>
+      fetchPhotosFromGlobalSymbols({
+    required String? searchText,
+    required String? languageCode,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #fetchPhotosFromGlobalSymbols,
+              [],
+              {
+                #searchText: searchText,
+                #languageCode: languageCode,
+              },
+            ),
+            returnValue: _i4.Future<
+                    _i2.Either<String, List<_i16.ArsaacDataModel>>>.value(
+                _FakeEither_0<String, List<_i16.ArsaacDataModel>>(
+              this,
+              Invocation.method(
+                #fetchPhotosFromGlobalSymbols,
+                [],
+                {
+                  #searchText: searchText,
+                  #languageCode: languageCode,
+                },
+              ),
+            )),
+          ) as _i4.Future<_i2.Either<String, List<_i16.ArsaacDataModel>>>);
+  @override
+  _i4.Future<String> uploadOtherImages({
+    required String? imagePath,
+    required String? directoryPath,
+    required String? name,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadOtherImages,
+          [],
+          {
+            #imagePath: imagePath,
+            #directoryPath: directoryPath,
+            #name: name,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<String>.value(''),
+      ) as _i4.Future<String>);
 }
 
 /// A class which mocks [LocalStorageRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalStorageRepository extends _i1.Mock
-    implements _i16.LocalStorageRepository {
+    implements _i17.LocalStorageRepository {
   MockLocalStorageRepository() {
     _i1.throwOnMissingStub(this);
   }

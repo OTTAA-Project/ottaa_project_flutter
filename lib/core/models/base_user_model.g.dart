@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// coverage:ignore-file
+
 part of 'base_user_model.dart';
 
 // **************************************************************************

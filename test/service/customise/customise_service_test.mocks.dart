@@ -10,6 +10,8 @@ import 'package:either_dart/either.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i9;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i5;
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart'
+    as _i11;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i6;
 import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i10;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i8;
@@ -990,4 +992,53 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
         ),
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<_i2.Either<String, List<_i11.ArsaacDataModel>>>
+      fetchPhotosFromGlobalSymbols({
+    required String? searchText,
+    required String? languageCode,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #fetchPhotosFromGlobalSymbols,
+              [],
+              {
+                #searchText: searchText,
+                #languageCode: languageCode,
+              },
+            ),
+            returnValue: _i4.Future<
+                    _i2.Either<String, List<_i11.ArsaacDataModel>>>.value(
+                _FakeEither_0<String, List<_i11.ArsaacDataModel>>(
+              this,
+              Invocation.method(
+                #fetchPhotosFromGlobalSymbols,
+                [],
+                {
+                  #searchText: searchText,
+                  #languageCode: languageCode,
+                },
+              ),
+            )),
+          ) as _i4.Future<_i2.Either<String, List<_i11.ArsaacDataModel>>>);
+  @override
+  _i4.Future<String> uploadOtherImages({
+    required String? imagePath,
+    required String? directoryPath,
+    required String? name,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadOtherImages,
+          [],
+          {
+            #imagePath: imagePath,
+            #directoryPath: directoryPath,
+            #name: name,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i4.Future<String>.value(''),
+      ) as _i4.Future<String>);
 }

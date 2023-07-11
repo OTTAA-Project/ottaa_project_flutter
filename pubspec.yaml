@@ -33,7 +33,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   http: ^0.13.5
-  image_picker: ^0.8.6
+  image_picker: ^0.8.8
   intl: ^0.17.0
   json_theme: ^4.0.1+4
   just_audio: ^0.9.29

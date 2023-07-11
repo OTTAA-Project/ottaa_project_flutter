@@ -11,9 +11,11 @@ import 'package:either_dart/either.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/common/i18n.dart' as _i5;
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart'
-    as _i14;
+    as _i15;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i12;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i8;
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart'
+    as _i14;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i9;
 import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i13;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i11;
@@ -1027,6 +1029,55 @@ class MockServerRepository extends _i1.Mock implements _i6.ServerRepository {
         ),
         returnValue: _i7.Future<dynamic>.value(),
       ) as _i7.Future<dynamic>);
+  @override
+  _i7.Future<_i2.Either<String, List<_i14.ArsaacDataModel>>>
+      fetchPhotosFromGlobalSymbols({
+    required String? searchText,
+    required String? languageCode,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #fetchPhotosFromGlobalSymbols,
+              [],
+              {
+                #searchText: searchText,
+                #languageCode: languageCode,
+              },
+            ),
+            returnValue: _i7.Future<
+                    _i2.Either<String, List<_i14.ArsaacDataModel>>>.value(
+                _FakeEither_0<String, List<_i14.ArsaacDataModel>>(
+              this,
+              Invocation.method(
+                #fetchPhotosFromGlobalSymbols,
+                [],
+                {
+                  #searchText: searchText,
+                  #languageCode: languageCode,
+                },
+              ),
+            )),
+          ) as _i7.Future<_i2.Either<String, List<_i14.ArsaacDataModel>>>);
+  @override
+  _i7.Future<String> uploadOtherImages({
+    required String? imagePath,
+    required String? directoryPath,
+    required String? name,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadOtherImages,
+          [],
+          {
+            #imagePath: imagePath,
+            #directoryPath: directoryPath,
+            #name: name,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i7.Future<String>.value(''),
+      ) as _i7.Future<String>);
 }
 
 /// A class which mocks [RemoteConfigRepository].
@@ -1136,14 +1187,14 @@ class MockI18N extends _i1.Mock implements _i5.I18N {
         )),
       ) as _i7.Future<_i5.I18N>);
   @override
-  _i7.Future<_i14.TranslationTree?> loadTranslation(_i4.Locale? locale) =>
+  _i7.Future<_i15.TranslationTree?> loadTranslation(_i4.Locale? locale) =>
       (super.noSuchMethod(
         Invocation.method(
           #loadTranslation,
           [locale],
         ),
-        returnValue: _i7.Future<_i14.TranslationTree?>.value(),
-      ) as _i7.Future<_i14.TranslationTree?>);
+        returnValue: _i7.Future<_i15.TranslationTree?>.value(),
+      ) as _i7.Future<_i15.TranslationTree?>);
   @override
   _i7.Future<void> changeLanguage(String? languageCode) => (super.noSuchMethod(
         Invocation.method(

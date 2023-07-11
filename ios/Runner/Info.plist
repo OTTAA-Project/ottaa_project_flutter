@@ -41,6 +41,8 @@
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone allows you to record custom voices &amp; sounds.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera allows user to take pictures and use them in app.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photos &amp; Images allows you to create customized pictograms.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

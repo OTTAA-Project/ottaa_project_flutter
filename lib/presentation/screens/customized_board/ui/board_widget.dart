@@ -60,8 +60,8 @@ class BoardWidget extends StatelessWidget {
                     onTap: customizeOnTap,
                     child: Image.asset(
                       AppImages.kCustomizePictoIcon,
-                      height: 10,
-                      width: 10,
+                      height: 20,
+                      width: 20,
                     ),
                   ),
                   const SizedBox(
@@ -71,8 +71,8 @@ class BoardWidget extends StatelessWidget {
                     onTap: deleteOnTap,
                     child: Image.asset(
                       AppImages.kDeletePictoIcon,
-                      height: 10,
-                      width: 10,
+                      height: 20,
+                      width: 20,
                     ),
                   ),
                 ],

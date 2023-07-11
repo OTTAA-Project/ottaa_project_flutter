@@ -46,14 +46,14 @@ class AppRoutes {
   ///
   static const patientSettings = "/home/settings";
   static const patientSettingsLayout = "/home/settings/layout";
-  static const patientSettingsAccessibilty = "/home/settings/accessibility";
+  static const patientSettingsAccessibility = "/home/settings/accessibility";
   static const patientSettingsTTS = "/home/settings/tts";
   static const patientSettingsLanguage = "/home/settings/language";
 
   static const patientGame = "/home/games";
   static const patientGameGroupSelection = "/home/games/groups";
   static const patientGameSearchGroup = "/home/games/groups/search";
-  static const patienMatchPictogramGame = "/home/games/match";
+  static const patientMatchPictogramGame = "/home/games/match";
   static const patientMemoryGame = "/home/games/memory";
   static const patientWhatsThePictoGame = "/home/games/wtp";
   static const patientStoryGame = "/home/games/story";
@@ -61,4 +61,14 @@ class AppRoutes {
   static const selectBoardPicto = "/home/games/story/selectBoard";
   static const patientHistorySelectPicto = "/home/games/history/pictos";
   static const patientHistoryReview = "/home/games/history/review";
+
+  static const patientCreatePicto = "/home/viewBoardsAndPictos/createPicto";
+  static const patientViewBoardsAndPictos = "/home/viewBoardsAndPictos";
+
+  static const patientCreatePictoarsaac = "/home/viewBoardsAndPictos/createPicto/arsaac";
+  static const patientEditPicto = "/home/viewBoardsAndPictos/editPicto";
+  static const patientSearch = "/home/viewBoardsAndPictos/search";
+  static const patientShowPictos = "/home/viewBoardsAndPictos/showPictos";
+  static const patientCreateBoard = "/home/viewBoardsAndPictos/createBoard";
+  static const patientEditPictoarsaac = "/home/viewBoardsAndPictos/editPicto/arsaac";
 }

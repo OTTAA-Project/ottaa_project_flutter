@@ -7,9 +7,10 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart';
 import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/models/devices_token.dart';
 import 'package:ottaa_project_flutter/core/models/phrase_model.dart';
@@ -344,6 +345,24 @@ class ServerService implements ServerRepository {
   }
 
   @override
+  Future<String> uploadOtherImages({
+    required String imagePath,
+    required String directoryPath,
+    required String name,
+    required String userId,
+  }) async {
+    Reference ref = _storage.ref().child(directoryPath).child('$name.jpg');
+    final metadata = SettableMetadata(
+      contentType: 'image/jpeg',
+      customMetadata: {'picked-file-path': imagePath},
+    );
+
+    var uploadTask = await ref.putFile(File(imagePath), metadata);
+
+    return await uploadTask.ref.getDownloadURL();
+  }
+
+  @override
   Future<EitherMap> getConnectedUsers({required String userId}) async {
     final ref = _database.ref().child('$userId/users'); //TODO: Change this to the real path
     final res = await ref.get();
@@ -640,7 +659,7 @@ class ServerService implements ServerRepository {
         queryParameters: {
           "limit": limit,
           "chunk": chunk,
-          if(reduced) "reduced": true,
+          if (reduced) "reduced": true,
         },
         options: Options(
           contentType: Headers.jsonContentType,
@@ -710,5 +729,34 @@ class ServerService implements ServerRepository {
       return Right(Map.from(res.value as Map<dynamic, dynamic>));
     }
     return const Left("no_data_found");
+  }
+
+  @override
+  Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode}) async {
+    String languageFormat = languageCode == 'en' ? '639-3' : '639-1';
+    String language = languageCode == 'en' ? 'eng' : languageCode;
+    String url = 'https://globalsymbols.com/api/v1/labels/search?query=${searchText.replaceAll(' ', '+')}&language=$language&language_iso_format=$languageFormat&limit=60';
+    http.Response response = await http.get(
+      Uri.parse(url),
+      headers: {"Accept": "application/json"},
+    );
+    // print(url);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print(data.toString());
+      final List<ArsaacDataModel> res = (jsonDecode(response.body) as List).map((e) => ArsaacDataModel.fromJson(e)).toList();
+      print(res.length);
+      print(res.last.text);
+      print(res.first.text);
+      // print(data['symbols'][0]['name']);
+      // final res = (jsonDecode(response.body) as List).map((e) => SearchModel.fromJson(e)).toList();
+      // SearchModel searchModel = SearchModel.fromJson(jsonDecode(response.body));
+      // print(searchModel.itemCount);
+      // print(searchModel.symbols[0].name);
+      // print(jsonDecode(response.body));
+      return Right(res);
+    } else {
+      return const Left('Error While loading');
+    }
   }
 }

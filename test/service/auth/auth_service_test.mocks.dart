@@ -9,16 +9,18 @@ import 'dart:ui' as _i3;
 import 'package:dio/dio.dart' as _i13;
 import 'package:either_dart/either.dart' as _i2;
 import 'package:firebase_core/firebase_core.dart' as _i5;
-import 'package:firebase_messaging/firebase_messaging.dart' as _i18;
+import 'package:firebase_messaging/firebase_messaging.dart' as _i19;
 import 'package:firebase_messaging_platform_interface/firebase_messaging_platform_interface.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ottaa_project_flutter/application/common/i18n.dart' as _i4;
 import 'package:ottaa_project_flutter/application/language/translation_tree.dart'
-    as _i17;
+    as _i18;
 import 'package:ottaa_project_flutter/core/abstracts/user_model.dart' as _i8;
 import 'package:ottaa_project_flutter/core/enums/board_data_type.dart' as _i15;
 import 'package:ottaa_project_flutter/core/enums/user_types.dart' as _i11;
+import 'package:ottaa_project_flutter/core/models/arsaac_data_model.dart'
+    as _i17;
 import 'package:ottaa_project_flutter/core/models/assets_image.dart' as _i12;
 import 'package:ottaa_project_flutter/core/models/devices_token.dart' as _i16;
 import 'package:ottaa_project_flutter/core/models/shortcuts_model.dart' as _i14;
@@ -1159,6 +1161,55 @@ class MockServerRepository extends _i1.Mock implements _i10.ServerRepository {
         ),
         returnValue: _i9.Future<dynamic>.value(),
       ) as _i9.Future<dynamic>);
+  @override
+  _i9.Future<_i2.Either<String, List<_i17.ArsaacDataModel>>>
+      fetchPhotosFromGlobalSymbols({
+    required String? searchText,
+    required String? languageCode,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #fetchPhotosFromGlobalSymbols,
+              [],
+              {
+                #searchText: searchText,
+                #languageCode: languageCode,
+              },
+            ),
+            returnValue: _i9.Future<
+                    _i2.Either<String, List<_i17.ArsaacDataModel>>>.value(
+                _FakeEither_0<String, List<_i17.ArsaacDataModel>>(
+              this,
+              Invocation.method(
+                #fetchPhotosFromGlobalSymbols,
+                [],
+                {
+                  #searchText: searchText,
+                  #languageCode: languageCode,
+                },
+              ),
+            )),
+          ) as _i9.Future<_i2.Either<String, List<_i17.ArsaacDataModel>>>);
+  @override
+  _i9.Future<String> uploadOtherImages({
+    required String? imagePath,
+    required String? directoryPath,
+    required String? name,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadOtherImages,
+          [],
+          {
+            #imagePath: imagePath,
+            #directoryPath: directoryPath,
+            #name: name,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i9.Future<String>.value(''),
+      ) as _i9.Future<String>);
 }
 
 /// A class which mocks [I18N].
@@ -1210,14 +1261,14 @@ class MockI18N extends _i1.Mock implements _i4.I18N {
         )),
       ) as _i9.Future<_i4.I18N>);
   @override
-  _i9.Future<_i17.TranslationTree?> loadTranslation(_i3.Locale? locale) =>
+  _i9.Future<_i18.TranslationTree?> loadTranslation(_i3.Locale? locale) =>
       (super.noSuchMethod(
         Invocation.method(
           #loadTranslation,
           [locale],
         ),
-        returnValue: _i9.Future<_i17.TranslationTree?>.value(),
-      ) as _i9.Future<_i17.TranslationTree?>);
+        returnValue: _i9.Future<_i18.TranslationTree?>.value(),
+      ) as _i9.Future<_i18.TranslationTree?>);
   @override
   _i9.Future<void> changeLanguage(String? languageCode) => (super.noSuchMethod(
         Invocation.method(
@@ -1282,7 +1333,7 @@ class MockI18N extends _i1.Mock implements _i4.I18N {
 /// A class which mocks [FirebaseMessaging].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFirebaseMessaging extends _i1.Mock implements _i18.FirebaseMessaging {
+class MockFirebaseMessaging extends _i1.Mock implements _i19.FirebaseMessaging {
   MockFirebaseMessaging() {
     _i1.throwOnMissingStub(this);
   }
