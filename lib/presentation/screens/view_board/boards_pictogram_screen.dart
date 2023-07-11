@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/create_picto_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/view_board_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/presentation/screens/view_board/board_screen.dart';
@@ -56,18 +57,24 @@ class BoardsPictogramScreen extends ConsumerWidget {
             ],
           ),
           actions: [
-            Icon(
-              Icons.star_border,
-              color: colorScheme.primary,
-              size: 24,
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-            Icon(
-              Icons.history,
-              color: colorScheme.primary,
-              size: 24,
+            IconButton(
+              icon: Icon(
+                Icons.add,
+                color: colorScheme.primary,
+                size: 24,
+              ),
+              onPressed: provider.selectedType == 'home.grid.title'.trl
+                  ? () async {
+                      final pro = ref.read(createPictoProvider);
+                      pro.init(userId: provider.userID);
+                      pro.resetCreateBoardScreen();
+                      context.push(AppRoutes.patientCreateBoard);
+                    }
+                  : () async {
+                      final pro = ref.read(createPictoProvider);
+                      pro.init(userId: provider.userID);
+                      context.push(AppRoutes.patientCreatePicto);
+                    },
             ),
           ],
         ),
