@@ -1,3 +1,4 @@
+import 'package:flutter/src/foundation/change_notifier.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ottaa_project_flutter/core/enums/devices_accessibility.dart';
 import 'package:ottaa_project_flutter/core/enums/display_types.dart';
@@ -60,7 +61,9 @@ class HiveDatabase extends LocalDatabaseRepository {
 
     user ??= iHive.box(UserType.none.name).get(UserType.none.name);
 
-    return this.user ?? user;
+    this.user = user;
+
+    return this.user;
   }
 
   @FactoryMethod(preResolve: true)
@@ -175,5 +178,10 @@ class HiveDatabase extends LocalDatabaseRepository {
   Future<bool> getLongClick() async {
     final res = iHive.box('longClick').get('isLongClick');
     return res ?? false;
+  }
+
+  @override
+  ValueListenable getListeneableFromName(String name) {
+    return iHive.box(name).listenable();
   }
 }
