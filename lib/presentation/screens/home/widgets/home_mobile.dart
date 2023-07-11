@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ottaa_project_flutter/application/providers/home_provider.dart';
+import 'package:ottaa_project_flutter/core/abstracts/enums/size_types.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/exit_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/talk_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/home/ui/word_bar.dart';
@@ -19,6 +20,7 @@ class _HomeMobileState extends ConsumerState<HomeMobileLayout> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     final provider = ref.watch(homeProvider);
     return Stack(
       fit: StackFit.expand,
@@ -52,6 +54,30 @@ class _HomeMobileState extends ConsumerState<HomeMobileLayout> {
             top: 10,
             child: TalkWidget(),
           ),
+          provider.patientState.user.patientSettings.tts.subtitlesSetting.show
+              ? Positioned(
+                  bottom: 40,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary,
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      child: Text(
+                        provider.patientState.user.patientSettings.tts.subtitlesSetting.caps ? provider.subtitleText.toUpperCase() : provider.subtitleText,
+                        style: provider.patientState.user.patientSettings.tts.subtitlesSetting.size == SizeTypes.small
+                            ? textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w700, color: Colors.white)
+                            : provider.patientState.user.patientSettings.tts.subtitlesSetting.size == SizeTypes.mid
+                                ? textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w700, color: Colors.white)
+                                : textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ],
         if (provider.isExit) ...[
           Container(
