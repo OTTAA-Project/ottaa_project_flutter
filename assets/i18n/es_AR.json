@@ -378,6 +378,7 @@
     "new_board": "Nuevo tablero",
     "create_new_board": "Crear nuevo tablero",
     "board_name": "Nombre del tablero",
-    "edit_picto": "Editar pictograma"
+    "edit_picto": "Editar pictograma",
+    "final_heading": "Listo, chequea que todo este correcto"
   }
 }
