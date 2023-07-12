@@ -31,7 +31,7 @@ class MatchPictogramScreen extends ConsumerWidget {
             },
           ),
           Positioned(
-            bottom: size.height * 0.2,
+            bottom: size.height * 0.01,
             left: 0,
             right: 0,
             child: Column(
