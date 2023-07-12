@@ -30,11 +30,11 @@ class ChatGPTService extends ChatGPTRepository {
       type = "adulto";
     }
 
-    if (remotePrompt!.isNotEmpty) {
+    if (remotePrompt != null && remotePrompt.isNotEmpty) {
       remotePrompt = remotePrompt.replaceAll("{AGE}", type).replaceAll("{SEX}", gender).replaceAll("{PHRASE}", pictograms).replaceAll("{LANG}", language);
     }
 
-    final prompt = remotePrompt.isNotEmpty ? remotePrompt : "chatgpt.prompt".trlf({"age": type, "gender": gender, "pictograms": pictograms, "language": language});
+    final prompt = remotePrompt ?? "chatgpt.prompt".trlf({"age": type, "gender": gender, "pictograms": pictograms, "language": language});
 
     final response = await serverService.generatePhraseGPT(
       prompt: prompt,
