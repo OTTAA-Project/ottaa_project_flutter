@@ -20,7 +20,6 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     return WillPopScope(
       onWillPop: () async {
-        provider.isFinalPage = false;
         if (provider.controller.page != 0) {
           provider.previousPage();
           provider.notify();
@@ -36,7 +35,6 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-              provider.isFinalPage = false;
               if (provider.controller.page != 0) {
                 provider.previousPage();
                 provider.notify();
@@ -47,7 +45,7 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
             splashRadius: 24,
           ),
           title: Text(
-            provider.isFinalPage ? 'create.final_heading'.trl : 'create.heading'.trl,
+            'create.heading'.trl,
             style: textTheme.headlineMedium,
           ),
         ),

@@ -89,7 +89,6 @@ class CreatePictoProvider extends ChangeNotifier {
   String selectedPictoForEditId = '';
   String userIdByCareGiver = '';
   List<int> pictoInBoards = [];
-  bool isFinalPage = false;
 
   /// 6 is the default color for black and Miscellaneous
   int borderColor = 6;
@@ -111,9 +110,7 @@ class CreatePictoProvider extends ChangeNotifier {
     if (isFromBoard) {
       controller = PageController(initialPage: 1);
       currentIndex = 1;
-    } else {
-      controller = PageController(initialPage: 0);
-    }
+    } else {}
     controller.addListener(setIndex);
   }
 
@@ -269,7 +266,6 @@ class CreatePictoProvider extends ChangeNotifier {
       newUser.groups[_i18n.currentLocale.toString()] = boards;
       await _localDatabaseRepository.setUser(newUser);
     }
-    isFinalPage = false;
   }
 
   Future<void> saveAndUploadGroup() async {

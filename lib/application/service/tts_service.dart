@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ottaa_project_flutter/application/common/i18n.dart';
@@ -87,7 +88,9 @@ class TTSService extends TTSRepository {
     await tts.setVolume(1.0);
     await tts.setLanguage(language);
     await tts.awaitSpeakCompletion(true);
-    await tts.awaitSynthCompletion(true);
+    if (!kIsWeb) {
+      await tts.awaitSynthCompletion(true);
+    }
     availableTTS = await tts.getLanguages;
   }
 

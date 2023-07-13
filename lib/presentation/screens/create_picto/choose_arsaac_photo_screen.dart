@@ -13,6 +13,8 @@ class ChooseArsaacPhotoScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(createPictoProvider);
     final textTheme = Theme.of(context).textTheme;
+    final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+    final isTablet = data.size.shortestSide < 600 ? false : true;
     return Scaffold(
       appBar: OTTAAAppBar(
         title: Text(
@@ -78,10 +80,11 @@ class ChooseArsaacPhotoScreen extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       shrinkWrap: true,
                       itemCount: provider.searchedData.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: isTablet ? 4 : 3,
                         crossAxisSpacing: 12,
                         mainAxisSpacing: 12,
+                        childAspectRatio: isTablet ? 1.3 : 1,
                       ),
                       itemBuilder: (context, index) => FittedBox(
                         fit: BoxFit.contain,

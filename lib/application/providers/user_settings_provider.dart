@@ -67,6 +67,9 @@ class UserSettingsProvider extends ChangeNotifier {
   SizeTypes size = SizeTypes.small;
   bool capital = true;
   String language = 'es_AR';
+  final List<String> enVoices = ['Ava', 'Nathan', 'Albert', 'Whisper', 'Jester'];
+  final List<String> itVoices = ['Alice', 'Luca', 'Paola'];
+  final List<String> esVoices = ['Diego', 'Isabela'];
   late AccessibilitySetting accessibilitySetting;
   late LanguageSetting languageSetting;
   late LayoutSetting layoutSetting;
@@ -87,7 +90,7 @@ class UserSettingsProvider extends ChangeNotifier {
 
   Future<void> init() async {
     language = _i18n.currentLanguage!.locale.toString();
-    await fetchAllVoices();
+    await fetchAllVoices(language: language);
     await initialiseSettings();
   }
 
@@ -115,27 +118,6 @@ class UserSettingsProvider extends ChangeNotifier {
     }
 
     notify();
-  }
-
-  Future<void> changeLanguage({required String languageCode}) async {
-    language = languageCode;
-    languageSetting.language = languageCode;
-    if (_userNotifier.user?.isPatient ?? false) {
-      await _i18n.changeLanguage(languageCode);
-    }
-    await fetchAllVoices();
-    await changeLanguageWithoutTTSSPeaking(name: filteredVoices.first.name);
-    notifyListeners();
-  }
-
-  Future<void> changeLanguageWithoutTTSSPeaking({required String name}) async {
-    voiceType = name;
-    voiceName = name;
-    await _ttsServices.changeCustomTTs(true);
-    await _ttsServices.changeTTSVoice(name);
-    ttsSetting.voiceSetting.voicesNames[language] = name;
-    _localDatabaseRepository.setVoice(name: name);
-    notifyListeners();
   }
 
   Future<void> changeOttaaLabs({required bool value}) async {
@@ -217,6 +199,27 @@ class UserSettingsProvider extends ChangeNotifier {
       currentUser.patientSettings.layout = layoutSetting;
       _localDatabaseRepository.setUser(currentUser);
     }
+  }
+
+  Future<void> changeLanguage({required String languageCode}) async {
+    language = languageCode;
+    languageSetting.language = languageCode;
+    if (_userNotifier.user?.isPatient ?? false) {
+      await _i18n.changeLanguage(languageCode);
+    }
+    await fetchAllVoices(language: language);
+    await changeLanguageWithoutTTSSPeaking(name: filteredVoices.first.name);
+    notifyListeners();
+  }
+
+  Future<void> changeLanguageWithoutTTSSPeaking({required String name}) async {
+    voiceType = name;
+    voiceName = name;
+    await _ttsServices.changeCustomTTs(true);
+    await _ttsServices.changeTTSVoice(name);
+    ttsSetting.voiceSetting.voicesNames[language] = name;
+    _localDatabaseRepository.setVoice(name: name);
+    notifyListeners();
   }
 
   Future<void> changeVoiceType({required String type}) async {
@@ -342,16 +345,61 @@ class UserSettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchAllVoices() async {
+  Future<void> fetchAllVoices({String language = ''}) async {
     voices = await _ttsServices.fetchVoices();
     filteredVoices = [];
     final splittedLanguage = language.split('_');
 
-    for (var voice in voices) {
-      if ((voice.locale.startsWith(splittedLanguage[0]) || (voice.locale.startsWith(splittedLanguage[0]) && voice.locale.endsWith(splittedLanguage[1]))) && !voice.name.contains('network')) {
-        filteredVoices.add(voice);
+    if (Platform.isIOS) {
+      switch (language) {
+        case 'en_US':
+          for (var element in enVoices) {
+            for (var voice in voices) {
+              if (voice.name.toUpperCase() == element.toUpperCase()) {
+                filteredVoices.add(voice);
+              }
+            }
+          }
+          break;
+        case 'es_AR':
+          for (var element in esVoices) {
+            for (var voice in voices) {
+              if (voice.name.toUpperCase() == element.toUpperCase()) {
+                filteredVoices.add(voice);
+              }
+            }
+          }
+          break;
+        case 'it_IT':
+          for (var element in itVoices) {
+            for (var voice in voices) {
+              if (voice.name.toUpperCase() == element.toUpperCase()) {
+                filteredVoices.add(voice);
+              }
+            }
+          }
+          break;
+        default:
+          for (var voice in voices) {
+            if (voice.locale == '${splittedLanguage.first}-${splittedLanguage.last}' && !voice.name.contains('network')) {
+              filteredVoices.add(voice);
+            }
+          }
+      }
+    } else {
+      for (var voice in voices) {
+        print('data from here');
+        if (voice.locale.toUpperCase().contains('es'.toUpperCase())) {
+          print(voice.name);
+          print(voice.locale);
+        }
+        if (voice.locale == '${splittedLanguage.first}-${splittedLanguage.last}' && !voice.name.contains('network')) {
+          filteredVoices.add(voice);
+        }
       }
     }
+    print('till here');
+    print(filteredVoices.length);
   }
 }
 

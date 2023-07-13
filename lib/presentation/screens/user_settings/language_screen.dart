@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -66,6 +68,22 @@ class LanguageScreen extends ConsumerWidget {
                     ChooserWidget(
                       selected: provider.languageSetting.language.contains('es'),
                       onTap: () async {
+                        if (Platform.isIOS) {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: Text(
+                                    'please, install voices from setting for better usability'.trl,
+                                    style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                );
+                              });
+                          await Future.delayed(const Duration(seconds: 1));
+                          context.pop();
+                        }
                         await provider.changeLanguage(languageCode: 'es_AR');
                       },
                       title: 'global.spanish'.trl,
@@ -74,12 +92,44 @@ class LanguageScreen extends ConsumerWidget {
                       selected: provider.languageSetting.language == 'en_US',
                       onTap: () async {
                         await provider.changeLanguage(languageCode: 'en_US');
+                        if (Platform.isIOS) {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: Text(
+                                    'please, install voices from setting for better usability'.trl,
+                                    style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                );
+                              });
+                          await Future.delayed(const Duration(seconds: 1));
+                          context.pop();
+                        }
                       },
                       title: 'global.english'.trl,
                     ),
                     ChooserWidget(
                       selected: provider.languageSetting.language == 'pt_BR',
                       onTap: () async {
+                        if (Platform.isIOS) {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: Text(
+                                    'please, install voices from setting for better usability'.trl,
+                                    style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                );
+                              });
+                          await Future.delayed(const Duration(seconds: 1));
+                          context.pop();
+                        }
                         await provider.changeLanguage(languageCode: 'pt_BR');
                       },
                       title: 'global.portuguese'.trl,
@@ -87,6 +137,22 @@ class LanguageScreen extends ConsumerWidget {
                     ChooserWidget(
                       selected: provider.languageSetting.language == 'it_IT',
                       onTap: () async {
+                        if (Platform.isIOS) {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: Text(
+                                    'please, install voices from setting for better usability'.trl,
+                                    style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                );
+                              });
+                          await Future.delayed(const Duration(seconds: 1));
+                          context.pop();
+                        }
                         await provider.changeLanguage(languageCode: 'it_IT');
                       },
                       title: 'global.italian'.trl,
@@ -113,29 +179,71 @@ class LanguageScreen extends ConsumerWidget {
                             runSpacing: 16,
                             children: [
                               ChooserWidget(
-                                selected:
-                                    provider.languageSetting.language == 'es_AR',
+                                selected: provider.languageSetting.language == 'es_AR',
                                 onTap: () async {
-                                  await provider.changeLanguage(
-                                      languageCode: 'es_AR');
+                                  if (Platform.isIOS) {
+                                    showDialog(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            content: Text(
+                                              'please, install voices from setting for better usability'.trl,
+                                              style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          );
+                                        });
+                                    await Future.delayed(const Duration(seconds: 1));
+                                    context.pop();
+                                  }
+                                  await provider.changeLanguage(languageCode: 'es_AR');
                                 },
                                 title: 'global.argentina'.trl,
                               ),
                               ChooserWidget(
-                                selected:
-                                    provider.languageSetting.language == 'es_CL',
+                                selected: provider.languageSetting.language == 'es_CL',
                                 onTap: () async {
-                                  await provider.changeLanguage(
-                                      languageCode: 'es_CL');
+                                  if (Platform.isIOS) {
+                                    showDialog(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            content: Text(
+                                              'please, install voices from setting for better usability'.trl,
+                                              style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          );
+                                        });
+                                    await Future.delayed(const Duration(seconds: 1));
+                                    context.pop();
+                                  }
+                                  await provider.changeLanguage(languageCode: 'es_CL');
                                 },
                                 title: 'global.chile'.trl,
                               ),
                               ChooserWidget(
-                                selected:
-                                    provider.languageSetting.language == 'es_CO',
+                                selected: provider.languageSetting.language == 'es_CO',
                                 onTap: () async {
-                                  await provider.changeLanguage(
-                                      languageCode: 'es_CO');
+                                  if (Platform.isIOS) {
+                                    showDialog(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            content: Text(
+                                              'please, install voices from setting for better usability'.trl,
+                                              style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          );
+                                        });
+                                    await Future.delayed(const Duration(seconds: 1));
+                                    context.pop();
+                                  }
+                                  await provider.changeLanguage(languageCode: 'es_CO');
                                 },
                                 title: 'global.colombia'.trl,
                               ),

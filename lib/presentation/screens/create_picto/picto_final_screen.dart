@@ -20,7 +20,7 @@ class PictoFinalScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'create.time_headline'.trl,
+                'create.final_heading'.trl,
                 style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
               ),
               Padding(
