@@ -235,7 +235,8 @@
     "save": "Guardar",
     "image": "Imágen",
     "saved_in": "Guardado en",
-    "location": "ubicación"
+    "location": "ubicación",
+    "voices": "Por favor, instale voces desde la configuración para una mejor usabilidad"
   },
   "onboarding": {
     "start": "Comenzar",

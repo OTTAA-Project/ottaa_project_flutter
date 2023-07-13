@@ -75,7 +75,7 @@ class LanguageScreen extends ConsumerWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   content: Text(
-                                    'please, install voices from setting for better usability'.trl,
+                                    'global.voices'.trl,
                                     style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
                                     textAlign: TextAlign.center,
                                   ),
@@ -99,7 +99,7 @@ class LanguageScreen extends ConsumerWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   content: Text(
-                                    'please, install voices from setting for better usability'.trl,
+                                    'global.voices'.trl,
                                     style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
                                     textAlign: TextAlign.center,
                                   ),
@@ -121,7 +121,7 @@ class LanguageScreen extends ConsumerWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   content: Text(
-                                    'please, install voices from setting for better usability'.trl,
+                                    'global.voices'.trl,
                                     style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
                                     textAlign: TextAlign.center,
                                   ),
@@ -144,7 +144,7 @@ class LanguageScreen extends ConsumerWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   content: Text(
-                                    'please, install voices from setting for better usability'.trl,
+                                    'global.voices'.trl,
                                     style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
                                     textAlign: TextAlign.center,
                                   ),
@@ -188,7 +188,7 @@ class LanguageScreen extends ConsumerWidget {
                                         builder: (context) {
                                           return AlertDialog(
                                             content: Text(
-                                              'please, install voices from setting for better usability'.trl,
+                                              'global.voices'.trl,
                                               style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
                                               textAlign: TextAlign.center,
                                             ),
