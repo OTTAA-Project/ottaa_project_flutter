@@ -387,8 +387,8 @@ class UserSettingsProvider extends ChangeNotifier {
           }
       }
     } else {
+      print('data from here');
       for (var voice in voices) {
-        print('data from here');
         if (voice.locale.toUpperCase().contains('es'.toUpperCase())) {
           print(voice.name);
           print(voice.locale);
