@@ -117,7 +117,7 @@ Future<void> main() async {
     ];
 
     fakePictosMap = {
-      'FWy18PiX2jLwZQF6-oNZR': Picto(id: 'FWy18PiX2jLwZQF6-oNZR', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
+      '_hqTU9A7I3RFDVrcIEK-L': Picto(id: '_hqTU9A7I3RFDVrcIEK-L', type: 1, resource: AssetsImage(asset: 'TestAsset', network: 'TestNetwork'), tags: {
         'hour': ['MANANA']
       }, relations: [
         PictoRelation(id: "0", value: 2)
@@ -947,10 +947,7 @@ Future<void> main() async {
     GetIt.I.registerSingleton<LearnPictogram>(MockLearnPictogram());
     GetIt.I.registerSingleton<LocalDatabaseRepository>(MockLocalDatabaseRepository());
 
-    final container = ProviderContainer(overrides: [
-      ttsProvider.overrideWith((_) => mockTTSProvider),
-      chatGPTProvider.overrideWith((ref) => mockChatGPTNotifier)
-    ]);
+    final container = ProviderContainer(overrides: [ttsProvider.overrideWith((_) => mockTTSProvider), chatGPTProvider.overrideWith((ref) => mockChatGPTNotifier)]);
 
     final provider = container.read(homeProvider.notifier);
 
