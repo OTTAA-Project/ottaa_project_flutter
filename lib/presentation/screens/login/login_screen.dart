@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             type: SignInType.google,
                           ),
                         ),
-                        const AppleSignButton(),
+                        Platform.isIOS ? const AppleSignButton() : const SizedBox.shrink(),
                       ],
                     ),
                   ),
