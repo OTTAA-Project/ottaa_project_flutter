@@ -18,4 +18,6 @@ abstract class AuthRepository {
   Future<void> logout();
 
   Future<String> getDeviceId();
+
+  Future<bool> deleteAccount({required String userId});
 }

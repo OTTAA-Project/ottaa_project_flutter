@@ -44,6 +44,10 @@ class AuthProvider extends ChangeNotifier {
     // _userNotifier.setUser(null);
   }
 
+  Future<bool> deleteAccount() async {
+    return await _authService.deleteAccount(userId: _userNotifier.user!.id);
+  }
+
   Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     _loadingNotifier.showLoading();
     try {
@@ -56,7 +60,7 @@ class AuthProvider extends ChangeNotifier {
 
         _userNotifier.setUser(result.right);
         authData.setSignedIn();
-      }else {
+      } else {
         throw Exception(result.left);
       }
 

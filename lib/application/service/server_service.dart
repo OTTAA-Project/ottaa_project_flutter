@@ -721,6 +721,20 @@ class ServerService implements ServerRepository {
   }
 
   @override
+  Future<bool> deleteTheAccount({required String userId}) async {
+    try {
+      final response = await _functions.httpsCallable("removeUserData").call<Map<String, dynamic>>({"uid": userId});
+      print(response.toString());
+      if (response.data["code"] == null || response.data['message'] == null) {
+        return false;
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
   Future<dynamic> fetchUserSettings({required String userId}) async {
     final ref = _database.ref().child('$userId/settings/');
     final res = await ref.get();
