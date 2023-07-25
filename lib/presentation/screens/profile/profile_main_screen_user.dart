@@ -50,6 +50,7 @@ class _ProfileMainScreenUserState extends ConsumerState<ProfileMainScreenUser> {
             onTap: () => context.push(AppRoutes.userProfile),
             child: ProfilePhotoWidget(
               image: user?.settings.data.avatar.network ?? "",
+              asset: '671',
             ),
           ),
           title: Padding(

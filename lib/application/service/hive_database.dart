@@ -123,6 +123,8 @@ class HiveDatabase extends LocalDatabaseRepository {
 
     await iHive.openBox('longClick');
 
+    await iHive.openBox('apple');
+
     await getUser();
   }
 
@@ -177,5 +179,16 @@ class HiveDatabase extends LocalDatabaseRepository {
   Future<bool> getLongClick() async {
     final res = iHive.box('longClick').get('isLongClick');
     return res ?? false;
+  }
+
+  @override
+  Future<void> setAppleUserDara({required Map<String, String> data}) async {
+    await iHive.box('apple').put('data', data);
+  }
+
+  @override
+  Future<Map<String, String>> getAppleUserData() async {
+    final res = iHive.box('apple').get('data');
+    return res ?? {};
   }
 }

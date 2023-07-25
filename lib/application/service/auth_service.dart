@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -19,6 +21,7 @@ import 'package:ottaa_project_flutter/core/models/user_data_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 @Singleton(as: AuthRepository)
 class AuthService extends AuthRepository {
@@ -29,7 +32,7 @@ class AuthService extends AuthRepository {
   String name = '';
   final LocalDatabaseRepository _databaseRepository;
   final ServerRepository _serverRepository;
-
+  late AuthorizationCredentialAppleID result;
   final I18N _i18n;
 
   AuthService(
@@ -136,10 +139,14 @@ class AuthService extends AuthRepository {
   @override
   Future<Either<String, UserModel>> signIn(SignInType type, [String? email, String? password]) async {
     Either<String, User> result;
+    final appleData = await _databaseRepository.getAppleUserData();
 
     switch (type) {
       case SignInType.google:
         result = await _signInWithGoogle();
+        break;
+      case SignInType.apple:
+        result = await _signInWithApple();
         break;
       default:
         return const Left("error_no_implement_auth_method"); //TODO: Implement translate method.
@@ -165,8 +172,8 @@ class AuthService extends AuthRepository {
                 birthDate: DateTime.fromMillisecondsSinceEpoch(0),
                 genderPref: "n/a",
                 lastConnection: DateTime.now(),
-                lastName: lastName,
-                name: name,
+                lastName: Platform.isIOS ? appleData['lastname']! : lastName,
+                name: Platform.isIOS ? appleData['name']! : nameRetriever!,
               ),
               language: LanguageSetting.empty(
                 language: _i18n.currentLocale.toString(),
@@ -241,6 +248,39 @@ class AuthService extends AuthRepository {
       return Left(e.toString());
     }
   }*/
+  Future<Either<String, User>> _signInWithApple() async {
+    try {
+      result = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+      if (result.givenName != null) {
+        _databaseRepository.setAppleUserDara(data: {
+          'name': result.givenName!,
+          'lastname': result.familyName!,
+          'email': result.email!,
+        });
+      }
+      final credential = OAuthProvider('apple.com').credential(
+        idToken: result.identityToken,
+        accessToken: result.authorizationCode,
+      );
+
+      final UserCredential userCredential = await _authProvider.signInWithCredential(credential);
+
+      if (userCredential.user == null) {
+        return const Left("error_apple_sign_in_cancelled");
+      }
+
+      final User user = userCredential.user!;
+
+      return Right(user);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 
   @override
   bool get isLogged => _databaseRepository.user != null;
@@ -248,6 +288,7 @@ class AuthService extends AuthRepository {
   @override
   Future<Either<String, bool>> signUp() async {
     final user = _authProvider.currentUser;
+    final appleData = await _databaseRepository.getAppleUserData();
 
     if (user == null) {
       return const Left("error_user_not_logged");
@@ -264,8 +305,8 @@ class AuthService extends AuthRepository {
           birthDate: DateTime.fromMillisecondsSinceEpoch(0),
           genderPref: "n/a",
           lastConnection: DateTime.now(),
-          lastName: lastName,
-          name: name,
+          lastName: Platform.isIOS ? appleData['lastname']! : '',
+          name: Platform.isIOS ? appleData['name']! : nameRetriever!,
         ),
         language: LanguageSetting.empty(
           language: _i18n.currentLocale.toString(),
@@ -284,5 +325,10 @@ class AuthService extends AuthRepository {
           vapidKey: kIsWeb ? "BM1DJoICvUa0DM7SYOJE4aDc_Odtlbq5QKXRgB5XoeHEY7EIIP-39WnCqr-QNmNSDoRJEbNyq6LV7bUE6FoGWVE" : null,
         ) ??
         "";
+  }
+
+  @override
+  Future<bool> deleteAccount({required String userId}) async {
+    return await _serverRepository.deleteTheAccount(userId: userId);
   }
 }

@@ -3,13 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
 
 class ProfilePhotoWidget extends StatelessWidget {
-  const ProfilePhotoWidget({
-    Key? key,
-    required this.image,
-    this.height = 32,
-    this.width = 32,
-  }) : super(key: key);
-  final String image;
+  const ProfilePhotoWidget({Key? key, required this.image, this.height = 32, this.width = 32, this.asset = '671'}) : super(key: key);
+  final String image, asset;
   final double height, width;
 
   @override
@@ -31,10 +26,12 @@ class ProfilePhotoWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(height / 2),
             ),
             clipBehavior: Clip.antiAlias,
-            child: CachedNetworkImage(
-              fit: BoxFit.contain,
-              imageUrl: image,
-            ),
+            child: image.isEmpty
+                ? Image.asset('assets/profiles/Group $asset@2x.png')
+                : CachedNetworkImage(
+                    fit: BoxFit.contain,
+                    imageUrl: image,
+                  ),
           ),
         ],
       ),
