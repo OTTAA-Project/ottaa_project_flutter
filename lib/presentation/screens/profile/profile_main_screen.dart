@@ -66,6 +66,7 @@ class _ProfileMainScreenState extends ConsumerState<ProfileMainScreen> {
                             onTap: () => context.push(AppRoutes.userProfile),
                             child: ProfilePhotoWidget(
                               image: user.settings.data.avatar.network ?? "",
+                              asset: '671',
                             ),
                           ),
                           const SizedBox(

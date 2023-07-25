@@ -27,7 +27,7 @@ class ProfilePhotoWidget extends StatelessWidget {
             ),
             clipBehavior: Clip.antiAlias,
             child: image.isEmpty
-                ? Image.asset('assets/profiles/Group $image@2x.png')
+                ? Image.asset('assets/profiles/Group $asset@2x.png')
                 : CachedNetworkImage(
                     fit: BoxFit.contain,
                     imageUrl: image,

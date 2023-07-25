@@ -45,7 +45,8 @@ class ProfileSettingsScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ProfilePhotoWidget(
-                    image: user?.settings.data.avatar.network ?? "",
+                    image: user?.settings.data.avatar.network ?? '',
+                    asset: '671',
                     height: 120,
                     width: 120,
                   ),
@@ -78,8 +79,7 @@ class ProfileSettingsScreen extends ConsumerWidget {
                   provider.isUser
                       ? Container()
                       : CategoryWidget(
-                          onTap: () =>
-                              context.push(AppRoutes.userProfileAccounts),
+                          onTap: () => context.push(AppRoutes.userProfileAccounts),
                           icon: AppImages.kProfileSettingsIcon4,
                           text: "profile.linked_accounts".trl,
                         ),
@@ -87,6 +87,20 @@ class ProfileSettingsScreen extends ConsumerWidget {
                     onTap: () => context.push(AppRoutes.userProfileTips),
                     icon: AppImages.kProfileSettingsIcon5,
                     text: "profile.ottaa.tips".trl,
+                  ),
+                  CategoryWidget(
+                    divider: false,
+                    onTap: () async {
+                      final res = await auth.deleteAccount();
+                      if (res) {
+                        context.go(AppRoutes.login);
+                      } else {
+                        //todo: show the error message.
+                        context.pop();
+                      }
+                    },
+                    icon: null,
+                    text: "profile.delete_account".trl,
                   ),
                   CategoryWidget(
                     divider: false,

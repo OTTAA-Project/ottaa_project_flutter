@@ -326,4 +326,9 @@ class AuthService extends AuthRepository {
         ) ??
         "";
   }
+
+  @override
+  Future<bool> deleteAccount({required String userId}) async {
+    return await _serverRepository.deleteTheAccount(userId: userId);
+  }
 }
