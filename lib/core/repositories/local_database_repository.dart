@@ -26,4 +26,8 @@ abstract class LocalDatabaseRepository {
   Future<void> setLongClick({required bool isLongClick});
 
   Future<void> setVoice({required String name});
+
+  Future<void> setAppleUserDara({required Map<String, String> data});
+
+  Future<Map<String, String>> getAppleUserData();
 }

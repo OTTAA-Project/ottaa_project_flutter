@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
 import 'package:ottaa_project_flutter/application/common/screen_helpers.dart';
 import 'package:ottaa_project_flutter/core/enums/sign_in_types.dart';
+import 'package:ottaa_project_flutter/presentation/screens/login/ui/apple_sign_button.dart';
 import 'package:ottaa_project_flutter/presentation/screens/login/ui/sign_in_button.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -79,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             type: SignInType.google,
                           ),
                         ),
+                        Platform.isIOS ? const AppleSignButton() : const SizedBox.shrink(),
                       ],
                     ),
                   ),

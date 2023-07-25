@@ -13,7 +13,6 @@ typedef EitherListMap = Either<String, List<Map<String, dynamic>>>;
 typedef EitherMap = Either<String, Map<String, dynamic>>;
 
 abstract class ServerRepository {
-
   Future<EitherString> getAvailableAppVersion(String platform);
 
   Future<UserType> getUserType(String userId);
@@ -126,4 +125,6 @@ abstract class ServerRepository {
   Future<Either<String, List<ArsaacDataModel>>> fetchPhotosFromGlobalSymbols({required String searchText, required String languageCode});
 
   Future<String> uploadOtherImages({required String imagePath, required String directoryPath, required String name, required String userId});
+
+  Future<bool> deleteTheAccount({required String userId});
 }
