@@ -80,6 +80,7 @@ class HomeProvider extends ChangeNotifier {
   int? selectedWord;
   bool isExitLong = false;
   bool isLongClickCheck = false;
+  String subtitleText = '';
   ScrollController scrollController = ScrollController();
 
   HomeScreenStatus status = HomeScreenStatus.pictos;
@@ -394,6 +395,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> speakSentence() async {
     isSpeakWidget = true;
+    subtitleText = '';
     notifyListeners();
     if (patientState.state != null) {
       learnPictogram.call(
@@ -415,6 +417,9 @@ class HomeProvider extends ChangeNotifier {
       }
 
       sentence ??= pictoWords.map((e) => pictosTranslations[e.id] ?? e.text).join(' ');
+      subtitleText = sentence;
+      subtitleText = subtitleText.replaceAll('\n', '');
+      notifyListeners();
       await _tts.speak(sentence);
 
       isSpeakWidget = false;
@@ -427,8 +432,9 @@ class HomeProvider extends ChangeNotifier {
           duration: const Duration(microseconds: 50),
           curve: Curves.easeIn,
         );
-        notifyListeners();
         final e = pictoWords[i];
+        subtitleText = "$subtitleText ${pictosTranslations[e.id] ?? e.text}";
+        notifyListeners();
         await _tts.speak(pictosTranslations[e.id] ?? e.text);
       }
       isSpeakWidget = false;
