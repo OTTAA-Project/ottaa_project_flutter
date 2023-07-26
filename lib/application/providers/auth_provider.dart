@@ -45,6 +45,9 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<bool> deleteAccount() async {
+    await _authService.logout();
+    await _localDatabaseRepository.setIntro(false);
+    authData.setSignedOut();
     return await _authService.deleteAccount(userId: _userNotifier.user!.id);
   }
 

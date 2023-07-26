@@ -34,6 +34,7 @@ class AuthService extends AuthRepository {
   final ServerRepository _serverRepository;
   late AuthorizationCredentialAppleID result;
   final I18N _i18n;
+  bool isSignInApple = false;
 
   AuthService(
     this._databaseRepository,
@@ -172,8 +173,8 @@ class AuthService extends AuthRepository {
                 birthDate: DateTime.fromMillisecondsSinceEpoch(0),
                 genderPref: "n/a",
                 lastConnection: DateTime.now(),
-                lastName: Platform.isIOS ? appleData['lastname']! : lastName,
-                name: Platform.isIOS ? appleData['name']! : nameRetriever!,
+                lastName: (Platform.isIOS && isSignInApple) ? appleData['lastname']! : lastName,
+                name: (Platform.isIOS && isSignInApple) ? appleData['name']! : nameRetriever!,
               ),
               language: LanguageSetting.empty(
                 language: _i18n.currentLocale.toString(),
@@ -194,6 +195,7 @@ class AuthService extends AuthRepository {
   }
 
   Future<Either<String, User>> _signInWithGoogle() async {
+    isSignInApple = false;
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
@@ -249,6 +251,7 @@ class AuthService extends AuthRepository {
     }
   }*/
   Future<Either<String, User>> _signInWithApple() async {
+    isSignInApple = true;
     try {
       result = await SignInWithApple.getAppleIDCredential(
         scopes: [
@@ -305,8 +308,8 @@ class AuthService extends AuthRepository {
           birthDate: DateTime.fromMillisecondsSinceEpoch(0),
           genderPref: "n/a",
           lastConnection: DateTime.now(),
-          lastName: Platform.isIOS ? appleData['lastname']! : '',
-          name: Platform.isIOS ? appleData['name']! : nameRetriever!,
+          lastName: (Platform.isIOS && isSignInApple) ? appleData['lastname']! : '',
+          name: (Platform.isIOS && isSignInApple) ? appleData['name']! : nameRetriever!,
         ),
         language: LanguageSetting.empty(
           language: _i18n.currentLocale.toString(),
