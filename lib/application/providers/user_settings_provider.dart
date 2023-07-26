@@ -387,19 +387,19 @@ class UserSettingsProvider extends ChangeNotifier {
           }
       }
     } else {
-      print('data from here');
       for (var voice in voices) {
-        if (voice.locale.toUpperCase().contains('es'.toUpperCase())) {
-          print(voice.name);
-          print(voice.locale);
-        }
         if (voice.locale == '${splittedLanguage.first}-${splittedLanguage.last}' && !voice.name.contains('network')) {
           filteredVoices.add(voice);
         }
       }
+      if (language.toLowerCase().contains('es') || filteredVoices.isEmpty) {
+        for (var voice in voices) {
+          if (voice.locale.toUpperCase() == 'ES-US' && !voice.name.contains('network')) {
+            filteredVoices.add(voice);
+          }
+        }
+      }
     }
-    print('till here');
-    print(filteredVoices.length);
   }
 }
 
