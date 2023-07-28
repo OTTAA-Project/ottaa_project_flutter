@@ -208,34 +208,34 @@
     "test": "This is the voice you are going to use in otta",
     "add": "Add",
     "confirm": "Confirm",
-    "gallery": "Galería",
+    "gallery": "Gallery",
     "arasaac": "ARASAAC",
-    "text": "Texto",
+    "text": "Text",
     "color": "Color",
-    "search": "Buscar",
-    "actions": "Acciones",
-    "people": "Personas",
-    "miscellaneous": "Miscelaneas",
-    "noun": "Sustantivos",
-    "adjective": "Adjetivos",
-    "predictive": "Predictivo",
-    "sunday": "Domingo",
-    "monday": "Lunes",
-    "tuesday": "Martes",
-    "wednesday": "Miércoles",
-    "thursday": "Jueves",
-    "friday": "Viernes",
-    "saturday": "Sábado",
-    "tomorrow": "Mañana",
-    "noon": "Mediodía",
-    "late": "Tarde",
-    "evening": "Noche",
-    "add_new": "Agregar nuevo",
-    "disguise": "Ocultar",
-    "save": "Guardar",
-    "image": "Imágen",
-    "saved_in": "Guardado en",
-    "location": "ubicación"
+    "search": "Search",
+    "actions": "Actions",
+    "people": "People",
+    "miscellaneous": "Miscellaneous",
+    "noun": "Nouns",
+    "adjective": "Adjectives",
+    "predictive": "Predictive",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "tomorrow": "Tomorrow",
+    "noon": "Noon",
+    "late": "Evening",
+    "evening": "Night",
+    "add_new": "Add new",
+    "disguise": "Hide",
+    "save": "Save",
+    "image": "Image",
+    "saved_in": "Saved at",
+    "location": "Location"
   },
   "onboarding": {
     "start": "Get Started",
@@ -247,12 +247,12 @@
     "home": {
       "title": "Customize your Home",
       "subtitle": "Shortcuts on main screen",
-      "description": "Personalizá de acuerdo a tus gustos y necesidades"
+      "description": "Customize according to your tastes and needs"
     },
     "customize": {
-      "title": "Personalizá tu Home",
+      "title": "Customize your Home",
       "subtitle": "We guide you in the learning process",
-      "description": "Activá o desactivá tableros o pictogramas para modificar la predicción, vos tenés el control."
+      "description": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
     },
     "skip": {
       "title": "Do you really want to skip the tutorial?"
@@ -269,7 +269,7 @@
     "title": "Log in with your account",
     "google": "Login with Google",
     "facebook": "Login with Facebook",
-    "apple": "Continuar con Apple",
+    "apple": "Login with Apple",
     "register": "Don't have an account yet? Sign up here",
     "wait": {
       "title": "Welcome!",
@@ -284,7 +284,7 @@
       "subtitle": "See pictograms"
     },
     "shortcut": {
-      "title": "Seleccioná los atajos que aparecerán en la pantalla principal.",
+      "title": "Choose the shortcuts to use on Home screen.",
       "appbar": "Shortcuts",
       "favorites": "Favorites",
       "history": "History",
@@ -313,7 +313,7 @@
     }
   },
   "chatgpt": {
-    "prompt": "escribir una frase en ingles con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras y agregale la expresion culiau: {pictograms}"
+    "prompt": "write a proper sentence in english with the following words as if you are a {gender}, adding connectors and articles when needed, without changing words: {pictograms}"
   },
   "notification": {
     "code": {
@@ -328,57 +328,57 @@
     }
   },
   "game": {
-    "play": "Juguemos!",
-    "next": "Jugar",
-    "game_header_0": "¿Cuál es el picto?",
-    "game_header_1": "Unir pictogramas",
-    "game_header_2": "Juego de la Memoria",
-    "game_header_3": "Armá una historia",
-    "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprende jugando",
-    "game_sub_1": "Uní los pictogramas de manera correcta",
-    "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
-    "game_sub_3": "Elegí los pictogramas que más te gusten, y con la ayuda de Chat GPT, crearás una historia.",
-    "group": "Seleccioná una categoría para poder jugar",
-    "search": "Buscar Tablero",
-    "find": "Encontrá los tableros que quieras, fácilmente!",
-    "game_1_line": "Seleccioná el pictograma que escuches",
-    "game_2_line": "Seleccioná la palabra que corresponde a su pictograma",
-    "game_3_line": "Seleccioná una tarjeta y encontrá la pareja del pictograma",
-    "game_4_line": "Agregá hasta 4 pictogramas y creá tu propia historia",
-    "no": "¡Oh Oh!",
-    "yes": "¡Muy bien!",
-    "correct": "Correcto",
-    "incorrect": "Incorrecto",
-    "use_time": "Tiempo total",
-    "maximum_streak": "Mejor racha",
-    "speak_what": "¿Cual es el picto {name}?",
-    "gptbtn": "Crear historia",
-    "prompt": "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:"
+    "play": "Let's play!",
+    "next": "Play",
+    "game_header_0": "What's the pictogram?",
+    "game_header_1": "Match pictograms",
+    "game_header_2": "Memory game",
+    "game_header_3": "Create a story",
+    "game_sub_0": "Answer questions picking the right pictogram. Learn playing",
+    "game_sub_1": "Match the pictograms correctly",
+    "game_sub_2": "Test your memory, can you remember all pictograms?",
+    "game_sub_3": "Choose the pictograms you like and with ChatGPT you will create a story.",
+    "group": "Choose a category to play",
+    "search": "Search board",
+    "find": "Easily find the boards you want!",
+    "game_1_line": "Choose the pictogram you listen to",
+    "game_2_line": "Choose the word that match the pictogram",
+    "game_3_line": "Choose a card and find the pictogram match",
+    "game_4_line": "Add up to 4 pictograms and create a story",
+    "no": "Oh Oh!",
+    "yes": "Great!",
+    "correct": "Right",
+    "incorrect": "Incorrect",
+    "use_time": "Total time",
+    "maximum_streak": "Best streak",
+    "speak_what": "What's the picto {name}?",
+    "gptbtn": "Create a story",
+    "prompt": "Act as a kindergarten teacher and write a story in English for kids using the following words:"
   },
   "exit": {
     "long": {
-      "headline": "¿Deseas volver a la pantalla de perfiles?",
-      "body": "Mantén presionado el botón resaltado para volver",
-      "check": "No volver a mostrar este mensaje",
-      "btn": "De acuerdo"
+      "headline": "Do you want to go back to profile screen?",
+      "body": "Press and hold the highlighted button to go back",
+      "check": "Do not show this message again",
+      "btn": "Ok"
     },
     "short": {
-      "headline": " ¿Confima que deseas volver a la pantalla de perfiles?"
+      "headline": "Do you want to go back to profile screen?"
     }
   },
   "create": {
-    "heading": "Crear pictograma",
-    "image_selection": "Elije la imagen que represente al pictograma",
-    "choose_color": "Elije el color",
-    "search_arsaac": "Buscar Arsaac",
-    "time_headline": "Selecciona los horarios que más se adecuen a sus actividades",
-    "time_sub1": "¿Qué días de la semana es cuando más lo utiliza?",
-    "schedule": "¿En qué horario?",
-    "save": "Guardar pictograma",
-    "created_by_me": "Creados por mi",
-    "new_board": "Nuevo tablero",
-    "create_new_board": "Crear nuevo tablero",
-    "board_name": "Nombre del tablero",
-    "edit_picto": "Editar pictograma"
+    "heading": "Create pictogram",
+    "image_selection": "Choose the image that best represent the pictogram",
+    "choose_color": "Choose color",
+    "search_arsaac": "Search in ARASAAC",
+    "time_headline": "Choose the timing to show this pictogram",
+    "time_sub1": "What days of the week is when you use it the most?",
+    "schedule": "In what schedule?",
+    "save": "Save pictogram",
+    "created_by_me": "Created by me",
+    "new_board": "New board",
+    "create_new_board": "Create new board",
+    "board_name": "Board name",
+    "edit_picto": "Edit pictogram"
   }
 }
