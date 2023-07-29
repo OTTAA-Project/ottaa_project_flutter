@@ -126,7 +126,7 @@
       "board_view": "Board view",
       "tabs": "Tabs",
       "grid": "Grid",
-      "ottaa_labs": "Ottaa Labs",
+      "ottaa_labs": "OTTAA Labs",
       "labs_text": "Verbal phrases feature",
       "labs_long": "Beta mode\nAllows creating sentences with more complex tenses",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "Scroll&Press",
       "sip": "Sip&Puff",
       "selection_type": "Selection method",
-      "swept": "Swept",
+      "swept": "Screen scanning",
       "speed": "Speed",
       "selection_speed": "Selection speed"
     },
@@ -186,7 +186,7 @@
     "general": "General",
     "pictogram": "Pictograms",
     "configuration": "Settings",
-    "user_ottaa": "Usar Ottaa como",
+    "user_ottaa": "Use OTTAA as",
     "cancel": "Cancel",
     "slow": "Slow",
     "default": "Default",
@@ -205,10 +205,10 @@
     "italian": "Italian",
     "french": "French",
     "portuguese": "Portuguese",
-    "test": "Esta es la voz que vas a usar en ottaa",
+    "test": "This is the voice you are going to use in ota",
     "add": "Add",
     "confirm": "Confirm",
-    "gallery": "galería",
+    "gallery": "gallery",
     "arasaac": "ARASAAC",
     "text": "Text",
     "color": "Color",
@@ -235,8 +235,8 @@
     "save": "Save",
     "image": "Image",
     "saved_in": "Saved at",
-    "location": "ubicación",
-    "voices": "Por favor, instale voces desde la configuración para una mejor usabilidad"
+    "location": "Location",
+    "voices": "Please, install voices from settings for better experience"
   },
   "onboarding": {
     "start": "Get Started",
@@ -314,7 +314,7 @@
     }
   },
   "chatgpt": {
-    "prompt": "escribir una frase en ingles con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras y agregale la expresion culiau: {pictograms}"
+    "prompt": "write a proper sentence in english with the following words as if you are a {gender}, adding connectors and articles when needed, without changing words: {pictograms}"
   },
   "notification": {
     "code": {
@@ -364,15 +364,15 @@
       "btn": "Ok"
     },
     "short": {
-      "headline": " ¿Confima que deseas volver a la pantalla de perfiles?"
+      "headline": "Do you want to go back to profile screen?"
     }
   },
   "create": {
     "heading": "Create pictogram",
     "image_selection": "Choose the image that best represent the pictogram",
     "choose_color": "Choose color",
-    "search_arsaac": "Buscar Arsaac",
-    "time_headline": "Selecciona los horarios que más se adecuen a sus actividades",
+    "search_arsaac": "Search in ARASAAC",
+    "time_headline": "Choose the timing that better suits your needs",
     "time_sub1": "What days of the week is when you use it the most?",
     "schedule": "In what schedule?",
     "save": "Save pictogram",
@@ -381,6 +381,6 @@
     "create_new_board": "Create new board",
     "board_name": "Board name",
     "edit_picto": "Edit pictogram",
-    "final_heading": "Listo, chequea que todo este correcto"
+    "final_heading": "Done! Check everything is OK"
   }
 }
