@@ -126,7 +126,7 @@
       "board_view": "Vista de tableros",
       "tabs": "Por pestañas",
       "grid": "Grilla",
-      "ottaa_labs": "Ottaa Labs",
+      "ottaa_labs": "OTTAA Labs",
       "labs_text": "Función frases verbales",
       "labs_long": "Función en Modo Beta\nPermite generar frases con tiempos verbales más complejas",
       "one_by_one": "ONE by ONE"
@@ -140,7 +140,7 @@
       "scroll": "Scroll&Press",
       "sip": "Soplo y succión",
       "selection_type": "Tipo de selección",
-      "swept": "Swept",
+      "swept": "Barrido",
       "speed": "Velocidad",
       "selection_speed": "Velocidad de selección"
     },
@@ -186,7 +186,7 @@
     "general": "General",
     "pictogram": "Pictogramas",
     "configuration": "Configuración",
-    "user_ottaa": "Usar Ottaa como",
+    "user_ottaa": "Usar OTTAA como",
     "cancel": "Cancelar",
     "slow": "Lenta",
     "default": "Predeterminada",
@@ -203,9 +203,9 @@
     "colombia": "Colombia",
     "english": "Inglés",
     "italian": "Italiano",
-    "french": "French",
-    "portuguese": "Portuguese",
-    "test": "Esta es la voz que vas a usar en ottaa",
+    "french": "Francés",
+    "portuguese": "Portugues",
+    "test": "Esta es la voz que vas a usar en ota",
     "add": "Añadir",
     "confirm": "Confirmar",
     "gallery": "galería",
@@ -235,7 +235,7 @@
     "save": "Guardar",
     "image": "Imágen",
     "saved_in": "Guardado en",
-    "location": "ubicación",
+    "location": "Ubicación",
     "voices": "Por favor, instale voces desde la configuración para una mejor usabilidad"
   },
   "onboarding": {
@@ -314,7 +314,7 @@
     }
   },
   "chatgpt": {
-    "prompt": "escribir una frase en ingles con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras y agregale la expresion culiau: {pictograms}"
+    "prompt": "escribir una frase en español con estas palabras como si fueras {gender}, agregando conectores y artículos cuando sea necesario, pero sin cambiar las palabras: {pictograms}"
   },
   "notification": {
     "code": {
@@ -364,14 +364,14 @@
       "btn": "De acuerdo"
     },
     "short": {
-      "headline": " ¿Confima que deseas volver a la pantalla de perfiles?"
+      "headline": "¿Confima que deseas volver a la pantalla de perfiles?"
     }
   },
   "create": {
     "heading": "Crear pictograma",
     "image_selection": "Elije la imagen que represente al pictograma",
     "choose_color": "Elije el color",
-    "search_arsaac": "Buscar Arsaac",
+    "search_arsaac": "Buscar ARASAAC",
     "time_headline": "Selecciona los horarios que más se adecuen a sus actividades",
     "time_sub1": "¿Qué días de la semana es cuando más lo utiliza?",
     "schedule": "¿En qué horario?",
