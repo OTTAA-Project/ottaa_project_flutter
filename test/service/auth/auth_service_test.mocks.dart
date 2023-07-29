@@ -206,6 +206,25 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setAppleUserDara({required Map<String, String>? data}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setAppleUserDara,
+          [],
+          {#data: data},
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<Map<String, String>> getAppleUserData() => (super.noSuchMethod(
+        Invocation.method(
+          #getAppleUserData,
+          [],
+        ),
+        returnValue: _i9.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i9.Future<Map<String, String>>);
 }
 
 /// A class which mocks [ServerRepository].
@@ -1176,8 +1195,8 @@ class MockServerRepository extends _i1.Mock implements _i10.ServerRepository {
                 #languageCode: languageCode,
               },
             ),
-            returnValue: _i9.Future<
-                    _i2.Either<String, List<_i17.ArsaacDataModel>>>.value(
+            returnValue: _i9
+                .Future<_i2.Either<String, List<_i17.ArsaacDataModel>>>.value(
                 _FakeEither_0<String, List<_i17.ArsaacDataModel>>(
               this,
               Invocation.method(
@@ -1210,6 +1229,16 @@ class MockServerRepository extends _i1.Mock implements _i10.ServerRepository {
         ),
         returnValue: _i9.Future<String>.value(''),
       ) as _i9.Future<String>);
+  @override
+  _i9.Future<bool> deleteTheAccount({required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteTheAccount,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 }
 
 /// A class which mocks [I18N].

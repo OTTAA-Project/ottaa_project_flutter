@@ -1007,8 +1007,8 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
                 #languageCode: languageCode,
               },
             ),
-            returnValue: _i4.Future<
-                    _i2.Either<String, List<_i11.ArsaacDataModel>>>.value(
+            returnValue: _i4
+                .Future<_i2.Either<String, List<_i11.ArsaacDataModel>>>.value(
                 _FakeEither_0<String, List<_i11.ArsaacDataModel>>(
               this,
               Invocation.method(
@@ -1041,4 +1041,14 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
         ),
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
+  @override
+  _i4.Future<bool> deleteTheAccount({required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteTheAccount,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }

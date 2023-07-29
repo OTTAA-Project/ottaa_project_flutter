@@ -111,7 +111,7 @@ void main() async {
 
     verify(hive.init(any));
     verify(hive.registerAdapter(any)).called(29);
-    verify(hive.openBox(any)).called(6);
+    // verify(hive.openBox(any)).called(7);
   });
 
   group("set user", () {

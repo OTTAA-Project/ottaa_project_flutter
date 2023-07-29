@@ -1013,8 +1013,8 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
                 #languageCode: languageCode,
               },
             ),
-            returnValue: _i4.Future<
-                    _i2.Either<String, List<_i11.ArsaacDataModel>>>.value(
+            returnValue: _i4
+                .Future<_i2.Either<String, List<_i11.ArsaacDataModel>>>.value(
                 _FakeEither_0<String, List<_i11.ArsaacDataModel>>(
               this,
               Invocation.method(
@@ -1047,6 +1047,16 @@ class MockServerRepository extends _i1.Mock implements _i3.ServerRepository {
         ),
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
+  @override
+  _i4.Future<bool> deleteTheAccount({required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteTheAccount,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }
 
 /// A class which mocks [LocalDatabaseRepository].
@@ -1164,6 +1174,25 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> setAppleUserDara({required Map<String, String>? data}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setAppleUserDara,
+          [],
+          {#data: data},
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<Map<String, String>> getAppleUserData() => (super.noSuchMethod(
+        Invocation.method(
+          #getAppleUserData,
+          [],
+        ),
+        returnValue: _i4.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i4.Future<Map<String, String>>);
 }
 
 /// A class which mocks [AuthRepository].
@@ -1263,4 +1292,14 @@ class MockAuthRepository extends _i1.Mock implements _i14.AuthRepository {
         ),
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
+  @override
+  _i4.Future<bool> deleteAccount({required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAccount,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }
