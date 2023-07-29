@@ -143,6 +143,16 @@ class MockAuthRepository extends _i1.Mock implements _i3.AuthRepository {
         ),
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
+  @override
+  _i4.Future<bool> deleteAccount({required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAccount,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }
 
 /// A class which mocks [RemoteStorageRepository].
@@ -1173,8 +1183,8 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
                 #languageCode: languageCode,
               },
             ),
-            returnValue: _i4.Future<
-                    _i2.Either<String, List<_i16.ArsaacDataModel>>>.value(
+            returnValue: _i4
+                .Future<_i2.Either<String, List<_i16.ArsaacDataModel>>>.value(
                 _FakeEither_0<String, List<_i16.ArsaacDataModel>>(
               this,
               Invocation.method(
@@ -1207,4 +1217,14 @@ class MockServerRepository extends _i1.Mock implements _i9.ServerRepository {
         ),
         returnValue: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
+  @override
+  _i4.Future<bool> deleteTheAccount({required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteTheAccount,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }

@@ -245,6 +245,16 @@ class MockAuthRepository extends _i1.Mock implements _i6.AuthRepository {
         ),
         returnValue: _i7.Future<String>.value(''),
       ) as _i7.Future<String>);
+  @override
+  _i7.Future<bool> deleteAccount({required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAccount,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 }
 
 /// A class which mocks [LoadingNotifier].
@@ -633,4 +643,23 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> setAppleUserDara({required Map<String, String>? data}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setAppleUserDara,
+          [],
+          {#data: data},
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<Map<String, String>> getAppleUserData() => (super.noSuchMethod(
+        Invocation.method(
+          #getAppleUserData,
+          [],
+        ),
+        returnValue: _i7.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i7.Future<Map<String, String>>);
 }

@@ -517,8 +517,8 @@ class MockPredictPictogram extends _i1.Mock implements _i14.PredictPictogram {
             #cancelToken: cancelToken,
           },
         ),
-        returnValue: _i8.Future<
-                _i3.Either<String, List<_i15.PictoPredictedReduced>>>.value(
+        returnValue: _i8
+            .Future<_i3.Either<String, List<_i15.PictoPredictedReduced>>>.value(
             _FakeEither_1<String, List<_i15.PictoPredictedReduced>>(
           this,
           Invocation.method(
@@ -783,6 +783,25 @@ class MockLocalDatabaseRepository extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+  @override
+  _i8.Future<void> setAppleUserDara({required Map<String, String>? data}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setAppleUserDara,
+          [],
+          {#data: data},
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+  @override
+  _i8.Future<Map<String, String>> getAppleUserData() => (super.noSuchMethod(
+        Invocation.method(
+          #getAppleUserData,
+          [],
+        ),
+        returnValue: _i8.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i8.Future<Map<String, String>>);
 }
 
 /// A class which mocks [I18N].
