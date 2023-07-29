@@ -81,7 +81,7 @@ class LanguageScreen extends ConsumerWidget {
                                   ),
                                 );
                               });
-                          await Future.delayed(const Duration(seconds: 1));
+                          await Future.delayed(const Duration(seconds: 2));
                           context.pop();
                         }
                         await provider.changeLanguage(languageCode: 'es_AR');
@@ -105,7 +105,7 @@ class LanguageScreen extends ConsumerWidget {
                                   ),
                                 );
                               });
-                          await Future.delayed(const Duration(seconds: 1));
+                          await Future.delayed(const Duration(seconds: 2));
                           context.pop();
                         }
                       },
@@ -127,7 +127,7 @@ class LanguageScreen extends ConsumerWidget {
                                   ),
                                 );
                               });
-                          await Future.delayed(const Duration(seconds: 1));
+                          await Future.delayed(const Duration(seconds: 2));
                           context.pop();
                         }
                         await provider.changeLanguage(languageCode: 'pt_BR');
@@ -150,7 +150,7 @@ class LanguageScreen extends ConsumerWidget {
                                   ),
                                 );
                               });
-                          await Future.delayed(const Duration(seconds: 1));
+                          await Future.delayed(const Duration(seconds: 2));
                           context.pop();
                         }
                         await provider.changeLanguage(languageCode: 'it_IT');
@@ -194,7 +194,7 @@ class LanguageScreen extends ConsumerWidget {
                                             ),
                                           );
                                         });
-                                    await Future.delayed(const Duration(seconds: 1));
+                                    await Future.delayed(const Duration(seconds: 2));
                                     context.pop();
                                   }
                                   await provider.changeLanguage(languageCode: 'es_AR');
@@ -217,7 +217,7 @@ class LanguageScreen extends ConsumerWidget {
                                             ),
                                           );
                                         });
-                                    await Future.delayed(const Duration(seconds: 1));
+                                    await Future.delayed(const Duration(seconds: 2));
                                     context.pop();
                                   }
                                   await provider.changeLanguage(languageCode: 'es_CL');
@@ -240,7 +240,7 @@ class LanguageScreen extends ConsumerWidget {
                                             ),
                                           );
                                         });
-                                    await Future.delayed(const Duration(seconds: 1));
+                                    await Future.delayed(const Duration(seconds: 2));
                                     context.pop();
                                   }
                                   await provider.changeLanguage(languageCode: 'es_CO');

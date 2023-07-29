@@ -67,7 +67,7 @@ class UserSettingsProvider extends ChangeNotifier {
   SizeTypes size = SizeTypes.small;
   bool capital = true;
   String language = 'es_AR';
-  final List<String> enVoices = ['Ava', 'Nathan', 'Albert', 'Whisper', 'Jester'];
+  final List<String> enVoices = ['Ava', 'Nathan', 'Albert', 'Whisper', 'Jester', 'Samantha'];
   final List<String> itVoices = ['Alice', 'Luca', 'Paola'];
   final List<String> esVoices = ['Diego', 'Isabela'];
   late AccessibilitySetting accessibilitySetting;
@@ -208,7 +208,7 @@ class UserSettingsProvider extends ChangeNotifier {
       await _i18n.changeLanguage(languageCode);
     }
     await fetchAllVoices(language: language);
-    await changeLanguageWithoutTTSSPeaking(name: filteredVoices.first.name);
+    await changeLanguageWithoutTTSSPeaking(name: filteredVoices.isNotEmpty ? filteredVoices.first.name : '');
     notifyListeners();
   }
 

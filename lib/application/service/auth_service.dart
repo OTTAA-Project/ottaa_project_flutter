@@ -262,7 +262,7 @@ class AuthService extends AuthRepository {
       if (result.givenName != null) {
         _databaseRepository.setAppleUserDara(data: {
           'name': result.givenName!,
-          'lastname': result.familyName!,
+          'lastname': result.familyName ?? '',
           'email': result.email!,
         });
       }
