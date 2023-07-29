@@ -112,7 +112,8 @@ class ShowPictosScreen extends ConsumerWidget {
                       child: PictoWidget(
                         onTap: () async {
                           final pro = ref.read(createPictoProvider);
-                          await pro.init(userId: provider.userID);
+                          await pro.init(userId: provider.userID, isFromBoard: true);
+                          pro.selectedBoardID = provider.selectedBoardID;
                           context.push(AppRoutes.patientCreatePicto);
                         },
                         image: Image.asset(

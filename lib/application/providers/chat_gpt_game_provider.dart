@@ -21,10 +21,10 @@ class ChatGptGameProvider extends ChangeNotifier {
   List<Picto> chatGptPictos = [];
   bool btnText = false;
   bool isStoryFetched = false;
-  final List<String> nounBoards = ['APLbz00sRZDNGyGzioXMz', 'DDrKGBCRqNeAy4LgKfN4J', 'alr_Y_ZidZDqQJQCRiqoE', 'lyr-m9k0Q6-rffFFBwPEk'];
-  final List<String> modifierBoards = ['--PHmDIFeKHvulVxNtBgk', '5kfboTpsoH8RSFvA9ruE1', 'TMO8t_1hMaHiyh1SUwaFH'];
-  final List<String> actionBoards = ['L6pHIipM3ocu3wYlMuo2y'];
-  final List<String> placeBoards = ['H6zmHfH-5XVtpy1RJ1ci7', 'kBVGvu0NygXFUWTFxcQJe'];
+  final List<String> nounBoards = ['0geft4arn_A8kL-rfUPYc', 'WZYuZd331Hm5gHXJtUmBN', 'puda9fUGjqvm9oSM6CpTk', 'xjfPlDs-AcFV9LCyY-v9j'];
+  final List<String> modifierBoards = ['7ngCuvmAnM_7ygpFQgLpk', '7w5ACMFdOCTkBrS911MA1', 'berI6X2_pAVCNOrcHAL6y'];
+  final List<String> actionBoards = ['PYTnUqCLwAbngR2Ozroc2'];
+  final List<String> placeBoards = ['y545pM8pvB3WgukIac6NT'];
 
   ChatGptGameProvider(this._chatGPTServices, this._gamesProvider, this._tts);
 

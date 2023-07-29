@@ -16,12 +16,13 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.read(createPictoProvider);
+    final provider = ref.watch(createPictoProvider);
     final textTheme = Theme.of(context).textTheme;
     return WillPopScope(
       onWillPop: () async {
         if (provider.controller.page != 0) {
           provider.previousPage();
+          provider.notify();
           return false;
         } else {
           context.pop();
@@ -36,6 +37,7 @@ class CreatePictoPageViewerScreen extends ConsumerWidget {
             onPressed: () {
               if (provider.controller.page != 0) {
                 provider.previousPage();
+                provider.notify();
               } else {
                 context.pop();
               }

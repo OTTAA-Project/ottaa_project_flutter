@@ -79,6 +79,8 @@ class ChoosePictoDayScreen extends ConsumerWidget {
             child: SimpleButton(
               width: false,
               onTap: () {
+                provider.daysString = '';
+                provider.timeString = '';
                 for (var element in provider.daysToUsePicto) {
                   if (provider.daysString.isEmpty) {
                     provider.daysString = '$element ';

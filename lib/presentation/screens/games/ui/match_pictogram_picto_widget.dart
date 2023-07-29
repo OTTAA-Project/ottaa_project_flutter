@@ -28,8 +28,8 @@ class MPPictoWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: size.height * 0.2,
-          height: size.height *0.25,
+          width: size.height * 0.3,
+          height: size.height * 0.4,
           padding: const EdgeInsets.all(0.5),
           decoration: BoxDecoration(
             border: hideFlag
@@ -44,7 +44,7 @@ class MPPictoWidget extends StatelessWidget {
                   onTap: onTap,
                   child: Container(
                     width: size.height * 0.2,
-                    height: size.height *0.25,
+                    height: size.height * 0.25,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
@@ -67,7 +67,7 @@ class MPPictoWidget extends StatelessWidget {
                             : Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
                                 child: AutoSizeText(
-                                  hideText,
+                                  hideText.toUpperCase(),
                                   maxLines: 1,
                                 ),
                               ),

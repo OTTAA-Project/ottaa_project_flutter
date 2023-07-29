@@ -27,8 +27,8 @@ class PictWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: size.height * 0.2,
-          height: size.height *0.25,
+          width: size.height * 0.3,
+          height: size.height * 0.4,
           padding: const EdgeInsets.all(0.5),
           decoration: BoxDecoration(
             border: show ? Border.all(color: rightOrWrong ? Colors.green : Colors.red, width: 4) : Border.all(color: Colors.transparent),
@@ -62,7 +62,7 @@ class PictWidget extends StatelessWidget {
                             : Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
                                 child: AutoSizeText(
-                                  hideText,
+                                  hideText.toUpperCase(),
                                   maxLines: 1,
                                 ),
                               ),
@@ -87,7 +87,7 @@ class PictWidget extends StatelessWidget {
                             fit: BoxFit.fill,
                             "assets/img/${pict.text}.webp",
                           ),
-                    text: pict.text,
+                    text: pict.text.toUpperCase(),
                     colorNumber: pict.type,
                   ),
                 ),

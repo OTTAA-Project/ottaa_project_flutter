@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -73,7 +75,7 @@ class VoiceAndSubtitleScreen extends ConsumerWidget {
                           padding: const EdgeInsets.only(right: 16),
                           child: ChooserWidget(
                             selected: provider.ttsSetting.voiceSetting.voicesNames[provider.language] == provider.filteredVoices[index].name,
-                            title: '${'global.voice'.trl} ${index + 1}',
+                            title: Platform.isIOS ? provider.filteredVoices[index].name : provider.filteredVoices[index].locale,
                             onTap: () async => await provider.changeVoiceType(type: provider.filteredVoices[index].name),
                           ),
                         );

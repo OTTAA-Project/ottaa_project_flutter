@@ -16,6 +16,7 @@ import 'package:ottaa_project_flutter/core/repositories/create_picto_repository.
 import 'package:ottaa_project_flutter/core/repositories/groups_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/local_database_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
+import 'package:path/path.dart';
 
 class CreatePictoProvider extends ChangeNotifier {
   final Map<int, int> dataSetMapId = {
@@ -70,7 +71,7 @@ class CreatePictoProvider extends ChangeNotifier {
   final TTSProvider _ttsProvider;
   final ViewBoardProvider _viewBoardProvider;
 
-  final PageController controller = PageController(initialPage: 0);
+  PageController controller = PageController(initialPage: 0);
 
   int currentIndex = 0;
   bool isImageSelected = false;
@@ -100,23 +101,21 @@ class CreatePictoProvider extends ChangeNotifier {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController arsaacController = TextEditingController();
 
-  CreatePictoProvider(
-    this._createPictoServices,
-    this._i18n,
-    this._groupsService,
-    this._pictogramsService,
-    this.userState,
-    this._localDatabaseRepository,
-    this._ttsProvider,
-    this._viewBoardProvider,
-  ) {
-    controller.addListener(setIndex);
-  }
+  CreatePictoProvider(this._createPictoServices, this._i18n, this._groupsService, this._pictogramsService, this.userState, this._localDatabaseRepository, this._ttsProvider, this._viewBoardProvider);
 
-  Future<void> init({required String userId}) async {
+  Future<void> init({required String userId, bool isFromBoard = false}) async {
     userID = userId;
     await fetchUserGroups(userId: userId);
     await fetchUserPictos(userId: userId);
+    if (isFromBoard) {
+      controller = PageController(initialPage: 1);
+      currentIndex = 1;
+    } else {}
+    controller.addListener(setIndex);
+  }
+
+  void setToSecondPage() async {
+    controller.jumpToPage(1);
   }
 
   Future<bool> captureImageFromCamera() async {
