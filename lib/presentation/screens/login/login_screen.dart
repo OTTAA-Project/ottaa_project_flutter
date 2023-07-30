@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             type: SignInType.google,
                           ),
                         ),
-                        Platform.isIOS ? const AppleSignButton() : const SizedBox.shrink(),
+                        if (defaultTargetPlatform == TargetPlatform.iOS) const AppleSignButton() else const SizedBox.shrink(),
                       ],
                     ),
                   ),
