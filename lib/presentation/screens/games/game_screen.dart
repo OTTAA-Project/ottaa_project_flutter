@@ -115,7 +115,7 @@ class GameScreenUI extends ConsumerWidget {
               Wrap(
                 children: [
                   Text(
-                    '${'game.novel'.trl}  ',
+                    '${'game.nivel'.trl}  ',
                     style: textTheme.displaySmall!.copyWith(
                       color: colorScheme.primary,
                     ),

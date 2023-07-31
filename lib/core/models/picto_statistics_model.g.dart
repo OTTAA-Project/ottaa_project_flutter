@@ -6,35 +6,55 @@ part of 'picto_statistics_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PictoStatisticsModel _$PictoStatisticsModelFromJson(Map<String, dynamic> json) => PictoStatisticsModel(
-      mostUsedSentences: (json['most_used_sentences'] as List<dynamic>).map((e) => MostUsedSentence.fromJson(e as Map<String, dynamic>)).toList(),
-      pictoUsagePerGroup: (json['picto_usage_per_group'] as List<dynamic>).map((e) => PictoUsagePerGroup.fromJson(e as Map<String, dynamic>)).toList(),
+PictoStatisticsModel _$PictoStatisticsModelFromJson(
+        Map<String, dynamic> json) =>
+    PictoStatisticsModel(
+      mostUsedSentences: (json['most_used_sentences'] as List<dynamic>)
+          .map((e) => MostUsedSentence.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      pictoUsagePerGroup: (json['picto_usage_per_group'] as List<dynamic>)
+          .map((e) => PictoUsagePerGroup.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$PictoStatisticsModelToJson(PictoStatisticsModel instance) => <String, dynamic>{
+Map<String, dynamic> _$PictoStatisticsModelToJson(
+        PictoStatisticsModel instance) =>
+    <String, dynamic>{
       'most_used_sentences': instance.mostUsedSentences,
       'picto_usage_per_group': instance.pictoUsagePerGroup,
     };
 
-MostUsedSentence _$MostUsedSentenceFromJson(Map<String, dynamic> json) => MostUsedSentence(
+MostUsedSentence _$MostUsedSentenceFromJson(Map<String, dynamic> json) =>
+    MostUsedSentence(
       frec: json['frec'] as int,
-      pictoComponentes: (json['picto_componentes'] as List<dynamic>).map((e) => PictoComponente.fromJson(e as Map<String, dynamic>)).toList(),
+      pictoComponentes: (json['picto_componentes'] as List<dynamic>)
+          .map((e) => PictoComponente.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$MostUsedSentenceToJson(MostUsedSentence instance) => <String, dynamic>{
+Map<String, dynamic> _$MostUsedSentenceToJson(MostUsedSentence instance) =>
+    <String, dynamic>{
       'frec': instance.frec,
       'picto_componentes': instance.pictoComponentes,
     };
 
-PictoComponente _$PictoComponenteFromJson(Map<String, dynamic> json) => PictoComponente(
+PictoComponente _$PictoComponenteFromJson(Map<String, dynamic> json) =>
+    PictoComponente(
       id: json['id'] as String,
       esSugerencia: json['esSugerencia'] as bool,
-      hora: (json['hora'] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
-      sexo: (json['sexo'] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
-      edad: (json['edad'] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+      hora:
+          (json['hora'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      sexo:
+          (json['sexo'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      edad:
+          (json['edad'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
     );
 
-Map<String, dynamic> _$PictoComponenteToJson(PictoComponente instance) => <String, dynamic>{
+Map<String, dynamic> _$PictoComponenteToJson(PictoComponente instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'esSugerencia': instance.esSugerencia,
       'hora': instance.hora,
@@ -42,13 +62,15 @@ Map<String, dynamic> _$PictoComponenteToJson(PictoComponente instance) => <Strin
       'edad': instance.edad,
     };
 
-PictoUsagePerGroup _$PictoUsagePerGroupFromJson(Map<String, dynamic> json) => PictoUsagePerGroup(
+PictoUsagePerGroup _$PictoUsagePerGroupFromJson(Map<String, dynamic> json) =>
+    PictoUsagePerGroup(
       groupId: json['groupId'] as int? ?? 0,
       percentage: (json['percentage'] as num).toDouble(),
       name: Name.fromJson(json['name'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$PictoUsagePerGroupToJson(PictoUsagePerGroup instance) => <String, dynamic>{
+Map<String, dynamic> _$PictoUsagePerGroupToJson(PictoUsagePerGroup instance) =>
+    <String, dynamic>{
       'groupId': instance.groupId,
       'percentage': instance.percentage,
       'name': instance.name,
