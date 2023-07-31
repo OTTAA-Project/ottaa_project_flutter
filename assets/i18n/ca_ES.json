@@ -1,7 +1,7 @@
 {
   "profile": {
     "selection": {
-      "text1": "Qui usarà l'aplicació en aquest dispositiu?",
+      "text1": "¿Quién va a utilizar la aplicación en este dispositivo?",
       "caregiver_text": "Necessita comunicar-se",
       "user_text": "Necessita comunicar-se"
     },
@@ -9,38 +9,38 @@
     "ottaa": {
       "tips": "Consells OTTAA"
     },
-    "mail": "Correu electrònic",
+    "mail": "Correo electrónico",
     "date": "Data de naixement",
     "faq": {
       "title": "Preguntes freqüents",
       "faq0": "Qui pot usar l'aplicació OTTAA?",
-      "faq0Description": "OTTAA està dissenyat per a persones no verbals, és a dir, qualsevol persona que no utilitzi la parla oral per comunicar-se. Les persones que fan servir OTTAA avui en dia van ser diagnosticades amb autisme, paràlisi cerebral, síndrome de Down, esclerosi lateral amiotròfica (ELA), atrofia muscular espinal (AME) o síndrome d'enclaustrament post al accident cerebrovascular (LiS), entre altres afeccions. Al ser una eina de comunicació dinàmica, OTTAA requereix que els seus usuaris posseeixin funcions cognitives de nivell mitjà a alt. No obstant, ens agrada considerar cada cas individualment, així que no dubtis a posar-te en contacte i sol·licitar una avaluació en línia amb el nostre equip.",
+      "faq0Description": "OTTAA está diseñado para personas no verbales, es decir, cualquier persona que no utilice el habla oral para comunicarse. Las personas que usan OTTAA hoy en día fueron diagnosticadas con autismo, parálisis cerebral, síndrome de Down, esclerosis lateral amiotrófica (ELA), atrofia muscular espinal (AME) o síndrome de enclaustramiento post al accidente cerebrovascular (LiS), entre otras afecciones. Al ser una herramienta de comunicación dinámica, OTTAA requiere que sus usuarios posean funciones cognitivas de nivel medio a alto. Sin embargo, nos gusta considerar cada caso individualmente, así que no dude en ponerse en contacto y solicitar una evaluación en línea con nuestro equipo.",
       "faq1": "Com funciona l'aplicació?",
-      "faq1Description": "L'aplicació OTTAA proporciona a l'usuari pictogrames: imatges que representen accions, objectes, sentiments o emocions. L'usuari pot triar els pictogrames que necessita i crear una frase, aquesta es tradueix dels pictogrames a una oració escrita que apareix a la pantalla i que l'aplicació també llegeix en veu alta. Consulteu el nostre canal de Youtube per obtenir una explicació més visual.",
+      "faq1Description": "La aplicación OTTAA proporciona al usuario pictogramas: imágenes que representan acciones, objetos, sentimientos o emociones. El usuario puede elegir los pictogramas que necesita y crear una frase, esta se traduce de los pictogramas a una oración escrita que aparece en la pantalla y que la aplicación también lee en voz alta. Consulta nuestro canal de Youtube para obtener una explicación más visual.",
       "faq2": "En què es diferencia aquesta aplicació d'altres dispositius AAC (comunicació augmentativa i alternativa)?",
       "faq2Description": "L'aplicació OTTAA és diferent d'altres aplicacions de CAA a causa del seu innovador algorisme predictiu i generador de llenguatge natural, que permet que l'aplicació aprengui del comportament de l'usuari a l'aplicació, la seva edat, sexe, l'hora del dia i la seva ubicació per pre-seleccionar pictograma(s) per al moment comunicacional en què es troben.",
       "faq3": "Quant costa l'aplicació OTTAA?",
       "faq3Description": "L'aplicació OTTAA és gratuïta per descarregar i usar. Per crear un producte sostenible que resisteixi el pas del temps, hi ha algunes característiques que requereixen una subscripció per utilitzar-les. No obstant, estem treballant durament per brindar finançament a tothom que ho necessiti.\n\nSi estàs a Argentina, qualsevol ajuda tècnica que necessiti una persona ha d'estar cobert per un assegurança de salut. Comuniqui's amb el nostre equip per obtenir orientació i assistència sobre com obtenir aquesta cobertura.\n\nSi ets de qualsevol altre país de LATAM i vols compartir la teva experiència sobre aquest tema, no dubtis en comunicar-te, la teva contribució podria ajudar a moltes persones.",
       "faq4": "Quins idiomes són compatibles amb el Projecte OTTAA?",
-      "faq4Description": "Actualment admetem espanyol, anglès, portuguès i francès. Per a espanyol, tenim versions localitzades d'Argentina, Xile, Colòmbia i Espanya. Estem buscant activament contribucions sobre nous idiomes o una millor localització per a les varietats espanyoles. Uneix-te a la nostra comunitat de crowdin per contribuir.",
+      "faq4Description": "Actualmente admitimos español, inglés, portugués y francés. Para español, tenemos versiones localizadas de Argentina, Chile, Colombia y España. Estamos buscando activamente contribuciones sobre nuevos idiomas o una mejor localización para las variedades españolas. Únete a nuestra comunidad de crowdin para contribuir.",
       "faq5": "Com puc col·laborar amb el Projecte OTTAA?",
-      "faq5Description": "Els col·laboradors poden ajudar a OTTAA amb el desenvolupament, les proves i/o la traducció. Per llegir més sobre el tema i començar, consulteu la secció Contribuir en el repositori oficial de OTTAA a GitHub."
+      "faq5Description": "Los colaboradores pueden ayudar a OTTAA con el desarrollo, las pruebas y/o la traducción. Para leer más sobre el tema y comenzar, consulta la sección Contribuir en el repositorio oficial de OTTAA en GitHub."
     },
     "caregiver": "Acompanyant",
     "caregivers_families": "Professionals/Familiars",
     "user": "Usuari/a",
     "user_description": "Persona no verbal",
-    "wait": "Si us plau, espera",
+    "wait": "Por favor espera",
     "setting_exp": "Configurant la teva experiència...",
     "link_account": "Vincular un compte",
     "use": {
-      "ottaa": "Utilitzar OTTAA"
+      "ottaa": "Utilizar OTTAA"
     },
-    "close_profile": "Amagar",
+    "close_profile": "Ocultar",
     "open_profile": "Veure perfil",
     "no_account": "Mode sense perfil",
     "new_existant": "Nou/Existente",
-    "what_do": "Què vols fer?",
+    "what_do": "¿Qué quieres hacer?",
     "profile": "Perfil",
     "linked_accounts": "Comptes vinculats",
     "name": "Nom",
@@ -55,38 +55,38 @@
       "title2": "Taulells",
       "title3": "Historial",
       "title4": "Favorits",
-      "text1": "Mira les estadístiques del teu pacient/familiar, per veure la seva activitat i com va millorant al llarg dels dies, setmanes i mesos.",
-      "text2": "Amaga els taulells que no utilitza l'usuari, perquè li apareguin els taulells que més utilitza i necessita.",
-      "text3": "Utilitza l'historial per veure les teves frases passades, què vas fer durant el dia i explicar històries.",
-      "text4": "Desa pictogrames o frases favorites, per poder accedir-hi més ràpidament."
+      "text1": "Mira las estadísticas de tu paciente/familiar, para ver su actividad y cómo fue mejorando a lo largo de los días, semanas y meses.",
+      "text2": "Oculta los tableros que no use el usuario, para que le aparezcan los tableros que más utiliza y necesita.",
+      "text3": "Utiliza el historial para ver tus frases pasadas, qué hiciste durante el día y contar historias.",
+      "text4": "Guarda pictogramas o frases favoritas, para poder acceder a ellas más rápidamente."
     },
     "unlink": "Desvincular",
     "unlink_account": "¿Desea desvincular a {name} de sus cuentas?",
     "help": {
-      "help": "Ajuda",
+      "help": "¿Necesita ayuda?",
       "title1": "Preguntes freqüents",
-      "title2": "Contactar amb suport"
+      "title2": "Contactar con el soporte"
     },
     "link": {
       "title": "Vincular Compte",
       "mail": {
-        "title": "Introduïu el correu electrònic vinculat a la compte de OTTAA",
+        "title": "Introduzca el correo electrónico vinculado a la cuenta de OTTAA",
         "input": {
-          "required": "El correu electrònic és requerit",
-          "invalid": "El correu electrònic és invàlid"
+          "required": "El correo electrónico es obligatorio",
+          "invalid": "El correo electrónico no es válido"
         },
         "warn": "*Se enviará una notificación con un código para enlazar los perfiles.",
         "contact": "*Asegurate de estar en contacto con la persona que posea esta cuenta en un dispositivo."
       },
       "token": {
         "title": "Coloque el código de verificación que llegó como notificación a otro dispositivo.",
-        "problem": "Inconvenients per enllaçar les comptes?",
+        "problem": "¿Tiene problemas para vincular las cuentas?",
         "resend": "Reenviar codi",
-        "back": "Introduir un altre correu electrònic",
-        "invalid": "Token invàlid"
+        "back": "Introducir otro email",
+        "invalid": "Token no válido"
       },
       "wait": {
-        "title": "Espereu",
+        "title": "Espere",
         "subtitle": "Carregant perfil..."
       },
       "success": {
@@ -95,17 +95,18 @@
       },
       "error": {
         "link-exist": "Ja estan vinculades",
-        "miss-caregiver": "Error:Caregiver 404",
-        "miss-user": "Error:User 404",
-        "user-no-comp": "Error: User 406",
-        "caregiver-no-comp": "Error: Caregiver 406",
+        "miss-caregiver": "Error: Cuidador 404",
+        "miss-user": "Error: Usuario 404",
+        "user-no-comp": "Error: Usuario 406",
+        "caregiver-no-comp": "Error: Cuidador 406",
         "autolink": "Error: Mateixa compte",
         "auth/user-not-found": "Usuari no trobat",
         "miss-token": "Falta el Token",
-        "invalid-token": "Token invàlid",
-        "expired-token": "Token vençut"
+        "invalid-token": "Token no válido",
+        "expired-token": "Token caducado"
       }
-    }
+    },
+    "delete_account": "Eliminar cuenta"
   },
   "user": {
     "main": {
@@ -122,7 +123,7 @@
     "main_setting": {
       "interaction": "Interaccions",
       "talk_delete": "Hablar y Borrar",
-      "shortcut": "Dreceres a la pantalla principal",
+      "shortcut": "Atajos en el Inicio",
       "board_view": "Vista de taulells",
       "tabs": "Per pestanyes",
       "grid": "Grella",
@@ -138,7 +139,7 @@
       "device": "Dispositiu d'accessibilitat",
       "press": "Press&Press",
       "scroll": "Scroll&Press",
-      "sip": "Sip&puff",
+      "sip": "Soplo y succión",
       "selection_type": "Tipus de selecció",
       "swept": "Barrido",
       "speed": "Velocitat",
@@ -150,9 +151,9 @@
       "voz1": "Veu 1",
       "voz2": "Veu 2",
       "voz3": "Veu 3",
-      "mute": "Silenciar pictogrames",
+      "mute": "Silenciar pictogramas",
       "subtitle": "Subtítols",
-      "show": "Mostrar subtítols",
+      "show": "Mostrar subtítulos",
       "size": "Mida",
       "capital": "Majúscules"
     },
@@ -166,7 +167,7 @@
     "continue": "Continuar",
     "next": "Següent",
     "back": "Anterior",
-    "please_enter_text": "Si us plau, introdueixi un text",
+    "please_enter_text": "Por favor, introduce un texto",
     "done": "Fet",
     "yes": "Sí",
     "delete": "Esborrar",
@@ -192,16 +193,16 @@
     "default": "Per defecte",
     "fast": "Ràpida",
     "voice": "Veu",
-    "small": "Chico",
+    "small": "Pequeño",
     "medium": "Mitjana",
     "big": "Gran",
-    "comingsoon": "Esta característica va estár disponible muy pronto!",
+    "comingsoon": "¡Esta característica estará disponible muy pronto!",
     "delicate": "Región",
     "chile": "Chile",
     "spanish": "Español",
     "argentina": "Argentina",
     "colombia": "Colombia",
-    "english": "English",
+    "english": "Inglés",
     "italian": "Italiano",
     "french": "Francés",
     "portuguese": "Portugues",
@@ -246,7 +247,7 @@
       "description": "Amb la selecció de perfils podràs utilitzar OTTAA des de qualsevol dispositiu, mantenint els teus pictogrames i estils!"
     },
     "home": {
-      "title": "Personalitza la teva pantalla principal",
+      "title": "Personaliza tu Inicio",
       "subtitle": "Accessos directes a la pantalla principal",
       "description": "Personalizá de acuerdo a tus gustos y necesidades"
     },
@@ -267,11 +268,11 @@
     "text": "Et donem la benvinguda!\nAl món d'OTTAA"
   },
   "login": {
-    "title": "Inicia sessió amb el teu compte",
-    "google": "Continuar amb Google",
+    "title": "Ingresa con tu cuenta",
+    "google": "Continuar con Google.",
     "facebook": "Continuar amb Facebook",
     "apple": "Continuar con Apple",
-    "register": "Encara no tens compte? Registra't aquí",
+    "register": "¿Todavía no tienes cuenta? Regístrate aquí",
     "wait": {
       "title": "Et donem la benvinguda!",
       "subtitle": "Al nou món d'OTTAA Project"
@@ -297,12 +298,12 @@
       "switch": "Activar taulell"
     },
     "help": {
-      "boards": "Els taulells predictius permeten configurar quin grup de pictogrames es mostraran a la pantalla de l'usuari/a final.",
+      "boards": "Los tableros predictivos permiten configurar qué grupo de pictogramas se mostrará en la pantalla del usuario/a final.",
       "shortcut": "Els accessos directes són accessos ràpids a diferents funcions perquè l'usuari/a final disposi a la seva pantalla principal."
     },
     "wait": {
       "title": "Felicitats!",
-      "subtitle": "Has configurat l'experiència de {name}",
+      "subtitle": "Has configurado la experiencia de {name}",
       "button": "Anar al panell de perfils"
     },
     "skip": "Estàs d'acord en saltar les preferències del perfil?"
@@ -320,7 +321,7 @@
     "code": {
       "request": {
         "title": "Verificación de OTTAA Link",
-        "body": "Están intentando vincular tu cuenta con el token <b>{linkToken}</b>"
+        "body": "Están intentando vincular tu cuenta con el token {linkToken}"
       },
       "confirm": {
         "title": "Confirmación de OTTAA Link",
@@ -329,19 +330,19 @@
     }
   },
   "game": {
-    "play": "Juguemos!",
+    "play": "¡Juguemos!",
     "next": "Jugar",
-    "game_header_0": "¿Cuál es el picto?",
+    "game_header_0": "¿Cuál es el pictograma?",
     "game_header_1": "Unir pictogramas",
     "game_header_2": "Juego de la Memoria",
     "game_header_3": "Armá una historia",
     "game_sub_0": "Respondé las preguntas eligiendo el pictograma correcto. Aprende jugando",
-    "game_sub_1": "Uní los pictogramas de manera correcta",
-    "game_sub_2": "Prueba tu memoria, ¿Cuánto recordas los pictogramas?",
+    "game_sub_1": "Unir los pictogramas de manera correcta",
+    "game_sub_2": "Prueba tu memoria, ¿Cuánto recuerdas los pictogramas?",
     "game_sub_3": "Elegí los pictogramas que más te gusten, y con la ayuda de Chat GPT, crearás una historia.",
     "group": "Seleccioná una categoría para poder jugar",
     "search": "Buscar Tablero",
-    "find": "Encontrá los tableros que quieras, fácilmente!",
+    "find": "Encuentra los tableros que quieras, fácilmente!",
     "game_1_line": "Seleccioná el pictograma que escuches",
     "game_2_line": "Seleccioná la palabra que corresponde a su pictograma",
     "game_3_line": "Seleccioná una tarjeta y encontrá la pareja del pictograma",
@@ -354,7 +355,8 @@
     "maximum_streak": "Mejor racha",
     "speak_what": "¿Cual es el picto {name}?",
     "gptbtn": "Crear historia",
-    "prompt": "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:"
+    "prompt": "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:",
+    "nivel": "Nivel"
   },
   "exit": {
     "long": {
