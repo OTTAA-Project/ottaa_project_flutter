@@ -105,7 +105,8 @@
         "invalid-token": "Token no válido",
         "expired-token": "Token caducado"
       }
-    }
+    },
+    "delete_account": "Eliminar cuenta"
   },
   "user": {
     "main": {
@@ -354,7 +355,8 @@
     "maximum_streak": "Mejor racha",
     "speak_what": "¿Cual es el picto {name}?",
     "gptbtn": "Crear una historia",
-    "prompt": "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:"
+    "prompt": "Actúa como maestra de jardín de infantes y escribe una historia en español para niños usando las siguientes palabras:",
+    "nivel": "Nivel"
   },
   "exit": {
     "long": {
