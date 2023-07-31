@@ -105,7 +105,8 @@
         "invalid-token": "Token no válido",
         "expired-token": "Token caducado"
       }
-    }
+    },
+    "delete_account": "Eliminar cuenta"
   },
   "user": {
     "main": {
@@ -354,7 +355,8 @@
     "maximum_streak": "Best streak",
     "speak_what": "What's the picto {name}?",
     "gptbtn": "Create a story",
-    "prompt": "Act as a kindergarten teacher and write a story in English for kids using the following words:"
+    "prompt": "Act as a kindergarten teacher and write a story in English for kids using the following words:",
+    "nivel": "Nivel"
   },
   "exit": {
     "long": {
