@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ottaa_project_flutter/application/common/app_images.dart';
 import 'package:ottaa_project_flutter/application/common/extensions/translate_string.dart';
+import 'package:ottaa_project_flutter/application/providers/chat_gpt_game_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/games_provider.dart';
 import 'package:ottaa_project_flutter/application/providers/user_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
@@ -96,10 +97,12 @@ class GameScreenUI extends ConsumerWidget {
                         child: SimpleButton(
                           /// niceu emir chan
                           width: false,
-                          onTap: () {
+                          onTap: () async {
                             provider.selectedGame = index;
 
                             if (index == 3) {
+                              final pro = ref.read(chatGptGameProvider);
+                              await pro.loadTranslations();
                               context.push(AppRoutes.patientStoryGame);
                             } else {
                               context.push(AppRoutes.patientGameGroupSelection);

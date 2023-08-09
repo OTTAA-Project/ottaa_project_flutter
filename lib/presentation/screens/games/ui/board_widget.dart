@@ -16,7 +16,11 @@ class BoardWidget extends ConsumerWidget {
     final provider = ref.watch(chatGptGameProvider);
     final game = ref.watch(gameProvider);
     final colorScheme = Theme.of(context).colorScheme;
-    final groups = provider.gptBoards.map((e) => game.groups[e]).toList();
+    final groups = provider.gptBoards.map((e) {
+      var group = game.groups[e];
+      group?.text = provider.pictosTranslations[e] ?? group.text;
+      return group;
+    }).toList();
     final size = MediaQuery.of(context).size;
     return Positioned(
       bottom: 72,
