@@ -23,7 +23,7 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
     final provider = ref.read(reportProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await provider.init();
+      // await provider.init();
     });
   }
 
@@ -83,7 +83,12 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
                 ),
                 BottomWidget(
                   pageController: provider.pageController,
-                  averageSentenceValue: provider.averagePictoFrase == 0.00 ? 0.00 : double.parse(provider.averagePictoFrase.toString().substring(0, 3).toString()),
+                  averageSentenceValue: provider.averagePictoFrase == 0.00
+                      ? 0.00
+                      : double.parse(provider.averagePictoFrase
+                          .toString()
+                          .substring(0, 3)
+                          .toString()),
                   sevenDaysValue: provider.frases7Days,
                 ),
               ],

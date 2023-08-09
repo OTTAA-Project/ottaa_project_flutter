@@ -1,17 +1,6 @@
-import 'package:ottaa_project_flutter/core/models/groups_model.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
+import 'package:ottaa_project_flutter/core/models/group_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 
 abstract class LocalStorageRepository {
-  Future<void> writeGruposToFile({
-    required String data,
-    required String language,
-  });
-
-  Future<List<Groups>> readGruposFromFile({
-    required String language,
-  });
-
-  Future<void> writePictoToFile({required String data, required String language});
-
-  Future<List<Pict>> readPictoFromFile({required String language});
+  Future<Map<String, dynamic>> readPictosFromLocal({required String locale});
 }

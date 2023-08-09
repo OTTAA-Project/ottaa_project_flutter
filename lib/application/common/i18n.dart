@@ -1,47 +1,87 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ottaa_project_flutter/application/language/file_language.dart';
-import 'package:ottaa_project_flutter/application/language/spanish.dart';
-import 'package:ottaa_project_flutter/core/abstracts/language.dart';
+import 'package:injectable/injectable.dart';
+import 'package:ottaa_project_flutter/application/language/translation_tree.dart';
+import 'package:universal_io/io.dart';
 
-const defaultFallbackLanguage = SpanishLanguage();
+const Map<String, Locale> supportedLocales = {
+  "es_AR": Locale("es", "AR"),
+  "en_US": Locale("en", "US"),
+  "it_IT": Locale("it", "IT"),
+  "pt_BR": Locale("pt", "BR"),
+  "ca_ES": Locale("ca", "ES"),
+  "es_CL": Locale("es", "CL"),
+  "es_CO": Locale("es", "CO"),
+  "es_ES": Locale("es", "ES"),
+  "ur_PK": Locale("ur", "PK"),
+};
 
-class I18N {
-  final Map<String, Language> _languages = {"es": defaultFallbackLanguage};
+@Singleton()
+class I18N extends ChangeNotifier {
+  final Map<String, TranslationTree> _languages = {};
+  final platformLanguages = {
+    "es": const Locale("es", "CO"),
+    "en": const Locale("en", "US"),
+    "it": const Locale("it", "IT"),
+    "pt": const Locale("pt", "BR"),
+  };
 
-  final String languageCode;
-  late Language _currentLanguage;
+  late Locale currentLocale;
+  TranslationTree? _currentLanguage;
 
-  I18N(this.languageCode);
+  TranslationTree? get currentLanguage => _currentLanguage;
+
+  @FactoryMethod(preResolve: true)
+  static Future<I18N> start() => I18N().init();
 
   Future<I18N> init() async {
+    final List<String> deviceLanguage = Platform.localeName.split('_');
+
+    if (deviceLanguage.length == 2) {
+      currentLocale = Locale(deviceLanguage[0], deviceLanguage[1]);
+    } else {
+      currentLocale = platformLanguages[deviceLanguage[0]] ?? const Locale("es", "CO");
+    }
+
+    String languageCode = "${currentLocale.languageCode}_${currentLocale.countryCode}";
+
+    if (!supportedLocales.containsKey(languageCode)) {
+      languageCode = platformLanguages[currentLocale.languageCode]?.toString() ?? "es_CO";
+    }
+
     if (_languages.containsKey(languageCode)) {
       _currentLanguage = _languages[languageCode]!;
       return this;
     }
 
-    final newLanguage = await loadLanguage(languageCode);
+    TranslationTree? newLanguage = await loadTranslation(currentLocale);
+    newLanguage ??= await loadTranslation(const Locale("es", "CO"));
 
-    if (newLanguage != null) {
-      _languages[languageCode] = newLanguage;
-      _currentLanguage = newLanguage;
-    } else {
-      _currentLanguage = defaultFallbackLanguage;
-    }
+    _languages.putIfAbsent(languageCode, () => newLanguage!);
+    _currentLanguage = newLanguage;
 
     return this;
   }
 
-  Future<Language?> loadLanguage(String languageCode) async {
+  Future<TranslationTree?> loadTranslation(Locale locale) async {
     try {
+      final languageCode = "${locale.languageCode}_${locale.countryCode}";
+
+      if (_languages.containsKey(languageCode)) {
+        return _languages[languageCode];
+      }
+
       final languageString = await rootBundle.loadString("assets/i18n/$languageCode.json");
 
-      FileLanguage newLanguage = FileLanguage(
-        languageCode: languageCode,
-        translations: Map.from(json.decode(languageString)),
-      );
+      //We execute this in a compute function to avoid blocking the UI thread
+      final languageJson = await compute(json.decode, languageString) as Map<String, dynamic>;
+
+      final newLanguage = TranslationTree(locale);
+
+      newLanguage.addTranslations(languageJson);
 
       return newLanguage;
     } catch (e) {
@@ -49,13 +89,52 @@ class I18N {
     }
   }
 
-  Language get currentLanguage => _currentLanguage;
-
-  void changeLanguage(String languageCode) {
-    _currentLanguage = _languages[languageCode] ?? const SpanishLanguage();
+  Future<void> changeLanguage(String languageCode) async {
+    if (languageCode == 'en_US') {
+      final languageString = await rootBundle.loadString("assets/i18n/$languageCode.json");
+      final languageJson = json.decode(languageString) as Map<String, dynamic>;
+      Locale locale = const Locale('en', 'US');
+      final newLanguage = TranslationTree(locale);
+      newLanguage.addTranslations(languageJson);
+      _languages[locale.toString()] = newLanguage;
+      _currentLanguage = _languages[locale.toString()];
+      currentLocale = locale;
+      notify();
+      return;
+    }
+    var split = languageCode.split("_");
+    assert(split.length == 2, "Language code must be in the format: languageCode_countryCode (en_US)");
+    Locale locale = Locale(split[0], split[1]);
+    await changeLanguageFromLocale(locale);
+    notify();
   }
 
-  void changeLanguageFromLocale(Locale locale) {
-    changeLanguage(locale.languageCode);
+  Future<void> changeLanguageFromLocale(Locale locale) async {
+    assert(locale.countryCode != null, "Locale must have a country code");
+
+    if (!supportedLocales.containsKey(locale.toString())) return;
+    TranslationTree? newLanguage = _languages[locale.toString()] ?? await loadTranslation(locale);
+    if (newLanguage == null) {
+      throw Exception("Language not found");
+    }
+    _languages[locale.toString()] ??= newLanguage;
+    _currentLanguage = _languages[locale.toString()];
+    currentLocale = locale;
+    notify();
+  }
+
+  void notify() {
+    notifyListeners();
+  }
+
+  static I18N of(BuildContext context) => (context.dependOnInheritedWidgetOfExactType<I18nNotifier>())!.notifier!;
+}
+
+class I18nNotifier extends InheritedNotifier<I18N> {
+  const I18nNotifier({super.key, super.notifier, required super.child});
+
+  @override
+  bool updateShouldNotify(I18nNotifier oldWidget) {
+    return true;
   }
 }

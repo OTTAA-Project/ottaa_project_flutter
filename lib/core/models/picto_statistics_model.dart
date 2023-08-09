@@ -1,5 +1,5 @@
+// coverage:ignore-file
 import 'package:json_annotation/json_annotation.dart';
-
 
 part 'picto_statistics_model.g.dart';
 
@@ -47,13 +47,13 @@ class PictoComponente {
     required this.edad,
   });
 
-  int id;
+  String id;
   bool esSugerencia;
-  @JsonKey(nullable: true,defaultValue: [],name: 'hora')
+  @JsonKey(nullable: true, defaultValue: [], name: 'hora')
   List<String> hora;
-  @JsonKey(nullable: true,defaultValue: [],name: 'sexo')
+  @JsonKey(nullable: true, defaultValue: [], name: 'sexo')
   List<String> sexo;
-  @JsonKey(nullable: true,defaultValue: [],name: 'edad')
+  @JsonKey(nullable: true, defaultValue: [], name: 'edad')
   List<String> edad;
   factory PictoComponente.fromJson(Map<String, dynamic> json) =>
       _$PictoComponenteFromJson(json);
@@ -68,7 +68,7 @@ class PictoUsagePerGroup {
     required this.percentage,
     required this.name,
   });
-  @JsonKey(nullable: true,defaultValue: 000,name: 'groupId')
+  @JsonKey(nullable: true, defaultValue: 000, name: 'groupId')
   int groupId;
   double percentage;
   Name name;
@@ -91,8 +91,7 @@ class Name {
   String es;
   String fr;
   String pt;
-  factory Name.fromJson(Map<String, dynamic> json) =>
-      _$NameFromJson(json);
+  factory Name.fromJson(Map<String, dynamic> json) => _$NameFromJson(json);
 
   Map<String, dynamic> toJson() => _$NameToJson(this);
 }

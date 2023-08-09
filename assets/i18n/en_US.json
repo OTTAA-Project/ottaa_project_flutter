@@ -1,0 +1,388 @@
+{
+  "profile": {
+    "selection": {
+      "text1": "Who is going to use the app on this device?",
+      "caregiver_text": "Needs to communicate",
+      "user_text": "Needs to communicate"
+    },
+    "hello": "Hi {name}!",
+    "ottaa": {
+      "tips": "OTTAA tips"
+    },
+    "mail": "Mail",
+    "date": "Date of birth",
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "faq0": "Who can use the OTTAA app?",
+      "faq0Description": "OTTAA is designed for non-verbal individuals, that is anyone that does not use oral speech to communicate. People that are using OTTAA today were diagnosed with autism, cerebral palsy, Down syndrome, Amyotrophic Lateral Sclerosis (ALS), Spinal Motor Atrophy (SMA), or post-stroke locked-in syndrome (LiS), among other affections. Being a dynamic communication tool, OTTAA requires its users to be capable of mid to high-level cognitive functions. However, we like to consider every case individually so do not hesitate to get in touch and request an online assessment with our team.",
+      "faq1": "How does the app work?",
+      "faq1Description": "The OTTAA app provides the user with pictograms: images that represent actions, objects, feelings, or emotions. The user can choose the pictogram(s) he or she needs and create a speech utterance. The utterance is translated from the pictogram(s) to a written sentence that appears on the screen and is also read out loud by the app. Check out our Youtube channel for a more visual explanation.",
+      "faq2": "How is this app different from other AAC (augmentative and alternative communication) devices?",
+      "faq2Description": "The OTTAA app is different from other AAC apps because of its innovative predictive algorithm and natural language generator, which allow the app to learn from the user’s behavior on the app, their age, gender, the time of the day, and their location to pre-select pictogram(s) for the communicational moment they are in.",
+      "faq3": "How much does the OTTAA app cost?",
+      "faq3Description": "The OTTAA app is free to download & use. In order to create a sustainable product that withstands the passage of time, there are some features that require a subscription to access. However, we are working hard to provide financing to everyone that needs it.\n\nIf you are in Argentina, any assistive device a person needs should be covered by health insurance. Contact our team to get guidance and assistance on how to obtain this coverage.\n\nIf you are from any other country in LATAM and want to share your experience around this subject, feel free to reach out, your contribution might help many people in need.",
+      "faq4": "Which languages are supported by the OTTAA Project?",
+      "faq4Description": "We currently support Spanish, English, Portuguese, and French. For Spanish, we have localized versions from Argentina, Chile, Colombia, and Spain. We are actively looking for contributions on new languages or better localization for Spanish varieties. Join our crowdin community to contribute.",
+      "faq5": "How can I collaborate with the OTTAA Project?",
+      "faq5Description": "Contributors can help OTTAA with developing, testing, and/or translation. To read more about the subject and get started, please see the Contributing section in the official OTTAA GitHub repository."
+    },
+    "caregiver": "Caregiver",
+    "caregivers_families": "Caregivers/Relatives",
+    "user": "User",
+    "user_description": "Non-verbal person",
+    "wait": "Please wait",
+    "setting_exp": "Setting up your experience...",
+    "link_account": "Link to an account",
+    "use": {
+      "ottaa": "Use OTTAA"
+    },
+    "close_profile": "Hide",
+    "open_profile": "View profile",
+    "no_account": "No account mode",
+    "new_existant": "New/Existent",
+    "what_do": "What do you want to do?",
+    "profile": "Profile",
+    "linked_accounts": "Linked accounts",
+    "name": "Name",
+    "logout": "Logout",
+    "last_name": "Last Name",
+    "role": "Role",
+    "day": "Day",
+    "month": "Month",
+    "year": "Year",
+    "tips": {
+      "title1": "Stats",
+      "title2": "Boards",
+      "title3": "History",
+      "title4": "Favorites",
+      "text1": "Take a look at the statistics of your patient/family member, to check their activity and how they improved over the days, weeks and months.",
+      "text2": "Hide boards the user does not need, so we only show what is important.",
+      "text3": "Use the history feature to see old sentences, what you did during the day, or tell stories.",
+      "text4": "Save pictograms and sentences in Favorites, so you can access them quickly."
+    },
+    "unlink": "Unlink",
+    "unlink_account": "Do you want to unlink {name} from your accounts?",
+    "help": {
+      "help": "Need help?",
+      "title1": "Frequently Asked Questions",
+      "title2": "Contact support"
+    },
+    "link": {
+      "title": "Link to an account",
+      "mail": {
+        "title": "Enter the email of the account you want to link",
+        "input": {
+          "required": "Email is required",
+          "invalid": "Invalid email"
+        },
+        "warn": "*We will show a token on the device screen to link accounts.",
+        "contact": "*Be sure you are in contact with the person using this email."
+      },
+      "token": {
+        "title": "Input the verification code that appears on the other device.",
+        "problem": "Having trouble linking accounts?",
+        "resend": "Resend code",
+        "back": "Please enter another email",
+        "invalid": "Invalid token"
+      },
+      "wait": {
+        "title": "Wait",
+        "subtitle": "Loading profile..."
+      },
+      "success": {
+        "title": "Profile successfully linked!",
+        "lastTime": "Last seen {date}"
+      },
+      "error": {
+        "link-exist": "Already linked",
+        "miss-caregiver": "Error:Caregiver 404",
+        "miss-user": "Error:User 404",
+        "user-no-comp": "Error:User 406",
+        "caregiver-no-comp": "Error: Caregiver 406",
+        "autolink": "Error: Same account",
+        "auth/user-not-found": "User not found",
+        "miss-token": "Missing token",
+        "invalid-token": "Invalid token",
+        "expired-token": "Expired token"
+      }
+    },
+    "delete_account": "Delete Account"
+  },
+  "user": {
+    "main": {
+      "title": "Setting up your experience",
+      "subtitle1": "Application usage",
+      "subtitle2": "Predictive texting"
+    },
+    "settings": {
+      "main_screen": "Main Screen",
+      "accessibility": "Accessibility",
+      "voice_and_subtitles": "Voice & subtitles",
+      "language": "Language"
+    },
+    "main_setting": {
+      "interaction": "Interactions",
+      "talk_delete": "Talk & Erase",
+      "shortcut": "Shortcuts",
+      "board_view": "Board view",
+      "tabs": "Tabs",
+      "grid": "Grid",
+      "ottaa_labs": "OTTAA Labs",
+      "labs_text": "Verbal phrases feature",
+      "labs_long": "Beta mode\nAllows creating sentences with more complex tenses",
+      "one_by_one": "ONE by ONE"
+    },
+    "accessibility": {
+      "selection": "Selection",
+      "bar_text": "Clicking time (Seconds)",
+      "connected": "Connected devices",
+      "device": "Assistive device",
+      "press": "Press&Press",
+      "scroll": "Scroll&Press",
+      "sip": "Sip&Puff",
+      "selection_type": "Selection method",
+      "swept": "Screen scanning",
+      "speed": "Speed",
+      "selection_speed": "Selection speed"
+    },
+    "voice_and_subtitle": {
+      "voice_types": "Voices",
+      "voice_rate": "Speech rate",
+      "voz1": "Voice 1",
+      "voz2": "Voice 2",
+      "voz3": "Voice 3",
+      "mute": "Mute",
+      "subtitle": "Subtitles",
+      "show": "Show subtitles",
+      "size": "Size",
+      "capital": "Uppercase"
+    },
+    "language": {
+      "set": "Language"
+    }
+  },
+  "global": {
+    "hello_world": "Hello World",
+    "hello": "Hello",
+    "continue": "Continue",
+    "next": "Next",
+    "back": "Previous",
+    "please_enter_text": "Please enter some text",
+    "done": "Done",
+    "yes": "Yes",
+    "delete": "Delete",
+    "edit": "Edit",
+    "no": "No",
+    "mute": "Mute",
+    "important": "Important",
+    "save_changes": "Save changes",
+    "send": "Submit",
+    "skip": "Skip",
+    "email": "Email",
+    "step": "Step",
+    "share": "Share",
+    "support": "Support",
+    "congrats": "Congratulations",
+    "settings": "Settings",
+    "general": "General",
+    "pictogram": "Pictograms",
+    "configuration": "Settings",
+    "user_ottaa": "Use OTTAA as",
+    "cancel": "Cancel",
+    "slow": "Slow",
+    "default": "Default",
+    "fast": "Fast",
+    "voice": "Voice",
+    "small": "Small",
+    "medium": "Medium",
+    "big": "Large",
+    "comingsoon": "¡This feature will be available very soon!",
+    "delicate": "Zone",
+    "chile": "Chile",
+    "spanish": "Spanish",
+    "argentina": "Argentina",
+    "colombia": "Colombia",
+    "english": "English",
+    "italian": "Italian",
+    "french": "French",
+    "portuguese": "Portuguese",
+    "test": "This is the voice you are going to use in ota",
+    "add": "Add",
+    "confirm": "Confirm",
+    "gallery": "gallery",
+    "arasaac": "ARASAAC",
+    "text": "Text",
+    "color": "Color",
+    "search": "Search",
+    "actions": "Actions",
+    "people": "People",
+    "miscellaneous": "Miscellaneous",
+    "noun": "Nouns",
+    "adjective": "Adjectives",
+    "predictive": "Predictive",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "tomorrow": "Tomorrow",
+    "noon": "Noon",
+    "late": "Evening",
+    "evening": "Night",
+    "add_new": "Add new",
+    "disguise": "Hide",
+    "save": "Save",
+    "image": "Image",
+    "saved_in": "Saved at",
+    "location": "Location",
+    "voices": "Please, install voices from settings for better experience"
+  },
+  "onboarding": {
+    "start": "Get Started",
+    "profile": {
+      "title": "Profiles screen",
+      "subtitle": "Who is using OTTAA today?",
+      "description": "With the profile selection, you will be able to use OTTAA from any device, keeping your pictograms and styles!"
+    },
+    "home": {
+      "title": "Customize your Home",
+      "subtitle": "Shortcuts on main screen",
+      "description": "Customize according to your tastes and needs"
+    },
+    "customize": {
+      "title": "Customize your Home",
+      "subtitle": "We guide you in the learning process",
+      "description": "Activate or deactivate boards and pictograms to enhance the prediction, you have control."
+    },
+    "skip": {
+      "title": "Do you really want to skip the tutorial?"
+    }
+  },
+  "terms": {
+    "button": "I accept the terms",
+    "text": "To continue we need you to accept the terms & conditions.\nSee terms & conditions"
+  },
+  "loginWait": {
+    "text": "Welcome!\nTo the OTTAA World"
+  },
+  "login": {
+    "title": "Log in with your account",
+    "google": "Login with Google.",
+    "facebook": "Login with Facebook",
+    "apple": "Login with Apple",
+    "register": "Don't have an account yet? Sign up here",
+    "wait": {
+      "title": "Welcome!",
+      "subtitle": "To the OTTAA Project World"
+    }
+  },
+  "customize": {
+    "board": {
+      "title": "What boards will the user use?",
+      "appbar": "Predictive boards",
+      "skip": "Do you skip board customization?",
+      "subtitle": "See pictograms"
+    },
+    "shortcut": {
+      "title": "Choose the shortcuts to use on Home screen.",
+      "appbar": "Shortcuts",
+      "favorites": "Favorites",
+      "history": "History",
+      "camera": "Camera",
+      "games": "Games"
+    },
+    "picto": {
+      "title": "Board {name}",
+      "switch": "Enable board"
+    },
+    "help": {
+      "boards": "Predictive boards allow choosing what boards & pictograms will show up to the user.",
+      "shortcut": "Shortcuts are a fast way to access different features for the user on Home Screen."
+    },
+    "wait": {
+      "title": "¡Congratulations!",
+      "subtitle": "{name} experience is all set up",
+      "button": "Go to profile screen"
+    },
+    "skip": "Do you want to skip profile customization?"
+  },
+  "home": {
+    "grid": {
+      "title": "Boards",
+      "pictos": "Board {group}"
+    }
+  },
+  "chatgpt": {
+    "prompt": "write a proper sentence in english with the following words as if you are a {gender}, adding connectors and articles when needed, without changing words: {pictograms}"
+  },
+  "notification": {
+    "code": {
+      "request": {
+        "title": "OTTAA Link verification",
+        "body": "Someone is trying to link your account with token {linkToken}"
+      },
+      "confirm": {
+        "title": "OTTAA Link confirmation",
+        "body": "You have successfully linked your account"
+      }
+    }
+  },
+  "game": {
+    "play": "¡Let's play!",
+    "next": "Play",
+    "game_header_0": "What's the pictogram?",
+    "game_header_1": "Match pictograms",
+    "game_header_2": "Memory game",
+    "game_header_3": "Create a story",
+    "game_sub_0": "Answer questions picking the right pictogram. Learn playing",
+    "game_sub_1": "Match the pictograms correctly",
+    "game_sub_2": "Test your memory, can you remember all pictograms?",
+    "game_sub_3": "Choose the pictograms you like and with ChatGPT you will create a story.",
+    "group": "Choose a category to play",
+    "search": "Search board",
+    "find": "Easily find the boards you want!",
+    "game_1_line": "Choose the pictogram you listen to",
+    "game_2_line": "Choose the word that match the pictogram",
+    "game_3_line": "Choose a card and find the pictogram match",
+    "game_4_line": "Add up to 4 pictograms and create a story",
+    "no": "Oh Oh!",
+    "yes": "Great!",
+    "correct": "Right",
+    "incorrect": "Incorrect",
+    "use_time": "Total time",
+    "maximum_streak": "Best streak",
+    "speak_what": "What's the picto {name}?",
+    "gptbtn": "Create a story",
+    "prompt": "Act as a kindergarten teacher and write a story in English for kids using the following words:",
+    "nivel": "Level"
+  },
+  "exit": {
+    "long": {
+      "headline": "Do you want to go back to profile screen?",
+      "body": "Press and hold the highlighted button to go back",
+      "check": "Do not show this message again",
+      "btn": "Ok"
+    },
+    "short": {
+      "headline": "Do you want to go back to profile screen?"
+    }
+  },
+  "create": {
+    "heading": "Create pictogram",
+    "image_selection": "Choose the image that best represent the pictogram",
+    "choose_color": "Choose color",
+    "search_arsaac": "Search in ARASAAC",
+    "time_headline": "Choose the timing that better suits your needs",
+    "time_sub1": "What days of the week is when you use it the most?",
+    "schedule": "In what schedule?",
+    "save": "Save pictogram",
+    "created_by_me": "Created by me",
+    "new_board": "New board",
+    "create_new_board": "Create new board",
+    "board_name": "Board name",
+    "edit_picto": "Edit pictogram",
+    "final_heading": "Done! Check everything is OK"
+  }
+}

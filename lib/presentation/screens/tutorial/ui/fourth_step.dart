@@ -38,7 +38,8 @@ class FourthStep extends StatelessWidget {
                 child: FittedBox(
                   child: Text(
                     "Play_and_learn".trl,
-                    style: const TextStyle(color: kOTTAAOrangeNew, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        color: kOTTAAOrangeNew, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),

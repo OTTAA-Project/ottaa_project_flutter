@@ -1,24 +1,32 @@
-import 'dart:io';
-
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
+import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
 import 'package:ottaa_project_flutter/core/enums/user_types.dart';
-import 'package:ottaa_project_flutter/core/models/user_model.dart';
+import 'package:ottaa_project_flutter/core/abstracts/user_model.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
+import 'package:ottaa_project_flutter/core/models/base_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/caregiver_user_model.dart';
+import 'package:ottaa_project_flutter/core/models/patient_user_model.dart';
 import 'dart:async';
 
-import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
-import 'package:ottaa_project_flutter/core/repositories/server_repository.dart';
+import 'package:ottaa_project_flutter/core/repositories/repositories.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:universal_io/io.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+@Singleton(
+  as: AboutRepository,
+)
 class AboutService extends AboutRepository {
   final ServerRepository _serverRepository;
 
+  final LocalDatabaseRepository _databaseRepository;
+
   final AuthRepository _auth;
 
-  AboutService(this._auth, this._serverRepository);
+  AboutService(this._auth, this._serverRepository, this._databaseRepository);
 
   @override
   Future<String> getAppVersion() async {
@@ -62,22 +70,23 @@ class AboutService extends AboutRepository {
     if (result.isRight) {
       final user = result.right;
       return user.email;
+      // return user.settings.data.;
     }
 
     return result.left;
   }
 
   @override
-  Future<UserType> getUserType() async {
+  Future<UserPayment> getUserType() async {
     final result = await _auth.getCurrentUser();
 
-    if (result.isLeft) {
-      return UserType.free;
+    if (result.isLeft || result.right.type == UserType.caregiver) {
+      return UserPayment.free;
     }
 
-    final user = result.right;
-
-    return _serverRepository.getUserType(user.id);
+    return (result.right as PatientUserModel).patientSettings.payment.payment
+        ? UserPayment.premium
+        : UserPayment.free;
   }
 
   @override
@@ -100,7 +109,7 @@ class AboutService extends AboutRepository {
     if (await canLaunchUrl(params)) {
       await launchUrl(params);
     } else {
-      print('Could not launch ${params.toString()}');
+      debugPrint('Could not launch ${params.toString()}');
     }
   }
 
@@ -117,18 +126,22 @@ class AboutService extends AboutRepository {
   }
 
   @override
-  Future<void> uploadProfilePicture(String photo) async {
+  Future<void> uploadProfilePicture(AssetsImage image) async {
     final userResult = await _auth.getCurrentUser();
     if (userResult.isLeft) return;
 
     final UserModel user = userResult.right;
 
-    await _serverRepository.uploadUserPicture(user.id, photo, user.photoUrl);
+    await _serverRepository.uploadUserPicture(
+        user.id,
+        user.settings.data.avatar
+            .copyWith(asset: image.asset, network: image.network));
   }
 
   @override
   Future<Either<String, UserModel>> getUserInformation() async {
     final userResult = await _auth.getCurrentUser();
+
     if (userResult.isLeft) return Left(userResult.left);
 
     final UserModel user = userResult.right;
@@ -137,9 +150,32 @@ class AboutService extends AboutRepository {
 
     if (userData.isLeft) return const Left("no_user_found");
 
-    final UserModel newUser = UserModel.fromRemote(userData.right);
+    UserModel model;
 
-    return Right(newUser);
+    switch (userData.right["type"]) {
+      case "caregiver":
+        model = CaregiverUserModel.fromMap({
+          "email": user.email,
+          ...userData.right,
+        });
+        break;
+      case "user":
+        model = PatientUserModel.fromMap({
+          "email": user.email,
+          ...userData.right,
+        });
+        break;
+      case "none":
+      default:
+        model = BaseUserModel.fromMap({
+          "email": user.email,
+          ...userData.right,
+        });
+    }
+
+    await _databaseRepository.setUser(model);
+
+    return Right(model);
   }
 
   @override
@@ -149,7 +185,7 @@ class AboutService extends AboutRepository {
 
     final UserModel user = userResult.right;
 
-    await _serverRepository.uploadUserInformation(user.id, user.toRemote());
+    await _serverRepository.uploadUserInformation(user.id, user.toMap());
   }
 
   @override
@@ -159,7 +195,7 @@ class AboutService extends AboutRepository {
       return false;
     }
 
-    return result.right.avatar != null || result.right.photoUrl == "0";
+    return result.right.settings.data.avatar.network != null;
   }
 
   @override
@@ -169,7 +205,24 @@ class AboutService extends AboutRepository {
     if (result.isLeft) {
       return false;
     }
+    //TODO: Check for first time!
+    return result.right.settings.data.birthDate == DateTime(0);
+  }
 
-    return result.right.birthdate == 0;
+  @override
+  Future<void> updateUserType(
+      {required String id, required UserType userType}) async {
+    await _serverRepository.updateUserType(id: id, userType: userType);
+  }
+
+  @override
+  Future<void> updateUserLastConnectionTime({
+    required String userId,
+    required int time,
+  }) async {
+    await _serverRepository.updateUserLastConnectionTime(
+      userId: userId,
+      time: time,
+    );
   }
 }

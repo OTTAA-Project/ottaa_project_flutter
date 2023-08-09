@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ottaa_project_flutter/core/enums/user_types.dart';
+import 'package:ottaa_project_flutter/core/enums/user_payment.dart';
+import 'package:ottaa_project_flutter/core/models/assets_image.dart';
 import 'package:ottaa_project_flutter/core/repositories/about_repository.dart';
 
 class AboutProvider extends ChangeNotifier {
@@ -11,8 +12,7 @@ class AboutProvider extends ChangeNotifier {
 
   Future<String> getAppVersion() => aboutService.getAppVersion();
 
-  Future<String> getAvailableAppVersion() =>
-      aboutService.getAvailableAppVersion();
+  Future<String> getAvailableAppVersion() => aboutService.getAvailableAppVersion();
 
   Future<String> getDeviceName() => aboutService.getDeviceName();
 
@@ -20,12 +20,11 @@ class AboutProvider extends ChangeNotifier {
 
   Future<String> getProfilePicture() => aboutService.getProfilePicture();
 
-  Future<UserType> getUserType() => aboutService.getUserType();
+  Future<UserPayment> getUserType() => aboutService.getUserType();
 
   Future<void> sendSupportEmail() => aboutService.sendSupportEmail();
 
-  Future<void> uploadProfilePicture(String photo) =>
-      aboutService.uploadProfilePicture(photo);
+  Future<void> uploadProfilePicture(String network, String asset) => aboutService.uploadProfilePicture(AssetsImage(asset: asset, network: network));
 
   Future<void> uploadUserInformation() => aboutService.uploadUserInformation();
 }

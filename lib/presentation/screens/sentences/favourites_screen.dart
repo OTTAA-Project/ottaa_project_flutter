@@ -5,7 +5,6 @@ import 'package:ottaa_project_flutter/application/common/extensions/translate_st
 import 'package:ottaa_project_flutter/application/providers/sentences_provider.dart';
 import 'package:ottaa_project_flutter/application/router/app_routes.dart';
 import 'package:ottaa_project_flutter/application/theme/app_theme.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/mini_picto_widget.dart';
 import 'package:ottaa_project_flutter/presentation/common/widgets/ottaa_logo_widget.dart';
 import 'package:ottaa_project_flutter/presentation/screens/sentences/ui/list_pictos_widget.dart';
@@ -19,12 +18,16 @@ class FavouriteScreen extends ConsumerWidget {
     double horizontalSize = MediaQuery.of(context).size.width;
 
     final speak = ref.read(sentencesProvider.select((prov) => prov.speakFav));
-    final showCircular = ref.watch(sentencesProvider.select((prov) => prov.showCircular));
+    final showCircular =
+        ref.watch(sentencesProvider.select((prov) => prov.showCircular));
 
-    var sentencesIndex = ref.read(sentencesProvider.select((prov) => prov.sentencesIndex));
-    final changeSentencesIndex = ref.read(sentencesProvider.select((prov) => prov.changeSelectedIndexFav));
+    var sentencesIndex =
+        ref.read(sentencesProvider.select((prov) => prov.sentencesIndex));
+    final changeSentencesIndex = ref
+        .read(sentencesProvider.select((prov) => prov.changeSelectedIndexFav));
 
-    final favouritesList = ref.read(sentencesProvider.select((prov) => prov.favouriteSentences));
+    final favouritesList =
+        ref.read(sentencesProvider.select((prov) => prov.favouriteSentences));
 
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +38,6 @@ class FavouriteScreen extends ConsumerWidget {
         title: Text('favourite_sentences'.trl),
         actions: [
           GestureDetector(
-            onTap: () => context.push(AppRoutes.addOrRemoveFavouriteSentences),
             child: const Icon(
               Icons.favorite,
             ),
@@ -78,9 +80,6 @@ class FavouriteScreen extends ConsumerWidget {
                           /// for keeping them in order and the button will be in separate Positioned
                           Container(),
                           GestureDetector(
-                            onTap: () {
-                              context.push(AppRoutes.addOrRemoveFavouriteSentences);
-                            },
                             child: Icon(
                               Icons.edit,
                               size: verticalSize * 0.1,
@@ -102,13 +101,15 @@ class FavouriteScreen extends ConsumerWidget {
               child: Container(
                 height: verticalSize * 0.8,
                 width: horizontalSize * 0.8,
-                padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
+                padding:
+                    EdgeInsets.symmetric(horizontal: horizontalSize * 0.099),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: horizontalSize * 0.02),
                   child: Center(
                     //todo: update the view according to the things
                     child: SizedBox(
@@ -126,7 +127,8 @@ class FavouriteScreen extends ConsumerWidget {
                                 ? ListPictosWidget(
                                     height: verticalSize / 3,
                                     width: horizontalSize * 0.78,
-                                    padding: EdgeInsets.symmetric(vertical: verticalSize * 0.05),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: verticalSize * 0.05),
                                   )
                                 : Container()
                           ],

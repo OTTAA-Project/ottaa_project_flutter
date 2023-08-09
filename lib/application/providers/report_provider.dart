@@ -1,13 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ottaa_project_flutter/application/service/report_service.dart';
+import 'package:ottaa_project_flutter/core/models/chart_model.dart';
+import 'package:ottaa_project_flutter/core/models/phrases_statistics_model.dart';
+import 'package:ottaa_project_flutter/core/models/picto_model.dart';
 import 'package:ottaa_project_flutter/core/models/picto_statistics_model.dart';
-import 'package:ottaa_project_flutter/core/models/pictogram_model.dart';
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:ottaa_project_flutter/core/models/report_chart_data_model.dart';
-import 'package:ottaa_project_flutter/core/models/sentence_statistics_model.dart';
 import 'package:ottaa_project_flutter/core/repositories/auth_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/pictograms_repository.dart';
 import 'package:ottaa_project_flutter/core/repositories/report_repository.dart';
@@ -37,9 +36,9 @@ class ReportProvider extends ChangeNotifier {
   String fourthValueText = 'fourth';
   List<List<String>> mostUsedSentences = [];
   late PictoStatisticsModel pictoStatisticsModel;
-  late FrasesStatisticsModel frasesStatisticsModel;
+  late PhraseStatisticModel frasesStatisticsModel;
   late List<String> randomPictos;
-  late List<Pict> _pictos;
+  late List<Picto> _pictos;
   double averagePictoFrase = 0.00;
   bool loadingMostUsedSentences = false;
   int frases7Days = 0;
@@ -52,7 +51,7 @@ class ReportProvider extends ChangeNotifier {
     _pictos = await _pictogramsService.getAllPictograms();
     final user = await _auth.getCurrentUser();
     uid = user.right.id;
-    photoUrl = user.right.photoUrl;
+    photoUrl = user.right.settings.data.avatar.network!;
     await fetchPictoStatisticsData();
     await fetchMostUsedSentences();
     calculateScoreForProfile();
@@ -66,7 +65,8 @@ class ReportProvider extends ChangeNotifier {
   }
 
   Future<void> fetchPictoStatisticsData() async {
-    final pictosResponse = await _reportService.getPictogramsStatistics(uid, "ES-AR"); //TODO: Connect to service
+    final pictosResponse = await _reportService.getPictogramsStatistics(
+        uid, "es_AR"); //TODO: Connect to service
 
     if (pictosResponse == null) return;
 
@@ -77,7 +77,8 @@ class ReportProvider extends ChangeNotifier {
 
   Future<void> fetchMostUsedSentences() async {
     // print(res.body);
-    final sentencesResponse = await _reportService.getMostUsedSentences(uid, "ES-AR"); //TODO: Connect to service
+    final sentencesResponse = await _reportService.getMostUsedSentences(
+        uid, "es_AR"); //TODO: Connect to service
 
     if (sentencesResponse == null) return;
 
@@ -89,9 +90,9 @@ class ReportProvider extends ChangeNotifier {
 
   Future<void> makeMostUsedSentencesList() async {
     /// creating a list to add all of the ids
-    List<List<int>> pictosIds = [];
+    List<List<String>> pictosIds = [];
     for (var element in pictoStatisticsModel.mostUsedSentences) {
-      List<int> res = [];
+      List<String> res = [];
       for (var element in element.pictoComponentes) {
         res.add(element.id);
         // print(element.id);
@@ -106,7 +107,7 @@ class ReportProvider extends ChangeNotifier {
       for (var id in element) {
         for (var element in _pictos) {
           if (element.id == id) {
-            final val = element.imagen.pictoEditado ?? element.imagen.picto;
+            final val = element.resource.network!;
             res.add(val);
           }
         }
@@ -166,7 +167,10 @@ class ReportProvider extends ChangeNotifier {
       last7DaysUsage = last7DaysUsage + value;
     });
     double score = 0;
-    score = (last7DaysUsage * a) + (frasesStatisticsModel.frases7Days * b) + (averagePictoFrase * c) + (usedGrupos * d);
+    score = (last7DaysUsage * a) +
+        (frasesStatisticsModel.frases7Days * b) +
+        (averagePictoFrase * c) +
+        (usedGrupos * d);
     scoreProfile = score;
     String val = score.toString();
     val = val.substring(1);
@@ -189,7 +193,7 @@ class ReportProvider extends ChangeNotifier {
     }
     values.sort((a, b) => b.compareTo(a));
     //todo: add here the language too
-    final language = 'ES-AR';
+    const language = 'es_AR';
     firstValueProgress = values[0];
     secondValueProgress = values[1];
     thirdValueProgress = values[2];
@@ -198,7 +202,7 @@ class ReportProvider extends ChangeNotifier {
     for (var element in pictoStatisticsModel.pictoUsagePerGroup) {
       if (element.percentage == firstValueProgress) {
         switch (language) {
-          case "es-AR":
+          case "es_AR":
             firstValueText = element.name.es;
             break;
           case "en-US":
@@ -216,7 +220,7 @@ class ReportProvider extends ChangeNotifier {
       }
       if (element.percentage == secondValueProgress) {
         switch (language) {
-          case "es-AR":
+          case "es_AR":
             secondValueText = element.name.es;
             break;
           case "en-US":
@@ -234,7 +238,7 @@ class ReportProvider extends ChangeNotifier {
       }
       if (element.percentage == thirdValueProgress) {
         switch (language) {
-          case "es-AR":
+          case "es_AR":
             thirdValueText = element.name.es;
             break;
           case "en-US":
@@ -252,7 +256,7 @@ class ReportProvider extends ChangeNotifier {
       }
       if (element.percentage == fourthValueProgress) {
         switch (language) {
-          case "es-AR":
+          case "es_AR":
             fourthValueText = element.name.es;
             break;
           case "en-US":

@@ -40,7 +40,7 @@ Map<String, dynamic> _$MostUsedSentenceToJson(MostUsedSentence instance) =>
 
 PictoComponente _$PictoComponenteFromJson(Map<String, dynamic> json) =>
     PictoComponente(
-      id: json['id'] as int,
+      id: json['id'] as String,
       esSugerencia: json['esSugerencia'] as bool,
       hora:
           (json['hora'] as List<dynamic>?)?.map((e) => e as String).toList() ??

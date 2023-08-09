@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:ottaa_project_flutter/application/providers/report_provider.dart';
-import 'package:ottaa_project_flutter/core/models/report_chart_data_model.dart';
+import 'package:ottaa_project_flutter/core/models/chart_model.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart' as ch;
 

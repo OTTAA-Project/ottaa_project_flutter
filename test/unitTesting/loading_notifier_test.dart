@@ -1,18 +1,18 @@
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ottaa_project_flutter/application/notifiers/loading_notifier.dart';
 
-void main(){
+void main() {
   var notifier = LoadingNotifier();
-  group('notifier coverage', (){
-    test('Show Loading', (){
+  group('notifier coverage', () {
+    test('Show Loading', () {
       notifier.showLoading();
       expect(notifier.getState(), true);
     });
-    test('Hide Loading', (){
+    test('Hide Loading', () {
       notifier.hideLoading();
       expect(notifier.getState(), false);
     });
-    test('toogle Loading', (){
+    test('toogle Loading', () {
       notifier.showLoading();
       notifier.toggleLoading();
       expect(notifier.getState(), false);

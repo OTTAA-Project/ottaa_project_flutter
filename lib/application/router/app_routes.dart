@@ -1,19 +1,74 @@
 class AppRoutes {
-  static const splash = "/splash";
+  ///
+  /// General Routes
+  ///
+
+  static const splash = "/";
   static const login = "/login";
+  static const loginWait = "/login/waiting";
   static const home = "/home";
-  static const sentences = "/sentences";
-  static const settings = "/settings";
-  static const settingslang = "/settings_lang";
-  static const settingsvoice = "/settings_voice";
+
   static const onboarding = "/onboarding";
-  static const tutorial = "/tutorial";
-  static const report = "/report";
-  static const profileChooserScreen = "/profile_chooser_screen";
-  static const profileMainScreen = "/profile_main_screen";
-  static const profileSettingsScreen = "/profile_settings_screen";
-  static const profileWaitingScreen = "/profile_waiting_screen";
-  static const favouriteSentences = "/favourite_sentences";
-  static const addOrRemoveFavouriteSentences = "/add_or_remove_favourite_sentences";
-  static const searchSentences = "/search_sentences";
+
+  ///
+  /// User General Routes
+  ///
+
+  static const userWait = "/home/loading";
+  static const userProfile = "/home/profile";
+  static const userProfileRole = "/home/profile/role";
+  static const userProfileAccounts = "/home/profile/accounts";
+  static const userProfileTips = "/home/profile/tips";
+  static const userProfileEdit = "/home/profile/edit";
+  static const userProfileHelp = "/home/profile/help";
+  static const userProfileHelpFaq = "/home/profile/help/faq";
+  static const userCustomize = "/home/customize";
+  static const userCustomizeBoard = "/home/customize/board";
+  static const userCustomizePicto = "/home/customize/picto";
+  static const userCustomizeWait = "/home/customize/wait";
+  static const userTalk = "/home/talk";
+
+  ///
+  /// User Caregiver Routes
+  ///
+  static const caregiverAccount = "/home/account";
+  static const caregiverAccountLayout = "/home/account/layout";
+  static const caregiverAccountAccessibility = "/home/account/accessibility";
+  static const caregiverAccountTTS = "/home/account/tts";
+  static const caregiverAccountLanguage = "/home/account/language";
+  static const caregiverLink = "/home/link";
+  static const caregiverLinkToken = "/home/link/token";
+  static const caregiverLinkWait = "/home/link/wait";
+  static const caregiverLinkSuccess = "/home/link/success";
+
+  ///
+  /// User Patient routes
+  ///
+  static const patientSettings = "/home/settings";
+  static const patientSettingsLayout = "/home/settings/layout";
+  static const patientSettingsAccessibility = "/home/settings/accessibility";
+  static const patientSettingsTTS = "/home/settings/tts";
+  static const patientSettingsLanguage = "/home/settings/language";
+
+  static const patientGame = "/home/games";
+  static const patientGameGroupSelection = "/home/games/groups";
+  static const patientGameSearchGroup = "/home/games/groups/search";
+  static const patientMatchPictogramGame = "/home/games/match";
+  static const patientMemoryGame = "/home/games/memory";
+  static const patientWhatsThePictoGame = "/home/games/wtp";
+  static const patientStoryGame = "/home/games/story";
+  static const patientShowStory = "/home/games/story/show";
+  static const selectBoardPicto = "/home/games/story/selectBoard";
+  static const patientHistorySelectPicto = "/home/games/history/pictos";
+  static const patientHistoryReview = "/home/games/history/review";
+
+  static const patientCreatePicto = "/home/viewBoardsAndPictos/createPicto";
+  static const patientViewBoardsAndPictos = "/home/viewBoardsAndPictos";
+
+  static const patientCreatePictoarsaac = "/home/viewBoardsAndPictos/createPicto/arsaac";
+  static const patientEditPicto = "/home/viewBoardsAndPictos/editPicto";
+  static const patientSearch = "/home/viewBoardsAndPictos/search";
+  static const patientShowPictos = "/home/viewBoardsAndPictos/showPictos";
+  static const patientCreateBoard = "/home/viewBoardsAndPictos/createBoard";
+  static const patientEditPictoarsaac = "/home/viewBoardsAndPictos/editPicto/arsaac";
 }
